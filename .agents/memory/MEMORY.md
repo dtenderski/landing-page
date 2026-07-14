@@ -60,3 +60,4 @@
 - [PremiumPageGuard PAS/AIDA template](claw-guard-pas-template.md) — shared gate component IS the landing page for ~85 claw/premium routes; add `pas` prop for tailored copy, generic fallback covers the rest.
 - [Super Admin phone allowlist](superadmin-phone-allowlist.md) — founder's phone auto-promotes to DB role=superadmin at register/verify/login; reuses existing role-based gate system, no new bypass surface.
 - [Meta Pixel WA CTA tracking](meta-pixel-wa-cta-tracking.md) — trackLead only wired to email login; WA CTA (real primary conversion) had zero pixel event on ~69/71 pages; per-agent pixel is a separate intentional feature, not a stray dupe.
+- [KB seeding with real embeddings](kb-seed-with-embeddings.md) — for RAG-grounded mentor agents, compute real OpenAI embeddings in seed scripts (not empty []); watch for placeholder-value secrets (401 masks as `OPENAI_A**_KEY`); restart workflow after fixing key.
