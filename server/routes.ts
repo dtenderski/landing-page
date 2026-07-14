@@ -18697,11 +18697,15 @@ Return HANYA JSON berikut (tanpa penjelasan lain):
           const accessUrl = `${baseUrl}/store/access/${accessToken}`;
           console.log(`[Scalev] Chatbot store order created for ${customerEmail}: ${accessUrl}`);
 
-          // ALSO create a clientSubscription (active, 30 days) so requireRegistration chatbots grant chat access
+          // ALSO create a clientSubscription so requireRegistration chatbots grant chat access.
+          // Agen yang melekat pada produk ebook (mis. AI Mentor Gustafta) diberi akses
+          // seumur pembelian (bukan 30 hari) — itu bonus permanen dari buku, bukan langganan.
+          const isEbookBoundAgent = masterAgent?.slug === "ai-mentor-gustafta";
           try {
             const subToken = genUUID();
             const subStart = new Date();
-            const subEnd = new Date(); subEnd.setDate(subEnd.getDate() + 30);
+            const subEnd = new Date();
+            subEnd.setDate(subEnd.getDate() + (isEbookBoundAgent ? 3650 : 30));
             await storage.createClientSubscription({
               agentId: String(matchedMapping.agentId),
               customerName: customerName || "Customer",
@@ -18715,6 +18719,18 @@ Return HANYA JSON berikut (tanpa penjelasan lain):
               endDate: subEnd,
             } as any);
             console.log(`[Scalev] Chatbot clientSubscription created for ${customerEmail}`);
+
+            if (isEbookBoundAgent && customerEmail && masterAgent) {
+              const { sendAgentAccessDeliveryEmail } = await import("./lib/email");
+              const agentRef = masterAgent.slug || masterAgent.id;
+              sendAgentAccessDeliveryEmail({
+                to: customerEmail,
+                customerName,
+                agentName: masterAgent.name || "AI Mentor Gustafta",
+                chatUrl: `${baseUrl}/bot/${agentRef}`,
+                bonusContext: "bonus dari pembelian Ebook Trilogi Gustafta",
+              }).catch((emailErr: any) => console.error(`[Scalev] Gagal kirim email akses AI Mentor ke ${customerEmail}:`, emailErr?.message));
+            }
           } catch (subErr: any) {
             console.error(`[Scalev] Failed to create clientSubscription for chatbot:`, subErr?.message);
           }

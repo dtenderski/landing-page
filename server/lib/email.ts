@@ -141,6 +141,81 @@ Simpan email ini sebagai bukti pembelian.
   });
 }
 
+interface AgentAccessDeliveryOptions {
+  to: string;
+  customerName?: string | null;
+  agentName: string;
+  chatUrl: string;
+  bonusContext?: string;
+}
+
+// Delivers access to a chatbot/agent bundled as a bonus with a product purchase
+// (e.g. AI Mentor melekat pada pembelian ebook Trilogi). Buyer unlocks chat by
+// entering their purchase email on the chat page — no separate token needed.
+// Never throws.
+export async function sendAgentAccessDeliveryEmail(opts: AgentAccessDeliveryOptions): Promise<SendEmailResult> {
+  const greetName = opts.customerName?.trim() || "Sahabat Gustafta";
+  const context = opts.bonusContext || "sebagai bonus dari pembelianmu";
+
+  const html = `<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f3f4f6">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f3f4f6;padding:32px 0">
+    <tr><td align="center">
+      <table width="480" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;padding:40px;font-family:Arial,sans-serif;color:#111">
+        <tr><td>
+          <p style="margin:0 0 4px;font-size:22px;font-weight:700;color:#1e3a8a">Gustafta</p>
+          <hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0">
+          <p style="font-size:16px;margin:0 0 8px">Halo <b>${greetName}</b>,</p>
+          <p style="font-size:15px;color:#374151;margin:0 0 16px">
+            Akses <b>${opts.agentName}</b> sudah aktif untukmu, ${context}.
+          </p>
+          <div style="text-align:center;margin:0 0 24px">
+            <a href="${opts.chatUrl}" style="display:inline-block;background:#1e3a8a;color:#fff;text-decoration:none;font-size:15px;font-weight:700;padding:14px 28px;border-radius:8px">💬 Mulai Ngobrol dengan ${opts.agentName}</a>
+          </div>
+          <div style="padding:20px;background:#f9fafb;border-radius:8px;border:1px solid #e5e7eb;margin:0 0 20px">
+            <p style="font-size:13px;color:#6b7280;margin:0 0 8px;font-weight:600">Cara membuka akses:</p>
+            <ol style="font-size:14px;color:#111;margin:0;padding-left:18px">
+              <li style="margin:0 0 6px">Buka link di atas</li>
+              <li style="margin:0 0 6px">Masukkan email pembelianmu (<b>${opts.to}</b>) saat diminta</li>
+              <li>Selesai — langsung bisa tanya jawab</li>
+            </ol>
+          </div>
+          <hr style="border:none;border-top:1px solid #e5e7eb;margin:0 0 16px">
+          <p style="font-size:12px;color:#9ca3af;margin:0">Simpan email ini sebagai bukti akses. Ada kendala? Balas email ini atau hubungi WhatsApp kami.</p>
+          <p style="font-size:12px;color:#9ca3af;margin:8px 0 0">© 2026 Gustafta. Seluruh hak dilindungi.</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+
+  const textContent = `Halo ${greetName},
+
+Akses ${opts.agentName} sudah aktif untukmu, ${context}.
+
+Mulai ngobrol: ${opts.chatUrl}
+
+Cara membuka akses:
+1. Buka link di atas
+2. Masukkan email pembelianmu (${opts.to}) saat diminta
+3. Selesai — langsung bisa tanya jawab
+
+Simpan email ini sebagai bukti akses.
+© 2026 Gustafta.`;
+
+  return sendEmail({
+    to: opts.to,
+    toName: opts.customerName || undefined,
+    subject: `💬 Akses ${opts.agentName} kamu sudah aktif`,
+    htmlContent: html,
+    textContent,
+    tags: ["agent-access-delivery"],
+  });
+}
+
 const ROLE_LABELS: Record<string, string> = {
   editor: "Editor (dapat mengubah agen)",
   viewer: "Viewer (hanya dapat melihat & menggunakan)",
