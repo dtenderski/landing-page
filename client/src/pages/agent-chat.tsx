@@ -433,7 +433,10 @@ export default function AgentChat() {
   const [voucherCode, setVoucherCode] = useState("");
   const [voucherLoading, setVoucherLoading] = useState(false);
   const [voucherMessage, setVoucherMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
-  const [showClaimAccess, setShowClaimAccess] = useState(false);
+  const [showClaimAccess, setShowClaimAccess] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return new URLSearchParams(window.location.search).get("claim") === "1";
+  });
   const [claimEmail, setClaimEmail] = useState("");
   const [claimLoading, setClaimLoading] = useState(false);
   const [claimError, setClaimError] = useState<string | null>(null);
@@ -1876,6 +1879,48 @@ export default function AgentChat() {
                   </Badge>
                 )}
               </div>
+              {(config?.paymentUrl || showClaimAccess) && (
+                <div className="rounded-lg border border-dashed p-3 space-y-2">
+                  <button
+                    type="button"
+                    onClick={() => { setShowClaimAccess(s => !s); setClaimError(null); }}
+                    className="w-full text-sm font-medium text-center flex items-center justify-center gap-1.5"
+                    style={{ color }}
+                    data-testid="button-toggle-claim-access"
+                  >
+                    <Check className="w-4 h-4" />
+                    Sudah bayar? Ambil akses di sini
+                  </button>
+                  {showClaimAccess && (
+                    <div className="space-y-2 pt-1">
+                      <input
+                        type="email"
+                        value={claimEmail}
+                        onChange={(e) => setClaimEmail(e.target.value)}
+                        placeholder="Masukkan email yang digunakan saat bayar"
+                        className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                        data-testid="input-claim-email"
+                      />
+                      {claimError && (
+                        <p className="text-xs text-destructive">{claimError}</p>
+                      )}
+                      <Button
+                        onClick={handleClaimAccessByEmail}
+                        disabled={!claimEmail.trim() || claimLoading}
+                        className="w-full"
+                        data-testid="button-claim-access"
+                      >
+                        {claimLoading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
+                        Ambil Akses
+                      </Button>
+                      <p className="text-xs text-muted-foreground text-center">
+                        Gunakan email yang sama persis saat Anda melakukan pembayaran.
+                      </p>
+                      <p className="text-xs text-muted-foreground text-center">atau daftar manual di bawah</p>
+                    </div>
+                  )}
+                </div>
+              )}
               <div className="space-y-3">
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium">Nama</label>
@@ -2000,8 +2045,8 @@ export default function AgentChat() {
 
               {!clientToken ? (
                 <div className="space-y-3">
-                  {/* If paymentUrl exists, show "Sudah bayar?" email claim first */}
-                  {config?.paymentUrl && (
+                  {/* If paymentUrl exists, or a support link forced ?claim=1, show "Sudah bayar?" email claim first */}
+                  {(config?.paymentUrl || showClaimAccess) && (
                     <div className="rounded-lg border border-dashed p-3 space-y-2">
                       <button
                         type="button"

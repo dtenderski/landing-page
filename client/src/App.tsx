@@ -421,6 +421,14 @@ function DialogGustaftaRedirect() {
   return null;
 }
 
+function TrilogiMentorRedirect() {
+  const [, navigate] = useLocation();
+  useEffect(() => {
+    navigate("/chat/ai-mentor-gustafta?claim=1", { replace: true });
+  }, []);
+  return null;
+}
+
 function MarketplaceRedirect() {
   const { toast } = useToast();
   const [, navigate] = useLocation();
@@ -2016,6 +2024,7 @@ function Router() {
         <Route path="/konsultasi" component={DialogGustaftaPage} />
         <Route path="/dialog-gustafta" component={DialogGustaftaRedirect} />
         <Route path="/dialog" component={DialogGustaftaRedirect} />
+        <Route path="/trilogi-mentor" component={TrilogiMentorRedirect} />
       <Route component={NotFound} />
     </Switch>
   );
