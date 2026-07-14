@@ -51,18 +51,50 @@ export const PRICING = {
 
 // ─── Trilogi GUSTAFTA (produk buku/ebook — sumber tunggal harga Trilogi) ──────────
 // Dipakai di /trilogi (landing) & /konstruksi. JANGAN tulis ulang angka di halaman.
+// Sinkron dengan produk Scalev "Gustafta Ebook Trilogy" (slug: gustafta-ebook-trilogy,
+// varian "basic" id 533205 & "Bundling" id 533206) — harga di sini WAJIB sama persis
+// dengan harga varian aktif di Scalev, atau checkout akan menampilkan harga berbeda.
 export const TRILOGI = {
+  /** PAKET PREMIUM (Bundling Lengkap) — varian Scalev "Bundling" (id 533206) */
   bundle: {
-    /** Harga bundle 3 buku (Early Bird) */
-    price: "Rp 499.000",
-    /** Harga coret (anchor) bundle */
-    normal: "Rp 945.000",
-    amount: 499000,
-  },
-  bukuSatu: {
-    /** Harga Buku I saja (Early Bird) */
     price: "Rp 245.000",
+    normal: "Rp 445.000",
     amount: 245000,
+    savings: "Hemat Rp 200.000",
+    bonuses: [
+      "Buku 1: DIALOG (PDF, 166 halaman) — Akses Segera",
+      "Buku 2: KOLABORASI (PDF) — Dikirim saat rilis",
+      "Buku 3: KREASI (PDF) — Dikirim saat rilis",
+      "Full E-Course Pendamping — Modul praktik video untuk ke-3 buku",
+      "Prompt Trilogi Lengkap — Panduan siap pakai: Dialog → Kolaborasi → Kreasi",
+      "Trial Gustafta Builder 7 Hari — Bonus eksklusif senilai Rp 150.000",
+    ],
+    guarantee: "Garansi 30 Hari Bersyarat — uang kembali 100% jika sudah membaca min. 2 dari 3 buku, mencoba min. 1 latihan per buku, dan disertai dokumentasi singkat.",
+    cocokUntuk: [
+      "Pensiunan/Senior yang ingin mewariskan keahlian bertahun-tahun",
+      "Konsultan, Guru, Dokter, Pakar Domain yang ingin menjangkau lebih banyak orang",
+      "Profesional transisi karier yang ingin membangun aset pengetahuan mandiri",
+      "Kreator & Pengusaha yang ingin sistematisasi visi besar menjadi produk digital",
+    ],
+  },
+  /** PAKET BASIC — varian Scalev "basic" (id 533205) */
+  bukuSatu: {
+    price: "Rp 87.000",
+    normal: "Rp 245.000",
+    amount: 87000,
+    savings: "Hemat Rp 158.000",
+    bonuses: [
+      "Buku 1: DIALOG (PDF, 166 halaman) — Akses Segera",
+      "E-Course Pendamping Modul 1 — Video tutorial praktik step-by-step",
+      "Prompt Dasar Trilogi — Panduan bertanya yang efektif untuk menggali pengetahuan",
+      "Akses Lifetime — Sekali beli, miliki selamanya",
+      "Update Konten Minor — Gratis update konten",
+    ],
+    cocokUntuk: [
+      "Profesional yang ingin segera mempraktikkan AI untuk dokumentasi pengetahuan",
+      "Pencari kerja yang ingin merapikan portofolio kompetensi",
+      "Siapa pun yang ingin memulai perjalanan transformasi digital dengan risiko minimal",
+    ],
   },
 } as const;
 

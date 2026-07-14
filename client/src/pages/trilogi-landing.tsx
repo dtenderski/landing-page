@@ -44,7 +44,7 @@ export default function TrilogiLanding() {
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    const DEADLINE = new Date("2026-07-01T00:00:00+07:00");
+    const DEADLINE = new Date("2026-08-15T00:00:00+07:00");
     const tick = () => {
       const diff = DEADLINE.getTime() - Date.now();
       if (diff <= 0) { setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 }); return; }
@@ -155,9 +155,9 @@ export default function TrilogiLanding() {
               </div>
 
               <p className="text-xs text-blue-200 flex flex-wrap gap-x-3 gap-y-1">
-                <span>✅ Garansi 7 Hari Uang Kembali</span>
+                <span>✅ Garansi 30 Hari Bersyarat</span>
                 <span>🔒 Checkout Aman via Scalev</span>
-                <span>📦 Akses Seumur Hidup</span>
+                <span>📦 Akses Lifetime</span>
               </p>
             </div>
 
@@ -342,53 +342,40 @@ export default function TrilogiLanding() {
       </section>
 
       {/* ══════════════════════════════════════════════
-          PRICING
+          PRICING — Paket Basic vs Premium (Bundling)
       ══════════════════════════════════════════════ */}
       <section id="pricing" className="py-16 px-4 bg-gray-50">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center">
           <p className="text-xs font-bold text-blue-600 uppercase tracking-widest mb-2">Investasi</p>
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Pilih Paket Anda</h2>
-          <p className="text-gray-500 mb-10 text-sm">Investasi leher ke atas untuk ketenangan finansial selamanya.</p>
+          <p className="text-gray-500 mb-10 text-sm max-w-2xl mx-auto">
+            Ditulis oleh Wuryanto Kusdjali — praktisi di persimpangan teknologi, pendidikan, dan industri konstruksi,
+            serta pimpinan asosiasi jasa konstruksi dan pengarah lembaga sertifikasi.
+          </p>
 
-          {/* Bundle Card */}
-          <div className="relative bg-white rounded-2xl shadow-2xl border-2 border-orange-500 overflow-visible max-w-2xl mx-auto mb-8">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-orange-500 text-white text-xs font-extrabold py-1.5 px-6 rounded-full shadow-lg whitespace-nowrap">
-              PALING LARIS 🔥
-            </div>
-            <div className="p-8 md:p-10 pt-10">
+          <div className="grid md:grid-cols-2 gap-6 items-stretch text-left">
 
-              {/* 2-col: cover + detail */}
-              <div className="flex flex-col sm:flex-row gap-6 items-start mb-6">
-                {/* Cover flat */}
-                <div className="flex-shrink-0 mx-auto sm:mx-0">
-                  <img
-                    src={coverFlat}
-                    alt="Cover Ebook Dari Monolog ke Dialog"
-                    className="w-36 sm:w-40 rounded-xl shadow-lg border border-gray-100"
-                  />
+            {/* ── PAKET BASIC ── */}
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-7 md:p-8 flex flex-col">
+              <div className="text-3xl mb-2">🥉</div>
+              <h3 className="text-lg font-extrabold text-gray-900 mb-1">PAKET BASIC</h3>
+              <p className="text-gray-500 text-xs mb-5 leading-relaxed">
+                Fokus: Memulai transformasi dari sekadar "tahu" menjadi "bisa berdialog" dengan AI.
+              </p>
+
+              <div className="mb-5">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-gray-400 line-through text-sm">{TRILOGI.bukuSatu.normal}</span>
+                  <span className="text-3xl font-extrabold text-gray-900">{TRILOGI.bukuSatu.price}</span>
                 </div>
-
-                {/* Title + price */}
-                <div className="text-left flex-1">
-                  <h3 className="text-xl font-extrabold text-gray-900 mb-1">BUNDLE LENGKAP TRILOGI</h3>
-                  <p className="text-gray-500 text-xs mb-4">Buku I + II + III · Belajar → Bekerja → Berkarya</p>
-                  <div className="text-4xl font-extrabold text-orange-600 mb-1">{TRILOGI.bundle.price}</div>
-                  <div className="text-gray-400 text-sm">
-                    <span className="line-through">{TRILOGI.bundle.normal}</span>{" "}
-                    <span className="text-orange-500 font-semibold no-underline">Hemat 47%</span>
-                  </div>
-                </div>
+                <span className="inline-block mt-1 text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
+                  ({TRILOGI.bukuSatu.savings})
+                </span>
               </div>
 
-              <ul className="text-left space-y-3 mb-8 text-sm text-gray-700">
-                {[
-                  "Buku I, II, III (PDF + Flipbook Interaktif)",
-                  "Prompt Pack MultiClaw (50+ prompt siap pakai)",
-                  "Template Tim 6-Agen AI (import 1 klik ke Gustafta)",
-                  "🎁 BONUS: 1 Bulan Gustafta Builder GRATIS",
-                  "🔄 Update gratis selamanya",
-                  "🛡️ Garansi 7 hari uang kembali",
-                ].map((item, i) => (
+              <p className="text-xs font-bold text-gray-700 uppercase tracking-wide mb-2">📦 Yang Anda Dapatkan:</p>
+              <ul className="space-y-2.5 mb-6 text-sm text-gray-700 flex-1">
+                {TRILOGI.bukuSatu.bonuses.map((item, i) => (
                   <li key={i} className="flex items-start gap-2.5">
                     <Check className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
                     {item}
@@ -396,29 +383,90 @@ export default function TrilogiLanding() {
                 ))}
               </ul>
 
-              <a href={SCALEV_BUNDLE} target="_blank" rel="noopener noreferrer" onClick={handleBundleClick}
-                className="block w-full text-center bg-orange-600 hover:bg-orange-500 text-white text-lg font-extrabold py-4 rounded-xl shadow-lg transition-all transform hover:scale-[1.02] active:scale-95"
-                data-testid="button-pricing-bundle">
-                AMANKAN BUNDLE SEKARANG →
+              <p className="text-xs font-bold text-gray-700 uppercase tracking-wide mb-2">🎯 Paling Cocok Untuk:</p>
+              <ul className="space-y-1.5 mb-7 text-xs text-gray-500">
+                {TRILOGI.bukuSatu.cocokUntuk.map((item, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="text-blue-400 mt-0.5">•</span>{item}
+                  </li>
+                ))}
+              </ul>
+
+              <a href={SCALEV_BUKU1} target="_blank" rel="noopener noreferrer" onClick={handleBuku1Click}
+                className="block w-full text-center border-2 border-gray-900 hover:bg-gray-900 hover:text-white text-gray-900 text-base font-extrabold py-3.5 rounded-xl transition-all"
+                data-testid="button-pricing-basic">
+                AMBIL PAKET BASIC →
               </a>
-              <p className="text-xs text-gray-400 mt-3 text-center">⏰ Harga Early Bird hanya sampai 30 Juni 2026!</p>
             </div>
+
+            {/* ── PAKET PREMIUM (BUNDLING) ── */}
+            <div className="relative bg-white rounded-2xl shadow-2xl border-2 border-orange-500 overflow-visible p-7 md:p-8 flex flex-col">
+              <div className="absolute top-0 right-6 -translate-y-1/2 bg-orange-500 text-white text-xs font-extrabold py-1.5 px-5 rounded-full shadow-lg whitespace-nowrap">
+                ⭐ BEST VALUE
+              </div>
+              <div className="text-3xl mb-2">🥇</div>
+              <h3 className="text-lg font-extrabold text-gray-900 mb-1">PAKET PREMIUM (BUNDLING LENGKAP)</h3>
+              <p className="text-gray-500 text-xs mb-5 leading-relaxed">
+                Fokus: Transformasi total. Dari dialog, kolaborasi tim virtual, hingga kreasi karya nyata yang bisa diwariskan.
+              </p>
+
+              <div className="mb-5">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-gray-400 line-through text-sm">{TRILOGI.bundle.normal}</span>
+                  <span className="text-3xl font-extrabold text-orange-600">{TRILOGI.bundle.price}</span>
+                </div>
+                <span className="inline-block mt-1 text-xs font-semibold text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full">
+                  ({TRILOGI.bundle.savings})
+                </span>
+              </div>
+
+              <p className="text-xs font-bold text-gray-700 uppercase tracking-wide mb-2">📦 Yang Anda Dapatkan:</p>
+              <ul className="space-y-2.5 mb-6 text-sm text-gray-700 flex-1">
+                {TRILOGI.bundle.bonuses.map((item, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="rounded-xl bg-orange-50 border border-orange-100 p-3 mb-4">
+                <p className="text-xs text-orange-800 leading-relaxed">🛡️ {TRILOGI.bundle.guarantee}</p>
+              </div>
+
+              <p className="text-xs font-bold text-gray-700 uppercase tracking-wide mb-2">🎯 Paling Cocok Untuk:</p>
+              <ul className="space-y-1.5 mb-7 text-xs text-gray-500">
+                {TRILOGI.bundle.cocokUntuk.map((item, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="text-orange-400 mt-0.5">•</span>{item}
+                  </li>
+                ))}
+              </ul>
+
+              <a href={SCALEV_BUNDLE} target="_blank" rel="noopener noreferrer" onClick={handleBundleClick}
+                className="block w-full text-center bg-orange-600 hover:bg-orange-500 text-white text-base font-extrabold py-3.5 rounded-xl shadow-lg transition-all transform hover:scale-[1.02] active:scale-95"
+                data-testid="button-pricing-bundle">
+                AMANKAN PREMIUM SEKARANG →
+              </a>
+            </div>
+
           </div>
 
-          {/* Buku 1 saja */}
-          <p className="text-gray-500 text-sm mb-2">Belum siap bundle? Mulai dari yang dasar dulu:</p>
-          <a href={SCALEV_BUKU1} target="_blank" rel="noopener noreferrer" onClick={handleBuku1Click}
-            className="text-blue-600 hover:text-blue-500 font-semibold underline text-sm"
-            data-testid="link-buku1">
-            Ambil Buku I Saja (Early Bird {TRILOGI.bukuSatu.price}) →
-          </a>
+          {/* Cover thumbnail */}
+          <div className="flex justify-center mt-8">
+            <img
+              src={coverFlat}
+              alt="Cover Ebook Dari Monolog ke Dialog"
+              className="w-28 rounded-xl shadow-lg border border-gray-100"
+            />
+          </div>
 
           {/* Platform teaser */}
           <div className="mt-10 p-6 bg-blue-50 border border-blue-200 rounded-2xl text-left max-w-xl mx-auto">
             <p className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-2">Sudah punya Ebook?</p>
             <p className="text-sm text-gray-700 mb-3">
               Langsung praktik di <strong className="text-blue-700">Gustafta Builder</strong> — platform no-code untuk membangun chatbot AI Anda.
-              Bundle sudah termasuk <strong>1 bulan gratis</strong>.
+              Paket Premium sudah termasuk <strong>Trial 7 hari</strong>.
             </p>
             <Link href="/packs">
               <span className="inline-flex items-center gap-1 text-sm font-semibold text-blue-700 hover:text-blue-600 cursor-pointer">
@@ -453,12 +501,12 @@ export default function TrilogiLanding() {
                 a: "YouTube memberikan serpihan informasi. Trilogi memberikan sistem yang teruji end-to-end: dari mindset, memilih keahlian, membangun chatbot, hingga mendapatkan klien pertama dan menskalakan penghasilan subscription. Plus template dan prompt pack siap pakai.",
               },
               {
-                q: `🤔 "Apakah saya perlu berlangganan Gustafta setelah aktivasi Starter Kit — Panduan Gustafta?"`,
-                a: "Tidak wajib. Ebook bisa dipelajari sendiri terlebih dahulu. Bundle sudah termasuk BONUS 1 bulan Gustafta Builder gratis agar Anda bisa langsung praktik. Setelah itu, Anda bebas memilih lanjut berlangganan atau tidak.",
+                q: `🤔 "Apakah saya perlu berlangganan Gustafta setelah beli ebook ini?"`,
+                a: "Tidak wajib. Ebook bisa dipelajari sendiri terlebih dahulu. Paket Premium sudah termasuk BONUS Trial Gustafta Builder 7 hari agar Anda bisa langsung praktik. Setelah itu, Anda bebas memilih lanjut berlangganan atau tidak.",
               },
               {
                 q: `🤔 "Bagaimana jika saya tidak puas setelah beli?"`,
-                a: "Coba 7 hari. Praktik minimal satu latihan dari Buku I. Jika tidak ada manfaat yang Anda rasakan, hubungi kami dan uang kembali 100%. Tanpa pertanyaan, tanpa drama.",
+                a: "Untuk Paket Premium (Bundling), berlaku Garansi 30 Hari Bersyarat: uang kembali 100% jika Anda sudah membaca minimal 2 dari 3 buku, mencoba minimal 1 latihan per buku, dan melampirkan dokumentasi singkat (foto catatan/screenshot).",
               },
             ].map((item, i) => (
               <AccordionItem key={i} value={`faq-${i}`} className="border border-gray-200 rounded-xl px-4">
@@ -502,7 +550,7 @@ export default function TrilogiLanding() {
             data-testid="button-final-cta">
             🔥 Ya, Saya Mau Mulai Sekarang
           </a>
-          <p className="text-sm text-blue-200">✅ Garansi 7 Hari Uang Kembali &nbsp;|&nbsp; ⏰ Early Bird habis 30 Juni 2026</p>
+          <p className="text-sm text-blue-200">✅ Garansi 30 Hari Bersyarat &nbsp;|&nbsp; ⏰ Harga Early Bird berakhir 15 Agustus 2026</p>
         </div>
       </section>
 
