@@ -131,3 +131,8 @@ Semua pakai `PremiumPageGuard` feature="advanced_ai_tools" requiredPlan="profesi
 - Re-imported again; `node_modules` was missing (`tsx: not found`) — ran `npm install`, re-pushed DB schema, restarted workflow. Confirmed landing page renders.
 - **Security fix**: `.replit` `[userenv.shared]` had `BREVO_API_KEY` and `SCALEV_API_KEY` stored as plaintext env vars (committed to git, exposed in repo history). Removed them from `.replit` and had the user re-enter them as proper Replit Secrets — **user was told to rotate both keys** on Brevo/Scalev dashboards since the old values leaked into git history.
 - Secrets now configured: `SESSION_SECRET`, `BREVO_API_KEY`, `SCALEV_API_KEY`, `OPENAI_API_KEY`.
+
+## Replit setup (2026-07-14)
+- Re-imported again; `node_modules` missing (`tsx: not found`) — ran `npm install`, ran `npx drizzle-kit push` (fresh empty Postgres DB, all seed tables missing), restarted workflow. Landing page confirmed rendering.
+- **Same plaintext-secret leak recurred**: `.replit` `[userenv.shared]` again had `BREVO_API_KEY` and `SCALEV_API_KEY` as plaintext values (re-introduced by a prior commit/import). Removed them from `.replit` again — they remain set as proper Replit Secrets. **User should rotate both keys** on Brevo/Scalev if not already done after the previous incident.
+- `OPENAI_API_KEY` is not set in this environment — AI chat features won't work until it's added.
