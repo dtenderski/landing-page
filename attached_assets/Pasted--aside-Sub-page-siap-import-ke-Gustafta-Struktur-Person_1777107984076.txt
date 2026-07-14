@@ -1,0 +1,74 @@
+<aside>
+🌱
+
+**Sub-page siap-import ke Gustafta.** Struktur: Persona → Knowledge Base 3 lapisan → Sumber Resmi.
+
+</aside>
+
+## 🧬 Persona
+
+| **Chatbot Name** | Pembinaan Jasa Konstruksi | **Tagline** | Pembinaan, Pemberdayaan & Pengembangan Sektor Konstruksi |
+| --- | --- | --- | --- |
+| **Description** | Spesialis kewenangan & tugas pembinaan jasa konstruksi: pemerintah pusat (Kemen PUPR/Ditjen Bina Konstruksi), provinsi & kabupaten/kota, LPJK, asosiasi, dan masyarakat jasa konstruksi. | **Primary Language** | Bahasa Indonesia |
+| **Series** | S5 — Tata Kelola, TK & Digitalisasi | **Avatar** | 🌱 |
+
+## 📚 Knowledge Base
+
+### 🟦 Foundational — Regulasi, Standar, Data Produk
+
+| **Sumber Resmi** | **Sektor** | **Subsektor** | **URL Sumber** | **Tanggal** |
+| --- | --- | --- | --- | --- |
+| PP No. 22/2020 jo. PP No. 14/2021 | Hukum | PP | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2020/2021 |
+| Permen PUPR No. 10/2020 — Akreditasi Asosiasi | PU | Permen | [jdih.pu.go.id](http://jdih.pu.go.id) | 2020 |
+| SE Dirjen Bina Konstruksi No. 214/SE/Dk/2022 | PU | SE | [binakonstruksi.pu.go.id](http://binakonstruksi.pu.go.id) | 2022 |
+
+### 🟩 Operational — SOP, Prosedur, FAQ, Template
+
+**Pembagian kewenangan:**
+
+#### A. Kewenangan Pemerintah Pusat
+
+- Kebijakan nasional jasa konstruksi
+- Pengembangan sistem rantai pasok
+- Standar SBU/SKK, sertifikat standar JK
+- Pembinaan LPJK, LSBU, LSP konstruksi
+- Sistem informasi (SIJK, SIBIMA)
+
+#### B. Kewenangan provinsi
+
+- Pembinaan jasa konstruksi tingkat provinsi
+- Pengawasan tertib usaha & tertib penyelenggaraan tingkat provinsi
+- Pengelolaan sistem informasi jasa konstruksi cakupan daerah provinsi
+- Pemberdayaan masyarakat jasa konstruksi
+
+#### C. Kewenangan kabupaten/kota
+
+- Penerbitan IUJK skala lokal (sesuai PBBR)
+- Pengawasan tertib usaha & tertib penyelenggaraan kabupaten/kota
+- Pengelolaan sistem informasi tingkat kabupaten/kota
+- Pemberdayaan masyarakat jasa konstruksi setempat
+
+**Aktor pendukung:** LPJK (pelaksana sebagian tugas Menteri), asosiasi BU/profesi terakreditasi, masyarakat jasa konstruksi (forum/dewan).
+
+**FAQ:**
+
+- *Siapa pembina utama?* — Menteri PU melalui Ditjen Bina Konstruksi.
+- *Peran LPJK pasca PP 22/2020?* — Bukan lagi penerbit SBU/SKK; menjalankan tugas tertentu Menteri (lisensi LSBU, pengawasan, dsb).
+
+### 🟪 Case Memory — Notulen, Keputusan, Preseden
+
+*TBD — diisi dengan: laporan tahunan Ditjen Bina Konstruksi, notulen forum jasa konstruksi, program pelatihan provinsi, evaluasi LPJK.*
+
+## 🔗 Sumber Resmi
+
+[binakonstruksi.pu.go.id](http://binakonstruksi.pu.go.id) · [lpjk.pu.go.id](http://lpjk.pu.go.id) · [jdih.pu.go.id](http://jdih.pu.go.id) · [peraturan.bpk.go.id](http://peraturan.bpk.go.id)
+
+## ❓ Contoh Pertanyaan
+
+1. Apa kewenangan provinsi dalam pembinaan jasa konstruksi?
+2. Siapa yang menerbitkan IUJK skala kabupaten/kota?
+3. Bagaimana hubungan LPJK dengan Menteri PU pasca PP 22/2020?
+
+## 🔗 Halaman induk
+
+[Regulasi Jasa Konstruksi Indonesia — Ringkasan Lengkap](https://www.notion.so/Regulasi-Jasa-Konstruksi-Indonesia-Ringkasan-Lengkap-5a3f66d1250941f18f53a104f957a336?pvs=21) — Bab 8.

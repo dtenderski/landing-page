@@ -1,0 +1,154 @@
+Oke, lanjut. Kita bikin **DASHBOARD Google Sheets yang “hidup”** dengan **Pivot + filter + daftar risiko + rekap PUB**, tanpa mengubah struktur file template.
+
+## 1) Upload & siap pakai
+
+1. Upload file ini ke Google Drive → klik kanan → **Open with → Google Sheets**
+2. (Opsional) File → **Make a copy** untuk versi produksi
+
+---
+
+## 2) Pivot 1 — Top 5 Prioritas Pembinaan (paling penting)
+
+Tujuan: tahu “tema pembinaan” yang paling banyak dibutuhkan.
+
+### Langkah
+
+* Insert → **Pivot table**
+* Range: `ASESMEN!A:AD`
+* New sheet: `PIVOT_PRIORITAS`
+
+### Pivot Setup
+
+**Rows**
+
+* `prioritas_1`
+  **Values**
+* `prioritas_1` → COUNTA
+
+Lalu ulangi 2 pivot lagi untuk `prioritas_2` dan `prioritas_3` (atau gabungkan dengan cara cepat di bawah).
+
+### Cara cepat (gabungkan 1–3 jadi satu list)
+
+Buat sheet baru `PRIORITAS_FLAT`, isi di A1:
+
+```gs
+=FILTER({ASESMEN!Z2:Z;ASESMEN!AA2:AA;ASESMEN!AB2:AB},{ASESMEN!Z2:Z;ASESMEN!AA2:AA;ASESMEN!AB2:AB}<>"")
+```
+
+Lalu buat Pivot dari `PRIORITAS_FLAT!A:A`:
+
+* Rows: kolom A
+* Values: COUNTA
+* Sort by COUNTA desc
+* Filter: Top 5
+
+Hasilnya jadi **Top 5 kebutuhan pembinaan** secara real.
+
+---
+
+## 3) Pivot 2 — Distribusi Level per Jenis Usaha (Kontraktor vs Konsultan)
+
+Insert → Pivot table (sheet: `PIVOT_LEVEL`)
+
+**Rows**
+
+* `jenis_usaha` (kolom D di ASESMEN)
+* `level` (kolom Y)
+
+**Values**
+
+* `level` → COUNTA
+
+Ini bikin matriks: Konsultan banyak di “Muda” misalnya, Kontraktor banyak di “Madya”, dll.
+
+---
+
+## 4) Tabel “Risiko Tinggi” otomatis (Skor < 50 tahun berjalan)
+
+Buat sheet: `RISIKO_TINGGI`
+
+Di A1:
+
+```gs
+=LET(
+ th, YEAR(TODAY()),
+ FILTER(ASESMEN!A:AD, ASESMEN!C:C=th, ASESMEN!X:X<50)
+)
+```
+
+Tambahkan Filter View: Data → Create a filter.
+
+Ini jadi “daftar prioritas pembinaan” paling actionable.
+
+---
+
+## 5) Rekap PUB (Pembinaan minimal 1x/tahun) – per anggota
+
+Buat sheet: `PUB_STATUS`
+
+Di A1:
+
+```gs
+=LET(
+ th, YEAR(TODAY()),
+ aktif, FILTER(ANGGOTA!A:J, ANGGOTA!I:I="Aktif"),
+ member, INDEX(aktif,,1),
+ nama, INDEX(aktif,,3),
+ hasil, MAP(member, LAMBDA(m,
+   IF(COUNTIFS(PEMBINAAN!B:B,m,PEMBINAAN!C:C,th,PEMBINAAN!I:I,"Yes")>0,"Sudah PUB","Belum PUB")
+ )),
+ HSTACK(member,nama,hasil)
+)
+```
+
+Lalu Anda bisa filter “Belum PUB” untuk daftar target pembinaan (selaras kewajiban minimal 1x/tahun).
+
+---
+
+## 6) Grafik Dashboard (biar enak dipresentasikan)
+
+Di sheet `DASHBOARD`:
+
+* Grafik 1: **Distribusi Level** (pakai tabel A11:B15 yang sudah ada)
+* Grafik 2: **% sudah asesmen** (angka B7)
+* Grafik 3: **Top 5 prioritas** (dari Pivot prioritas)
+
+Insert → Chart (pilih Pie/Bar sesuai selera).
+
+---
+
+## 7) Mapping output Chatbot → Kolom Sheet (biar gampang integrasi)
+
+Kalau chatbot mengirim data, minimal kirim ini ke sheet **ASESMEN**:
+
+Wajib:
+
+* `assessment_id` (A)
+* `member_id` (B)
+* `tahun` (C)
+* `jenis_usaha` (D)
+
+Lalu skor komponen sesuai jenis:
+
+* Kontraktor: isi **E–M**
+* Konsultan: isi **N–U**
+
+Kolom V–AB akan otomatis menghitung:
+
+* `skor_proyek` (V)
+* `skor_manajemen` (W)
+* `skor_total` (X)
+* `level` (Y)
+* `prioritas_1..3` (Z–AB)
+
+---
+
+## 8) Next step yang paling berguna
+
+Saya bisa lanjutkan dengan salah satu (pilih yang Anda mau, saya langsung tuliskan):
+
+1. **Script Google Apps Script** untuk auto-append data webhook ke `ASESMEN`
+2. **Flow pertanyaan chatbot versi final** (Kontraktor + Konsultan) dengan output skor komponen siap kirim
+3. **Template Sertifikat Digital** (PDF) + isi otomatis: nama, level, skor, QR/link verifikasi
+
+Mau lanjut yang mana dulu: **(1) Apps Script webhook** atau **(2) final flow chatbot + output skor**?

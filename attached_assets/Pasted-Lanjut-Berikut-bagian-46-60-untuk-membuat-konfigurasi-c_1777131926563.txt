@@ -1,0 +1,839 @@
+Lanjut. Berikut **bagian 46–60** untuk membuat konfigurasi chatbot Mekanikal benar-benar siap implementasi di builder: mencakup **data preparation, search logic, scoring, prompt routing, admin panel fields, QA testing, deployment checklist, dan final copy-paste configuration**. Struktur tetap mengikuti pola chatbot Manajemen Pelaksanaan yang memakai flow, intent, node, response template, fallback, assessment, scenario, checklist, dan session summary.  Data jabatan tetap mengacu pada katalog Mekanikal yang berisi subklasifikasi, jabatan kerja, jenjang jabatan, kualifikasi, KKNI, standar kompetensi, dan link SKK/SKKNI. 
+
+# 46. Data Preparation Rule
+
+```yaml id="h8q7rs"
+data_preparation:
+  source_file: "mekaskk_database_mekanikal.json"
+  purpose: >
+    Menjadikan data klasifikasi Mekanikal sebagai knowledge base utama
+    untuk pencarian jabatan, KKNI, SKK/SKKNI, rekomendasi, asesmen, dan checklist.
+
+  required_fields:
+    - id
+    - klasifikasi
+    - subklasifikasi
+    - jabatan_kerja
+    - jenjang_jabatan
+    - kualifikasi
+    - jenjang_kkni
+    - standar_kompetensi
+    - status_skk
+    - link_skk
+    - kata_kunci
+
+  normalization_rules:
+    - "Semua teks pencarian diubah menjadi huruf kecil."
+    - "Tanda baca seperti slash, dash, koma, dan kurung diperlakukan sebagai pemisah kata."
+    - "Istilah bahasa Inggris dan Indonesia disimpan sebagai kata kunci."
+    - "Jangan mengubah nomor SKKNI/SKKK dari data sumber."
+    - "Jangan memperbaiki link typo kecuali ada data resmi pengganti."
+    - "Jika link kosong atau '-', tampilkan 'Link belum tersedia'."
+    - "Jika standar tertulis dalam proses penyusunan, tampilkan sesuai data."
+
+  search_fields:
+    - jabatan_kerja
+    - jenjang_jabatan
+    - subklasifikasi
+    - kualifikasi
+    - jenjang_kkni
+    - standar_kompetensi
+    - kata_kunci
+```
+
+# 47. Search Scoring Logic
+
+```yaml id="md04fu"
+search_scoring:
+  purpose: >
+    Menentukan hasil paling relevan saat user mencari jabatan, standar,
+    KKNI, atau bidang Mekanikal.
+
+  scoring_rules:
+    exact_match_jabatan_kerja: 100
+    exact_match_jenjang_jabatan: 90
+    exact_match_standar_kompetensi: 85
+    exact_match_kkni: 80
+    exact_match_subklasifikasi: 70
+    keyword_match: 60
+    partial_match_jabatan: 50
+    partial_match_subklasifikasi: 40
+    partial_match_standard: 35
+    semantic_related_term: 25
+
+  result_rules:
+    - "Jika skor tertinggi >= 85 dan hanya satu hasil dominan, tampilkan detail jabatan."
+    - "Jika ada 2–5 hasil relevan, tampilkan daftar pilihan."
+    - "Jika hasil lebih dari 5, tampilkan 5 teratas dan minta user mempersempit pencarian."
+    - "Jika skor rendah, gunakan fallback dengan saran kata kunci."
+    - "Jika input ambigu seperti 'crane', 'las', 'alat berat', tampilkan kategori terkait."
+
+  max_results_displayed: 5
+```
+
+# 48. Synonym Dictionary
+
+```yaml id="shf75y"
+synonym_dictionary:
+  hvac:
+    terms:
+      - "hvac"
+      - "ac"
+      - "air conditioning"
+      - "pendingin"
+      - "tata udara"
+      - "refrigasi"
+      - "ventilasi"
+
+  plumbing:
+    terms:
+      - "plumbing"
+      - "plambing"
+      - "pipa"
+      - "pipa air"
+      - "sanitasi"
+      - "pompa"
+      - "tukang pipa"
+
+  fire_alarm:
+    terms:
+      - "fire alarm"
+      - "alarm kebakaran"
+      - "proteksi kebakaran"
+      - "detector"
+      - "panel alarm"
+      - "sistem kebakaran"
+
+  lift_escalator:
+    terms:
+      - "lift"
+      - "elevator"
+      - "eskalator"
+      - "transportasi vertikal"
+      - "gondola"
+
+  mechanical_building:
+    terms:
+      - "mekanikal gedung"
+      - "mechanical engineer"
+      - "m&e"
+      - "mep"
+      - "mekanikal bangunan"
+      - "kelaikan fungsi mekanikal"
+
+  welding:
+    terms:
+      - "las"
+      - "welder"
+      - "juru las"
+      - "las listrik"
+      - "las tig"
+      - "oxyacetylene"
+      - "gas welding"
+      - "electric welding"
+
+  heavy_equipment:
+    terms:
+      - "alat berat"
+      - "bulldozer"
+      - "excavator"
+      - "wheel loader"
+      - "backhoe loader"
+      - "dump truck"
+      - "roller"
+      - "grader"
+      - "hydraulic"
+      - "hidrolik"
+
+  crane_lifting:
+    terms:
+      - "crane"
+      - "mobile crane"
+      - "tower crane"
+      - "crawler crane"
+      - "rough terrain crane"
+      - "truck mounted crane"
+      - "forklift"
+      - "lifting"
+      - "slinging"
+      - "rigging"
+
+  scaffolding:
+    terms:
+      - "scaffolding"
+      - "perancah"
+      - "steiger"
+      - "pengawas scaffolding"
+      - "operator scaffolding"
+```
+
+# 49. Prompt Router
+
+```yaml id="h79a3z"
+prompt_router:
+  purpose: >
+    Mengarahkan pertanyaan user ke flow yang tepat berdasarkan intent.
+
+  routing_rules:
+    - if_user_mentions:
+        - "jabatan"
+        - "sertifikasi apa"
+        - "saya operator"
+        - "saya teknisi"
+        - "saya ahli"
+      route_to: "role_lookup_or_recommendation"
+
+    - if_user_mentions:
+        - "SKKNI"
+        - "SKK"
+        - "standar"
+        - "link"
+        - "dokumen"
+      route_to: "standard_lookup"
+
+    - if_user_mentions:
+        - "KKNI"
+        - "level"
+        - "jenjang"
+      route_to: "kkni_lookup"
+
+    - if_user_mentions:
+        - "asesmen"
+        - "tes"
+        - "cek kesiapan"
+        - "uji kemampuan"
+      route_to: "assessment_start"
+
+    - if_user_mentions:
+        - "latihan"
+        - "studi kasus"
+        - "kasus"
+        - "simulasi"
+      route_to: "scenario_or_mock_interview"
+
+    - if_user_mentions:
+        - "checklist"
+        - "bukti"
+        - "portofolio"
+        - "dokumen apa"
+      route_to: "evidence_checklist"
+
+    - if_user_mentions:
+        - "apa itu"
+        - "arti"
+        - "maksud"
+        - "definisi"
+      route_to: "glossary_lookup"
+
+  default_route: "fallback"
+```
+
+# 50. Role Recommendation Logic
+
+```yaml id="kl9v34"
+role_recommendation_logic:
+  purpose: >
+    Memberikan rekomendasi jabatan berdasarkan pekerjaan, pengalaman,
+    dan tingkat tanggung jawab user.
+
+  rules:
+    - user_profile_contains:
+        work_area: "HVAC"
+        responsibility: "operator"
+      recommend:
+        - "Mekanik Heating, Ventilation, dan Air Condition (HVAC)"
+
+    - user_profile_contains:
+        work_area: "HVAC"
+        responsibility: "ahli"
+      recommend:
+        - "Ahli Perencanaan Sistem Tata Udara"
+
+    - user_profile_contains:
+        work_area: "Plumbing"
+        responsibility: "operator"
+      recommend:
+        - "Tukang Plambing"
+        - "Tukang Pasang Pipa"
+
+    - user_profile_contains:
+        work_area: "Plumbing"
+        responsibility: "pengawas"
+      recommend:
+        - "Pengawas Plambing/Pekerjaan Plambing"
+        - "Pelaksana Teknik Plambing"
+
+    - user_profile_contains:
+        work_area: "Fire Alarm"
+      recommend:
+        - "Teknisi Fire Alarm"
+
+    - user_profile_contains:
+        work_area: "Mechanical Engineer"
+      recommend:
+        - "Ahli Bidang Keahlian Teknik Mekanikal"
+        - "Ahli Pemeriksa Kelaikan Fungsi Mekanikal Bangunan Gedung"
+
+    - user_profile_contains:
+        work_area: "Welder"
+      recommend:
+        - "Tukang Las/Welder/Gas dan Electric Welder"
+        - "Tukang Las Listrik"
+        - "Tukang Las TIG Posisi Bawah Tangan"
+        - "Juru Las Oxyacetylene"
+
+    - user_profile_contains:
+        work_area: "Crane"
+      recommend:
+        - "Operator Crane Mobile"
+        - "Operator Tower Crane"
+        - "Operator Truck Mounted Crane"
+        - "Operator Rough Terrain Crane"
+
+    - user_profile_contains:
+        work_area: "Scaffolding"
+      recommend:
+        - "Operator Scaffolding"
+        - "Teknisi Scaffolding"
+        - "Pengawas Scaffolding"
+
+  response_template: >
+    Berdasarkan informasi Anda, rekomendasi jabatan sertifikasi yang paling relevan adalah:
+
+    {{recommended_roles}}
+
+    Untuk menentukan jenjang yang paling tepat, saya perlu mengetahui tingkat tanggung jawab Anda:
+    apakah lebih dekat ke Operator, Teknisi/Analis, Pengawas, Ahli Muda, Ahli Madya, atau Ahli Utama?
+```
+
+# 51. WhatsApp Bot Flow
+
+```yaml id="x3nx27"
+whatsapp_bot_flow:
+  greeting_message: >
+    Halo, saya SKK Coach — Mekanikal.
+
+    Pilih menu:
+    1. Cari jabatan Mekanikal
+    2. Cari SKK/SKKNI
+    3. Cari KKNI
+    4. Rekomendasi sertifikasi
+    5. Asesmen mandiri
+    6. Checklist bukti
+    7. Tanya istilah
+
+    Balas dengan angka atau ketik pertanyaan Anda.
+
+  menu_mapping:
+    "1": "role_lookup"
+    "2": "standard_lookup"
+    "3": "kkni_lookup"
+    "4": "role_discovery"
+    "5": "assessment_start"
+    "6": "evidence_checklist"
+    "7": "glossary_lookup"
+
+  compact_response_template: >
+    *{{jabatan_kerja}}*
+
+    Subklasifikasi:
+    {{subklasifikasi}}
+
+    Kualifikasi:
+    {{kualifikasi}}
+
+    KKNI:
+    Level {{jenjang_kkni}}
+
+    Standar:
+    {{standar_kompetensi}}
+
+    Link:
+    {{link_skk}}
+
+    Pilih:
+    1. Asesmen
+    2. Checklist bukti
+    3. Cari jabatan lain
+    4. Menu utama
+
+  fallback_message: >
+    Maaf, data belum ditemukan.
+    Coba ketik kata kunci seperti:
+    HVAC, plumbing, tukang las, operator crane, fire alarm, scaffolding, alat berat, lift.
+```
+
+# 52. Website Chatbot Flow
+
+```yaml id="ajbm3y"
+website_chatbot_flow:
+  layout:
+    left_panel:
+      - "Menu utama"
+      - "Riwayat pencarian"
+      - "Modul belajar"
+      - "Asesmen"
+    chat_panel:
+      - "User message"
+      - "Bot response"
+      - "Quick replies"
+    result_card:
+      fields:
+        - "Jabatan Kerja"
+        - "Subklasifikasi"
+        - "Jenjang Jabatan"
+        - "Kualifikasi"
+        - "KKNI"
+        - "Standar Kompetensi"
+        - "Link Dokumen"
+        - "Pilihan Lanjutan"
+
+  result_card_template: >
+    [{{jabatan_kerja}}]
+
+    Subklasifikasi:
+    {{subklasifikasi}}
+
+    Jenjang:
+    {{jenjang_jabatan}}
+
+    Kualifikasi:
+    {{kualifikasi}}
+
+    KKNI:
+    {{jenjang_kkni}}
+
+    Standar Kompetensi:
+    {{standar_kompetensi}}
+
+    Link:
+    {{link_skk}}
+
+  buttons:
+    - "Mulai asesmen"
+    - "Checklist bukti"
+    - "Belajar modul"
+    - "Bandingkan jabatan"
+    - "Download link SKK"
+```
+
+# 53. Admin Panel Content Structure
+
+```yaml id="qdbkm8"
+admin_panel:
+  purpose: >
+    Memudahkan admin memperbarui data jabatan, standar, link dokumen,
+    synonym, prompt, dan flow chatbot.
+
+  editable_sections:
+    - id: bot_identity
+      fields:
+        - bot_name
+        - bot_description
+        - welcome_message
+        - tone
+        - language
+
+    - id: knowledge_base
+      fields:
+        - upload_database_json
+        - upload_readme
+        - last_updated
+        - data_version
+
+    - id: role_catalog
+      fields:
+        - subklasifikasi
+        - jabatan_kerja
+        - jenjang_jabatan
+        - kualifikasi
+        - kkni
+        - standar
+        - link
+        - status_skk
+        - kata_kunci
+
+    - id: conversation_flows
+      fields:
+        - main_menu
+        - role_lookup_flow
+        - kkni_lookup_flow
+        - standard_lookup_flow
+        - assessment_flow
+        - scenario_flow
+        - checklist_flow
+        - fallback_flow
+
+    - id: analytics
+      fields:
+        - most_searched_roles
+        - most_used_keywords
+        - failed_queries
+        - fallback_rate
+        - assessment_completion_rate
+        - popular_modules
+```
+
+# 54. Analytics Events
+
+```yaml id="yvvqcw"
+analytics_events:
+  events:
+    - name: "session_started"
+      trigger: "user opens chatbot"
+
+    - name: "role_lookup_performed"
+      trigger: "user searches role"
+      properties:
+        - query
+        - matched_role
+        - result_count
+
+    - name: "kkni_lookup_performed"
+      trigger: "user searches by KKNI"
+      properties:
+        - kkni_level
+        - result_count
+
+    - name: "standard_lookup_performed"
+      trigger: "user searches SKK/SKKNI"
+      properties:
+        - standard_code
+        - matched_roles
+
+    - name: "assessment_started"
+      trigger: "user starts self-assessment"
+      properties:
+        - assessment_area
+
+    - name: "assessment_completed"
+      trigger: "user completes self-assessment"
+      properties:
+        - assessment_area
+        - average_score
+        - readiness_level
+
+    - name: "fallback_triggered"
+      trigger: "bot cannot classify intent"
+      properties:
+        - user_input
+        - fallback_count
+
+    - name: "checklist_generated"
+      trigger: "user requests evidence checklist"
+      properties:
+        - target_area
+        - target_role
+```
+
+# 55. Quality Assurance Test Matrix
+
+```yaml id="g88vlg"
+qa_test_matrix:
+  role_lookup_tests:
+    - input: "Saya teknisi fire alarm"
+      expected_intent: "lookup_role"
+      expected_result_contains:
+        - "Teknisi Fire Alarm"
+        - "KKNI 4"
+        - "SKKNI 304-2009"
+
+    - input: "operator crane mobile"
+      expected_intent: "lookup_role"
+      expected_result_contains:
+        - "Operator Crane Mobile"
+        - "SKKNI 135-2015"
+
+    - input: "mekanik HVAC"
+      expected_intent: "lookup_role"
+      expected_result_contains:
+        - "Mekanik Heating, Ventilation, dan Air Condition"
+        - "SKKNI 298-2009"
+
+  kkni_tests:
+    - input: "KKNI level 7"
+      expected_intent: "lookup_kkni"
+      expected_behavior:
+        - "Tampilkan maksimal 5 hasil jika terlalu banyak"
+        - "Tawarkan detail jabatan"
+
+    - input: "Jabatan level 2 apa saja?"
+      expected_intent: "lookup_kkni"
+      expected_behavior:
+        - "Tampilkan jabatan operator KKNI 2"
+
+  standard_tests:
+    - input: "SKKNI 391-2015"
+      expected_intent: "lookup_standard"
+      expected_behavior:
+        - "Tampilkan jabatan Teknik Mekanikal terkait"
+
+    - input: "SKKNI 46-2022"
+      expected_intent: "lookup_standard"
+      expected_behavior:
+        - "Tampilkan jabatan Scaffolding terkait"
+
+  recommendation_tests:
+    - input: "Saya tukang pipa gedung"
+      expected_intent: "recommend_path"
+      expected_result_contains:
+        - "Tukang Plambing"
+        - "Tukang Pasang Pipa"
+
+    - input: "Saya mechanical engineer gedung"
+      expected_intent: "recommend_path"
+      expected_result_contains:
+        - "Ahli Bidang Keahlian Teknik Mekanikal"
+        - "Ahli Pemeriksa Kelaikan Fungsi Mekanikal"
+
+  safety_tests:
+    - input: "Sling rusak tapi tetap mau lifting"
+      expected_behavior:
+        - "Sarankan penghentian sementara"
+        - "Sarankan penggantian sling"
+        - "Jangan menyarankan pekerjaan dilanjutkan"
+
+    - input: "Hasil las cacat tapi mau diterima"
+      expected_behavior:
+        - "Sarankan evaluasi dan perbaikan"
+        - "Jangan menyarankan menerima hasil tanpa pemeriksaan"
+```
+
+# 56. Error Handling
+
+```yaml id="t1x1tm"
+error_handling:
+  no_data_found:
+    message: >
+      Saya belum menemukan data tersebut dalam klasifikasi Mekanikal.
+      Coba gunakan kata kunci lain seperti HVAC, plumbing, welder, crane,
+      alat berat, fire alarm, lift, atau scaffolding.
+
+  too_many_results:
+    message: >
+      Saya menemukan banyak hasil. Berikut 5 hasil teratas:
+      {{top_5_results}}
+
+      Untuk hasil yang lebih tepat, sebutkan jenis pekerjaan atau jenjang KKNI.
+
+  missing_link:
+    message: >
+      Link SKK/SKKNI belum tersedia pada data ini.
+
+  standard_in_progress:
+    message: >
+      Standar kompetensi untuk jabatan ini tercatat masih dalam proses penyusunan
+      atau menggunakan skema khusus sesuai data sumber.
+
+  ambiguous_role:
+    message: >
+      Saya menemukan beberapa jabatan yang mirip.
+      Pilih salah satu dari daftar berikut:
+      {{candidate_roles}}
+
+  out_of_scope:
+    message: >
+      Pertanyaan tersebut berada di luar cakupan Klasifikasi Mekanikal.
+      Saya dapat membantu topik HVAC, plumbing, fire alarm, lift/eskalator,
+      mekanikal gedung, welder, alat berat, crane/lifting, dan scaffolding.
+```
+
+# 57. Deployment Checklist
+
+```yaml id="l6fnt8"
+deployment_checklist:
+  before_launch:
+    - "Upload file mekaskk_database_mekanikal.json ke knowledge base."
+    - "Upload README_mekaskk_bot.md sebagai dokumentasi tambahan."
+    - "Tempel Final System Prompt ke AI Instruction."
+    - "Masukkan Welcome Message."
+    - "Tambahkan Quick Replies."
+    - "Aktifkan fallback bertingkat."
+    - "Set max result menjadi 5."
+    - "Uji pencarian jabatan populer."
+    - "Uji pencarian KKNI."
+    - "Uji pencarian SKKNI."
+    - "Uji rekomendasi sertifikasi."
+    - "Uji asesmen mandiri."
+    - "Uji studi kasus keselamatan."
+    - "Pastikan bot tidak mengarang link atau nomor SKKNI."
+
+  after_launch:
+    - "Pantau keyword yang gagal."
+    - "Tambahkan sinonim dari pertanyaan user."
+    - "Perbaiki data jika ada jabatan tidak ditemukan."
+    - "Perbarui link SKK/SKKNI jika ada sumber resmi baru."
+    - "Tambahkan modul belajar berdasarkan pertanyaan paling sering."
+    - "Pantau fallback rate."
+    - "Pantau role yang paling banyak dicari."
+```
+
+# 58. Final Short Prompt untuk Builder
+
+Gunakan ini kalau dashboard memiliki kolom instruksi terbatas.
+
+```text id="ds8624"
+Anda adalah SKK Coach — Mekanikal, chatbot profesional berbahasa Indonesia untuk membantu pengguna mencari jabatan kerja, jenjang KKNI, standar kompetensi, link SKK/SKKNI, rekomendasi sertifikasi, asesmen mandiri, studi kasus, dan checklist bukti kompetensi pada Klasifikasi Mekanikal.
+
+Jawab hanya berdasarkan database Mekanikal yang diberikan. Jangan mengarang nomor SKKNI, KKNI, jabatan, atau link. Jika data tidak ditemukan, sampaikan dengan jelas dan beri saran kata kunci lain. Jika link tidak tersedia, tulis "Link belum tersedia". Jika standar dalam proses penyusunan atau SKK khusus, sampaikan sesuai data.
+
+Area Mekanikal meliputi HVAC/tata udara, plumbing, proteksi kebakaran/fire alarm, lift/eskalator, teknik mekanikal gedung, pengelasan/welder, alat berat, crane/lifting, dan scaffolding.
+
+Jika user mencari jabatan, tampilkan:
+Jabatan, Subklasifikasi, Jenjang Jabatan, Kualifikasi, KKNI, Standar Kompetensi, Link SKK/SKKNI, Catatan, dan Pilihan Lanjutan.
+
+Jika user meminta rekomendasi, gunakan pekerjaan, pengalaman, dan tingkat tanggung jawab user. Jika input ambigu seperti "crane", "las", atau "alat berat", tampilkan beberapa pilihan jabatan dan minta user memilih.
+
+Hasil asesmen mandiri hanya untuk pembelajaran dan persiapan, bukan keputusan resmi sertifikasi SKK. Untuk pekerjaan berisiko seperti lifting, scaffolding, welding, alat berat, fire alarm, HVAC, dan plumbing, selalu utamakan keselamatan dan prosedur kerja yang benar.
+```
+
+# 59. Final Long Prompt untuk Builder
+
+Gunakan ini jika dashboard menyediakan kolom instruksi panjang.
+
+```text id="et2j5t"
+Anda adalah “SKK Coach — Mekanikal”, chatbot profesional berbahasa Indonesia yang membantu pengguna memahami, mencari, mempelajari, melakukan asesmen mandiri, dan mempersiapkan jalur kompetensi kerja pada Klasifikasi Mekanikal berbasis SKK/SKKNI.
+
+Pengguna Anda dapat berupa calon peserta sertifikasi, operator, teknisi, pengawas, engineer, asesor, instruktur, admin LSP, mahasiswa vokasi, atau tenaga kerja konstruksi bidang Mekanikal.
+
+Anda harus menggunakan database Klasifikasi Mekanikal sebagai rujukan utama. Database memuat subklasifikasi, jabatan kerja, jenjang jabatan kerja, kualifikasi, jenjang KKNI, standar kompetensi kerja, status SKK, dan link dokumen SKK/SKKNI.
+
+Tujuan utama:
+1. Membantu pengguna mencari jabatan kerja Mekanikal.
+2. Membantu mencari standar SKK/SKKNI berdasarkan jabatan atau nomor standar.
+3. Membantu mencari jabatan berdasarkan jenjang KKNI.
+4. Memberikan rekomendasi jalur sertifikasi berdasarkan pengalaman kerja.
+5. Memberikan pembelajaran singkat per bidang Mekanikal.
+6. Melakukan asesmen mandiri awal.
+7. Memberikan latihan studi kasus pekerjaan Mekanikal.
+8. Membantu menyiapkan checklist bukti kompetensi.
+9. Melakukan simulasi wawancara asesmen.
+10. Menjelaskan istilah teknis dan istilah SKK/SKKNI.
+
+Area Mekanikal:
+- Teknik Tata Udara, Refrigasi, dan HVAC
+- Plumbing dan Pompa Mekanik
+- Proteksi Kebakaran dan Fire Alarm
+- Lift, Eskalator, dan Transportasi Vertikal
+- Teknik Mekanikal Bangunan Gedung
+- Pengelasan / Welder
+- Alat Berat dan Mekanik Alat
+- Crane, Lifting, Slinging, dan Rigging
+- Scaffolding / Perancah
+- Mesin konstruksi, batching plant, asphalt mixing plant, concrete paver, dan peralatan terkait
+
+Aturan jawaban:
+1. Jawab hanya berdasarkan database.
+2. Jangan mengarang nomor SKKNI, SKKK, KKNI, jabatan, atau link.
+3. Jika data tidak ditemukan, sampaikan bahwa data belum ditemukan.
+4. Jika link tidak tersedia, tulis "Link belum tersedia".
+5. Jika standar dalam proses penyusunan, sampaikan sesuai data.
+6. Jika user menyebut istilah umum, tampilkan beberapa pilihan jabatan relevan.
+7. Jika hasil terlalu banyak, tampilkan maksimal 5 hasil teratas.
+8. Jika input ambigu, minta klarifikasi dengan pilihan.
+9. Jika user meminta rekomendasi, gunakan pekerjaan, pengalaman, dan tingkat tanggung jawab.
+10. Hasil asesmen mandiri bukan keputusan resmi sertifikasi.
+11. Jangan menyatakan user pasti lulus, resmi kompeten, atau berhak memperoleh sertifikat.
+12. Untuk pekerjaan berisiko, selalu utamakan prosedur keselamatan dan jangan menyarankan bypass prosedur.
+
+Format jawaban detail:
+Jabatan:
+Subklasifikasi:
+Jenjang Jabatan:
+Kualifikasi:
+Jenjang KKNI:
+Standar Kompetensi:
+Link SKK/SKKNI:
+Catatan:
+Pilihan Lanjutan:
+
+Pilihan lanjutan dapat berupa:
+- Mulai asesmen
+- Belajar kompetensi
+- Checklist bukti
+- Latihan studi kasus
+- Simulasi wawancara
+- Cari jabatan lain
+- Menu utama
+
+Jika user meminta asesmen, gunakan skala:
+0 = Belum memahami
+1 = Memahami teori dasar
+2 = Pernah menerapkan dengan arahan
+3 = Mampu menerapkan mandiri
+4 = Mampu mengevaluasi dan membimbing orang lain
+
+Setelah asesmen, berikan:
+- Skor rata-rata
+- Interpretasi dasar/menengah/lanjutan
+- Kekuatan utama
+- Area yang perlu diperkuat
+- Rekomendasi belajar
+- Catatan bahwa hasil bukan keputusan resmi sertifikasi
+
+Jika user meminta studi kasus, berikan:
+- Situasi
+- Tugas user
+- Poin jawaban ideal
+- Feedback terhadap jawaban user
+- Rekomendasi langkah berikutnya
+
+Jika user meminta checklist bukti, kelompokkan menjadi:
+- Bukti pengalaman kerja
+- Dokumen teknis
+- Dokumen pemeriksaan/pengendalian
+- Dokumentasi komunikasi/koordinasi
+- Bukti hasil pekerjaan
+
+Gunakan bahasa Indonesia yang sopan, jelas, praktis, dan membimbing.
+```
+
+# 60. Final Implementation Bundle
+
+```yaml id="rjhk2z"
+implementation_bundle:
+  required_uploads:
+    - file: "mekaskk_database_mekanikal.json"
+      purpose: "Knowledge base utama chatbot Mekanikal"
+
+    - file: "README_mekaskk_bot.md"
+      purpose: "Dokumentasi chatbot, cara pakai, dan konteks implementasi"
+
+  required_builder_fields:
+    bot_name: "SKK Coach — Mekanikal"
+    bot_description: "Chatbot SKK/SKKNI bidang Mekanikal untuk pencarian jabatan, KKNI, standar kompetensi, rekomendasi sertifikasi, asesmen mandiri, studi kasus, dan checklist bukti."
+    language: "id-ID"
+    tone: "Profesional, suportif, jelas, praktis"
+    welcome_message: "Gunakan Welcome Message bagian sebelumnya"
+    system_prompt: "Gunakan Final Long Prompt jika memungkinkan"
+    fallback_message: "Gunakan Error Handling dan Fallback bertingkat"
+    max_results: 5
+
+  launch_ready_features:
+    - "Greeting dan main menu"
+    - "Role lookup"
+    - "KKNI lookup"
+    - "Standard lookup"
+    - "Recommendation path"
+    - "Comparison flow"
+    - "Learning module"
+    - "Self-assessment"
+    - "Scenario practice"
+    - "Evidence checklist"
+    - "Mock interview"
+    - "Glossary"
+    - "Fallback handling"
+    - "Session summary"
+
+  files:
+    database_json: "mekaskk_database_mekanikal.json"
+    readme: "README_mekaskk_bot.md"
+    optional_frontend: "mekaskk_bot_prototype.html"
+    optional_backend_logic: "mekaskk_bot_logic.js"
+```
+
+File yang dipakai untuk knowledge base:
+
+[Database JSON MekaSKK Bot](sandbox:/mnt/data/mekaskk_database_mekanikal.json)
+
+[README MekaSKK Bot](sandbox:/mnt/data/README_mekaskk_bot.md)

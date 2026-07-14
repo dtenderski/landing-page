@@ -1,0 +1,480 @@
+Berikut rancangan **peran, tugas, dan tanggung jawab** untuk empat pihak utama dalam proses **Sertifikasi Nirkertas** dan **AJJ Nirkertas**. Saya susun sebagai bahan konfigurasi chatbot/flow operasional, mengikuti pola desain chatbot terlampir yang menekankan alur, checklist, asesmen mandiri, bukti kompetensi, guardrails, dan tidak mengklaim keputusan sertifikasi resmi. 
+
+Acuan utamanya adalah **SE BNSP Nomor SE.007/BNSP/V/2023** tentang ketentuan pelaksanaan sertifikasi kompetensi jarak jauh dan penggunaan nirkertas/paperless. Dalam SE tersebut, LSP minimal perlu memiliki SOP pelayanan sertifikasi jarak jauh, SOP asesmen jarak jauh, SOP verifikasi TUK jarak jauh, dan SOP banding jarak jauh.  Sistem/aplikasi juga perlu mendukung permohonan sertifikasi, asesmen mandiri, persetujuan asesmen, instrumen asesmen, rekaman asesmen, umpan balik, laporan asesmen, peninjauan proses asesmen, dan banding. 
+
+---
+
+## 1. Kerangka Peran Utama
+
+```yaml
+stakeholder_roles:
+  - Asesi
+  - TUK
+  - Asesor Kompetensi
+  - Manajemen LSP
+
+process_scope:
+  sertifikasi_nirkertas:
+    fokus: "Seluruh proses sertifikasi menggunakan dokumen, formulir, rekaman, dan laporan digital."
+  ajj_nirkertas:
+    fokus: "Asesmen dilakukan jarak jauh dan seluruh administrasi asesmen dikelola secara digital."
+```
+
+---
+
+# A. Asesi
+
+## Peran Utama
+
+**Asesi** adalah peserta sertifikasi yang mengajukan permohonan, mengunggah dokumen, mengikuti asesmen mandiri, mengikuti asesmen kompetensi, memberikan umpan balik, dan menerima hasil resmi dari LSP.
+
+## Tugas Asesi dalam Sertifikasi Nirkertas
+
+| Tahap               | Tugas Asesi                                                                  | Tanggung Jawab                                                   | Output Digital                                                |
+| ------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------- |
+| Pendaftaran         | Mengisi formulir permohonan sertifikasi secara digital                       | Memastikan data diri, skema, dan kontak aktif benar              | Form permohonan sertifikasi                                   |
+| Dokumen awal        | Mengunggah identitas, persyaratan pendidikan/pelatihan, dan pengalaman kerja | Memastikan dokumen sah, jelas, terbaca, dan sesuai ketentuan LSP | File identitas, ijazah, sertifikat pelatihan, CV, surat kerja |
+| Asesmen mandiri     | Mengisi asesmen mandiri sesuai skema                                         | Menjawab jujur berdasarkan pengalaman dan bukti kompetensi       | Form asesmen mandiri                                          |
+| Bukti kompetensi    | Mengunggah portofolio/bukti kerja                                            | Menyusun bukti yang relevan, autentik, dan mudah diverifikasi    | Portofolio digital, foto kerja, laporan, dokumen teknis       |
+| Persetujuan asesmen | Membaca dan menyetujui rencana asesmen                                       | Memahami metode asesmen, jadwal, aturan, dan hak/kewajiban       | Persetujuan asesmen digital                                   |
+| Umpan balik         | Mengisi umpan balik setelah asesmen                                          | Memberikan masukan objektif atas proses asesmen                  | Form umpan balik                                              |
+| Banding             | Mengajukan banding jika diperlukan                                           | Mengikuti prosedur banding dan melampirkan alasan/bukti          | Form banding digital                                          |
+
+## Tugas Asesi dalam AJJ Nirkertas
+
+| Tahap                | Tugas Asesi                                                                                    | Tanggung Jawab                                                                     | Output/Bukti                            |
+| -------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------- |
+| Pra-asesmen          | Mengecek perangkat, kamera, mikrofon, koneksi internet, dan ruang asesmen                      | Menjamin lingkungan asesmen kondusif, terang, tenang, dan minim gangguan           | Checklist kesiapan AJJ                  |
+| Verifikasi identitas | Menunjukkan identitas diri sesuai instruksi asesor/LSP                                         | Tidak menggunakan identitas orang lain atau dokumen palsu                          | Rekaman/verifikasi identitas            |
+| Pelaksanaan asesmen  | Mengikuti asesmen melalui platform yang ditentukan                                             | Hadir tepat waktu, mengikuti instruksi asesor, menjaga integritas asesmen          | Rekaman asesmen, jawaban asesmen        |
+| Etika AJJ            | Tidak dibantu pihak lain tanpa izin, tidak membuka materi terlarang, tidak memanipulasi sistem | Menjaga kejujuran dan validitas asesmen                                            | Pernyataan integritas / rekaman asesmen |
+| Kendala teknis       | Melaporkan kendala segera kepada asesor/admin LSP                                              | Menyampaikan bukti kendala seperti screenshot, waktu kejadian, atau log komunikasi | Catatan kendala teknis                  |
+| Pasca-asesmen        | Menunggu hasil resmi dari LSP                                                                  | Tidak mengklaim kompeten sebelum ada keputusan resmi                               | Notifikasi/hasil resmi LSP              |
+
+## Checklist Tanggung Jawab Asesi
+
+```yaml
+asesi_responsibilities:
+  sebelum_asesmen:
+    - membaca informasi skema sertifikasi
+    - mengisi permohonan sertifikasi digital
+    - mengunggah dokumen persyaratan
+    - mengisi asesmen mandiri
+    - menyiapkan bukti kompetensi digital
+    - mengecek perangkat dan koneksi
+    - memahami tata tertib AJJ
+  saat_asesmen:
+    - hadir tepat waktu
+    - menunjukkan identitas
+    - mengikuti instruksi asesor
+    - menjawab berdasarkan pengalaman sendiri
+    - menjaga kamera/mikrofon sesuai arahan
+    - melaporkan kendala teknis secara langsung
+  setelah_asesmen:
+    - mengisi umpan balik
+    - menunggu hasil resmi
+    - mengajukan banding bila diperlukan sesuai prosedur
+```
+
+---
+
+# B. TUK
+
+## Peran Utama
+
+**TUK** adalah tempat/sarana uji kompetensi yang digunakan untuk mendukung pelaksanaan asesmen. Dalam konteks AJJ, TUK berperan memastikan dukungan teknis, sarana, prasarana, lingkungan asesmen, dan bukti kesiapan/verifikasi TUK dapat dipertanggungjawabkan secara digital. SE BNSP mensyaratkan adanya SOP verifikasi TUK jarak jauh dan aplikasi verifikasi TUK. 
+
+## Tugas TUK dalam Sertifikasi Nirkertas
+
+| Tahap                 | Tugas TUK                                                  | Tanggung Jawab                                    | Output Digital                 |
+| --------------------- | ---------------------------------------------------------- | ------------------------------------------------- | ------------------------------ |
+| Kesiapan TUK          | Menyediakan data TUK, sarana, dan prasarana                | Memastikan data TUK benar dan mutakhir            | Profil TUK digital             |
+| Verifikasi TUK        | Menyiapkan bukti kelayakan TUK                             | Mendukung proses verifikasi oleh LSP              | Rekaman/verifikasi TUK         |
+| Dukungan administrasi | Membantu kelengkapan dokumen lokasi/sarana jika diperlukan | Menyimpan bukti dukungan secara terdokumentasi    | Dokumen sarana-prasarana       |
+| Dukungan asesmen      | Menyediakan fasilitas yang relevan dengan skema            | Memastikan fasilitas sesuai kebutuhan skema       | Checklist fasilitas TUK        |
+| Keamanan data         | Menjaga kerahasiaan dokumen dan rekaman                    | Tidak menyebarkan dokumen asesmen tanpa otorisasi | Log akses / catatan penggunaan |
+
+## Tugas TUK dalam AJJ Nirkertas
+
+| Tahap                 | Tugas TUK                                                                               | Tanggung Jawab                                                            | Output/Bukti                      |
+| --------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | --------------------------------- |
+| Pra-AJJ               | Menyediakan dukungan ruang, perangkat, atau fasilitas jika asesi menggunakan lokasi TUK | Menjamin lokasi bebas gangguan dan layak untuk asesmen jarak jauh         | Checklist kesiapan TUK            |
+| Verifikasi jarak jauh | Mengikuti proses verifikasi TUK jarak jauh                                              | Menampilkan sarana/prasarana melalui video, foto, atau rekaman sesuai SOP | Rekaman verifikasi TUK            |
+| Dukungan teknis       | Membantu asesi/asesor jika ada kendala perangkat atau koneksi di lokasi TUK             | Menyediakan prosedur mitigasi kendala                                     | Catatan kendala dan tindak lanjut |
+| Pengawasan fasilitas  | Menjamin tidak ada bantuan tidak sah kepada asesi                                       | Menjaga integritas pelaksanaan asesmen                                    | Catatan pengawasan                |
+| Dokumentasi           | Menyimpan bukti kesiapan, penggunaan fasilitas, dan kendala                             | Menyampaikan bukti kepada LSP bila diminta                                | Bukti digital TUK                 |
+
+## Checklist Tanggung Jawab TUK
+
+```yaml
+tuk_responsibilities:
+  sertifikasi_nirkertas:
+    - menyediakan data TUK digital
+    - menyiapkan bukti sarana dan prasarana
+    - mendukung verifikasi TUK oleh LSP
+    - menjaga keamanan dan kerahasiaan data
+    - mendokumentasikan penggunaan fasilitas
+  ajj_nirkertas:
+    - memastikan ruang asesmen layak
+    - memastikan perangkat, kamera, mikrofon, dan internet tersedia jika digunakan
+    - mengikuti verifikasi TUK jarak jauh
+    - menjaga integritas asesmen
+    - mencatat dan melaporkan kendala teknis
+```
+
+---
+
+# C. Asesor Kompetensi
+
+## Peran Utama
+
+**Asesor Kompetensi** adalah pihak yang melaksanakan asesmen kompetensi sesuai skema, instrumen, metode, dan prosedur LSP. Dalam AJJ Nirkertas, asesor juga memastikan asesmen tetap valid, adil, autentik, terdokumentasi, dan dapat ditelusuri melalui rekaman atau bukti digital.
+
+## Tugas Asesor dalam Sertifikasi Nirkertas
+
+| Tahap                 | Tugas Asesor                                                             | Tanggung Jawab                                                    | Output Digital                      |
+| --------------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------- | ----------------------------------- |
+| Persiapan asesmen     | Meninjau rencana asesmen dan instrumen asesmen                           | Memastikan instrumen sesuai skema dan siap digunakan              | Rencana asesmen, MUK/instrumen      |
+| Review dokumen        | Meninjau asesmen mandiri dan bukti kompetensi asesi                      | Memastikan bukti relevan, cukup, valid, dan terkini               | Catatan review bukti                |
+| Persetujuan asesmen   | Menjelaskan proses asesmen kepada asesi                                  | Memastikan asesi memahami metode, jadwal, aturan, dan hak banding | Persetujuan asesmen                 |
+| Pelaksanaan asesmen   | Melakukan observasi, wawancara, uji lisan/tertulis/praktik sesuai metode | Menjaga objektivitas, konsistensi, dan integritas asesmen         | Rekaman asesmen, jawaban, checklist |
+| Keputusan rekomendasi | Membuat rekomendasi berdasarkan bukti asesmen                            | Tidak membuat keputusan di luar kewenangan atau tanpa bukti       | Rekomendasi asesmen                 |
+| Pelaporan             | Menyusun laporan asesmen                                                 | Menyampaikan hasil asesmen ke LSP sesuai prosedur                 | Laporan asesmen                     |
+| Umpan balik           | Memberikan umpan balik kepada asesi                                      | Memberi masukan yang jelas, profesional, dan berbasis bukti       | Form umpan balik                    |
+
+## Tugas Asesor dalam AJJ Nirkertas
+
+| Tahap                   | Tugas Asesor                                        | Tanggung Jawab                                                            | Output/Bukti                  |
+| ----------------------- | --------------------------------------------------- | ------------------------------------------------------------------------- | ----------------------------- |
+| Pra-AJJ                 | Mengecek kesiapan teknis bersama asesi              | Memastikan asesi memahami tata tertib, platform, dan metode AJJ           | Checklist pra-AJJ             |
+| Verifikasi identitas    | Memverifikasi identitas asesi                       | Mencegah penyamaran atau penggunaan identitas tidak sah                   | Rekaman/verifikasi identitas  |
+| Verifikasi lingkungan   | Memastikan lingkungan asesmen sesuai                | Mengurangi risiko bantuan pihak lain atau gangguan asesmen                | Catatan verifikasi lingkungan |
+| Pelaksanaan AJJ         | Mengelola asesmen melalui platform jarak jauh       | Menjaga komunikasi, instruksi, waktu, dan dokumentasi asesmen             | Rekaman asesmen               |
+| Pengendalian integritas | Memantau perilaku asesi selama asesmen              | Menghentikan/menunda asesmen bila terjadi pelanggaran atau kendala serius | Catatan kejadian              |
+| Penanganan kendala      | Mencatat kendala teknis dan keputusan tindak lanjut | Menjaga fairness, validitas, dan bukti proses                             | Log kendala                   |
+| Pelaporan digital       | Mengunggah/menyelesaikan laporan asesmen digital    | Memastikan laporan lengkap, akurat, dan dapat diaudit                     | Laporan asesmen digital       |
+
+## Checklist Tanggung Jawab Asesor
+
+```yaml
+asesor_kompetensi_responsibilities:
+  sebelum_asesmen:
+    - meninjau skema dan rencana asesmen
+    - menyiapkan instrumen asesmen
+    - meninjau asesmen mandiri dan bukti asesi
+    - menjelaskan aturan asesmen dan hak banding
+    - memastikan kesiapan platform AJJ
+  saat_asesmen:
+    - memverifikasi identitas asesi
+    - memverifikasi lingkungan asesmen
+    - memberikan instruksi yang jelas
+    - melakukan asesmen sesuai metode
+    - menjaga objektivitas dan integritas asesmen
+    - mencatat kendala dan kejadian penting
+  setelah_asesmen:
+    - mengevaluasi bukti
+    - menyusun rekomendasi asesmen
+    - mengisi laporan asesmen digital
+    - memberikan umpan balik
+    - menyerahkan dokumen/rekaman kepada LSP sesuai prosedur
+```
+
+---
+
+# D. Manajemen LSP
+
+## Peran Utama
+
+**Manajemen LSP** adalah pengelola sistem sertifikasi yang bertanggung jawab terhadap kebijakan, persetujuan proses, SOP, sistem informasi, penugasan personil, pengendalian mutu, keamanan data, audit internal, pelaporan, dan keputusan sertifikasi. Dalam SE BNSP, LSP perlu menyiapkan dokumen permohonan persetujuan sertifikasi jarak jauh, termasuk SOP, personil pengelola, pemeliharaan sistem, sarana-prasarana, internet, penjelasan aplikasi/server, keamanan rekaman, sosialisasi internal, dan rekaman uji coba. 
+
+## Tugas Manajemen LSP dalam Sertifikasi Nirkertas
+
+| Tahap                 | Tugas Manajemen LSP                                                    | Tanggung Jawab                                                                                                                       | Output Digital                       |
+| --------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------ |
+| Kebijakan             | Menetapkan kebijakan nirkertas                                         | Menjamin proses sesuai regulasi, skema, dan persyaratan BNSP                                                                         | Kebijakan/SK internal                |
+| SOP                   | Menyusun SOP sertifikasi berbasis nirkertas                            | Memastikan proses digital terdokumentasi dan konsisten                                                                               | SOP nirkertas                        |
+| Sistem aplikasi       | Menyediakan aplikasi sertifikasi digital                               | Memastikan aplikasi mendukung permohonan, asesmen mandiri, persetujuan asesmen, instrumen, rekaman, umpan balik, laporan, peninjauan | Sistem/aplikasi sertifikasi          |
+| Personil              | Menetapkan admin, asesor, komite teknis, dan pengelola sistem          | Menjamin hak akses sesuai kewenangan                                                                                                 | SK penetapan personil                |
+| Keamanan data         | Mengelola akses, kerahasiaan, backup, dan retensi dokumen              | Melindungi dokumen dan rekaman asesmen                                                                                               | Log akses, backup, kebijakan retensi |
+| Administrasi          | Memverifikasi permohonan dan dokumen asesi                             | Menjamin hanya peserta memenuhi persyaratan yang diproses                                                                            | Catatan verifikasi                   |
+| Keputusan sertifikasi | Menetapkan hasil berdasarkan rekomendasi asesor/komite sesuai prosedur | Memastikan keputusan resmi dibuat oleh pihak berwenang                                                                               | SK/keputusan hasil sertifikasi       |
+| Audit internal        | Melakukan audit internal proses nirkertas                              | Menjamin kesesuaian dan perbaikan berkelanjutan                                                                                      | Laporan audit internal               |
+| Pelaporan             | Menyusun pelaporan kepada BNSP sesuai ketentuan                        | Memenuhi kewajiban pelaporan periodik                                                                                                | Laporan pelaksanaan                  |
+
+## Tugas Manajemen LSP dalam AJJ Nirkertas
+
+| Tahap               | Tugas Manajemen LSP                                                                                                     | Tanggung Jawab                                                                                                                       | Output/Bukti                          |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------- |
+| Persetujuan AJJ     | Mengajukan persetujuan pelaksanaan sertifikasi jarak jauh kepada BNSP                                                   | Tidak melaksanakan AJJ sebelum mendapat persetujuan/izin yang diperlukan                                                             | Dokumen permohonan AJJ                |
+| SOP AJJ             | Menyediakan SOP pelayanan sertifikasi jarak jauh, asesmen jarak jauh, verifikasi TUK jarak jauh, dan banding jarak jauh | Menjamin semua pihak bekerja dengan prosedur yang sama                                                                               | Paket SOP AJJ                         |
+| Sistem AJJ          | Menyediakan aplikasi AJJ, aplikasi verifikasi TUK, aplikasi banding, dan sistem manajemen akun                          | Menjamin proses dapat direkam, ditelusuri, dan diaudit                                                                               | Platform AJJ                          |
+| Penetapan personil  | Menetapkan pengelola sistem, asesor, admin, TUK, dan komite teknis                                                      | Menjamin peran dan hak akses jelas                                                                                                   | SK personil                           |
+| Uji coba            | Melakukan uji coba AJJ dan mendokumentasikan hasil                                                                      | Membuktikan kesiapan sistem, personil, dan prosedur                                                                                  | Video/PDF rekaman uji coba            |
+| Sosialisasi         | Melakukan sosialisasi sistem AJJ kepada internal LSP, asesor, TUK, dan asesi                                            | Mengurangi kesalahan operasional                                                                                                     | Bukti sosialisasi                     |
+| Monitoring asesmen  | Memantau pelaksanaan AJJ                                                                                                | Menangani kendala dan menjaga mutu layanan                                                                                           | Log monitoring                        |
+| Audit dan pelaporan | Melakukan audit internal dan laporan pelaksanaan sertifikasi jarak jauh secara berkala                                  | SE BNSP menyebut audit internal dan laporan pelaksanaan setiap 6 bulan, dilaporkan pada Juni dan Desember paling lambat tanggal 10.  | Laporan audit dan laporan pelaksanaan |
+| Banding             | Menyediakan proses banding jarak jauh                                                                                   | Menjamin hak asesi untuk mengajukan keberatan                                                                                        | Catatan banding                       |
+
+## Checklist Tanggung Jawab Manajemen LSP
+
+```yaml
+manajemen_lsp_responsibilities:
+  kebijakan_dan_sop:
+    - menetapkan kebijakan sertifikasi nirkertas
+    - menetapkan SOP pelayanan sertifikasi jarak jauh
+    - menetapkan SOP asesmen jarak jauh
+    - menetapkan SOP verifikasi TUK jarak jauh
+    - menetapkan SOP banding jarak jauh
+  sistem_digital:
+    - menyediakan aplikasi permohonan sertifikasi
+    - menyediakan asesmen mandiri digital
+    - menyediakan persetujuan asesmen digital
+    - menyediakan instrumen asesmen digital
+    - menyediakan rekaman asesmen
+    - menyediakan umpan balik dan laporan asesmen digital
+    - menyediakan fitur banding
+    - menyediakan audit trail dan manajemen akun
+  personil:
+    - menetapkan admin LSP
+    - menetapkan asesor kompetensi
+    - menetapkan pengelola sistem
+    - menetapkan TUK
+    - menetapkan komite teknis atau pihak pengambil keputusan
+  pengendalian_mutu:
+    - melakukan uji coba sistem
+    - melakukan monitoring pelaksanaan asesmen
+    - melakukan audit internal
+    - menyusun laporan berkala
+    - menindaklanjuti temuan dan perbaikan
+```
+
+---
+
+# 2. Matriks RACI Ringkas
+
+Keterangan: **R = Responsible**, **A = Accountable**, **C = Consulted**, **I = Informed**
+
+| Aktivitas                      | Asesi | TUK | Asesor Kompetensi | Manajemen LSP |
+| ------------------------------ | ----: | --: | ----------------: | ------------: |
+| Menetapkan SOP nirkertas/AJJ   |     I |   C |                 C |           A/R |
+| Menyediakan sistem aplikasi    |     I |   C |                 C |           A/R |
+| Mengisi permohonan sertifikasi |     R |   I |                 I |           A/C |
+| Verifikasi dokumen asesi       |     C |   I |                 C |           A/R |
+| Mengisi asesmen mandiri        |     R |   I |                 C |           A/C |
+| Menyiapkan bukti kompetensi    |     R |   C |                 C |           A/C |
+| Menetapkan rencana asesmen     |     I |   C |                 R |             A |
+| Persetujuan asesmen            |     R |   I |                 R |             A |
+| Verifikasi TUK                 |     I |   R |                 C |             A |
+| Verifikasi identitas asesi     |     R |   I |                 R |           A/C |
+| Pelaksanaan asesmen            |     R |   C |               A/R |             C |
+| Rekaman asesmen                |     I |   C |                 R |             A |
+| Rekomendasi hasil asesmen      |     I |   I |                 R |           A/C |
+| Keputusan sertifikasi          |     I |   I |                 C |           A/R |
+| Umpan balik asesi              |     R |   I |                 C |           A/C |
+| Banding                        |     R |   I |                 C |           A/R |
+| Audit internal                 |     I |   C |                 C |           A/R |
+| Pelaporan ke BNSP              |     I |   I |                 C |           A/R |
+
+---
+
+# 3. Alur Operasional Sertifikasi Nirkertas
+
+```yaml
+sertifikasi_nirkertas_flow:
+  1_pendaftaran:
+    asesi:
+      - mengisi permohonan digital
+      - memilih skema sertifikasi
+      - mengunggah dokumen persyaratan
+    manajemen_lsp:
+      - membuka jadwal/skema
+      - memverifikasi permohonan
+      - mengatur hak akses sistem
+
+  2_asesmen_mandiri:
+    asesi:
+      - mengisi asesmen mandiri
+      - menghubungkan jawaban dengan bukti kompetensi
+    asesor_kompetensi:
+      - meninjau asesmen mandiri
+      - mengidentifikasi bukti yang perlu diklarifikasi
+    manajemen_lsp:
+      - memastikan form asesmen mandiri tersimpan
+
+  3_persetujuan_asesmen:
+    asesor_kompetensi:
+      - menjelaskan rencana asesmen
+      - menyepakati metode dan jadwal
+    asesi:
+      - menyetujui rencana asesmen
+    manajemen_lsp:
+      - menyimpan persetujuan asesmen digital
+
+  4_pelaksanaan_asesmen:
+    asesor_kompetensi:
+      - melaksanakan asesmen
+      - mengisi instrumen asesmen
+      - mencatat bukti dan rekomendasi
+    asesi:
+      - memberikan jawaban dan bukti
+    manajemen_lsp:
+      - memastikan rekaman dan laporan tersimpan
+
+  5_keputusan_dan_pelaporan:
+    asesor_kompetensi:
+      - menyerahkan rekomendasi
+    manajemen_lsp:
+      - memproses keputusan sertifikasi
+      - menerbitkan hasil resmi
+      - menyimpan laporan asesmen
+    asesi:
+      - menerima pemberitahuan hasil
+      - mengisi umpan balik atau banding bila diperlukan
+```
+
+---
+
+# 4. Alur Operasional AJJ Nirkertas
+
+```yaml
+ajj_nirkertas_flow:
+  1_persiapan_sistem:
+    manajemen_lsp:
+      - memastikan izin/persetujuan AJJ dan nirkertas
+      - menetapkan SOP AJJ
+      - menetapkan personil pengelola sistem
+      - menyiapkan platform asesmen, verifikasi TUK, rekaman, dan banding
+    tuk:
+      - menyiapkan sarana-prasarana pendukung
+      - mengikuti verifikasi TUK jarak jauh bila digunakan
+
+  2_persiapan_asesi:
+    asesi:
+      - memastikan perangkat, kamera, mikrofon, koneksi, dan ruangan
+      - mengunggah dokumen digital
+      - memahami tata tertib AJJ
+    manajemen_lsp:
+      - mengirim jadwal, link, panduan, dan informasi teknis
+
+  3_pra_asesmen:
+    asesor_kompetensi:
+      - mengecek kehadiran asesi
+      - memverifikasi identitas
+      - memverifikasi lingkungan asesmen
+      - menjelaskan tata tertib
+    asesi:
+      - menunjukkan identitas
+      - mengikuti instruksi teknis
+    tuk:
+      - mendukung kesiapan lokasi/perangkat bila asesmen memakai fasilitas TUK
+
+  4_pelaksanaan_ajj:
+    asesor_kompetensi:
+      - memimpin asesmen jarak jauh
+      - menggunakan instrumen asesmen digital
+      - memastikan bukti cukup dan valid
+      - mencatat kendala teknis
+    asesi:
+      - menjawab pertanyaan/uji praktik sesuai instruksi
+      - menjaga integritas asesmen
+    manajemen_lsp:
+      - memantau proses bila diperlukan
+      - memastikan rekaman tersimpan
+
+  5_pasca_ajj:
+    asesor_kompetensi:
+      - menyusun rekomendasi dan laporan asesmen
+    manajemen_lsp:
+      - melakukan proses keputusan sertifikasi
+      - menyimpan rekaman dan laporan
+      - menyediakan kanal umpan balik dan banding
+    asesi:
+      - mengisi umpan balik
+      - menerima hasil resmi
+      - mengajukan banding jika diperlukan
+```
+
+---
+
+# 5. Versi Siap Masuk ke Chatbot
+
+```yaml
+role_matrix_for_chatbot:
+  asesi:
+    role_description: >
+      Peserta sertifikasi yang mengikuti proses sertifikasi nirkertas dan/atau
+      asesmen jarak jauh.
+    primary_responsibilities:
+      - mengisi permohonan sertifikasi digital
+      - mengunggah dokumen persyaratan
+      - mengisi asesmen mandiri
+      - menyiapkan bukti kompetensi digital
+      - mengikuti asesmen sesuai instruksi asesor
+      - menjaga integritas dan kejujuran asesmen
+      - mengisi umpan balik
+      - mengajukan banding bila diperlukan
+
+  tuk:
+    role_description: >
+      Tempat Uji Kompetensi atau fasilitas pendukung asesmen yang diverifikasi
+      dan digunakan dalam proses sertifikasi.
+    primary_responsibilities:
+      - menyiapkan data dan bukti kesiapan TUK
+      - mendukung verifikasi TUK jarak jauh
+      - menyediakan sarana-prasarana asesmen
+      - menjaga keamanan dan ketertiban tempat asesmen
+      - mendokumentasikan penggunaan fasilitas
+      - melaporkan kendala teknis atau fasilitas
+
+  asesor_kompetensi:
+    role_description: >
+      Pihak yang melaksanakan asesmen kompetensi sesuai skema, instrumen,
+      metode, dan prosedur LSP.
+    primary_responsibilities:
+      - meninjau rencana dan instrumen asesmen
+      - menilai asesmen mandiri dan bukti kompetensi
+      - menjelaskan rencana asesmen kepada asesi
+      - memverifikasi identitas dan lingkungan AJJ
+      - melaksanakan asesmen
+      - menjaga objektivitas dan integritas asesmen
+      - menyusun rekomendasi dan laporan asesmen
+      - memberikan umpan balik berbasis bukti
+
+  manajemen_lsp:
+    role_description: >
+      Pengelola resmi proses sertifikasi yang bertanggung jawab atas kebijakan,
+      SOP, sistem, personil, pengendalian mutu, keputusan sertifikasi, audit,
+      dan pelaporan.
+    primary_responsibilities:
+      - menetapkan SOP sertifikasi nirkertas dan AJJ
+      - mengelola sistem aplikasi sertifikasi
+      - menetapkan personil dan hak akses
+      - memverifikasi permohonan sertifikasi
+      - menugaskan asesor dan TUK
+      - menjamin keamanan data dan rekaman
+      - menetapkan keputusan sertifikasi
+      - mengelola umpan balik dan banding
+      - melakukan audit internal dan pelaporan
+```
+
+---
+
+# 6. Catatan Guardrail untuk Chatbot
+
+```yaml
+guardrails:
+  official_decision:
+    - "Chatbot tidak boleh menyatakan asesi kompeten atau belum kompeten secara resmi."
+    - "Keputusan resmi sertifikasi hanya dikeluarkan melalui mekanisme LSP."
+  integrity:
+    - "Chatbot tidak boleh membantu memalsukan dokumen."
+    - "Chatbot tidak boleh memberi saran untuk mengakali asesmen jarak jauh."
+    - "Chatbot harus mengarahkan pengguna mengikuti SOP LSP."
+  data_privacy:
+    - "Jangan meminta NIK, nomor sertifikat, atau dokumen sensitif di ruang chat terbuka."
+    - "Arahkan unggahan dokumen hanya melalui platform resmi LSP."
+  ajj_safety:
+    - "Jika terjadi kendala teknis, sarankan dokumentasi kendala dan segera hubungi asesor/admin LSP."
+```
+
+Intinya: **Asesi bertanggung jawab atas kejujuran, kesiapan, dan bukti kompetensinya; TUK bertanggung jawab atas kesiapan tempat/fasilitas dan dukungan verifikasi; Asesor Kompetensi bertanggung jawab atas pelaksanaan asesmen yang objektif dan terdokumentasi; Manajemen LSP bertanggung jawab atas sistem, SOP, penugasan, keputusan sertifikasi, keamanan data, audit, dan pelaporan.**

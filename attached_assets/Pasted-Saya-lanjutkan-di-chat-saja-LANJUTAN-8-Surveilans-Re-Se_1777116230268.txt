@@ -1,0 +1,699 @@
+Saya lanjutkan **di chat saja**.
+
+## LANJUTAN 8 — Surveilans, Re-Sertifikasi, Konversi, Sanksi, Keluhan & Banding Engine
+
+Modul ini menambahkan kemampuan chatbot untuk menangani fase **setelah SBU terbit**: surveilans, perpanjangan/re-sertifikasi, perubahan data, konversi, potensi sanksi, keluhan, dan banding. Ini penting karena SK Dirjen Binakon No. 37/KPTS/DK/2025 memasukkan surveilans, re-sertifikasi, pembekuan/pencabutan, keluhan, dan banding sebagai bagian skema sertifikasi BUJK.  Permen PU No. 6 Tahun 2025 juga mengatur pengawasan rutin/insidental, sanksi administratif, konversi SBU lama, serta risiko SBU dinyatakan tidak berlaku jika tidak dikonversi sesuai batas waktu. 
+
+```yaml
+# -----------------------------------------------------------------------------
+# LANJUTAN 8 — POST-CERTIFICATION & COMPLIANCE ENGINE
+# -----------------------------------------------------------------------------
+
+post_certification_engine:
+  id: post_certification_engine_v1
+  title: "Mesin Pasca-Sertifikasi SBU"
+  purpose:
+    - membantu pengguna memahami kewajiban setelah SBU terbit
+    - membantu memantau kebutuhan surveilans dan pemeliharaan sertifikasi
+    - membantu menyiapkan re-sertifikasi/perpanjangan SBU
+    - membantu memahami perubahan data, konversi, pembekuan, pencabutan, sanksi, keluhan, dan banding
+  disclaimer: >
+    Modul ini bersifat edukatif dan pra-checklist. Keputusan resmi mengenai status SBU,
+    surveilans, pembekuan, pencabutan, sanksi, keluhan, atau banding tetap mengikuti
+    LSBU, OSS, SIJK, dan pejabat berwenang.
+```
+
+## 1. Menu Pasca-Sertifikasi
+
+```yaml
+post_certification_menu:
+  parent_node: node_main_menu
+  buttons:
+    - label: "Surveilans SBU"
+      target_node: node_surveillance_intro
+    - label: "Perpanjangan SBU"
+      target_node: node_renewal_intro
+    - label: "Perubahan Data SBU"
+      target_node: node_change_intro
+    - label: "Konversi SBU"
+      target_node: node_conversion_intro
+    - label: "Risiko Sanksi"
+      target_node: node_sanction_risk_intro
+    - label: "Keluhan dan Banding"
+      target_node: node_complaint_appeal_intro
+```
+
+## 2. Flow Surveilans
+
+```yaml
+node_surveillance_intro:
+  type: message_with_buttons
+  title: "Surveilans / Pemeliharaan Sertifikasi"
+  message: >
+    Surveilans adalah bagian dari pemeliharaan sertifikasi untuk memastikan
+    BUJK tetap memenuhi persyaratan setelah SBU diterbitkan. Surveilans dapat
+    berkaitan dengan data badan usaha, TKK, peralatan, SMAP, laporan, atau
+    keluhan terhadap BUJK.
+  buttons:
+    - label: "Cek Kesiapan Surveilans"
+      target_node: node_surveillance_check
+    - label: "Checklist Surveilans"
+      target_node: node_surveillance_checklist
+    - label: "Menu Utama"
+      target_node: node_main_menu
+
+node_surveillance_check:
+  type: guided_form
+  title: "Cek Kesiapan Surveilans"
+  questions:
+    - id: q_sbu_active
+      text: "Apakah SBU masih aktif dan belum habis masa berlaku?"
+      quick_replies: ["Aktif", "Hampir habis", "Sudah habis", "Belum tahu"]
+      save_to: surveillance.sbu_status
+
+    - id: q_data_changed
+      text: "Apakah ada perubahan data badan usaha, TKK, peralatan, atau subklasifikasi?"
+      quick_replies: ["Ada", "Tidak ada", "Belum yakin"]
+      save_to: surveillance.data_change
+
+    - id: q_annual_report
+      text: "Apakah laporan kegiatan usaha tahunan sudah disiapkan/disampaikan?"
+      quick_replies: ["Sudah", "Belum", "Tidak tahu"]
+      save_to: surveillance.annual_report
+
+    - id: q_tkk_valid
+      text: "Apakah PJBU, PJTBU, dan PJSKBU masih aktif dan sesuai?"
+      quick_replies: ["Sesuai", "Ada perubahan", "Belum dicek"]
+      save_to: surveillance.tkk_status
+
+    - id: q_equipment_valid
+      text: "Apakah peralatan yang digunakan masih tersedia dan dapat dibuktikan?"
+      quick_replies: ["Ya", "Sebagian", "Tidak", "Tidak dipersyaratkan"]
+      save_to: surveillance.equipment_status
+
+    - id: q_smap_valid
+      text: "Apakah dokumen SMAP masih tersedia dan dapat ditunjukkan?"
+      quick_replies: ["Ya", "Sebagian", "Belum ada"]
+      save_to: surveillance.smap_status
+
+  completion_node: node_surveillance_result
+
+node_surveillance_result:
+  type: dynamic_response
+  title: "Hasil Cek Kesiapan Surveilans"
+  response_template: >
+    Hasil cek kesiapan surveilans:
+
+    Status SBU:
+    {{surveillance.sbu_status}}
+
+    Perubahan data:
+    {{surveillance.data_change}}
+
+    Laporan kegiatan usaha tahunan:
+    {{surveillance.annual_report}}
+
+    Status TKK:
+    {{surveillance.tkk_status}}
+
+    Status peralatan:
+    {{surveillance.equipment_status}}
+
+    Status SMAP:
+    {{surveillance.smap_status}}
+
+    Status awal:
+    {{surveillance_readiness_status}}
+
+    Rekomendasi:
+    {{surveillance_recommendation}}
+
+    Catatan:
+    Surveilans resmi tetap mengikuti prosedur LSBU dan ketentuan yang berlaku.
+```
+
+## 3. Checklist Surveilans
+
+```yaml
+node_surveillance_checklist:
+  type: response_template
+  title: "Checklist Surveilans SBU"
+  template: >
+    Checklist surveilans/pemeliharaan SBU:
+
+    1. SBU aktif dan sesuai subklasifikasi.
+    2. Data badan usaha masih sesuai dengan kondisi terakhir.
+    3. KBLI pada OSS masih selaras dengan SBU.
+    4. PJBU, PJTBU, dan PJSKBU masih aktif dan sesuai.
+    5. SKK tenaga kerja masih berlaku.
+    6. Peralatan masih tersedia atau dikuasai sesuai ketentuan.
+    7. Dokumen SMAP tersedia dan mutakhir.
+    8. Laporan kegiatan usaha tahunan disiapkan/disampaikan.
+    9. Tidak ada keluhan atau temuan yang belum ditindaklanjuti.
+    10. Jika ada perubahan data, siapkan permohonan perubahan.
+```
+
+## 4. Flow Perpanjangan / Re-Sertifikasi
+
+```yaml
+node_renewal_intro:
+  type: message_with_buttons
+  title: "Perpanjangan / Re-Sertifikasi SBU"
+  message: >
+    Re-sertifikasi dilakukan untuk memperpanjang SBU yang akan habis masa berlakunya.
+    Siapkan dokumen termutakhir dan pastikan data pengalaman, keuangan, TKK,
+    peralatan, serta SMAP masih memenuhi persyaratan.
+  buttons:
+    - label: "Cek Kesiapan Perpanjangan"
+      target_node: node_renewal_check
+    - label: "Checklist Perpanjangan"
+      target_node: node_docs_renewal
+    - label: "Menu Utama"
+      target_node: node_main_menu
+
+node_renewal_check:
+  type: guided_form
+  title: "Cek Kesiapan Perpanjangan SBU"
+  questions:
+    - id: q_expiry_date
+      text: "Kapan masa berlaku SBU berakhir?"
+      expected_type: text
+      save_to: renewal.expiry_date
+
+    - id: q_renewal_timing
+      text: "Apakah pengajuan dilakukan sebelum masa berlaku berakhir?"
+      quick_replies: ["Ya", "Tidak", "Belum tahu"]
+      save_to: renewal.timing_status
+
+    - id: q_same_subclassification
+      text: "Apakah perpanjangan untuk subklasifikasi yang sama?"
+      quick_replies: ["Ya", "Ada perubahan", "Belum tahu"]
+      save_to: renewal.subclassification_status
+
+    - id: q_latest_experience
+      text: "Apakah ada pengalaman/penjualan tahunan terbaru untuk subklasifikasi tersebut?"
+      quick_replies: ["Ada", "Tidak ada", "Belum tahu"]
+      save_to: renewal.experience_status
+
+    - id: q_latest_finance
+      text: "Apakah laporan keuangan terbaru tersedia?"
+      quick_replies: ["Ada", "Belum", "Belum tahu"]
+      save_to: renewal.finance_status
+
+    - id: q_latest_tkk
+      text: "Apakah TKK masih sesuai?"
+      quick_replies: ["Sesuai", "Ada perubahan", "Belum dicek"]
+      save_to: renewal.tkk_status
+
+    - id: q_latest_equipment
+      text: "Apakah peralatan masih sesuai?"
+      quick_replies: ["Sesuai", "Sebagian", "Belum dicek", "Tidak dipersyaratkan"]
+      save_to: renewal.equipment_status
+
+    - id: q_latest_smap
+      text: "Apakah SMAP masih tersedia?"
+      quick_replies: ["Ya", "Sebagian", "Belum"]
+      save_to: renewal.smap_status
+
+  completion_node: node_renewal_result
+
+node_renewal_result:
+  type: dynamic_response
+  title: "Hasil Cek Perpanjangan SBU"
+  response_template: >
+    Hasil cek perpanjangan SBU:
+
+    Masa berlaku:
+    {{renewal.expiry_date}}
+
+    Status waktu pengajuan:
+    {{renewal.timing_status}}
+
+    Subklasifikasi:
+    {{renewal.subclassification_status}}
+
+    Pengalaman terbaru:
+    {{renewal.experience_status}}
+
+    Keuangan:
+    {{renewal.finance_status}}
+
+    TKK:
+    {{renewal.tkk_status}}
+
+    Peralatan:
+    {{renewal.equipment_status}}
+
+    SMAP:
+    {{renewal.smap_status}}
+
+    Status awal:
+    {{renewal_readiness_status}}
+
+    Rekomendasi:
+    {{renewal_recommendation}}
+
+    Catatan:
+    Jika masa berlaku SBU sudah habis atau permohonan terlambat, pengguna perlu
+    memeriksa konsekuensi pada OSS/LSBU sesuai ketentuan yang berlaku.
+```
+
+## 5. Flow Perubahan Data
+
+```yaml
+node_change_intro:
+  type: message_with_buttons
+  title: "Perubahan Data SBU"
+  message: >
+    Perubahan data dapat terjadi karena perubahan badan usaha, subklasifikasi,
+    kualifikasi, TKK, peralatan, SMAP, atau data lain yang mempengaruhi sertifikasi.
+  buttons:
+    - label: "Cek Jenis Perubahan"
+      target_node: node_change_check
+    - label: "Checklist Perubahan"
+      target_node: node_docs_change
+    - label: "Menu Utama"
+      target_node: node_main_menu
+
+node_change_check:
+  type: guided_form
+  title: "Cek Jenis Perubahan"
+  questions:
+    - id: q_change_type
+      text: "Jenis perubahan apa yang terjadi?"
+      quick_replies:
+        - "Data badan usaha"
+        - "KBLI"
+        - "Subklasifikasi"
+        - "Kualifikasi"
+        - "PJBU/PJTBU/PJSKBU"
+        - "Peralatan"
+        - "SMAP"
+        - "Lainnya"
+      save_to: change.type
+
+    - id: q_change_document
+      text: "Apakah dokumen pendukung perubahan tersedia?"
+      quick_replies: ["Ada", "Sebagian", "Belum ada"]
+      save_to: change.document_status
+
+    - id: q_change_impact
+      text: "Apakah perubahan berdampak pada kemampuan/kualifikasi badan usaha?"
+      quick_replies: ["Ya", "Tidak", "Belum tahu"]
+      save_to: change.impact_status
+
+  completion_node: node_change_result
+
+node_change_result:
+  type: dynamic_response
+  title: "Hasil Cek Perubahan Data"
+  response_template: >
+    Hasil cek perubahan data:
+
+    Jenis perubahan:
+    {{change.type}}
+
+    Dokumen pendukung:
+    {{change.document_status}}
+
+    Dampak terhadap kemampuan/kualifikasi:
+    {{change.impact_status}}
+
+    Status awal:
+    {{change_readiness_status}}
+
+    Rekomendasi:
+    {{change_recommendation}}
+
+    Catatan:
+    Jika perubahan mempengaruhi kualifikasi, subklasifikasi, TKK, peralatan, atau
+    kemampuan badan usaha, pengguna perlu menyiapkan dokumen pendukung dan mengikuti
+    mekanisme perubahan yang berlaku.
+```
+
+## 6. Flow Konversi SBU
+
+```yaml
+node_conversion_intro:
+  type: message_with_buttons
+  title: "Konversi SBU"
+  message: >
+    Konversi SBU diperlukan bila terdapat perubahan ketentuan dan SBU lama harus
+    disesuaikan. Konversi biasanya dilakukan melalui proses perubahan tanpa asesmen,
+    dan masa berlaku hasil konversi mengikuti masa berlaku SBU sebelumnya.
+  buttons:
+    - label: "Cek Kesiapan Konversi"
+      target_node: node_conversion_check
+    - label: "Checklist Konversi"
+      target_node: node_docs_conversion
+    - label: "Menu Utama"
+      target_node: node_main_menu
+
+node_conversion_check:
+  type: guided_form
+  title: "Cek Kesiapan Konversi SBU"
+  questions:
+    - id: q_old_sbu
+      text: "Apakah SBU lama masih berlaku?"
+      quick_replies: ["Masih berlaku", "Sudah habis", "Belum tahu"]
+      save_to: conversion.old_sbu_status
+
+    - id: q_conversion_required
+      text: "Apakah sudah ada informasi bahwa SBU perlu dikonversi?"
+      quick_replies: ["Ya", "Belum", "Belum tahu"]
+      save_to: conversion.required_status
+
+    - id: q_conversion_data
+      text: "Apakah data badan usaha, KBLI, dan subklasifikasi sudah siap?"
+      quick_replies: ["Siap", "Sebagian", "Belum"]
+      save_to: conversion.data_status
+
+    - id: q_conversion_submission
+      text: "Apakah sudah mengajukan konversi melalui sistem yang berlaku?"
+      quick_replies: ["Sudah", "Belum", "Dalam proses"]
+      save_to: conversion.submission_status
+
+  completion_node: node_conversion_result
+
+node_conversion_result:
+  type: dynamic_response
+  title: "Hasil Cek Konversi SBU"
+  response_template: >
+    Hasil cek konversi SBU:
+
+    Status SBU lama:
+    {{conversion.old_sbu_status}}
+
+    Status kebutuhan konversi:
+    {{conversion.required_status}}
+
+    Kesiapan data:
+    {{conversion.data_status}}
+
+    Status pengajuan:
+    {{conversion.submission_status}}
+
+    Status awal:
+    {{conversion_readiness_status}}
+
+    Rekomendasi:
+    {{conversion_recommendation}}
+
+    Catatan:
+    Jika SBU lama wajib dikonversi dan tidak dikonversi sesuai batas waktu, SBU
+    dapat berisiko dinyatakan tidak berlaku sesuai ketentuan.
+```
+
+## 7. Sanction Risk Engine
+
+```yaml
+sanction_risk_engine:
+  id: sanction_risk_engine_v1
+  title: "Mesin Deteksi Risiko Sanksi"
+  risk_sources:
+    - "SBU tidak memenuhi syarat"
+    - "SBU habis masa berlaku"
+    - "PB tidak dimiliki saat melaksanakan layanan jasa konstruksi"
+    - "kewajiban laporan kegiatan usaha tahunan tidak dipenuhi"
+    - "persyaratan khusus BUJK asing tidak dipenuhi"
+    - "ketentuan peraturan jasa konstruksi dilanggar"
+```
+
+```yaml
+node_sanction_risk_intro:
+  type: message_with_buttons
+  title: "Cek Risiko Sanksi"
+  message: >
+    Saya akan membantu mengecek potensi risiko sanksi administratif secara awal.
+    Hasil ini bukan keputusan hukum, tetapi daftar peringatan agar pengguna dapat
+    memperbaiki kepatuhan.
+  buttons:
+    - label: "Mulai Cek Risiko"
+      target_node: node_sanction_risk_form
+    - label: "Menu Utama"
+      target_node: node_main_menu
+
+node_sanction_risk_form:
+  type: guided_form
+  title: "Form Risiko Sanksi"
+  questions:
+    - id: q_has_pb
+      text: "Apakah badan usaha memiliki PB/NIB yang sesuai?"
+      quick_replies: ["Ya", "Tidak", "Belum tahu"]
+      save_to: sanction.has_pb
+
+    - id: q_has_valid_sbu
+      text: "Apakah SBU masih berlaku dan sesuai persyaratan?"
+      quick_replies: ["Ya", "Tidak", "Habis masa berlaku", "Belum tahu"]
+      save_to: sanction.has_valid_sbu
+
+    - id: q_annual_report_done
+      text: "Apakah laporan kegiatan usaha tahunan sudah dipenuhi?"
+      quick_replies: ["Sudah", "Belum", "Belum tahu"]
+      save_to: sanction.annual_report
+
+    - id: q_foreign_bujk
+      text: "Apakah badan usaha termasuk BUJK PMA/KPBUJKA/BUJK asing?"
+      quick_replies: ["Ya", "Tidak", "Belum tahu"]
+      save_to: sanction.foreign_status
+
+    - id: q_special_obligation
+      text: "Apakah ada kewajiban khusus yang belum dipenuhi?"
+      quick_replies: ["Ada", "Tidak ada", "Belum tahu"]
+      save_to: sanction.special_obligation
+
+  completion_node: node_sanction_risk_result
+
+node_sanction_risk_result:
+  type: dynamic_response
+  title: "Hasil Cek Risiko Sanksi"
+  response_template: >
+    Hasil cek risiko sanksi administratif:
+
+    PB/NIB:
+    {{sanction.has_pb}}
+
+    SBU:
+    {{sanction.has_valid_sbu}}
+
+    Laporan kegiatan usaha tahunan:
+    {{sanction.annual_report}}
+
+    Status BUJK asing/PMA/KPBUJKA:
+    {{sanction.foreign_status}}
+
+    Kewajiban khusus:
+    {{sanction.special_obligation}}
+
+    Level risiko:
+    {{sanction_risk_level}}
+
+    Rekomendasi:
+    {{sanction_recommendation}}
+
+    Catatan:
+    Potensi sanksi dapat berupa peringatan tertulis, denda administratif,
+    penghentian sementara kegiatan usaha, pencabutan PB, dan/atau daftar hitam,
+    tergantung jenis pelanggaran dan kewenangan pemberi sanksi.
+```
+
+## 8. Logic Risiko Sanksi
+
+```yaml
+sanction_risk_logic:
+  low:
+    condition:
+      - "has_pb == Ya"
+      - "has_valid_sbu == Ya"
+      - "annual_report == Sudah"
+      - "special_obligation == Tidak ada"
+    label: "Risiko rendah"
+    recommendation: >
+      Pertahankan kepatuhan dan simpan bukti pemenuhan kewajiban.
+
+  medium:
+    condition:
+      - "annual_report == Belum"
+      - "has_valid_sbu == Belum tahu"
+      - "special_obligation == Belum tahu"
+    label: "Risiko sedang"
+    recommendation: >
+      Segera cek status SBU, PB/NIB, laporan tahunan, dan kewajiban khusus.
+
+  high:
+    condition:
+      - "has_pb == Tidak"
+      - "has_valid_sbu == Tidak"
+      - "has_valid_sbu == Habis masa berlaku"
+      - "special_obligation == Ada"
+    label: "Risiko tinggi"
+    recommendation: >
+      Jangan lanjutkan layanan jasa konstruksi sebelum status PB/SBU dan kewajiban
+      utama diperbaiki. Konsultasikan dengan LSBU/OSS/pejabat berwenang.
+```
+
+## 9. Keluhan dan Banding
+
+```yaml
+node_complaint_appeal_intro:
+  type: message_with_buttons
+  title: "Keluhan dan Banding"
+  message: >
+    Jika pengguna tidak setuju dengan proses atau hasil sertifikasi, pengguna dapat
+    menyiapkan keluhan atau banding sesuai prosedur yang berlaku. Bot dapat membantu
+    menyusun struktur ringkasan, tetapi tidak memutuskan hasil keluhan atau banding.
+  buttons:
+    - label: "Buat Ringkasan Keluhan"
+      target_node: node_complaint_form
+    - label: "Buat Ringkasan Banding"
+      target_node: node_appeal_form
+    - label: "Menu Utama"
+      target_node: node_main_menu
+
+node_complaint_form:
+  type: guided_form
+  title: "Form Ringkasan Keluhan"
+  questions:
+    - id: q_complaint_subject
+      text: "Keluhan terkait apa?"
+      quick_replies:
+        - "Proses pendaftaran"
+        - "Verifikasi dokumen"
+        - "Hasil asesmen"
+        - "Penerbitan sertifikat"
+        - "Surveilans"
+        - "Lainnya"
+      save_to: complaint.subject
+
+    - id: q_complaint_chronology
+      text: "Tuliskan kronologi singkat keluhan."
+      expected_type: text
+      save_to: complaint.chronology
+
+    - id: q_complaint_evidence
+      text: "Bukti pendukung apa yang tersedia?"
+      expected_type: text
+      save_to: complaint.evidence
+
+    - id: q_complaint_expected_resolution
+      text: "Apa penyelesaian yang diharapkan?"
+      expected_type: text
+      save_to: complaint.expected_resolution
+
+  completion_node: node_complaint_summary
+
+node_complaint_summary:
+  type: dynamic_response
+  title: "Ringkasan Keluhan"
+  response_template: >
+    Ringkasan keluhan:
+
+    Pokok keluhan:
+    {{complaint.subject}}
+
+    Kronologi:
+    {{complaint.chronology}}
+
+    Bukti pendukung:
+    {{complaint.evidence}}
+
+    Penyelesaian yang diharapkan:
+    {{complaint.expected_resolution}}
+
+    Saran:
+    Gunakan ringkasan ini sebagai draft awal untuk disampaikan melalui kanal resmi
+    LSBU atau pihak berwenang sesuai prosedur keluhan yang berlaku.
+```
+
+```yaml
+node_appeal_form:
+  type: guided_form
+  title: "Form Ringkasan Banding"
+  questions:
+    - id: q_appeal_decision
+      text: "Keputusan apa yang ingin diajukan banding?"
+      expected_type: text
+      save_to: appeal.decision
+
+    - id: q_appeal_reason
+      text: "Apa alasan utama banding?"
+      expected_type: text
+      save_to: appeal.reason
+
+    - id: q_appeal_evidence
+      text: "Bukti pendukung apa yang tersedia?"
+      expected_type: text
+      save_to: appeal.evidence
+
+    - id: q_appeal_request
+      text: "Apa permohonan atau koreksi yang diharapkan?"
+      expected_type: text
+      save_to: appeal.request
+
+  completion_node: node_appeal_summary
+
+node_appeal_summary:
+  type: dynamic_response
+  title: "Ringkasan Banding"
+  response_template: >
+    Ringkasan banding:
+
+    Keputusan yang dibantah:
+    {{appeal.decision}}
+
+    Alasan banding:
+    {{appeal.reason}}
+
+    Bukti pendukung:
+    {{appeal.evidence}}
+
+    Permohonan:
+    {{appeal.request}}
+
+    Saran:
+    Lengkapi bukti dan ajukan melalui kanal resmi sesuai prosedur banding yang berlaku.
+```
+
+## 10. Template Jawaban Cepat
+
+```yaml
+quick_answer_templates_post_certification:
+  sbu_habis_masa_berlaku: >
+    Jika SBU sudah habis masa berlaku, segera cek apakah masih dapat dilakukan
+    perpanjangan/re-sertifikasi atau perlu pengajuan ulang sesuai sistem yang berlaku.
+    Jangan menggunakan SBU yang sudah tidak berlaku untuk layanan jasa konstruksi.
+
+  data_tkk_berubah: >
+    Jika PJBU, PJTBU, atau PJSKBU berubah, siapkan dokumen perubahan dan pastikan
+    SKK serta jenjangnya sesuai dengan subklasifikasi dan kualifikasi SBU.
+
+  alat_berubah: >
+    Jika peralatan berubah, perbarui daftar alat, bukti milik/sewa, nomor registrasi,
+    dan kecocokan dengan subklasifikasi. Jika alat sewa, pastikan perjanjian sewa
+    dapat diklarifikasi.
+
+  smap_kadaluarsa: >
+    Jika bukti SMAP tidak mutakhir, siapkan dokumen pengganti atau pembaruan.
+    Bentuk pemenuhan dapat berupa ISO 37001, PANCEK, dokumen penerapan SMAP,
+    atau surat komitmen sesuai ketentuan.
+
+  ingin_banding: >
+    Saya dapat membantu membuat ringkasan banding. Siapkan keputusan yang dibantah,
+    alasan banding, bukti pendukung, dan permohonan koreksi.
+```
+
+## 11. Runtime Prompt Tambahan
+
+```yaml
+runtime_prompt_addition_post_certification:
+  text: >
+    Saat pengguna bertanya tentang SBU setelah terbit, arahkan ke modul pasca-sertifikasi.
+    Jelaskan surveilans, perpanjangan, perubahan data, konversi, risiko sanksi, keluhan,
+    dan banding dengan bahasa edukatif. Jangan menyatakan keputusan resmi. Gunakan label
+    risiko rendah, sedang, atau tinggi untuk risiko kepatuhan. Untuk keluhan dan banding,
+    bantu susun ringkasan berbasis kronologi, bukti, dan permohonan pengguna.
+```
+
+Dengan bagian ini, chatbot sudah mencakup siklus penuh:
+
+**Pencarian SBU → Pemetaan KBLI → Pra-verifikasi dokumen → Pengajuan → Asesmen → Penerbitan → Surveilans → Perpanjangan/Konversi → Sanksi/Keluhan/Banding.**

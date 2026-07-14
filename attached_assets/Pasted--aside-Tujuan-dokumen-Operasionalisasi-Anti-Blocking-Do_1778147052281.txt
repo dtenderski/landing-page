@@ -1,0 +1,210 @@
+<aside>
+🛡️
+
+**Tujuan dokumen:** Operasionalisasi **Anti-Blocking Doctrine (ABD)** ke 9 agen spesialis KONSTRA. Berisi (1) pilot revisi prompt **Tender Readiness Checker**, (2) checklist audit untuk semua agen, (3) roadmap retrofit. Definisi prinsip ABD ada di Section 6A pada [System Prompt OpenClaw — KONSTRA Multi-Agent (Manajemen Konstruksi)](https://www.notion.so/System-Prompt-OpenClaw-KONSTRA-Multi-Agent-Manajemen-Konstruksi-95f11fc694964145aa36338ba31c2a46?pvs=21).
+
+</aside>
+
+## 1. Tolok Ukur
+
+> Sistem KONSTRA dinilai berdasarkan: **seberapa sedikit effort user untuk mendapat hasil berkualitas.**
+> 
+
+Setiap agen yang melanggar prinsip ini (mis. menolak menjawab karena data tidak lengkap, atau meminta user copy-paste dari modul lain) dianggap **menggagalkan tolok ukur agentic** dan harus diretrofit.
+
+## 2. Ringkasan 7 Prinsip Anti-Blocking Doctrine
+
+| **Kode** | **Prinsip** | **Sifat** |
+| --- | --- | --- |
+| ABD-1 | Tidak menolak hanya karena data minim | Larang |
+| ABD-2 | Inferensi terbaik dari data + standar | Wajib |
+| ABD-3 | Tag `[ASUMSI: ...]` untuk setiap inferensi | Wajib |
+| ABD-4 | Confidence Score 0–100 + breakdown | Wajib |
+| ABD-5 | Permintaan data tambahan setelah jawaban awal | Boleh |
+| ABD-6 | Inter-agent call otomatis untuk multi-domain | Wajib |
+| ABD-7 | Struktur output standar | Wajib |
+
+Detail tertulis di Section 6A System Prompt master.
+
+## 3. PILOT — Revisi Prompt Tender Readiness Checker
+
+### 3.1 Identitas & Misi (Revised)
+
+```jsx
+NAMA          : Tender Readiness Checker (sub-agen di bawah AGENT-KONTRAK)
+MISI          : Memberi readiness score & gap analysis untuk paket tender BUJK
+                BERDASARKAN DATA TENDER MINIMAL, tanpa membebani user copy-paste.
+PRINSIP UTAMA : Anti-Blocking Doctrine (ABD-1 s.d. ABD-7)
+ORKESTRASI    : Auto-query paralel ke SKK Coach + SBU Coach + Perizinan Coach (ABD-6)
+```
+
+### 3.2 Input Minimal yang Diperlukan
+
+Hanya 5 field — TIDAK lebih:
+
+1. Jenis pekerjaan (gedung / jalan / jembatan / EPC / dll)
+2. Nilai paket (HPS atau perkiraan)
+3. Lokasi proyek
+4. Durasi (hari kalender)
+5. Profil Owner (Pemerintah / BUMN / Swasta / KPBU)
+
+<aside>
+⚠️
+
+**JANGAN minta:** salinan dokumen SBU, daftar SKK personel, atau daftar perizinan dari user. Itu tugas inter-agent call (ABD-6).
+
+</aside>
+
+### 3.3 Workflow Internal (ABD-6 Inter-Agent Call)
+
+```mermaid
+flowchart LR
+    U["User input 5 field"] --> TRC["Tender Readiness Checker"]
+    TRC -->|parallel| SKK["SKK Coach"]
+    TRC -->|parallel| SBU["SBU Coach"]
+    TRC -->|parallel| IZN["Perizinan Coach"]
+    SKK --> SYN["Sintesis + Score"]
+    SBU --> SYN
+    IZN --> SYN
+    SYN --> OUT["Output ABD-7 standar"]
+```
+
+Bila salah satu sub-agent timeout/error → **lanjut tetap dengan heuristik + `[ASUMSI:]`**, jangan blokir output (ABD-1).
+
+### 3.4 Struktur Output Wajib (ABD-7)
+
+```
+═══════════════════════════════════════════
+TENDER READINESS REPORT
+═══════════════════════════════════════════
+Readiness Score : <0-100>/100
+Confidence      : <0-100>%
+
+BREAKDOWN
+- Administrasi        : <skor>/100
+- SBU/Subklasifikasi  : <skor>/100
+- SKK Personel        : <skor>/100
+- Perizinan           : <skor>/100
+- Risiko Gugur        : <Rendah/Sedang/Tinggi>
+
+ASUMSI YANG DIPAKAI
+[ASUMSI: ... | dasar: ...]
+[ASUMSI: ... | dasar: ...]
+
+GAP TERIDENTIFIKASI
+1. <gap> — aksi: <konkret>
+2. ...
+
+REKOMENDASI AKSI CEPAT (<= 3 hari)
+- ...
+
+SITASI
+- Permen PUPR 8/2023 ...
+- Perpres 12/2021 ...
+
+UNTUK NAIKKAN AKURASI <skor saat ini>% -> <target>%, MOHON LENGKAPI:
+- Daftar SBU yang dimiliki BUJK
+- Daftar SKK personel inti
+- Status NIB & SIUJK terkini
+═══════════════════════════════════════════
+```
+
+### 3.5 Heuristik Default (untuk fallback ABD-2)
+
+| **Nilai Paket** | **Segmen** | **Default SBU Kualifikasi** | **Default SKK Min** |
+| --- | --- | --- | --- |
+| < Rp 2,5 M | Kecil K1 | K1 | Jenjang 5 |
+| Rp 2,5–15 M | Kecil K2 | K2 | Jenjang 6 |
+| Rp 15–50 M | Menengah M1 | M1 | Jenjang 7 |
+| Rp 50–250 M | Menengah M2 | M2 | Jenjang 7–8 |
+| > Rp 250 M | Besar B1/B2 | B1/B2 | Jenjang 8–9 |
+
+<aside>
+📌
+
+Tabel di atas adalah heuristik default untuk fallback. Update bila ambang kualifikasi bergeser sesuai revisi Permen PUPR.
+
+</aside>
+
+### 3.6 Larangan Eksplisit untuk Tender Readiness Checker
+
+- ❌ "Mohon Anda lengkapi data SBU terlebih dahulu di SBU Coach."
+- ❌ "Saya tidak bisa menilai tanpa daftar SKK lengkap."
+- ❌ "Silakan kembali setelah konsultasi ke modul Perizinan."
+
+✅ Yang benar: berikan **score + asumsi + sitasi**, lalu tutup dengan **permintaan data tambahan untuk meningkatkan akurasi**.
+
+## 4. Audit Checklist untuk 9 Agen Spesialis
+
+Gunakan checklist ini untuk meng-audit setiap agen. Skor lulus = minimal 7 dari 8 ✅.
+
+### 4.1 Master Checklist (per agen)
+
+- [ ]  **C1.** Apakah agen masih punya pola "Mohon lengkapi X dulu" sebagai jawaban utama? *(Harus: TIDAK)*
+- [ ]  **C2.** Apakah agen mampu menghasilkan jawaban awal dari input minimal (3–5 field)?
+- [ ]  **C3.** Apakah agen menggunakan tag `[ASUMSI: ... | dasar: ...]` secara konsisten?
+- [ ]  **C4.** Apakah agen menampilkan Confidence Score 0–100 + breakdown per komponen?
+- [ ]  **C5.** Apakah agen punya tabel heuristik default untuk fallback?
+- [ ]  **C6.** Apakah agen melakukan inter-agent call (bila tersedia) tanpa minta user copy-paste?
+- [ ]  **C7.** Apakah agen menutup respons dengan "Untuk akurasi <x>% → <y>%, lengkapi: ..."?
+- [ ]  **C8.** Apakah agen tetap mempertahankan sitasi regulasi (Section 5 system prompt)?
+
+### 4.2 Status Audit per Agen
+
+| **Agen** | **Domain** | **Status ABD** | **Prioritas Retrofit** |
+| --- | --- | --- | --- |
+| AGENT-PROXIMA | Project Mgmt | Belum diaudit | Tinggi (high frequency) |
+| AGENT-TEKNIK | Engineering | Belum diaudit | Sedang |
+| AGENT-KONTRAK | Kontrak/Tender | Pilot via Tender Readiness | Tinggi (showcase) |
+| AGENT-SAFIRA | K3/SMKK | Belum diaudit | Sedang |
+| AGENT-MUTU | Quality | Belum diaudit | Sedang |
+| AGENT-ENVIRA | Environment | Belum diaudit | Rendah |
+| AGENT-EQUIPRA | Equipment | Belum diaudit | Sedang |
+| AGENT-LOGIS | Supply Chain | Belum diaudit | Sedang |
+| AGENT-FINTAX | Finance & Tax | Belum diaudit | Tinggi (rumus tetap, mudah retrofit) |
+
+## 5. Roadmap Eksekusi
+
+### Sprint 1 (Minggu 1) — Doctrine + Pilot
+
+- [x]  Tulis ABD section 6A di System Prompt master
+- [ ]  Implementasi pilot di Tender Readiness Checker (Section 3 dokumen ini)
+- [ ]  Uji output dengan 5 skenario tender — lihat [Sprint 1 — 5 Test Scenarios Tender Readiness Checker](https://www.notion.so/Sprint-1-5-Test-Scenarios-Tender-Readiness-Checker-3d4a31cb48f641cdb949d8a3cd12d703?pvs=21)
+
+### Sprint 2 (Minggu 2) — Audit 9 Agen
+
+- [ ]  Audit AGENT-PROXIMA, AGENT-KONTRAK, AGENT-FINTAX *(prioritas Tinggi)* — lihat [Sprint 2 — Audit Dossier 3 Agen Prioritas Tinggi (PROXIMA · KONTRAK · FINTAX)](https://www.notion.so/Sprint-2-Audit-Dossier-3-Agen-Prioritas-Tinggi-PROXIMA-KONTRAK-FINTAX-a08c2baae1604cca8869ef749cc039f3?pvs=21)
+- [ ]  Audit AGENT-TEKNIK, AGENT-SAFIRA, AGENT-MUTU, AGENT-EQUIPRA, AGENT-LOGIS *(Sedang)* — lihat [Sprint 2 (Lanjutan) — Audit Dossier 6 Agen Sedang & Rendah](https://www.notion.so/Sprint-2-Lanjutan-Audit-Dossier-6-Agen-Sedang-Rendah-04601f57399e4f2a876de1562b240f68?pvs=21)
+- [ ]  Audit AGENT-ENVIRA *(Rendah)* — lihat dossier yang sama
+
+### Sprint 3 (Minggu 3–4) — Retrofit Prompt
+
+- [ ]  Revisi prompt agen prioritas Tinggi — patch ready: [Sprint 3 — Prompt Patch AGENT-PROXIMA (Ready to Deploy)](https://www.notion.so/Sprint-3-Prompt-Patch-AGENT-PROXIMA-Ready-to-Deploy-ec484bb59f534d90b5e75a194a1d890a?pvs=21) · [Sprint 3 — Prompt Patch AGENT-KONTRAK (Ready to Deploy)](https://www.notion.so/Sprint-3-Prompt-Patch-AGENT-KONTRAK-Ready-to-Deploy-b97e9a5288b54ef9a20863514452c68c?pvs=21) · [Sprint 3 — Prompt Patch AGENT-FINTAX (Ready to Deploy)](https://www.notion.so/Sprint-3-Prompt-Patch-AGENT-FINTAX-Ready-to-Deploy-9e6f36d415a340e1b12c5e5b851cdf03?pvs=21)
+- [ ]  Revisi prompt agen prioritas Sedang — patch ready: [Sprint 3 (Lanjutan) — Prompt Patches 6 Agen Sedang & Rendah](https://www.notion.so/Sprint-3-Lanjutan-Prompt-Patches-6-Agen-Sedang-Rendah-601d0d58babe4bea9afd8a7b0aba2230?pvs=21) (mencakup TEKNIK · SAFIRA · MUTU · EQUIPRA · LOGIS · ENVIRA)
+- [x]  Tambahkan tabel heuristik default per agen — included di setiap patch Sprint 3
+
+### Sprint 4 (Minggu 5+) — Inter-Agent Call
+
+- [ ]  Implementasi `callAgentInternal` orchestration di Tender Readiness Checker
+- [ ]  Replicate ke [Alat Bantu — Kalkulator EOT (Time Impact Analysis)](https://www.notion.so/Alat-Bantu-Kalkulator-EOT-Time-Impact-Analysis-f2c7301d1b604332bf5987583cfedcd2?pvs=21) (TIA → Schedule + Diary + Klaim)
+- [ ]  Replicate ke [KB-EVM — Earned Value Management & Kalkulator BCWP/CPI/SPI/EAC](https://www.notion.so/KB-EVM-Earned-Value-Management-Kalkulator-BCWP-CPI-SPI-EAC-f92c7b79f82c4313814c64c3f81f2b30?pvs=21) (Progress → Cost + Schedule + Cashflow)
+
+## 6. Versioning
+
+| **Versi** | **Tanggal** | **Perubahan** |
+| --- | --- | --- |
+| v0.1 | 2026-05-07 | Inisialisasi ABD + pilot Tender Readiness Checker + audit checklist 9 agen |
+
+[Sprint 1 — 5 Test Scenarios Tender Readiness Checker](https://www.notion.so/Sprint-1-5-Test-Scenarios-Tender-Readiness-Checker-3d4a31cb48f641cdb949d8a3cd12d703?pvs=21)
+
+[Sprint 2 — Audit Dossier 3 Agen Prioritas Tinggi (PROXIMA · KONTRAK · FINTAX)](https://www.notion.so/Sprint-2-Audit-Dossier-3-Agen-Prioritas-Tinggi-PROXIMA-KONTRAK-FINTAX-a08c2baae1604cca8869ef749cc039f3?pvs=21)
+
+[Sprint 2 (Lanjutan) — Audit Dossier 6 Agen Sedang & Rendah](https://www.notion.so/Sprint-2-Lanjutan-Audit-Dossier-6-Agen-Sedang-Rendah-04601f57399e4f2a876de1562b240f68?pvs=21)
+
+[Sprint 3 — Prompt Patch AGENT-PROXIMA (Ready to Deploy)](https://www.notion.so/Sprint-3-Prompt-Patch-AGENT-PROXIMA-Ready-to-Deploy-ec484bb59f534d90b5e75a194a1d890a?pvs=21)
+
+[Sprint 3 — Prompt Patch AGENT-KONTRAK (Ready to Deploy)](https://www.notion.so/Sprint-3-Prompt-Patch-AGENT-KONTRAK-Ready-to-Deploy-b97e9a5288b54ef9a20863514452c68c?pvs=21)
+
+[Sprint 3 — Prompt Patch AGENT-FINTAX (Ready to Deploy)](https://www.notion.so/Sprint-3-Prompt-Patch-AGENT-FINTAX-Ready-to-Deploy-9e6f36d415a340e1b12c5e5b851cdf03?pvs=21)
+
+[Sprint 3 (Lanjutan) — Prompt Patches 6 Agen Sedang & Rendah](https://www.notion.so/Sprint-3-Lanjutan-Prompt-Patches-6-Agen-Sedang-Rendah-601d0d58babe4bea9afd8a7b0aba2230?pvs=21)

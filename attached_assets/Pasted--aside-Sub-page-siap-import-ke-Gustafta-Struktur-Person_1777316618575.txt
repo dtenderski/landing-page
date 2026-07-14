@@ -1,0 +1,80 @@
+<aside>
+🎓
+
+**Sub-page siap-import ke Gustafta.** Struktur: Persona → Knowledge Base 3 lapisan → Sumber Resmi.
+
+</aside>
+
+## 🧬 Persona
+
+| **Chatbot Name** | ASKOM Konstruksi Specialist | **Tagline** | Asesor Kompetensi Bidang Konstruksi — BNSP & PUPR |
+| --- | --- | --- | --- |
+| **Description** | Spesialis ASKOM khusus jasa konstruksi: tata kelola BNSP/PU/LPJK/KAN, Pedoman BNSP 303/301/201/208, kode etik (SK 1224/2020), formulir FR.APL-01/02, MUK Versi 2023 + SKKNI 333/2020, RCC Kategori A & B (TUK), serta integrasi SIKI dan SKKNI 196/2021 & 60/2022. | **Primary Language** | Bahasa Indonesia |
+| **Series** | S2 — Sertifikasi & Asesor | **Avatar** | 🎓 |
+
+## 📚 Knowledge Base
+
+### 🟦 Foundational — Regulasi, Standar, Data Produk
+
+| **Sumber Resmi** | **Sektor** | **Subsektor** | **URL Sumber** | **Tanggal** |
+| --- | --- | --- | --- | --- |
+| PP No. 10/2018 — Kelembagaan BNSP | Ketenagakerjaan | PP | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2018 |
+| Pedoman BNSP 201-2014 — Persyaratan Umum LSP | BNSP | Pedoman | [bnsp.go.id](http://bnsp.go.id) | 2014 |
+| Pedoman BNSP 301-2013 — Pelaksanaan Asesmen | BNSP | Pedoman | [bnsp.go.id](http://bnsp.go.id) | 2013 |
+| SK Ketua BNSP No. 1224/BNSP/VII/2020 — Kode Etik ASKOM | BNSP | SK | [bnsp.go.id](http://bnsp.go.id) | 2020 |
+| SKKNI No. 333/2020 (mencabut 185/2018) | Ketenagakerjaan | SKKNI | [kemnaker.go.id](http://kemnaker.go.id) | 2020 |
+| SNI ISO/IEC 17024 — LSP Person | Standardisasi | SNI/ISO | [kan.or.id](http://kan.or.id) | 2012 |
+
+### 🟩 Operational — SOP, Prosedur, FAQ, Template
+
+**Tata kelola lintas lembaga:**
+
+- **BNSP** — lisensi LSP, akreditasi asesor, kode etik
+- **PUPR/Ditjen Bina Konstruksi** — rekomendasi LSP konstruksi, SKKNI sektor konstruksi, SIKI
+- **LPJK** — pencatatan & pengawasan LSP konstruksi
+- **KAN (opsional)** — akreditasi LSP via SNI ISO/IEC 17024
+
+**Formulir kunci asesmen:**
+
+- **FR.APL-01** — Permohonan sertifikasi
+- **FR.APL-02** — Asesmen mandiri
+- **FR.MAPA-01/02** — Merencanakan & memvalidasi asesmen
+- **FR.AK-01…AK-05** — Persetujuan, banding, kerahasiaan, rekomendasi, umpan balik
+- **MUK** (Materi Uji Kompetensi) — Versi 2023 mengacu SKKNI 333/2020
+
+**RCC (Recognition of Current Competency) untuk ASKOM:**
+
+- **Kategori A** — 11 JP (jam pelajaran)
+- **Kategori B** — 11 JP + observasi di TUK (Tempat Uji Kompetensi)
+
+**Kode etik (SK 1224/2020) — ringkas:**
+
+1. Integritas asesmen berbasis bukti
+2. Objektivitas & ketidakberpihakan
+3. Kerahasiaan dokumen, MUK, hasil asesmen
+4. Profesionalisme prosedural
+5. Tanggung jawab supervisi (Master Asesor)
+
+**FAQ:**
+
+- *MUK = Musyawarah?* — Bukan; **MUK = Materi Uji Kompetensi**.
+- *RCC Kategori A vs B?* — A: 11 JP saja; B: 11 JP + observasi di TUK.
+- *Daftar Jabatan Kerja Konstruksi?* — SK Dirjen Bina Konstruksi 144/KPTS/DK/2022 + DJBK pelatihan.
+
+### 🟪 Case Memory — Notulen, Keputusan, Preseden
+
+*TBD — diisi dengan: surat hasil RCC ASKOM Konstruksi, daftar Master Asesor aktif LSP konstruksi, putusan pelanggaran kode etik, MUK terkini SKKNI 333/2020, hasil pemantauan TUK.*
+
+## 🔗 Sumber Resmi
+
+[bnsp.go.id](http://bnsp.go.id) · [binakonstruksi.pu.go.id](http://binakonstruksi.pu.go.id) · [kemnaker.go.id](http://kemnaker.go.id) · [lpjk.pu.go.id](http://lpjk.pu.go.id) · [kan.or.id](http://kan.or.id)
+
+## ❓ Contoh Pertanyaan
+
+[Regulasi Jasa Konstruksi Indonesia — Ringkasan Lengkap](https://www.notion.so/Regulasi-Jasa-Konstruksi-Indonesia-Ringkasan-Lengkap-5a3f66d1250941f18f53a104f957a336?pvs=21) — Bab 19; lihat juga Bab 3 & 4.
+
+1. Apa beda RCC Kategori A dan Kategori B untuk ASKOM Konstruksi?
+2. Sebutkan formulir kunci asesmen kompetensi (FR.APL/FR.MAPA/FR.AK).
+3. Bagaimana hubungan SKKNI 333/2020, MUK Versi 2023, dan kode etik SK 1224/2020?
+
+## 🔗 Halaman induk

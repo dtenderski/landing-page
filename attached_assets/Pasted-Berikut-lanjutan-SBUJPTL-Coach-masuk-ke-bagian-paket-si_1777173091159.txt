@@ -1,0 +1,909 @@
+Berikut lanjutan **SBUJPTL Coach**, masuk ke bagian **paket siap implementasi untuk MVP**, termasuk **arsitektur minimal, prioritas fitur, struktur halaman, flow API sederhana, seed knowledge, dan backlog pengembangan**. Bagian ini tetap mengacu pada data sebelumnya tentang SBUJPTL, SKTTK, PJT/TT, jenis usaha, bidang/subbidang, kualifikasi, dan alur sampai IUJPTL. 
+
+## 164. MVP scope
+
+```yaml id="mvp_scope_01"
+mvp_scope:
+  product_name: "SBUJPTL Coach MVP"
+  goal: >
+    Membuat versi awal chatbot yang sudah bisa digunakan untuk edukasi,
+    pemetaan klasifikasi, cek dokumen, cek SKTTK dasar, dan pengumpulan lead.
+
+  included_features:
+    - "Greeting dan main menu"
+    - "Penjelasan SBUJPTL"
+    - "Penjelasan SKTTK, PJT, dan TT"
+    - "Pemilihan jenis usaha"
+    - "Pemilihan bidang dan subbidang"
+    - "Cek kualifikasi kecil/menengah/besar"
+    - "Checklist dokumen SBUJPTL"
+    - "Checklist dokumen SKTTK"
+    - "Lead capture"
+    - "Ringkasan untuk pengguna"
+    - "Ringkasan untuk admin"
+
+  excluded_from_mvp:
+    - "OCR dokumen"
+    - "Upload file dokumen"
+    - "Integrasi CRM otomatis"
+    - "Dashboard analytics kompleks"
+    - "AI semantic classifier tingkat lanjut"
+    - "Multi-tenant dashboard"
+    - "Pembayaran online"
+    - "Tracking status pengurusan real-time"
+
+  mvp_principle: >
+    Mulai dari rule-based chatbot yang stabil, aman, dan mudah diedit admin.
+    Setelah data percakapan terkumpul, tambahkan intent classifier dan
+    rekomendasi yang lebih cerdas.
+```
+
+## 165. MVP navigation
+
+```yaml id="mvp_navigation_01"
+mvp_navigation:
+  public_chat_widget:
+    main_menu:
+      - label: "Apa itu SBUJPTL?"
+        node: explain_sbujptl
+
+      - label: "Pilih jenis usaha"
+        node: business_type_decision_tree
+
+      - label: "Pilih bidang/subbidang"
+        node: field_subfield_decision_tree
+
+      - label: "Cek kualifikasi"
+        node: qualification_check_start
+
+      - label: "Cek SKTTK"
+        node: skttk_prescreening_wizard
+
+      - label: "Cek dokumen"
+        node: document_assessment_start
+
+      - label: "Konsultasi admin"
+        node: lead_capture_start
+
+  admin_dashboard:
+    menu:
+      - "Dashboard"
+      - "Lead Masuk"
+      - "Checklist Dokumen"
+      - "Klasifikasi"
+      - "FAQ"
+      - "Glossary"
+      - "Pengaturan Bot"
+```
+
+## 166. MVP user flow
+
+```yaml id="mvp_user_flow_01"
+mvp_user_flow:
+  default_flow:
+    - step: "User membuka chatbot"
+      node: first_session_start
+
+    - step: "Bot menampilkan menu utama"
+      node: main_menu
+
+    - step: "User memilih kebutuhan"
+      possible_nodes:
+        - explain_sbujptl
+        - business_type_decision_tree
+        - qualification_check_start
+        - skttk_prescreening_wizard
+        - document_assessment_start
+        - lead_capture_start
+
+    - step: "Bot mengumpulkan data dasar"
+      data_collected:
+        - target_classification
+        - target_field
+        - selected_subfield
+        - target_qualification
+        - skttk_status
+        - missing_documents
+
+    - step: "Bot memberi rekomendasi awal"
+      output:
+        - readiness_summary
+        - missing_documents
+        - recommended_next_steps
+
+    - step: "Bot menawarkan konsultasi admin"
+      node: lead_capture_start
+
+    - step: "Data lead masuk dashboard admin"
+      node: admin_lead_detail
+```
+
+## 167. MVP page structure
+
+```yaml id="mvp_page_structure_01"
+pages:
+  landing_page:
+    sections:
+      - hero:
+          headline: "Butuh Bantuan Pengurusan SBUJPTL?"
+          subheadline: >
+            Cek klasifikasi, kualifikasi, SKTTK, dan dokumen awal perusahaan
+            Anda melalui chatbot SBUJPTL Coach.
+          cta_primary: "Mulai Cek Sekarang"
+          cta_secondary: "Konsultasi Admin"
+
+      - benefits:
+          items:
+            - "Pemetaan jenis usaha"
+            - "Cek bidang dan subbidang"
+            - "Cek kebutuhan SKTTK"
+            - "Checklist dokumen"
+            - "Ringkasan kesiapan awal"
+
+      - chatbot_embed:
+          component: "SBUJPTLCoachWidget"
+
+      - disclaimer:
+          text: >
+            Hasil chatbot adalah panduan awal dan bukan keputusan resmi
+            sertifikasi.
+
+  admin_dashboard:
+    sections:
+      - summary_metrics
+      - recent_leads
+      - missing_document_stats
+      - popular_classification
+      - fallback_questions
+
+  lead_detail_page:
+    sections:
+      - contact_information
+      - company_profile
+      - classification_summary
+      - skttk_summary
+      - document_readiness
+      - recommended_followup
+      - admin_notes
+```
+
+## 168. MVP data model ringkas
+
+```json id="mvp_data_model_01"
+{
+  "lead": {
+    "id": "lead_001",
+    "created_at": "2026-04-25T10:00:00+07:00",
+    "source": "chatbot",
+    "contact": {
+      "name": null,
+      "phone": null,
+      "email": null
+    },
+    "company": {
+      "name": null,
+      "legal_entity_type": null,
+      "nib_status": null,
+      "npwp_status": null
+    },
+    "request": {
+      "target_service": null,
+      "business_goal": null,
+      "target_classification": null,
+      "target_field": null,
+      "selected_subfield": null,
+      "target_qualification": null
+    },
+    "technical": {
+      "has_pjt": null,
+      "has_tt": null,
+      "skttk_status": null,
+      "pjt_level": null,
+      "tt_count": null,
+      "tt_min_level": null,
+      "duplicate_assignment_status": null
+    },
+    "documents": {
+      "available": [],
+      "missing": [],
+      "unknown": []
+    },
+    "readiness": {
+      "label": null,
+      "score": null,
+      "recommendations": []
+    },
+    "admin": {
+      "status": "new",
+      "assigned_to": null,
+      "notes": []
+    }
+  }
+}
+```
+
+## 169. MVP API minimal
+
+```yaml id="mvp_api_minimal_01"
+api:
+  - method: "POST"
+    path: "/api/chat"
+    description: "Memproses pesan chatbot."
+    request:
+      session_id: "string"
+      message: "string"
+      state: "object"
+    response:
+      bot_message: "string"
+      quick_replies: "array"
+      next_node: "string"
+      state_updates: "object"
+
+  - method: "POST"
+    path: "/api/leads"
+    description: "Menyimpan lead konsultasi."
+    request:
+      contact_name: "string"
+      phone_number: "string"
+      company_name: "string"
+      target_service: "string"
+      target_classification: "string"
+      target_field: "string"
+      selected_subfield: "string"
+      skttk_status: "string"
+      missing_documents: "array"
+    response:
+      lead_id: "string"
+      status: "created"
+
+  - method: "GET"
+    path: "/api/leads"
+    description: "Menampilkan daftar lead untuk admin."
+    response:
+      leads: "array"
+
+  - method: "GET"
+    path: "/api/knowledge/classifications"
+    description: "Mengambil data jenis usaha, bidang, dan subbidang."
+    response:
+      classifications: "array"
+
+  - method: "GET"
+    path: "/api/knowledge/checklists"
+    description: "Mengambil checklist dokumen."
+    response:
+      checklists: "array"
+```
+
+## 170. MVP rule-based router
+
+```yaml id="mvp_router_01"
+rule_based_router:
+  priority:
+    - unsafe_request
+    - lead_request
+    - tender_request
+    - skttk_request
+    - document_request
+    - classification_request
+    - qualification_request
+    - iujptl_request
+    - general_faq
+    - fallback
+
+  keyword_rules:
+    unsafe_request:
+      keywords:
+        - "dokumen palsu"
+        - "pinjam nama"
+        - "tanpa SKTTK"
+        - "asal lolos"
+      route_to: safety_refusal
+
+    lead_request:
+      keywords:
+        - "hubungi"
+        - "konsultasi"
+        - "bantu urus"
+        - "pakai jasa"
+      route_to: lead_capture_start
+
+    tender_request:
+      keywords:
+        - "tender"
+        - "proyek pemerintah"
+        - "proyek swasta"
+        - "deadline"
+      route_to: tender_urgency_handler
+
+    skttk_request:
+      keywords:
+        - "SKTTK"
+        - "PJT"
+        - "TT"
+        - "tenaga teknik"
+        - "sertifikat kompetensi"
+      route_to: skttk_process_module
+
+    document_request:
+      keywords:
+        - "dokumen"
+        - "syarat"
+        - "persyaratan"
+        - "checklist"
+      route_to: document_assessment_start
+
+    classification_request:
+      keywords:
+        - "klasifikasi"
+        - "jenis usaha"
+        - "pemasangan"
+        - "pemeliharaan"
+        - "pengoperasian"
+        - "konsultansi"
+      route_to: business_type_decision_tree
+
+    qualification_request:
+      keywords:
+        - "kualifikasi"
+        - "kecil"
+        - "menengah"
+        - "besar"
+        - "kekayaan bersih"
+      route_to: qualification_check_start
+
+    iujptl_request:
+      keywords:
+        - "IUJPTL"
+        - "izin usaha"
+        - "sampai izin"
+      route_to: sbujptl_to_iujptl_flow
+```
+
+## 171. MVP response templates
+
+```yaml id="mvp_response_templates_01"
+response_templates:
+  main_menu:
+    text: >
+      Halo, saya SBUJPTL Coach. Saya bisa membantu Anda memilih jenis usaha,
+      bidang/subbidang, mengecek kualifikasi, SKTTK, dokumen, dan menghubungkan
+      Anda dengan admin.
+
+      Apa yang ingin Anda lakukan?
+    quick_replies:
+      - "Pilih jenis usaha"
+      - "Cek SKTTK"
+      - "Cek dokumen"
+      - "Cek kualifikasi"
+      - "Konsultasi admin"
+
+  fallback:
+    text: >
+      Maaf, saya belum memahami pertanyaan Anda. Pilih salah satu menu berikut
+      agar saya bisa membantu lebih tepat.
+    quick_replies:
+      - "Apa itu SBUJPTL?"
+      - "Pilih jenis usaha"
+      - "Cek SKTTK"
+      - "Cek dokumen"
+      - "Konsultasi admin"
+
+  safety_refusal:
+    text: >
+      Saya tidak dapat membantu membuat atau menyarankan dokumen yang tidak
+      sesuai prosedur, penggunaan nama PJT/TT secara tidak tepat, atau cara
+      melewati verifikasi.
+
+      Saya bisa bantu mengecek dokumen yang perlu dilengkapi secara benar.
+    quick_replies:
+      - "Cek dokumen"
+      - "Konsultasi admin"
+      - "Menu utama"
+
+  lead_capture_intro:
+    text: >
+      Baik, saya akan mencatat data awal agar admin dapat menindaklanjuti.
+      Mohon isi nama Anda terlebih dahulu.
+```
+
+## 172. MVP lead capture form
+
+```yaml id="mvp_lead_capture_form_01"
+lead_capture_form:
+  id: mvp_lead_capture
+  questions:
+    - id: contact_name
+      text: "Nama Anda siapa?"
+      required: true
+
+    - id: phone_number
+      text: "Nomor WhatsApp aktif?"
+      required: true
+
+    - id: company_name
+      text: "Nama perusahaan?"
+      required: true
+
+    - id: target_service
+      text: "Kebutuhan utama Anda?"
+      required: true
+      quick_replies:
+        - "SKTTK"
+        - "SBUJPTL"
+        - "SBUJPTL + IUJPTL"
+        - "Belum tahu"
+
+    - id: target_classification
+      text: "Jenis usaha yang dituju?"
+      required: false
+      quick_replies:
+        - "Konsultansi"
+        - "Pembangunan/Pemasangan"
+        - "Pemeriksaan/Pengujian"
+        - "Pengoperasian"
+        - "Pemeliharaan"
+        - "Belum tahu"
+
+    - id: target_field
+      text: "Bidang pekerjaan?"
+      required: false
+      quick_replies:
+        - "Pembangkitan"
+        - "Transmisi"
+        - "Distribusi"
+        - "Instalasi Pemanfaatan"
+        - "Belum tahu"
+
+    - id: skttk_status
+      text: "Status SKTTK saat ini?"
+      required: false
+      quick_replies:
+        - "Belum punya"
+        - "Sudah ada PJT"
+        - "Sudah ada TT"
+        - "Sudah ada PJT dan TT"
+        - "Belum tahu"
+
+  completion_message: >
+    Terima kasih. Data konsultasi Anda sudah tercatat.
+
+    Admin dapat menindaklanjuti berdasarkan ringkasan kebutuhan berikut:
+    - Nama: {{contact_name}}
+    - Perusahaan: {{company_name}}
+    - Kebutuhan: {{target_service}}
+    - Jenis usaha: {{target_classification}}
+    - Bidang: {{target_field}}
+    - Status SKTTK: {{skttk_status}}
+
+    Catatan: hasil chatbot adalah panduan awal, bukan keputusan resmi.
+```
+
+## 173. MVP document checklist
+
+```yaml id="mvp_document_checklist_01"
+mvp_document_checklist:
+  sbujptl:
+    - id: akta_sk
+      label: "Akta dan SK Pengesahan"
+      question: "Apakah Akta dan SK Pengesahan perusahaan sudah tersedia?"
+
+    - id: nib
+      label: "NIB"
+      question: "Apakah NIB perusahaan sudah tersedia?"
+
+    - id: npwp_company
+      label: "NPWP Perusahaan"
+      question: "Apakah NPWP perusahaan sudah tersedia?"
+
+    - id: ktp_npwp_pengurus
+      label: "KTP dan NPWP Pengurus"
+      question: "Apakah KTP dan NPWP pengurus sudah tersedia?"
+
+    - id: pjt_tt_skttk
+      label: "PJT, TT, dan SKTTK"
+      question: "Apakah perusahaan sudah memiliki PJT/TT dengan SKTTK?"
+
+    - id: laporan_keuangan
+      label: "Laporan Keuangan"
+      question: "Apakah laporan keuangan atau neraca sudah tersedia?"
+
+    - id: company_profile
+      label: "Company Profile"
+      question: "Apakah company profile sudah tersedia?"
+
+    - id: struktur_organisasi
+      label: "Struktur Organisasi"
+      question: "Apakah struktur organisasi sudah tersedia?"
+
+  skttk:
+    - id: pengalaman
+      label: "Pengalaman pekerjaan"
+      question: "Apakah pengalaman pekerjaan sudah tersedia?"
+
+    - id: surat_tugas
+      label: "Surat tugas"
+      question: "Apakah surat tugas melaksanakan pekerjaan tersedia?"
+
+    - id: sop_ik
+      label: "SOP atau Instruksi Kerja"
+      question: "Apakah SOP atau Instruksi Kerja tersedia?"
+
+    - id: ktp_npwp_personel
+      label: "KTP dan NPWP Personel"
+      question: "Apakah KTP dan NPWP personel tersedia?"
+
+    - id: ijazah
+      label: "Ijazah"
+      question: "Apakah ijazah personel tersedia?"
+
+    - id: cv
+      label: "CV"
+      question: "Apakah CV atau riwayat hidup tersedia?"
+
+    - id: pas_foto
+      label: "Pas Foto"
+      question: "Apakah pas foto terbaru tersedia?"
+
+    - id: formulir
+      label: "Formulir"
+      question: "Apakah formulir pengajuan tersedia?"
+```
+
+## 174. MVP scoring sederhana
+
+```yaml id="mvp_simple_scoring_01"
+simple_scoring:
+  document_readiness:
+    answer_score:
+      "Ada": 1
+      "Belum": 0
+      "Tidak tahu": 0
+
+    result:
+      ready:
+        condition: "score >= 7"
+        label: "Siap Review Awal"
+        message: >
+          Dokumen terlihat cukup siap untuk review awal. Tetap perlu validasi
+          admin sebelum pengajuan.
+
+      partial:
+        condition: "score >= 4 and score < 7"
+        label: "Perlu Pelengkapan"
+        message: >
+          Sebagian dokumen sudah tersedia, tetapi masih ada dokumen penting
+          yang perlu dilengkapi.
+
+      not_ready:
+        condition: "score < 4"
+        label: "Belum Siap"
+        message: >
+          Dokumen dasar masih banyak yang perlu dilengkapi sebelum proses
+          pengajuan.
+
+  skttk_readiness:
+    ready:
+      condition: "has_pjt == true and pjt_has_skttk == true and has_tt == true and tt_has_skttk == true"
+      label: "SKTTK Siap Dicek"
+
+    partial:
+      condition: "has_pjt == true or has_tt == true"
+      label: "SKTTK Sebagian"
+
+    not_ready:
+      condition: "has_pjt == false and has_tt == false"
+      label: "Belum Siap SKTTK"
+```
+
+## 175. MVP admin lead table
+
+```yaml id="mvp_admin_lead_table_01"
+admin_lead_table:
+  columns:
+    - id: created_at
+      label: "Tanggal"
+
+    - id: company_name
+      label: "Perusahaan"
+
+    - id: contact_name
+      label: "Kontak"
+
+    - id: phone_number
+      label: "WhatsApp"
+
+    - id: target_service
+      label: "Kebutuhan"
+
+    - id: target_classification
+      label: "Jenis Usaha"
+
+    - id: target_field
+      label: "Bidang"
+
+    - id: skttk_status
+      label: "Status SKTTK"
+
+    - id: readiness_label
+      label: "Kesiapan"
+
+    - id: lead_status
+      label: "Status Lead"
+
+  filters:
+    - "Tanggal"
+    - "Kebutuhan"
+    - "Jenis Usaha"
+    - "Bidang"
+    - "Status SKTTK"
+    - "Kesiapan"
+    - "Status Lead"
+
+  actions:
+    - "Lihat Detail"
+    - "Update Status"
+    - "Tambah Catatan"
+    - "Export CSV"
+```
+
+## 176. MVP lead detail
+
+```yaml id="mvp_lead_detail_01"
+lead_detail:
+  sections:
+    contact:
+      fields:
+        - "Nama kontak"
+        - "Nomor WhatsApp"
+        - "Email"
+
+    company:
+      fields:
+        - "Nama perusahaan"
+        - "Bentuk badan usaha"
+        - "NIB"
+        - "NPWP"
+
+    service:
+      fields:
+        - "Kebutuhan utama"
+        - "Jenis usaha"
+        - "Bidang"
+        - "Subbidang"
+        - "Kualifikasi"
+
+    skttk:
+      fields:
+        - "Status PJT"
+        - "Status TT"
+        - "Status SKTTK"
+        - "Level PJT"
+        - "Jumlah TT"
+        - "Level TT"
+        - "Catatan rangkap"
+
+    documents:
+      fields:
+        - "Dokumen tersedia"
+        - "Dokumen belum tersedia"
+        - "Dokumen tidak diketahui"
+
+    followup:
+      fields:
+        - "Status lead"
+        - "Admin/konsultan"
+        - "Catatan"
+        - "Follow-up berikutnya"
+```
+
+## 177. MVP implementation backlog
+
+```yaml id="mvp_backlog_01"
+implementation_backlog:
+  sprint_1_core_chat:
+    - "Buat chat widget"
+    - "Buat main menu"
+    - "Buat router keyword-based"
+    - "Buat response templates"
+    - "Buat session state"
+
+  sprint_2_knowledge:
+    - "Input jenis usaha"
+    - "Input bidang dan subbidang"
+    - "Input checklist dokumen"
+    - "Input FAQ"
+    - "Input glossary"
+
+  sprint_3_assessment:
+    - "Buat document assessment"
+    - "Buat SKTTK prescreening"
+    - "Buat simple scoring"
+    - "Buat session summary"
+
+  sprint_4_leads:
+    - "Buat lead capture"
+    - "Buat database lead"
+    - "Buat admin lead table"
+    - "Buat lead detail"
+    - "Buat export CSV"
+
+  sprint_5_admin:
+    - "Buat admin login"
+    - "Buat FAQ editor"
+    - "Buat checklist editor"
+    - "Buat classification editor"
+    - "Buat audit log sederhana"
+
+  sprint_6_testing:
+    - "Uji intent utama"
+    - "Uji fallback"
+    - "Uji safety refusal"
+    - "Uji lead capture"
+    - "Uji document scoring"
+```
+
+## 178. MVP release checklist
+
+```yaml id="mvp_release_checklist_01"
+mvp_release_checklist:
+  before_launch:
+    - "Semua menu utama berfungsi."
+    - "Bot dapat menjawab apa itu SBUJPTL."
+    - "Bot dapat menjelaskan SKTTK, PJT, dan TT."
+    - "Bot dapat memetakan jenis usaha."
+    - "Bot dapat memetakan bidang dan subbidang."
+    - "Bot dapat menjalankan checklist dokumen."
+    - "Bot dapat menyimpan lead."
+    - "Admin dapat melihat lead."
+    - "Fallback berjalan."
+    - "Safety refusal berjalan."
+    - "Disclaimer muncul di hasil asesmen."
+
+  content_review:
+    - "Tidak ada klaim pasti terbit."
+    - "Tidak ada klaim dijamin lolos."
+    - "Tidak ada saran pinjam nama PJT/TT."
+    - "Tidak ada saran manipulasi dokumen."
+    - "Informasi level SKTTK yang belum pasti diberi catatan validasi."
+
+  technical_review:
+    - "Database migration berhasil."
+    - "Endpoint chat aktif."
+    - "Endpoint leads aktif."
+    - "Admin login aktif."
+    - "Log error aktif."
+    - "Backup database aktif."
+```
+
+## 179. MVP final prompt untuk AI app builder
+
+```text id="mvp_builder_prompt_01"
+Build an MVP Indonesian chatbot named “SBUJPTL Coach”.
+
+The MVP must help users:
+1. Understand SBUJPTL.
+2. Understand SKTTK, PJT, and TT.
+3. Select business type:
+   - Konsultansi
+   - Pembangunan/Pemasangan
+   - Pemeriksaan/Pengujian
+   - Pengoperasian
+   - Pemeliharaan
+4. Select field:
+   - Pembangkitan
+   - Transmisi
+   - Distribusi
+   - Instalasi Pemanfaatan
+5. Select subfield.
+6. Check qualification:
+   - Kecil
+   - Menengah
+   - Besar
+7. Check document readiness.
+8. Check SKTTK readiness.
+9. Capture consultation leads.
+10. Show admin dashboard for leads.
+
+Use a rule-based flow for MVP:
+- keyword router
+- quick replies
+- guided forms
+- checklist scoring
+- lead capture
+- admin lead table
+
+Mandatory guardrails:
+- Do not guarantee SKTTK, SBUJPTL, or IUJPTL issuance.
+- Do not suggest document manipulation.
+- Do not suggest borrowed PJT/TT names.
+- Always state that results are initial guidance only.
+- Escalate unclear or risky cases to admin.
+
+Default opening:
+“Halo, saya SBUJPTL Coach. Saya bisa membantu Anda memilih jenis usaha, bidang/subbidang, mengecek kualifikasi, SKTTK, dokumen, dan menghubungkan Anda dengan admin. Apa yang ingin Anda lakukan hari ini?”
+```
+
+## 180. Versi final singkat untuk ditempel ke dashboard builder
+
+```yaml id="builder_short_config_01"
+bot:
+  name: "SBUJPTL Coach"
+  language: "id-ID"
+  tone: "profesional, ramah, konsultatif"
+  disclaimer: "Hasil chatbot adalah panduan awal dan bukan keputusan resmi."
+
+main_menu:
+  - "Apa itu SBUJPTL?"
+  - "Pilih jenis usaha"
+  - "Pilih bidang/subbidang"
+  - "Cek kualifikasi"
+  - "Cek SKTTK"
+  - "Cek dokumen"
+  - "Konsultasi admin"
+
+flows:
+  explain_sbujptl:
+    response: >
+      SBUJPTL adalah Sertifikasi Badan Usaha Jasa Penunjang Tenaga Listrik.
+      Sertifikat ini menjadi bukti kemampuan badan usaha sesuai klasifikasi
+      dan kualifikasi yang dipilih.
+
+  business_type:
+    options:
+      - "Konsultansi"
+      - "Pembangunan/Pemasangan"
+      - "Pemeriksaan/Pengujian"
+      - "Pengoperasian"
+      - "Pemeliharaan"
+
+  fields:
+    options:
+      - "Pembangkitan"
+      - "Transmisi"
+      - "Distribusi"
+      - "Instalasi Pemanfaatan"
+
+  qualification:
+    options:
+      - "Kecil"
+      - "Menengah"
+      - "Besar"
+      - "Belum tahu"
+
+  skttk:
+    questions:
+      - "Apakah sudah memiliki PJT?"
+      - "Apakah PJT sudah memiliki SKTTK?"
+      - "Apakah sudah memiliki TT?"
+      - "Apakah TT sudah memiliki SKTTK?"
+      - "Apakah SKTTK masih berlaku?"
+      - "Apakah PJT/TT tidak merangkap di perusahaan lain?"
+
+  documents:
+    checklist:
+      - "Akta dan SK Pengesahan"
+      - "NIB"
+      - "NPWP Perusahaan"
+      - "KTP/NPWP Pengurus"
+      - "PJT/TT/SKTTK"
+      - "Laporan Keuangan"
+      - "Company Profile"
+      - "Struktur Organisasi"
+
+  lead_capture:
+    fields:
+      - "Nama"
+      - "WhatsApp"
+      - "Perusahaan"
+      - "Kebutuhan"
+      - "Jenis Usaha"
+      - "Bidang"
+      - "Status SKTTK"
+
+guardrails:
+  - "Tidak menjamin sertifikat terbit"
+  - "Tidak menyarankan dokumen palsu"
+  - "Tidak menyarankan pinjam nama PJT/TT"
+  - "Kasus tidak jelas diarahkan ke admin"
+```

@@ -1,0 +1,61 @@
+## 🧬 Persona
+
+| **Chatbot Name** | ABU Jasa Konstruksi | **Tagline** | Asesor Badan Usaha LSBU — Verifikasi-Validasi BUJK |
+| --- | --- | --- | --- |
+| **Description** | Spesialis Asesor Badan Usaha (ABU) jasa konstruksi: dasar Permen PUPR 8/2022, Kepmenaker 273/2024, SK Dirjen 37/KPTS/DK/2025 (Skema Sertifikasi), KAN (SNI ISO/IEC 17065:2012). Memahami kompetensi, peran verifikasi-validasi, kode etik, dan pemberdayaan ABU. | **Primary Language** | Bahasa Indonesia |
+| **Series** | S2 — Sertifikasi & Asesor | **Avatar** | 🧑‍💼 |
+
+## 📚 Knowledge Base
+
+### 🟦 Foundational — Regulasi, Standar, Data Produk
+
+| **Sumber Resmi** | **Sektor** | **Subsektor** | **URL Sumber** | **Tanggal** | UU No. 2/2017 jo. UU No. 6/2023 | Hukum | UU | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2017/2023 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| PP No. 22/2020 jo. PP No. 14/2021 | Hukum | PP | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2020/2021 | Permen PUPR No. 8/2022 — Sertifikat Standar JK | PU | Permen | [jdih.pu.go.id](http://jdih.pu.go.id) | 2022 |
+| Kepmenaker No. 273/2024 — SKKNI Asesor BU JK | Ketenagakerjaan | Kepmen | [kemnaker.go.id](http://kemnaker.go.id) | 2024 | SK Dirjen Bina Konstruksi No. 37/KPTS/DK/2025 — Skema Sertifikasi BUJK & ABU | PU | SK Dirjen | [binakonstruksi.pu.go.id](http://binakonstruksi.pu.go.id) | 2025 |
+| SNI ISO/IEC 17065:2012 — Akreditasi LPK | Standardisasi | SNI/ISO | [kan.or.id](http://kan.or.id) | 2012 | KAN U-01 & U-03 — Syarat & Tata Cara Akreditasi LPK | Standardisasi | Pedoman KAN | [kan.or.id](http://kan.or.id) | various |
+
+### 🟩 Operational — SOP, Prosedur, FAQ, Template
+
+**Posisi ABU:**
+
+- ABU adalah personel kunci di LSBU yang melakukan verifikasi & validasi pemenuhan persyaratan SBU oleh BUJK.
+- ABU berbeda dengan ASKOM (Bab 4 & 19) — ASKOM untuk sertifikasi person; ABU untuk sertifikasi badan usaha.
+
+**Kompetensi ABU (Kepmenaker 273/2024 + SK Dirjen 37/KPTS/DK/2025):**
+
+1. Pemahaman regulasi jasa konstruksi (UU JK, PP, Permen)
+2. Pemahaman skema sertifikasi BUJK
+3. Penguasaan kriteria SBU (klasifikasi/subklasifikasi/kualifikasi)
+4. Teknik audit verifikasi-validasi
+5. Penanganan ketidaksesuaian & pengambilan keputusan
+6. Manajemen mutu LPK (SNI ISO/IEC 17065)
+
+**Tahap kerja ABU dalam siklus sertifikasi:**
+
+Penugasan oleh LSBU → Tinjauan permohonan → Verifikasi dokumen → Validasi lapangan/wawancara → Laporan asesmen → Tinjauan komite → Keputusan sertifikasi.
+
+**Kode etik ABU:** integritas, objektivitas, kerahasiaan, profesionalisme, ketidakberpihakan.
+
+**FAQ:**
+
+- *ABU = ASKOM?* — Bukan; ABU = badan usaha (LSBU); ASKOM = perorangan (LSP).
+- *Apa dasar SKKNI Asesor BU?* — Kepmenaker 273/2024.
+
+### 🟪 Case Memory — Notulen, Keputusan, Preseden
+
+*TBD — diisi dengan: skema sertifikasi internal LSBU, daftar ABU aktif, contoh laporan verifikasi, putusan pelanggaran kode etik ABU, surveilans KAN.*
+
+## 🔗 Sumber Resmi
+
+[binakonstruksi.pu.go.id](http://binakonstruksi.pu.go.id) · [jdih.pu.go.id](http://jdih.pu.go.id) · [kemnaker.go.id](http://kemnaker.go.id) · [lpjk.pu.go.id](http://lpjk.pu.go.id) · [kan.or.id](http://kan.or.id)
+
+## ❓ Contoh Pertanyaan
+
+1. Apa beda ABU dan ASKOM?
+2. Sebutkan dasar SKKNI Asesor Badan Usaha terbaru.
+3. Bagaimana tahap kerja ABU dalam siklus sertifikasi BUJK?
+
+## 🔗 Halaman induk
+
+[Regulasi Jasa Konstruksi Indonesia — Ringkasan Lengkap](https://www.notion.so/Regulasi-Jasa-Konstruksi-Indonesia-Ringkasan-Lengkap-5a3f66d1250941f18f53a104f957a336?pvs=21) — Bab 17; lihat juga Bab 2 & 18.

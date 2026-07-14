@@ -1,0 +1,1407 @@
+Saya lanjutkan bagian chatbot yang sebelumnya terpotong di Unit 4, lalu menambahkan komponen produksi yang masih perlu: materi unit 4–9 lengkap, quiz bank per unit, flow remedial, dialog contoh, format import builder, dan checklist QA pra-launch.
+AQ. (lanjutan) Database Materi Ringkas Per Unit
+unit_materials:
+  unit_4:
+    code: "F.410100.004.01"
+    title: "Rancang Bangun Konstruksi Berdasarkan Desain Arsitektur"
+    theory: |
+      Unit ini membahas kemampuan menerjemahkan desain arsitektur menjadi konsep rancang bangun konstruksi.
+      Peserta harus mampu membaca gambar arsitektur, mengidentifikasi kebutuhan pemilik, menentukan sistem struktur, menetapkan grid kolom-balok-pelat, menghitung beban (mati, hidup, angin, gempa), memodelkan struktur, memeriksa deformasi dan fleksibilitas, serta membuat gambar desain dan gambar detail.
+    practice: |
+      Contoh praktik:
+      Peserta menerima denah arsitektur gedung kantor 5 lantai. Peserta diminta menentukan sistem struktur, menyusun grid, mengidentifikasi beban utama, menetapkan dimensi elemen struktur awal, dan membuat daftar gambar desain yang diperlukan.
+    evidence:
+      - "Konsep sistem struktur"
+      - "Sketsa grid struktur"
+      - "Daftar asumsi desain"
+      - "Gambar draft konstruksi"
+      - "Hasil perhitungan awal"
+      - "Daftar gambar detail"
+
+  unit_5:
+    code: "F.410100.005.01"
+    title: "Persyaratan Teknis Konstruksi Bangunan Gedung"
+    theory: |
+      Unit ini membahas penyusunan persyaratan teknis dan spesifikasi pekerjaan konstruksi.
+      Peserta harus mampu menginventarisasi standar mutu pekerjaan dan bahan, memeriksa kelengkapan standar nasional/internasional yang relevan, mengevaluasi gambar rencana dan gambar kerja, serta menyusun spesifikasi teknis untuk dokumen lelang dan pelaksanaan.
+    practice: |
+      Contoh praktik:
+      Peserta menyusun spesifikasi teknis pekerjaan beton bertulang yang memuat mutu beton, mutu baja tulangan, toleransi pekerjaan, metode pengujian, kriteria penerimaan, dan dokumen inspeksi.
+    evidence:
+      - "Daftar standar acuan"
+      - "Evaluasi gambar rencana"
+      - "Rekomendasi perbaikan gambar"
+      - "Draft spesifikasi teknis"
+      - "Format kriteria penerimaan"
+
+  unit_6:
+    code: "F.410100.006.01"
+    title: "Metode Kerja Pekerjaan Konstruksi Terkait Rekayasa Desain"
+    theory: |
+      Unit ini membahas penyusunan alternatif metode kerja yang sesuai dengan desain struktur dan kondisi lapangan.
+      Peserta harus mampu menginventarisasi gambar desain, memeriksa kondisi topografi, geologi, dan lingkungan, menyusun alternatif metode kerja berdasarkan biaya, mutu, dan waktu, serta menentukan peralatan, bahan, tenaga kerja, dan durasi.
+    practice: |
+      Contoh praktik:
+      Peserta membandingkan dua alternatif metode pekerjaan struktur atas: cor di tempat konvensional vs. sistem semi-pracetak. Peserta menyusun matriks pemilihan dengan parameter biaya, mutu, waktu, risiko K3, ketersediaan alat, dan dampak terhadap jadwal.
+    evidence:
+      - "Inventarisasi gambar desain"
+      - "Analisis kondisi lapangan"
+      - "Matriks alternatif metode kerja (BMW)"
+      - "Urutan kerja terpilih"
+      - "Daftar peralatan, bahan, tenaga, durasi"
+
+  unit_7:
+    code: "F.410100.007.01"
+    title: "Standar Quality Control Hasil Rekayasa Konstruksi"
+    theory: |
+      Unit ini membahas penyusunan standar quality control hasil rekayasa konstruksi.
+      Peserta harus mampu menyiapkan dokumen QC, mengidentifikasi target mutu sesuai spesifikasi teknis, menyusun SOP pemeriksaan mutu, menetapkan skema inspeksi dan pengujian, serta mendokumentasikan hasil pemeriksaan.
+    practice: |
+      Contoh praktik:
+      Peserta menyusun rencana QC untuk pekerjaan struktur beton: item pemeriksaan, standar rujukan, metode inspeksi, frekuensi pemeriksaan, kriteria penerimaan, penanggung jawab, dan bukti dokumen yang harus dikumpulkan.
+    evidence:
+      - "QC plan"
+      - "Inspection & Test Plan (ITP)"
+      - "Checklist mutu per item pekerjaan"
+      - "Format laporan hasil inspeksi"
+      - "Format non-conformance report"
+
+  unit_8:
+    code: "F.410100.008.01"
+    title: "Rekayasa Ulang Konstruksi"
+    theory: |
+      Unit ini membahas pelaksanaan rekayasa ulang konstruksi apabila terjadi kendala teknis di lapangan.
+      Peserta harus mampu menginventarisasi kendala, mengidentifikasi penyebab, melakukan kajian teknologi-ekonomi-lingkungan, menyusun alternatif solusi, dan menetapkan rancangan rekayasa ulang berdasarkan hasil kajian.
+    practice: |
+      Contoh praktik:
+      Pada proyek gedung bertingkat ditemukan daya dukung tanah aktual lebih rendah dari laporan awal. Peserta menginventarisasi kendala, menentukan data tambahan, menyusun alternatif solusi fondasi, menilai dampak biaya-mutu-waktu-K3L, dan menyusun rekomendasi rekayasa ulang.
+    evidence:
+      - "Laporan kendala lapangan"
+      - "Analisis penyebab"
+      - "Kajian teknologi/ekonomi/lingkungan"
+      - "Matriks alternatif solusi"
+      - "Rekomendasi redesign + persetujuan pihak terkait"
+
+  unit_9:
+    code: "F.410100.009.01"
+    title: "Laporan Pekerjaan Rekayasa Konstruksi Bangunan Gedung"
+    theory: |
+      Unit ini membahas penyusunan laporan akhir pekerjaan rekayasa konstruksi.
+      Peserta harus mampu mengumpulkan data, memilih substansi laporan, menyusun kerangka, memeriksa kesesuaian draft terhadap rekomendasi final perencanaan teknis, dan menyampaikan laporan kepada pihak terkait.
+    practice: |
+      Contoh praktik:
+      Peserta menyusun laporan akhir berstruktur: ringkasan eksekutif, dasar pekerjaan, data awal, evaluasi site, konsep struktur, analisis, gambar, spesifikasi, metode kerja, QC, risiko, rekayasa ulang, kesimpulan, dan lampiran.
+    evidence:
+      - "Kerangka laporan akhir"
+      - "Laporan akhir final"
+      - "Berita acara serah terima dokumen"
+      - "Ringkasan eksekutif"
+      - "Lampiran teknis terindeks"
+​
+AR. Bank Soal Lengkap Per Unit (Format Import)
+{
+  "quiz_bank_full": [
+    {
+      "id": "RG-101", "unit": "F.410100.001.01", "difficulty": "mudah",
+      "question": "Hierarki peraturan paling tinggi yang mengatur pekerjaan konstruksi di Indonesia adalah:",
+      "options": { "A": "SOP perusahaan", "B": "Undang-Undang", "C": "Notulen rapat", "D": "Brosur produk" },
+      "answer": "B",
+      "feedback": "UU berada di atas PP, Permen, SNI, dan dokumen kontrak. Identifikasi hierarki adalah langkah pertama unit F.410100.001.01."
+    },
+    {
+      "id": "RG-102", "unit": "F.410100.001.01", "difficulty": "sedang",
+      "question": "Urutan penyusunan program pengendalian risiko K3L yang benar adalah:",
+      "options": {
+        "A": "Identifikasi bahaya → penilaian risiko → pengendalian → monitoring",
+        "B": "Pengendalian → identifikasi → monitoring → penilaian",
+        "C": "Monitoring → pengendalian → identifikasi → penilaian",
+        "D": "Penilaian → monitoring → pengendalian → identifikasi"
+      },
+      "answer": "A",
+      "feedback": "Siklus HIRARC: Hazard Identification, Risk Assessment, Risk Control, lalu monitoring berkelanjutan."
+    },
+    {
+      "id": "RG-201", "unit": "F.410100.002.01", "difficulty": "mudah",
+      "question": "RFI (Request for Information) digunakan untuk:",
+      "options": {
+        "A": "Meminta klarifikasi teknis terhadap dokumen kontrak/gambar",
+        "B": "Mengganti kontraktor",
+        "C": "Memesan material",
+        "D": "Mencetak laporan akhir"
+      },
+      "answer": "A",
+      "feedback": "RFI adalah alat komunikasi formal untuk meminta klarifikasi teknis dan harus didokumentasikan."
+    },
+    {
+      "id": "RG-202", "unit": "F.410100.002.01", "difficulty": "sedang",
+      "question": "Risiko utama jika instruksi kerja tidak diverifikasi terhadap kondisi lapangan adalah:",
+      "options": {
+        "A": "Kesalahan pelaksanaan, rework, dan potensi kecelakaan kerja",
+        "B": "Laporan menjadi berwarna",
+        "C": "Jadwal rapat berkurang",
+        "D": "Logo proyek berubah"
+      },
+      "answer": "A",
+      "feedback": "Verifikasi instruksi terhadap kondisi lapangan mencegah rework, klaim, dan kecelakaan kerja."
+    },
+    {
+      "id": "RG-301", "unit": "F.410100.003.01", "difficulty": "sedang",
+      "question": "Pada lapisan tanah lunak dengan muka air tinggi, alternatif fondasi yang umum dipertimbangkan adalah:",
+      "options": {
+        "A": "Tiang pancang atau tiang bor",
+        "B": "Fondasi batu kali dangkal",
+        "C": "Fondasi umpak",
+        "D": "Tidak perlu fondasi"
+      },
+      "answer": "A",
+      "feedback": "Tanah lunak memerlukan transfer beban ke lapisan keras melalui tiang dalam (pancang/bor)."
+    },
+    {
+      "id": "RG-302", "unit": "F.410100.003.01", "difficulty": "sulit",
+      "question": "Data gempa wilayah digunakan terutama untuk menetapkan:",
+      "options": {
+        "A": "Kategori desain seismik dan parameter beban gempa rencana",
+        "B": "Warna lantai gedung",
+        "C": "Jadwal cuti tim proyek",
+        "D": "Logo arsitek"
+      },
+      "answer": "A",
+      "feedback": "Data gempa menentukan KDS, Ss, S1, dan respons spektrum desain sesuai SNI gempa."
+    },
+    {
+      "id": "RG-401", "unit": "F.410100.004.01", "difficulty": "sedang",
+      "question": "Pemeriksaan deformasi struktur (drift, defleksi) bertujuan untuk:",
+      "options": {
+        "A": "Memastikan kenyamanan layan dan keamanan struktur",
+        "B": "Mempercantik fasad",
+        "C": "Mengurangi jumlah gambar",
+        "D": "Mengganti perhitungan beban"
+      },
+      "answer": "A",
+      "feedback": "Drift dan defleksi dibatasi agar memenuhi serviceability dan tidak merusak elemen non-struktur."
+    },
+    {
+      "id": "RG-402", "unit": "F.410100.004.01", "difficulty": "sulit",
+      "question": "Pada gedung bertingkat tinggi di wilayah gempa, sistem struktur yang umum dipilih untuk meningkatkan kekakuan lateral adalah:",
+      "options": {
+        "A": "Sistem ganda rangka pemikul momen + dinding geser",
+        "B": "Rangka kayu tunggal",
+        "C": "Tanpa pengaku lateral",
+        "D": "Hanya kolom tanpa balok"
+      },
+      "answer": "A",
+      "feedback": "Sistem ganda (dual system) memberi kekakuan dan daktilitas yang baik untuk gedung tinggi di zona gempa."
+    },
+    {
+      "id": "RG-501", "unit": "F.410100.005.01", "difficulty": "sedang",
+      "question": "Spesifikasi teknis pekerjaan beton minimal harus memuat:",
+      "options": {
+        "A": "Mutu beton, mutu baja, toleransi, metode uji, kriteria penerimaan",
+        "B": "Warna sampul",
+        "C": "Daftar tamu rapat",
+        "D": "Logo konsultan"
+      },
+      "answer": "A",
+      "feedback": "Spesifikasi teknis harus operasional: dapat dikerjakan, diuji, dan diterima secara objektif."
+    },
+    {
+      "id": "RG-601", "unit": "F.410100.006.01", "difficulty": "sedang",
+      "question": "Output utama unit metode kerja adalah:",
+      "options": {
+        "A": "Metode kerja terpilih beserta dokumentasinya",
+        "B": "Daftar undangan rapat",
+        "C": "Foto kantor",
+        "D": "Logo proyek"
+      },
+      "answer": "A",
+      "feedback": "Metode kerja terpilih harus terdokumentasi untuk dokumen lelang/pelaksanaan."
+    },
+    {
+      "id": "RG-701", "unit": "F.410100.007.01", "difficulty": "sedang",
+      "question": "Inspection & Test Plan (ITP) memuat:",
+      "options": {
+        "A": "Item pekerjaan, standar acuan, metode pemeriksaan, frekuensi, kriteria penerimaan, PIC",
+        "B": "Daftar makan siang",
+        "C": "Warna helm",
+        "D": "Nama file gambar"
+      },
+      "answer": "A",
+      "feedback": "ITP adalah jantung QC plan dan menjadi dasar pelaksanaan inspeksi."
+    },
+    {
+      "id": "RG-801", "unit": "F.410100.008.01", "difficulty": "sulit",
+      "question": "Saat data tanah aktual berbeda dari laporan awal, langkah pertama rekayasa ulang adalah:",
+      "options": {
+        "A": "Inventarisasi kendala dan verifikasi data tambahan",
+        "B": "Langsung mengecor fondasi",
+        "C": "Mengabaikan data baru",
+        "D": "Mengganti pemilik proyek"
+      },
+      "answer": "A",
+      "feedback": "Rekayasa ulang selalu diawali inventarisasi kendala dan verifikasi data sebelum kajian alternatif."
+    },
+    {
+      "id": "RG-901", "unit": "F.410100.009.01", "difficulty": "sedang",
+      "question": "Struktur laporan akhir rekayasa konstruksi yang baik diawali dengan:",
+      "options": {
+        "A": "Ringkasan eksekutif dan dasar pekerjaan",
+        "B": "Lampiran tanpa isi",
+        "C": "Halaman warna",
+        "D": "Daftar tamu undangan"
+      },
+      "answer": "A",
+      "feedback": "Ringkasan eksekutif memberi konteks cepat bagi pembaca eksekutif/pemilik."
+    }
+  ]
+}
+​
+AS. Flow Remedial Berdasarkan Skor
+remedial_flow:
+  trigger_after: "quiz_result"
+  rules:
+    - condition: "score_pct < 50"
+      action: "remedial_intensive"
+      message: |
+        Skor Anda menunjukkan perlu pendalaman menyeluruh.
+        Rekomendasi 3 langkah:
+        1. Baca ulang ringkasan teori unit {weak_unit}.
+        2. Kerjakan ulang latihan mudah unit yang sama.
+        3. Diskusikan dengan instruktur melalui menu 8.
+        Mulai dari mana? A) Baca teori, B) Soal mudah, C) Hubungi instruktur.
+    - condition: "score_pct >= 50 and score_pct < 70"
+      action: "remedial_targeted"
+      message: |
+        Skor Anda cukup, tetapi ada beberapa konsep yang perlu diperkuat.
+        Unit yang perlu diperdalam: {weak_units_list}.
+        Rekomendasi:
+        1. Tinjau contoh praktik unit tersebut.
+        2. Kerjakan soal sedang.
+        3. Lanjutkan ke studi kasus mini.
+        Mulai dari mana? A) Contoh praktik, B) Soal sedang, C) Studi kasus.
+    - condition: "score_pct >= 70 and score_pct < 85"
+      action: "advance_case"
+      message: |
+        Skor Anda baik. Saatnya mengasah kemampuan terapan.
+        Rekomendasi:
+        1. Kerjakan studi kasus terintegrasi.
+        2. Latihan wawancara asesor.
+        3. Susun draft portofolio.
+    - condition: "score_pct >= 85"
+      action: "advance_portfolio"
+      message: |
+        Skor Anda sangat baik.
+        Fokus akhir Anda:
+        1. Lengkapi portofolio (CV, gambar, spesifikasi, metode, QC, laporan).
+        2. Latih penjelasan lisan pengalaman proyek.
+        3. Simulasi asesmen 20 soal sebagai pemanasan.
+
+  weak_unit_detector:
+    method: "tally_per_unit"
+    threshold_correct_pct: 60
+    output_variable: "weak_units_list"
+​
+AT. Dialog Contoh End-to-End (Skenario Lengkap)
+dialog_examples:
+  - id: "DLG-01"
+    title: "Peserta baru, ingin orientasi sampai latihan"
+    turns:
+      - user: "halo"
+        bot: |
+          Halo, saya RekayasaGedung Bot.
+          Pilih menu: 1) Orientasi SKKNI 2) Belajar Unit 3) Latihan Soal 4) Studi Kasus 5) Portofolio 6) Simulasi Asesor 7) Istilah 8) Admin.
+      - user: "1"
+        bot: |
+          SKKNI 106-2015 adalah standar kompetensi nasional untuk Ahli Rekayasa Konstruksi Bangunan Gedung.
+          Ada 9 unit kompetensi yang dinilai dari pengetahuan, keterampilan, dan sikap kerja.
+          Mau lihat daftar unit? (YA / MENU)
+      - user: "ya"
+        bot: |
+          1. Peraturan & SMK3L
+          2. Komunikasi Kerja
+          3. Evaluasi Site
+          4. Rancang Bangun
+          5. Persyaratan Teknis
+          6. Metode Kerja
+          7. Quality Control
+          8. Rekayasa Ulang
+          9. Laporan Akhir
+          Ketik nomor unit untuk mulai belajar.
+      - user: "4"
+        bot: |
+          Anda memilih Unit 4: Rancang Bangun Konstruksi.
+          Pilih: A) Teori B) Praktik C) Bukti D) Latihan Soal E) Studi Kasus F) Menu.
+      - user: "D"
+        bot: |
+          Soal 1 (Unit 4):
+          Pemeriksaan deformasi struktur bertujuan untuk:
+          A. Memastikan kenyamanan layan & keamanan struktur
+          B. Mempercantik fasad
+          C. Mengurangi jumlah gambar
+          D. Mengganti perhitungan beban
+      - user: "A"
+        bot: |
+          Benar.
+          Pembahasan: Drift & defleksi dibatasi agar memenuhi serviceability dan tidak merusak elemen non-struktur.
+          Skor: 1/1. Lanjut soal berikutnya? (YA/SELESAI)
+
+  - id: "DLG-02"
+    title: "Peserta menanyakan hal di luar konteks"
+    turns:
+      - user: "rekomendasi laptop terbaik"
+        bot: |
+          Saya fokus membantu persiapan Bimtek & Uji Kompetensi Ahli Madya Rekayasa Konstruksi Bangunan Gedung (SKKNI 106-2015).
+          Ingin lanjut ke salah satu menu ini?
+          • Belajar Unit • Latihan Soal • Studi Kasus • Portofolio
+
+  - id: "DLG-03"
+    title: "Peserta meminta keputusan kompeten"
+    turns:
+      - user: "saya sudah jawab semua, apakah saya kompeten?"
+        bot: |
+          Keputusan kompeten/belum kompeten hanya dapat diberikan oleh asesor resmi melalui proses uji kompetensi.
+          Saya dapat membantu Anda:
+          1. Memetakan kesiapan per unit.
+          2. Menyusun checklist portofolio.
+          3. Latihan simulasi wawancara asesor.
+          Mulai dari mana?
+
+  - id: "DLG-04"
+    title: "Pertanyaan teknis butuh data proyek"
+    turns:
+      - user: "fondasi apa yang cocok untuk gedung saya?"
+        bot: |
+          Untuk merekomendasikan sistem fondasi, saya butuh data proyek minimal:
+          1. Fungsi gedung & jumlah lantai
+          2. Luas bangunan & beban perkiraan
+          3. Hasil penyelidikan tanah (N-SPT, jenis lapisan, MAT)
+          4. Lokasi & kategori gempa wilayah
+          5. Batasan lahan & akses alat berat
+          Silakan isi data tersebut, lalu saya bantu petakan alternatif fondasinya.
+​
+AU. Konfigurasi Variabel Sesi & Profil Peserta
+session_variables:
+  user_profile:
+    name: null
+    institution: null
+    role: "peserta"
+    target_scheme: "Ahli Madya Rekayasa Konstruksi Bangunan Gedung"
+    experience_years: null
+    weak_units: []
+    strong_units: []
+  learning_state:
+    last_unit_studied: null
+    last_quiz_score: null
+    cumulative_score: 0
+    quiz_attempts: 0
+    case_studies_completed: []
+    interview_sessions_completed: 0
+    portfolio_progress_pct: 0
+  flags:
+    has_seen_orientation: false
+    has_completed_quick_quiz: false
+    has_completed_assessment_simulation: false
+    portfolio_checklist_acknowledged: false
+
+persistence:
+  store: "user_id"
+  ttl_days: 90
+  reset_command: "reset progress"
+  export_command: "ekspor progress"
+​
+AV. Format Import Final untuk Builder
+{
+  "bot": {
+    "id": "rekayasa_gedung_skkni_106_2015",
+    "name": "RekayasaGedung Bot",
+    "version": "1.0.0",
+    "language": "id-ID",
+    "scheme": "Ahli Madya Rekayasa Konstruksi Bangunan Gedung",
+    "standard": "SKKNI 106-2015",
+    "level": "Ahli / Level 8"
+  },
+  "system_prompt_ref": "system_prompt.txt",
+  "knowledge_base": [
+    "kb_skkni_106_2015.json",
+    "kb_unit_materials.json",
+    "kb_glossary.json"
+  ],
+  "intents": "intents.yaml",
+  "entities": "entities.yaml",
+  "responses": "responses.yaml",
+  "flows": [
+    "flow_welcome.yaml",
+    "flow_orientasi.yaml",
+    "flow_belajar_unit.yaml",
+    "flow_quiz.yaml",
+    "flow_remedial.yaml",
+    "flow_studi_kasus.yaml",
+    "flow_simulasi_asesor.yaml",
+    "flow_portofolio.yaml",
+    "flow_istilah.yaml",
+    "flow_handoff.yaml"
+  ],
+  "quiz_bank": "quiz_bank_full.json",
+  "case_studies": "case_studies.yaml",
+  "guardrails": "guardrails.yaml",
+  "analytics": "analytics.yaml",
+  "deployment": {
+    "channels": ["website", "WhatsApp Business", "LMS embed", "Telegram"],
+    "human_handoff": true,
+    "progress_tracking": true,
+    "admin_dashboard": true,
+    "default_reply_mode": "hybrid"
+  }
+}
+​
+AW. Glossary / Istilah Teknis untuk Intent ask_term
+glossary:
+  - term: "SMK3L"
+    definition: "Sistem Manajemen Keselamatan, Kesehatan Kerja, dan Lingkungan; sistem terpadu untuk mengendalikan risiko K3 dan pencemaran lingkungan dalam pekerjaan konstruksi."
+  - term: "AMDAL"
+    definition: "Analisis Mengenai Dampak Lingkungan; kajian dampak suatu rencana usaha/kegiatan terhadap lingkungan hidup."
+  - term: "RKS"
+    definition: "Rencana Kerja dan Syarat-syarat; dokumen yang memuat persyaratan administratif dan teknis pekerjaan."
+  - term: "QC Plan"
+    definition: "Dokumen perencanaan pengendalian mutu yang memuat target mutu, metode inspeksi, frekuensi, kriteria penerimaan, dan PIC."
+  - term: "ITP"
+    definition: "Inspection & Test Plan; rencana inspeksi dan pengujian untuk setiap item pekerjaan beserta titik tahanan (hold/witness point)."
+  - term: "Rekayasa Ulang"
+    definition: "Proses menyusun ulang desain atau metode kerja untuk menanggulangi kendala teknis di lapangan berdasarkan kajian teknologi, ekonomi, dan lingkungan."
+  - term: "BMW"
+    definition: "Singkatan kerja untuk Biaya, Mutu, Waktu; tiga aspek utama dalam pemilihan metode kerja konstruksi."
+  - term: "Drift"
+    definition: "Simpangan antar lantai akibat beban lateral; dibatasi oleh standar untuk menjaga keamanan dan kenyamanan layan."
+  - term: "Daktilitas"
+    definition: "Kemampuan struktur menahan deformasi inelastis tanpa runtuh; penting untuk struktur tahan gempa."
+  - term: "KDS"
+    definition: "Kategori Desain Seismik; klasifikasi struktur berdasarkan tingkat risiko gempa untuk menentukan persyaratan desain."
+  - term: "TUK"
+    definition: "Tempat Uji Kompetensi; lokasi resmi pelaksanaan asesmen kompetensi yang terverifikasi."
+  - term: "Portofolio Asesmen"
+    definition: "Kumpulan bukti kompetensi (dokumen, gambar, laporan) yang menunjukkan pengalaman peserta sesuai unit SKKNI."
+​
+AX. Checklist QA Pra-Launch Chatbot
+pre_launch_qa:
+  content:
+    - "Semua 9 unit punya: theory, practice, evidence."
+    - "Bank soal minimal 10 per unit (target 15)."
+    - "Minimal 3 studi kasus berbeda level kesulitan."
+    - "Glossary minimal 20 istilah."
+    - "Dialog contoh untuk 5 skenario inti diuji."
+  flow:
+    - "Setiap menu utama (1–8) dapat dijangkau dari welcome."
+    - "Setiap leaf node punya jalur kembali ke menu utama."
+    - "Fallback memanggil ulang menu, bukan loop kosong."
+    - "Routing nomor & huruf konsisten (1–9, A–F)."
+  guardrail:
+    - "Bot menolak klaim 'pasti lulus' dengan disclaimer asesor."
+    - "Bot meminta data tambahan untuk pertanyaan teknis spesifik proyek."
+    - "Bot mengarahkan keluar konteks ke menu utama."
+    - "Bot tidak memberikan keputusan kompeten/tidak kompeten."
+  analytics:
+    - "Quiz score tersimpan per user_id."
+    - "Weak unit terdeteksi otomatis."
+    - "Fallback rate dipantau (<10% target)."
+    - "Handoff admin tercatat dengan field lengkap."
+  ux:
+    - "Pesan welcome ≤ 80 kata di mobile."
+    - "Tabel/long text dipotong dengan 'lanjut?' prompt."
+    - "Quick reply tersedia di kanal yang mendukung (WA, Telegram)."
+    - "Bahasa Indonesia formal, konsisten, tanpa jargon yang tidak dijelaskan."
+  security_privacy:
+    - "Data peserta (nama, instansi, kontak) hanya disimpan setelah persetujuan."
+    - "TTL data sesi ≤ 90 hari atau sesuai kebijakan lembaga."
+    - "Tidak menyimpan dokumen proyek nyata di sesi chatbot."
+    - "Tersedia perintah 'reset progress' & 'ekspor progress'."
+​
+AY. Roadmap Rilis Chatbot (4 Sprint)
+Sprint
+Fokus
+Deliverable
+Definition of Done
+Sprint 1 (2 minggu)
+Foundation
+System prompt, KB unit 1–9, intent inti, flow welcome–menu–unit
+Peserta dapat melihat menu & belajar teori 9 unit
+Sprint 2 (2 minggu)
+Quiz engine
+Bank soal 9 unit, flow quiz, scoring, remedial
+Peserta dapat ambil 4 mode kuis & dapat umpan balik
+Sprint 3 (2 minggu)
+Asesmen terapan
+Studi kasus, simulasi wawancara, portofolio checklist
+Peserta dapat berlatih kasus + wawancara end-to-end
+Sprint 4 (1–2 minggu)
+Hardening
+Guardrail, analytics, handoff admin, QA pra-launch
+Lulus checklist QA, siap deploy ke kanal target
+AZ. Catatan Penutup
+Konfigurasi di atas sudah cukup untuk dijadikan paket lengkap chatbot RekayasaGedung Bot yang siap dipindahkan ke builder. Prioritas implementasi:
+Wajib di Sprint 1: system prompt, KB 9 unit, intent inti, flow welcome & belajar unit, guardrail dasar.
+Wajib di Sprint 2: quiz engine + bank soal + remedial.
+Pengayaan Sprint 3: studi kasus, wawancara asesor, portofolio.
+Sebelum launch: jalankan checklist QA AX dan testing skenario AL.
+Jika Anda ingin, saya bisa konsolidasikan seluruh materi (Bagian 1 Modul Bimtek + Bagian 2 Chatbot lengkap) menjadi satu page Notion terstruktur di workspace Anda — misalnya Chatbot RekayasaGedung — SKKNI 106-2015 (Bimtek + Builder Config) — dengan sub-page per komponen (KB, intents, flows, quiz bank, studi kasus, guardrail). Cukup beri tahu apakah ingin dibuatkan halamannya, dan di parent mana sebaiknya ditempatkan.
+lanjut
+8:53 AM
+Thought
+Saya lanjutkan dengan komponen yang melengkapi chatbot menjadi sistem multi-agent (mengikuti pola OpenClaw/Gustafta yang sudah Anda gunakan), plus instrumen asesmen mandiri, bank soal wawancara asesor lengkap, generator dokumen, dan integrasi LMS.
+BA. Arsitektur Multi-Agent RekayasaGedung Bot
+Mengadopsi pola orchestrator + agen spesialis seperti SMAP-ORCHESTRATOR pada chatbot SMAP Anda.
+multi_agent_architecture:
+  orchestrator:
+    id: "RG-ORCHESTRATOR"
+    role: "Penerima pesan utama, klasifikasi intent, routing ke agen spesialis, konsolidasi jawaban."
+    responsibilities:
+      - "Identifikasi unit kompetensi yang relevan dengan pertanyaan."
+      - "Menentukan agen spesialis yang dipanggil."
+      - "Menggabungkan respons multi-agen menjadi satu jawaban koheren."
+      - "Menjaga konteks sesi dan profil peserta."
+      - "Menerapkan guardrail global."
+
+  specialists:
+    - id: "RG-EDU"
+      domain: "Edukasi & teori unit kompetensi"
+      handles: ["ask_unit_detail", "ask_training_material", "ask_practical_example"]
+      knowledge: "unit_materials (unit 1–9)"
+
+    - id: "RG-QUIZ"
+      domain: "Latihan soal & remedial"
+      handles: ["start_quiz", "answer_quiz", "remedial_flow"]
+      knowledge: "quiz_bank_full + scoring rules"
+
+    - id: "RG-CASE"
+      domain: "Studi kasus proyek gedung"
+      handles: ["start_case_study", "case stage feedback"]
+      knowledge: "case_studies + rubrik"
+
+    - id: "RG-ASESOR"
+      domain: "Simulasi wawancara asesor"
+      handles: ["assessor_interview", "evaluate_oral_answer"]
+      knowledge: "interview_question_bank + rubrik lisan"
+
+    - id: "RG-PORTO"
+      domain: "Penyusunan portofolio asesmen"
+      handles: ["portfolio_checklist", "evidence mapping"]
+      knowledge: "evidence per unit + format dokumen"
+
+    - id: "RG-DOC"
+      domain: "Generator dokumen teknis (SOP/Spesifikasi/Metode/QC/Laporan)"
+      handles: ["generate_document"]
+      knowledge: "template dokumen + standar acuan"
+
+    - id: "RG-REG"
+      domain: "Regulasi konstruksi & K3L"
+      handles: ["ask_regulation", "ask_term"]
+      knowledge: "glossary + hierarki regulasi konstruksi"
+
+    - id: "RG-PROGRESS"
+      domain: "Pelacakan progres peserta & rekomendasi belajar"
+      handles: ["show_progress", "recommend_next_step"]
+      knowledge: "session_variables + analytics"
+
+  routing_rules:
+    - if: "intent in [ask_unit_detail, ask_training_material]"
+      route: "RG-EDU"
+    - if: "intent in [start_quiz, answer_quiz]"
+      route: "RG-QUIZ"
+    - if: "intent == start_case_study"
+      route: "RG-CASE"
+    - if: "intent == assessor_interview"
+      route: "RG-ASESOR"
+    - if: "intent == portfolio_checklist"
+      route: "RG-PORTO"
+    - if: "intent == generate_document"
+      route: "RG-DOC"
+    - if: "intent in [ask_regulation, ask_term]"
+      route: "RG-REG"
+    - if: "intent in [show_progress, recommend_next_step]"
+      route: "RG-PROGRESS"
+    - default: "RG-ORCHESTRATOR fallback"
+
+  composition_rules:
+    - "Maksimal 2 agen dipanggil paralel per turn."
+    - "Orchestrator wajib menyertakan disclaimer asesor jika output menyentuh keputusan kompetensi."
+    - "Setiap respons agen ditandai sumber agen-nya pada log analytics."
+​
+Diagram Routing
+flowchart TD
+    U["Peserta"] --> ORC["RG-ORCHESTRATOR"]
+    ORC -->|edukasi| EDU["RG-EDU"]
+    ORC -->|kuis| QZ["RG-QUIZ"]
+    ORC -->|studi kasus| CS["RG-CASE"]
+    ORC -->|wawancara| AS["RG-ASESOR"]
+    ORC -->|portofolio| PT["RG-PORTO"]
+    ORC -->|generator dokumen| DC["RG-DOC"]
+    ORC -->|regulasi/istilah| RG["RG-REG"]
+    ORC -->|progres| PR["RG-PROGRESS"]
+    EDU --> KB1["KB Unit 1-9"]
+    QZ --> KB2["Quiz Bank"]
+    CS --> KB3["Case Studies"]
+    AS --> KB4["Interview Bank"]
+    PT --> KB5["Evidence Map"]
+    DC --> KB6["Template Docs"]
+    RG --> KB7["Glossary + Regulasi"]
+    PR --> KB8["Session Vars"]
+Peserta
+
+RG-ORCHESTRATOR
+
+RG-EDU
+
+RG-QUIZ
+
+RG-CASE
+
+RG-ASESOR
+
+RG-PORTO
+
+RG-DOC
+
+RG-REG
+
+RG-PROGRESS
+
+KB Unit 1-9
+
+Quiz Bank
+
+Case Studies
+
+Interview Bank
+
+Evidence Map
+
+Template Docs
+
+Glossary + Regulasi
+
+Session Vars
+
+edukasi
+
+kuis
+
+studi kasus
+
+wawancara
+
+portofolio
+
+generator dokumen
+
+regulasi/istilah
+
+progres
+
+​
+BB. System Prompt Per Agen Spesialis
+system_prompts:
+  RG-ORCHESTRATOR: |
+    Anda adalah orkestrator utama RekayasaGedung Bot.
+    Tugas:
+    1. Klasifikasikan pesan pengguna ke salah satu intent yang dikenali.
+    2. Tentukan agen spesialis yang menjawab.
+    3. Jika pesan ambigu, minta klarifikasi singkat dengan menawarkan 2–4 opsi.
+    4. Konsolidasikan respons agen spesialis menjadi satu jawaban yang koheren, ringkas, dan profesional.
+    5. Tambahkan disclaimer asesor saat dibutuhkan.
+    6. Tidak menjawab konten teknis sendiri jika ada agen spesialis yang lebih tepat.
+    Bahasa: Indonesia formal, ramah, jelas.
+
+  RG-EDU: |
+    Anda adalah agen edukasi unit kompetensi SKKNI 106-2015.
+    Setiap jawaban harus:
+    - Menyebut kode unit yang relevan.
+    - Memuat tujuan unit, materi inti, contoh praktik, dan bukti kompetensi.
+    - Menggunakan struktur: paragraf singkat → poin bernomor → contoh.
+    Jangan memberi keputusan kompeten/tidak kompeten.
+
+  RG-QUIZ: |
+    Anda adalah agen latihan soal & remedial.
+    Setiap soal harus:
+    - Memiliki kode unit, tingkat kesulitan, 4 opsi, jawaban benar, pembahasan.
+    - Pembahasan menjelaskan alasan jawaban benar dan kesalahan jawaban populer.
+    Setelah kuis selesai, panggil remedial_flow berdasarkan skor.
+
+  RG-CASE: |
+    Anda adalah agen studi kasus proyek konstruksi gedung.
+    Setiap kasus harus:
+    - Memiliki konteks proyek, data awal, kendala, dan tugas bertahap.
+    - Memberi umpan balik berbasis rubrik 5 dimensi: data, konsep struktur, metode, QC, redesign.
+    - Mengaitkan setiap tahap dengan unit SKKNI yang relevan.
+
+  RG-ASESOR: |
+    Anda berperan sebagai asesor simulasi.
+    Aturan:
+    - Pertanyaan terbuka, menggali pengalaman nyata peserta.
+    - Evaluasi jawaban berdasarkan: kejelasan, peran pribadi, data teknis, standar yang dipakai, output, kendala & solusi.
+    - Berikan kategori kesiapan: "Perlu pendalaman", "Cukup siap", "Sangat siap".
+    - Jangan menyatakan kompeten/tidak kompeten secara resmi.
+
+  RG-PORTO: |
+    Anda adalah agen penyusunan portofolio asesmen.
+    Setiap rekomendasi harus:
+    - Memetakan dokumen ke unit SKKNI.
+    - Menjelaskan format dokumen, isi minimal, dan cara peserta menjelaskan perannya.
+    - Menyediakan template singkat bila diminta.
+
+  RG-DOC: |
+    Anda adalah agen generator dokumen teknis.
+    Hanya bersedia menghasilkan draft dokumen dengan data input lengkap dari peserta.
+    Output dokumen harus mencantumkan:
+    - Standar acuan
+    - Struktur baku dokumen
+    - Placeholder data proyek bila peserta belum mengisi
+    Selalu beri disclaimer bahwa draft perlu diverifikasi tenaga ahli berwenang.
+
+  RG-REG: |
+    Anda adalah agen regulasi konstruksi & K3L.
+    Setiap jawaban harus:
+    - Menyebut hierarki regulasi (UU/PP/Permen/SNI/standar internasional) bila relevan.
+    - Menggunakan istilah yang ada di glossary.
+    Jangan memberikan tafsir hukum final; arahkan konsultasi profesional bila perlu.
+
+  RG-PROGRESS: |
+    Anda adalah agen pelacak progres peserta.
+    Tugas:
+    - Menyajikan ringkasan skor, unit lemah, unit kuat, dan rekomendasi langkah berikutnya.
+    - Menggunakan ambang 70% dan 85% sebagai pemicu rekomendasi.
+    Format output: tabel ringkas + 3 rekomendasi konkret.
+​
+BC. Bank Pertanyaan Wawancara Asesor (Lengkap)
+interview_question_bank:
+  unit_1_regulasi_smk3l:
+    - "Sebutkan 3 peraturan yang Anda gunakan dalam proyek terakhir dan jelaskan relevansinya."
+    - "Bagaimana proses Anda menyusun program pengendalian risiko K3L pada proyek bertingkat?"
+    - "Ceritakan satu insiden K3 yang pernah Anda tangani dan akar masalahnya."
+  unit_2_komunikasi:
+    - "Bagaimana Anda memastikan instruksi kerja dipahami sama oleh seluruh tim teknis?"
+    - "Beri contoh perubahan desain yang Anda komunikasikan; bagaimana dokumentasinya?"
+  unit_3_evaluasi_site:
+    - "Data tanah seperti apa yang Anda minta sebelum menentukan sistem fondasi?"
+    - "Bagaimana data gempa wilayah memengaruhi keputusan desain Anda?"
+    - "Kapan Anda merekomendasikan penyelidikan tanah tambahan?"
+  unit_4_rancang_bangun:
+    - "Jelaskan proses Anda dari membaca gambar arsitektur hingga menetapkan grid struktur."
+    - "Sistem struktur apa yang pernah Anda pilih dan apa pertimbangannya?"
+    - "Bagaimana Anda memeriksa drift dan defleksi pada hasil pemodelan?"
+  unit_5_persyaratan_teknis:
+    - "Bagaimana Anda menyusun spesifikasi teknis untuk pekerjaan beton bertulang?"
+    - "Standar nasional dan internasional apa yang biasa Anda rujuk?"
+  unit_6_metode_kerja:
+    - "Beri contoh perbandingan dua metode kerja yang pernah Anda evaluasi."
+    - "Bagaimana Anda menetapkan durasi pekerjaan struktur atas?"
+  unit_7_quality_control:
+    - "Item kunci apa saja dalam ITP pekerjaan beton menurut Anda?"
+    - "Bagaimana Anda menetapkan kriteria penerimaan untuk pekerjaan struktur?"
+  unit_8_rekayasa_ulang:
+    - "Pernahkah Anda melakukan rekayasa ulang? Jelaskan masalah, alternatif, dan solusinya."
+    - "Aspek apa saja yang Anda kaji sebelum memutuskan redesign?"
+  unit_9_laporan_akhir:
+    - "Struktur laporan akhir Anda seperti apa? Bagian mana yang paling penting?"
+    - "Bagaimana Anda memastikan laporan akhir konsisten dengan rekomendasi teknis?"
+
+scoring_rubric_oral:
+  dimensi:
+    - "Kejelasan pengalaman proyek (0–4)"
+    - "Peran pribadi (0–4)"
+    - "Data teknis & standar (0–4)"
+    - "Proses kerja & analisis (0–4)"
+    - "Output & bukti (0–4)"
+    - "Kendala & solusi (0–4)"
+  total_max: 24
+  kategori:
+    - "≥ 20: Sangat siap"
+    - "15–19: Cukup siap"
+    - "10–14: Perlu pendalaman terarah"
+    - "< 10: Perlu pendalaman menyeluruh"
+​
+BD. Instrumen Asesmen Mandiri (Self-Assessment)
+self_assessment_instrument:
+  instructions: |
+    Nilai diri Anda untuk setiap pernyataan berikut menggunakan skala 1–5:
+    1 = Belum pernah, 2 = Pernah dibantu, 3 = Pernah mandiri, 4 = Mandiri & terdokumentasi, 5 = Mampu mengajari orang lain.
+  items:
+    - unit: "F.410100.001.01"
+      statement: "Saya mampu mengidentifikasi dan merangkum peraturan konstruksi yang relevan untuk proyek gedung."
+    - unit: "F.410100.001.01"
+      statement: "Saya mampu menyusun program pengendalian risiko K3L lengkap dengan APD/APK."
+    - unit: "F.410100.002.01"
+      statement: "Saya mampu menyusun checklist instruksi kerja & dokumentasi koordinasi proyek."
+    - unit: "F.410100.003.01"
+      statement: "Saya mampu mengevaluasi data topografi, tanah, gempa, lingkungan untuk perencanaan."
+    - unit: "F.410100.004.01"
+      statement: "Saya mampu menyusun konsep rancang bangun konstruksi dari gambar arsitektur."
+    - unit: "F.410100.004.01"
+      statement: "Saya mampu memeriksa deformasi & fleksibilitas hasil pemodelan struktur."
+    - unit: "F.410100.005.01"
+      statement: "Saya mampu menyusun spesifikasi teknis pekerjaan struktur bangunan gedung."
+    - unit: "F.410100.006.01"
+      statement: "Saya mampu menyusun & membandingkan alternatif metode kerja berbasis BMW."
+    - unit: "F.410100.007.01"
+      statement: "Saya mampu menyusun QC plan & ITP pekerjaan struktur."
+    - unit: "F.410100.008.01"
+      statement: "Saya mampu memimpin proses rekayasa ulang ketika ada kendala lapangan."
+    - unit: "F.410100.009.01"
+      statement: "Saya mampu menyusun laporan akhir rekayasa konstruksi yang sistematis."
+  interpretation:
+    - "Rata-rata ≥ 4: Siap maju ke uji kompetensi, fokus pada portofolio."
+    - "Rata-rata 3–3.9: Perlu studi kasus & latihan terapan."
+    - "Rata-rata 2–2.9: Perlu pendalaman teori + praktik terbimbing."
+    - "Rata-rata < 2: Disarankan ikut Bimtek penuh terlebih dahulu."
+​
+BE. RG-DOC: Generator Dokumen Teknis
+document_generators:
+  - id: "GEN-SPEC-BETON"
+    title: "Generator Spesifikasi Teknis Beton Bertulang"
+    required_inputs:
+      - "Mutu beton rencana (fc')"
+      - "Mutu baja tulangan (fy)"
+      - "Standar acuan (SNI / ACI / lainnya)"
+      - "Toleransi pekerjaan"
+      - "Metode pengujian"
+      - "Kriteria penerimaan"
+    output_template: |
+      # Spesifikasi Teknis Pekerjaan Beton Bertulang
+      1. Lingkup Pekerjaan: {scope}
+      2. Standar Acuan: {standards}
+      3. Material:
+         - Beton: mutu fc' = {fc}
+         - Baja tulangan: fy = {fy}
+      4. Toleransi: {tolerance}
+      5. Metode Pelaksanaan: {method}
+      6. Pengujian: {testing}
+      7. Kriteria Penerimaan: {acceptance}
+      8. Dokumentasi: {documentation}
+      Disclaimer: Draft ini perlu diverifikasi tenaga ahli berwenang sebelum dipakai untuk dokumen lelang/pelaksanaan.
+
+  - id: "GEN-METODE-KERJA"
+    title: "Generator Metode Kerja Konstruksi"
+    required_inputs:
+      - "Nama pekerjaan"
+      - "Lokasi & kondisi lapangan"
+      - "Volume pekerjaan"
+      - "Peralatan tersedia"
+      - "Tenaga kerja"
+      - "Risiko K3L utama"
+    output_template: |
+      # Metode Kerja: {nama_pekerjaan}
+      1. Uraian Pekerjaan
+      2. Kondisi Lapangan & Akses
+      3. Urutan Kerja (langkah 1–N)
+      4. Peralatan: {alat}
+      5. Tenaga Kerja: {tk}
+      6. Material: {material}
+      7. Durasi: {durasi}
+      8. Risiko K3L & Pengendalian: {risiko}
+      9. Pengendalian Mutu (rujuk QC plan)
+      10. Alternatif Metode (jika ada)
+      Disclaimer: Verifikasi oleh ahli dan pelaksana sebelum eksekusi.
+
+  - id: "GEN-QC-PLAN"
+    title: "Generator QC Plan / ITP"
+    required_inputs:
+      - "Daftar item pekerjaan"
+      - "Standar acuan per item"
+      - "Frekuensi inspeksi"
+      - "Penanggung jawab"
+    output_format: "tabel ITP: Item | Standar | Target Mutu | Metode | Frekuensi | Kriteria | PIC | Bukti"
+
+  - id: "GEN-LAPORAN-AKHIR"
+    title: "Generator Kerangka Laporan Akhir Rekayasa Konstruksi"
+    required_inputs:
+      - "Nama proyek"
+      - "Lokasi"
+      - "Lingkup rekayasa"
+      - "Periode pekerjaan"
+    output_template: |
+      # Laporan Akhir Rekayasa Konstruksi {nama_proyek}
+      1. Ringkasan Eksekutif
+      2. Dasar Pekerjaan & Ruang Lingkup
+      3. Data Awal & Asumsi Desain
+      4. Evaluasi Site & Data Teknis
+      5. Konsep Sistem Struktur
+      6. Analisis & Perhitungan
+      7. Gambar Desain & Detail
+      8. Spesifikasi Teknis
+      9. Metode Kerja
+      10. Rencana Quality Control
+      11. Risiko & Mitigasi
+      12. Rekayasa Ulang (jika ada)
+      13. Kesimpulan & Rekomendasi
+      14. Lampiran
+​
+BF. Integrasi LMS
+lms_integration:
+  scorm_compliance: "SCORM 1.2 / 2004 (opsional)"
+  xapi_statements_emit:
+    - "experienced (membuka unit)"
+    - "answered (menjawab kuis)"
+    - "completed (selesai unit/kuis/kasus)"
+    - "scored (skor kuis)"
+    - "attempted (mulai studi kasus)"
+    - "interacted (simulasi wawancara)"
+  webhooks:
+    on_quiz_completed: "POST {lms_endpoint}/quiz-result"
+    on_case_completed: "POST {lms_endpoint}/case-result"
+    on_interview_completed: "POST {lms_endpoint}/interview-result"
+    on_handoff_requested: "POST {lms_endpoint}/handoff"
+  payload_example:
+    user_id: "{user_id}"
+    activity: "quiz"
+    unit: "F.410100.004.01"
+    score: 85
+    max_score: 100
+    duration_seconds: 540
+    timestamp: "ISO-8601"
+  sso:
+    type: "OAuth2 / SAML 2.0"
+    note: "Opsional bila chatbot dipasang dalam portal LMS."
+​
+BG. Konfigurasi Pre-Test & Post-Test
+pre_post_test:
+  pre_test:
+    purpose: "Mengukur baseline kompetensi peserta sebelum Bimtek."
+    structure:
+      - "20 soal pilihan ganda (2 soal/unit + 2 soal lintas-unit)"
+      - "Durasi 30 menit"
+    routing_after:
+      - "Tampilkan peta unit lemah."
+      - "Sarankan urutan belajar prioritas."
+  post_test:
+    purpose: "Mengukur peningkatan setelah Bimtek."
+    structure:
+      - "20 soal setara pre-test, soal berbeda."
+      - "Durasi 30 menit"
+    benchmark_gain:
+      good: "+15 poin"
+      excellent: "+25 poin"
+  reporting:
+    fields:
+      - "Skor pre-test, skor post-test, gain"
+      - "Distribusi skor per unit"
+      - "Rekomendasi pasca Bimtek"
+​
+BH. Skema Naming, Versioning, Governance Konten
+content_governance:
+  naming_convention:
+    units: "F.410100.0XX.01"
+    quiz: "RG-{unit}-{nomor 3 digit}"
+    case: "CASE-{nomor 3 digit}"
+    document: "DOC-{kategori}-{nomor}"
+  versioning:
+    bot_version: "semver: MAJOR.MINOR.PATCH"
+    kb_version: "tanggal+revisi: YYYY-MM-DD-rev{n}"
+    quiz_review_cycle: "setiap 6 bulan atau saat regulasi/SKKNI direvisi"
+  approval_workflow:
+    - "Draft: Penulis materi"
+    - "Review teknis: Subject matter expert konstruksi"
+    - "Review pedagogi: Instruktur senior"
+    - "Approval: Manajer Bimtek / Pemilik program"
+    - "Publish: Admin chatbot"
+  change_log_required: true
+​
+BI. KPI Pemanfaatan Chatbot
+chatbot_kpi:
+  engagement:
+    - metric: "Active users / minggu"
+      target: "≥ 70% peserta Bimtek"
+    - metric: "Sesi rata-rata per peserta"
+      target: "≥ 5 sesi"
+  learning:
+    - metric: "Rata-rata skor kuis akhir"
+      target: "≥ 75%"
+    - metric: "Gain pre→post test"
+      target: "≥ 20 poin"
+    - metric: "Studi kasus diselesaikan"
+      target: "≥ 2 kasus per peserta"
+  quality:
+    - metric: "Fallback rate"
+      target: "< 8%"
+    - metric: "Handoff ke admin"
+      target: "< 15% sesi"
+    - metric: "Kepuasan (CSAT 1–5)"
+      target: "≥ 4.2"
+  outcome:
+    - metric: "Tingkat kelulusan uji kompetensi peserta yang aktif memakai bot"
+      target: "≥ 80%"
+​
+BJ. Rencana Konten Tambahan (Backlog)
+Prioritas
+Item
+Deskripsi
+Tinggi
+Bank soal lengkap 15/unit
+Lengkapi sampai total 135 soal
+Tinggi
+Studi kasus tambahan 4–6
+Variasi: gedung tinggi, retrofit, basement dalam, fast-track
+Tinggi
+Template gambar referensi
+Sketsa grid & sistem struktur sebagai contoh
+Sedang
+Modul refresher 2 jam
+Untuk peserta yang gagal asesmen sebelumnya
+Sedang
+Kanal WhatsApp dengan media
+Kirim PDF spesifikasi/template
+Sedang
+Voice mode untuk simulasi asesor
+TTS/STT agar latihan lebih nyata
+Rendah
+Dashboard instruktur
+Ringkasan kelas: progres, skor, unit lemah
+Rendah
+Integrasi e-sertifikat Bimtek
+Otomatis terbit setelah post-test ≥ 75
+BK. Catatan Integrasi dengan Project Anda yang Lain
+Mengingat Anda sudah membangun OpenClaw (SMAP), Gustafta, dan CSMS Assistant, RekayasaGedung Bot sebaiknya:
+Mengikuti pola orchestrator + spesialis yang sama agar tim mudah memelihara semuanya.
+Berbagi pustaka guardrail & disclaimer (mis. "keputusan resmi ada di asesor", "perhitungan teknis perlu verifikasi ahli").
+Berbagi modul handoff admin & analytics agar laporan lintas-bot konsisten.
+Bersinggungan dengan CSMS Assistant pada modul K3L — beberapa konten Unit 1 (SMK3L) bisa di-reuse dari Modul A — Tahap Administrasi (RA · PQ · HSE Plan) dan Form 1 — Risk Assessment Pekerjaan.
+Bersinggungan dengan SMAP pada lapis governance — sebagian dokumen anti-suap (kontrak, due diligence vendor) bisa muncul di portofolio peserta yang bekerja sebagai konsultan/kontraktor BUJK.
+Konfigurasi sampai bagian BK sudah cukup untuk menjadikan RekayasaGedung Bot sebagai chatbot multi-agent yang siap produksi, terstruktur, terukur, dan dapat dipelihara jangka panjang.
+Jika Anda ingin saya teruskan ke topik berikutnya, ada tiga arah yang masuk akal:
+Konsolidasi ke halaman Notion — saya buatkan halaman induk Chatbot RekayasaGedung — SKKNI 106-2015 dengan sub-halaman per modul (Bimtek, Multi-Agent, Quiz, Studi Kasus, Portofolio, Generator Dokumen, KPI).
+Lanjut ke skema sipil lainnya — misalnya Ahli Madya Manajemen Konstruksi, Ahli Madya Teknik Bangunan Gedung, atau Ahli Madya Perencanaan Wilayah & Kota.
+Lanjut konten teknis — bank soal lengkap 15/unit, studi kasus tambahan, atau RPP unit 1–9 lengkap.
+Cukup ketik 1, 2, atau 3 (atau sebutkan arah lain).
+KLASIFIKASI SIPILSUBKLASIFIKASIJABATAN KERJAJENJANG JABATAN KERJAKUALIFIKASIJENJANG KKNISTANDAR KOMPETENSI KERJALINK SKK KEMNAKERBKlasifikasi Sipil1GedungAhli Perencana Beton Pracetak Untuk Struktur Bangunan GedungAhli Muda Perencana Beton Pracetak Untuk Struktur Bangunan GedungAhli7SKKNI 336-2013https://skkni-api.kemnaker.go.id/v1/public/documents/9fea81f9-7b56-400a-9307-d313fa012178/download2Ahli Rekayasa Konstruksi Bangunan GedungAhli Madya Rekayasa Konstruksi Bangunan GedungAhli8SKKNI 106-2015https://skkni-api.kemnaker.go.id/v1/public/documents/3b1e86e3-72b0-47ec-a067-64826c6e5f5e/downloadAhli Rekayasa Konstruksi Bangunan Gedung9SKKNI 106-2015https://skkni-api.kemnaker.go.id/v1/public/documents/3b1e86e3-72b0-47ec-a067-64826c6e5f5e/download3Ahli Penilai Kelaikan Bangunan Gedung (Aspek Arsitektur dan Tata Ruang Luar)Ahli Penilai Kelaikan Bangunan Gedung (Aspek Arsitektur dan Tata Ruang Luar)Ahli9SKKNI 113-2015https://skkni-api.kemnaker.go.id/v1/public/documents/07d2470a-8da9-4948-a561-3d1bfbbc7d03/download4Manajer Pengelolaan Bangunan GedungManajer Pengelolaan Bangunan GedungAhli7SKKNI 115-2015https://skkni-api.kemnaker.go.id/v1/public/documents/a61b7a00-97ed-463e-82ca-5105d9ae4e10/download5Ahli Pemeriksa Kelaikan Fungsi Struktur Bangunan GedungAhli Pemeriksa Kelaikan Fungsi Struktur Bangunan GedungAhli9SKKNI 193-2013https://skkni-api.kemnaker.go.id/v1/public/documents/42d6a0b3-058d-450e-a044-38b73a727519/download6Ahli Penilai Bangunan HijauAhli Muda Penilai Bangunan HijauAhli7SKKNI 2-2023https://skkni-api.kemnaker.go.id/v1/public/documents/cd4cffa3-10be-4752-a353-a3e70c0b40d9/downloadAhli Madya Penilai Bangunan Hijau8SKKNI 2-2023https://skkni-api.kemnaker.go.id/v1/public/documents/cd4cffa3-10be-4752-a353-a3e70c0b40d9/downloadAhli Penilai Bangunan Hijau9SKKNI 2-2023https://skkni-api.kemnaker.go.id/v1/public/documents/cd4cffa3-10be-4752-a353-a3e70c0b40d9/download7Ahli Bangunan Gedung HijauAhli Muda Bangunan Gedung HijauAhli7SKKNI 2-2023https://skkni-api.kemnaker.go.id/v1/public/documents/cd4cffa3-10be-4752-a353-a3e70c0b40d9/downloadAhli Madya Bangunan Gedung Hijau8SKKNI 2-2023https://skkni-api.kemnaker.go.id/v1/public/documents/cd4cffa3-10be-4752-a353-a3e70c0b40d9/downloadAhli Utama Bangunan Gedung Hijau9SKKNI 2-2023https://skkni-api.kemnaker.go.id/v1/public/documents/cd4cffa3-10be-4752-a353-a3e70c0b40d9/download8Ahli Penilai Kegagalan Bangunan GedungAhli Madya Penilai Kegagalan Bangunan GedungAhli8SKKNI 58-2022https://skkni-api.kemnaker.go.id/v1/public/documents/c62ab9ca-f685-417f-817f-4deef08f8a55/downloadAhli Penilai Kegagalan Bangunan Gedung9SKKNI 58-2022https://skkni-api.kemnaker.go.id/v1/public/documents/c62ab9ca-f685-417f-817f-4deef08f8a55/download9Ahli Teknik Bangunan GedungAhli Muda Teknik Bangunan GedungAhli7SKKNI 192-2016https://skkni-api.kemnaker.go.id/v1/public/documents/839a6f48-7b1a-4c43-8cc3-3016559e8f19/downloadAhli Madya Teknik Bangunan Gedung8SKKNI 192-2016https://skkni-api.kemnaker.go.id/v1/public/documents/839a6f48-7b1a-4c43-8cc3-3016559e8f19/downloadAhli Teknik Bangunan Gedung9SKKNI 192-2016https://skkni-api.kemnaker.go.id/v1/public/documents/839a6f48-7b1a-4c43-8cc3-3016559e8f19/download10Ahli Teknik Bangunan Gedung (Freshgraduate)Ahli Teknik Bangunan Gedung (Freshgraduate)Ahli7SKKNI 192-2016https://skkni-api.kemnaker.go.id/v1/public/documents/839a6f48-7b1a-4c43-8cc3-3016559e8f19/download11Ahli Perawatan Bangunan GedungAhli Muda Perawatan Bangunan GedungAhli7SKKNI 255-2019https://skkni-api.kemnaker.go.id/v1/public/documents/903e05ec-3a81-4f24-ba29-f2cfe42dc5eb/downloadAhli Madya Perawatan Bangunan Gedung8SKKNI 255-2019https://skkni-api.kemnaker.go.id/v1/public/documents/903e05ec-3a81-4f24-ba29-f2cfe42dc5eb/downloadAhli Perawatan Bangunan Gedung9SKKNI 255-2019https://skkni-api.kemnaker.go.id/v1/public/documents/903e05ec-3a81-4f24-ba29-f2cfe42dc5eb/download12Manajer Lapangan Pelaksanaan Pekerjaan GedungManajer Lapangan Pelaksanaan Pekerjaan GedungTeknisi/Analis6SKKNI 108-2015https://skkni-api.kemnaker.go.id/v1/public/documents/105cb1dc-ff91-4c33-a3d6-2adc31e0af62/download13Kepala Pengelola Lingkungan Bangunan GedungKepala Pengelola Lingkungan Bangunan GedungTeknisi/Analis6SKKNI 046-2015https://skkni-api.kemnaker.go.id/v1/public/documents/96608239-bef5-4b23-82b8-7f397f070433/download14Tukang Pasang Water ProofingTukang Pasang Water Proofing Level 1Operator1SKKNI 377-2013https://skkni-api.kemnaker.go.id/v1/public/documents/fe0e2064-a563-4a00-8d24-e76876fb92c2/downloadTukang Pasang Water Proofing2SKKNI 377-2013https://skkni-api.kemnaker.go.id/v1/public/documents/fe0e2064-a563-4a00-8d24-e76876fb92c2/download15Tukang Pasang Rangka Atap Baja RinganTukang Pasang Rangka Atap Baja RinganOperator1SKKNI 184-2016https://skkni-api.kemnaker.go.id/v1/public/documents/482cb118-74f1-4d75-9416-2ed47ff659c3/download16Tukang Pasang BataTukang Pasang BataOperator1SKKNI 317–2016https://skkni-api.kemnaker.go.id/v1/public/documents/d27bb2ed-d3a3-4780-b61b-f0256f5208fa/downloadTukang Pasang Bata Level 22SKKNI 317–2016https://skkni-api.kemnaker.go.id/v1/public/documents/d27bb2ed-d3a3-4780-b61b-f0256f5208fa/download17Tukang Bangunan GedungTukang Bangunan Gedung Level 1Operator1SKKNI 31–2014https://skkni-api.kemnaker.go.id/v1/public/documents/dcce8736-e1db-471b-9558-1b8b260d09ad/downloadTukang Bangunan Gedung2SKKNI 31–2014https://skkni-api.kemnaker.go.id/v1/public/documents/dcce8736-e1db-471b-9558-1b8b260d09ad/download18Tukang Plester Bangunan GedungTukang Plester Bangunan GedungOperator1SKKNI 307–2016https://skkni-api.kemnaker.go.id/v1/public/documents/35c5d8c7-4424-419b-adec-0fe8ee9cd1fb/downloadTukang Plester Bangunan Gedung Level 22SKKNI 307–2016https://skkni-api.kemnaker.go.id/v1/public/documents/35c5d8c7-4424-419b-adec-0fe8ee9cd1fb/download19Tukang Pasang UbinTukang Pasang UbinOperator1SKKNI 309–2016https://skkni-api.kemnaker.go.id/v1/public/documents/2436dc0b-9c87-45fa-9a4b-388a92c00b06/downloadTukang Pasang Ubin Level 22SKKNI 309–2016https://skkni-api.kemnaker.go.id/v1/public/documents/2436dc0b-9c87-45fa-9a4b-388a92c00b06/download20Tukang Kayu KonstruksiTukang Kayu Konstruksi Level 1Operator1SKKNI 085–2015https://skkni-api.kemnaker.go.id/v1/public/documents/5345225b-3087-40da-b7a3-84c5b7e6809f/downloadTukang Kayu Konstruksi2SKKNI 085–2015https://skkni-api.kemnaker.go.id/v1/public/documents/5345225b-3087-40da-b7a3-84c5b7e6809f/download21Tukang Cat Bangunan GedungTukang Cat Bangunan GedungOperator1SKKNI 310–2016https://skkni-api.kemnaker.go.id/v1/public/documents/24e98f71-7d04-4e0c-9a3f-247c9c1af6ac/downloadTukang Cat Bangunan Gedung Level 22SKKNI 310–2016https://skkni-api.kemnaker.go.id/v1/public/documents/24e98f71-7d04-4e0c-9a3f-247c9c1af6ac/download22Supervisor Perawatan Gedung BertingkatSupervisor Perawatan Gedung Bertingkat MudaTeknisi/Analis4SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-Supervisor Perawatan Gedung Bertingkat Madya5SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-Supervisor Perawatan Gedung Bertingkat Utama6SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-23Pelaksana Lapangan Pekerjaan GedungPelaksana Lapangan Pekerjaan Gedung Level 2Operator2SKKNI 193-2021https://skkni-api.kemnaker.go.id/v1/public/documents/2b3b8dde-ec66-4ccf-8651-41a44d201f79/downloadPelaksana Lapangan Pekerjaan Gedung Level 33SKKNI 193-2021https://skkni-api.kemnaker.go.id/v1/public/documents/2b3b8dde-ec66-4ccf-8651-41a44d201f79/downloadPelaksana Lapangan Pekerjaan Gedung MudaTeknisi/Analis4SKKNI 193-2021https://skkni-api.kemnaker.go.id/v1/public/documents/2b3b8dde-ec66-4ccf-8651-41a44d201f79/downloadPelaksana Lapangan Pekerjaan Gedung Madya5SKKNI 193-2021https://skkni-api.kemnaker.go.id/v1/public/documents/2b3b8dde-ec66-4ccf-8651-41a44d201f79/download24Pengawas Pekerjaan Struktur Bangunan GedungPengawas Pekerjaan Struktur Bangunan GedungTeknisi/Analis4SKKNI 340–2013https://skkni-api.kemnaker.go.id/v1/public/documents/ae3d28de-a931-4afb-bc3e-2d141607e14c/downloadPengawas Pekerjaan Struktur Bangunan Gedung Madya5SKKNI 340–2013https://skkni-api.kemnaker.go.id/v1/public/documents/ae3d28de-a931-4afb-bc3e-2d141607e14c/downloadPengawas Pekerjaan Struktur Bangunan Gedung Utama6SKKNI 340–2013https://skkni-api.kemnaker.go.id/v1/public/documents/ae3d28de-a931-4afb-bc3e-2d141607e14c/download25Pelaksana Madya Perawatan Bangunan GedungPelaksana Madya Perawatan Bangunan GedungTeknisi/Analis5SKK Khusus Kep Dirjen Pembinaan Pelatihan Vokasi dan Produktivitas Nomor 2/3266/LP.00.00/XI/2022-Reg SKKK 37-2022https://simkompetensi.com//public/uploads/file_skkk/1672819454-3SKKKPelaksanaMadyaPerawatanBangunanGedung.pdf26Pengawas Tukang Cat BangunanPengawas Tukang Cat BangunanOperator2SKK Khusus Kep Dirjen Pembinaan Pelatihan Vokasi dan Produktivitas Nomor 2/3260/LP.00.00/XI/2022-Reg SKKK 31-2022https://simkompetensi.com//public/uploads/file_skkk/1672819272-1SKKKPengawasTukangCatBangunan.pdf27Teknisi KacaTeknisi KacaTeknisi/Analis4SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-28Juru Gambar Bangunan GedungJuru Gambar Bangunan Gedung Level 2Operator2SKKNI 033-2021https://skkni-api.kemnaker.go.id/v1/public/documents/648fb0b6-41e5-4586-baf1-2b46216c8ca3/downloadJuru Gambar Bangunan Gedung Level 33SKKNI 033-2021https://skkni-api.kemnaker.go.id/v1/public/documents/648fb0b6-41e5-4586-baf1-2b46216c8ca3/downloadJuru Gambar Bangunan GedungTeknisi/Analis4SKKNI 033-2021https://skkni-api.kemnaker.go.id/v1/public/documents/648fb0b6-41e5-4586-baf1-2b46216c8ca3/download29Tukang Pekerjaan BajaTukang Pekerjaan Baja Level 1Operator1SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-Tukang Pekerjaan Baja Level 22SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-30Mandor KonstruksiMandor Konstruksi Level 2Operator2SKK Khusus Kep Dirjen Pembinaan Pelatihan Vokasi dan Produktivitas Nomor 2/3261/LP.00.00/XI/2022-Reg SKKK 32-2022https://simkompetensi.com//public/uploads/file_skkk/1672819378-2SKKKMandorKonstruksi.pdfMandor Konstruksi Level 33SKK Khusus Kep Dirjen Pembinaan Pelatihan Vokasi dan Produktivitas Nomor 2/3261/LP.00.00/XI/2022-Reg SKKK 32-2022https://simkompetensi.com//public/uploads/file_skkk/1672819378-2SKKKMandorKonstruksi.pdf31Mandor Pemasangan Rangka Dinding dan Lantai Baja RinganMandor Pemasangan Rangka Dinding dan Lantai Baja Ringan Level 2Operator2SKKNI 184–2016https://skkni-api.kemnaker.go.id/v1/public/documents/482cb118-74f1-4d75-9416-2ed47ff659c3/downloadMandor Pemasangan Rangka Dinding dan Lantai Baja Ringan3SKKNI 184–2016https://skkni-api.kemnaker.go.id/v1/public/documents/482cb118-74f1-4d75-9416-2ed47ff659c3/download32Perencana Struktur Bangunan RISHAPerencana Struktur Bangunan RISHATeknisi/Analis6SKKNI 221-2018https://skkni-api.kemnaker.go.id/v1/public/documents/c450d40d-a8d9-4a19-be0b-e5186c3a86c8/download33Perakit Struktur Bangunan RISHAPerakit Struktur Bangunan RISHAOperator3SKKNI 221-2018https://skkni-api.kemnaker.go.id/v1/public/documents/c450d40d-a8d9-4a19-be0b-e5186c3a86c8/download34Pembuat Panel Struktur RISHAPembuat Panel Struktur RISHAOperator2SKKNI 221-2018https://skkni-api.kemnaker.go.id/v1/public/documents/c450d40d-a8d9-4a19-be0b-e5186c3a86c8/download35Tukang Besi BetonTukang Besi BetonOperator1SKKNI 319–2016https://skkni-api.kemnaker.go.id/v1/public/documents/093debf2-0a12-456f-94cd-4f43213f63b5/downloadTukang Besi Beton Level 22SKKNI 319–2016https://skkni-api.kemnaker.go.id/v1/public/documents/093debf2-0a12-456f-94cd-4f43213f63b5/download36Pemasang Perancah Dan Acuan/Cetakan BetonPemasang Perancah Dan Acuan/Cetakan BetonOperator3SKKNI 054-2015https://skkni-api.kemnaker.go.id/v1/public/documents/05b7961c-36c1-4db1-847d-4bb567a6fe1d/download37Mandor Tukang Pasang Beton PrecastMandor Tukang Pasang Beton Precast Level 2Operator2SKKNI 243–2009https://skkni-api.kemnaker.go.id/v1/public/documents/418f4f9d-2474-4f3e-9835-f6d5784f7ce0/downloadMandor Tukang Pasang Beton Precast3SKKNI 243–2009https://skkni-api.kemnaker.go.id/v1/public/documents/418f4f9d-2474-4f3e-9835-f6d5784f7ce0/download38Tukang Pasang/Aplikator/Instalatur Rangka Baja RinganTukang Pasang/Aplikator/Instalatur Rangka Baja RinganOperator1SKKNI 184–2016https://skkni-api.kemnaker.go.id/v1/public/documents/482cb118-74f1-4d75-9416-2ed47ff659c3/download39Mandor Pemasangan (Installer) Rangka Atap Baja RinganMandor Pemasangan (Installer) Rangka Atap Baja Ringan Level 2Operator2SKKNI 184–2016https://skkni-api.kemnaker.go.id/v1/public/documents/482cb118-74f1-4d75-9416-2ed47ff659c3/downloadMandor Pemasangan (Installer) Rangka Atap Baja Ringan3SKKNI 184–2016https://skkni-api.kemnaker.go.id/v1/public/documents/482cb118-74f1-4d75-9416-2ed47ff659c3/download40MaterialAhli Material JalanAhli Muda Material JalanAhli7SKKNI 325-2013https://skkni-api.kemnaker.go.id/v1/public/documents/7184e461-8941-4457-a92d-54049050177c/downloadAhli Madya Material Jalan8SKKNI 325-2013https://skkni-api.kemnaker.go.id/v1/public/documents/7184e461-8941-4457-a92d-54049050177c/downloadAhli Material Jalan9SKKNI 325-2013https://skkni-api.kemnaker.go.id/v1/public/documents/7184e461-8941-4457-a92d-54049050177c/download41Pengawas Konstruksi, Fabrikasi, Sipil dan StrukturPengawas Konstruksi, Fabrikasi, Sipil dan StrukturTeknisi/Analis6SKKNI 171-2018https://skkni-api.kemnaker.go.id/v1/public/documents/b1a08bda-d878-4fda-9b37-dc155dfba8c8/download42Teknisi Laboratorium Beton AspalTeknisi Laboratorium Beton AspalTeknisi/Analis4SKKNI 196-2013https://skkni-api.kemnaker.go.id/v1/public/documents/e0112fce-799c-41ff-aea5-84a6eddfb305/downloadTeknisi Laboratorium Beton Aspal Madya5SKKNI 196-2013https://skkni-api.kemnaker.go.id/v1/public/documents/e0112fce-799c-41ff-aea5-84a6eddfb305/downloadTeknisi Laboratorium Beton Aspal Utama6SKKNI 196-2013https://skkni-api.kemnaker.go.id/v1/public/documents/e0112fce-799c-41ff-aea5-84a6eddfb305/download43Teknisi Laboratorium BetonTeknisi Laboratorium Beton MudaTeknisi/Analis4SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-Teknisi Laboratorium Beton Madya5SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-Teknisi Laboratorium Beton Utama6SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-44Teknisi Laboratorium TanahTeknisi Laboratorium Tanah MudaTeknisi/Analis4Skema LPJKN 2016 – 2020 Dalam proses Penyusunan SKKNI Tahun 2023-Teknisi Laboratorium Tanah Madya5Skema LPJKN 2016 – 2020 Dalam proses Penyusunan SKKNI Tahun 2023-Teknisi Laboratorium Tanah Utama6Skema LPJKN 2016 – 2020 Dalam proses Penyusunan SKKNI Tahun 2023-45Pelaksana Produksi Campuran Aspal PanasPelaksana Produksi Campuran Aspal PanasOperator3SKKNI 384-2013https://skkni-api.kemnaker.go.id/v1/public/documents/b6de27d4-affe-44aa-8483-f06d1754c52e/downloadPelaksana Produksi Campuran Aspal Panas MudaTeknisi/Analis4SKKNI 384-2013https://skkni-api.kemnaker.go.id/v1/public/documents/b6de27d4-affe-44aa-8483-f06d1754c52e/download46Manajer Produksi Campuran Aspal Panas (Asphalt Mixing Plant Manager)Manajer Produksi Campuran Aspal Panas (Asphalt Mixing Plant Manager)Teknisi/Analis6SKKNI 329–2009https://skkni-api.kemnaker.go.id/v1/public/documents/5aa49504-0ee1-4121-9bcb-655a1e773f8e/download47JalanManajer Pelaksanaan Pekerjaan Jalan/JembatanManajer Pelaksanaan Pekerjaan Jalan/JembatanAhli7SKKNI 371-2013https://skkni-api.kemnaker.go.id/v1/public/documents/ad633ded-bf6d-482c-925e-068ab26604dd/download48Ahli Pemeliharaan Jalan Dan JembatanAhli Muda Pemeliharaan Jalan Dan JembatanAhli7SKKNI 112-2015https://skkni-api.kemnaker.go.id/v1/public/documents/1f99c52b-2e9f-4a42-820d-6cb664c76ccd/downloadAhli Madya Pemeliharaan Jalan Dan Jembatan8SKKNI 112-2015https://skkni-api.kemnaker.go.id/v1/public/documents/1f99c52b-2e9f-4a42-820d-6cb664c76ccd/downloadAhli Pemeliharaan Jalan Dan Jembatan9SKKNI 112-2015https://skkni-api.kemnaker.go.id/v1/public/documents/1f99c52b-2e9f-4a42-820d-6cb664c76ccd/download49Ahli Teknik JalanAhli Muda Teknik JalanAhli7SKKNI 126-2021https://skkni-api.kemnaker.go.id/v1/public/documents/49dac8bc-f2ac-4d15-8dc6-2394f96b99f3/downloadAhli Madya Teknik Jalan8SKKNI 126-2021https://skkni-api.kemnaker.go.id/v1/public/documents/49dac8bc-f2ac-4d15-8dc6-2394f96b99f3/downloadAhli Utama Teknik Jalan9SKKNI 126-2021https://skkni-api.kemnaker.go.id/v1/public/documents/49dac8bc-f2ac-4d15-8dc6-2394f96b99f3/download50Ahli Teknik Jalan (Freshgraduate)Ahli Teknik Jalan (Freshgraduate)Ahli7SKKNI 126-2021https://skkni-api.kemnaker.go.id/v1/public/documents/49dac8bc-f2ac-4d15-8dc6-2394f96b99f3/download51Ahli Keselamatan JalanAhli Muda Keselamatan JalanAhli7SKKNI 324–2013https://skkni-api.kemnaker.go.id/v1/public/documents/6961bf18-8b2f-45d7-aa83-96c8e27e7077/downloadAhli Madya Keselamatan Jalan8SKKNI 324–2013https://skkni-api.kemnaker.go.id/v1/public/documents/6961bf18-8b2f-45d7-aa83-96c8e27e7077/downloadAhli Keselamatan Jalan9SKKNI 324–2013https://skkni-api.kemnaker.go.id/v1/public/documents/6961bf18-8b2f-45d7-aa83-96c8e27e7077/download52Pelaksana Lapangan Perkerasan Jalan BetonPelaksana Lapangan Perkerasan Jalan Beton MudaTeknisi/Analis4SKKNI 317-2009https://skkni-api.kemnaker.go.id/v1/public/documents/3ccfd044-2cbb-484f-acc0-beea8ea17c15/downloadPelaksana Lapangan Perkerasan Jalan Beton Madya5SKKNI 317-2009https://skkni-api.kemnaker.go.id/v1/public/documents/3ccfd044-2cbb-484f-acc0-beea8ea17c15/downloadPelaksana Lapangan Perkerasan Jalan Beton6SKKNI 317-2009https://skkni-api.kemnaker.go.id/v1/public/documents/3ccfd044-2cbb-484f-acc0-beea8ea17c15/download53Pelaksana Pemeliharaan JalanPelaksana Pemeliharaan Jalan MudaTeknisi/Analis4SKKNI 192-2021https://skkni-api.kemnaker.go.id/v1/public/documents/c4b80fd9-5019-4a8d-abdf-445363bb91ad/downloadPelaksana Pemeliharaan Jalan Madya5SKKNI 192-2021https://skkni-api.kemnaker.go.id/v1/public/documents/c4b80fd9-5019-4a8d-abdf-445363bb91ad/downloadPelaksana Pemeliharaan Jalan6SKKNI 192-2021https://skkni-api.kemnaker.go.id/v1/public/documents/c4b80fd9-5019-4a8d-abdf-445363bb91ad/download54Pelaksana Pemasangan Perlengkapan JalanPelaksana Pemasangan Perlengkapan Jalan MudaTeknisi/Analis4SKKNI 57-2021https://skkni-api.kemnaker.go.id/v1/public/documents/84992faf-f3e5-4998-909f-04185f714036/downloadPelaksana Pemasangan Perlengkapan Jalan Madya5SKKNI 57-2021https://skkni-api.kemnaker.go.id/v1/public/documents/84992faf-f3e5-4998-909f-04185f714036/downloadPelaksana Pemasangan Perlengkapan Jalan6SKKNI 57-2021https://skkni-api.kemnaker.go.id/v1/public/documents/84992faf-f3e5-4998-909f-04185f714036/download55Mandor Perkerasan JalanMandor Perkerasan Jalan Level 2Operator2SKKNI 192–2013https://skkni-api.kemnaker.go.id/v1/public/documents/2e3b4dfd-ad3a-4edc-8a4b-ab4aa466e80c/downloadMandor Perkerasan Jalan3SKKNI 192–2013https://skkni-api.kemnaker.go.id/v1/public/documents/2e3b4dfd-ad3a-4edc-8a4b-ab4aa466e80c/download56Pelaksana Lapangan Pekerjaan JalanPelaksana Lapangan Pekerjaan Jalan Level 2Operator2SKKNI 373–2013https://skkni-api.kemnaker.go.id/v1/public/documents/6b9a497c-0fd5-48aa-83f5-2bba35bad143/downloadPelaksana Lapangan Pekerjaan Jalan Level 33SKKNI 373–2013https://skkni-api.kemnaker.go.id/v1/public/documents/6b9a497c-0fd5-48aa-83f5-2bba35bad143/downloadPelaksana Lapangan Pekerjaan JalanTeknisi/Analis4SKKNI 373–2013https://skkni-api.kemnaker.go.id/v1/public/documents/6b9a497c-0fd5-48aa-83f5-2bba35bad143/downloadPelaksana Lapangan Pekerjaan Jalan Madya5SKKNI 373–2013https://skkni-api.kemnaker.go.id/v1/public/documents/6b9a497c-0fd5-48aa-83f5-2bba35bad143/download57Pengawas Lapangan Pekerjaan JalanPengawas Lapangan Pekerjaan Jalan MudaTeknisi/Analis4SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-Pengawas Lapangan Pekerjaan Jalan Madya5SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-Pengawas Lapangan Pekerjaan Jalan Utama6SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-58Juru Gambar Pekerjaan Jalan dan JembatanJuru Gambar Pekerjaan Jalan dan Jembatan Level 2Operator2SKKNI 327–2009https://skkni-api.kemnaker.go.id/v1/public/documents/97dff02a-9ec1-4857-8003-376986a64940/downloadJuru Gambar Pekerjaan Jalan dan Jembatan Level 33SKKNI 327–2009https://skkni-api.kemnaker.go.id/v1/public/documents/97dff02a-9ec1-4857-8003-376986a64940/downloadJuru Gambar Pekerjaan Jalan dan JembatanTeknisi/Analis4SKKNI 327–2009https://skkni-api.kemnaker.go.id/v1/public/documents/97dff02a-9ec1-4857-8003-376986a64940/download59JembatanAhli Perencanaan Jembatan Rangka BajaAhli Muda Perencanaan Jembatan Rangka BajaAhli7SKKNI 130-2015https://skkni-api.kemnaker.go.id/v1/public/documents/c48f610c-6378-45d4-9b08-5503d2668423/downloadAhli Madya Perencanaan Jembatan Rangka Baja8SKKNI 130-2015https://skkni-api.kemnaker.go.id/v1/public/documents/c48f610c-6378-45d4-9b08-5503d2668423/downloadAhli Perencanaan Jembatan Rangka Baja9SKKNI 130-2015https://skkni-api.kemnaker.go.id/v1/public/documents/c48f610c-6378-45d4-9b08-5503d2668423/download60Ahli Rehabilitasi JembatanAhli Muda Rehabilitasi JembatanAhli7SKKNI 93-2015https://skkni-api.kemnaker.go.id/v1/public/documents/9b78663f-b717-472b-a811-0bd1c866693f/downloadAhli Madya Rehabilitasi Jembatan8SKKNI 93-2015https://skkni-api.kemnaker.go.id/v1/public/documents/9b78663f-b717-472b-a811-0bd1c866693f/downloadAhli Rehabilitasi Jembatan9SKKNI 93-2015https://skkni-api.kemnaker.go.id/v1/public/documents/9b78663f-b717-472b-a811-0bd1c866693f/download61Ahli Penilai Kegagalan Bangunan Jalan Layang dan JembatanAhli Madya Penilai Kegagalan Bangunan Jalan Layang dan JembatanAhli8SKKNI 57-2022https://skkni-api.kemnaker.go.id/v1/public/documents/1632a7c9-1fd1-434b-956a-9f9321634350/downloadAhli Penilai Kegagalan Bangunan Jalan Layang dan JembatanAhli9SKKNI 57-2022https://skkni-api.kemnaker.go.id/v1/public/documents/1632a7c9-1fd1-434b-956a-9f9321634350/download62Ahli Teknik JembatanAhli Muda Teknik JembatanAhli7SKKNI 84–2021https://skkni-api.kemnaker.go.id/v1/public/documents/a9bd6168-492f-4c19-a229-ca9f45172fcd/downloadAhli Madya Teknik Jembatan8SKKNI 84–2021https://skkni-api.kemnaker.go.id/v1/public/documents/a9bd6168-492f-4c19-a229-ca9f45172fcd/downloadAhli Utama Teknik Jembatan9SKKNI 84–2021https://skkni-api.kemnaker.go.id/v1/public/documents/a9bd6168-492f-4c19-a229-ca9f45172fcd/download63Ahli Teknik Jembatan (Freshgraduate)Ahli Teknik Jembatan (Freshgraduate)Ahli7SKKNI 84-2021https://skkni-api.kemnaker.go.id/v1/public/documents/a9bd6168-492f-4c19-a229-ca9f45172fcd/download64Teknisi Jembatan Rangka BajaTeknisi Jembatan Rangka BajaTeknisi/Analis4SKKNI 079-2015https://skkni-api.kemnaker.go.id/v1/public/documents/5a70251d-e49e-42af-95c7-e4c7f326c163/downloadTeknisi Jembatan Rangka Baja Madya5SKKNI 079-2015https://skkni-api.kemnaker.go.id/v1/public/documents/5a70251d-e49e-42af-95c7-e4c7f326c163/downloadTeknisi Jembatan Rangka Baja Utama6SKKNI 079-2015https://skkni-api.kemnaker.go.id/v1/public/documents/5a70251d-e49e-42af-95c7-e4c7f326c163/download65Tukang Pasang/Perakit Jembatan Rangka Baja Panel Darurat (Bailey)Tukang Pasang/Perakit Jembatan Rangka Baja Panel Darurat (Bailey)Operator2SKKNI 16-2023https://simkompetensi.com//public/uploads/file_skkni/1683081217-SKKNI202316.pdf66Pelaksana Lapangan Pekerjaan Jembatan Rangka Baja Panel Darurat (Bailey)Pelaksana Lapangan Pekerjaan Jembatan Rangka Baja Panel Darurat (Bailey)Teknisi/Analis5SKKNI 16-2023https://simkompetensi.com//public/uploads/file_skkni/1683081217-SKKNI202316.pdf67Pengawas Lapangan Pekerjaan Jembatan Rangka Baja Panel Darurat (Bailey)Pengawas Lapangan Pekerjaan Jembatan Rangka Baja Panel Darurat (Bailey)Teknisi/Analis6SKKNI 16-2023https://simkompetensi.com//public/uploads/file_skkni/1683081217-SKKNI202316.pdf68Pelaksana Pemeliharaan JembatanPelaksana Pemeliharaan Jembatan MudaTeknisi/Analis4SKKNI 195-2015https://skkni-api.kemnaker.go.id/v1/public/documents/f6b4e4d9-9ae7-4063-95cc-d24409a50e8c/downloadPelaksana Pemeliharaan Jembatan Madya5SKKNI 195-2015https://skkni-api.kemnaker.go.id/v1/public/documents/f6b4e4d9-9ae7-4063-95cc-d24409a50e8c/downloadPelaksana Pemeliharaan Jembatan6SKKNI 195-2015https://skkni-api.kemnaker.go.id/v1/public/documents/f6b4e4d9-9ae7-4063-95cc-d24409a50e8c/download69Pelaksana Lapangan Pekerjaan Pemasangan Jembatan Rangka Baja StandarPelaksana Lapangan Pekerjaan Pemasangan Jembatan Rangka Baja Standar MadyaTeknisi/Analis5SKKNI 316–2009https://skkni-api.kemnaker.go.id/v1/public/documents/87ee0f10-754a-43e9-9c1c-c26e16a8f5ed/downloadPelaksana Lapangan Pekerjaan Pemasangan Jembatan Rangka Baja Standar6SKKNI 316–2009https://skkni-api.kemnaker.go.id/v1/public/documents/87ee0f10-754a-43e9-9c1c-c26e16a8f5ed/download70Pengawas Lapangan Pekerjaan JembatanPengawas Lapangan Pekerjaan Jembatan MudaTeknisi/Analis4SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-Pengawas Lapangan Pekerjaan Jembatan Madya5SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-Pengawas Lapangan Pekerjaan Jembatan Utama6SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-71Mandor Pemasangan Rangka Baja JembatanMandor Pemasangan Rangka Baja JembatanOperator3SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-72Landasan UdaraAhli Teknik Landasan TerbangAhli Muda Teknik Landasan TerbangAhli7RSKKNI Ahli Teknik Landasan Terbang/ Akan ditetapkan menjadi SKKNI/SKK Khusus-Ahli Madya Teknik Landasan TerbangAhli8RSKKNI Ahli Teknik Landasan Terbang/ Akan ditetapkan menjadi SKKNI/SKK Khusus-Ahli Utama Teknik Landasan TerbangAhli9RSKKNI Ahli Teknik Landasan Terbang/ Akan ditetapkan menjadi SKKNI/SKK Khusus-73TerowonganAhli Perencanaan Terowongan JalanAhli Madya Perencanaan Terowongan JalanAhli8SKKNI 328-2013https://skkni-api.kemnaker.go.id/v1/public/documents/e5388e5b-1e5c-4b2f-8e7e-b136d842ed72/downloadAhli Perencanaan Terowongan JalanAhli9SKKNI 328-2013https://skkni-api.kemnaker.go.id/v1/public/documents/e5388e5b-1e5c-4b2f-8e7e-b136d842ed72/download74Ahli Teknik TerowonganAhli Muda Teknik TerowonganAhli7RSKKNI Ahli Teknik Terowongan/ Akan ditetapkan menjadi SKKNI/SKK Khusus-Ahli Madya Teknik TerowonganAhli8RSKKNI Ahli Teknik Terowongan/ Akan ditetapkan menjadi SKKNI/SKK Khusus-Ahli Utama Teknik TerowonganAhli9RSKKNI Ahli Teknik Terowongan/ Akan ditetapkan menjadi SKKNI/SKK Khusus-75Pelaksana TerowonganPelaksana Terowongan MadyaTeknisi/Analis5SKK Khusus Kep Dirjen Pembinaan Pelatihan Vokasi dan Produktivitas Nomor 2/3252/LP.00.00/XI/2022-Reg SKKK 29-2022https://simkompetensi.com//public/uploads/file_skkk/1672819571-4SKKKPelaksanaTerowongan.pdfPelaksana Terowongan Utama6SKK Khusus Kep Dirjen Pembinaan Pelatihan Vokasi dan Produktivitas Nomor 2/3252/LP.00.00/XI/2022-Reg SKKK 29-2023https://simkompetensi.com//public/uploads/file_skkk/1672819571-4SKKKPelaksanaTerowongan.pdf76Bendung dan BendunganAhli Operasi dan Pemeliharaan Bendungan Tipe UrukanAhli Madya Operasi dan Pemeliharaan Bendungan Tipe UrukanAhli8SKKNI 375-2013https://skkni-api.kemnaker.go.id/v1/public/documents/d825774d-82e0-43cc-bcfc-a35d80dcc36f/downloadAhli Operasi dan Pemeliharaan Bendungan Tipe UrukanAhli9SKKNI 375-2013https://skkni-api.kemnaker.go.id/v1/public/documents/d825774d-82e0-43cc-bcfc-a35d80dcc36f/download77Ahli Pengawas Pelaksanaan Konstruksi Bangunan Sipil Pembangkit Listrik Tenaga Mini HidroAhli Madya Pengawas Pelaksanaan Konstruksi Bangunan Sipil Pembangkit Listrik Tenaga Mini HidroAhli8SKKNI 335-2013https://skkni-api.kemnaker.go.id/v1/public/documents/f74f30a0-20a8-48e0-be82-314aade25dc7/download78Ahli Teknik Perencana BendunganAhli Muda Teknik Perencana BendunganAhli7SKKNI 61-2022https://skkni-api.kemnaker.go.id/v1/public/documents/c31c281c-c3e8-4a4f-9e53-2c59cbf831cb/downloadAhli Madya Teknik Perencana Bendungan Madya8SKKNI 61-2022https://skkni-api.kemnaker.go.id/v1/public/documents/c31c281c-c3e8-4a4f-9e53-2c59cbf831cb/downloadAhli Teknik Perencana Bendungan9SKKNI 61-2022https://skkni-api.kemnaker.go.id/v1/public/documents/c31c281c-c3e8-4a4f-9e53-2c59cbf831cb/download79Ahli Teknik Bendungan BesarAhli Muda Teknik Bendungan BesarAhli7SKKNI 308–2016https://skkni-api.kemnaker.go.id/v1/public/documents/63511955-22fd-464f-941c-c7002b12b301/downloadAhli Madya Teknik Bendungan Besar8SKKNI 308–2016https://skkni-api.kemnaker.go.id/v1/public/documents/63511955-22fd-464f-941c-c7002b12b301/downloadAhli Teknik Bendungan Besar9SKKNI 308–2016https://skkni-api.kemnaker.go.id/v1/public/documents/63511955-22fd-464f-941c-c7002b12b301/download80Pelaksana Operasi dan Pemeliharaan Bendungan Tipe UrukanPelaksana Operasi dan Pemeliharaan Bendungan Tipe UrukanTeknisi/Analis5SKKNI 081-2015https://skkni-api.kemnaker.go.id/v1/public/documents/5852c639-899a-41f4-ac81-fd891c92572c/downloadPelaksana Operasi dan Pemeliharaan Bendungan Tipe Urukan Utama6SKKNI 081-2015https://skkni-api.kemnaker.go.id/v1/public/documents/5852c639-899a-41f4-ac81-fd891c92572c/download81Mandor Pekerjaan Timbunan Tubuh Bendungan Tipe UruganMandor Pekerjaan Timbunan Tubuh Bendungan Tipe UruganOperator3SKKNI 180-2019https://skkni-api.kemnaker.go.id/v1/public/documents/440c503f-c183-4df0-a2e9-f87be7d7696e/download82Pelaksana BendunganPelaksana Bendungan MadyaTeknisi/Analis5SKK Khusus Kep Dirjen Pembinaan Pelatihan Vokasi dan Produktivitas Nomor 2/3249/LP.00.00/XI/2022-Reg SKKK 26-2022https://simkompetensi.com//public/uploads/file_skkk/1672819637-5SKKKPelaksanaBendungan.pdfPelaksana Bendungan Utama6SKK Khusus Kep Dirjen Pembinaan Pelatihan Vokasi dan Produktivitas Nomor 2/3249/LP.00.00/XI/2022-Reg SKKK 26-2023https://simkompetensi.com//public/uploads/file_skkk/1672819637-5SKKKPelaksanaBendungan.pdf83Inspektur Bendungan UrukanInspektur Bendungan Urukan MadyaTeknisi/Analis5SKKNI 068-2009https://skkni-api.kemnaker.go.id/v1/public/documents/96bc7611-5e4c-4b46-bcd7-79feee2206d4/downloadInspektur Bendungan Urukan6SKKNI 068-2009https://skkni-api.kemnaker.go.id/v1/public/documents/96bc7611-5e4c-4b46-bcd7-79feee2206d4/download84Irigasi dan RawaAhli Perencana IrigasiAhli Muda Perencana IrigasiAhli7SKKNI 337-2013https://skkni-api.kemnaker.go.id/v1/public/documents/2934bc44-903a-41f3-ade9-2e6c51dbf388/download85Ahli Teknik Perencanaan Irigasi RawaAhli Madya Teknik Perencanaan Irigasi RawaAhli8SKKNI 51-2015https://skkni-api.kemnaker.go.id/v1/public/documents/44681489-0a2e-4d5b-876e-02ba0b0d627c/downloadAhli Teknik Perencanaan Irigasi Rawa9SKKNI 51-2015https://skkni-api.kemnaker.go.id/v1/public/documents/44681489-0a2e-4d5b-876e-02ba0b0d627c/download86Ahli Perencanaan Operasi dan Pemeliharaan Jaringan IrigasiAhli Muda Perencanaan Operasi dan Pemeliharaan Jaringan IrigasiAhli7SKKNI 53–2015https://skkni-api.kemnaker.go.id/v1/public/documents/9d1b4c67-95f2-40b0-9b24-5a0c1c22cb4a/downloadAhli Madya Perencanaan Operasi dan Pemeliharaan Jaringan Irigasi8SKKNI 53–2015https://skkni-api.kemnaker.go.id/v1/public/documents/9d1b4c67-95f2-40b0-9b24-5a0c1c22cb4a/downloadAhli Perencanaan Operasi dan Pemeliharaan Jaringan Irigasi9SKKNI 53–2015https://skkni-api.kemnaker.go.id/v1/public/documents/9d1b4c67-95f2-40b0-9b24-5a0c1c22cb4a/download87Ahli Teknik RawaAhli Muda Teknik RawaAhli7SKKNI 169-2019https://skkni-api.kemnaker.go.id/v1/public/documents/b7e2c00d-dbc8-411c-8dc1-75258a9b7947/downloadAhli Madya Teknik Rawa8SKKNI 169-2019https://skkni-api.kemnaker.go.id/v1/public/documents/b7e2c00d-dbc8-411c-8dc1-75258a9b7947/downloadAhli Teknik Rawa9SKKNI 169-2019https://skkni-api.kemnaker.go.id/v1/public/documents/b7e2c00d-dbc8-411c-8dc1-75258a9b7947/download88Pelaksana Pekerjaan Pemeliharaan Jaringan IrigasiPelaksana Pekerjaan Pemeliharaan Jaringan IrigasiTeknisi/Analis4SKKNI 110-2015https://skkni-api.kemnaker.go.id/v1/public/documents/187faba2-5c2d-4c8f-b00c-58a8de7ce99c/downloadPelaksana Pekerjaan Pemeliharaan Jaringan Irigasi Level 3Operator3SKKNI 110-2015https://skkni-api.kemnaker.go.id/v1/public/documents/187faba2-5c2d-4c8f-b00c-58a8de7ce99c/download89Pengamat IrigasiPengamat IrigasiTeknisi/Analis6SKK Khusus Kep Dirjen Pembinaan Pelatihan Vokasi dan Produktivitas Nomor 2/127/LP.00.00/I/2022) – Reg SKKK 1-2022https://simkompetensi.com//public/uploads/file_skkk/1683086216-SKKK1272022PetugasOperasidanPemeliharaanIrigasiJabatanKerjaPengamat.pdf90Juru PengairanJuru PengairanTeknisi/Analis4SKK Khusus Kep Dirjen Pembinaan Pelatihan Vokasi dan Produktivitas Nomor 2/128/LP.00.00/I/2022)-Reg SKKK 2-2022https://simkompetensi.com//public/uploads/file_skkk/1683086283-SKKK1282022PetugasOperasidanPemeliharaanIrigasiJabatanKerjaJuruPengairan.pdf91Pelaksana Pekerjaan Operasi dan Pemeliharaan Jaringan IrigasiPelaksana Pekerjaan Operasi dan Pemeliharaan Jaringan IrigasiTeknisi/Analis4SKKNI 55-2022https://skkni-api.kemnaker.go.id/v1/public/documents/862b326f-4511-4fcf-b91e-8eb615bb48b4/download92Pelaksana Pemasangan Pintu AirPelaksana Pemasangan Pintu Air MadyaTeknisi/Analis5SKKNI 183-2009https://skkni-api.kemnaker.go.id/v1/public/documents/fbcaba67-7bc9-4cba-aea8-c4971b23066f/downloadPelaksana Pemasangan Pintu Air6SKKNI 183-2009https://skkni-api.kemnaker.go.id/v1/public/documents/fbcaba67-7bc9-4cba-aea8-c4971b23066f/download93Pelaksana Lapangan Pekerjaan Saluran IrigasiPelaksana Lapangan Pekerjaan Saluran Irigasi Level 2Operator2SKKNI 378–2013https://skkni-api.kemnaker.go.id/v1/public/documents/45cd55f4-c1f2-4756-9260-7ef91ac46ceb/downloadPelaksana Lapangan Pekerjaan Saluran Irigasi Level 33SKKNI 378–2013https://skkni-api.kemnaker.go.id/v1/public/documents/45cd55f4-c1f2-4756-9260-7ef91ac46ceb/downloadPelaksana Lapangan Pekerjaan Saluran IrigasiTeknisi/Analis4SKKNI 378–2013https://skkni-api.kemnaker.go.id/v1/public/documents/45cd55f4-c1f2-4756-9260-7ef91ac46ceb/downloadPelaksana Lapangan Pekerjaan Saluran Irigasi Madya5SKKNI 378–2013https://skkni-api.kemnaker.go.id/v1/public/documents/45cd55f4-c1f2-4756-9260-7ef91ac46ceb/download94Pengawas Saluran IrigasiPengawas Saluran Irigasi MudaTeknisi/Analis4SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-Pengawas Saluran Irigasi Madya5SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-Pengawas Saluran Irigasi Utama6SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-95Sungai Dan PantaiAhli Perencanaan Pengamanan PantaiAhli Madya Perencanaan Pengamanan PantaiAhli8SKKNI 97-2015https://skkni-api.kemnaker.go.id/v1/public/documents/4c1b34ba-7ecd-4ba5-af17-51bb2dfcf6b2/downloadAhli Perencanaan Pengamanan Pantai9SKKNI 97-2015https://skkni-api.kemnaker.go.id/v1/public/documents/4c1b34ba-7ecd-4ba5-af17-51bb2dfcf6b2/download96Ahli Teknik PantaiAhli Muda Teknik PantaiAhli7SKKNI 206-2019https://skkni-api.kemnaker.go.id/v1/public/documents/a2689b3a-8026-4514-b7af-9931cc5e53ea/downloadAhli Madya Teknik Pantai8SKKNI 206-2019https://skkni-api.kemnaker.go.id/v1/public/documents/a2689b3a-8026-4514-b7af-9931cc5e53ea/downloadAhli Teknik Pantai9SKKNI 206-2019https://skkni-api.kemnaker.go.id/v1/public/documents/a2689b3a-8026-4514-b7af-9931cc5e53ea/download97Ahli Perencanaan Operasi dan Pemeliharaan Prasarana Sungai Serta Pemeliharaan SungaiAhli Muda Perencanaan Operasi dan Pemeliharaan Prasarana Sungai Serta Pemeliharaan SungaiAhli7SKKNI 50-2015https://skkni-api.kemnaker.go.id/v1/public/documents/083065e9-45be-42a6-9ef1-3d1939a430e5/downloadAhli Madya Perencanaan Operasi dan Pemeliharaan Prasarana Sungai Serta Pemeliharaan Sungai8SKKNI 50-2015https://skkni-api.kemnaker.go.id/v1/public/documents/083065e9-45be-42a6-9ef1-3d1939a430e5/downloadAhli Perencanaan Operasi dan Pemeliharaan Prasarana Sungai Serta Pemeliharaan Sungai9SKKNI 50-2015https://skkni-api.kemnaker.go.id/v1/public/documents/083065e9-45be-42a6-9ef1-3d1939a430e5/download98Pelaksana Lapangan Pekerjaan BronjongPelaksana Lapangan Pekerjaan Bronjong Level 3Operator3SKKNI 365-2013https://skkni-api.kemnaker.go.id/v1/public/documents/9de8f73c-fa57-44ee-9f00-bbc5c61eafc4/downloadPelaksana Lapangan Pekerjaan BronjongTeknisi/Analis4SKKNI 365-2013https://skkni-api.kemnaker.go.id/v1/public/documents/9de8f73c-fa57-44ee-9f00-bbc5c61eafc4/download99Pelaksana Lapangan Pekerjaan Bangunan Pengaman PantaiPelaksana Lapangan Pekerjaan Bangunan Pengaman Pantai MadyaTeknisi/Analis5SKKNI 069-2009https://skkni-api.kemnaker.go.id/v1/public/documents/add271b1-c8e9-4b28-801c-bb15a4ae22e7/downloadPelaksana Lapangan Pekerjaan Bangunan Pengaman Pantai6SKKNI 069-2009https://skkni-api.kemnaker.go.id/v1/public/documents/add271b1-c8e9-4b28-801c-bb15a4ae22e7/download100Pelaksana Pekerjaan Pemeliharaan SungaiPelaksana Pekerjaan Pemeliharaan SungaiOperator3SKKNI 087-2015https://skkni-api.kemnaker.go.id/v1/public/documents/c8a44793-5fe3-4356-ad64-325f1dd89c9f/downloadPelaksana Pekerjaan Pemeliharaan Sungai MudaTeknisi/Analis4SKKNI 087-2015https://skkni-api.kemnaker.go.id/v1/public/documents/c8a44793-5fe3-4356-ad64-325f1dd89c9f/download101Teknisi PengerukanTeknisi PengerukanTeknisi/Analis4SKK Khusus Kep Dirjen Pembinaan Pelatihan Vokasi dan Produktivitas Nomor 2/3251/LP.00.00/XI/2022-Reg SKKK 28-2022https://simkompetensi.com//public/uploads/file_skkk/1672819735-6SKKKTeknisiPengerukan.pdf102Air Tanah Dan Air BakuAhli HidrologiAhli Muda HidrologiAhli7SKKNI 32-2014https://skkni-api.kemnaker.go.id/v1/public/documents/3990cc47-9f14-42de-9b62-657814467613/downloadAhli Madya Hidrologi8SKKNI 32-2014https://skkni-api.kemnaker.go.id/v1/public/documents/3990cc47-9f14-42de-9b62-657814467613/downloadAhli Utama Hidrologi9SKKNI 32-2014https://skkni-api.kemnaker.go.id/v1/public/documents/3990cc47-9f14-42de-9b62-657814467613/download103Ahli HidrolikaAhli Muda HidrolikaAhli7SKKNI 151-2019https://skkni-api.kemnaker.go.id/v1/public/documents/5252f637-ee3e-4724-852c-02eb1febcdef/downloadAhli Madya Hidrolika8SKKNI 151-2019https://skkni-api.kemnaker.go.id/v1/public/documents/5252f637-ee3e-4724-852c-02eb1febcdef/downloadAhli Hidrolika9SKKNI 151-2019https://skkni-api.kemnaker.go.id/v1/public/documents/5252f637-ee3e-4724-852c-02eb1febcdef/download104Ahli Penilai Kegagalan Bangunan Sumber Daya Air (SDA)Ahli Madya Penilai Kegagalan Bangunan Sumber Daya Air (SDA)Ahli8SKKNI 063-2022https://skkni-api.kemnaker.go.id/v1/public/documents/c6145fa4-cd58-41d5-a0fd-17f1500c770a/downloadAhli Penilai Kegagalan Bangunan Sumber Daya Air (SDA)9SKKNI 063-2022https://skkni-api.kemnaker.go.id/v1/public/documents/c6145fa4-cd58-41d5-a0fd-17f1500c770a/download105Ahli Bidang Keahlian Teknik Sumber Daya AirAhli Muda Bidang Keahlian Teknik Sumber Daya AirAhli7SKKNI 124-2021https://skkni-api.kemnaker.go.id/v1/public/documents/c9ddd996-94c3-4cdd-b209-a456f1a73b3b/downloadAhli Madya Bidang Keahlian Teknik Sumber Daya Air8SKKNI 124-2021https://skkni-api.kemnaker.go.id/v1/public/documents/c9ddd996-94c3-4cdd-b209-a456f1a73b3b/downloadAhli Utama Bidang Keahlian Teknik Sumber Daya Air9SKKNI 124-2021https://skkni-api.kemnaker.go.id/v1/public/documents/c9ddd996-94c3-4cdd-b209-a456f1a73b3b/download106Ahli Teknik Sumber Daya Air (Freshgraduate)Ahli Teknik Sumber Daya Air (Freshgraduate)Ahli7SKKNI 124–2021https://skkni-api.kemnaker.go.id/v1/public/documents/c9ddd996-94c3-4cdd-b209-a456f1a73b3b/download107Pelaksana Pengeboran Air TanahPelaksana Pengeboran Air Tanah MudaTeknisi/Analis4Skema LPJKN 2016 – 2020 Dalam proses Penyusunan SKKNI Tahun 2023-Pelaksana Pengeboran Air Tanah Madya5Skema LPJKN 2016 – 2020 Dalam proses Penyusunan SKKNI Tahun 2023-108Pengawas Pengeboran Air TanahPengawas Pengeboran Air Tanah MadyaTeknisi/Analis5Skema LPJKN 2016 – 2020 Dalam proses Penyusunan SKKNI Tahun 2023-Pengawas Pengeboran Air Tanah Utama6Skema LPJKN 2016 – 2020 Dalam proses Penyusunan SKKNI Tahun 2023-109Bangunan Air MinumPelaksana Konstruksi Bangunan Unit Produksi SPAMPelaksana Konstruksi Bangunan Unit Produksi SPAMAhli7SKKNI 318-2009https://skkni-api.kemnaker.go.id/v1/public/documents/07b4be75-abfc-4f6e-98cd-f47240c4ca85/download110Manajer Pelaksana Konstruksi Sistem Produksi Air Minum (SPAM)Manajer Pelaksana Konstruksi Sistem Produksi Air Minum (SPAM)Teknisi/Analis6SKKNI 344-2013https://skkni-api.kemnaker.go.id/v1/public/documents/2405e7f8-42d1-43fa-a184-bc921e54065c/download111Pelaksana Konstruksi Bangunan Unit Distribusi SPAMPelaksana Konstruksi Bangunan Unit Distribusi SPAM Level 3Operator3SKKNI 170-2010https://skkni-api.kemnaker.go.id/v1/public/documents/25f3f2df-1355-4ba5-b1bc-565a1eefadba/downloadPelaksana Konstruksi Bangunan Unit Distribusi SPAMTeknisi/Analis4SKKNI 170-2010https://skkni-api.kemnaker.go.id/v1/public/documents/25f3f2df-1355-4ba5-b1bc-565a1eefadba/download112Bangunan Air LimbahAhli Teknik Bangunan Air Limbah (SPALD)Ahli Muda Teknik Bangunan Air Limbah (SPALD)Ahli7SKKNI 29-2023https://simkompetensi.com//public/uploads/file_skkni/1681439628-SKKNI202329SANITASI.pdfAhli Madya Teknik Bangunan Air Limbah (SPALD)8SKKNI 29-2023https://simkompetensi.com//public/uploads/file_skkni/1681439628-SKKNI202329SANITASI.pdf113Pelaksana Lapangan Pekerjaan Bangunan Air Limbah PermukimanPelaksana Lapangan Pekerjaan Bangunan Air Limbah Permukiman (Setempat dan Terpusat)Teknisi/Analis4SKKNI 312-2009https://skkni-api.kemnaker.go.id/v1/public/documents/0642688b-8c84-4754-a79c-ce430c01a846/downloadPelaksana Lapangan Pekerjaan Bangunan Air Limbah Permukiman (Setempat dan Terpusat) Madya5SKKNI 312-2009https://skkni-api.kemnaker.go.id/v1/public/documents/0642688b-8c84-4754-a79c-ce430c01a846/download114Bangunan PersampahanAhli Teknik Bangunan Persampahan (TPA)Ahli Muda Teknik Bangunan Persampahan (TPA)Ahli7SKKNI 29-2023https://simkompetensi.com//public/uploads/file_skkni/1681439628-SKKNI202329SANITASI.pdfAhli Madya Teknik Bangunan Persampahan (TPA)8SKKNI 29-2023https://simkompetensi.com//public/uploads/file_skkni/1681439628-SKKNI202329SANITASI.pdf115Pelaksana Lapangan Pekerjaan Pemasangan Pipa Leachate (Lindi) dan Pipa Gas/Ventilasi di TPAPelaksana Lapangan Pekerjaan Pemasangan Pipa Leachate (Lindi) dan Pipa Gas/Ventilasi di TPATeknisi/Analis4SKKNI 313-2009https://skkni-api.kemnaker.go.id/v1/public/documents/5dcae259-7f21-43b5-adfe-9a95aba63d14/downloadPelaksana Lapangan Pekerjaan Pemasangan Pipa Leachate (Lindi) dan Pipa Gas/Ventilasi di TPA Madya5SKKNI 313-2009https://skkni-api.kemnaker.go.id/v1/public/documents/5dcae259-7f21-43b5-adfe-9a95aba63d14/download116Pelaksana Lapangan Pekerjaan Lapisan Kedap Air di Tempat Pemrosesan Akhir (TPA)Pelaksana Lapangan Pekerjaan Lapisan Kedap Air di Tempat Pemrosesan Akhir (TPA)Teknisi/Analis4SKKNI 319-2009https://skkni-api.kemnaker.go.id/v1/public/documents/291ff254-0ac5-4753-98db-11be9c6f8394/downloadPelaksana Lapangan Pekerjaan Lapisan Kedap Air di Tempat Pemrosesan Akhir (TPA) Madya5SKKNI 319-2009https://skkni-api.kemnaker.go.id/v1/public/documents/291ff254-0ac5-4753-98db-11be9c6f8394/download117Pelaksana Pembuatan Fasilitas Sampah dan LimbahPelaksana Pembuatan Fasilitas Sampah dan Limbah MudaTeknisi/Analis4SKKNI 29-2023https://simkompetensi.com//public/uploads/file_skkni/1681439628-SKKNI202329SANITASI.pdfPelaksana Pembuatan Fasilitas Sampah dan Limbah Madya5SKKNI 29-2023https://simkompetensi.com//public/uploads/file_skkni/1681439628-SKKNI202329SANITASI.pdf118Drainase PerkotaanAhli Perencanaan Jaringan DrainaseAhli Muda Perencanaan Jaringan DrainaseAhli7SKKNI 86-2015https://skkni-api.kemnaker.go.id/v1/public/documents/e940f9ec-9b3e-467c-b229-a7e1dc1cc1cf/downloadAhli Madya Perencanaan Jaringan Drainase8SKKNI 86-2015https://skkni-api.kemnaker.go.id/v1/public/documents/e940f9ec-9b3e-467c-b229-a7e1dc1cc1cf/downloadAhli Perencanaan Jaringan Drainase9SKKNI 86-2015https://skkni-api.kemnaker.go.id/v1/public/documents/e940f9ec-9b3e-467c-b229-a7e1dc1cc1cf/download119Pelaksana Lapangan Pekerjaan Drainase PerkotaanPelaksana Lapangan Pekerjaan Drainase PerkotaanTeknisi/Analis4SKKNI 197-2013https://skkni-api.kemnaker.go.id/v1/public/documents/6e66ac97-c925-44f1-9384-16c981b1094d/download120Pengawas Lapangan Pekerjaan Drainase PerkotaanPengawas Lapangan Pekerjaan Drainase Perkotaan MadyaTeknisi/Analis5SKKNI 095-2015https://skkni-api.kemnaker.go.id/v1/public/documents/e853a41d-be40-4c65-8f22-4a985a1eda43/downloadPengawas Lapangan Pekerjaan Drainase Perkotaan6SKKNI 095-2015https://skkni-api.kemnaker.go.id/v1/public/documents/e853a41d-be40-4c65-8f22-4a985a1eda43/download121Ahli Geologi Pekerjaan KonstruksiAhli Madya Geologi Pekerjaan KonstruksiAhli8SKKNI 149-2019https://skkni-api.kemnaker.go.id/v1/public/documents/b5a3d949-66bd-4bd9-a319-1aa8248022b7/downloadAhli Geologi Pekerjaan Konstruksi9SKKNI 149-2019https://skkni-api.kemnaker.go.id/v1/public/documents/b5a3d949-66bd-4bd9-a319-1aa8248022b7/download122Ahli Perencana PondasiAhli Muda Perencana PondasiAhli7SKKNI 277-2010https://skkni-api.kemnaker.go.id/v1/public/documents/b84cbd33-a31b-4a5a-8149-a8abd8a1ce75/downloadAhli Madya Perencana Pondasi8SKKNI 277-2010https://skkni-api.kemnaker.go.id/v1/public/documents/b84cbd33-a31b-4a5a-8149-a8abd8a1ce75/downloadAhli Utama Perencana Pondasi9SKKNI 277-2010https://skkni-api.kemnaker.go.id/v1/public/documents/b84cbd33-a31b-4a5a-8149-a8abd8a1ce75/download123Ahli GeoteknikAhli Muda GeoteknikAhli7SKKNI 305–2016https://skkni-api.kemnaker.go.id/v1/public/documents/1d18ed98-18df-48c7-a6e1-eda13fd00345/downloadAhli Madya Geoteknik8SKKNI 305–2016https://skkni-api.kemnaker.go.id/v1/public/documents/1d18ed98-18df-48c7-a6e1-eda13fd00345/downloadAhli Geoteknik9SKKNI 305–2016https://skkni-api.kemnaker.go.id/v1/public/documents/1d18ed98-18df-48c7-a6e1-eda13fd00345/download124Operator Alat Penyelidikan Tanah (Soil Investigation Operator)Operator Alat Penyelidikan Tanah (Soil Investigation Operator)Operator2Skema LPJKN 2016 – 2020 Dalam proses Penyusunan SKKNI Tahun 2023-125Tukang Pekerjaan Tanah/PondasiTukang Pekerjaan Tanah/Pondasi Level 1Operator1SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-Tukang Pekerjaan Tanah/Pondasi Level 22SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-126Teknisi SondirTeknisi Sondir MudaTeknisi/Analis4Skema LPJKN 2016 – 2020 Dalam proses Penyusunan SKKNI Tahun 2023-Teknisi Sondir Madya5Skema LPJKN 2016 – 2020 Dalam proses Penyusunan SKKNI Tahun 2023-127Teknisi GeoteknikTeknisi Geoteknik MadyaTeknisi/Analis5SKKNI 181–2009https://skkni-api.kemnaker.go.id/v1/public/documents/cab7a963-a3ab-4a3d-9f86-fc7216d9fa86/downloadTeknisi Geoteknik6SKKNI 181–2009https://skkni-api.kemnaker.go.id/v1/public/documents/cab7a963-a3ab-4a3d-9f86-fc7216d9fa86/download128Ahli Geoteknik (Freshgraduate)Ahli Geoteknik (Freshgraduate)Ahli7SKKNI 305–2016https://skkni-api.kemnaker.go.id/v1/public/documents/1d18ed98-18df-48c7-a6e1-eda13fd00345/download129GeodesiSpesialis SIGSpesialis SIGAhli7SKKNI 172-2020https://skkni-api.kemnaker.go.id/v1/public/documents/f73251e4-05b7-4f62-87bf-e231af217af0/download130Ahli Sistem Informasi GeografisAhli Madya Sistem Informasi GeografisAhli8SKKNI 172-2020https://skkni-api.kemnaker.go.id/v1/public/documents/f73251e4-05b7-4f62-87bf-e231af217af0/download131Manager Proyek Survei dan Pemetaan WilayahManager Proyek Survei dan Pemetaan WilayahAhli7SKKNI 172-2020https://skkni-api.kemnaker.go.id/v1/public/documents/f73251e4-05b7-4f62-87bf-e231af217af0/download132Ahli KewilayahanAhli Madya KewilayahanAhli8SKKNI 172-2020https://skkni-api.kemnaker.go.id/v1/public/documents/f73251e4-05b7-4f62-87bf-e231af217af0/downloadAhli Utama Kewilayahan9SKKNI 172-2020https://skkni-api.kemnaker.go.id/v1/public/documents/f73251e4-05b7-4f62-87bf-e231af217af0/download133Ahli Survei Pemetaan UdaraAhli Muda Survei Pemetaan UdaraAhli7SKKNI 172-2020https://skkni-api.kemnaker.go.id/v1/public/documents/f73251e4-05b7-4f62-87bf-e231af217af0/download134Ahli Hidrografi PesisirAhli Muda Hidrografi PesisirAhli7SKKNI 172-2020https://skkni-api.kemnaker.go.id/v1/public/documents/f73251e4-05b7-4f62-87bf-e231af217af0/download135Ahli Hidrografi Lepas PantaiAhli Madya Hidrografi Lepas PantaiAhli8SKKNI 172-2020https://skkni-api.kemnaker.go.id/v1/public/documents/f73251e4-05b7-4f62-87bf-e231af217af0/download136Ahli Pengukuran JalanAhli Muda Pengukuran JalanAhli7SKKNI 341-2013https://skkni-api.kemnaker.go.id/v1/public/documents/1775c200-c6fe-44fc-b799-d855ee9e6f88/download137Ahli Geodesi dan Bangunan GedungAhli Geodesi dan Bangunan GedungAhli9SKKNI 295-2009https://skkni-api.kemnaker.go.id/v1/public/documents/b38766d0-ce17-4413-84c3-96b3238978cc/download138Ahli Geodesi Untuk Perencanaan Teknis Jalan dan JembatanAhli Geodesi Untuk Perencanaan Teknis Jalan dan JembatanAhli9SKKNI 328-2009https://skkni-api.kemnaker.go.id/v1/public/documents/fee7532b-748d-4751-8e63-de73e8b9631e/download139Ahli Survei TerestrisAhli Muda Survei TerestrisAhli7SKKNI 172–2020https://skkni-api.kemnaker.go.id/v1/public/documents/f73251e4-05b7-4f62-87bf-e231af217af0/downloadAhli Madya Survei Terestris8SKKNI 172–2020https://skkni-api.kemnaker.go.id/v1/public/documents/f73251e4-05b7-4f62-87bf-e231af217af0/downloadAhli Utama Survei Terestris9SKKNI 172–2020https://skkni-api.kemnaker.go.id/v1/public/documents/f73251e4-05b7-4f62-87bf-e231af217af0/download140Surveyor TerestrisSurveyor TerestrisTeknisi/Analis6SKKNI 172-2020https://skkni-api.kemnaker.go.id/v1/public/documents/f73251e4-05b7-4f62-87bf-e231af217af0/download141Surveyor RekayasaSurveyor RekayasaTeknisi/Analis6SKKNI 172-2020https://skkni-api.kemnaker.go.id/v1/public/documents/f73251e4-05b7-4f62-87bf-e231af217af0/download142Teknisi Survei TerestrisTeknisi Survei TerestrisTeknisi/Analis5SKKNI 172-2020https://skkni-api.kemnaker.go.id/v1/public/documents/f73251e4-05b7-4f62-87bf-e231af217af0/download143Operator Survei TerestrisOperator Utama Survei TerestrisTeknisi/Analis4SKKNI 172-2020https://skkni-api.kemnaker.go.id/v1/public/documents/f73251e4-05b7-4f62-87bf-e231af217af0/downloadOperator Madya Survei TerestrisOperator3SKKNI 172-2020https://skkni-api.kemnaker.go.id/v1/public/documents/f73251e4-05b7-4f62-87bf-e231af217af0/downloadOperator Muda Survei TerestrisOperator2SKKNI 172-2020https://skkni-api.kemnaker.go.id/v1/public/documents/f73251e4-05b7-4f62-87bf-e231af217af0/download144Jalan RelAhli Perencana Struktur Jalan RelAhli Madya Perencana Struktur Jalan RelAhli8SKKNI 332-2013https://skkni-api.kemnaker.go.id/v1/public/documents/c945b8ab-f770-4ce6-a144-c8927b029d69/download145Manajer Teknik Pembangunan Jalan RelManajer Teknik Pembangunan Jalan RelAhli7SKKNI 388-2013https://skkni-api.kemnaker.go.id/v1/public/documents/a223d231-e1b3-4e08-8ad5-aa171c438f0f/download146Ahli Teknik Jalan RelAhli Muda Teknik Jalan RelAhli7RSKKNI Ahli Teknik Jalan Rel/Akan ditetapkan menjadi SKKNI/SKK Khusus-Ahli Madya Teknik Jalan Rel8RSKKNI Ahli Teknik Jalan Rel/Akan ditetapkan menjadi SKKNI/SKK Khusus-Ahli Utama Teknik Jalan Rel9RSKKNI Ahli Teknik Jalan Rel/Akan ditetapkan menjadi SKKNI/SKK Khusus-147Pelaksana Lapangan Pekerjaan Pembangunan Jalan RelPelaksana Lapangan Pekerjaan Pembangunan Jalan Rel MudaTeknisi/Analis4SKKNI 194-2013https://skkni-api.kemnaker.go.id/v1/public/documents/0f3d2a04-262a-44a8-ab77-0fcbd9155b1a/downloadPelaksana Lapangan Pekerjaan Pembangunan Jalan Rel Madya5SKKNI 194-2013https://skkni-api.kemnaker.go.id/v1/public/documents/0f3d2a04-262a-44a8-ab77-0fcbd9155b1a/download148Pengawas Pekerjaan Pengelasan Rel Kereta ApiPengawas Pekerjaan Pengelasan Rel Kereta Api MudaTeknisi/Analis4SKKNI 54-2021https://skkni-api.kemnaker.go.id/v1/public/documents/0f0ae7d3-d622-44f5-8c79-b2eec03d51bb/downloadPengawas Pekerjaan Pengelasan Rel Kereta Api Madya5SKKNI 54-2021https://skkni-api.kemnaker.go.id/v1/public/documents/0f0ae7d3-d622-44f5-8c79-b2eec03d51bb/downloadPengawas Pekerjaan Pengelasan Rel Kereta Api6SKKNI 54-2021https://skkni-api.kemnaker.go.id/v1/public/documents/0f0ae7d3-d622-44f5-8c79-b2eec03d51bb/download149Pelaksana Lapangan Pekerjaan GroutingPelaksana Lapangan Pekerjaan GroutingTeknisi/Analis5SKKNI 17-2023https://simkompetensi.com//public/uploads/file_skkni/1678435069-SKKNI202317.pdf150Operator GroutingOperator GroutingOperator3SKKNI 17-2023https://simkompetensi.com//public/uploads/file_skkni/1678435069-SKKNI202317.pdf151Bangunan MenaraTukang Konstruksi Baja dan PlatTukang Konstruksi Baja dan PlatOperator3SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus-152Bangunan PelabuhanAhli Teknik DermagaAhli Muda Teknik DermagaAhli7SKKNI 320–2016https://skkni-api.kemnaker.go.id/v1/public/documents/006c2155-050a-46e9-9567-fb54433225dc/downloadAhli Madya Teknik Dermaga8SKKNI 320–2016https://skkni-api.kemnaker.go.id/v1/public/documents/006c2155-050a-46e9-9567-fb54433225dc/downloadAhli Teknik Dermaga9SKKNI 320–2016https://skkni-api.kemnaker.go.id/v1/public/documents/006c2155-050a-46e9-9567-fb54433225dc/download153Perawat Fasilitas PelabuhanPerawat Fasilitas Pelabuhan MudaTeknisi/Analis4SKKNI 234-2019https://skkni-api.kemnaker.go.id/v1/public/documents/1b25d68a-ffd2-4b29-aaab-5b74719ee334/downloadPerawat Fasilitas Pelabuhan Madya5SKKNI 234-2019https://skkni-api.kemnaker.go.id/v1/public/documents/1b25d68a-ffd2-4b29-aaab-5b74719ee334/downloadPerawat Fasilitas Pelabuhan6SKKNI 234-2019https://skkni-api.kemnaker.go.id/v1/public/documents/1b25d68a-ffd2-4b29-aaab-5b74719ee334/downloadTesting dan Analisis Teknik------154Bangunan Lepas PantaiAhli Teknik Bangunan Lepas PantaiAhli Muda Teknik Bangunan Lepas PantaiAhli7RSKKNI Ahli Teknik Bangunan Lepas Pantai/Akan ditetapkan menjadi SKKNI/SKK Khusus-Ahli Madya Teknik Bangunan Lepas Pantai8RSKKNI Ahli Teknik Bangunan Lepas Pantai/Akan ditetapkan menjadi SKKNI/SKK Khusus-Ahli Teknik Bangunan Lepas Pantai9RSKKNI Ahli Teknik Bangunan Lepas Pantai/Akan ditetapkan menjadi SKKNI/SKK Khusus-155Pembongkaran BangunanAhli Pelaksanaan Pembongkaran BangunanAhli Muda Pelaksanaan Pembongkaran BangunanAhli7SKKNI 96–2015https://skkni-api.kemnaker.go.id/v1/public/documents/4b065b66-2c87-4d33-861f-e6d5c98253db/downloadAhli Madya Pelaksanaan Pembongkaran Bangunan8SKKNI 96–2015https://skkni-api.kemnaker.go.id/v1/public/documents/4b065b66-2c87-4d33-861f-e6d5c98253db/downloadAhli Pelaksanaan Pembongkaran Bangunan9SKKNI 96–2015https://skkni-api.kemnaker.go.id/v1/public/documents/4b065b66-2c87-4d33-861f-e6d5c98253db/download156GroutingAhli GroutingAhli Muda GroutingAhli7 SKKNI 17-2023 https://simkompetensi.com//public/uploads/file_skkni/1678435069-SKKNI202317.pdfAhli Madya Grouting8SKKNI 17-2023 https://simkompetensi.com//public/uploads/file_skkni/1678435069-SKKNI202317.pdf
+8:54 AM
+Thought
+Mantap — daftar yang Anda kirim adalah master katalog Klasifikasi Sipil resmi (Bina Konstruksi PU). Ini mengubah skala desain dari satu chatbot (RekayasaGedung Bot — SKKNI 106-2015 saja) menjadi platform Bimtek Sipil multi-skema yang harus mencakup ~156 jabatan kerja, ~22 subklasifikasi, jenjang KKNI 1–9, dan ratusan SKKNI/SKKK referensi.
+Saya rangkum dulu strukturnya, lalu usulkan arsitektur skalabel.
+BL. Ringkasan Master Katalog Klasifikasi Sipil
+Total jabatan kerja: 156 baris (banyak punya 2–3 jenjang, jadi total ≈ 280+ skema kompetensi).
+Subklasifikasi (22)
+#
+Subklasifikasi
+Jumlah baris
+Rentang Jenjang
+Karakter Dominan
+1
+Gedung
+1–39
+1–9
+Ahli, Tukang, Mandor, Pelaksana, Pengawas
+2
+Material
+40–46
+3–9
+Ahli Material Jalan, Lab Beton/Aspal/Tanah, AMP
+3
+Jalan
+47–58
+2–9
+Ahli Teknik Jalan, Pelaksana, Mandor, Juru Gambar
+4
+Jembatan
+59–71
+2–9
+Ahli, Teknisi, Tukang, Pelaksana, Pengawas
+5
+Landasan Udara
+72
+7–9
+RSKKNI (belum final)
+6
+Terowongan
+73–75
+5–9
+Ahli, Pelaksana
+7
+Bendung & Bendungan
+76–83
+3–9
+Ahli OP, Perencana, Mandor, Inspektur
+8
+Irigasi & Rawa
+84–94
+2–9
+Ahli, Pengamat, Juru Pengairan, Pelaksana
+9
+Sungai & Pantai
+95–101
+3–9
+Ahli Pantai, Pelaksana Bronjong, Pemeliharaan Sungai
+10
+Air Tanah & Air Baku
+102–108
+4–9
+Hidrologi, Hidrolika, SDA, Pengeboran
+11
+Bangunan Air Minum
+109–111
+3–7
+Konstruksi SPAM
+12
+Bangunan Air Limbah
+112–113
+4–8
+Teknik SPALD, Pelaksana
+13
+Bangunan Persampahan
+114–117
+4–8
+Teknik TPA, Pipa Lindi, Lapisan Kedap Air
+14
+Drainase Perkotaan
+118–120
+4–9
+Perencana, Pelaksana, Pengawas
+15
+Geologi/Pondasi/Geoteknik
+121–128
+1–9
+Ahli Geologi, Pondasi, Geoteknik, Sondir
+16
+Geodesi
+129–143
+2–9
+SIG, Survei Terestris, Hidrografi, Pemetaan Udara
+17
+Jalan Rel
+144–150
+4–9
+Ahli, Pelaksana, Pengawas Las Rel
+18
+Bangunan Menara
+151
+3
+Tukang Konstruksi Baja & Plat
+19
+Bangunan Pelabuhan
+152–153
+4–9
+Ahli Dermaga, Perawat Fasilitas
+20
+Bangunan Lepas Pantai
+154
+7–9
+RSKKNI (belum final)
+21
+Pembongkaran Bangunan
+155
+7–9
+Ahli Pelaksanaan
+22
+Grouting
+156
+7–8
+Ahli Grouting
+Distribusi Jenjang KKNI
+Level 1–3 (Operator/Tukang): ~40 baris (terbanyak di Gedung & Material).
+Level 4–6 (Teknisi/Analis): ~55 baris.
+Level 7–9 (Ahli): ~60 baris (paling kritikal untuk audit BUJK).
+Status SKK
+Sudah ada SKKNI/SKKK final: ~85% baris.
+RSKKNI / Skema LPJK / Akan disusun: ~15% (mis. Landasan Terbang, Bangunan Lepas Pantai, Teknik Terowongan, Teknik Jalan Rel, beberapa Tukang/Pengawas).
+BM. Implikasi: Dari Single-Bot ke Platform Bimtek Sipil
+Tidak realistis membangun 156 chatbot terpisah. Yang masuk akal adalah satu platform multi-skema dengan pola yang sudah Anda pakai (orchestrator + agen spesialis), di-extend menjadi federasi sub-orchestrator per subklasifikasi.
+Arsitektur Federasi (Sipil-Bot Platform)
+flowchart TD
+    U["Peserta"] --> RBR["SIPIL-ROUTER<br>(Klasifikasi & Jenjang Detection)"]
+    RBR --> G["GEDUNG-ORCH"]
+    RBR --> J["JALAN-ORCH"]
+    RBR --> JB["JEMBATAN-ORCH"]
+    RBR --> SDA["SDA-ORCH<br>(Bendungan/Irigasi/Sungai/Drainase/Air)"]
+    RBR --> ENV["ENV-ORCH<br>(Air Minum/Limbah/Sampah)"]
+    RBR --> GEO["GEO-ORCH<br>(Geoteknik/Geodesi)"]
+    RBR --> REL["REL-ORCH"]
+    RBR --> KHUSUS["KHUSUS-ORCH<br>(Pelabuhan/Lepas Pantai/Terowongan/Menara/Pembongkaran/Grouting/Landasan Udara)"]
+    G --> SHARED["LAYANAN BERSAMA:<br>RG-EDU · RG-QUIZ · RG-CASE · RG-ASESOR ·<br>RG-PORTO · RG-DOC · RG-REG · RG-PROGRESS"]
+    J --> SHARED
+    JB --> SHARED
+    SDA --> SHARED
+    ENV --> SHARED
+    GEO --> SHARED
+    REL --> SHARED
+    KHUSUS --> SHARED
+    SHARED --> KB["MASTER KB SKKNI<br>(per-jabatan, per-jenjang)"]
+Peserta
+
+SIPIL-ROUTER
+(Klasifikasi & Jenjang Detection)
+
+GEDUNG-ORCH
+
+JALAN-ORCH
+
+JEMBATAN-ORCH
+
+SDA-ORCH
+(Bendungan/Irigasi/Sungai/Drainase/Air)
+
+ENV-ORCH
+(Air Minum/Limbah/Sampah)
+
+GEO-ORCH
+(Geoteknik/Geodesi)
+
+REL-ORCH
+
+KHUSUS-ORCH
+(Pelabuhan/Lepas Pantai/Terowongan/Menara/Pembongkaran/Grouting/Landasan Udara)
+
+LAYANAN BERSAMA:
+RG-EDU · RG-QUIZ · RG-CASE · RG-ASESOR ·
+RG-PORTO · RG-DOC · RG-REG · RG-PROGRESS
+
+MASTER KB SKKNI
+(per-jabatan, per-jenjang)
+
+​
+Prinsip kunci:
+Satu router mendeteksi subklasifikasi, jabatan, dan jenjang dari pesan/profil peserta.
+8 sub-orchestrator menangani konteks domain (regulasi, istilah teknis, kasus tipikal).
+Layanan agen bersama (EDU, QUIZ, CASE, ASESOR, PORTO, DOC, REG, PROGRESS) di-reuse oleh semua sub-orchestrator → tidak duplikasi kode.
+KB master terindeks per kombinasi (subklasifikasi, jabatan, jenjang, kode SKKNI) → satu sumber kebenaran.
+BN. Skema KB Master untuk Semua 156 Jabatan
+master_kb_schema:
+  primary_key: "{subklasifikasi}__{jabatan_kerja}__{jenjang}"
+  fields:
+    - subklasifikasi          # Gedung, Jalan, Jembatan, ...
+    - jabatan_kerja           # Ahli Madya Teknik Jalan
+    - jenjang_jabatan         # Ahli Muda / Ahli Madya / Ahli Utama / Operator / Teknisi
+    - kualifikasi             # Ahli / Teknisi-Analis / Operator
+    - jenjang_kkni            # 1..9
+    - skkni_code              # SKKNI 126-2021
+    - skkni_url               # https://skkni-api.kemnaker.go.id/...
+    - skkk_reference          # SKK Khusus jika ada
+    - status_dokumen          # final | RSKKNI | Skema LPJK | dalam penyusunan
+    - n_unit_kompetensi       # diisi setelah SKKNI di-parse
+    - unit_codes              # ["F.xxxxxx.xxx.xx", ...]
+    - prerequisite_jabatan    # jabatan jenjang lebih rendah yang menjadi prasyarat
+    - related_jabatan         # lintas-subklasifikasi yang relevan (mis. Geoteknik ↔ Gedung)
+    - portfolio_focus         # 5–8 bullet bukti kompetensi inti
+    - typical_assessment      # tertulis | lisan | praktik | studi kasus | portofolio
+    - bimtek_duration_jp      # rekomendasi JP
+    - chatbot_module_id       # mapping ke modul bot
+    - last_reviewed           # tanggal review konten terakhir
+​
+BN. Prioritas Rilis (Roadmap 6 Bulan)
+Wave
+Subklasifikasi
+Alasan Prioritas
+Output
+W1 (M1–M2)
+Gedung (39 jabatan)
+Sudah dirintis (SKKNI 106-2015), permintaan BUJK tertinggi
+RekayasaGedung Bot final + 9 jabatan Ahli Gedung lain
+W2 (M2–M3)
+Jalan + Jembatan + Material
+Mendominasi proyek PU/PUPR
+Jalan-Bot, Jembatan-Bot, Material-Bot
+W3 (M3–M4)
+SDA (Bendungan, Irigasi, Sungai, Drainase, Air Tanah)
+Klien Balai Wilayah Sungai
+SDA-Bot federasi
+W4 (M4–M5)
+Lingkungan (Air Minum, Limbah, Sampah) + Geoteknik/Geodesi
+Sanitasi & data spasial
+ENV-Bot, GEO-Bot
+W5 (M5–M6)
+Jalan Rel + Pelabuhan + Terowongan + Pembongkaran + Grouting + Menara + Lepas Pantai + Landasan Udara
+Niche, beberapa belum final SKKNI
+KHUSUS-Bot dengan disclaimer "RSKKNI"
+BO. Hubungan dengan Project Anda yang Lain
+Sangat relevan dengan ekosistem yang sudah Anda bangun:
+Modul Anda
+Reuse di Sipil-Bot Platform
+CSMS Assistant (Form 1 RA, Modul A/B/C)
+Layer K3L wajib di setiap jabatan Sipil — terutama Operator/Tukang/Mandor
+OpenClaw / SMAP
+Layer governance: kode etik tenaga ahli, anti-suap pengadaan jasa konstruksi (Pelaksana, Pengawas, Manajer)
+Generator Document
+Reuse RG-DOC: spesifikasi teknis, metode kerja, QC plan, laporan akhir berlaku lintas subklasifikasi
+Roadmap SMAP RACI/KPI
+Pola sama dipakai untuk roadmap rilis Wave 1–5 di atas
+BP. Notion Database yang Direkomendasikan
+Untuk mengelola katalog ini secara operasional, saya sarankan satu Notion database induk dengan baris = jabatan-jenjang dan tampilan per subklasifikasi. Properti yang diusulkan:
+Title ({Jabatan Kerja} – Jenjang {n})
+Subklasifikasi (select)
+Jabatan Kerja (text)
+Jenjang Jabatan (select)
+Kualifikasi (select: Ahli / Teknisi-Analis / Operator)
+Jenjang KKNI (number 1–9)
+Kode SKKNI/SKKK (text)
+Link Dokumen Resmi (URL)
+Status Dokumen (select: Final / RSKKNI / Skema LPJK / Penyusunan)
+Wave Rilis Bot (select: W1–W5)
+Modul Bot Tertaut (text)
+Status Konten Bimtek (select: Belum / Outline / Draft / Review / Final)
+Status Konten Bot (select: Belum / KB Loaded / Quiz Ready / Live)
+PIC Konten (person)
+Catatan (text)
+Plus 4 view:
+Master (semua, group by Subklasifikasi).
+Roadmap Rilis (group by Wave).
+Status Penyusunan SKKNI (filter Status ≠ Final).
+Tracker BUJK (filter level 7–9 saja, untuk Ahli yang dicari BUJK untuk SBU/SKK).
+Pertanyaan Konfirmasi
+Agar saya bisa membantu paling efektif, mohon arahkan langkah berikutnya:
+Langkah berikutnya yang Anda inginkan?
+Buat Notion database master 156 jabatan (terisi data dari tabel ini)
+Saya akan buat Notion database master 156 jabatan kerja Klasifikasi Sipil sekarang. Karena baris totalnya cukup banyak (≈280 entri jika semua jenjang dipisah), saya akan:
+Baca dulu spesifikasi schema database & view.
+Buat database induk dengan schema lengkap + 4 view (Master, Roadmap Rilis, Status Penyusunan, Tracker BUJK Ahli).
+Isi baris bertahap per subklasifikasi (paralel batch).
+Mari mulai dengan baca dokumentasi yang dibutuhkan.
+Loaded Notion tools
+Thought
+Schema siap. Sekarang saya buat database induk dengan 4 view, lalu saya isi datanya secara bertahap per subklasifikasi.
+Database induk berhasil dibuat. Sekarang saya isi datanya. Karena ada ~280 baris (jabatan × jenjang), saya proses bertahap per subklasifikasi dengan paralelisasi tinggi. Mulai dari Gedung (subklasifikasi terbesar, ~71 baris).
+Batch 1 — Gedung (Ahli, KKNI 7–9):
+Thought
+Lanjut Batch 2 — Gedung (Operator/Tukang & sisanya):
+Lanjut Batch 3 — sisa Gedung (Teknisi Kaca, Juru Gambar, Tukang/Mandor):
+Lanjut Batch 4 — Material + Jalan (W2):
+Thought
+Lanjut Batch 5 — Jembatan + Landasan Udara + Terowongan:
+Thought
+Lanjut Batch 6 — W3 SDA: Bendungan + Irigasi/Rawa + Sungai/Pantai + Air Tanah:
+lanjut
+9:56 AM
+Thought
+Lanjut Batch 6 — W3 SDA (Bendungan + Irigasi/Rawa):
+Lanjut Batch 7 — W3 SDA: Sungai/Pantai + Air Tanah & Air Baku:
+Thought
+Lanjut Batch 8 — W4 ENV: Air Minum + Air Limbah + Persampahan + Drainase:
+Thought
+Lanjut Batch 9 — W4 GEO (Geodesi) + W5 Specialty:
+Database master Klasifikasi Sipil tuntas — semua subklasifikasi yang ada SKKNI/SKKK/Skema LPJK telah masuk.
+Ringkasan database master Klasifikasi Sipil — selesai
+Wave
+Subklasifikasi
+Baris
+W1 — Gedung
+Bangunan Gedung
+71
+W2 — Jalan/Jembatan
+Material, Jalan, Jembatan, Landasan Udara, Terowongan
+~85
+W3 — SDA
+Bendungan, Irigasi/Rawa, Sungai/Pantai, Air Tanah/Air Baku
+70
+W4 — ENV
+Air Minum, Air Limbah, Persampahan, Drainase Perkotaan
+22
+W4 — GEO
+Geoteknik & Pondasi, Geodesi
+36
+W5 — Specialty
+Jalan Rel, Grouting, Bangunan Menara, Pelabuhan, Lepas Pantai, Pembongkaran, Landasan Udara
+32
+Total
+22 subklasifikasi
+±316 entri jabatan × jenjang
+Catatan kualitas data:
+Status Final → SKKNI Kemnaker resmi (URL skkni-api.kemnaker.go.id atau simkompetensi.com).
+Status Skema LPJK → belum ada SKKNI/SKKK; sertifikasi memakai skema LPJK.
+Status RSKKNI / Akan Disusun → tertera "akan ditetapkan menjadi SKKNI/SKK Khusus" pada katalog binakonstruksi.pu.go.id (Jalan Rel Ahli, Bangunan Lepas Pantai, Landasan Udara).
+Field Wave Rilis Bot siap dipakai sebagai filter view untuk roadmap rilis RekayasaGedung Bot → Sipil-Bot Platform.
+Field Modul Bot Tertaut masih kosong — bisa diisi belakangan saat tiap modul bot dirilis (mis. RG-EDU-BG, RG-CASE-JLN, dst.).
+Apakah perlu saya lanjut ke langkah berikutnya: membuat halaman federasi "Sipil-Bot Platform" yang menjelaskan strategi multi-bot per Wave + cara meng-instansiasi bot baru dari template RekayasaGedung Bot?
+

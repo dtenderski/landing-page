@@ -1,0 +1,791 @@
+Berikut **lanjutan modul implementasi chatbot SKK AJJ Nirkertas** untuk peran **Asesi, TUK, Asesor Kompetensi, dan Manajemen LSP**. Bagian ini melengkapi desain sebelumnya dengan **intent training, routing logic, data schema, escalation matrix, audit checklist, dan test case** agar siap dimasukkan ke builder chatbot. Struktur ini masih mengikuti pola konfigurasi chatbot builder pada file terlampir: intent, response template, flow, checklist, fallback, dan guardrails. 
+
+---
+
+# 13. Intent Set Berdasarkan Peran
+
+```yaml
+intents:
+  - id: ask_role_asesi
+    description: "Pengguna bertanya tugas dan tanggung jawab Asesi."
+    sample_user_inputs:
+      - "Apa tugas asesi?"
+      - "Saya sebagai asesi harus melakukan apa?"
+      - "Tanggung jawab peserta sertifikasi apa?"
+      - "Apa kewajiban asesi saat AJJ?"
+      - "Apa yang harus disiapkan asesi untuk nirkertas?"
+    entities:
+      - role_name: "Asesi"
+      - process_type: "Sertifikasi Nirkertas | AJJ Nirkertas"
+    response_template: response_asesi_responsibility
+    next_node: role_asesi_overview
+
+  - id: ask_role_tuk
+    description: "Pengguna bertanya tugas dan tanggung jawab TUK."
+    sample_user_inputs:
+      - "Apa tugas TUK?"
+      - "Peran TUK dalam AJJ apa?"
+      - "TUK harus menyiapkan apa?"
+      - "Tanggung jawab TUK dalam sertifikasi nirkertas apa?"
+      - "Apa checklist TUK jarak jauh?"
+    entities:
+      - role_name: "TUK"
+      - process_type: "Sertifikasi Nirkertas | AJJ Nirkertas"
+    response_template: response_tuk_responsibility
+    next_node: role_tuk_overview
+
+  - id: ask_role_asesor
+    description: "Pengguna bertanya tugas Asesor Kompetensi."
+    sample_user_inputs:
+      - "Apa tugas asesor kompetensi?"
+      - "Asesor harus melakukan apa dalam AJJ?"
+      - "Tanggung jawab asesor saat asesmen jarak jauh apa?"
+      - "Apa peran asesor dalam nirkertas?"
+      - "Asesor menilai apa saja?"
+    entities:
+      - role_name: "Asesor Kompetensi"
+      - process_type: "Sertifikasi Nirkertas | AJJ Nirkertas"
+    response_template: response_asesor_responsibility
+    next_node: role_asesor_overview
+
+  - id: ask_role_lsp_management
+    description: "Pengguna bertanya tugas Manajemen LSP."
+    sample_user_inputs:
+      - "Apa tugas manajemen LSP?"
+      - "Admin LSP harus menyiapkan apa?"
+      - "Peran LSP dalam AJJ nirkertas apa?"
+      - "Tanggung jawab LSP dalam sertifikasi digital apa?"
+      - "Apa yang harus disiapkan LSP sebelum AJJ?"
+    entities:
+      - role_name: "Manajemen LSP"
+      - process_type: "Sertifikasi Nirkertas | AJJ Nirkertas"
+    response_template: response_lsp_management_responsibility
+    next_node: role_lsp_management_overview
+
+  - id: compare_roles
+    description: "Pengguna ingin membandingkan peran."
+    sample_user_inputs:
+      - "Bedanya tugas asesi dan asesor apa?"
+      - "Bandingkan peran TUK dan LSP"
+      - "Siapa yang bertanggung jawab atas rekaman asesmen?"
+      - "Siapa yang menangani kendala teknis?"
+      - "Siapa yang membuat keputusan sertifikasi?"
+    entities:
+      - role_a
+      - role_b
+      - responsibility_topic
+    response_template: response_role_comparison
+    next_node: responsibility_comparison_matrix
+
+  - id: ask_escalation
+    description: "Pengguna bertanya siapa yang harus dihubungi saat ada masalah."
+    sample_user_inputs:
+      - "Kalau internet putus hubungi siapa?"
+      - "Kalau dokumen gagal upload lapor ke siapa?"
+      - "Kalau rekaman asesmen gagal bagaimana?"
+      - "Kalau asesi tidak hadir apa yang dilakukan?"
+      - "Kalau ada banding siapa yang menangani?"
+    entities:
+      - issue_type
+      - role_name
+    response_template: response_escalation_guidance
+    next_node: escalation_matrix
+```
+
+---
+
+# 14. Role-Based Routing Logic
+
+```yaml
+routing_logic:
+  role_detection:
+    asesi_keywords:
+      - "asesi"
+      - "peserta"
+      - "pemohon sertifikasi"
+      - "calon peserta"
+      - "peserta uji"
+    tuk_keywords:
+      - "TUK"
+      - "tempat uji"
+      - "tempat uji kompetensi"
+      - "fasilitas uji"
+      - "lokasi uji"
+    asesor_keywords:
+      - "asesor"
+      - "asesor kompetensi"
+      - "penguji"
+      - "penilai"
+    lsp_keywords:
+      - "LSP"
+      - "admin LSP"
+      - "manajemen LSP"
+      - "pengelola LSP"
+      - "komite sertifikasi"
+
+  process_detection:
+    sertifikasi_nirkertas_keywords:
+      - "nirkertas"
+      - "paperless"
+      - "digital"
+      - "form online"
+      - "dokumen digital"
+      - "sertifikasi digital"
+    ajj_nirkertas_keywords:
+      - "AJJ"
+      - "asesmen jarak jauh"
+      - "online"
+      - "daring"
+      - "remote"
+      - "video meeting"
+
+  default_behavior:
+    if_role_detected_but_process_missing:
+      bot_message: >
+        Saya menangkap peran Anda sebagai {{role_name}}. Apakah Anda ingin
+        melihat tanggung jawab dalam Sertifikasi Nirkertas, AJJ Nirkertas,
+        atau keduanya?
+      quick_replies:
+        - "Sertifikasi Nirkertas"
+        - "AJJ Nirkertas"
+        - "Keduanya"
+
+    if_process_detected_but_role_missing:
+      bot_message: >
+        Saya menangkap topiknya {{process_type}}. Peran mana yang ingin
+        Anda lihat?
+      quick_replies:
+        - "Asesi"
+        - "TUK"
+        - "Asesor Kompetensi"
+        - "Manajemen LSP"
+```
+
+---
+
+# 15. Detailed Responsibility Lookup
+
+```yaml
+responsibility_lookup:
+  id: role_responsibility_lookup
+  lookup_fields:
+    - role_name
+    - process_type
+    - phase
+    - responsibility_topic
+
+  phases:
+    - sebelum_asesmen
+    - saat_asesmen
+    - setelah_asesmen
+    - kendala
+    - banding
+    - audit
+    - pelaporan
+
+  response_structure:
+    - "Peran"
+    - "Tahap proses"
+    - "Tugas utama"
+    - "Tanggung jawab"
+    - "Dokumen atau bukti digital"
+    - "Pihak yang berkoordinasi"
+    - "Batas kewenangan"
+    - "Langkah berikutnya"
+
+  example_response:
+    user_input: "Apa tugas asesor saat AJJ?"
+    bot_response: >
+      Dalam AJJ Nirkertas, tugas Asesor Kompetensi saat asesmen adalah:
+      1. Memverifikasi identitas asesi.
+      2. Memverifikasi lingkungan asesmen.
+      3. Menjelaskan instruksi asesmen.
+      4. Melaksanakan asesmen sesuai instrumen.
+      5. Menjaga objektivitas dan integritas asesmen.
+      6. Mencatat kendala teknis atau kejadian penting.
+      7. Menyusun catatan asesmen sebagai dasar laporan.
+      
+      Dokumen/bukti yang terkait:
+      - rekaman asesmen
+      - checklist verifikasi identitas
+      - catatan asesmen
+      - catatan kendala teknis
+      - laporan asesmen digital
+      
+      Batas kewenangan:
+      Asesor memberikan rekomendasi hasil asesmen, tetapi keputusan resmi
+      sertifikasi tetap berada pada mekanisme LSP.
+```
+
+---
+
+# 16. Output Dokumen Digital per Peran
+
+```yaml
+digital_outputs_by_role:
+  asesi:
+    dokumen_dihasilkan:
+      - form permohonan sertifikasi
+      - asesmen mandiri
+      - persetujuan asesmen
+      - bukti kompetensi digital
+      - umpan balik asesmen
+      - formulir banding jika diperlukan
+    dokumen_diterima:
+      - jadwal asesmen
+      - link/platform asesmen
+      - instruksi asesmen
+      - hasil resmi dari LSP
+      - informasi tindak lanjut
+
+  tuk:
+    dokumen_dihasilkan:
+      - profil TUK
+      - checklist kesiapan TUK
+      - bukti sarana dan prasarana
+      - dokumentasi verifikasi TUK
+      - catatan kendala fasilitas
+    dokumen_diterima:
+      - jadwal asesmen
+      - permintaan verifikasi TUK
+      - instruksi LSP
+      - hasil evaluasi/verifikasi TUK
+
+  asesor_kompetensi:
+    dokumen_dihasilkan:
+      - catatan review asesmen mandiri
+      - catatan review bukti kompetensi
+      - checklist verifikasi identitas
+      - catatan pelaksanaan asesmen
+      - rekomendasi hasil asesmen
+      - laporan asesmen
+      - umpan balik asesmen
+    dokumen_diterima:
+      - surat tugas asesor
+      - rencana asesmen
+      - instrumen asesmen
+      - data asesi
+      - bukti kompetensi asesi
+      - SOP AJJ/Nirkertas
+
+  manajemen_lsp:
+    dokumen_dihasilkan:
+      - kebijakan sertifikasi nirkertas
+      - SOP sertifikasi jarak jauh
+      - SOP asesmen jarak jauh
+      - SOP verifikasi TUK jarak jauh
+      - SOP banding jarak jauh
+      - surat tugas personil
+      - keputusan sertifikasi
+      - laporan audit internal
+      - laporan pelaksanaan
+    dokumen_diterima:
+      - permohonan asesi
+      - laporan asesor
+      - laporan kendala
+      - umpan balik asesi
+      - permohonan banding
+      - hasil verifikasi TUK
+```
+
+---
+
+# 17. Escalation Matrix
+
+```yaml
+escalation_matrix:
+  id: ajj_nirkertas_escalation_matrix
+  title: "Matriks Eskalasi Kendala Sertifikasi Nirkertas dan AJJ Nirkertas"
+
+  issues:
+    - issue: "Asesi tidak bisa login"
+      first_handler: "Admin LSP"
+      supporting_role: "Asesi"
+      action:
+        - "Verifikasi akun asesi."
+        - "Reset akses jika sesuai prosedur."
+        - "Catat kendala."
+        - "Informasikan langkah pemulihan."
+      escalation_to: "Manajemen LSP / pengelola sistem"
+
+    - issue: "Dokumen gagal diunggah"
+      first_handler: "Admin LSP"
+      supporting_role: "Asesi"
+      action:
+        - "Cek format dan ukuran file."
+        - "Cek koneksi pengguna."
+        - "Berikan instruksi unggah ulang."
+        - "Catat kendala jika berulang."
+      escalation_to: "Pengelola sistem LSP"
+
+    - issue: "Kamera/mikrofon asesi bermasalah"
+      first_handler: "Asesor Kompetensi"
+      supporting_role: "Asesi / Admin LSP"
+      action:
+        - "Minta asesi melakukan pengecekan perangkat."
+        - "Berikan waktu perbaikan sesuai SOP."
+        - "Catat kendala."
+        - "Tentukan apakah asesmen dapat dilanjutkan."
+      escalation_to: "Admin LSP / Manajemen LSP"
+
+    - issue: "Koneksi internet putus saat asesmen"
+      first_handler: "Asesor Kompetensi"
+      supporting_role: "Asesi"
+      action:
+        - "Tunggu asesi masuk kembali sesuai batas waktu SOP."
+        - "Catat waktu kejadian."
+        - "Evaluasi dampak terhadap validitas asesmen."
+        - "Lanjutkan, tunda, atau jadwalkan ulang sesuai SOP."
+      escalation_to: "Manajemen LSP"
+
+    - issue: "Rekaman asesmen gagal"
+      first_handler: "Admin LSP / Pengelola Sistem"
+      supporting_role: "Asesor Kompetensi"
+      action:
+        - "Cek log sistem."
+        - "Cek bukti asesmen alternatif."
+        - "Catat insiden."
+        - "Evaluasi kecukupan bukti."
+      escalation_to: "Manajemen LSP"
+
+    - issue: "Indikasi bantuan tidak sah kepada asesi"
+      first_handler: "Asesor Kompetensi"
+      supporting_role: "Manajemen LSP"
+      action:
+        - "Hentikan sementara proses jika diperlukan."
+        - "Verifikasi situasi."
+        - "Catat kejadian."
+        - "Ikuti SOP integritas asesmen."
+      escalation_to: "Manajemen LSP / Komite terkait"
+
+    - issue: "Asesi mengajukan banding"
+      first_handler: "Manajemen LSP"
+      supporting_role: "Asesi / Asesor Kompetensi"
+      action:
+        - "Terima permohonan banding."
+        - "Verifikasi kelengkapan alasan dan bukti."
+        - "Proses sesuai SOP banding."
+        - "Sampaikan hasil tindak lanjut resmi."
+      escalation_to: "Komite banding / pihak berwenang LSP"
+```
+
+---
+
+# 18. Conversation Nodes untuk Eskalasi
+
+```yaml
+node:
+  id: escalation_start
+  title: "Bantuan Eskalasi Kendala"
+  bot_message: >
+    Pilih kendala yang sedang terjadi agar saya dapat menunjukkan pihak yang
+    perlu dihubungi dan langkah tindak lanjutnya.
+  quick_replies:
+    - "Tidak bisa login"
+    - "Dokumen gagal upload"
+    - "Kamera/mikrofon bermasalah"
+    - "Internet putus"
+    - "Rekaman gagal"
+    - "Indikasi pelanggaran"
+    - "Banding"
+
+node:
+  id: escalation_response_dynamic
+  type: "dynamic_escalation_lookup"
+  input:
+    - issue_type
+  response_template: >
+    Untuk kendala: {{issue_type}}
+    
+    Penangan pertama:
+    {{first_handler}}
+    
+    Pihak pendukung:
+    {{supporting_role}}
+    
+    Langkah awal:
+    {{action_steps}}
+    
+    Jika belum selesai, eskalasikan ke:
+    {{escalation_to}}
+    
+    Catatan:
+    Simpan bukti kendala seperti screenshot, waktu kejadian, pesan error,
+    rekaman komunikasi, atau catatan asesor/admin.
+  quick_replies:
+    - "Buat catatan kejadian"
+    - "Lihat SOP terkait"
+    - "Kembali ke menu kendala"
+    - "Kembali ke menu utama"
+```
+
+---
+
+# 19. Incident Report Template
+
+```yaml
+incident_report_template:
+  id: ajj_incident_report
+  title: "Template Catatan Kendala AJJ/Nirkertas"
+  purpose: >
+    Membantu asesi, asesor, TUK, atau admin LSP mencatat kendala secara
+    sistematis agar mudah ditindaklanjuti.
+  fields:
+    - field: "Tanggal dan waktu kejadian"
+      example: "12 Mei 2026, pukul 09.35 WIB"
+    - field: "Nama pihak yang mengalami kendala"
+      example: "Asesi / Asesor / TUK / Admin LSP"
+    - field: "Jenis kendala"
+      example: "Internet putus, gagal login, kamera tidak aktif"
+    - field: "Tahap proses"
+      example: "Pra-asesmen / saat asesmen / pasca-asesmen"
+    - field: "Deskripsi kejadian"
+      example: "Koneksi asesi terputus selama 10 menit saat wawancara asesmen."
+    - field: "Bukti pendukung"
+      example: "Screenshot error, log sistem, chat dengan admin"
+    - field: "Tindakan awal"
+      example: "Asesi mencoba masuk ulang, asesor mencatat waktu kejadian."
+    - field: "Keputusan sementara"
+      example: "Asesmen dilanjutkan setelah koneksi pulih."
+    - field: "Tindak lanjut"
+      example: "Admin LSP memeriksa rekaman dan log sistem."
+```
+
+---
+
+# 20. Session Summary per Peran
+
+```yaml
+session_summary_templates:
+  asesi:
+    bot_message: >
+      Ringkasan sesi Asesi:
+      - Topik yang dibahas: {{topics_covered}}
+      - Dokumen yang perlu disiapkan: {{documents_needed}}
+      - Kesiapan teknis: {{technical_readiness}}
+      - Area yang perlu diperbaiki: {{improvement_areas}}
+      - Langkah berikutnya: {{next_steps}}
+      
+      Catatan: hasil ini adalah panduan persiapan, bukan keputusan resmi
+      sertifikasi.
+
+  tuk:
+    bot_message: >
+      Ringkasan sesi TUK:
+      - Fasilitas yang perlu disiapkan: {{facility_items}}
+      - Bukti verifikasi yang perlu tersedia: {{verification_evidence}}
+      - Kendala yang perlu dimitigasi: {{risk_items}}
+      - Langkah berikutnya: {{next_steps}}
+
+  asesor_kompetensi:
+    bot_message: >
+      Ringkasan sesi Asesor Kompetensi:
+      - Tahap asesmen yang dibahas: {{assessment_phase}}
+      - Dokumen/instrumen yang perlu disiapkan: {{assessment_documents}}
+      - Risiko integritas yang perlu diperhatikan: {{integrity_risks}}
+      - Catatan pelaporan: {{reporting_notes}}
+      - Langkah berikutnya: {{next_steps}}
+
+  manajemen_lsp:
+    bot_message: >
+      Ringkasan sesi Manajemen LSP:
+      - SOP yang perlu tersedia: {{sop_list}}
+      - Sistem yang perlu dicek: {{system_items}}
+      - Personil yang perlu ditetapkan: {{personnel_items}}
+      - Risiko operasional: {{operational_risks}}
+      - Prioritas tindak lanjut: {{next_steps}}
+```
+
+---
+
+# 21. Analytics dan Monitoring Chatbot
+
+```yaml
+analytics_tracking:
+  purpose: >
+    Membantu pengelola chatbot mengetahui kebutuhan pengguna, kendala umum,
+    dan area yang perlu diperbaiki dalam proses SKK AJJ Nirkertas.
+  events:
+    - event_id: "role_selected"
+      description: "Peran yang paling sering dipilih pengguna."
+      properties:
+        - role_name
+        - timestamp
+
+    - event_id: "process_selected"
+      description: "Pengguna memilih Sertifikasi Nirkertas atau AJJ Nirkertas."
+      properties:
+        - process_type
+        - role_name
+
+    - event_id: "checklist_opened"
+      description: "Checklist yang sering dibuka."
+      properties:
+        - checklist_id
+        - role_name
+
+    - event_id: "readiness_assessment_completed"
+      description: "Pengguna menyelesaikan asesmen kesiapan."
+      properties:
+        - role_name
+        - readiness_score
+        - weak_topics
+
+    - event_id: "troubleshooting_selected"
+      description: "Jenis kendala yang paling sering dipilih."
+      properties:
+        - issue_type
+        - escalation_to
+
+    - event_id: "fallback_triggered"
+      description: "Fallback terjadi karena bot tidak memahami pertanyaan."
+      properties:
+        - user_input
+        - last_node
+        - fallback_count
+
+  dashboard_recommendations:
+    - "Tampilkan kendala teknis paling sering."
+    - "Tampilkan peran pengguna paling banyak."
+    - "Tampilkan checklist paling sering dibuka."
+    - "Tampilkan pertanyaan yang sering gagal dipahami."
+    - "Tampilkan skor kesiapan rata-rata per peran."
+```
+
+---
+
+# 22. Admin Content Management Structure
+
+```yaml
+admin_content_structure:
+  editable_content:
+    - id: sop_links
+      label: "Link SOP LSP"
+      editable_by: "Admin LSP"
+      fields:
+        - sop_sertifikasi_nirkertas
+        - sop_ajj
+        - sop_verifikasi_tuk
+        - sop_banding
+
+    - id: platform_links
+      label: "Link Platform Sertifikasi"
+      editable_by: "Admin LSP"
+      fields:
+        - link_pendaftaran
+        - link_asesmen_mandiri
+        - link_upload_dokumen
+        - link_video_meeting
+        - link_banding
+
+    - id: contact_points
+      label: "Kontak Bantuan"
+      editable_by: "Admin LSP"
+      fields:
+        - kontak_admin_lsp
+        - kontak_teknis
+        - kontak_tuk
+        - kontak_banding
+
+    - id: document_requirements
+      label: "Persyaratan Dokumen"
+      editable_by: "Admin LSP"
+      fields:
+        - dokumen_identitas
+        - dokumen_pendidikan
+        - dokumen_pengalaman
+        - bukti_kompetensi
+        - format_file
+        - ukuran_file_maksimum
+
+    - id: assessment_rules
+      label: "Tata Tertib AJJ"
+      editable_by: "Admin LSP"
+      fields:
+        - aturan_kehadiran
+        - aturan_kamera
+        - aturan_mikrofon
+        - aturan_integritas
+        - aturan_kendala_teknis
+```
+
+---
+
+# 23. UAT / Test Case Chatbot
+
+```yaml
+uat_test_cases:
+  - test_id: "TC-001"
+    scenario: "Pengguna bertanya tugas Asesi"
+    user_input: "Saya asesi, apa yang harus saya siapkan?"
+    expected_intent: "ask_role_asesi"
+    expected_response_contains:
+      - "dokumen"
+      - "asesmen mandiri"
+      - "bukti kompetensi"
+      - "perangkat"
+      - "koneksi internet"
+
+  - test_id: "TC-002"
+    scenario: "Pengguna bertanya tugas TUK"
+    user_input: "Apa tugas TUK dalam AJJ?"
+    expected_intent: "ask_role_tuk"
+    expected_response_contains:
+      - "fasilitas"
+      - "verifikasi TUK"
+      - "sarana-prasarana"
+      - "koneksi internet"
+
+  - test_id: "TC-003"
+    scenario: "Pengguna bertanya tugas Asesor"
+    user_input: "Asesor harus melakukan apa saat asesmen jarak jauh?"
+    expected_intent: "ask_role_asesor"
+    expected_response_contains:
+      - "verifikasi identitas"
+      - "instrumen asesmen"
+      - "integritas"
+      - "laporan asesmen"
+
+  - test_id: "TC-004"
+    scenario: "Pengguna bertanya tugas Manajemen LSP"
+    user_input: "Apa tanggung jawab LSP dalam nirkertas?"
+    expected_intent: "ask_role_lsp_management"
+    expected_response_contains:
+      - "SOP"
+      - "sistem aplikasi"
+      - "keputusan sertifikasi"
+      - "keamanan data"
+      - "audit"
+
+  - test_id: "TC-005"
+    scenario: "Pengguna mengalami kendala login"
+    user_input: "Saya tidak bisa login ke sistem"
+    expected_intent: "ask_escalation"
+    expected_response_contains:
+      - "Admin LSP"
+      - "reset akses"
+      - "catat kendala"
+
+  - test_id: "TC-006"
+    scenario: "Pengguna bertanya keputusan sertifikasi"
+    user_input: "Apakah saya pasti kompeten kalau sudah ikut AJJ?"
+    expected_intent: "certification_decision_boundary"
+    expected_response_contains:
+      - "tidak dapat menyatakan kompeten"
+      - "keputusan resmi"
+      - "LSP"
+
+  - test_id: "TC-007"
+    scenario: "Pengguna meminta cara mengakali asesmen"
+    user_input: "Bagaimana supaya saya bisa dibantu teman saat AJJ?"
+    expected_intent: "integrity_violation"
+    expected_response_contains:
+      - "tidak dapat membantu"
+      - "integritas asesmen"
+      - "ikuti tata tertib"
+```
+
+---
+
+# 24. Guardrail Response untuk Pelanggaran Integritas
+
+```yaml
+guardrail_responses:
+  integrity_violation:
+    triggers:
+      - "dibantu teman"
+      - "memalsukan dokumen"
+      - "mengakali kamera"
+      - "menyontek"
+      - "menggunakan identitas orang lain"
+      - "membuat bukti palsu"
+    bot_message: >
+      Saya tidak dapat membantu tindakan yang melanggar integritas asesmen,
+      seperti memalsukan dokumen, menggunakan bantuan tidak sah, mengakali
+      kamera, atau menggunakan identitas orang lain.
+      
+      Saya bisa membantu Anda dengan cara yang benar, misalnya:
+      - menyusun checklist dokumen yang sah
+      - menyiapkan bukti kompetensi
+      - memahami tata tertib AJJ
+      - berlatih wawancara asesmen
+      - mengecek kesiapan perangkat dan koneksi
+    quick_replies:
+      - "Checklist dokumen sah"
+      - "Latihan wawancara"
+      - "Cek kesiapan AJJ"
+      - "Tata tertib AJJ"
+```
+
+---
+
+# 25. API-Ready Response Object Example
+
+```json
+{
+  "intent": "ask_role_asesor",
+  "confidence": 0.94,
+  "entities": {
+    "role_name": "Asesor Kompetensi",
+    "process_type": "AJJ Nirkertas",
+    "phase": "saat_asesmen"
+  },
+  "bot_response": {
+    "text": "Dalam AJJ Nirkertas, Asesor Kompetensi bertanggung jawab memverifikasi identitas asesi, memverifikasi lingkungan asesmen, menjelaskan instruksi, melaksanakan asesmen sesuai instrumen, menjaga objektivitas dan integritas, mencatat kendala teknis, serta menyusun catatan asesmen sebagai dasar laporan. Asesor memberikan rekomendasi hasil asesmen, sedangkan keputusan resmi sertifikasi tetap mengikuti mekanisme LSP.",
+    "quick_replies": [
+      "Checklist asesor AJJ",
+      "Tugas sebelum asesmen",
+      "Tugas setelah asesmen",
+      "Simulasi kendala asesmen"
+    ]
+  },
+  "next_node": "role_asesor_overview"
+}
+```
+
+---
+
+# 26. Final Integration Notes
+
+```yaml
+integration_notes:
+  chatbot_positioning:
+    - "Modul ini sebaiknya ditempatkan setelah menu pengenalan AJJ dan Nirkertas."
+    - "Gunakan menu pemilihan peran sebagai shortcut utama."
+    - "Tambahkan tombol 'Saya Asesi', 'Saya TUK', 'Saya Asesor', dan 'Saya Admin LSP' pada halaman awal."
+    - "Sediakan fallback jika pengguna tidak tahu perannya."
+
+  recommended_main_menu_update:
+    options:
+      - "Pahami AJJ dan Nirkertas"
+      - "Pilih peran saya"
+      - "Tugas dan tanggung jawab per peran"
+      - "Cek kesiapan berdasarkan peran"
+      - "Checklist dokumen dan sistem"
+      - "Bantuan kendala teknis"
+      - "Simulasi skenario"
+      - "Tanya istilah"
+
+  implementation_priority:
+    phase_1:
+      - "Menu pemilihan peran"
+      - "Ringkasan tugas per peran"
+      - "Checklist Asesi"
+      - "Checklist Asesor"
+      - "Checklist LSP"
+      - "Kendala teknis dasar"
+    phase_2:
+      - "Asesmen kesiapan per peran"
+      - "Escalation matrix"
+      - "Incident report template"
+      - "Scenario practice"
+    phase_3:
+      - "Dashboard analytics"
+      - "Admin content management"
+      - "UAT automation"
+      - "Integrasi link SOP dan platform LSP"
+```
+
+---
+
+Bagian ini membuat chatbot tidak hanya menjawab “siapa melakukan apa”, tetapi juga bisa **mengarahkan pengguna berdasarkan peran, tahap proses, jenis kendala, dokumen yang dibutuhkan, dan batas kewenangan**.

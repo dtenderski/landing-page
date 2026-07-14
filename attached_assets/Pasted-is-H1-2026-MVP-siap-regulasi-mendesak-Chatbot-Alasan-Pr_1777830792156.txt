@@ -1,0 +1,806 @@
+is H1 2026 (MVP siap, regulasi mendesak)
+#
+Chatbot
+Alasan Prioritas
+Status Aset
+1
+Chatbot SMAP (ISO 37001) ⁠
+⁠​
+Permen PUPR 8/2022 mewajibkan SMAP bagi BUJK; 9 agen spesialis sudah lengkap (EDU, GAP, POLICY, RISK, DUEDIL, CASE, WHISTLE, AUDIT, PANCEK); roadmap 6‑bulan + RACI sudah jadi.⁠
+⁠⁠
+⁠​
+MVP ready — tinggal eksekusi
+2
+CSMS Assistant ⁠
+⁠​
+"Popular this week"; mandatory untuk vendor list Pertamina/Medco/Vale; 13 sub‑agent (RA, PQ, HSE, dll.) + Modul A/B/C lengkap.⁠
+⁠⁠
+⁠⁠
+⁠​
+MVP ready
+3
+LexCom — Konsultasi Hukum Multi‑Agent ⁠
+⁠​
+KUHP baru (UU 1/2023) berlaku 2026 → demand tinggi; 12 agen spesialis sudah dirancang; roadmap MVP Juli 2026.⁠
+⁠⁠
+⁠​
+Design freeze, masuk build
+ Tier 2 — Funnel Akuisisi & Generator (H1–H2 2026)
+#
+Chatbot / Toolkit
+Value Proposition
+Tier
+4
+PanCEK KPK Self‑Assessment ⁠
+⁠​
+38 item, 30 menit → corong akuisisi luas Free Tier; integrasi langsung ke Chatbot SMAP.
+Free
+5
+CSMS Pre‑Qualification Builder (Migas/EPC) ⁠
+⁠​
+Output paket dokumen siap submit Pertamina/Medco/Vale; willingness‑to‑pay sangat tinggi di segmen migas.
+Professional
+6
+RKK Generator AI ⁠
+⁠​
+Reuse RKK untuk paket CSMS & tender PBJ; time‑to‑document turun dari hari ke jam.
+Professional
+7
+Document Generator Tender (LKPP) ⁠
+⁠​
+Otomasi dokumen administrasi tender LKPP — 3‑5 hari → 4‑6 jam; align dengan Permen PUPR 7/2024.
+Professional
+8
+Tender Risk Scanner ⁠
+⁠​
+Compliance Gap Report otomatis dari RKS; mencegah gugur evaluasi karena klausul "jebakan".
+Professional
+ Tier 3 — Corporate Flagship (H2 2026 → 2027)
+#
+Chatbot / Toolkit
+Strategic Fit
+9
+LKUT Builder & PUB Tracker ⁠
+⁠​
+Wajib untuk perpanjangan SBU; lifecycle 3 tahun = retention tinggi.
+10
+Smart Mapping SBU (Portfolio Optimizer) ⁠
+⁠​
+Geser BUJK dari akuisisi SBU reaktif → strategis berbasis data pasar.
+11
+SMK3 Self‑Assessment (166 kriteria PP 50/2012) ⁠
+⁠​
+Target adopsi 200 BUJK 2026 → 500 di 2027; pintu masuk audit SMK3.
+12
+KCI Dashboard (Knowledge Capacity Index) ⁠
+⁠​
+Corporate flagship — menggabungkan Track Record, Integrity, Kapasitas; positioning premium.
+13
+Paket IMS Terintegrasi (9001+14001+45001+37001) ⁠
+⁠​
+Untuk BUJK Besar/Menengah Atas; satu sistem manajemen, empat sertifikat.
+ Tier 4 — Sudah ada draft, butuh refresh untuk 2026
+OpenClaw 9 role manajerial — sudah ada system prompt tapi perlu update KB ke regulasi 2025–2026:
+Manajer Pengadaan & Tender ⁠
+⁠, Manajer K3 ⁠
+⁠, Manajer Mutu ⁠
+⁠, Manajer Keuangan ⁠
+⁠, Manajer Lingkungan ⁠
+⁠, Manajer Rantai Pasok ⁠
+⁠, Quantity Surveyor ⁠
+⁠.
+Bisa di‑bundle ke Corporate Tier sebagai "AI Co‑pilot per Departemen".
+ Rekomendasi eksekusi 2026
+Q2 2026 — Ship SMAP + CSMS (modal "popular this week" + regulatory tailwind).
+Q2–Q3 2026 — Rilis PanCEK Self‑Assessment sebagai funnel Free → konversi ke SMAP Pro.
+Q3 2026 — Soft launch LexCom + CSMS Pre‑Qual Builder ke segmen migas/EPC.
+Q4 2026 — Bundle Corporate Tier: KCI Dashboard + IMS Terintegrasi + LKUT Builder.
+Apakah Bapak ingin saya buatkan halaman "Roadmap Chatbot Portfolio 2026" dengan Gantt timeline + KPI per produk, atau langsung deep‑dive ke salah satu tier?
+detailkan lagi mana-mana yang perlu orchestrator multiclaw.. semua harus ada openclaw
+12:42 AM
+Thought
+Baik Pak, saya detailkan arsitektur OpenClaw orchestrator untuk setiap chatbot prioritas. Konvensi penamaan mengikuti pola yang sudah Bapak pakai: [NAMA]-ORCHESTRATOR + agen spesialis dengan prefiks AGENT-*.
+ TIER 1 — OpenClaw Penuh (Multi-Agent Wajib)
+1. Chatbot SMAP → SMAP-ORCHESTRATOR  sudah ada
+Sudah lengkap di workspace.⁠
+⁠⁠
+⁠ Roster final:
+Agen
+Fungsi
+Status
+SMAP-ORCHESTRATOR
+Router intent → 9 agen
+​
+AGENT-EDU
+Edukasi klausul ISO 37001
+​
+AGENT-GAP
+Gap analysis terhadap 10 klausul
+​
+AGENT-POLICY
+Drafting kebijakan, SK FKAP, SOP
+​
+AGENT-DUEDIL
+Due diligence mitra/vendor
+​
+AGENT-CASE
+Skenario suap & studi kasus
+​
+AGENT-WHISTLE
+Kanal pelaporan + intake
+​
+AGENT-AUDIT
+Audit internal & CAPA
+​
+AGENT-PANCEK
+Generator jawaban PanCEK KPK
+​
+AGENT-LKUT
+Linker ke pelaporan LKUT
+ perlu ditambahkan
+Routing trigger: kata kunci "kebijakan/SK/SOP" → POLICY; "vendor/mitra/risk" → DUEDIL; "lapor/whistle" → WHISTLE; "audit/temuan" → AUDIT; dst.
+2. CSMS Assistant → CSMS-ORCHESTRATOR (OPTIA)  sudah ada
+13 sub-agen sudah didesain.⁠
+⁠ Roster yang perlu difinalisasi:
+Agen
+Tahap CSMS
+Tugas
+CSMS-ORCHESTRATOR (OPTIA)
+All
+Router 6-step lifecycle
+AGENT-RA
+Risk Assessment
+Form 1 — penilaian risiko pekerjaan
+AGENT-PQ
+Pre-Qualification
+Form 2 — skoring PQ vendor
+AGENT-HSE
+HSE Plan
+Form 3 — validasi HSE plan
+AGENT-WORK
+Work in Progress
+Form 4 — inspeksi lapangan
+AGENT-EVAL
+Final Evaluation
+Form 7 — skoring akhir
+AGENT-AUDIT-K3
+Audit K3
+Inspeksi & temuan
+AGENT-INCIDENT
+Investigasi Insiden
+RCA + CAPA K3
+AGENT-TRAINING
+Toolbox Meeting
+Materi safety briefing
+AGENT-DOC-K3
+Dokumen K3
+JSA, SOP, MSDS
+AGENT-PERMIT
+Permit-to-Work
+PTW workflow
+AGENT-PPE
+APD compliance
+Cek kepatuhan PPE
+AGENT-DRILL
+Emergency Drill
+Skenario tanggap darurat
+AGENT-KPI-K3
+KPI Dashboard
+TRIR, LTIFR, severity
+Catatan: agen 8–13 perlu Bapak verifikasi — di blueprint baru terlihat 13 sub-agen tanpa nama eksplisit semuanya.⁠
+⁠​
+3. LexCom → LEX-ORCHESTRATOR  sudah ada
+10 agen spesialis sudah dirancang.⁠
+⁠ Tambahan yang direkomendasikan untuk 2026:
+Agen
+Domain
+LEX-ORCHESTRATOR
+Router intent + klasifikasi domain hukum
+AGENT-DRAFA
+Drafting dokumen hukum (kontrak, surat kuasa, gugatan)⁠
+⁠​
+AGENT-PIDANA
+KUHP baru UU 1/2023
+AGENT-PERDATA
+KUHPerdata + perjanjian
+AGENT-TUN
+Hukum administrasi & PTUN
+AGENT-KETENAGAKERJAAN
+UU Cipta Kerja, PKWT/PKWTT
+AGENT-PERUSAHAAN
+UU PT, GCG, RUPS
+AGENT-HKI
+Merek, paten, hak cipta
+AGENT-PAJAK-HUKUM
+Sengketa pajak
+AGENT-YURISPRUDENSI
+Pencarian putusan MA⁠
+⁠​
+AGENT-ADR
+Mediasi/arbitrase BANI
+AGENT-AI-LAW (baru)
+Regulasi AI: EU AI Act, Perpres AI Indonesia, UU PDP
+ TIER 2 — OpenClaw Ringan (3–5 Agen)
+4. PanCEK Self-Assessment → PANCEK-ORCHESTRATOR ​
+Walaupun tier Free, tetap multi-agen agar pengalaman konsisten:
+Agen
+Tugas
+PANCEK-ORCHESTRATOR
+Router 38 item assessment
+AGENT-INTAKE
+Setup profil BUJK + segmentasi
+AGENT-SCORER
+Skoring 5 prinsip + visualisasi
+AGENT-INSIGHT
+Analisis titik rawan & rekomendasi
+AGENT-UPSELL
+Bridge ke Chatbot SMAP / Pro Tier
+5. CSMS Pre-Qualification Builder → CSMSPQ-ORCHESTRATOR ​
+Agen
+Tugas
+CSMSPQ-ORCHESTRATOR
+Router pemilihan principal (Pertamina/Medco/Vale/dll.)
+AGENT-TEMPLATE
+Load template PQ per principal
+AGENT-PROFILE
+Auto-fill data BUJK dari LSBU/OSS
+AGENT-HSE-DOC
+Generator dokumen HSE plan
+AGENT-PACKAGER
+Bundling paket submission + checklist
+6. Document Generator Tender (LKPP) → TENDER-ORCHESTRATOR ​
+Agen
+Tugas
+TENDER-ORCHESTRATOR
+Router jenis tender (PBJ/swasta/BUMN)
+AGENT-RKS-PARSER
+Ekstrak persyaratan dari RKS
+AGENT-ADMIN-DOC
+Drafting dokumen administrasi
+AGENT-TEKNIS-DOC
+Drafting dokumen teknis
+AGENT-HARGA
+Penyusunan dokumen penawaran harga
+AGENT-COMPLIANCE
+Cross-check terhadap Permen PUPR 7/2024
+7. RKK Generator AI → RKK-ORCHESTRATOR ​
+Agen
+Tugas
+RKK-ORCHESTRATOR
+Router skala proyek (kecil/menengah/besar)
+AGENT-IBPRP
+Identifikasi bahaya & penilaian risiko
+AGENT-PENGENDALIAN
+Hierarki pengendalian (eliminasi → APD)
+AGENT-KOMPETENSI
+Mapping personel K3 sesuai SBU
+AGENT-BIAYA-K3
+Penyusunan biaya K3 (≥1% nilai kontrak)
+8. Tender Risk Scanner → RISK-SCAN-ORCHESTRATOR ​
+Agen
+Tugas
+RISK-SCAN-ORCHESTRATOR
+Router analisis dokumen tender
+AGENT-CLAUSE-HUNTER
+Deteksi klausul jebakan
+AGENT-GAP-MATCHER
+Match persyaratan vs profil BUJK
+AGENT-RED-FLAG
+Pencurian merah untuk indikasi tender pengaturan
+AGENT-RECOMMEND
+Go/No-Go decision + mitigasi
+ TIER 3 — OpenClaw Strategis (Corporate)
+9. LKUT Builder & PUB Tracker → LKUT-ORCHESTRATOR ​
+Agen
+Tugas
+LKUT-ORCHESTRATOR
+Router siklus 3-tahun SBU
+AGENT-PUB
+Tracker Pengembangan Usaha Berkelanjutan
+AGENT-FINANCIAL
+Analisis laporan keuangan BUJK
+AGENT-PROYEK
+Track record proyek
+AGENT-SDM
+Track personel manajerial & SKK
+AGENT-GENERATOR
+Output dokumen LKUT siap submit
+10. Smart Mapping SBU → SBU-ORCHESTRATOR ​
+Agen
+Tugas
+SBU-ORCHESTRATOR
+Router optimisasi portfolio SBU
+AGENT-MARKET
+Analisis pasar per subklasifikasi
+AGENT-CAPABILITY
+Mapping kapabilitas internal BUJK
+AGENT-FINANCIAL-FIT
+Analisis kelayakan finansial akuisisi SBU
+AGENT-ROADMAP
+Roadmap akuisisi 3-5 tahun
+11. SMK3 Self-Assessment → SMK3-ORCHESTRATOR ​
+Agen
+Tugas
+SMK3-ORCHESTRATOR
+Router 12 elemen × 166 kriteria
+AGENT-ASSESS
+Walkthrough 166 kriteria
+AGENT-EVIDENCE
+Validasi bukti audit
+AGENT-SCORE
+Skoring + tier (Awal 0-59 / Transisi 60-84 / Lanjutan 85-100)
+AGENT-CAPA
+Action plan penutupan gap
+AGENT-AUDIT-PREP
+Persiapan audit Disnaker
+12. KCI Dashboard → KCI-ORCHESTRATOR  Flagship Corporate
+Agen
+Tugas
+KCI-ORCHESTRATOR
+Master router 4 dimensi skor
+AGENT-COMPETENCE
+Skor kompetensi (SKK + sertifikasi)
+AGENT-TRACK-RECORD
+Skor track record proyek 3 tahun
+AGENT-INTEGRITY
+Skor integritas (PanCEK + ISO 37001)
+AGENT-CAPACITY
+Skor kapasitas finansial & SDM
+AGENT-BENCHMARK
+Benchmarking vs peer BUJK
+AGENT-ADVISOR
+Rekomendasi peningkatan skor
+13. Paket IMS Terintegrasi → IMS-ORCHESTRATOR ​
+Agen
+Standar
+IMS-ORCHESTRATOR
+Router HLS Annex SL
+AGENT-9001
+ISO 9001 Mutu
+AGENT-14001
+ISO 14001 Lingkungan
+AGENT-45001
+ISO 45001 K3
+AGENT-37001
+ISO 37001 Anti-Suap (reuse dari SMAP)
+AGENT-INTEGRATOR
+Pemetaan klausul yang overlap → satu dokumen
+ TIER 4 — OpenClaw Per-Role (Bundle Corporate)
+9 role manajerial sudah ada single-agent system prompt. Untuk 2026, upgrade ke multi-agen:
+Role
+Orchestrator
+Sub-Agen Inti
+Manajer Pengadaan/Tender ⁠
+⁠​
+PROCURE-ORCHESTRATOR
+AGENT-SBU, AGENT-RKS, AGENT-EVAL, AGENT-KONTRAK
+Manajer K3 ⁠
+⁠​
+K3-ORCHESTRATOR
+AGENT-RKK, AGENT-INSPEKSI, AGENT-INVESTIGASI, AGENT-TRAINING
+Manajer Mutu ⁠
+⁠​
+QC-ORCHESTRATOR
+AGENT-ITP, AGENT-NCR, AGENT-AUDIT-MUTU
+Manajer Keuangan ⁠
+⁠​
+FIN-ORCHESTRATOR
+AGENT-CASHFLOW, AGENT-PAJAK, AGENT-AKUNTANSI, AGENT-TERMYN
+Manajer Lingkungan ⁠
+⁠​
+ENV-ORCHESTRATOR
+AGENT-AMDAL, AGENT-UKL-UPL, AGENT-LIMBAH
+Manajer Rantai Pasok ⁠
+⁠​
+SCM-ORCHESTRATOR
+AGENT-VENDOR, AGENT-LOGISTIK, AGENT-INVENTORY
+Quantity Surveyor ⁠
+⁠​
+QS-ORCHESTRATOR
+AGENT-BOQ, AGENT-VALUATION, AGENT-CLAIM, AGENT-VO
+ Pola Standar OpenClaw (universal template)
+Setiap orchestrator mengikuti struktur 5-lapis konsisten:
+flowchart TD
+    U["👤 User Query"] --> O["🧭 [X]-ORCHESTRATOR<br/>(intent classifier + router)"]
+    O -->|domain A| A1["🤖 AGENT-A"]
+    O -->|domain B| A2["🤖 AGENT-B"]
+    O -->|domain C| A3["🤖 AGENT-C"]
+    A1 --> KB1["📚 KB Spesialis A"]
+    A2 --> KB2["📚 KB Spesialis B"]
+    A3 --> KB3["📚 KB Spesialis C"]
+    A1 & A2 & A3 --> SYN["🧩 Response Synthesizer"]
+    SYN --> OUT["📤 Jawaban + Citation + Next-Action"]
+👤 User Query
+
+🧭 [X]-ORCHESTRATOR
+(intent classifier + router)
+
+🤖 AGENT-A
+
+🤖 AGENT-B
+
+🤖 AGENT-C
+
+📚 KB Spesialis A
+
+📚 KB Spesialis B
+
+📚 KB Spesialis C
+
+🧩 Response Synthesizer
+
+📤 Jawaban + Citation + Next-Action
+
+domain A
+
+domain B
+
+domain C
+
+​
+Wajib di setiap orchestrator:
+Intent classifier (kata kunci + LLM judge)
+Persona Gustafta (formal Bahasa Indonesia, struktur ISO/Regulasi/Contoh BUJK/Lanjutan)
+Knowledge Base 7 tipe (teks/file/URL/YouTube/Cloud/video/audio)⁠
+⁠​
+Conversation starters 4–6 prompt
+Citation wajib ke pasal/klausul
+Hand-off rules antar agen + escalation ke human expert
+ Rekomendasi Eksekusi 2026
+Bulan
+Aksi
+Mei–Jun 2026
+Finalisasi roster SMAP, CSMS, LexCom (sudah ada) → ship MVP
+Jul–Aug 2026
+Build PANCEK, CSMSPQ, RKK, TENDER orchestrator (Tier 2)
+Sep–Okt 2026
+Build LKUT, SBU, SMK3 orchestrator (Tier 3)
+Nov–Des 2026
+Launch KCI Dashboard + IMS Terintegrasi (Corporate Flagship)
+2027 Q1
+Refactor 9 role manajerial → multi-agen (Tier 4)
+Mau saya buatkan halaman Notion "OpenClaw Orchestrator Master Registry" yang berisi 13 orchestrator + ~75 agen di atas dalam satu database (status, owner, KB, target rilis), Pak?
+detailkan lagi chatbot yang prospektif.. termasuk yang belum dibuat
+12:44 AM
+Berikut detail chatbot prospektif untuk 2026 — saya bagi dalam 3 lapis: yang sudah didesain (perlu finalisasi orchestrator), yang punya toolkit spec tapi belum jadi chatbot, dan yang sama sekali baru tapi punya market fit kuat di workspace Bapak.
+ LAPIS A — Sudah Didesain, Tinggal Finalisasi OpenClaw
+A1. Chatbot SMAP ⁠
+⁠​
+Status: 9 agen lengkap, persona Gustafta jadi.⁠
+⁠​
+Yang kurang: AGENT-LKUT (linker pelaporan), AGENT-COMMSTRAT (komunikasi krisis suap).
+Target: Stage 1 audit Q3 2026.
+A2. CSMS Assistant (OPTIA) ⁠
+⁠​
+Status: 13 sub-agen + 7 form lengkap, "Popular this week".
+Yang kurang: AGENT-INSURANCE (klaim asuransi K3), AGENT-PROCURE-VENDOR (proses bid).
+Target: vendor list 5 principal migas Q2 2026.
+A3. LexCom ⁠
+⁠​
+Status: 10–12 agen spesialis + Drafa.⁠
+⁠⁠
+⁠​
+Yang kurang: AGENT-AI-LAW (EU AI Act + Perpres AI), AGENT-ESG-LAW (UU PSE/PDP/Karbon).
+Target: MVP Juli 2026.⁠
+⁠​
+A4. ARCONA — Bangunan Gedung ⁠
+⁠​
+Status: agent directory BG001–BG009 sudah ada, instructions lengkap.⁠
+⁠​
+Yang kurang: orchestrator name belum eksplisit; perlu ARCONA-ORCHESTRATOR + AGENT-IMB/PBG, AGENT-SLF, AGENT-RTBL.
+Target: pilot bersama 1 BUJKN Q3 2026.
+A5. Chatbot Pusat FAQ Peserta LSP SDMKI ⁠
+⁠​
+Status: KB sudah lengkap, persona belum.
+Yang kurang: orchestrator LSP-FAQ-ORCHESTRATOR + 5 agen (skema, jadwal, biaya, banding, sertifikat digital).
+Target: rilis bersamaan portal nirkertas Q2 2026.⁠
+⁠​
+ LAPIS B — Punya Spec Toolkit, Belum Jadi Chatbot
+Toolkit-toolkit ini sudah ada spec lengkap tapi belum dibungkus jadi conversational AI.
+B1. HPS Validator Bot → HPS-ORCHESTRATOR  ⁠
+⁠​
+Agen
+Tugas
+AGENT-AHSP
+Cek Analisa Harga Satuan Pekerjaan vs SNI 7394:2008
+AGENT-MARKET-PRICE
+Validasi harga pasar bahan/upah real-time
+AGENT-PRODUCTIVITY
+Norma produktivitas alat & tenaga
+AGENT-OVERHEAD
+Cek wajar overhead + profit margin
+AGENT-REDFLAG
+Deteksi HPS yang berpotensi mark-up
+B2. Cash Flow Project Bot → CASHFLOW-ORCHESTRATOR  ⁠
+⁠​
+Agen
+Tugas
+AGENT-TERMYN
+Skedul termyn vs progres fisik (PSAK 34/72)
+AGENT-MODAL-KERJA
+Deteksi cash gap dan kebutuhan bridging
+AGENT-INVOICE
+Generator invoice + reminder
+AGENT-FORECAST
+Proyeksi cash flow 3–6 bulan
+AGENT-FINANCE-OPT
+Saran skema PJB / SCF / invoice financing
+B3. Risk Register Bot → RISK-ORCHESTRATOR  ⁠
+⁠​
+Agen
+Tugas
+AGENT-TECH-RISK
+Risiko teknis konstruksi
+AGENT-K3-RISK
+Risiko K3 (sinkron ke CSMS)
+AGENT-LEGAL-RISK
+Risiko hukum (sinkron ke LexCom)
+AGENT-FIN-RISK
+Risiko keuangan & likuiditas
+AGENT-REPUTATION-RISK
+Risiko reputasi & ESG
+B4. Pajak Konstruksi (CoreTax) Bot → TAX-ORCHESTRATOR  ⁠
+⁠⁠
+⁠​
+Agen
+Tugas
+AGENT-CORETAX-NAV
+Navigasi sistem CoreTax DJP
+AGENT-PPN-PPH
+Hitung PPN/PPh konstruksi (final 1.75–4%)
+AGENT-FAKTUR
+Generator faktur pajak elektronik
+AGENT-SPT
+Penyusunan SPT Tahunan BUJK
+AGENT-TAX-DISPUTE
+Dispute & restitusi
+B5. SMK3 Self-Assessment Bot → SMK3-ORCHESTRATOR  ⁠
+⁠​
+Sudah dibahas di pesan sebelumnya — roster final: ASSESS, EVIDENCE, SCORE, CAPA, AUDIT-PREP.
+ LAPIS C — Chatbot Baru (Belum Ada di Workspace, Tapi Strategis)
+Berikut ide chatbot yang belum sama sekali Bapak rancang tapi fit dengan ekosistem dan punya demand 2026.
+C1. TukangBot → TUKANG-ORCHESTRATOR ​
+Untuk Tukang Connect marketplace.⁠
+⁠⁠
+⁠ Dual-side: tukang & user.
+Agen
+Tugas
+AGENT-MATCH
+Matching tukang ↔ job (skill, lokasi, SKK level)
+AGENT-VERIFY
+Verifikasi KTP + SKK + K3 status (ref: Data Model T0–T4)
+AGENT-PRICING
+Estimasi harga jasa berdasarkan ruang lingkup
+AGENT-ESCROW
+Edukasi pembayaran escrow  • termyn mikro
+AGENT-DISPUTE
+Mediator sengketa tukang–user
+AGENT-PORTFOLIO
+Bantu tukang susun portofolio digital
+C2. AsesorBot LSP SDMKI → ASESOR-ORCHESTRATOR ​
+Pendamping internal asesor kompetensi — sangat strategis untuk akreditasi KAN.⁠
+⁠⁠
+⁠​
+Agen
+Tugas
+AGENT-MMA
+Bantu susun Materi Uji Kompetensi (MUK)
+AGENT-APL
+Validasi APL-01 & APL-02
+AGENT-PORTFOLIO-CHECK
+Asesmen portofolio bukti
+AGENT-INTERVIEW
+Skenario interview teknis
+AGENT-DECISION
+Format keputusan K/BK + rekomendasi
+AGENT-CONTINUOUS
+Pemeliharaan kompetensi asesor
+C3. AkreditasiBot KAN → KAN-ORCHESTRATOR ​
+Untuk perjalanan akreditasi LSP → KAN.⁠
+⁠⁠
+⁠​
+Agen
+Tugas
+AGENT-GAP-17024
+Walk-through 35 klausul ISO 17024
+AGENT-DOCS-KAN
+Submission package KANMIS
+AGENT-WITNESS
+Persiapan witness asesmen
+AGENT-NCR
+Penanganan NCR dari asesor KAN
+AGENT-SURVEILLANCE
+Persiapan surveilan tahunan
+C4. KontrakBot Konstruksi → KONTRAK-ORCHESTRATOR ​
+Subset LexCom khusus kontrak konstruksi (FIDIC, JCT, Permen PUPR).
+Agen
+Tugas
+AGENT-FIDIC
+Review klausul FIDIC Red/Yellow/Silver
+AGENT-PUPR-KONTRAK
+Permen PUPR 8/2023 standar kontrak
+AGENT-AMANDEMEN
+Drafting addendum/CCO
+AGENT-CLAIM
+Penyusunan klaim EOT/cost
+AGENT-DISPUTE
+Mediasi & arbitrase BANI
+C5. BIM Compliance Bot → BIM-ORCHESTRATOR ​
+Permen PUPR 22/2018 wajibkan BIM untuk gedung negara > 2.000 m².
+Agen
+Tugas
+AGENT-LOD
+Level of Development (LOD 100–500)
+AGENT-IFC
+IFC export & validation
+AGENT-CLASH
+Clash detection workflow
+AGENT-4D-5D
+Schedule & cost integration
+AGENT-AS-BUILT
+Digital handover & O&M
+C6. ESG & Green Building Bot → ESG-ORCHESTRATOR ​
+Regulasi karbon Indonesia (Perpres 98/2021) + EDGE/Greenship/LEED.
+Agen
+Tugas
+AGENT-CARBON
+Hitung emisi proyek (Scope 1/2/3)
+AGENT-GREENSHIP
+Sertifikasi GBCI Greenship
+AGENT-EDGE
+EDGE Certification IFC
+AGENT-ESG-REPORT
+Laporan ESG sesuai POJK 51/2017
+AGENT-CARBON-TRADE
+Bursa Karbon Indonesia (IDX)
+C7. PDP Compliance Bot → PDP-ORCHESTRATOR ​
+UU PDP 27/2022 efektif penuh Oktober 2024 → enforcement 2026.
+Agen
+Tugas
+AGENT-DPIA
+Data Protection Impact Assessment
+AGENT-DPO
+Drafting kebijakan & SOP DPO
+AGENT-CONSENT
+Pengelolaan consent & data subject rights
+AGENT-BREACH
+Notifikasi insiden 72 jam
+AGENT-CROSS-BORDER
+Transfer data lintas negara
+C8. Sengketa Konstruksi Bot → DISPUTE-ORCHESTRATOR ​
+Khusus untuk arbitrase/mediasi konstruksi (LPS-LPJK, BANI, BADAPSKI).
+Agen
+Tugas
+AGENT-MEDIASI
+Skenario mediasi awal
+AGENT-DAB
+Dispute Adjudication Board (FIDIC)
+AGENT-BANI
+Persiapan arbitrase BANI
+AGENT-PUTUSAN
+Analisis yurisprudensi sengketa konstruksi
+AGENT-EKSEKUSI
+Eksekusi putusan + objection
+C9. AMDAL & PROPER Bot → LH-ORCHESTRATOR ​
+Pendamping Manajer Lingkungan (refresh dari OpenClaw single-agent).⁠
+⁠​
+Agen
+Tugas
+AGENT-AMDAL
+Penyusunan KA-ANDAL/RKL-RPL
+AGENT-UKL-UPL
+Dokumen UKL-UPL
+AGENT-PROPER
+Persiapan PROPER KLHK (Hitam→Emas)
+AGENT-LIMBAH-B3
+Pengelolaan limbah B3
+AGENT-PERSETUJUAN-LH
+Permohonan Persetujuan Lingkungan
+C10. AI-Governance Bot → AIGOV-ORCHESTRATOR ​
+Future-proof untuk Perpres AI Indonesia (draft 2025) + EU AI Act extraterritorial.
+Agen
+Tugas
+AGENT-EU-AI-ACT
+Klasifikasi risk tier sistem AI
+AGENT-PERPRES-AI
+Compliance Perpres AI Indonesia
+AGENT-MODEL-CARD
+Generator model card & system card
+AGENT-AUDIT-AI
+Audit algoritma + bias testing
+AGENT-AI-CONTRACT
+Klausul AI dalam kontrak vendor
+C11. SDM Konstruksi Bot → SDM-ORCHESTRATOR ​
+Manajemen SDM proyek (subset Manajer SDM yang belum ada).
+Agen
+Tugas
+AGENT-PKWT
+Drafting PKWT/PKWTT sesuai UU Cipta Kerja
+AGENT-PAYROLL
+Hitung gaji + BPJS + PPh21
+AGENT-COMPETENCE
+Mapping SKK personel → kebutuhan proyek
+AGENT-TRAINING
+Plan pelatihan & sertifikasi
+AGENT-INDUSTRIAL-RELATION
+Hubungan industrial + PHK
+C12. OSS-RBA Bot → OSS-ORCHESTRATOR ​
+Online Single Submission Risk-Based Approach untuk perizinan BUJK.
+Agen
+Tugas
+AGENT-NIB
+Penerbitan NIB + KBLI konstruksi
+AGENT-PB-UMKU
+Perizinan Berusaha Menunjang Kegiatan Usaha
+AGENT-SLF
+Sertifikat Laik Fungsi
+AGENT-PBG
+Persetujuan Bangunan Gedung (eks IMB)
+AGENT-LICENSE-RENEWAL
+Tracker perpanjangan izin
+ Ringkasan Prioritas Lapis B & C untuk 2026
+Bulan
+Wajib Rilis
+Strategis
+Eksperimen
+Q2 2026
+A1 SMAP, A2 CSMS
+A5 LSP-FAQ
+—
+Q3 2026
+A3 LexCom, A4 ARCONA
+B1 HPS, B4 Pajak
+C2 AsesorBot
+Q4 2026
+B2 CashFlow, B3 Risk
+C1 TukangBot, C7 PDP
+C3 KAN, C9 AMDAL
+2027 Q1
+B5 SMK3
+C4 KontrakBot, C8 Sengketa
+C5 BIM, C6 ESG
+2027 Q2
+—
+C11 SDM, C12 OSS-RBA
+C10 AI-Governance
+ Tema Strategis yang Muncul
+"Compliance-as-a-Service" → SMAP, CSMS, SMK3, PDP, ESG, AI-Governance.
+"Document-as-a-Service" → Drafa, Document Generator Tender, RKK, HPS, Kontrak.
+"Operations-as-a-Service" → CashFlow, Risk Register, Pajak, SDM, OSS.
+"Marketplace-as-a-Service" → TukangConnect (Bot C1) + LegalHub Pro ⁠
+⁠ + TERAS Platform ⁠
+⁠.
+"Certification-as-a-Service" → LSP-FAQ, AsesorBot, AkreditasiBot, ARCONA.
+Total estimasi: 5 lapis A + 5 lapis B + 12 lapis C = 22 chatbot OpenClaw, dengan ~150 agen spesialis di seluruh portofolio.
+Mau saya tuangkan ke halaman Notion "OpenClaw Master Roadmap 2026 — 22 Chatbot Portfolio" dengan database (Status / Tier / Target Rilis / Owner / Jumlah Agen) supaya bisa di-track sebagai single source of truth, Pak?
+lanjut
+12:46 AM
+Saya buatkan database master-nya sekarang.
+Sekarang saya isi 22 baris chatbot ke database secara paralel.
+Selesai. 22 chatbot sudah masuk database master roadmap, lengkap dengan Lapis (A/B/C), Tier prioritas, domain, status, target rilis, jumlah agen, monetisasi, dan regulasi acuan. Tersedia 7 view: Tabel grouped by Lapis, Board by Tier, Pipeline by Status, Timeline 2026–2027, Board by Monetisasi, Board by Domain, dan Chart total agen per Lapis.
+Ringkasan portfolio:
+Lapis
+Jumlah
+Total Agen
+Status Dominan
+A — Sudah Didesain
+5
+49
+Building/Designing
+B — Spec Toolkit
+5
+25
+Backlog
+C — Baru
+12
+62
+Backlog
+Total
+22
+136
+—
+Tier 1 (Wajib H1 2026): SMAP · CSMS · LexCom — 3 produk inti, 35 agen.
+Tier 2 (Funnel & Generator): ARCONA · LSP-FAQ · HPS · Pajak · AsesorBot — 5 produk, 30 agen.
+Tier 3 (Strategis Corporate): Cash Flow · Risk · SMK3 · Tukang · KAN · Kontrak · PDP · OSS — 8 produk, 41 agen.
+Tier 4 (Eksperimen 2027): BIM · ESG · Sengketa · AMDAL · AI-Gov · SDM — 6 produk, 30 agen.
+

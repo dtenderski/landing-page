@@ -1,0 +1,236 @@
+<aside>
+✉️
+
+5 template surat resmi untuk pengajuan SBU. Format **Markdown**, placeholder `{variabel}` siap diisi oleh AGENT-LETTERGEN. Setiap template ditutup klausul kebenaran + tanda tangan Direktur Utama + materai Rp10.000 (untuk surat pernyataan).
+
+</aside>
+
+## 🧾 Daftar Variabel Universal
+
+Variabel yang dipakai lintas template (AGENT-LETTERGEN akan mengisi dari `session_state` atau menanyakan ke user):
+
+```yaml
+company_name: string         # "PT XXX KONSTRUKSI"
+company_address: string
+company_nib: string
+company_npwp: string
+director_name: string        # Direktur Utama
+director_id: string          # NIK
+letter_number: string        # nomor surat internal
+letter_date: string          # "12 Mei 2026"
+city: string                 # "Bekasi"
+lsbu_name: string            # "LSBU GAPENSI"
+person_name: string          # nama personel kunci
+person_id: string
+person_position: string      # PJTBU / PJSKBU / PJKBU / PJBU
+person_skk_number: string
+person_skk_field: string
+person_skk_level: string     # Muda/Madya/Utama
+subklas_list: list           # ["BS001 - ...", ...]
+kualifikasi_target: string   # K / M1 / M2 / B1 / B2
+```
+
+---
+
+## ✉️ Template 1 — Surat Penunjukan PJTBU/PJSKBU
+
+```markdown
+**[KOP SURAT {company_name}]**
+
+Nomor    : {letter_number}
+Lampiran : -
+Perihal  : Penunjukan Penanggung Jawab Teknis Badan Usaha (PJTBU)
+
+Kepada Yth.
+{person_name}
+di tempat.
+
+Dengan hormat,
+
+Melalui surat ini, kami **{company_name}**, berkedudukan di {company_address}, NIB {company_nib}, menunjuk Saudara/i:
+
+- Nama          : **{person_name}**
+- NIK           : {person_id}
+- Nomor SKK     : {person_skk_number}
+- Bidang SKK    : {person_skk_field}
+- Jenjang SKK   : {person_skk_level}
+
+untuk bertindak sebagai **{person_position}** pada {company_name} dalam rangka pengajuan/pemanfaatan Sertifikat Badan Usaha (SBU) Jasa Konstruksi pada kualifikasi **{kualifikasi_target}** dengan subklasifikasi:
+
+{subklas_list_bullet}
+
+Penunjukan ini berlaku sejak tanggal {letter_date} sampai dengan dicabut secara tertulis.
+
+Demikian surat penunjukan ini dibuat dengan sebenar-benarnya untuk dipergunakan sebagaimana mestinya.
+
+{city}, {letter_date}
+{company_name}
+
+**{director_name}**
+Direktur Utama
+```
+
+---
+
+## ✉️ Template 2 — Surat Pernyataan Kesediaan Penanggung Jawab
+
+```markdown
+**SURAT PERNYATAAN KESEDIAAN**
+*(di atas materai Rp10.000)*
+
+Yang bertanda tangan di bawah ini:
+
+- Nama          : **{person_name}**
+- NIK           : {person_id}
+- Alamat        : {person_address}
+- Nomor SKK     : {person_skk_number} ({person_skk_field}, {person_skk_level})
+
+dengan ini menyatakan:
+
+1. **Bersedia** ditunjuk sebagai **{person_position}** pada {company_name} (NIB {company_nib}).
+2. **Tidak sedang terikat** sebagai penanggung jawab pada Badan Usaha Jasa Konstruksi (BUJK) lain.
+3. **Bersedia menjalankan tugas** sesuai ketentuan UU 2/2017, PP 14/2021, dan Permen PUPR 8/2022.
+4. **Bertanggung jawab penuh** atas aspek teknis pada subklasifikasi {subklas_short} di {company_name}.
+5. **Bersedia diaudit/asesmen** sewaktu-waktu oleh LSBU {lsbu_name} maupun LPJK.
+
+Apabila pernyataan ini tidak benar, saya bersedia menerima sanksi sesuai peraturan perundang-undangan yang berlaku.
+
+{city}, {letter_date}
+Yang menyatakan,
+
+*[materai Rp10.000]*
+
+**{person_name}**
+```
+
+---
+
+## ✉️ Template 3 — Surat Permohonan Penerbitan SBU ke LSBU
+
+```markdown
+**[KOP SURAT {company_name}]**
+
+Nomor    : {letter_number}
+Lampiran : 1 (satu) berkas dokumen
+Perihal  : **Permohonan Penerbitan Sertifikat Badan Usaha (SBU) Jasa Konstruksi**
+
+Kepada Yth.
+Ketua **{lsbu_name}**
+di tempat.
+
+Dengan hormat,
+
+Kami yang bertanda tangan di bawah ini:
+
+- Nama Badan Usaha : **{company_name}**
+- Alamat           : {company_address}
+- NIB              : {company_nib}
+- NPWP             : {company_npwp}
+- Direktur Utama   : {director_name}
+
+dengan ini mengajukan **permohonan penerbitan SBU Jasa Konstruksi** dengan rincian:
+
+- Jenis permohonan   : **{permohonan_type}**   *(baru / tambah subklas / perpanjangan / naik kualifikasi / mutasi)*
+- Kualifikasi target : **{kualifikasi_target}**
+- Subklasifikasi     :
+{subklas_list_bullet}
+
+Dokumen pendukung kami lampirkan sesuai checklist resmi (Lampiran).
+
+Kami sanggup memenuhi seluruh persyaratan dan ketentuan pengajuan SBU, mengikuti proses verifikasi dan asesmen, serta membayar biaya sesuai tarif resmi {lsbu_name}.
+
+Demikian surat permohonan ini kami ajukan. Atas perhatian dan kerja sama yang baik, kami ucapkan terima kasih.
+
+{city}, {letter_date}
+{company_name}
+
+**{director_name}**
+Direktur Utama
+```
+
+---
+
+## ✉️ Template 4 — Surat Pernyataan Tunduk Kode Etik
+
+```markdown
+**SURAT PERNYATAAN TUNDUK KODE ETIK**
+*(di atas materai Rp10.000)*
+
+Yang bertanda tangan di bawah ini:
+
+- Nama          : **{director_name}**
+- Jabatan       : Direktur Utama {company_name}
+- NIK           : {director_id}
+- Alamat        : {company_address}
+- NIB           : {company_nib}
+
+dalam kapasitas mewakili **{company_name}**, dengan ini menyatakan:
+
+1. **Tunduk pada Kode Etik** Asosiasi/LSBU **{lsbu_name}** dan ketentuan LPJK.
+2. **Menaati seluruh peraturan** Jasa Konstruksi (UU 2/2017, PP 14/2021, Permen PUPR 8/2022, Permen PUPR 9/2023, Permen PUPR 10/2021).
+3. **Tidak melakukan praktik suap, gratifikasi, kolusi, atau persaingan tidak sehat** dalam menjalankan usaha jasa konstruksi.
+4. **Menjaga mutu, keselamatan, dan kesehatan kerja (SMKK)** sesuai standar.
+5. **Bersedia menerima sanksi** apabila terbukti melanggar Kode Etik dan/atau peraturan terkait.
+
+Demikian pernyataan ini dibuat dengan sebenar-benarnya, tanpa paksaan dari pihak manapun.
+
+{city}, {letter_date}
+Yang menyatakan,
+
+*[materai Rp10.000]*
+
+**{director_name}**
+Direktur Utama {company_name}
+```
+
+---
+
+## ✉️ Template 5 — Surat Pernyataan Tidak dalam Pailit / Sengketa
+
+```markdown
+**SURAT PERNYATAAN TIDAK DALAM PAILIT, KEPAILITAN, ATAU SENGKETA HUKUM**
+*(di atas materai Rp10.000)*
+
+Yang bertanda tangan di bawah ini:
+
+- Nama          : **{director_name}**
+- Jabatan       : Direktur Utama {company_name}
+- NIK           : {director_id}
+- NIB           : {company_nib}
+- Alamat        : {company_address}
+
+dalam kapasitas mewakili **{company_name}**, dengan ini menyatakan dengan sebenarnya bahwa Perusahaan kami:
+
+1. **Tidak sedang dinyatakan pailit** oleh pengadilan niaga atau pengadilan setara.
+2. **Tidak sedang dalam proses Penundaan Kewajiban Pembayaran Utang (PKPU)**.
+3. **Tidak sedang dalam pengawasan pengadilan** atas dasar sengketa keperdataan, kepailitan, atau gugatan terhadap aset perusahaan.
+4. **Tidak sedang masuk dalam Daftar Hitam (blacklist)** LKPP, kementerian/lembaga, BUMN, atau pemerintah daerah.
+5. **Kegiatan usaha tidak sedang dihentikan** oleh keputusan pengadilan atau otoritas yang berwenang.
+
+Apabila pernyataan ini terbukti tidak benar, kami bersedia:
+
+- Permohonan SBU **dibatalkan** secara otomatis.
+- SBU yang telah terbit **dicabut**.
+- Menerima **sanksi administratif maupun hukum** sesuai peraturan yang berlaku.
+
+Demikian pernyataan ini dibuat dengan sebenar-benarnya untuk digunakan dalam permohonan SBU pada **{lsbu_name}**.
+
+{city}, {letter_date}
+Yang menyatakan,
+
+*[materai Rp10.000]*
+
+**{director_name}**
+Direktur Utama {company_name}
+```
+
+---
+
+## 🔐 Aturan Generate (Untuk AGENT-LETTERGEN)
+
+1. **Validasi variabel wajib** sebelum render. Jika ada `null` di field wajib (`company_name`, `director_name`, `letter_date`), TANYA user (maks 1 round).
+2. **Substitusi placeholder** dengan regex `\{([a-z_]+)\}` → cari di `session_state.user_profile.badan_usaha` dan `session_state.target`.
+3. **Tandai placeholder tersisa** dengan ⚠️ jika user tidak menyuplai (jangan biarkan `{variabel}` mentah lewat).
+4. **DILARANG**: memalsukan tanda tangan, mencantumkan stempel basah otomatis, menulis tanggal mundur, atau menyisipkan nomor surat fiktif tanpa konfirmasi.
+5. **Output**: kembalikan markdown + daftar `missing_variables[]` agar user bisa edit cepat.
+6. **Disclaimer otomatis** di footer balasan chatbot: *"Surat ini adalah draft. Verifikasi format final dengan LSBU pilihan Anda sebelum cetak & tanda tangan basah."*

@@ -1,0 +1,300 @@
+<aside>
+💬
+
+**3 Percakapan Lengkap TENDERA** — validasi UX & flow MultiClaw sebelum deploy ke Gustafta. Setiap percakapan: persona BUJK · tujuan · 6–10 turn user-bot · evidence orchestrator routing · evidence agen paralel · evidence ABD compliance.
+
+</aside>
+
+## 🎭 Tiga Persona BUJK
+
+| Persona | Profil | Tujuan Utama |
+| --- | --- | --- |
+| **BUJK Kecil — CV Mandiri Jaya** | Kualifikasi K, omzet 1,8 M, 6 karyawan, baru 2 tahun | Cari tender pertama yang realistis menang |
+| **BUJK Menengah — PT Karya Bersama** | Kualifikasi M, 8 paket aktif/tahun, win rate 28% | Bid prep gedung pemerintah HPS 24 M |
+| **BUJK Besar — PT Cipta Nusantara** | Kualifikasi B, multi-province, kalah di pemenang lebih kecil | Sanggah hasil tender + post-mortem |
+
+---
+
+## 💬 Percakapan 1 — BUJK Kecil Scouting Tender Pertama
+
+<details><summary>**Turn 1 — User**</summary>
+
+Halo TENDERA. Perusahaan saya CV Mandiri Jaya, kualifikasi Kecil, baru 2 tahun, SBU BG002 dan BG004. Modal disetor 200 jt, omzet tahun lalu 1,8 M. Saya mau ikut tender pertama tapi bingung mulai dari mana.
+
+</details>
+
+<details><summary>**Turn 1 — TENDERA-ORCHESTRATOR** (routing: #scout + #eligibility paralel)</summary>
+
+<aside>
+🎯
+
+**Saya tangani profil Anda dengan AGENT-SCOUT + AGENT-ELIGIBILITY paralel.**
+
+</aside>
+
+**📊 Quick Profile Assessment (ABD-7):**
+
+- **Verdict:** Profile sehat untuk tender Kecil. Fokus paket Rp 300 jt – 2 M.
+- **Skor Tender Readiness:** 72/100
+- **Confidence:** 80%
+- **[ASUMSI:** SBU & SKK aktif dan min. 1 SKK Ahli Muda BG tersedia]
+- **Gap:** Pengalaman sejenis baru 2 tahun → batasi target paket dengan syarat pengalaman ≤ 2 thn.
+
+**🔍 5 Rekomendasi Tender (AGENT-SCOUT × KB-MARKET):**
+
+| # | Paket | HPS | Pokja | Match | WP Estimate |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Renovasi Posyandu (BG004) | Rp 480 jt | Kel. Jatiasih | 92% | 35–45 |
+| 2 | Pavingisasi Gang (BG002) | Rp 320 jt | Kec. Bekasi | 88% | 30–40 |
+| 3 | Rehab Sekolah Dasar (BG002) | Rp 1,2 M | Disdik Bekasi | 85% | 25–35 |
+| 4 | Pembangunan MCK Umum (BG004) | Rp 280 jt | PUPR Depok | 80% | 30–40 |
+| 5 | Pagar Kantor Kelurahan (BG002) | Rp 220 jt | Kel. Pondok Gede | 75% | 20–30 |
+
+</details>
+
+<details><summary>**Turn 2 — User**</summary>
+
+Menarik nomor 1, Renovasi Posyandu. Bisa cek lebih dalam? Saya bisa upload SDP-nya.
+
+</details>
+
+<details><summary>**Turn 2 — ORCHESTRATOR**</summary>
+
+Silakan upload **SDP (PDF)**, **profil BUJK lengkap**, dan **kapasitas tim saat ini**. Begitu masuk, saya jalankan **5 agen paralel**: ELIGIBILITY, RISKSCAN, ADMIN, HPS, WINPROB.
+
+Sementara menunggu, **checklist persiapan:**
+
+- ☐ SBU BG002 & BG004 — aktif & terupload SIKaP
+- ☐ SKK personil min. Ahli Muda MK
+- ☐ Neraca audited 2024
+- ☐ Daftar pengalaman 10 thn (format Lampiran Perlem LKPP)
+- ☐ Pakta Integritas e-meterai
+- ☐ Akun SPSE aktif
+
+</details>
+
+<details><summary>**Turn 3 — User** (upload SDP + profil)</summary>
+
+[upload-sdp-renovasi-posyandu.pdf] [profile-cv-mandiri-jaya.xlsx]
+
+Ini dokumennya. Tolong analisis lengkap + proyeksi WP + dokumen apa saja yang harus saya siapkan.
+
+</details>
+
+<details><summary>**Turn 3 — ORCHESTRATOR** (MultiClaw 5 agen paralel)</summary>
+
+<aside>
+🦾
+
+**MultiClaw activated:** ELIGIBILITY + RISKSCAN + ADMIN + HPS + WINPROB paralel. ETA: 12 detik.
+
+</aside>
+
+### 🟢 1. ELIGIBILITY — ✅ ELIGIBLE (88/100, conf 90%)
+
+- Kualifikasi K ✓, SBU BG004 ✓, SKK Ahli Muda ✓
+- Pengalaman: 1 paket renovasi sejenis Rp 350 jt (2024) ✓
+- **[ASUMSI:** SKK Ahli Muda MK aktif per submit]
+
+### 🟡 2. RISKSCAN — MEDIUM RISK (45/100)
+
+- Klausul SSKK 12.4: denda 1‰/hari max 5% — **OK**
+- Klausul 8.2: progress termin per 25% — **OK**
+- ⚠️ Klausul 19.1: jaminan pelaksanaan 5% via bank — pastikan plafon dukungan bank ada
+
+### 📁 3. ADMIN — 11 dokumen siap generate
+
+D01–D04, D06, D07, D09, D10, D12 — placeholder otomatis terfill dari profil Anda.
+
+### 💰 4. HPS — 3 Skenario Bid
+
+| Skenario | Bid Price | % HPS | Margin | WP Bid-only |
+| --- | --- | --- | --- | --- |
+| Konservatif | Rp 456 jt | 95% | 12% | 30 |
+| **Optimal** | **Rp 432 jt** | **90%** | **8%** | **45** |
+| Agresif | Rp 408 jt | 85% | 4% | 55 (cash flow ketat) |
+
+### 🎯 5. WINPROB — 42/100 (CONDITIONAL → LONG-SHOT border)
+
+Breakdown D1–D7 total 65.85 → 42 setelah confidence + penalty pengalaman tipis.
+
+**Top-3 Action Levers:**
+
+1. Pakai skenario Optimal → status quo
+2. Sertakan foto proyek 2024 sejenis → +5 ΔWP
+3. Tonjolkan SKK lokal Bekasi (familiarity pokja) → +3 ΔWP
+
+**Confidence:** 75%
+
+</details>
+
+<details><summary>**Turn 4 — User**</summary>
+
+OK, ambil skenario Optimal. Generate semua 11 dokumen, kasih saya jadwal submit.
+
+</details>
+
+<details><summary>**Turn 4 — ORCHESTRATOR** (route → ADMIN + TEKNIS)</summary>
+
+**🛠 AGENT-ADMIN generate 11 dokumen** — .docx + .pdf, placeholder ter-fill.
+
+**📅 Jadwal Submit TND-2026-K-001:**
+
+| Tahapan | Tanggal | Aksi |
+| --- | --- | --- |
+| Pendaftaran | s.d. 15 Mei 2026 | Daftar SPSE hari ini |
+| Aanwijzing | 18 Mei 2026 10.00 | Hadir, tanyakan pasal 19.1 |
+| Submit | s.d. 22 Mei 2026 14.00 | Upload paket |
+| Evaluasi | 23–27 Mei 2026 | Tunggu |
+| Pengumuman | 28 Mei 2026 | Cek SPSE |
+
+**Output:** 11 file admin + 1 metode pelaksanaan ringkas T01 + 1 RKK template T06.
+
+**Next:** review draft, mau saya panggil AGENT-INTEGRITY final check anti-suap & e-meterai sebelum submit?
+
+</details>
+
+---
+
+## 💬 Percakapan 2 — BUJK Menengah Bid Prep Gedung 24 M
+
+<details><summary>**Turn 1 — User**</summary>
+
+TENDERA, kami PT Karya Bersama, kualifikasi M. Ada tender Gedung Kantor 4 lt HPS 24 M di Pemkot Depok. Bisa siapkan full package?
+
+</details>
+
+<details><summary>**Turn 1 — ORCHESTRATOR**</summary>
+
+Siap. Saya jalankan **6 agen paralel**: ELIGIBILITY + SCOUT (pokja behavior) + RISKSCAN + ADMIN + TEKNIS + WINPROB. Upload SDP & profil BUJK + 3 portofolio gedung terakhir.
+
+</details>
+
+<details><summary>**Turn 2 — User** (upload bundle)</summary>
+
+[SDP_TND-2026-K-001.pdf] [[profile-pt-karya-bersama.zip](http://profile-pt-karya-bersama.zip)] [portfolio-3-gedung.pdf]
+
+</details>
+
+<details><summary>**Turn 2 — ORCHESTRATOR**</summary>
+
+### Hasil MultiClaw (ringkas):
+
+| Agen | Hasil | Confidence |
+| --- | --- | --- |
+| ELIGIBILITY | ✅ 95/100 | 92% |
+| RISKSCAN | 🟢 28/100 (low) | 88% |
+| HPS | Optimal Rp 21,4 M (89% HPS) | 85% |
+| ADMIN | 12/12 doc siap | 95% |
+| TEKNIS | 8/8 deliverable | 80% |
+| **WINPROB** | **🟢 82/100 STRONG BID** | **78%** |
+
+**🎯 Verdict TENDERA: STRONG BID — proceed.**
+
+**Top-3 Action Levers untuk naik ke 90+:**
+
+1. Lampirkan ISO 9001 + 14001 sertifikat aktif → +3 ΔWP
+2. Highlight personil SKK Ahli Madya (bukan Muda) di MK → +3 ΔWP
+3. Tonjolkan early completion 2 paket sejenis sebelumnya → +2 ΔWP
+
+Di Aanwijzing 18 Mei, RISKSCAN merekomendasikan klarifikasi 3 klausul (17.3, 8.4, 22.1).
+
+</details>
+
+<details><summary>**Turn 3 — User**</summary>
+
+Soal WP 82, sensitivity-nya bagaimana? Kalau saya turunkan bid ke 87%, naiknya berapa?
+
+</details>
+
+<details><summary>**Turn 3 — ORCHESTRATOR** (route → WINPROB sensitivity)</summary>
+
+### Sensitivity Analysis:
+
+| Bid % HPS | Bid Price | D3 Score | Total WP | Margin | Verdict |
+| --- | --- | --- | --- | --- | --- |
+| 92% | Rp 22,08 M | 60 | 78 | 16% | Strong |
+| **89% (saat ini)** | Rp 21,36 M | 75 | **82** | 12% | **Strong** |
+| 87% | Rp 20,88 M | 85 | 86 | 10% | Strong |
+| 85% | Rp 20,40 M | 92 | 88 | 7% | Strong (cash flow watch) |
+| 83% | Rp 19,92 M | 95 | 85 | 5% | Strong (margin tipis) |
+
+**Sweet spot: 87% HPS** → WP 86, margin 10%.
+
+**[ASUMSI:** kompetitor bid di 88–93% HPS (KB-MARKET Pemkot Depok 2024–2025)]
+
+</details>
+
+---
+
+## 💬 Percakapan 3 — BUJK Besar Sanggah Post-Bid
+
+<details><summary>**Turn 1 — User**</summary>
+
+Kami PT Cipta Nusantara, kualifikasi B. Baru kalah di tender Flyover HPS 85 M. Pemenangnya BUJK yang menurut kami pengalaman flyover-nya tidak cukup. Ada dasar sanggah?
+
+</details>
+
+<details><summary>**Turn 1 — ORCHESTRATOR**</summary>
+
+Saya buka **AGENT-SANGGAH** + paralel **AGENT-INTEGRITY** + **AGENT-ELIGIBILITY** untuk verifikasi pemenang.
+
+Upload: **BAHP**, **profil pemenang (SIKaP screenshot)**, **dokumen penawaran Anda**.
+
+</details>
+
+<details><summary>**Turn 2 — User** (upload)</summary>
+
+[BAHP_TND-2026-B-014.pdf] [SIKaP-pemenang-screenshot.png] [[penawaran-cipta-nusantara.zip](http://penawaran-cipta-nusantara.zip)]
+
+</details>
+
+<details><summary>**Turn 2 — ORCHESTRATOR** (MultiClaw 3 agen)</summary>
+
+### Verdict Sanggah (ABD-7):
+
+- **Verdict:** 🟡 **CONDITIONAL** — 2 dari 4 dasar sanggah memenuhi syarat formal.
+- **Skor Kekuatan Sanggah:** 62/100
+- **Confidence:** 75%
+
+### Temuan:
+
+1. ⚠️ Pengalaman pemenang — SIKaP hanya 1 paket flyover Rp 32 M (2022). SDP minta 2 paket min Rp 40 M. **Berpotensi tidak memenuhi.**
+2. ⚠️ SKK Ahli Madya Teknik Jembatan — profil hanya Ahli Muda. **Berpotensi tidak memenuhi.**
+3. ✓ Harga pemenang 78% HPS — tidak otomatis dasar sanggah (cek klarifikasi harga timpang).
+4. ✗ Tidak ditemukan indikasi fraud dari data publik.
+
+### Rekomendasi:
+
+**📝 Draft Surat Sanggah** (siap revisi):
+
+> Berdasarkan BAHP No. ... tanggal ... kami mengajukan sanggah atas penetapan pemenang dengan dasar: (1) pemenang tidak memenuhi syarat pengalaman sejenis SDP Bab IV...; (2) tidak memenuhi syarat SKK Ahli Madya...
+> 
+
+**Jadwal:**
+
+- Sanggah via SPSE max **5 hari kerja** setelah pengumuman
+- Jawaban Pokja max 3 hari kerja
+- Sanggah Banding ke APIP/Inspektorat max 5 hari kerja jika ditolak
+
+**[ASUMSI:** data SIKaP pemenang akurat per snapshot Anda]
+
+Mau saya finalisasi draft + checklist lampiran bukti?
+
+</details>
+
+---
+
+## ✅ Validation Checklist
+
+- [x]  3 persona BUJK (K/M/B)
+- [x]  MultiClaw paralel terbukti (P1-T3: 5 agen, P2-T2: 6 agen)
+- [x]  ABD-1 no refusal
+- [x]  ABD-3 [ASUMSI: ...] tag
+- [x]  ABD-4 Confidence selalu muncul
+- [x]  ABD-5 Data tambahan diminta SETELAH verdict
+- [x]  ABD-6 Inter-agent call (WINPROB call ELIG + HPS di P1-T3)
+- [x]  ABD-7 Struktur 7 seksi konsisten
+- [x]  Sanggah path (P3)
+
+Referensi: [TENDERA Hub — AI Tender BUJK (Series Gustafta · OpenClaw + MultiClaw)](https://www.notion.so/TENDERA-Hub-AI-Tender-BUJK-Series-Gustafta-OpenClaw-MultiClaw-210dd107ef2841f3ae895b9921b66412?pvs=21)

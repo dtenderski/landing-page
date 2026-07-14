@@ -1,0 +1,170 @@
+<aside>
+📚
+
+Knowledge base ini adalah **rangkuman terstruktur** *Metodologi Penelitian Hukum* karya **Tommy Hendra Purwaka** (Penerbit Atma Jaya, Jakarta — Cet. I 2007 / Cet. II 2011, ISBN 978-602-8904-22-3). Disusun supaya bisa langsung dipakai chatbot LexSkripsi sebagai rujukan saat membimbing mahasiswa.
+
+</aside>
+
+## 1. Identitas Buku
+
+| Item | Keterangan |
+| --- | --- |
+| Penulis | Tommy Hendra Purwaka (dosen FH Unika Atma Jaya Jakarta) |
+| Judul | Metodologi Penelitian Hukum |
+| Penerbit | Penerbit Universitas Atma Jaya, Jakarta |
+| Edisi | Cet. I 2007 (vi + 104 hlm); Cet. II 2011 (136 hlm) |
+| Klasifikasi | 340.072 — Hukum, Penelitian |
+
+## 2. Posisi & Tujuan Buku
+
+Buku ini bersifat **aplikatif-prosedural**, bukan filosofis berat. Sasarannya: mahasiswa hukum yang sedang menyusun skripsi/tesis. Fokusnya pada **tata cara baku** sejak merumuskan masalah sampai menyusun laporan.
+
+## 3. Hakikat Penelitian Hukum (menurut Purwaka)
+
+- Ilmu hukum adalah ilmu *sui generis* — punya logika sendiri yang tidak persis sama dengan ilmu sosial.
+- Penelitian hukum bersifat **preskriptif** (mencari *das Sollen* — apa yang seharusnya), bukan sekadar **deskriptif** (potret *das Sein*).
+- Hasilnya berupa **argumentasi hukum yang rasional**, bukan sekadar laporan fakta.
+
+> Implikasi untuk mahasiswa: **kesimpulan skripsi wajib bernilai preskriptif** — beri rekomendasi, bukan cuma narasi temuan.
+> 
+
+## 4. Jenis Penelitian Hukum
+
+### 4.1 Penelitian Hukum Normatif (Doktrinal)
+
+Mengkaji **norma, asas, doktrin**. Tidak butuh data lapangan. Sub-tipenya:
+
+- Penelitian asas-asas hukum
+- Penelitian sistematika hukum
+- Penelitian taraf sinkronisasi (vertikal/horizontal antar peraturan)
+- Penelitian sejarah hukum
+- Penelitian perbandingan hukum
+- Penelitian terhadap penemuan hukum *in concreto* (analisis putusan)
+
+### 4.2 Penelitian Hukum Empiris (Sosio-Legal / Yuridis-Sosiologis)
+
+Mengkaji *law in action* — bagaimana norma bekerja di masyarakat. Sub-tipenya:
+
+- Penelitian efektivitas hukum
+- Penelitian identifikasi hukum tidak tertulis (hukum adat / kebiasaan)
+- Penelitian perilaku hukum / kesadaran hukum
+- Penelitian dampak / *impact study*
+
+### 4.3 Kombinasi (Yuridis-Empiris)
+
+Normatif sebagai inti, ditopang data lapangan terbatas. **Inilah yang dipakai dalam skripsi MBDK ini.**
+
+## 5. Pendekatan Penelitian (Approaches)
+
+| Pendekatan | Kegunaan |
+| --- | --- |
+| Perundang-undangan (*statute approach*) | Mengkaji peraturan terkait isu |
+| Konseptual (*conceptual approach*) | Mengkaji doktrin & konsep hukum |
+| Kasus (*case approach*) | Mengkaji *ratio decidendi* putusan |
+| Historis (*historical approach*) | Menelusuri sejarah pembentukan norma |
+| Komparatif (*comparative approach*) | Membandingkan dengan hukum negara lain |
+| Filsafat (*philosophical approach*) | Menggali nilai dasar di balik norma |
+| Sosio-legal (*socio-legal approach*) | Menjembatani norma dengan realitas sosial |
+
+## 6. Penyusunan Usulan Penelitian (Proposal)
+
+Urutan baku menurut Purwaka:
+
+1. **Latar Belakang Masalah** — kondisi ideal vs kondisi aktual (*gap*) + data pendukung.
+2. **Identifikasi Masalah** — daftar semua masalah yang muncul dari latar belakang.
+3. **Pembatasan Masalah** — fokus pada masalah yang akan diteliti.
+4. **Rumusan Masalah** — kalimat tanya, *researchable*, max 3 pertanyaan.
+5. **Tujuan Penelitian** — sejajar 1:1 dengan rumusan masalah.
+6. **Manfaat Penelitian** — teoretis & praktis.
+7. **Kerangka Teori & Konseptual** — peta teori + definisi operasional.
+8. **Metode Penelitian** — jenis, pendekatan, sumber data, teknik, analisis.
+9. **Sistematika Penulisan** — gambaran isi tiap bab.
+
+## 7. Pengumpulan Bahan Hukum & Data
+
+### 7.1 Bahan Hukum (untuk dimensi normatif)
+
+- **Bahan Hukum Primer** — UUD 1945, UU, PP, Perpres, Permen, Perda, putusan pengadilan, konvensi internasional yang diratifikasi.
+- **Bahan Hukum Sekunder** — buku hukum, jurnal ilmiah, hasil penelitian, doktrin sarjana.
+- **Bahan Hukum Tersier** — kamus hukum, ensiklopedi, indeks.
+
+Teknik: **studi kepustakaan** — *card system* atau catatan elektronik per isu hukum.
+
+### 7.2 Data Lapangan (untuk dimensi empiris)
+
+- **Wawancara** — terstruktur / semi-terstruktur / mendalam.
+- **Observasi** — partisipatif / non-partisipatif.
+- **Kuesioner** — bila perlu data kuantitatif terbatas.
+- **Dokumentasi** — catatan kelurahan, data puskesmas, dsb.
+
+Pemilihan informan: **purposive sampling** (informan kunci dipilih berdasar kriteria, bukan acak).
+
+## 8. Pengolahan & Analisis Data
+
+- **Editing** — periksa kelengkapan & konsistensi.
+- **Klasifikasi** — kelompokkan per isu / variabel.
+- **Sistematisasi** — susun runtut sesuai kerangka teori.
+- **Analisis Kualitatif Preskriptif** — uraikan, tafsirkan, lalu *argumentasikan*.
+
+Tiga inti analisis hukum (Purwaka, 2011 MMH UNDIP):
+
+1. **Penafsiran (interpretasi)** — gramatikal, sistematis, historis, teleologis, sosiologis.
+2. **Penalaran (legal reasoning)** — silogisme hukum: premis mayor (norma) + premis minor (fakta) → kesimpulan.
+3. **Argumentasi** — menyusun pembelaan atau kritik atas suatu posisi hukum secara rasional.
+
+## 9. Pembuatan Laporan
+
+Sistematika baku skripsi/tesis hukum:
+
+```
+BAB I  PENDAHULUAN
+BAB II TINJAUAN PUSTAKA / KERANGKA TEORI
+BAB III METODE PENELITIAN
+BAB IV HASIL DAN PEMBAHASAN
+BAB V  PENUTUP (Kesimpulan & Saran)
+DAFTAR PUSTAKA
+LAMPIRAN
+```
+
+Kaidah teknis:
+
+- Sitasi konsisten (gunakan satu gaya: *footnote* tradisional / Turabian / sesuai pedoman fakultas).
+- Hindari plagiasi — kutipan langsung > 4 baris dipisah blok & diberi tanda kutip.
+- Daftar pustaka diurut alfabetis menurut nama belakang penulis.
+
+## 10. Checklist Mutu Skripsi (versi Purwaka, disederhanakan)
+
+- [ ]  Latar belakang menunjukkan **gap** yang jelas (ideal vs aktual)
+- [ ]  Rumusan masalah max 3, kalimat tanya, *researchable*
+- [ ]  Tujuan sejajar 1:1 dengan rumusan masalah
+- [ ]  Kerangka teori menjelaskan **rantai: teori → konsep → indikator**
+- [ ]  Jenis & pendekatan penelitian dijustifikasi (bukan asal sebut)
+- [ ]  Bahan hukum primer-sekunder-tersier disebut spesifik
+- [ ]  Analisis bersifat preskriptif (ada *argumentasi*, bukan deskripsi)
+- [ ]  Kesimpulan menjawab tiap rumusan masalah
+- [ ]  Saran berbasis temuan, bukan opini umum
+
+## 11. Cara Chatbot LexSkripsi Memakai KB Ini
+
+```
+Saat mahasiswa bertanya soal:
+  - "jenis penelitian apa yang cocok?"      → rujuk Bagian 4
+  - "pendekatan apa yang dipakai?"          → rujuk Bagian 5
+  - "bagaimana susun proposal?"             → rujuk Bagian 6
+  - "apa beda primer/sekunder/tersier?"     → rujuk Bagian 7.1
+  - "bagaimana analisis data hukum?"        → rujuk Bagian 8
+  - "apa saja yang harus ada di Bab III?"   → rujuk Bagian 6 + 7
+  - "checklist sebelum sidang"              → rujuk Bagian 10
+```
+
+## 12. Daftar Pelengkap (Direkomendasikan untuk Bibliografi Skripsi)
+
+- Peter Mahmud Marzuki, *Penelitian Hukum*, Kencana, edisi terbaru — pelengkap untuk pendekatan & legal reasoning.
+- Soerjono Soekanto, *Pengantar Penelitian Hukum*, UI Press — pelengkap untuk sosio-legal.
+- Johnny Ibrahim, *Teori dan Metodologi Penelitian Hukum Normatif*, Bayumedia — pelengkap normatif lanjutan.
+- I Made Pasek Diantha, *Metodologi Penelitian Hukum Normatif dalam Justifikasi Teori Hukum*, Prenada — pelengkap untuk justifikasi teori.
+- Zainuddin Ali, *Metode Penelitian Hukum*, Sinar Grafika — pelengkap praktis.
+
+---
+
+*KB ini bisa diperbarui jika mahasiswa menemukan bagian buku yang perlu didetailkan lebih lanjut. Hubungi agen LexSkripsi untuk minta tambahan.*

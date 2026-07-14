@@ -1,0 +1,84 @@
+<aside>
+📚
+
+Knowledge Base CSMS Assistant mengikuti standar Gustafta Chatbot Builder: **7 tipe sumber pengetahuan** — teks, file, URL, YouTube, Cloud Drive, video, audio. Tambahkan sumber baru di seksi yang sesuai.
+
+</aside>
+
+## 1️⃣ Teks (Inline Knowledge)
+
+Diketik langsung dalam halaman ini atau di system prompt chatbot.
+
+- Ringkasan 6 langkah siklus CSMS, matriks risiko 5×5, 16 elemen PQ, kriteria HSE Plan, ceklist PJA/WIP, daftar permit khusus, formula skoring KPI dan Final Eval.
+- Lihat sistem prompt lengkap di halaman instruksi @CSMS Assistant.
+
+## 2️⃣ File (PDF / DOCX / Excel)
+
+Upload file regulasi & pedoman ke chatbot:
+
+- ISO 45001:2018 (PDF resmi BSN)
+- PP No. 50/2012 + Lampiran (PDF Setneg)
+- UU No. 1/1970 (PDF JDIH)
+- Permenaker No. 5/2018 (PDF Kemnaker)
+- Permen ESDM No. 10/2021 (PDF JDIH ESDM)
+- Pedoman CSMS PT PLN Indonesia Power (PDF internal)
+- Template Form 1–7 dalam DOCX/Excel (lihat [CSMS Hub — Contractor Safety Management System](https://www.notion.so/CSMS-Hub-Contractor-Safety-Management-System-5d81a6cee0474e3296e453877234f4b7?pvs=21))
+
+## 3️⃣ URL (Web Sources)
+
+Daftar situs primer untuk *deep search* AI:
+
+- [peraturan.bpk.go.id](http://peraturan.bpk.go.id) — JDIH terpusat
+- [kemnaker.go.id](http://kemnaker.go.id) — regulasi K3 nasional
+- [bsn.go.id](http://bsn.go.id) — standar SNI
+- [esdm.go.id](http://esdm.go.id) — K3 ketenagalistrikan & migas
+- [menlhk.go.id](http://menlhk.go.id) — ambang baku mutu lingkungan
+- [bnsp.go.id](http://bnsp.go.id) — sertifikasi profesi
+
+## 4️⃣ YouTube (Auto-Transcribe)
+
+Link video referensi yang ditranskripsi otomatis:
+
+- Channel resmi Kemnaker / DJK ESDM — sosialisasi regulasi
+- Channel pelatihan AK3 Umum (BNSP)
+- Demo confined space rescue, hotwork procedure, working at height
+- Studi kasus insiden konstruksi dan pembangkit
+
+## 5️⃣ Cloud Drive (Google Drive / OneDrive)
+
+Folder bersama yang disinkronkan:
+
+- Folder *Arsip Kontraktor* — dokumen PQ historis per kontraktor.
+- Folder *Insiden & Lesson Learned* — laporan investigasi.
+- Folder *Audit Lapangan* — foto + ceklist WIP per kunjungan.
+
+## 6️⃣ Video (Upload Langsung)
+
+Video internal hasil produksi sendiri:
+
+- Rekaman safety induction perusahaan
+- Walk-through fasilitas berisiko (tank farm, switchyard, boiler)
+- Demonstrasi pemakaian APD level tertentu
+- Simulasi tabletop ERP
+
+## 7️⃣ Audio (Upload Langsung)
+
+- Rekaman toolbox meeting harian
+- Rekaman safety stand-down setelah insiden
+- Wawancara saksi pasca-insiden (untuk transkripsi RCA)
+
+---
+
+## 🔄 Workflow Update KB
+
+1. Sumber baru ditemukan/dipublikasikan → catat di seksi tipe yang sesuai.
+2. Upload file/link ke pengaturan chatbot di Gustafta Builder.
+3. Tunggu transkripsi/RAG selesai (background).
+4. Uji dengan pertanyaan kunci di chatbot — pastikan referensi muncul.
+5. Catat tanggal update di bawah ini agar versioning rapi.
+
+## 📅 Riwayat Update KB
+
+| Tanggal | Tipe | Sumber | Catatan |
+| --- | --- | --- | --- |
+| 2026-04-28 | Teks | Sistem prompt OPTIA v2.0 | Restrukturisasi multi-agent |

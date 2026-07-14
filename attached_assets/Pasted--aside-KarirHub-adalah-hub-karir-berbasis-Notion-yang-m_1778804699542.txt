@@ -1,0 +1,91 @@
+<aside>
+🎯
+
+**KarirHub** adalah hub karir berbasis Notion yang menghubungkan **pencari kerja bersertifikat BNSP** dengan **pemberi kerja** di sektor teknik (konstruksi, MEP, migas, manufaktur, IT). Didukung oleh agen AI yang berperan sebagai *Job Matcher*, *CV Coach*, *BNSP Advisor*, *Intake Bot*, dan *Curator*.
+
+</aside>
+
+## 🧭 Navigasi Cepat
+
+4 database inti hub ini (lihat embed di bawah halaman):
+
+- 📢 [](https://www.notion.so/1822d70fe1b14ff8a49234e7dd2631ea?pvs=21) — semua posting (pemerintah, swasta, blue-collar, remote). Cek view **Prioritas BNSP** & **Per Sektor**.
+- 🧑‍🔧 [](https://www.notion.so/6f7e429502474f388c0ff9214d853321?pvs=21) — profil kandidat. Cek view **Bersertifikat BNSP** & **BNSP Coverage**.
+- 🏢 [](https://www.notion.so/a00426da0cb143b1947959cc4e6c2876?pvs=21) — perusahaan, kontraktor, mandor, agency.
+- 🗂️ [](https://www.notion.so/35ddcc53791242f29ed96e2df6a16e16?pvs=21) — 18 sumber kurasi sudah di-seed.
+
+## 🤖 Chat dengan Agen
+
+<aside>
+💼
+
+**Agen aktif**: @KarirHub Bot. Mention di komentar/page mana pun, atau buka chat dari sidebar Notion.
+
+Agen ini berperan ganda sebagai **Job Matcher**, **CV/Portfolio Coach**, **BNSP Advisor**, **Intake Bot**, dan **Curator** — semua dengan doktrin **ABD-7** (selalu best-effort, tag `[ASUMSI:]`, confidence score).
+
+</aside>
+
+### Contoh prompt yang bisa dicoba
+
+- *"Cari saya lowongan AI Engineer remote dengan gaji 25-40jt."*
+- *"Saya punya SKK Konstruksi Madya + Ahli K3, posisi apa yang paling laku 2026?"*
+- *"Review CV saya: [paste teks CV]"*
+- *"Tolong posting kebutuhan: butuh 5 tukang las 6G di Bekasi, deadline 2 minggu."*
+- *"Tambah lowongan dari link ini: [paste URL JobStreet/LinkedIn]."*
+- *"Buat surat lamaran untuk posisi Site Engineer di PT XYZ, formal Bahasa Indonesia."*
+
+### Jadwal otomatis
+
+Agen punya **trigger harian 07:00 WIB** untuk mode Curator — silakan komentari di hub ini hal-hal yang ingin dipantau secara berkala (sektor, kata kunci, lokasi).
+
+## 📊 Dashboard & Quick Views
+
+**Lowongan Kerja** — [🔥 Prioritas BNSP](https://www.notion.so/1d5afd3ddc2842fbace4f5e2433e5f49?pvs=21) · [📊 Per Sektor (donut)](https://www.notion.so/cffe5de043d642bcbfcf49671c02512f?pvs=21) · [📊 Status Pipeline](https://www.notion.so/aa3e4eced5d74c2b87f87601b5779440?pvs=21) · [📊 Prioritas BNSP (chart)](https://www.notion.so/03e4c530e88f475b8697222ff8aec78a?pvs=21)
+
+**Pencari Kerja** — [🏅 Bersertifikat BNSP](https://www.notion.so/ec6723ee7eac4df5b382be8d3e62089d?pvs=21) · [📊 BNSP Coverage](https://www.notion.so/b8fc9b29d00a431eb45b63529cf47d48?pvs=21) · [📊 Kandidat per Sektor](https://www.notion.so/2f294728e48d4ceb84ac2772e79b78b5?pvs=21) · [📊 Distribusi Pengalaman](https://www.notion.so/7cae82a593424c89a41f594385ec1e3b?pvs=21)
+
+**Form intake publik** — [📩 Posting Lowongan](https://www.notion.so/356ecde11cae4458a12d0ce17d66f04f?pvs=21) · [📝 Daftar Pencari Kerja](https://www.notion.so/370018df3b2b456bb2adfd9b9fe821bd?pvs=21) · [🏢 Daftar Pemberi Kerja](https://www.notion.so/bbaedeeea8814c2486708e482eb1a610?pvs=21)
+
+## 📋 Cara Pakai
+
+### Untuk Pencari Kerja
+
+1. Isi form **Daftar Pencari Kerja** (di database Pencari Kerja)
+2. Chat dengan agen KarirHub untuk dapat rekomendasi lowongan, review CV, atau saran sertifikasi BNSP
+3. Lamar via tombol/relasi ke lowongan yang cocok
+
+### Untuk Pemberi Kerja
+
+1. Isi form **Posting Kebutuhan Tenaga Kerja**
+2. Agen akan klasifikasi otomatis & cari kandidat yang cocok
+3. Review profil kandidat yang direkomendasikan
+
+## 🗺️ Roadmap
+
+- [x]  Hub page & arsitektur
+- [x]  4 database inti + relasi 2-arah
+- [x]  Form intake (3 form: Pencari, Pemberi, Lowongan)
+- [x]  Seed 18 sumber lowongan utama
+- [x]  Agen KarirHub Bot (OpenClaw + ABD-7)
+- [x]  Chart analytics (per sektor, status, BNSP coverage)
+- [x]  Trigger harian curator (07:00 WIB)
+- [x]  Seed data real: 6 Pemberi Kerja + 6 Lowongan (Mei 2026)
+- [x]  Profil pencari kerja pertama (user) ter-input
+- [x]  Dashboard section di hub page
+- [ ]  Smoke test agent dengan skenario real
+- [ ]  Apply ke top match (Crossover Remote AI Engineer)
+- [ ]  Share form intake publik (untuk pencari & pemberi kerja eksternal)
+- [ ]  Autofill agent untuk Fit Score & ATS Score (saat data >75 rows)
+- [ ]  Telegram/email digest mingguan kandidat top-fit
+
+---
+
+*Dibangun dengan pola OpenClaw dan doktrin ABD (Anti-Blocking Doctrine) v1.1 — agen tidak akan menolak; akan selalu memberikan jawaban best-effort dengan tag `[ASUMSI:]` dan confidence score.*
+
+[Sumber Lowongan (KB)](https://www.notion.so/35ddcc53791242f29ed96e2df6a16e16?pvs=21)
+
+[Lowongan Kerja](https://www.notion.so/1822d70fe1b14ff8a49234e7dd2631ea?pvs=21)
+
+[Pemberi Kerja](https://www.notion.so/a00426da0cb143b1947959cc4e6c2876?pvs=21)
+
+[Pencari Kerja](https://www.notion.so/6f7e429502474f388c0ff9214d853321?pvs=21)

@@ -1,0 +1,792 @@
+Lanjut. Berikut **bagian 34–45** untuk melengkapi konfigurasi chatbot Mekanikal agar setara dengan struktur chatbot Manajemen Pelaksanaan terlampir: ada **state machine, API-ready response object, rubric asesmen, adaptive learning, conversation examples, dan final builder package**. Formatnya mengikuti pola konfigurasi Manajemen Pelaksanaan yang memakai flow, node, intent, template respons, asesmen, studi kasus, fallback, dan session summary.  Basis data tetap dari katalog Mekanikal yang berisi subklasifikasi, jabatan kerja, jenjang jabatan, KKNI, standar kompetensi, dan link SKK/SKKNI. 
+
+# 34. Conversation State Machine
+
+```yaml id="ixgejt"
+state_machine:
+  initial_state: onboarding
+
+  states:
+    onboarding:
+      description: "Menyambut user dan mengarahkan ke menu utama."
+      on:
+        user_selects_role_lookup: role_lookup
+        user_selects_standard_lookup: standard_lookup
+        user_selects_kkni_lookup: kkni_lookup
+        user_selects_recommendation: role_discovery
+        user_selects_learning: learning_menu
+        user_selects_assessment: assessment_start
+        user_selects_scenario: scenario_menu
+        user_selects_checklist: evidence_checklist
+        user_selects_glossary: glossary_lookup
+
+    role_lookup:
+      description: "Mencari jabatan Mekanikal berdasarkan input user."
+      on:
+        exact_role_found: role_detail
+        multiple_roles_found: role_selection
+        no_role_found: fallback_role_not_found
+        role_ambiguous: role_clarification
+
+    role_detail:
+      description: "Menampilkan detail jabatan kerja."
+      on:
+        user_requests_assessment: role_assessment
+        user_requests_learning: related_learning_module
+        user_requests_checklist: evidence_checklist
+        user_requests_standard: standard_detail
+        user_requests_comparison: compare_roles
+        user_returns_menu: main_menu
+
+    kkni_lookup:
+      description: "Mencari jabatan berdasarkan jenjang KKNI."
+      on:
+        kkni_valid: show_roles_by_kkni
+        kkni_invalid: kkni_validation_error
+        user_selects_role: role_detail
+
+    standard_lookup:
+      description: "Mencari jabatan berdasarkan kode SKKNI/SKKK atau standar kompetensi."
+      on:
+        standard_found: standard_detail
+        multiple_standards_found: standard_selection
+        standard_not_found: fallback_standard_not_found
+
+    role_discovery:
+      description: "Memetakan rekomendasi jabatan berdasarkan pengalaman user."
+      on:
+        profile_complete: role_recommendation
+        answer_ambiguous: role_discovery_clarification
+        user_selects_area: area_recommendation
+
+    learning_menu:
+      description: "Menu modul pembelajaran Mekanikal."
+      on:
+        module_selected: learning_module
+        module_complete: module_quiz
+        quiz_complete: learning_recommendation
+        user_requests_scenario: scenario_menu
+        user_requests_assessment: assessment_start
+
+    assessment_start:
+      description: "Memulai asesmen mandiri."
+      on:
+        assessment_area_selected: assessment_questions
+        assessment_complete: assessment_result
+        user_requests_recommendation: adaptive_learning
+
+    scenario_menu:
+      description: "Latihan studi kasus Mekanikal."
+      on:
+        scenario_selected: scenario_prompt
+        user_submits_answer: scenario_feedback
+        user_requests_model_answer: scenario_model_answer
+        user_requests_next_scenario: scenario_menu
+
+    mock_interview:
+      description: "Simulasi wawancara asesmen."
+      on:
+        question_asked: user_answer_wait
+        user_submits_answer: mock_feedback
+        continue_interview: next_mock_question
+        finish_interview: session_summary
+
+    evidence_checklist:
+      description: "Membuat checklist bukti kompetensi."
+      on:
+        area_selected: generate_area_checklist
+        role_selected: generate_role_checklist
+        user_requests_detail: checklist_detail
+        user_requests_mock_interview: mock_interview
+
+    glossary_lookup:
+      description: "Menjelaskan istilah SKK/SKKNI/Mekanikal."
+      on:
+        term_found: glossary_response
+        term_not_found: fallback_glossary
+
+    fallback:
+      description: "Menangani input ambigu atau tidak ditemukan."
+      on:
+        user_selects_topic: corresponding_state
+        repeated_failure: main_menu
+```
+
+# 35. API-Ready Intent Response Object
+
+Format ini berguna untuk builder, backend, atau integrasi WhatsApp/Telegram.
+
+```json id="f4wi9u"
+{
+  "intent": "lookup_role",
+  "confidence": 0.94,
+  "entities": {
+    "role_name": "Teknisi Fire Alarm",
+    "subklasifikasi": "Proteksi Kebakaran",
+    "kkni_level": 4
+  },
+  "matched_catalog_item": {
+    "classification": "Mekanikal",
+    "subklasifikasi": "Proteksi Kebakaran",
+    "jabatan_kerja": "Teknisi Fire Alarm",
+    "jenjang_jabatan": "Teknisi Fire Alarm",
+    "kualifikasi": "Teknisi/Analis",
+    "kkni": 4,
+    "standar": "SKKNI 304-2009",
+    "link_skk": "https://skkni-api.kemnaker.go.id/v1/public/documents/bbd818ec-027a-47ec-8c14-1970313917c0/download"
+  },
+  "bot_response": {
+    "text": "Teknisi Fire Alarm berada dalam subklasifikasi Proteksi Kebakaran. Jabatan ini memiliki kualifikasi Teknisi/Analis dengan jenjang KKNI Level 4 dan menggunakan standar SKKNI 304-2009. Fokus kompetensinya berkaitan dengan instalasi, pemeriksaan, pengujian, perawatan, dan penanganan gangguan sistem fire alarm.",
+    "quick_replies": [
+      "Mulai asesmen fire alarm",
+      "Checklist bukti fire alarm",
+      "Latihan studi kasus",
+      "Cari jabatan lain"
+    ]
+  },
+  "next_node": "role_detail_followup"
+}
+```
+
+# 36. Intent Classification Schema
+
+```yaml id="e0hxjg"
+nlu_schema:
+  intents:
+    greet:
+      examples:
+        - "Halo"
+        - "Mulai"
+        - "Saya mau cari SKK Mekanikal"
+        - "Bisa bantu saya?"
+
+    explain_scope:
+      examples:
+        - "Apa saja bidang Mekanikal?"
+        - "Klasifikasi Mekanikal mencakup apa?"
+        - "Subklasifikasi Mekanikal apa saja?"
+
+    lookup_role:
+      examples:
+        - "Cari jabatan Operator Crane Mobile"
+        - "Saya teknisi fire alarm"
+        - "Apa itu Ahli Teknik Mekanikal?"
+        - "Saya tukang las listrik"
+
+    lookup_kkni:
+      examples:
+        - "Jabatan KKNI 7 apa saja?"
+        - "Level 2 ada jabatan apa?"
+        - "Tampilkan jabatan Mekanikal KKNI 4"
+        - "Saya mau lihat jabatan ahli muda"
+
+    lookup_standard:
+      examples:
+        - "SKKNI 391-2015 untuk jabatan apa?"
+        - "Standar Operator Crane Mobile apa?"
+        - "SKKNI tukang las nomor berapa?"
+        - "Cari SKKNI 46-2022"
+
+    recommend_path:
+      examples:
+        - "Saya cocok ambil sertifikasi apa?"
+        - "Saya operator alat berat"
+        - "Saya mechanical engineer gedung"
+        - "Saya kerja di plumbing"
+
+    compare_roles:
+      examples:
+        - "Apa beda Tukang Plambing dan Tukang Pasang Pipa?"
+        - "Apa beda Crane Mobile dan Tower Crane?"
+        - "Bandingkan Ahli Teknik Mekanikal dan Ahli Pemeriksa Kelaikan Fungsi Mekanikal"
+
+    start_assessment:
+      examples:
+        - "Mulai asesmen"
+        - "Cek kesiapan saya"
+        - "Saya mau asesmen crane"
+        - "Tes kemampuan HVAC"
+
+    start_scenario:
+      examples:
+        - "Latihan studi kasus"
+        - "Beri saya kasus plumbing"
+        - "Kasus lifting"
+        - "Latihan masalah fire alarm"
+
+    generate_checklist:
+      examples:
+        - "Checklist bukti operator crane"
+        - "Dokumen apa untuk welder?"
+        - "Portofolio untuk HVAC apa saja?"
+        - "Bukti kompetensi plumbing"
+
+    start_mock_interview:
+      examples:
+        - "Simulasi wawancara"
+        - "Latihan jawab asesor"
+        - "Tanya saya seperti asesor"
+        - "Interview untuk Ahli Teknik Mekanikal"
+
+    glossary_lookup:
+      examples:
+        - "Apa itu HVAC?"
+        - "Apa itu rigging?"
+        - "Apa itu SKKNI?"
+        - "Apa itu KKNI?"
+```
+
+# 37. Entity Extraction Schema
+
+```yaml id="uakrxs"
+entities:
+  role_name:
+    type: "string"
+    examples:
+      - "Operator Crane Mobile"
+      - "Teknisi Fire Alarm"
+      - "Tukang Plambing"
+      - "Ahli Bidang Keahlian Teknik Mekanikal"
+      - "Mekanik HVAC"
+      - "Operator Wheel Loader"
+      - "Pengawas Scaffolding"
+
+  subklasifikasi:
+    type: "enum"
+    values:
+      - "Teknik Tata Udara dan Refrigasi"
+      - "Plumbing dan Pompa Mekanik"
+      - "Proteksi Kebakaran"
+      - "Transportasi dalam Gedung"
+      - "Teknik Mekanikal"
+      - "Pengelasan"
+      - "Alat Berat"
+      - "Teknik Lifting"
+      - "Scaffolding"
+
+  kkni_level:
+    type: "number"
+    values: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+  standard_code:
+    type: "string"
+    examples:
+      - "SKKNI 391-2015"
+      - "SKKNI 135-2015"
+      - "SKKNI 304-2009"
+      - "SKKNI 46-2022"
+      - "SKKNI 27-2021"
+
+  user_goal:
+    type: "enum"
+    values:
+      - "cari jabatan"
+      - "cari standar"
+      - "belajar"
+      - "asesmen"
+      - "sertifikasi"
+      - "latihan kasus"
+      - "checklist bukti"
+      - "simulasi wawancara"
+
+  experience_level:
+    type: "enum"
+    values:
+      - "pemula"
+      - "operator"
+      - "teknisi/analis"
+      - "pengawas"
+      - "ahli muda"
+      - "ahli madya"
+      - "ahli utama"
+```
+
+# 38. Adaptive Learning Recommendation
+
+```yaml id="zo519q"
+adaptive_learning:
+  id: adaptive_learning_mekanikal
+  purpose: >
+    Memberikan rekomendasi modul berdasarkan hasil asesmen, jabatan target,
+    jawaban studi kasus, dan kelemahan user.
+
+  input_signals:
+    - target_role
+    - target_subklasifikasi
+    - assessment_scores
+    - weak_topics
+    - failed_quiz_questions
+    - selected_scenario
+    - repeated_fallback_topics
+
+  recommendation_rules:
+    - condition: "score_hvac < 2"
+      recommend:
+        - "Dasar sistem HVAC"
+        - "Checklist pemeriksaan unit HVAC"
+        - "Studi kasus AC tidak mencapai suhu desain"
+
+    - condition: "score_plumbing < 2"
+      recommend:
+        - "Dasar instalasi plumbing"
+        - "Pengujian tekanan pipa"
+        - "Studi kasus kebocoran instalasi"
+
+    - condition: "score_fire_protection < 2"
+      recommend:
+        - "Dasar sistem fire alarm"
+        - "Testing dan commissioning fire alarm"
+        - "Studi kasus detector tidak merespons"
+
+    - condition: "score_welding < 2"
+      recommend:
+        - "Dasar prosedur pengelasan"
+        - "Pemeriksaan cacat las"
+        - "Studi kasus hasil las tidak sesuai"
+
+    - condition: "score_crane_lifting < 2"
+      recommend:
+        - "Dasar keselamatan lifting"
+        - "Pemeriksaan alat bantu angkat"
+        - "Studi kasus sling tidak layak"
+
+    - condition: "score_scaffolding < 2"
+      recommend:
+        - "Dasar scaffolding aman"
+        - "Checklist inspeksi scaffolding"
+        - "Studi kasus perancah belum lengkap"
+
+  response_template: >
+    Berdasarkan jawaban Anda, area yang paling perlu diperkuat adalah:
+    {{weakest_area}}
+
+    Saya sarankan urutan belajar berikut:
+    1. {{recommendation_1}}
+    2. {{recommendation_2}}
+    3. {{recommendation_3}}
+
+    Setelah menyelesaikan modul tersebut, Anda dapat mencoba kembali asesmen
+    mandiri atau latihan studi kasus.
+
+    Catatan:
+    Rekomendasi ini adalah bantuan belajar, bukan keputusan resmi sertifikasi SKK.
+```
+
+# 39. Assessment Result Template
+
+```yaml id="ybsfe0"
+response_template:
+  id: assessment_result_summary
+  text: >
+    Berikut hasil asesmen mandiri Anda:
+
+    Area asesmen:
+    {{assessment_title}}
+
+    Skor rata-rata:
+    {{average_score}} dari 4
+
+    Interpretasi:
+    {{readiness_level}}
+
+    Kekuatan utama:
+    {{strong_points}}
+
+    Area yang perlu diperkuat:
+    {{weak_points}}
+
+    Rekomendasi belajar:
+    {{recommended_modules}}
+
+    Langkah berikutnya:
+    1. Pelajari modul yang direkomendasikan.
+    2. Siapkan checklist bukti kompetensi.
+    3. Latihan studi kasus sesuai jabatan target.
+    4. Lakukan simulasi wawancara asesmen.
+
+    Catatan:
+    Hasil ini adalah asesmen mandiri awal untuk pembelajaran dan persiapan.
+    Hasil ini bukan keputusan resmi kelulusan sertifikasi SKK.
+  quick_replies:
+    - "Belajar rekomendasi pertama"
+    - "Ulangi asesmen"
+    - "Latihan studi kasus"
+    - "Lihat checklist bukti"
+    - "Simulasi wawancara"
+```
+
+# 40. Microlearning Content Examples
+
+## 40.1 Microlearning — Pemeriksaan Sling Lifting
+
+```yaml id="zywjn7"
+learning_module:
+  module_id: lifting_sling_inspection
+  title: "Pemeriksaan Sling Sebelum Lifting"
+  target_area: "Crane, Lifting, Slinging, dan Rigging"
+  difficulty: "basic"
+
+  objective: >
+    Membantu pengguna memahami pentingnya pemeriksaan sling dan alat bantu angkat
+    sebelum pekerjaan lifting dilakukan.
+
+  explanation: >
+    Sling adalah alat bantu angkat yang harus sesuai kapasitas, kondisi fisik,
+    dan metode pengangkatan. Sling yang aus, rusak, atau tidak memiliki label
+    kapasitas tidak boleh digunakan karena dapat menyebabkan kegagalan lifting.
+
+  field_example: >
+    Sebelum pengangkatan material baja, operator menemukan sling aus dan label
+    kapasitas tidak terbaca. Pekerjaan harus dihentikan sementara sampai sling
+    diganti dengan alat bantu angkat yang layak dan sesuai kapasitas.
+
+  competency_checklist:
+    - "Dapat memeriksa kondisi fisik sling."
+    - "Dapat memastikan kapasitas sling sesuai beban."
+    - "Dapat menghentikan pekerjaan saat alat bantu angkat tidak layak."
+    - "Dapat mencatat temuan dalam checklist pemeriksaan."
+
+  quiz:
+    question: "Apa tindakan terbaik saat sling terlihat aus dan label kapasitas tidak terbaca?"
+    options:
+      A: "Tetap digunakan karena pekerjaan mendesak"
+      B: "Digunakan dengan mengurangi beban"
+      C: "Menghentikan pekerjaan sementara dan mengganti sling"
+      D: "Melanjutkan pekerjaan tanpa dokumentasi"
+    correct_answer: "C"
+    explanation: >
+      Sling yang tidak layak harus diganti. Pekerjaan lifting tidak boleh dilanjutkan
+      sampai alat bantu angkat aman dan sesuai kapasitas.
+```
+
+## 40.2 Microlearning — Pengujian Tekanan Plumbing
+
+```yaml id="sszx1v"
+learning_module:
+  module_id: plumbing_pressure_test
+  title: "Pengujian Tekanan Instalasi Plumbing"
+  target_area: "Plumbing dan Pompa Mekanik"
+  difficulty: "basic"
+
+  objective: >
+    Membantu pengguna memahami fungsi pengujian tekanan untuk memastikan instalasi
+    pipa tidak bocor sebelum pekerjaan ditutup atau dilanjutkan.
+
+  explanation: >
+    Pengujian tekanan dilakukan untuk memeriksa kekuatan dan kerapatan sistem pipa.
+    Kebocoran yang ditemukan harus diperbaiki, diuji ulang, dan didokumentasikan.
+
+  field_example: >
+    Setelah instalasi pipa air bersih selesai, tim melakukan pengujian tekanan.
+    Ditemukan kebocoran pada sambungan. Tim menunda penutupan plafon, memperbaiki
+    sambungan, lalu melakukan pengujian ulang.
+
+  quiz:
+    question: "Apa tindakan tepat saat ditemukan kebocoran pada uji tekanan pipa?"
+    options:
+      A: "Tetap menutup plafon agar jadwal tidak mundur"
+      B: "Memperbaiki sambungan dan melakukan pengujian ulang"
+      C: "Mengabaikan kebocoran kecil"
+      D: "Mencatat saja tanpa tindakan"
+    correct_answer: "B"
+```
+
+## 40.3 Microlearning — Cacat Hasil Las
+
+```yaml id="p5hbpv"
+learning_module:
+  module_id: welding_defect_control
+  title: "Menangani Cacat Hasil Las"
+  target_area: "Pengelasan / Welder"
+  difficulty: "intermediate"
+
+  explanation: >
+    Cacat hasil las dapat memengaruhi kekuatan, keamanan, dan penerimaan pekerjaan.
+    Temuan cacat perlu dicatat, dievaluasi, diperbaiki sesuai prosedur, lalu
+    diverifikasi ulang.
+
+  field_example: >
+    Pada pekerjaan las pipa, ditemukan cacat pada sambungan. Pekerjaan lanjutan
+    ditunda sampai hasil las diperbaiki dan diperiksa kembali.
+
+  quiz:
+    question: "Apa langkah awal saat hasil las ditemukan tidak sesuai?"
+    options:
+      A: "Menerima pekerjaan karena sudah selesai"
+      B: "Menahan pekerjaan, mencatat temuan, dan melakukan evaluasi"
+      C: "Melanjutkan pekerjaan berikutnya"
+      D: "Menghapus dokumentasi temuan"
+    correct_answer: "B"
+```
+
+# 41. Session Summary Template
+
+```yaml id="yyg7vb"
+session_summary:
+  trigger:
+    - "user says selesai"
+    - "user asks ringkasan"
+    - "after assessment completion"
+    - "after mock interview completion"
+    - "after scenario completion"
+
+  bot_message_template: >
+    Berikut ringkasan sesi Anda:
+
+    Tujuan sesi:
+    {{user_goal}}
+
+    Area Mekanikal yang dibahas:
+    {{covered_areas}}
+
+    Jabatan/jenjang yang diminati:
+    {{target_role_or_kkni}}
+
+    Aktivitas yang diselesaikan:
+    {{completed_activities}}
+
+    Kekuatan yang terlihat:
+    {{strong_points}}
+
+    Area yang disarankan untuk diperkuat:
+    {{improvement_areas}}
+
+    Rekomendasi langkah berikutnya:
+    1. {{next_step_1}}
+    2. {{next_step_2}}
+    3. {{next_step_3}}
+
+    Catatan:
+    Ringkasan ini adalah bantuan belajar dan persiapan awal, bukan hasil asesmen
+    resmi sertifikasi SKK.
+
+  quick_replies:
+    - "Lanjut belajar"
+    - "Mulai asesmen lain"
+    - "Latihan wawancara"
+    - "Checklist bukti"
+    - "Menu utama"
+```
+
+# 42. Full Example Conversation — Role Recommendation
+
+```text id="mvuosh"
+User:
+Saya kerja sebagai operator crane mobile, mau sertifikasi. Cocoknya apa?
+
+Bot:
+Berdasarkan pekerjaan Anda sebagai operator crane mobile, jabatan yang paling relevan adalah:
+
+Jabatan:
+Operator Crane Mobile
+
+Subklasifikasi:
+Crane / Lifting
+
+Kualifikasi:
+Operator
+
+Jenjang KKNI:
+Level 2 atau Level 3
+
+Standar Kompetensi:
+SKKNI 135-2015
+
+Alasan:
+Jabatan ini sesuai karena Anda menyebut pengalaman pada pengoperasian crane mobile.
+Jika pengalaman Anda masih pada pelaksanaan dasar, mulai dari Level 2. Jika sudah lebih mandiri dan berpengalaman, pertimbangkan Level 3 sesuai persyaratan sertifikasi.
+
+Pilihan lanjutan:
+[Mulai asesmen crane] [Checklist bukti operator crane] [Latihan studi kasus lifting] [Cari jabatan lain]
+```
+
+# 43. Full Example Conversation — Assessment
+
+```text id="r8v62e"
+User:
+Mulai asesmen plumbing.
+
+Bot:
+Baik. Kita mulai asesmen mandiri Plumbing dan Pompa Mekanik.
+
+Gunakan skala:
+0 = Belum memahami
+1 = Memahami teori dasar
+2 = Pernah menerapkan dengan arahan
+3 = Mampu menerapkan mandiri
+4 = Mampu mengevaluasi dan membimbing orang lain
+
+Pertanyaan 1:
+Seberapa mampu Anda membaca gambar instalasi pipa sebelum pekerjaan dimulai?
+
+User:
+3
+
+Bot:
+Pertanyaan 2:
+Seberapa mampu Anda melakukan pengujian tekanan pada instalasi plumbing?
+
+User:
+2
+
+Bot:
+Pertanyaan 3:
+Seberapa mampu Anda menangani kebocoran sambungan pipa dan melakukan pengujian ulang?
+
+User:
+2
+
+Bot:
+Hasil asesmen mandiri Anda:
+
+Area:
+Plumbing dan Pompa Mekanik
+
+Skor rata-rata:
+2.3 dari 4
+
+Interpretasi:
+Menengah
+
+Kekuatan:
+Anda sudah mampu membaca gambar dan pernah menerapkan prosedur pengujian.
+
+Area yang perlu diperkuat:
+Pengujian tekanan, dokumentasi hasil uji, dan tindakan korektif kebocoran.
+
+Rekomendasi:
+1. Pelajari modul Pengujian Tekanan Plumbing.
+2. Latihan studi kasus kebocoran instalasi.
+3. Siapkan checklist bukti pekerjaan plumbing.
+
+Catatan:
+Hasil ini bukan keputusan resmi sertifikasi SKK.
+```
+
+# 44. Full Example Conversation — Mock Interview
+
+```text id="g72gox"
+User:
+Saya mau latihan wawancara untuk Teknisi Fire Alarm.
+
+Bot:
+Baik. Teknisi Fire Alarm berada pada subklasifikasi Proteksi Kebakaran dengan kualifikasi Teknisi/Analis dan KKNI Level 4.
+
+Kita akan latihan wawancara asesmen.
+Jawab berdasarkan pengalaman nyata Anda.
+
+Pertanyaan 1:
+Ceritakan pengalaman Anda melakukan pengujian sistem fire alarm.
+
+User:
+Saya pernah melakukan testing fire alarm di gedung. Saya cek panel dan detector, lalu catat hasilnya.
+
+Bot:
+Jawaban Anda sudah relevan, tetapi masih bisa diperkuat.
+
+Yang sudah baik:
+- Anda menyebutkan pekerjaan testing fire alarm.
+- Anda menyebutkan pemeriksaan panel dan detector.
+- Anda menyebutkan pencatatan hasil.
+
+Yang perlu diperkuat:
+- Sebutkan konteks proyek atau lokasi.
+- Jelaskan metode pengujian.
+- Jelaskan hasil atau tindak lanjut.
+- Sebutkan dokumen hasil testing.
+
+Contoh jawaban yang lebih kuat:
+“Pada proyek gedung perkantoran, saya bertugas membantu pengujian sistem fire alarm sebelum serah terima. Saya memeriksa panel, detector, manual call point, dan alarm bell sesuai checklist. Saat menemukan satu detector tidak merespons, saya menelusuri koneksi dan melaporkan temuan untuk diperbaiki. Setelah perbaikan, pengujian ulang dilakukan dan hasilnya dicatat dalam laporan testing.”
+
+Apakah Anda ingin pertanyaan berikutnya?
+[Ya, lanjut] [Ulangi dengan jawaban saya] [Checklist bukti fire alarm]
+```
+
+# 45. Final Builder Package Ringkas
+
+Bagian ini bisa ditempel ke dashboard builder sebagai konfigurasi ringkas.
+
+```yaml id="ma20l3"
+final_builder_package:
+  bot_name: "SKK Coach — Mekanikal"
+
+  bot_description: >
+    Chatbot profesional berbahasa Indonesia untuk membantu pengguna memahami,
+    mencari, mempelajari, melakukan asesmen mandiri, dan mempersiapkan jalur
+    sertifikasi SKK/SKKNI pada Klasifikasi Mekanikal.
+
+  language: "id-ID"
+
+  tone:
+    - profesional
+    - jelas
+    - suportif
+    - praktis
+    - berbasis pembelajaran
+
+  main_features:
+    - role_lookup
+    - kkni_lookup
+    - standard_lookup
+    - certification_recommendation
+    - learning_modules
+    - self_assessment
+    - scenario_practice
+    - evidence_checklist
+    - mock_interview
+    - glossary
+    - session_summary
+
+  knowledge_base_files:
+    - "mekaskk_database_mekanikal.json"
+    - "README_mekaskk_bot.md"
+
+  main_menu:
+    - "Cari jabatan Mekanikal"
+    - "Cari SKK/SKKNI"
+    - "Cari berdasarkan KKNI"
+    - "Rekomendasi sertifikasi"
+    - "Belajar kompetensi"
+    - "Asesmen mandiri"
+    - "Latihan studi kasus"
+    - "Checklist bukti"
+    - "Simulasi wawancara"
+    - "Tanya istilah"
+
+  strict_rules:
+    - "Jawab hanya berdasarkan database Mekanikal."
+    - "Jangan mengarang nomor SKKNI, KKNI, jabatan, atau link."
+    - "Hasil asesmen mandiri bukan keputusan resmi sertifikasi."
+    - "Utamakan keselamatan kerja pada pekerjaan berisiko."
+    - "Tampilkan maksimal 5 hasil saat hasil terlalu banyak."
+    - "Minta klarifikasi saat input user ambigu."
+
+  fallback:
+    first_message: >
+      Maaf, saya belum menangkap maksud Anda. Apakah pertanyaan Anda berkaitan
+      dengan HVAC, Plumbing, Fire Alarm, Lift/Eskalator, Welder, Alat Berat,
+      Crane/Lifting, Scaffolding, atau Sertifikasi SKK?
+
+    second_message: >
+      Coba tuliskan dengan format:
+      “Saya ingin tahu tentang [jabatan/bidang] untuk [tujuan].”
+      Contoh: “Saya ingin tahu operator crane untuk persiapan sertifikasi.”
+
+    third_message: >
+      Saya akan arahkan kembali ke menu utama agar lebih mudah.
+
+  success_test:
+    - "User dapat mencari jabatan berdasarkan nama."
+    - "User dapat mencari standar berdasarkan SKKNI."
+    - "User dapat mencari jabatan berdasarkan KKNI."
+    - "User mendapat rekomendasi jabatan berdasarkan pengalaman."
+    - "User dapat menjalankan asesmen mandiri."
+    - "User dapat latihan studi kasus."
+    - "User dapat membuat checklist bukti."
+```
+
+File knowledge base yang dipakai:
+
+[Database JSON MekaSKK Bot](sandbox:/mnt/data/mekaskk_database_mekanikal.json)
+
+[README MekaSKK Bot](sandbox:/mnt/data/README_mekaskk_bot.md)

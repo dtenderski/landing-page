@@ -1,0 +1,834 @@
+Berikut lanjutan **tanpa canvas** untuk menutup modul **SBU Coach All-in-One** menjadi paket deployment yang benar-benar siap dipindahkan ke builder.
+
+---
+
+# LANJUTAN — Master Production Pack SBU All-in-One
+
+```yaml
+# -----------------------------------------------------------------------------
+# MASTER PRODUCTION PACK — SBU COACH ALL-IN-ONE
+# -----------------------------------------------------------------------------
+
+sbu_master_production_pack:
+  id: sbu_master_production_pack_v1
+  name: "SBU Coach All-in-One — Production Pack"
+  status: "ready_for_testing_and_deployment"
+  language: "id-ID"
+
+  included_families:
+    contractor:
+      label: "SBU Kontraktor / Pelaksana"
+      prefixes:
+        - BG
+        - BS
+        - IN
+        - KK
+        - KP
+        - PA
+        - PB
+        - PL
+
+    consultant:
+      label: "SBU Konsultan"
+      prefixes:
+        - AR
+        - RK
+        - RT
+        - AL
+        - IT
+        - AT
+
+    integrated:
+      label: "SBU Pekerjaan Konstruksi Terintegrasi"
+      prefixes:
+        - GT
+        - ST
+      source_status: "needs_review"
+```
+
+---
+
+## 1. Master Data Source Registry
+
+```yaml
+master_data_source_registry:
+  contractor_catalog:
+    id: subklasifikasi_table
+    family: contractor
+    primary_key: code
+    valid_prefixes:
+      - BG
+      - BS
+      - IN
+      - KK
+      - KP
+      - PA
+      - PB
+      - PL
+    required_fields:
+      - code
+      - title
+      - kbli
+      - group_code
+      - group_name
+      - scope_summary
+      - keywords
+
+  consultant_catalog:
+    id: sub_bidang_konsultan_catalog
+    family: consultant
+    primary_key: code
+    valid_prefixes:
+      - AR
+      - RK
+      - RT
+      - AL
+      - IT
+      - AT
+    required_fields:
+      - code
+      - title
+      - kbli
+      - group_code
+      - group_name
+      - business_type
+      - required_expertise
+      - keywords
+
+  integrated_catalog:
+    id: integrated_construction_catalog
+    family: integrated
+    primary_key: code
+    valid_prefixes:
+      - GT
+      - ST
+    required_fields:
+      - code
+      - integrated_title
+      - kbli
+      - group_code
+      - group_name
+      - related_regular_sbu
+      - source_status
+      - keywords
+```
+
+---
+
+## 2. Master Router Rules
+
+```yaml
+master_router_rules:
+  route_by_code_prefix:
+    BG: contractor
+    BS: contractor
+    IN: contractor
+    KK: contractor
+    KP: contractor
+    PA: contractor
+    PB: contractor
+    PL: contractor
+
+    AR: consultant
+    RK: consultant
+    RT: consultant
+    AL: consultant
+    IT: consultant
+    AT: consultant
+
+    GT: integrated
+    ST: integrated
+
+  route_by_activity_type:
+    physical_construction:
+      keywords:
+        - bangun
+        - pembangunan
+        - konstruksi fisik
+        - pelaksanaan
+        - pemasangan
+        - renovasi
+        - pembongkaran
+      target_family: contractor
+
+    consulting_service:
+      keywords:
+        - jasa konsultansi
+        - konsultan
+        - desain
+        - perencanaan
+        - rekayasa
+        - studi
+        - kajian
+        - pengujian
+        - analisis
+        - laboratorium
+      target_family: consultant
+
+    integrated_project:
+      keywords:
+        - design and build
+        - rancang bangun
+        - EPC
+        - engineering procurement construction
+        - terintegrasi
+        - perencanaan dan pelaksanaan
+      target_family: integrated
+
+  fallback_if_ambiguous:
+    action: "ask_master_triage"
+    target_node: node_master_triage_start
+```
+
+---
+
+## 3. Master Lookup Result Template
+
+```yaml
+tpl_master_lookup_result: >
+  Hasil pencarian SBU:
+
+  Jenis SBU:
+  {{family_label}}
+
+  Kode:
+  {{code}} — {{title}}
+
+  KBLI:
+  {{kbli}}
+
+  Kelompok:
+  {{group_code}} — {{group_name}}
+
+  Ringkasan:
+  {{scope_summary}}
+
+  Catatan data:
+  {{data_status_note}}
+
+  Langkah berikutnya:
+  1. Cek kesesuaian KBLI pada OSS.
+  2. Cek pengalaman atau portofolio sesuai ruang lingkup.
+  3. Cek tenaga ahli/TKK sesuai jenis SBU.
+  4. Cek peralatan jika termasuk SBU kontraktor atau terintegrasi.
+  5. Cek SMAP atau surat komitmen jika dipersyaratkan.
+  6. Lakukan validasi akhir ke LSBU/OSS/SIJK.
+
+  Disclaimer:
+  Hasil ini adalah pemetaan awal, bukan keputusan resmi sertifikasi.
+```
+
+---
+
+## 4. Master KBLI Result Template
+
+```yaml
+tpl_master_kbli_result: >
+  Hasil pencarian KBLI {{kbli}}:
+
+  A. Kandidat SBU Kontraktor/Pelaksana:
+  {{contractor_candidates}}
+
+  B. Kandidat SBU Konsultan:
+  {{consultant_candidates}}
+
+  C. Kandidat SBU Terintegrasi:
+  {{integrated_candidates}}
+
+  Catatan:
+  Satu KBLI dapat muncul pada beberapa keluarga SBU. Pilihan akhir ditentukan oleh
+  jenis kegiatan utama:
+
+  - Jika kegiatan berupa pelaksanaan konstruksi fisik, gunakan SBU Kontraktor.
+  - Jika kegiatan berupa konsultansi, desain, studi, rekayasa, pengujian, atau analisis,
+    gunakan SBU Konsultan.
+  - Jika kegiatan berupa rancang bangun, design and build, EPC, atau pekerjaan yang
+    menggabungkan perencanaan/rekayasa dan pelaksanaan fisik, gunakan SBU Terintegrasi.
+
+  Pertanyaan klarifikasi:
+  Apakah kegiatan Anda berupa konstruksi fisik, jasa konsultansi, atau pekerjaan terintegrasi?
+```
+
+---
+
+## 5. Master Keyword Result Template
+
+```yaml
+tpl_master_keyword_result: >
+  Berdasarkan kata kunci:
+  "{{session.master_keyword}}"
+
+  Saya menemukan kandidat berikut:
+
+  SBU Kontraktor:
+  {{contractor_ranked_candidates}}
+
+  SBU Konsultan:
+  {{consultant_ranked_candidates}}
+
+  SBU Terintegrasi:
+  {{integrated_ranked_candidates}}
+
+  Arah rekomendasi awal:
+  {{master_recommended_direction}}
+
+  Pertanyaan klarifikasi:
+  {{master_clarification_question}}
+
+  Catatan:
+  Jika hasil menampilkan lebih dari satu keluarga SBU, pilih berdasarkan jenis kegiatan,
+  bukan hanya nama objek proyek.
+```
+
+---
+
+## 6. Master Triage Output Rules
+
+```yaml
+master_triage_output_rules:
+  contractor_output:
+    when: "target_family == contractor"
+    message: >
+      Kegiatan Anda mengarah ke SBU Kontraktor/Pelaksana karena fokusnya adalah
+      pelaksanaan pekerjaan konstruksi fisik. Saya akan bantu cari subklasifikasi
+      BG, BS, IN, KK, KP, PA, PB, atau PL yang paling sesuai.
+
+  consultant_output:
+    when: "target_family == consultant"
+    message: >
+      Kegiatan Anda mengarah ke SBU Konsultan karena fokusnya adalah jasa konsultansi,
+      desain, perencanaan, rekayasa, studi, pengujian, atau analisis teknis.
+      Saya akan bantu cari sub bidang AR, RK, RT, AL, IT, atau AT.
+
+  integrated_output:
+    when: "target_family == integrated"
+    message: >
+      Kegiatan Anda mengarah ke SBU Pekerjaan Konstruksi Terintegrasi karena mencakup
+      rancang bangun, design and build, EPC, atau penggabungan perencanaan/rekayasa
+      dan pelaksanaan fisik. Saya akan bantu pilih GT atau ST.
+
+  unclear_output:
+    when: "target_family == unclear"
+    message: >
+      Saya belum bisa menentukan jenis SBU. Mohon jelaskan apakah badan usaha Anda
+      melaksanakan pekerjaan fisik, memberi jasa konsultansi, atau mengerjakan
+      rancang bangun/EPC.
+```
+
+---
+
+## 7. Master Pre-Verification Unified Form
+
+```yaml
+node_master_pre_verification_unified_form:
+  type: guided_form
+  title: "Pra-Verifikasi SBU All-in-One"
+  message: >
+    Saya akan membantu pra-verifikasi awal. Jawab beberapa pertanyaan berikut.
+  questions:
+    - id: q_sbu_family
+      text: "Jenis SBU yang ingin dicek?"
+      quick_replies:
+        - "Kontraktor"
+        - "Konsultan"
+        - "Terintegrasi"
+        - "Belum tahu"
+      save_to: master_precheck.family
+
+    - id: q_code
+      text: "Masukkan kode SBU/sub bidang jika sudah tahu. Contoh BG001, AR003, atau ST005."
+      expected_type: text
+      save_to: master_precheck.code
+
+    - id: q_kbli
+      text: "Masukkan KBLI yang digunakan di OSS."
+      expected_type: text
+      save_to: master_precheck.kbli
+
+    - id: q_activity_type
+      text: "Jenis kegiatan utama?"
+      quick_replies:
+        - "Konstruksi fisik"
+        - "Jasa konsultansi"
+        - "Design and Build/Rancang Bangun/EPC"
+        - "Belum tahu"
+      save_to: master_precheck.activity_type
+
+    - id: q_experience
+      text: "Apakah pengalaman/portofolio sesuai bidang sudah tersedia?"
+      quick_replies:
+        - "Ada dan sesuai"
+        - "Ada tapi belum yakin sesuai"
+        - "Belum ada"
+        - "Belum tahu"
+      save_to: master_precheck.experience
+
+    - id: q_finance
+      text: "Apakah dokumen keuangan tersedia?"
+      quick_replies:
+        - "Ada"
+        - "Sebagian"
+        - "Belum"
+        - "Belum tahu"
+      save_to: master_precheck.finance
+
+    - id: q_workforce
+      text: "Apakah tenaga ahli/TKK/SKK sudah tersedia sesuai kebutuhan?"
+      quick_replies:
+        - "Lengkap"
+        - "Sebagian"
+        - "Belum"
+        - "Belum tahu"
+      save_to: master_precheck.workforce
+
+    - id: q_equipment
+      text: "Apakah peralatan utama tersedia? Pilih tidak relevan jika SBU Konsultan."
+      quick_replies:
+        - "Lengkap"
+        - "Sebagian"
+        - "Belum"
+        - "Tidak relevan"
+        - "Belum tahu"
+      save_to: master_precheck.equipment
+
+    - id: q_smap
+      text: "Apakah dokumen SMAP atau surat komitmen tersedia?"
+      quick_replies:
+        - "Ada"
+        - "Surat komitmen"
+        - "Belum"
+        - "Belum tahu"
+      save_to: master_precheck.smap
+
+  completion_node: node_master_pre_verification_result
+```
+
+---
+
+## 8. Master Pre-Verification Result
+
+```yaml
+node_master_pre_verification_result:
+  type: dynamic_response
+  title: "Hasil Pra-Verifikasi SBU"
+  response_template: >
+    Hasil pra-verifikasi awal:
+
+    Jenis SBU:
+    {{master_precheck.family}}
+
+    Kode:
+    {{master_precheck.code}}
+
+    KBLI:
+    {{master_precheck.kbli}}
+
+    Jenis kegiatan:
+    {{master_precheck.activity_type}}
+
+    Pengalaman/portofolio:
+    {{master_precheck.experience}}
+
+    Keuangan:
+    {{master_precheck.finance}}
+
+    Tenaga ahli/TKK/SKK:
+    {{master_precheck.workforce}}
+
+    Peralatan:
+    {{master_precheck.equipment}}
+
+    SMAP:
+    {{master_precheck.smap}}
+
+    Skor awal:
+    {{master_precheck_score}} / 100
+
+    Status:
+    {{master_precheck_status}}
+
+    Temuan utama:
+    {{master_precheck_issues}}
+
+    Rekomendasi:
+    {{master_precheck_recommendations}}
+
+    Catatan:
+    Ini adalah pra-verifikasi umum. Untuk hasil yang lebih tepat, gunakan pra-verifikasi
+    khusus sesuai jenis SBU: Kontraktor, Konsultan, atau Terintegrasi.
+```
+
+---
+
+## 9. Master Scoring Logic
+
+```yaml
+master_precheck_scoring_logic:
+  score_range: "0-100"
+
+  components:
+    family_and_activity_match:
+      max_score: 20
+      full_score_condition: "jenis SBU sesuai dengan jenis kegiatan"
+      partial_score_condition: "jenis kegiatan masih ambigu"
+      zero_score_condition: "jenis SBU tidak sesuai dengan kegiatan"
+
+    code_kbli_match:
+      max_score: 20
+      full_score_condition: "kode SBU dan KBLI selaras"
+      partial_score_condition: "KBLI memiliki banyak kandidat"
+      zero_score_condition: "kode SBU dan KBLI tidak selaras"
+
+    experience:
+      max_score: 15
+      full_score_condition: "pengalaman/portofolio ada dan sesuai"
+      partial_score_condition: "pengalaman ada tetapi belum jelas"
+      zero_score_condition: "pengalaman belum ada"
+
+    finance:
+      max_score: 10
+      full_score_condition: "dokumen keuangan tersedia"
+      partial_score_condition: "sebagian tersedia"
+      zero_score_condition: "belum tersedia"
+
+    workforce:
+      max_score: 20
+      full_score_condition: "tenaga ahli/TKK/SKK lengkap"
+      partial_score_condition: "sebagian tersedia"
+      zero_score_condition: "belum tersedia"
+
+    equipment:
+      max_score: 10
+      full_score_condition: "lengkap atau tidak relevan untuk SBU Konsultan"
+      partial_score_condition: "sebagian tersedia"
+      zero_score_condition: "dipersyaratkan tetapi belum tersedia"
+
+    smap:
+      max_score: 5
+      full_score_condition: "SMAP tersedia"
+      partial_score_condition: "surat komitmen tersedia"
+      zero_score_condition: "belum tersedia"
+```
+
+---
+
+## 10. Master Admin Dashboard
+
+```yaml
+master_admin_dashboard:
+  pages:
+    all_catalogs:
+      title: "Semua Katalog SBU"
+      features:
+        - "lihat katalog Kontraktor"
+        - "lihat katalog Konsultan"
+        - "lihat katalog Terintegrasi"
+        - "filter berdasarkan prefix"
+        - "filter berdasarkan KBLI"
+        - "filter berdasarkan status valid/needs_review"
+        - "edit keywords"
+        - "edit catatan validasi"
+
+    master_kbli_map:
+      title: "Peta KBLI Lintas SBU"
+      features:
+        - "lihat KBLI yang muncul di beberapa keluarga SBU"
+        - "lihat kandidat Kontraktor/Konsultan/Terintegrasi"
+        - "atur pertanyaan klarifikasi"
+        - "tandai KBLI ambigu"
+
+    conflict_center:
+      title: "Pusat Konflik Data"
+      features:
+        - "review konflik IT006/IT007"
+        - "review konflik AT007 KBLI"
+        - "review status GT/ST"
+        - "validasi data needs_review"
+        - "simpan keputusan admin"
+
+    analytics:
+      title: "Analytics SBU Coach"
+      metrics:
+        - "jumlah pencarian kode"
+        - "jumlah pencarian KBLI"
+        - "jumlah keyword search"
+        - "kode paling sering dicari"
+        - "KBLI paling sering ambigu"
+        - "fallback rate"
+        - "guardrail triggered"
+        - "needs_review triggered"
+        - "skor pra-verifikasi rata-rata"
+        - "jenis SBU paling sering dipilih"
+```
+
+---
+
+## 11. Master API Blueprint
+
+```yaml
+master_api_blueprint:
+  lookup_any_code:
+    method: POST
+    path: "/api/sbu/lookup-any-code"
+    request:
+      code: "AR003"
+    response:
+      found: true
+      family: "consultant"
+      code: "AR003"
+      title: "Jasa Desain Interior pada Bangunan Gedung dan Bangunan Sipil"
+      kbli: "74120"
+      group: "AR"
+      status: "valid"
+
+  lookup_any_kbli:
+    method: POST
+    path: "/api/sbu/lookup-any-kbli"
+    request:
+      kbli: "71102"
+    response:
+      found: true
+      contractor_candidates: []
+      consultant_candidates:
+        - "RK001"
+        - "RK002"
+        - "RK003"
+        - "RK004"
+        - "RK005"
+        - "RT002"
+        - "RT003"
+        - "IT001"
+        - "IT002"
+        - "IT003"
+        - "IT004"
+        - "IT005"
+        - "IT006"
+        - "AT001"
+        - "AT002"
+        - "AT003"
+        - "AT004"
+        - "AT005"
+        - "AT006"
+      integrated_candidates: []
+      clarification_required: true
+
+  classify_activity:
+    method: POST
+    path: "/api/sbu/classify-activity"
+    request:
+      user_text: "rancang bangun hotel"
+    response:
+      recommended_family: "integrated"
+      recommended_code: "GT007"
+      reason: "Terdapat kata rancang bangun dan objek hotel."
+
+  pre_verify_master:
+    method: POST
+    path: "/api/sbu/pre-verify-master"
+    request:
+      family: "integrated"
+      code: "ST005"
+      kbli: "42912"
+      activity_type: "EPC"
+      experience: "Ada dan sesuai"
+      finance: "Ada"
+      workforce: "Sebagian"
+      equipment: "Sebagian"
+      smap: "Surat komitmen"
+    response:
+      score: 78
+      status: "Perlu Perbaikan Ringan"
+      issues:
+        - "TKK dan peralatan belum lengkap."
+        - "SMAP masih berupa surat komitmen."
+      recommendations:
+        - "Lengkapi data TKK dan peralatan."
+        - "Validasi kode ST005 karena status GT/ST needs_review."
+```
+
+---
+
+## 12. Master Webhook Events
+
+```yaml
+master_webhook_events:
+  master_lookup_completed:
+    event_name: "sbu_master.lookup_completed"
+    payload:
+      session_id: "string"
+      query_type: "code_or_kbli_or_keyword"
+      query_value: "string"
+      detected_family: "contractor_or_consultant_or_integrated"
+      selected_code: "string_nullable"
+      found: "boolean"
+
+  master_triage_completed:
+    event_name: "sbu_master.triage_completed"
+    payload:
+      session_id: "string"
+      service_type: "string"
+      recommended_family: "string"
+      candidate_list: "array"
+
+  master_precheck_completed:
+    event_name: "sbu_master.precheck_completed"
+    payload:
+      session_id: "string"
+      family: "string"
+      code: "string"
+      score: "number"
+      status_label: "string"
+      issues: "array"
+      recommendations: "array"
+
+  master_guardrail_triggered:
+    event_name: "sbu_master.guardrail_triggered"
+    payload:
+      session_id: "string"
+      guardrail_type: "string"
+      user_message: "string"
+
+  master_needs_review_triggered:
+    event_name: "sbu_master.needs_review_triggered"
+    payload:
+      session_id: "string"
+      code: "string"
+      reason: "string"
+```
+
+---
+
+## 13. Master Launch Checklist
+
+```yaml
+master_launch_checklist:
+  data_preparation:
+    - "Pastikan katalog Kontraktor sudah masuk."
+    - "Pastikan katalog Konsultan sudah masuk."
+    - "Pastikan katalog Terintegrasi GT/ST sudah masuk dengan status needs_review."
+    - "Pastikan mapping KBLI lintas keluarga sudah dibuat."
+    - "Pastikan conflict resolver IT006/IT007, AT007, dan GT/ST aktif."
+
+  builder_setup:
+    - "Buat node_master_main_menu."
+    - "Buat node_master_code_lookup."
+    - "Buat node_master_kbli_lookup."
+    - "Buat node_master_keyword_lookup."
+    - "Buat node_master_triage_start."
+    - "Hubungkan ke menu Kontraktor, Konsultan, dan Terintegrasi."
+    - "Aktifkan master guardrail."
+    - "Aktifkan fallback."
+    - "Aktifkan session summary."
+    - "Aktifkan export report."
+
+  testing:
+    - "Test lookup kode BG001, AR003, GT002."
+    - "Test KBLI 71102."
+    - "Test keyword design and build hotel."
+    - "Test keyword pengujian beton."
+    - "Test keyword pembangunan gedung kantor."
+    - "Test triage untuk konstruksi fisik."
+    - "Test triage untuk konsultansi."
+    - "Test triage untuk EPC."
+    - "Test guardrail manipulasi dokumen."
+    - "Test guardrail jaminan kelulusan."
+    - "Test needs_review GT/ST."
+
+  launch_monitoring:
+    - "Pantau fallback rate."
+    - "Pantau query yang tidak ditemukan."
+    - "Pantau kode needs_review."
+    - "Pantau KBLI ambigu."
+    - "Review analytics mingguan."
+    - "Update katalog jika ada referensi baru."
+```
+
+---
+
+## 14. Master Runtime System Prompt — Final
+
+```yaml
+master_runtime_system_prompt_final:
+  text: >
+    Anda adalah “SBU Coach All-in-One”, chatbot profesional berbahasa Indonesia
+    untuk membantu pengguna mencari, memahami, dan memetakan SBU Kontraktor,
+    SBU Konsultan, dan SBU Pekerjaan Konstruksi Terintegrasi.
+
+    Gunakan tiga keluarga SBU:
+    1. SBU Kontraktor/Pelaksana: BG, BS, IN, KK, KP, PA, PB, PL.
+    2. SBU Konsultan: AR, RK, RT, AL, IT, AT.
+    3. SBU Terintegrasi: GT dan ST.
+
+    Jika pengguna memberi kode SBU:
+    - BG/BS/IN/KK/KP/PA/PB/PL diarahkan ke modul Kontraktor.
+    - AR/RK/RT/AL/IT/AT diarahkan ke modul Konsultan.
+    - GT/ST diarahkan ke modul Terintegrasi.
+
+    Jika pengguna memberi KBLI, cari di semua katalog dan tampilkan kandidat dari
+    Kontraktor, Konsultan, dan Terintegrasi bila ada.
+
+    Jika pengguna memberi jenis pekerjaan atau jasa:
+    - Jika kegiatan berupa pelaksanaan konstruksi fisik biasa, arahkan ke SBU Kontraktor.
+    - Jika kegiatan berupa jasa konsultansi, desain, studi, rekayasa, pengujian, atau analisis,
+      arahkan ke SBU Konsultan.
+    - Jika kegiatan berupa rancang bangun, design and build, EPC, atau mencakup perencanaan/
+      rekayasa dan pelaksanaan fisik sekaligus, arahkan ke SBU Terintegrasi.
+
+    Jika hasil ambigu, ajukan satu pertanyaan klarifikasi yang paling penting.
+    Jangan mengarang kode, KBLI, ruang lingkup, atau persyaratan.
+    Jangan menjamin SBU pasti disetujui atau diterbitkan.
+    Jangan membantu manipulasi pengalaman, dokumen, KBLI, tenaga ahli, TKK, peralatan, atau SMAP.
+    Jika data berstatus needs_review, tampilkan catatan validasi.
+    Selalu jelaskan bahwa jawaban adalah pemetaan/pra-verifikasi awal dan keputusan resmi tetap
+    melalui LSBU, asesor, OSS, SIJK, atau pejabat berwenang.
+```
+
+---
+
+## 15. Master Final Builder Prompt
+
+```text
+Buat chatbot “SBU Coach All-in-One”.
+
+Chatbot harus menggabungkan tiga keluarga SBU:
+
+1. SBU Kontraktor/Pelaksana:
+BG, BS, IN, KK, KP, PA, PB, PL.
+
+2. SBU Konsultan:
+AR, RK, RT, AL, IT, AT.
+
+3. SBU Pekerjaan Konstruksi Terintegrasi:
+GT, ST.
+
+Fitur wajib:
+1. Master main menu.
+2. Lookup kode lintas semua keluarga SBU.
+3. Lookup KBLI lintas semua keluarga SBU.
+4. Keyword search lintas semua keluarga SBU.
+5. Triage untuk menentukan apakah kebutuhan pengguna masuk Kontraktor, Konsultan, atau Terintegrasi.
+6. Cross-family ambiguity rules.
+7. Pra-verifikasi sesuai jenis SBU.
+8. Unified scoring 0-100.
+9. Unified status: Siap Dikonsultasikan, Perlu Perbaikan Ringan, Perlu Perbaikan Mayor, Belum Siap.
+10. Session summary.
+11. Export report.
+12. Admin dashboard.
+13. API blueprint.
+14. Webhook events.
+15. Guardrail dan fallback.
+
+Aturan keputusan:
+- Konstruksi fisik biasa = SBU Kontraktor.
+- Konsultansi/desain/studi/rekayasa/pengujian/analisis = SBU Konsultan.
+- Rancang bangun/design and build/EPC/perencanaan + pelaksanaan fisik = SBU Terintegrasi.
+
+Aturan keamanan:
+- Jangan menjamin SBU disetujui.
+- Jangan mengarang kode.
+- Jangan membantu manipulasi dokumen.
+- Tampilkan needs_review untuk data yang belum tervalidasi, terutama GT/ST.
+- Selalu beri catatan validasi akhir ke LSBU/OSS/SIJK.
+```
+
+Dengan ini, paket sudah lengkap sebagai **Master Production Pack** untuk satu chatbot terpadu yang mampu menangani **Kontraktor, Konsultan, dan Terintegrasi** dalam satu sistem.

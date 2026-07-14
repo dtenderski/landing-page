@@ -1,0 +1,45 @@
+Rekomendasi saya — jujur:
+
+Jangan deploy ke 129 hub sekarang. Ini alasannya:
+
+Kapasitas Replit — 129 prompt update sekaligus adalah ~800KB+ SQL dalam satu operasi. Server pernah perlu restart setelah bulk update. Risikonya rendah tapi nyata.
+
+ABD v1.1 belum teruji di Federation context — format output ABD-7 (8 section dengan separator ═══) dirancang untuk agen specialist yang menjawab langsung. Hub Federation adalah synthesizer — mereka menerima laporan sub-agent lalu mensintesis. Format ABD-7 di synthesizer bisa menghasilkan output yang terlalu panjang dan berulang.
+
+Sign-off Sprint 4 belum tercapai — sesuai dokumen Claude sendiri: "Sprint 4 dimulai SETELAH ≥14/16 TC pass." KONSTRA baru saja di-seed, belum ditest sama sekali. Menggeneralisasi standar yang belum tervalidasi itu terbalik dari prinsip wave deploy.
+
+Yang saya rekomendasikan:
+
+Selesaikan dulu apa yang sedang berjalan:
+
+Sprint 3 (sekarang):
+  → Test 10 KONSTRA agents dengan 7 AC
+  → Reach ≥14/16 TC pass
+  → Sign-off Sprint 4
+Sprint 4:
+  → Aktifkan callAgentInternal orchestration KONSTRA
+  → Validasi output synthesizer vs specialist
+Sprint 5 (baru generalisasi):
+  → Ambil bagian ABD yang terbukti berhasil di KONSTRA
+  → Buat "patch ringkas" untuk 129 hub (bukan full ABD-7, cukup 3-4 elemen kunci)
+  → Deploy bertahap: 10 hub dulu → validasi → lanjut
+
+Intinya: biarkan KONSTRA jadi bukti dulu. Kalau sudah terbukti, kita punya argumen kuat untuk generalisasi, dan kita tahu persis bagian mana yang benar-benar bernilai.
+
+Apakah kamu setuju dengan pendekatan ini, atau ada bagian yang ingin kamu percepat?
+
+Setuju. Pendekatan yang masuk akal.
+
+Jadi roadmap-nya:
+
+Sekarang (Sprint 3): Test KONSTRA dulu — jalankan 16 TC, capai sign-off ≥14/16.
+
+Sprint 4: Aktifkan orchestration KONSTRA, lihat apakah output synthesizer + specialist benar-benar lebih baik dari hub biasa.
+
+Sprint 5 (kalau terbukti): Ambil elemen ABD yang paling bernilai — kemungkinan cukup 3 hal: ASUMSI tag, Sitasi regulasi, dan Closing line "akurasi X% → Y%" — lalu patch ke hub-hub yang paling aktif dulu, bukan semua 129 sekaligus.
+
+Untuk kapasitas Replit: selama kita deploy bertahap (10–20 hub per batch, bukan 129 sekaligus), tidak ada risiko berarti.
+
+Jadi langkah praktis sekarang: mulai testing KONSTRA agents. Buka /test-tracker, klik tab KONSTRA, lalu mulai dari Wave 1 — PROXIMA, KONTRAK, FINTAX. Untuk setiap agen, buka /bot/ID, kirim prompt dari kolom AC-4 dulu (anti-blocking test paling critical), catat hasilnya di tracker.
+
+Kalau kamu mau saya bantu menyiapkan sesuatu untuk mempermudah proses testing itu — misalnya halaman ringkas dengan semua prompt siap pakai per agen, atau otomasi pengecekan respons — bilang saja dan saya kerjakan.

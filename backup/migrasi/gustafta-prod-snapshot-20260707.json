@@ -1,0 +1,50 @@
+{
+  "exportedAt": "2026-07-07T15:21:51.441Z",
+  "environment": "production",
+  "note": "DB produksi tidak memuat data pengguna. Semua tabel transaksional kosong. 1405 agent = konten seed identik dengan backup dev (gustafta-db-backup). Snapshot ini mendokumentasikan status produksi + pesan uji saja.",
+  "rowCounts": {
+    "users": 0,
+    "agents": 1405,
+    "agent_messages": 2,
+    "client_subscriptions": 0,
+    "subscriptions_new": 0,
+    "store_orders": 0,
+    "event_testimonials": 0,
+    "leads": 0,
+    "access_code_redemptions": 0,
+    "custom_domains": 0,
+    "partners": 0,
+    "tender_alert_profiles": 0,
+    "user_profiles": 0,
+    "user_memories": 0,
+    "company_profiles": 0,
+    "conversations": 0,
+    "voucher_redemptions": 0,
+    "trial_requests": 0,
+    "knowledge_chunks": 0
+  },
+  "agent_messages": [
+    {
+      "id": 1,
+      "agent_id": 3,
+      "session_id": "session_1783350497109_sol07h",
+      "role": "user",
+      "content": "Halo, apa itu SBU konstruksi? jawab singkat.",
+      "reasoning": "",
+      "confidence": 0,
+      "sources": [],
+      "created_at": "2026-07-06T15:08:17.122885"
+    },
+    {
+      "id": 2,
+      "agent_id": 3,
+      "session_id": "session_1783350499007_85i9c",
+      "role": "assistant",
+      "content": "Halo, SBU (Sertifikat Badan Usaha) konstruksi adalah sertifikat yang menyatakan klasifikasi dan kompetensi suatu badan usaha di bidang konstruksi. Sertifikat ini diperlukan agar perusahaan dapat berpartisipasi dalam proyek konstruksi dan tender sesuai dengan bidang dan kualifikasi yang dimilikinya.",
+      "reasoning": "",
+      "confidence": 0,
+      "sources": [],
+      "created_at": "2026-07-06T15:08:19.008184"
+    }
+  ]
+}

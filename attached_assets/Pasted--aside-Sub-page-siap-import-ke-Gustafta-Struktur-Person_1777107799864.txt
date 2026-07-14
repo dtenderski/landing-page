@@ -1,0 +1,80 @@
+<aside>
+📝
+
+**Sub-page siap-import ke Gustafta.** Struktur: Persona → Knowledge Base 3 lapisan → Sumber Resmi.
+
+</aside>
+
+## 🧬 Persona
+
+| **Chatbot Name** | Kontrak Kerja Konstruksi Advisor | **Tagline** | Klausa Wajib, Cara Pembayaran & Penyelesaian Kontrak Konstruksi |
+| --- | --- | --- | --- |
+| **Description** | Spesialis kontrak kerja konstruksi: dasar UU JK, PP 22/2020, Permen PUPR 14/2020 (Standar Pengadaan), Perpres PBJ. Mengerti klausa wajib, cara pembayaran (LS/UP/Termijn), variasi & klaim, force majeure, kegagalan bangunan. | **Primary Language** | Bahasa Indonesia |
+| **Series** | S1 — Regulasi & Hukum | **Avatar** | 📝 |
+
+## 📚 Knowledge Base
+
+### 🟦 Foundational — Regulasi, Standar, Data Produk
+
+| **Sumber Resmi** | **Sektor** | **Subsektor** | **URL Sumber** | **Tanggal** |
+| --- | --- | --- | --- | --- |
+| KUH Perdata (Buku III) | Hukum | UU | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 1847 |
+| Perpres No. 16/2018 jo. 12/2021 jo. 46/2025 | LKPP | Perpres | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2018/2021/2025 |
+| Permen PUPR No. 1/2020 jo. 25/2020 — D&B | PU | Permen | [jdih.pu.go.id](http://jdih.pu.go.id) | 2020 |
+| Permen PUPR No. 10/2021 — SMKK | PU | Permen | [jdih.pu.go.id](http://jdih.pu.go.id) | 2021 |
+
+### 🟩 Operational — SOP, Prosedur, FAQ, Template
+
+**Klausa wajib (UU JK Pasal 47):**
+
+1. Para pihak
+2. Rumusan pekerjaan
+3. Masa pertanggungan/pemeliharaan
+4. Hak & kewajiban setara
+5. Penggunaan tenaga kerja konstruksi (SKK)
+6. Cara pembayaran
+7. Wanprestasi
+8. Penyelesaian perselisihan
+9. Pemutusan kontrak
+10. Keadaan memaksa (force majeure)
+11. Kegagalan bangunan
+12. Pelindungan pekerja
+13. Aspek lingkungan
+14. Jaminan atas risiko
+
+**Cara pembayaran:**
+
+- **Lump-Sum (LS)** — harga pasti, risiko volume di kontraktor
+- **Harga Satuan (Unit Price)** — dibayar per volume aktual
+- **Gabungan LS + Unit Price**
+- **Terima Jadi (Turnkey)**
+- **Persentase** — konsultansi
+
+**Klausa khusus:**
+
+- Variasi (CCO/Addendum)
+- Eskalasi/penyesuaian harga (sesuai Permen PUPR & Perpres PBJ)
+- Jaminan: penawaran, pelaksanaan, uang muka, pemeliharaan
+
+**FAQ:**
+
+- *Klausa minimum?* — 14 unsur Pasal 47 UU JK.
+- *Eskalasi harga selalu boleh?* — Tidak; hanya jika dicantumkan & memenuhi syarat aturan.
+
+### 🟪 Case Memory — Notulen, Keputusan, Preseden
+
+*TBD — diisi dengan: kontrak template Permen PUPR 14/2020, putusan sengketa kontrak (BANI/PN), CCO terbesar, klaim eskalasi yang dikabulkan/ditolak, BAST PHO/FHO.*
+
+## 🔗 Sumber Resmi
+
+[jdih.pu.go.id](http://jdih.pu.go.id) · [jdih.lkpp.go.id](http://jdih.lkpp.go.id) · [peraturan.bpk.go.id](http://peraturan.bpk.go.id) · [binakonstruksi.pu.go.id](http://binakonstruksi.pu.go.id)
+
+## ❓ Contoh Pertanyaan
+
+1. Sebutkan 14 unsur klausa wajib menurut Pasal 47 UU JK.
+2. Apa beda Lump-Sum dan Unit Price?
+3. Bagaimana mekanisme eskalasi harga pada kontrak konstruksi pemerintah?
+
+## 🔗 Halaman induk
+
+[Regulasi Jasa Konstruksi Indonesia — Ringkasan Lengkap](https://www.notion.so/Regulasi-Jasa-Konstruksi-Indonesia-Ringkasan-Lengkap-5a3f66d1250941f18f53a104f957a336?pvs=21) — Bab 13; lihat juga Bab 5 & 11.

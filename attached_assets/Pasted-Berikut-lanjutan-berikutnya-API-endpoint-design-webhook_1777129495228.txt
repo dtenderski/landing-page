@@ -1,0 +1,783 @@
+Berikut lanjutan berikutnya: **API endpoint design, webhook contract, seed data CSV, content versioning, audit log, dan contoh konfigurasi deployment** untuk chatbot SKK **Manajemen Pelaksanaan**. Bagian ini tetap mengacu pada katalog jabatan dari file yang Anda unggah. 
+
+---
+
+# 117. API Endpoint Design
+
+```yaml id="api_endpoint_design"
+api_endpoints:
+
+  - method: "POST"
+    path: "/api/chat/message"
+    purpose: "Menerima pesan pengguna dan mengembalikan respons chatbot."
+    request_body:
+      user_id: "string"
+      session_id: "string"
+      message: "string"
+      metadata:
+        platform: "web | whatsapp | mobile | internal"
+        locale: "id-ID"
+    response_body:
+      session_id: "string"
+      intent: "string"
+      confidence: "number"
+      response:
+        text: "string"
+        quick_replies: "array"
+        cards: "array"
+      next_state: "string"
+
+  - method: "GET"
+    path: "/api/roles"
+    purpose: "Mengambil daftar jabatan kerja Manajemen Pelaksanaan."
+    query_params:
+      subklasifikasi: "optional string"
+      kkni_level: "optional integer"
+      standard_code: "optional string"
+      search: "optional string"
+    response_body:
+      roles: "array"
+
+  - method: "GET"
+    path: "/api/roles/{role_id}"
+    purpose: "Mengambil detail satu jabatan kerja."
+    response_body:
+      id: "string"
+      classification_name: "string"
+      subklasifikasi: "string"
+      jabatan_kerja: "string"
+      jenjang_jabatan_kerja: "string"
+      kualifikasi: "string"
+      kkni_level: "integer"
+      standard_code: "string"
+      official_link: "string"
+      focus_summary: "string"
+
+  - method: "POST"
+    path: "/api/assessment/start"
+    purpose: "Memulai asesmen mandiri berdasarkan area atau jabatan."
+    request_body:
+      user_id: "string"
+      target_area: "string"
+      target_role: "optional string"
+    response_body:
+      assessment_id: "string"
+      first_question: "string"
+      scale: "array"
+
+  - method: "POST"
+    path: "/api/assessment/answer"
+    purpose: "Menyimpan jawaban asesmen dan mengembalikan pertanyaan berikutnya."
+    request_body:
+      user_id: "string"
+      session_id: "string"
+      assessment_id: "string"
+      question_id: "string"
+      score: "integer"
+    response_body:
+      completed: "boolean"
+      next_question: "string | null"
+      result: "object | null"
+
+  - method: "POST"
+    path: "/api/scenario/evaluate"
+    purpose: "Mengevaluasi jawaban pengguna pada studi kasus."
+    request_body:
+      scenario_id: "string"
+      user_answer: "string"
+      target_area: "string"
+    response_body:
+      score: "number"
+      matched_points: "array"
+      missing_points: "array"
+      feedback: "string"
+
+  - method: "POST"
+    path: "/api/interview/evaluate"
+    purpose: "Mengevaluasi jawaban simulasi wawancara menggunakan STAR."
+    request_body:
+      question_id: "string"
+      user_answer: "string"
+      target_role: "string"
+    response_body:
+      score: "number"
+      star_components:
+        situation: "boolean"
+        task: "boolean"
+        action: "boolean"
+        result: "boolean"
+      feedback: "string"
+```
+
+---
+
+# 118. Chat Message Request Example
+
+```json id="chat_message_request"
+{
+  "user_id": "user_001",
+  "session_id": "sess_2026_001",
+  "message": "Quality Engineer pakai SKKNI apa?",
+  "metadata": {
+    "platform": "web",
+    "locale": "id-ID"
+  }
+}
+```
+
+```json id="chat_message_response"
+{
+  "session_id": "sess_2026_001",
+  "intent": "lookup_role",
+  "confidence": 0.94,
+  "entities": {
+    "role_name": "Quality Engineer"
+  },
+  "response": {
+    "text": "Quality Engineer berada dalam subklasifikasi Pengendalian Mutu Pekerjaan Konstruksi. Jenjang yang tersedia adalah Quality Engineer Madya pada KKNI 5 dan Quality Engineer pada KKNI 6. Standar kompetensi kerja yang digunakan adalah SKKNI 333-2013. Fokus kompetensinya meliputi inspeksi mutu, verifikasi kesesuaian pekerjaan, dokumentasi hasil pemeriksaan, NCR, dan tindakan korektif.",
+    "quick_replies": [
+      "Belajar modul mutu",
+      "Mulai asesmen mutu",
+      "Checklist bukti mutu",
+      "Bandingkan dengan QA Engineer"
+    ],
+    "cards": []
+  },
+  "next_state": "role_detail_followup"
+}
+```
+
+---
+
+# 119. Webhook Contract for Chatbot Builder
+
+```yaml id="webhook_contract"
+webhook_contract:
+  name: "SKK Coach Webhook"
+  trigger: "user_message_received"
+
+  input_payload:
+    user:
+      id: "string"
+      name: "string | null"
+    session:
+      id: "string"
+      current_state: "string"
+      target_role: "string | null"
+      target_area: "string | null"
+    message:
+      text: "string"
+      timestamp: "datetime"
+
+  output_payload:
+    reply:
+      type: "text | card | assessment | scenario | menu"
+      text: "string"
+      quick_replies:
+        - label: "string"
+          value: "string"
+      cards:
+        - title: "string"
+          subtitle: "string"
+          fields:
+            - label: "string"
+              value: "string"
+          buttons:
+            - label: "string"
+              action: "string"
+    session_update:
+      current_state: "string"
+      last_intent: "string"
+      target_role: "string | null"
+      target_area: "string | null"
+      fallback_count: "integer"
+
+  timeout_behavior:
+    if_webhook_timeout: >
+      Tampilkan pesan fallback ringan dan tawarkan menu utama.
+    timeout_message: >
+      Maaf, sistem sedang membutuhkan waktu lebih lama untuk memproses.
+      Silakan pilih menu berikut agar saya bisa bantu lebih cepat.
+```
+
+---
+
+# 120. Seed Data CSV Format
+
+```csv id="seed_data_csv_format"
+id,classification_code,classification_name,subklasifikasi,jabatan_kerja,jenjang_jabatan_kerja,kualifikasi,kkni_level,standard_code,official_link,recommended_assessment,active_status
+role_petugas_k3_kkni_3,E,Manajemen Pelaksanaan,Keselamatan Konstruksi,Petugas Keselamatan dan Kesehatan Kerja (K3) Konstruksi,Petugas Keselamatan dan Kesehatan Kerja (K3) Konstruksi,Operator,3,SKKNI 307-2013,https://skkni-api.kemnaker.go.id/v1/public/documents/1230bb07-0c70-48be-84b3-1e1ff98af6ff/download,assessment_k3,true
+role_petugas_keselamatan_kkni_3,E,Manajemen Pelaksanaan,Keselamatan Konstruksi,Petugas Keselamatan Konstruksi,Petugas Keselamatan Konstruksi,Operator,3,SKKNI 60-2022,https://skkni-api.kemnaker.go.id/v1/public/documents/88f9fdba-5fa4-465d-b963-b59af5d642d7/download,assessment_k3,true
+role_personil_k3_kkni_4,E,Manajemen Pelaksanaan,Keselamatan Konstruksi,Personil Keselamatan dan Kesehatan Kerja,Personil Keselamatan dan Kesehatan Kerja,Teknisi/Analis,4,SKKNI 038-2019,https://skkni-api.kemnaker.go.id/v1/public/documents/b079dc8b-5343-4dc0-8615-20fb163781f9/download,assessment_k3,true
+role_supervisor_k3_kkni_5,E,Manajemen Pelaksanaan,Keselamatan Konstruksi,Supervisor K3,Supervisor K3,Teknisi/Analis,5,SKKNI 350-2014,https://skkni-api.kemnaker.go.id/v1/public/documents/de9bf21b-f0ef-4cb9-bce5-7813da449476/download,assessment_k3,true
+role_supervisor_k3_utama_kkni_6,E,Manajemen Pelaksanaan,Keselamatan Konstruksi,Supervisor K3,Supervisor K3 Utama,Teknisi/Analis,6,SKKNI 350-2014,https://skkni-api.kemnaker.go.id/v1/public/documents/de9bf21b-f0ef-4cb9-bce5-7813da449476/download,assessment_k3,true
+role_quality_engineer_madya_kkni_5,E,Manajemen Pelaksanaan,Pengendalian Mutu Pekerjaan Konstruksi,Quality Engineer,Quality Engineer Madya,Teknisi/Analis,5,SKKNI 333-2013,https://skkni-api.kemnaker.go.id/v1/public/documents/de38d51f-9d5c-475c-adc3-df962fd2b8b5/download,assessment_quality,true
+role_quality_engineer_kkni_6,E,Manajemen Pelaksanaan,Pengendalian Mutu Pekerjaan Konstruksi,Quality Engineer,Quality Engineer,Teknisi/Analis,6,SKKNI 333-2013,https://skkni-api.kemnaker.go.id/v1/public/documents/de38d51f-9d5c-475c-adc3-df962fd2b8b5/download,assessment_quality,true
+role_ahli_kontrak_madya_kkni_8,E,Manajemen Pelaksanaan,Hukum Kontrak Konstruksi,Ahli Kontrak Kerja Konstruksi,Ahli Madya Kontrak Kerja Konstruksi,Ahli,8,SKKNI 88-2015,https://skkni-api.kemnaker.go.id/v1/public/documents/8d1ba9f8-c11d-47e7-bafe-93a29e5b3084/download,assessment_contract,true
+role_ahli_qs_muda_kkni_7,E,Manajemen Pelaksanaan,Estimasi Biaya Konstruksi,Ahli Quantity Surveyor,Ahli Muda Quantity Surveyor,Ahli,7,SKKNI 6-2011,https://skkni-api.kemnaker.go.id/v1/public/documents/5f16bf68-2cb3-42d8-b60b-4dc4ae3054c1/download,assessment_cost_qs,true
+```
+
+---
+
+# 121. Content Versioning Model
+
+```yaml id="content_versioning_model"
+content_versioning:
+  purpose: >
+    Menjaga agar perubahan katalog, modul belajar, pertanyaan asesmen, dan
+    skenario dapat dilacak dengan jelas.
+
+  version_fields:
+    content_id: "string"
+    content_type: "role_catalog | module | assessment | scenario | glossary | faq"
+    version: "semver string"
+    status: "draft | reviewed | published | archived"
+    created_by: "admin user id"
+    reviewed_by: "subject matter expert id | null"
+    published_at: "datetime | null"
+    change_summary: "string"
+
+  rules:
+    - "Setiap perubahan data jabatan harus menghasilkan versi baru."
+    - "Konten lama tidak langsung dihapus; ubah status menjadi archived."
+    - "Konten published hanya dapat berubah melalui draft baru."
+    - "Perubahan standar SKKNI/SKKK wajib ditandai sebagai high-impact update."
+    - "Modul asesmen yang berubah harus menyimpan riwayat versi agar hasil lama tetap dapat ditelusuri."
+
+  example:
+    content_id: "role_quality_engineer_kkni_6"
+    content_type: "role_catalog"
+    version: "1.0.0"
+    status: "published"
+    change_summary: "Initial import from Manajemen Pelaksanaan catalog."
+```
+
+---
+
+# 122. Audit Log Schema
+
+```sql id="audit_log_schema"
+CREATE TABLE audit_logs (
+    id VARCHAR(120) PRIMARY KEY,
+    actor_id VARCHAR(120),
+    actor_role VARCHAR(80),
+    action_type VARCHAR(120),
+    target_type VARCHAR(120),
+    target_id VARCHAR(120),
+    old_value JSONB,
+    new_value JSONB,
+    change_reason TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+```yaml id="audit_log_examples"
+audit_log_examples:
+  - action_type: "role_catalog_updated"
+    target_type: "role_catalog"
+    target_id: "role_quality_engineer_kkni_6"
+    change_reason: "Standard code formatting normalized from SKKNI333-2013 to SKKNI 333-2013."
+
+  - action_type: "assessment_question_added"
+    target_type: "assessment"
+    target_id: "assessment_quality"
+    change_reason: "Added NCR-related readiness question based on user fallback data."
+
+  - action_type: "scenario_archived"
+    target_type: "scenario"
+    target_id: "scenario_old_contract_claim"
+    change_reason: "Scenario replaced with updated variation order case."
+```
+
+---
+
+# 123. Admin Review Workflow
+
+```yaml id="admin_review_workflow"
+admin_review_workflow:
+  states:
+    draft:
+      description: "Konten baru atau revisi awal."
+      allowed_actions:
+        - "edit"
+        - "submit_for_review"
+        - "delete_draft"
+
+    in_review:
+      description: "Konten sedang ditinjau oleh reviewer atau SME."
+      allowed_actions:
+        - "approve"
+        - "request_changes"
+        - "reject"
+
+    approved:
+      description: "Konten sudah disetujui tetapi belum dipublikasikan."
+      allowed_actions:
+        - "publish"
+        - "return_to_draft"
+
+    published:
+      description: "Konten aktif digunakan chatbot."
+      allowed_actions:
+        - "create_new_version"
+        - "archive"
+
+    archived:
+      description: "Konten lama tidak aktif tetapi tetap tersimpan."
+      allowed_actions:
+        - "restore_as_draft"
+
+  reviewer_checklist:
+    - "Apakah nama jabatan sesuai katalog?"
+    - "Apakah KKNI dan kualifikasi tepat?"
+    - "Apakah kode SKKNI/SKKK konsisten?"
+    - "Apakah bahasa mudah dipahami pengguna?"
+    - "Apakah ada klaim resmi yang tidak boleh?"
+    - "Apakah ada saran yang melanggar K3, mutu, atau kontrak?"
+```
+
+---
+
+# 124. Conversation Memory Rules
+
+```yaml id="conversation_memory_rules"
+conversation_memory:
+  purpose: >
+    Menyimpan konteks percakapan selama sesi agar bot dapat memberi respons
+    yang relevan tanpa meminta informasi berulang.
+
+  short_term_memory:
+    store_during_session:
+      - "target_role"
+      - "target_area"
+      - "target_kkni"
+      - "current_flow"
+      - "current_question_index"
+      - "assessment_answers"
+      - "last_intent"
+      - "fallback_count"
+
+  long_term_memory_optional:
+    store_if_user_allows:
+      - "preferred_target_role"
+      - "completed_modules"
+      - "assessment_history"
+      - "generated_checklists"
+      - "preferred_learning_style"
+
+  do_not_store:
+    - "nomor identitas pribadi"
+    - "data proyek rahasia"
+    - "dokumen kontrak rahasia"
+    - "informasi finansial pribadi"
+    - "data kesehatan pribadi"
+
+  example_behavior:
+    user_says: "Saya target Ahli Quantity Surveyor."
+    bot_memory_update:
+      target_role: "Ahli Quantity Surveyor"
+      target_area: "Estimasi Biaya Konstruksi"
+      target_kkni_range: "7-9"
+
+    later_user_says: "Mulai asesmen."
+    bot_should_do: >
+      Mulai assessment_cost_qs tanpa menanyakan ulang area, karena target role
+      sudah tersimpan di session_state.
+```
+
+---
+
+# 125. Session Timeout and Resume Logic
+
+```yaml id="session_timeout_resume"
+session_timeout:
+  inactivity_limit: "30 minutes"
+  on_timeout_message: >
+    Sesi Anda sebelumnya terhenti. Anda ingin melanjutkan dari bagian terakhir
+    atau kembali ke menu utama?
+
+  quick_replies:
+    - "Lanjutkan"
+    - "Kembali ke menu utama"
+    - "Mulai asesmen baru"
+
+resume_logic:
+  if_current_flow_assessment:
+    message: >
+      Anda terakhir berada di asesmen {{assessment_title}},
+      pertanyaan {{current_question_index}} dari {{total_questions}}.
+      Apakah ingin melanjutkan?
+    quick_replies:
+      - "Lanjutkan asesmen"
+      - "Mulai ulang"
+      - "Kembali"
+
+  if_current_flow_learning:
+    message: >
+      Anda terakhir belajar modul {{module_title}}.
+      Apakah ingin melanjutkan modul tersebut?
+    quick_replies:
+      - "Lanjutkan modul"
+      - "Pilih modul lain"
+      - "Kembali"
+
+  if_current_flow_scenario:
+    message: >
+      Anda terakhir membuka studi kasus {{scenario_title}}.
+      Apakah ingin melanjutkan latihan?
+    quick_replies:
+      - "Lanjutkan studi kasus"
+      - "Pilih kasus lain"
+      - "Kembali"
+```
+
+---
+
+# 126. Confidence-Based Response Strategy
+
+```yaml id="confidence_based_response"
+confidence_strategy:
+
+  high_confidence:
+    condition: "intent_confidence >= 0.85 and entity_confidence >= 0.85"
+    behavior: >
+      Berikan jawaban langsung, tampilkan data katalog, dan tawarkan langkah
+      berikutnya.
+
+  medium_confidence:
+    condition: "intent_confidence >= 0.65 and intent_confidence < 0.85"
+    behavior: >
+      Berikan jawaban dengan frasa kehati-hatian seperti “Kemungkinan yang
+      Anda maksud...” lalu tampilkan opsi konfirmasi.
+
+  low_confidence:
+    condition: "intent_confidence < 0.65"
+    behavior: >
+      Jangan menebak. Ajukan pertanyaan klarifikasi dengan quick replies.
+
+  examples:
+    high:
+      user_input: "Quality Engineer"
+      response_style: "Tampilkan detail Quality Engineer langsung."
+
+    medium:
+      user_input: "quality"
+      response_style: "Tanyakan apakah maksudnya Quality Engineer, QA Engineer, atau Ahli Sistem Manajemen Mutu."
+
+    low:
+      user_input: "yang level itu"
+      response_style: "Minta pengguna memilih KKNI atau jabatan yang dimaksud."
+```
+
+---
+
+# 127. Disambiguation Templates
+
+```yaml id="disambiguation_templates"
+disambiguation_templates:
+
+  role_ambiguous_quality:
+    trigger_terms:
+      - "quality"
+      - "mutu"
+      - "QA QC"
+    message: >
+      Dalam Pengendalian Mutu Pekerjaan Konstruksi, ada beberapa jalur.
+      Yang Anda maksud lebih dekat ke mana?
+    options:
+      - "Quality Engineer, KKNI 5–6"
+      - "Quality Assurance Engineer, KKNI 5–6"
+      - "Ahli Sistem Manajemen Mutu Konstruksi, KKNI 7–9"
+
+  role_ambiguous_qs:
+    trigger_terms:
+      - "QS"
+      - "quantity"
+      - "volume"
+      - "estimasi"
+    message: >
+      Dalam Estimasi Biaya Konstruksi, ada beberapa jalur terkait QS dan biaya.
+      Pilih yang paling sesuai:
+    options:
+      - "Juru Hitung Kuantitas, KKNI 4–6"
+      - "Estimator Biaya Jalan, KKNI 5–6"
+      - "Quantity Surveyor, KKNI 5–6"
+      - "Ahli Quantity Surveyor, KKNI 7–9"
+
+  role_ambiguous_project:
+    trigger_terms:
+      - "manajemen proyek"
+      - "project"
+      - "manajemen konstruksi"
+    message: >
+      Jalur Manajemen Konstruksi/Proyek memiliki beberapa pilihan.
+      Yang Anda maksud lebih dekat ke mana?
+    options:
+      - "Manajer Logistik Proyek, KKNI 7"
+      - "Ahli Bidang Keahlian Manajemen Konstruksi, KKNI 7–9"
+      - "Ahli Manajemen Proyek Konstruksi, KKNI 7–9"
+      - "Fasilitator Teknis Infrastruktur Berbasis Masyarakat, KKNI 5–6"
+```
+
+---
+
+# 128. Bot Response Length Policy
+
+```yaml id="response_length_policy"
+response_length_policy:
+
+  short:
+    trigger:
+      - "user asks simple definition"
+      - "user says ringkas"
+      - "mobile quick reply interaction"
+    format:
+      - "1 direct answer"
+      - "max 3 bullets"
+      - "1 next action"
+
+  medium:
+    trigger:
+      - "role lookup"
+      - "KKNI lookup"
+      - "standard lookup"
+      - "comparison"
+    format:
+      - "answer summary"
+      - "catalog details"
+      - "practical focus"
+      - "next actions"
+
+  long:
+    trigger:
+      - "learning module"
+      - "scenario feedback"
+      - "assessment result"
+      - "mock interview coaching"
+    format:
+      - "structured explanation"
+      - "examples"
+      - "feedback"
+      - "recommended next steps"
+
+  user_override:
+    if_user_says: "jelaskan lengkap"
+    behavior: "Use long format."
+
+    if_user_says: "singkat saja"
+    behavior: "Use short format."
+```
+
+---
+
+# 129. Production Environment Variables
+
+```env id="production_env_variables"
+APP_NAME=skk-coach-manajemen-pelaksanaan
+APP_ENV=production
+APP_LOCALE=id-ID
+
+DATABASE_URL=postgres://user:password@host:5432/skk_coach
+VECTOR_DB_URL=https://vector-db.example.com
+REDIS_URL=redis://cache:6379
+
+ROLE_CATALOG_TABLE=skk_roles
+ASSESSMENT_TABLE=skk_assessments
+SCENARIO_TABLE=skk_scenarios
+SESSION_TABLE=chat_sessions
+AUDIT_LOG_TABLE=audit_logs
+
+ENABLE_ANALYTICS=true
+ENABLE_LONG_TERM_MEMORY=false
+ENABLE_ADMIN_CMS=true
+ENABLE_UNSAFE_REQUEST_FILTER=true
+ENABLE_CERTIFICATION_DISCLAIMER=true
+
+DEFAULT_FALLBACK_LIMIT=3
+SESSION_TIMEOUT_MINUTES=30
+MAX_QUICK_REPLIES=7
+DEFAULT_LANGUAGE=id-ID
+```
+
+---
+
+# 130. Deployment Configuration Example
+
+```yaml id="deployment_config"
+deployment:
+  service_name: "skk-coach-api"
+  runtime: "nodejs | python | serverless"
+  region: "asia-southeast2"
+  replicas:
+    minimum: 1
+    maximum: 5
+
+  resources:
+    cpu: "1 vCPU"
+    memory: "1GB"
+
+  health_checks:
+    readiness_probe:
+      path: "/health/ready"
+      interval_seconds: 10
+    liveness_probe:
+      path: "/health/live"
+      interval_seconds: 30
+
+  logging:
+    level: "info"
+    redact_fields:
+      - "user_message_if_contains_sensitive_project_data"
+      - "personal_identifier"
+      - "private_document_text"
+
+  security:
+    rate_limit:
+      requests_per_minute_per_user: 60
+    cors:
+      allowed_origins:
+        - "https://your-chatbot-domain.example.com"
+    authentication:
+      admin_routes: "required"
+      public_chat_routes: "optional"
+
+  backup:
+    database_backup_frequency: "daily"
+    retention_days: 30
+
+  monitoring:
+    metrics:
+      - "request_latency"
+      - "error_rate"
+      - "fallback_rate"
+      - "role_lookup_success_rate"
+      - "assessment_completion_rate"
+```
+
+---
+
+# 131. Health Check Endpoints
+
+```yaml id="health_check_endpoints"
+health_checks:
+
+  readiness:
+    method: "GET"
+    path: "/health/ready"
+    checks:
+      - "database connection"
+      - "role catalog loaded"
+      - "intent classifier available"
+      - "cache available"
+    success_response:
+      status: "ready"
+
+  liveness:
+    method: "GET"
+    path: "/health/live"
+    checks:
+      - "application process running"
+    success_response:
+      status: "alive"
+
+  catalog_status:
+    method: "GET"
+    path: "/health/catalog"
+    checks:
+      - "role count greater than zero"
+      - "KKNI index available"
+      - "standard code index available"
+    success_response:
+      status: "catalog_loaded"
+      role_count: 35
+```
+
+---
+
+# 132. Error Code Registry
+
+```yaml id="error_code_registry"
+error_codes:
+
+  SKK_ROLE_NOT_FOUND:
+    message: >
+      Jabatan tidak ditemukan dalam katalog Manajemen Pelaksanaan.
+    user_recovery:
+      - "Gunakan kata kunci umum."
+      - "Pilih subklasifikasi."
+      - "Cari berdasarkan KKNI."
+
+  SKK_ROLE_AMBIGUOUS:
+    message: >
+      Beberapa jabatan cocok dengan input pengguna.
+    user_recovery:
+      - "Tampilkan daftar kandidat."
+      - "Minta pengguna memilih salah satu."
+
+  SKK_INVALID_KKNI:
+    message: >
+      KKNI tidak valid untuk katalog ini.
+    user_recovery:
+      - "Minta pengguna memilih KKNI 3 sampai 9."
+
+  SKK_STANDARD_NOT_FOUND:
+    message: >
+      Kode SKKNI/SKKK tidak ditemukan.
+    user_recovery:
+      - "Normalisasi kode."
+      - "Tawarkan daftar standar."
+
+  SKK_ASSESSMENT_INCOMPLETE:
+    message: >
+      Asesmen belum selesai.
+    user_recovery:
+      - "Tawarkan lanjutkan atau mulai ulang."
+
+  SKK_UNSAFE_REQUEST:
+    message: >
+      Permintaan pengguna berpotensi melanggar keselamatan, mutu, atau prosedur kontrak.
+    user_recovery:
+      - "Tolak saran tidak aman."
+      - "Arahkan ke tindakan aman dan prosedural."
+```
+
+---
+
+# 133. Final Developer Notes
+
+```text id="final_developer_notes"
+Catatan untuk developer:
+
+1. Jadikan role_catalog sebagai sumber kebenaran untuk semua jawaban terkait
+   jabatan, KKNI, kualifikasi, subklasifikasi, dan standar kompetensi.
+
+2. Jangan hardcode semua respons di model bahasa jika data dapat diambil dari
+   database. Gunakan template respons dan isi variabel dari role_catalog.
+
+3. Untuk input ambigu seperti “K3”, “QS”, “mutu”, atau “project”, jangan langsung
+   memilih satu jabatan. Gunakan disambiguation templates.
+
+4. Semua asesmen harus menampilkan disclaimer:
+   “Hasil ini adalah asesmen mandiri awal untuk pembelajaran dan persiapan.
+   Hasil ini bukan keputusan resmi sertifikasi SKK.”
+
+5. Semua skenario terkait keselamatan, mutu struktur, klaim, atau kontrak harus
+   mengutamakan prosedur, dokumentasi, dan pihak berwenang.
+
+6. Untuk MVP, prioritaskan:
+   - main menu,
+   - role lookup,
+   - KKNI lookup,
+   - standard lookup,
+   - fallback,
+   - asesmen mandiri sederhana.
+
+7. Setelah MVP stabil, lanjutkan:
+   - scenario practice,
+   - mock interview,
+   - evidence checklist,
+   - analytics,
+   - admin CMS.
+```
+
+---

@@ -1,0 +1,355 @@
+Buat Template Baru
+Definisikan field data untuk proyek chatbot Anda
+
+Nama Template
+Contoh: Data Properti, Info Produk
+Deskripsi (opsional)
+Deskripsi singkat template ini...
+Fields
+Field 1
+
+Key
+project_name
+Label
+Nama Proyek
+Tipe
+Teks Singkat
+Placeholder
+Contoh: Pembangunan Jembatan Kali Brantas
+
+Wajib diisi
+Field 2
+
+Key
+project_type
+Label
+Tipe Proyek
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih tipe proyek
+Opsi (pisahkan dengan koma)
+Gedung, Jalan, Jembatan, Infrastruktur
+
+Wajib diisi
+Field 3
+
+Key
+project_stage
+Label
+Tahap Proyek
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih tahap proyek
+Opsi (pisahkan dengan koma)
+Planning, Execution, Closeout
+
+Wajib diisi
+Field 4
+
+Key
+location
+Label
+Lokasi
+Tipe
+Teks Singkat
+Placeholder
+Contoh: Surabaya, Jawa Timur
+
+Wajib diisi
+Field 5
+
+Key
+owner_client
+Label
+Owner / Client
+Tipe
+Teks Singkat
+Placeholder
+Contoh: PT Jasa Marga, Kementerian PUPR
+
+Wajib diisi
+Field 6
+
+Key
+structural_system
+Label
+Sistem Struktur
+Tipe
+Teks Singkat
+Placeholder
+Contoh: Beton bertulang, Baja, Komposit
+
+Wajib diisi
+Field 7
+
+Key
+concrete_grade
+Label
+Mutu Beton (fc')
+Tipe
+Teks Singkat
+Placeholder
+Contoh: fc' 30 MPa
+
+Wajib diisi
+Field 8
+
+Key
+construction_method
+Label
+Metode Konstruksi Utama
+Tipe
+Teks Singkat
+Placeholder
+Contoh: Konvensional, Precast, Prestress
+
+Wajib diisi
+Field 9
+
+Key
+time_constraint
+Label
+Batasan Waktu
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih batasan waktu
+Opsi (pisahkan dengan koma)
+Normal, Tight
+
+Wajib diisi
+Field 10
+
+Key
+cost_constraint
+Label
+Batasan Biaya
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih batasan biaya
+Opsi (pisahkan dengan koma)
+Normal, Tight
+
+Wajib diisi
+Field 11
+
+Key
+site_access
+Label
+Akses Lokasi
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih kondisi akses
+Opsi (pisahkan dengan koma)
+Easy, Limited
+
+Wajib diisi
+Field 12
+
+Key
+environmental_factors
+Label
+Faktor Lingkungan
+Tipe
+Teks Singkat
+Placeholder
+Contoh: Dekat sungai, area rawan banjir
+
+Wajib diisi
+Field 13
+
+Key
+issue_type
+Label
+Tipe Isu
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih tipe isu
+Opsi (pisahkan dengan koma)
+Structural, Quality, Safety, Method, Cost, Schedule, Environment
+
+Wajib diisi
+Field 14
+
+Key
+issue_location
+Label
+Lokasi/Elemen Isu
+Tipe
+Teks Singkat
+Placeholder
+Contoh: Kolom Lt.3, Pondasi zona B
+
+Wajib diisi
+Field 15
+
+Key
+issue_status
+Label
+Status Isu
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih status
+Opsi (pisahkan dengan koma)
+Open, Monitoring, Closed
+
+Wajib diisi
+Field 16
+
+Key
+issue_since
+Label
+Isu Sejak
+Tipe
+Tanggal
+Placeholder
+Placeholder teks...
+
+Wajib diisi
+Field 17
+
+Key
+decision_summary
+Label
+Ringkasan Keputusan
+Tipe
+Teks Panjang
+Placeholder
+Contoh: Ganti metode pondasi dari bored pile ke driven pile
+
+Wajib diisi
+Field 18
+
+Key
+decision_reason
+Label
+Alasan Keputusan
+Tipe
+Teks Panjang
+Placeholder
+Contoh: Kondisi tanah tidak sesuai hasil soil test
+
+Wajib diisi
+Field 19
+
+Key
+decision_risk_level
+Label
+Level Risiko Keputusan
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih level risiko
+Opsi (pisahkan dengan koma)
+Low, Medium, High
+
+Wajib diisi
+Field 20
+
+Key
+decision_date
+Label
+Tanggal Keputusan
+Tipe
+Tanggal
+Placeholder
+Placeholder teks...
+
+Wajib diisi
+Field 21
+
+Key
+decision_impact
+Label
+Dampak Keputusan
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih dampak
+Opsi (pisahkan dengan koma)
+Cost, Time, Quality, Safety, Multi
+
+Wajib diisi
+Field 22
+
+Key
+assumption_used
+Label
+Asumsi Utama
+Tipe
+Teks Panjang
+Placeholder
+Contoh: Data soil test dianggap valid hingga kedalaman 30 m
+
+Wajib diisi
+Field 23
+
+Key
+slump
+Label
+Slump
+Tipe
+Teks Singkat
+Placeholder
+Contoh: 12 ± 2 cm
+
+Wajib diisi
+Field 24
+
+Key
+concrete_strength
+Label
+Kuat Tekan Beton
+Tipe
+Teks Singkat
+Placeholder
+Contoh: 28 hari = 32 MPa (Umur / Nilai)
+
+Wajib diisi
+Field 25
+
+Key
+inspection_notes
+Label
+Catatan Inspeksi
+Tipe
+Teks Panjang
+Placeholder
+Contoh: Visual check OK, rebar spacing sesuai gambar
+
+Wajib diisi
+Field 26
+
+Key
+completeness_level
+Label
+Tingkat Kelengkapan Data
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih level
+Opsi (pisahkan dengan koma)
+Draft, Partial, Complete
+
+Wajib diisi
+Field 27
+
+Key
+last_updated
+Label
+Terakhir Diperbarui
+Tipe
+Tanggal
+Placeholder
+Placeholder teks...
+
+Wajib diisi
+Tambah Field
+Batal
+Buat Template

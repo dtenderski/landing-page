@@ -1,0 +1,175 @@
+Berikut versi “copywriting final” + aturan dependensi (basic vs advanced), dengan istilah konsisten dan helper text maksimal 1 baris.
+
+A) Konsistensi istilah (rekomendasi)
+
+- Gunakan “Mode Agentic” (bukan “agentik”) karena ini istilah umum di produk AI.
+- Gunakan “Otonomi” untuk autonomy, “Retensi konteks” untuk memory, “Bantuan proaktif” untuk proactivity.
+- Hindari campur Bahasa Inggris kecuali nama preset (Balanced, Mentor, dll.) karena itu memang label produk.
+
+B) Copywriting final per field (Label + helper 1 baris)
+
+1) Mode Lanjutan (Advanced) (toggle)
+
+- Label: Mode Lanjutan
+- Helper: Tampilkan pengaturan detail untuk pengguna berpengalaman.
+
+2) Preset Perilaku (behaviorPreset) (select)
+
+- Label: Preset Perilaku
+- Helper: Pilih gaya kerja AI yang paling cocok.
+- Catatan kecil (hanya bila preset ≠ Custom): “Sebagian pengaturan mengikuti preset.”
+
+3) Tingkat Otonomi (autonomyLevel) (select)
+
+- Label: Tingkat Otonomi
+- Helper: Seberapa aktif AI mengambil inisiatif.
+
+4) Mode Agentic (agenticMode) (toggle)
+
+- Label: Mode Agentic
+- Helper: Aktifkan kemampuan lanjutan (perencanaan & langkah bertahap).
+- Jika OFF, tampilkan warning ringan: “Fitur lanjutan akan dibatasi.”
+
+5) Kedalaman Jawaban (responseDepth) (select)
+
+- Label: Kedalaman Jawaban
+- Helper: Atur tingkat detail penjelasan AI.
+
+6) Format Output Utama (outputFormat) (select)
+
+- Label: Format Output Utama
+- Helper: Bentuk jawaban yang paling sering digunakan.
+
+7) Pemeriksaan Mandiri (selfCorrection) (toggle)
+
+- Label: Pemeriksaan Mandiri
+- Helper: AI mengecek ulang jawaban sebelum dikirim.
+
+8) Minta Klarifikasi Dulu (clarifyBeforeAnswer) (toggle)
+
+- Label: Minta Klarifikasi Dulu
+- Helper: AI bertanya jika informasi belum cukup.
+
+9) Saat Tidak Yakin (uncertaintyHandling) (select)
+
+- Label: Saat Tidak Yakin
+- Helper: Cara AI merespons ketika informasinya tidak pasti.
+
+10) Tampilkan Peringatan Risiko (showRiskWarnings) (toggle)
+
+- Label: Tampilkan Peringatan Risiko
+- Helper: Tambahkan catatan kehati-hatian untuk topik sensitif.
+
+11) Mendengarkan dengan Teliti (attentiveListening) (toggle)
+
+- Label: Mendengarkan dengan Teliti
+- Helper: AI membaca konteks dan maksud lebih cermat.
+
+12) Retensi Konteks (contextRetention) (slider 1–50)
+
+- Label: Retensi Konteks
+- Helper: Banyaknya pesan terakhir yang jadi acuan.
+
+13) Prioritas Konteks (contextPriority) (sortable multi-select)
+
+- Label: Prioritas Konteks
+- Helper: Urutan konteks yang paling diutamakan.
+
+14) Bantuan Proaktif (proactiveAssistance) (select)
+
+- Label: Bantuan Proaktif
+- Helper: Seberapa sering AI memberi bantuan tambahan.
+
+15) Jenis Bantuan Proaktif (proactiveHelpTypes) (multi-select)
+
+- Label: Jenis Bantuan Proaktif
+- Helper: Jenis bantuan yang boleh ditampilkan.
+
+16) Gaya Interaksi (interactionStyle) (select)
+
+- Label: Gaya Interaksi
+- Helper: Cara AI menyampaikan jawaban.
+
+17) Empati Kontekstual (contextualEmpathy) (select)
+
+- Label: Empati Kontekstual
+- Helper: Seberapa peka AI terhadap emosi pengguna.
+
+18) Batas Tindakan AI (actionBoundary) (multi-select)
+
+- Label: Batas Tindakan AI
+- Helper: Apa saja tindakan yang diizinkan.
+
+19) Aturan Eskalasi (escalationRules) (multi-select)
+
+- Label: Aturan Eskalasi
+- Helper: Apa yang dilakukan saat kasus sensitif/rumit.
+
+20) Saat Pertanyaan di Luar Topik (offTopicBehavior) (select)
+
+- Label: Saat di Luar Topik
+- Helper: Respons AI ketika pertanyaan tidak relevan.
+
+21) Mode Pembelajaran Adaptif (adaptiveLearningMode) (select)
+
+- Label: Mode Pembelajaran Adaptif
+- Helper: Apakah AI menyesuaikan diri dari interaksi.
+
+22) Simpan Sinyal Interaksi (storeInteractionSignals) (toggle)
+
+- Label: Simpan Sinyal Interaksi
+- Helper: Simpan sinyal untuk evaluasi kualitas.
+
+23) Prioritas Sumber Jawaban (sourcePriority) (sortable-list)
+
+- Label: Prioritas Sumber Jawaban
+- Helper: Urutan sumber yang diprioritaskan AI.
+
+C) Aturan dependensi & penguncian (rekomendasi implementasi)
+
+1) behaviorPreset mengatur default turunan
+
+- Saat user memilih preset (selain Custom), sistem mengisi nilai rekomendasi untuk:
+    - autonomyLevel, responseDepth, proactiveAssistance, clarifyBeforeAnswer, uncertaintyHandling, showRiskWarnings, interactionStyle (dan yang lain jika perlu).
+- UX: tampilkan tombol kecil “Reset ke Preset” di card Preset Perilaku (Advanced).
+- Penguncian:
+    - Opsi 1 (lebih jelas): tidak dikunci, tapi ada “Reset ke Preset”.
+    - Opsi 2 (lebih ketat): sebagian field dikunci bila preset ≠ Custom, dan dibuka bila preset = Custom.
+    - Rekomendasi saya: Opsi 1 (lebih fleksibel, lebih sedikit frustrasi).
+
+2) Mode Lanjutan (Advanced) hanya mengatur visibilitas, bukan perilaku
+
+- Advanced OFF: sembunyikan pengaturan detail, tapi nilai tetap tersimpan.
+- Advanced ON: tampilkan semua.
+
+3) proactiveHelpTypes muncul hanya jika proactiveAssistance ≠ Off
+
+- Jika user set proactiveAssistance = Off, proactiveHelpTypes disembunyikan dan nilai tetap tersimpan (atau reset—pilih salah satu, saya sarankan tetap tersimpan).
+
+4) actionBoundary mengontrol fitur “aksi”
+
+- Jika “Boleh memanggil mini apps” tidak dipilih, maka UI/fitur mini apps tidak ditawarkan di percakapan.
+- Jika “Boleh mengarahkan ke chatbot lain” tidak dipilih, jangan tampilkan rekomendasi chatbot spesialis.
+- Jika “Boleh memberi CTA bisnis” tidak dipilih, jangan berikan CTA penjualan.
+
+5) storeInteractionSignals hanya relevan jika ada “pembelajaran/analitik”
+
+- Jika adaptiveLearningMode = Off, storeInteractionSignals boleh tetap ada (untuk analytics), atau disembunyikan supaya sederhana.
+- Rekomendasi: tampilkan hanya di Advanced, tanpa dependensi ketat.
+
+6) Mode Agentic OFF membatasi fitur multi-step
+
+- Jika agenticMode = false:
+    - multiStepReasoning dipaksa OFF atau diabaikan.
+    - proactiveAssistance maksimal “Rendah” (opsional).
+    - Tampilkan info: “Mode Agentic nonaktif, kemampuan perencanaan dibatasi.”
+
+D) Default paket Basic vs Advanced (final)
+
+- Basic (tampil): Preset Perilaku, Tingkat Otonomi, Mode Agentic, Kedalaman Jawaban, Format Output Utama, Minta Klarifikasi Dulu, Saat Tidak Yakin, Tampilkan Peringatan Risiko, Mendengarkan dengan Teliti, Retensi Konteks, Bantuan Proaktif, Gaya Interaksi
+- Advanced (tambahan): Pemeriksaan Mandiri, Prioritas Konteks, Jenis Bantuan Proaktif, Empati Kontekstual, Batas Tindakan AI, Aturan Eskalasi, Saat di Luar Topik, Mode Pembelajaran Adaptif, Simpan Sinyal Interaksi, Prioritas Sumber Jawaban
+
+Kalau “lanjut” yang Anda maksud berikutnya adalah spesifikasi “nilai rekomendasi per preset” (Balanced/Learn/Mentor/Solve/Expert/Brain Project/Compliance), sebutkan apakah Anda ingin saya tetapkan sebagai:
+
+- versi ringkas (1–2 baris per preset), atau
+- versi detail (mapping preset → nilai untuk setiap field).

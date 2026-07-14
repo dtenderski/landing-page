@@ -1,0 +1,193 @@
+<aside>
+🏁
+
+**Modul C** mencakup pengendalian biaya proyek, manajemen klaim & EOT, proses serah terima (PHO/FHO), dan postmortem dengan lesson learned. Output: **retensi cair, defect closed, knowledge transfer ke proyek berikut**.
+
+</aside>
+
+## C1 — Keuangan & Perpajakan
+
+**Owner agent:** AGENT-FINTAX.
+
+### Aktivitas Kunci
+
+- **Cash Flow Forecast bulanan** — S-Curve cash-in (termin) vs cash-out (gaji, vendor, alat).
+- **Akuntansi PSAK 34** — metode **percentage of completion** (POC) atau cost recovery, sesuai kebijakan BUJK.
+- **Invoice Termin** — sesuai milestone kontrak (mis. 0%, 25%, 50%, 75%, 95%, 100%).
+- **PPh Final Pasal 4(2)** — PP 9/2022:
+    - Kualifikasi Kecil: **1.75%**
+    - Kualifikasi Menengah: **2.65%**
+    - Kualifikasi Besar: **2.65%**
+    - Tidak punya SBU: **4%**
+    - Konsultansi Konstruksi: **3.5%** (kecil) / **6%** (besar)
+- **PPN 11%** atas jasa konstruksi (e-Faktur via CoreTax DJP).
+- **Retensi 5%** ditahan Owner sampai akhir Defect Liability Period (umumnya 12–24 bulan).
+- **Performance Bond release** setelah PHO; Maintenance Bond 5% selama DLP.
+
+### KPI Keuangan
+
+- **Akurasi cash flow forecast** ±5%
+- **Days Payable Outstanding (DPO)** ≤45 hari (vendor)
+- **Days Sales Outstanding (DSO)** ≤30 hari (Owner)
+- **PPh Final tepat waktu** = 100% (deadline tanggal 10 bulan berikut)
+- **e-Faktur tepat waktu** = 100%
+
+### Sitasi
+
+- PSAK 34 (Kontrak Konstruksi) — DSAK IAI
+- PP 9/2022 (PPh Final Jasa Konstruksi)
+- UU PPN & PMK Pembayaran PPN
+- PMK 165/PMK.03/2007 (e-Faktur)
+- Permen PUPR 8/2023 (klausul retensi & jaminan)
+
+## C2 — Manajemen Klaim & EOT
+
+**Owner agent:** AGENT-KONTRAK + AGENT-PROXIMA (kuantifikasi schedule & cost impact).
+
+### Tipe Klaim Umum
+
+| **Tipe** | **Penyebab** | **Bukti yang Diperlukan** |  |  |  |
+| --- | --- | --- | --- | --- | --- |
+| **EOT (Time Only)** | Late drawing, late site access, force majeure, late Owner decision | Daily report, RFI log, correspondence, weather record | **Cost + EOT** | Variation Order Owner, perubahan spesifikasi, rework karena kesalahan Owner | VO instruction, cost breakdown, schedule impact analysis |
+| **Disruption / Acceleration** | Owner perintah percepat, multiple disruptions cumulative impact | Productivity records, baseline vs actual, expert analysis | **Force Majeure** | Bencana alam, pandemi, perubahan regulasi major | Press release, government decree, third-party verification |
+
+### Workflow Klaim (FIDIC Sub-Clause 20.1)
+
+```mermaid
+flowchart LR
+	EVENT["Event terjadi"] --> NOTICE["📢 Notice of Claim<br>dalam 28 hari<br>(FIDIC 20.1)"]
+	NOTICE --> RECORD["📊 Continuing Records<br>daily docs"]
+	RECORD --> SUBMIT["📝 Fully Detailed Claim<br>dalam 42 hari<br>(FIDIC 20.1)"]
+	SUBMIT --> ENG["⚖️ Engineer's<br>Determination"]
+	ENG --> ACCEPT{Diterima?}
+	ACCEPT -- Ya --> PAY["💰 Cost + EOT<br>granted"]
+	ACCEPT -- Tidak --> DISPUTE["⚠️ Notice of Dispute<br>→ DAB / Mediasi / Arbitrase"]
+```
+
+### Output / Deliverables
+
+1. **Notice of Claim** — surat resmi dalam 28 hari sejak event (FIDIC).
+2. **Fully Detailed Claim** — cost breakdown + schedule analysis + bukti (typical 50–200 halaman).
+3. **Variation Order** — (jika diakibatkan instruksi Owner).
+4. **Schedule Impact Analysis (SIA)** — metode TIA (Time Impact Analysis) atau Window Analysis.
+5. **EOT Granted Letter** + **Cost Compensation Agreement**.
+
+### Sitasi
+
+- FIDIC Red Book 2017 Sub-Clause 8.5 (EOT), 13 (Variations), 20.1 (Claims)
+- UU 2/2017 Pasal 47–49 (Hak & Kewajiban Para Pihak)
+- Perpres 12/2021 (untuk Owner pemerintah — mekanisme adendum)
+
+## C3 — Serah Terima & Garansi
+
+**Owner agent:** AGENT-MUTU + AGENT-PROXIMA.
+
+### PHO (Provisional Hand-Over)
+
+Serah terima setelah pekerjaan selesai 100% & lulus testing & commissioning.
+
+#### Pre-PHO Checklist
+
+- ✅ Progres fisik 100% (atau >95% dengan punch list disetujui Owner)
+- ✅ Semua **NCR major** sudah closed
+- ✅ **As-Built Drawing** lengkap per disiplin
+- ✅ **Operation & Maintenance Manual** (O&M Manual) untuk MEP
+- ✅ Sertifikat material & uji laboratorium lengkap
+- ✅ **Testing & Commissioning Report** lulus (FAT/SAT)
+- ✅ Site bersih & punch list <2% dari nilai kontrak
+- ✅ Training operator (untuk fasilitas industri/EPC)
+
+#### Output PHO
+
+1. **Berita Acara PHO (BAST)** ditandatangani Owner + Konsultan MK + Kontraktor.
+2. **Punch List** — defect minor untuk diselesaikan dalam DLP (Defect Liability Period).
+3. **Mulai Defect Liability Period** — 12 bulan (umum) atau 24 bulan (high-rise/infrastruktur).
+4. **Pembayaran termin terakhir** (kecuali retensi).
+5. **Maintenance Bond 5%** dipasang menggantikan Performance Bond.
+
+### FHO (Final Hand-Over)
+
+Serah terima akhir setelah Defect Liability Period selesai.
+
+#### Pre-FHO Checklist
+
+- ✅ Semua punch list closed (foto + verifikasi Owner).
+- ✅ Tidak ada defect baru yang diklaim Owner dalam DLP.
+- ✅ Maintenance log selama DLP didokumentasikan.
+- ✅ As-Built final + arsip lengkap diserahkan.
+
+#### Output FHO
+
+1. **Berita Acara FHO (BAST FHO)**.
+2. **Pencairan retensi 5%**.
+3. **Pelepasan Maintenance Bond**.
+4. **Sertifikat Penyelesaian Pekerjaan** — referensi untuk LKUT BUJK.
+
+### Sitasi
+
+- UU 2/2017 Pasal 60–62 (Kegagalan Bangunan & DLP)
+- PP 14/2021 Pasal 130–135 (Penyerahan Hasil Pekerjaan)
+- FIDIC Red Book Sub-Clause 10 (Taking-Over) & 11 (Defects)
+
+## C4 — Postmortem & Lesson Learned
+
+**Owner agent:** AGENT-PROXIMA (didampingi seluruh agen domain).
+
+### Aktivitas Kunci
+
+- **Project Closure Report** — final KPI vs baseline, varians schedule/cost/quality, root cause major issues.
+- **Lesson Learned Workshop** — PM + tim proyek + perwakilan Owner/Konsultan MK, struktur:
+    - What went well? (3–5 hal)
+    - What didn't go well? (3–5 hal)
+    - What to do differently next time? (action items dengan owner)
+- **Knowledge Transfer Pack** — dokumen yang akan diwariskan ke proyek berikut:
+    - Best practices per disiplin
+    - Vendor performance scoring (masuk AVL global)
+    - Risk register matang dengan mitigasi terbukti
+    - Cost benchmarking actual
+    - Template form yang sudah teruji
+- **Update Otak Proyek KONSTRA** — lesson learned masuk **Case Memory** layer KB.
+- **Award Recognition** — untuk personel/subkon/vendor dengan kinerja terbaik.
+
+### Output
+
+1. **Project Closure Report** (PDF, 30–80 halaman).
+2. **Lesson Learned Document** + action items.
+3. **Updated AVL Global** dengan scoring final.
+4. **Updated KONSTRA Case Memory** — lesson learned ter-anonimisasi untuk training.
+5. **Recognition / Award List**.
+
+### Sitasi: PMBOK 7th Performance Domain — Project Work (close-out) & Measurement (lesson learned).
+
+## Alur Kerja Modul C
+
+```mermaid
+flowchart TD
+	MC["Mechanical<br>Completion 100%"] --> TC["Testing &<br>Commissioning"]
+	TC --> PRE["Pre-PHO Walk-<br>through + Punch List"]
+	PRE --> PHO["🏁 PHO<br>BAST + Maintenance Bond"]
+	PHO --> DLP["🔧 Defect Liability Period<br>(12–24 bulan)"]
+	DLP --> FHO["🏆 FHO<br>BAST Final + Retensi cair"]
+	FHO --> PM["🎓 Postmortem &<br>Lesson Learned"]
+	PM --> KT["📚 Knowledge Transfer<br>ke proyek berikutnya"]
+
+	EVENT["⚠️ Event Klaim"] -.-> NOC["📢 Notice of Claim"]
+	NOC -.-> SET["⚖️ Settlement"]
+	SET -.-> PHO
+```
+
+## Quick Reference — Conversation Starters Modul C
+
+1. "Proyeksi cash flow & PPh Final 4(2) sampai PHO untuk proyek lump sum 100M"
+2. "Bantu susun Notice of Claim FIDIC 20.1 — late drawing 45 hari"
+3. "Hitung EOT dengan Time Impact Analysis dari critical path"
+4. "Susun pre-PHO checklist proyek high-rise 30 lantai"
+5. "Generate Project Closure Report template"
+6. "Lesson learned workshop — facilitator script + template"
+
+## Halaman Terkait
+
+- [OpenClaw — System Prompt Multi-Agent: Manajer Keuangan & Perpajakan Konstruksi](https://www.notion.so/OpenClaw-System-Prompt-Multi-Agent-Manajer-Keuangan-Perpajakan-Konstruksi-82ae1ff9377142dab3a9c0d7c2849718?pvs=21)
+- [KB-CASHFLOW — Manajemen Arus Kas & Pembiayaan Konstruksi](https://www.notion.so/KB-CASHFLOW-Manajemen-Arus-Kas-Pembiayaan-Konstruksi-dcb5339a02b84b2898c36d88461933af?pvs=21)
+- [KB-TAX — Perpajakan Jasa Konstruksi](https://www.notion.so/KB-TAX-Perpajakan-Jasa-Konstruksi-9470795c864e48318e3faad6b808bac7?pvs=21)
+- [System Prompt OpenClaw — Manajer Proyek Konstruksi](https://www.notion.so/System-Prompt-OpenClaw-Manajer-Proyek-Konstruksi-bd5ece9df10e4eca823e9c76f96d331c?pvs=21)

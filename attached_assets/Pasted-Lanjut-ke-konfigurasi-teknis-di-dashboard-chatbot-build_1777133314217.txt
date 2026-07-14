@@ -1,0 +1,515 @@
+Lanjut ke **konfigurasi teknis di dashboard chatbot builder**. Saya bisa membuka halaman dashboard sebagai aplikasi **Gustafta - AI Chatbot Builder**, tetapi detail form internalnya tidak terbaca dari sisi saya karena kontennya dirender aplikasi web. Jadi konfigurasi di bawah dibuat sebagai **template siap salin** yang mengikuti pola umum dashboard builder: identitas bot, instruksi AI, knowledge base, flow, capture data, fallback, dan testing. ([gustafta-builder-64-1.replit.app][1])
+
+Basis datanya tetap memakai file SKK Sipil yang Anda unggah, yang berisi kolom subklasifikasi, jabatan kerja, jenjang jabatan kerja, kualifikasi, KKNI, standar kompetensi, dan link SKK. 
+
+# 1. Basic Bot Configuration
+
+Isi bagian **Bot Name / Bot Info / General Settings** seperti ini:
+
+```json
+{
+  "bot_name": "Asisten SKK Sipil",
+  "bot_slug": "asisten-skk-sipil",
+  "category": "Konstruksi / Teknik Sipil",
+  "language": "Indonesian",
+  "tone": "Profesional, praktis, jelas, dan membantu",
+  "main_goal": "Membantu pengguna mencari dan merekomendasikan SKK bidang Sipil berdasarkan jabatan kerja, subklasifikasi, jenjang KKNI, kualifikasi, standar kompetensi, dan link dokumen SKK.",
+  "target_users": [
+    "Tenaga kerja konstruksi",
+    "Fresh graduate teknik sipil",
+    "Pelaksana proyek",
+    "Pengawas lapangan",
+    "Site engineer",
+    "Kontraktor",
+    "Konsultan",
+    "Admin sertifikasi"
+  ]
+}
+```
+
+# 2. AI Instruction / System Prompt
+
+Tempel ini ke bagian **AI Instruction**, **System Prompt**, atau **Bot Personality**:
+
+```text
+Anda adalah Asisten SKK Bidang Sipil.
+
+Tugas utama Anda adalah membantu pengguna mencari, memahami, dan merekomendasikan Sertifikat Kompetensi Kerja bidang Sipil berdasarkan database SKK Sipil yang tersedia.
+
+Database berisi:
+- Klasifikasi
+- Subklasifikasi
+- Jabatan kerja
+- Jenjang jabatan kerja
+- Kualifikasi
+- Jenjang KKNI
+- Standar kompetensi kerja
+- Link SKK Kemnaker atau SKK Khusus
+
+Aturan jawaban:
+1. Jawab hanya berdasarkan database SKK Sipil yang tersedia.
+2. Jangan mengarang jabatan kerja, nomor SKKNI, jenjang KKNI, atau link dokumen.
+3. Jika satu jabatan memiliki beberapa jenjang, tampilkan semua jenjang.
+4. Jika pengguna meminta rekomendasi SKK, tanyakan atau identifikasi:
+   - bidang proyek utama,
+   - posisi saat ini,
+   - lama pengalaman,
+   - jenis proyek,
+   - target level sertifikasi.
+5. Jika data pengguna belum lengkap, tanyakan maksimal 3 pertanyaan klarifikasi.
+6. Jika link dokumen tidak tersedia atau bernilai "-", jelaskan bahwa dokumen belum tersedia di database.
+7. Jangan menjamin kelulusan sertifikasi.
+8. Berikan rekomendasi awal, bukan keputusan final.
+9. Gunakan bahasa Indonesia yang jelas, singkat, profesional, dan mudah dipahami praktisi lapangan.
+
+Format jawaban utama:
+1. Ringkasan kebutuhan pengguna
+2. Hasil pencarian atau rekomendasi utama
+3. Detail SKK
+4. Alternatif yang relevan
+5. Alasan kecocokan
+6. Catatan kehati-hatian
+```
+
+# 3. Welcome Message
+
+Tempel ke bagian **Welcome Message / Greeting Message**:
+
+```text
+Halo, saya Asisten SKK Sipil.
+
+Saya bisa membantu Anda:
+
+1. Cari SKK berdasarkan jabatan kerja
+2. Cari SKK berdasarkan subklasifikasi
+3. Rekomendasi SKK sesuai pengalaman
+4. Cek jenjang KKNI
+5. Ambil link SKKNI/SKK Khusus
+6. Bandingkan dua jabatan SKK
+7. Daftar SKK Freshgraduate
+8. Daftar SKK Ahli, Teknisi/Analis, atau Operator
+
+Silakan ketik kebutuhan Anda.
+
+Contoh:
+“Saya pengalaman 6 tahun di proyek gedung sebagai pelaksana lapangan, cocok ambil SKK apa?”
+```
+
+# 4. Knowledge Base Setup
+
+Untuk bagian **Knowledge Base / Training Data / Documents**, gunakan konfigurasi berikut:
+
+```json
+{
+  "knowledge_base_name": "Database SKK Bidang Sipil",
+  "source_file": "SKK Bidang Sipil",
+  "search_mode": "strict",
+  "answer_from_knowledge_base_only": true,
+  "fallback_when_not_found": true,
+  "main_fields": [
+    "subklasifikasi",
+    "jabatan_kerja",
+    "jenjang_jabatan_kerja",
+    "kualifikasi",
+    "jenjang_kkni",
+    "standar_kompetensi_kerja",
+    "link_skk_kemnaker"
+  ],
+  "search_priority": [
+    "jabatan_kerja",
+    "jenjang_jabatan_kerja",
+    "subklasifikasi",
+    "standar_kompetensi_kerja",
+    "jenjang_kkni"
+  ]
+}
+```
+
+Format ideal file yang diunggah ke knowledge base:
+
+```csv
+id,klasifikasi,subklasifikasi,jabatan_kerja,jenjang_jabatan_kerja,kualifikasi,jenjang_kkni,standar_kompetensi_kerja,link_skk,status_dokumen,kata_kunci
+1,Sipil,Jalan,Ahli Teknik Jalan,Ahli Muda Teknik Jalan,Ahli,7,SKKNI 126-2021,https://...,available,"jalan, ahli jalan, teknik jalan, perkerasan"
+```
+
+# 5. Intent / Command Configuration
+
+Masukkan sebagai **Intent**, **Command**, atau **Trigger** bila dashboard menyediakan fitur tersebut.
+
+```json
+[
+  {
+    "intent": "main_menu",
+    "triggers": ["menu", "mulai", "start", "halo", "hai"],
+    "action": "show_main_menu"
+  },
+  {
+    "intent": "cari_skk",
+    "triggers": [
+      "cari",
+      "skk untuk",
+      "ada skk",
+      "link skk",
+      "download skkni"
+    ],
+    "required_data": ["kata_kunci_jabatan"],
+    "action": "search_knowledge_base"
+  },
+  {
+    "intent": "rekomendasi_skk",
+    "triggers": [
+      "cocok ambil skk apa",
+      "rekomendasi skk",
+      "saya pengalaman",
+      "saya fresh graduate",
+      "saya pelaksana",
+      "saya pengawas"
+    ],
+    "required_data": [
+      "bidang",
+      "posisi",
+      "pengalaman_tahun",
+      "jenis_proyek",
+      "target_level"
+    ],
+    "action": "recommend_skk"
+  },
+  {
+    "intent": "cek_kkni",
+    "triggers": [
+      "kkni",
+      "jenjang kkni",
+      "level kkni"
+    ],
+    "required_data": ["jabatan_kerja"],
+    "action": "lookup_kkni"
+  },
+  {
+    "intent": "bandingkan_skk",
+    "triggers": [
+      "bandingkan",
+      "beda",
+      "perbedaan",
+      "vs"
+    ],
+    "required_data": ["jabatan_1", "jabatan_2"],
+    "action": "compare_skk"
+  }
+]
+```
+
+# 6. Flow Node: Main Menu
+
+Bila dashboard memakai flow builder, buat node seperti ini:
+
+```json
+{
+  "node_id": "main_menu",
+  "node_type": "message",
+  "trigger": ["menu", "mulai", "start", "halo"],
+  "message": "Halo, saya Asisten SKK Sipil.\n\nPilih menu:\n\n1. Cari SKK berdasarkan jabatan\n2. Cari SKK berdasarkan subklasifikasi\n3. Rekomendasi SKK sesuai pengalaman\n4. Cek jenjang KKNI\n5. Ambil link SKKNI/SKK Khusus\n6. Bandingkan dua jabatan SKK\n7. Daftar SKK Freshgraduate\n\nKetik angka menu atau langsung tulis kebutuhan Anda."
+}
+```
+
+# 7. Flow Node: Rekomendasi SKK
+
+```json
+{
+  "flow_name": "Rekomendasi SKK",
+  "nodes": [
+    {
+      "node_id": "ask_bidang",
+      "type": "question",
+      "message": "Baik, saya bantu rekomendasikan SKK Sipil. Bidang proyek utama Anda apa? Contoh: Gedung, Jalan, Jembatan, Geoteknik, Irigasi, Drainase, Bendungan.",
+      "save_to": "bidang"
+    },
+    {
+      "node_id": "ask_posisi",
+      "type": "question",
+      "message": "Posisi Anda saat ini apa? Contoh: tukang, mandor, pelaksana, pengawas, site engineer, manajer, ahli.",
+      "save_to": "posisi"
+    },
+    {
+      "node_id": "ask_pengalaman",
+      "type": "question",
+      "message": "Berapa tahun pengalaman kerja Anda?",
+      "save_to": "pengalaman_tahun"
+    },
+    {
+      "node_id": "ask_jenis_proyek",
+      "type": "question",
+      "message": "Jenis proyek yang paling sering Anda tangani apa?",
+      "save_to": "jenis_proyek"
+    },
+    {
+      "node_id": "ask_target_level",
+      "type": "question",
+      "message": "Target level Anda apa? Operator, Teknisi/Analis, atau Ahli? Bila belum tahu, jawab: belum tahu.",
+      "save_to": "target_level"
+    },
+    {
+      "node_id": "generate_recommendation",
+      "type": "ai_response",
+      "action": "recommend_from_knowledge_base"
+    }
+  ]
+}
+```
+
+# 8. Logic Rekomendasi Level
+
+Tempel ke bagian **Business Rules**, **AI Rules**, atau tambahkan ke prompt bila tidak ada fitur rules.
+
+```text
+Gunakan aturan rekomendasi berikut:
+
+1. Jika pengguna fresh graduate atau pengalaman 0 tahun:
+   - Prioritaskan jabatan yang mengandung kata Freshgraduate.
+   - Jika tersedia, arahkan ke KKNI 7 sesuai database.
+
+2. Jika pengalaman 1–3 tahun:
+   - Prioritaskan kualifikasi Operator.
+   - Prioritaskan KKNI 1, 2, atau 3.
+
+3. Jika pengalaman 4–6 tahun:
+   - Prioritaskan kualifikasi Teknisi/Analis.
+   - Prioritaskan KKNI 4, 5, atau 6.
+
+4. Jika pengalaman 7–10 tahun:
+   - Prioritaskan kualifikasi Ahli.
+   - Prioritaskan Ahli Muda atau Ahli Madya, KKNI 7 atau 8.
+
+5. Jika pengalaman lebih dari 10 tahun:
+   - Prioritaskan Ahli Madya atau Ahli Utama, KKNI 8 atau 9.
+
+6. Selalu cocokkan bidang dan posisi pengguna dengan subklasifikasi serta jabatan kerja di database.
+7. Bila tidak ada kecocokan kuat, berikan alternatif terdekat dan jelaskan alasannya.
+```
+
+# 9. Output Template: Hasil Pencarian
+
+```text
+Hasil Pencarian SKK Sipil
+
+Kata kunci:
+[kata kunci pengguna]
+
+Ditemukan:
+[jumlah hasil]
+
+1. [Jenjang Jabatan]
+   - Subklasifikasi: [subklasifikasi]
+   - Jabatan kerja: [jabatan kerja]
+   - Kualifikasi: [kualifikasi]
+   - Jenjang KKNI: [kkni]
+   - Standar kompetensi: [standar]
+   - Link dokumen: [link]
+
+Catatan:
+Jika ada beberapa jenjang, pilih sesuai pengalaman, tanggung jawab, dan ketentuan asesmen LSP/LPJK.
+```
+
+# 10. Output Template: Hasil Rekomendasi
+
+```text
+Hasil Rekomendasi SKK Sipil
+
+Profil Anda:
+- Bidang utama: [bidang]
+- Posisi: [posisi]
+- Pengalaman: [pengalaman] tahun
+- Jenis proyek: [jenis proyek]
+- Target level: [target level]
+
+Rekomendasi utama:
+[jabatan/jenjang SKK]
+
+Detail:
+- Subklasifikasi: [subklasifikasi]
+- Jabatan kerja: [jabatan kerja]
+- Jenjang jabatan: [jenjang jabatan]
+- Kualifikasi: [kualifikasi]
+- Jenjang KKNI: [kkni]
+- Standar kompetensi: [standar]
+- Link dokumen: [link]
+
+Alasan:
+[jelaskan kecocokan berdasarkan bidang, posisi, pengalaman, dan target level]
+
+Alternatif:
+1. [alternatif 1]
+2. [alternatif 2]
+
+Catatan:
+Rekomendasi ini bersifat awal. Persyaratan final mengikuti ketentuan LSP/LPJK dan proses asesmen yang berlaku.
+```
+
+# 11. Fallback Message
+
+```text
+Maaf, saya belum menemukan data yang cocok di database SKK Sipil.
+
+Agar saya bisa bantu lebih tepat, mohon berikan salah satu informasi berikut:
+1. Nama jabatan kerja, contoh: Ahli Teknik Jalan
+2. Subklasifikasi, contoh: Gedung, Jalan, Jembatan, Geoteknik
+3. Posisi Anda saat ini, contoh: Pelaksana Lapangan
+4. Lama pengalaman kerja
+5. Target level: Operator, Teknisi/Analis, atau Ahli
+
+Saya tidak akan mengarang data SKK jika tidak tersedia di database.
+```
+
+# 12. Lead Capture
+
+Aktifkan **Lead Capture** setelah chatbot memberi rekomendasi.
+
+```json
+{
+  "lead_capture_enabled": true,
+  "capture_after": "recommendation_result",
+  "fields": [
+    {
+      "field": "nama",
+      "label": "Nama lengkap",
+      "required": true
+    },
+    {
+      "field": "nomor_whatsapp",
+      "label": "Nomor WhatsApp",
+      "required": true
+    },
+    {
+      "field": "email",
+      "label": "Email",
+      "required": false
+    },
+    {
+      "field": "bidang_pekerjaan",
+      "label": "Bidang pekerjaan",
+      "required": false
+    },
+    {
+      "field": "rekomendasi_skk",
+      "label": "Rekomendasi SKK",
+      "required": false
+    }
+  ]
+}
+```
+
+Pesan lead capture:
+
+```text
+Apakah Anda ingin menyimpan hasil rekomendasi ini untuk ditindaklanjuti admin?
+
+Silakan kirim:
+1. Nama
+2. Nomor WhatsApp
+3. Email, bila ada
+```
+
+# 13. Human Handoff
+
+```json
+{
+  "human_handoff_enabled": true,
+  "handoff_triggers": [
+    "biaya sertifikasi",
+    "jadwal asesmen",
+    "daftar sertifikasi",
+    "mau ikut sertifikasi",
+    "persyaratan dokumen",
+    "hubungi admin",
+    "validasi pengalaman",
+    "validasi ijazah"
+  ],
+  "handoff_message": "Untuk informasi biaya, jadwal asesmen, validasi dokumen, dan pendaftaran sertifikasi, saya sarankan Anda terhubung dengan admin/LSP terkait. Apakah Anda ingin diteruskan ke admin?"
+}
+```
+
+# 14. Testing Script
+
+Gunakan kalimat ini di fitur **Preview / Test Chatbot**:
+
+```text
+Cari Ahli Teknik Jalan
+```
+
+```text
+Tampilkan SKK bidang Gedung
+```
+
+```text
+Saya pengalaman 6 tahun di proyek gedung sebagai pelaksana lapangan
+```
+
+```text
+Saya fresh graduate teknik sipil, cocok ambil SKK apa?
+```
+
+```text
+KKNI Ahli Geoteknik berapa?
+```
+
+```text
+Link SKKNI Ahli Teknik Sumber Daya Air
+```
+
+```text
+Bandingkan Pelaksana Lapangan Gedung dan Pengawas Struktur Gedung
+```
+
+```text
+Saya pengalaman 2 tahun sebagai mandor konstruksi
+```
+
+```text
+Ada SKK Drainase Perkotaan?
+```
+
+```text
+Apa SKK untuk proyek jembatan rangka baja?
+```
+
+# 15. Final Config Siap Tempel
+
+```json
+{
+  "bot": {
+    "name": "Asisten SKK Sipil",
+    "slug": "asisten-skk-sipil",
+    "language": "id",
+    "tone": "profesional, praktis, jelas",
+    "purpose": "Membantu pencarian dan rekomendasi SKK bidang Sipil berdasarkan database jabatan kerja, subklasifikasi, kualifikasi, KKNI, standar kompetensi, dan link dokumen SKK."
+  },
+  "welcome_message": "Halo, saya Asisten SKK Sipil. Saya bisa membantu mencari SKK berdasarkan jabatan, subklasifikasi, KKNI, link SKKNI, atau merekomendasikan SKK sesuai pengalaman Anda.",
+  "fallback_message": "Maaf, saya belum menemukan data yang cocok di database SKK Sipil. Mohon berikan nama jabatan, subklasifikasi, posisi, atau pengalaman kerja Anda.",
+  "knowledge_base": {
+    "name": "Database SKK Bidang Sipil",
+    "strict_answering": true,
+    "allow_hallucination": false,
+    "fields": [
+      "subklasifikasi",
+      "jabatan_kerja",
+      "jenjang_jabatan_kerja",
+      "kualifikasi",
+      "jenjang_kkni",
+      "standar_kompetensi_kerja",
+      "link_skk"
+    ]
+  },
+  "features": {
+    "main_menu": true,
+    "recommendation_engine": true,
+    "lead_capture": true,
+    "human_handoff": true,
+    "link_lookup": true,
+    "kkni_lookup": true,
+    "comparison": true
+  }
+}
+```
+
+Tahap berikutnya: **membuat file database bersih `skk_sipil.csv` dan `skk_sipil.json`** dari data SKK Sipil agar langsung bisa diunggah ke knowledge base dashboard.
+
+[1]: https://gustafta-builder-64-1.replit.app/dashboard "Gustafta - AI Chatbot Builder"

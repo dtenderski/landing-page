@@ -1,0 +1,200 @@
+Keputusan yang sangat tepat.
+Kita **kunci konsistensi dulu (B)** sebelum naik ke agregasi besar (A).
+
+Kalau tidak, nanti MASTER summary akan mengagregasi data yang belum stabil.
+
+---
+
+# 🎯 TUJUAN STEP B SEKARANG
+
+Pastikan semua chatbot:
+
+* Membaca *_SUMMARY v1 dengan cara yang sama*
+* Tidak over-analyze ulang
+* Tidak konflik penilaian
+* Tidak mengubah status yang sudah ditentukan bot sebelumnya
+* Tidak mengeskalasi risk tanpa alasan jelas
+
+Ini kita lakukan dengan:
+
+> 🔒 SUMMARY INTERPRETATION RULEBOOK v1
+
+Ini bukan schema baru.
+Ini aturan membaca schema.
+
+Dan ini krusial.
+
+---
+
+# 🔒 SUMMARY INTERPRETATION RULEBOOK v1
+
+Tempelkan prinsip ini ke setiap chatbot yang membaca summary:
+
+---
+
+## 1️⃣ PRIORITY OF SUMMARY
+
+Jika *_SUMMARY v1 tersedia*:
+
+* Gunakan bagian `OVERALL` sebagai referensi utama
+* Jangan override status kecuali ada inkonsistensi jelas
+* Jangan menurunkan risk level yang sudah lebih tinggi
+
+Contoh:
+Jika `sbu_risk_level = Tinggi`
+→ TRC tidak boleh menurunkan jadi Sedang.
+
+---
+
+## 2️⃣ FIELD INTERPRETATION RULE
+
+Jika field = `UNKNOWN`
+
+→ Jangan langsung anggap fatal
+→ Tandai sebagai “Butuh Verifikasi”
+→ Risk maksimal naik 1 level (bukan langsung Kritis)
+
+Contoh:
+IUJK.status = UNKNOWN
+→ Risk minimal Sedang
+→ Bukan otomatis Tinggi
+
+---
+
+## 3️⃣ EXPIRED / INVALID RULE
+
+Jika ada:
+
+* status = EXPIRED
+* status = INVALID
+
+Dan field tersebut termasuk requirement tender
+
+→ Risk minimal Tinggi.
+
+Jika lebih dari satu expired/invalid inti
+→ Risk boleh Kritis.
+
+---
+
+## 4️⃣ DATA CONSISTENCY RULE
+
+Jika ada:
+
+```
+DATA_CONSISTENCY_CHECK:
+- name_match = MISMATCH
+```
+
+→ Risk minimal Sedang
+Jika mismatch pada:
+
+* name atau directors
+
+→ Risk minimal Tinggi.
+
+---
+
+## 5️⃣ NO RE-INTERPRETATION RULE
+
+Jika SUMMARY sudah menyatakan:
+
+```
+OVERALL:
+- skk_status: Tidak Memenuhi
+- skk_risk_level: Tinggi
+```
+
+Bot berikutnya:
+
+❌ Tidak boleh menghitung ulang jumlah SKK
+❌ Tidak boleh menyimpulkan “sebenarnya masih cukup”
+
+Kecuali user memberi data baru.
+
+---
+
+## 6️⃣ ESCALATION CONSISTENCY RULE
+
+Risk boleh:
+
+* Tetap
+* Naik
+
+Risk tidak boleh:
+
+* Turun
+
+Kecuali:
+User memberi bukti baru yang memperbaiki gap.
+
+---
+
+# 🎯 IMPLEMENTASI PRAKTIS (Tanpa Ubah Platform)
+
+Tambahkan 1 blok kecil di system prompt setiap bot:
+
+---
+
+### SUMMARY INTERPRETATION INSTRUCTION
+
+Jika menerima *_SUMMARY v1*, ikuti aturan:
+
+1. Gunakan bagian OVERALL sebagai referensi utama.
+2. Jangan override risk kecuali ada inkonsistensi eksplisit.
+3. Jangan menurunkan risk tanpa data baru.
+4. Field UNKNOWN = Butuh Verifikasi, bukan otomatis fatal.
+5. EXPIRED/INVALID pada requirement inti = minimal Tinggi.
+
+---
+
+Itu saja.
+
+Tidak perlu ubah UI.
+Tidak perlu ubah routing.
+Tidak perlu ubah platform.
+
+Tapi dampaknya besar.
+
+---
+
+# 🔥 Sekarang Kita Uji Arsitektur Secara Konseptual
+
+Kalau:
+
+* LICENSING_SUMMARY → legal_risk = Sedang
+* SBU_SUMMARY → sbu_risk = Tinggi
+* SKK_SUMMARY → skk_risk = Rendah
+
+Maka TRC:
+
+→ Tidak boleh menyimpulkan overall = Sedang
+→ Minimal harus Tinggi
+
+Karena escalation consistency.
+
+---
+
+# 🧠 Setelah Ini Stabil
+
+Baru kita masuk ke:
+
+> MASTER_COMPLIANCE_SUMMARY v1
+
+Yang akan menjadi:
+
+“Single Compliance Snapshot”
+
+Tapi itu hanya aman kalau semua rule ini sudah konsisten.
+
+---
+
+Sekarang saya ingin pastikan:
+
+Apakah Anda ingin saya buatkan:
+
+A) Checklist audit internal untuk memastikan semua chatbot sudah patuh Rulebook ini
+atau
+B) Template patch singkat yang bisa langsung Anda tempel ke semua bot agar konsisten?
+
+Saya sarankan B dulu, lalu A.

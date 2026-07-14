@@ -1,0 +1,308 @@
+<aside>
+🧭
+
+**Tujuan dokumen.** Menetapkan arsitektur fitur lengkap untuk chatbot **AI Tutor** — sebuah bimbingan belajar berbasis chat interaktif yang menggabungkan **teori, literasi, tryout, persiapan ujian, gamifikasi**, dan **pendalaman materi**. Disusun dalam format operasional siap-turun-prompt mengikuti pola **OpenClaw + ABD** Anda.
+
+**Audiens.** Siswa SD–SMA (default), dapat diperluas ke mahasiswa & profesional.
+
+**Bahasa default.** Bahasa Indonesia, dengan dukungan bilingual (ID/EN) untuk istilah teknis.
+
+</aside>
+
+## 1. Prinsip Desain Pedagogis
+
+1. **Active Learning > Passive Reading** — siswa harus *melakukan*, bukan sekadar membaca.
+2. **Socratic First** — tutor menuntun dengan pertanyaan sebelum memberi jawaban langsung.
+3. **Scaffolding Bertingkat** — bantuan diberikan berlapis (hint → contoh mirip → solusi sebagian → solusi penuh).
+4. **Mastery-based Progression** — siswa naik level setelah menguasai, bukan setelah waktu berlalu.
+5. **Spaced Repetition** — review otomatis berbasis kurva lupa Ebbinghaus.
+6. **Growth Mindset Language** — feedback selalu *process-oriented*, bukan *trait-oriented*.
+7. **ABD-7 Compliant** — tutor tidak boleh memblok; selalu beri jawaban best-effort + `[ASUMSI:]` + confidence.
+
+---
+
+## 2. Arsitektur Multi-Agent (OpenClaw Pattern)
+
+<aside>
+🧩
+
+Gunakan **1 Coordinator + N Specialist Agents**, dipanggil via `callAgentInternal`. Setiap specialist punya KB sendiri & output ABD-7.
+
+</aside>
+
+| Agent | Peran | Output utama |
+| --- | --- | --- |
+| **TutorCoordinator** | Router niat siswa, jaga konteks sesi, pegang profil & progres | Routing decision + ringkasan sesi |
+| **TheoryAgent** | Menjelaskan konsep dengan Socratic + analogi + multi-representasi | Penjelasan berlapis + cek paham |
+| **LiteracyAgent** | Latihan literasi (membaca, menyimpulkan, menulis, kritis) | Teks + pertanyaan HOTS + feedback |
+| **TryoutAgent** | Bank soal, simulasi ujian, timer, skoring adaptif | Paket soal + analisis hasil |
+| **DiagnosticAgent** | Asesmen awal & deteksi miskonsepsi | Peta kekuatan/kelemahan |
+| **DrillAgent** | Latihan soal terfokus (mastery practice) | Set soal bertahap + hint |
+| **GamificationAgent** | XP, badge, streak, quest, leaderboard | Reward state + narasi |
+| **MentorAgent** | Motivasi, manajemen waktu, *study-skills coaching* | Pesan suportif + rencana belajar |
+| **ParentDashboardAgent** | Ringkasan progres untuk ortu/guru | Laporan mingguan |
+
+---
+
+## 3. Fitur Inti (Wajib Ada)
+
+### 3.1 Diagnostic & Onboarding Cerdas
+
+- **Placement Test Adaptif** — 10–15 soal yang menyesuaikan tingkat kesulitan berdasarkan jawaban sebelumnya (IRT/CAT ringan).
+- **Learning Style Probe** — visual / auditori / kinestetik / membaca-menulis (VARK) untuk menyesuaikan format penjelasan.
+- **Goal Setting** — siswa pilih target (nilai rapor, UTBK, OSN, lulus mapel, dll.), tutor membuat *roadmap* otomatis.
+- **Knowledge Map** — peta visual topik yang sudah/belum dikuasai per mapel.
+
+### 3.2 Mode Belajar Teori — Socratic Tutoring
+
+- **Penjelasan Berlapis (Layered Explanation):**
+    1. *One-liner* (definisi 1 kalimat)
+    2. *Analogi sehari-hari*
+    3. *Penjelasan formal*
+    4. *Contoh terbimbing*
+    5. *Contoh menantang*
+- **Multi-Representasi** — konsep yang sama dijelaskan via teks, diagram ASCII/Mermaid, tabel, dan cerita.
+- **Konfirmasi Paham (Check for Understanding)** — setiap 1–2 paragraf, tutor bertanya: *“Coba jelaskan ulang dengan kata-katamu sendiri”* (Feynman technique).
+- **Misconception Catcher** — kalau siswa salah, tutor mendeteksi *pola kesalahan* (bukan sekadar salah/benar) dan memberi *counter-example*.
+
+### 3.3 Mode Literasi
+
+- **Reading Coach** — kirim bacaan (artikel, cerpen, teks ilmiah), tutor pandu *skimming → scanning → close reading*.
+- **Active Reading Prompts** — “Apa klaim utama penulis?”, “Bukti apa yang dipakai?”, “Bias apa yang mungkin ada?”
+- **Vocabulary Builder** — kata sulit otomatis ditandai, diberi definisi + contoh + kuis cepat.
+- **Writing Studio** — siswa menulis ringkasan/opini, tutor beri feedback dengan **rubrik 6+1 Traits** (ide, organisasi, suara, pilihan kata, kelancaran kalimat, konvensi, presentasi).
+
+### 3.4 Mode Tryout & Simulasi Ujian
+
+- **Bank Soal Berlapis** — per mapel, per topik, per tingkat kesulitan (C1–C6 Bloom).
+- **Simulasi Realistis** — timer, urutan acak, *no-back* mode (mirip UTBK/CBT).
+- **Adaptive Tryout** — soal berikutnya menyesuaikan performa (IRT).
+- **Post-Mortem Analysis:**
+    - Skor + persentil estimasi
+    - *Heatmap* topik kuat/lemah
+    - *Time-per-question* analysis (terlalu lama? terburu-buru?)
+    - *Mistake taxonomy* (konseptual / ceroboh / kehabisan waktu / tebak)
+- **Predicted Score** — estimasi nilai akhir + interval kepercayaan.
+
+### 3.5 Mode Latihan Soal (Drill)
+
+- **Mastery Practice** — siswa harus benar 5 berturut-turut untuk dianggap kuasai.
+- **Hint Ladder** — 3 level hint sebelum solusi penuh.
+- **Worked Examples** — contoh soal selesai berdampingan dengan soal kembar untuk dikerjakan siswa.
+- **Spaced Review Queue** — soal yang pernah salah otomatis muncul lagi pada interval 1d / 3d / 7d / 14d / 30d.
+
+### 3.6 Mode Pendalaman Materi
+
+- **Deep Dive Chain** — siswa pilih topik, tutor jalankan rantai: *konsep dasar → koneksi antar konsep → aplikasi dunia nyata → soal HOTS → mini-proyek*.
+- **Cross-Subject Linking** — “Konsep ini juga muncul di mapel X karena…”
+- **Case Study Mode** — kasus nyata (mis. fisika di roller-coaster, ekonomi di harga BBM) untuk konteks.
+- **Mini Research Project** — tutor bimbing siswa lakukan riset kecil 3–7 hari (pertanyaan → hipotesis → data → kesimpulan).
+
+---
+
+## 4. Gamifikasi (Engagement Engine)
+
+<aside>
+🎮
+
+Gamifikasi harus **mendukung pembelajaran**, bukan menggantikannya. Reward terikat pada *effort* dan *mastery*, bukan sekadar klik.
+
+</aside>
+
+### 4.1 Sistem Inti
+
+| Elemen | Mekanik |
+| --- | --- |
+| **XP (Experience Points)** | Didapat dari menjawab soal, menyelesaikan sesi, streak, mastery |
+| **Level Siswa** | Lv 1–100 dengan judul (Pemula Bertanya → Penjelajah Konsep → Ahli Muda → Mentor) |
+| **Streak Harian** | Belajar minimal 10 menit/hari, ada *streak freeze* (2/bulan) |
+| **Badges** | 50+ lencana (mis. *Tanya 10x dalam 1 sesi*, *Selesaikan tryout tanpa hint*, *Kuasai 1 bab penuh*) |
+| **Quests** | Misi harian/mingguan (mis. “Selesaikan 3 soal HOTS hari ini”) |
+| **Leaderboard** | Opsional, *opt-in*, berbasis liga mingguan (Bronze → Diamond) |
+| **Pet / Avatar** | Maskot belajar yang tumbuh seiring progres siswa |
+
+### 4.2 Mekanik Lanjutan
+
+- **Boss Battle** — ujian akhir bab dikemas sebagai *boss fight* (HP boss = jumlah soal, damage = ketepatan jawaban).
+- **Loot Drop** — selesaikan quest → dapat *power-up* (skip 1 hint penalty, 2x XP 10 menit, dll.).
+- **Story Mode** — kurikulum dibungkus narasi (mis. *Petualangan di Negeri Aljabar*).
+- **Duel Mode** — 1v1 quiz cepat dengan teman/AI.
+- **Guild / Study Group** — siswa bisa bergabung kelompok belajar dengan target kolektif.
+
+### 4.3 Anti-Adiksi & Etika
+
+- Cap XP harian agar tidak *grinding* berlebihan.
+- Reminder istirahat tiap 45 menit (teknik Pomodoro).
+- *No dark patterns* (tidak ada FOMO menyesatkan, tidak ada pay-to-win).
+
+---
+
+## 5. Personalisasi & Adaptive Engine
+
+- **Student Profile (persistent):** kelas, mapel, target, gaya belajar, riwayat miskonsepsi, kecepatan, jam aktif.
+- **Adaptive Difficulty (Zone of Proximal Development)** — tutor menjaga tingkat kesulitan di ~75–85% keberhasilan (sweet spot belajar).
+- **Tone Adapter** — bahasa lebih santai untuk SD, semi-formal untuk SMP, akademis untuk SMA.
+- **Pacing Control** — siswa bisa minta *“lebih lambat”*, *“lebih ringkas”*, *“kasih analogi lain”*.
+- **Forgetting Curve Model** — sistem prediksi kapan siswa akan lupa & jadwalkan review.
+
+---
+
+## 6. Fitur Multi-Modal
+
+| Modalitas | Penggunaan |
+| --- | --- |
+| **Teks** | Default chat |
+| **Diagram (Mermaid/ASCII)** | Konsep yang butuh visual (alur, hierarki, grafik fungsi) |
+| **Tabel** | Perbandingan, klasifikasi |
+| **Gambar (generate/upload)** | Soal bergambar, ilustrasi konsep |
+| **OCR Foto Soal** | Siswa foto soal dari buku → tutor baca & bahas |
+| **Suara (TTS/STT)** | Mode hands-free, latihan listening (B. Inggris/Arab) |
+| **Video Mikro (link)** | Rekomendasi klip 2–3 menit dari kanal terpercaya |
+
+---
+
+## 7. Fitur Asesmen & Feedback
+
+### 7.1 Jenis Asesmen
+
+- **Formative** (selama belajar) — *exit ticket*, *muddiest point*, *one-sentence summary*.
+- **Summative** (akhir unit) — tryout bab.
+- **Diagnostic** (sebelum belajar) — pretest miskonsepsi.
+- **Self-Assessment** — siswa nilai diri sendiri, tutor kalibrasi.
+
+### 7.2 Rubrik Feedback (5 lapis)
+
+1. **Apa yang benar** (penguatan positif spesifik)
+2. **Apa yang kurang tepat** (diagnosis presisi)
+3. **Mengapa keliru** (akar miskonsepsi)
+4. **Cara memperbaiki** (langkah konkret)
+5. **Tantangan berikutnya** (next step)
+
+---
+
+## 8. Fitur Manajemen Belajar (Study OS)
+
+- **Study Planner** — jadwal otomatis berdasar deadline ujian + ketersediaan waktu siswa.
+- **Pomodoro Built-in** — timer 25/5 dengan tutor *check-in* tiap sesi.
+- **Notes Auto-Generated** — setiap akhir sesi, tutor buat ringkasan + flashcard otomatis.
+- **Flashcard Deck** — Anki-style, integrasi spaced repetition.
+- **Mind Map Generator** — buat peta konsep dari materi yang dipelajari.
+- **Cheat Sheet Maker** — 1 halaman rangkuman per bab.
+
+---
+
+## 9. Fitur Sosial & Kolaboratif
+
+- **Study Buddy Match** — sistem cocokkan siswa dengan teman selevel untuk *peer learning*.
+- **Ask-the-Class** — pertanyaan dilempar ke komunitas (moderasi tutor).
+- **Teach-back Mode** — siswa “mengajari” tutor; tutor pura-pura jadi murid bingung (Protégé Effect).
+- **Parent Mode** — laporan mingguan otomatis ke ortu (waktu belajar, topik, progres, rekomendasi).
+- **Teacher Console** — guru bisa assign tugas, lihat progres kelas, ekspor rapor.
+
+---
+
+## 10. Fitur Khusus Persiapan Ujian Indonesia
+
+- **Modul UTBK-SNBT** — TPS (Penalaran Umum, Pengetahuan Kuantitatif, Literasi, Penalaran Matematika) + Tes Literasi.
+- **Modul ANBK / AKM** — literasi membaca + numerasi + survei karakter.
+- **Modul OSN/KSN** — soal olimpiade dengan pembahasan mendalam.
+- **Modul Ujian Sekolah** — disesuaikan kurikulum (Kurikulum Merdeka / K-13).
+- **Modul Tes Beasiswa** — LPDP, IELTS, TOEFL persiapan dasar.
+- **Modul Mata Kuliah** — perluasan ke level mahasiswa (kalkulus, statistika, dll.).
+
+---
+
+## 11. Safety, Etika, & Akademik Integritas
+
+<aside>
+🛡️
+
+Fitur wajib agar AI Tutor *aman & jujur*.
+
+</aside>
+
+- **No-Direct-Answer Mode** untuk PR/ujian — tutor hanya beri hint, bukan solusi penuh, kecuali siswa sudah mencoba.
+- **Plagiarism Guard** — jika siswa minta esai jadi, tutor tolak halus & ajak menulis bersama.
+- **Source Citing** — setiap fakta non-trivial diberi rujukan (buku, jurnal, situs).
+- **Hallucination Mitigation** — tutor wajib bilang *“saya tidak yakin, mari kita verifikasi”* jika confidence < 0.7.
+- **Age-Appropriate Filter** — konten disesuaikan usia.
+- **Mental Health Triage** — jika deteksi distress (stress berat, *self-harm signal*), tutor alihkan ke hotline (119 ext 8 / Into The Light).
+- **Privacy by Design** — data siswa dienkripsi, parental consent untuk <13 tahun.
+
+---
+
+## 12. Output Standar Tutor (ABD-7 Compliant)
+
+Setiap respons substansial mengikuti struktur:
+
+```
+[NIAT TERDETEKSI]: <ringkas niat siswa>
+[ASUMSI]: <asumsi yang dipakai jika konteks tidak lengkap>
+[CONFIDENCE]: <0.0–1.0>
+[JAWABAN INTI]: <inti penjelasan/feedback>
+[CEK PAHAM]: <1 pertanyaan balik>
+[NEXT STEP]: <saran langkah lanjut>
+[XP/REWARD]: <jika relevan>
+```
+
+---
+
+## 13. Roadmap Implementasi (Sprint Plan)
+
+| Sprint | Durasi | Deliverable |
+| --- | --- | --- |
+| **S1 — Foundation** | 2 minggu | TutorCoordinator + TheoryAgent + DiagnosticAgent (MVP 1 mapel) |
+| **S2 — Practice Loop** | 2 minggu | DrillAgent + spaced repetition + flashcard |
+| **S3 — Assessment** | 2 minggu | TryoutAgent + analytics + report |
+| **S4 — Engagement** | 2 minggu | GamificationAgent + streak + badge + quest |
+| **S5 — Literacy & Writing** | 2 minggu | LiteracyAgent + rubrik feedback |
+| **S6 — Multi-modal** | 2 minggu | OCR soal + diagram + TTS/STT |
+| **S7 — Social & Parent** | 2 minggu | Study buddy + Parent dashboard |
+| **S8 — Polish & Scale** | 2 minggu | Boss battle, story mode, A/B testing, KB consolidation |
+
+---
+
+## 14. Metrik Sukses (KPI)
+
+- **Engagement**: DAU/MAU ≥ 0.4, rata-rata sesi ≥ 15 menit, streak 7-hari ≥ 30% pengguna.
+- **Learning Outcome**: peningkatan skor pretest→posttest ≥ 20%, mastery rate per topik ≥ 80%.
+- **Retention**: D7 ≥ 40%, D30 ≥ 20%.
+- **Quality**: hallucination rate < 2%, ABD-compliance ≥ 95%, kepuasan siswa (NPS) ≥ 50.
+- **Equity**: gap performa antar kuintil sosioekonomi menurun ≥ 15%.
+
+---
+
+## 15. Ide *Wow-Factor* (Diferensiasi)
+
+1. **“Tutor Klon Guru Favorit”** — siswa bisa pilih persona tutor (gaya guru tegas, kakak senior santai, sensei filosofis).
+2. **AR Math** — arahkan kamera ke soal di buku, jawaban + langkah muncul *overlay*.
+3. **Voice Debate Mode** — siswa debat topik PKN/sejarah dengan AI, dinilai argumentasinya.
+4. **Time Machine Learning** — sejarah dijelaskan via simulasi dialog dengan tokoh (mis. wawancara virtual dengan Soekarno).
+5. **Dream Career Simulator** — siswa pilih cita-cita, tutor petakan mapel & skill prioritas.
+6. **Real-Time Whiteboard** — tutor & siswa coret-coret bareng (fungsi turunan, peta buta geografi).
+7. **Wellness Check** — mood tracker harian, tutor sesuaikan beban belajar.
+8. **Offline Pack** — paket belajar bisa diunduh untuk daerah dengan koneksi terbatas (krusial di Indonesia).
+
+---
+
+<aside>
+📌
+
+**Langkah lanjutan yang direkomendasikan:**
+
+1. Pilih 1 mapel pilot (saran: Matematika SMP atau B. Indonesia SMA) untuk MVP Sprint S1–S3.
+2. Saya bisa lanjut menyusun **System Prompt OpenClaw v1.0** untuk `TutorCoordinator` + 2 specialist agent pertama.
+3. Atau menyusun **KB skeleton** (struktur folder Notion) untuk menampung bank soal, rubrik, & doktrin pedagogis.
+</aside>
+
+[A — System Prompts OpenClaw v1.0 (MVP Sprint S1)](https://www.notion.so/A-System-Prompts-OpenClaw-v1-0-MVP-Sprint-S1-a274ce6572704d7d852c630e7e6b8337?pvs=21)
+
+[B — KB Skeleton: Knowledge Base AI Tutor](https://www.notion.so/B-KB-Skeleton-Knowledge-Base-AI-Tutor-c6277636f3f143dd9cbaceb4e7e1282a?pvs=21)
+
+[C — Detail Mode: Gamification Engine & Adaptive Tryout](https://www.notion.so/C-Detail-Mode-Gamification-Engine-Adaptive-Tryout-37a3bdfd2c95464c86c8dc60401f02c1?pvs=21)
+
+[E — System Prompts Specialist Agent (Sprint S2–S5)](https://www.notion.so/E-System-Prompts-Specialist-Agent-Sprint-S2-S5-20612d3b0d2944c7b50e75dd5cf45491?pvs=21)
+
+[F — Parent Dashboard: Ringkasan Progres untuk Orang Tua & Guru](https://www.notion.so/F-Parent-Dashboard-Ringkasan-Progres-untuk-Orang-Tua-Guru-b97754cf476247bdbfa673cdaf0f4dbb?pvs=21)
+
+[D — Smoke Test ABD: Skenario Acceptance per Agent](https://www.notion.so/D-Smoke-Test-ABD-Skenario-Acceptance-per-Agent-54ea05431e424011be65c6a53bf9c911?pvs=21)

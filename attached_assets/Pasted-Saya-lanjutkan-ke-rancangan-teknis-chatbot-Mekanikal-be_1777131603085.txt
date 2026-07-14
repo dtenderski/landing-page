@@ -1,0 +1,467 @@
+Saya lanjutkan ke **rancangan teknis chatbot Mekanikal berbasis SKK/SKKNI**. Data acuannya adalah klasifikasi Mekanikal yang memuat jabatan kerja, kualifikasi, jenjang KKNI, standar kompetensi kerja, dan link SKK/SKKNI. 
+
+# 10. Arsitektur chatbot
+
+## A. Komponen utama
+
+```text
+User
+ ↓
+Chatbot Interface
+Website / WhatsApp / Telegram / Custom GPT
+ ↓
+Intent Detector
+Mendeteksi maksud pertanyaan user
+ ↓
+Knowledge Base SKK Mekanikal
+Database jabatan kerja, KKNI, SKKNI, link dokumen
+ ↓
+Response Generator
+Menjawab dengan format terstruktur
+```
+
+## B. Alur kerja chatbot
+
+```text
+1. User bertanya:
+   "Saya mau sertifikasi operator crane"
+
+2. Chatbot membaca kata kunci:
+   operator, crane
+
+3. Chatbot mencari data terkait:
+   - Operator Crane Mobile
+   - Operator Tower Crane
+   - Operator Truck Mounted Crane
+   - Operator Crawler Crane
+   - Operator Rough Terrain Crane
+
+4. Chatbot menampilkan pilihan.
+
+5. Jika terlalu banyak pilihan, chatbot bertanya:
+   "Jenis crane yang Anda maksud mobile crane, tower crane, atau truck mounted crane?"
+```
+
+# 11. Struktur database chatbot
+
+Untuk tahap awal, database bisa dibuat dalam format **JSON**.
+
+```json
+[
+  {
+    "id": "MEK-001",
+    "klasifikasi": "Mekanikal",
+    "subklasifikasi": "Teknik Tata Udara dan Refrigasi",
+    "jabatan_kerja": "Ahli Perencanaan Sistem Tata Udara",
+    "jenjang_jabatan": "Ahli Muda Perencanaan Sistem Tata Udara",
+    "kualifikasi": "Ahli",
+    "jenjang_kkni": 7,
+    "standar_kompetensi": "SKKNI 131-2015",
+    "link_skk": "https://skkni-api.kemnaker.go.id/v1/public/documents/419f0d1b-f65b-447c-be03-8f226fac6a81/download",
+    "kata_kunci": [
+      "tata udara",
+      "refrigasi",
+      "hvac",
+      "ac",
+      "air conditioning"
+    ]
+  },
+  {
+    "id": "MEK-002",
+    "klasifikasi": "Mekanikal",
+    "subklasifikasi": "Plumbing dan Pompa Mekanik",
+    "jabatan_kerja": "Tukang Plambing",
+    "jenjang_jabatan": "Tukang Plambing",
+    "kualifikasi": "Operator",
+    "jenjang_kkni": 2,
+    "standar_kompetensi": "SKKNI 304-2016 Dalam proses Penyusunan SKKNI Tahun 2023",
+    "link_skk": "https://skkni-api.kemnaker.go.id/v1/public/documents/5021cb4f-ef05-4cf0-8112-519c664acab6/download",
+    "kata_kunci": [
+      "plumbing",
+      "plambing",
+      "pipa air",
+      "sanitasi",
+      "tukang pipa"
+    ]
+  },
+  {
+    "id": "MEK-003",
+    "klasifikasi": "Mekanikal",
+    "subklasifikasi": "Teknik Lifting",
+    "jabatan_kerja": "Operator Forklift",
+    "jenjang_jabatan": "Operator Forklift",
+    "kualifikasi": "Operator",
+    "jenjang_kkni": 2,
+    "standar_kompetensi": "SKKNI 135-2015",
+    "link_skk": "https://skkni-api.kemnaker.go.id/v1/public/documents/e530abac-e0f8-45f0-aa67-c91eb89a76ce/download",
+    "kata_kunci": [
+      "forklift",
+      "operator forklift",
+      "lifting",
+      "angkat angkut"
+    ]
+  }
+]
+```
+
+# 12. Kategori utama chatbot
+
+Agar chatbot mudah digunakan, bidang Mekanikal bisa dikelompokkan menjadi beberapa menu:
+
+## Menu utama
+
+```text
+Pilih bidang Mekanikal:
+
+1. Tata Udara / HVAC / Refrigasi
+2. Plumbing dan Pompa Mekanik
+3. Proteksi Kebakaran
+4. Lift dan Eskalator
+5. Mekanikal Bangunan Gedung
+6. Pengelasan / Welder
+7. Alat Berat
+8. Crane dan Lifting
+9. Scaffolding
+10. Aspal dan Batching Plant
+11. Mesin / Engine / Hidrolik
+12. Lainnya
+```
+
+# 13. Intent lengkap chatbot
+
+## Intent 1 — Cari berdasarkan nama jabatan
+
+**Contoh user:**
+
+```text
+Cari SKKNI tukang las
+```
+
+**Respons bot:**
+
+```text
+Saya menemukan beberapa jabatan terkait tukang las:
+
+1. Tukang Las/Welder/Gas dan Electric Welder
+   - Kualifikasi: Operator
+   - Jenjang KKNI: Level 1 dan Level 2
+   - Standar Kompetensi: SKKNI 98-2018, diperbaharui dengan SKKNI 27-2021
+
+2. Juru Las Oxyacetylene
+   - Kualifikasi: Operator
+   - Jenjang KKNI: Level 2
+   - Standar Kompetensi: SKKNI 98-2018, diperbaharui dengan SKKNI 27-2021
+
+3. Tukang Las Listrik
+   - Kualifikasi: Operator
+   - Jenjang KKNI: Level 1 dan Level 2
+   - Standar Kompetensi: SKKNI 98-2018, diperbaharui dengan SKKNI 27-2021
+```
+
+## Intent 2 — Cari berdasarkan KKNI
+
+**Contoh user:**
+
+```text
+Tampilkan jabatan Mekanikal KKNI level 7
+```
+
+**Respons bot:**
+
+```text
+Berikut jabatan Mekanikal dengan jenjang KKNI Level 7:
+
+1. Ahli Muda Perencanaan Sistem Tata Udara
+2. Pengkaji Muda Teknis Proteksi Kebakaran
+3. Ahli Muda Pesawat Lift dan Eskalator
+4. Ahli Muda Bidang Keahlian Teknik Mekanikal
+5. Ahli Teknik Mekanikal Freshgraduate
+6. Ahli Teknik Elektronika dan Telekomunikasi dalam Gedung Freshgraduate
+7. Ahli Muda Elektrikal Konstruksi Bangunan Gedung
+8. Ahli Muda Launching Girder
+```
+
+## Intent 3 — Rekomendasi sertifikasi
+
+**Contoh user:**
+
+```text
+Saya kerja sebagai teknisi fire alarm
+```
+
+**Respons bot:**
+
+```text
+Berdasarkan pengalaman Anda sebagai teknisi fire alarm, jabatan yang sesuai adalah:
+
+Jabatan:
+Teknisi Fire Alarm
+
+Kualifikasi:
+Teknisi/Analis
+
+Jenjang KKNI:
+Level 4
+
+Standar Kompetensi:
+SKKNI 304-2009
+
+Link SKK/SKKNI:
+Tersedia pada data SKK Kemnaker.
+```
+
+## Intent 4 — Data belum tersedia
+
+**Contoh user:**
+
+```text
+SKKNI operator mesin bubut logam
+```
+
+**Respons bot:**
+
+```text
+Data yang tersedia:
+
+Jabatan:
+Operator Mesin Bubut Logam
+
+Kualifikasi:
+Operator
+
+Jenjang KKNI:
+Level 2
+
+Standar Kompetensi:
+SKEMA LPJK / Akan disusun SKKNI / SKK Khusus
+
+Catatan:
+Dokumen SKKNI belum tersedia pada data ini.
+```
+
+# 14. Logika pencarian chatbot
+
+Gunakan logika berikut:
+
+```text
+1. Ubah input user menjadi huruf kecil.
+2. Cocokkan dengan:
+   - jabatan_kerja
+   - jenjang_jabatan
+   - subklasifikasi
+   - kata_kunci
+   - standar_kompetensi
+3. Jika hasil 1 data:
+   tampilkan detail.
+4. Jika hasil lebih dari 1:
+   tampilkan daftar pilihan.
+5. Jika tidak ada hasil:
+   tampilkan fallback dan saran kata kunci.
+```
+
+# 15. Contoh kode sederhana chatbot
+
+Berikut contoh prototype menggunakan JavaScript.
+
+```javascript
+const dataMekanikal = [
+  {
+    jabatan_kerja: "Teknisi Fire Alarm",
+    subklasifikasi: "Proteksi Kebakaran",
+    jenjang_jabatan: "Teknisi Fire Alarm",
+    kualifikasi: "Teknisi/Analis",
+    jenjang_kkni: 4,
+    standar_kompetensi: "SKKNI 304-2009",
+    link_skk: "https://skkni-api.kemnaker.go.id/v1/public/documents/bbd818ec-027a-47ec-8c14-1970313917c0/download",
+    kata_kunci: ["fire alarm", "alarm kebakaran", "proteksi kebakaran"]
+  },
+  {
+    jabatan_kerja: "Mekanik Heating, Ventilation, dan Air Condition (HVAC)",
+    subklasifikasi: "Teknik Tata Udara dan Refrigasi",
+    jenjang_jabatan: "Mekanik HVAC",
+    kualifikasi: "Operator",
+    jenjang_kkni: 3,
+    standar_kompetensi: "SKKNI 298-2009",
+    link_skk: "https://skkni-api.kemnaker.go.id/v1/public/documents/d0ad1709-830a-4dee-b2ce-19d94cf92342/download",
+    kata_kunci: ["hvac", "ac", "tata udara", "refrigasi"]
+  }
+];
+
+function cariSKK(input) {
+  const query = input.toLowerCase();
+
+  const hasil = dataMekanikal.filter(item => {
+    const teksGabungan = [
+      item.jabatan_kerja,
+      item.subklasifikasi,
+      item.jenjang_jabatan,
+      item.kualifikasi,
+      item.standar_kompetensi,
+      ...item.kata_kunci
+    ].join(" ").toLowerCase();
+
+    return teksGabungan.includes(query);
+  });
+
+  if (hasil.length === 0) {
+    return `
+Maaf, data belum ditemukan.
+
+Coba gunakan kata kunci seperti:
+- HVAC
+- plumbing
+- tukang las
+- crane
+- fire alarm
+- scaffolding
+- alat berat
+`;
+  }
+
+  return hasil.map(item => `
+Jabatan: ${item.jabatan_kerja}
+Subklasifikasi: ${item.subklasifikasi}
+Jenjang: ${item.jenjang_jabatan}
+Kualifikasi: ${item.kualifikasi}
+Jenjang KKNI: ${item.jenjang_kkni}
+Standar Kompetensi: ${item.standar_kompetensi}
+Link SKK/SKKNI: ${item.link_skk || "-"}
+`).join("\n---\n");
+}
+
+console.log(cariSKK("fire alarm"));
+```
+
+# 16. Format respons final chatbot
+
+Gunakan format ini agar konsisten:
+
+```text
+Berikut informasi jabatan Mekanikal yang saya temukan:
+
+Jabatan:
+[Nama Jabatan]
+
+Subklasifikasi:
+[Nama Subklasifikasi]
+
+Jenjang Jabatan:
+[Nama Jenjang]
+
+Kualifikasi:
+[Operator / Teknisi-Analis / Ahli]
+
+Jenjang KKNI:
+[Level KKNI]
+
+Standar Kompetensi:
+[Nomor SKKNI / SKK Khusus / Keterangan]
+
+Link SKK/SKKNI:
+[Link jika tersedia]
+
+Catatan:
+[Informasi tambahan, misalnya dalam proses penyusunan SKKNI]
+```
+
+# 17. Pertanyaan klarifikasi otomatis
+
+Jika user bertanya terlalu umum, chatbot perlu bertanya balik.
+
+## User:
+
+```text
+Saya mau sertifikasi mekanikal
+```
+
+## Bot:
+
+```text
+Bidang Mekanikal cukup luas. Pilih salah satu bidang berikut:
+
+1. HVAC / Tata Udara
+2. Plumbing
+3. Fire Alarm / Proteksi Kebakaran
+4. Lift dan Eskalator
+5. Mekanikal Bangunan Gedung
+6. Las / Welder
+7. Alat Berat
+8. Crane / Lifting
+9. Scaffolding
+10. Mesin / Engine / Hidrolik
+
+Anda bekerja di bidang yang mana?
+```
+
+# 18. Prompt untuk chatbot versi Custom GPT
+
+Ini prompt yang lebih siap pakai:
+
+```text
+Anda adalah MekaSKK Bot, chatbot bidang Mekanikal berbasis SKK/SKKNI.
+
+Anda hanya boleh menjawab berdasarkan database klasifikasi Mekanikal yang diberikan.
+
+Database berisi:
+- Subklasifikasi
+- Jabatan kerja
+- Jenjang jabatan kerja
+- Kualifikasi
+- Jenjang KKNI
+- Standar kompetensi kerja
+- Link dokumen SKK/SKKNI
+
+Aturan:
+1. Jangan membuat data baru di luar database.
+2. Jika data tidak ditemukan, katakan bahwa data belum ditemukan.
+3. Jika link SKK tidak tersedia, tulis "Link belum tersedia".
+4. Jika standar masih dalam proses penyusunan, sampaikan sesuai data.
+5. Jika user menyebut istilah umum seperti "crane", "alat berat", "las", atau "plumbing", tampilkan beberapa pilihan jabatan yang relevan.
+6. Jika user meminta rekomendasi, gunakan pengalaman kerja, bidang, dan level untuk memilih jabatan paling sesuai.
+7. Gunakan bahasa Indonesia.
+8. Jawaban harus ringkas, jelas, dan berbentuk poin.
+
+Format jawaban:
+Jabatan:
+Subklasifikasi:
+Jenjang Jabatan:
+Kualifikasi:
+Jenjang KKNI:
+Standar Kompetensi:
+Link SKK/SKKNI:
+Catatan:
+```
+
+# 19. Pertanyaan pembuka untuk user
+
+Saat chatbot pertama kali dibuka, tampilkan:
+
+```text
+Halo, saya MekaSKK Bot.
+
+Saya membantu mencari informasi jabatan kerja Mekanikal berbasis SKK/SKKNI.
+
+Silakan pilih kebutuhan Anda:
+
+1. Cari jabatan kerja Mekanikal
+2. Cari SKK/SKKNI berdasarkan jabatan
+3. Cari jenjang KKNI
+4. Rekomendasi sertifikasi berdasarkan pengalaman kerja
+5. Minta link dokumen SKK/SKKNI
+
+Contoh:
+- Saya teknisi fire alarm
+- Cari SKKNI tukang las
+- Jenjang KKNI operator crane
+- Sertifikasi untuk HVAC
+```
+
+# 20. Tahap berikutnya
+
+Tahap berikutnya yang paling penting adalah mengubah seluruh data Mekanikal menjadi **database JSON/Excel siap pakai**, lalu membuat:
+
+1. **dataset knowledge base chatbot**
+2. **prompt final chatbot**
+3. **flow percakapan**
+4. **prototype website chatbot**
+5. **versi WhatsApp bot**

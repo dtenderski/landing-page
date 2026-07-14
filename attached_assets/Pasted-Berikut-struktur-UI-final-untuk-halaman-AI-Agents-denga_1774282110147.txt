@@ -1,0 +1,253 @@
+Berikut struktur UI final untuk halaman “AI Agents”, dengan urutan card, label Indonesia, helper text singkat, serta rekomendasi mana yang tampil di mode Basic vs Advanced.
+
+1) Header halaman
+
+- Judul: AI Agents
+- Subteks: Atur perilaku, tingkat otonomi, dan cara AI merespons.
+- (Opsional) Switch global: Mode Lanjutan (Advanced)
+    - Label: Mode Lanjutan
+    - Helper: Tampilkan pengaturan detail untuk pengguna berpengalaman.
+
+2) Card: Preset Perilaku (paling atas)
+
+Tujuan: pengguna cepat “siap pakai” tanpa mengutak-atik detail.
+
+- behaviorPreset (select)
+    - Label: Preset Perilaku
+    - Helper: Pilih gaya kerja AI sesuai kebutuhan.
+    - Opsi: Balanced, Learn, Mentor, Solve, Expert, Brain Project, Compliance, Custom
+    - Default: Balanced
+- (Jika preset ≠ Custom)
+    - Tampilkan catatan kecil: “Sebagian pengaturan detail mengikuti preset dan bisa dikunci.”
+- (Jika preset = Custom)
+    - Helper tambahan: “Anda bisa mengatur detail di bagian Pengaturan Lanjutan.”
+
+Tampil:
+
+- Basic: Ya
+- Advanced: Ya
+
+3) Card: Tingkat Inisiatif (Autonomi)
+
+Tujuan: kontrol utama seberapa “aktif” AI.
+
+- autonomyLevel (select)
+    - Label: Tingkat Otonomi
+    - Helper: Seberapa besar AI mengambil inisiatif tanpa diminta.
+    - Opsi: Pasif, Terbatas, Sedang, Tinggi
+    - Default: Terbatas
+
+Tampil:
+
+- Basic: Ya
+- Advanced: Ya
+
+4) Card: Mode Agentic (saklar fitur tingkat lanjut)
+
+Tujuan: satu pintu untuk kemampuan agentic.
+
+- agenticMode (toggle)
+    - Label: Mode Agentic
+    - Helper: Aktifkan perilaku AI tingkat lanjut (perencanaan, eksekusi bertahap).
+    - Default: true
+
+Rekomendasi UX:
+
+- Jika OFF: tampilkan peringatan ringan “Beberapa fitur lanjutan akan nonaktif.”
+
+Tampil:
+
+- Basic: Ya (boleh dipindah ke Advanced jika target user pemula banget)
+- Advanced: Ya
+
+5) Card: Kualitas Respons (Respons & Format)
+
+Tujuan: kontrol cara jawaban disajikan.
+
+- responseDepth (select)
+    - Label: Kedalaman Jawaban
+    - Helper: Seberapa detail AI menjelaskan.
+    - Opsi: Singkat, Normal, Terstruktur, Mendalam
+    - Default: Terstruktur
+- outputFormat (select)
+    - Label: Format Output Utama
+    - Helper: Bentuk jawaban yang paling sering dipakai.
+    - Opsi: Paragraf, Poin-poin, Langkah demi langkah, Checklist, Ringkasan + langkah
+    - Default: Ringkasan + langkah
+- selfCorrection (toggle)
+    - Label: Pemeriksaan Mandiri
+    - Helper: AI meninjau ulang jawaban sebelum ditampilkan.
+    - Default: true
+
+Tampil:
+
+- Basic: responseDepth + outputFormat (Ya), selfCorrection (Opsional; saya sarankan tetap tampil)
+- Advanced: Ya semua
+
+6) Card: Klarifikasi & Ketidakpastian
+
+Tujuan: mengurangi halusinasi dan menaikkan kualitas dialog.
+
+- clarifyBeforeAnswer (toggle)
+    - Label: Minta Klarifikasi Dulu
+    - Helper: AI bertanya jika info belum cukup jelas.
+    - Default: true
+- uncertaintyHandling (select)
+    - Label: Saat Tidak Yakin
+    - Helper: Apa yang dilakukan AI ketika informasinya tidak pasti.
+    - Opsi: Jawab normal, Jelaskan keterbatasan, Minta klarifikasi, Sarankan verifikasi ke sumber resmi, Jangan jawab jika tidak cukup yakin
+    - Default: Sarankan verifikasi ke sumber resmi
+- showRiskWarnings (toggle)
+    - Label: Tampilkan Peringatan Risiko
+    - Helper: Tambahkan catatan kehati-hatian untuk topik sensitif.
+    - Default: true
+
+Tampil:
+
+- Basic: clarifyBeforeAnswer (Ya), uncertaintyHandling (Ya), showRiskWarnings (Ya)
+- Advanced: Ya
+
+7) Card: Memori & Konteks
+
+Tujuan: kontrol apa yang diingat dan diprioritaskan.
+
+- attentiveListening (toggle)
+    - Label: Mendengarkan dengan Teliti
+    - Helper: AI membaca konteks dan maksud pengguna lebih cermat.
+    - Default: true
+- contextRetention (slider 1–50)
+    - Label: Retensi Konteks
+    - Helper: Jumlah pesan terakhir yang jadi acuan.
+    - Default: 10
+- contextPriority (multi-select)
+    - Label: Prioritas Konteks
+    - Helper: Urutan konteks yang paling diutamakan AI.
+    - Opsi: Pertanyaan terakhir, Tujuan pengguna, Profil pengguna, Data proyek, Riwayat percakapan, Hasil tools
+    - Default: Pertanyaan terakhir, Tujuan pengguna, Riwayat percakapan
+
+Catatan UX: tampilkan sebagai checklist + drag handle (sortable), tapi tetap izinkan multi-select.
+
+Tampil:
+
+- Basic: attentiveListening (Ya), contextRetention (Ya), contextPriority (Sembunyikan atau tampil ringkas)
+- Advanced: Ya semua
+
+8) Card: Bantuan Proaktif
+
+Tujuan: mengatur seberapa sering AI “mendorong” bantuan tambahan.
+
+- proactiveAssistance (select)
+    - Label: Bantuan Proaktif
+    - Helper: Seberapa sering AI memberi bantuan tambahan tanpa diminta.
+    - Opsi: Off, Rendah, Sedang, Tinggi
+    - Default: Rendah
+- proactiveHelpTypes (multi-select)
+    - Label: Jenis Bantuan Proaktif
+    - Helper: Bentuk bantuan yang boleh muncul.
+    - Opsi: Saran langkah berikutnya, Pertanyaan klarifikasi, Checklist, Peringatan risiko, Rekomendasi mini apps, Rekomendasi chatbot spesialis, Rekomendasi dokumen
+    - Default: Saran langkah berikutnya, Pertanyaan klarifikasi, Checklist
+
+Aturan tampilan:
+
+- proactiveHelpTypes hanya muncul jika proactiveAssistance ≠ Off.
+
+Tampil:
+
+- Basic: proactiveAssistance (Ya), proactiveHelpTypes (Sembunyikan)
+- Advanced: Ya semua
+
+9) Card: Gaya Interaksi & Empati
+
+Tujuan: nada dan “rasa” respons.
+
+- interactionStyle (select)
+    - Label: Gaya Interaksi
+    - Helper: Cara AI berkomunikasi.
+    - Opsi: Formal, Profesional, Ramah, Konsultatif, Mentor
+    - Default: Konsultatif
+- contextualEmpathy (select)
+    - Label: Empati Kontekstual
+    - Helper: Seberapa peka AI pada emosi pengguna.
+    - Opsi: Off, Ringan, Sedang, Tinggi
+    - Default: Ringan
+
+Tampil:
+
+- Basic: interactionStyle (Ya), contextualEmpathy (Opsional)
+- Advanced: Ya
+
+10) Card: Batas Tindakan & Eskalasi (Safety/Compliance)
+
+Tujuan: guardrails.
+
+- actionBoundary (multi-select)
+    - Label: Batas Tindakan AI
+    - Helper: Apa yang boleh AI lakukan dalam percakapan.
+    - Opsi: Hanya menjawab, Boleh menyarankan, Boleh bertanya balik, Boleh memanggil mini apps, Boleh mengarahkan ke chatbot lain, Boleh memberi CTA bisnis
+    - Default: Hanya menjawab, Boleh bertanya balik, Boleh menyarankan
+- escalationRules (multi-select)
+    - Label: Aturan Eskalasi
+    - Helper: Apa yang dilakukan saat kasus sensitif/rumit.
+    - Opsi: Arahkan ke sumber resmi, Sarankan konsultasi manusia, Pindahkan ke chatbot spesialis, Sarankan mini app terkait, Tampilkan disclaimer
+    - Default: Arahkan ke sumber resmi, Tampilkan disclaimer
+
+Tampil:
+
+- Basic: Sembunyikan (atau tampil ringkas hanya “Batas Tindakan”)
+- Advanced: Ya
+
+11) Card: Perilaku Off-topic
+
+Tujuan: menjaga fokus.
+
+- offTopicBehavior (select)
+    - Label: Saat Pertanyaan di Luar Topik
+    - Helper: Cara AI merespons ketika user menyimpang.
+    - Opsi: Arahkan dengan sopan, Jawab singkat lalu arahkan kembali, Tolak dengan jelas
+    - Default: Jawab singkat lalu arahkan kembali
+
+Tampil:
+
+- Basic: Sembunyikan
+- Advanced: Ya
+
+12) Card: Pembelajaran & Telemetri (paling bawah, karena sensitif)
+
+Tujuan: kontrol adaptasi dan penyimpanan sinyal.
+
+- adaptiveLearningMode (select)
+    - Label: Mode Pembelajaran Adaptif
+    - Helper: Apakah AI menyesuaikan diri dari interaksi.
+    - Opsi: Off, Sesi aktif saja, Belajar pola interaksi, Dengan review admin
+    - Default: Off
+- storeInteractionSignals (toggle)
+    - Label: Simpan Sinyal Interaksi
+    - Helper: Simpan sinyal untuk evaluasi kualitas (tanpa menyimpan konten sensitif).
+    - Default: false
+
+Tampil:
+
+- Basic: Sembunyikan
+- Advanced: Ya
+
+13) Card: Prioritas Sumber (Advanced)
+
+Tujuan: urutan rujukan jawaban.
+
+- sourcePriority (sortable-list)
+    - Label: Prioritas Sumber Jawaban
+    - Helper: Urutan sumber yang paling diprioritaskan AI.
+    - Opsi: System Prompt, Knowledge Engine, Riwayat percakapan, Mini Apps, Integrations, Sumber eksternal
+    - Default: System Prompt > Knowledge Engine > Riwayat percakapan > Mini Apps > Integrations > Sumber eksternal
+
+Tampil:
+
+- Basic: Sembunyikan
+- Advanced: Ya
+
+Rekomendasi ringkas Basic vs Advanced
+
+- Basic (tampil): behaviorPreset, autonomyLevel, agenticMode, responseDepth, outputFormat, clarifyBeforeAnswer, uncertaintyHandling, showRiskWarnings, attentiveListening, contextRetention, proactiveAssistance, interactionStyle
+- Advanced (tambahan): contextPriority, proactiveHelpTypes, selfCorrection (jika tidak ditampilkan di basic), contextualEmpathy, actionBoundary, escalationRules, offTopicBehavior, adaptiveLearningMode, storeInteractionSignals, sourcePriority
+
+Kalau Anda setuju, saya bisa rapikan juga “copywriting” final: konsistensi istilah (Agentic vs Agentik), panjang helper text (maks 1 baris), dan aturan dependensi (mis. preset selain Custom mengunci beberapa setting).

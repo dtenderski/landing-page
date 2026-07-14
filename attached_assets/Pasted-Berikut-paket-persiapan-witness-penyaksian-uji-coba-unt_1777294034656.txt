@@ -1,0 +1,528 @@
+Berikut **paket persiapan witness / penyaksian uji coba** untuk **pengajuan permohonan LSP melaksanakan SKK AJJ Nirkertas**. Istilah **witness** di sini saya gunakan sebagai **penyaksian uji coba pelaksanaan sertifikasi jarak jauh oleh BNSP** pada tahap asesmen lapangan permohonan LSP. BNSP memuat SE terkait “Sertifikasi Jarak Jauh dan Penggunaan Nirkertas” pada halaman download resminya, dan SE tersebut mengatur bahwa BNSP melakukan asesmen lapangan serta menyaksikan uji coba pelaksanaan sertifikasi jarak jauh kepada LSP maksimal 30 hari kerja sejak permohonan diterima. ([BNSP][1])
+
+---
+
+# 1. Tujuan Witness AJJ Nirkertas
+
+Witness dilakukan untuk membuktikan bahwa LSP **benar-benar siap** menjalankan proses sertifikasi jarak jauh dan nirkertas, bukan hanya memiliki dokumen. Yang biasanya perlu ditunjukkan adalah: SOP berjalan, sistem/aplikasi dapat digunakan, peran admin–asesor–asesi–TUK jelas, rekaman tersimpan, laporan keluar, proses banding tersedia, dan data dapat ditelusuri. SE BNSP juga mensyaratkan rekaman uji coba pelaksanaan sertifikasi jarak jauh satu skema, termasuk rekaman verifikasi TUK jarak jauh; untuk pengajuan lebih dari satu skema, minimal mengirimkan dua rekaman uji coba dalam format video dan PDF. 
+
+```yaml id="witness_objective"
+witness_objective:
+  tujuan:
+    - membuktikan kesiapan SOP AJJ
+    - membuktikan kesiapan aplikasi sertifikasi jarak jauh
+    - membuktikan kesiapan aplikasi nirkertas
+    - membuktikan kesiapan verifikasi TUK jarak jauh
+    - membuktikan kesiapan asesor, admin, asesi, TUK, dan pengelola sistem
+    - membuktikan rekaman dan dokumen keluaran dapat disimpan serta ditelusuri
+    - membuktikan mekanisme umpan balik, laporan asesmen, dan banding tersedia
+```
+
+---
+
+# 2. Dokumen yang Harus Siap Sebelum Witness
+
+## A. Dokumen AJJ / Sertifikasi Jarak Jauh
+
+Sebelum witness, LSP perlu memastikan seluruh lampiran permohonan AJJ sudah siap: SOP pelayanan sertifikasi jarak jauh, SOP melaksanakan asesmen jarak jauh, SOP verifikasi TUK jarak jauh, SOP banding jarak jauh, SK personil pengelola sistem, SK pemeliharaan sistem, daftar sarana-prasarana kantor, bukti internet berlangganan, penjelasan sistem aplikasi termasuk server, surat pernyataan penggunaan software legal, keamanan dan kerahasiaan rekaman, bukti sosialisasi internal, serta rekaman uji coba. 
+
+```yaml id="dokumen_witness_ajj"
+dokumen_witness_ajj:
+  sop:
+    - SOP Melayani Pelaksanaan Kegiatan Sertifikasi Kompetensi Jarak Jauh
+    - SOP Melaksanakan Asesmen Jarak Jauh
+    - SOP Verifikasi TUK Jarak Jauh
+    - SOP Banding Jarak Jauh
+
+  sk_dan_personil:
+    - SK penetapan personil pengelola sistem sertifikasi jarak jauh
+    - SK penetapan pemeliharaan sistem sertifikasi jarak jauh
+    - daftar admin sistem
+    - daftar asesor kompetensi
+    - daftar pengelola TUK
+    - daftar komite teknis / pengambil keputusan sertifikasi
+
+  sarana_prasarana:
+    - daftar sarana dan prasarana kantor LSP
+    - bukti internet berlangganan kantor LSP
+    - dokumentasi perangkat kerja admin
+    - dokumentasi ruang kerja / ruang kendali pelaksanaan AJJ
+
+  sistem_aplikasi:
+    - penjelasan aplikasi sertifikasi jarak jauh
+    - penjelasan server
+    - diagram alur proses aplikasi
+    - hak akses pengguna
+    - akun demo admin
+    - akun demo asesor
+    - akun demo asesi
+    - akun demo TUK
+    - fitur rekaman
+    - fitur laporan
+    - fitur banding
+
+  pernyataan:
+    - surat pernyataan tidak menggunakan software/aplikasi ilegal
+    - surat pernyataan menjaga keamanan dan kerahasiaan rekaman
+    - surat pernyataan menyimpan rekaman minimal satu periode masa berlaku sertifikat
+    - surat pernyataan sosialisasi internal sistem AJJ
+```
+
+## B. Dokumen Nirkertas / Paperless
+
+Untuk nirkertas, LSP perlu menunjukkan bahwa sistem mampu menangani proses digital seperti permohonan sertifikasi, asesmen mandiri, persetujuan asesmen, instrumen asesmen, ceklis review instrumen, rekaman asesmen, umpan balik, laporan asesmen, dan peninjauan proses asesmen. SE BNSP juga menyebut permohonan nirkertas dilampiri SOP relevan, rekaman uji coba aplikasi nirkertas dalam bentuk video, serta rekaman dokumen keluaran hasil uji coba dalam bentuk PDF. 
+
+```yaml id="dokumen_witness_nirkertas"
+dokumen_witness_nirkertas:
+  sop:
+    - SOP Melayani Kegiatan Sertifikasi Kompetensi yang relevan dengan nirkertas
+    - SOP pengelolaan dokumen digital
+    - SOP penyimpanan rekaman dan laporan asesmen
+    - SOP pengendalian akses dokumen
+
+  bukti_uji_coba:
+    - video uji coba aplikasi nirkertas
+    - PDF keluaran hasil uji coba aplikasi nirkertas
+    - contoh form permohonan digital
+    - contoh asesmen mandiri digital
+    - contoh persetujuan asesmen digital
+    - contoh instrumen asesmen digital
+    - contoh laporan asesmen digital
+    - contoh umpan balik digital
+```
+
+---
+
+# 3. Tim yang Harus Disiapkan Saat Witness
+
+```yaml id="witness_team"
+witness_team:
+  penanggung_jawab_lsp:
+    peran:
+      - membuka kegiatan witness
+      - menjelaskan ruang lingkup permohonan
+      - menjelaskan skema yang diajukan
+      - menjawab pertanyaan kebijakan dan tata kelola
+  admin_lsp:
+    peran:
+      - menjalankan demo pendaftaran
+      - menampilkan data asesi
+      - menampilkan penugasan asesor
+      - menampilkan pengaturan jadwal
+      - menampilkan dokumen digital
+  pengelola_sistem_it:
+    peran:
+      - menjelaskan server dan aplikasi
+      - menjelaskan keamanan data dan hak akses
+      - mengatasi kendala teknis saat witness
+      - menampilkan log/audit trail bila diminta
+  asesor_kompetensi:
+    peran:
+      - memimpin simulasi asesmen jarak jauh
+      - memverifikasi identitas asesi
+      - menggunakan instrumen asesmen digital
+      - mengisi laporan asesmen
+      - memberi umpan balik
+  asesi_simulasi:
+    peran:
+      - login sebagai peserta
+      - mengisi permohonan
+      - mengisi asesmen mandiri
+      - menyetujui rencana asesmen
+      - mengikuti simulasi asesmen
+      - mengisi umpan balik
+  petugas_tuk:
+    peran:
+      - mengikuti simulasi verifikasi TUK jarak jauh
+      - menunjukkan sarana/prasarana TUK
+      - menampilkan dokumen TUK
+      - menjawab pertanyaan kesiapan TUK
+  komite_teknis_atau_pengambil_keputusan:
+    peran:
+      - menjelaskan proses keputusan sertifikasi
+      - menunjukkan alur SK hasil keputusan
+      - menjelaskan batas kewenangan asesor dan LSP
+```
+
+---
+
+# 4. Skenario Demo Witness yang Disarankan
+
+Skenario witness sebaiknya dibuat seperti proses nyata dari awal sampai akhir. Jangan hanya menampilkan dashboard; tunjukkan **alur lengkap** dari pendaftaran sampai laporan, termasuk verifikasi TUK dan banding. Fitur minimal aplikasi AJJ yang perlu diperagakan mencakup permohonan sertifikasi, asesmen mandiri, persetujuan asesmen, instrumen asesmen sesuai rencana asesmen, ceklis meninjau instrumen, rekaman asesmen, umpan balik, laporan asesmen, meninjau proses asesmen, dan banding. 
+
+```yaml id="skenario_demo_witness"
+skenario_demo_witness:
+  skema_demo:
+    nama_skema: "[Nama skema yang diajukan]"
+    jumlah_asesi_simulasi: 1
+    jumlah_asesor_simulasi: 1
+    tuk_demo: "[Nama TUK]"
+    metode: "AJJ + Nirkertas"
+
+  alur_demo:
+    1_pembukaan:
+      durasi: "10 menit"
+      kegiatan:
+        - perkenalan tim LSP
+        - penjelasan ruang lingkup permohonan
+        - penjelasan skema yang diajukan
+        - penjelasan sistem dan SOP yang digunakan
+
+    2_demo_admin_lsp:
+      durasi: "20 menit"
+      kegiatan:
+        - login admin LSP
+        - menampilkan dashboard permohonan
+        - menampilkan data skema
+        - menampilkan data TUK
+        - menampilkan data asesor
+        - menampilkan penjadwalan asesmen
+        - menampilkan pengaturan akun dan hak akses
+
+    3_demo_asesi:
+      durasi: "20 menit"
+      kegiatan:
+        - login asesi
+        - mengisi permohonan sertifikasi
+        - mengunggah dokumen persyaratan
+        - mengisi asesmen mandiri
+        - menyetujui rencana asesmen
+        - menerima jadwal dan link asesmen
+
+    4_demo_verifikasi_tuk_jarak_jauh:
+      durasi: "20 menit"
+      kegiatan:
+        - menampilkan SPT verifikasi TUK
+        - menampilkan data TUK
+        - melakukan panggilan video/verifikasi fasilitas
+        - merekam verifikasi TUK
+        - menampilkan hasil verifikasi
+        - menampilkan SK penetapan TUK
+
+    5_demo_asesmen_jarak_jauh:
+      durasi: "30 menit"
+      kegiatan:
+        - asesor membuka asesmen
+        - asesor memverifikasi identitas asesi
+        - asesor memverifikasi lingkungan asesmen
+        - asesor menjelaskan aturan asesmen
+        - asesor menggunakan instrumen asesmen digital
+        - asesi menjawab pertanyaan/uji praktik simulasi
+        - sistem merekam proses asesmen
+        - asesor memberi catatan asesmen
+
+    6_demo_laporan_dan_keputusan:
+      durasi: "20 menit"
+      kegiatan:
+        - asesor mengisi laporan asesmen
+        - asesor memberikan rekomendasi
+        - admin/komite menampilkan alur keputusan sertifikasi
+        - sistem menampilkan SK hasil keputusan simulasi
+        - sistem menampilkan database pemegang sertifikat simulasi jika tersedia
+
+    7_demo_umpan_balik_dan_banding:
+      durasi: "15 menit"
+      kegiatan:
+        - asesi mengisi umpan balik
+        - admin menampilkan rekap umpan balik
+        - asesi membuka menu banding
+        - admin menjelaskan SOP dan alur banding
+
+    8_penutupan:
+      durasi: "10 menit"
+      kegiatan:
+        - menampilkan daftar rekaman
+        - menampilkan daftar dokumen keluaran PDF
+        - menjawab pertanyaan witness
+        - mencatat temuan atau permintaan perbaikan
+```
+
+---
+
+# 5. Checklist H-7 sampai Hari-H Witness
+
+```yaml id="timeline_persiapan_witness"
+timeline_persiapan_witness:
+  h_minus_7:
+    fokus: "Kesiapan dokumen dan skenario"
+    checklist:
+      - "[ ] Surat permohonan dan seluruh lampiran sudah final"
+      - "[ ] SOP sudah ditandatangani/disahkan"
+      - "[ ] SK personil dan SK pemeliharaan sistem sudah tersedia"
+      - "[ ] Skema yang akan didemokan sudah dipilih"
+      - "[ ] Skenario witness sudah ditulis"
+      - "[ ] Tim witness sudah ditetapkan"
+
+  h_minus_5:
+    fokus: "Kesiapan sistem dan akun"
+    checklist:
+      - "[ ] Akun admin LSP siap"
+      - "[ ] Akun asesor siap"
+      - "[ ] Akun asesi simulasi siap"
+      - "[ ] Akun TUK siap"
+      - "[ ] Hak akses diuji"
+      - "[ ] Server dan koneksi diuji"
+      - "[ ] Fitur rekaman diuji"
+
+  h_minus_3:
+    fokus: "Dry run internal"
+    checklist:
+      - "[ ] Simulasi dari pendaftaran sampai laporan selesai"
+      - "[ ] Simulasi verifikasi TUK jarak jauh selesai"
+      - "[ ] Simulasi kendala koneksi dilakukan"
+      - "[ ] Output PDF berhasil diunduh"
+      - "[ ] Rekaman video berhasil disimpan"
+      - "[ ] Catatan perbaikan dry run diselesaikan"
+
+  h_minus_1:
+    fokus: "Final check"
+    checklist:
+      - "[ ] Link meeting witness dikirim"
+      - "[ ] Link sistem/aplikasi siap"
+      - "[ ] Folder dokumen witness siap"
+      - "[ ] Folder rekaman uji coba siap"
+      - "[ ] Kontak darurat IT siap"
+      - "[ ] Laptop cadangan siap"
+      - "[ ] Internet cadangan siap"
+      - "[ ] Susunan acara dicetak/dibagikan digital"
+
+  hari_h:
+    fokus: "Pelaksanaan witness"
+    checklist:
+      - "[ ] Semua tim hadir 30 menit lebih awal"
+      - "[ ] Kamera dan mikrofon diuji"
+      - "[ ] Screen sharing diuji"
+      - "[ ] Admin membuka dashboard"
+      - "[ ] Asesor dan asesi standby"
+      - "[ ] Petugas TUK standby"
+      - "[ ] Notulis mencatat pertanyaan dan temuan"
+      - "[ ] Semua rekaman/dokumen keluaran ditampilkan"
+```
+
+---
+
+# 6. Bukti yang Harus Bisa Ditunjukkan Saat Witness
+
+```yaml id="bukti_witness"
+bukti_witness:
+  bukti_sop:
+    - SOP AJJ
+    - SOP asesmen jarak jauh
+    - SOP verifikasi TUK jarak jauh
+    - SOP banding jarak jauh
+    - SOP nirkertas/paperless
+
+  bukti_personil:
+    - SK pengelola sistem
+    - SK pemeliharaan sistem
+    - daftar asesor
+    - daftar admin
+    - daftar petugas TUK
+    - daftar komite teknis
+
+  bukti_sistem:
+    - dashboard admin
+    - manajemen akun dan hak akses
+    - formulir permohonan sertifikasi
+    - asesmen mandiri
+    - persetujuan asesmen
+    - instrumen asesmen
+    - rekaman asesmen
+    - laporan asesmen
+    - umpan balik
+    - banding
+    - audit trail/log aktivitas
+
+  bukti_tuk:
+    - data TUK
+    - SPT verifikasi TUK
+    - rekaman verifikasi TUK
+    - SK penetapan TUK
+    - dokumentasi fasilitas TUK
+
+  bukti_output:
+    - video uji coba AJJ
+    - video verifikasi TUK
+    - PDF output nirkertas
+    - laporan asesmen
+    - catatan peninjauan proses asesmen
+    - bukti umpan balik
+    - bukti alur banding
+```
+
+---
+
+# 7. Red Flag yang Harus Dihindari Saat Witness
+
+```yaml id="red_flags_witness"
+red_flags_witness:
+  sistem:
+    - "Akun demo tidak bisa login"
+    - "Hak akses admin, asesor, dan asesi tidak dibedakan"
+    - "Rekaman asesmen tidak tersimpan"
+    - "Output PDF tidak bisa diunduh"
+    - "Tidak ada log aktivitas"
+    - "Fitur banding tidak tersedia"
+
+  dokumen:
+    - "SOP belum final atau belum disahkan"
+    - "SK personil tidak tersedia"
+    - "Daftar sarana-prasarana tidak sinkron dengan demo"
+    - "Bukti internet tidak tersedia"
+    - "Surat pernyataan keamanan rekaman belum ada"
+
+  proses:
+    - "Asesor tidak memahami alur AJJ"
+    - "Asesi simulasi tidak memahami perannya"
+    - "TUK tidak siap saat diverifikasi"
+    - "Verifikasi identitas tidak dilakukan"
+    - "Verifikasi lingkungan asesmen tidak dilakukan"
+    - "Tidak ada skenario kendala teknis"
+
+  kepatuhan:
+    - "LSP mengklaim sudah melaksanakan AJJ/Nirkertas sebelum persetujuan"
+    - "Data sensitif ditampilkan tanpa kontrol"
+    - "Rekaman tidak memiliki kebijakan penyimpanan"
+```
+
+Catatan kepatuhan penting: SE BNSP menyebut permohonan yang tidak sesuai klausul persyaratan tidak akan diproses; LSP juga dilarang melaksanakan sertifikasi kompetensi jarak jauh dan menggunakan nirkertas sebelum mendapat persetujuan BNSP. 
+
+---
+
+# 8. Script Singkat Pembukaan Witness
+
+```text id="script_pembukaan_witness"
+Assalamu’alaikum warahmatullahi wabarakatuh / Selamat pagi.
+
+Terima kasih kepada Tim BNSP yang hadir dalam kegiatan asesmen lapangan dan
+penyaksian uji coba pelaksanaan Sertifikasi Kompetensi Jarak Jauh dan
+Penggunaan Nirkertas pada LSP [Nama LSP].
+
+Pada kesempatan ini, kami akan menampilkan:
+1. Kesiapan kebijakan dan SOP AJJ/Nirkertas.
+2. Kesiapan personil dan pembagian peran.
+3. Kesiapan sistem aplikasi, server, akun, dan hak akses.
+4. Simulasi proses permohonan sertifikasi secara digital.
+5. Simulasi asesmen mandiri dan persetujuan asesmen.
+6. Simulasi verifikasi TUK jarak jauh.
+7. Simulasi pelaksanaan asesmen jarak jauh.
+8. Simulasi rekaman asesmen, laporan asesmen, umpan balik, dan banding.
+9. Bukti output video dan PDF hasil uji coba.
+
+Kami juga telah menyiapkan tim admin, asesor, asesi simulasi, petugas TUK,
+pengelola sistem, dan notulis untuk mendukung kelancaran kegiatan witness ini.
+```
+
+---
+
+# 9. Template Catatan Temuan Witness
+
+```yaml id="template_catatan_temuan_witness"
+template_catatan_temuan_witness:
+  fields:
+    - nomor_temuan
+    - waktu_temuan
+    - area_temuan
+    - uraian_temuan
+    - kategori: "dokumen | sistem | proses | personil | TUK | rekaman | keamanan data"
+    - pertanyaan_dari_tim_witness
+    - jawaban_lsp
+    - bukti_yang_ditunjukkan
+    - status: "selesai | perlu tindak lanjut | perlu perbaikan"
+    - penanggung_jawab
+    - target_penyelesaian
+```
+
+---
+
+# 10. Modul Chatbot Siap Pakai
+
+Bagian ini bisa langsung ditempel ke konfigurasi chatbot **SKK Coach — AJJ Nirkertas**. Struktur flow, checklist, scenario, guardrails, dan response template mengikuti pola konfigurasi chatbot terlampir yang sebelumnya memakai menu, intent, quick replies, asesmen mandiri, skenario, serta batasan agar chatbot tidak mengklaim keputusan sertifikasi resmi. 
+
+```yaml id="chatbot_module_persiapan_witness"
+module:
+  id: persiapan_witness_ajj_nirkertas
+  title: "Persiapan Witness Pengajuan Permohonan LSP untuk AJJ Nirkertas"
+  purpose: >
+    Membantu LSP menyiapkan dokumen, sistem, personil, skenario uji coba,
+    bukti rekaman, dan alur demonstrasi saat asesmen lapangan serta
+    penyaksian uji coba AJJ Nirkertas.
+
+intents:
+  - id: ask_witness_preparation
+    description: "Pengguna bertanya persiapan witness AJJ Nirkertas."
+    sample_user_inputs:
+      - "Apa yang harus disiapkan untuk witness AJJ Nirkertas?"
+      - "Persiapan witness pengajuan LSP apa saja?"
+      - "Checklist witness BNSP untuk AJJ"
+      - "Apa yang harus didemokan saat witness?"
+    response_template: response_witness_preparation
+    next_node: witness_preparation_menu
+
+  - id: ask_witness_documents
+    description: "Pengguna bertanya dokumen witness."
+    sample_user_inputs:
+      - "Dokumen witness apa saja?"
+      - "Lampiran apa yang harus siap saat witness?"
+      - "SOP apa yang harus ditunjukkan?"
+    response_template: response_witness_documents
+    next_node: dokumen_witness_ajj
+
+  - id: ask_witness_scenario
+    description: "Pengguna bertanya skenario demo witness."
+    sample_user_inputs:
+      - "Buatkan skenario witness"
+      - "Alur demo AJJ Nirkertas bagaimana?"
+      - "Run down witness AJJ"
+    response_template: response_witness_scenario
+    next_node: skenario_demo_witness
+
+  - id: ask_witness_red_flags
+    description: "Pengguna bertanya hal yang harus dihindari."
+    sample_user_inputs:
+      - "Apa risiko saat witness?"
+      - "Kesalahan apa yang harus dihindari?"
+      - "Red flag witness AJJ apa saja?"
+    response_template: response_witness_red_flags
+    next_node: red_flags_witness
+
+flow:
+  id: witness_preparation_menu
+  title: "Menu Persiapan Witness AJJ Nirkertas"
+  bot_message: >
+    Pilih bagian persiapan witness yang ingin Anda lihat.
+  quick_replies:
+    - "Checklist dokumen"
+    - "Skenario demo"
+    - "Tim yang harus hadir"
+    - "Timeline H-7"
+    - "Bukti output"
+    - "Red flag"
+    - "Script pembukaan"
+
+response_template:
+  id: response_witness_preparation
+  text: >
+    Persiapan witness AJJ Nirkertas mencakup 6 hal utama:
+    1. Dokumen permohonan dan SOP.
+    2. Sistem aplikasi dan hak akses.
+    3. Tim pelaksana: manajemen LSP, admin, asesor, asesi simulasi, TUK, dan IT.
+    4. Skenario uji coba dari pendaftaran sampai laporan.
+    5. Rekaman video dan output PDF.
+    6. Catatan temuan dan rencana tindak lanjut.
+    
+    Saya sarankan mulai dari checklist dokumen, lalu lanjut ke skenario demo.
+  quick_replies:
+    - "Checklist dokumen"
+    - "Skenario demo"
+    - "Timeline persiapan"
+    - "Red flag"
+```
+
+---
+
+## Ringkasan Inti
+
+Untuk witness AJJ Nirkertas, LSP harus siap menunjukkan **bukan hanya dokumen**, tetapi **proses nyata**: admin membuat/menampilkan permohonan, asesi mengisi asesmen mandiri dan persetujuan asesmen, TUK diverifikasi jarak jauh, asesor menjalankan asesmen jarak jauh, sistem merekam, laporan keluar, umpan balik tersedia, dan banding dapat diproses. BNSP dapat melakukan asesmen lapangan dan menyaksikan uji coba; setelah itu keputusan permohonan AJJ diterbitkan sesuai tahapan dalam SE. 
+
+[1]: https://bnsp.go.id/download?hal=2&id=10&utm_source=chatgpt.com "Halaman Download - BNSP"

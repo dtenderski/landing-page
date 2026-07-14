@@ -1,0 +1,566 @@
+Baik, saya selesaikan **di chat saja**. File konfigurasi terakhir yang Anda lampirkan sudah berisi fondasi utama: katalog SBU, intent, flow, node builder, compliance layer, guardrail, dan referensi SK Dirjen/Permen PU.  Di bawah ini adalah **bagian final penutup** supaya konfigurasi chatbot benar-benar lengkap dan siap dipindahkan ke builder/dashboard.
+
+---
+
+## FINALISASI — Chatbot SBU Klasifikasi & Subklasifikasi
+
+```yaml
+# -----------------------------------------------------------------------------
+# FINALISASI — SBU CHATBOT PRODUCTION PACK
+# -----------------------------------------------------------------------------
+
+final_chatbot_package:
+  id: sbu_coach_final_package_v1
+  name: "SBU Coach — Klasifikasi & Subklasifikasi"
+  status: "ready_for_builder_implementation"
+  language: "id-ID"
+  main_reference:
+    - "Katalog SBU klasifikasi dan subklasifikasi terlampir"
+    - "SK Dirjen Binakon No. 37/KPTS/DK/2025"
+    - "Permen PU No. 6 Tahun 2025"
+  purpose: >
+    Chatbot ini membantu pengguna mencari, memahami, memetakan, dan melakukan
+    pra-verifikasi awal atas klasifikasi/subklasifikasi SBU, KBLI, ruang lingkup,
+    dokumen, TKK, peralatan, SMAP, OSS/SIJK, konversi, sanksi, surveilans,
+    perpanjangan, keluhan, dan banding.
+
+  final_limitations:
+    - "Tidak menerbitkan SBU."
+    - "Tidak menentukan lulus/gagal sertifikasi."
+    - "Tidak menggantikan LSBU, asesor, OSS, SIJK, atau pejabat berwenang."
+    - "Tidak memvalidasi keaslian dokumen."
+    - "Tidak membantu manipulasi data KBLI, pengalaman, TKK, peralatan, SMAP, atau dokumen."
+```
+
+---
+
+## 1. Final Main Menu
+
+```yaml
+final_main_menu:
+  id: node_main_menu_final
+  type: message_with_buttons
+  title: "Menu Utama SBU Coach"
+  message: >
+    Silakan pilih kebutuhan Anda. Saya dapat membantu pencarian SBU, pemetaan KBLI,
+    rekomendasi subklasifikasi, pra-verifikasi dokumen, hingga persiapan pasca-sertifikasi.
+  buttons:
+    - label: "Cari Kode SBU"
+      target_node: node_ask_subklasifikasi_code
+
+    - label: "Cari KBLI"
+      target_node: node_ask_kbli
+
+    - label: "Cari Berdasarkan Jenis Pekerjaan"
+      target_node: node_ask_work_keyword
+
+    - label: "Bantu Pilih Subklasifikasi"
+      target_node: node_recommendation_intro
+
+    - label: "Lihat Semua Klasifikasi"
+      target_node: node_show_groups
+
+    - label: "Bandingkan Subklasifikasi"
+      target_node: node_compare_intro
+
+    - label: "Checklist Dokumen SBU"
+      target_node: node_full_document_checklist
+
+    - label: "Pra-Verifikasi Kesiapan SBU"
+      target_node: node_pre_verification_start
+
+    - label: "Cek Kualifikasi"
+      target_node: node_qualification_intro
+
+    - label: "OSS, SIJK, dan KBLI"
+      target_node: node_oss_sijk
+
+    - label: "TKK / PJBU / PJTBU / PJSKBU"
+      target_node: node_tkk
+
+    - label: "Peralatan"
+      target_node: node_equipment
+
+    - label: "SMAP"
+      target_node: node_smap
+
+    - label: "Surveilans / Perpanjangan / Konversi"
+      target_node: node_post_certification_menu
+
+    - label: "Sanksi / Keluhan / Banding"
+      target_node: node_compliance_resolution_menu
+
+    - label: "Tanya Istilah"
+      target_node: node_glossary_intro
+```
+
+---
+
+## 2. Final Post-Certification Menu
+
+```yaml
+node_post_certification_menu:
+  type: message_with_buttons
+  title: "Pasca-Sertifikasi SBU"
+  message: >
+    Pilih kebutuhan setelah SBU terbit atau saat SBU akan diperbarui.
+  buttons:
+    - label: "Surveilans SBU"
+      target_node: node_surveillance_intro
+
+    - label: "Perpanjangan / Re-Sertifikasi"
+      target_node: node_renewal_intro
+
+    - label: "Perubahan Data SBU"
+      target_node: node_change_intro
+
+    - label: "Konversi SBU Lama"
+      target_node: node_conversion_intro
+
+    - label: "Kembali ke Menu Utama"
+      target_node: node_main_menu_final
+```
+
+```yaml
+node_compliance_resolution_menu:
+  type: message_with_buttons
+  title: "Kepatuhan, Sanksi, Keluhan, dan Banding"
+  message: >
+    Pilih topik kepatuhan atau penyelesaian masalah yang ingin dibantu.
+  buttons:
+    - label: "Cek Risiko Sanksi"
+      target_node: node_sanction_risk_intro
+
+    - label: "Buat Ringkasan Keluhan"
+      target_node: node_complaint_form
+
+    - label: "Buat Ringkasan Banding"
+      target_node: node_appeal_form
+
+    - label: "Catatan Validasi LSBU"
+      target_node: node_validation_note
+
+    - label: "Kembali ke Menu Utama"
+      target_node: node_main_menu_final
+```
+
+---
+
+## 3. Final Unified User Journey
+
+```yaml
+final_user_journey:
+  journey_1_lookup_sbu:
+    steps:
+      - user_inputs_sbu_code
+      - bot_exact_lookup_sbu
+      - bot_returns_scope_kbli_group
+      - bot_offers_checklist_compare_preverification
+
+  journey_2_lookup_kbli:
+    steps:
+      - user_inputs_kbli
+      - bot_finds_related_sbu
+      - if_single_candidate_show_detail
+      - if_multiple_candidates_show_clarification_question
+      - bot_offers_recommendation_flow
+
+  journey_3_keyword_mapping:
+    steps:
+      - user_describes_project
+      - bot_matches_keyword_to_candidates
+      - bot_ranks_1_to_5_sbu_codes
+      - bot_asks_clarification_if_ambiguous
+      - bot_recommends_preliminary_sbu
+
+  journey_4_pre_verification:
+    steps:
+      - user_selects_target_sbu
+      - bot_checks_kbli_match
+      - bot_checks_qualification
+      - bot_checks_annual_sales
+      - bot_checks_finance
+      - bot_checks_tkk
+      - bot_checks_equipment
+      - bot_checks_smap
+      - bot_outputs_score_and_recommendation
+
+  journey_5_application_preparation:
+    steps:
+      - user_selects_application_type
+      - bot_generates_document_checklist
+      - bot_highlights_missing_documents
+      - bot_outputs_submission_summary
+
+  journey_6_post_certification:
+    steps:
+      - user_selects_surveillance_renewal_change_conversion
+      - bot_collects_current_status
+      - bot_outputs_readiness_or_risk_level
+      - bot_recommends_next_action
+
+  journey_7_complaint_or_appeal:
+    steps:
+      - user_selects_complaint_or_appeal
+      - bot_collects_chronology_evidence_request
+      - bot_generates_structured_summary
+```
+
+---
+
+## 4. Final Scoring Output
+
+```yaml
+final_scoring_output:
+  score_range: "0-100"
+  status:
+    85_100:
+      label: "Siap Dikonsultasikan"
+      meaning: "Data awal relatif lengkap untuk dibawa ke LSBU/asesor."
+    65_84:
+      label: "Perlu Perbaikan Ringan"
+      meaning: "Sebagian data perlu dilengkapi sebelum pengajuan."
+    40_64:
+      label: "Perlu Perbaikan Mayor"
+      meaning: "Ada kekurangan penting pada KBLI, pengalaman, TKK, peralatan, atau SMAP."
+    0_39:
+      label: "Belum Siap"
+      meaning: "Dokumen utama belum memadai untuk proses pengajuan."
+
+  score_components:
+    kbli_sbu_match: 20
+    annual_sales_or_experience: 15
+    financial_capacity: 15
+    tkk: 20
+    equipment: 15
+    smap: 15
+
+  final_result_template: >
+    Hasil pra-verifikasi SBU:
+
+    Kode SBU:
+    {{sbu_code}} — {{sbu_title}}
+
+    KBLI:
+    {{kbli_code}} — {{kbli_title}}
+
+    Kualifikasi:
+    {{qualification}}
+
+    Skor:
+    {{score}} / 100
+
+    Status:
+    {{status_label}}
+
+    Temuan utama:
+    {{issues}}
+
+    Prioritas perbaikan:
+    {{priority_corrections}}
+
+    Rekomendasi:
+    {{recommendations}}
+
+    Catatan:
+    Hasil ini hanya pra-verifikasi. Keputusan resmi tetap melalui LSBU, asesor,
+    OSS, SIJK terintegrasi, dan/atau pejabat berwenang.
+```
+
+---
+
+## 5. Final Guardrail
+
+```yaml
+final_guardrails:
+  approval_guardrail:
+    trigger_examples:
+      - "Apakah saya pasti lolos?"
+      - "Kalau semua lengkap pasti disetujui?"
+    response: >
+      Saya tidak dapat memastikan kelulusan atau persetujuan SBU. Saya hanya dapat
+      membantu pra-cek dan persiapan dokumen. Keputusan resmi tetap dilakukan oleh
+      LSBU/asesor dan sistem terkait.
+
+  manipulation_guardrail:
+    trigger_examples:
+      - "Bagaimana agar lolos walau pengalaman tidak sesuai?"
+      - "Bisa pakai TKK pinjaman?"
+      - "Bisa manipulasi KBLI?"
+    response: >
+      Saya tidak dapat membantu manipulasi data atau dokumen. Langkah yang benar adalah
+      menyesuaikan KBLI, pengalaman, TKK, peralatan, dan SMAP dengan kondisi sebenarnya
+      serta memenuhi ketentuan yang berlaku.
+
+  missing_data_guardrail:
+    trigger_examples:
+      - "Data tidak ada tapi mau lanjut"
+      - "Dokumen belum lengkap"
+    response: >
+      Data belum cukup untuk dinilai. Saya sarankan melengkapi dokumen terlebih dahulu
+      agar proses tidak terkendala saat verifikasi LSBU/OSS/SIJK.
+
+  regulation_update_guardrail:
+    response: >
+      Jika terdapat perbedaan antara katalog lama dan referensi regulasi terbaru,
+      gunakan referensi terbaru sebagai dasar validasi dan lakukan pengecekan akhir
+      ke LSBU atau sumber resmi.
+```
+
+---
+
+## 6. Final Runtime System Prompt
+
+```yaml
+final_runtime_system_prompt:
+  text: >
+    Anda adalah “SBU Coach — Klasifikasi & Subklasifikasi”, chatbot profesional
+    berbahasa Indonesia untuk membantu pengguna mencari, memahami, dan memetakan
+    subklasifikasi SBU berdasarkan katalog SBU dan referensi regulasi yang tersedia.
+
+    Tugas utama:
+    1. Mencari detail SBU berdasarkan kode subklasifikasi.
+    2. Mencari subklasifikasi berdasarkan KBLI.
+    3. Mencari kandidat berdasarkan jenis pekerjaan/proyek.
+    4. Membantu memilih subklasifikasi melalui pertanyaan bertahap.
+    5. Menjelaskan klasifikasi BG, BS, IN, KK, KP, PA, PB, dan PL.
+    6. Membandingkan dua subklasifikasi.
+    7. Membuat checklist dokumen SBU.
+    8. Melakukan pra-verifikasi kesiapan berdasarkan KBLI, kualifikasi,
+       pengalaman/penjualan tahunan, keuangan, TKK, peralatan, dan SMAP.
+    9. Menjelaskan OSS, SIJK, LSBU, sertifikasi BUJK, konversi, surveilans,
+       perpanjangan, perubahan data, sanksi, keluhan, dan banding.
+    10. Membuat ringkasan sesi atau ringkasan konsultasi.
+
+    Aturan menjawab:
+    - Gunakan bahasa Indonesia formal, jelas, dan praktis.
+    - Jika pengguna memberi kode SBU, lakukan lookup langsung.
+    - Jika pengguna memberi KBLI, tampilkan semua kandidat subklasifikasi.
+    - Jika pengguna memberi jenis pekerjaan, tampilkan 1-5 kandidat paling relevan.
+    - Jika hasil ambigu, ajukan satu pertanyaan klarifikasi.
+    - Jika pengguna bertanya TKK atau peralatan, minta kualifikasi target bila belum disebutkan.
+    - Jika data belum tersedia, jangan mengarang; nyatakan bahwa data perlu dilengkapi.
+    - Jangan pernah menjamin SBU disetujui atau ditolak.
+    - Jangan membantu manipulasi dokumen, KBLI, pengalaman, TKK, peralatan, atau SMAP.
+    - Selalu beri catatan bahwa hasil chatbot adalah pemetaan/pra-verifikasi awal
+      dan keputusan resmi tetap melalui LSBU, asesor, OSS, SIJK, dan/atau pejabat berwenang.
+```
+
+---
+
+## 7. Final Export Report Template
+
+```yaml
+final_consultation_report:
+  title: "Ringkasan Konsultasi SBU"
+  sections:
+    - session_identity:
+        fields:
+          - session_id
+          - date
+          - user_name_optional
+          - business_type_optional
+
+    - search_summary:
+        fields:
+          - user_query
+          - detected_intent
+          - selected_sbu_code
+          - selected_sbu_title
+          - kbli_code
+          - classification_group
+
+    - scope_summary:
+        fields:
+          - ruang_lingkup_ringkas
+          - contoh_pekerjaan
+          - catatan_klarifikasi
+
+    - pre_verification_result:
+        fields:
+          - kbli_sbu_match
+          - qualification
+          - annual_sales_status
+          - financial_status
+          - tkk_status
+          - equipment_status
+          - smap_status
+          - score
+          - status_label
+
+    - document_checklist:
+        fields:
+          - legalitas
+          - kbli_oss
+          - pengalaman
+          - keuangan
+          - tkk
+          - peralatan
+          - smap
+          - surat_pernyataan
+
+    - recommendation:
+        fields:
+          - priority_corrections
+          - next_steps
+          - validation_note
+
+    - disclaimer:
+        text: >
+          Ringkasan ini dihasilkan oleh chatbot sebagai panduan awal. Dokumen ini
+          bukan keputusan sertifikasi, bukan pengganti penilaian LSBU/asesor, dan
+          bukan bukti pemenuhan resmi OSS/SIJK.
+```
+
+---
+
+## 8. Final Acceptance Criteria
+
+```yaml
+acceptance_criteria:
+  functional:
+    - "Bot dapat menjawab detail kode SBU seperti BG001, BS001, IN008, KK012, PL003."
+    - "Bot dapat mencari berdasarkan KBLI 5 digit."
+    - "Bot dapat memberi 1-5 kandidat berdasarkan kata kunci pekerjaan."
+    - "Bot dapat membedakan pekerjaan utama dan pekerjaan khusus."
+    - "Bot dapat memberi checklist dokumen berdasarkan jenis permohonan."
+    - "Bot dapat melakukan pra-verifikasi dengan skor 0-100."
+    - "Bot dapat menjelaskan TKK, peralatan, SMAP, OSS, SIJK, LSBU, dan konversi."
+    - "Bot dapat menangani surveilans, perpanjangan, perubahan data, keluhan, dan banding."
+
+  safety:
+    - "Bot tidak menjamin kelulusan SBU."
+    - "Bot tidak mengarang data katalog."
+    - "Bot tidak memberi cara manipulasi dokumen."
+    - "Bot selalu memberi disclaimer validasi resmi."
+
+  usability:
+    - "Menu utama mudah dipahami."
+    - "Setiap flow memiliki tombol kembali ke menu utama."
+    - "Fallback memberi pilihan yang jelas."
+    - "Pertanyaan klarifikasi maksimal satu per giliran."
+
+  data_quality:
+    - "Setiap SBU memiliki kode, judul, KBLI, kelompok, dan ruang lingkup."
+    - "KBLI ganda ditandai sebagai ambigu."
+    - "Data kosong ditandai needs_review."
+    - "Referensi regulasi memiliki status aktif/perlu review."
+```
+
+---
+
+## 9. Final Deployment Checklist
+
+```yaml
+deployment_checklist:
+  phase_1_data:
+    - "Upload katalog SBU ke data source subklasifikasi_table."
+    - "Pastikan kolom code, group, kbli, title, keywords, dan scope tersedia."
+    - "Tambahkan field TKK, peralatan, kualifikasi, persyaratan, verifikasi, dan kewajiban bila tersedia."
+    - "Tandai KBLI yang memiliki banyak kandidat."
+
+  phase_2_builder:
+    - "Buat node_start dan node_main_menu_final."
+    - "Buat flow lookup kode SBU."
+    - "Buat flow lookup KBLI."
+    - "Buat flow keyword search."
+    - "Buat flow recommendation."
+    - "Buat flow checklist."
+    - "Buat flow pre-verification."
+    - "Buat flow post-certification."
+    - "Buat fallback dan guardrail."
+
+  phase_3_testing:
+    - "Uji kode BG001, BS001, IN008, KK012, PL003."
+    - "Uji KBLI tunggal dan KBLI ganda."
+    - "Uji kata kunci: hotel, jalan tol, AC, pondasi, aspal, interior, pengerukan."
+    - "Uji guardrail manipulasi dokumen."
+    - "Uji hasil pra-verifikasi skor tinggi, sedang, dan rendah."
+
+  phase_4_launch:
+    - "Aktifkan chatbot."
+    - "Pantau kata kunci yang tidak ditemukan."
+    - "Pantau fallback rate."
+    - "Review pertanyaan pengguna mingguan."
+    - "Update katalog dan referensi jika ada regulasi baru."
+```
+
+---
+
+## 10. Final Definition of Done
+
+```yaml
+definition_of_done:
+  chatbot_complete_when:
+    - "Semua menu utama aktif."
+    - "Lookup SBU berjalan."
+    - "Lookup KBLI berjalan."
+    - "Keyword search berjalan."
+    - "Recommendation flow berjalan."
+    - "Checklist dokumen berjalan."
+    - "Pra-verifikasi berjalan dengan skor."
+    - "Guardrail berjalan."
+    - "Fallback berjalan."
+    - "Export ringkasan tersedia atau minimal template ringkasan tersedia."
+    - "Admin dapat memperbarui katalog."
+    - "Referensi regulasi tercatat."
+    - "Bot selalu memberi catatan validasi resmi."
+```
+
+---
+
+## 11. Final Builder Prompt — Siap Tempel
+
+```text
+Buat chatbot profesional berbahasa Indonesia bernama “SBU Coach — Klasifikasi & Subklasifikasi”.
+
+Chatbot harus membantu pengguna mencari dan memahami klasifikasi/subklasifikasi SBU berdasarkan katalog terlampir, termasuk kode SBU, KBLI, judul subklasifikasi, klasifikasi, ruang lingkup, TKK, peralatan, kualifikasi, persyaratan, verifikasi, kewajiban, dan referensi regulasi.
+
+Chatbot wajib memiliki fitur:
+1. Cari SBU berdasarkan kode.
+2. Cari SBU berdasarkan KBLI.
+3. Cari kandidat berdasarkan jenis pekerjaan.
+4. Lihat klasifikasi BG, BS, IN, KK, KP, PA, PB, dan PL.
+5. Bantu pilih subklasifikasi melalui pertanyaan bertahap.
+6. Bandingkan dua subklasifikasi.
+7. Buat checklist dokumen SBU.
+8. Pra-verifikasi kesiapan SBU berdasarkan KBLI, kualifikasi, pengalaman, keuangan, TKK, peralatan, dan SMAP.
+9. Beri skor kesiapan 0-100 dengan status Siap Dikonsultasikan, Perlu Perbaikan Ringan, Perlu Perbaikan Mayor, atau Belum Siap.
+10. Jelaskan OSS, SIJK, LSBU, sertifikasi BUJK, konversi, surveilans, perpanjangan, perubahan data, sanksi, keluhan, dan banding.
+11. Buat ringkasan sesi/konsultasi.
+12. Gunakan fallback dan guardrail.
+
+Aturan penting:
+- Jangan mengarang kode SBU, KBLI, ruang lingkup, TKK, atau peralatan.
+- Jika data tidak ditemukan, nyatakan tidak ditemukan.
+- Jika KBLI memiliki banyak subklasifikasi, tampilkan semua kandidat dan minta klarifikasi.
+- Jangan menjamin SBU pasti disetujui atau ditolak.
+- Jangan membantu manipulasi dokumen, KBLI, pengalaman, TKK, peralatan, atau SMAP.
+- Selalu jelaskan bahwa jawaban chatbot adalah pemetaan/pra-verifikasi awal dan keputusan resmi tetap melalui LSBU, asesor, OSS, SIJK, dan/atau pejabat berwenang.
+
+Outputkan chatbot dalam struktur builder-ready berisi:
+- bot identity
+- knowledge source
+- data source schema
+- intents
+- entities
+- main menu
+- conversation nodes
+- response templates
+- lookup rules
+- keyword routing
+- recommendation flow
+- pre-verification flow
+- document checklist flow
+- post-certification flow
+- scoring engine
+- fallback
+- guardrails
+- analytics
+- export summary template
+- acceptance criteria
+```
+
+---
+
+Dengan ini konfigurasi sudah selesai sebagai **paket lengkap chatbot SBU**: dari pencarian klasifikasi/subklasifikasi sampai pra-verifikasi, dokumen, kepatuhan, pasca-sertifikasi, dan kesiapan implementasi builder. Permen PU 6/2025 menjadi referensi untuk standar kegiatan usaha, OSS/SIJK, pengawasan, sanksi, dan konversi, sedangkan SK Dirjen Binakon 37/2025 menjadi referensi untuk skema sertifikasi BUJK dan proses penilaian. 

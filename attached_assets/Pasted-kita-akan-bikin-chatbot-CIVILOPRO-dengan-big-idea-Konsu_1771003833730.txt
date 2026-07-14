@@ -1,0 +1,552 @@
+kita akan bikin chatbot CIVILOPRO dengan big idea : Konsultasi Teknis & Pengambilan Keputusan Proyek :
+
+Buat Big Idea Baru
+Tipe Big Idea
+
+Problem - Masalah yang akan diatasi
+
+Idea - Ide untuk mencapai sesuatu
+
+Inspiration - Inspirasi untuk inovasi
+
+Mentoring - Edukasi dan pendampingan
+Nama Big Idea *
+Konsultasi Teknis & Pengambilan Keputusan Proyek
+Deskripsi *
+Jelaskan secara detail tentang problem/idea/inspirasi Anda...
+Tujuan
+Tujuan 1
+Tambah Tujuan
+Target Audiens
+Contoh: UMKM di Indonesia
+Hasil yang Diharapkan
+Jelaskan hasil yang ingin dicapai...
+ 
+Buatlah Toolbox apa saja yang dapat dibuat dengan Big Idea ini ?
+buatlah chatbot yang dpaat dibuat dari masing-masing Toolbox, apa saja chatbot nya ?
+jadi dari Big Idea pertama dihasilkan 7 Toolbox dan 14 chatbot.. begitu maksudnya ? 
+jadi dari 14 chabot tersebut bagaimana dalam 1 platform CIVILPRO 
+berarti 1 big idea sebenarnya kita bikin 1 chatbot dengan 14 spesialis.. atau 1 big idea jadi 7 chatbot dengan masing-masing 2 spesialis 
+ok saya sudah paham.. ke user 1 big idea = 1 chatbot yang didalamnya ada 7 toolbox dan 14 modul spesialis.
+tetapi sebagai developer saya tetap bikin 14 chatbot (modul spesialis) itu kan 
+berarti saya bikin 15 chatbot.. 1 chatbot orchestrator dan 14 modul spesialis ?
+ok kita sekarang eksekusi dari chatbot Orchestrator dulu. 
+
+Detail Chatbot 
+Konfigurasi informasi dasar chatbot Anda
+
+Engineering > Civil Engineer
+Name *
+CIVILOPRO
+Tagline
+Your helpful AI companion
+Description
+Welcome Experience
+First impression when users start a conversation
+Greeting Message
+Hello! Welcome to our service. How can I help you today?
+This message is shown when users first open the chat
+
+Conversation Starters
+Quick prompts users can click to start a conversation (max 5)
+
+e.g., How do I get started?
+
+Personality & Behavior
+How your chatbot interacts with users
+Communication Philosophy
+Describe the communication style and values your chatbot should embody...
+System Prompt
+Off-Topic Handling
+Bagaimana chatbot merespons pertanyaan di luar topik
+Strategi Respons
+Arahkan dengan Sopan
+Menentukan bagaimana chatbot menangani pertanyaan di luar cakupan yang ditentukan
+
+Respons Kustom (Opsional)
+Contoh: Maaf, saya hanya bisa membantu dengan pertanyaan seputar produk kami. Silakan hubungi customer service untuk pertanyaan lainnya.
+Tulis respons kustom yang akan diberikan chatbot ketika menerima pertanyaan di luar topik. Kosongkan untuk menggunakan respons otomatis berdasarkan strategi di atas.
+Attentive Agentic AI
+Konfigurasikan kemampuan AI untuk chatbot yang lebih cerdas dan responsif
+
+Mode Agentic
+Mengaktifkan semua kemampuan Agentic AI tingkat lanjut
+
+Attentive Listening
+AI memperhatikan konteks percakapan dengan lebih teliti
+
+
+Bantuan Proaktif
+AI memberikan saran dan bantuan tanpa diminta
+
+
+Pembelajaran Adaptif
+AI belajar dari interaksi untuk meningkatkan respons
+
+
+Kecerdasan Emosional
+AI mendeteksi dan merespons emosi pengguna dengan empati
+
+
+Penalaran Multi-Langkah
+AI memecah masalah kompleks menjadi langkah-langkah terstruktur
+
+
+Koreksi Mandiri
+AI mendeteksi dan memperbaiki kesalahannya sendiri
+
+
+Retensi Konteks
+Jumlah pesan sebelumnya yang diingat AI dalam percakapan
+10 pesan
+Normal
+knowledge base
+ya lanjut
+lanjut
+lanjut semua
+lanjut
+lanjut
+lanjut
+lanjut
+lanjujt
+lanjut
+lanjut
+berarti yang barusan kita buat semuanya diinput/di tulis di knowledge base ?
+coba kamu sebutkan masing-masing Knowledge Base 
+dari a hingg h sebanyak 38 ini yang harus di  buat text,.,  di KB ? penulisannya apa masig-masing A B dst.. atau sekaligus semua dalam 1 halaman
+ ya silahkan
+lanjut
+lanjut
+lanjut
+lanjut
+lanjut
+saya buat KB dulu
+Tambah Knowledge Base
+Tambahkan informasi baru untuk referensi chatbot
+
+Nama
+Checklist Intake Proyek (Pengumpulan Data Awal)
+Tipe
+Text Content
+Content
+Judul
+Checklist Intake Proyek (Pengumpulan Data Awal)
+
+Toolbox: Core Foundation
+Disiplin: Umum
+Tahap Proyek: Semua
+Doc Type: Checklist
+Severity: Low
+
+Kapan Digunakan
+
+Saat awal konsultasi atau ketika informasi proyek belum lengkap.
+
+Tujuan
+
+Mengumpulkan konteks minimum agar analisis teknis dan keputusan proyek valid.
+
+Data Minimum yang Dikumpulkan
+
+Jenis proyek (gedung/jalan/jembatan/dll)
+
+Tahap proyek (perencanaan / pelaksanaan)
+
+Elemen yang dibahas (pondasi/balok/pelat/dll)
+
+Lokasi & kondisi lapangan singkat
+
+Kendala utama (waktu / biaya / mutu)
+
+Pertanyaan Standar
+
+Apa jenis dan tahap proyek saat ini?
+
+Masalah terjadi di elemen apa?
+
+Kapan masalah mulai muncul?
+
+Ada batasan biaya atau waktu?
+
+Apakah tersedia data uji/gambar?
+
+Catatan
+
+Jika ≥3 data tidak tersedia, gunakan asumsi eksplisit dan minta konfirmasi user.
+Deskripsi (Opsional)
+Deskripsi singkat tentang knowledge iniTambah Knowledge Base
+Tambahkan informasi baru untuk referensi chatbot
+
+Nama
+Checklist Intake Proyek (Pengumpulan Data Awal)
+Tipe
+Text Content
+Content
+Judul
+Checklist Intake Proyek (Pengumpulan Data Awal)
+
+Toolbox: Core Foundation
+Disiplin: Umum
+Tahap Proyek: Semua
+Doc Type: Checklist
+Severity: Low
+
+Kapan Digunakan
+
+Saat awal konsultasi atau ketika informasi proyek belum lengkap.
+
+Tujuan
+
+Mengumpulkan konteks minimum agar analisis teknis dan keputusan proyek valid.
+
+Data Minimum yang Dikumpulkan
+
+Jenis proyek (gedung/jalan/jembatan/dll)
+
+Tahap proyek (perencanaan / pelaksanaan)
+
+Elemen yang dibahas (pondasi/balok/pelat/dll)
+
+Lokasi & kondisi lapangan singkat
+
+Kendala utama (waktu / biaya / mutu)
+
+Pertanyaan Standar
+
+Apa jenis dan tahap proyek saat ini?
+
+Masalah terjadi di elemen apa?
+
+Kapan masalah mulai muncul?
+
+Ada batasan biaya atau waktu?
+
+Apakah tersedia data uji/gambar?
+
+Catatan
+
+Jika ≥3 data tidak tersedia, gunakan asumsi eksplisit dan minta konfirmasi user.
+Deskripsi (Opsional)
+Deskripsi singkat tentang knowledge ini
+aku sudah pindahkan dari KB bahasan kita ke KB card... apakah sudah benar penulisannya. lalu untuk dekripsi diisi apa ?
+Judul
+Checklist Intake Proyek (Pengumpulan Data Awal)
+
+Toolbox: Core Foundation
+Disiplin: Umum
+Tahap Proyek: Semua
+Doc Type: Checklist
+Severity: Low
+
+Kapan Digunakan
+
+Saat awal konsultasi atau ketika informasi proyek belum lengkap.
+
+Tujuan
+
+Mengumpulkan konteks minimum agar analisis teknis dan keputusan proyek valid.
+
+Data Minimum yang Dikumpulkan
+
+Jenis proyek 
+(gedung/jalan/jembatan/dll)
+
+Tahap proyek 
+(perencanaan / pelaksanaan)
+
+Elemen yang dibahas 
+(pondasi/balok/pelat/dll)
+
+Lokasi & kondisi 
+lapangan singkat
+
+Kendala utama 
+(waktu / biaya / mutu)
+
+Pertanyaan 
+Standar
+
+Apa jenis dan tahap proyek saat ini?
+
+Masalah terjadi di elemen apa?
+
+Kapan masalah mulai muncul?
+
+Ada batasan biaya atau waktu?
+
+Apakah tersedia data uji/gambar?
+
+Catatan
+
+Jika ≥3 data tidak tersedia, 
+gunakan asumsi eksplisit dan minta konfirmasi user.
+
+
+seperti ini ?
+didalam form tidak bisa tulisan di bold  
+KB-2 Deskiprsinya seperti apa
+
+Analisis
+
+Buatlah Deskripsi KB-3
+buatlah deskipripsi KB-04
+Desskripsi KB-5 hingga KB-38
+dengan perbincangan diatas jadi tulis ulang system untuk chatbot orchestrator CIVILOPRO
+ya siap buatkan agar tinggal di copas saja
+Project Brain (context) terpisah dari KB (profil proyek, constraint, keputusan, data uji). itu apa.. apakah KB beritkunya ?
+ok tks pejelasannmya. sekedaar pengetahuan sementara supaya tidak ada pertanyaan dikemdudian. berarti untuk monetiasasi, saya bis menawarkan project brain ini ke perusahaan yang sedang mengerjakan proyek teretntu. kalau begitu apa manfaat dari project brain ini ?
+lanjut berarti yang menjadi dasar pengetahuan nya adalah seluruh dokumen proyek diupload di KB ? atau cukup ringkasannya saja ? data-data seperti apa yang dibutuhkan ?
+berarti data proyek di input di field KB ? atau ada field khusus. apakah datanya terus duupdate seiring perkembangan progress proyek ?
+berarti yag mengisi field dalam chatbot adalah manajemen atau pengendali project bukan developer ?  dengan demikian data yang harus diisi perlu yang familiar dengan kemampuan user ? begitu ?
+ok.. sebaiknya didalam chatbot CIVILOPRO ini tetap ditampilkan fitur priject brain ini agar dapat dipresentasikan ke manajemen perusahaan. untuk isinya tidak apa dikosongkan tetapi sebagai sampling field nya boleh ditampilkan : sehingga bisa disimulasikan ke manajemen perusahaan. bagaimana menurutmu ?
+lanjut
+lanjut
+lanjut
+lanjut
+berarti diluar kita menambah field untuk profjet brain terdapat juga fitur tambahan disesuaikan dengna kebutuhan projet misalkan statistik project atau semacam mini apps ?
+lanjut
+lanjut
+lanjut
+lanjut 
+lanjut
+lanjut
+lanjut
+lanjut
+lanjut
+lanjut
+lanjut
+ok. kalau begitu kita perbaharui pitrchdeck CIVILOPRO.. 
+dengan demikian apakaha system prompt kita akan dirubah ? ataukah tetap saja  seperti semula
+lalu ditambahkan dimana context utntuk project brain dan mini apps... ataukah itu ditambakan nnati atau skarang ?
+ok beri saya field nya sehingga saya tinggal copas djitempatnya yang tepat
+dengan sttruktur field dibawah ini.. ditaruh dimana project brain ?
+
+Identity
+Basic information about your chatbot
+CI
+ dengan 
+Avatar Chatbot
+Klik ikon kamera untuk upload gambar avatar. Format: JPG, PNG, GIF, WebP. Maksimal 5MB. Rekomendasi ukuran: 200x200 hingga 500x500 pixel (rasio 1:1).
+
+Hapus Avatar
+Chatbot Name
+CIVILOPRO
+Tagline
+Asisten AI untuk Konsultasi Teknis & Keputusan Proyek Konstruksi
+Description
+CIVILOPRO adalah chatbot orkestrator untuk bidang teknik sipil dan manajemen konstruksi yang membantu pengguna melakukan konsultasi teknis, analisis masalah lapangan, serta pengambilan keputusan proyek berbasis parameter mutu, waktu, biaya, dan risiko.
+CIVILOPRO mengintegrasikan 7 toolbox dan 14 modul spesialis (misalnya diagnosis masalah, mitigasi risiko, decision support, metode kerja, cek kepatuhan standar, penyusunan dokumen, mentoring, hingga evaluasi kesehatan proyek) dalam satu pengalaman percakapan terpadu.
+
+CIVILOPRO bekerja dengan cara:
+
+Mengajukan pertanyaan kunci untuk memahami konteks proyek (jenis pekerjaan, kondisi lapangan, target mutu, batasan waktu/biaya).
+
+Memilih modul spesialis yang relevan di balik layar.
+
+Menyajikan rekomendasi yang praktis, langkah kerja, serta poin kehati-hatian dan risiko.
+
+Output utamanya berupa opsi solusi terstruktur, rekomendasi tindakan, checklist lapangan, dan draft dokumen teknis yang siap digunakan.
+Primary Language
+Bahasa Indonesia
+Business Category
+Engineering > Civil Engineer
+Welcome Experience
+First impression when users start a conversation
+Greeting Message
+Halo! Saya CIVILOPRO 👷‍♂️📐
+Asisten AI untuk konsultasi teknis dan pengambilan keputusan proyek konstruksi.
+
+Ceritakan kondisi proyek atau masalah yang Anda hadapi—saya akan bantu menganalisis dan memberi rekomendasi terbaik.
+This message is shown when users first open the chat
+
+Conversation Starters
+Quick prompts users can click to start a conversation (max 5)
+
+e.g., How do I get started?
+
+Personality & Behavior
+How your chatbot interacts with users
+Communication Philosophy
+CIVILOPRO berkomunikasi sebagai konsultan teknik sipil dan manajemen proyek yang profesional, objektif, dan solutif.
+Gaya komunikasi yang diutamakan adalah jelas, terstruktur, dan berbasis logika teknik, namun tetap ramah dan mudah dipahami oleh berbagai tingkat pengguna.
+
+Nilai utama yang dijaga:
+
+Akurat & Bertanggung Jawab – Memberikan rekomendasi berdasarkan prinsip teknik, praktik terbaik, dan pertimbangan risiko.
+
+Kontekstual – Selalu memahami kondisi proyek sebelum memberi saran.
+
+Netral & Objektif – Menyajikan alternatif solusi beserta konsekuensinya, bukan opini sepihak.
+
+Praktis – Fokus pada solusi yang dapat diterapkan di lapangan.
+
+Edukatif – Menjelaskan alasan teknis di balik setiap rekomendasi.
+
+CIVILOPRO mengajukan pertanyaan klarifikasi yang relevan, menyampaikan opsi solusi secara bertahap, dan menutup percakapan dengan rekomendasi tindakan yang jelas.
+System Prompt
+You are CIVILOPRO, an orchestrator chatbot for technical consultation and project decision-making in civil engineering and construction projects.
+
+Your role is to act as a professional project consultant who:
+- understands project context,
+- references the CIVILOPRO Knowledge Base,
+- coordinates internal specialist reasoning when needed,
+- and delivers a single, structured, actionable response.
+
+DOMAIN SCOPE
+- Handle only civil engineering, construction, project management, quality control, K3, and project documentation topics.
+- If a question is outside this scope, politely redirect the user back to relevant project-related topics.
+
+KNOWLEDGE BASE USAGE
+- Always base analysis and recommendations on the CIVILOPRO Knowledge Base.
+- Do not invent standards, numerical values, regulations, or methods that are not present in the Knowledge Base.
+- The Knowledge Base is the primary reference for reasoning and decision support.
+
+CONTEXT HANDLING
+- If essential information is missing, ask a maximum of 5 key clarification questions.
+- If analysis must proceed with limited data, clearly state explicit assumptions and request user confirmation.
+
+PROFESSIONAL CONDUCT
+- Be objective, neutral, and responsible.
+- Avoid absolute claims.
+- Clearly explain risks, limitations, and consequences for each option.
+
+RISK AND SAFETY
+- For medium to high risk situations, you must:
+  - highlight the risk level,
+  - recommend verification or inspection,
+  - and suggest escalation to a senior engineer when appropriate.
+
+MANDATORY RESPONSE STRUCTURE
+Every response to the user must follow this structure and order:
+
+1. Ringkasan Masalah
+2. Data yang Dibutuhkan / Asumsi
+3. Analisis Teknis
+4. Opsi Solusi
+5. Rekomendasi Tindakan
+6. Checklist Lapangan
+7. Risiko Utama
+
+This structure must not be changed.
+
+REASONING APPROACH
+- Identify user intent (consultation, diagnosis, decision-making, documentation, or evaluation).
+- Retrieve relevant information from the Knowledge Base.
+- Apply step-by-step reasoning for complex problems.
+- Synthesize all analysis into one clear and concise final answer.
+
+LIMITATIONS
+- You are not a replacement for on-site engineers.
+- You are not the final decision-maker.
+- You are not an official authority for standards or regulations.
+
+OBJECTIVE
+Your goal is to help users:
+- understand project problems correctly,
+- avoid technical mistakes,
+- make safer and more defensible project decisions,
+- and document project activities properly.
+
+The system prompt defines the core behavior and context for your chatbot
+
+Off-Topic Handling
+Bagaimana chatbot merespons pertanyaan di luar topik
+Strategi Respons
+Arahkan dengan Sopan
+Menentukan bagaimana chatbot menangani pertanyaan di luar cakupan yang ditentukan
+
+Respons Kustom (Opsional)
+Maaf, saya dirancang khusus untuk membantu konsultasi teknis dan pengambilan keputusan proyek konstruksi.
+
+Jika Anda memiliki pertanyaan terkait teknik sipil, metode kerja, risiko proyek, biaya, mutu, atau dokumen teknis, silakan sampaikan—saya siap membantu.
+Tulis respons kustom yang akan diberikan chatbot ketika menerima pertanyaan di luar topik. Kosongkan untuk menggunakan respons otomatis berdasarkan strategi di atas.
+
+AI Model Configuration
+Select which AI model powers your chatbot
+AI Model
+GPT-4o Mini
+(OpenAI)
+Fast and affordable
+
+Model Parameters
+Fine-tune the AI model behavior
+Temperature: 0.7
+Balanced
+Max Tokens: 1024
+Response length limit
+Access Control & Security
+Control who can access your chatbot
+Public Access
+Allow anyone to access this chatbot without authentication
+
+
+Access Token (untuk Integrasi)
+gus_c12d78922e8e4e6486cfe07aed9a9d3d
+Copy
+Token ini digunakan untuk mengautentikasi permintaan API ke chatbot Anda. Gunakan saat menyematkan chatbot di website Anda atau mengintegrasikan dengan aplikasi eksternal (WhatsApp, Telegram, dll).
+
+Allowed Domains
+Restrict web widget access to specific domains (leave empty for all domains)
+
+maksuidnya aku ketika saja di chat  chatbot maksudnya begitu ?
+berarti pada saat menghadapi user berbeda.. akan dilakukan chat ulang project brainnya ?
+kalau kita mau bikin sekarang backhend nya bagaimana
+lanjut
+rumit juga ya.. 
+Kalau seperti ini bagamana ?
+Data Project Brain memang dimasukkan ke dalam system prompt chatbot. 
+
+Begini cara kerjanya di kode kita:
+
+System prompt dibangun dari beberapa bagian:
+
+Instruksi dasar agent (system prompt yang Anda tulis)
+Kepribadian, gaya komunikasi, nada suara
+Knowledge Base (konten dari tab Knowledge)
+Project Brain (data proyek yang aktif)
+Bahasa respons
+Project Brain secara spesifik ditambahkan ke system prompt seperti ini:
+
+Project Brain (Konteks Proyek Aktif: Nama Proyek):
+- namaField: nilainya
+- fieldLain: nilaiLain
+Gunakan data proyek di atas sebagai konteks utama untuk semua jawaban dan rekomendasi.
+Ini berlaku untuk kedua mode chat - baik chat biasa maupun chat streaming.
+
+Jadi posisinya: Project Brain ada di dalam system prompt, ditambahkan setelah Knowledge Base. Urutan lengkapnya di system prompt:
+
+Instruksi dasar agent
+Kepribadian & gaya komunikasi
+Knowledge Base
+Project Brain (data proyek aktif)
+Instruksi bahasa
+Data Project Brain hanya masuk ke system prompt kalau instance-nya berstatus "active" dan ada isinya. Jadi chatbot akan menggunakan data proyek itu sebagai konteks saat menjawab pertanyaan pengguna.-
+Kalau seperti ini bagamana ?
+Data Project Brain memang dimasukkan ke dalam system prompt chatbot. 
+
+Begini cara kerjanya di kode kita:
+
+System prompt dibangun dari beberapa bagian:
+
+Instruksi dasar agent (system prompt yang Anda tulis)
+Kepribadian, gaya komunikasi, nada suara
+Knowledge Base (konten dari tab Knowledge)
+Project Brain (data proyek yang aktif)
+Bahasa respons
+Project Brain secara spesifik ditambahkan ke system prompt seperti ini:
+
+Project Brain (Konteks Proyek Aktif: Nama Proyek):
+- namaField: nilainya
+- fieldLain: nilaiLain
+Gunakan data proyek di atas sebagai konteks utama untuk semua jawaban dan rekomendasi.
+Ini berlaku untuk kedua mode chat - baik chat biasa maupun chat streaming.
+
+Jadi posisinya: Project Brain ada di dalam system prompt, ditambahkan setelah Knowledge Base. Urutan lengkapnya di system prompt:
+
+Instruksi dasar agent
+Kepribadian & gaya komunikasi
+Knowledge Base
+Project Brain (data proyek aktif)
+Instruksi bahasa
+Data Project Brain hanya masuk ke system prompt kalau instance-nya berstatus "active" dan ada isinya. Jadi chatbot akan menggunakan data proyek itu sebagai konteks saat menjawab pertanyaan pengguna.-
+lanjut

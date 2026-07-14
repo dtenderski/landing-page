@@ -1,0 +1,565 @@
+## LANJUTAN 6 — Modul Kualifikasi, Dokumen, dan Status Pengajuan
+
+Bagian ini menambahkan kemampuan chatbot untuk membantu pengguna memilih **kualifikasi SBU**, memahami **jenis permohonan**, dan membuat **daftar dokumen yang perlu disiapkan**. Modul ini mengikuti struktur SK Dirjen Binakon No. 37/KPTS/DK/2025 yang memuat kriteria penilaian seperti penjualan tahunan, kemampuan keuangan, TKK, peralatan, dan SMAP, serta Permen PU No. 6 Tahun 2025 yang mengatur pemenuhan standar kegiatan usaha melalui OSS/SIJK dan konsekuensi pengawasan/sanksi.  
+
+```yaml
+# -----------------------------------------------------------------------------
+# LANJUTAN 6 — QUALIFICATION & DOCUMENT ENGINE
+# -----------------------------------------------------------------------------
+
+qualification_document_engine:
+  id: qualification_document_engine_v1
+  title: "Mesin Kualifikasi dan Dokumen SBU"
+  purpose:
+    - membantu pengguna memahami kualifikasi SBU yang dituju
+    - membedakan permohonan baru, perubahan, perpanjangan, dan konversi
+    - membuat checklist dokumen berdasarkan status badan usaha
+    - memberi pra-catatan kekurangan sebelum pengajuan ke LSBU/OSS/SIJK
+```
+
+## 1. Menu Tambahan
+
+```yaml
+qualification_menu_addition:
+  parent_node: node_main_menu
+  buttons:
+    - label: "Cek Kualifikasi SBU"
+      target_node: node_qualification_intro
+    - label: "Jenis Permohonan SBU"
+      target_node: node_application_type_intro
+    - label: "Checklist Dokumen Lengkap"
+      target_node: node_full_document_checklist
+    - label: "Simulasi Status Pengajuan"
+      target_node: node_submission_status_simulation
+```
+
+## 2. Flow Cek Kualifikasi
+
+```yaml
+node_qualification_intro:
+  type: message_with_buttons
+  title: "Cek Kualifikasi SBU"
+  message: >
+    Kualifikasi SBU menunjukkan tingkat kemampuan badan usaha. Untuk usaha jasa
+    konstruksi bersifat umum, kualifikasi dapat berupa Kecil, Menengah, atau Besar.
+    Saya dapat membantu pra-cek kualifikasi berdasarkan data awal.
+  buttons:
+    - label: "Mulai Cek Kualifikasi"
+      target_node: node_qualification_form
+    - label: "Cek Subklasifikasi Dulu"
+      target_node: node_ask_subklasifikasi_code
+    - label: "Menu Utama"
+      target_node: node_main_menu
+
+node_qualification_form:
+  type: guided_form
+  title: "Form Cek Kualifikasi"
+  questions:
+    - id: q_subklasifikasi
+      text: "Masukkan kode subklasifikasi yang dituju, contoh BG001, BS001, IN008."
+      save_to: profile.target_subklasifikasi
+
+    - id: q_business_status
+      text: "Status badan usaha?"
+      quick_replies:
+        - "BUJK Nasional"
+        - "BUJK PMA"
+        - "KPBUJKA"
+        - "Belum tahu"
+      save_to: profile.business_status
+
+    - id: q_target_qualification
+      text: "Kualifikasi yang ingin diajukan?"
+      quick_replies:
+        - "Kecil 1"
+        - "Kecil 2"
+        - "Kecil 3"
+        - "Menengah"
+        - "Besar"
+        - "Belum tahu"
+      save_to: profile.target_qualification
+
+    - id: q_annual_sales_value
+      text: "Masukkan estimasi penjualan tahunan/pengalaman pekerjaan, atau pilih 'belum tahu'."
+      expected_type: text
+      save_to: profile.annual_sales_value
+
+    - id: q_equity_value
+      text: "Masukkan estimasi ekuitas/kemampuan keuangan, atau pilih 'belum tahu'."
+      expected_type: text
+      save_to: profile.equity_value
+
+    - id: q_tkk_ready
+      text: "Apakah PJBU, PJTBU, dan PJSKBU sudah siap?"
+      quick_replies:
+        - "Sudah lengkap"
+        - "Sebagian"
+        - "Belum"
+        - "Belum tahu"
+      save_to: profile.tkk_ready
+
+    - id: q_equipment_ready
+      text: "Apakah peralatan utama sudah tersedia sesuai subklasifikasi?"
+      quick_replies:
+        - "Sudah lengkap"
+        - "Sebagian"
+        - "Belum"
+        - "Tidak dipersyaratkan"
+        - "Belum tahu"
+      save_to: profile.equipment_ready
+
+  completion_node: node_qualification_result
+```
+
+## 3. Template Hasil Cek Kualifikasi
+
+```yaml
+node_qualification_result:
+  type: dynamic_response
+  title: "Hasil Pra-Cek Kualifikasi"
+  response_template: tpl_qualification_result
+
+tpl_qualification_result: >
+  Hasil pra-cek kualifikasi SBU:
+
+  Subklasifikasi target:
+  {{profile.target_subklasifikasi}}
+
+  Status badan usaha:
+  {{profile.business_status}}
+
+  Kualifikasi yang dituju:
+  {{profile.target_qualification}}
+
+  Penjualan tahunan/pengalaman:
+  {{profile.annual_sales_value}}
+  Catatan: pengalaman harus sesuai lingkup pekerjaan utama pada subklasifikasi yang diajukan.
+
+  Kemampuan keuangan:
+  {{profile.equity_value}}
+  Catatan: kebutuhan neraca internal atau laporan audit bergantung pada kualifikasi dan jenis badan usaha.
+
+  TKK:
+  {{profile.tkk_ready}}
+  Catatan: pastikan PJBU, PJTBU, dan PJSKBU sesuai ketentuan subklasifikasi dan kualifikasi.
+
+  Peralatan:
+  {{profile.equipment_ready}}
+  Catatan: pastikan daftar alat sesuai subklasifikasi, kualifikasi, dan status penguasaan peralatan.
+
+  Status awal:
+  {{qualification_readiness_status}}
+
+  Rekomendasi:
+  {{qualification_recommendation}}
+
+  Disclaimer:
+  Ini adalah pra-cek. Penetapan kualifikasi resmi tetap melalui proses sertifikasi oleh LSBU.
+```
+
+## 4. Logic Rekomendasi Kualifikasi
+
+```yaml
+qualification_logic:
+  ready_condition:
+    if:
+      - "subklasifikasi valid"
+      - "target kualifikasi dipilih"
+      - "pengalaman tersedia"
+      - "kemampuan keuangan tersedia"
+      - "TKK siap"
+      - "peralatan siap atau tidak dipersyaratkan"
+    status: "Siap dikonsultasikan"
+    recommendation: >
+      Data awal cukup baik untuk dikonsultasikan ke LSBU. Pastikan seluruh dokumen
+      pendukung sudah valid, konsisten, dan sesuai dengan data OSS/SIJK.
+
+  partial_condition:
+    if:
+      - "sebagian data tersedia"
+      - "ada data belum pasti"
+    status: "Perlu dilengkapi"
+    recommendation: >
+      Lengkapi data yang masih kosong, terutama pengalaman pekerjaan, laporan keuangan,
+      TKK, peralatan, dan SMAP sebelum pengajuan.
+
+  risk_condition:
+    if:
+      - "subklasifikasi tidak valid"
+      - "pengalaman tidak tersedia"
+      - "TKK belum tersedia"
+      - "kemampuan keuangan belum tersedia"
+    status: "Berisiko terkendala"
+    recommendation: >
+      Pengajuan berisiko tertolak atau diminta perbaikan. Periksa ulang KBLI, SBU,
+      pengalaman, kemampuan keuangan, TKK, peralatan, dan SMAP.
+```
+
+## 5. Jenis Permohonan SBU
+
+```yaml
+node_application_type_intro:
+  type: message_with_buttons
+  title: "Jenis Permohonan SBU"
+  message: >
+    Pilih jenis permohonan yang ingin Anda siapkan. Setiap jenis permohonan
+    memiliki fokus dokumen dan pemeriksaan yang berbeda.
+  buttons:
+    - label: "Permohonan Baru"
+      target_node: node_application_new
+    - label: "Perubahan Data"
+      target_node: node_application_change
+    - label: "Perpanjangan"
+      target_node: node_application_renewal
+    - label: "Konversi SBU"
+      target_node: node_application_conversion
+    - label: "Menu Utama"
+      target_node: node_main_menu
+
+node_application_new:
+  type: message_with_buttons
+  title: "Permohonan Baru"
+  message: >
+    Untuk permohonan baru, fokus utama adalah kecocokan KBLI dan subklasifikasi,
+    legalitas badan usaha, kemampuan keuangan, kesiapan TKK, peralatan, SMAP,
+    dan data awal pengalaman bila dipersyaratkan.
+  buttons:
+    - label: "Checklist Permohonan Baru"
+      target_node: node_docs_new
+    - label: "Pra-Verifikasi"
+      target_node: node_pre_verification_start
+
+node_application_change:
+  type: message_with_buttons
+  title: "Perubahan Data"
+  message: >
+    Perubahan dapat berkaitan dengan perubahan data badan usaha, subklasifikasi,
+    kualifikasi, TKK, peralatan, atau data lain yang mempengaruhi sertifikasi.
+    Pastikan perubahan yang dimohonkan sesuai dengan kondisi aktual dan dokumen pendukung.
+  buttons:
+    - label: "Checklist Perubahan"
+      target_node: node_docs_change
+    - label: "Cek Kualifikasi"
+      target_node: node_qualification_intro
+
+node_application_renewal:
+  type: message_with_buttons
+  title: "Perpanjangan SBU"
+  message: >
+    Untuk perpanjangan, bot perlu mengecek masa berlaku SBU, pengalaman pada
+    subklasifikasi yang sama, kewajiban laporan, TKK, peralatan, dan SMAP.
+  buttons:
+    - label: "Checklist Perpanjangan"
+      target_node: node_docs_renewal
+    - label: "Cek Status SBU"
+      target_node: node_submission_status_simulation
+
+node_application_conversion:
+  type: message_with_buttons
+  title: "Konversi SBU"
+  message: >
+    Konversi SBU mengikuti ketentuan peralihan. SBU lama perlu dikonversi sesuai
+    batas waktu yang berlaku. Masa berlaku SBU hasil konversi mengikuti masa berlaku
+    SBU sebelumnya.
+  buttons:
+    - label: "Checklist Konversi"
+      target_node: node_docs_conversion
+    - label: "Cek Status Konversi"
+      target_node: node_conversion_check
+```
+
+## 6. Checklist Dokumen per Jenis Permohonan
+
+```yaml
+document_checklists_by_application_type:
+  new_application:
+    title: "Checklist Permohonan Baru"
+    items:
+      - "Data legalitas badan usaha"
+      - "NIB dan data OSS"
+      - "KBLI yang sesuai dengan subklasifikasi"
+      - "Subklasifikasi dan kualifikasi yang dimohonkan"
+      - "Data PJBU"
+      - "Data PJTBU beserta SKK yang sesuai"
+      - "Data PJSKBU beserta SKK yang sesuai"
+      - "Data kemampuan keuangan/neraca/laporan audit bila diperlukan"
+      - "Data pengalaman/penjualan tahunan bila dipersyaratkan"
+      - "Daftar peralatan sesuai subklasifikasi bila dipersyaratkan"
+      - "Bukti kepemilikan atau sewa peralatan"
+      - "Dokumen SMAP atau surat komitmen SMAP"
+      - "Surat pernyataan tanggung jawab mutlak"
+
+  change_application:
+    title: "Checklist Perubahan Data"
+    items:
+      - "SBU eksisting"
+      - "Data perubahan yang dimohonkan"
+      - "Dokumen pendukung perubahan"
+      - "Data KBLI dan subklasifikasi setelah perubahan"
+      - "Data TKK terbaru bila berubah"
+      - "Data peralatan terbaru bila berubah"
+      - "Dokumen keuangan atau pengalaman jika perubahan mempengaruhi kualifikasi"
+      - "Surat pernyataan perubahan data"
+
+  renewal_application:
+    title: "Checklist Perpanjangan"
+    items:
+      - "SBU yang akan diperpanjang"
+      - "Masa berlaku SBU"
+      - "Data pengalaman/penjualan tahunan pada subklasifikasi yang sama"
+      - "Data keuangan terbaru"
+      - "Data PJBU, PJTBU, dan PJSKBU terbaru"
+      - "Data peralatan terbaru"
+      - "Dokumen SMAP terbaru"
+      - "Bukti pemenuhan kewajiban laporan bila diperlukan"
+      - "Surat pernyataan tanggung jawab mutlak"
+
+  conversion_application:
+    title: "Checklist Konversi SBU"
+    items:
+      - "SBU lama yang masih berlaku"
+      - "Data KBLI dan subklasifikasi pada SBU lama"
+      - "Data subklasifikasi hasil konversi"
+      - "Data badan usaha terbaru"
+      - "Dokumen pendukung perubahan tanpa asesmen jika berlaku"
+      - "Konfirmasi masa berlaku SBU lama"
+      - "Bukti pengajuan konversi melalui sistem yang berlaku"
+```
+
+## 7. Node Checklist Lengkap
+
+```yaml
+node_full_document_checklist:
+  type: message_with_buttons
+  title: "Checklist Dokumen Lengkap"
+  message: >
+    Pilih jenis checklist dokumen yang ingin dibuat.
+  buttons:
+    - label: "Permohonan Baru"
+      target_node: node_docs_new
+    - label: "Perubahan"
+      target_node: node_docs_change
+    - label: "Perpanjangan"
+      target_node: node_docs_renewal
+    - label: "Konversi"
+      target_node: node_docs_conversion
+    - label: "Checklist per Kode SBU"
+      target_node: node_checklist_ask_code
+
+node_docs_new:
+  type: response_template
+  template: tpl_docs_new
+
+tpl_docs_new: >
+  Checklist Permohonan Baru SBU:
+  {{document_checklists_by_application_type.new_application.items}}
+
+  Catatan:
+  Pastikan KBLI, subklasifikasi, kualifikasi, TKK, peralatan, dan SMAP konsisten
+  dengan data yang akan diajukan melalui sistem.
+
+node_docs_change:
+  type: response_template
+  template: tpl_docs_change
+
+tpl_docs_change: >
+  Checklist Perubahan Data SBU:
+  {{document_checklists_by_application_type.change_application.items}}
+
+  Catatan:
+  Perubahan data harus memiliki dokumen pendukung dan tidak boleh bertentangan
+  dengan data resmi badan usaha.
+
+node_docs_renewal:
+  type: response_template
+  template: tpl_docs_renewal
+
+tpl_docs_renewal: >
+  Checklist Perpanjangan SBU:
+  {{document_checklists_by_application_type.renewal_application.items}}
+
+  Catatan:
+  Untuk perpanjangan, pastikan pengalaman, TKK, peralatan, dan SMAP masih relevan
+  serta sesuai dengan subklasifikasi yang sama.
+
+node_docs_conversion:
+  type: response_template
+  template: tpl_docs_conversion
+
+tpl_docs_conversion: >
+  Checklist Konversi SBU:
+  {{document_checklists_by_application_type.conversion_application.items}}
+
+  Catatan:
+  Perhatikan batas waktu konversi dan masa berlaku SBU lama.
+```
+
+## 8. Simulasi Status Pengajuan
+
+```yaml
+node_submission_status_simulation:
+  type: guided_form
+  title: "Simulasi Status Pengajuan"
+  message: >
+    Saya akan membantu membaca kemungkinan status pengajuan berdasarkan kondisi dokumen.
+  questions:
+    - id: q_status_kbli
+      text: "Apakah KBLI di OSS sudah sesuai dengan SBU yang dituju?"
+      quick_replies:
+        - "Sesuai"
+        - "Tidak sesuai"
+        - "Belum tahu"
+      save_to: status.kbli
+
+    - id: q_status_sbu
+      text: "Apakah nomor SBU sudah terbit atau tercatat?"
+      quick_replies:
+        - "Sudah"
+        - "Belum"
+        - "Dalam proses"
+        - "Belum tahu"
+      save_to: status.sbu
+
+    - id: q_status_tkk
+      text: "Apakah TKK sudah lengkap?"
+      quick_replies:
+        - "Lengkap"
+        - "Sebagian"
+        - "Belum"
+      save_to: status.tkk
+
+    - id: q_status_equipment
+      text: "Apakah peralatan sudah lengkap?"
+      quick_replies:
+        - "Lengkap"
+        - "Sebagian"
+        - "Belum"
+        - "Tidak dipersyaratkan"
+      save_to: status.equipment
+
+    - id: q_status_smap
+      text: "Apakah SMAP sudah tersedia?"
+      quick_replies:
+        - "Sudah"
+        - "Belum"
+        - "Surat komitmen"
+      save_to: status.smap
+
+  completion_node: node_submission_status_result
+
+node_submission_status_result:
+  type: dynamic_response
+  title: "Hasil Simulasi Status Pengajuan"
+  response_template: >
+    Simulasi status pengajuan:
+
+    KBLI:
+    {{status.kbli}}
+
+    SBU:
+    {{status.sbu}}
+
+    TKK:
+    {{status.tkk}}
+
+    Peralatan:
+    {{status.equipment}}
+
+    SMAP:
+    {{status.smap}}
+
+    Kemungkinan status:
+    {{submission_status_prediction}}
+
+    Tindakan yang disarankan:
+    {{submission_recommended_action}}
+
+    Catatan:
+    Ini hanya simulasi. Status resmi hanya dapat dipastikan melalui OSS, SIJK,
+    LSBU, atau pihak berwenang.
+```
+
+## 9. Logic Simulasi Status
+
+```yaml
+submission_status_logic:
+  likely_ready:
+    condition:
+      - "status.kbli == Sesuai"
+      - "status.sbu == Sudah or status.sbu == Dalam proses"
+      - "status.tkk == Lengkap"
+      - "status.equipment == Lengkap or status.equipment == Tidak dipersyaratkan"
+      - "status.smap == Sudah or status.smap == Surat komitmen"
+    prediction: "Relatif siap untuk dilanjutkan"
+    action: >
+      Lanjutkan pengecekan formal melalui sistem dan pastikan dokumen pendukung valid.
+
+  likely_revision:
+    condition:
+      - "ada status Sebagian atau Belum tahu"
+    prediction: "Kemungkinan perlu perbaikan atau klarifikasi"
+    action: >
+      Lengkapi data yang belum pasti, terutama KBLI, TKK, peralatan, dan SMAP.
+
+  likely_blocked:
+    condition:
+      - "status.kbli == Tidak sesuai"
+      - "status.tkk == Belum"
+      - "status.smap == Belum"
+    prediction: "Berisiko terkendala"
+    action: >
+      Jangan lanjutkan pengajuan sebelum KBLI/SBU diselaraskan dan dokumen utama dilengkapi.
+```
+
+## 10. FAQ Tambahan untuk Chatbot
+
+```yaml
+faq_regulatory_2025:
+  - question: "Apakah SBU wajib dimiliki BUJK?"
+    answer: >
+      Ya, SBU merupakan tanda bukti pengakuan terhadap klasifikasi dan kualifikasi
+      kemampuan BUJK. Untuk kegiatan jasa konstruksi, SBU menjadi bagian penting
+      dalam pemenuhan standar kemampuan badan usaha.
+
+  - question: "Apa bedanya KBLI dan subklasifikasi SBU?"
+    answer: >
+      KBLI adalah kode kegiatan usaha, sedangkan subklasifikasi SBU adalah penggolongan
+      kemampuan badan usaha jasa konstruksi menurut klasifikasi dan lingkup pekerjaan.
+      Dalam pemenuhan Sertifikat Standar, KBLI dan SBU harus selaras.
+
+  - question: "Apakah pengalaman bisa dipakai untuk lebih dari satu subklasifikasi?"
+    answer: >
+      Pengalaman harus dinilai berdasarkan kesesuaian pekerjaan utama pada kontrak.
+      Jika pengalaman sudah digunakan pada subklasifikasi tertentu, pengguna perlu
+      berhati-hati sebelum menggunakannya kembali untuk subklasifikasi lain.
+
+  - question: "Apakah PJSKBU boleh merangkap?"
+    answer: >
+      Ketentuan rangkap PJSKBU bergantung pada skema sertifikasi dan klasifikasi.
+      Bot dapat membantu mengingatkan, tetapi validasi final harus mengikuti ketentuan LSBU.
+
+  - question: "Apa akibat jika SBU lama tidak dikonversi?"
+    answer: >
+      Jika terdapat kewajiban konversi dan tidak dilakukan sesuai batas waktu,
+      SBU dapat dinyatakan tidak berlaku. Periksa status dan ketentuan peralihan terbaru.
+
+  - question: "Apakah bot bisa menentukan lulus sertifikasi?"
+    answer: >
+      Tidak. Bot hanya membantu pra-cek dan edukasi. Keputusan resmi dilakukan oleh LSBU
+      dan asesor sesuai skema sertifikasi.
+```
+
+## 11. Runtime Prompt Tambahan
+
+```yaml
+runtime_prompt_addition:
+  text: >
+    Selain membantu pencarian kode SBU, Anda juga membantu pra-verifikasi kesiapan
+    pengajuan SBU. Saat pengguna bertanya tentang kualifikasi, dokumen, TKK, peralatan,
+    SMAP, OSS, SIJK, konversi, atau sanksi, gunakan pendekatan edukatif dan hati-hati.
+    Jangan menyatakan pengguna pasti lolos atau gagal. Tampilkan status sebagai:
+    “siap dikonsultasikan”, “perlu dilengkapi”, atau “berisiko terkendala”.
+    Selalu minta validasi akhir kepada LSBU, OSS, SIJK, atau pihak berwenang.
+```
+
+Ini membuat chatbot menjadi **lebih lengkap**: dari pencarian kode SBU → pemetaan KBLI → pra-verifikasi → checklist dokumen → simulasi status pengajuan.

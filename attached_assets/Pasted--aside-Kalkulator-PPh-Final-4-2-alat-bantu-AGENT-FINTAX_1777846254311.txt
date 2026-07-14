@@ -1,0 +1,154 @@
+<aside>
+💰
+
+**Kalkulator PPh Final 4(2)** — alat bantu AGENT-FINTAX untuk hitung pajak penghasilan final atas jasa konstruksi sesuai **PP 9/2022** (yang mengganti PP 51/2008 & PP 40/2009). Berlaku efektif **21 Februari 2022**.
+
+</aside>
+
+## 1. Tarif PPh Final 4(2) Jasa Konstruksi (PP 9/2022)
+
+| **Jenis Jasa** | **Kualifikasi BUJK** | **Tarif** | **Dasar** |
+| --- | --- | --- | --- |
+| **Pelaksanaan Konstruksi** | Kecil (K1–K3) | **1.75%** | Pasal 3 ayat (1) huruf a PP 9/2022 |
+| **Pelaksanaan Konstruksi** | Menengah (M1–M2) | **2.65%** | Pasal 3 ayat (1) huruf b PP 9/2022 |
+| **Pelaksanaan Konstruksi** | Besar (B1–B2) / Spesialis | **2.65%** | Pasal 3 ayat (1) huruf b PP 9/2022 |
+| **Pelaksanaan Konstruksi** | Tidak punya SBU | **4%** | Pasal 3 ayat (1) huruf c PP 9/2022 |
+| **Konsultansi Konstruksi** | Memiliki SBU | **3.5%** | Pasal 3 ayat (2) huruf a PP 9/2022 |
+| **Konsultansi Konstruksi** | Tidak punya SBU | **6%** | Pasal 3 ayat (2) huruf b PP 9/2022 |
+| **Pekerjaan Konstruksi Terintegrasi** | Memiliki SBU | **2.65%** | Pasal 3 ayat (3) huruf a PP 9/2022 |
+| **Pekerjaan Konstruksi Terintegrasi** | Tidak punya SBU | **4%** | Pasal 3 ayat (3) huruf b PP 9/2022 |
+
+## 2. Mekanisme Pemotongan & Penyetoran
+
+```
+Dasar Pengenaan Pajak (DPP) = Nilai kontrak (sebelum PPN)
+                            = Termin invoice yang dibayar Owner
+
+PPh Final 4(2) = DPP × Tarif (sesuai tabel)
+
+Mekanisme:
+	• Jika Owner adalah Pemotong (Pemerintah, BUMN, WP Badan tertentu):
+	  → Owner POTONG PPh Final saat bayar termin
+	  → Owner setor sendiri ke Kas Negara
+	  → Kontraktor terima pembayaran NET (sudah dipotong)
+	  → Kontraktor terima Bukti Potong (BP-1)
+
+	• Jika Owner BUKAN Pemotong (mis. orang pribadi non-pemotong):
+	  → Kontraktor SETOR SENDIRI PPh Final
+	  → Deadline: tanggal 15 bulan berikutnya
+	  → Lapor SPT Masa: tanggal 20 bulan berikutnya
+
+Mekanisme via CoreTax DJP (mulai 2025):
+	• Bukti Potong otomatis ter-generate via CoreTax
+	• Pelaporan SPT Masa via CoreTax (e-Bupot)
+	• Setoran via SSE / billing CoreTax
+```
+
+## 3. Kalkulator PPh Final — Template
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│  KALKULATOR PPh FINAL 4(2) JASA KONSTRUKSI — PP 9/2022                     │
+├─────────────────────────────────────────────────────────────────────┤
+│  IDENTIFIKASI                                                              │
+│  Nomor Kontrak           : [______________________]                        │
+│  Nama Owner              : [______________________]                        │
+│  Owner adalah Pemotong?  : ⬜ Ya  ⬜ Tidak                                    │
+│                                                                            │
+│  KLASIFIKASI JASA                                                          │
+│  Jenis Jasa              :                                                 │
+│    ⬜ Pelaksanaan Konstruksi                                                 │
+│    ⬜ Konsultansi Konstruksi                                                 │
+│    ⬜ Pekerjaan Konstruksi Terintegrasi                                      │
+│  Kualifikasi BUJK         :                                                │
+│    ⬜ Kecil (K1–K3)         → 1.75% (pelaksanaan)                            │
+│    ⬜ Menengah (M1–M2)      → 2.65% (pelaksanaan)                            │
+│    ⬜ Besar (B1–B2)/Spesialis→ 2.65% (pelaksanaan)                          │
+│    ⬜ Tanpa SBU             → 4% (pelaksanaan) / 6% (konsultansi)            │
+│    ⬜ Konsultansi ber-SBU   → 3.5%                                          │
+│  Tarif final              : [_____]%                                       │
+│                                                                            │
+│  PERHITUNGAN PER TERMIN                                                    │
+│  Nilai Termin (DPP, sblm  : Rp [_______________]                           │
+│    PPN)                                                                    │
+│  PPN 11%                  : Rp [_______________]  (DPP × 11%)              │
+│  PPh Final 4(2) (DIPOTONG): Rp [_______________]  (DPP × tarif)            │
+│                                                                            │
+│  CASH FLOW BAGI KONTRAKTOR                                                 │
+│  Bruto invoice            = DPP + PPN          = Rp [_______________]      │
+│  Pemotongan PPh Final     = (−) Rp [_______________]                       │
+│  Net diterima             = Bruto − PPh Final = Rp [_______________]      │
+│                            (PPN tetap diterima karena WP harus setor PPN)  │
+│                                                                            │
+│  DEADLINE PAJAK                                                            │
+│  Setor PPh Final          : tanggal 15 bulan berikut                      │
+│  Lapor SPT Masa Bukti     : tanggal 20 bulan berikut                      │
+│    Potong (e-Bupot)                                                       │
+│  Lapor SPT Masa PPN       : akhir bulan berikut (e-Faktur)                │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+## 4. Contoh Kalkulasi: Termin Invoice BUJK Besar
+
+```
+SKENARIO:
+	BUJK         : PT Kontraktor Sejahtera (Kualifikasi B1)
+	Owner        : K/L Pemerintah (PEMOTONG)
+	Proyek       : Gedung Kantor Pemda — Lump Sum
+	Nilai kontrak: Rp 50,000,000,000 (sebelum PPN)
+	Termin saat ini: Termin 3 (50% progres) = Rp 25,000,000,000
+
+PERHITUNGAN:
+	DPP                   = Rp 25,000,000,000
+	Tarif PPh Final 4(2)  = 2.65% (BUJK Besar, pelaksanaan)
+	PPh Final dipotong    = 2.65% × 25,000,000,000 = Rp 662,500,000
+	PPN 11%               = 11% × 25,000,000,000 = Rp 2,750,000,000
+
+INVOICE & PAYMENT FLOW:
+	Invoice bruto         = 25,000,000,000 + 2,750,000,000 = Rp 27,750,000,000
+	Dipotong oleh Owner   = (−) Rp 662,500,000 (PPh Final 4(2))
+	Net ditransfer Owner  = Rp 27,087,500,000
+
+KEWAJIBAN BUJK:
+	1. Setor PPN Rp 2,750,000,000 (DPP × 11%) — deadline akhir bulan berikut
+	2. Buat e-Faktur PPN ke CoreTax
+	3. Terima Bukti Potong PPh Final dari Owner (BP-1) untuk arsip
+	4. Catat di akuntansi PSAK 34 sebagai pendapatan bruto Rp 25,000,000,000
+	   dengan PPh Final sudah final (tidak perlu PPh Pasal 25/29 lagi)
+```
+
+## 5. Catatan Penting (PP 9/2022)
+
+<aside>
+✨
+
+**Final = Selesai.** PPh Final 4(2) sudah "clear" — tidak digabung dengan penghasilan lain di SPT Tahunan PPh Badan, tidak dapat dikompensasi rugi, tidak dapat dikreditkan. Ini berbeda dengan PPh Pasal 23 atau 25.
+
+</aside>
+
+<aside>
+⚠️
+
+**Kualifikasi SBU saat kontrak ditandatangani** — yang menentukan tarif. Jika SBU naik tier mid-project, tarif lama tetap berlaku untuk kontrak existing.
+
+</aside>
+
+<aside>
+⚠️
+
+**Pekerjaan terintegrasi** (mis. EPC) — dikenakan tarif 2.65% (ber-SBU) atau 4% (tanpa SBU), bukan tarif pelaksanaan. Pastikan klasifikasi yang benar di kontrak.
+
+</aside>
+
+<aside>
+⚠️
+
+**Subkontraktor** — Kontraktor utama wajib memotong PPh Final 4(2) saat bayar subkon (BUJK utama menjadi pemotong terhadap subkon). Tarif sesuai kualifikasi subkon.
+
+</aside>
+
+## 6. Halaman Terkait
+
+- [OpenClaw — System Prompt Multi-Agent: Manajer Keuangan & Perpajakan Konstruksi](https://www.notion.so/OpenClaw-System-Prompt-Multi-Agent-Manajer-Keuangan-Perpajakan-Konstruksi-82ae1ff9377142dab3a9c0d7c2849718?pvs=21)
+- [KB-TAX — Perpajakan Jasa Konstruksi](https://www.notion.so/KB-TAX-Perpajakan-Jasa-Konstruksi-9470795c864e48318e3faad6b808bac7?pvs=21)
+- [Modul C — Control & Close-Out (Keuangan · Klaim/EOT · Serah Terima · Postmortem)](https://www.notion.so/Modul-C-Control-Close-Out-Keuangan-Klaim-EOT-Serah-Terima-Postmortem-e818d7460f984c948b66675ea19aaa22?pvs=21)

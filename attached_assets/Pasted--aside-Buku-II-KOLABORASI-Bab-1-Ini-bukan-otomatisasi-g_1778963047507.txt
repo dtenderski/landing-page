@@ -1,0 +1,213 @@
+<aside>
+📗
+
+**Buku II — KOLABORASI · Bab 1**
+
+Ini bukan otomatisasi gelombang ketiga. Ini bukan revolusi industri 4.0 yang dijanjikan PowerPoint sejak 2016. Yang sedang terjadi di pekerjaan pengetahuan hari ini adalah sesuatu yang lebih halus, dan justru karena halus, lebih berbahaya kalau salah dibaca: sebuah **reset diam-diam**.
+
+</aside>
+
+## 1. Hook — Pukul 06.42 di sebuah kantor cabang bank di Surabaya
+
+Pak Yusuf, 45 tahun, manajer kantor cabang bank di kawasan Darmo, biasanya datang pukul 07.30. Hari Senin itu ia datang lebih awal, pukul 06.42, karena tidak bisa tidur sejak Sabtu.
+
+Jumat sore minggu sebelumnya, dalam *town hall* virtual, direksi mengumumkan tiga hal:
+
+1. Sistem **AI underwriting** baru akan menggantikan sebagian besar pekerjaan analis kredit konsumtif level 1 dan 2 dalam enam bulan.
+2. Tim *contact center* akan dibantu (atau, kata Pak Yusuf dalam hati, *dikurangi*) oleh agen percakapan yang sudah berjalan 24 jam sehari di empat saluran.
+3. Setiap pemimpin cabang "diharapkan" menyusun **roadmap kolaborasi manusia-AI** untuk timnya, paling lambat akhir kuartal.
+
+Pak Yusuf sudah 19 tahun di bank yang sama. Ia memulai sebagai *customer service*, naik menjadi analis, lalu *relationship manager*, lalu wakil pemimpin, lalu pemimpin cabang. Ia tahu semua jalur karier itu. Ia bahkan tahu kursi mana yang biasanya kosong di kantor pusat Senin pagi.
+
+Yang ia tidak tahu adalah: dari 23 anggota timnya hari ini, **berapa banyak yang akan masih ada peran konkretnya tahun depan**? Dan dari pekerjaan yang akan tersisa, **mana yang berubah bentuk, mana yang hilang sama sekali, dan mana yang justru naik nilainya**?
+
+Pukul 06.42, di kantor yang masih sepi, Pak Yusuf membuka *whiteboard* dan menulis satu kalimat di pojok kanan atas dengan spidol merah:
+
+> *Ini bukan tentang AI. Ini tentang siapa yang masih dibutuhkan kalau AI mengerjakan separuh pekerjaan kita.*
+> 
+
+Lalu ia menatap kalimat itu selama 18 menit, tanpa menulis apa pun di bawahnya.
+
+## 2. Data Membuka Tabir — Reset yang sudah berjalan
+
+Kalau Anda mengira yang dialami Pak Yusuf adalah cerita masa depan, datanya berkata sebaliknya. Reset sudah berjalan, dan tahun 2025–2026 adalah titik di mana ia berhenti menjadi tren dan mulai menjadi **kondisi default**.
+
+- **76% organisasi melaporkan pemakaian AI dalam minimal satu fungsi bisnis pada 2025**, menurut survei McKinsey — naik dari 55% setahun sebelumnya. Adopsi generatif AI bahkan tumbuh lebih cepat lagi.[[1]](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai)
+- **60–70% dari waktu kerja pengetahuan secara teoretis dapat diotomasi** dengan teknologi gen-AI saat ini, terutama tugas-tugas yang melibatkan ekstraksi informasi, ringkasan, klasifikasi, dan penulisan ulang.[[2]](https://courses.cfte.education/digital-library-ai-mckinsey-report/)
+- **Mayoritas organisasi belum melihat dampak EBITDA yang signifikan dari AI generatif** — sebuah fenomena yang McKinsey sebut sebagai *gen AI paradox*: investasi tinggi, hasil bisnis rendah. Bukan karena AI-nya gagal, tetapi karena cara bekerjanya belum di-*rewire*.[[3]](https://www.mckinsey.com/capabilities/strategy-and-corporate-finance/our-insights/where-ai-will-create-value-and-where-it-wont)[[4]](https://www.mckinsey.com/~/media/mckinsey/business%20functions/mckinsey%20digital/our%20insights/a%20generative%20ai%20reset%20rewiring%20to%20turn%20potential%20into%20value%20in%202024/a-generative-ai-reset-rewiring-to-turn-potential-into-value-in-2024.pdf)
+- **Di Amerika Serikat, hampir setengah dari aktivitas kerja yang ada saat ini berpotensi diotomasi pada 2030**, mempercepat proyeksi sebelumnya sekitar satu dekade.[[5]](https://www.mckinsey.com/mgi/our-research/generative-ai-and-the-future-of-work-in-america)
+
+[ASUMSI: angka-angka di atas berbasis riset di pasar AS/Eropa; pemetaan ke konteks Indonesia memerlukan penyesuaian berdasarkan komposisi sektor, struktur tenaga kerja informal, dan kecepatan adopsi yang umumnya tertinggal 18–36 bulan dari pasar maju.]
+
+Mari berhenti sebentar di dua angka yang paling penting: **76% organisasi sudah memakai AI**, dan **mayoritas belum merasakan dampak finansial yang berarti**.
+
+Kalau Anda meletakkan dua angka itu berdampingan, Anda akan menemukan inti masalah Buku II.
+
+> Adopsi AI sudah merata. Yang belum merata adalah **arsitektur kerja baru** yang membuat adopsi itu berbuah.
+> 
+
+Dan kalau itu benar, maka pertanyaan yang relevan untuk Pak Yusuf bukan *"apakah AI akan masuk ke cabang saya?"* Jawabannya **sudah**. Pertanyaan yang relevan adalah: *"apakah cara tim saya bekerja akan berubah cukup cepat untuk membuat AI itu berarti, dan bukan sekadar beban biaya lisensi tahunan?"*
+
+## 3. Anatomi Masalah — Tiga lapis reset yang sering tertukar
+
+Ketika orang berkata *"AI mengubah pekerjaan"*, sebenarnya mereka sedang membicarakan **tiga lapis perubahan yang berbeda** — dan kekeliruan mencampuradukkan ketiganya adalah sumber kebanyakan kekacauan manajemen hari ini.
+
+### Lapis 1 — Reset tugas (*task reset*)
+
+Lapis paling dangkal, dan paling sering dibicarakan. Tugas-tugas individual mulai dikerjakan agen AI: meringkas dokumen, menjawab email rutin, menyusun draf laporan, mengekstrak data dari PDF, menjawab pertanyaan SOP.
+
+Ini nyata, ini cepat, dan ini **menggoda untuk dianggap selesai**. Manajemen senang karena ada penghematan jam kerja yang bisa dipresentasikan ke direksi. Karyawan senang karena tugas yang membosankan berkurang.
+
+Masalahnya: kalau reset hanya berhenti di sini, organisasi Anda akan menjadi **organisasi yang sama, tetapi dengan biaya AI ditambahkan**. Itu bukan transformasi. Itu *cost addition*.
+
+### Lapis 2 — Reset peran (*role reset*)
+
+Lapis menengah. Ketika cukup banyak tugas dalam sebuah peran dipindahkan ke AI, **bentuk peran itu mulai bergeser**. Analis kredit level 1 yang dulu menghabiskan 70% waktu memeriksa kelengkapan dokumen, sekarang menghabiskan 70% waktu memeriksa *hasil pemeriksaan AI* dan menangani kasus yang AI tidak yakin.
+
+Di sini, kerangka tradisional *job description* mulai pecah. Apa nama peran yang isinya "mengawasi keputusan AI dan menangani 8% kasus tepi"? Belum ada bukunya.
+
+Lapis 2 inilah yang membuat banyak orang seperti Pak Yusuf tidak bisa tidur. Bukan karena pekerjaan hilang, tetapi karena **pekerjaan yang masih ada tidak lagi cocok dengan kerangka karier yang ia pahami**.
+
+### Lapis 3 — Reset arsitektur (*architecture reset*)
+
+Lapis paling dalam, paling jarang dibicarakan, dan paling menentukan. Di sini, **cara seluruh tim bekerja bersama** — manusia, agen, sistem, data — dirombak.
+
+Contohnya: di Lapis 1, AI dipakai sebagai *tool* yang dipanggil oleh manusia. Di Lapis 3, ada **agen yang berjalan sendiri di latar belakang**, ada **rapat pagi di mana manusia melihat ringkasan yang sudah dibuatkan agen semalam**, ada **workflow di mana satu agen memicu agen lain**, dan manusia masuk hanya pada titik-titik keputusan yang memang menuntut pertimbangan manusiawi.
+
+Lapis 3 inilah yang McKinsey sebut sebagai *rewiring*, dan tanpa lapis ini, adopsi AI cenderung berakhir di paradox.[[4]](https://www.mckinsey.com/~/media/mckinsey/business%20functions/mckinsey%20digital/our%20insights/a%20generative%20ai%20reset%20rewiring%20to%20turn%20potential%20into%20value%20in%202024/a-generative-ai-reset-rewiring-to-turn-potential-into-value-in-2024.pdf)
+
+<aside>
+⚠️
+
+Kekeliruan paling umum yang kami lihat di organisasi Indonesia tahun 2025–2026: mengira Lapis 1 sudah berarti transformasi, dan menunda Lapis 2 dan 3 sampai "nanti, setelah tim siap". Bahaya: kompetitor yang menyentuh Lapis 3 sambil Anda masih di Lapis 1 akan unggul *tidak sedikit, tetapi jauh sekali*.
+
+</aside>
+
+## 4. Studi Kasus — Pak Yusuf dan dua kantor cabang
+
+Mari kita bawa tiga lapis itu turun ke lantai cabang.
+
+[ASUMSI: studi kasus ini adalah simulasi gabungan dari pola yang umum ditemui di industri perbankan retail di kota tier-1 Indonesia 2025–2026; tokoh dan nama cabang fiktif.]
+
+Pak Yusuf memimpin Cabang Darmo. Rekan satu angkatannya, Bu Lia, memimpin Cabang Gubeng — cabang dengan profil nasabah dan ukuran tim yang nyaris identik. Keduanya menerima briefing yang sama dari kantor pusat: implementasikan AI underwriting + AI contact center, susun roadmap kolaborasi tim-AI.
+
+### Bulan 1–2: Cabang Darmo (pendekatan Lapis 1)
+
+Pak Yusuf mengambil pendekatan yang ia kuasai: *project management* klasik. Ia menunjuk dua anggota tim sebagai *AI champion*, mengirim mereka pelatihan, lalu meminta mereka mengintegrasikan AI underwriting ke proses analisis kredit yang sudah ada. Tim contact center diberi tahu, *"chatbot akan menangani pertanyaan level 1, kalian tangani yang lebih kompleks"*.
+
+Hasil bulan 2: rata-rata waktu pemrosesan kredit konsumtif turun 22%. *Direksi senang.* Kepuasan nasabah di contact center naik sedikit (4 poin NPS). *Tim senang.* Pak Yusuf merasa di jalur yang benar.
+
+### Bulan 1–2: Cabang Gubeng (pendekatan Lapis 1 + Lapis 2)
+
+Bu Lia mengambil pendekatan yang lebih lambat di awal. Sebelum mengintegrasikan apa pun, ia mengundang seluruh tim ke ruang rapat selama tiga hari beruntun (sore, dua jam) dan mengajukan satu pertanyaan yang sama setiap sore:
+
+> *Kalau AI mengerjakan separuh pekerjaan kita, apa yang akan tersisa yang justru paling bernilai — dan paling sulit — untuk kita kerjakan sebagai manusia?*
+> 
+
+Tiga hari itu menghasilkan **peta peran baru**, di mana setiap orang mengetahui (a) bagian pekerjaannya yang akan dipindahkan ke AI, (b) bagian pekerjaannya yang akan **berubah bentuk** karena harus mengawasi AI, dan (c) bagian pekerjaannya yang **naik nilainya** karena justru tidak bisa dikerjakan AI.
+
+Integrasi teknis di Cabang Gubeng baru dimulai akhir minggu kedua. Hasil bulan 2: rata-rata waktu pemrosesan kredit turun 18% (sedikit di bawah Cabang Darmo), tetapi **turnover staf nol**, dan **dua orang dengan inisiatif sendiri** sudah mulai membangun proses baru untuk *cross-sell* berbasis sinyal yang dihasilkan AI underwriting.
+
+### Bulan 6: gap mulai melebar
+
+Pada bulan 6, hasilnya tidak lagi mirip.
+
+**Cabang Darmo (Pak Yusuf):**
+
+- Waktu pemrosesan kredit turun 28% (lebih banyak penghematan jam kerja).
+- Tetapi 4 dari 23 staf mengundurkan diri — sebagian besar berkata, dalam *exit interview* yang sopan, bahwa mereka *"tidak lagi yakin apa peran saya"*.
+- Tidak ada inisiatif baru muncul dari tim. AI dipakai persis seperti yang diinstruksikan kantor pusat, tidak lebih.
+- NPS naik 5 poin dari baseline.
+- **Beban Pak Yusuf naik**: karena tim tidak inisiatif, ia menjadi penyaring keputusan untuk semua kasus tepi AI underwriting.
+
+**Cabang Gubeng (Bu Lia):**
+
+- Waktu pemrosesan kredit turun 26% (sedikit di bawah Darmo).
+- Turnover masih nol.
+- **Dua inisiatif lokal yang lahir dari tim**: program *cross-sell* berbasis sinyal AI (kontribusi pendapatan 7% di Q2), dan ritual mingguan "review keputusan AI" yang menemukan tiga pola bias yang dilaporkan ke kantor pusat — dan diterapkan secara nasional.
+- NPS naik 9 poin.
+- **Beban Bu Lia turun**: karena tim sudah membangun proses sendiri untuk mengawasi AI, ia bisa memakai waktunya untuk *hal lain*.
+
+<aside>
+📖
+
+**Pelajaran dari kasus Pak Yusuf dan Bu Lia**
+
+1. **Penghematan jam kerja jangka pendek bukan tolok ukur keberhasilan adopsi AI.** Cabang Darmo mengirit lebih banyak, tetapi kehilangan orang dan inisiatif.
+2. **Reset peran (Lapis 2) tidak bisa dilewati.** Tim yang tidak tahu peran barunya akan kehilangan motivasi atau pergi.
+3. **Investasi awal di percakapan tim soal "apa yang tersisa untuk kita?" adalah investasi tertinggi *return*-nya.** Tiga hari rapat Bu Lia bernilai jutaan rupiah dalam turnover yang tidak terjadi dan inisiatif yang muncul organik.
+4. **Beban pemimpin akan naik kalau ia tidak mendelegasikan pengawasan AI ke timnya.** Pak Yusuf menjadi *bottleneck*; Bu Lia tidak.
+5. **Adopsi AI yang berhasil ditandai oleh hal yang tidak ada di laporan adopsi**: orang yang masih betah, ide baru yang muncul, beban yang turun secara *struktural* bukan kosmetik.
+</aside>
+
+## 5. Jalan Baru MultiClaw — Reset sebagai kesempatan, bukan ancaman
+
+Di sinilah arsitektur MultiClaw yang kita perkenalkan di Buku I menjadi sangat relevan untuk dunia kerja.
+
+Kalau di Buku I, MultiClaw kita pakai untuk **belajar** — merakit tim agen yang menjadi tutor multi-peran — maka di Buku II, MultiClaw kita pakai untuk **bekerja**: merakit tim agen yang menjadi **rekan kerja multi-peran** dalam alur tugas sehari-hari.
+
+Bu Lia, tanpa pernah mendengar istilah MultiClaw, secara intuitif sudah membangun pola itu. Mari kita beri nama pada apa yang ia lakukan:
+
+- **🔎 Researcher kerja** — agen yang menyusun ringkasan harian (berita industri, perubahan regulasi, sinyal pasar) sebelum tim datang.
+- **📊 Analyst kerja** — agen yang membaca data nasabah dan menyiapkan rekomendasi tindakan untuk ditinjau manusia.
+- **🗣️ Communicator kerja** — agen yang menyusun draf komunikasi (email, follow-up, ringkasan rapat) yang langsung bisa diedit manusia.
+- **🛡️ Compliance kerja** — agen yang memeriksa keputusan dari sudut pandang regulasi dan etika sebelum dieksekusi.
+- **🪞 Reflector kerja** — agen yang menanyai manusia di akhir hari/minggu: *"keputusan apa yang Anda buat hari ini yang ingin Anda evaluasi besok?"*
+
+Lima peran ini bukan resep wajib. Mereka adalah **pola dasar** yang bisa Anda adaptasi ke konteks industri Anda. Manajer pabrik akan menambahkan agen *Quality* dan agen *Logistik*. Pemilik restoran akan menambahkan agen *Stok* dan agen *Ulasan pelanggan*. Direktur sekolah akan menambahkan agen *Kurikulum* dan agen *Hubungan orang tua*.
+
+Yang konstan adalah **prinsip-prinsipnya**:
+
+1. **Banyak peran sempit, bukan satu agen lebar.** Sama seperti di Buku I, satu agen serba bisa cenderung mediocre. Tim agen dengan peran sempit cenderung **bisa dipercaya**.
+2. **Manusia di titik keputusan, agen di titik pengulangan.** Aturan ini akan menjadi mantra di Buku II.
+3. **Output agen masuk ke manusia, bukan langsung ke pelanggan/keputusan akhir** — setidaknya untuk pekerjaan bernilai tinggi atau berisiko etis.
+4. **Pemimpin tim adalah arsitek dialog**, bukan operator AI. (Anda akan melihat gema dari Bab 7 Buku I di sini.)
+
+## 6. Latihan Reflektif
+
+Sebelum lanjut ke Bab 2, kerjakan tiga hal kecil ini untuk pekerjaan Anda sendiri:
+
+<aside>
+📝
+
+**Latihan 1.1 — Audit tiga lapis**
+
+1. **Lapis 1 (tugas):** Tuliskan 5 tugas dalam pekerjaan Anda hari ini yang Anda yakin **sebagian besar bisa dikerjakan AI** dalam 12 bulan ke depan.
+2. **Lapis 2 (peran):** Kalau 5 tugas itu benar-benar berpindah, **peran apa yang akan tersisa untuk Anda?** Tulis dalam satu kalimat.
+3. **Lapis 3 (arsitektur):** Kalau seluruh tim Anda mengalami reset serupa, **bentuk tim baru** seperti apa yang paling masuk akal? Berapa orang manusia, berapa peran agen, dan di titik mana manusia mengambil keputusan?
+
+Kalau Anda tidak bisa menjawab pertanyaan 2 dan 3, itu **bukan kegagalan Anda**. Itu sinyal bahwa percakapan ini belum pernah Anda lakukan secara sadar — dan inilah saat yang tepat untuk memulainya.
+
+</aside>
+
+## 7. Sketsa 2030 — Pak Yusuf, lima tahun kemudian
+
+**Mei 2030.** Pak Yusuf, sekarang 49 tahun, masih memimpin Cabang Darmo. Dari 23 staf di tahun 2026, sekarang ia memimpin **11 manusia dan 9 agen**. Bukan karena 12 orang dipecat — 12 orang itu pindah ke peran baru di kantor pusat, ke cabang lain, dua di antaranya keluar dan membuka usaha sendiri.
+
+Rapat pagi cabang Darmo tahun 2030 tidak lagi dimulai dengan presentasi *dashboard* oleh manusia. Ketika Pak Yusuf masuk pukul 07.30, ringkasan harian sudah ada di layar besar di ruang rapat: tiga sinyal nasabah penting yang muncul semalam, dua perubahan regulasi yang relevan, satu eskalasi etis yang sengaja **tidak diputuskan agen** karena menyangkut nasabah lansia yang mungkin tidak memahami risiko produk yang dipilihnya.
+
+Manusia mengambil eskalasi itu. Manusia memutuskan. Manusia menelepon nasabah, bukan agen.
+
+Di *whiteboard* di pojok ruangan, kalimat yang Pak Yusuf tulis dengan spidol merah lima tahun lalu masih ada — dengan tambahan dua baris di bawahnya, ditulis dengan spidol hitam, di tahun yang berbeda-beda:
+
+> *Ini bukan tentang AI. Ini tentang siapa yang masih dibutuhkan kalau AI mengerjakan separuh pekerjaan kita.* (2026)
+> 
+
+> *Jawabannya: orang yang tahu pertanyaan apa yang harus ditanyakan kepada AI, dan kapan tidak boleh menanyakannya.* (2028)
+> 
+
+> *Dan: orang yang tahu kapan harus berhenti.* (2030)
+> 
+
+Pak Yusuf tidak kehilangan pekerjaannya. Pekerjaannya berubah, dan ia berubah bersamanya.
+
+[ASUMSI: skenario 2030 ini bersifat ilustratif dan optimistis-realistis; jalur aktual akan dipengaruhi banyak faktor lokal seperti regulasi sektor keuangan Indonesia, dinamika serikat pekerja, dan kecepatan adopsi sistem inti bank.]
+
+---
+
+<aside>
+➡️
+
+**Lanjut ke:** Bab 2 — *Asisten AI vs Rekan AI: Pergeseran Mindset yang Menentukan Segalanya*.
+
+</aside>

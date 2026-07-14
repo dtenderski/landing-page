@@ -1,0 +1,117 @@
+Berikut **Template Document Generator** untuk **“Ringkasan Status + Timeline (OSS/NIB)”** yang otomatis mengambil `timeline_summary` (bullet) dari Otak Proyek, lalu menghasilkan dokumen 1 halaman yang rapi untuk **internal** atau **klien**.
+
+## 1) Template Dokumen (MVP) — “Ringkasan Status NIB (OSS)”
+
+**Nama template:** Ringkasan Status NIB (OSS)  
+
+**Kategori:** Laporan Status  
+
+**Tujuan:** Memberikan update singkat + timeline tahapan terbaru berdasarkan data OSS yang sudah disimpan di proyek.  
+
+**Sumber data utama (Otak Proyek):**
+
+- `client_name`
+- `project_name`
+- `nib_number`
+- `process_stage`
+- `process_status`
+- `last_checked_date`
+- `timeline_summary`
+- `latest_update`
+- (opsional) `next_action`
+
+**Input tambahan saat generate (manual):**
+
+- `audience` (Pilihan tunggal): **Internal** / **Klien**
+- `tone` (Pilihan tunggal): Profesional / Formal / Ramah
+- `note_to_recipient` (opsional): catatan khusus
+
+## 2) Struktur dokumen (output)
+
+### A. Header
+
+- **Judul:** Ringkasan Status NIB (OSS)
+- **Klien:** client_name
+- **Proyek:** project_name
+- **Nomor NIB:** nib_number
+- **Terakhir dicek:** last_checked_date
+
+### B. Status saat ini
+
+- **Tahap saat ini:** process_stage
+- **Status umum:** process_status
+- **Update terakhir:**
+    
+    latest_update
+    
+
+### C. Timeline tahapan (dari OSS)
+
+Tempel apa adanya dari `timeline_summary` (format bullet):
+
+- timeline_summary
+
+### D. Langkah berikutnya
+
+Untuk **Internal**:
+
+- **Langkah berikutnya (saran):** next_action
+- Jika `next_action` kosong, AI isi 1–3 langkah yang paling masuk akal berdasarkan timeline.
+
+Untuk **Klien**:
+
+- Versi lebih ringkas + sopan, fokus ke apa yang perlu klien lakukan (mis. dokumen kurang).
+
+### E. Catatan (opsional)
+
+- note_to_recipient
+
+## 3) Aturan AI block (biar konsisten, tidak “mengarang”)
+
+Tambahkan 2 blok AI yang terkontrol:
+
+1) **AI: Ringkas timeline jadi 3–5 poin**  
+
+Input: `timeline_summary`  
+
+Aturan:
+
+- Jangan menambah tahapan yang tidak ada.
+- Jangan menebak tanggal.
+- Kalau ada ketidakpastian, tulis “Belum tercantum di OSS”.
+
+2) **AI: Saran langkah berikutnya**  
+
+Input: `process_status`, `timeline_summary`, `latest_update`  
+
+Aturan:
+
+- Maks 3 langkah.
+- Jika status “Menunggu”, sarankan “tunggu & cek ulang pada tanggal X” atau “siapkan dokumen jika diminta”.
+- Jika ada indikasi “Blocked/Revisi”, sarankan tindakan follow-up.
+
+## 4) Output format & tombol
+
+**Output format (MVP):**
+
+- Copy teks
+- Simpan sebagai Draft dokumen proyek
+
+**Tahap berikutnya (opsional):**
+
+- Export PDF/DOCX
+- Generate “Pesan WhatsApp follow-up” dari dokumen ini
+
+## 5) Dependensi & guardrails
+
+- Jika `timeline_summary` kosong:
+    - tampilkan warning: **“Belum ada timeline. Jalankan Action ‘Ambil Status + Timeline’ dulu.”**
+    - tawarkan tombol: **Jalankan Cek Status (butuh konfirmasi)**
+
+---
+
+Kalau Anda setuju, saya lanjutkan lagi dengan **2 template pendamping** yang biasanya paling kepakai:
+
+1) **Pesan WhatsApp update status ke klien (1:1)** (singkat, sopan, CTA jelas)  
+
+2) **Laporan internal “Snapshot Proyek”** (lebih detail, termasuk risiko & kendala)

@@ -1,0 +1,97 @@
+<aside>
+🔍
+
+**Lampiran C — Laporan Audit Internal ISO/IEC 17024**
+
+Digunakan oleh Tim Audit Internal LSP SDMKI di Tahap 3 (Pre-Assessment Internal) sesuai klausul 10.6 ISO 17024.
+
+**No. Dokumen:** SOP-LSP-KAN-001/LAMP-C | **Versi:** 1.0
+
+</aside>
+
+## 1. Informasi Audit
+
+| **Item** | **Detail** | Periode Audit | [TGL] – [TGL] |
+| --- | --- | --- | --- |
+| Tanggal Pelaporan | […] | Lead Auditor Internal | […] |
+| Tim Audit | […] | Lingkup Audit | Seluruh klausul ISO/IEC 17024 + persyaratan tambahan KAN K-09 |
+| Standar Acuan | SNI ISO/IEC 17024:2012, KAN U-01 Rev.1, KAN K-09 | Auditee (Fungsi) | Direktur, Manajer Mutu, Manajer Sertifikasi, Manajer IT, Komite Skema, Komite Ketidakberpihakan |
+
+## 2. Ringkasan Eksekutif
+
+[Narasi 1–2 paragraf: kesiapan keseluruhan, jumlah temuan major/minor/observasi, rekomendasi go/no-go ke pengajuan KANMIS.]
+
+**Skor Kesiapan Keseluruhan:** [__] %
+
+**Rekomendasi:** [ ] Lanjut ke Pengajuan KANMIS  [ ] Tunda — selesaikan temuan major dahulu
+
+## 3. Statistik Temuan
+
+| **Kategori** | **Jumlah** | **% dari Total Item** | Major (Ketidaksesuaian Kritis) | […] | […] |
+| --- | --- | --- | --- | --- | --- |
+| Minor (Ketidaksesuaian Ringan) | […] | […] | Observasi (Peluang Perbaikan) | […] | […] |
+| Sesuai | […] | […] | **Total Item Diperiksa** | **38** | **100%** |
+
+## 4. Temuan Detail per Klausul
+
+### Format Temuan
+
+```
+ID Temuan      : F-[NN]
+Klausul        : [misal 9.7 — Banding]
+Kategori       : [Major/Minor/Observasi]
+Deskripsi      : [Apa yang ditemukan]
+Bukti Objektif : [Dokumen/wawancara/observasi yang menjadi dasar]
+Dampak         : [Risiko terhadap akreditasi KAN]
+Akar Masalah   : [Hasil 5-Why / Fishbone]
+Tindakan Korektif Disarankan : [...]
+PIC            : [...]
+Tenggat        : [TGL]
+```
+
+### Daftar Temuan
+
+| **ID** | **Klausul** | **Kategori** | **Deskripsi Singkat** | **PIC** | **Tenggat** | F-01 | […] | […] | […] | […] | […] |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| F-02 | […] | […] | […] | […] | […] | F-03 | […] | […] | […] | […] | […] |
+
+## 5. Kesesuaian per Klausul (Mapping)
+
+| **Klausul** | **Status** | **Bukti Utama** | **Catatan** |
+| --- | --- | --- | --- |
+| 5 — Struktural | [ ] Sesuai [ ] Sebagian [ ] Belum | […] | […] |
+| 7 — Rekaman & Informasi | [ ] Sesuai [ ] Sebagian [ ] Belum | […] | […] |
+| 9 — Persyaratan Proses | [ ] Sesuai [ ] Sebagian [ ] Belum | […] | […] |
+| KAN K-09 (Tambahan) | [ ] Sesuai [ ] Sebagian [ ] Belum | […] | […] |
+
+## 6. Rekomendasi & Tindak Lanjut
+
+1. [Rekomendasi prioritas tinggi]
+2. [Rekomendasi prioritas menengah]
+3. [Rekomendasi peluang perbaikan]
+
+## 7. Tanda Tangan
+
+**Lead Auditor Internal**
+
+---
+
+Nama: […]
+
+Tanggal: […]
+
+**Manajer Mutu**
+
+---
+
+Nama: […]
+
+Tanggal: […]
+
+**Direktur LSP SDMKI**
+
+---
+
+Nama: […]
+
+Tanggal: […]

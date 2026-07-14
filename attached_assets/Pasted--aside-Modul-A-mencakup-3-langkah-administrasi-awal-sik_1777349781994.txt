@@ -1,0 +1,49 @@
+<aside>
+📋
+
+**Modul A** mencakup 3 langkah administrasi awal siklus CSMS: Risk Assessment → Pre-Qualification → Selection (HSE Plan). Output modul ini menentukan apakah pekerjaan layak dilanjutkan dan kontraktor mana yang berhak award.
+
+</aside>
+
+## 🤖 Sub-Chatbot (Alat Bantu Level 4)
+
+| Agent | Trigger | Output |
+| --- | --- | --- |
+| **AGENT-RA** | "berapa risiko", "matriks 5×5" | Skor kemungkinan×keparahan, level risiko, daftar tahap CSMS yang berlaku |
+| **AGENT-PQ** | "audit PQ", "skor minimum" | Skoring 16 elemen, total %, status lulus/gugur, gap dokumen |
+| **AGENT-HSE** | "evaluasi HSE Plan", "bobot kriteria" | Penilaian per kriteria (bobot 100), gap, kondisi award |
+
+## 📝 Formulir & Alat Bantu
+
+- [Form 1 — Risk Assessment Pekerjaan](https://www.notion.so/Form-1-Risk-Assessment-Pekerjaan-a18b33a2b8834188b76061613d47a6f1?pvs=21)
+- [Form 2 — Prakualifikasi (PQ)](https://www.notion.so/Form-2-Prakualifikasi-PQ-6e49906b3c324b0dbb1858df72a19848?pvs=21)
+- [Form 3 — HSE Plan (Seleksi Kontraktor)](https://www.notion.so/Form-3-HSE-Plan-Seleksi-Kontraktor-35de1d1455b949dcae1317bf1530c09b?pvs=21)
+- [Kalkulator Risiko & Skor PQ](https://www.notion.so/Kalkulator-Risiko-Skor-PQ-207fe0cc23854d8c978c1a87d69149a7?pvs=21)
+- [](https://www.notion.so/efce751940844463add38887420ebf93?pvs=21)
+
+## 🔄 Alur Modul A
+
+1. **Pemilik pekerjaan** mengisi Form 1 → tentukan tingkat risiko (Rendah/Moderat/Tinggi/Sangat Tinggi/Ekstrem).
+2. Bila risiko **Moderat ke atas** → wajib lanjut ke PQ.
+3. **Procurement** kirim kuesioner PQ ke kontraktor calon → terima jawaban + bukti.
+4. **Auditor CSMS** isi Form 2 → hitung skor PQ % → cocokkan ke passing grade per tingkat risiko.
+5. **Risiko Sangat Tinggi/Ekstrem** → wajib verifikasi lapangan + sertifikat SMK3.
+6. Kontraktor lulus → diundang submit **HSE Plan**.
+7. **HSE Officer + User** isi Form 3 → skor HSE Plan (bobot 100).
+8. Skor tertinggi + harga wajar → **Contract Award**.
+
+## 🎯 Output Modul A
+
+- Tingkat risiko pekerjaan (terdokumentasi).
+- Daftar kontraktor lulus PQ (update Data Bank).
+- Pemenang seleksi HSE Plan (siap masuk Modul B).
+
+## 📐 Passing Grade PQ per Tingkat Risiko
+
+| Tingkat Risiko | Skor PQ Minimum |
+| --- | --- |
+| Rendah | < 30% (PQ opsional) |
+| Moderat | 30 – 50% |
+| Tinggi | 51 – 75% |
+| Sangat Tinggi | 76 – 85% (+ verifikasi lapangan) |
+| Ekstrem | 86 – 100% (+ verifikasi lapangan + SMK3) |

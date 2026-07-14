@@ -1,0 +1,767 @@
+Berikut lanjutan **SBUJPTL Coach**, masuk ke bagian **production logic**: webhook, event handling, WhatsApp/CRM routing, validation, import knowledge base, role admin, serta template notifikasi. Bagian ini tetap memakai data dari file yang Anda kirim tentang **SKTTK, PJT/TT, jenis usaha, bidang/subbidang, kualifikasi, alur SBUJPTL, dan IUJPTL**. 
+
+## 126. Webhook event architecture
+
+```yaml id="webhook_architecture_01"
+webhook_architecture:
+  id: sbujptl_webhook_events
+  purpose: >
+    Menghubungkan chatbot dengan sistem eksternal seperti WhatsApp,
+    CRM, dashboard admin, email notification, dan pipeline konsultan.
+
+  inbound_events:
+    - id: user_message_received
+      source: "web_widget | whatsapp | api"
+      description: "Pesan baru dari pengguna masuk ke sistem."
+      handler: "handle_user_message"
+
+    - id: quick_reply_selected
+      source: "chat_widget"
+      description: "Pengguna memilih tombol quick reply."
+      handler: "handle_quick_reply"
+
+    - id: document_assessment_answered
+      source: "chatbot"
+      description: "Pengguna menjawab pertanyaan checklist dokumen."
+      handler: "handle_document_answer"
+
+    - id: skttk_prescreening_answered
+      source: "chatbot"
+      description: "Pengguna menjawab pertanyaan pra-cek SKTTK."
+      handler: "handle_skttk_answer"
+
+    - id: lead_form_submitted
+      source: "chatbot"
+      description: "Pengguna mengisi form konsultasi."
+      handler: "handle_lead_submission"
+
+  outbound_events:
+    - id: notify_admin_new_lead
+      target: "admin_dashboard | email | whatsapp_internal"
+      description: "Notifikasi lead baru ke admin."
+
+    - id: create_crm_lead
+      target: "crm"
+      description: "Membuat lead baru di CRM."
+
+    - id: update_pipeline_stage
+      target: "admin_dashboard"
+      description: "Mengubah status pipeline pengurusan."
+
+    - id: send_user_summary
+      target: "chat | email | whatsapp"
+      description: "Mengirim ringkasan kesiapan ke pengguna."
+```
+
+## 127. Webhook payload: user message
+
+```json id="webhook_user_message_01"
+{
+  "event": "user_message_received",
+  "timestamp": "{{timestamp}}",
+  "source": "web_widget",
+  "session": {
+    "session_id": "{{session_id}}",
+    "user_id": "{{user_id}}",
+    "current_flow": "{{current_flow}}",
+    "current_node": "{{current_node}}"
+  },
+  "message": {
+    "text": "{{user_message}}",
+    "attachments": [],
+    "metadata": {
+      "language": "id-ID",
+      "timezone": "Asia/Jakarta"
+    }
+  },
+  "context": {
+    "selected_classification": "{{selected_classification}}",
+    "selected_field": "{{selected_field}}",
+    "selected_subfield": "{{selected_subfield}}",
+    "target_qualification": "{{target_qualification}}",
+    "skttk_status": "{{skttk_status}}"
+  }
+}
+```
+
+## 128. Webhook payload: bot response
+
+```json id="webhook_bot_response_01"
+{
+  "event": "bot_response_generated",
+  "timestamp": "{{timestamp}}",
+  "session_id": "{{session_id}}",
+  "intent": {
+    "name": "{{intent_name}}",
+    "confidence": "{{intent_confidence}}",
+    "entities": {
+      "classification_type": "{{classification_type}}",
+      "field": "{{field}}",
+      "subfield": "{{subfield}}",
+      "qualification": "{{qualification}}",
+      "document_name": "{{document_name}}"
+    }
+  },
+  "response": {
+    "text": "{{bot_message}}",
+    "quick_replies": [
+      "{{quick_reply_1}}",
+      "{{quick_reply_2}}",
+      "{{quick_reply_3}}"
+    ],
+    "cards": [],
+    "next_node": "{{next_node}}"
+  },
+  "analytics": {
+    "track_event": true,
+    "event_name": "{{event_name}}"
+  }
+}
+```
+
+## 129. CRM lead object final
+
+```json id="crm_lead_object_final_01"
+{
+  "lead": {
+    "source": "SBUJPTL Coach",
+    "status": "new",
+    "priority": "{{lead_priority}}",
+    "created_at": "{{timestamp}}",
+    "contact": {
+      "name": "{{contact_name}}",
+      "phone": "{{phone_number}}",
+      "email": "{{email}}"
+    },
+    "company": {
+      "name": "{{company_name}}",
+      "legal_entity_type": "{{legal_entity_type}}",
+      "nib_status": "{{nib_status}}",
+      "npwp_status": "{{npwp_status}}"
+    },
+    "service_request": {
+      "target_service": "{{target_service}}",
+      "business_goal": "{{business_goal}}",
+      "needs_skttk": "{{needs_skttk}}",
+      "needs_sbujptl": "{{needs_sbujptl}}",
+      "needs_iujptl": "{{needs_iujptl}}"
+    },
+    "classification": {
+      "jenis_usaha": "{{target_classification}}",
+      "bidang": "{{target_field}}",
+      "subbidang": "{{selected_subfield}}",
+      "kualifikasi": "{{target_qualification}}"
+    },
+    "technical_personnel": {
+      "has_pjt": "{{has_pjt}}",
+      "pjt_skttk_level": "{{pjt_level}}",
+      "has_tt": "{{has_tt}}",
+      "tt_count": "{{tt_count}}",
+      "tt_min_level": "{{tt_min_level}}",
+      "duplicate_assignment_risk": "{{duplicate_assignment_risk}}"
+    },
+    "readiness": {
+      "combined_score": "{{combined_score}}",
+      "readiness_label": "{{readiness_label}}",
+      "missing_documents": "{{missing_documents}}",
+      "priority_gaps": "{{priority_gaps}}"
+    },
+    "recommended_action": "{{recommended_admin_action}}"
+  }
+}
+```
+
+## 130. Validation rules
+
+```yaml id="validation_rules_01"
+validation_rules:
+  phone_number:
+    rule: "must_start_with_08_or_62"
+    error_message: "Nomor WhatsApp belum valid. Gunakan format 08xxx atau 62xxx."
+
+  email:
+    rule: "valid_email_format_or_optional"
+    error_message: "Format email belum sesuai. Anda dapat melewati jika belum ingin mengisi email."
+
+  company_name:
+    rule: "min_length_3"
+    error_message: "Nama perusahaan terlalu pendek. Mohon isi nama perusahaan dengan jelas."
+
+  net_worth:
+    rule: "numeric_or_range_selection"
+    error_message: "Mohon pilih rentang kekayaan bersih atau masukkan angka."
+
+  skttk_level:
+    allowed_values:
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+    error_message: "Level SKTTK yang dapat dipilih adalah level 2 sampai 6."
+
+  qualification:
+    allowed_values:
+      - "Kecil"
+      - "Menengah"
+      - "Besar"
+      - "Belum tahu"
+
+  business_type:
+    allowed_values:
+      - "Konsultansi"
+      - "Pembangunan/Pemasangan"
+      - "Pemeriksaan/Pengujian"
+      - "Pengoperasian"
+      - "Pemeliharaan"
+      - "Belum tahu"
+
+  field:
+    allowed_values:
+      - "Pembangkitan"
+      - "Transmisi"
+      - "Distribusi"
+      - "Instalasi Pemanfaatan"
+      - "Belum tahu"
+```
+
+## 131. Admin notification templates
+
+```yaml id="admin_notification_templates_01"
+admin_notifications:
+  new_hot_lead:
+    title: "Hot Lead SBUJPTL Baru"
+    message: >
+      Lead prioritas tinggi baru masuk dari SBUJPTL Coach.
+
+      Perusahaan: {{company_name}}
+      Kontak: {{contact_name}} - {{phone_number}}
+      Kebutuhan: {{target_service}}
+      Jenis usaha: {{target_classification}}
+      Bidang/subbidang: {{target_field}} / {{selected_subfield}}
+      Kualifikasi: {{target_qualification}}
+      Status: {{readiness_label}}
+
+      Rekomendasi: {{recommended_admin_action}}
+
+  missing_skttk:
+    title: "Lead Butuh Bantuan SKTTK"
+    message: >
+      Lead ini belum memiliki SKTTK lengkap.
+
+      Perusahaan: {{company_name}}
+      Bidang: {{target_field}}
+      Subbidang: {{selected_subfield}}
+      Status PJT: {{has_pjt}}
+      Status TT: {{has_tt}}
+      Gap: {{skttk_gap_summary}}
+
+      Tindak lanjut: Validasi kebutuhan PJT/TT dan okupasi SKTTK.
+
+  duplicate_assignment_risk:
+    title: "Risiko Rangkap PJT/TT"
+    message: >
+      Lead terindikasi memiliki risiko PJT/TT rangkap.
+
+      Perusahaan: {{company_name}}
+      Kontak: {{contact_name}}
+      Status rangkap: {{duplicate_assignment_status}}
+
+      Tindak lanjut: Validasi status penugasan sebelum proses pengajuan.
+
+  skttk_expiring:
+    title: "SKTTK Mendekati Masa Berlaku Akhir"
+    message: >
+      SKTTK pada lead ini mendekati masa berlaku akhir.
+
+      Perusahaan: {{company_name}}
+      Tanggal terbit: {{skttk_issue_date}}
+      Estimasi akhir berlaku: {{skttk_expiry_date}}
+
+      Tindak lanjut: Hubungi pengguna untuk validasi atau perpanjangan.
+```
+
+## 132. User notification templates
+
+```yaml id="user_notification_templates_01"
+user_notifications:
+  consultation_received:
+    message: >
+      Terima kasih. Permintaan konsultasi Anda sudah tercatat.
+
+      Ringkasan:
+      - Perusahaan: {{company_name}}
+      - Kebutuhan: {{target_service}}
+      - Jenis usaha: {{target_classification}}
+      - Bidang: {{target_field}}
+      - Status awal: {{readiness_label}}
+
+      Tim kami dapat menindaklanjuti berdasarkan data ini.
+
+  document_missing_reminder:
+    message: >
+      Berdasarkan cek awal, beberapa dokumen masih perlu dilengkapi:
+
+      {{missing_documents}}
+
+      Anda dapat menyiapkan dokumen tersebut sebelum konsultasi lanjutan
+      agar proses review lebih cepat.
+
+  skttk_next_step:
+    message: >
+      Untuk menyiapkan SKTTK, langkah berikutnya adalah memastikan calon PJT/TT,
+      memilih okupasi yang sesuai, menyiapkan dokumen personel, lalu mengikuti
+      proses pembekalan dan uji kompetensi.
+
+  tender_fast_track:
+    message: >
+      Karena kebutuhan Anda berkaitan dengan tender, pastikan klasifikasi,
+      bidang, subbidang, kualifikasi, PJT/TT, SKTTK, dan dokumen perusahaan
+      sesuai dengan dokumen tender.
+```
+
+## 133. Import format: classification catalog CSV
+
+```csv id="classification_catalog_csv_01"
+id,jenis_usaha,bidang,subbidang,support_status,notes
+konsultansi_pembangkitan_plts,Konsultansi,Pembangkitan,PLTS,supported,Konsultansi bidang pembangkitan PLTS
+pembangunan_distribusi_jtm,Pembangunan/Pemasangan,Distribusi,Jaringan Tegangan Menengah,supported,Pemasangan jaringan distribusi TM
+pembangunan_distribusi_jtr,Pembangunan/Pemasangan,Distribusi,Jaringan Tegangan Rendah,supported,Pemasangan jaringan distribusi TR
+pemeliharaan_instalasi_tr,Pemeliharaan,Instalasi Pemanfaatan,Tegangan Rendah,supported,Pemeliharaan instalasi pemanfaatan TR
+pengoperasian_pembangkitan_pltd,Pengoperasian,Pembangkitan,PLTD,supported,Pengoperasian pembangkitan PLTD
+pemeriksaan_transmisi_gardu_induk,Pemeriksaan/Pengujian,Transmisi,Gardu Induk,limited,Perlu konfirmasi admin
+```
+
+## 134. Import format: SKTTK occupation CSV
+
+```csv id="skttk_occupation_csv_01"
+id,bidang,occupation,related_subfield,notes
+occ_plts,Pembangkitan,Laik Operasi PLTS,PLTS,Okupasi untuk pembangkit tenaga surya
+occ_pltu,Pembangkitan,Laik Operasi PLTU,PLTU,Okupasi untuk pembangkit tenaga uap
+occ_sutt,Transmisi,Laik Operasi SUTT,Tegangan Tinggi,Saluran udara tegangan tinggi
+occ_sutet,Transmisi,Laik Operasi SUTET,Tegangan Ekstra Tinggi,Saluran udara tegangan ekstra tinggi
+occ_sutm,Distribusi,Laik Operasi SUTM,Jaringan Tegangan Menengah,Distribusi tegangan menengah
+occ_sutr,Distribusi,Laik Operasi SUTR,Jaringan Tegangan Rendah,Distribusi tegangan rendah
+occ_gardu_luar,Distribusi,Laik Operasi Gardu Distribusi Pasangan Luar,Gardu Distribusi,Distribusi gardu luar
+occ_instalasi_tr,Instalasi Pemanfaatan,Laik Operasi Instalasi Pemanfaatan Tegangan Rendah,Tegangan Rendah,Instalasi pemanfaatan TR
+```
+
+## 135. Import format: document checklist CSV
+
+```csv id="document_checklist_csv_01"
+id,stage,label,required,question,help_text
+akta_sk,Legalitas,Akta dan SK Pengesahan,true,Apakah Akta dan SK Pengesahan sudah tersedia?,Dokumen legalitas dasar badan usaha
+nib,Legalitas,NIB,true,Apakah NIB sudah tersedia?,NIB diperlukan sebagai identitas berusaha
+npwp_company,Legalitas,NPWP Perusahaan,true,Apakah NPWP perusahaan sudah tersedia?,Identitas perpajakan badan usaha
+ktp_npwp_pengurus,Data Pengurus,KTP dan NPWP Pengurus,true,Apakah data pengurus sudah tersedia?,Untuk verifikasi pengurus dan pemegang saham
+pjt_skttk,Teknis,SKTTK PJT,true,Apakah PJT sudah memiliki SKTTK?,Komponen penting untuk validasi teknis
+tt_skttk,Teknis,SKTTK TT,true,Apakah TT sudah memiliki SKTTK?,Komponen penting sesuai kualifikasi
+laporan_keuangan,Keuangan,Laporan Keuangan,true,Apakah laporan keuangan sudah tersedia?,Untuk pemetaan kemampuan usaha
+company_profile,Profil,Company Profile,true,Apakah company profile sudah tersedia?,Untuk menjelaskan profil dan pengalaman usaha
+struktur_organisasi,Profil,Struktur Organisasi,true,Apakah struktur organisasi tersedia?,Termasuk nama pemilik SKTTK
+```
+
+## 136. Knowledge import service
+
+```yaml id="knowledge_import_service_01"
+knowledge_import_service:
+  id: sbujptl_knowledge_importer
+  purpose: >
+    Memungkinkan admin mengimpor data klasifikasi, okupasi SKTTK, FAQ,
+    dan checklist dokumen dari CSV/JSON ke knowledge base chatbot.
+
+  supported_formats:
+    - "csv"
+    - "json"
+
+  import_types:
+    - id: classification_catalog
+      required_columns:
+        - "id"
+        - "jenis_usaha"
+        - "bidang"
+        - "subbidang"
+        - "support_status"
+
+    - id: skttk_occupation
+      required_columns:
+        - "id"
+        - "bidang"
+        - "occupation"
+        - "related_subfield"
+
+    - id: document_checklist
+      required_columns:
+        - "id"
+        - "stage"
+        - "label"
+        - "required"
+        - "question"
+
+    - id: faq
+      required_columns:
+        - "id"
+        - "question"
+        - "answer"
+
+  validation:
+    - "Cek kolom wajib."
+    - "Cek duplicate id."
+    - "Cek empty value pada field penting."
+    - "Cek status supported/limited/unsupported."
+    - "Cek apakah bidang termasuk daftar resmi internal."
+    - "Cek apakah konten mengandung klaim terlarang."
+
+  import_workflow:
+    - "upload_file"
+    - "validate_schema"
+    - "preview_rows"
+    - "detect_errors"
+    - "admin_confirm"
+    - "import_to_draft"
+    - "review"
+    - "publish"
+```
+
+## 137. Content QA checker
+
+```yaml id="content_qa_checker_01"
+content_qa_checker:
+  id: sbujptl_content_quality_checker
+  purpose: >
+    Mengecek konten knowledge base sebelum dipublish agar tidak ada klaim
+    berisiko atau informasi yang terlalu pasti.
+
+  prohibited_phrases:
+    - "pasti terbit"
+    - "dijamin lolos"
+    - "langsung jadi"
+    - "tanpa verifikasi"
+    - "pinjam nama"
+    - "tidak perlu SKTTK"
+    - "tidak perlu PJT"
+    - "bisa pakai dokumen apa saja"
+
+  required_phrases_for_assessment:
+    - "panduan awal"
+    - "perlu diverifikasi"
+    - "bukan keputusan resmi"
+
+  checks:
+    - id: guarantee_claim_check
+      description: "Mendeteksi klaim jaminan terbit/lulus."
+
+    - id: document_manipulation_check
+      description: "Mendeteksi saran manipulasi dokumen."
+
+    - id: pjt_tt_duplicate_check
+      description: "Mendeteksi saran penggunaan PJT/TT rangkap."
+
+    - id: disclaimer_presence_check
+      description: "Memastikan ada disclaimer pada hasil asesmen."
+
+    - id: conflict_data_check
+      description: "Memastikan data konflik diarahkan ke validasi admin."
+
+  output:
+    status:
+      - "passed"
+      - "needs_revision"
+      - "blocked"
+    report_fields:
+      - "issue_type"
+      - "content_location"
+      - "suggested_fix"
+```
+
+## 138. Example QA result
+
+```json id="content_qa_result_example_01"
+{
+  "qa_result": {
+    "status": "needs_revision",
+    "issues": [
+      {
+        "issue_type": "guarantee_claim_check",
+        "content_location": "faq.skttk_process.answer",
+        "detected_text": "sertifikat pasti terbit",
+        "suggested_fix": "Gunakan frasa: sertifikat dapat diproses setelah peserta memenuhi persyaratan dan dinyatakan lulus oleh asesor."
+      },
+      {
+        "issue_type": "disclaimer_presence_check",
+        "content_location": "assessment.document_readiness.result",
+        "detected_text": "Tidak ditemukan disclaimer",
+        "suggested_fix": "Tambahkan: Hasil ini adalah panduan awal dan bukan keputusan resmi sertifikasi."
+      }
+    ]
+  }
+}
+```
+
+## 139. Role-based admin UI actions
+
+```yaml id="admin_ui_actions_01"
+admin_ui_actions:
+  super_admin:
+    - "publish_knowledge_base"
+    - "approve_content_changes"
+    - "manage_admin_users"
+    - "export_all_leads"
+    - "view_audit_log"
+    - "configure_integration"
+
+  compliance_admin:
+    - "review_classification_rules"
+    - "review_skttk_matrix"
+    - "review_disclaimers"
+    - "approve_compliance_content"
+    - "flag_conflicting_data"
+
+  content_editor:
+    - "edit_faq"
+    - "edit_glossary"
+    - "edit_response_template"
+    - "upload_csv_draft"
+    - "submit_for_review"
+
+  consultant:
+    - "view_assigned_leads"
+    - "update_pipeline_stage"
+    - "add_followup_notes"
+    - "request_documents"
+    - "mark_duplicate_assignment_risk"
+
+  analyst:
+    - "view_dashboard_metrics"
+    - "view_fallback_queries"
+    - "export_analytics_summary"
+    - "suggest_new_intents"
+```
+
+## 140. Consultant notes template
+
+```yaml id="consultant_notes_template_01"
+consultant_notes:
+  id: followup_notes_template
+  purpose: "Membantu konsultan mencatat hasil follow-up lead."
+
+  fields:
+    - id: contact_result
+      label: "Hasil Kontak"
+      type: "select"
+      options:
+        - "Tersambung"
+        - "Tidak tersambung"
+        - "Minta dihubungi ulang"
+        - "Nomor tidak aktif"
+
+    - id: user_need_confirmed
+      label: "Kebutuhan Terkonfirmasi"
+      type: "select"
+      options:
+        - "SKTTK"
+        - "SBUJPTL"
+        - "IUJPTL"
+        - "SKTTK + SBUJPTL"
+        - "SBUJPTL + IUJPTL"
+        - "Belum jelas"
+
+    - id: classification_confirmed
+      label: "Klasifikasi Terkonfirmasi"
+      type: "text"
+
+    - id: missing_documents
+      label: "Dokumen Kurang"
+      type: "multi_select"
+
+    - id: skttk_notes
+      label: "Catatan PJT/TT/SKTTK"
+      type: "textarea"
+
+    - id: next_action
+      label: "Tindak Lanjut"
+      type: "select"
+      options:
+        - "Minta dokumen"
+        - "Jadwalkan konsultasi"
+        - "Review SKTTK"
+        - "Review klasifikasi"
+        - "Kirim penawaran"
+        - "Tutup lead"
+
+    - id: next_followup_date
+      label: "Tanggal Follow-up Berikutnya"
+      type: "date"
+```
+
+## 141. Follow-up message templates
+
+```yaml id="followup_message_templates_01"
+followup_messages:
+  request_documents:
+    message: >
+      Halo {{contact_name}}, terima kasih sudah menghubungi kami terkait
+      pengurusan {{target_service}}.
+
+      Untuk review awal, mohon siapkan dokumen berikut:
+      {{missing_documents}}
+
+      Setelah dokumen tersedia, kami dapat bantu cek klasifikasi, kualifikasi,
+      PJT/TT, SKTTK, dan langkah proses berikutnya.
+
+  request_skttk_data:
+    message: >
+      Halo {{contact_name}}, untuk validasi SKTTK, mohon siapkan data berikut:
+
+      1. Nama calon PJT/TT.
+      2. Level SKTTK.
+      3. Okupasi SKTTK.
+      4. Tanggal terbit SKTTK.
+      5. Bidang dan subbidang pekerjaan.
+      6. Status apakah sedang digunakan di perusahaan lain atau tidak.
+
+  tender_followup:
+    message: >
+      Halo {{contact_name}}, karena kebutuhan Anda berkaitan dengan tender,
+      mohon kirimkan informasi berikut agar dapat kami cek cepat:
+
+      1. Dokumen persyaratan tender terkait SBUJPTL.
+      2. Klasifikasi dan kualifikasi yang diminta.
+      3. Deadline tender.
+      4. Status SBUJPTL/SKTTK saat ini.
+      5. Legalitas perusahaan yang sudah tersedia.
+
+  consultation_schedule:
+    message: >
+      Halo {{contact_name}}, kami siap membantu konsultasi pengurusan
+      {{target_service}}. Silakan pilih waktu yang nyaman untuk diskusi
+      agar kami dapat memvalidasi dokumen dan kebutuhan teknis perusahaan Anda.
+```
+
+## 142. Audit log specification
+
+```yaml id="audit_log_spec_01"
+audit_log:
+  id: sbujptl_audit_log
+  purpose: >
+    Mencatat seluruh perubahan penting pada knowledge base, lead, pipeline,
+    dan pengaturan chatbot.
+
+  tracked_actions:
+    - "knowledge_base_created"
+    - "knowledge_base_updated"
+    - "knowledge_base_published"
+    - "classification_rule_changed"
+    - "skttk_matrix_changed"
+    - "document_checklist_changed"
+    - "lead_created"
+    - "lead_updated"
+    - "pipeline_stage_changed"
+    - "admin_note_added"
+    - "lead_exported"
+    - "integration_setting_changed"
+
+  fields:
+    - "log_id"
+    - "actor_id"
+    - "actor_role"
+    - "action"
+    - "target_type"
+    - "target_id"
+    - "before_value"
+    - "after_value"
+    - "timestamp"
+    - "ip_address"
+
+  retention_policy:
+    default: "2 years"
+    lead_export_logs: "5 years"
+```
+
+## 143. Production environment checklist
+
+```yaml id="production_environment_checklist_01"
+production_checklist:
+  infrastructure:
+    - "Database production sudah aktif."
+    - "Backup database harian aktif."
+    - "Environment variables sudah dikonfigurasi."
+    - "Logging aktif dengan redaction untuk data pribadi."
+    - "Rate limit aktif untuk public chat endpoint."
+
+  chatbot:
+    - "Greeting flow berjalan."
+    - "Intent utama terdeteksi."
+    - "Fallback berjalan maksimal 3 kali."
+    - "Lead capture tersimpan."
+    - "Document assessment menghasilkan skor."
+    - "SKTTK prescreening menghasilkan status."
+    - "Combined readiness score berjalan."
+    - "CRM handoff berhasil."
+
+  admin:
+    - "Admin login aktif."
+    - "Role permission aktif."
+    - "Pipeline lead berjalan."
+    - "Audit log aktif."
+    - "Content QA checker aktif."
+    - "Knowledge import draft/review/publish berjalan."
+
+  compliance:
+    - "Tidak ada klaim jaminan terbit."
+    - "Tidak ada saran manipulasi dokumen."
+    - "Tidak ada saran pinjam nama PJT/TT."
+    - "Disclaimer muncul pada semua hasil asesmen."
+    - "Konflik data SKTTK diarahkan ke validasi admin."
+
+  analytics:
+    - "Event percakapan tercatat."
+    - "Event lead_created tercatat."
+    - "Event fallback tercatat."
+    - "Event assessment_completed tercatat."
+    - "Dashboard metrik tampil."
+```
+
+## 144. Final production configuration summary
+
+```yaml id="final_production_summary_01"
+final_production_configuration:
+  chatbot_name: "SBUJPTL Coach"
+  version: "2.0.0"
+
+  core_capabilities:
+    - "Edukasi SBUJPTL"
+    - "Pemetaan jenis usaha"
+    - "Pemetaan bidang dan subbidang"
+    - "Cek kualifikasi kecil/menengah/besar"
+    - "Cek PJT, TT, dan SKTTK"
+    - "Cek masa berlaku SKTTK"
+    - "Cek okupasi SKTTK"
+    - "Checklist dokumen SKTTK"
+    - "Checklist dokumen SBUJPTL"
+    - "Alur SBUJPTL sampai IUJPTL"
+    - "Lead capture"
+    - "CRM handoff"
+    - "Admin dashboard"
+    - "Content QA"
+    - "Audit log"
+
+  default_start_message: >
+    Halo, saya SBUJPTL Coach. Saya bisa membantu Anda memahami SBUJPTL,
+    memilih jenis usaha, menentukan bidang dan subbidang, mengecek
+    kualifikasi, menyiapkan PJT/TT/SKTTK, mengecek dokumen, dan menghubungkan
+    Anda dengan konsultan. Apa yang ingin Anda lakukan hari ini?
+
+  default_quick_replies:
+    - "Pilih jenis usaha"
+    - "Cek SKTTK"
+    - "Cek dokumen"
+    - "Cek kualifikasi"
+    - "Alur IUJPTL"
+    - "Konsultasi admin"
+
+  mandatory_disclaimer: >
+    Hasil chatbot ini adalah panduan awal dan bukan keputusan resmi
+    sertifikasi. Validasi final tetap perlu dilakukan oleh pihak berwenang,
+    lembaga terkait, atau konsultan yang menangani proses.
+```

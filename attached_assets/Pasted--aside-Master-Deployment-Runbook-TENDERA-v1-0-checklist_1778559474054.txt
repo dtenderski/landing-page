@@ -1,0 +1,220 @@
+<aside>
+🚀
+
+**Master Deployment Runbook TENDERA v1.0** — checklist deploy 10 agen MultiClaw + 1 orchestrator ke Gustafta Builder. Pola mirror dari [Master Deployment Runbook — 9 Agen KONSTRA ABD v1.1](https://www.notion.so/Master-Deployment-Runbook-9-Agen-KONSTRA-ABD-v1-1-635a80d593c2408092176a9d57ebee04?pvs=21). Total 4 sprint, target deploy lengkap 7 minggu.
+
+</aside>
+
+## 🎯 Tujuan Runbook
+
+1. Standarisasi step-by-step deploy tiap agen ke Gustafta.
+2. Checklist pre-deploy, deploy, post-deploy per agen.
+3. Smoke-test scenario per agen.
+4. Rollback procedure jika fail.
+5. Sign-off matrix antar role (PO · Prompt Eng · QA).
+
+## 📦 Inventory — 11 Build Artifacts
+
+| # | Artifact | Type |
+| --- | --- | --- |
+| 0 | TENDERA-ORCHESTRATOR | System Prompt |
+| 1 | AGENT-SCOUT | System Prompt |
+| 2 | AGENT-ELIGIBILITY | System Prompt |
+| 3 | AGENT-RISKSCAN | System Prompt |
+| 4 | AGENT-ADMIN | System Prompt |
+| 5 | AGENT-TEKNIS | System Prompt |
+| 6 | AGENT-HPS | System Prompt |
+| 7 | AGENT-KONTRAK | System Prompt |
+| 8 | AGENT-WINPROB | System Prompt |
+| 9 | AGENT-INTEGRITY | System Prompt |
+| 10 | AGENT-SANGGAH | System Prompt |
+
+## 🗓️ Roadmap 4 Sprint (≈7 minggu)
+
+```mermaid
+gantt
+	title TENDERA Deployment Timeline
+	dateFormat YYYY-MM-DD
+	section Sprint 1
+	Foundation ORCH ELIG RISK WINPROB :s1, 2026-05-12, 14d
+	section Sprint 2
+	Doc Tech ADMIN TEKNIS HPS :s2, after s1, 12d
+	section Sprint 3
+	Legal Sourcing KONTRAK SCOUT INTEGRITY :s3, after s2, 10d
+	section Sprint 4
+	Post-Bid SANGGAH KB Integration :s4, after s3, 12d
+```
+
+## 🟢 Sprint 1 — Foundation (4 agen)
+
+**Target:** ORCHESTRATOR + ELIGIBILITY + RISKSCAN + WINPROB live & lulus 5 skenario Sprint 1.
+
+### Pre-deploy
+
+- [ ]  System Prompt final di-review PO + Prompt Engineer
+- [ ]  KB minimum tersedia (KB-REG Tier-1 22 entries, KB-MARKET basic untuk WINPROB)
+- [ ]  `callAgentInternal` matrix didefinisikan (ORCH ↔ 3 agen)
+- [ ]  Test scenarios siap (5 skenario — lihat sub-page Sprint 1 Tests)
+
+### Deploy ke Gustafta Builder
+
+1. Login Gustafta → New Agent → Series TENDERA → L3 Agent
+2. Paste System Prompt dari sub-page Orchestrator/MultiClaw
+3. Set persona, greeting, conversation starters (sesuai Hub spec)
+4. Set memory: long-term ON, session ON
+5. Set tools: lookup KB-REG, lookup KB-MARKET (untuk WINPROB)
+6. Save & Publish to staging
+
+### Smoke Test
+
+| Agen | Smoke Prompt | Expected |
+| --- | --- | --- |
+| ORCHESTRATOR | "Bagaimana cara mulai?" | Greeting + 7 conversation starters |
+| ELIGIBILITY | Input minimum S1-01 | Verdict ELIGIBLE + ABD-7 lengkap |
+| RISKSCAN | Paste klausul S1-03 | Verdict HIGH RISK + 3 temuan |
+| WINPROB | Input minimum S1-04 | Score 60–80 + Top-3 Levers |
+
+### Post-deploy
+
+- [ ]  Jalankan 5 skenario S1-01 s.d. S1-05 penuh
+- [ ]  Log semua percakapan
+- [ ]  Checklist ABD-7 compliance per output
+- [ ]  Sign-off PO
+
+### Rollback
+
+Jika ≥ 2 skenario fail dan tidak bisa fix dengan micro-patch <30 menit:
+
+1. Unpublish agen di Gustafta
+2. Re-deploy versi sebelumnya (atau placeholder "under maintenance")
+3. Issue ticket di triage rubric (mirror [Issue Triage Rubric — Micro-Patch Library 9 Agen KONSTRA](https://www.notion.so/Issue-Triage-Rubric-Micro-Patch-Library-9-Agen-KONSTRA-e12f61e2ad3b4e0fa58b1944976fbd86?pvs=21))
+4. Fix → re-deploy → re-test
+
+## 🟡 Sprint 2 — Document & Technical (3 agen)
+
+**Target:** ADMIN + TEKNIS + HPS live.
+
+### Pre-requisites
+
+- [ ]  KB-DOC: 12 template admin + 8 deliverable teknis siap
+- [ ]  KB-AHSP: minimal 200 line-items (subset Bangunan Gedung untuk MVP)
+- [ ]  ELIGIBILITY stabil (ADMIN call ELIG untuk profile lookup)
+
+### Smoke Tests
+
+| Agen | Test |
+| --- | --- |
+| ADMIN | Generate 11 dokumen dari profile + tender → semua placeholder ter-fill |
+| TEKNIS | Generate metode pelaksanaan + Kurva-S untuk gedung 4 lt |
+| HPS | Validate BoQ 50 baris + susun 3 skenario bid |
+
+## 🟠 Sprint 3 — Legal & Sourcing (3 agen)
+
+**Target:** KONTRAK + SCOUT + INTEGRITY live.
+
+### Pre-requisites
+
+- [ ]  KB-REG Tier-2 (FIDIC sub-clause detail, SNI ISO 37001 implementation guide)
+- [ ]  KB-PROC lengkap
+- [ ]  KB-MARKET full import (1.500 tender historis)
+
+### Smoke Tests
+
+| Agen | Test |
+| --- | --- |
+| KONTRAK | Review SSKK FIDIC Red-equivalent → identifikasi 5+ klausul kritis |
+| SCOUT | Filter tender minggu ini berdasarkan profile BUJK M → 5 rekomendasi |
+| INTEGRITY | Audit checklist anti-suap untuk proses tender → output compliance score |
+
+## 🔴 Sprint 4 — Post-Bid & KB Integration
+
+**Target:** SANGGAH live + KB auto-sync + Integrasi TENDERA↔KONSTRA.
+
+### Pre-requisites
+
+- [ ]  KB-CASE: 30+ kasus
+- [ ]  Handoff payload schema implemented (sub-page Integrasi)
+- [ ]  Cross-reference link aktif
+
+### Smoke Tests
+
+| Test | Expected |
+| --- | --- |
+| SANGGAH dengan BAHP + profil pemenang | Verdict + draft surat sanggah |
+| Handoff TENDERA → KONSTRA (skenario menang) | KONSTRA-ORCH terima payload, start Sprint Mobilisasi |
+| KB-CASE update dari closeout KONSTRA | Entry baru muncul, terindex |
+
+---
+
+## 📋 Master Checklist
+
+<details><summary>**Sprint 1 Checklist**</summary>
+
+- [ ]  ORCHESTRATOR system prompt deployed
+- [ ]  ELIGIBILITY deployed + smoke pass
+- [ ]  RISKSCAN deployed + smoke pass
+- [ ]  WINPROB deployed + smoke pass
+- [ ]  5 skenario S1-01 s.d. S1-05 pass ≥ 4/5
+- [ ]  Triage rubric ready untuk fail cases
+- [ ]  Sign-off PO
+
+</details>
+
+<details><summary>**Sprint 2 Checklist**</summary>
+
+- [ ]  KB-DOC populated (12+8 template)
+- [ ]  ADMIN deployed + generate 11 doc test pass
+- [ ]  TEKNIS deployed + 8 deliverable test pass
+- [ ]  HPS deployed + 3 skenario bid test pass
+- [ ]  callAgentInternal ELIG↔ADMIN tested
+- [ ]  Sign-off PO
+
+</details>
+
+<details><summary>**Sprint 3 Checklist**</summary>
+
+- [ ]  KB-REG Tier-2 + KB-PROC + KB-MARKET full
+- [ ]  KONTRAK deployed + 5 klausul FIDIC test pass
+- [ ]  SCOUT deployed + filter tender LPSE test pass
+- [ ]  INTEGRITY deployed + audit checklist test pass
+- [ ]  Sign-off PO
+
+</details>
+
+<details><summary>**Sprint 4 Checklist**</summary>
+
+- [ ]  KB-CASE 30+ entries
+- [ ]  SANGGAH deployed + draft surat sanggah test pass
+- [ ]  Handoff payload schema implemented bidirectional
+- [ ]  KB auto-sync TENDERA ↔ KONSTRA
+- [ ]  End-to-end Percakapan 1–3 pass full
+- [ ]  **GO-LIVE sign-off** PO + Stakeholder
+
+</details>
+
+## 👥 Sign-off Matrix
+
+| Sprint | PO (Wuryanto) | Prompt Engineer | QA | Status |
+| --- | --- | --- | --- | --- |
+| Sprint 1 | ⬜ | ⬜ | ⬜ | Not started |
+| Sprint 2 | ⬜ | ⬜ | ⬜ | Not started |
+| Sprint 3 | ⬜ | ⬜ | ⬜ | Not started |
+| Sprint 4 (Go-Live) | ⬜ | ⬜ | ⬜ | Not started |
+
+## 🛡️ Risk & Mitigation
+
+| Risk | Likelihood | Impact | Mitigation |
+| --- | --- | --- | --- |
+| KB-MARKET data tidak akurat | Med | High | Mulai konservatif, kalibrasi bulanan |
+| WINPROB skor terlalu optimis | Med | High | Audit confidence breakdown, tweak gating |
+| KONTRAK miss klausul jebakan | Low | High | Tambah CASE library + double-check expert |
+| Gustafta token limit per prompt | Med | Med | Modularize prompt, retrieval untuk KB |
+| User confuse TENDERA vs KONSTRA | Med | Med | Visual handoff + tombol explicit |
+
+## 📚 Referensi
+
+- [TENDERA Hub — AI Tender BUJK (Series Gustafta · OpenClaw + MultiClaw)](https://www.notion.so/TENDERA-Hub-AI-Tender-BUJK-Series-Gustafta-OpenClaw-MultiClaw-210dd107ef2841f3ae895b9921b66412?pvs=21) — Hub TENDERA
+- [Master Deployment Runbook — 9 Agen KONSTRA ABD v1.1](https://www.notion.so/Master-Deployment-Runbook-9-Agen-KONSTRA-ABD-v1-1-635a80d593c2408092176a9d57ebee04?pvs=21) — Master Deployment Runbook KONSTRA (pattern source)
+- [Issue Triage Rubric — Micro-Patch Library 9 Agen KONSTRA](https://www.notion.so/Issue-Triage-Rubric-Micro-Patch-Library-9-Agen-KONSTRA-e12f61e2ad3b4e0fa58b1944976fbd86?pvs=21) — Issue Triage Rubric
+- [Sprint 4 Blueprint — callAgentInternal Orchestration (Draft Pre-Activation)](https://www.notion.so/Sprint-4-Blueprint-callAgentInternal-Orchestration-Draft-Pre-Activation-cdb8c92f8ed9485fb6605ed99b4be435?pvs=21) — Sprint Orchestration Blueprint
+- [Anti-Blocking Doctrine — Implementasi & Audit 9 Agen KONSTRA](https://www.notion.so/Anti-Blocking-Doctrine-Implementasi-Audit-9-Agen-KONSTRA-a22523df455f4a9d9823d2ee0db7d2de?pvs=21) — ABD v1.1 Master

@@ -1,0 +1,459 @@
+Berikut **lanjutan modul Surveilans BNSP AJJ Nirkertas**, fokus pada **risk-based surveillance, register bukti, matriks risiko, validasi rekaman, pelaporan tindak lanjut, dan format kesiapan akhir**. Format tetap dibuat seperti konfigurasi chatbot-builder sebagaimana pola dokumen chatbot terlampir. 
+
+---
+
+# 20. Risk-Based Surveillance
+
+Surveilans sebaiknya tidak hanya memeriksa dokumen secara acak, tetapi memakai pendekatan berbasis risiko.
+
+```yaml id="risk_based_surveillance"
+risk_based_surveillance:
+  tujuan: >
+    Memprioritaskan area pemeriksaan berdasarkan risiko tertinggi terhadap
+    validitas, keamanan, integritas, dan keterlacakan proses AJJ Nirkertas.
+
+  kategori_risiko:
+    risiko_tinggi:
+      contoh:
+        - rekaman asesmen tidak tersedia
+        - asesmen dilakukan pada skema yang belum disetujui
+        - hak akses sistem tidak dibedakan
+        - keputusan sertifikasi tidak memiliki dasar laporan asesmen
+        - banding tidak diproses
+        - audit internal 6 bulanan tidak dilakukan
+      tindakan:
+        - sampling diperbanyak
+        - audit sistem dilakukan lebih detail
+        - CAPA wajib dibuat
+        - bukti penutupan temuan harus diverifikasi
+
+    risiko_sedang:
+      contoh:
+        - keterlambatan unggah laporan asesmen
+        - output PDF tidak konsisten formatnya
+        - dokumen TUK kurang lengkap tetapi masih dapat ditelusuri
+        - kendala teknis berulang tetapi ditindaklanjuti
+      tindakan:
+        - perbaikan prosedur
+        - review ulang dokumen
+        - monitoring pada periode berikutnya
+
+    risiko_rendah:
+      contoh:
+        - kesalahan penamaan file
+        - ketidakkonsistenan kecil pada format laporan
+        - bukti pendukung tersedia tetapi belum tersusun rapi
+      tindakan:
+        - koreksi administratif
+        - pembaruan template
+        - pengarahan ulang kepada admin
+```
+
+---
+
+# 21. Register Bukti Surveilans
+
+```yaml id="register_bukti_surveillance"
+register_bukti_surveillance:
+  tujuan: >
+    Mencatat seluruh bukti yang akan ditunjukkan kepada BNSP selama surveilans.
+
+  fields:
+    - nomor_bukti
+    - area_bukti
+    - nama_dokumen_atau_rekaman
+    - periode
+    - pemilik_dokumen
+    - lokasi_file
+    - status_kelengkapan
+    - status_validasi
+    - catatan
+
+  contoh:
+    - nomor_bukti: "EV-001"
+      area_bukti: "Persetujuan BNSP"
+      nama_dokumen_atau_rekaman: "SK Persetujuan AJJ Nirkertas"
+      periode: "Berlaku"
+      pemilik_dokumen: "Manajemen LSP"
+      lokasi_file: "01_persetujuan_bnsp/sk_persetujuan.pdf"
+      status_kelengkapan: "Lengkap"
+      status_validasi: "Tervalidasi"
+      catatan: "Sesuai ruang lingkup skema yang dijalankan"
+
+    - nomor_bukti: "EV-002"
+      area_bukti: "Rekaman Asesmen"
+      nama_dokumen_atau_rekaman: "Rekaman AJJ Asesi Sampel 01"
+      periode: "Januari-Juni"
+      pemilik_dokumen: "Pengelola Sistem"
+      lokasi_file: "05_rekaman/asesi_01.mp4"
+      status_kelengkapan: "Lengkap"
+      status_validasi: "Dapat dibuka"
+      catatan: "Identitas asesi dan proses asesmen terlihat jelas"
+```
+
+---
+
+# 22. Matriks Risiko Surveilans
+
+```yaml id="matriks_risiko_surveillance"
+matriks_risiko:
+  - risiko: "Rekaman asesmen tidak tersedia"
+    dampak: "Tinggi"
+    kemungkinan: "Sedang"
+    level_risiko: "Tinggi"
+    pengendalian:
+      - backup recording
+      - checklist pasca-asesmen
+      - monitoring rekaman oleh admin
+    bukti_pengendalian:
+      - daftar rekaman
+      - log penyimpanan
+      - checklist pemeriksaan rekaman
+
+  - risiko: "Hak akses tidak sesuai peran"
+    dampak: "Tinggi"
+    kemungkinan: "Sedang"
+    level_risiko: "Tinggi"
+    pengendalian:
+      - role-based access control
+      - review hak akses bulanan
+      - log aktivitas
+    bukti_pengendalian:
+      - matriks hak akses
+      - screenshot role permission
+      - log review akses
+
+  - risiko: "Laporan 6 bulanan terlambat dikirim"
+    dampak: "Sedang"
+    kemungkinan: "Sedang"
+    level_risiko: "Sedang"
+    pengendalian:
+      - kalender pelaporan
+      - reminder otomatis
+      - validasi manajemen sebelum tanggal 10
+    bukti_pengendalian:
+      - bukti pengiriman laporan
+      - jadwal pelaporan
+      - notulen validasi laporan
+
+  - risiko: "TUK belum diverifikasi dengan benar"
+    dampak: "Tinggi"
+    kemungkinan: "Rendah-Sedang"
+    level_risiko: "Tinggi"
+    pengendalian:
+      - SOP verifikasi TUK jarak jauh
+      - SPT verifikasi TUK
+      - checklist verifikasi
+      - rekaman verifikasi
+    bukti_pengendalian:
+      - profil TUK
+      - checklist TUK
+      - rekaman verifikasi TUK
+      - SK penetapan TUK
+```
+
+---
+
+# 23. Validasi Rekaman Asesmen
+
+```yaml id="validasi_rekaman_asesmen"
+validasi_rekaman_asesmen:
+  tujuan: >
+    Memastikan rekaman asesmen AJJ dapat digunakan sebagai bukti objektif
+    proses asesmen.
+
+  checklist:
+    identitas_file:
+      - "[ ] Nama file sesuai format"
+      - "[ ] Mencantumkan kode asesi atau nomor registrasi"
+      - "[ ] Mencantumkan tanggal asesmen"
+      - "[ ] Mencantumkan skema atau kode skema"
+
+    keterbacaan_rekaman:
+      - "[ ] File dapat dibuka"
+      - "[ ] Audio terdengar jelas"
+      - "[ ] Video terlihat cukup jelas"
+      - "[ ] Tidak ada bagian penting yang hilang"
+
+    isi_rekaman:
+      - "[ ] Pembukaan asesmen terekam"
+      - "[ ] Verifikasi identitas terekam"
+      - "[ ] Verifikasi lingkungan asesmen terekam"
+      - "[ ] Instruksi asesor terekam"
+      - "[ ] Proses tanya jawab/uji kompetensi terekam"
+      - "[ ] Penutupan atau kesimpulan asesmen terekam"
+
+    keamanan:
+      - "[ ] Rekaman disimpan pada lokasi resmi"
+      - "[ ] Akses dibatasi"
+      - "[ ] Backup tersedia"
+      - "[ ] Masa retensi sesuai SOP"
+
+  status_validasi:
+    - "Valid"
+    - "Valid dengan catatan"
+    - "Tidak valid / perlu tindak lanjut"
+```
+
+---
+
+# 24. Template Log Rekaman
+
+```yaml id="template_log_rekaman"
+log_rekaman_asesmen:
+  fields:
+    - nomor_log
+    - nomor_registrasi_asesi
+    - nama_asesi
+    - skema
+    - asesor
+    - tanggal_asesmen
+    - waktu_mulai
+    - waktu_selesai
+    - link_rekaman
+    - status_rekaman
+    - hasil_validasi
+    - catatan_kendala
+    - penanggung_jawab_validasi
+
+  status_rekaman:
+    - tersedia
+    - tersedia_dengan_catatan
+    - tidak_lengkap
+    - tidak_tersedia
+```
+
+---
+
+# 25. Pemeriksaan Kesesuaian Data Laporan vs Sistem
+
+```yaml id="rekonsiliasi_laporan_sistem"
+rekonsiliasi_laporan_sistem:
+  tujuan: >
+    Memastikan data pada laporan pelaksanaan, laporan asesmen, dan sistem
+    aplikasi konsisten.
+
+  data_yang_dicocokkan:
+    - jumlah asesi terdaftar
+    - jumlah asesi mengikuti asesmen
+    - jumlah asesmen selesai
+    - jumlah asesmen tertunda
+    - jumlah rekomendasi asesor
+    - jumlah keputusan sertifikasi
+    - jumlah rekaman asesmen
+    - jumlah banding
+    - jumlah kendala teknis
+    - jumlah TUK digunakan
+
+  metode:
+    - tarik data dari dashboard aplikasi
+    - cocokkan dengan rekap laporan pelaksanaan
+    - cocokkan dengan folder rekaman
+    - cocokkan dengan laporan asesmen per asesi
+    - buat catatan selisih jika ada
+
+  output:
+    - berita acara rekonsiliasi data
+    - daftar selisih data
+    - tindak lanjut perbaikan data
+```
+
+---
+
+# 26. Template Berita Acara Rekonsiliasi Data
+
+```text id="ba_rekonsiliasi_data"
+BERITA ACARA REKONSILIASI DATA
+SERTIFIKASI AJJ NIRKERTAS
+
+Pada hari ini, [hari/tanggal], telah dilakukan rekonsiliasi data pelaksanaan
+Sertifikasi AJJ Nirkertas periode [periode] pada LSP [nama LSP].
+
+Data yang diperiksa:
+1. Rekap asesi terdaftar
+2. Rekap asesmen terlaksana
+3. Rekap laporan asesmen
+4. Rekap keputusan sertifikasi
+5. Rekap rekaman asesmen
+6. Rekap kendala teknis
+7. Rekap banding
+
+Hasil rekonsiliasi:
+- Jumlah asesi pada sistem: [jumlah]
+- Jumlah asesi pada laporan: [jumlah]
+- Selisih data: [ada/tidak ada]
+- Uraian selisih: [uraian]
+- Tindak lanjut: [tindakan]
+
+Demikian berita acara ini dibuat untuk digunakan sebagai bukti pengendalian
+data dan persiapan surveilans.
+
+[Tempat, Tanggal]
+
+Diperiksa oleh,
+[Nama / Jabatan]
+
+Disetujui oleh,
+[Nama / Jabatan]
+```
+
+---
+
+# 27. Checklist Kesiapan Hari-H Surveilans
+
+```yaml id="checklist_hari_h_surveillance"
+checklist_hari_h_surveillance:
+  tim:
+    - "[ ] Penanggung jawab LSP hadir"
+    - "[ ] Admin LSP hadir"
+    - "[ ] Pengelola sistem/IT hadir"
+    - "[ ] Asesor perwakilan hadir"
+    - "[ ] Petugas TUK siap jika diminta"
+    - "[ ] Manajemen Mutu hadir"
+    - "[ ] Notulis hadir"
+
+  dokumen:
+    - "[ ] SK persetujuan BNSP siap"
+    - "[ ] Daftar skema disetujui siap"
+    - "[ ] SOP AJJ dan Nirkertas siap"
+    - "[ ] Laporan pelaksanaan 6 bulanan siap"
+    - "[ ] Laporan audit internal siap"
+    - "[ ] Bukti pengiriman laporan ke BNSP siap"
+    - "[ ] Register CAPA siap"
+
+  sistem:
+    - "[ ] Akun admin siap"
+    - "[ ] Akun asesor siap"
+    - "[ ] Akun asesi sampel siap"
+    - "[ ] Akun TUK/komite siap jika diperlukan"
+    - "[ ] Dashboard dapat dibuka"
+    - "[ ] Rekaman sampel dapat diputar"
+    - "[ ] Audit trail dapat ditampilkan"
+
+  sampling:
+    - "[ ] Daftar sampel asesi siap"
+    - "[ ] Dokumen sampel lengkap"
+    - "[ ] Rekaman sampel tersedia"
+    - "[ ] Laporan asesmen sampel tersedia"
+    - "[ ] Keputusan sertifikasi sampel tersedia"
+    - "[ ] Sampel kendala/banding tersedia jika ada"
+
+  teknis:
+    - "[ ] Internet utama siap"
+    - "[ ] Internet cadangan siap"
+    - "[ ] Screen sharing diuji"
+    - "[ ] Folder bukti mudah diakses"
+    - "[ ] File penting sudah diunduh cadangan"
+```
+
+---
+
+# 28. Acceptance Criteria Surveilans Internal
+
+```yaml id="acceptance_criteria_surveillance"
+acceptance_criteria:
+  dokumen:
+    - "100% SOP utama tersedia, disahkan, dan sesuai praktik."
+    - "SK persetujuan dan ruang lingkup AJJ/Nirkertas dapat ditunjukkan."
+    - "Laporan 6 bulanan tersedia dan memiliki bukti pengiriman."
+
+  sistem:
+    - "Sistem dapat menampilkan data sampel dari pendaftaran sampai keputusan."
+    - "Hak akses dibedakan berdasarkan peran."
+    - "Audit trail dapat ditampilkan."
+    - "Rekaman asesmen dapat dibuka."
+
+  asesmen:
+    - "Setiap sampel memiliki permohonan, asesmen mandiri, persetujuan asesmen, instrumen, laporan, dan keputusan."
+    - "Setiap asesmen memiliki rekaman atau bukti sesuai SOP."
+    - "Rekomendasi asesor dapat ditelusuri ke bukti asesmen."
+
+  tuk:
+    - "TUK yang digunakan memiliki profil, verifikasi, rekaman verifikasi, dan SK penetapan."
+    - "Kesesuaian TUK dengan skema dapat dibuktikan."
+
+  capa:
+    - "Semua temuan memiliki tindakan koreksi."
+    - "Temuan sistemik memiliki tindakan perbaikan."
+    - "Status open/closed jelas."
+    - "Bukti penutupan temuan tersedia."
+```
+
+---
+
+# 29. Modul Chatbot Tambahan
+
+```yaml id="chatbot_module_surveillance_operasional"
+module:
+  id: surveillance_operasional_ajj_nirkertas
+  title: "Surveilans Operasional AJJ Nirkertas"
+  purpose: >
+    Membantu LSP melakukan pemeriksaan internal sebelum surveilans BNSP,
+    terutama pada risiko, sampling, rekaman, rekonsiliasi data, CAPA, dan
+    kesiapan hari-H.
+
+intents:
+  - id: ask_risk_based_surveillance
+    sample_user_inputs:
+      - "Bagaimana risk based surveillance AJJ?"
+      - "Risiko apa yang harus dicek sebelum surveilans?"
+      - "Matriks risiko surveilans AJJ"
+    response_template: response_risk_based_surveillance
+    next_node: risk_based_surveillance
+
+  - id: ask_recording_validation
+    sample_user_inputs:
+      - "Bagaimana validasi rekaman asesmen?"
+      - "Checklist rekaman AJJ apa saja?"
+      - "Rekaman asesmen harus dicek apa?"
+    response_template: response_recording_validation
+    next_node: validasi_rekaman_asesmen
+
+  - id: ask_data_reconciliation
+    sample_user_inputs:
+      - "Bagaimana rekonsiliasi data laporan dan sistem?"
+      - "Data laporan AJJ harus cocok dengan apa?"
+      - "Template berita acara rekonsiliasi data"
+    response_template: response_data_reconciliation
+    next_node: rekonsiliasi_laporan_sistem
+
+  - id: ask_day_of_surveillance_checklist
+    sample_user_inputs:
+      - "Checklist hari H surveilans"
+      - "Apa yang harus siap saat BNSP surveilans?"
+      - "Persiapan terakhir surveilans AJJ"
+    response_template: response_day_of_surveillance_checklist
+    next_node: checklist_hari_h_surveillance
+
+response_template:
+  id: response_risk_based_surveillance
+  text: >
+    Risk-based surveillance berarti LSP memprioritaskan pemeriksaan pada area
+    yang berisiko tinggi, seperti rekaman asesmen, ruang lingkup persetujuan,
+    hak akses sistem, keputusan sertifikasi, verifikasi TUK, banding, audit
+    internal, dan pelaporan 6 bulanan. Area berisiko tinggi harus memiliki
+    bukti pengendalian dan CAPA jika ditemukan ketidaksesuaian.
+  quick_replies:
+    - "Matriks risiko"
+    - "Checklist rekaman"
+    - "Rekonsiliasi data"
+    - "CAPA temuan"
+
+response_template:
+  id: response_recording_validation
+  text: >
+    Validasi rekaman asesmen dilakukan untuk memastikan rekaman dapat dibuka,
+    audio/video cukup jelas, identitas asesi terlihat, proses asesmen terekam,
+    dan file disimpan di lokasi resmi dengan akses terbatas. Rekaman yang tidak
+    lengkap harus dicatat sebagai kendala dan ditindaklanjuti sesuai SOP.
+  quick_replies:
+    - "Template log rekaman"
+    - "Contoh CAPA rekaman"
+    - "Checklist hari-H"
+```
+
+---
+
+## Ringkasan Lanjutan
+
+Dalam surveilans, LSP harus siap menunjukkan bahwa data **konsisten, rekaman valid, risiko terkendali, dan temuan ditindaklanjuti**. Fokus pemeriksaan internal sebelum BNSP hadir sebaiknya diarahkan ke: **rekaman asesmen, ruang lingkup persetujuan, hak akses, verifikasi TUK, laporan 6 bulanan, audit internal, CAPA, dan rekonsiliasi data laporan dengan sistem**.

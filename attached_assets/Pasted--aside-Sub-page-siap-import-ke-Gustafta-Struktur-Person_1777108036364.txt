@@ -1,0 +1,73 @@
+<aside>
+👷
+
+**Sub-page siap-import ke Gustafta.** Struktur: Persona → Knowledge Base 3 lapisan → Sumber Resmi.
+
+</aside>
+
+## 🧬 Persona
+
+| **Chatbot Name** | Tenaga Kerja Konstruksi | **Tagline** | SKK, Jenjang 1–9 KKNI, & Sertifikasi Kompetensi Konstruksi |
+| --- | --- | --- | --- |
+| **Description** | Spesialis tata kelola TKK: Sertifikat Kompetensi Kerja (SKK), 9 jenjang KKNI, jabatan kerja konstruksi (SK Dirjen 144/KPTS/DK/2022), SKKNI 196/2021 & 60/2022, registrasi LPJK, dan integrasi SIKI. | **Primary Language** | Bahasa Indonesia |
+| **Series** | S5 — Tata Kelola, TK & Digitalisasi | **Avatar** | 👷 |
+
+## 📚 Knowledge Base
+
+### 🟦 Foundational — Regulasi, Standar, Data Produk
+
+| **Sumber Resmi** | **Sektor** | **Subsektor** | **URL Sumber** | **Tanggal** |
+| --- | --- | --- | --- | --- |
+| PP No. 22/2020 jo. PP No. 14/2021 | Hukum | PP | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2020/2021 |
+| Permen PUPR No. 12/2021 (perubahan 9/2020) | PU | Permen | [jdih.pu.go.id](http://jdih.pu.go.id) | 2021 |
+| SKKNI No. 196/2021 & 60/2022 | Ketenagakerjaan | SKKNI | [kemnaker.go.id](http://kemnaker.go.id) | 2021/2022 |
+
+### 🟩 Operational — SOP, Prosedur, FAQ, Template
+
+**Tingkatan TKK menurut UU 2/2017:**
+
+1. **Operator** (jenjang 1–3 KKNI)
+2. **Teknisi/Analis** (jenjang 4–6 KKNI)
+3. **Ahli** (jenjang 7–9 KKNI)
+
+**Jenjang KKNI yang umum digunakan untuk SKK Konstruksi:**
+
+- Jenjang 1–3 → tukang/operator
+- Jenjang 4–6 → teknisi/supervisor
+- Jenjang 7–9 → ahli muda/madya/utama
+
+**Alur sertifikasi SKK:**
+
+1. Permohonan ke LSP konstruksi terlisensi BNSP
+2. Asesmen oleh ASKOM (Bab 4 & 19)
+3. Penerbitan SKK → registrasi LPJK → tercatat di SIKI
+4. Masa berlaku & RCC sesuai SKKNI
+
+**Hubungan ke ekosistem lain:**
+
+- TKK ↔ BUJK: BUJK wajib mempekerjakan TKK ber-SKK sesuai klasifikasi/kualifikasi
+- TKK ↔ K3: TKK ahli K3 konstruksi wajib di proyek Permenaker 5/2018
+- TKK ↔ Pengadaan: TKK menjadi syarat personil paket Perpres 16/2018 jo. 12/2021 jo. 46/2025
+
+**FAQ:**
+
+- *SKK = SKA/SKT lama?* — SKK menggantikan SKA/SKT sejak Permen PUPR 9/2020.
+- *Berapa masa berlaku SKK?* — 5 tahun (perlu RCC/sertifikasi ulang).
+
+### 🟪 Case Memory — Notulen, Keputusan, Preseden
+
+*TBD — diisi dengan: data registrasi TKK SIKI, statistik kelulusan ASKOM, daftar jabatan kerja prioritas, MoU pelatihan vokasi.*
+
+## 🔗 Sumber Resmi
+
+[binakonstruksi.pu.go.id](http://binakonstruksi.pu.go.id) · [lpjk.pu.go.id](http://lpjk.pu.go.id) · [jdih.pu.go.id](http://jdih.pu.go.id) · [kemnaker.go.id](http://kemnaker.go.id) · [bnsp.go.id](http://bnsp.go.id)
+
+## ❓ Contoh Pertanyaan
+
+1. Apa saja tingkatan TKK menurut UU 2/2017?
+2. Bagaimana hubungan SKK dengan jenjang KKNI?
+3. Sebutkan dasar SKKNI Konstruksi terbaru.
+
+## 🔗 Halaman induk
+
+[Regulasi Jasa Konstruksi Indonesia — Ringkasan Lengkap](https://www.notion.so/Regulasi-Jasa-Konstruksi-Indonesia-Ringkasan-Lengkap-5a3f66d1250941f18f53a104f957a336?pvs=21) — Bab 12; lihat juga Bab 3 & 4.

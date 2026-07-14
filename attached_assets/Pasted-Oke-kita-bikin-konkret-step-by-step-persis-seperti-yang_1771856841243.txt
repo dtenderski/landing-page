@@ -1,0 +1,142 @@
+Oke, kita bikin konkret, step-by-step, persis seperti yang akan terjadi di production.
+
+Di bawah ini ada 2 skenario paling realistis. Anda tinggal pilih yang mau dipakai sekarang.
+
+✅ SKENARIO A (PALING MUDAH & CEPAT PRODUKSI): USER “PASTE” DATA KE ENGINE
+Tujuan
+
+Tender Readiness Checker langsung bisa dipakai hari ini, tanpa integrasi otomatis.
+
+Langkah 1 — User buat SUMMARY di modul lain
+
+User pergi ke:
+
+SKK Hub → menghasilkan SKK_SUMMARY
+
+SBU Hub → menghasilkan SBU_SUMMARY
+
+Perizinan Usaha Hub → menghasilkan LICENSING_SUMMARY
+
+Setelah masing-masing chatbot mengeluarkan ringkasan, user copy ringkasan itu.
+
+Langkah 2 — User buka Tender Readiness Checker
+
+User masuk ke chatbot: Tender Readiness Checker.
+
+Langkah 3 — User tempel semua SUMMARY (inputnya di chat)
+
+User paste seperti ini:
+
+SKK_SUMMARY:
+{ tempel hasil dari SKK Hub }
+
+SBU_SUMMARY:
+{ tempel hasil dari SBU Hub }
+
+LICENSING_SUMMARY:
+{ tempel hasil dari Perizinan Usaha Hub }
+Langkah 4 — (Opsional) Kalau user punya dokumen tender → tambahkan requirement
+
+Kalau belum ada extractor, requirement tender bisa ditulis ringkas manual:
+
+TENDER_REQ_SUMMARY:
+{
+  "project_info": {
+    "project_type": "Gedung",
+    "estimated_value": "52M",
+    "deadline_category": "14_30_days"
+  },
+  "sbu_requirements": {
+    "required_subclassification": "BG004",
+    "required_qualification_level": "Menengah"
+  },
+  "skk_requirements": {
+    "key_personnel": [
+      {"role":"Site Manager","minimum_level":"Ahli Madya","quantity_required":1},
+      {"role":"Ahli K3","minimum_level":"Ahli Muda","quantity_required":1}
+    ]
+  },
+  "administrative_requirements": {
+    "nib_required": true,
+    "iujk_required": true
+  }
+}
+Output
+
+Engine mengeluarkan:
+
+Status: Siap / Bersyarat / Tidak Siap
+
+Risk: Rendah / Sedang / Tinggi / Kritis
+
+Top gap
+
+Tindakan prioritas
+
+Handoff ke modul lain jika perlu
+
+📌 Inputnya ada di chat (kolom pesan), bukan di KB.
+
+⚙️ SKENARIO B (SEMI OTOMATIS): UPLOAD DOKUMEN TENDER → EXTRACTOR → ENGINE
+Tujuan
+
+User tidak menulis requirement manual. Cukup upload dokumen tender.
+
+Langkah 1 — User upload dokumen tender (PDF/DOC)
+
+User upload ke chatbot Tender Requirement Extractor (Agen).
+
+Langkah 2 — Extractor menghasilkan TENDER_REQ_SUMMARY
+
+Extractor keluarkan ringkasan terstruktur:
+
+TENDER_REQ_SUMMARY:
+{ ...hasil ekstraksi... }
+Langkah 3 — User copy hasil extractor ke Tender Readiness Checker
+
+Lalu paste bersama SUMMARY lain:
+
+SKK_SUMMARY: ...
+SBU_SUMMARY: ...
+LICENSING_SUMMARY: ...
+TENDER_REQ_SUMMARY: ...
+
+📌 Ini masih “copy paste”, tapi requirement-nya otomatis.
+
+🧠 Jadi “INPUT DIMANA?” (jawaban paling jelas)
+
+Input operasional selalu di kolom chat Tender Readiness Checker, berupa:
+
+SKK_SUMMARY
+
+SBU_SUMMARY
+
+LICENSING_SUMMARY
+
+(opsional) TENDER_REQ_SUMMARY
+
+KB hanya berisi aturan & rubrik, bukan data input.
+
+✅ Saya Buatkan TEMPLATE INPUT SIAP PAKAI
+
+Anda bisa tempel ini sebagai “cara penggunaan” di greeting/help:
+
+Untuk evaluasi, tempelkan data dengan format berikut:
+
+SKK_SUMMARY:
+{...}
+
+SBU_SUMMARY:
+{...}
+
+LICENSING_SUMMARY:
+{...}
+
+(Opsional) TENDER_REQ_SUMMARY:
+{...}
+Pilihan Anda Sekarang
+
+A) Kita jalankan Skenario A dulu (manual paste, paling cepat)
+B) Kita bangun Extractor dulu (Skenario B)
+
+Kalau target Anda “production cepat”, pilih A dulu.

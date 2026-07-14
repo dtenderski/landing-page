@@ -1,0 +1,84 @@
+# ✅ ABD Audit — Implementasi & Checklist 7 Agen BRAIN
+
+> Halaman L4 — audit ABD v1.1 untuk 7 agen Brain Project. Pola sama dengan halaman ABD KONSTRA.
+> 
+
+**Sasaran**: 7 agen (Orchestrator + 6 Spesialis) · **Frekuensi**: pre-deploy + monthly
+
+---
+
+## Definisi 7 Prinsip ABD v1.1
+
+| Kode | Prinsip | Audit Item |
+| --- | --- | --- |
+| ABD-1 | Best-Effort Answer (no-block) | Tidak menolak menjawab; selalu beri jawaban terbaik |
+| ABD-2 | Explicit Assumption Tagging | Format `[ASUMSI: ...]` muncul jika ada asumsi |
+| ABD-3 | Confidence Score | `Confidence: NN%` di akhir jawaban substantif |
+| ABD-4 | Inter-Agent Call | `callAgentInternal` ke spesialis lain bila relevan |
+| ABD-5 | Citation Requirement | ≥1 sitasi regulasi/standar/klausul per jawaban substantif |
+| ABD-6 | Output Format ABD-7 | 7 bagian lengkap |
+| ABD-7 | Follow-Up Question | 1-2 pertanyaan tindak-lanjut spesifik |
+
+## Audit Matrix per Agen
+
+| Agen | ABD-1 | ABD-2 | ABD-3 | ABD-4 | ABD-5 | ABD-6 | ABD-7 | Skor |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| BRAIN-ORCHESTRATOR | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ | _/7 |
+| BRAIN-PROXIMA | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ | _/7 |
+| BRAIN-EVM | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ | _/7 |
+| BRAIN-MUTU | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ | _/7 |
+| BRAIN-SAFIRA | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ | _/7 |
+| BRAIN-ENVIRA | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ | _/7 |
+| BRAIN-KONTRAK | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ | ☐ | _/7 |
+
+**Threshold Go-Live**: setiap agen ≥ 6/7 · **Critical (fail go-live)**: ABD-3, ABD-5, ABD-6
+
+## Test Battery (5 input per agen)
+
+Untuk setiap agen, jalankan 5 input uji:
+
+1. **Input lengkap** — cek output ABD-7 lengkap
+2. **Input minim** — cek [ASUMSI] muncul + confidence rendah
+3. **Input lintas-domain** — cek callAgentInternal
+4. **Input dengan event regulasi** — cek sitasi tepat
+5. **Input tanpa pertanyaan eksplisit** — cek ABD-7 follow-up muncul
+
+## Hotfix Library (jika gagal audit)
+
+### Bila ABD-3 Confidence tidak muncul
+
+```
+PATCH: Tambah di System Prompt Section 4 (Output):
+"WAJIB akhiri SETIAP jawaban substantif dengan: 
+Confidence: NN% (0-100)"
+```
+
+### Bila ABD-5 Sitasi tidak ada
+
+```
+PATCH: Tambah di System Prompt Section sitasi:
+"Setiap jawaban substantif HARUS punya minimal 1 sitasi. 
+Bila tidak ada sitasi yang sesuai, jawab: 
+'Tidak ada referensi regulasi langsung; berdasarkan praktik umum...' 
+DAN tambah confidence ≤ 50%."
+```
+
+### Bila ABD-6 Format ABD-7 tidak konsisten
+
+```
+PATCH: Pindahkan Section 4 Format ke awal System Prompt + 
+beri contoh konkret 1 output ABD-7 lengkap (few-shot).
+```
+
+## Audit Log
+
+| Tanggal | Auditor | Agen | Skor | Catatan | Status |
+| --- | --- | --- | --- | --- | --- |
+| _ | _ | _ | _ | _ | _ |
+
+## Frekuensi Audit
+
+- **Pre-deploy**: semua 7 agen, semua 7 ABD
+- **Monthly**: sampling 2 agen, semua 7 ABD
+- **Post-incident**: agen terkait, semua 7 ABD
+- **Major update**: agen yang di-update, semua 7 ABD

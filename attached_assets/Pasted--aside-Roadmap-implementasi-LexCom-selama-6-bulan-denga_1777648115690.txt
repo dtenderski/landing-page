@@ -1,0 +1,190 @@
+<aside>
+🗺️
+
+Roadmap implementasi LexCom selama **6 bulan** dengan fase, deliverable, milestone, RACI, risiko, dan KPI dashboard.
+
+</aside>
+
+## 1. Visi & Outcome
+
+- Meluncurkan **MVP LexCom** dalam 3 bulan (Bulan 1–3).
+- **Public beta** untuk advokat & korporat partner di Bulan 4.
+- **General availability** di Bulan 6 dengan 10 agen spesialis aktif penuh.
+- **Target retensi:** 70% pengguna aktif bulanan setelah onboarding.
+- **Target akurasi:** ≥90% citation correctness pada audit sampel mingguan.
+
+## 2. Fase Roadmap
+
+```mermaid
+gantt
+	title Roadmap LexCom 6 Bulan
+	dateFormat YYYY-MM-DD
+	section Fase 1 Foundation
+	Discovery & taksonomi		:f1a, 2026-05-01, 21d
+	KB seed (UU inti)			:f1b, 2026-05-08, 28d
+	System prompt v0.1			:f1c, 2026-05-15, 14d
+	section Fase 2 MVP Build
+	Integrasi multi-agent		:f2a, 2026-06-01, 28d
+	AGENT PIDANA + PERDATA + DRAFTER	:f2b, 2026-06-08, 21d
+	Internal alpha test			:f2c, 2026-06-22, 14d
+	section Fase 3 MVP Launch
+	MVP launch (T2/T3)			:f3a, 2026-07-15, 7d
+	Feedback loop				:f3b, 2026-07-22, 21d
+	section Fase 4 Expand
+	Tambah 7 agen sisa			:f4a, 2026-08-01, 28d
+	KB Yurisprudensi			:f4b, 2026-08-15, 28d
+	section Fase 5 Public Beta
+	Beta T1 (awam)				:f5a, 2026-09-01, 28d
+	QA & guardrail audit			:f5b, 2026-09-15, 21d
+	section Fase 6 GA
+	General Availability		:f6a, 2026-10-15, 14d
+	Docs & training				:f6b, 2026-10-22, 14d
+```
+
+## 3. Detail Fase & Deliverable
+
+### Bulan 1 — Foundation
+
+- [ ]  Workshop discovery dengan stakeholder (advokat, in-house counsel, awam)
+- [ ]  Taksonomi domain hukum disetujui Legal Lead
+- [ ]  Seed KB: KUHP baru, KUHPerdata, UU 13/2003, UU 40/2007 (5 UU inti)
+- [ ]  System prompt LEX-ORCHESTRATOR v0.1
+- [ ]  Persona Gustafta untuk 3 agen pertama
+- [ ]  Setup vector store + embedding pipeline
+
+**Milestone:** Demo internal AGENT-PIDANA + PERDATA dengan KB seed.
+
+### Bulan 2 — MVP Build
+
+- [ ]  Integrasi orchestrator + 3 agen MVP (PIDANA, PERDATA, DRAFTER)
+- [ ]  Template library v1: somasi, gugatan PMH/wanprestasi, NDA, MoU, LO
+- [ ]  Tier router (T1/T2/T3) berfungsi
+- [ ]  Citation engine (link ke sumber resmi)
+- [ ]  Internal alpha: 10 tester (legal team)
+
+**Milestone:** MVP dapat menjawab 20 use case test dengan citation valid ≥85%.
+
+### Bulan 3 — MVP Launch (T2/T3)
+
+- [ ]  Soft launch ke 5 law firm partner & 5 in-house counsel
+- [ ]  Dashboard analytics (volume, success rate, NPS)
+- [ ]  Whistleblowing/feedback channel
+- [ ]  Patch hot-issue (KUHP transisi, UU CK)
+
+**Milestone:** ≥100 sesi konsultasi tervalidasi; CSAT ≥4.0/5.
+
+### Bulan 4 — Expand Specialists
+
+- [ ]  Tambah AGENT-KORPORASI, KETENAGAKERJAAN, PERTANAHAN, PAJAK
+- [ ]  Tambah AGENT-YURISPRUDENSI dengan integrasi [putusan3.mahkamahagung.go.id](http://putusan3.mahkamahagung.go.id)
+- [ ]  KB Yurisprudensi seed: 500 putusan landmark MA/MK
+- [ ]  Tambah AGENT-LITIGASI & KEPAILITAN
+
+**Milestone:** Semua 10 agen aktif; KB yurisprudensi ≥500 putusan ter-anotasi.
+
+### Bulan 5 — Public Beta (T1)
+
+- [ ]  Aktifkan T1 (awam) dengan disclaimer kuat
+- [ ]  Edukasi user: video onboarding, FAQ, tutorial
+- [ ]  Guardrail audit minggu pertama (audit sample 100 sesi)
+- [ ]  Penyesuaian bahasa untuk awam
+- [ ]  Multilingual readiness (Bahasa Indonesia + opsi English)
+
+**Milestone:** ≥1000 sesi T1 dengan tingkat kepatuhan guardrail ≥98%.
+
+### Bulan 6 — General Availability
+
+- [ ]  Launch publik
+- [ ]  Tier pricing & monetisasi (jika applicable)
+- [ ]  Training & dokumentasi user
+- [ ]  SLA, terms of service, privacy policy final
+- [ ]  Compliance review (UU PDP, attorney-client privilege)
+
+**Milestone:** GA stabil; ≥5000 MAU; uptime ≥99.5%.
+
+## 4. RACI Per Fase
+
+| **Fase** | **Legal Lead** | **AI Engineer** | **Knowledge Curator** | **QA Legal** | **Product Owner** | **Compliance** |
+| --- | --- | --- | --- | --- | --- | --- |
+| F1 Foundation | R/A | R | R | C | A | C |
+| F2 MVP Build | C | R/A | R | C | A | I |
+| F3 MVP Launch | C | R | C | R/A | R/A | C |
+| F4 Expand | R/A | R | R/A | R | C | I |
+| F5 Public Beta | C | R | C | R/A | A | R |
+| F6 GA | A | R | C | R | R/A | R/A |
+
+## 5. KPI Dashboard
+
+### KPI Lagging (Outcome)
+
+| **KPI** | **Target M3** | **Target M6** | **Sumber** |
+| --- | --- | --- | --- |
+| MAU (Monthly Active Users) | 200 | 5.000 | Analytics |
+| Sesi konsultasi diselesaikan | 500 | 15.000 | Logs |
+| Dokumen di-generate | 100 | 3.000 | Logs |
+| CSAT | ≥4.0/5 | ≥4.5/5 | In-app survey |
+| NPS | ≥20 | ≥40 | Survey berkala |
+| Retensi 30 hari | 40% | 70% | Analytics |
+
+### KPI Leading (Quality & Compliance)
+
+| **KPI** | **Target** | **Frekuensi Audit** |
+| --- | --- | --- |
+| Citation Correctness Rate | ≥90% | Mingguan, sample 100 |
+| Guardrail Compliance Rate | ≥98% | Mingguan, sample 100 |
+| Disclaimer Coverage | 100% | Otomatis (validator) |
+| Hallucination Rate (case/citation) | ≤2% | Mingguan, sample 100 |
+| Tier Routing Accuracy | ≥95% | Bulanan |
+| Domain Routing Accuracy | ≥90% | Bulanan |
+| Mean Response Latency | ≤5 detik | Real-time |
+| Uptime SLA | ≥99.5% | Bulanan |
+| KB Freshness | ≤7 hari (UU), ≤30 hari (yurisprudensi) | Mingguan |
+| Eskalasi ke advokat manusia | ≥5% (kasus high-risk) | Bulanan |
+
+### KPI Bisnis & Etika
+
+- **Insiden privasi/data leakage:** 0 toleransi.
+- **Komplain etika dari Peradi/regulator:** 0 toleransi.
+- **False legal advice incident:** ≤0.5% per kuartal.
+- **Coverage UU baru** (mis. UU baru diundangkan minggu X): tersedia di KB minggu X+1.
+
+## 6. Risk Register
+
+| **Risiko** | **Likelihood** | **Impact** | **Mitigasi** |
+| --- | --- | --- | --- |
+| Halusinasi citation pasal/putusan | Tinggi | Tinggi | Citation validator + audit mingguan + KB resmi |
+| Saran melawan hukum (suap, evasion) | Sedang | Tinggi | Hard guardrails + red team test bulanan |
+| Bias domain (mis. pro-pengusaha) | Sedang | Sedang | Persona netral, dual-perspective output |
+| Pelanggaran UU PDP (data klien) | Sedang | Tinggi | Anonimisasi default, retention policy ketat |
+| Klaim sebagai advokat berlisensi | Rendah | Tinggi | Disclaimer wajib, branding clear sbg AI |
+| Out-of-date KB (UU baru) | Tinggi | Sedang | Pipeline kurasi mingguan + monitoring BPK |
+| Eskalasi gagal pada kasus berat | Sedang | Sedang | Trigger eskalasi: pidana berat, urgensi, multi-domain |
+
+## 7. Tim & Resource Plan
+
+| **Role** | **FTE** | **Bulan** |
+| --- | --- | --- |
+| Legal Lead (Advokat senior) | 1.0 | 1–6 |
+| AI Engineer / Prompt Engineer | 2.0 | 1–6 |
+| Knowledge Curator (paralegal) | 2.0 | 1–6 |
+| QA Legal (advokat junior) | 1.0 | 2–6 |
+| Product Owner | 0.5 | 1–6 |
+| UX Writer | 0.5 | 2–6 |
+| Compliance Officer | 0.3 | 3–6 |
+| DevOps | 0.5 | 1–6 |
+
+## 8. Definition of Done (per fase)
+
+- **DoD Foundation:** Taksonomi disetujui + 5 UU inti terindeks + system prompt v0.1 di-review.
+- **DoD MVP Build:** 3 agen MVP lulus uji 20 use case + tier router 95% akurat.
+- **DoD MVP Launch:** Soft launch live, dashboard berjalan, feedback channel aktif.
+- **DoD Expand:** Semua 10 agen aktif + 500 putusan ter-anotasi.
+- **DoD Public Beta:** Audit guardrail ≥98% lolos + onboarding T1 live.
+- **DoD GA:** Compliance review lolos, SLA terdokumentasi, training user tersedia.
+
+<aside>
+📌
+
+Roadmap ini adalah **dokumen hidup** — di-review dwi-mingguan dan disesuaikan sesuai kecepatan tim & feedback pengguna.
+
+</aside>

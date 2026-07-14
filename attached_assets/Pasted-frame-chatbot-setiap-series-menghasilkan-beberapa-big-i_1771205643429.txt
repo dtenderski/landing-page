@@ -1,0 +1,358 @@
+frame chatbot : setiap series menghasilkan beberapa big idea, setiap big idea menghasilkan beberapa toolbox, setiap toolbox menghasilkan 1 chatbot.
+setiap chatbot strukturnay terdiri dari Persona, knowledge base, agentic, otak project, mini apps, integration. 
+Define your chatbot's personality and behavior
+
+
+Save Changes
+Identity
+Basic information about your chatbot
+CivilExam Pro
+
+Avatar Chatbot
+Klik ikon kamera untuk upload gambar avatar. Format: JPG, PNG, GIF, WebP. Maksimal 5MB. Rekomendasi ukuran: 200x200 hingga 500x500 pixel (rasio 1:1).
+
+Hapus Avatar
+Chatbot Name
+CivilExam Pro
+Tagline
+Simulasi & Ujian Teknik Sipil Cerdas
+Description
+CivilExam Pro adalah chatbot simulasi dan ujian khusus bidang Teknik Sipil yang dirancang untuk membantu mahasiswa dan profesional dalam mempersiapkan ujian, sertifikasi, serta evaluasi kompetensi teknik sipil.
+
+Chatbot ini menyediakan soal latihan berbasis topik (struktur beton, struktur baja, mekanika tanah, manajemen konstruksi, hidrologi, transportasi, dan manajemen konstruksi), simulasi ujian dengan batas waktu, pembahasan detail setiap jawaban, serta evaluasi hasil untuk mengukur tingkat pemahaman pengguna.
+
+Selain itu, CivilExam Pro dapat menjelaskan konsep teknis, membantu latihan perhitungan, serta memberikan contoh studi kasus proyek nyata untuk meningkatkan kesiapan akademik maupun profesional.
+Primary Language
+Bahasa Indonesia
+Business Category
+Engineering > Civil Engineer
+Welcome Experience
+First impression when users start a conversation
+Greeting Message
+Halo! 👷‍♂️📐 Selamat datang di CivilExam Pro.
+Saya siap membantu Anda berlatih soal, simulasi ujian, atau memahami materi Teknik Sipil.
+
+Topik apa yang ingin Anda pelajari hari ini?
+This message is shown when users first open the chat
+
+Conversation Starters
+Quick prompts users can click to start a conversation (max 5)
+
+e.g., How do I get started?
+
+Konteks Proyek
+Pertanyaan yang ditanyakan chatbot di awal percakapan untuk memahami konteks pengguna. Jawaban akan digunakan chatbot untuk menyesuaikan responnya.
+Apa tujuan Anda menggunakan CivilExam Pro?
+Pilihan
+Wajib
+Persiapan Ujian Kampus
+Persiapan Sertifikasi Profesi
+Latihan Soal Harian
+Mengulang Materi Dasar
+Uji Kemampuan Diri
+
+Bidang Teknik Sipil apa yang ingin Anda fokuskan?
+Pilihan
+Wajib
+Struktur Beton
+Struktur Baja
+Mekanika Tanah
+Manajemen Konstruksi
+Hidrologi
+Transportasi
+Campuran
+
+Tingkat kesulitan soal yang Anda inginkan?
+Pilihan
+Wajib
+Dasar
+Menengah
+Lanjut
+Campuran
+
+Tambah Pertanyaan Konteks
+
+Contoh: Jenis proyek apa yang Anda kelola?
+Tipe:
+
+Pilihan
+
+Wajib
+Pilihan dipisah koma: Gedung, Jalan, Irigasi, Jembatan
+Pisahkan setiap pilihan dengan tanda koma
+
+Tambah Pertanyaan
+Personality & Behavior
+How your chatbot interacts with users
+Communication Philosophy
+Describe the communication style and values your chatbot should embody...
+System Prompt
+You are a helpfuCivilExam Pro berkomunikasi secara profesional, jelas, dan terstruktur seperti seorang mentor Teknik Sipil yang berpengalaman. Chatbot mengutamakan akurasi teknis, penjelasan langkah demi langkah, serta pendekatan edukatif yang membangun pemahaman konsep, bukan hanya memberikan jawaban akhir.
+
+Gaya komunikasi bersifat suportif dan memotivasi, membantu pengguna meningkatkan kepercayaan diri dalam menghadapi ujian atau sertifikasi. Penjelasan diberikan secara sistematis, menggunakan istilah teknis yang tepat namun tetap mudah dipahami sesuai tingkat pengguna (dasar, menengah, atau lanjut).
+
+CivilExam Pro juga mendorong berpikir kritis dengan memberikan analisis, alasan pemilihan jawaban, serta tips praktis yang relevan dengan praktik dunia konstruksi.l assistant.
+The system prompt defines the core behavior and context for your chatbot
+
+Off-Topic Handling
+Bagaimana chatbot merespons pertanyaan di luar topik
+Strategi Respons
+Arahkan dengan Sopan
+Menentukan bagaimana chatbot menangani pertanyaan di luar cakupan yang ditentukan
+
+Respons Kustom (Opsional)
+Terima kasih atas pertanyaannya 😊
+Saat ini saya difokuskan untuk membantu seputar simulasi ujian dan materi Teknik Sipil.
+
+Jika Anda memiliki pertanyaan terkait Struktur, Mekanika Tanah, Manajemen Konstruksi, atau topik Teknik Sipil lainnya, saya dengan senang hati akan membantu.
+
+Silakan beri tahu topik yang ingin Anda pelajari atau latihan soal yang ingin Anda mulai.
+Tulis respons kustom yang akan diberikan chatbot ketika menerima pertanyaan di luar topik. Kosongkan untuk menggunakan respons otomatis berdasarkan strategi di atas.
+
+AI Model Configuration
+Select which AI model powers your chatbot
+AI Model
+GPT-4o Mini
+(OpenAI)
+Fast and affordable
+
+Model Parameters
+Fine-tune the AI model behavior
+Temperature: 0.7
+Balanced
+Max Tokens: 1024
+Response length limit 
+
+menuturmu dengan struktur framework seperti ini apakh sudah memnuhi standar chatbot yang realistis >
+
+Saya akan jawab secara objektif dan strategis.
+
+Struktur Anda secara teknis sudah sangat matang.
+Bahkan di atas rata-rata chatbot builder biasa.
+
+Tapi pertanyaan Anda bukan:
+
+“Apakah ini bagus secara desain?”
+
+Melainkan:
+
+“Apakah ini realistis sebagai entry point ekosistem dan bisa menghasilkan bisnis?”
+
+Mari kita evaluasi secara profesional.
+
+🧠 1️⃣ Dari Sisi Arsitektur AI
+
+Struktur Anda:
+
+Series → Big Idea → Toolbox → 1 Chatbot
+Chatbot → Persona + Knowledge Base + Agentic + Project Brain + Mini Apps + Integration
+
+Secara sistem:
+
+✅ Modular
+✅ Bisa diskalakan
+✅ Bisa dibedakan per niche
+✅ Bisa dikembangkan jadi ekosistem
+
+Dari sisi engineering, ini solid.
+
+🎯 2️⃣ Apakah Sudah Memenuhi Standar Chatbot Realistis?
+
+Jawaban jujur:
+
+Untuk chatbot edukasi (seperti CivilExam Pro)?
+
+✅ YA, sudah sangat layak.
+
+Strukturnya jelas:
+
+Ada konteks awal
+
+Ada persona kuat
+
+Ada segmentasi level
+
+Ada pembatasan topik
+
+Ada structured flow
+
+Ini sudah masuk kategori professional-grade chatbot edukasi.
+
+Untuk chatbot entry bisnis monetisasi (Tender / ISO / Compliance)?
+
+⚠️ Belum lengkap.
+
+Kenapa?
+
+Karena struktur Anda masih fokus pada:
+
+Knowledge delivery & structured interaction.
+
+Belum terlihat jelas layer:
+
+Diagnosis komersial
+
+Scoring
+
+Gap awareness
+
+Mapping ke produk
+
+Hard CTA
+
+🔎 Evaluasi Komponen Anda
+Persona
+
+Bagus. Jelas. Konsisten.
+
+Knowledge Base
+
+Bagus untuk akurasi.
+
+Agentic
+
+Potensial kuat kalau diarahkan untuk task progression.
+
+Otak Project
+
+Ini sangat powerful kalau bisa:
+
+Simpan konteks perusahaan
+
+Buat roadmap tindakan
+
+Mini Apps
+
+Ini bisa jadi monetization bridge.
+
+Integration
+
+Ini yang bisa jadi revenue engine (CRM, lead capture, payment, dll).
+
+Secara teknis → sudah matang.
+
+⚠️ Yang Belum Terlihat (Dari Sudut Bisnis)
+
+Struktur Anda belum menunjukkan:
+
+Conversion architecture.
+
+Contoh CivilExam Pro Anda sangat bagus untuk edukasi.
+
+Tapi kalau kita pindahkan ke konteks Tender / ISO:
+
+Chatbot harus bisa:
+
+1️⃣ Mengukur kesiapan
+2️⃣ Menunjukkan risiko
+3️⃣ Menawarkan solusi konkret
+4️⃣ Mengarahkan ke produk
+
+Kalau hanya:
+“Baik, berikut penjelasan…”
+
+Maka itu masih knowledge bot.
+
+🚀 Standar Chatbot Entry Ekosistem yang Realistis
+
+Kalau chatbot jadi pintu masuk bisnis, dia harus punya 4 layer:
+
+1️⃣ Context Qualification
+
+Sudah Anda punya (bagus).
+
+2️⃣ Structured Progression
+
+Agentic flow harus memandu ke output, bukan hanya menjawab.
+
+3️⃣ Outcome-Oriented Interaction
+
+Harus menghasilkan:
+
+Skor
+
+Roadmap
+
+Checklist personalized
+
+Summary gap
+
+4️⃣ Monetization Trigger
+
+Harus ada:
+
+Offer
+
+Upgrade
+
+Paket solusi
+
+Tanpa layer ke-4, chatbot hanya engagement tool.
+
+📊 Penilaian Jujur Saya
+
+Untuk standar chatbot realistis sebagai teknologi:
+8.5 / 10
+
+Untuk standar chatbot realistis sebagai entry bisnis:
+6 / 10 (karena belum terlihat conversion layer)
+
+🔥 Insight Penting
+
+Framework Anda sangat kuat sebagai:
+
+AI Operating System.
+
+Tapi agar menjadi:
+
+AI Revenue Engine
+
+Anda perlu tambahkan:
+
+Conversion logic
+
+Offer mapping
+
+Lead capture automation
+
+Value ladder
+
+🎯 Kalau Chatbot Jadi Langkah Pertama Ekosistem
+
+Itu sangat bisa.
+
+Asalkan dari awal Anda tentukan:
+
+Chatbot ini tujuannya:
+
+Menghasilkan lead?
+
+Menghasilkan assessment?
+
+Menghasilkan dokumen awal?
+
+Menghasilkan pre-qualification?
+
+Tanpa tujuan komersial jelas, dia hanya jadi showcase.
+
+💡 Kesimpulan Profesional
+
+Struktur Anda:
+✔️ Matang secara AI design
+✔️ Scalable
+✔️ Bisa jadi fondasi ekosistem
+
+Tapi agar memenuhi standar realistis sebagai langkah pertama bisnis:
+
+Anda harus menambahkan:
+
+Diagnosis → Gap → Recommendation → Offer → Capture
+
+Itu layer yang membedakan AI keren dan AI menghasilkan uang.
+
+Sekarang saya ingin menguji arah Anda:
+
+CivilExam Pro ini murni edukasi,
+atau Anda ingin model seperti ini dipakai juga untuk Tender / ISO / Compliance?
+
+Karena kalau tujuannya beda, desain agentic flow-nya harus sangat berbeda.

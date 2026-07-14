@@ -1,0 +1,1303 @@
+Berikut lanjutan konfigurasi **Chatbot SBUJPTL Coach**. Bagian ini melanjutkan struktur sebelumnya menjadi lebih siap implementasi: **NLU schema, entity extraction, API contract, database schema, admin dashboard, analytics, testing checklist, FAQ seed, dan deployment notes**. Struktur ini mengikuti pola dokumen contoh yang memuat intent, response template, conversation branch, assessment, fallback, implementation notes, analytics, dan future extensions. 
+
+## 18. Implementation notes
+
+```yaml id="l9x4h3"
+implementation_notes:
+  nlp:
+    intent_matching:
+      phase_1: "keyword matching untuk MVP"
+      phase_2: "semantic intent classifier"
+      phase_3: "hybrid intent + entity extraction"
+    entity_extraction:
+      - "classification_type"
+      - "installation_field"
+      - "document_name"
+      - "company_status"
+      - "pjt_status"
+      - "tt_status"
+      - "skttk_status"
+      - "business_goal"
+      - "contact_info"
+
+  data_storage:
+    store:
+      - "current_flow"
+      - "selected_classification"
+      - "selected_installation_field"
+      - "document_readiness_score"
+      - "missing_documents"
+      - "lead_contact"
+      - "consultation_need"
+
+  privacy_note:
+    - "Jangan menyimpan KTP, NPWP, akta, atau dokumen pribadi secara penuh di chat kecuali sistem memang memiliki consent dan keamanan file upload."
+    - "Untuk MVP, cukup simpan status dokumen: ada, belum, atau tidak tahu."
+    - "Data kontak hanya digunakan untuk tindak lanjut konsultasi."
+
+  analytics:
+    track:
+      - "most_selected_classification"
+      - "most_selected_installation_field"
+      - "document_assessment_completion_rate"
+      - "most_missing_documents"
+      - "pjt_tt_questions_count"
+      - "lead_capture_conversion_rate"
+      - "fallback_rate"
+      - "admin_escalation_rate"
+
+  future_extensions:
+    - "upload dokumen dan review checklist otomatis"
+    - "generate personalized document preparation plan"
+    - "downloadable SBUJPTL readiness report"
+    - "admin CMS untuk update klasifikasi dan persyaratan"
+    - "integrasi WhatsApp"
+    - "integrasi CRM"
+    - "tracking status pengurusan"
+```
+
+## 19. NLU intent schema
+
+```yaml id="zgel78"
+nlu_schema:
+  intents:
+    greet:
+      examples:
+        - "Halo"
+        - "Selamat pagi"
+        - "Saya mau tanya SBU"
+        - "Saya mau urus SBUJPTL"
+        - "Bisa bantu sertifikasi badan usaha listrik?"
+
+    explain_sbujptl:
+      examples:
+        - "Apa itu SBUJPTL?"
+        - "SBU penunjang tenaga listrik itu apa?"
+        - "SBUJPTL untuk apa?"
+        - "Kenapa perusahaan saya perlu SBUJPTL?"
+        - "Apakah SBUJPTL wajib untuk tender?"
+
+    select_classification:
+      examples:
+        - "Saya mau pilih klasifikasi"
+        - "Klasifikasi SBUJPTL apa saja?"
+        - "Perusahaan saya pemasangan listrik"
+        - "Saya jasa pemeliharaan instalasi listrik"
+        - "Saya konsultan teknik listrik"
+
+    select_installation_field:
+      examples:
+        - "Bidang distribusi"
+        - "Saya di pembangkitan"
+        - "Pekerjaan kami instalasi pemanfaatan"
+        - "Transmisi tenaga listrik"
+        - "Jaringan distribusi listrik"
+
+    document_requirements:
+      examples:
+        - "Syarat dokumennya apa?"
+        - "Dokumen SBUJPTL apa saja?"
+        - "Apa saja yang harus disiapkan?"
+        - "Butuh akta perusahaan?"
+        - "Apakah perlu laporan keuangan?"
+
+    start_document_assessment:
+      examples:
+        - "Cek dokumen saya"
+        - "Mulai asesmen dokumen"
+        - "Saya mau cek kelengkapan"
+        - "Dokumen saya sudah siap belum?"
+        - "Tolong buat checklist"
+
+    ask_pjt_tt:
+      examples:
+        - "Apa itu PJT?"
+        - "Apa itu TT?"
+        - "PJT dan TT bedanya apa?"
+        - "Apakah wajib punya PJT?"
+        - "Tenaga teknik harus berapa orang?"
+
+    ask_skttk:
+      examples:
+        - "Apa itu SKTTK?"
+        - "Apakah PJT harus punya SKTTK?"
+        - "Sertifikat tenaga teknik apa yang dibutuhkan?"
+        - "Kalau belum punya SKTTK bagaimana?"
+
+    process_guidance:
+      examples:
+        - "Bagaimana alur pengurusan SBUJPTL?"
+        - "Tahapan prosesnya apa?"
+        - "Mulai dari mana?"
+        - "Berapa lama proses pengurusan?"
+        - "Apa langkah pertama?"
+
+    lead_capture:
+      examples:
+        - "Saya mau konsultasi"
+        - "Tolong hubungi saya"
+        - "Saya mau dibantu urus"
+        - "Bisa minta admin?"
+        - "Saya ingin pakai jasa pengurusan"
+
+    glossary_lookup:
+      examples:
+        - "Apa itu NIB?"
+        - "Apa itu SKTTK?"
+        - "Apa itu instalasi pemanfaatan?"
+        - "Apa arti pembangkitan?"
+        - "Apa beda transmisi dan distribusi?"
+
+    fallback:
+      examples:
+        - "Saya bingung"
+        - "Tidak tahu"
+        - "Belum paham"
+        - "Jelaskan lagi"
+```
+
+## 20. Entity extraction schema
+
+```yaml id="4qfnc7"
+entities:
+  classification_type:
+    type: enum
+    values:
+      - "konsultansi"
+      - "pembangunan_pemasangan"
+      - "pemeriksaan_pengujian"
+      - "pengoperasian"
+      - "pemeliharaan"
+    synonyms:
+      konsultansi:
+        - "konsultan"
+        - "perencanaan"
+        - "desain"
+        - "kajian teknis"
+      pembangunan_pemasangan:
+        - "kontraktor"
+        - "pemasangan"
+        - "pembangunan"
+        - "instalasi"
+      pemeriksaan_pengujian:
+        - "inspeksi"
+        - "pengujian"
+        - "testing"
+        - "commissioning"
+      pengoperasian:
+        - "operasi"
+        - "operator"
+        - "menjalankan instalasi"
+      pemeliharaan:
+        - "maintenance"
+        - "perawatan"
+        - "perbaikan"
+        - "servis"
+
+  installation_field:
+    type: enum
+    values:
+      - "pembangkitan"
+      - "transmisi"
+      - "distribusi"
+      - "instalasi_pemanfaatan"
+    synonyms:
+      pembangkitan:
+        - "pembangkit"
+        - "power plant"
+        - "genset"
+        - "PLTS"
+        - "PLTU"
+        - "PLTA"
+      transmisi:
+        - "sutet"
+        - "sutt"
+        - "jaringan transmisi"
+      distribusi:
+        - "jaringan distribusi"
+        - "gardu distribusi"
+        - "tegangan menengah"
+        - "tegangan rendah"
+      instalasi_pemanfaatan:
+        - "instalasi gedung"
+        - "instalasi konsumen"
+        - "pemanfaatan listrik"
+        - "instalasi pengguna"
+
+  document_name:
+    type: enum
+    values:
+      - "akta_pendirian"
+      - "sk_pengesahan"
+      - "akta_perubahan"
+      - "ktp_npwp_pengurus"
+      - "npwp_perusahaan"
+      - "nib"
+      - "email_telepon"
+      - "foto_direktur"
+      - "dokumen_pjt_tt"
+      - "skttk"
+      - "laporan_keuangan"
+      - "company_profile"
+      - "struktur_organisasi"
+
+  document_status:
+    type: enum
+    values:
+      - "ada"
+      - "belum"
+      - "tidak_tahu"
+
+  business_goal:
+    type: enum
+    values:
+      - "tender_pemerintah"
+      - "tender_swasta"
+      - "legalitas"
+      - "perpanjangan"
+      - "perubahan_klasifikasi"
+      - "belum_tahu"
+```
+
+## 21. Classification catalog seed
+
+```json id="djt8vy"
+{
+  "classification_catalog": [
+    {
+      "id": "konsultansi_instalasi_tenaga_listrik",
+      "name": "Konsultansi dalam Bidang Instalasi Tenaga Listrik",
+      "short_label": "Konsultansi",
+      "description": "Untuk badan usaha yang memberikan jasa kajian, perencanaan, desain, pengawasan teknis, atau konsultansi instalasi tenaga listrik.",
+      "fields": [
+        "Pembangkitan Tenaga Listrik",
+        "Transmisi Tenaga Listrik",
+        "Distribusi Tenaga Listrik",
+        "Instalasi Pemanfaatan Tenaga Listrik"
+      ],
+      "recommended_documents": [
+        "Akta pendirian dan SK pengesahan",
+        "NIB",
+        "NPWP perusahaan",
+        "Company profile",
+        "Dokumen PJT dan TT",
+        "SKTTK",
+        "Struktur organisasi"
+      ]
+    },
+    {
+      "id": "pembangunan_pemasangan_instalasi_tenaga_listrik",
+      "name": "Pembangunan dan Pemasangan Instalasi Tenaga Listrik",
+      "short_label": "Pembangunan dan Pemasangan",
+      "description": "Untuk badan usaha yang melakukan pekerjaan pemasangan, konstruksi, pembangunan, atau instalasi sistem tenaga listrik.",
+      "fields": [
+        "Pembangkitan Tenaga Listrik",
+        "Transmisi Tenaga Listrik",
+        "Distribusi Tenaga Listrik",
+        "Instalasi Pemanfaatan Tenaga Listrik"
+      ],
+      "recommended_documents": [
+        "Akta pendirian dan SK pengesahan",
+        "Akta perubahan bila ada",
+        "NIB",
+        "NPWP perusahaan",
+        "Data pengurus dan pemegang saham",
+        "Dokumen PJT dan TT",
+        "SKTTK",
+        "Laporan keuangan",
+        "Company profile",
+        "Struktur organisasi"
+      ]
+    },
+    {
+      "id": "pemeriksaan_pengujian_instalasi_tenaga_listrik",
+      "name": "Pemeriksaan dan Pengujian Instalasi Tenaga Listrik",
+      "short_label": "Pemeriksaan dan Pengujian",
+      "description": "Untuk badan usaha yang melakukan inspeksi, pemeriksaan teknis, pengujian, evaluasi, atau verifikasi instalasi tenaga listrik.",
+      "fields": [
+        "Pembangkitan Tenaga Listrik",
+        "Transmisi Tenaga Listrik",
+        "Distribusi Tenaga Listrik",
+        "Instalasi Pemanfaatan Tenaga Listrik"
+      ],
+      "recommended_documents": [
+        "Legalitas badan usaha",
+        "NIB",
+        "NPWP perusahaan",
+        "Dokumen teknis PJT/TT",
+        "SKTTK",
+        "Company profile",
+        "Struktur organisasi"
+      ]
+    },
+    {
+      "id": "pengoperasian_instalasi_tenaga_listrik",
+      "name": "Pengoperasian Instalasi Tenaga Listrik",
+      "short_label": "Pengoperasian",
+      "description": "Untuk badan usaha yang menjalankan, mengendalikan, atau mengoperasikan instalasi tenaga listrik.",
+      "fields": [
+        "Pembangkitan Tenaga Listrik",
+        "Transmisi Tenaga Listrik",
+        "Distribusi Tenaga Listrik",
+        "Instalasi Pemanfaatan Tenaga Listrik"
+      ],
+      "recommended_documents": [
+        "Legalitas perusahaan",
+        "NIB",
+        "NPWP perusahaan",
+        "Dokumen PJT/TT",
+        "SKTTK",
+        "Company profile",
+        "Struktur organisasi"
+      ]
+    },
+    {
+      "id": "pemeliharaan_instalasi_tenaga_listrik",
+      "name": "Pemeliharaan Instalasi Tenaga Listrik",
+      "short_label": "Pemeliharaan",
+      "description": "Untuk badan usaha yang melakukan perawatan, perbaikan, maintenance, inspeksi berkala, atau troubleshooting instalasi tenaga listrik.",
+      "fields": [
+        "Pembangkitan Tenaga Listrik",
+        "Transmisi Tenaga Listrik",
+        "Distribusi Tenaga Listrik",
+        "Instalasi Pemanfaatan Tenaga Listrik"
+      ],
+      "recommended_documents": [
+        "Akta dan SK pengesahan",
+        "NIB",
+        "NPWP perusahaan",
+        "Dokumen PJT/TT",
+        "SKTTK",
+        "Laporan keuangan",
+        "Company profile",
+        "Struktur organisasi"
+      ]
+    }
+  ]
+}
+```
+
+## 22. Document checklist seed
+
+```json id="1atp6g"
+{
+  "document_checklist": [
+    {
+      "id": "akta_pendirian_sk",
+      "label": "Akta Pendirian dan SK Pengesahan",
+      "category": "legalitas",
+      "required": true,
+      "question": "Apakah perusahaan sudah memiliki Akta Pendirian dan SK Pengesahan?",
+      "help_text": "Dokumen ini menjadi dasar legalitas awal badan usaha."
+    },
+    {
+      "id": "akta_perubahan_sk",
+      "label": "Akta Perubahan dan SK Pengesahan",
+      "category": "legalitas",
+      "required": false,
+      "question": "Apakah perusahaan memiliki Akta Perubahan dan SK Pengesahan terakhir?",
+      "help_text": "Diperlukan jika pernah ada perubahan pengurus, pemegang saham, nama, modal, atau data perusahaan."
+    },
+    {
+      "id": "ktp_npwp_pengurus",
+      "label": "KTP dan NPWP Pengurus serta Pemegang Saham",
+      "category": "data_pengurus",
+      "required": true,
+      "question": "Apakah KTP dan NPWP seluruh pengurus serta pemegang saham sudah tersedia?",
+      "help_text": "Data ini digunakan untuk verifikasi identitas pengurus dan pemilik perusahaan."
+    },
+    {
+      "id": "npwp_perusahaan",
+      "label": "NPWP Perusahaan",
+      "category": "perpajakan",
+      "required": true,
+      "question": "Apakah NPWP perusahaan sudah tersedia?",
+      "help_text": "NPWP perusahaan diperlukan sebagai identitas perpajakan badan usaha."
+    },
+    {
+      "id": "nib",
+      "label": "NIB Perusahaan",
+      "category": "perizinan",
+      "required": true,
+      "question": "Apakah NIB perusahaan sudah tersedia?",
+      "help_text": "NIB menjadi identitas berusaha dan dasar perizinan perusahaan."
+    },
+    {
+      "id": "email_telepon",
+      "label": "Email dan Nomor Telepon Aktif",
+      "category": "kontak",
+      "required": true,
+      "question": "Apakah perusahaan memiliki email dan nomor telepon aktif?",
+      "help_text": "Kontak aktif diperlukan untuk komunikasi proses dan verifikasi."
+    },
+    {
+      "id": "foto_direktur",
+      "label": "Foto Penanggung Jawab Perusahaan atau Direktur",
+      "category": "data_pengurus",
+      "required": true,
+      "question": "Apakah foto penanggung jawab perusahaan atau direktur sudah tersedia?",
+      "help_text": "Foto digunakan untuk melengkapi data administrasi penanggung jawab."
+    },
+    {
+      "id": "dokumen_pjt_tt_skttk",
+      "label": "Dokumen PJT, TT, dan SKTTK",
+      "category": "teknis",
+      "required": true,
+      "question": "Apakah perusahaan sudah memiliki PJT dan TT dengan dokumen SKTTK?",
+      "help_text": "Dokumen teknis ini biasanya mencakup KTP, NPWP, ijazah, riwayat hidup, dan SKTTK."
+    },
+    {
+      "id": "laporan_keuangan",
+      "label": "Neraca atau Laporan Keuangan",
+      "category": "keuangan",
+      "required": true,
+      "question": "Apakah neraca atau laporan keuangan perusahaan sudah tersedia?",
+      "help_text": "Untuk kualifikasi tertentu, laporan keuangan mungkin perlu diaudit oleh KAP."
+    },
+    {
+      "id": "company_profile",
+      "label": "Company Profile",
+      "category": "profil_usaha",
+      "required": true,
+      "question": "Apakah company profile perusahaan sudah tersedia?",
+      "help_text": "Company profile membantu menjelaskan identitas, pengalaman, layanan, dan kemampuan perusahaan."
+    },
+    {
+      "id": "struktur_organisasi",
+      "label": "Struktur Organisasi dan Nama Pemilik SKTTK",
+      "category": "organisasi",
+      "required": true,
+      "question": "Apakah struktur organisasi perusahaan beserta nama pemilik SKTTK sudah tersedia?",
+      "help_text": "Struktur organisasi menunjukkan susunan tanggung jawab teknis dan manajerial."
+    }
+  ]
+}
+```
+
+## 23. API endpoint design
+
+```yaml id="rq3uwb"
+api_endpoints:
+  - method: "POST"
+    path: "/api/chat/message"
+    purpose: "Menerima pesan pengguna dan mengembalikan respons chatbot."
+    request_body:
+      user_id: "string"
+      session_id: "string"
+      message: "string"
+      metadata:
+        platform: "web | whatsapp | mobile"
+        locale: "id-ID"
+    response_body:
+      session_id: "string"
+      intent: "string"
+      confidence: "number"
+      entities: "object"
+      response:
+        text: "string"
+        quick_replies: "array"
+        cards: "array"
+        next_node: "string"
+
+  - method: "GET"
+    path: "/api/classifications"
+    purpose: "Mengambil daftar klasifikasi SBUJPTL."
+    response_body:
+      classifications: "array"
+
+  - method: "GET"
+    path: "/api/classifications/{classification_id}"
+    purpose: "Mengambil detail klasifikasi dan bidang instalasi."
+    response_body:
+      id: "string"
+      name: "string"
+      description: "string"
+      fields: "array"
+      recommended_documents: "array"
+
+  - method: "POST"
+    path: "/api/document-assessment/start"
+    purpose: "Memulai asesmen kelengkapan dokumen."
+    request_body:
+      user_id: "string"
+      session_id: "string"
+      selected_classification: "string | null"
+      selected_field: "string | null"
+    response_body:
+      assessment_id: "string"
+      first_question: "object"
+      total_questions: "integer"
+
+  - method: "POST"
+    path: "/api/document-assessment/answer"
+    purpose: "Menyimpan jawaban dokumen dan mengembalikan pertanyaan berikutnya."
+    request_body:
+      user_id: "string"
+      session_id: "string"
+      assessment_id: "string"
+      document_id: "string"
+      answer: "ada | belum | tidak_tahu"
+    response_body:
+      completed: "boolean"
+      next_question: "object | null"
+      result: "object | null"
+
+  - method: "POST"
+    path: "/api/leads"
+    purpose: "Menyimpan data konsultasi."
+    request_body:
+      contact_name: "string"
+      company_name: "string"
+      phone_number: "string"
+      email: "string | null"
+      consultation_need: "string"
+      selected_classification: "string | null"
+      selected_field: "string | null"
+    response_body:
+      lead_id: "string"
+      status: "created"
+      next_action: "string"
+
+  - method: "GET"
+    path: "/api/glossary"
+    purpose: "Mengambil daftar istilah SBUJPTL."
+    query_params:
+      search: "optional string"
+    response_body:
+      terms: "array"
+```
+
+## 24. Database schema
+
+```sql id="3e0zla"
+CREATE TABLE chatbot_sessions (
+  id VARCHAR(64) PRIMARY KEY,
+  user_id VARCHAR(64),
+  current_flow VARCHAR(100),
+  current_node VARCHAR(100),
+  selected_classification VARCHAR(150),
+  selected_field VARCHAR(150),
+  fallback_count INTEGER DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE sbujptl_classifications (
+  id VARCHAR(150) PRIMARY KEY,
+  name TEXT NOT NULL,
+  short_label VARCHAR(100),
+  description TEXT,
+  fields JSONB,
+  recommended_documents JSONB,
+  is_active BOOLEAN DEFAULT TRUE,
+  version VARCHAR(20) DEFAULT '1.0.0',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE document_checklist_items (
+  id VARCHAR(150) PRIMARY KEY,
+  label TEXT NOT NULL,
+  category VARCHAR(100),
+  required BOOLEAN DEFAULT TRUE,
+  question TEXT NOT NULL,
+  help_text TEXT,
+  sort_order INTEGER DEFAULT 0,
+  is_active BOOLEAN DEFAULT TRUE
+);
+
+CREATE TABLE document_assessments (
+  id VARCHAR(64) PRIMARY KEY,
+  user_id VARCHAR(64),
+  session_id VARCHAR(64),
+  selected_classification VARCHAR(150),
+  selected_field VARCHAR(150),
+  score INTEGER DEFAULT 0,
+  total_questions INTEGER DEFAULT 0,
+  readiness_level VARCHAR(50),
+  missing_documents JSONB,
+  recommended_next_steps JSONB,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  completed_at TIMESTAMP
+);
+
+CREATE TABLE document_assessment_answers (
+  id VARCHAR(64) PRIMARY KEY,
+  assessment_id VARCHAR(64),
+  document_id VARCHAR(150),
+  answer VARCHAR(20),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE consultation_leads (
+  id VARCHAR(64) PRIMARY KEY,
+  contact_name VARCHAR(150),
+  company_name VARCHAR(200),
+  phone_number VARCHAR(50),
+  email VARCHAR(150),
+  consultation_need TEXT,
+  selected_classification VARCHAR(150),
+  selected_field VARCHAR(150),
+  document_readiness_level VARCHAR(50),
+  status VARCHAR(50) DEFAULT 'new',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE glossary_terms (
+  id VARCHAR(150) PRIMARY KEY,
+  term VARCHAR(150) NOT NULL,
+  definition TEXT NOT NULL,
+  example TEXT,
+  related_terms JSONB,
+  is_active BOOLEAN DEFAULT TRUE
+);
+
+CREATE TABLE analytics_events (
+  id VARCHAR(64) PRIMARY KEY,
+  user_id VARCHAR(64),
+  session_id VARCHAR(64),
+  event_name VARCHAR(150),
+  event_payload JSONB,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+## 25. Conversation state machine
+
+```yaml id="4ai1u8"
+state_machine:
+  initial_state: onboarding
+
+  states:
+    onboarding:
+      on:
+        user_greets: main_menu
+        user_asks_sbujptl: explain_sbujptl
+        user_wants_classification: classification_menu
+        user_wants_documents: document_assessment_start
+
+    main_menu:
+      on:
+        select_intro: explain_sbujptl
+        select_classification: classification_menu
+        select_document_check: document_assessment_start
+        select_pjt_tt: pjt_tt_explanation
+        select_process: process_flow
+        select_consultation: lead_capture_start
+        select_glossary: glossary_lookup
+
+    classification_menu:
+      on:
+        select_konsultansi: classification_konsultansi
+        select_pembangunan_pemasangan: classification_pembangunan_pemasangan
+        select_pemeriksaan_pengujian: classification_pemeriksaan_pengujian
+        select_pengoperasian: classification_pengoperasian
+        select_pemeliharaan: classification_pemeliharaan
+        select_unknown: classification_discovery_questions
+
+    classification_discovery_questions:
+      on:
+        profile_complete: classification_recommendation
+        user_uncertain: classification_help
+
+    classification_recommendation:
+      on:
+        confirm_classification: select_installation_field
+        reject_classification: classification_menu
+        ask_documents: document_assessment_start
+
+    select_installation_field:
+      on:
+        select_pembangkitan: field_pembangkitan
+        select_transmisi: field_transmisi
+        select_distribusi: field_distribusi
+        select_instalasi_pemanfaatan: field_instalasi_pemanfaatan
+        select_unknown: field_discovery_help
+
+    document_assessment_start:
+      on:
+        start_assessment: document_assessment_questions
+        view_checklist: document_checklist_overview
+        back_to_menu: main_menu
+
+    document_assessment_questions:
+      on:
+        answer_saved: next_document_question
+        assessment_complete: document_assessment_result
+
+    document_assessment_result:
+      on:
+        request_admin: lead_capture_start
+        view_missing_documents: missing_document_detail
+        repeat_assessment: document_assessment_start
+        back_to_menu: main_menu
+
+    lead_capture_start:
+      on:
+        form_complete: lead_capture_summary
+        user_cancel: main_menu
+
+    fallback:
+      on:
+        user_selects_topic: route_to_selected_topic
+        repeated_failure: lead_capture_start
+```
+
+## 26. Document readiness result template
+
+```yaml id="hbyqes"
+response_template:
+  id: document_readiness_result
+  text: >
+    Berikut hasil cek awal kelengkapan dokumen SBUJPTL Anda:
+
+    Klasifikasi yang dipilih:
+    {{selected_classification}}
+
+    Bidang instalasi:
+    {{selected_field}}
+
+    Skor kelengkapan:
+    {{score}} dari {{total_questions}}
+
+    Status:
+    {{readiness_level}}
+
+    Dokumen yang belum tersedia:
+    {{missing_documents}}
+
+    Rekomendasi langkah berikutnya:
+    {{recommended_next_steps}}
+
+    Catatan:
+    Hasil ini adalah cek awal berbasis jawaban Anda. Verifikasi final tetap
+    perlu dilakukan oleh konsultan, lembaga sertifikasi, atau pihak berwenang.
+  quick_replies:
+    - "Kirim ke admin"
+    - "Lihat dokumen kurang"
+    - "Ulangi cek"
+    - "Pilih klasifikasi lain"
+    - "Menu utama"
+
+readiness_logic:
+  ready_review:
+    condition: "score >= 9"
+    readiness_level: "Siap Review Awal"
+    recommended_next_steps:
+      - "Validasi kesesuaian klasifikasi dan bidang."
+      - "Pastikan PJT/TT dan SKTTK sesuai kebutuhan."
+      - "Siapkan dokumen dalam format digital."
+      - "Lanjutkan review oleh konsultan atau admin."
+
+  partial:
+    condition: "score >= 6 and score < 9"
+    readiness_level: "Perlu Pelengkapan"
+    recommended_next_steps:
+      - "Lengkapi dokumen yang belum tersedia."
+      - "Prioritaskan NIB, NPWP, akta, dan dokumen PJT/TT."
+      - "Pastikan company profile dan struktur organisasi sudah rapi."
+      - "Lakukan cek ulang setelah dokumen dilengkapi."
+
+  not_ready:
+    condition: "score < 6"
+    readiness_level: "Belum Siap"
+    recommended_next_steps:
+      - "Mulai dari legalitas dasar perusahaan."
+      - "Pastikan NIB dan NPWP perusahaan tersedia."
+      - "Siapkan data pengurus dan pemegang saham."
+      - "Konsultasikan kebutuhan PJT, TT, dan SKTTK."
+```
+
+## 27. FAQ seed
+
+```json id="13ijht"
+{
+  "faq": [
+    {
+      "id": "faq_apa_itu_sbujptl",
+      "question": "Apa itu SBUJPTL?",
+      "answer": "SBUJPTL adalah Sertifikasi Badan Usaha Jasa Penunjang Tenaga Listrik. Sertifikat ini menjadi bukti formal kemampuan badan usaha dalam bidang jasa penunjang ketenagalistrikan sesuai klasifikasi dan kualifikasi yang dipilih.",
+      "quick_replies": ["Pilih klasifikasi", "Cek dokumen", "Tanya PJT/TT"]
+    },
+    {
+      "id": "faq_kenapa_perlu_sbujptl",
+      "question": "Mengapa perusahaan perlu SBUJPTL?",
+      "answer": "SBUJPTL diperlukan untuk mendukung legalitas badan usaha, terutama bila perusahaan mengikuti tender, proyek pemerintah, proyek swasta, atau pekerjaan jasa penunjang tenaga listrik.",
+      "quick_replies": ["Cek syarat", "Pilih klasifikasi", "Konsultasi"]
+    },
+    {
+      "id": "faq_klasifikasi_apa_saja",
+      "question": "Klasifikasi SBUJPTL apa saja?",
+      "answer": "Klasifikasi umum meliputi konsultansi, pembangunan dan pemasangan, pemeriksaan dan pengujian, pengoperasian, serta pemeliharaan instalasi tenaga listrik.",
+      "quick_replies": ["Konsultansi", "Pemasangan", "Pengujian", "Pengoperasian", "Pemeliharaan"]
+    },
+    {
+      "id": "faq_bidang_instalasi",
+      "question": "Bidang instalasi apa saja yang dapat dipilih?",
+      "answer": "Bidang instalasi meliputi pembangkitan tenaga listrik, transmisi tenaga listrik, distribusi tenaga listrik, dan instalasi pemanfaatan tenaga listrik.",
+      "quick_replies": ["Pembangkitan", "Transmisi", "Distribusi", "Instalasi Pemanfaatan"]
+    },
+    {
+      "id": "faq_pjt_tt",
+      "question": "Apa itu PJT dan TT?",
+      "answer": "PJT adalah Penanggung Jawab Teknik, sedangkan TT adalah Tenaga Teknik. Keduanya mendukung kemampuan teknis badan usaha dan biasanya perlu dilengkapi dokumen kompetensi seperti SKTTK.",
+      "quick_replies": ["Tanya SKTTK", "Cek dokumen PJT/TT", "Konsultasi"]
+    },
+    {
+      "id": "faq_belum_punya_skttk",
+      "question": "Bagaimana jika belum punya SKTTK?",
+      "answer": "Jika perusahaan belum memiliki PJT atau TT dengan SKTTK, langkah berikutnya adalah memetakan kebutuhan tenaga teknik sesuai klasifikasi yang dituju dan menyiapkan tenaga yang memenuhi kompetensi.",
+      "quick_replies": ["Konsultasi", "Cek dokumen", "Pilih klasifikasi"]
+    }
+  ]
+}
+```
+
+## 28. Admin dashboard specification
+
+```yaml id="kytr5p"
+admin_dashboard:
+  purpose: >
+    Memberi admin kemampuan mengelola konten chatbot SBUJPTL, melihat
+    pertanyaan pengguna, memperbarui checklist, dan menindaklanjuti leads.
+
+  pages:
+    dashboard_home:
+      widgets:
+        - "Total conversations"
+        - "Lead masuk hari ini"
+        - "Klasifikasi paling banyak dipilih"
+        - "Dokumen paling sering belum lengkap"
+        - "Fallback rate"
+        - "Document assessment completion rate"
+
+    classification_manager:
+      features:
+        - "Tambah/edit klasifikasi"
+        - "Tambah/edit bidang instalasi"
+        - "Atur deskripsi klasifikasi"
+        - "Atur dokumen rekomendasi"
+        - "Preview sebagai chatbot response"
+
+    document_checklist_manager:
+      features:
+        - "Tambah/edit item dokumen"
+        - "Atur kategori dokumen"
+        - "Atur required/optional"
+        - "Atur pertanyaan asesmen"
+        - "Atur help text"
+
+    faq_manager:
+      features:
+        - "Tambah FAQ"
+        - "Edit jawaban"
+        - "Tambah quick replies"
+        - "Publish/unpublish FAQ"
+
+    glossary_manager:
+      features:
+        - "Tambah istilah"
+        - "Edit definisi"
+        - "Tambah contoh"
+        - "Tambah related terms"
+
+    lead_manager:
+      features:
+        - "Lihat daftar leads"
+        - "Filter berdasarkan klasifikasi"
+        - "Filter berdasarkan status dokumen"
+        - "Update status follow-up"
+        - "Export CSV"
+
+    fallback_review:
+      features:
+        - "Lihat pertanyaan yang tidak dipahami bot"
+        - "Tambahkan contoh intent baru"
+        - "Tandai sebagai resolved"
+        - "Kirim ke content editor"
+
+    audit_log:
+      features:
+        - "Lihat perubahan konten"
+        - "Filter berdasarkan admin"
+        - "Filter berdasarkan tanggal"
+        - "Bandingkan versi lama dan baru"
+```
+
+## 29. Admin permission matrix
+
+```yaml id="9gixaz"
+admin_permissions:
+  roles:
+    super_admin:
+      permissions:
+        - "manage_users"
+        - "publish_content"
+        - "archive_content"
+        - "view_all_leads"
+        - "export_data"
+        - "view_audit_logs"
+        - "manage_system_settings"
+
+    content_editor:
+      permissions:
+        - "create_content_draft"
+        - "edit_faq"
+        - "edit_glossary"
+        - "edit_response_templates"
+        - "submit_for_review"
+
+    consultant:
+      permissions:
+        - "view_assigned_leads"
+        - "update_lead_status"
+        - "add_consultation_notes"
+        - "view_document_assessment_summary"
+
+    analyst:
+      permissions:
+        - "view_analytics"
+        - "export_reports"
+        - "view_fallback_queries"
+
+  restrictions:
+    - "Hanya super_admin yang dapat publish perubahan checklist dokumen."
+    - "Hanya super_admin yang dapat export seluruh data leads."
+    - "Audit log tidak boleh diedit."
+    - "Data pribadi harus dibatasi sesuai kebutuhan peran."
+```
+
+## 30. Analytics events
+
+```json id="axw9lp"
+{
+  "analytics_events": [
+    {
+      "event_name": "conversation_started",
+      "description": "Pengguna memulai percakapan."
+    },
+    {
+      "event_name": "main_menu_selected",
+      "description": "Pengguna memilih menu utama.",
+      "payload": {
+        "menu_id": "string"
+      }
+    },
+    {
+      "event_name": "classification_selected",
+      "description": "Pengguna memilih klasifikasi SBUJPTL.",
+      "payload": {
+        "classification_id": "string"
+      }
+    },
+    {
+      "event_name": "installation_field_selected",
+      "description": "Pengguna memilih bidang instalasi.",
+      "payload": {
+        "field": "pembangkitan | transmisi | distribusi | instalasi_pemanfaatan"
+      }
+    },
+    {
+      "event_name": "document_assessment_started",
+      "description": "Pengguna memulai cek dokumen."
+    },
+    {
+      "event_name": "document_assessment_completed",
+      "description": "Pengguna menyelesaikan cek dokumen.",
+      "payload": {
+        "score": "number",
+        "readiness_level": "string",
+        "missing_documents": "array"
+      }
+    },
+    {
+      "event_name": "lead_created",
+      "description": "Pengguna mengisi form konsultasi.",
+      "payload": {
+        "consultation_need": "string",
+        "selected_classification": "string"
+      }
+    },
+    {
+      "event_name": "fallback_triggered",
+      "description": "Bot tidak memahami input pengguna.",
+      "payload": {
+        "user_message": "string",
+        "fallback_count": "number"
+      }
+    }
+  ]
+}
+```
+
+## 31. Response length policy
+
+```yaml id="qu4x3b"
+response_length_policy:
+  short:
+    trigger:
+      - "pengguna bertanya definisi sederhana"
+      - "pengguna memilih quick reply"
+      - "pengguna berkata 'singkat saja'"
+    format:
+      - "jawaban inti 1 paragraf"
+      - "maksimal 3 poin"
+      - "1 pertanyaan lanjutan"
+
+  medium:
+    trigger:
+      - "pengguna bertanya klasifikasi"
+      - "pengguna bertanya persyaratan dokumen"
+      - "pengguna bertanya PJT/TT/SKTTK"
+    format:
+      - "jawaban inti"
+      - "daftar poin penting"
+      - "quick replies untuk langkah berikutnya"
+
+  long:
+    trigger:
+      - "pengguna meminta penjelasan lengkap"
+      - "hasil asesmen dokumen"
+      - "alur pengurusan"
+      - "rekomendasi persiapan"
+    format:
+      - "ringkasan"
+      - "detail langkah"
+      - "checklist"
+      - "rekomendasi"
+      - "catatan non-resmi"
+```
+
+## 32. Safety and compliance controls
+
+```yaml id="wxb3gg"
+safety_controls:
+  prohibited_responses:
+    - "Sertifikat pasti terbit."
+    - "Tidak perlu dokumen tersebut."
+    - "Bisa pinjam PJT tanpa keterlibatan teknis."
+    - "Dokumen bisa dibuat seolah-olah ada."
+    - "Tidak perlu verifikasi lembaga."
+
+  safe_response_template: >
+    Saya tidak dapat menyarankan cara yang mengabaikan prosedur legal,
+    teknis, atau sertifikasi. Langkah yang lebih tepat adalah melengkapi
+    dokumen sesuai persyaratan, memastikan tenaga teknik yang digunakan
+    benar-benar memenuhi kompetensi, dan melakukan verifikasi melalui
+    konsultan atau lembaga terkait.
+
+  official_claim_disclaimer: >
+    Informasi ini adalah panduan awal untuk membantu persiapan pengurusan
+    SBUJPTL. Keputusan resmi tetap mengikuti hasil verifikasi lembaga
+    sertifikasi atau instansi berwenang.
+
+  personal_data_handling:
+    - "Jangan tampilkan ulang nomor KTP atau NPWP penuh."
+    - "Jangan meminta unggahan dokumen sensitif jika sistem belum mendukung penyimpanan aman."
+    - "Gunakan masking untuk nomor kontak bila ditampilkan di admin preview."
+```
+
+## 33. Testing checklist
+
+```yaml id="49wvuz"
+testing_checklist:
+  intent_tests:
+    - input: "Apa itu SBUJPTL?"
+      expected_intent: "explain_sbujptl"
+    - input: "Saya kontraktor pemasangan listrik"
+      expected_intent: "select_classification"
+      expected_entity:
+        classification_type: "pembangunan_pemasangan"
+    - input: "Saya di distribusi"
+      expected_intent: "select_installation_field"
+      expected_entity:
+        installation_field: "distribusi"
+    - input: "Syarat dokumennya apa?"
+      expected_intent: "document_requirements"
+    - input: "Apa itu SKTTK?"
+      expected_intent: "ask_skttk"
+    - input: "Tolong hubungi saya"
+      expected_intent: "lead_capture"
+
+  flow_tests:
+    - name: "User memilih klasifikasi sampai bidang"
+      steps:
+        - "start"
+        - "pilih klasifikasi"
+        - "pembangunan dan pemasangan"
+        - "distribusi"
+      expected_final_node: "classification_field_summary"
+
+    - name: "User menyelesaikan document assessment"
+      steps:
+        - "cek dokumen"
+        - "jawab semua pertanyaan"
+      expected_final_node: "document_assessment_result"
+
+    - name: "User ingin konsultasi"
+      steps:
+        - "konsultasi"
+        - "isi nama"
+        - "isi perusahaan"
+        - "isi kontak"
+        - "isi kebutuhan"
+      expected_final_node: "lead_capture_summary"
+
+  fallback_tests:
+    - input: "Saya mau yang listrik itu"
+      expected_behavior: "ask clarification with quick replies"
+    - input: "Bikin saja dokumen palsu"
+      expected_behavior: "safe refusal and redirect to legal process"
+```
+
+## 34. Deployment configuration example
+
+```yaml id="4fte3d"
+deployment:
+  service_name: "sbujptl-coach-api"
+  runtime: "nodejs | python | serverless"
+  region: "asia-southeast2"
+
+  environment_variables:
+    APP_NAME: "SBUJPTL Coach"
+    APP_ENV: "production"
+    APP_LOCALE: "id-ID"
+    DATABASE_URL: "postgres://user:password@host:5432/sbujptl_coach"
+    ENABLE_ANALYTICS: "true"
+    ENABLE_ADMIN_CMS: "true"
+    ENABLE_LEAD_CAPTURE: "true"
+    ENABLE_DOCUMENT_ASSESSMENT: "true"
+    DEFAULT_FALLBACK_LIMIT: "3"
+    SESSION_TIMEOUT_MINUTES: "30"
+    MAX_QUICK_REPLIES: "7"
+
+  health_checks:
+    readiness_probe:
+      path: "/health/ready"
+      interval_seconds: 10
+    liveness_probe:
+      path: "/health/live"
+      interval_seconds: 30
+
+  logging:
+    level: "info"
+    redact_fields:
+      - "phone_number"
+      - "email"
+      - "npwp"
+      - "ktp"
+      - "uploaded_document_text"
+
+  security:
+    rate_limit:
+      requests_per_minute_per_user: 60
+    admin_authentication: "required"
+    public_chat_authentication: "optional"
+    cors:
+      allowed_origins:
+        - "https://your-domain.example.com"
+
+  backup:
+    database_backup_frequency: "daily"
+    retention_days: 30
+
+  monitoring:
+    metrics:
+      - "request_latency"
+      - "error_rate"
+      - "fallback_rate"
+      - "lead_conversion_rate"
+      - "document_assessment_completion_rate"
+```
+
+## 35. Final launch checklist
+
+```yaml id="8m7ual"
+launch_checklist:
+  content:
+    - "Semua klasifikasi SBUJPTL sudah masuk knowledge base."
+    - "Semua bidang instalasi sudah tersedia."
+    - "Checklist dokumen sudah lengkap."
+    - "FAQ dasar sudah tersedia."
+    - "Glossary PJT, TT, SKTTK, NIB, NPWP, dan klasifikasi sudah tersedia."
+    - "Disclaimer non-resmi muncul pada asesmen dan proses pengurusan."
+
+  conversation:
+    - "Greeting berjalan dengan benar."
+    - "Main menu menampilkan semua pilihan."
+    - "Flow pemilihan klasifikasi berjalan sampai bidang instalasi."
+    - "Flow document assessment menghasilkan skor dan dokumen kurang."
+    - "Lead capture menyimpan data konsultasi."
+    - "Fallback muncul saat input ambigu."
+    - "Escalation ke admin tersedia."
+
+  admin:
+    - "Admin dapat melihat leads."
+    - "Admin dapat mengedit FAQ."
+    - "Admin dapat mengedit glossary."
+    - "Admin dapat memperbarui checklist dokumen."
+    - "Audit log aktif."
+
+  analytics:
+    - "Event conversation_started tercatat."
+    - "Event classification_selected tercatat."
+    - "Event document_assessment_completed tercatat."
+    - "Event lead_created tercatat."
+    - "Fallback rate dapat dipantau."
+
+  compliance:
+    - "Tidak ada klaim sertifikat pasti terbit."
+    - "Tidak ada saran manipulasi dokumen."
+    - "Tidak ada penyimpanan data sensitif tanpa kontrol."
+    - "Bot selalu menyarankan verifikasi resmi untuk keputusan final."
+```
+
+## 36. Contoh final handoff prompt untuk developer
+
+```text id="ha7ods"
+Build a production-ready Indonesian chatbot called “SBUJPTL Coach”.
+
+The chatbot helps companies understand, classify, prepare documents, and request consultation for Sertifikasi Badan Usaha Jasa Penunjang Tenaga Listrik.
+
+Core modules:
+1. Onboarding and greeting.
+2. SBUJPTL explanation.
+3. Classification selection:
+   - Konsultansi instalasi tenaga listrik
+   - Pembangunan dan pemasangan instalasi tenaga listrik
+   - Pemeriksaan dan pengujian instalasi tenaga listrik
+   - Pengoperasian instalasi tenaga listrik
+   - Pemeliharaan instalasi tenaga listrik
+4. Installation field selection:
+   - Pembangkitan
+   - Transmisi
+   - Distribusi
+   - Instalasi pemanfaatan
+5. Document readiness assessment.
+6. PJT, TT, and SKTTK guidance.
+7. Process guidance.
+8. Glossary and FAQ.
+9. Lead capture for consultation.
+10. Fallback and admin escalation.
+11. Analytics and admin dashboard.
+
+The chatbot must use:
+- intent detection
+- entity extraction
+- quick replies
+- structured response templates
+- guided forms
+- document scoring
+- session state
+- fallback count
+- lead capture
+- admin CMS
+- analytics events
+
+Important rules:
+- Do not claim to issue official certification.
+- Do not guarantee approval.
+- Do not advise document manipulation.
+- Do not suggest using PJT or TT without proper technical competence.
+- Always describe document scoring as initial readiness checking only.
+- For official decisions, advise verification with authorized parties.
+```

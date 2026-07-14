@@ -1,0 +1,85 @@
+Siap, kalau kamu pilih **(1) dibedakan berdasarkan sumber aturan**, maka desain yang paling tepat adalah menambah 1 *master database* khusus “rulebook/pedoman” dan menjadikannya acuan routing OpenClaw untuk Track **PBJ Formal (Pemerintah/BUMN)**.
+
+### 1) Tambahan database master: **PBJ Rulebooks**
+
+Fungsi: menyimpan *sumber aturan* yang dipakai saat membuat checklist, matriks kepatuhan, dan dokumen formal.
+
+**Properti minimal yang disarankan**
+
+- **Rulebook Name** (title)
+    
+    Contoh: “Pedoman PBJ BUMN X 2025”, “Dokumen Pemilihan Paket Y”, “SOP Pengadaan Internal BUMN Z”
+    
+- **Entity/Owner** (select atau relation)
+    
+    Contoh: K/L/Pemda, BUMN A, BUMN B
+    
+- **Category** (select)
+    
+    Misal: Regulasi, SOP internal, Dokumen Pemilihan (Dokpem), Syarat Vendor, Contract template
+    
+- **Applies To Track** (select)
+    
+    Default: **PBJ Formal (Pemerintah/BUMN)**, opsional bisa juga “Komersial”
+    
+- **Effective Date** (date)
+- **Status** (select): Active, Superseded, Deprecated
+- **Source Link / File** (url atau file)
+- **Key Clauses / Highlights** (text ringkas)
+- **Default QC Checklist** (relation ke Toolbox checklist)
+- **Default Document Types** (relation ke Document Types) *(opsional tapi powerful)*
+
+---
+
+### 2) Update database **Document Types**
+
+Tambahkan property:
+
+- **Rulebook Required?** (checkbox) → biasanya ON untuk Track PBJ Formal
+- **Rulebook Category Needed** (multi_select)
+    
+    Misal: “Dokpem”, “SOP Internal”, “Regulasi”
+    
+- **Default Rulebook** (relation ke PBJ Rulebooks) *(opsional)*
+    
+    Kalau ada standar yang selalu dipakai untuk tipe dokumen itu.
+    
+
+---
+
+### 3) Update database **OpenClaw Executions**
+
+Tambahkan property:
+
+- **Rulebook Used** (relation ke PBJ Rulebooks)
+- **Rulebook Version/Effective Date** (rollup dari Rulebook Used)
+- **Clause Reference Required** (checkbox) (biasanya rollup dari Document Type atau Track)
+
+Ini yang membuat setiap eksekusi “audit-able” dan konsisten.
+
+---
+
+### 4) Routing OpenClaw (aturan eksekusi yang jelas)
+
+Saat user minta dokumen Track **PBJ Formal (Pemerintah/BUMN)**, OpenClaw melakukan ini:
+
+1. Tentukan **Entity/Owner** (BUMN mana / instansi mana)
+2. Pilih **Rulebook Used**
+    - kalau ada “dokpem paket X” → itu jadi rulebook utama
+    - kalau tidak ada → pilih SOP internal BUMN + regulasi acuan
+3. Baru pilih **Document Type**
+4. Generate dokumen dengan kewajiban:
+    - setiap temuan/check punya **rujukan klausul** (dari rulebook)
+    - setiap klaim compliance punya **bukti** (halaman/section/attachment)
+
+---
+
+### 5) Pertanyaan singkat biar struktur master-nya pas
+
+Untuk Rulebooks, kamu ingin level “Entity/Owner”-nya diset sebagai:
+
+1) **Nama BUMN saja** (BUMN A, BUMN B), atau  
+
+2) **BUMN + unit/anak perusahaan** (BUMN A Holding, Subholding, Anak Usaha)?
+
+Kalau kamu jawab ini, taksonominya akan lebih stabil saat databasenya mulai besar.

@@ -1,0 +1,226 @@
+<aside>
+📘
+
+**Manual Mutu LSP SDMKI**
+
+Dokumen induk sistem manajemen mutu LSP SDMKI berbasis SNI ISO/IEC 17024:2012, KAN U-01 Rev.1, dan KAN K-09. Mengatur tata kelola, sumber daya, proses sertifikasi, dan sistem manajemen.
+
+**No. Dokumen:** MM-LSP-SDMKI-001 | **Versi:** 1.0 | **Tanggal Berlaku:** 28 April 2026
+
+</aside>
+
+## Lembar Pengesahan
+
+| **Aktivitas** | **Nama** | **Jabatan** | **Tanda Tangan** | **Tanggal** | Disusun | […] | Manajer Mutu |  | […] |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Diperiksa | […] | Komite Skema |  | […] | Disahkan | […] | Direktur LSP |  | […] |
+
+## Riwayat Revisi
+
+| **Versi** | **Tanggal** | **Bagian** | **Ringkasan Perubahan** | **Penyusun** | 1.0 | 28-04-2026 | Seluruh | Penerbitan awal | Manajer Mutu |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+## 1. Pendahuluan
+
+### 1.1 Profil LSP SDMKI
+
+LSP SDMKI adalah Lembaga Sertifikasi Profesi yang berkedudukan di [alamat], didirikan untuk menyelenggarakan sertifikasi kompetensi pada bidang [ruang lingkup]. LSP SDMKI berkomitmen menerapkan sistem manajemen mutu sesuai SNI ISO/IEC 17024 dan berorientasi pada akreditasi KAN.
+
+### 1.2 Visi & Misi
+
+- **Visi:** Menjadi LSP terpercaya dengan sertifikasi kompetensi berstandar internasional.
+- **Misi:**
+    1. Menyelenggarakan sertifikasi yang valid, andal, autentik, dan adil.
+    2. Menjaga ketidakberpihakan dan kerahasiaan.
+    3. Mengembangkan asesor & TUK secara berkelanjutan.
+    4. Mengintegrasikan platform digital untuk asesmen jarak jauh.
+
+### 1.3 Tujuan Manual Mutu
+
+Menjadi rujukan tunggal bagi seluruh personel, asesor, dan pihak terkait dalam menjalankan proses sertifikasi yang konsisten dengan ISO 17024 dan persyaratan KAN.
+
+## 2. Ruang Lingkup
+
+Manual Mutu ini berlaku untuk seluruh aktivitas sertifikasi person yang dilakukan LSP SDMKI, termasuk skema yang diakreditasi KAN dan dilisensikan BNSP.
+
+## 3. Acuan Normatif
+
+- SNI ISO/IEC 17024:2012 — Persyaratan Umum Lembaga Sertifikasi Person.
+- KAN U-01 Rev.1 — Syarat dan Aturan Akreditasi LPK.
+- KAN K-09 — Persyaratan Khusus Lembaga Sertifikasi Personal.
+- KAN U-03 Rev.2 — Penggunaan Simbol Akreditasi KAN.
+- Pedoman BNSP 201, 202, 210.
+- UU No. 13/2003 tentang Ketenagakerjaan; UU No. 20/2014 tentang Standardisasi & Penilaian Kesesuaian.
+
+## 4. Persyaratan Umum (ISO 17024 Klausul 4)
+
+### 4.1 Masalah Hukum
+
+LSP SDMKI berbadan hukum sah dan bertanggung jawab atas seluruh aktivitas sertifikasinya. Bukti legalitas: Akta Pendirian No. […], SK Kemenkumham No. […], NPWP No. […], Lisensi BNSP No. […].
+
+### 4.2 Tanggung Jawab atas Keputusan Sertifikasi
+
+Keputusan pemberian, pemeliharaan, perluasan, penangguhan, atau pencabutan sertifikat dilakukan oleh personel LSP SDMKI yang ditunjuk dan tidak boleh didelegasikan ke pihak eksternal.
+
+### 4.3 Pengelolaan Ketidakberpihakan
+
+- Direktur menunjuk **Komite Ketidakberpihakan** yang beranggotakan minimal 3 orang dari unsur pengguna jasa, pemohon, dan pakar.
+- Komite mengevaluasi risiko ketidakberpihakan minimal 2× per tahun.
+- Seluruh personel mengisi **Form Deklarasi COI** (Lampiran B SOP-LSP-KAN-001) tahunan.
+- LSP SDMKI tidak memberikan pelatihan pada calon asesi yang akan diuji oleh asesornya sendiri tanpa pemisahan fungsi yang ketat.
+
+### 4.4 Keuangan & Tanggung Jawab
+
+- LSP SDMKI memiliki sumber daya keuangan yang memadai dan transparan.
+- Asuransi tanggung jawab profesi: Polis No. […], Penjamin: […], Limit: Rp […].
+
+## 5. Persyaratan Struktural (Klausul 5)
+
+### 5.1 Struktur Organisasi & Manajemen
+
+```mermaid
+flowchart TD
+	A["Direktur LSP"] --> B["Manajer Mutu"]
+	A --> C["Manajer Sertifikasi"]
+	A --> D["Manajer IT"]
+	A --> E["Komite Skema"]
+	A --> F["Komite Ketidakberpihakan"]
+	C --> G["Tim Asesor"]
+	C --> H["Sekretariat"]
+	C --> I["Jaringan TUK"]
+```
+
+### 5.2 Struktur Berkaitan dengan Pelatihan
+
+LSP SDMKI memisahkan fungsi pelatihan dan sertifikasi melalui kebijakan organisasi & rotasi personel. Pelatih tidak boleh menjadi asesor dan/atau pengambil keputusan sertifikasi atas peserta pelatihannya sendiri.
+
+## 6. Persyaratan Sumber Daya (Klausul 6)
+
+### 6.1 Personel
+
+- Persyaratan kompetensi setiap peran dijabarkan dalam Job Description & Matriks Kompetensi.
+- Pemantauan kinerja dilakukan tahunan oleh Manajer Mutu.
+
+### 6.2 Sumber Daya Asesor
+
+- Asesor wajib memiliki sertifikat asesor BNSP yang aktif.
+- Asesor dievaluasi melalui witness internal minimal 1× per 2 tahun.
+- Database asesor dikelola di KB LSP–TUK.
+
+### 6.3 Subkontrak
+
+LSP SDMKI dapat melakukan subkontrak aktivitas penilaian (bukan keputusan sertifikasi) dengan perjanjian tertulis dan kepatuhan setara ISO 17024.
+
+### 6.4 Sumber Daya Lain (TUK & TI)
+
+- TUK ditetapkan dengan MoU dan diaudit pra-verifikasi.
+- Platform TI: e-Assessment, online proctoring, sistem manajemen rekaman, mengikuti Kebijakan Keamanan Informasi.
+
+## 7. Rekaman & Informasi (Klausul 7)
+
+### 7.1 Rekaman Pemohon, Asesi, Pemegang Sertifikat
+
+Disimpan minimal **siklus sertifikasi + 2 tahun** dengan klasifikasi rahasia.
+
+### 7.2 Informasi Publik
+
+LSP SDMKI mempublikasikan: skema, biaya, prosedur banding/keluhan, daftar pemegang sertifikat (atas izin), status akreditasi.
+
+### 7.3 Kerahasiaan
+
+Seluruh personel dan subkontraktor menandatangani Perjanjian Kerahasiaan. Akses sistem mengikuti prinsip *least privilege*.
+
+### 7.4 Keamanan Informasi
+
+Mengikuti Kebijakan Keamanan Informasi LSP SDMKI (KK-IS-001), termasuk enkripsi at-rest & in-transit, audit log, dan backup terenkripsi.
+
+## 8. Skema Sertifikasi (Klausul 8)
+
+- Setiap skema dikembangkan & ditinjau oleh **Komite Skema** dengan keterwakilan pemangku kepentingan.
+- Dokumen skema mencakup: ruang lingkup, prasyarat, kompetensi, metode asesmen, kriteria, masa berlaku, mekanisme pemeliharaan & perpanjangan, ketentuan re-sertifikasi.
+- Tinjauan skema minimal 1× per 3 tahun atau saat ada perubahan SKKNI/regulasi.
+
+## 9. Persyaratan Proses Sertifikasi (Klausul 9)
+
+### 9.1 Proses Aplikasi
+
+Dijabarkan dalam **SOP P-01**: penerimaan, verifikasi prasyarat, kontrak.
+
+### 9.2 Proses Asesmen
+
+**SOP P-02**: penjadwalan, metode (tertulis, observasi, wawancara, portofolio), pelaksanaan tatap muka & jarak jauh, dokumentasi.
+
+### 9.3 Keputusan Sertifikasi
+
+**SOP P-03**: pemisahan asesor & pengambil keputusan; rekomendasi → keputusan → penerbitan sertifikat. Sertifikat memuat ID unik, ruang lingkup, masa berlaku, simbol KAN (bila terakreditasi).
+
+### 9.4 Penangguhan, Pencabutan, atau Pengurangan Ruang Lingkup
+
+**SOP P-04**: dasar tindakan, hak pemegang sertifikat, mekanisme banding.
+
+### 9.5 Proses Re-sertifikasi
+
+**SOP P-05**: aktivitas pemeliharaan kompetensi, evidensi pengalaman kerja, asesmen ringkas/penuh.
+
+### 9.6 Penggunaan Sertifikat, Logo, dan Marka
+
+**SOP P-06**: aturan penggunaan logo LSP, simbol KAN (KAN U-03 Rev.2), pelanggaran & sanksi.
+
+### 9.7 Banding
+
+**SOP P-07**: tata cara, jangka waktu, panel banding independen, dokumentasi.
+
+### 9.8 Keluhan
+
+**SOP P-08**: penerimaan, registrasi, investigasi, tindak lanjut, komunikasi.
+
+## 10. Sistem Manajemen LSP (Klausul 10)
+
+### 10.1 Pilihan Sistem Manajemen
+
+LSP SDMKI menerapkan **Opsi B**: sistem manajemen yang memenuhi klausul 10.2–10.8 ISO 17024.
+
+### 10.2 Persyaratan Sistem Manajemen Umum
+
+- Kebijakan Mutu disahkan Direktur, dikomunikasikan, ditinjau berkala.
+- Sasaran Mutu terukur per fungsi.
+
+### 10.3 Pengendalian Dokumen
+
+Seluruh dokumen mutu dikendalikan melalui Daftar Induk Dokumen di KB LSP–TUK; revisi diberi nomor dan tanggal berlaku.
+
+### 10.4 Pengendalian Rekaman
+
+Klasifikasi, masa simpan, otoritas akses, dan disposal diatur dalam Prosedur Pengendalian Rekaman.
+
+### 10.5 Tinjauan Manajemen
+
+Minimal 1× per tahun, agenda mencakup: hasil audit internal, umpan balik pelanggan, banding/keluhan, status tindakan korektif, perubahan signifikan, peluang perbaikan.
+
+### 10.6 Audit Internal
+
+Minimal 1× per tahun, mencakup seluruh klausul ISO 17024 + KAN K-09. Format laporan: Lampiran C SOP-LSP-KAN-001.
+
+### 10.7 Tindakan Korektif
+
+Root-cause analysis (5-Why/Fishbone), bukti efektivitas, verifikasi closing oleh Manajer Mutu.
+
+### 10.8 Tindakan Pencegahan / Peluang Peningkatan
+
+Identifikasi proaktif risiko & peluang melalui Risk Register tahunan.
+
+## 11. Ketertelusuran ke Klausul ISO 17024
+
+| **Klausul ISO 17024** | **Bagian Manual Mutu** | **Dokumen Pendukung** | 4. Persyaratan Umum | Bab 4 | SK Kemenkumham, COI Form, Polis Asuransi |
+| --- | --- | --- | --- | --- | --- |
+| 5. Struktural | Bab 5 | Struktur Organisasi, JD | 6. Sumber Daya | Bab 6 | Matriks Kompetensi, MoU TUK, Daftar Asesor |
+| 7. Rekaman & Informasi | Bab 7 | Prosedur Pengendalian Rekaman, Kebijakan Keamanan Informasi | 8. Skema | Bab 8 | Dokumen Skema per jabatan |
+| 9. Proses Sertifikasi | Bab 9 | SOP P-01 s.d. P-09 | 10. Sistem Manajemen | Bab 10 | Audit Internal, Tinjauan Manajemen, CAR |
+
+## 12. Lampiran
+
+- Lampiran 1: Kebijakan Mutu yang ditandatangani Direktur.
+- Lampiran 2: Sasaran Mutu Tahunan.
+- Lampiran 3: Daftar Induk Dokumen.
+- Lampiran 4: Struktur Organisasi rinci.
+- Lampiran 5: Matriks Kompetensi Personel.

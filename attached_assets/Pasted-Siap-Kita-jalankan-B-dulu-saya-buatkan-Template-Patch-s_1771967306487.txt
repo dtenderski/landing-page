@@ -1,0 +1,118 @@
+Siap. Kita jalankan **B dulu**: saya buatkan **Template Patch singkat** yang bisa Anda tempel ke **semua chatbot** (TRC, ECSG, SKK, SBU, Perizinan Usaha) supaya konsisten membaca *_SUMMARY v1 tanpa konflik — tanpa ubah platform.
+
+Di bawah ini ada 3 patch: **Core (wajib)**, **Risk Aggregation (untuk TRC/ECSG)**, dan **Output Hygiene (opsional)**.
+
+---
+
+# 1) PATCH CORE (WAJIB) — “SUMMARY RULEBOOK v1”
+
+Tempel ke **system prompt** setiap chatbot yang membaca summary.
+
+```
+SUMMARY_RULEBOOK v1 (WAJIB DIPATUHI)
+
+Jika user memberikan *_SUMMARY v1 (mis. LICENSING_SUMMARY v1, SBU_SUMMARY v1, SKK_SUMMARY v1, TENDER_REQ_SUMMARY v1):
+
+1) PRIORITAS OVERALL:
+- Gunakan bagian OVERALL sebagai sumber utama status & risk.
+- Jangan menilai ulang data mentah jika OVERALL tersedia.
+
+2) NO DOWNGRADE:
+- Jangan menurunkan risk level atau status readiness yang sudah dinyatakan di SUMMARY.
+- Risk boleh tetap atau naik, tidak boleh turun, kecuali user memberikan data baru yang jelas memperbaiki gap.
+
+3) UNKNOWN HANDLING:
+- Jika field = UNKNOWN, tandai sebagai BUTUH_VERIFIKASI.
+- UNKNOWN tidak boleh dianggap fatal secara otomatis.
+- UNKNOWN hanya boleh menaikkan risk maksimal 1 level (contoh: Rendah → Sedang), kecuali ada red flag lain.
+
+4) EXPIRED / INVALID RULE:
+- Jika ada status EXPIRED/INVALID pada komponen inti yang relevan, risk minimal Tinggi.
+- Jika lebih dari satu komponen inti EXPIRED/INVALID atau ada red flag berat, risk boleh Kritis.
+
+5) DATA CONSISTENCY:
+- Jika DATA_CONSISTENCY_CHECK menyatakan MISMATCH pada nama entitas atau pengurus/direksi → risk minimal Tinggi.
+- Mismatch alamat saja → risk minimal Sedang (kecuali disertai red flag lain).
+
+6) DATA BARU:
+- Jika user memberi data baru yang bertentangan dengan SUMMARY, minta user memilih mana yang benar, atau gunakan data terbaru jika jelas lebih valid (mis. ada tanggal terbaru).
+```
+
+---
+
+# 2) PATCH RISK AGGREGATION (KHUSUS TRC & ECSG)
+
+Tempel hanya untuk bot yang menggabungkan banyak summary jadi 1 keputusan.
+
+```
+RISK_AGGREGATION_RULE v1
+
+Jika menerima lebih dari satu SUMMARY v1:
+- Tentukan FINAL_RISK_LEVEL = level tertinggi dari semua risk yang tersedia:
+  {Rendah < Sedang < Tinggi < Kritis}
+
+- FINAL_READINESS_STATUS mengikuti kaidah:
+  - Jika ada area status "Tidak Memenuhi" pada Legalitas/SBU/SKK → minimal "Tidak Siap"
+  - Jika semua area "Memenuhi" dan tidak ada red flag → "Siap"
+  - Selain itu → "Bersyarat"
+
+- Jangan menurunkan FINAL_RISK_LEVEL walaupun ada area lain yang rendah.
+- Jika satu area UNKNOWN tapi area lain Tinggi/Kritis → FINAL tetap Tinggi/Kritis (UNKNOWN tidak mengalahkan data kuat).
+```
+
+---
+
+# 3) PATCH OUTPUT HYGIENE (OPSIONAL, tapi bikin rapi)
+
+Ini untuk menjaga semua bot selalu mengeluarkan sinyal yang bisa “dibaca” bot lain / user.
+
+```
+OUTPUT_HYGIENE v1
+
+Selalu tulis header machine-readable (1 baris per field) sebelum penjelasan:
+- STATUS: ...
+- RISK_LEVEL: ...
+- PRIMARY_GAP: ...
+
+Jika ada bagian yang tidak bisa dipastikan:
+- tulis "BUTUH_VERIFIKASI:" di poin tersebut.
+
+Jika memberi rekomendasi:
+- gunakan format PRIORITY_1, PRIORITY_2, PRIORITY_3 (maks 3).
+```
+
+---
+
+# 4) Cara Deploy Paling Cepat (Tanpa Ganggu Bot yang Sudah Jalan)
+
+* Tambahkan PATCH CORE ke semua bot dulu (paling aman).
+* Tambahkan PATCH RISK AGGREGATION hanya ke TRC & ECSG.
+* OUTPUT_HYGIENE opsional jika Anda ingin semua output makin konsisten (saya sarankan iya).
+
+---
+
+# 5) Checklist mini setelah patch (cek cepat 5 menit per bot)
+
+Untuk memastikan patch “nempel”, lakukan 1 test kasus:
+
+**Case test**:
+
+* LICENSING: Sedang
+* SBU: Tinggi
+* SKK: Rendah
+  Maka:
+* TRC final risk **harus Tinggi** (tidak boleh Sedang)
+
+**Case test 2**:
+
+* IUJK UNKNOWN, lainnya valid
+  Maka:
+* risk maksimal **Sedang** (kecuali tender mensyaratkan IUJK wajib dan ada sinyal invalid)
+
+---
+
+Kalau patch ini sudah Anda tempel di semua bot, langkah berikutnya yang paling natural adalah:
+
+✅ membuat **“SUMMARY COMPATIBILITY HEADER”** di setiap bot (1–2 baris) agar user tahu summary mana saja yang didukung, tanpa bikin UI baru.
+
+Mau saya buatkan teks “Supported Inputs” yang pendek dan konsisten untuk semua bot?

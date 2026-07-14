@@ -1,0 +1,66 @@
+Saya cek link yang Anda kirim, tetapi halaman tersebut diarahkan ke `share_not_found`, jadi isi konfigurasi di link tidak bisa saya salin persis. ([ChatGPT][1])
+
+Saya tetap buatkan **paket konfigurasi Gustafta Builder untuk Chatbot SKK Sipil** dengan struktur siap pakai: identity, prompt, knowledge base, intent, flow, recommendation rules, lead capture, human handoff, widget, dan testing.
+
+## File konfigurasi siap pakai
+
+Download paket lengkap:
+
+[Paket Konfigurasi Gustafta SKK Sipil](sandbox:/mnt/data/paket_konfigurasi_gustafta_skk_sipil.zip)
+
+Isi paket:
+
+1. [gustafta_config_skk_sipil.json](sandbox:/mnt/data/gustafta_skk_sipil_config/gustafta_config_skk_sipil.json)
+   Konfigurasi lengkap chatbot untuk builder.
+
+2. [konfigurasi_singkat_siap_tempel.json](sandbox:/mnt/data/gustafta_skk_sipil_config/konfigurasi_singkat_siap_tempel.json)
+   Versi ringkas untuk copy-paste cepat.
+
+3. [system_prompt_skk_sipil_gustafta.txt](sandbox:/mnt/data/gustafta_skk_sipil_config/system_prompt_skk_sipil_gustafta.txt)
+   Prompt utama untuk bagian **AI Instruction / System Prompt**.
+
+4. [README_KONFIGURASI_GUSTAFTA_SKK_SIPIL.md](sandbox:/mnt/data/gustafta_skk_sipil_config/README_KONFIGURASI_GUSTAFTA_SKK_SIPIL.md)
+   Panduan pemasangan di dashboard.
+
+## Ringkasan konfigurasi
+
+```json
+{
+  "bot_name": "Asisten SKK Sipil",
+  "bot_slug": "asisten-skk-sipil",
+  "language": "id",
+  "industry": "Konstruksi / Teknik Sipil",
+  "knowledge_base_file": "skk_sipil_database.csv",
+  "strict_knowledge_base": true,
+  "lead_capture_enabled": true,
+  "human_handoff_enabled": true
+}
+```
+
+## Struktur flow utama
+
+Chatbot akan punya menu:
+
+```text
+1. Cari SKK berdasarkan jabatan
+2. Cari SKK berdasarkan subklasifikasi
+3. Rekomendasi SKK sesuai pengalaman
+4. Cek jenjang KKNI
+5. Ambil link SKKNI/SKK Khusus
+6. Bandingkan dua jabatan SKK
+7. Daftar SKK Freshgraduate
+```
+
+Untuk rekomendasi, bot akan bertanya:
+
+```text
+1. Bidang proyek utama Anda apa?
+2. Posisi Anda saat ini apa?
+3. Berapa tahun pengalaman kerja Anda?
+4. Jenis proyek yang paling sering Anda tangani apa?
+5. Target level Anda apa? Operator, Teknisi/Analis, atau Ahli?
+```
+
+Database tetap mengacu pada data SKK Sipil yang Anda unggah, yang berisi subklasifikasi, jabatan kerja, jenjang jabatan kerja, kualifikasi, KKNI, standar kompetensi, dan link SKK. 
+
+[1]: https://chatgpt.com/share/e/69ec7151-d34c-8011-bbd8-3aa6260a7e6d "ChatGPT"

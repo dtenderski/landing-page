@@ -1,0 +1,806 @@
+<aside>
+📝
+
+**Modul:** Generator interaktif untuk membantu BUJK mengisi **Kuesioner PanCEK KPK Ver.2** di platform [**JAGA.id**](http://JAGA.id) — lengkap dengan template jawaban, daftar dokumen lampiran wajib per indikator, dan simulasi dialog chatbot.
+
+**Referensi:** Form PanCEK resmi KPK (sampel: CV SUMMA JAYA, periode 2025) — **6 Seksi × 79 Indikator**.
+
+**Selaras dengan:** [SMAP Nasional — Panduan Cegah Korupsi (PanCEK Ver.2) berdasarkan UU Tipikor](https://www.notion.so/SMAP-Nasional-Panduan-Cegah-Korupsi-PanCEK-Ver-2-berdasarkan-UU-Tipikor-16ae48433c3b4fa9a0abfa3096f59ac4?pvs=21) · [Generator Document — Pembuat Draft Dokumen SMAP & Onboarding Data Internal](https://www.notion.so/Generator-Document-Pembuat-Draft-Dokumen-SMAP-Onboarding-Data-Internal-9faa16bd71a741de8458e81b736cd7ad?pvs=21).
+
+</aside>
+
+## 1. Struktur Resmi PanCEK Ver.2 (sesuai [JAGA.id](http://JAGA.id))
+
+Setelah mengkaji form resmi KPK, struktur PanCEK Ver.2 yang benar adalah **6 Seksi** (bukan 5 Pilar) dengan **79 indikator**:
+
+| **Kode** | **Seksi** | **Jumlah Pertanyaan Utama** |
+| --- | --- | --- |
+| **I. K** | **KOMITMEN** | 9 (K.1–K.9) |
+| **II. P** | **PERENCANAAN** | 3 (P.1–P.3) |
+| **III. D** | **PELAKSANAAN** | 8 (D.1–D.8) |
+| **IV. C** | **EVALUASI** | 4 (C.1–C.4) |
+| **V. A** | **PERBAIKAN** | 3 (A.1–A.3) |
+| **VI. R** | **RESPON** | 3 (R.1–R.3) |
+| **Total** | **30 pertanyaan utama** | **79 indikator** |
+
+<aside>
+💡
+
+**Catatan koreksi:** Modul SMAP Nasional sebelumnya (5 Pilar × 45 kriteria) adalah penyederhanaan didaktik. Untuk pengisian resmi di [**JAGA.id**](http://JAGA.id), gunakan struktur **6 Seksi × 79 Indikator** ini. Tetap selaras: 5 Pilar saya = (P1=K, P2=P, P3=D, P4=A, P5=C+R).
+
+</aside>
+
+---
+
+## 2. Profil Korporasi (Wajib Diisi Sebelum Mulai)
+
+Seperti contoh CV SUMMA JAYA, sebelum jawab indikator, isi data korporasi:
+
+| **Field [JAGA.id](http://JAGA.id)** | **Format** | **Contoh** |
+| --- | --- | --- |
+| Nama Badan Usaha | Sesuai akta | CV SUMMA JAYA |
+| NPWP | 15 digit | 02.475.654.6-654.000 |
+| Nomor Induk Berusaha (NIB) | 13 digit | 1242000711768 |
+| Nomor Surat Keputusan | SK Kemenkumham | AHU-0009316-AH.01.16 Tahun 2022 |
+| Jenis Instansi | Swasta / BUMN / BUMD / Yayasan / Koperasi | SWASTA |
+| Sektor Usaha | Klasifikasi KBLI | JASA INFRASTRUKTUR |
+| Alamat | Lengkap | Jl. Malowopati 58, Dampit |
+| Kota/Kabupaten + Provinsi | Sesuai NIB | KAB. MALANG, Jawa Timur |
+| Periode | Tahun asesmen | 2025 |
+| Pengisi | Nama, KTP, Jabatan, Email, Telp | DJUNO RENOSAN — Direktur |
+
+---
+
+## 3. Generator Jawaban + Dokumen Lampiran per Indikator
+
+Untuk setiap indikator, modul ini menyediakan:
+
+- **Pertanyaan asli** (sesuai [JAGA.id](http://JAGA.id))
+- **Template jawaban level Standar / Baik / Excellent**
+- **Daftar dokumen lampiran wajib** yang harus di-upload
+- **Tip pengisian**
+
+### 📖 Konvensi Lampiran
+
+| **Format File** | **Maks Ukuran** | **Tip** |
+| --- | --- | --- |
+| PDF (.pdf) | 5 MB / file | Format paling aman; gunakan untuk semua dokumen scan |
+| Image (.jpg, .png) | 2 MB / file | Untuk foto kegiatan, screenshot |
+| Word (.docx) | 5 MB / file | Untuk template/draft yang masih editable |
+| Excel (.xlsx) | 5 MB / file | Untuk register, statistik, daftar |
+
+---
+
+## 4. SEKSI I — KOMITMEN (K.1–K.9)
+
+### K.1 Komitmen Tertulis Pimpinan Tertinggi (4 indikator: K.1.a–K.1.d)
+
+**Pertanyaan:** Tunjukkan bahwa pimpinan tertinggi korporasi (pemilik, direksi, komisaris) memiliki komitmen tertulis antikorupsi.
+
+| **Indikator** | **Yang Diminta** | **Lampiran Wajib** |
+| --- | --- | --- |
+| **K.1.a** | Komitmen tertulis antikorupsi | 1. Surat Komitmen Antikorupsi signed Direksi/Komisaris/Pemilik (PDF)
+2. Kop surat resmi + nomor surat + materai 10.000 |
+| **K.1.b** | Bukti deklarasi komitmen + pihak yang menghadiri | 1. Notulen acara deklarasi (PDF)
+2. Daftar hadir signed (PDF/scan)
+3. Foto/video deklarasi (JPG/MP4)
+4. Press release atau publikasi internal |
+| **K.1.c** | Komunikasi via email, sesi diskusi, dll | 1. Screenshot email blast ke seluruh pegawai
+2. Notulen rapat/town hall yang membahas komitmen
+3. Foto poster/banner di kantor & proyek |
+| **K.1.d** | Bukti komitmen → menghasilkan kebijakan antikorupsi | 1. **Kebijakan Antikorupsi** signed Direksi (PDF)
+2. SK pemberlakuan kebijakan
+3. Daftar Induk Dokumen yang mencantumkannya |
+
+<aside>
+📝
+
+**Template Jawaban K.1.a (level Excellent):**
+
+"Pimpinan tertinggi `[CV SUMMA JAYA]` telah menerbitkan **Surat Komitmen Antikorupsi Nomor `[001/SK-AK/I/2025]`** tertanggal `[15 Januari 2025]` yang ditandatangani oleh Direktur `[DJUNO RENOSAN]` dan disaksikan seluruh pemegang saham. Komitmen ini menyatakan **‘zero tolerance’ terhadap segala bentuk korupsi** sesuai UU No. 31/1999 jo. UU No. 20/2001 dan SNI ISO 37001:2016, mengikat seluruh organ korporasi termasuk pemilik, direksi, dan seluruh pegawai. Dokumen tersedia di intranet dan website resmi korporasi."
+
+</aside>
+
+### K.2 Pernyataan Antikorupsi Pegawai (2 indikator)
+
+| **Indikator** | **Yang Diminta** | **Lampiran Wajib** |
+| --- | --- | --- |
+| **K.2.a** | Pakta integritas / kontrak kerja (sampel level manajer) | 1. **Pakta Integritas** kosong (template)
+2. **3–5 sampel signed** dari level Direktur, Manajer, Staff
+3. Klausul antikorupsi di kontrak kerja standar |
+| **K.2.b** | Larangan uang pelicin/suap kepada pembuat kebijakan | 1. Highlight pasal larangan di Pakta Integritas
+2. Definisi "uang pelicin" dan "pembuat kebijakan"
+3. Sanksi pelanggaran (terhubung A.1) |
+
+### K.3 Definisi Korupsi (1 indikator)
+
+| **Indikator** | **Yang Diminta** | **Lampiran Wajib** |
+| --- | --- | --- |
+| **K.3.a** | Definisi korupsi dibandingkan berbagai sumber | 1. Bagian "Definisi" di Kebijakan Antikorupsi yang merujuk:
+  • UU 31/1999 jo. 20/2001 (7 jenis tipikor)
+  • ISO 37001:2016 klausul 3
+  • UNCAC (United Nations Convention Against Corruption)
+  • OECD Anti-Bribery Convention |
+
+### K.4 Mengacu UU Tipikor (1 indikator)
+
+| **Indikator** | **Yang Diminta** | **Lampiran Wajib** |
+| --- | --- | --- |
+| **K.4.a** | Kebijakan antikorupsi mengacu UU Tipikor | 1. Bagian "Dasar Hukum" di Kebijakan Antikorupsi
+2. Pasal-pasal UU Tipikor yang diturunkan menjadi larangan internal (Pasal 5, 11, 12, 12B–12C, 13, 20) |
+
+### K.5 Peta Rawan Korupsi (1 indikator)
+
+| **Indikator** | **Yang Diminta** | **Lampiran Wajib** |
+| --- | --- | --- |
+| **K.5.a** | Penjelasan peta rawan korupsi | 1. **Risk Register / Bribery Risk Map** (excerpt)
+2. Peta proses bisnis dengan red zone (P1–P10)
+3. Heat map risiko (likelihood × impact)
+· Cross-ref: [](https://www.notion.so/57ce809991524a329edba82689127992?pvs=21) |
+
+### K.6 Unit/Individu Fungsi Kepatuhan (5 indikator)
+
+| **Indikator** | **Yang Diminta** | **Lampiran Wajib** |
+| --- | --- | --- |
+| **K.6.a** | Unit/individu fungsi kepatuhan | 1. Bagan organisasi yang menampilkan unit Compliance/FKAP
+2. Struktur tim & jumlah personel |
+| **K.6.b** | Surat pengangkatan & wewenang | 1. **SK Pengangkatan FKAP/Compliance Officer**
+2. Job Description detail
+3. Surat Tugas / SK Wewenang |
+| **K.6.c** | SOP unit tersebut | 1. **SOP Fungsi Kepatuhan**
+2. SOP Investigasi Internal
+3. SOP Penanganan Pelanggaran
+4. Workflow / flowchart |
+| **K.6.d** | Rasio jumlah pegawai kepatuhan vs total pegawai | 1. Tabel rasio (best practice: 1:50 sd 1:100)
+2. Benchmark dengan AKBU/industri sejenis
+3. Rencana penambahan kapasitas (jika rasio < benchmark) |
+| **K.6.e** | Bukti kompetensi (sertifikat auditor, CCO, API, SPIP) | 1. **Sertifikat ISO 37001 Lead Implementer/Auditor**
+2. Sertifikat CCO (Certified Compliance Officer)
+3. Sertifikat API/SPIP/QIA
+4. CV personel kepatuhan |
+
+### K.7 Tanggung Jawab Audit Internal (1 indikator)
+
+| **K.7.a** | Lingkup tanggung jawab unit terhadap rekomendasi audit internal | 1. **Audit Charter**
+2. Matriks tanggung jawab (RACI) audit
+3. Sample laporan rekomendasi audit + tindak lanjut |
+| --- | --- | --- |
+
+### K.8 Sanksi & Penghargaan (2 indikator)
+
+| **K.8.a** | Komitmen tertulis mekanisme sanksi & penghargaan | 1. **SOP Sanksi & Penghargaan Pegawai**
+2. Disciplinary Code di Peraturan Perusahaan
+3. Reward Program antikorupsi |
+| --- | --- | --- |
+| **K.8.b** | Bukti pemberian sanksi & penghargaan | 1. **Disciplinary Log** (anonim) — sample 3 kasus
+2. SK pemberian penghargaan integritas — sample
+3. Foto/dokumentasi penyerahan penghargaan |
+
+### K.9 Komunikasi & Pelatihan Pencegahan (3 indikator)
+
+<aside>
+⚠️
+
+**Catatan dari sampel CV SUMMA JAYA:** K.9 adalah salah satu **gap** mereka (3 indikator belum terjawab dari total 79). Ini area paling sering ditinggal — prioritaskan saat mengisi.
+
+</aside>
+
+| **K.9.a** | Komitmen tertulis untuk komunikasi & pelatihan | 1. **Rencana Kerja Tahunan Compliance** dengan agenda training
+2. Annual Communication Plan antikorupsi
+3. Budget training yang teralokasi (excerpt RKAP) |
+| --- | --- | --- |
+| **K.9.b** | Bukti pelaksanaan kegiatan | 1. **Laporan Pelaksanaan Training** (per sesi)
+2. Daftar hadir signed
+3. Materi training (PDF/PPT)
+4. Foto/dokumentasi kegiatan
+5. Sertifikat kepada peserta |
+| **K.9.c** | Bukti evaluasi pelaksanaan | 1. **Pre/post test** dengan skor
+2. Survei kepuasan training
+3. Laporan evaluasi efektivitas (KPI: awareness score, behavior change)
+4. Tindak lanjut & rencana training berikutnya |
+
+---
+
+## 5. SEKSI II — PERENCANAAN (P.1–P.3)
+
+### P.1 Identifikasi & Pemetaan Risiko (3 indikator)
+
+| **P.1.a** | Fungsi pelaksana yang mengidentifikasi & memetakan risiko | 1. SK Tim Risk Assessment
+2. JD spesifik untuk Risk Owner per proses bisnis
+3. Notulen workshop risiko |
+| --- | --- | --- |
+| **P.1.b** | Kertas kerja pemetaan risiko — daftar risiko, mitigasi, monev | 1. **Bribery Risk Register** lengkap
+2. Risk Treatment Plan (RTP)
+3. Monitoring & Evaluation matrix
+· Cross-ref: [](https://www.notion.so/57ce809991524a329edba82689127992?pvs=21) |
+| **P.1.c** | Penentuan tingkat kerawanan | 1. Metodologi skoring (mis. 5×5 matrix)
+2. Definisi level — Low/Medium/High/Extreme
+3. Heat map visual |
+
+### P.2 Penilaian Risiko di Semua Aktivitas (1 indikator)
+
+| **P.2.a** | Penilaian risiko di semua/beberapa unit | 1. Coverage matrix per unit/divisi
+2. Risk Register per unit (Marketing, Tender, Pengadaan, Proyek, HR, Keuangan, Legal, IT)
+3. Persentase coverage (target 100%) |
+| --- | --- | --- |
+
+### P.3 Penilaian Risiko Berkala & Update (1 indikator)
+
+| **P.3.a** | Penilaian risiko berkala + update modus korupsi | 1. Jadwal review risiko (minimal tahunan)
+2. **2–3 versi Risk Register** (versi tahun lalu vs tahun ini, dengan changelog)
+3. Laporan trigger event (regulasi baru, kasus industri)
+4. Sumber referensi modus baru (laporan KPK, TI, Stranas PK) |
+| --- | --- | --- |
+
+---
+
+## 6. SEKSI III — PELAKSANAAN (D.1–D.8)
+
+### D.1 Uji Tuntas / Due Diligence (6 indikator)
+
+<aside>
+⚠️
+
+**Catatan dari sampel:** D.1.a.2 (pelanggan), D.1.a.3 (distributor/vendor/agen), D.1.b.2, D.1.b.3 — 4 indikator ini tidak terjawab oleh CV SUMMA JAYA. Ini gap umum BUJK kecil.
+
+</aside>
+
+| **Indikator** | **Subjek DD** | **Lampiran Wajib** |
+| --- | --- | --- |
+| **D.1.a.1** | DD karyawan | 1. **SOP DD Karyawan** (background check, SKCK, ijazah)
+2. Form DD karyawan
+3. 3–5 sampel hasil DD karyawan baru |
+| **D.1.a.2** | DD pelanggan | 1. **SOP DD Pelanggan/Klien**
+2. Form Customer Due Diligence (CDD)
+3. PEP screening checklist (Politically Exposed Person)
+4. 3 sampel hasil DD pelanggan |
+| **D.1.a.3** | DD distributor/vendor/agen | 1. **SOP DD Mitra Bisnis** dengan tier risiko
+2. Form Vendor Due Diligence
+3. Sanctions list screening (OFAC, UN, EU, KPK, LKPP blacklist)
+4. 5 sampel laporan DD mitra (RISIKO TINGGI) |
+| **D.1.b.1** | Hasil verifikasi DD karyawan | 1. Verification log
+2. Tindak lanjut hasil DD (clear / red flag / rejected) |
+| **D.1.b.2** | Hasil verifikasi DD pelanggan | 1. Customer risk classification
+2. Mitigasi untuk pelanggan high-risk |
+| **D.1.b.3** | Hasil verifikasi DD vendor | 1. Vendor risk classification
+2. Approved Vendor List dengan tier
+3. Black list internal |
+
+### D.2 Peraturan Antikorupsi Mengikat Pihak Eksternal (1 indikator)
+
+| **D.2.a** | Perjanjian/kontrak yang mengikat eksternal | 1. **Klausul Antikorupsi standar** untuk kontrak
+2. **Komitmen Antikorupsi Mitra** template
+3. 5 sampel kontrak signed yang sudah memuat klausul (dengan redaksi/anonim untuk informasi sensitif) |
+| --- | --- | --- |
+
+### D.3 Sistem Pengawasan, Sanksi, Evaluasi Internal & Eksternal (2 indikator)
+
+| **D.3.a** | Perjanjian kerja internal (sampel) | 1. Perjanjian Kerja standar
+2. Disciplinary clause
+3. 3 sampel signed |
+| --- | --- | --- |
+| **D.3.b** | Klausul antikorupsi kontrak eksternal | 1. Klausul pengawasan + audit right
+2. Klausul sanksi (terminasi, denda, blacklist)
+3. Klausul evaluasi periodik mitra
+4. 5 sampel kontrak signed |
+
+### D.4 Gratifikasi, Hadiah, Konflik Kepentingan (5 indikator)
+
+| **D.4.a** | Kebijakan gratifikasi/hadiah/COI (3 hal) | 1. **SOP Gratifikasi** (referensi UU Tipikor Pasal 12B/12C)
+2. **SOP Hadiah & Hospitality**
+3. **SOP Konflik Kepentingan** |
+| --- | --- | --- |
+| **D.4.b** | Batasan nilai & bentuk gratifikasi ke PN | 1. Threshold matrix (Rp 0 untuk PN, atau threshold sangat ketat)
+2. Daftar bentuk yang dilarang/diizinkan
+3. Form pelaporan ke KPK ≤30 hari (Pasal 12C) |
+| **D.4.c** | Batasan nilai & bentuk hadiah/sponsor internal-eksternal | 1. Threshold internal (mis. < Rp 500k boleh, > Rp 500k harus deklarasi)
+2. Approval matrix sponsor/CSR/donasi
+3. **Register Hadiah & Hospitality** — sample entries |
+| **D.4.d** | Pengaturan kontribusi dana politik | 1. Kebijakan **NO political contribution** atau pembatasan jelas
+2. Larangan untuk kandidat aktif
+3. Disclosure ke KPU jika ada (untuk yayasan/asosiasi) |
+| **D.4.e** | Pengaturan konflik kepentingan | 1. **Form COI Disclosure** tahunan
+2. SOP penanganan conflict (rotasi tugas, recusal)
+3. Sample disclosure dari Direksi & manajer |
+
+### D.5 Pemilik Manfaat (Beneficial Ownership) (1 indikator)
+
+| **D.5.a** | Bukti penetapan Beneficial Owner (per Pasal 11 Perpres 13/2018) | 1. **Akta Pendirian + Anggaran Dasar**
+2. Akta perubahan terakhir
+3. **Notulen RUPS / Rapat Pengurus** terkait BO
+4. Surat Pernyataan BO dari Direksi
+5. Bukti pelaporan ke OSS/Kemenkumham (sistem BO online)
+6. Diagram kepemilikan (ownership chain) |
+| --- | --- | --- |
+
+### D.6 Sistem Pelaporan & Pengaduan / Whistleblowing (7 indikator)
+
+| **D.6.a** | Sosialisasi sistem pelaporan periodik | 1. Materi sosialisasi
+2. Daftar hadir
+3. Foto kegiatan
+4. Jadwal sosialisasi tahunan |
+| --- | --- | --- |
+| **D.6.b** | SOP Pelaporan & Pengaduan | 1. **SOP Whistleblowing**
+2. Workflow alur pelaporan
+3. Timeline penanganan (SLA)
+· Cross-ref: [Spec Teknis Kanal Whistleblowing — AGENT-WHISTLE & FKAP Backend](https://www.notion.so/Spec-Teknis-Kanal-Whistleblowing-AGENT-WHISTLE-FKAP-Backend-17ae74c937624e15b0427f58fb12527d?pvs=21) |
+| **D.6.c** | Saluran pelaporan | 1. Daftar **≥ 3 kanal**: web form, email khusus, hotline 24/7, SMS, datang langsung
+2. Screenshot / poster kanal
+3. Bukti kanal anonim & terenkripsi |
+| **D.6.d** | Fungsi pelaksana internal/eksternal pengelola | 1. SK pengangkatan tim WB
+2. JD pengelola WB
+3. Surat kerjasama dengan vendor eksternal (jika outsource hotline) |
+| **D.6.e** | Bukti penanganan berjenjang | 1. Diagram escalation matrix
+2. SOP eskalasi major/minor case
+3. Sample case file (anonim) yang menunjukkan eskalasi |
+| **D.6.f** | Statistik pelaporan & rekomendasi | 1. **Dashboard WB** — jumlah laporan, status, MTTC
+2. Laporan triwulan/tahunan
+3. Top-5 rekomendasi & implementasi |
+| **D.6.g** | Evaluasi sistem secara periodik | 1. Annual review report kanal WB
+2. User satisfaction survey
+3. Improvement plan |
+
+### D.7 Pencatatan Keuangan & Dokumentasi (4 indikator)
+
+| **D.7.a** | Kebijakan sistem pencatatan & dokumentasi | 1. **Pedoman Akuntansi Korporasi**
+2. SOP Pencatatan Keuangan
+3. Pedoman Pengarsipan |
+| --- | --- | --- |
+| **D.7.b** | Persetujuan berjenjang biaya operasional & belanja modal | 1. **Authority Matrix / Approval Matrix**
+2. Threshold approval (Manager / GM / Direksi / Komisaris)
+3. Sample voucher / PO yang menunjukkan multiple approval |
+| **D.7.c** | Dokumen disimpan sesuai urutan | 1. **Daftar Induk Dokumen**
+2. Filing system structure (fisik & digital)
+3. Foto rak arsip / screenshot DMS |
+| **D.7.d** | Sistem penyimpanan sesuai peraturan (mis. UU 8/1997 Dokumen Perusahaan) | 1. Retention schedule (10 tahun untuk dokumen keuangan)
+2. Disposal log (penghancuran terkontrol)
+3. Backup & disaster recovery plan |
+
+### D.8 Sosialisasi Kebijakan ke Pegawai (4 indikator)
+
+<aside>
+⚠️
+
+**Catatan dari sampel:** D.8.a, D.8.b, D.8.c — 3 indikator ini tidak terjawab oleh CV SUMMA JAYA. Sosialisasi sering dianggap remeh tapi sangat penting.
+
+</aside>
+
+| **D.8.a** | Kebijakan adanya program sosialisasi | 1. **Annual Communication Plan**
+2. Anggaran sosialisasi
+3. PIC per kanal sosialisasi |
+| --- | --- | --- |
+| **D.8.b** | Bukti kegiatan sosialisasi | 1. **Laporan kegiatan** per sesi (min 4 sesi/tahun)
+2. Daftar hadir signed
+3. Foto/video
+4. Materi sosialisasi (PDF/PPT) |
+| **D.8.c** | Media menjangkau semua pegawai | 1. Email blast screenshots
+2. Foto poster/banner di kantor & proyek
+3. Screenshot pop-up intranet/aplikasi internal
+4. Daftar media yang digunakan + reach |
+| **D.8.d** | Korporasi terima feedback pegawai | 1. **Survei pegawai tahunan** — awareness score
+2. Hasil tabulasi survei
+3. Tindak lanjut feedback |
+
+---
+
+## 7. SEKSI IV — EVALUASI (C.1–C.4)
+
+### C.1 Sistem Pemantauan & Evaluasi (5 indikator)
+
+| **C.1.a** | Kebijakan monev antikorupsi | 1. **SOP Monitoring & Evaluasi Antikorupsi**
+2. Annual Monev Plan |
+| --- | --- | --- |
+| **C.1.b** | Area evaluasi & cara pengukuran | 1. **KPI Dashboard** integritas (mis. dari [Roadmap Implementasi SMAP — 6 Bulan, RACI, & KPI Dashboard](https://www.notion.so/Roadmap-Implementasi-SMAP-6-Bulan-RACI-KPI-Dashboard-0f01e56b92de4ef6a63bb5af1f55f399?pvs=21))
+2. Definisi metric per area
+3. Target & threshold |
+| **C.1.c** | Unit pelaksana monev | 1. SK Tim Monev
+2. JD
+3. Independence statement |
+| **C.1.d** | Jadwal monev | 1. Annual monev calendar
+2. Monthly KPI review schedule
+3. Quarterly compliance review |
+| **C.1.e** | Hasil monev & rencana tindak lanjut | 1. **Laporan monev** terbaru
+2. CAPA Log
+3. Trend analysis 3 periode terakhir |
+
+### C.2 Komunikasi Sistem Monev (1 indikator)
+
+| **C.2.a** | Media komunikasi monev ke pegawai | 1. Notulen rapat sosialisasi monev
+2. Email blast hasil monev (dikemas friendly)
+3. Town hall presentation
+4. Newsletter integritas |
+| --- | --- | --- |
+
+### C.3 Hasil Monev Dikomunikasikan ke Pimpinan (2 indikator)
+
+| **C.3.a** | Hasil monev disampaikan ke pimpinan | 1. **Notulen Tinjauan Manajemen** dengan agenda monev
+2. Email/memo ke Direksi
+3. Board presentation deck |
+| --- | --- | --- |
+| **C.3.b** | Evaluasi untuk efisiensi & efektivitas | 1. **Audit Report** internal
+2. Audit follow-up tracker
+3. Improvement initiative based on audit |
+
+### C.4 Piagam Audit / Audit Charter (3 indikator)
+
+| **C.4.a** | Audit Charter | 1. **Internal Audit Charter** signed Komisaris/Direksi
+2. Approval rapat tahunan |
+| --- | --- | --- |
+| **C.4.b** | Independensi audit | 1. Bagan organisasi yang menampilkan audit lapor langsung ke Komisaris/Audit Committee
+2. Anggaran audit yang independen
+3. Independence declaration auditor |
+| **C.4.c** | Wewenang audit untuk semua aktivitas | 1. Annual Audit Plan yang covers semua proses bisnis
+2. Sample working paper untuk area risiko korupsi (Tender, Pengadaan, Marketing)
+3. Akses audit ke semua dokumen (audit access letter) |
+
+---
+
+## 8. SEKSI V — PERBAIKAN (A.1–A.3)
+
+| **A.1.a** | Mekanisme sanksi pelanggaran | 1. **Disciplinary Code** di Peraturan Perusahaan
+2. Matrix sanksi (lisan / tertulis / SP / terminasi)
+3. SOP investigasi sebelum sanksi |
+| --- | --- | --- |
+| **A.1.b** | Bukti pelaksanaan pemberian sanksi | 1. **Disciplinary log** (anonim) — sample 3–5 kasus
+2. SK pemberian sanksi
+3. Laporan ke Direksi |
+| **A.2.a** | Kualifikasi penerima penghargaan integritas | 1. **Kriteria Reward Program**
+2. Form nominasi
+3. Process panel selection |
+| **A.2.b** | Mekanisme penghargaan | 1. SOP Reward
+2. Approval matrix
+3. Tipe penghargaan (sertifikat, bonus, promosi, recognition) |
+| **A.2.c** | Bukti pelaksanaan penghargaan | 1. **3–5 sample SK reward**
+2. Foto penyerahan
+3. Internal communication |
+| **A.3.a** | Perubahan peraturan/kebijakan/SOP berdasar evaluasi | 1. **Changelog** kebijakan/SOP terhadap finding monev/audit
+2. Sample 3 SOP yang direvisi dengan justifikasi
+3. Rapat persetujuan revisi |
+| **A.3.b** | Sasaran baru pencegahan korupsi | 1. **Annual Antikorupsi Objectives**
+2. Cascading ke KPI departemen
+3. Approval Direksi |
+
+---
+
+## 9. SEKSI VI — RESPON (R.1–R.3)
+
+| **R.1.a** | Keanggotaan asosiasi/perkumpulan | 1. **Sertifikat keanggotaan** (ASPEKINDO, KADIN, AKBU, asosiasi profesi)
+2. Bukti iuran terbayar
+3. Surat penunjukan delegasi |
+| --- | --- | --- |
+| **R.1.b** | Asosiasi memiliki agenda antikorupsi | 1. AD/ART asosiasi yang menyebut antikorupsi
+2. Notulen rapat asosiasi yang membahas antikorupsi
+3. Komunike / pernyataan bersama |
+| **R.2.a** | Aksi kolektif kelompok kerja antikorupsi | 1. **Bukti partisipasi forum AKBU/Stranas PK**
+2. Laporan workshop / collective action
+3. Foto/dokumentasi kegiatan
+4. MoU kolaborasi |
+| **R.2.b** | Forum lintas sektoral (NGO, akademisi, pemerintah) | 1. Daftar forum yang diikuti
+2. Materi paparan korporasi
+3. Joint statement |
+| **R.3.a** | SOP pelaporan tindak pidana oleh oknum regulator/APH | 1. **SOP Pelaporan ke KPK / Polri / Kejaksaan**
+2. Decision tree: kapan lapor mandiri vs collective
+3. Legal counsel involvement
+4. Whistleblower protection internal |
+| **R.3.b** | Statistik pelaporan ke APH (jika ada) | 1. Logbook pelaporan (nomor TBL, tanggal, status)
+2. Surat balasan APH
+3. Status case follow-up
+**Catatan:** Tidak wajib jika belum pernah — cukup tunjukkan SOP siap pakai (R.3.a) |
+
+---
+
+## 10. Simulasi Dialog Chatbot — PanCEK Generator
+
+### 10.1 Skenario A: Mulai dari Nol
+
+```
+👤 User    : Bantu saya isi PanCEK di JAGA.id, perusahaan saya BUJK kecil di 
+             Malang, belum pernah isi sama sekali.
+🤖 Bot     : (AGENT-PANCEK aktif)
+             Baik. PanCEK Ver.2 punya 79 indikator di 6 seksi (Komitmen, 
+             Perencanaan, Pelaksanaan, Evaluasi, Perbaikan, Respon).
+             
+             Saya akan pandu Anda mengisi step-by-step. Untuk setiap indikator 
+             saya akan:
+             • Tampilkan pertanyaan asli
+             • Tanya status Anda (Sudah / Belum / Sebagian)
+             • Beri template jawaban siap copy
+             • Daftar dokumen yang harus Anda upload
+             
+             Estimasi: 2–3 jam pengisian + 1–2 minggu siapkan lampiran.
+             
+             Sebelum mulai, saya butuh data dasar perusahaan:
+             [Mulai Wizard Profil] [Skip Profil — lanjut indikator]
+
+👤 User    : Mulai Wizard
+... [profil terisi] ...
+
+🤖 Bot     : ✅ Profil tersimpan: CV CONTOH JAYA.
+             
+             Saya rekomendasikan urutan pengisian:
+             1️⃣ SEKSI I (Komitmen) — 22 indikator (paling krusial untuk audit)
+             2️⃣ SEKSI II (Perencanaan) — 5 indikator
+             3️⃣ SEKSI III (Pelaksanaan) — 30 indikator (paling banyak lampiran)
+             4️⃣ SEKSI IV–VI (Evaluasi, Perbaikan, Respon) — 22 indikator
+             
+             [Mulai dari K.1] [Quick Scan dulu — 5 menit]
+
+👤 User    : Mulai dari K.1
+🤖 Bot     : 📋 K.1 — Komitmen Tertulis Pimpinan Tertinggi (4 sub-indikator)
+             
+             Pertanyaan resmi JAGA.id:
+             > "Tunjukkan bahwa pimpinan tertinggi korporasi (pemilik, 
+             > direksi, komisaris) memiliki komitmen tertulis antikorupsi"
+             
+             K.1.a — Komitmen tertulis antikorupsi
+             Status di perusahaan Anda?
+             [Sudah ada] [Belum ada] [Lewati untuk sekarang]
+
+👤 User    : Belum ada
+🤖 Bot     : Baik, saya bantu generate. Saya akan buat draft Surat Komitmen 
+             Antikorupsi yang siap signed Direksi.
+             
+             Konfirmasi nama Direktur untuk signature: DJUNO RENOSAN?
+             [Ya] [Edit nama]
+
+👤 User    : Ya
+🤖 Bot     : 📄 Draft dibuat: "Surat Komitmen Antikorupsi CV CONTOH JAYA 
+             Nomor 001/SK-AK/I/2025".
+             
+             [Lihat Draft] [Download .docx] [Kirim ke Direktur via Email]
+             
+             Saat sudah signed, upload ke JAGA.id sebagai lampiran K.1.a.
+             
+             Lanjut ke K.1.b? (Bukti deklarasi & yang menghadiri)
+             [Lanjut] [Pending K.1 dulu] [Skip ke K.2]
+```
+
+### 10.2 Skenario B: Sudah ada dokumen — chatbot bantu mapping
+
+```
+👤 User    : Saya sudah punya Kebijakan Antikorupsi dan Pakta Integritas. 
+             Bisa cek apa lagi yang kurang?
+🤖 Bot     : 🔍 Mari saya cek mapping dokumen Anda ke indikator PanCEK.
+             
+             [Upload Kebijakan Antikorupsi] [Upload Pakta Integritas] 
+             [Upload semua dokumen sekaligus (zip)]
+
+... [user upload] ...
+
+🤖 Bot     : ✅ Hasil scan dokumen Anda:
+             
+             Kebijakan Antikorupsi cover:
+             ✅ K.1.d (Kebijakan dari komitmen)
+             ✅ K.3.a (Definisi korupsi) — confidence 85%
+             ✅ K.4.a (Mengacu UU Tipikor) — confidence 92%
+             ⚠️ K.5.a (Peta rawan korupsi) — belum ada section ini di Kebijakan
+             
+             Pakta Integritas cover:
+             ✅ K.2.a (Pakta tertandatangan)
+             ✅ K.2.b (Larangan uang pelicin) — confidence 78%
+             
+             📊 Coverage Anda saat ini: 5 dari 79 indikator (6%)
+             
+             Top-3 prioritas berikut:
+             1. K.1.a Surat Komitmen Direksi (1 jam) → Generate sekarang?
+             2. K.6.a–e Penunjukan FKAP (1 hari) → Generate paket?
+             3. P.1.a–c Risk Register (3 hari) → Buka <mention-page url="https://www.notion.so/57ce809991524a329edba82689127992">Risk Register</mention-page>
+             
+             [Generate K.1.a sekarang] [Lihat semua gap] [Export action plan]
+```
+
+### 10.3 Skenario C: Bulk Generate Lampiran
+
+```
+👤 User    : Generate semua dokumen lampiran yang perlu untuk Seksi I.
+🤖 Bot     : Seksi I — Komitmen — butuh ~12 dokumen unik.
+             
+             Saya akan generate berdasarkan Profil Anda. Estimasi 8–12 menit.
+             
+             • K.1.a Surat Komitmen Direksi
+             • K.1.b Notulen Deklarasi + Daftar Hadir template
+             • K.1.c Email blast template + Poster antikorupsi
+             • K.1.d Kebijakan Antikorupsi (sudah di-generate sebelumnya)
+             • K.2.a Pakta Integritas × 3 level (Direktur/Manajer/Staff)
+             • K.3.a Definisi Korupsi expansion section
+             • K.4.a UU Tipikor reference table
+             • K.5.a Peta Rawan Korupsi (auto-pull dari Risk Register)
+             • K.6.a SK Pengangkatan FKAP
+             • K.6.b JD FKAP detail
+             • K.6.c SOP Fungsi Kepatuhan
+             • K.7.a Audit Charter (excerpt)
+             • K.8.a SOP Sanksi & Penghargaan
+             • K.9.a Rencana Kerja Tahunan Compliance
+             
+             [Generate Semua] [Pilih Subset] [Tinjau Profil Dulu]
+
+👤 User    : Generate Semua
+🤖 Bot     : 🔄 Generating... 
+             [1/14] K.1.a Surat Komitmen ✓
+             [2/14] K.1.b Notulen Deklarasi ✓
+             ...
+             [14/14] K.9.a Rencana Kerja ✓
+             
+             ✅ Selesai. Folder "Lampiran PanCEK Seksi I — CV CONTOH JAYA".
+             
+             Quality Check:
+             ✅ 14/14 dokumen lulus 8 quality gate
+             ⚠️ K.1.b: nama hadir masih placeholder — isi sebelum upload
+             ⚠️ K.6.a: nama FKAP belum ditentukan — isi sebelum signing
+             
+             Estimasi waktu approve & upload: 2–3 minggu
+             
+             [Download ZIP] [Routing approval Direksi] [Lanjut Seksi II]
+```
+
+---
+
+## 11. Daftar Lengkap Dokumen Lampiran (Master Checklist)
+
+Konsolidasi semua dokumen yang dibutuhkan PanCEK — dapat dipisahkan menjadi **"Bundle Dokumen PanCEK"**:
+
+### 11.1 Tier-1 Dokumen Wajib (15 item)
+
+| **No.** | **Dokumen** | **Indikator yang Tertutup** |
+| --- | --- | --- |
+| 1 | Surat Komitmen Antikorupsi Direksi | K.1.a, K.1.d |
+| 2 | Kebijakan Antikorupsi (POL-001) | K.1.d, K.3.a, K.4.a, K.5.a |
+| 3 | Pakta Integritas (3 level) | K.2.a, K.2.b |
+| 4 | SK Pengangkatan FKAP/Compliance Officer | K.6.b, K.6.a |
+| 5 | Job Description FKAP | K.6.b, K.6.d |
+| 6 | SOP Fungsi Kepatuhan | K.6.c |
+| 7 | Audit Charter (Internal Audit) | K.7.a, C.4.a, C.4.b, C.4.c |
+| 8 | Bribery Risk Register | K.5.a, P.1.a, P.1.b, P.1.c, P.2.a, P.3.a |
+| 9 | SOP Due Diligence (Karyawan, Pelanggan, Mitra) | D.1.a.1–3, D.1.b.1–3 |
+| 10 | SOP Hadiah, Gratifikasi, COI | D.4.a, D.4.b, D.4.c, D.4.d, D.4.e |
+| 11 | SOP Whistleblowing | D.6.a–D.6.g |
+| 12 | SOP Pencatatan Keuangan + Authority Matrix | D.7.a, D.7.b, D.7.c, D.7.d |
+| 13 | Annual Communication & Training Plan | K.9.a, D.8.a, K.9.b, K.9.c, D.8.b, D.8.c |
+| 14 | SOP Monev + KPI Dashboard | C.1.a–e, C.2.a, C.3.a, C.3.b |
+| 15 | Disciplinary & Reward Code | K.8.a, K.8.b, A.1.a–b, A.2.a–c |
+
+### 11.2 Tier-2 Bukti Implementasi (sample)
+
+- Laporan kegiatan training & sosialisasi
+- Daftar hadir signed
+- Foto/video kegiatan
+- Sample 3–5 kontrak signed dengan klausul antikorupsi
+- Sample DD report 3–5 mitra/karyawan
+- Sample disciplinary action (anonim)
+- Statistik WB & laporan kasus
+- Survei pegawai awareness
+- Sertifikat AKBU / asosiasi membership
+- Notulen Tinjauan Manajemen
+
+### 11.3 Tier-3 Sertifikasi & Pengakuan (boost score)
+
+- Sertifikat ISO 37001:2016
+- Sertifikat Lead Implementer / Auditor (FKAP)
+- Sertifikat CCO, API, SPIP, QIA
+- Awards / pengakuan integritas eksternal
+- Bukti collective action AKBU
+- Bukti Internal Wealth Disclosure (untuk BUMN/BUMD)
+
+---
+
+## 12. Tips Pengisian Berbasis Kasus CV SUMMA JAYA
+
+Dari sampel pengisian CV SUMMA JAYA (64 dari 79 terjawab, 1 revisi), pelajaran kunci:
+
+<aside>
+💡
+
+**Kekuatan CV SUMMA JAYA:**
+
+✅ Komitmen pimpinan (K.1) lengkap signed Direktur Djuno Renosan
+
+✅ Pakta Integritas (K.2) terdokumentasi level manajer
+
+✅ Risk Register (P.1–P.3) terisi dengan update berkala
+
+✅ Klausul antikorupsi di kontrak eksternal (D.2, D.3)
+
+✅ BO disclosure (D.5) dan WB (D.6) lengkap
+
+✅ Audit Charter & sistem pengawasan (C.4) ada
+
+</aside>
+
+<aside>
+⚠️
+
+**Gap Umum (15 indikator belum terjawab):**
+
+✘ K.6.e Sertifikat kompetensi auditor/CCO/API — prioritas tinggi
+
+✘ K.9.a–c Rencana & evaluasi training — paling sering miss
+
+✘ D.1.a.2, D.1.a.3 DD pelanggan & mitra — BUJK kecil sering skip
+
+✘ D.1.b.2, D.1.b.3 Hasil verifikasi DD pelanggan & mitra
+
+✘ D.8.a–c Sosialisasi kebijakan ke pegawai — sering tidak terdokumentasi
+
+✘ C.3.a Hasil monev disampaikan ke pimpinan
+
+✘ C.4.b Independensi audit
+
+✘ A.2.c Bukti pelaksanaan penghargaan
+
+✘ R.3.b Statistik pelaporan ke APH (acceptable jika belum pernah)
+
+</aside>
+
+### 12.1 Quick-Win Closure Plan untuk 15 Gap Umum
+
+| **Gap** | **Quick Win Action** | **Estimasi** |
+| --- | --- | --- |
+| K.6.e Sertifikat | Daftarkan FKAP ke training Lead Implementer ISO 37001 (PECB/IRCA) | 1 bulan |
+| K.9.a–c Training | Generate Annual Training Plan + jadwalkan 4 sesi/tahun | 1 minggu setup |
+| D.1.a/b.2 DD pelanggan | Generate SOP DD Pelanggan + jalankan untuk top-10 klien | 2–3 minggu |
+| D.1.a/b.3 DD mitra | Generate SOP DD Vendor + DD batch 1 untuk vendor RISIKO TINGGI | 3–4 minggu |
+| D.8 Sosialisasi | Town hall 1× + email blast 4×/tahun + poster di kantor | 1 minggu |
+| C.3.a Komunikasi monev | Tetapkan agenda monev di Tinjauan Manajemen tahunan | 1 hari (jadwal) |
+| C.4.b Independensi audit | Pastikan reporting line audit → Komisaris (ubah JD jika perlu) | 1 minggu |
+| A.2.c Penghargaan | Award integritas tahunan — berikan ke 3–5 pegawai dengan dokumentasi | 1 bulan |
+
+---
+
+## 13. Format Output Generator
+
+Saat user request "generate jawaban PanCEK", chatbot menghasilkan **3 artefak**:
+
+### 13.1 Artefak A — Jawaban Naratif (untuk text box [JAGA.id](http://JAGA.id))
+
+Text siap copy-paste ke field jawaban di platform [JAGA.id](http://JAGA.id), **maks 500 karakter** per indikator (sesuai batas form).
+
+### 13.2 Artefak B — Bundle Lampiran
+
+Folder/ZIP berisi semua dokumen siap-upload, dengan:
+
+- File rename otomatis: `K.1.a_Komitmen_Direksi_CVNAMA.pdf`
+- Index file `_DAFTAR_LAMPIRAN.pdf` yang memetakan file ke indikator
+- Watermark "Lampiran PanCEK 2025 — CV NAMA"
+
+### 13.3 Artefak C — Tracker Pengisian
+
+Google Sheet/Excel dengan kolom:
+
+- Indikator · Status (Belum / Draft / Final / Uploaded) · PIC · Lampiran terkait · Catatan
+
+---
+
+## 14. Integrasi dengan Database Workspace
+
+Generator ini terhubung ke:
+
+| **Indikator PanCEK** | **Sumber Data Otomatis** |
+| --- | --- |
+| K.6 (FKAP) | Profil BUJK · SK FKAP |
+| K.5, P.1, P.2, P.3 | [](https://www.notion.so/57ce809991524a329edba82689127992?pvs=21) |
+| K.9, D.8 | Annual Training Log database |
+| D.1 | Vendor Master + DD Reports database |
+| D.4 (Hadiah) | Register Hadiah database |
+| D.6 (Whistleblowing) | [Spec Teknis Kanal Whistleblowing — AGENT-WHISTLE & FKAP Backend](https://www.notion.so/Spec-Teknis-Kanal-Whistleblowing-AGENT-WHISTLE-FKAP-Backend-17ae74c937624e15b0427f58fb12527d?pvs=21)  • WB log |
+| C.1–C.4 (Monev) | KPI Dashboard di [Roadmap Implementasi SMAP — 6 Bulan, RACI, & KPI Dashboard](https://www.notion.so/Roadmap-Implementasi-SMAP-6-Bulan-RACI-KPI-Dashboard-0f01e56b92de4ef6a63bb5af1f55f399?pvs=21) |
+| Status PanCEK | [](https://www.notion.so/ec4bf89def7e40c5bb92d9f9d1602e97?pvs=21) (paralel mapping ISO) |
+
+---
+
+## 15. Resource & Akses Resmi PanCEK
+
+- **Platform [JAGA.id](http://JAGA.id)** — [jaga.id](http://jaga.id) (login dengan akun KPK)
+- **Form PanCEK Online** — fitur "PanCEK" di dashboard [JAGA.id](http://JAGA.id)
+- **Buku Panduan Cegah Korupsi Ver.2** — unduh dari KPK / AKBU
+- **Webinar PanCEK** — jadwal di [aclc.kpk.go.id](http://aclc.kpk.go.id)
+- **Helpdesk** — [humas@kpk.go.id](mailto:humas@kpk.go.id) atau hotline 198
+- **AKBU Network** — Antikorupsi Badan Usaha (komunitas pengisi PanCEK)
+
+---
+
+<aside>
+📝
+
+**Kunci sukses pengisian PanCEK:** **Bukan jumlah indikator yang terjawab**, tapi **konsistensi antara jawaban naratif dengan bukti lampiran yang valid**. Generator ini memastikan setiap jawaban memiliki **dokumen pendukung yang autentik, terkini, dan signed** — sehingga PanCEK Anda menjadi alat nyata pertahanan korporasi sesuai Pasal 4(2) Perma 13/2016, bukan sekadar formalitas isian online.
+
+</aside>

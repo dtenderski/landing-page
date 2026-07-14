@@ -1,0 +1,582 @@
+Berikut **paket Audit BNSP untuk Pengajuan LSP: Permohonan AJJ Nirkertas**. Format ini bisa dipakai sebagai **checklist kesiapan audit/asesmen lapangan**, **script simulasi**, dan **modul chatbot SKK AJJ Nirkertas**.
+
+BNSP masih menampilkan Surat Edaran tentang **Sertifikasi Jarak Jauh dan Penggunaan Nirkertas** pada halaman download resminya, sedangkan SE.007/BNSP/V/2023 mengatur audit/asesmen lapangan, witness uji coba, verifikasi nirkertas, audit internal, dan pelaporan LSP. ([BNSP][1]) Struktur chatbot di bawah juga mengikuti pola file konfigurasi yang Anda lampirkan: ada guardrails, acceptance criteria, audit log, fallback, dan larangan klaim kelulusan resmi. 
+
+---
+
+# 1. Tujuan Audit BNSP
+
+```yaml id="audit_objective_ajj_nirkertas"
+audit_objective:
+  title: "Audit / Asesmen Lapangan BNSP untuk Permohonan AJJ Nirkertas"
+  tujuan:
+    - memastikan LSP memenuhi persyaratan dokumen permohonan AJJ
+    - memastikan LSP memenuhi persyaratan penggunaan nirkertas/paperless
+    - memastikan SOP LSP dapat dijalankan, bukan hanya tersedia
+    - memastikan aplikasi mendukung proses sertifikasi jarak jauh dan nirkertas
+    - memastikan personil memahami peran masing-masing
+    - memastikan verifikasi TUK jarak jauh dapat dilakukan
+    - memastikan proses asesmen jarak jauh dapat direkam dan ditelusuri
+    - memastikan laporan, umpan balik, banding, dan keputusan sertifikasi terdokumentasi
+    - memastikan keamanan data, hak akses, penyimpanan rekaman, dan audit trail berjalan
+```
+
+Dalam SE.007, BNSP melakukan **asesmen lapangan dan menyaksikan uji coba pelaksanaan sertifikasi jarak jauh** maksimal **30 hari kerja** sejak permohonan diterima; keputusan permohonan sertifikasi jarak jauh diterbitkan **20 hari kerja** sejak batas waktu perbaikan LKS asesmen lapangan. ([NAS Online][2])
+
+---
+
+# 2. Ruang Lingkup Audit
+
+```yaml id="audit_scope"
+audit_scope:
+  area_audit:
+    - dokumen permohonan
+    - SOP AJJ dan nirkertas
+    - sistem aplikasi sertifikasi jarak jauh
+    - sistem aplikasi nirkertas
+    - manajemen akun dan hak akses
+    - keamanan data dan rekaman
+    - kesiapan personil
+    - kesiapan asesor kompetensi
+    - kesiapan TUK dan verifikasi TUK jarak jauh
+    - simulasi asesi
+    - simulasi asesmen jarak jauh
+    - rekaman asesmen
+    - laporan asesmen
+    - umpan balik
+    - banding
+    - audit internal dan pelaporan berkala
+```
+
+Untuk penggunaan nirkertas, SE.007 menyebut BNSP melakukan **verifikasi permohonan** maksimal **30 hari kerja** sejak permohonan diterima. SE yang sama juga mewajibkan LSP melakukan **audit internal pelaksanaan sertifikasi jarak jauh setiap 6 bulan** dan menyampaikan laporan audit beserta tindakan perbaikan kepada BNSP pada **Juni dan Desember paling lambat tanggal 10**. ([NAS Online][2])
+
+---
+
+# 3. Area Audit dan Bukti yang Harus Disiapkan
+
+## A. Audit Dokumen Permohonan
+
+```yaml id="audit_dokumen_permohonan"
+audit_area:
+  id: audit_dokumen_permohonan
+  title: "Audit Dokumen Permohonan"
+  auditor_focus:
+    - apakah surat permohonan lengkap dan ditandatangani pejabat berwenang
+    - apakah skema yang diajukan jelas
+    - apakah dokumen lampiran sesuai persyaratan
+    - apakah dokumen mudah ditelusuri
+    - apakah dokumen PDF, video, dan output sistem dapat dibuka
+  evidence_required:
+    - surat permohonan AJJ
+    - surat permohonan nirkertas/paperless jika diajukan bersamaan
+    - daftar skema yang diajukan
+    - daftar metode uji jarak jauh
+    - daftar lampiran dokumen
+    - folder digital pengajuan
+    - bukti pengiriman permohonan
+  common_findings:
+    - skema yang diajukan tidak jelas
+    - nama dokumen tidak konsisten
+    - lampiran tidak lengkap
+    - tautan Google Drive tidak dapat diakses
+    - dokumen belum ditandatangani/disahkan
+```
+
+---
+
+## B. Audit SOP
+
+```yaml id="audit_sop"
+audit_area:
+  id: audit_sop
+  title: "Audit SOP AJJ dan Nirkertas"
+  auditor_focus:
+    - apakah SOP tersedia, disahkan, dan dikendalikan
+    - apakah SOP sesuai dengan alur sistem yang didemokan
+    - apakah SOP menjelaskan peran admin, asesor, asesi, TUK, dan manajemen LSP
+    - apakah SOP memuat penanganan kendala teknis
+    - apakah SOP memuat banding jarak jauh
+  evidence_required:
+    - SOP Melayani Pelaksanaan Kegiatan Sertifikasi Kompetensi Jarak Jauh
+    - SOP Melaksanakan Asesmen Jarak Jauh
+    - SOP Verifikasi TUK Jarak Jauh
+    - SOP Banding Jarak Jauh
+    - SOP Pelayanan Sertifikasi berbasis Nirkertas
+    - daftar distribusi SOP
+    - bukti sosialisasi SOP
+  audit_questions:
+    - "Siapa yang bertanggung jawab membuka jadwal AJJ?"
+    - "Bagaimana asesi mengisi asesmen mandiri secara digital?"
+    - "Bagaimana asesor memverifikasi identitas dan lingkungan asesi?"
+    - "Apa yang dilakukan jika koneksi asesi terputus?"
+    - "Bagaimana asesi mengajukan banding secara jarak jauh?"
+  common_findings:
+    - SOP ada tetapi tidak sesuai praktik aplikasi
+    - SOP belum mencantumkan rekaman asesmen
+    - SOP belum mengatur kendala teknis
+    - SOP banding jarak jauh belum jelas
+    - personil tidak memahami SOP
+```
+
+---
+
+## C. Audit Sistem Aplikasi
+
+```yaml id="audit_sistem_aplikasi"
+audit_area:
+  id: audit_sistem_aplikasi
+  title: "Audit Sistem Aplikasi AJJ Nirkertas"
+  auditor_focus:
+    - apakah aplikasi dapat menjalankan proses dari awal sampai akhir
+    - apakah hak akses admin, asesor, asesi, TUK, dan komite dibedakan
+    - apakah semua dokumen digital dapat dibuat, diunggah, ditinjau, dan disimpan
+    - apakah rekaman asesmen dapat diakses kembali
+    - apakah laporan asesmen dan output PDF dapat dihasilkan
+  evidence_required:
+    - akun demo admin LSP
+    - akun demo asesor
+    - akun demo asesi
+    - akun demo TUK
+    - akun demo komite teknis / pengambil keputusan
+    - diagram alur aplikasi
+    - penjelasan server
+    - daftar fitur aplikasi
+    - log aktivitas / audit trail
+    - bukti backup data
+  fitur_minimal_yang_didemokan:
+    - permohonan sertifikasi
+    - asesmen mandiri
+    - persetujuan asesmen
+    - instrumen asesmen
+    - ceklis meninjau instrumen asesmen
+    - rekaman asesmen
+    - umpan balik
+    - laporan asesmen
+    - peninjauan proses asesmen
+    - banding
+```
+
+SE.007 menyebut aplikasi sertifikasi jarak jauh/nirkertas perlu mendukung elemen seperti permohonan sertifikasi, asesmen mandiri, persetujuan asesmen, instrumen asesmen, rekaman asesmen, umpan balik, laporan asesmen, peninjauan proses asesmen, dan banding. ([NAS Online][2])
+
+---
+
+## D. Audit Personil dan Peran
+
+```yaml id="audit_personil"
+audit_area:
+  id: audit_personil
+  title: "Audit Personil dan Pembagian Peran"
+  auditor_focus:
+    - apakah personil ditetapkan secara resmi
+    - apakah personil memahami tugasnya
+    - apakah admin, asesor, TUK, dan komite memahami batas kewenangan
+    - apakah ada pengelola sistem dan pemelihara sistem
+  evidence_required:
+    - SK penetapan personil pengelola sistem
+    - SK penetapan pemeliharaan sistem
+    - daftar admin LSP
+    - daftar asesor kompetensi
+    - daftar petugas TUK
+    - daftar komite teknis / pengambil keputusan
+    - bukti sosialisasi internal
+  audit_questions:
+    - "Siapa admin yang mengelola akun asesi?"
+    - "Siapa yang memelihara sistem?"
+    - "Siapa yang menetapkan TUK?"
+    - "Siapa yang memberikan rekomendasi asesmen?"
+    - "Siapa yang membuat keputusan sertifikasi?"
+  common_findings:
+    - personil ada tetapi belum ada SK
+    - hak akses tidak sesuai peran
+    - asesor dianggap sebagai pengambil keputusan sertifikasi
+    - admin tidak memahami alur banding
+```
+
+---
+
+## E. Audit Verifikasi TUK Jarak Jauh
+
+```yaml id="audit_verifikasi_tuk"
+audit_area:
+  id: audit_verifikasi_tuk_jarak_jauh
+  title: "Audit Verifikasi TUK Jarak Jauh"
+  auditor_focus:
+    - apakah TUK memiliki data dan dokumen pendukung
+    - apakah verifikasi TUK dapat dilakukan secara jarak jauh
+    - apakah sarana-prasarana TUK dapat ditunjukkan melalui sistem
+    - apakah rekaman verifikasi TUK tersimpan
+    - apakah SK penetapan TUK dapat ditampilkan
+  evidence_required:
+    - data profil TUK
+    - SPT verifikasi TUK
+    - checklist verifikasi TUK
+    - rekaman verifikasi TUK jarak jauh
+    - dokumentasi sarana-prasarana TUK
+    - SK penetapan TUK
+  audit_questions:
+    - "Bagaimana proses verifikasi TUK jarak jauh dilakukan?"
+    - "Apa bukti bahwa TUK memenuhi persyaratan?"
+    - "Bagaimana rekaman verifikasi TUK disimpan?"
+    - "Bagaimana TUK ditetapkan setelah verifikasi?"
+  common_findings:
+    - rekaman verifikasi TUK tidak tersedia
+    - tidak ada SPT verifikasi TUK
+    - SK penetapan TUK tidak dapat ditampilkan
+    - dokumentasi fasilitas tidak sesuai skema
+```
+
+---
+
+## F. Audit Simulasi/Witness Asesmen Jarak Jauh
+
+```yaml id="audit_witness_asesmen"
+audit_area:
+  id: audit_witness_asesmen_jarak_jauh
+  title: "Audit Witness / Penyaksian Uji Coba AJJ"
+  auditor_focus:
+    - apakah simulasi berjalan sesuai SOP
+    - apakah asesi dapat login dan mengikuti asesmen
+    - apakah asesor memverifikasi identitas asesi
+    - apakah asesor memverifikasi lingkungan asesmen
+    - apakah instrumen asesmen digunakan secara digital
+    - apakah rekaman asesmen tersimpan
+    - apakah laporan asesmen dapat dibuat
+  evidence_required:
+    - skenario uji coba
+    - daftar peserta simulasi
+    - akun asesi simulasi
+    - akun asesor simulasi
+    - rekaman asesmen
+    - catatan asesmen
+    - laporan asesmen
+    - umpan balik asesi
+    - output PDF hasil uji coba
+  audit_questions:
+    - "Bagaimana memastikan asesi adalah orang yang benar?"
+    - "Bagaimana memastikan lingkungan asesmen bebas bantuan tidak sah?"
+    - "Apa yang dilakukan jika kamera asesi mati?"
+    - "Apa yang dilakukan jika rekaman gagal tersimpan?"
+    - "Bagaimana laporan asesmen disahkan?"
+```
+
+---
+
+# 4. Checklist Audit H-7 sampai Hari-H
+
+```yaml id="audit_timeline_checklist"
+audit_timeline:
+  h_minus_7:
+    title: "Kunci Dokumen dan SOP"
+    checklist:
+      - "[ ] Surat permohonan AJJ/Nirkertas final"
+      - "[ ] Daftar skema final"
+      - "[ ] SOP AJJ final dan disahkan"
+      - "[ ] SOP nirkertas final dan disahkan"
+      - "[ ] SOP verifikasi TUK jarak jauh final"
+      - "[ ] SOP banding jarak jauh final"
+      - "[ ] SK personil lengkap"
+      - "[ ] Folder audit disusun rapi"
+
+  h_minus_5:
+    title: "Kunci Sistem dan Akun"
+    checklist:
+      - "[ ] Akun admin siap"
+      - "[ ] Akun asesor siap"
+      - "[ ] Akun asesi siap"
+      - "[ ] Akun TUK siap"
+      - "[ ] Akun komite/pengambil keputusan siap"
+      - "[ ] Hak akses diuji"
+      - "[ ] Server dan koneksi diuji"
+      - "[ ] Backup data diuji"
+
+  h_minus_3:
+    title: "Dry Run Internal"
+    checklist:
+      - "[ ] Simulasi permohonan sertifikasi berhasil"
+      - "[ ] Simulasi asesmen mandiri berhasil"
+      - "[ ] Simulasi persetujuan asesmen berhasil"
+      - "[ ] Simulasi verifikasi TUK berhasil"
+      - "[ ] Simulasi asesmen jarak jauh berhasil"
+      - "[ ] Rekaman tersimpan"
+      - "[ ] Laporan asesmen keluar"
+      - "[ ] Umpan balik dan banding diuji"
+
+  h_minus_1:
+    title: "Final Audit Readiness"
+    checklist:
+      - "[ ] Link meeting audit siap"
+      - "[ ] Folder bukti dapat diakses"
+      - "[ ] Tim LSP hadir briefing"
+      - "[ ] Asesor simulasi siap"
+      - "[ ] Asesi simulasi siap"
+      - "[ ] TUK simulasi siap"
+      - "[ ] Notulis audit siap"
+      - "[ ] Internet cadangan siap"
+
+  hari_h:
+    title: "Pelaksanaan Audit/Witness"
+    checklist:
+      - "[ ] Pembukaan oleh Manajemen LSP"
+      - "[ ] Penjelasan ruang lingkup pengajuan"
+      - "[ ] Demo dokumen dan SOP"
+      - "[ ] Demo sistem aplikasi"
+      - "[ ] Demo verifikasi TUK"
+      - "[ ] Demo asesmen jarak jauh"
+      - "[ ] Demo rekaman dan laporan"
+      - "[ ] Demo umpan balik dan banding"
+      - "[ ] Catatan pertanyaan auditor dibuat"
+      - "[ ] Catatan LKS/temuan dibuat"
+```
+
+---
+
+# 5. Simulasi Pertanyaan Auditor BNSP
+
+```yaml id="simulasi_pertanyaan_auditor"
+simulasi_pertanyaan_auditor:
+  kebijakan_dan_sop:
+    - "Apa dasar LSP mengajukan AJJ dan nirkertas?"
+    - "SOP mana yang mengatur pelaksanaan asesmen jarak jauh?"
+    - "Bagaimana SOP penanganan kendala teknis?"
+    - "Bagaimana SOP banding jarak jauh dijalankan?"
+
+  sistem_aplikasi:
+    - "Tunjukkan alur permohonan sertifikasi sampai laporan asesmen."
+    - "Bagaimana hak akses admin, asesor, asesi, TUK, dan komite dibedakan?"
+    - "Di mana rekaman asesmen disimpan?"
+    - "Bagaimana backup dan keamanan data dilakukan?"
+    - "Bagaimana audit trail ditampilkan?"
+
+  asesi:
+    - "Bagaimana asesi mengisi asesmen mandiri?"
+    - "Bagaimana asesi menyetujui rencana asesmen?"
+    - "Bagaimana asesi mengajukan umpan balik atau banding?"
+
+  asesor:
+    - "Bagaimana asesor memverifikasi identitas asesi?"
+    - "Bagaimana asesor memastikan lingkungan asesmen layak?"
+    - "Bagaimana asesor mengisi instrumen asesmen?"
+    - "Apa batas kewenangan asesor terhadap keputusan sertifikasi?"
+
+  tuk:
+    - "Bagaimana proses verifikasi TUK jarak jauh?"
+    - "Apa bukti bahwa TUK sudah diverifikasi?"
+    - "Tunjukkan rekaman verifikasi TUK."
+    - "Tunjukkan SK penetapan TUK."
+
+  keputusan_dan_pelaporan:
+    - "Bagaimana laporan asesmen ditinjau?"
+    - "Siapa yang menetapkan keputusan sertifikasi?"
+    - "Bagaimana laporan pelaksanaan AJJ disusun?"
+    - "Bagaimana audit internal 6 bulanan dilakukan?"
+```
+
+---
+
+# 6. LKS / Temuan yang Umum Muncul
+
+```yaml id="potensi_lks_audit"
+potential_lks:
+  dokumen:
+    - issue: "SOP belum disahkan"
+      risk: "Prosedur belum memiliki kekuatan pengendalian internal"
+      correction: "Sahkan SOP dan lengkapi nomor dokumen, tanggal berlaku, dan pejabat pengesah"
+
+    - issue: "SK personil pengelola sistem tidak tersedia"
+      risk: "Tanggung jawab sistem tidak jelas"
+      correction: "Terbitkan SK personil pengelola dan pemelihara sistem"
+
+  sistem:
+    - issue: "Hak akses tidak dibedakan"
+      risk: "Admin/asesor/asesi dapat mengakses fitur yang bukan kewenangannya"
+      correction: "Atur role-based access control dan uji ulang hak akses"
+
+    - issue: "Rekaman asesmen tidak tersimpan"
+      risk: "Bukti proses asesmen tidak dapat ditelusuri"
+      correction: "Perbaiki fitur rekaman, backup, dan bukti penyimpanan"
+
+    - issue: "Output PDF tidak lengkap"
+      risk: "Dokumen nirkertas tidak memenuhi kebutuhan penelusuran"
+      correction: "Pastikan semua form menghasilkan output digital yang lengkap"
+
+  proses:
+    - issue: "Verifikasi identitas asesi tidak dilakukan"
+      risk: "Validitas asesmen jarak jauh lemah"
+      correction: "Tambahkan langkah verifikasi identitas pada SOP dan simulasi"
+
+    - issue: "Verifikasi TUK jarak jauh tidak direkam"
+      risk: "Kelayakan TUK tidak dapat dibuktikan"
+      correction: "Rekam proses verifikasi TUK dan simpan sebagai bukti"
+
+  pelaporan:
+    - issue: "Belum ada rencana audit internal 6 bulanan"
+      risk: "Kewajiban audit internal dan pelaporan tidak terkendali"
+      correction: "Buat jadwal audit internal Juni dan Desember serta template tindakan perbaikan"
+```
+
+---
+
+# 7. Format Catatan Audit
+
+```yaml id="format_catatan_audit"
+audit_record_template:
+  fields:
+    - nomor_temuan
+    - tanggal_audit
+    - auditor
+    - area_audit
+    - klausul_atau_kriteria
+    - uraian_temuan
+    - bukti_objektif
+    - kategori_temuan: "minor | mayor | observasi | peluang perbaikan"
+    - akar_masalah
+    - tindakan_koreksi
+    - tindakan_perbaikan
+    - penanggung_jawab
+    - target_selesai
+    - bukti_tindak_lanjut
+    - status: "open | closed | pending verification"
+```
+
+---
+
+# 8. Scoring Kesiapan Audit Internal LSP
+
+```yaml id="audit_readiness_scoring"
+audit_readiness_scoring:
+  scale:
+    0: "Belum tersedia"
+    1: "Tersedia sebagian, belum disahkan/diuji"
+    2: "Tersedia dan disahkan, tetapi belum konsisten dijalankan"
+    3: "Tersedia, disahkan, diuji, dan bukti cukup"
+    4: "Tersedia, berjalan konsisten, terdokumentasi, dan siap diaudit"
+
+  dimensions:
+    - id: dokumen_permohonan
+      weight: 15
+    - id: sop
+      weight: 20
+    - id: sistem_aplikasi
+      weight: 20
+    - id: personil
+      weight: 10
+    - id: tuk
+      weight: 10
+    - id: witness_uji_coba
+      weight: 10
+    - id: keamanan_data
+      weight: 10
+    - id: audit_internal_pelaporan
+      weight: 5
+
+  interpretation:
+    - condition: "score < 60"
+      level: "Belum siap audit BNSP"
+      recommendation: "Lengkapi dokumen, SOP, sistem, dan lakukan dry run internal."
+    - condition: "score >= 60 and score < 80"
+      level: "Cukup siap dengan risiko temuan"
+      recommendation: "Fokus pada uji coba, bukti rekaman, output PDF, dan pemahaman personil."
+    - condition: "score >= 80"
+      level: "Siap audit/witness"
+      recommendation: "Lakukan final rehearsal, siapkan notulis, dan pastikan semua bukti mudah ditampilkan."
+```
+
+---
+
+# 9. Modul Chatbot Siap Tempel
+
+```yaml id="chatbot_module_audit_bnsp_ajj_nirkertas"
+module:
+  id: audit_bnsp_pengajuan_lsp_ajj_nirkertas
+  title: "Audit BNSP untuk Pengajuan LSP: Permohonan AJJ Nirkertas"
+  purpose: >
+    Membantu Manajemen LSP, admin, asesor, TUK, dan pengelola sistem
+    menyiapkan audit/asesmen lapangan BNSP untuk permohonan pelaksanaan
+    Sertifikasi Jarak Jauh dan Penggunaan Nirkertas.
+
+intents:
+  - id: ask_audit_bnsp_overview
+    sample_user_inputs:
+      - "Audit BNSP untuk pengajuan AJJ Nirkertas apa saja?"
+      - "Apa yang diperiksa BNSP saat permohonan AJJ?"
+      - "Bagaimana persiapan audit pengajuan LSP?"
+    response_template: response_audit_overview
+    next_node: audit_bnsp_menu
+
+  - id: ask_audit_documents
+    sample_user_inputs:
+      - "Dokumen audit BNSP apa saja?"
+      - "Apa yang harus disiapkan untuk audit AJJ?"
+      - "Checklist dokumen audit permohonan nirkertas"
+    response_template: response_audit_documents
+    next_node: audit_dokumen_permohonan
+
+  - id: ask_audit_system
+    sample_user_inputs:
+      - "Sistem apa yang akan diperiksa?"
+      - "Fitur aplikasi apa yang harus ada?"
+      - "Apa yang harus didemokan di aplikasi?"
+    response_template: response_audit_system
+    next_node: audit_sistem_aplikasi
+
+  - id: ask_audit_questions
+    sample_user_inputs:
+      - "Pertanyaan auditor BNSP apa saja?"
+      - "Simulasi tanya jawab audit"
+      - "Apa yang biasanya ditanyakan BNSP?"
+    response_template: response_audit_questions
+    next_node: simulasi_pertanyaan_auditor
+
+  - id: ask_potential_lks
+    sample_user_inputs:
+      - "Temuan audit yang umum apa?"
+      - "LKS audit AJJ biasanya apa?"
+      - "Apa red flag saat audit BNSP?"
+    response_template: response_potential_lks
+    next_node: potential_lks
+
+flow:
+  id: audit_bnsp_menu
+  title: "Menu Audit BNSP AJJ Nirkertas"
+  bot_message: >
+    Pilih area persiapan audit yang ingin Anda cek.
+  quick_replies:
+    - "Dokumen permohonan"
+    - "SOP"
+    - "Sistem aplikasi"
+    - "Personil"
+    - "Verifikasi TUK"
+    - "Witness asesmen"
+    - "Keamanan data"
+    - "Audit internal & pelaporan"
+    - "Simulasi pertanyaan auditor"
+    - "Potensi LKS"
+
+response_template:
+  id: response_audit_overview
+  text: >
+    Audit BNSP untuk permohonan AJJ Nirkertas umumnya memeriksa kesiapan
+    dokumen, SOP, sistem aplikasi, personil, TUK, proses witness/uji coba,
+    rekaman, laporan, umpan balik, banding, keamanan data, dan mekanisme
+    audit internal LSP.
+    
+    Fokus utamanya bukan hanya apakah dokumen tersedia, tetapi apakah proses
+    dapat dijalankan dari awal sampai akhir dan buktinya dapat ditelusuri.
+  quick_replies:
+    - "Checklist dokumen"
+    - "Checklist sistem"
+    - "Skenario witness"
+    - "Pertanyaan auditor"
+    - "Potensi LKS"
+```
+
+---
+
+# 10. Ringkasan Eksekutif
+
+Untuk audit BNSP, LSP harus siap menunjukkan **3 hal sekaligus**: **kepatuhan dokumen**, **kesiapan sistem**, dan **kemampuan menjalankan proses nyata**. SE.007 menjadi rujukan utama untuk sertifikasi jarak jauh dan nirkertas; BNSP melakukan asesmen lapangan/witness untuk AJJ, verifikasi untuk nirkertas, dan LSP wajib melakukan audit internal serta pelaporan berkala setiap 6 bulan. ([NAS Online][2])
+
+Praktisnya, sebelum audit/witness, LSP perlu memastikan: **SOP final, SK personil lengkap, aplikasi berjalan, hak akses benar, TUK bisa diverifikasi jarak jauh, asesmen dapat direkam, laporan keluar, banding tersedia, audit trail aktif, dan semua personil mampu menjelaskan perannya.**
+
+[1]: https://bnsp.go.id/download?utm_source=chatgpt.com "Halaman Download - BNSP"
+[2]: https://nasonline.id/wp-content/uploads/2024/12/SE-SJJ-Paperless-Final-17.05.23.pdf?utm_source=chatgpt.com "TENTANG - nasonline.id"

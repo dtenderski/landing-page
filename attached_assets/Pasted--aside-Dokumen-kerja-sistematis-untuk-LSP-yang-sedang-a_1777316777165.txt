@@ -1,0 +1,683 @@
+<aside>
+📌
+
+Dokumen kerja **sistematis** untuk LSP yang sedang/akan mengajukan lisensi ke BNSP. Mengonsolidasikan **5 tahap inti**: Pengajuan Skema → Verifikasi Skema → Full Assessment → Witness Assessment → Penetapan Lisensi. Acuan: **Pedoman BNSP 201-2014, 202-2014, 210-2017, 301/302/305**, **SNI ISO/IEC 17024**, dan untuk LSP konstruksi tambahan **SE LPJK No. 02/SE/LPJK/2023**.
+
+</aside>
+
+## 1. Ringkasan Alur Lisensi BNSP
+
+```mermaid
+flowchart LR
+	A["Persiapan Internal LSP<br>(Dokumen Mutu, Skema,<br>Asesor, TUK)"] --> B["Tahap 1<br>Pengajuan Skema"]
+	B --> C["Tahap 2<br>Verifikasi Skema<br>(Desk Review)"]
+	C --> D["Tahap 3<br>Full Assessment"]
+	D --> E["Tahap 4<br>Witness Assessment"]
+	E --> F["Tahap 5<br>Penetapan Lisensi<br>(SK + Sertifikat 5 tahun)"]
+	F --> G["Surveilans Tahunan<br>+ Resertifikasi"]
+```
+
+<aside>
+⏱️
+
+**Estimasi waktu total**: 6–18 bulan, tergantung kesiapan dokumen, jumlah skema, dan kelancaran perbaikan temuan.
+
+</aside>
+
+## 2. Aktor & Tanggung Jawab
+
+| **Aktor** | **Peran Inti** | **Output Dokumen** |
+| --- | --- | --- |
+| Ketua LSP | Penanggung jawab keseluruhan; penandatangan permohonan & komitmen ketidakberpihakan | Surat Permohonan, Pakta Integritas |
+| Manajer Sertifikasi | Pengembangan & pemeliharaan skema; koordinasi asesor & TUK | Skema Sertifikasi, MUK, Daftar Asesor |
+| Manajer Mutu | Sistem manajemen mutu, audit internal, kaji ulang manajemen | Panduan Mutu, Laporan AI/KUM |
+| Komite Skema | Validasi skema (industri, profesi, regulator, akademisi) | BA Validasi Skema |
+| Asesor Kompetensi (ASKOM) | Pelaksana asesmen kompetensi peserta | FR.IA, FR.AK, FR.MAPA |
+| Pengelola TUK | Penyediaan sarana uji & event log | BA Verifikasi TUK, Logbook |
+| Asesor Lisensi BNSP | Penilai eksternal: Full Assessment & Witness | Laporan Asesmen Lisensi, NCR |
+
+## 3. Tahap 1 — Pengajuan Skema Sertifikasi
+
+### 3.1 Tujuan
+
+Mengajukan **skema sertifikasi** kepada BNSP sebagai dasar ruang lingkup lisensi yang akan diaudit.
+
+### 3.2 Input Wajib
+
+- SK Pendirian LSP & Akta Notaris (P3) atau SK Pembentukan internal (P1/P2).
+- **Untuk LSP Konstruksi**: Surat Rekomendasi Menteri PU c.q. LPJK (SE LPJK 02/2023).
+- SKKNI / Standar Internasional / Standar Khusus rujukan skema.
+- SK Komite Skema + BA penyusunan.
+
+### 3.3 Aktivitas
+
+1. Susun **Skema Sertifikasi** mengacu **Pedoman BNSP 210-2017** — struktur: ruang lingkup, paket UK, persyaratan dasar, proses sertifikasi, biaya, kode etik.
+2. Validasi skema oleh **Komite Skema** → terbit **Berita Acara Validasi Skema**.
+3. Susun **MUK (Materi Uji Kompetensi)** per skema (FR.IA.01–11) sesuai metode asesmen.
+4. Lengkapi **dokumen mutu LSP** (≥ 29 dokumen wajib BNSP):
+    - Panduan Mutu (Pedoman 201)
+    - Prosedur: Sertifikasi, Banding, Keluhan, Ketidakberpihakan, Kerahasiaan
+    - Daftar Asesor + sertifikat Met.000 + RCC aktif
+    - Daftar TUK (Sewaktu / Tempat Kerja / Mandiri) + BA verifikasi TUK
+    - Struktur organisasi & uraian tugas
+    - Rencana keuangan & keberlanjutan
+5. Submit **Permohonan + dokumen** via portal BNSP.
+
+### 3.4 Output
+
+- Nomor Registrasi Permohonan dari BNSP
+- Tanda terima dokumen
+
+### 3.5 Form Kerja Standar
+
+| **Kode** | **Nama Form** | **Pengisi** |
+| --- | --- | --- |
+| F-LSP-01 | Surat Permohonan Lisensi BNSP | Ketua LSP |
+| F-LSP-02 | Daftar Skema yang Diajukan | Manajer Sertifikasi |
+| F-LSP-03 | Berita Acara Validasi Skema | Ketua Komite Skema |
+| F-LSP-04 | Checklist Kelengkapan Dokumen Permohonan | Manajer Mutu |
+
+## 4. Tahap 2 — Verifikasi Skema (Pra-Asesmen / Desk Review)
+
+### 4.1 Tujuan
+
+BNSP memastikan **kelengkapan & kelayakan** skema dan dokumen mutu sebelum penjadwalan asesmen lapangan.
+
+### 4.2 Pelaksana
+
+**Tim Verifikator BNSP** — kaji dokumen, terbitkan **Catatan Tindak Lanjut Pra-Asesmen (CTLP)**.
+
+### 4.3 Aktivitas
+
+1. BNSP menerbitkan **Surat Penugasan Verifikator**.
+2. Verifikator menelaah:
+    - Kelengkapan dokumen mutu (Pedoman 201)
+    - Kesesuaian skema dengan Pedoman 210 + acuan SKKNI/standar
+    - Konsistensi MUK terhadap unit kompetensi
+    - Status asesor (Met.000 aktif, RCC, jumlah memadai per subklasifikasi)
+    - Verifikasi awal TUK (sarana, event log, kerahasiaan)
+3. Terbitkan **Laporan Verifikasi Skema** + daftar temuan.
+4. LSP **tindakan perbaikan** dalam tenggat (umumnya 14–30 hari kerja).
+5. Verifikator **review ulang** sampai dinyatakan **memenuhi syarat** untuk Full Assessment.
+
+### 4.4 Kriteria Lulus Tahap Verifikasi
+
+- Seluruh temuan **mayor closed**.
+- Temuan **minor** boleh dibawa ke Full Assessment dengan rencana perbaikan.
+- Skema & MUK final di-*freeze* (tidak boleh berubah saat audit).
+
+### 4.5 Form Kerja Standar
+
+| **Kode** | **Nama Form** | **Pengisi** |
+| --- | --- | --- |
+| F-LSP-05 | Laporan Verifikasi Skema (Desk Review) | Verifikator BNSP |
+| F-LSP-06 | CAR — Corrective Action Register | Manajer Mutu LSP |
+| F-LSP-07 | BA Penutupan Temuan Pra-Asesmen | Verifikator + Ketua LSP |
+
+## 5. Tahap 3 — Full Assessment
+
+### 5.1 Tujuan
+
+Audit menyeluruh ke kantor LSP untuk memverifikasi **implementasi sistem mutu, skema, kompetensi personel, dan TUK** sesuai Pedoman 201 & SNI ISO/IEC 17024.
+
+### 5.2 Tim Asesor Lisensi BNSP
+
+- Ketua Tim Asesor Lisensi
+- Anggota teknis (sesuai bidang skema)
+- Observer BNSP (opsional)
+
+### 5.3 Aktivitas
+
+1. **Opening meeting** — penyampaian rencana audit, ruang lingkup, kriteria.
+2. **Document audit on-site** — verifikasi dokumen vs rekaman aktual.
+3. **Wawancara personel inti** — Ketua LSP, Manajer Sertifikasi, Manajer Mutu, Komite Skema, Asesor.
+4. **Audit silang** terhadap:
+    - Prosedur sertifikasi (penerimaan asesi → asesmen → keputusan → surveilans → banding/keluhan)
+    - Ketidakberpihakan & manajemen konflik kepentingan
+    - Manajemen kontrak, finansial, kerahasiaan data
+    - Sistem informasi & integrasi (SIKI/SIJK untuk LSP konstruksi)
+5. **Verifikasi TUK** — kunjungan fisik ke ≥ 1 TUK utama.
+6. **Closing meeting** — sampaikan temuan sementara (mayor / minor / observasi).
+7. LSP **tindakan perbaikan** dipantau via CAR.
+
+### 5.4 Klasifikasi Temuan
+
+| **Kelas** | **Definisi** | **Tenggat Penyelesaian** |
+| --- | --- | --- |
+| Mayor | Tidak terpenuhinya klausul kritis Pedoman 201/210 yang berdampak pada hasil sertifikasi | ≤ 30 hari kerja, **sebelum Witness** |
+| Minor | Penyimpangan tidak kritis namun perlu diperbaiki | ≤ 60 hari kerja |
+| Observasi | Saran peningkatan | Surveilans berikutnya |
+
+### 5.5 Form Kerja Standar
+
+| **Kode** | **Nama Form** | **Pengisi** |
+| --- | --- | --- |
+| F-LSP-08 | Audit Plan Full Assessment | Ketua Tim Asesor BNSP |
+| F-LSP-09 | BA Opening / Closing Meeting | Sekretaris Tim |
+| F-LSP-10 | Checklist Audit (Klausul Pedoman 201) | Asesor Lisensi |
+| F-LSP-11 | Laporan Verifikasi TUK | Asesor Lisensi |
+| F-LSP-12 | Daftar Temuan (NCR) | Asesor Lisensi |
+| F-LSP-13 | Bukti Tindak Lanjut + Verifikasi Penutupan | Manajer Mutu LSP + Asesor |
+
+## 6. Tahap 4 — Witness Assessment
+
+### 6.1 Tujuan
+
+Mengamati **pelaksanaan asesmen kompetensi nyata** terhadap asesi, untuk membuktikan bahwa skema & MUK diimplementasikan secara konsisten, kompeten, dan tidak berpihak.
+
+### 6.2 Persyaratan Penjadwalan
+
+- Tahap Full Assessment **mayor closed**.
+- LSP menjadwalkan **uji kompetensi riil** (bukan simulasi) dengan jumlah asesi minimum sesuai ketentuan BNSP per skema.
+- TUK siap operasional + asesor terjadwal.
+
+### 6.3 Aktivitas Witness
+
+1. Asesor Lisensi **mengamati tanpa intervensi** seluruh siklus asesmen:
+    - Verifikasi identitas asesi
+    - Review FR.APL-01 & FR.APL-02
+    - Konsultasi pra-asesmen FR.AK-01
+    - Pelaksanaan uji metode FR.IA.01–11
+    - Pengambilan keputusan FR.AK-02
+    - Umpan balik FR.AK-03
+    - Penanganan banding (jika ada) FR.AK-04
+    - Pelaporan ke LSP FR.AK-05 & review FR.AK-06
+2. Verifikasi **kerahasiaan MUK** (penyimpanan, distribusi, pemusnahan).
+3. Verifikasi **kompetensi asesor** vs skema yang diuji (kesesuaian RCC).
+4. Penyusunan **Laporan Witness** + temuan tambahan (jika ada).
+
+### 6.4 Indikator Lulus Witness
+
+- Asesor menerapkan **VATM** (Valid, Authentic, Terkini, Memadai).
+- Konsistensi keputusan antar-asesor.
+- Tidak ada konflik kepentingan terdeteksi.
+- Rekaman lengkap & dapat ditelusuri (audit trail).
+
+### 6.5 Form Kerja Standar
+
+| **Kode** | **Nama Form** | **Pengisi** |
+| --- | --- | --- |
+| F-LSP-14 | Witness Plan | Asesor Lisensi BNSP |
+| F-LSP-15 | Lembar Observasi Witness per Asesor / per Metode | Asesor Lisensi |
+| F-LSP-16 | Laporan Witness Assessment | Ketua Tim Asesor |
+| F-LSP-17 | Daftar Hadir & Identitas Asesi (terverifikasi) | TUK / Manajer Sertifikasi |
+
+## 7. Tahap 5 — Penetapan Lisensi
+
+### 7.1 Aktivitas
+
+1. Tim Asesor Lisensi mengajukan **rekomendasi** ke BNSP berdasarkan hasil Full Assessment + Witness.
+2. **Rapat Pleno BNSP** memutuskan: **diberikan / ditolak / ditunda**.
+3. Bila disetujui:
+    - Diterbitkan **SK Ketua BNSP** (`KEP-…/BNSP/…/Tahun`)
+    - Diterbitkan **Sertifikat Lisensi LSP** — masa berlaku **5 tahun**
+    - Nomor Lisensi format: `BNSP-LSP-XXXX-ID`
+4. **Pencatatan publik** di [bnsp.go.id/lsp](http://bnsp.go.id/lsp).
+5. Untuk LSP konstruksi: **Pencatatan di LPJK / SIKI** sesuai SE LPJK 02/2023.
+6. **Penandatanganan Pakta Integritas & Komitmen** oleh Ketua LSP.
+
+### 7.2 Pasca-Penetapan
+
+| **Aktivitas** | **Frekuensi** | **Output** |
+| --- | --- | --- |
+| Surveilans BNSP | Tahunan | Laporan Surveilans |
+| Monev LPJK (LSP konstruksi) | Tahunan | Laporan Monev |
+| Audit Internal & Kaji Ulang Manajemen | ≥ 1×/tahun | Laporan AI / Notulen KUM |
+| Penambahan Ruang Lingkup Skema | Sesuai kebutuhan | Asesmen tambahan + adendum lisensi |
+| Resertifikasi Lisensi | Tiap 5 tahun, mulai ≤ 6 bulan sebelum jatuh tempo | SK Lisensi baru |
+
+### 7.3 Form Kerja Standar
+
+| **Kode** | **Nama Form** | **Pengisi** |
+| --- | --- | --- |
+| F-LSP-18 | Rekomendasi Tim Asesor ke BNSP | Ketua Tim Asesor |
+| F-LSP-19 | Notulen Rapat Pleno BNSP | Sekretariat BNSP |
+| F-LSP-20 | Pakta Integritas & Komitmen Ketua LSP | Ketua LSP |
+| F-LSP-21 | Register Sertifikat Lisensi & Tanggal Jatuh Tempo | Manajer Mutu |
+
+## 8. Master Checklist Kesiapan Lisensi
+
+### 8.1 Dokumen Mutu (Pedoman BNSP 201)
+
+- [ ]  Panduan Mutu LSP
+- [ ]  Prosedur Sertifikasi
+- [ ]  Prosedur Banding & Keluhan
+- [ ]  Prosedur Ketidakberpihakan & Konflik Kepentingan
+- [ ]  Prosedur Kerahasiaan
+- [ ]  Prosedur Pengendalian Dokumen & Rekaman
+- [ ]  Prosedur Audit Internal & Kaji Ulang Manajemen
+- [ ]  Prosedur Pengelolaan Risiko
+- [ ]  Prosedur Surveilans Pemegang Sertifikat
+
+### 8.2 Skema & MUK (Pedoman 210)
+
+- [ ]  Skema Sertifikasi divalidasi Komite Skema
+- [ ]  Paket Unit Kompetensi (Inti, Pilihan, Umum) lengkap
+- [ ]  MUK FR.IA.01–11 sesuai metode
+- [ ]  Bank soal terkendali & terkunci
+- [ ]  Standar biaya sertifikasi (Kepmen PUPR 713/2022 untuk konstruksi)
+
+### 8.3 SDM & TUK
+
+- [ ]  ≥ 2 Asesor per subklasifikasi (Met.000 aktif + RCC)
+- [ ]  Kode Etik ASKOM (SK BNSP 1224/2020) ditandatangani
+- [ ]  BA Verifikasi TUK (Sewaktu / Tempat Kerja / Mandiri)
+- [ ]  Sarana & prasarana sesuai skema
+
+### 8.4 Tata Kelola & Legalitas
+
+- [ ]  SK Pendirian / Akta Notaris LSP
+- [ ]  Struktur organisasi & uraian tugas
+- [ ]  **Surat Rekomendasi LPJK** *(khusus LSP konstruksi)*
+- [ ]  Rencana keuangan & keberlanjutan
+- [ ]  Asuransi profesi (jika dipersyaratkan)
+
+## 9. Tata Kelola Dokumentasi (Records Control)
+
+### 9.1 Prinsip
+
+- **Identifikasi unik** — semua form diberi kode `F-LSP-XX` + revisi + tanggal terbit.
+- **Akses terkendali** — hak baca/ubah dipisahkan per peran.
+- **Retensi** — minimal 5 tahun untuk rekaman sertifikasi; **3 tahun** untuk event log TUK; permanen untuk SK Lisensi.
+- **Audit trail** — semua perubahan dicatat (siapa, kapan, mengapa).
+
+### 9.2 Struktur Folder Rekomendasi
+
+```
+/01-Legalitas-LSP
+/02-Dokumen-Mutu
+	/Panduan-Mutu
+	/Prosedur
+	/Formulir-Master
+/03-Skema-Sertifikasi
+	/<Nama-Skema>
+		/Skema
+		/MUK
+		/BA-Validasi
+/04-SDM
+	/Asesor
+	/Komite-Skema
+/05-TUK
+	/<Nama-TUK>
+		/Verifikasi
+		/Event-Log
+/06-Permohonan-Lisensi-BNSP
+	/Tahap-1-Pengajuan
+	/Tahap-2-Verifikasi
+	/Tahap-3-Full-Assessment
+	/Tahap-4-Witness
+	/Tahap-5-Penetapan
+/07-Operasional-Sertifikasi
+	/Asesi-<Tahun>
+/08-Surveilans-Audit-Internal
+/09-Pengaduan-Banding
+/10-Resertifikasi-Lisensi
+```
+
+### 9.3 Penomoran Dokumen
+
+| **Pola** | **Contoh** | **Keterangan** |
+| --- | --- | --- |
+| `PM-LSP-XX-Rev.YY` | PM-LSP-01-Rev.02 | Panduan Mutu |
+| `PR-LSP-XX-Rev.YY` | PR-LSP-03-Rev.01 | Prosedur |
+| `F-LSP-XX-Rev.YY` | F-LSP-12-Rev.00 | Formulir |
+| `SKM-<KODE>-Rev.YY` | SKM-AHLI-K3-Rev.01 | Skema Sertifikasi |
+| `MUK-<KODE>-Rev.YY` | MUK-AHLI-K3-Rev.01 | Materi Uji Kompetensi |
+
+## 10. RACI Matrix Proses Lisensi
+
+| **Aktivitas** | Ketua LSP | Manajer Sertifikasi | Manajer Mutu | Komite Skema | Asesor / TUK | BNSP |
+| --- | --- | --- | --- | --- | --- | --- |
+| Penyusunan Skema & MUK | A | R | C | C | C | I |
+| Validasi Skema | A | C | C | R | I | I |
+| Pengajuan Permohonan | R/A | C | C | I | I | I |
+| Verifikasi Skema (Desk Review) | I | C | C | I | I | R/A |
+| Tindak Lanjut Temuan Pra-Asesmen | A | R | R | C | C | I |
+| Full Assessment | I | C | C | C | C | R/A |
+| Witness Assessment | I | C | I | I | R | A |
+| Penetapan Lisensi | I | I | I | I | I | R/A |
+| Surveilans Tahunan | A | R | R | C | C | R |
+
+<aside>
+💡
+
+**R** = Responsible · **A** = Accountable · **C** = Consulted · **I** = Informed
+
+</aside>
+
+## 11. KPI Sistem Mutu LSP
+
+| **KPI** | **Target** | **Frekuensi** |
+| --- | --- | --- |
+| Waktu pemrosesan permohonan asesi (terima → keputusan) | ≤ 30 hari kerja | Bulanan |
+| Tingkat kelulusan asesmen | Konsisten 70–90 % | Per skema |
+| Banding ditangani tepat waktu | 100 % ≤ 14 hari kerja | Per kasus |
+| Pengaduan ditangani tepat waktu | 100 % ≤ 14 hari kerja | Per kasus |
+| Temuan surveilans BNSP — Mayor | 0 | Tahunan |
+| Audit internal dilaksanakan | ≥ 1×/tahun, seluruh klausul | Tahunan |
+| RCC asesor aktif | 100 % | Tahunan |
+| Pemutakhiran skema saat SKKNI direvisi | ≤ 90 hari setelah revisi | Per perubahan |
+
+## 12. Risiko Umum & Mitigasi
+
+| **Risiko** | **Dampak** | **Mitigasi** |
+| --- | --- | --- |
+| Skema tidak konsisten dengan SKKNI | Verifikasi gagal, lisensi tertunda | Pemetaan UK ↔ KUK eksplisit; review Komite Skema |
+| Asesor kurang / tidak aktif RCC | Tidak lulus Full Assessment | Program kaderisasi asesor; jadwal RCC tahunan |
+| TUK tidak siap saat Witness | Reschedule + biaya tambahan | Pre-witness simulation; verifikasi TUK 2 minggu sebelumnya |
+| Bocornya MUK | Pencabutan lisensi | Bank soal terkunci; rotasi soal; perjanjian kerahasiaan |
+| Konflik kepentingan asesor–asesi | Temuan mayor | Deklarasi COI per asesmen; matriks konflik kepentingan |
+| Rekomendasi LPJK kedaluwarsa (LSP konstruksi) | Permohonan ditolak | Tracker masa berlaku; perpanjangan ≥ 90 hari sebelum jatuh tempo |
+
+## 13. Referensi Regulasi
+
+- **UU No. 13 Tahun 2003** — Ketenagakerjaan
+- **PP No. 10 Tahun 2018** — Kelembagaan BNSP
+- **PP No. 23 Tahun 2004** — BNSP
+- **Pedoman BNSP 201-2014** — Persyaratan Umum LSP
+- **Pedoman BNSP 202-2014** — Pembentukan LSP
+- **Pedoman BNSP 210-2017** — Skema Sertifikasi
+- **Pedoman BNSP 301-2013 / 302 / 305** — Asesmen, Sertifikat, Uji
+- **SK Ketua BNSP No. 1224/BNSP/VII/2020** — Kode Etik ASKOM
+- **SNI ISO/IEC 17024** — LSP Person
+- **SE LPJK No. 02/SE/LPJK/2023** *(LSP konstruksi)* — Rekomendasi Lisensi LSP
+- **Kepmen PUPR No. 713/KPTS/M/2022** *(LSP konstruksi)* — Biaya Sertifikasi
+
+<aside>
+📝
+
+**Catatan revisi.** Dokumen ini bersifat *living document*. Perbarui section terkait setiap kali ada perubahan Pedoman BNSP, SE LPJK, SKKNI, atau struktur LSP. Catat perubahan pada log revisi di akhir dokumen.
+
+</aside>
+
+## 14. Log Revisi
+
+| **Rev.** | **Tanggal** | **Perubahan** | **Disusun** | **Disahkan** |
+| --- | --- | --- | --- | --- |
+| 00 | 2026-04-27 | Penerbitan awal | Manajer Mutu | Ketua LSP |
+
+## 15. Timeline Indikatif (Gantt Bulanan)
+
+```mermaid
+gantt
+	title Timeline Lisensi LSP BNSP (skenario ideal 12 bulan)
+	dateFormat  YYYY-MM
+	axisFormat %b %y
+	section Persiapan Internal
+	Dokumen Mutu & Skema             :a1, 2026-05, 3M
+	Validasi Komite Skema            :a2, after a1, 1M
+	Rekrut & Sertifikasi Asesor      :a3, 2026-05, 4M
+	Verifikasi TUK Internal          :a4, 2026-07, 2M
+	section Tahap 1 — Pengajuan
+	Submit Permohonan + Dokumen      :b1, 2026-09, 0.5M
+	section Tahap 2 — Verifikasi
+	Desk Review BNSP                 :c1, after b1, 1M
+	Corrective Action LSP            :c2, after c1, 1M
+	section Tahap 3 — Full Assessment
+	Audit On-Site                    :d1, after c2, 0.5M
+	Corrective Action Mayor          :d2, after d1, 1M
+	section Tahap 4 — Witness
+	Pelaksanaan Witness              :e1, after d2, 0.5M
+	Corrective Action (jika ada)     :e2, after e1, 0.5M
+	section Tahap 5 — Penetapan
+	Rapat Pleno BNSP                 :f1, after e2, 0.5M
+	Penerbitan SK & Sertifikat       :f2, after f1, 0.5M
+```
+
+## 16. Lampiran A — Template F-LSP-01: Surat Permohonan Lisensi BNSP
+
+<aside>
+📄
+
+Cetak di kop surat resmi LSP. Tanda tangan basah Ketua LSP + stempel.
+
+</aside>
+
+Nomor : ........./LSP-...../[Bulan-Romawi]/[Tahun]
+
+Lampiran : 1 (satu) berkas
+
+Perihal : **Permohonan Lisensi LSP**
+
+Kepada Yth.
+
+Ketua Badan Nasional Sertifikasi Profesi (BNSP)
+
+di Jakarta
+
+Dengan hormat,
+
+Dalam rangka penyelenggaraan sertifikasi kompetensi profesi sesuai amanat **PP No. 10 Tahun 2018**, kami yang bertanda tangan di bawah ini:
+
+| Nama LSP | : ............................................................ | Kategori | : LSP P1 / P2 / P3 *(coret salah satu)* |
+| --- | --- | --- | --- |
+| Pembentuk | : ............................................................ | Alamat | : ............................................................ |
+| Telepon / Email | : ............................................................ | Nama Ketua LSP | : ............................................................ |
+
+Dengan ini mengajukan permohonan **Lisensi LSP** kepada BNSP untuk ruang lingkup skema sebagai berikut:
+
+1. ........................................................
+2. ........................................................
+3. ........................................................
+
+Bersama surat ini terlampir dokumen pendukung sesuai **Pedoman BNSP 201-2014** dan checklist kelengkapan.
+
+Demikian permohonan ini kami sampaikan. Atas perhatian dan kerja sama Bapak/Ibu, kami ucapkan terima kasih.
+
+[Kota], [Tanggal] [Bulan] [Tahun]
+
+**Ketua LSP ......................**
+
+(........................................)
+
+## 17. Lampiran B — Template F-LSP-03: Berita Acara Validasi Skema
+
+**BERITA ACARA VALIDASI SKEMA SERTIFIKASI**
+
+Nomor : ........./KS/LSP-...../[Bulan]/[Tahun]
+
+Pada hari ini, ............... tanggal ............... bulan ............... tahun ..............., bertempat di ..............., telah dilaksanakan rapat **Komite Skema** untuk memvalidasi Skema Sertifikasi:
+
+| Judul Skema | : ............................................................ |
+| --- | --- |
+| Acuan | : SKKNI / Standar Khusus / Standar Internasional .............. |
+| Ruang Lingkup | : ............................................................ |
+
+**Hasil Validasi** *(centang)*
+
+- [ ]  Skema **disetujui** tanpa perbaikan
+- [ ]  Skema **disetujui dengan catatan** (lampirkan catatan)
+- [ ]  Skema **belum disetujui**, dikembalikan untuk revisi
+
+**Daftar Hadir Komite Skema**
+
+| **No.** | **Nama** | **Unsur** | **Tanda Tangan** | 1 |  | Industri / Profesi / Regulator / Akademisi |  |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 2 |  |  |  | 3 |  |  |  |
+| 4 |  |  |  | 5 |  |  |  |
+
+Demikian Berita Acara ini dibuat untuk dipergunakan sebagaimana mestinya.
+
+Ketua Komite Skema,
+
+(........................................)
+
+## 18. Lampiran C — Template F-LSP-06: Corrective Action Register (CAR)
+
+| **No.** | **Tgl Temuan** | **Sumber** | **Klausul / Ref.** | **Uraian Temuan** | **Kelas** | **Akar Penyebab** | **Tindakan Perbaikan** | **PIC** | **Target** | **Bukti** | **Status** | **Verifikator** |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 |  | Desk Review / Full Assessment / Witness / Audit Internal / Surveilans |  |  | Mayor / Minor / Observasi |  |  |  |  |  | Open / In Progress / Closed |  |
+| 2 |  |  |  |  |  |  |  |  |  |  |  |  |
+
+<aside>
+✅
+
+**Definisi Closed**: bukti tindak lanjut diterima & diverifikasi oleh Manajer Mutu (untuk audit internal) atau Asesor Lisensi (untuk audit BNSP) dengan tanda tangan & tanggal.
+
+</aside>
+
+## 19. Lampiran D — Template F-LSP-08: Audit Plan Full Assessment
+
+| **LSP yang Diaudit** | : ............................................................ | **Jenis Audit** | : Full Assessment Lisensi Baru / Perpanjangan / Penambahan Skema |
+| --- | --- | --- | --- |
+| **Tanggal** | : ............................................................ | **Lokasi** | : Kantor LSP & TUK ...................................... |
+| **Ruang Lingkup** | : Pedoman BNSP 201/210 + skema yang diajukan | **Kriteria Audit** | : Pedoman BNSP 201-2014, 210-2017, SNI ISO/IEC 17024 |
+
+**Tim Auditor**
+
+| **Nama** | **Peran** | **Bidang** |  | Ketua Tim |  |
+| --- | --- | --- | --- | --- | --- |
+|  | Anggota Teknis |  |  | Observer |  |
+
+**Jadwal**
+
+| **Waktu** | **Aktivitas** | **Auditee** | **Auditor** |
+| --- | --- | --- | --- |
+| 09.00 – 11.00 | Audit Sistem Mutu (Klausul Pedoman 201) | Manajer Mutu | Ketua Tim |
+| 13.30 – 15.00 | Audit SDM Asesor (Met.000, RCC) | Manajer Sertifikasi | Anggota Teknis |
+| 16.30 – 17.30 | Closing Meeting | Seluruh personel inti LSP | Tim |
+
+## 20. Lampiran E — Template F-LSP-12: Daftar Temuan (NCR)
+
+| **NCR No.** | **Klausul** | **Bukti Objektif** | **Pernyataan Ketidaksesuaian** | **Kelas** | **Tanggapan Auditee** | **Tindakan Perbaikan** | **Target Penutupan** | **Verifikasi Auditor** |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| NCR-001 | BNSP 201 § ... |  |  | Mayor / Minor / Observasi |  |  |  | Closed / Open |
+| NCR-002 |  |  |  |  |  |  |  |  |
+
+Tanda tangan auditee menyatakan **menyetujui temuan** dan **berkomitmen** menindaklanjuti sesuai target.
+
+| **Auditor** | **Auditee (Ketua LSP / Manajer Mutu)** | 
+
+(....................) | 
+
+(....................) |
+| --- | --- | --- | --- |
+
+## 21. Lampiran F — Template F-LSP-14 & F-LSP-15: Witness Plan + Lembar Observasi
+
+### 21.1 F-LSP-14 — Witness Plan
+
+| **Skema yang di-Witness** | : ............................................................ |
+| --- | --- |
+| **TUK** | : ............................................................ |
+| **Asesor yang Diamati** | : 1) ............... 2) ............... |
+| **Asesor Lisensi BNSP** | : ............................................................ |
+
+### 21.2 F-LSP-15 — Lembar Observasi Witness
+
+| **No.** | **Aspek yang Diamati** | **Kriteria** | **Sesuai (Y/T)** | **Bukti / Catatan** |  |  |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | Verifikasi identitas asesi | KTP cocok dengan FR.APL-01 |  |  | 2 | Konsultasi pra-asesmen (FR.AK-01) | Persetujuan asesi terdokumentasi |  |  |
+| 3 | Penerapan metode asesmen | Konsisten dengan MAPA & MUK |  |  | 4 | Prinsip VATM dipenuhi | Bukti Valid, Authentic, Terkini, Memadai |  |  |
+| 5 | Keputusan asesmen | Berbasis bukti, didokumentasikan FR.AK-02 |  |  | 6 | Umpan balik (FR.AK-03) | Diberikan kepada asesi |  |  |
+| 7 | Penanganan banding | Mekanisme dijelaskan & tersedia |  |  | 8 | Kerahasiaan MUK | Penyimpanan, distribusi, pemusnahan terkendali |  |  |
+| 9 | Ketidakberpihakan | Tidak ada konflik kepentingan asesor–asesi |  |  | 10 | Kesesuaian sarana TUK | Sesuai persyaratan skema |  |  |
+
+**Kesimpulan Witness:**
+
+- [ ]  **Sesuai** — dapat direkomendasikan untuk lisensi
+- [ ]  **Sesuai dengan catatan minor** — perlu tindak lanjut
+- [ ]  **Tidak sesuai** — perlu witness ulang
+
+## 22. Lampiran G — Template F-LSP-20: Pakta Integritas & Komitmen Ketua LSP
+
+**PAKTA INTEGRITAS & KOMITMEN PIMPINAN LSP**
+
+Saya yang bertanda tangan di bawah ini:
+
+| Nama | : ............................................................ | Jabatan | : Ketua LSP ............................................................ |
+| --- | --- | --- | --- |
+| NIK | : ............................................................ | Alamat | : ............................................................ |
+
+dalam rangka pelaksanaan tugas dan tanggung jawab sebagai Ketua LSP yang dilisensi oleh BNSP, dengan ini **menyatakan dan berkomitmen** untuk:
+
+1. Menyelenggarakan sertifikasi kompetensi sesuai **Pedoman BNSP 201, 210, 301/302/305** dan **SNI ISO/IEC 17024**.
+2. Menjaga **ketidakberpihakan** dan **bebas dari konflik kepentingan** dalam seluruh proses sertifikasi.
+3. Menjamin **kerahasiaan** data asesi, MUK, dan rekaman asesmen.
+4. Menerapkan **sistem manajemen mutu** secara konsisten dan berkelanjutan.
+5. Menindaklanjuti hasil **surveilans BNSP** dan **audit internal** secara tepat waktu.
+6. Tidak melakukan praktik **pemalsuan, suap, gratifikasi, atau penyalahgunaan wewenang**.
+7. Bersedia menerima **sanksi** sesuai ketentuan apabila terbukti melanggar pakta ini.
+8. Untuk LSP konstruksi: **patuh pada SE LPJK No. 02/SE/LPJK/2023** dan ketentuan terkait.
+
+Demikian Pakta Integritas ini saya buat dengan penuh kesadaran dan tanpa paksaan dari pihak manapun.
+
+[Kota], [Tanggal] [Bulan] [Tahun]
+
+Materai Rp10.000
+
+(........................................)
+
+Ketua LSP ............................
+
+## 23. Lampiran H — Quick Reference Card (Cetak / Tempel di Ruang Mutu)
+
+<aside>
+📥
+
+**TAHAP 1 — Pengajuan**
+
+- Skema + MUK final
+- Dokumen mutu lengkap
+- Asesor & TUK siap
+- Submit via portal BNSP
+</aside>
+
+<aside>
+🔍
+
+**TAHAP 2 — Verifikasi**
+
+- Desk Review oleh BNSP
+- Tutup mayor ≤ 30 hari kerja
+- Skema di-*freeze*
+</aside>
+
+<aside>
+📊
+
+**TAHAP 3 — Full Assessment**
+
+- Audit on-site + TUK
+- Wawancara personel inti
+- Tutup mayor sebelum Witness
+</aside>
+
+<aside>
+👁️
+
+**TAHAP 4 — Witness**
+
+- Uji kompetensi RIIL
+- Asesor menerapkan VATM
+- Audit trail lengkap
+</aside>
+
+<aside>
+🏆
+
+**TAHAP 5 — Penetapan**
+
+- Rapat Pleno BNSP
+- SK + Sertifikat (5 thn)
+- Pakta Integritas
+- Pencatatan publik & SIKI
+</aside>
+
+<aside>
+🔄
+
+**PASCA-LISENSI**
+
+- Surveilans BNSP tahunan
+- Monev LPJK tahunan
+- Audit Internal & KUM
+- Resertifikasi T-6 bulan
+</aside>
+
+<aside>
+✅
+
+**Cara pakai dokumen ini:** duplikasi setiap lampiran ke folder `/02-Dokumen-Mutu/Formulir-Master`, kunci versi master, lalu gunakan **salinan terkendali** untuk pengisian operasional. Setiap perbaikan dicatat di **Log Revisi** (Section 14).
+
+</aside>

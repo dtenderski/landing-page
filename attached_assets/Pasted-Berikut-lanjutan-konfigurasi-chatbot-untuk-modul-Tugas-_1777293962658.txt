@@ -1,0 +1,812 @@
+Berikut **lanjutan konfigurasi chatbot** untuk modul **Tugas, Tanggung Jawab, dan Peran Asesi, TUK, Asesor Kompetensi, dan Manajemen LSP** dalam proses **Sertifikasi Nirkertas** dan **AJJ Nirkertas**.
+
+Struktur ini melanjutkan pola chatbot-builder dari konfigurasi Manajemen Pelaksanaan terlampir: menggunakan **intents, response templates, role-based flow, checklist, assessment, scenario practice, fallback, dan guardrails**.  Rujukan publik yang relevan: halaman download BNSP memuat Surat Edaran tentang **Sertifikasi Jarak Jauh dan Penggunaan Nirkertas**, dan isi SE tersebut menegaskan bahwa LSP tidak boleh melaksanakan sertifikasi jarak jauh serta nirkertas sebelum memperoleh persetujuan dari BNSP. ([BNSP][1])
+
+---
+
+```yaml id="role_based_chatbot_module_ajj_nirkertas"
+# MODUL LANJUTAN
+# Role-Based Duties and Responsibilities
+# SKK Coach — AJJ Nirkertas
+
+module:
+  id: role_responsibility_ajj_nirkertas
+  title: "Tugas, Tanggung Jawab, dan Peran dalam Sertifikasi Nirkertas dan AJJ Nirkertas"
+  purpose: >
+    Membantu pengguna memahami peran masing-masing pihak dalam proses
+    sertifikasi nirkertas dan asesmen jarak jauh nirkertas, mulai dari
+    pendaftaran, persiapan, pelaksanaan, pelaporan, keputusan sertifikasi,
+    sampai umpan balik dan banding.
+  target_users:
+    - Asesi
+    - TUK
+    - Asesor Kompetensi
+    - Manajemen LSP
+```
+
+---
+
+## 1. Menu Pemilihan Peran
+
+```yaml id="role_selection_menu"
+flow:
+  id: role_responsibility_menu
+  title: "Pilih Peran Anda"
+  bot_message: >
+    Untuk menjelaskan tugas dan tanggung jawab secara tepat, pilih peran Anda
+    dalam proses Sertifikasi Nirkertas atau AJJ Nirkertas.
+  options:
+    - label: "Saya Asesi"
+      next_node: role_asesi_overview
+    - label: "Saya TUK"
+      next_node: role_tuk_overview
+    - label: "Saya Asesor Kompetensi"
+      next_node: role_asesor_overview
+    - label: "Saya Manajemen/Admin LSP"
+      next_node: role_lsp_management_overview
+    - label: "Lihat semua peran"
+      next_node: all_roles_summary
+    - label: "Bandingkan tanggung jawab antar peran"
+      next_node: responsibility_comparison_matrix
+```
+
+---
+
+# 2. Flow Peran Asesi
+
+```yaml id="asesi_flow"
+node:
+  id: role_asesi_overview
+  title: "Peran Asesi"
+  type: "role_explanation"
+  bot_message: >
+    Asesi adalah peserta sertifikasi yang mengajukan permohonan, menyiapkan
+    dokumen, mengisi asesmen mandiri, mengikuti asesmen, memberikan bukti
+    kompetensi, menerima hasil resmi, dan dapat mengajukan banding sesuai
+    prosedur LSP.
+    
+    Dalam Sertifikasi Nirkertas, asesi bertanggung jawab memastikan semua
+    dokumen digital benar, sah, lengkap, dan terbaca.
+    
+    Dalam AJJ Nirkertas, asesi juga wajib memastikan kesiapan perangkat,
+    koneksi internet, ruang asesmen, identitas diri, serta menjaga integritas
+    proses asesmen jarak jauh.
+  quick_replies:
+    - "Tugas sebelum asesmen"
+    - "Tugas saat asesmen"
+    - "Tugas setelah asesmen"
+    - "Checklist Asesi"
+    - "Simulasi kesiapan Asesi"
+
+asesi_duties:
+  sebelum_asesmen:
+    sertifikasi_nirkertas:
+      - mengisi formulir permohonan sertifikasi digital
+      - memilih skema atau jabatan sertifikasi yang sesuai
+      - mengunggah dokumen identitas dan persyaratan
+      - mengisi asesmen mandiri secara jujur
+      - mengunggah bukti kompetensi atau portofolio
+      - membaca rencana asesmen
+      - menyetujui persetujuan asesmen digital
+    ajj_nirkertas:
+      - memastikan laptop/PC dapat digunakan
+      - memastikan kamera dan mikrofon berfungsi
+      - memastikan koneksi internet stabil
+      - menyiapkan ruang yang terang, tenang, dan minim gangguan
+      - menyiapkan identitas diri untuk verifikasi
+      - memahami tata tertib asesmen jarak jauh
+      - menyimpan kontak admin LSP atau asesor untuk keadaan darurat
+
+  saat_asesmen:
+    sertifikasi_nirkertas:
+      - mengikuti instruksi asesor
+      - memberikan jawaban dan bukti sesuai instrumen asesmen
+      - memastikan semua isian digital tersimpan
+      - bertanya jika ada instruksi yang belum jelas
+    ajj_nirkertas:
+      - hadir tepat waktu di platform asesmen
+      - menyalakan kamera dan mikrofon sesuai arahan
+      - menunjukkan identitas diri
+      - mengikuti verifikasi lingkungan asesmen
+      - menjaga kejujuran dan tidak menerima bantuan tidak sah
+      - segera melaporkan kendala teknis
+      - tidak meninggalkan asesmen tanpa izin asesor
+
+  setelah_asesmen:
+    sertifikasi_nirkertas:
+      - mengisi umpan balik asesmen
+      - menunggu keputusan resmi dari LSP
+      - menyimpan bukti komunikasi resmi
+      - mengajukan banding jika diperlukan
+    ajj_nirkertas:
+      - memastikan proses asesmen telah selesai sesuai arahan
+      - mencatat kendala teknis jika terjadi
+      - melengkapi dokumen tambahan bila diminta secara resmi
+      - mengikuti prosedur banding jarak jauh jika diperlukan
+```
+
+---
+
+## Response Template untuk Asesi
+
+```yaml id="asesi_response_templates"
+response_template:
+  id: asesi_before_assessment_response
+  text: >
+    Sebelum asesmen, tugas utama Asesi adalah memastikan data, dokumen,
+    asesmen mandiri, dan bukti kompetensi sudah lengkap secara digital.
+    Untuk AJJ Nirkertas, Asesi juga harus mengecek perangkat, koneksi internet,
+    kamera, mikrofon, ruang asesmen, dan identitas diri.
+    
+    Checklist cepat:
+    1. Form permohonan sudah diisi.
+    2. Dokumen persyaratan sudah diunggah.
+    3. Asesmen mandiri sudah diisi jujur.
+    4. Bukti kompetensi sudah disiapkan.
+    5. Kamera, mikrofon, dan internet sudah dites.
+    6. Ruang asesmen sudah siap.
+  quick_replies:
+    - "Cek kesiapan saya"
+    - "Checklist dokumen"
+    - "Panduan hari asesmen"
+    - "Kembali ke menu peran"
+```
+
+---
+
+# 3. Flow Peran TUK
+
+```yaml id="tuk_flow"
+node:
+  id: role_tuk_overview
+  title: "Peran TUK"
+  type: "role_explanation"
+  bot_message: >
+    TUK atau Tempat Uji Kompetensi berperan menyediakan dan memastikan
+    kesiapan sarana-prasarana uji kompetensi. Dalam proses nirkertas,
+    TUK mendukung dokumentasi fasilitas dan bukti kesiapan secara digital.
+    
+    Dalam AJJ Nirkertas, TUK dapat berperan sebagai lokasi pendukung,
+    penyedia fasilitas, atau pihak yang diverifikasi secara jarak jauh oleh LSP
+    sesuai SOP verifikasi TUK.
+  quick_replies:
+    - "Tugas TUK sebelum asesmen"
+    - "Tugas TUK saat asesmen"
+    - "Tugas TUK setelah asesmen"
+    - "Checklist kesiapan TUK"
+    - "Simulasi verifikasi TUK"
+
+tuk_duties:
+  sebelum_asesmen:
+    sertifikasi_nirkertas:
+      - menyediakan data profil TUK secara digital
+      - menyiapkan bukti sarana dan prasarana
+      - mendukung proses verifikasi TUK oleh LSP
+      - memastikan fasilitas sesuai skema sertifikasi
+      - memastikan dokumen TUK terdokumentasi
+    ajj_nirkertas:
+      - menyiapkan ruang asesmen jarak jauh bila asesi menggunakan fasilitas TUK
+      - memastikan koneksi internet, kamera, mikrofon, dan perangkat tersedia
+      - mengikuti verifikasi TUK jarak jauh
+      - menyediakan bukti visual/foto/video fasilitas
+      - menyiapkan prosedur jika terjadi kendala teknis
+
+  saat_asesmen:
+    sertifikasi_nirkertas:
+      - menjaga kesiapan fasilitas
+      - mendukung kebutuhan teknis proses asesmen
+      - memastikan fasilitas digunakan sesuai ketentuan
+    ajj_nirkertas:
+      - memastikan lingkungan asesmen tidak terganggu
+      - tidak memberikan bantuan tidak sah kepada asesi
+      - membantu penyelesaian kendala teknis fasilitas
+      - mencatat kejadian penting yang berkaitan dengan fasilitas
+
+  setelah_asesmen:
+    sertifikasi_nirkertas:
+      - menyimpan catatan penggunaan fasilitas
+      - menyampaikan laporan kendala kepada LSP jika ada
+      - mendukung audit atau peninjauan proses
+    ajj_nirkertas:
+      - menyimpan bukti dukungan TUK
+      - melaporkan kendala teknis
+      - mengikuti tindak lanjut LSP jika ada temuan
+```
+
+---
+
+## Checklist Kesiapan TUK
+
+```yaml id="tuk_readiness_checklist"
+checklist:
+  id: tuk_readiness_checklist
+  title: "Checklist Kesiapan TUK untuk Sertifikasi Nirkertas dan AJJ Nirkertas"
+  items:
+    profil_tuk:
+      - "Data TUK tersedia dan mutakhir"
+      - "Penanggung jawab TUK jelas"
+      - "Daftar fasilitas tersedia"
+      - "Dokumentasi fasilitas dalam bentuk foto/video tersedia"
+    sarana_prasarana:
+      - "Ruang asesmen layak"
+      - "Penerangan memadai"
+      - "Tidak bising atau mengganggu"
+      - "Perangkat pendukung tersedia"
+      - "Koneksi internet stabil"
+    dukungan_ajj:
+      - "Kamera dan mikrofon tersedia jika diperlukan"
+      - "Ada perangkat cadangan jika memungkinkan"
+      - "Ada prosedur kendala teknis"
+      - "Ada kontak admin LSP"
+    integritas:
+      - "Tidak ada bantuan tidak sah kepada asesi"
+      - "Lingkungan asesmen dapat dikontrol"
+      - "Dokumentasi kejadian penting dilakukan"
+```
+
+---
+
+# 4. Flow Peran Asesor Kompetensi
+
+```yaml id="asesor_flow"
+node:
+  id: role_asesor_overview
+  title: "Peran Asesor Kompetensi"
+  type: "role_explanation"
+  bot_message: >
+    Asesor Kompetensi bertanggung jawab melaksanakan asesmen sesuai skema,
+    metode, instrumen, dan prosedur LSP. Asesor menilai bukti kompetensi,
+    melakukan observasi/wawancara/uji praktik sesuai kebutuhan, menyusun
+    rekomendasi hasil asesmen, dan memberikan umpan balik.
+    
+    Dalam AJJ Nirkertas, asesor juga bertanggung jawab memverifikasi identitas,
+    memastikan lingkungan asesmen jarak jauh layak, menjaga integritas asesmen,
+    serta mencatat kendala teknis atau kejadian penting.
+  quick_replies:
+    - "Tugas asesor sebelum asesmen"
+    - "Tugas asesor saat asesmen"
+    - "Tugas asesor setelah asesmen"
+    - "Checklist asesor AJJ"
+    - "Simulasi kendala asesmen"
+
+asesor_duties:
+  sebelum_asesmen:
+    sertifikasi_nirkertas:
+      - meninjau rencana asesmen
+      - meninjau instrumen asesmen
+      - memeriksa asesmen mandiri asesi
+      - meninjau bukti kompetensi digital
+      - memastikan metode asesmen sesuai skema
+      - menjelaskan rencana asesmen kepada asesi
+    ajj_nirkertas:
+      - memastikan platform asesmen dapat digunakan
+      - mengecek jadwal, link, dan daftar asesi
+      - menyiapkan mekanisme verifikasi identitas
+      - menyiapkan mekanisme verifikasi lingkungan asesmen
+      - menyiapkan prosedur bila koneksi terputus
+      - memastikan rekaman asesmen berjalan sesuai SOP
+
+  saat_asesmen:
+    sertifikasi_nirkertas:
+      - melaksanakan asesmen sesuai instrumen
+      - mencatat jawaban dan bukti asesi
+      - menjaga objektivitas
+      - mengumpulkan bukti yang cukup dan relevan
+    ajj_nirkertas:
+      - memverifikasi identitas asesi
+      - memverifikasi lingkungan asesmen
+      - memberi instruksi yang jelas
+      - memantau integritas asesmen
+      - mencatat kendala teknis
+      - menghentikan atau menunda asesmen bila validitas proses terganggu
+
+  setelah_asesmen:
+    sertifikasi_nirkertas:
+      - mengevaluasi bukti asesmen
+      - menyusun rekomendasi hasil asesmen
+      - mengisi laporan asesmen digital
+      - memberikan umpan balik
+    ajj_nirkertas:
+      - memastikan rekaman asesmen tersimpan
+      - menyampaikan catatan kendala teknis
+      - menyerahkan laporan asesmen kepada LSP
+      - mendukung proses klarifikasi atau banding jika diminta
+```
+
+---
+
+## Template Feedback Asesor
+
+```yaml id="asesor_feedback_template"
+response_template:
+  id: asesor_feedback_guidance
+  text: >
+    Dalam memberikan umpan balik, Asesor sebaiknya menggunakan format:
+    
+    1. Bukti yang sudah memadai.
+    2. Bukti yang masih perlu dilengkapi.
+    3. Catatan terhadap proses asesmen.
+    4. Rekomendasi tindak lanjut.
+    
+    Contoh:
+    “Bukti pengalaman kerja Anda sudah relevan pada aspek pelaksanaan tugas.
+    Namun, bukti dokumentasi hasil pekerjaan masih perlu diperjelas. Silakan
+    lengkapi dengan laporan, foto pekerjaan, atau dokumen pendukung lain yang
+    dapat diverifikasi.”
+  quick_replies:
+    - "Contoh feedback asesi"
+    - "Checklist laporan asesor"
+    - "Kembali ke menu asesor"
+```
+
+---
+
+# 5. Flow Peran Manajemen LSP
+
+```yaml id="lsp_management_flow"
+node:
+  id: role_lsp_management_overview
+  title: "Peran Manajemen LSP"
+  type: "role_explanation"
+  bot_message: >
+    Manajemen LSP bertanggung jawab atas tata kelola sertifikasi, mulai dari
+    kebijakan, SOP, sistem aplikasi, penugasan asesor, verifikasi TUK,
+    pengendalian mutu, keamanan data, keputusan sertifikasi, audit internal,
+    pelaporan, umpan balik, dan banding.
+    
+    Untuk AJJ Nirkertas, Manajemen LSP harus memastikan pelaksanaan dilakukan
+    berdasarkan persetujuan, SOP, sistem, personil, rekaman, dan mekanisme
+    pengendalian mutu yang memadai.
+  quick_replies:
+    - "Tugas LSP sebelum asesmen"
+    - "Tugas LSP saat asesmen"
+    - "Tugas LSP setelah asesmen"
+    - "Checklist sistem LSP"
+    - "Checklist SOP LSP"
+    - "Simulasi audit kesiapan LSP"
+
+lsp_management_duties:
+  sebelum_asesmen:
+    sertifikasi_nirkertas:
+      - menetapkan kebijakan sertifikasi nirkertas
+      - menyediakan sistem aplikasi sertifikasi
+      - menetapkan admin dan hak akses
+      - membuka skema dan jadwal sertifikasi
+      - memverifikasi permohonan asesi
+      - menugaskan asesor
+      - memastikan instrumen asesmen tersedia secara digital
+    ajj_nirkertas:
+      - memastikan persetujuan pelaksanaan AJJ/Nirkertas dari BNSP jika diwajibkan
+      - menetapkan SOP AJJ
+      - menetapkan SOP verifikasi TUK jarak jauh
+      - menetapkan SOP banding jarak jauh
+      - melakukan uji coba sistem AJJ
+      - melakukan sosialisasi kepada asesor, admin, TUK, dan asesi
+      - memastikan rekaman dan keamanan data
+
+  saat_asesmen:
+    sertifikasi_nirkertas:
+      - memantau pelaksanaan administrasi sertifikasi
+      - memastikan sistem berjalan
+      - memberi dukungan admin kepada asesor dan asesi
+      - menangani kendala operasional
+    ajj_nirkertas:
+      - memantau pelaksanaan asesmen jarak jauh bila diperlukan
+      - memastikan rekaman asesmen tersimpan
+      - menangani eskalasi kendala teknis
+      - memastikan prosedur integritas asesmen berjalan
+      - mendokumentasikan kejadian penting
+
+  setelah_asesmen:
+    sertifikasi_nirkertas:
+      - menerima laporan dan rekomendasi asesor
+      - memproses keputusan sertifikasi sesuai prosedur
+      - menerbitkan hasil resmi
+      - mengelola umpan balik dan banding
+      - menyimpan dokumen digital
+    ajj_nirkertas:
+      - meninjau rekaman dan laporan jika diperlukan
+      - memastikan data asesmen tersimpan aman
+      - melakukan audit internal
+      - menyusun laporan pelaksanaan
+      - menindaklanjuti temuan perbaikan
+```
+
+---
+
+# 6. Matrix Percakapan: “Saya Harus Melakukan Apa?”
+
+```yaml id="dynamic_role_question_matrix"
+intent:
+  id: ask_my_responsibility
+  description: "User asks what they should do based on role."
+  sample_user_inputs:
+    - "Saya asesi, harus melakukan apa?"
+    - "Tugas TUK dalam AJJ apa?"
+    - "Apa tanggung jawab asesor?"
+    - "Admin LSP harus menyiapkan apa?"
+    - "Peran manajemen LSP dalam nirkertas apa?"
+  entities:
+    - role_name
+    - process_type
+  response_logic:
+    - if role_name == "Asesi" and process_type == "AJJ":
+        next_node: asesi_ajj_responsibility
+    - if role_name == "TUK" and process_type == "AJJ":
+        next_node: tuk_ajj_responsibility
+    - if role_name == "Asesor" and process_type == "Nirkertas":
+        next_node: asesor_nirkertas_responsibility
+    - if role_name == "Manajemen LSP":
+        next_node: lsp_management_responsibility
+    - default:
+        next_node: role_responsibility_menu
+```
+
+---
+
+# 7. Pertanyaan Asesmen Kesiapan per Peran
+
+## 7.1 Asesi
+
+```yaml id="asesi_readiness_assessment"
+assessment:
+  id: asesi_ajj_nirkertas_readiness
+  title: "Cek Kesiapan Asesi untuk AJJ Nirkertas"
+  scale:
+    0: "Belum siap"
+    1: "Perlu banyak perbaikan"
+    2: "Cukup siap"
+    3: "Siap"
+    4: "Sangat siap"
+  questions:
+    - "Saya sudah memahami skema sertifikasi yang saya ikuti."
+    - "Saya sudah mengisi permohonan sertifikasi digital."
+    - "Saya sudah mengunggah dokumen persyaratan."
+    - "Saya sudah mengisi asesmen mandiri dengan jujur."
+    - "Saya sudah menyiapkan bukti kompetensi digital."
+    - "Saya sudah mengetes kamera dan mikrofon."
+    - "Saya memiliki koneksi internet yang stabil."
+    - "Saya memiliki ruang asesmen yang tenang dan terang."
+    - "Saya memahami tata tertib AJJ."
+    - "Saya tahu harus menghubungi siapa jika terjadi kendala teknis."
+  result_template: >
+    Kesiapan Asesi Anda berada pada tingkat {{readiness_level}}.
+    Area yang sudah siap: {{strong_points}}.
+    Area yang perlu dilengkapi: {{weak_points}}.
+    Rekomendasi: {{recommended_actions}}.
+```
+
+## 7.2 TUK
+
+```yaml id="tuk_readiness_assessment"
+assessment:
+  id: tuk_ajj_nirkertas_readiness
+  title: "Cek Kesiapan TUK untuk AJJ Nirkertas"
+  questions:
+    - "Profil TUK sudah tersedia secara digital."
+    - "Dokumentasi fasilitas TUK sudah lengkap."
+    - "Ruang asesmen memenuhi kebutuhan skema."
+    - "Perangkat pendukung AJJ tersedia."
+    - "Koneksi internet di lokasi TUK stabil."
+    - "TUK siap mengikuti verifikasi jarak jauh."
+    - "Ada penanggung jawab teknis saat asesmen."
+    - "Ada prosedur penanganan kendala teknis."
+    - "TUK memahami larangan bantuan tidak sah kepada asesi."
+    - "TUK siap menyimpan dan melaporkan catatan kejadian."
+  result_template: >
+    Kesiapan TUK berada pada tingkat {{readiness_level}}.
+    Hal yang sudah memadai: {{strong_points}}.
+    Hal yang perlu diperbaiki: {{weak_points}}.
+```
+
+## 7.3 Asesor Kompetensi
+
+```yaml id="asesor_readiness_assessment"
+assessment:
+  id: asesor_ajj_nirkertas_readiness
+  title: "Cek Kesiapan Asesor untuk AJJ Nirkertas"
+  questions:
+    - "Saya sudah memahami SOP AJJ LSP."
+    - "Saya sudah memahami platform asesmen yang digunakan."
+    - "Saya sudah meninjau rencana asesmen."
+    - "Saya sudah meninjau instrumen asesmen."
+    - "Saya sudah meninjau asesmen mandiri asesi."
+    - "Saya tahu cara memverifikasi identitas asesi secara jarak jauh."
+    - "Saya tahu cara memverifikasi lingkungan asesmen."
+    - "Saya tahu prosedur jika koneksi asesi terputus."
+    - "Saya tahu cara mencatat kendala teknis."
+    - "Saya siap menyusun laporan asesmen digital."
+  result_template: >
+    Kesiapan Asesor berada pada tingkat {{readiness_level}}.
+    Fokus penguatan: {{weak_points}}.
+    Rekomendasi tindak lanjut: {{recommended_actions}}.
+```
+
+## 7.4 Manajemen LSP
+
+```yaml id="lsp_readiness_assessment"
+assessment:
+  id: lsp_ajj_nirkertas_readiness
+  title: "Cek Kesiapan Manajemen LSP untuk AJJ Nirkertas"
+  questions:
+    - "LSP memiliki kebijakan pelaksanaan sertifikasi nirkertas."
+    - "LSP memiliki SOP pelayanan sertifikasi jarak jauh."
+    - "LSP memiliki SOP pelaksanaan asesmen jarak jauh."
+    - "LSP memiliki SOP verifikasi TUK jarak jauh."
+    - "LSP memiliki SOP banding jarak jauh."
+    - "Sistem aplikasi mendukung permohonan sertifikasi digital."
+    - "Sistem mendukung asesmen mandiri digital."
+    - "Sistem mendukung persetujuan asesmen digital."
+    - "Sistem mendukung instrumen asesmen digital."
+    - "Sistem mendukung rekaman asesmen."
+    - "Sistem mendukung laporan asesmen digital."
+    - "Sistem memiliki pengaturan hak akses."
+    - "LSP memiliki mekanisme keamanan data dan backup."
+    - "LSP sudah melakukan uji coba sistem."
+    - "LSP memiliki mekanisme audit internal dan pelaporan."
+  result_template: >
+    Kesiapan Manajemen LSP berada pada tingkat {{readiness_level}}.
+    Kekuatan sistem: {{strong_points}}.
+    Celah kesiapan: {{weak_points}}.
+    Rekomendasi prioritas: {{recommended_actions}}.
+```
+
+---
+
+# 8. Skenario Latihan Berdasarkan Peran
+
+```yaml id="role_based_scenarios"
+scenario_menu:
+  id: role_based_scenario_menu
+  title: "Latihan Skenario Peran"
+  bot_message: >
+    Pilih skenario latihan sesuai peran Anda.
+  options:
+    - "Asesi: koneksi internet putus saat asesmen"
+    - "Asesi: dokumen bukti kompetensi belum lengkap"
+    - "TUK: verifikasi fasilitas jarak jauh"
+    - "TUK: ruang asesmen terganggu"
+    - "Asesor: identitas asesi tidak jelas"
+    - "Asesor: indikasi bantuan tidak sah"
+    - "Manajemen LSP: sistem rekaman gagal"
+    - "Manajemen LSP: permohonan banding masuk"
+
+scenario:
+  id: scenario_asesi_connection_lost
+  title: "Koneksi Asesi Putus Saat AJJ"
+  situation: >
+    Saat asesmen berlangsung, koneksi internet asesi terputus selama 10 menit.
+    Asesi kembali masuk ke platform asesmen, tetapi sebagian instruksi asesor
+    terlewat.
+  user_task:
+    - "Apa yang harus dilakukan Asesi?"
+    - "Apa yang harus dicatat?"
+    - "Kepada siapa kendala dilaporkan?"
+  ideal_answer_points:
+    - "Segera masuk kembali ke platform."
+    - "Menginformasikan kendala kepada asesor/admin LSP."
+    - "Mencatat waktu kejadian."
+    - "Menyampaikan bukti kendala jika ada."
+    - "Mengikuti keputusan asesor/LSP terkait kelanjutan asesmen."
+  feedback_template: >
+    Jawaban Anda sudah mencakup {{matched_points}} dari {{total_points}} poin.
+    Poin yang perlu ditambahkan: {{missing_points}}.
+
+scenario:
+  id: scenario_asesor_identity_unclear
+  title: "Identitas Asesi Tidak Jelas"
+  situation: >
+    Pada awal asesmen jarak jauh, kamera asesi buram dan identitas yang
+    ditunjukkan tidak terbaca dengan jelas.
+  user_task:
+    - "Apa tindakan asesor?"
+    - "Apakah asesmen boleh langsung dilanjutkan?"
+    - "Dokumentasi apa yang diperlukan?"
+  ideal_answer_points:
+    - "Meminta asesi memperbaiki kamera/pencahayaan."
+    - "Meminta identitas ditunjukkan ulang."
+    - "Tidak melanjutkan asesmen sebelum identitas dapat diverifikasi."
+    - "Mencatat kendala verifikasi."
+    - "Mengikuti SOP LSP bila verifikasi gagal."
+
+scenario:
+  id: scenario_lsp_recording_failed
+  title: "Rekaman Asesmen Gagal Tersimpan"
+  situation: >
+    Setelah asesmen selesai, admin LSP menemukan bahwa rekaman asesmen tidak
+    tersimpan lengkap karena gangguan sistem.
+  user_task:
+    - "Apa tindakan Manajemen LSP?"
+    - "Apa risiko yang harus dikendalikan?"
+    - "Apa tindak lanjut yang perlu dilakukan?"
+  ideal_answer_points:
+    - "Mencatat insiden sistem."
+    - "Memeriksa log aplikasi."
+    - "Menghubungi asesor untuk memastikan dokumen asesmen lain tersedia."
+    - "Menilai apakah bukti asesmen masih cukup dan dapat ditelusuri."
+    - "Mengikuti SOP penanganan rekaman/kendala teknis."
+    - "Melakukan tindakan korektif pada sistem."
+```
+
+---
+
+# 9. Template Jawaban Dinamis Chatbot
+
+```yaml id="dynamic_response_templates"
+response_templates:
+  role_summary:
+    structure:
+      - "Definisi peran"
+      - "Tugas dalam Sertifikasi Nirkertas"
+      - "Tugas dalam AJJ Nirkertas"
+      - "Checklist singkat"
+      - "Pilihan langkah berikutnya"
+    example: >
+      Sebagai {{role_name}}, peran utama Anda adalah {{role_definition}}.
+      Dalam Sertifikasi Nirkertas, fokus tugas Anda adalah {{paperless_focus}}.
+      Dalam AJJ Nirkertas, fokus tambahan Anda adalah {{ajj_focus}}.
+      
+      Checklist cepat:
+      {{checklist_items}}
+      
+      Apa yang ingin Anda lihat berikutnya?
+    quick_replies:
+      - "Checklist lengkap"
+      - "Simulasi kasus"
+      - "Cek kesiapan"
+      - "Kembali ke menu"
+
+  responsibility_comparison:
+    structure:
+      - "Ringkasan perbedaan"
+      - "Tugas sebelum asesmen"
+      - "Tugas saat asesmen"
+      - "Tugas setelah asesmen"
+      - "Batas kewenangan"
+    example: >
+      Perbedaan utamanya:
+      - Asesi bertanggung jawab atas data, dokumen, bukti, kehadiran, dan
+        integritas pribadi.
+      - TUK bertanggung jawab atas fasilitas dan dukungan tempat uji.
+      - Asesor bertanggung jawab atas pelaksanaan asesmen dan rekomendasi.
+      - Manajemen LSP bertanggung jawab atas sistem, SOP, keputusan resmi,
+        audit, dan pelaporan.
+```
+
+---
+
+# 10. Batas Kewenangan Setiap Peran
+
+```yaml id="authority_limits"
+authority_limits:
+  asesi:
+    boleh:
+      - mengajukan permohonan sertifikasi
+      - mengunggah dokumen
+      - mengikuti asesmen
+      - memberikan bukti kompetensi
+      - mengisi umpan balik
+      - mengajukan banding
+    tidak_boleh:
+      - memalsukan dokumen
+      - menggunakan bantuan tidak sah
+      - mengaku kompeten sebelum keputusan resmi
+      - mengakses instrumen asesmen tanpa hak
+
+  tuk:
+    boleh:
+      - menyediakan fasilitas asesmen
+      - mendukung verifikasi TUK
+      - membantu kendala fasilitas
+      - mendokumentasikan kesiapan lokasi
+    tidak_boleh:
+      - memengaruhi jawaban asesi
+      - memberikan bantuan tidak sah
+      - mengubah hasil asesmen
+      - menyebarkan dokumen asesmen
+
+  asesor_kompetensi:
+    boleh:
+      - melaksanakan asesmen
+      - memverifikasi identitas
+      - menilai bukti kompetensi
+      - memberi rekomendasi hasil asesmen
+      - memberi umpan balik
+    tidak_boleh:
+      - menerbitkan sertifikat sendiri
+      - membuat keputusan di luar prosedur LSP
+      - mengabaikan konflik kepentingan
+      - melanjutkan asesmen jika integritas proses terganggu berat
+
+  manajemen_lsp:
+    boleh:
+      - menetapkan SOP dan kebijakan
+      - menugaskan asesor
+      - memverifikasi permohonan
+      - menetapkan keputusan sertifikasi
+      - mengelola sistem, audit, dan pelaporan
+    tidak_boleh:
+      - melaksanakan AJJ/Nirkertas tanpa persetujuan yang diwajibkan
+      - mengabaikan keamanan data
+      - mengubah rekomendasi tanpa prosedur
+      - menutup akses banding yang sah
+```
+
+---
+
+# 11. Prompt Final untuk Builder
+
+```yaml id="final_builder_prompt_role_responsibility"
+final_builder_prompt:
+  title: "Build Role Responsibility Module for SKK AJJ Nirkertas Chatbot"
+  prompt: >
+    Tambahkan modul “Tugas, Tanggung Jawab, dan Peran” ke chatbot
+    “SKK Coach — AJJ Nirkertas”.
+
+    Modul ini harus menjelaskan peran:
+    1. Asesi
+    2. TUK
+    3. Asesor Kompetensi
+    4. Manajemen LSP
+
+    Untuk setiap peran, chatbot harus menjelaskan:
+    - definisi peran
+    - tugas sebelum asesmen
+    - tugas saat asesmen
+    - tugas setelah asesmen
+    - tanggung jawab dalam Sertifikasi Nirkertas
+    - tanggung jawab dalam AJJ Nirkertas
+    - checklist kesiapan
+    - batas kewenangan
+    - contoh skenario masalah
+    - rekomendasi tindak lanjut
+
+    Gunakan bahasa Indonesia profesional, jelas, dan praktis.
+    Gunakan quick replies untuk memandu pengguna.
+    Jangan menyatakan asesi kompeten atau belum kompeten secara resmi.
+    Jangan menyarankan tindakan yang melanggar integritas asesmen.
+    Jika pengguna menanyakan keputusan resmi, arahkan ke LSP.
+    Jika pengguna menanyakan izin atau ketentuan resmi AJJ/Nirkertas, arahkan
+    untuk memeriksa persetujuan dan SOP LSP serta ketentuan BNSP yang berlaku.
+```
+
+---
+
+## 12. Ringkasan untuk Ditampilkan Chatbot
+
+```yaml id="short_role_summary_for_bot"
+short_role_summary:
+  bot_message: >
+    Dalam Sertifikasi Nirkertas dan AJJ Nirkertas, pembagian peran utamanya
+    adalah sebagai berikut:
+
+    1. Asesi:
+       Bertanggung jawab menyiapkan data, dokumen, bukti kompetensi, mengikuti
+       asesmen secara jujur, menjaga integritas AJJ, dan mengisi umpan balik.
+
+    2. TUK:
+       Bertanggung jawab menyiapkan dan mendukung fasilitas uji, verifikasi TUK,
+       ruang asesmen, sarana-prasarana, dan dokumentasi fasilitas.
+
+    3. Asesor Kompetensi:
+       Bertanggung jawab melaksanakan asesmen, memverifikasi identitas,
+       menilai bukti kompetensi, menjaga objektivitas, membuat rekomendasi,
+       dan menyusun laporan asesmen.
+
+    4. Manajemen LSP:
+       Bertanggung jawab atas kebijakan, SOP, sistem aplikasi, penugasan,
+       verifikasi, keputusan sertifikasi, keamanan data, audit, pelaporan,
+       umpan balik, dan banding.
+
+    Pilih salah satu peran untuk melihat checklist detail.
+  quick_replies:
+    - "Asesi"
+    - "TUK"
+    - "Asesor Kompetensi"
+    - "Manajemen LSP"
+    - "Bandingkan semua peran"
+```
+
+Ini sudah bisa langsung dimasukkan sebagai **modul lanjutan** dalam chatbot SKK AJJ Nirkertas.
+
+[1]: https://bnsp.go.id/download?hal=2&id=10&utm_source=chatgpt.com "Halaman Download - BNSP"

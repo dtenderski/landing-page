@@ -1,0 +1,919 @@
+SKK Kertas (Hard Copy) — Peran Aktor dalam Proses Uji Kompetensi
+Metode Uji Kompetensi Kertas (Hard Copy) adalah pelaksanaan asesmen SKK Konstruksi secara tatap muka penuh, dengan seluruh perangkat MUK (Materi Uji Kompetensi) dicetak fisik (FR.APL, FR.MAPA, FR.IA, FR.AK), bukti dikumpulkan dalam map/portofolio, dan tanda tangan basah pada formulir. Metode ini dipakai bila daring/hybrid tidak memungkinkan, atau saat onsite di proyek/TUK Sewaktu di daerah dengan keterbatasan jaringan. Acuan utama: Permen PUPR 8/2022, Pedoman BNSP 301 & 303, SKKNI 333/2020, MUK Versi 2023, Kode Etik SK BNSP 1224/2020.⁠
+⁠⁠
+⁠​
+1. Alur Umum SKK Metode Hard Copy
+flowchart LR
+	A["Asesi daftar<br>FR.APL.01 + FR.APL.02 (cetak)"] --> B["LSP verifikasi<br>persyaratan dasar"]
+	B --> C["LSP tugaskan ASKOM<br>+ jadwalkan TUK"]
+	C --> D["Pra-asesmen di TUK<br>FR.AK.01 (persetujuan & kerahasiaan)"]
+	D --> E["Pelaksanaan uji<br>FR.IA.01–11 (cetak)"]
+	E --> F["Rekomendasi ASKOM<br>FR.AK.02–05"]
+	F --> G["LSP putuskan & terbitkan SKK<br>+ unggah ke SIKI-LPJK"]
+Asesi daftar
+FR.APL.01 + FR.APL.02 (cetak)
+
+LSP verifikasi
+persyaratan dasar
+
+LSP tugaskan ASKOM
++ jadwalkan TUK
+
+Pra-asesmen di TUK
+FR.AK.01 (persetujuan & kerahasiaan)
+
+Pelaksanaan uji
+FR.IA.01–11 (cetak)
+
+Rekomendasi ASKOM
+FR.AK.02–05
+
+LSP putuskan & terbitkan SKK
++ unggah ke SIKI-LPJK
+
+​
+2. Peran & Fungsi Asesi (Peserta Uji)
+Definisi: Tenaga kerja konstruksi yang mengajukan sertifikasi kompetensi sesuai jabatan kerja & jenjang KKNI tertentu.
+Tahap
+Peran/Tugas Asesi (Hard Copy)
+Pendaftaran
+Mengisi FR.APL.01 (Permohonan Sertifikasi) cetak + tanda tangan basah; melampirkan KTP, ijazah, CV, foto, bukti pengalaman
+Asesmen Mandiri
+Mengisi FR.APL.02 per unit kompetensi (K/BK), melampirkan bukti portofolio fisik (sertifikat pelatihan, surat referensi proyek, SK penugasan, dokumentasi pekerjaan)
+Pra-asesmen
+Hadir di TUK; menandatangani FR.AK.01 (persetujuan asesmen & kerahasiaan); konfirmasi FR.AK.07 (penyesuaian wajar bila ada disabilitas/kebutuhan khusus)
+Pelaksanaan
+Mengikuti metode uji yang dijadwalkan: observasi praktik (FR.IA.01/02), pertanyaan tertulis (FR.IA.05/06), wawancara/lisan (FR.IA.07/09), verifikasi portofolio (FR.IA.08), reviu produk (FR.IA.11)
+Pasca-asesmen
+Menerima umpan balik FR.AK.03; berhak mengajukan FR.AK.04 (Banding) bila tidak puas atas keputusan
+Kewajiban etika: kejujuran bukti (authentic), tidak memberi imbalan di luar biaya resmi, menjaga kerahasiaan MUK.
+3. Peran & Fungsi Asesor Kompetensi (ASKOM)
+Definisi: Personel ber-sertifikat ASKOM BNSP (Pedoman 303 + SKKNI 333/2020), kompeten metodologi (MAPA-MA-MKVA) dan kompeten teknis pada subklasifikasi konstruksi yang diuji, ditugaskan resmi oleh LSP & tercatat di LPJK (SE LPJK 14/SE/LPJK/2021).⁠
+⁠​
+Tugas inti pada metode kertas:
+Tahap
+Peran ASKOM
+Perencanaan
+Mengisi FR.MAPA.01 (rencana asesmen) & FR.MAPA.02 (peta instrumen) cetak — tentukan metode, tempat, waktu, sumber daya
+Pengembangan
+Menyiapkan/menggunakan FR.IA.01–11 versi cetak sesuai skema; menyiapkan ceklis observasi, soal tertulis, daftar pertanyaan lisan
+Pra-asesmen
+Memimpin sesi pembukaan, menjelaskan rencana, hak banding, dan kerahasiaan; menandatangani FR.AK.01 bersama asesi
+Pelaksanaan
+Mengumpulkan bukti VRFA (Valid, Reliabel, Fleksibel, Adil) dengan aturan CASR (Cukup, Asli, Saat ini, Relevan); mencatat manual di FR.IA
+Keputusan
+Membuat rekomendasi K/BK per unit di FR.AK.02 (Rekaman Asesmen); menyusun FR.AK.05 (Laporan Asesmen)
+Pelaporan
+Menyerahkan berkas fisik lengkap ke LSP: FR.APL, FR.MAPA, FR.IA terisi, FR.AK.01–05, bukti portofolio asesi
+Tinjauan
+Berkontribusi dalam FR.VA / FR.AK.06 (validasi & meninjau proses asesmen)
+Batasan kewenangan: ASKOM hanya merekomendasikan, tidak menerbitkan SKK. Wajib mematuhi Kode Etik SK BNSP 1224/2020 — integritas, objektivitas, kerahasiaan dokumen fisik MUK.⁠
+⁠⁠
+⁠​
+4. Peran & Fungsi TUK (Tempat Uji Kompetensi)
+Definisi: Tempat kerja/lembaga/sarana yang diverifikasi LSP sebagai lokasi pelaksanaan uji kompetensi. Tiga jenis: TUK Tempat Kerja, TUK Sewaktu, TUK Mandiri.
+Fungsi pada metode hard copy:
+Penyediaan ruang fisik — ruang teori (ujian tertulis FR.IA.05/06), ruang wawancara (FR.IA.07/09), area praktik/simulasi (FR.IA.01/02/04).
+Penyediaan peralatan & bahan uji — alat ukur, APD, material, gambar kerja, contoh produk untuk demonstrasi sesuai SKKNI subklasifikasi.
+Penyediaan logistik dokumen kertas — meja kerja asesor, lemari/brankas penyimpanan MUK, fotokopi cadangan, ATK, materai, stempel.
+Pengamanan kerahasiaan MUK fisik — soal & ceklis disimpan terkunci sebelum & sesudah uji; tidak boleh difoto/digandakan asesi.
+Pengelola TUK — bertanggung jawab pada kesiapan sarana, daftar hadir, berita acara fisik, dokumentasi foto pelaksanaan, dan serah terima berkas ke LSP.
+Verifikasi LSP — TUK harus diverifikasi LSP (kelayakan ruang, alat, K3, akses) sebelum digunakan; rekaman verifikasi disimpan di SMM LSP.
+5. Peran & Fungsi Manajemen LSP
+Dasar: Pedoman BNSP 201, 208, 301, 302, 305; Permen PUPR 8/2022; SNI ISO/IEC 17024. LSP wajib berlisensi BNSP & tercatat LPJK.⁠
+⁠​
+A. Sebelum Uji
+Fungsi LSP
+Aktivitas Hard Copy
+Tinjauan permohonan
+Verifikasi kelengkapan FR.APL.01/02 fisik; cek persyaratan dasar pemohon
+Penjadwalan
+Surat panggilan uji, jadwal TUK, daftar peserta cetak
+Penugasan ASKOM
+Surat tugas asesor (sesuai subklas, bebas konflik kepentingan); pakta imparsialitas
+Verifikasi TUK
+Pastikan TUK layak; cetak berita acara verifikasi
+Penyiapan MUK
+Cetak & segel paket FR.MAPA, FR.IA, FR.AK sesuai jumlah peserta
+B. Saat Uji
+Pengawasan pelaksanaan (witness/penyelia LSP bila perlu).
+Memastikan kerahasiaan MUK kertas terjaga.
+Menerima keluhan/banding asesi melalui FR.AK.04.
+C. Sesudah Uji
+Fungsi LSP
+Aktivitas
+Tinjauan hasil evaluasi
+Personel peninjau LSP mengkaji laporan ASKOM (FR.AK.05) — tidak boleh sekadar menyalin rekomendasi
+Keputusan sertifikasi
+Komite/pengambil keputusan LSP yang terpisah dari ASKOM menetapkan K/BK
+Penerbitan SKK
+SKK Konstruksi diterbitkan atas nama Menteri PU; pencatatan ke SIKI-LPJK / SIJK
+Pengarsipan
+Arsip fisik berkas asesmen disimpan sesuai retensi SMM (umumnya min. 5 tahun)
+Surveilans
+Pemantauan kinerja asesor min. 1×/tahun; laporan rekaman ke BNSP per 6 bulan
+Banding & Keluhan
+Penanganan FR.AK.04; bila banding, tugaskan ASKOM berbeda dari proses awal
+D. Tata Kelola (SMM LSP)
+Pemisahan fungsi: Tinjauan permohonan → Evaluasi (ASKOM) → Tinjauan hasil → Keputusan → Penerbitan — tidak boleh dilakukan oleh orang yang sama.
+Imparsialitas: deklarasi bebas konflik kepentingan untuk seluruh personel.
+Kerahasiaan: prosedur penanganan dokumen fisik (penomoran, segel, tanda terima, brankas).
+Audit internal & tinjauan manajemen: efektivitas SMM dievaluasi periodik.
+6. Matriks Ringkas Tanggung Jawab Hard Copy
+Aktivitas
+Asesi
+ASKOM
+TUK
+LSP
+---
+:-:
+:-:
+:-:
+:-:
+Mengisi FR.APL.01/02
+​
+Verifikasi
+Menyiapkan FR.MAPA, FR.IA cetak
+​
+Cetak & distribusi
+Menyediakan ruang & alat uji
+​
+Verifikasi TUK
+Menjaga kerahasiaan MUK fisik
+​
+​
+​
+​
+Mengumpulkan bukti & menilai
+Beri bukti
+​
+Menandatangani FR.AK.01
+​
+​
+Membuat rekomendasi K/BK
+​
+Memutuskan sertifikasi
+​
+Menerbitkan SKK
+​
+Mengajukan banding
+​
+Memproses
+Mengarsip berkas fisik
+Serahkan
+​
+7. Risiko Khusus Metode Kertas & Mitigasi
+Risiko
+Mitigasi
+MUK bocor / digandakan
+Penomoran seri, segel amplop, pengembalian wajib, brankas TUK
+Tanda tangan tidak lengkap
+Ceklis kontrol berkas oleh ASKOM sebelum tutup uji
+Bukti portofolio palsu
+Verifikasi pihak ketiga via FR.IA.10 (klarifikasi)
+Berkas fisik hilang saat transit
+Berita acara serah terima TUK → ASKOM → LSP, tracking nomor map
+Kesalahan transkripsi ke sistem
+Double-entry & reviu peninjau LSP sebelum keputusan
+Catatan kunci: Pada metode hard copy maupun daring, kewenangan menerbitkan SKK tetap milik LSP — ASKOM hanya merekomendasikan; TUK menyediakan sarana; asesi adalah subjek yang dinilai berbasis bukti VRFA-CASR.⁠
+⁠​
+lanjut
+9:28 PM
+Thought
+Lanjutan — Detail Operasional SKK Hard Copy
+8. Protokol Pelaksanaan Hari-H di TUK
+Tahap 1 — Pra-asesmen (08.00–09.00)
+Registrasi fisik — peserta tanda tangan daftar hadir bermaterai, serahkan KTP asli untuk verifikasi identitas.
+Pengarahan ASKOM — penjelasan: tujuan, ruang lingkup unit, metode, durasi, kriteria K/BK, hak banding, K3.
+Penandatanganan FR.AK.01 — persetujuan asesmen & kerahasiaan; bila ada penyesuaian wajar → FR.AK.07.
+Pemeriksaan portofolio fisik asesi — cocokkan FR.APL.02 dengan map bukti.
+Distribusi MUK tersegel — soal hanya dibuka di hadapan asesi.
+Tahap 2 — Pengumpulan Bukti (09.00–15.00)
+Urutan
+Metode
+Instrumen
+Output Fisik
+1
+Verifikasi portofolio
+FR.IA.08
+Ceklis terisi + paraf
+2
+Tertulis pilihan ganda
+FR.IA.05
+Lembar jawaban + kunci
+3
+Tertulis esai
+FR.IA.06
+Lembar esai + rubrik
+4
+Observasi praktik/demonstrasi
+FR.IA.01 + FR.IA.02
+Ceklis observasi + foto
+5
+Pertanyaan pendukung observasi
+FR.IA.03
+Catatan jawaban
+6
+Wawancara mendalam
+FR.IA.07 / FR.IA.09
+Lembar pertanyaan + rangkuman
+7
+Klarifikasi pihak ketiga (bila perlu)
+FR.IA.10
+Surat klarifikasi
+8
+Reviu produk (bila ada)
+FR.IA.11
+Ceklis reviu
+Tahap 3 — Pasca-asesmen (15.00–16.30)
+ASKOM mengisi FR.AK.02 (Rekaman Asesmen) per unit kompetensi.
+ASKOM menyusun FR.AK.05 (Laporan Asesmen) — rekomendasi K/BK + justifikasi.
+Pemberian umpan balik ke asesi via FR.AK.03.
+Asesi tanda tangan persetujuan/keberatan; bila keberatan → FR.AK.04 (Banding).
+ASKOM menutup MUK, menyegel kembali soal, serah-terima berkas ke pengelola TUK.
+Berita Acara Pelaksanaan Uji ditandatangani ASKOM + Pengelola TUK + Penyelia LSP (bila hadir).
+9. Struktur Map Berkas Asesi (Hard Copy)
+📁 MAP ASESI — [Nama] / [No. Reg LSP] / [Subklas]
+├── 1. FR.APL.01 — Permohonan (asli, tanda tangan basah)
+├── 2. FR.APL.02 — Asesmen Mandiri per unit
+├── 3. Persyaratan Administrasi
+│   ├── KTP, NPWP, Ijazah (legalisir)
+│   ├── Pas foto 3×4 & 4×6
+│   ├── CV terkini
+│   └── Surat rekomendasi atasan / asosiasi
+├── 4. Bukti Portofolio
+│   ├── Sertifikat pelatihan relevan
+│   ├── SK/Kontrak penugasan proyek
+│   ├── Surat referensi proyek (3 tahun terakhir)
+│   ├── Dokumentasi pekerjaan (foto, gambar kerja, BAST)
+│   └── Logbook pengalaman kerja
+├── 5. Hasil Asesmen
+│   ├── FR.IA.01–11 terisi
+│   ├── FR.AK.01 (persetujuan)
+│   ├── FR.AK.02 (rekaman)
+│   ├── FR.AK.03 (umpan balik)
+│   ├── FR.AK.05 (laporan)
+│   └── FR.AK.07 (penyesuaian wajar — bila ada)
+└── 6. Berita Acara & Daftar Hadir
+​
+Retensi: Arsip fisik wajib disimpan LSP minimal 5 tahun (atau sesuai SMM); setelah itu dimusnahkan dengan berita acara.
+10. Template Berita Acara Pelaksanaan Uji (Ringkas)
+BERITA ACARA PELAKSANAAN UJI KOMPETENSI
+Nomor: BA-UJI/[LSP]/[bulan]/[tahun]/[no.urut]
+
+Pada hari ini, [hari], tanggal [tgl] [bulan] [tahun], pukul [jam] WIB, telah
+dilaksanakan Uji Kompetensi Sertifikasi Kompetensi Kerja (SKK) Konstruksi
+metode tatap muka (hard copy) dengan rincian:
+
+1. LSP Penyelenggara : [Nama LSP] — Lisensi BNSP No. [____]
+2. Skema Sertifikasi : [Nama Skema / Kode]
+3. Jabatan Kerja     : [Jabatan] — Jenjang KKNI [___]
+4. SKKNI Acuan       : [SKKNI No. ___ Tahun ___]
+5. TUK               : [Nama & Alamat TUK] — Verifikasi LSP No. [___]
+6. Jumlah Peserta    : [___] orang (daftar hadir terlampir)
+7. Asesor (ASKOM)    : [Nama] — No. Reg. BNSP [___] — No. Tercatat LPJK [___]
+8. Penyelia LSP      : [Nama / Tidak Hadir]
+
+Pelaksanaan berlangsung [LANCAR / DENGAN CATATAN]:
+[catatan kejadian, banding, penyesuaian wajar, dll.]
+
+Seluruh berkas MUK telah dikembalikan dalam keadaan tersegel/lengkap dan
+diserahkan kepada LSP untuk tinjauan hasil evaluasi & keputusan sertifikasi.
+
+  Asesor (ASKOM)        Pengelola TUK         Penyelia LSP (bila hadir)
+  [Nama & TTD]          [Nama & TTD]          [Nama & TTD]
+​
+11. Checklist Administrasi LSP — Sebelum, Saat, Sesudah
+ H-7 (Persiapan)
+
+Surat tugas ASKOM diterbitkan & ditandatangani Direktur LSP
+
+Pakta imparsialitas ASKOM ditandatangani
+
+Pemberitahuan jadwal ke asesi (surat/email + WA)
+
+Verifikasi ulang TUK: ruang, alat, K3, akses
+
+MUK dicetak per peserta + cadangan 10%, disegel per amplop
+
+Daftar hadir, materai, stempel disiapkan
+
+Map kosong + label per asesi
+ H-1
+
+Briefing ASKOM oleh LSP — skema, kode etik, prosedur banding
+
+Konfirmasi kehadiran asesi
+
+MUK diserahterimakan ke ASKOM dengan berita acara serah terima (BAST-1)
+ Hari-H
+
+Daftar hadir terisi & diparaf
+
+FR.AK.01 ditandatangani semua peserta
+
+Dokumentasi foto pelaksanaan (≥ 5 foto: registrasi, briefing, tertulis, praktik, penutupan)
+
+Berita Acara Pelaksanaan Uji ditandatangani
+ H+1 sampai H+3
+
+ASKOM serahkan berkas lengkap ke LSP via BAST-2
+
+Personel peninjau LSP (≠ ASKOM) mengkaji laporan
+
+Jika ada gap → klarifikasi tertulis ASKOM
+
+Komite Keputusan LSP rapat pleno → tetapkan K/BK
+ H+7 sampai H+14
+
+SKK Konstruksi diterbitkan & ditandatangani Direktur LSP a.n. Menteri PU
+
+Data diunggah ke SIKI-LPJK / SIJK
+
+SKK fisik dikirim/diambil asesi dengan tanda terima
+
+Arsip lengkap di-binder & disimpan di ruang arsip LSP
+
+Jika BK → surat pemberitahuan + opsi uji ulang
+
+Jika banding → proses dengan ASKOM berbeda, max. 14 hari kerja
+12. Dimensi Kompetensi yang Dinilai (Wajib Tercakup)
+ASKOM wajib memastikan bukti meliputi 5 dimensi kompetensi:
+Dimensi
+Penjelasan
+Instrumen Utama
+Task Skill (TS)
+Mampu melaksanakan tugas individu
+FR.IA.01, FR.IA.02
+Task Management Skill (TMS)
+Mampu mengelola beberapa tugas berbeda
+FR.IA.04A/B
+Contingency Management Skill (CMS)
+Mampu menangani masalah/penyimpangan
+FR.IA.07, FR.IA.09
+Job Role/Environment Skill (JRES)
+Mampu menyesuaikan dengan tanggung jawab & lingkungan kerja
+FR.IA.07, FR.IA.10
+Transfer Skill (TRS)
+Mampu mentransfer kompetensi ke konteks baru
+FR.IA.06, FR.IA.09
+13. Penanganan Kasus Khusus
+Kasus
+Tindakan
+Asesi sakit mendadak hari-H
+Reschedule; berita acara penundaan; MUK disegel ulang
+Listrik/jaringan padam
+Lanjut metode kertas penuh; catat di berita acara
+Asesi keberatan atas penilaian
+Isi FR.AK.04 (Banding); LSP tunjuk ASKOM lain dalam 14 hari kerja
+Bukti portofolio diragukan keasliannya
+Klarifikasi pihak ketiga via FR.IA.10; bila terbukti palsu → BK + sanksi
+Konflik kepentingan ASKOM-asesi
+ASKOM wajib menolak penugasan; LSP ganti asesor
+Master Asesor ingin witness
+Diperbolehkan; tercatat di berita acara, tidak mempengaruhi keputusan ASKOM penilai
+14. Indikator Mutu Pelaksanaan (KPI Internal LSP)
+Indikator
+Target
+Kelengkapan berkas (% berkas lengkap saat serah terima)
+≥ 98%
+Waktu penerbitan SKK (dari hari uji)
+≤ 14 hari kerja
+Tingkat banding
+≤ 5%
+Kepuasan asesi (survei pasca-uji)
+≥ 80%
+Temuan surveilans BNSP/LPJK
+0 temuan major
+Akurasi data SIKI-LPJK
+100%
+15. Hubungan dengan Metode Lain (Komparasi Singkat)
+Aspek
+Hard Copy
+Daring
+Hybrid
+Onsite Proyek
+MUK
+Cetak fisik
+Aplikasi/PDF
+Kombinasi
+Cetak + foto lapangan
+Tanda tangan
+Basah
+Digital/e-sign
+Kombinasi
+Basah
+Lokasi
+TUK fisik
+Mana saja
+TUK + remote
+Lokasi proyek
+Observasi praktik
+Langsung
+Video real-time
+Langsung
+Langsung di pekerjaan
+Cocok untuk
+Daerah jaringan terbatas, jabatan teknik berat
+Jabatan ahli/manajerial
+Skala besar nasional
+Verifikasi kompetensi terkini
+Risiko utama
+Berkas hilang/bocor
+Identitas & integritas video
+Sinkronisasi dokumen
+K3 di lapangan
+Penegasan akhir: Apapun metodenya — kertas, daring, hybrid, onsite — prinsip VRFA + CASR + 5 dimensi kompetensi tidak berubah, pemisahan kewenangan Asesi (subjek) → ASKOM (penilai-perekomendasi) → TUK (sarana) → LSP (pemutus & penerbit) tetap berlaku, dan seluruh proses tunduk pada Pedoman BNSP 301/303, Permen PUPR 8/2022, serta Kode Etik SK BNSP 1224/2020.⁠
+⁠⁠
+⁠​
+Bila perlu, saya dapat menyusun dokumen ini menjadi halaman Notion siap pakai (SOP / handbook TUK / template berita acara) — tinggal sebut formatnya.
+lanjut
+9:29 PM
+Thought
+Lanjutan (Bagian 3) — Aspek Operasional Lanjutan SKK Hard Copy
+16. Tata Kelola TUK secara Mendalam
+16.1 Tiga Jenis TUK & Karakteristiknya
+Jenis TUK
+Definisi
+Cocok untuk Hard Copy?
+Verifikasi LSP
+---
+---
+:-:
+---
+TUK Tempat Kerja
+Lokasi kerja nyata BUJK / instansi (proyek, workshop)
+ — utamanya untuk observasi langsung
+Verifikasi awal + setiap penggunaan baru
+TUK Sewaktu
+Lokasi temporer (hotel, balai pelatihan, kantor asosiasi) yang disiapkan saat ada uji
+ — paling sering dipakai untuk hard copy massal
+Verifikasi setiap pelaksanaan
+TUK Mandiri
+TUK milik LSP atau lembaga diklat permanen yang sudah terverifikasi
+ — ideal untuk konsistensi mutu
+Verifikasi awal + reverifikasi periodik (tahunan)
+16.2 Persyaratan Fisik TUK untuk Hard Copy
+Komponen
+Standar Minimum
+Ruang teori
+1 meja per asesi, jarak antar meja ≥ 1 m, pencahayaan ≥ 300 lux, ventilasi/AC memadai
+Ruang praktik
+Sesuai SKKNI subklas (alat, bahan, area kerja, K3)
+Ruang wawancara
+Privat, kedap, kursi nyaman, meja, ATK
+Ruang asesor
+Terpisah, dapat dikunci, untuk pengisian FR.AK & koreksi
+Penyimpanan MUK
+Brankas/lemari berkunci dengan kontrol akses tunggal
+Dokumentasi
+Kamera/HP untuk foto kegiatan; daftar hadir; ATK lengkap
+K3
+APAR, P3K, jalur evakuasi, APD bila praktik berisiko
+Sanitasi
+Toilet bersih, air minum, area istirahat
+16.3 Verifikasi TUK — Form Internal LSP
+FORM VERIFIKASI TUK
+LSP: [_____]   Tanggal: [_____]   Verifikator: [_____]
+
+A. Identitas TUK
+   Nama TUK     : ____________________
+   Jenis        : [ ] Tempat Kerja  [ ] Sewaktu  [ ] Mandiri
+   Alamat       : ____________________
+   PIC          : ____________________
+
+B. Cek Sarana (✅/❌/N/A)
+   [ ] Ruang teori sesuai kapasitas
+   [ ] Ruang praktik sesuai subklas
+   [ ] Alat/bahan praktik tersedia & laik pakai
+   [ ] Brankas penyimpanan MUK
+   [ ] K3: APAR, P3K, evakuasi
+   [ ] Akses internet (cadangan, untuk pelaporan)
+   [ ] Listrik stabil + genset/UPS
+
+C. Kesimpulan
+   [ ] LAYAK digunakan
+   [ ] LAYAK dengan catatan: ________
+   [ ] TIDAK LAYAK — alasan: ________
+
+Verifikator LSP        Pengelola TUK
+[Nama & TTD]           [Nama & TTD]
+​
+17. Kompetensi Pengelola TUK
+Pengelola TUK harus memahami:
+Skema sertifikasi LSP yang akan dilaksanakan di TUK.
+Pedoman BNSP 206 (TUK) — persyaratan umum tempat uji kompetensi.
+K3 konstruksi — minimum SMK3 dasar / SKK Ahli K3 Konstruksi Muda bila praktik berisiko.
+Tata kelola dokumen rahasia — penanganan MUK fisik.
+Manajemen logistik — koordinasi peserta, asesor, konsumsi, transportasi.
+Banyak LSP mensyaratkan pengelola TUK memiliki sertifikat ToT TUK atau setara dari BNSP/LSP penaung.
+18. Risiko Etika & Pencegahan Kecurangan
+Modus Kecurangan
+Pengendalian
+Joki ujian (orang lain mengikuti uji atas nama asesi)
+Verifikasi KTP asli + pas foto + tanda tangan dibandingkan dengan FR.APL.01 di hari-H
+Bocoran soal MUK
+Soal disegel; ASKOM tanda tangan tanda terima; pengembalian wajib; rotasi paket soal
+Bukti portofolio palsu (sertifikat, surat referensi)
+Klarifikasi via FR.IA.10 ke penerbit; cek QR/nomor sertifikat di laman resmi
+Konflik kepentingan ASKOM
+Pakta imparsialitas + deklarasi hubungan kerja/keluarga sebelum penugasan
+Suap/gratifikasi ke asesor
+Kode etik ASKOM SK 1224/2020; whistleblowing channel LSP; sanksi pencabutan sertifikat asesor
+Pemalsuan tanda tangan asesi
+Penandatanganan di hadapan ASKOM; saksi penyelia LSP
+Jasa "calo SKK" yang menjamin lulus
+Edukasi publik LSP; pelaporan ke BNSP & APH bila tergolong pidana
+19. Format SOP Pelaksanaan Uji Hard Copy (Outline LSP)
+SOP-LSP-[kode]-[rev] — Pelaksanaan Uji Kompetensi Metode Hard Copy
+
+1. TUJUAN
+2. RUANG LINGKUP
+3. ACUAN
+   - Pedoman BNSP 301, 303, 206
+   - Permen PUPR 8/2022
+   - SK Ketua BNSP 1224/2020
+   - SKKNI 333/2020 + SKKNI bidang konstruksi terkait
+   - SE LPJK 14/SE/LPJK/2021
+4. DEFINISI
+5. TANGGUNG JAWAB
+   5.1 Direktur LSP
+   5.2 Manajer Sertifikasi
+   5.3 Manajer Mutu
+   5.4 Komite Skema
+   5.5 Komite Keputusan
+   5.6 ASKOM
+   5.7 Pengelola TUK
+   5.8 Bagian Administrasi
+6. PROSEDUR
+   6.1 Pendaftaran & verifikasi permohonan
+   6.2 Penjadwalan & penugasan asesor
+   6.3 Verifikasi TUK
+   6.4 Penyiapan & distribusi MUK
+   6.5 Pelaksanaan uji
+   6.6 Pengumpulan & serah terima berkas
+   6.7 Tinjauan hasil evaluasi
+   6.8 Keputusan sertifikasi
+   6.9 Penerbitan SKK & unggah SIKI-LPJK
+   6.10 Penanganan banding
+   6.11 Arsip & retensi
+7. REKAMAN
+8. LAMPIRAN (formulir terkait)
+9. RIWAYAT REVISI
+​
+20. Template Surat Tugas ASKOM
+[KOP LSP]
+
+SURAT TUGAS ASESOR
+Nomor: ST-ASKOM/[LSP]/[bln]/[thn]/[no]
+
+Yang bertanda tangan di bawah ini, Direktur LSP [____], dengan ini menugaskan:
+
+  Nama          : __________________________
+  No. Reg ASKOM : __________________________
+  No. LPJK      : __________________________
+
+Untuk melaksanakan asesmen kompetensi sebagai berikut:
+
+  Skema         : __________________________
+  Subklasifikasi: __________________________
+  Jabatan/KKNI  : __________________________
+  Metode        : Tatap Muka — Hard Copy
+  TUK           : __________________________
+  Tanggal       : __________________________
+  Jumlah peserta: ____ orang (daftar terlampir)
+
+Tugas:
+1. Menyusun FR.MAPA.01 & FR.MAPA.02 sesuai skema.
+2. Melaksanakan asesmen sesuai Pedoman BNSP 301 & MUK Versi 2023.
+3. Menjaga kerahasiaan MUK & data asesi.
+4. Menyerahkan seluruh berkas hasil asesmen ke LSP paling lambat
+   3 hari kerja setelah pelaksanaan.
+5. Mematuhi Kode Etik ASKOM (SK BNSP 1224/2020).
+
+Bersama surat tugas ini dilampirkan Pakta Imparsialitas & Kerahasiaan
+yang wajib ditandatangani sebelum pelaksanaan.
+
+[Kota], [tanggal]
+Direktur LSP
+
+[Nama & TTD]
+​
+21. Template Pakta Imparsialitas ASKOM
+PAKTA IMPARSIALITAS, KERAHASIAAN, & BEBAS KONFLIK KEPENTINGAN
+
+Saya, [Nama ASKOM], No. Reg [____], dalam pelaksanaan tugas asesmen
+SKK Konstruksi pada [tanggal] di [TUK], dengan ini menyatakan:
+
+1. Tidak memiliki hubungan kerja, keluarga (s.d. derajat ke-3), kepemilikan
+   usaha, atau kepentingan finansial dengan asesi yang akan saya ases.
+2. Tidak pernah memberikan jasa konsultansi/pelatihan komersial kepada asesi
+   yang berpotensi menimbulkan bias dalam penilaian.
+3. Akan menjalankan tugas berdasarkan prinsip Valid, Reliabel, Fleksibel,
+   Adil dengan aturan bukti Cukup, Asli, Saat ini, Relevan.
+4. Akan menjaga kerahasiaan: MUK, identitas asesi, hasil asesmen, dokumen
+   pendukung, baik selama maupun setelah penugasan.
+5. Tidak akan menerima janji, hadiah, atau imbalan di luar honorarium resmi LSP.
+6. Bila ditemukan potensi konflik kepentingan setelah penandatanganan, saya
+   akan segera melaporkan ke LSP untuk pergantian penugasan.
+
+Pelanggaran atas pakta ini saya pahami akan dikenai sanksi sesuai Kode Etik
+ASKOM SK BNSP 1224/2020, termasuk pembekuan/pencabutan sertifikat ASKOM.
+
+[Tempat], [tanggal]
+ASKOM
+
+[Nama & TTD bermaterai]
+​
+22. Pelaporan & Integrasi ke SIKI-LPJK / SIJK
+Walau metode pelaksanaan kertas, pelaporan akhir tetap digital ke ekosistem LPJK.
+Data wajib diunggah:
+Identitas SKK: nomor, nama, NIK, jabatan, jenjang KKNI, subklasifikasi, masa berlaku.
+Berkas digital hasil pemindaian: FR.APL.01/02, FR.AK.05, berita acara, dokumentasi foto.
+Data ASKOM penilai + nomor pencatatan LPJK.
+Data TUK + status verifikasi.
+Bukti pembayaran sesuai Kepmen PUPR 713/KPTS/M/2022.
+Alur singkat:
+LSP terbitkan SKK → Unggah ke SIKI-LPJK → 
+Validasi LPJK → Tercatat di SIJK → 
+SKK aktif & dapat diverifikasi publik via QR/portal LPJK
+​
+KPI pelaporan:
+Unggah ke SIKI-LPJK ≤ 3 hari kerja setelah penerbitan SKK.
+Akurasi data 100% (NIK, jabatan, masa berlaku).
+Tidak ada SKK "ghost" (terbit tetapi tidak tercatat).
+23. Pelatihan Internal Personel LSP — Modul Hard Copy
+Modul
+Durasi
+Sasaran
+1. Regulasi & ekosistem SKK Konstruksi
+4 JP
+Semua personel
+2. SMM LSP berbasis ISO/IEC 17024
+4 JP
+Manajer Mutu, peninjau
+3. Tata kelola MUK fisik & kerahasiaan
+2 JP
+ASKOM, pengelola TUK, admin
+4. Pengisian FR.APL → FR.AK end-to-end
+6 JP
+ASKOM, peninjau
+5. Verifikasi portofolio & klarifikasi pihak ketiga
+2 JP
+ASKOM
+6. Penanganan banding & keluhan
+2 JP
+Komite Keputusan, admin
+7. Integrasi SIKI-LPJK & SIJK
+2 JP
+Admin, IT
+8. Studi kasus pelanggaran kode etik
+2 JP
+ASKOM, manajemen
+9. Simulasi uji penuh (role play)
+8 JP
+ASKOM baru, magang
+Total
+32 JP
+24. Ringkasan Eksekutif — Kunci Keberhasilan SKK Hard Copy
+Persiapan adalah 70% sukses — verifikasi TUK, penyiapan MUK, briefing ASKOM tidak boleh dipotong.
+Pemisahan fungsi adalah harga mati — ASKOM ≠ peninjau ≠ pemutus ≠ penerbit.
+Bukti fisik harus VRFA + CASR — bila ragu, klarifikasi pihak ketiga sebelum putuskan.
+Kerahasiaan MUK adalah reputasi LSP — sekali bocor, lisensi BNSP terancam.
+Dokumentasi adalah pertahanan terbaik — semua proses harus dapat ditelusuri (auditable).
+Surveilans BNSP & LPJK akan datang — kelengkapan arsip fisik & digital harus 100%.
+Kode Etik mengikat seumur hidup karier asesor — pelanggaran = pencabutan + reputasi sektor.
+25. Saran Tindak Lanjut
+Materi pada thread ini dapat dikemas menjadi beberapa output operasional yang langsung dapat dipakai:
+Output
+Bentuk
+Audiens
+Handbook SKK Hard Copy
+Halaman Notion bertingkat
+Internal LSP
+SOP Pelaksanaan Uji Kertas
+Halaman Notion + lampiran
+ASKOM & TUK
+Checklist Pra-Hari-Pasca
+Database Notion (to-do per uji)
+Admin LSP
+Template Berita Acara, Surat Tugas, Pakta
+Halaman Notion (copy-paste ready)
+Admin & ASKOM
+Form Verifikasi TUK
+Database Notion
+Manajer Mutu
+Modul Pelatihan Internal 32 JP
+Halaman Notion + agenda
+Trainer LSP
+Silakan sebut output mana yang ingin saya buatkan terlebih dulu sebagai halaman/database Notion siap pakai.
+lanjut
+9:31 PM
+Thought
+Lanjutan (Bagian 4) — Skenario Praktis, FAQ & Kesiapan Audit
+26. Studi Kasus Pelaksanaan SKK Hard Copy
+Kasus A — Uji Massal di Daerah Terpencil
+Konteks: LSP mengirim tim ke kabupaten dengan sinyal internet tidak stabil. 40 asesi tukang besi/beton (jenjang 3).
+Tantangan:
+Tidak ada kantor formal sebagai TUK Mandiri.
+Asesi banyak yang belum pernah ujian formal.
+Bukti portofolio terbatas (banyak proyek informal).
+Solusi:
+Sewa balai desa sebagai TUK Sewaktu, verifikasi H-3.
+Tambah bobot observasi praktik (FR.IA.01–02) di area kerja simulasi.
+Manfaatkan FR.IA.10 (klarifikasi pihak ketiga) ke mandor/pemilik proyek setempat untuk validasi pengalaman.
+Bawa genset cadangan + lampu LED untuk antisipasi listrik padam.
+Gunakan logbook foto sebagai bukti pengalaman pengganti dokumen formal.
+Pelajaran: Hard copy unggul karena tidak bergantung jaringan; kunci sukses ada di TUK Sewaktu yang dipersiapkan matang.
+Kasus B — Banding Asesi Senior
+Konteks: Ahli K3 Konstruksi Madya yang sudah 15 tahun pengalaman dinilai BK pada unit "investigasi kecelakaan" karena bukti tidak otentik.
+Penanganan:
+Asesi mengisi FR.AK.04 dalam 7 hari kerja setelah hasil.
+Manajer Sertifikasi LSP menerima banding, bentuk panel banding 3 ASKOM senior berbeda dari penilai awal.
+Panel mengkaji ulang berkas + minta bukti tambahan (laporan investigasi proyek dengan tanda tangan basah PJK).
+Putusan: bukti tambahan diterima → status diubah menjadi K → SKK diterbitkan.
+Catatan untuk peninjau LSP: instruksi ASKOM awal kurang detail soal jenis bukti yang dapat diterima.
+Pelajaran: Sistem banding yang kredibel memperkuat reputasi LSP, bukan melemahkannya.
+Kasus C — Pemalsuan Sertifikat Pelatihan
+Konteks: Saat verifikasi portofolio, ASKOM mendapati nomor sertifikat pelatihan tidak terdaftar di lembaga penerbit.
+Penanganan:
+ASKOM tetap melaksanakan asesmen, namun mencatat temuan di FR.IA.10.
+ASKOM tidak menggunakan sertifikat tersebut sebagai bukti; nilai unit terkait BK.
+LSP melaporkan ke lembaga penerbit asli & BNSP untuk pendalaman.
+Asesi diberikan kesempatan klarifikasi tertulis dalam 14 hari kerja.
+Bila terbukti pemalsuan: laporan ke APH (Pasal 263 KUHP — pemalsuan surat) + blacklist LSP + larangan ikut uji 2 tahun.
+Pelajaran: ASKOM tidak boleh "menutup mata"; kerahasiaan ≠ menyembunyikan pelanggaran.
+27. Contoh Pengisian Form (Snippet)
+FR.APL.02 — Asesmen Mandiri (Cuplikan)
+Unit Kompetensi: M.71KKK01.001.1 — Menerapkan Ketentuan Peraturan
+                  Perundang-undangan Keselamatan & Kesehatan Kerja Konstruksi
+
+Elemen 1: Mengidentifikasi peraturan perundang-undangan K3 konstruksi
+  KUK 1.1 Daftar peraturan K3 konstruksi yang berlaku diidentifikasi
+          sesuai jenis pekerjaan.
+  
+  Penilaian Mandiri:  [✓] K (Kompeten)   [ ] BK (Belum Kompeten)
+  
+  Bukti yang dilampirkan:
+  - Logbook identifikasi regulasi K3 proyek Tol XYZ (2024) — Lampiran 1
+  - Matriks regulasi vs aktivitas konstruksi Tol XYZ — Lampiran 2
+  - SK Penugasan sebagai Ahli K3 Konstruksi proyek tersebut — Lampiran 3
+
+  KUK 1.2 ...
+​
+FR.IA.05 — Pertanyaan Tertulis Pilihan Ganda (Cuplikan)
+Soal 1 (Bobot: 2 poin)
+Berdasarkan UU No. 1 Tahun 1970, kewajiban utama pengurus tempat kerja terkait
+K3 adalah:
+  A. Menyediakan APD kepada tenaga kerja secara cuma-cuma
+  B. Menanggung seluruh biaya pengobatan kecelakaan kerja
+  C. Mengasuransikan seluruh tenaga kerja
+  D. Memberikan tunjangan keluarga tenaga kerja
+
+Jawaban asesi: [____]   Kunci: A   Nilai: [__]
+​
+FR.AK.02 — Rekaman Asesmen (Cuplikan)
+Asesi: Budi Santoso         No. Reg: 2026-001-LSP-XX
+Skema: Ahli Muda K3 Konstruksi (Jenjang 7)
+
+Unit                          Bukti yang Cukup    Keputusan
+---------------------------------------------------------------
+M.71KKK01.001.1               TS-TMS-CMS-JRES-TRS  K
+M.71KKK01.002.1               TS-TMS-CMS-JRES      K (TRS lemah)
+M.71KKK01.003.1               TS-TMS               BK
+M.71KKK01.004.1               TS-TMS-CMS-JRES-TRS  K
+...
+
+Rekomendasi keseluruhan: [ ] Kompeten  [✓] Belum Kompeten
+Catatan: Asesi perlu memperdalam unit 003.1 (investigasi insiden);
+disarankan asesmen ulang setelah 3 bulan pengalaman tambahan.
+
+ASKOM,                        Asesi,
+[ttd]                         [ttd]
+​
+28. FAQ Pelaksanaan SKK Hard Copy
+Q1. Bolehkah satu ASKOM menilai > 10 asesi dalam satu hari?
+Bolehkah secara teknis tidak dilarang, tetapi praktik baik membatasi maks. 8–10 asesi/asesor/hari untuk menjaga kualitas observasi & wawancara. Bila melampaui, tambah ASKOM ke-2.
+Q2. Apakah asesi boleh membawa catatan/buku saat ujian tertulis?
+Tergantung jenis soal. FR.IA.05/06 umumnya closed book. Bila open book, harus dinyatakan eksplisit dalam FR.MAPA.01 dan diumumkan saat briefing.
+Q3. Bagaimana jika ASKOM yang ditugaskan ternyata tidak hadir hari-H?
+LSP wajib menyiapkan ASKOM cadangan dengan kompetensi setara. Jika tidak ada, pelaksanaan ditunda dan dibuatkan berita acara penundaan. MUK disegel ulang.
+Q4. Apakah dokumentasi foto asesi mengerjakan soal melanggar privasi?
+Tidak, jika sudah ada persetujuan tertulis di FR.AK.01 klausul dokumentasi. Foto hanya untuk arsip LSP, tidak dipublikasikan tanpa izin.
+Q5. Berapa lama berkas hard copy boleh disimpan sebelum dimusnahkan?
+Minimum 5 tahun (umumnya), atau sesuai SMM LSP. Setelah itu, dimusnahkan dengan berita acara pemusnahan (shredding) dan saksi minimal 2 orang.
+Q6. Apakah SKK hard copy berbeda kekuatan hukumnya dari hasil daring?
+Tidak. SKK yang diterbitkan LSP berlisensi BNSP & tercatat LPJK memiliki kekuatan hukum yang identik, apapun metode ujinya.
+Q7. Bagaimana jika asesi BK pada beberapa unit saja?
+LSP dapat memberikan opsi uji ulang khusus pada unit BK (re-asesmen parsial) dalam jangka waktu tertentu (umumnya 1–6 bulan), tanpa mengulang seluruh skema. Biaya re-asesmen sesuai tarif LSP.
+Q8. Bolehkah asesor menilai rekan satu kantor?
+Tidak — termasuk konflik kepentingan. Wajib dideklarasikan & ditolak penugasannya.
+Q9. Apakah TUK harus terakreditasi formal?
+TUK tidak diakreditasi BNSP secara langsung; TUK diverifikasi LSP dan rekamannya menjadi bagian SMM LSP yang diaudit BNSP saat surveilans.
+Q10. Bagaimana posisi PTUK (Panitia Teknis Uji Kompetensi) dalam metode hard copy?
+PTUK dipakai hanya bila LSP belum tersedia untuk jabatan/subklas tertentu (SE Dirjen BK 214/SE/Dk/2022). Pelaksanaannya tetap mengikuti prinsip yang sama; setelah LSP tersedia, PTUK tidak digunakan lagi.
+29. Persiapan Menghadapi Surveilans BNSP
+BNSP melakukan surveilans tahunan ke LSP. Untuk metode hard copy, fokus auditor biasanya:
+Area Audit
+Bukti yang Dicari
+Kelengkapan berkas asesmen
+Sampling acak 10–20 berkas asesi: FR.APL → FR.AK lengkap, tanda tangan basah, tanggal konsisten
+Kerahasiaan MUK
+Bukti penyegelan, log akses brankas, tanda terima ASKOM
+Imparsialitas
+Pakta imparsialitas terisi semua, tidak ada penugasan ASKOM ke kerabat/rekan kantor
+Pemisahan fungsi
+Cek nama: ASKOM ≠ peninjau ≠ pemutus
+Validitas keputusan
+Laporan ASKOM (FR.AK.05) didukung bukti CASR; keputusan komite terdokumentasi
+Penanganan banding
+Rekaman FR.AK.04, panel banding, putusan, batas waktu
+Kompetensi ASKOM
+Sertifikat ASKOM masih berlaku, RCC tepat waktu, pencatatan LPJK aktif
+Verifikasi TUK
+Form verifikasi terisi setiap pelaksanaan
+Pelaporan SIKI-LPJK
+Konsistensi data antara berkas fisik & sistem digital
+Audit internal
+Bukti audit internal min. 1×/tahun + tinjauan manajemen
+Tip praktis: Lakukan mock audit internal 1 bulan sebelum surveilans BNSP — temuan sendiri lebih murah daripada temuan auditor.
+30. Daftar Temuan Surveilans yang Sering Terjadi
+Temuan
+Kategori
+Tindakan Korektif
+Tanda tangan asesi/ASKOM hilang di FR.AK.01
+Minor
+Lengkapi + edukasi ASKOM
+Sertifikat ASKOM kedaluwarsa saat menilai
+Major
+RCC segera + audit ulang berkas yang dia nilai
+Pemisahan ASKOM & pemutus tidak jelas
+Major
+Revisi SOP & struktur organisasi LSP
+MUK dibawa pulang ASKOM tanpa tanda terima
+Minor
+Perketat prosedur serah terima
+Bukti CASR tidak konsisten antar unit
+Mayor
+Pelatihan ulang ASKOM + reviu portofolio
+FR.MAPA.01 hanya copy-paste skema
+Minor
+Latihan kontekstualisasi rencana asesmen
+Tidak ada bukti verifikasi TUK
+Major
+Tambah form verifikasi standar + retroaktif
+Banding tidak ditangani dalam 14 hari
+Mayor
+Revisi SOP banding + monitoring
+Tidak ada audit internal tahunan
+Major
+Jadwal audit + bentuk auditor internal
+31. Indikator Kematangan Tata Kelola SKK Hard Copy LSP
+Tingkat
+Ciri
+1 — Awal
+Sebagian besar manual, sering temuan minor, pelaporan SIKI sering terlambat
+2 — Berkembang
+SOP ada tapi belum konsisten, ASKOM kompeten tapi mutu bervariasi, audit internal sporadis
+3 — Terstandar
+SOP lengkap, kepatuhan ≥ 90%, audit internal rutin, temuan major nol
+4 — Terkelola
+Mutu konsisten, KPI terukur, ada coaching/pembinaan ASKOM, retensi data sempurna
+5 — Optimal
+Continuous improvement, integrasi penuh fisik-digital, jadi rujukan praktik baik LSP lain
+Target wajar: Setiap LSP bertahap dari Tingkat 2 → 3 dalam 1 tahun, ke Tingkat 4 dalam 3 tahun.
+32. Tren ke Depan — Transisi Fisik ke Digital
+Aspek
+Hari Ini
+2026–2028 (Proyeksi)
+FR.APL & FR.IA
+Cetak fisik
+Aplikasi LSP + e-sign
+Tanda tangan basah
+Wajib di banyak skema
+Migrasi bertahap ke e-sign berbasis BSrE/PSrE
+Bukti portofolio
+Fotokopi legalisir
+Verifikasi via SIKI-LPJK & QR sertifikat
+Klarifikasi pihak ketiga
+Surat fisik
+Form digital + verifikasi via API antar lembaga
+Pelaporan
+Unggah scan ke SIKI
+Integrasi langsung sistem LSP ↔ SIJK ↔ OSS
+Audit
+Sampling fisik
+Audit log digital + AI-assisted anomaly detection
+Rekaman uji
+Foto + berita acara fisik
+CCTV + AI proctoring + e-portfolio asesi
+Hard copy tidak akan hilang sepenuhnya dalam jangka pendek — terutama untuk daerah terbatas jaringan & jabatan teknik berat. Namun proporsi metode daring/hybrid akan terus naik. LSP yang siap adalah yang mampu menjalankan keduanya dengan tata kelola yang setara.
+33. Penutup — Prinsip Tak Berubah
+Apapun bentuk fisik atau digital materinya, lima prinsip ini melandasi seluruh ekosistem SKK Konstruksi:
+Kompetensi nyata harus dibuktikan — bukan dipindahkan dari jabatan ke jabatan tanpa uji.
+Bukti adalah raja — tanpa bukti, tidak ada keputusan kompeten.
+Pemisahan kewenangan adalah penjaga integritas — Asesi (subjek), ASKOM (penilai), LSP (pemutus), BNSP (pengawas).
+Kerahasiaan & imparsialitas adalah modal kepercayaan — sektor.
+Dokumentasi adalah sejarah & pertahanan — yang tidak terdokumentasi dianggap tidak terjadi.
+Materi pada thread ini sudah cukup komprehensif untuk menjadi dasar handbook, SOP, dan modul pelatihan internal LSP. Jika ingin saya kemas menjadi struktur halaman Notion siap pakai (misalnya: Handbook SKK Hard Copy dengan sub-halaman SOP, template, checklist, dan FAQ), tinggal sebut format yang diinginkan dan parent page-nya — saya akan langsung susun.
+

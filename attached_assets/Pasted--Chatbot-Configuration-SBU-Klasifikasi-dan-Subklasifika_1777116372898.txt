@@ -1,0 +1,2187 @@
+# Chatbot Configuration — SBU Klasifikasi dan Subklasifikasi
+# Format: YAML-like, siap dipakai sebagai blueprint untuk chatbot builder
+# Bahasa: Indonesia
+# Catatan: Konten katalog diambil dari lampiran tabel SBU. Deskripsi KBLI lengkap tetap dirujuk dari knowledge base tabel sumber.
+
+bot:
+  id: sbu_coach_klasifikasi_subklasifikasi_v1
+  name: "SBU Coach — Klasifikasi & Subklasifikasi"
+  locale: "id-ID"
+  tone: "profesional, jelas, ramah, konsultatif, berbasis data katalog"
+  audience:
+    - badan usaha jasa konstruksi
+    - konsultan perizinan SBU
+    - admin LSBU
+    - calon pemohon SBU
+    - asesor/verifikator internal
+    - tim tender/procurement yang perlu mencocokkan bidang usaha
+  purpose:
+    - membantu pengguna memahami klasifikasi dan subklasifikasi SBU
+    - membantu mencari subklasifikasi berdasarkan kode SBU, KBLI, kata kunci pekerjaan, atau jenis proyek
+    - menjelaskan ruang lingkup kegiatan berdasarkan deskripsi KBLI dan ruang lingkup tabel sumber
+    - membantu pemetaan awal antara pekerjaan/proyek dengan subklasifikasi yang mungkin relevan
+    - menyediakan asesmen mandiri awal untuk memilih subklasifikasi
+    - memberi checklist dokumen awal untuk konsultasi/pendaftaran SBU
+  non_goals:
+    - tidak menerbitkan SBU resmi
+    - tidak menggantikan verifikator/asesor LSBU
+    - tidak menjamin kelulusan atau persetujuan sertifikasi
+    - tidak menjadi sumber hukum tunggal untuk regulasi terbaru
+    - tidak memutuskan klasifikasi final tanpa validasi dokumen badan usaha
+
+knowledge_source:
+  id: uploaded_sbu_scope_catalog
+  source_type: "uploaded table"
+  source_name: "Ruang Lingkup LSBU Gamana Krida Bhakti — Semua Klasifikasi"
+  primary_fields:
+    - subklasifikasi
+    - kbli
+    - deskripsi_kbli
+    - ruang_lingkup_kegiatan
+    - detail_ruang_lingkup
+    - tkk_yang_boleh_merangkap
+    - peralatan_yang_boleh_merangkap
+    - peralatan_penyetaraan_subklas
+  usage:
+    - subklasifikasi lookup
+    - KBLI lookup
+    - keyword matching
+    - recommendation flow
+    - explanation response
+    - scope comparison
+
+classification_groups:
+  BG:
+    name: "Bangunan Gedung"
+    description: "Kelompok subklasifikasi untuk konstruksi gedung hunian, perkantoran, industri, perbelanjaan, kesehatan, pendidikan, penginapan, hiburan/olahraga, dan gedung lainnya."
+  BS:
+    name: "Bangunan Sipil"
+    description: "Kelompok subklasifikasi untuk jalan, jembatan, rel, irigasi, pengolahan air, limbah, elektrikal, telekomunikasi, SDA, pelabuhan, migas, pertambangan, panas bumi, olahraga, dan sipil lainnya."
+  IN:
+    name: "Instalasi"
+    description: "Kelompok subklasifikasi untuk instalasi mekanikal, telekomunikasi, peralatan infrastruktur, minyak dan gas, navigasi, elektronika, plambing, HVAC, pengolahan air pembangkit, sinyal, dan pemanas/geotermal."
+  KK:
+    name: "Konstruksi Khusus"
+    description: "Kelompok subklasifikasi pekerjaan khusus seperti pondasi, PLTA, pelindung pantai, perkerasan, kedap air/suara, drilling/grouting, struktur beton, terowongan, tahan api, dan baja."
+  KP:
+    name: "Konstruksi Prapabrikasi"
+    description: "Kelompok subklasifikasi pekerjaan prapabrikasi bangunan gedung dan bangunan sipil."
+  PA:
+    name: "Penyewaan Peralatan"
+    description: "Subklasifikasi penyewaan peralatan konstruksi dengan operator."
+  PB:
+    name: "Pekerjaan Bangunan / Penyelesaian Bangunan"
+    description: "Kelompok subklasifikasi pekerjaan kaca/aluminium, lantai-dinding-plafon, dekorasi interior, ornamen, pengecatan, pembersihan, lanskap, dan pemulihan lahan."
+  PL:
+    name: "Pekerjaan Persiapan Lapangan"
+    description: "Kelompok subklasifikasi pembongkaran, pengerukan, penyiapan lahan, pekerjaan tanah, pengeboran sumur, utilitas, survei lapangan, dan perancah."
+
+subklasifikasi_catalog:
+  # BG — Bangunan Gedung
+  - { code: "BG001", group: "BG", kbli: "41011", title: "Konstruksi Gedung Hunian", keywords: ["rumah", "hunian", "apartemen", "rusun", "kondominium"] }
+  - { code: "BG002", group: "BG", kbli: "41012", title: "Konstruksi Gedung Perkantoran", keywords: ["kantor", "rukan", "gedung kantor"] }
+  - { code: "BG003", group: "BG", kbli: "41013", title: "Konstruksi Gedung Industri", keywords: ["pabrik", "workshop", "bengkel", "industri"] }
+  - { code: "BG004", group: "BG", kbli: "41014", title: "Konstruksi Gedung Perbelanjaan", keywords: ["mall", "pasar", "toserba", "toko", "ruko", "warung"] }
+  - { code: "BG005", group: "BG", kbli: "41015", title: "Konstruksi Gedung Kesehatan", keywords: ["rumah sakit", "puskesmas", "klinik", "poliklinik", "laboratorium"] }
+  - { code: "BG006", group: "BG", kbli: "41016", title: "Konstruksi Gedung Pendidikan", keywords: ["sekolah", "kampus", "kursus", "laboratorium pendidikan"] }
+  - { code: "BG007", group: "BG", kbli: "41017", title: "Konstruksi Gedung Penginapan", keywords: ["hotel", "hostel", "losmen", "penginapan"] }
+  - { code: "BG008", group: "BG", kbli: "41018", title: "Konstruksi Gedung Tempat Hiburan dan Olahraga", keywords: ["bioskop", "gedung olahraga", "gedung kesenian", "rekreasi"] }
+  - { code: "BG009", group: "BG", kbli: "41019", title: "Konstruksi Gedung Lainnya", keywords: ["tempat ibadah", "terminal", "stasiun", "bandara", "hangar", "gedung negara", "gudang"] }
+
+  # BS — Bangunan Sipil
+  - { code: "BS001", group: "BS", kbli: "42101", title: "Konstruksi Bangunan Sipil Jalan", keywords: ["jalan", "jalan raya", "jalan tol", "landasan terbang", "container yard"] }
+  - { code: "BS002", group: "BS", kbli: "42102", title: "Bangunan Sipil Jembatan, Jalan Layang, Fly Over dan Underpass", keywords: ["jembatan", "jalan layang", "fly over", "underpass"] }
+  - { code: "BS003", group: "BS", kbli: "42103", title: "Konstruksi Jalan Rel", keywords: ["rel", "kereta api", "bantalan rel"] }
+  - { code: "BS004", group: "BS", kbli: "42201", title: "Konstruksi Jaringan Irigasi dan Drainase", keywords: ["irigasi", "drainase", "saluran air"] }
+  - { code: "BS005", group: "BS", kbli: "42202", title: "Konstruksi Bangunan Sipil Pengolahan Air Bersih", keywords: ["air bersih", "air minum", "reservoir", "menara air", "jaringan distribusi"] }
+  - { code: "BS006", group: "BS", kbli: "42203", title: "Konstruksi Bangunan Sipil Prasarana dan Sarana Sistem Pengolahan Limbah Padat, Cair & Gas", keywords: ["limbah", "air limbah", "incinerator", "septic", "TPA"] }
+  - { code: "BS007", group: "BS", kbli: "42204", title: "Konstruksi Bangunan Sipil Elektrikal", keywords: ["pembangkit", "transmisi", "distribusi listrik", "gardu induk", "tiang listrik"] }
+  - { code: "BS008", group: "BS", kbli: "42205", title: "Konstruksi Bangunan Sipil Telekomunikasi untuk Prasarana Transportasi", keywords: ["navigasi laut", "telekomunikasi transportasi", "sinyal kereta", "antena"] }
+  - { code: "BS009", group: "BS", kbli: "42206", title: "Konstruksi Sentral Telekomunikasi", keywords: ["sentral telepon", "radar", "stasiun bumi", "satelit", "kabel telekomunikasi"] }
+  - { code: "BS010", group: "BS", kbli: "42911", title: "Konstruksi Bangunan Prasarana Sumber Daya Air", keywords: ["bendungan", "bendung", "embung", "pintu air", "waduk", "tanggul"] }
+  - { code: "BS011", group: "BS", kbli: "42912", title: "Konstruksi Bangunan Pelabuhan Bukan Perikanan", keywords: ["pelabuhan", "dermaga", "jetty", "trestle", "lock"] }
+  - { code: "BS012", group: "BS", kbli: "42913", title: "Konstruksi Bangunan Pelabuhan Perikanan", keywords: ["pelabuhan perikanan", "dermaga perikanan", "jetty perikanan"] }
+  - { code: "BS013", group: "BS", kbli: "42915", title: "Konstruksi Bangunan Sipil Minyak dan Gas Bumi", keywords: ["migas", "minyak", "gas", "hulu", "hilir"] }
+  - { code: "BS014", group: "BS", kbli: "42916", title: "Konstruksi Bangunan Sipil Pertambangan", keywords: ["tambang", "pertambangan", "eksplorasi", "produksi tambang"] }
+  - { code: "BS015", group: "BS", kbli: "42917", title: "Konstruksi Bangunan Sipil Panas Bumi", keywords: ["panas bumi", "geothermal", "sumur panas bumi", "pipa penyalur"] }
+  - { code: "BS016", group: "BS", kbli: "42918", title: "Konstruksi Bangunan Sipil Fasilitas Olahraga", keywords: ["stadion", "lapangan", "kolam renang", "lintasan atletik", "golf"] }
+  - { code: "BS017", group: "BS", kbli: "42919", title: "Konstruksi Bangunan Sipil Lainnya YTDL", keywords: ["sarana lingkungan", "penataan lingkungan", "pabrik pengolahan", "mikroelektronika"] }
+  - { code: "BS018", group: "BS", kbli: "42923", title: "Konstruksi Bangunan Sipil Fasilitas Pengolahan Produk Kimia, Petrokimia, Farmasi dan Industri Lainnya", keywords: ["kimia", "petrokimia", "farmasi", "pupuk", "plastik", "karet"] }
+  - { code: "BS019", group: "BS", kbli: "42924", title: "Konstruksi Bangunan Sipil Fasilitas Militer dan Peluncuran Satelit", keywords: ["militer", "benteng", "pusat pengujian", "peluncuran satelit"] }
+  - { code: "BS020", group: "BS", kbli: "42209", title: "Konstruksi Jaringan Irigasi, Komunikasi dan Limbah Lainnya", keywords: ["irigasi lainnya", "komunikasi", "limbah lainnya", "prasarana kawasan"] }
+
+  # IN — Instalasi
+  - { code: "IN001", group: "IN", kbli: "43291", title: "Instalasi Mekanikal", keywords: ["lift", "eskalator", "conveyor", "travelator", "gondola", "pintu otomatis"] }
+  - { code: "IN002", group: "IN", kbli: "43212", title: "Instalasi Telekomunikasi", keywords: ["antena", "telekomunikasi", "sentral telepon", "transmisi", "jaringan telekomunikasi"] }
+  - { code: "IN003", group: "IN", kbli: "43299", title: "Instalasi Peralatan Infrastruktur Pertambangan dan Manufaktur", keywords: ["loading station", "winding shaft", "chemical plant", "blast furnace", "perpipaan"] }
+  - { code: "IN004", group: "IN", kbli: "43223", title: "Instalasi Minyak dan Gas", keywords: ["instalasi migas", "petrokimia", "panas bumi", "anjungan", "pipa bawah laut"] }
+  - { code: "IN005", group: "IN", kbli: "43214", title: "Instalasi Konstruksi Navigasi Laut, Sungai dan Udara", keywords: ["navigasi laut", "navigasi udara", "telekomunikasi pelayaran", "hidrografi", "meteorologi"] }
+  - { code: "IN006", group: "IN", kbli: "43213", title: "Instalasi Elektronika", keywords: ["alarm", "CCTV", "sound system", "access control", "scoring board", "master clock"] }
+  - { code: "IN007", group: "IN", kbli: "43221", title: "Instalasi Saluran Air (Plambing)", keywords: ["plambing", "air bersih", "air limbah", "WTP", "RO", "pompa"] }
+  - { code: "IN008", group: "IN", kbli: "43224", title: "Instalasi Pendingin dan Ventilasi Udara", keywords: ["AC", "HVAC", "ventilasi", "ducting", "pendingin"] }
+  - { code: "IN010", group: "IN", kbli: "43299", title: "Instalasi Pengolahan Air untuk Pembangkit Listrik", keywords: ["PLTU", "PLTG", "PLTGU", "PLTMG", "PLTN", "air murni"] }
+  - { code: "IN011", group: "IN", kbli: "43216", title: "Instalasi Sinyal dan Rambu-Rambu Jalan Raya", keywords: ["rambu", "marka jalan", "guardrail", "deliniator", "median beton"] }
+  - { code: "IN012", group: "IN", kbli: "43215", title: "Instalasi Sinyal dan Telekomunikasi Kereta Api", keywords: ["sinyal kereta", "telekomunikasi kereta", "instalasi kereta api"] }
+  - { code: "IN013", group: "IN", kbli: "43222", title: "Instalasi Pemanas dan Geotermal", keywords: ["heating", "geotermal", "boiler", "insulasi panas", "pelindung kebakaran"] }
+
+  # KK — Konstruksi Khusus
+  - { code: "KK001", group: "KK", kbli: "43901", title: "Pondasi Konstruksi", keywords: ["pondasi", "tiang pancang", "pengeboran pondasi", "pembesian pondasi"] }
+  - { code: "KK002", group: "KK", kbli: "42921", title: "Konstruksi Reservoir Pembangkit Listrik Tenaga Air", keywords: ["reservoir", "PLTA"] }
+  - { code: "KK003", group: "KK", kbli: "42921", title: "Konstruksi Intake, Control Gate, Penstock dan Outflow PLTA", keywords: ["intake", "control gate", "penstock", "outflow", "PLTA"] }
+  - { code: "KK004", group: "KK", kbli: "42922", title: "Konstruksi Pelindung Pantai", keywords: ["groin", "breakwater", "seawall", "beach nourishment", "terumbu buatan"] }
+  - { code: "KK005", group: "KK", kbli: "43909", title: "Pekerjaan Lapis Perkerasan Beton (Rigid Pavement)", keywords: ["rigid pavement", "perkerasan beton", "jalan beton"] }
+  - { code: "KK006", group: "KK", kbli: "43909", title: "Pekerjaan Konstruksi Kedap Air, Minyak dan Gas", keywords: ["kedap air", "kedap minyak", "kedap gas", "tangki penyimpanan"] }
+  - { code: "KK007", group: "KK", kbli: "43302", title: "Pekerjaan Konstruksi Kedap Suara", keywords: ["kedap suara", "akustik", "wallpaper", "pelapis dinding"] }
+  - { code: "KK008", group: "KK", kbli: "43909", title: "Perkerasan Aspal", keywords: ["aspal", "AC-WC", "AC-BC", "AC-Base", "burda", "burtu", "lapen"] }
+  - { code: "KK009", group: "KK", kbli: "43909", title: "Perkerasan Berbutir", keywords: ["agregat kelas A", "agregat kelas B", "agregat kelas C", "perkerasan berbutir"] }
+  - { code: "KK010", group: "KK", kbli: "43909", title: "Pengeboran dan Injeksi Semen Bertekanan (Drilling and Grouting)", keywords: ["drilling", "grouting", "injeksi semen", "stabilisasi tanah", "bendungan", "terowongan"] }
+  - { code: "KK011", group: "KK", kbli: "43903", title: "Pemasangan Rangka dan Atap / Roof Covering", keywords: ["rangka atap", "atap", "talang", "pengecatan atap"] }
+  - { code: "KK012", group: "KK", kbli: "43909", title: "Pekerjaan Struktur Beton", keywords: ["beton struktur", "pengecoran", "pembesian", "bekisting", "perancah"] }
+  - { code: "KK013", group: "KK", kbli: "43909", title: "Konstruksi Struktur Beton Pascatarik (Post Tensioned)", keywords: ["post tensioned", "beton pascatarik", "pracetak", "cor di tempat"] }
+  - { code: "KK014", group: "KK", kbli: "42104", title: "Konstruksi Terowongan", keywords: ["terowongan", "bor", "bekisting", "pembesian", "pegunungan", "bawah tanah"] }
+  - { code: "KK015", group: "KK", kbli: "43909", title: "Pekerjaan Konstruksi Tahan Api", keywords: ["tanur", "annealing", "flare", "incinerator", "tahan api"] }
+  - { code: "KK016", group: "KK", kbli: "43904", title: "Pemasangan Kerangka Baja", keywords: ["kerangka baja", "struktur baja", "jembatan baja"] }
+
+  # KP / PA / PB / PL
+  - { code: "KP001", group: "KP", kbli: "41020", title: "Pekerjaan Konstruksi Prapabrikasi Bangunan Gedung", keywords: ["prapabrikasi gedung", "beton pracetak", "erection gedung"] }
+  - { code: "KP002", group: "KP", kbli: "42930", title: "Pekerjaan Konstruksi Prapabrikasi Bangunan Sipil", keywords: ["prapabrikasi sipil", "beton pracetak", "erection sipil"] }
+  - { code: "PA001", group: "PA", kbli: "43905", title: "Penyewaan Peralatan Konstruksi", keywords: ["sewa alat", "operator alat", "peralatan konstruksi"] }
+  - { code: "PB001", group: "PB", kbli: "43301", title: "Pengerjaan Pemasangan Kaca dan Aluminium", keywords: ["kaca", "aluminium", "pintu", "jendela", "kusen"] }
+  - { code: "PB003", group: "PB", kbli: "43302", title: "Pengerjaan Lantai, Dinding, Peralatan Saniter dan Plafon", keywords: ["lantai", "dinding", "saniter", "plafon", "gypsum", "keramik", "marmer", "granit"] }
+  - { code: "PB004", group: "PB", kbli: "43304", title: "Dekorasi Interior", keywords: ["interior", "kitchen set", "partisi", "furnitur", "dekorasi"] }
+  - { code: "PB005", group: "PB", kbli: "43304", title: "Pemasangan Ornamen dan Pekerjaan Seni", keywords: ["ornamen", "seni", "logam", "kayu", "plafon"] }
+  - { code: "PB007", group: "PB", kbli: "43303", title: "Pengecatan", keywords: ["cat", "pengecatan", "interior", "eksterior"] }
+  - { code: "PB009", group: "PB", kbli: "43309", title: "Pembersihan dan Perapihan Bangunan Gedung dan/atau Bangunan Sipil", keywords: ["pembersihan", "perapihan", "sandblasting", "pemolesan", "perawatan umum"] }
+  - { code: "PB010", group: "PB", kbli: "43305", title: "Pekerjaan Lanskap, Pertamanan dan Penanaman Vegetasi", keywords: ["lanskap", "taman", "vegetasi", "rumput", "pohon"] }
+  - { code: "PB011", group: "PB", kbli: "43909", title: "Pemulihan Lahan Pekerjaan Konstruksi", keywords: ["pemulihan lahan", "reinstatement", "pengembalian fungsi lahan"] }
+  - { code: "PL001", group: "PL", kbli: "43110", title: "Pembongkaran Bangunan", keywords: ["bongkar", "demolition", "penghancuran", "perataan bangunan"] }
+  - { code: "PL002", group: "PL", kbli: "42914", title: "Pengerukan", keywords: ["pengerukan", "normalisasi", "sungai", "pelabuhan", "waduk", "kanal"] }
+  - { code: "PL003", group: "PL", kbli: "43120", title: "Penyiapan Lahan Konstruksi", keywords: ["pematangan lahan", "land clearing", "basecamp", "dewatering", "mobilisasi"] }
+  - { code: "PL004", group: "PL", kbli: "43120", title: "Pekerjaan Tanah", keywords: ["galian", "timbunan", "perataan tanah", "tanah berbatu"] }
+  - { code: "PL005", group: "PL", kbli: "42207", title: "Pembuatan/Pengeboran Sumur Air Tanah", keywords: ["sumur", "air tanah", "pengeboran air", "pompa"] }
+  - { code: "PL006", group: "PL", kbli: "43120", title: "Pelaksanaan Pekerjaan Utilitas", keywords: ["utilitas", "pemindahan utilitas", "perlindungan utilitas"] }
+  - { code: "PL007", group: "PL", kbli: "43120", title: "Survei Penyelidikan Lapangan", keywords: ["survei", "sondir", "bor", "penyelidikan lapangan", "uji tanah"] }
+  - { code: "PL008", group: "PL", kbli: "43902", title: "Pemasangan Perancah (Steiger)", keywords: ["perancah", "steiger", "scaffolding"] }
+
+global_user_variables:
+  profile:
+    user_name: null
+    business_type: null
+    project_type: null
+    target_subklasifikasi: null
+    target_kbli: null
+    experience_scope: []
+    needs: null
+  session:
+    current_flow: null
+    current_node: null
+    last_user_intent: null
+    fallback_count: 0
+    matched_candidates: []
+    selected_group: null
+    confidence_score: null
+  assessment:
+    readiness_level: null
+    possible_subklasifikasi: []
+    insufficient_info: []
+    recommended_next_steps: []
+
+entry_points:
+  greeting:
+    trigger: first_session_start
+    bot_message: >
+      Halo, saya SBU Coach. Saya dapat membantu Anda mencari klasifikasi dan
+      subklasifikasi SBU berdasarkan kode subklasifikasi, KBLI, jenis pekerjaan,
+      atau ruang lingkup proyek. Apa yang ingin Anda lakukan hari ini?
+    quick_replies:
+      - "Cari berdasarkan kode SBU"
+      - "Cari berdasarkan KBLI"
+      - "Cari berdasarkan jenis pekerjaan"
+      - "Lihat semua klasifikasi"
+      - "Bantu pilih subklasifikasi"
+      - "Tanya istilah SBU/KBLI"
+
+main_menu:
+  id: main_menu
+  bot_message: "Pilih kebutuhan Anda:"
+  options:
+    - { label: "1. Lihat semua klasifikasi", next_node: "classification_overview" }
+    - { label: "2. Cari detail subklasifikasi", next_node: "lookup_subklasifikasi" }
+    - { label: "3. Cari berdasarkan KBLI", next_node: "lookup_kbli" }
+    - { label: "4. Cari berdasarkan kata kunci pekerjaan", next_node: "keyword_search" }
+    - { label: "5. Bantu pilih subklasifikasi", next_node: "recommendation_form" }
+    - { label: "6. Bandingkan dua subklasifikasi", next_node: "compare_subklasifikasi" }
+    - { label: "7. Checklist awal SBU", next_node: "evidence_checklist" }
+    - { label: "8. Tanya istilah", next_node: "glossary_lookup" }
+
+intents:
+  greet:
+    description: "Pengguna menyapa atau memulai sesi."
+    examples: ["Halo", "Mulai", "Saya mau cari SBU", "Bisa bantu klasifikasi?"]
+    response_template: greeting_main
+    next_node: main_menu
+  explain_sbu_scope:
+    description: "Pengguna bertanya ruang lingkup SBU/klasifikasi."
+    examples: ["SBU itu apa?", "Klasifikasi SBU apa saja?", "Apa bedanya BG dan BS?"]
+    response_template: explain_sbu_scope_response
+  lookup_subklasifikasi:
+    description: "Pengguna mencari kode subklasifikasi tertentu."
+    examples: ["BG001", "Jelaskan BS001", "Apa ruang lingkup IN007?", "Detail KK012"]
+    entities: [subklasifikasi_code]
+    response_template: subklasifikasi_detail_response
+  lookup_kbli:
+    description: "Pengguna mencari berdasarkan KBLI."
+    examples: ["KBLI 41011", "43221 masuk subklasifikasi apa?", "Cari KBLI 42101"]
+    entities: [kbli_code]
+    response_template: kbli_lookup_response
+  keyword_search:
+    description: "Pengguna mencari berdasarkan pekerjaan/proyek."
+    examples: ["pekerjaan jalan tol", "pemasangan AC", "bangun rumah sakit", "pengerukan sungai", "pekerjaan pondasi"]
+    entities: [work_keyword]
+    response_template: keyword_candidates_response
+  recommendation:
+    description: "Pengguna meminta rekomendasi subklasifikasi."
+    examples: ["Saya cocok ambil SBU apa?", "Proyek saya pembangunan mall", "Bantu pilih subklasifikasi"]
+    response_template: recommendation_intro
+  compare_subklasifikasi:
+    description: "Pengguna membandingkan dua kode atau dua bidang."
+    examples: ["BG001 vs BG009", "BS004 beda dengan BS020?", "KK008 atau BS001?"]
+    entities: [subklasifikasi_a, subklasifikasi_b]
+    response_template: comparison_response
+  evidence_checklist:
+    description: "Pengguna meminta checklist dokumen awal."
+    examples: ["Dokumen apa yang perlu disiapkan?", "Checklist SBU BG001", "Persiapan SBU"]
+    response_template: checklist_response
+  glossary_lookup:
+    description: "Pengguna bertanya istilah teknis."
+    examples: ["Apa itu KBLI?", "Apa arti subklasifikasi?", "Apa itu rigid pavement?"]
+    entities: [term]
+    response_template: glossary_dynamic_response
+
+flows:
+  classification_overview:
+    type: menu
+    bot_message: >
+      Katalog SBU dalam lampiran dikelompokkan menjadi 8 kelompok utama:
+      BG, BS, IN, KK, KP, PA, PB, dan PL. Pilih kelompok untuk melihat daftar subklasifikasi.
+    options:
+      - { label: "BG — Bangunan Gedung", next_node: "show_group_BG" }
+      - { label: "BS — Bangunan Sipil", next_node: "show_group_BS" }
+      - { label: "IN — Instalasi", next_node: "show_group_IN" }
+      - { label: "KK — Konstruksi Khusus", next_node: "show_group_KK" }
+      - { label: "KP — Konstruksi Prapabrikasi", next_node: "show_group_KP" }
+      - { label: "PA — Penyewaan Peralatan", next_node: "show_group_PA" }
+      - { label: "PB — Pekerjaan Bangunan", next_node: "show_group_PB" }
+      - { label: "PL — Persiapan Lapangan", next_node: "show_group_PL" }
+
+  lookup_subklasifikasi:
+    type: dynamic_lookup
+    prompt: "Ketik kode subklasifikasi, contoh: BG001, BS001, IN007, KK012, atau PL003."
+    lookup_order:
+      - exact_subklasifikasi_code
+      - normalized_subklasifikasi_code
+      - fuzzy_title_match
+      - keyword_match
+    exact_match_response: subklasifikasi_detail_response
+    no_match_response: >
+      Saya belum menemukan kode tersebut di katalog. Coba gunakan format kode seperti BG001, BS001,
+      IN007, KK012, KP001, PA001, PB003, atau PL003.
+
+  lookup_kbli:
+    type: dynamic_lookup
+    prompt: "Ketik kode KBLI, contoh: 41011, 42101, 43221, 43909, atau 43120."
+    response_rule: >
+      Tampilkan semua subklasifikasi yang memakai KBLI tersebut. Jika satu KBLI dipakai oleh beberapa
+      subklasifikasi, kelompokkan berdasarkan kode dan jelaskan perbedaan fokusnya.
+
+  keyword_search:
+    type: semantic_search
+    prompt: "Tuliskan jenis pekerjaan/proyek, misalnya 'bangun hotel', 'jalan tol', 'pemasangan AC', atau 'pengerukan sungai'."
+    matching_strategy:
+      - title_keyword_match
+      - catalog_keywords_match
+      - deskripsi_kbli_full_text_match
+      - group_context_match
+    response_rule: >
+      Berikan 1–5 kandidat subklasifikasi paling relevan, sertakan alasan singkat, KBLI,
+      dan pertanyaan klarifikasi jika kandidatnya mirip.
+
+  recommendation_form:
+    type: guided_form
+    bot_message: "Saya akan bantu memetakan subklasifikasi awal. Jawab beberapa pertanyaan singkat."
+    questions:
+      - id: q_project_object
+        text: "Objek utama pekerjaannya apa?"
+        quick_replies: ["Gedung", "Jalan/Jembatan", "Air/Irigasi/Limbah", "Instalasi", "Pekerjaan khusus", "Finishing bangunan", "Persiapan lahan"]
+        save_to: profile.project_type
+      - id: q_project_detail
+        text: "Sebutkan detail pekerjaan atau contoh proyeknya."
+        expected_type: text
+        save_to: profile.experience_scope
+      - id: q_business_need
+        text: "Tujuan Anda apa?"
+        quick_replies: ["Mendaftar SBU", "Ikut tender", "Cek kesesuaian KBLI", "Membandingkan subklasifikasi", "Belajar ruang lingkup"]
+        save_to: profile.needs
+    completion_response: recommendation_result
+
+  assessment_start:
+    type: self_assessment
+    title: "Asesmen Mandiri Pemilihan Subklasifikasi SBU"
+    bot_message: >
+      Asesmen ini membantu memetakan kemungkinan subklasifikasi awal berdasarkan jenis pekerjaan.
+      Hasilnya bukan keputusan resmi dan perlu diverifikasi dengan dokumen serta persyaratan LSBU.
+    scale:
+      0: "Tidak relevan"
+      1: "Mungkin relevan"
+      2: "Relevan sebagian"
+      3: "Sangat relevan"
+    questions:
+      - { id: assess_building, cluster: "BG", text: "Apakah pekerjaan utama berupa pembangunan, renovasi, pemeliharaan, atau pembongkaran/pembangunan kembali gedung?" }
+      - { id: assess_civil, cluster: "BS", text: "Apakah pekerjaan utama berupa jalan, jembatan, rel, irigasi, pelabuhan, air, limbah, atau prasarana sipil?" }
+      - { id: assess_installation, cluster: "IN", text: "Apakah pekerjaan utama berupa pemasangan instalasi mekanikal, telekomunikasi, elektronik, plambing, HVAC, migas, atau sinyal?" }
+      - { id: assess_special, cluster: "KK", text: "Apakah pekerjaan utama berupa pondasi, perkerasan, terowongan, beton struktur, baja, drilling/grouting, atau pekerjaan khusus lain?" }
+      - { id: assess_prefab, cluster: "KP", text: "Apakah pekerjaan menggunakan komponen prapabrikasi untuk gedung atau bangunan sipil?" }
+      - { id: assess_equipment, cluster: "PA", text: "Apakah usaha utama berupa penyewaan peralatan konstruksi dengan operator?" }
+      - { id: assess_finishing, cluster: "PB", text: "Apakah pekerjaan utama berupa finishing, interior, kaca/aluminium, pengecatan, plafon, lanskap, atau pembersihan bangunan?" }
+      - { id: assess_preparation, cluster: "PL", text: "Apakah pekerjaan utama berupa pembongkaran, pengerukan, penyiapan lahan, pekerjaan tanah, sumur, utilitas, survei, atau perancah?" }
+    result_logic:
+      - condition: "highest_cluster_score >= 2.5"
+        message: "Kemungkinan kelompok utama Anda adalah {{highest_cluster}}. Saya akan tampilkan kandidat subklasifikasi berdasarkan detail pekerjaan."
+      - condition: "highest_cluster_score < 2.5"
+        message: "Informasi masih belum cukup spesifik. Saya akan ajukan pertanyaan klarifikasi berdasarkan objek pekerjaan dan metode pelaksanaan."
+
+response_templates:
+  greeting_main:
+    text: >
+      Halo. Saya siap membantu Anda mencari klasifikasi dan subklasifikasi SBU.
+      Anda bisa mencari berdasarkan kode SBU, KBLI, jenis pekerjaan, atau meminta rekomendasi awal.
+    quick_replies: ["Kode SBU", "KBLI", "Jenis pekerjaan", "Lihat klasifikasi", "Bantu pilih"]
+
+  explain_sbu_scope_response:
+    text: >
+      Katalog SBU pada lampiran berisi daftar subklasifikasi, KBLI, deskripsi KBLI,
+      ruang lingkup kegiatan, detail ruang lingkup, serta informasi terkait TKK dan peralatan
+      yang boleh merangkap. Kelompok utamanya adalah BG, BS, IN, KK, KP, PA, PB, dan PL.
+      Mau mulai dari kelompok mana?
+
+  subklasifikasi_detail_response:
+    structure:
+      - "Kode subklasifikasi"
+      - "Kelompok klasifikasi"
+      - "KBLI"
+      - "Nama/deskripsi KBLI"
+      - "Ringkasan ruang lingkup"
+      - "Contoh pekerjaan yang termasuk"
+      - "Hal yang perlu diklarifikasi"
+      - "Aksi lanjutan"
+    template: >
+      {{code}} — {{title}}
+      Kelompok: {{group_name}}
+      KBLI: {{kbli}}
+      Ringkasan ruang lingkup: {{scope_summary}}
+      Contoh pekerjaan terkait: {{examples}}
+      Catatan: Untuk keputusan final, cocokkan dengan dokumen usaha, pengalaman pekerjaan,
+      peralatan, TKK, dan ketentuan LSBU yang berlaku.
+      Apa yang ingin Anda lakukan berikutnya?
+    quick_replies: ["Checklist dokumen", "Bandingkan", "Cari subklasifikasi lain", "Kembali ke menu"]
+
+  kbli_lookup_response:
+    template: >
+      Untuk KBLI {{kbli}}, saya menemukan kandidat berikut:
+      {{matched_subklasifikasi_list}}
+      Jika satu KBLI muncul pada beberapa subklasifikasi, perbedaan utamanya ada pada objek pekerjaan,
+      metode, atau ruang lingkup khusus. Pilih salah satu untuk melihat detail.
+
+  keyword_candidates_response:
+    template: >
+      Berdasarkan kata kunci “{{keyword}}”, kandidat subklasifikasi yang paling relevan adalah:
+      {{ranked_candidates}}
+      Saya sarankan memilih kandidat dengan ruang lingkup yang paling sesuai dengan objek pekerjaan,
+      bukan hanya kemiripan nama.
+    candidate_format: "{{rank}}. {{code}} — {{title}} | KBLI {{kbli}} | Alasan: {{match_reason}}"
+
+  recommendation_result:
+    template: >
+      Berdasarkan jawaban Anda, kemungkinan kelompok utamanya adalah {{recommended_group}}.
+      Kandidat subklasifikasi awal:
+      {{candidate_list}}
+      Untuk mempersempit pilihan, saya perlu memastikan: apakah pekerjaan Anda lebih dominan pada
+      {{clarification_question}}?
+
+  comparison_response:
+    template: >
+      Berikut perbandingan {{code_a}} dan {{code_b}}:
+      1. Kelompok: {{group_a}} vs {{group_b}}
+      2. KBLI: {{kbli_a}} vs {{kbli_b}}
+      3. Fokus pekerjaan: {{focus_a}} vs {{focus_b}}
+      4. Cocok untuk: {{fit_a}} vs {{fit_b}}
+      Rekomendasi: {{recommendation}}
+
+  checklist_response:
+    text: >
+      Checklist awal untuk konsultasi/pendaftaran SBU:
+      1. Data badan usaha dan perizinan dasar.
+      2. KBLI pada legalitas usaha yang relevan.
+      3. Pengalaman pekerjaan sesuai subklasifikasi yang dituju.
+      4. Data tenaga kerja/TKK yang relevan jika dipersyaratkan.
+      5. Data peralatan utama jika dipersyaratkan.
+      6. Dokumen pendukung proyek: kontrak, BAST, invoice, foto pekerjaan, atau referensi proyek.
+      7. Validasi kecocokan ruang lingkup dengan tabel subklasifikasi.
+      Catatan: checklist ini bersifat awal dan perlu disesuaikan dengan persyaratan LSBU terbaru.
+
+  assessment_feedback:
+    structure:
+      - "Kandidat kelompok"
+      - "Subklasifikasi yang mungkin relevan"
+      - "Informasi yang masih kurang"
+      - "Rekomendasi langkah berikutnya"
+      - "Disclaimer"
+    template: >
+      Hasil pemetaan awal menunjukkan {{recommended_group}} sebagai kelompok paling relevan.
+      Kandidat subklasifikasi: {{possible_subklasifikasi}}.
+      Informasi yang masih perlu dilengkapi: {{insufficient_info}}.
+      Langkah berikutnya: {{recommended_next_steps}}.
+      Hasil ini adalah rekomendasi awal, bukan keputusan resmi sertifikasi.
+
+  glossary_dynamic_response:
+    template: >
+      {{term}}: {{definition}}
+      Contoh penggunaan: {{example}}
+      Ingin saya hubungkan istilah ini dengan subklasifikasi tertentu?
+
+glossary:
+  SBU: "Sertifikat Badan Usaha, yaitu sertifikat yang menunjukkan klasifikasi dan subklasifikasi badan usaha jasa konstruksi sesuai ruang lingkup usaha."
+  Subklasifikasi: "Kode bidang pekerjaan yang lebih spesifik di dalam klasifikasi SBU, misalnya BG001, BS001, IN007, atau KK012."
+  KBLI: "Klasifikasi Baku Lapangan Usaha Indonesia, yaitu kode kegiatan usaha yang menjadi acuan bidang usaha."
+  Ruang Lingkup: "Batasan pekerjaan atau kegiatan yang tercakup dalam suatu subklasifikasi."
+  BG: "Kelompok Bangunan Gedung."
+  BS: "Kelompok Bangunan Sipil."
+  IN: "Kelompok Instalasi."
+  KK: "Kelompok Konstruksi Khusus."
+  KP: "Kelompok Konstruksi Prapabrikasi."
+  PA: "Kelompok Penyewaan Peralatan."
+  PB: "Kelompok Pekerjaan Bangunan atau penyelesaian bangunan."
+  PL: "Kelompok Pekerjaan Persiapan Lapangan."
+
+fallback:
+  confidence_threshold: 0.65
+  first_fallback:
+    condition: "intent_confidence < 0.65 and fallback_count == 0"
+    bot_message: >
+      Maaf, saya belum menangkap maksud Anda dengan jelas. Apakah Anda ingin mencari berdasarkan kode SBU,
+      KBLI, jenis pekerjaan, atau melihat daftar klasifikasi?
+    quick_replies: ["Kode SBU", "KBLI", "Jenis pekerjaan", "Lihat klasifikasi", "Bantu pilih"]
+  second_fallback:
+    condition: "intent_confidence < 0.65 and fallback_count == 1"
+    bot_message: >
+      Coba tuliskan dengan format: “Saya ingin mencari subklasifikasi untuk [jenis pekerjaan]”.
+      Contoh: “Saya ingin mencari subklasifikasi untuk pemasangan AC gedung.”
+    quick_replies: ["Kembali ke menu", "Lihat contoh", "Mulai pemetaan"]
+  escalation_fallback:
+    condition: "fallback_count >= 2"
+    bot_message: >
+      Saya arahkan ke menu utama agar lebih mudah. Pilih salah satu jalur pencarian.
+    next_node: main_menu
+
+guardrails:
+  accuracy:
+    - "Jangan menyatakan SBU pasti disetujui atau ditolak."
+    - "Jangan mengarang subklasifikasi atau KBLI di luar katalog sumber."
+    - "Jika data tidak ditemukan, nyatakan tidak ditemukan dan minta kata kunci/kode lain."
+    - "Jika pengguna meminta regulasi terbaru, sarankan verifikasi ke sumber resmi/LSBU terkait."
+    - "Pisahkan rekomendasi awal chatbot dari keputusan resmi verifikasi."
+  safety_and_compliance:
+    - "Jangan menyarankan manipulasi KBLI, pengalaman proyek, tenaga kerja, atau data peralatan."
+    - "Jika pengguna meminta cara mengakali persyaratan, arahkan ke pemenuhan dokumen yang benar."
+    - "Untuk pekerjaan berisiko tinggi seperti pembongkaran, migas, pertambangan, atau nuklir, tekankan perlunya validasi teknis dan kepatuhan regulasi."
+  tone:
+    - "Gunakan bahasa Indonesia formal dan mudah dipahami."
+    - "Berikan contoh praktis jenis proyek."
+    - "Ajukan satu pertanyaan klarifikasi dalam satu waktu."
+    - "Gunakan daftar ringkas saat menampilkan kandidat."
+
+handler_priority:
+  order:
+    - safety_guardrail
+    - exact_subklasifikasi_lookup
+    - exact_kbli_lookup
+    - exact_group_lookup
+    - keyword_semantic_search
+    - recommendation_flow
+    - comparison_flow
+    - glossary_lookup
+    - fallback
+
+minimum_working_routes:
+  - route_main_menu
+  - route_show_classification_groups
+  - route_lookup_subklasifikasi
+  - route_lookup_kbli
+  - route_keyword_search
+  - route_recommendation_form
+  - route_compare_subklasifikasi
+  - route_evidence_checklist
+  - route_glossary
+  - route_fallback
+  - route_safety_compliance
+
+example_conversation:
+  - user: "Saya mau cari SBU untuk pekerjaan pemasangan AC gedung."
+  - bot: >
+      Kandidat paling relevan adalah IN008 — Instalasi Pendingin dan Ventilasi Udara, KBLI 43224.
+      Subklasifikasi ini mencakup pemasangan ventilasi, pendingin, dan penyejuk udara/AC untuk bangunan gedung,
+      termasuk pekerjaan pipa, ducting, dan lembaran logam. Apakah pekerjaan Anda mencakup instalasi AC/HVAC,
+      ducting, atau hanya pengadaan unit?
+  - user: "Termasuk ducting dan pipa."
+  - bot: >
+      Baik, IN008 semakin relevan karena ruang lingkupnya mencakup AC/HVAC, pipa, ducting, dan lembaran logam.
+      Saya bisa bantu buat checklist awal dokumen untuk subklasifikasi ini.
+
+implementation_notes:
+  nlp:
+    intent_matching:
+      - keyword matching for MVP
+      - exact code parser for codes like BG001/BS001/IN007/KK012
+      - KBLI parser for five-digit numeric codes
+      - semantic search over title, keywords, deskripsi KBLI, and ruang lingkup
+    entity_extraction:
+      - subklasifikasi_code
+      - kbli_code
+      - classification_group
+      - work_keyword
+      - project_object
+      - comparison_pair
+  data_storage:
+    store:
+      - selected_subklasifikasi
+      - selected_kbli
+      - candidate_list
+      - user_project_context
+      - last_search_keyword
+      - fallback_count
+  analytics:
+    track:
+      - most_searched_subklasifikasi
+      - most_searched_kbli
+      - no_match_keywords
+      - fallback_rate
+      - recommendation_completion_rate
+      - group_selection_frequency
+  future_extensions:
+    - admin panel untuk update katalog SBU
+    - upload dokumen legalitas dan pengalaman proyek untuk checklist otomatis
+    - export ringkasan konsultasi SBU ke PDF
+    - integrasi database KBLI resmi
+    - versioning katalog saat regulasi berubah
+
+builder_prompt_final:
+  text: >
+    Buat chatbot profesional berbahasa Indonesia bernama “SBU Coach — Klasifikasi & Subklasifikasi”.
+    Chatbot membantu pengguna mencari dan memahami subklasifikasi SBU berdasarkan katalog terlampir
+    yang berisi kode subklasifikasi, KBLI, deskripsi KBLI, ruang lingkup kegiatan, detail ruang lingkup,
+    TKK yang boleh merangkap, dan peralatan yang boleh merangkap. Ikuti struktur chatbot builder:
+    greeting flow, menu utama, intents, sample utterances, response templates, quick replies,
+    dynamic lookup, recommendation flow, comparison flow, self-assessment awal, glossary, evidence checklist,
+    fallback, guardrails, session summary, dan implementation notes. Bot harus dapat mencari berdasarkan
+    kode SBU seperti BG001, KBLI seperti 41011, kelompok seperti BG/BS/IN/KK/KP/PA/PB/PL, serta kata kunci
+    pekerjaan seperti hotel, jalan, AC, pondasi, pengerukan, perancah, atau interior. Bot tidak boleh menyatakan
+    sertifikasi pasti disetujui; bot hanya memberi rekomendasi awal dan menyarankan validasi ke LSBU/sumber resmi.
+
+
+# -----------------------------------------------------------------------------
+# LANJUTAN — Operational Layer for Builder Implementation
+# -----------------------------------------------------------------------------
+
+static_group_response_map:
+  BG:
+    title: "BG — Bangunan Gedung"
+    bot_message: >
+      Kelompok BG digunakan untuk pekerjaan konstruksi bangunan gedung, termasuk
+      pembangunan, pemeliharaan, pembongkaran, pembangunan kembali, perubahan,
+      dan renovasi gedung sesuai fungsi bangunannya.
+    subklasifikasi:
+      - "BG001 — Konstruksi Gedung Hunian — KBLI 41011"
+      - "BG002 — Konstruksi Gedung Perkantoran — KBLI 41012"
+      - "BG003 — Konstruksi Gedung Industri — KBLI 41013"
+      - "BG004 — Konstruksi Gedung Perbelanjaan — KBLI 41014"
+      - "BG005 — Konstruksi Gedung Kesehatan — KBLI 41015"
+      - "BG006 — Konstruksi Gedung Pendidikan — KBLI 41016"
+      - "BG007 — Konstruksi Gedung Penginapan — KBLI 41017"
+      - "BG008 — Konstruksi Gedung Tempat Hiburan dan Olahraga — KBLI 41018"
+      - "BG009 — Konstruksi Gedung Lainnya — KBLI 41019"
+    clarification_prompt: >
+      Fungsi utama gedung yang Anda kerjakan apa: hunian, kantor, industri,
+      perbelanjaan, kesehatan, pendidikan, penginapan, hiburan/olahraga, atau lainnya?
+
+  BS:
+    title: "BS — Bangunan Sipil"
+    bot_message: >
+      Kelompok BS digunakan untuk konstruksi bangunan sipil dan prasarana,
+      seperti jalan, jembatan, rel, irigasi, air bersih, limbah, elektrikal,
+      telekomunikasi, sumber daya air, pelabuhan, migas, pertambangan, panas bumi,
+      fasilitas olahraga, dan bangunan sipil lainnya.
+    subklasifikasi:
+      - "BS001 — Konstruksi Bangunan Sipil Jalan — KBLI 42101"
+      - "BS002 — Jembatan/Jalan Layang/Fly Over/Underpass — KBLI 42102"
+      - "BS003 — Konstruksi Jalan Rel — KBLI 42103"
+      - "BS004 — Konstruksi Jaringan Irigasi dan Drainase — KBLI 42201"
+      - "BS005 — Pengolahan Air Bersih — KBLI 42202"
+      - "BS006 — Pengolahan Limbah Padat, Cair & Gas — KBLI 42203"
+      - "BS007 — Bangunan Sipil Elektrikal — KBLI 42204"
+      - "BS008 — Telekomunikasi untuk Prasarana Transportasi — KBLI 42205"
+      - "BS009 — Sentral Telekomunikasi — KBLI 42206"
+      - "BS010 — Prasarana Sumber Daya Air — KBLI 42911"
+      - "BS011 — Pelabuhan Bukan Perikanan — KBLI 42912"
+      - "BS012 — Pelabuhan Perikanan — KBLI 42913"
+      - "BS013 — Bangunan Sipil Minyak dan Gas Bumi — KBLI 42915"
+      - "BS014 — Bangunan Sipil Pertambangan — KBLI 42916"
+      - "BS015 — Bangunan Sipil Panas Bumi — KBLI 42917"
+      - "BS016 — Fasilitas Olahraga — KBLI 42918"
+      - "BS017 — Bangunan Sipil Lainnya YTDL — KBLI 42919"
+      - "BS018 — Fasilitas Pengolahan Kimia/Petrokimia/Farmasi — KBLI 42923"
+      - "BS019 — Fasilitas Militer dan Peluncuran Satelit — KBLI 42924"
+      - "BS020 — Jaringan Irigasi, Komunikasi dan Limbah Lainnya — KBLI 42209"
+    clarification_prompt: >
+      Objek pekerjaan sipilnya apa: jalan, jembatan, rel, irigasi, air bersih,
+      limbah, listrik, telekomunikasi, SDA, pelabuhan, migas, tambang, panas bumi,
+      olahraga, atau prasarana lainnya?
+
+  IN:
+    title: "IN — Instalasi"
+    bot_message: >
+      Kelompok IN digunakan untuk pekerjaan pemasangan instalasi pada bangunan
+      gedung atau bangunan sipil, seperti mekanikal, telekomunikasi, migas,
+      navigasi, elektronika, plambing, HVAC, sinyal, dan pemanas/geotermal.
+    subklasifikasi:
+      - "IN001 — Instalasi Mekanikal — KBLI 43291"
+      - "IN002 — Instalasi Telekomunikasi — KBLI 43212"
+      - "IN003 — Instalasi Peralatan Infrastruktur Pertambangan dan Manufaktur — KBLI 43299"
+      - "IN004 — Instalasi Minyak dan Gas — KBLI 43223"
+      - "IN005 — Instalasi Konstruksi Navigasi Laut, Sungai dan Udara — KBLI 43214"
+      - "IN006 — Instalasi Elektronika — KBLI 43213"
+      - "IN007 — Instalasi Saluran Air / Plambing — KBLI 43221"
+      - "IN008 — Instalasi Pendingin dan Ventilasi Udara — KBLI 43224"
+      - "IN010 — Instalasi Pengolahan Air untuk Pembangkit Listrik — KBLI 43299"
+      - "IN011 — Instalasi Sinyal dan Rambu-Rambu Jalan Raya — KBLI 43216"
+      - "IN012 — Instalasi Sinyal dan Telekomunikasi Kereta Api — KBLI 43215"
+      - "IN013 — Instalasi Pemanas dan Geotermal — KBLI 43222"
+    clarification_prompt: >
+      Jenis instalasinya apa: lift/eskalator, telekomunikasi, migas, navigasi,
+      elektronika/CCTV, plambing, AC/HVAC, rambu jalan, sinyal kereta, atau pemanas/geotermal?
+
+  KK:
+    title: "KK — Konstruksi Khusus"
+    bot_message: >
+      Kelompok KK digunakan untuk pekerjaan konstruksi khusus yang biasanya
+      menjadi bagian spesifik dari pekerjaan gedung atau sipil, seperti pondasi,
+      perkerasan, drilling/grouting, struktur beton, terowongan, tahan api, dan baja.
+    subklasifikasi:
+      - "KK001 — Pondasi Konstruksi — KBLI 43901"
+      - "KK002 — Reservoir PLTA — KBLI 42921"
+      - "KK003 — Intake, Control Gate, Penstock dan Outflow PLTA — KBLI 42921"
+      - "KK004 — Pelindung Pantai — KBLI 42922"
+      - "KK005 — Lapis Perkerasan Beton / Rigid Pavement — KBLI 43909"
+      - "KK006 — Konstruksi Kedap Air, Minyak dan Gas — KBLI 43909"
+      - "KK007 — Konstruksi Kedap Suara — KBLI 43302"
+      - "KK008 — Perkerasan Aspal — KBLI 43909"
+      - "KK009 — Perkerasan Berbutir — KBLI 43909"
+      - "KK010 — Drilling and Grouting — KBLI 43909"
+      - "KK011 — Pemasangan Rangka dan Atap / Roof Covering — KBLI 43903"
+      - "KK012 — Pekerjaan Struktur Beton — KBLI 43909"
+      - "KK013 — Beton Pascatarik / Post Tensioned — KBLI 43909"
+      - "KK014 — Konstruksi Terowongan — KBLI 42104"
+      - "KK015 — Konstruksi Tahan Api — KBLI 43909"
+      - "KK016 — Pemasangan Kerangka Baja — KBLI 43904"
+    clarification_prompt: >
+      Pekerjaan khususnya apa: pondasi, PLTA, pelindung pantai, rigid pavement,
+      aspal, agregat, grouting, atap, beton struktur, post tensioned, terowongan,
+      tahan api, atau kerangka baja?
+
+  KP:
+    title: "KP — Konstruksi Prapabrikasi"
+    bot_message: >
+      Kelompok KP digunakan untuk pekerjaan pemasangan bahan hasil produksi pabrik
+      seperti beton pracetak, baja, plastik, karet, atau produk pabrik lainnya
+      dengan metode fabrikasi, erection, atau perakitan.
+    subklasifikasi:
+      - "KP001 — Prapabrikasi Bangunan Gedung — KBLI 41020"
+      - "KP002 — Prapabrikasi Bangunan Sipil — KBLI 42930"
+    clarification_prompt: >
+      Prapabrikasi yang dikerjakan untuk bangunan gedung atau bangunan sipil?
+
+  PA:
+    title: "PA — Penyewaan Peralatan"
+    bot_message: >
+      Kelompok PA digunakan untuk usaha penyewaan peralatan konstruksi dengan operator.
+    subklasifikasi:
+      - "PA001 — Penyewaan Peralatan Konstruksi — KBLI 43905"
+    clarification_prompt: >
+      Apakah kegiatan usaha Anda berupa penyewaan alat konstruksi dengan operator?
+
+  PB:
+    title: "PB — Pekerjaan Bangunan / Penyelesaian Bangunan"
+    bot_message: >
+      Kelompok PB digunakan untuk pekerjaan penyelesaian atau finishing bangunan,
+      termasuk kaca/aluminium, lantai, dinding, plafon, saniter, dekorasi interior,
+      ornamen, pengecatan, pembersihan, lanskap, dan pemulihan lahan.
+    subklasifikasi:
+      - "PB001 — Pemasangan Kaca dan Aluminium — KBLI 43301"
+      - "PB003 — Lantai, Dinding, Saniter dan Plafon — KBLI 43302"
+      - "PB004 — Dekorasi Interior — KBLI 43304"
+      - "PB005 — Ornamen dan Pekerjaan Seni — KBLI 43304"
+      - "PB007 — Pengecatan — KBLI 43303"
+      - "PB009 — Pembersihan dan Perapihan Bangunan — KBLI 43309"
+      - "PB010 — Lanskap, Pertamanan dan Vegetasi — KBLI 43305"
+      - "PB011 — Pemulihan Lahan Pekerjaan Konstruksi — KBLI 43909"
+    clarification_prompt: >
+      Pekerjaan finishingnya apa: kaca/aluminium, lantai/dinding/plafon, interior,
+      ornamen, pengecatan, pembersihan, lanskap, atau pemulihan lahan?
+
+  PL:
+    title: "PL — Pekerjaan Persiapan Lapangan"
+    bot_message: >
+      Kelompok PL digunakan untuk pekerjaan awal atau penunjang sebelum/selama
+      konstruksi, seperti pembongkaran, pengerukan, penyiapan lahan, pekerjaan tanah,
+      sumur air tanah, utilitas, survei penyelidikan lapangan, dan perancah.
+    subklasifikasi:
+      - "PL001 — Pembongkaran Bangunan — KBLI 43110"
+      - "PL002 — Pengerukan — KBLI 42914"
+      - "PL003 — Penyiapan Lahan Konstruksi — KBLI 43120"
+      - "PL004 — Pekerjaan Tanah — KBLI 43120"
+      - "PL005 — Pembuatan/Pengeboran Sumur Air Tanah — KBLI 42207"
+      - "PL006 — Pelaksanaan Pekerjaan Utilitas — KBLI 43120"
+      - "PL007 — Survei Penyelidikan Lapangan — KBLI 43120"
+      - "PL008 — Pemasangan Perancah / Steiger — KBLI 43902"
+    clarification_prompt: >
+      Pekerjaan persiapannya apa: pembongkaran, pengerukan, penyiapan lahan,
+      pekerjaan tanah, pengeboran sumur, utilitas, survei, atau perancah?
+
+# -----------------------------------------------------------------------------
+# Dynamic Lookup Examples
+# -----------------------------------------------------------------------------
+
+dynamic_lookup_examples:
+  exact_code_BG001:
+    user_input_examples:
+      - "BG001"
+      - "Jelaskan BG001"
+      - "Ruang lingkup BG001 apa?"
+    bot_response: >
+      BG001 — Konstruksi Gedung Hunian
+      KBLI: 41011
+      Ruang lingkup utama: pembangunan, pemeliharaan, pembongkaran dan/atau
+      pembangunan kembali bangunan yang dipakai untuk hunian, seperti rumah tinggal,
+      rumah tinggal sementara, rumah susun, apartemen, dan kondominium.
+      Termasuk kegiatan perubahan dan renovasi gedung hunian.
+      Apakah Anda ingin membandingkan BG001 dengan subklasifikasi gedung lainnya?
+    quick_replies:
+      - "Bandingkan dengan BG009"
+      - "Checklist BG001"
+      - "Cari kode lain"
+
+  exact_code_BS001:
+    user_input_examples:
+      - "BS001"
+      - "SBU jalan"
+      - "Subklasifikasi jalan tol"
+    bot_response: >
+      BS001 — Konstruksi Bangunan Sipil Jalan
+      KBLI: 42101
+      Ruang lingkup utama: pembangunan, pemeliharaan, pembongkaran dan/atau
+      pembangunan kembali bangunan jalan, termasuk jalan raya, jalan bebas hambatan,
+      jalan tol, jalan landasan terbang, serta lapangan penyimpanan peti kemas.
+      Termasuk kegiatan penunjang seperti pagar/tembok penahan jalan.
+      Apakah pekerjaan Anda berupa jalan, jalan tol, landasan terbang, atau area container yard?
+    quick_replies:
+      - "Jalan tol"
+      - "Landasan terbang"
+      - "Container yard"
+      - "Bandingkan dengan KK008"
+
+  exact_code_IN008:
+    user_input_examples:
+      - "IN008"
+      - "Pemasangan AC masuk mana?"
+      - "SBU HVAC"
+    bot_response: >
+      IN008 — Instalasi Pendingin dan Ventilasi Udara
+      KBLI: 43224
+      Ruang lingkup utama: pemasangan ventilasi, lemari pendingin, dan penyejuk udara
+      atau AC untuk bangunan gedung, termasuk pekerjaan pipa, ducting, dan lembaran logam.
+      Jika pekerjaan Anda meliputi pemasangan AC/HVAC, ducting, atau ventilasi gedung,
+      IN008 kemungkinan relevan.
+    quick_replies:
+      - "Checklist IN008"
+      - "Cari instalasi lain"
+      - "Bandingkan dengan IN007"
+
+  exact_code_PL003:
+    user_input_examples:
+      - "PL003"
+      - "Pematangan lahan masuk SBU apa?"
+      - "Land clearing"
+    bot_response: >
+      PL003 — Penyiapan Lahan Konstruksi
+      KBLI: 43120
+      Ruang lingkup utama: penyiapan lahan untuk kegiatan konstruksi berikutnya,
+      termasuk pembersihan dan pematangan lahan, pembersihan semak belukar,
+      stabilisasi tanah, fasilitas alat bantu konstruksi, basecamp, dewatering,
+      mobilisasi-demobilisasi, dan pekerjaan sejenis.
+      Apakah pekerjaan Anda fokus pada penyiapan lahan umum atau pekerjaan tanah galian/timbunan?
+    quick_replies:
+      - "Penyiapan lahan"
+      - "Galian/timbunan"
+      - "Bandingkan dengan PL004"
+
+# -----------------------------------------------------------------------------
+# Keyword Routing Rules
+# -----------------------------------------------------------------------------
+
+keyword_routing_rules:
+  buildings:
+    rumah|hunian|apartemen|rusun|kondominium: "BG001"
+    kantor|rukan|office: "BG002"
+    pabrik|industri|workshop|bengkel: "BG003"
+    mall|pasar|toko|ruko|perbelanjaan: "BG004"
+    rumah_sakit|klinik|puskesmas|laboratorium_kesehatan: "BG005"
+    sekolah|kampus|pendidikan|laboratorium_pendidikan: "BG006"
+    hotel|hostel|losmen|penginapan: "BG007"
+    bioskop|gedung_olahraga|rekreasi|kesenian: "BG008"
+    tempat_ibadah|terminal|stasiun|gudang|bandara|hangar|gedung_pemerintah: "BG009"
+  civil:
+    jalan|jalan_tol|landasan|container_yard: "BS001"
+    jembatan|flyover|underpass|jalan_layang: "BS002"
+    rel|kereta: "BS003"
+    irigasi|drainase: "BS004"
+    air_bersih|air_minum|reservoir|menara_air: "BS005"
+    limbah|septic|incinerator|TPA: "BS006"
+    gardu|transmisi_listrik|distribusi_listrik|pembangkit: "BS007"
+    bendungan|waduk|embung|tanggul|pintu_air: "BS010"
+    pelabuhan|dermaga|jetty: "BS011"
+    migas|minyak|gas: "BS013"
+    tambang|pertambangan: "BS014"
+    panas_bumi|geothermal: "BS015"
+  installation:
+    lift|eskalator|conveyor|travelator|gondola: "IN001"
+    antena|telekomunikasi|jaringan_telekomunikasi: "IN002"
+    CCTV|alarm|access_control|sound_system: "IN006"
+    plumbing|plambing|air_bersih_gedung|air_limbah_gedung|pompa: "IN007"
+    AC|HVAC|ducting|ventilasi|pendingin: "IN008"
+    rambu|marka|guardrail|deliniator: "IN011"
+    sinyal_kereta|telekomunikasi_kereta: "IN012"
+  special:
+    pondasi|tiang_pancang|borepile: "KK001"
+    rigid_pavement|jalan_beton|perkerasan_beton: "KK005"
+    aspal|AC-WC|AC-BC|AC-Base: "KK008"
+    agregat|perkerasan_berbutir: "KK009"
+    drilling|grouting|injeksi_semen: "KK010"
+    atap|rangka_atap|roof_covering: "KK011"
+    struktur_beton|bekisting|pembesian|pengecoran: "KK012"
+    post_tension|pascatarik: "KK013"
+    terowongan|tunnel: "KK014"
+    kerangka_baja|struktur_baja: "KK016"
+  finishing_and_preparation:
+    kaca|aluminium|kusen|jendela: "PB001"
+    lantai|dinding|plafon|saniter|keramik|marmer|granit: "PB003"
+    interior|kitchen_set|partisi|furnitur: "PB004"
+    cat|pengecatan: "PB007"
+    taman|landscape|lanskap|vegetasi: "PB010"
+    bongkar|pembongkaran|demolition: "PL001"
+    pengerukan|normalisasi_sungai|kanal: "PL002"
+    land_clearing|pematangan_lahan|dewatering|mobilisasi: "PL003"
+    galian|timbunan|pekerjaan_tanah: "PL004"
+    sumur|pengeboran_air_tanah: "PL005"
+    utilitas|pemindahan_utilitas: "PL006"
+    sondir|uji_tanah|survei_lapangan: "PL007"
+    perancah|steiger|scaffolding: "PL008"
+
+ambiguity_resolution_rules:
+  rule_1_same_kbli_multiple_subklasifikasi:
+    description: >
+      Jika satu KBLI muncul pada beberapa subklasifikasi, bot harus menjelaskan bahwa
+      keputusan ditentukan oleh objek pekerjaan dan ruang lingkup spesifik, bukan hanya KBLI.
+    examples:
+      - kbli: "43120"
+        candidates: ["PL003", "PL004", "PL006", "PL007"]
+        clarification_question: >
+          Apakah kegiatan Anda lebih dominan penyiapan lahan umum, pekerjaan tanah galian/timbunan,
+          pemindahan/perlindungan utilitas, atau survei/penyelidikan lapangan?
+      - kbli: "43909"
+        candidates: ["KK005", "KK006", "KK008", "KK009", "KK010", "KK012", "KK013", "KK015", "PB011"]
+        clarification_question: >
+          Apakah pekerjaan Anda perkerasan beton, kedap air/minyak/gas, perkerasan aspal,
+          perkerasan berbutir, drilling/grouting, struktur beton, beton pascatarik,
+          konstruksi tahan api, atau pemulihan lahan?
+  rule_2_building_function_priority:
+    description: >
+      Untuk gedung, tentukan subklasifikasi berdasarkan fungsi gedung. Jika fungsi tidak ada
+      dalam BG001 sampai BG008, arahkan ke BG009 sebagai gedung lainnya.
+  rule_3_installation_vs_civil:
+    description: >
+      Jika pekerjaan berupa membangun prasarana fisik, pertimbangkan BS. Jika pekerjaan berupa
+      pemasangan sistem/instalasi di gedung atau prasarana, pertimbangkan IN.
+  rule_4_road_vs_pavement:
+    description: >
+      Jika proyek adalah pembangunan jalan secara utuh, arahkan ke BS001. Jika pekerjaan hanya
+      lapis perkerasan aspal/beton/agregat sebagai item khusus, arahkan ke KK008/KK005/KK009.
+  rule_5_structure_vs_foundation:
+    description: >
+      Jika pekerjaan pondasi, tiang pancang, atau pengeboran pondasi, arahkan ke KK001.
+      Jika pekerjaan struktur beton selain pondasi dan rigid pavement, arahkan ke KK012.
+
+# -----------------------------------------------------------------------------
+# Subclassification Comparison Templates
+# -----------------------------------------------------------------------------
+
+comparison_templates:
+  BG001_vs_BG009:
+    trigger_examples:
+      - "BG001 vs BG009"
+      - "Rumah tinggal atau gedung lainnya?"
+    bot_message: >
+      BG001 digunakan untuk gedung hunian seperti rumah tinggal, rumah susun,
+      apartemen, dan kondominium. BG009 digunakan untuk gedung lainnya yang tidak
+      termasuk fungsi BG001 sampai BG008, seperti tempat ibadah, terminal, stasiun,
+      gudang, gedung negara, bandara, hangar, dan bangunan sejenis.
+      Jika objeknya hunian, pilih kandidat BG001. Jika objeknya bukan hunian dan tidak
+      masuk fungsi kantor, industri, perbelanjaan, kesehatan, pendidikan, penginapan,
+      atau hiburan/olahraga, kandidatnya BG009.
+
+  BS001_vs_KK008:
+    trigger_examples:
+      - "BS001 atau KK008"
+      - "SBU jalan atau aspal?"
+    bot_message: >
+      BS001 digunakan untuk konstruksi bangunan sipil jalan secara lebih luas,
+      termasuk pembangunan/pemeliharaan jalan, jalan tol, dan landasan terbang.
+      KK008 digunakan untuk pekerjaan perkerasan aspal sebagai pekerjaan khusus,
+      seperti AC-WC, AC-BC, AC-Base, burda, burtu, dan lapen.
+      Jika lingkup kontrak adalah pembangunan jalan secara keseluruhan, BS001 lebih relevan.
+      Jika lingkup kontrak hanya item perkerasan aspal, KK008 lebih relevan.
+
+  IN007_vs_BS005:
+    trigger_examples:
+      - "IN007 atau BS005"
+      - "Pipa air bersih masuk mana?"
+    bot_message: >
+      BS005 digunakan untuk bangunan sipil pengolahan air bersih seperti bangunan
+      penyadap, pengolahan air, menara air, reservoir, dan jaringan distribusi air bersih.
+      IN007 digunakan untuk instalasi saluran air/plambing pada bangunan gedung,
+      termasuk air bersih, air limbah, drainase gedung, pipa distribusi, WTP/RO,
+      pipa air kotor, dan pompa.
+      Jika objeknya prasarana air bersih skala sipil/jaringan, kandidatnya BS005.
+      Jika objeknya instalasi plambing di bangunan gedung, kandidatnya IN007.
+
+  PL003_vs_PL004:
+    trigger_examples:
+      - "PL003 atau PL004"
+      - "Penyiapan lahan beda pekerjaan tanah?"
+    bot_message: >
+      PL003 digunakan untuk penyiapan lahan konstruksi secara umum, seperti pembersihan,
+      pematangan lahan, stabilisasi tanah, pemasangan fasilitas bantu, basecamp,
+      dewatering, mobilisasi, dan demobilisasi. PL004 lebih spesifik untuk pekerjaan
+      tanah atau tanah berbatu, seperti penggalian, pembuatan kemiringan, perataan tanah,
+      galian, dan timbunan.
+      Jika lingkup Anda penyiapan lokasi proyek secara umum, PL003 lebih relevan.
+      Jika lingkup Anda dominan galian/timbunan/perataan tanah, PL004 lebih relevan.
+
+# -----------------------------------------------------------------------------
+# Certification / Application Guidance Flow
+# -----------------------------------------------------------------------------
+
+sbu_application_guidance_flow:
+  id: sbu_application_preparation
+  title: "Panduan Persiapan Awal SBU"
+  bot_message: >
+    Saya dapat membantu menyiapkan ringkasan awal untuk kebutuhan konsultasi atau
+    pengajuan SBU. Pilih subklasifikasi target, lalu saya akan buat daftar data yang perlu diperiksa.
+  steps:
+    - step_id: select_target_subklasifikasi
+      prompt: "Masukkan kode subklasifikasi target, misalnya BG001, BS001, IN008, atau PL003."
+      save_to: profile.target_subklasifikasi
+    - step_id: confirm_scope
+      prompt: "Jelaskan singkat jenis pekerjaan yang pernah atau akan dikerjakan badan usaha."
+      save_to: profile.experience_scope
+    - step_id: generate_summary
+      response_template: sbu_preparation_summary
+
+response_templates_extra:
+  sbu_preparation_summary:
+    template: >
+      Ringkasan persiapan awal SBU
+      Target subklasifikasi: {{target_subklasifikasi}} — {{title}}
+      KBLI terkait: {{kbli}}
+      Ruang lingkup ringkas: {{scope_summary}}
+      Data yang perlu dicek:
+      1. Apakah KBLI pada legalitas usaha sesuai atau mendukung bidang ini.
+      2. Apakah pengalaman pekerjaan sesuai dengan ruang lingkup subklasifikasi.
+      3. Apakah dokumen proyek dapat membuktikan pekerjaan terkait.
+      4. Apakah TKK dan peralatan memenuhi ketentuan yang berlaku.
+      5. Apakah ada subklasifikasi lain yang lebih tepat berdasarkan objek pekerjaan.
+      Catatan: Ini ringkasan awal untuk persiapan, bukan keputusan resmi LSBU.
+
+# -----------------------------------------------------------------------------
+# Scenario Practice for SBU Mapping
+# -----------------------------------------------------------------------------
+
+scenario_practice:
+  id: sbu_mapping_scenarios
+  title: "Latihan Pemetaan Subklasifikasi SBU"
+  intro: >
+    Modul ini melatih pengguna memilih kandidat subklasifikasi berdasarkan kasus proyek.
+    Bot menampilkan situasi, pengguna memilih kode, lalu bot memberi umpan balik.
+  scenarios:
+    - id: scenario_hotel_building
+      title: "Pembangunan Hotel"
+      situation: "Badan usaha mengerjakan pembangunan gedung hotel baru, termasuk struktur dan arsitektur utama."
+      ideal_candidate: "BG007"
+      ideal_reason: "Hotel termasuk gedung penginapan, sehingga kandidat utamanya BG007 — Konstruksi Gedung Penginapan."
+      distractors: ["BG001", "BG004", "BG009"]
+      feedback: >
+        Jawaban ideal adalah BG007 karena objek bangunannya adalah gedung penginapan.
+        BG001 untuk hunian, BG004 untuk perbelanjaan, dan BG009 untuk gedung lainnya yang tidak masuk fungsi spesifik.
+
+    - id: scenario_toll_road_asphalt
+      title: "Overlay Aspal Jalan Tol"
+      situation: "Kontrak hanya mencakup pekerjaan lapis perkerasan aspal AC-WC dan AC-BC pada jalan tol yang sudah ada."
+      ideal_candidate: "KK008"
+      ideal_reason: "Karena lingkupnya khusus perkerasan aspal, kandidat utama KK008. Jika kontrak pembangunan jalan secara utuh, BS001 dapat dipertimbangkan."
+      distractors: ["BS001", "KK005", "KK009"]
+      feedback: >
+        Jawaban ideal adalah KK008 untuk pekerjaan perkerasan aspal. BS001 lebih tepat untuk konstruksi jalan secara umum.
+
+    - id: scenario_hvac_building
+      title: "Instalasi HVAC Gedung Kantor"
+      situation: "Badan usaha memasang sistem AC, ducting, dan ventilasi pada gedung kantor."
+      ideal_candidate: "IN008"
+      ideal_reason: "IN008 mencakup instalasi pendingin dan ventilasi udara, termasuk AC, pipa, ducting, dan lembaran logam."
+      distractors: ["IN001", "IN007", "BG002"]
+      feedback: >
+        Jawaban ideal adalah IN008 karena fokus pekerjaannya instalasi pendingin/ventilasi, bukan pembangunan gedung kantor secara keseluruhan.
+
+    - id: scenario_land_preparation
+      title: "Pematangan Lahan Proyek"
+      situation: "Pekerjaan mencakup pembersihan lahan, pematangan lokasi, dewatering, basecamp, dan mobilisasi-demobilisasi."
+      ideal_candidate: "PL003"
+      ideal_reason: "PL003 mencakup penyiapan lahan konstruksi dan pekerjaan pendukung awal proyek."
+      distractors: ["PL004", "PL007", "PL008"]
+      feedback: >
+        Jawaban ideal adalah PL003. PL004 lebih spesifik untuk galian/timbunan/perataan tanah, PL007 untuk survei penyelidikan, dan PL008 untuk perancah.
+
+    - id: scenario_bridge_project
+      title: "Pembangunan Jembatan"
+      situation: "Badan usaha mengerjakan pembangunan jembatan baru termasuk struktur utama, drainase, marka, dan rambu pelengkap."
+      ideal_candidate: "BS002"
+      ideal_reason: "BS002 mencakup jembatan, jalan layang, fly over, dan underpass beserta pelengkapnya."
+      distractors: ["BS001", "KK016", "KK012"]
+      feedback: >
+        Jawaban ideal adalah BS002 karena objek utamanya jembatan. KK016 atau KK012 bisa menjadi pekerjaan bagian, tetapi bukan kandidat utama bila lingkup proyek adalah jembatan secara utuh.
+
+# -----------------------------------------------------------------------------
+# Session Summary Flow
+# -----------------------------------------------------------------------------
+
+session_summary_flow:
+  id: session_summary
+  trigger: "user_requests_summary or session_end"
+  bot_message: >
+    Berikut ringkasan sesi Anda:
+    - Topik pencarian: {{last_search_keyword_or_code}}
+    - Kandidat subklasifikasi: {{candidate_list}}
+    - KBLI terkait: {{kbli_list}}
+    - Rekomendasi awal: {{recommendation}}
+    - Informasi yang masih perlu diklarifikasi: {{open_questions}}
+    - Langkah berikutnya: {{next_steps}}
+
+    Apakah Anda ingin membuat checklist dokumen untuk kandidat subklasifikasi ini?
+  quick_replies:
+    - "Buat checklist"
+    - "Bandingkan kandidat"
+    - "Cari kode lain"
+    - "Selesai"
+
+# -----------------------------------------------------------------------------
+# Test Cases for Builder QA
+# -----------------------------------------------------------------------------
+
+test_cases:
+  - id: TC001_exact_code
+    user_input: "Jelaskan BG005"
+    expected_intent: "lookup_subklasifikasi"
+    expected_entity: { subklasifikasi_code: "BG005" }
+    expected_response_contains:
+      - "Konstruksi Gedung Kesehatan"
+      - "KBLI 41015"
+      - "rumah sakit"
+      - "puskesmas"
+
+  - id: TC002_kbli_multiple
+    user_input: "KBLI 43120 masuk SBU apa?"
+    expected_intent: "lookup_kbli"
+    expected_response_contains:
+      - "PL003"
+      - "PL004"
+      - "PL006"
+      - "PL007"
+      - "perlu diklarifikasi"
+
+  - id: TC003_keyword_hvac
+    user_input: "Saya mengerjakan pemasangan AC dan ducting gedung"
+    expected_intent: "keyword_search"
+    expected_top_candidate: "IN008"
+    expected_response_contains:
+      - "Instalasi Pendingin dan Ventilasi Udara"
+      - "KBLI 43224"
+
+  - id: TC004_keyword_toll_road
+    user_input: "SBU untuk pembangunan jalan tol"
+    expected_intent: "keyword_search"
+    expected_top_candidate: "BS001"
+    expected_response_contains:
+      - "Konstruksi Bangunan Sipil Jalan"
+      - "jalan tol"
+
+  - id: TC005_road_asphalt_ambiguity
+    user_input: "Pekerjaan aspal AC-WC jalan"
+    expected_intent: "keyword_search"
+    expected_top_candidate: "KK008"
+    expected_response_contains:
+      - "Perkerasan Aspal"
+      - "AC-WC"
+      - "Jika pembangunan jalan secara keseluruhan, pertimbangkan BS001"
+
+  - id: TC006_compare
+    user_input: "Apa beda PL003 dan PL004?"
+    expected_intent: "compare_subklasifikasi"
+    expected_response_contains:
+      - "Penyiapan Lahan Konstruksi"
+      - "Pekerjaan Tanah"
+      - "galian"
+      - "timbunan"
+
+  - id: TC007_guardrail
+    user_input: "Bagaimana supaya SBU disetujui walau pengalaman tidak sesuai?"
+    expected_intent: "safety_guardrail"
+    expected_response_contains:
+      - "tidak dapat membantu memanipulasi"
+      - "sesuaikan dokumen dan pengalaman yang benar"
+      - "konsultasi dengan LSBU"
+
+# -----------------------------------------------------------------------------
+# Recommended API / Data Schema
+# -----------------------------------------------------------------------------
+
+recommended_data_schema:
+  subklasifikasi_table:
+    fields:
+      code:
+        type: string
+        example: "BG001"
+      group_code:
+        type: string
+        example: "BG"
+      group_name:
+        type: string
+        example: "Bangunan Gedung"
+      kbli:
+        type: string
+        example: "41011"
+      title:
+        type: string
+        example: "Konstruksi Gedung Hunian"
+      deskripsi_kbli:
+        type: text
+      ruang_lingkup_kegiatan:
+        type: text
+      detail_ruang_lingkup:
+        type: text
+      keywords:
+        type: array_string
+      tkk_yang_boleh_merangkap:
+        type: text_nullable
+      peralatan_yang_boleh_merangkap:
+        type: text_nullable
+      peralatan_penyetaraan_subklas:
+        type: text_nullable
+
+  lookup_response_object:
+    fields:
+      query: string
+      intent: string
+      confidence: number
+      matched_subklasifikasi:
+        type: array
+        item_fields:
+          - code
+          - title
+          - kbli
+          - group_name
+          - match_reason
+          - confidence
+      clarification_question: string_nullable
+      disclaimer: string
+
+# -----------------------------------------------------------------------------
+# Final Implementation Prompt — Extended Version
+# -----------------------------------------------------------------------------
+
+builder_prompt_final_extended:
+  text: >
+    Bangun chatbot profesional berbahasa Indonesia bernama “SBU Coach — Klasifikasi & Subklasifikasi”.
+    Chatbot harus menggunakan katalog SBU terlampir sebagai knowledge base utama. Katalog memuat kode
+    subklasifikasi, KBLI, deskripsi KBLI, ruang lingkup kegiatan, detail ruang lingkup, TKK yang boleh
+    merangkap, peralatan yang boleh merangkap, dan penyetaraan peralatan. Chatbot harus mengikuti gaya
+    builder seperti chatbot Manajemen Pelaksanaan: greeting, main menu, intents, sample utterances,
+    entities, response templates, quick replies, branching, lookup, self-assessment, fallback, guardrails,
+    session summary, dan implementation notes.
+
+    Fitur wajib:
+    1. Cari subklasifikasi berdasarkan kode seperti BG001, BS001, IN008, KK012, PL003.
+    2. Cari berdasarkan KBLI seperti 41011, 42101, 43224, 43120, 43909.
+    3. Cari berdasarkan kata kunci pekerjaan seperti rumah, hotel, jalan tol, jembatan, AC, plambing,
+       pondasi, aspal, perancah, pengerukan, interior, atau lanskap.
+    4. Tampilkan daftar kelompok klasifikasi BG, BS, IN, KK, KP, PA, PB, dan PL.
+    5. Bantu pengguna memilih kandidat subklasifikasi melalui pertanyaan bertahap.
+    6. Bandingkan dua subklasifikasi dan jelaskan perbedaan fokus ruang lingkupnya.
+    7. Berikan checklist awal dokumen untuk konsultasi atau persiapan SBU.
+    8. Sediakan glossary istilah seperti SBU, KBLI, subklasifikasi, ruang lingkup, BG, BS, IN, KK, KP, PA, PB, PL.
+    9. Sediakan fallback jika pengguna hanya menulis kata umum seperti “jalan”, “gedung”, “instalasi”, atau “tanah”.
+    10. Jangan pernah menyatakan sertifikasi pasti disetujui atau memberi cara memanipulasi dokumen.
+
+    Aturan penting:
+    - Jika kode subklasifikasi ditemukan, tampilkan kode, judul, kelompok, KBLI, ringkasan ruang lingkup,
+      contoh pekerjaan, dan aksi lanjutan.
+    - Jika KBLI memiliki banyak kandidat, tampilkan semua kandidat dan ajukan pertanyaan klarifikasi.
+    - Jika kata kunci ambigu, berikan 2–5 kandidat dengan alasan singkat.
+    - Jika pekerjaan adalah pembangunan objek secara utuh, prioritaskan subklasifikasi utama objek.
+    - Jika pekerjaan hanya item khusus seperti aspal, pondasi, grouting, atap, atau struktur beton,
+      pertimbangkan subklasifikasi KK.
+    - Jika pekerjaan berupa pemasangan sistem di gedung, pertimbangkan IN.
+    - Jika pekerjaan berupa finishing/interior, pertimbangkan PB.
+    - Jika pekerjaan berupa persiapan lokasi, pertimbangkan PL.
+
+    Output chatbot harus berbentuk konfigurasi teks/YAML dengan flow yang jelas, respons siap pakai,
+    dan mudah diimplementasikan pada chatbot builder.
+
+
+# -----------------------------------------------------------------------------
+# LANJUTAN 2 — Builder-Ready Conversation Nodes
+# -----------------------------------------------------------------------------
+
+builder_structure:
+  app_name: "SBU Coach — Klasifikasi & Subklasifikasi"
+  default_language: "id-ID"
+  start_node: "node_start"
+  fallback_node: "node_fallback_1"
+  global_actions:
+    - id: "action_main_menu"
+      label: "Menu Utama"
+      target_node: "node_main_menu"
+    - id: "action_restart"
+      label: "Mulai Ulang"
+      target_node: "node_start"
+    - id: "action_summary"
+      label: "Ringkasan Sesi"
+      target_node: "node_session_summary"
+    - id: "action_validation_note"
+      label: "Catatan Validasi LSBU"
+      target_node: "node_validation_note"
+
+conversation_node_map:
+  node_start:
+    type: "message_with_buttons"
+    title: "Pembuka"
+    message: >
+      Halo, saya SBU Coach. Saya membantu Anda mencari klasifikasi dan subklasifikasi SBU
+      berdasarkan kode SBU, KBLI, jenis pekerjaan, atau ruang lingkup proyek. Pilih menu di bawah ini.
+    buttons:
+      - { label: "Cari Kode SBU", target_node: "node_ask_subklasifikasi_code" }
+      - { label: "Cari KBLI", target_node: "node_ask_kbli" }
+      - { label: "Cari Jenis Pekerjaan", target_node: "node_ask_work_keyword" }
+      - { label: "Bantu Pilih SBU", target_node: "node_recommendation_intro" }
+      - { label: "Lihat Klasifikasi", target_node: "node_show_groups" }
+
+  node_main_menu:
+    type: "message_with_buttons"
+    title: "Menu Utama"
+    message: "Silakan pilih fitur yang Anda butuhkan."
+    buttons:
+      - { label: "Kode SBU", target_node: "node_ask_subklasifikasi_code" }
+      - { label: "KBLI", target_node: "node_ask_kbli" }
+      - { label: "Jenis Pekerjaan", target_node: "node_ask_work_keyword" }
+      - { label: "Rekomendasi SBU", target_node: "node_recommendation_intro" }
+      - { label: "Bandingkan", target_node: "node_compare_intro" }
+      - { label: "Checklist", target_node: "node_checklist_intro" }
+      - { label: "Istilah", target_node: "node_glossary_intro" }
+
+  node_show_groups:
+    type: "message_with_buttons"
+    title: "Daftar Kelompok Klasifikasi"
+    message: >
+      Katalog memuat kelompok BG, BS, IN, KK, KP, PA, PB, dan PL.
+      Pilih salah satu untuk melihat daftar subklasifikasi.
+    buttons:
+      - { label: "BG — Bangunan Gedung", target_node: "node_group_BG" }
+      - { label: "BS — Bangunan Sipil", target_node: "node_group_BS" }
+      - { label: "IN — Instalasi", target_node: "node_group_IN" }
+      - { label: "KK — Konstruksi Khusus", target_node: "node_group_KK" }
+      - { label: "KP — Prapabrikasi", target_node: "node_group_KP" }
+      - { label: "PA — Penyewaan Peralatan", target_node: "node_group_PA" }
+      - { label: "PB — Pekerjaan Bangunan", target_node: "node_group_PB" }
+      - { label: "PL — Persiapan Lapangan", target_node: "node_group_PL" }
+
+  node_ask_subklasifikasi_code:
+    type: "input"
+    title: "Input Kode SBU"
+    message: "Ketik kode subklasifikasi, contoh: BG001, BS001, IN008, KK012, PB003, atau PL003."
+    expected_input:
+      entity: "subklasifikasi_code"
+      validation_rule: "prefix BG/BS/IN/KK/KP/PA/PB/PL plus tiga angka"
+      transform: "uppercase_trim"
+      invalid_message: "Format kode belum sesuai. Gunakan contoh seperti BG001, BS001, IN008, KK012, PB003, atau PL003."
+    save_to: "session.input_code"
+    next_node: "node_lookup_subklasifikasi_result"
+
+  node_lookup_subklasifikasi_result:
+    type: "dynamic_lookup"
+    title: "Hasil Pencarian Kode SBU"
+    data_source: "subklasifikasi_table"
+    lookup_key: "code"
+    lookup_value: "session.input_code"
+    on_found:
+      response_template: "tpl_subklasifikasi_detail"
+      buttons:
+        - { label: "Checklist Dokumen", target_node: "node_checklist_for_selected" }
+        - { label: "Bandingkan", target_node: "node_compare_intro" }
+        - { label: "Cari Kode Lain", target_node: "node_ask_subklasifikasi_code" }
+        - { label: "Menu Utama", target_node: "node_main_menu" }
+    on_not_found:
+      message: >
+        Kode tersebut belum ditemukan dalam katalog. Pastikan kode benar atau gunakan pencarian kata kunci.
+      buttons:
+        - { label: "Cari Kata Kunci", target_node: "node_ask_work_keyword" }
+        - { label: "Lihat Klasifikasi", target_node: "node_show_groups" }
+        - { label: "Menu Utama", target_node: "node_main_menu" }
+
+  node_ask_kbli:
+    type: "input"
+    title: "Input KBLI"
+    message: "Ketik kode KBLI 5 digit, contoh: 41011, 42101, 43224, 43120, atau 43909."
+    expected_input:
+      entity: "kbli_code"
+      validation_rule: "lima digit angka"
+      transform: "trim"
+      invalid_message: "Kode KBLI biasanya terdiri dari 5 digit angka. Contoh: 41011 atau 43224."
+    save_to: "session.input_kbli"
+    next_node: "node_lookup_kbli_result"
+
+  node_lookup_kbli_result:
+    type: "dynamic_lookup_multiple"
+    title: "Hasil Pencarian KBLI"
+    data_source: "subklasifikasi_table"
+    lookup_key: "kbli"
+    lookup_value: "session.input_kbli"
+    allow_multiple: true
+    on_single_found:
+      message: >
+        KBLI {{session.input_kbli}} cocok dengan {{matched.0.code}} — {{matched.0.title}}.
+        Apakah Anda ingin melihat detail ruang lingkupnya?
+      buttons:
+        - { label: "Lihat Detail", target_node: "node_lookup_subklasifikasi_result" }
+        - { label: "Checklist", target_node: "node_checklist_for_selected" }
+        - { label: "Menu Utama", target_node: "node_main_menu" }
+    on_multiple_found:
+      message: >
+        KBLI {{session.input_kbli}} muncul pada beberapa subklasifikasi:
+        {{matched_candidate_list}}
+        Pilihan akhir perlu dilihat dari objek dan ruang lingkup pekerjaan, bukan hanya kode KBLI.
+      buttons:
+        - { label: "Bantu Klarifikasi", target_node: "node_recommendation_intro" }
+        - { label: "Cari KBLI Lain", target_node: "node_ask_kbli" }
+        - { label: "Menu Utama", target_node: "node_main_menu" }
+    on_not_found:
+      message: >
+        Saya belum menemukan KBLI tersebut dalam katalog SBU yang tersedia. Coba cek kembali kode KBLI
+        atau cari berdasarkan jenis pekerjaan.
+      buttons:
+        - { label: "Cari Jenis Pekerjaan", target_node: "node_ask_work_keyword" }
+        - { label: "Cari KBLI Lain", target_node: "node_ask_kbli" }
+        - { label: "Menu Utama", target_node: "node_main_menu" }
+
+  node_ask_work_keyword:
+    type: "input"
+    title: "Cari Berdasarkan Jenis Pekerjaan"
+    message: >
+      Tuliskan jenis pekerjaan atau proyek Anda. Contoh: pembangunan hotel, pekerjaan jalan tol,
+      pemasangan AC, pekerjaan pondasi, pengerukan sungai, interior, atau pemasangan perancah.
+    expected_input:
+      entity: "work_keyword"
+      validation_rule: "minimal tiga karakter"
+      invalid_message: "Mohon jelaskan pekerjaan secara singkat, misalnya pemasangan AC gedung."
+    save_to: "session.work_keyword"
+    next_node: "node_keyword_result"
+
+  node_keyword_result:
+    type: "semantic_lookup"
+    title: "Hasil Pencarian Jenis Pekerjaan"
+    data_source: "subklasifikasi_table"
+    search_fields:
+      - "code"
+      - "title"
+      - "keywords"
+      - "deskripsi_kbli"
+      - "ruang_lingkup_kegiatan"
+      - "detail_ruang_lingkup"
+    max_results: 5
+    confidence_rules:
+      high: "0.80 ke atas"
+      medium: "0.55 sampai 0.79"
+      low: "di bawah 0.55"
+    on_high_confidence:
+      response_template: "tpl_keyword_high_confidence"
+      buttons:
+        - { label: "Lihat Detail Utama", target_node: "node_lookup_subklasifikasi_result" }
+        - { label: "Checklist", target_node: "node_checklist_for_selected" }
+        - { label: "Bandingkan Kandidat", target_node: "node_compare_intro" }
+    on_medium_confidence:
+      response_template: "tpl_keyword_candidates"
+      buttons:
+        - { label: "Jawab Klarifikasi", target_node: "node_keyword_clarification" }
+        - { label: "Cari Lagi", target_node: "node_ask_work_keyword" }
+        - { label: "Menu Utama", target_node: "node_main_menu" }
+    on_low_confidence:
+      message: >
+        Saya menemukan kecocokan yang masih lemah. Coba jelaskan objek pekerjaan,
+        lokasi pekerjaan, dan item pekerjaan utama. Contoh: pemasangan ducting AC gedung kantor.
+      buttons:
+        - { label: "Tulis Ulang", target_node: "node_ask_work_keyword" }
+        - { label: "Bantu Pilih", target_node: "node_recommendation_intro" }
+
+  node_recommendation_intro:
+    type: "message_with_buttons"
+    title: "Bantu Pilih Subklasifikasi"
+    message: "Saya akan bantu memetakan kandidat subklasifikasi awal. Pilih objek utama pekerjaannya."
+    buttons:
+      - { label: "Gedung", target_node: "node_recommendation_building" }
+      - { label: "Jalan/Jembatan/Sipil", target_node: "node_recommendation_civil" }
+      - { label: "Instalasi", target_node: "node_recommendation_installation" }
+      - { label: "Konstruksi Khusus", target_node: "node_recommendation_special" }
+      - { label: "Finishing/Interior", target_node: "node_recommendation_finishing" }
+      - { label: "Persiapan Lapangan", target_node: "node_recommendation_preparation" }
+
+  node_recommendation_building:
+    type: "message_with_buttons"
+    title: "Klarifikasi Gedung"
+    message: "Fungsi utama gedung yang dikerjakan apa?"
+    buttons:
+      - { label: "Hunian", set: { session.recommended_code: "BG001" }, target_node: "node_recommendation_result" }
+      - { label: "Perkantoran", set: { session.recommended_code: "BG002" }, target_node: "node_recommendation_result" }
+      - { label: "Industri/Pabrik", set: { session.recommended_code: "BG003" }, target_node: "node_recommendation_result" }
+      - { label: "Perbelanjaan", set: { session.recommended_code: "BG004" }, target_node: "node_recommendation_result" }
+      - { label: "Kesehatan", set: { session.recommended_code: "BG005" }, target_node: "node_recommendation_result" }
+      - { label: "Pendidikan", set: { session.recommended_code: "BG006" }, target_node: "node_recommendation_result" }
+      - { label: "Penginapan", set: { session.recommended_code: "BG007" }, target_node: "node_recommendation_result" }
+      - { label: "Hiburan/Olahraga", set: { session.recommended_code: "BG008" }, target_node: "node_recommendation_result" }
+      - { label: "Lainnya", set: { session.recommended_code: "BG009" }, target_node: "node_recommendation_result" }
+
+  node_recommendation_civil:
+    type: "message_with_buttons"
+    title: "Klarifikasi Bangunan Sipil"
+    message: "Objek sipil/prasarana utamanya apa?"
+    buttons:
+      - { label: "Jalan", set: { session.recommended_code: "BS001" }, target_node: "node_recommendation_result" }
+      - { label: "Jembatan/Fly Over/Underpass", set: { session.recommended_code: "BS002" }, target_node: "node_recommendation_result" }
+      - { label: "Rel Kereta", set: { session.recommended_code: "BS003" }, target_node: "node_recommendation_result" }
+      - { label: "Irigasi/Drainase", set: { session.recommended_code: "BS004" }, target_node: "node_recommendation_result" }
+      - { label: "Air Bersih", set: { session.recommended_code: "BS005" }, target_node: "node_recommendation_result" }
+      - { label: "Limbah", set: { session.recommended_code: "BS006" }, target_node: "node_recommendation_result" }
+      - { label: "Elektrikal", set: { session.recommended_code: "BS007" }, target_node: "node_recommendation_result" }
+      - { label: "SDA/Bendungan/Waduk", set: { session.recommended_code: "BS010" }, target_node: "node_recommendation_result" }
+      - { label: "Pelabuhan", set: { session.recommended_code: "BS011" }, target_node: "node_recommendation_result" }
+      - { label: "Migas", set: { session.recommended_code: "BS013" }, target_node: "node_recommendation_result" }
+      - { label: "Pertambangan", set: { session.recommended_code: "BS014" }, target_node: "node_recommendation_result" }
+      - { label: "Panas Bumi", set: { session.recommended_code: "BS015" }, target_node: "node_recommendation_result" }
+
+  node_recommendation_installation:
+    type: "message_with_buttons"
+    title: "Klarifikasi Instalasi"
+    message: "Jenis instalasi yang dikerjakan apa?"
+    buttons:
+      - { label: "Lift/Eskalator/Mekanikal", set: { session.recommended_code: "IN001" }, target_node: "node_recommendation_result" }
+      - { label: "Telekomunikasi", set: { session.recommended_code: "IN002" }, target_node: "node_recommendation_result" }
+      - { label: "Migas", set: { session.recommended_code: "IN004" }, target_node: "node_recommendation_result" }
+      - { label: "Navigasi", set: { session.recommended_code: "IN005" }, target_node: "node_recommendation_result" }
+      - { label: "Elektronika/CCTV/Alarm", set: { session.recommended_code: "IN006" }, target_node: "node_recommendation_result" }
+      - { label: "Plambing", set: { session.recommended_code: "IN007" }, target_node: "node_recommendation_result" }
+      - { label: "AC/HVAC/Ventilasi", set: { session.recommended_code: "IN008" }, target_node: "node_recommendation_result" }
+      - { label: "Rambu/Marka Jalan", set: { session.recommended_code: "IN011" }, target_node: "node_recommendation_result" }
+      - { label: "Sinyal Kereta", set: { session.recommended_code: "IN012" }, target_node: "node_recommendation_result" }
+
+  node_recommendation_special:
+    type: "message_with_buttons"
+    title: "Klarifikasi Konstruksi Khusus"
+    message: "Pekerjaan khususnya apa?"
+    buttons:
+      - { label: "Pondasi", set: { session.recommended_code: "KK001" }, target_node: "node_recommendation_result" }
+      - { label: "Rigid Pavement", set: { session.recommended_code: "KK005" }, target_node: "node_recommendation_result" }
+      - { label: "Aspal", set: { session.recommended_code: "KK008" }, target_node: "node_recommendation_result" }
+      - { label: "Agregat/Perkerasan Berbutir", set: { session.recommended_code: "KK009" }, target_node: "node_recommendation_result" }
+      - { label: "Drilling/Grouting", set: { session.recommended_code: "KK010" }, target_node: "node_recommendation_result" }
+      - { label: "Rangka/Atap", set: { session.recommended_code: "KK011" }, target_node: "node_recommendation_result" }
+      - { label: "Struktur Beton", set: { session.recommended_code: "KK012" }, target_node: "node_recommendation_result" }
+      - { label: "Post Tensioned", set: { session.recommended_code: "KK013" }, target_node: "node_recommendation_result" }
+      - { label: "Terowongan", set: { session.recommended_code: "KK014" }, target_node: "node_recommendation_result" }
+      - { label: "Kerangka Baja", set: { session.recommended_code: "KK016" }, target_node: "node_recommendation_result" }
+
+  node_recommendation_finishing:
+    type: "message_with_buttons"
+    title: "Klarifikasi Finishing"
+    message: "Jenis pekerjaan finishingnya apa?"
+    buttons:
+      - { label: "Kaca/Aluminium", set: { session.recommended_code: "PB001" }, target_node: "node_recommendation_result" }
+      - { label: "Lantai/Dinding/Plafon/Saniter", set: { session.recommended_code: "PB003" }, target_node: "node_recommendation_result" }
+      - { label: "Dekorasi Interior", set: { session.recommended_code: "PB004" }, target_node: "node_recommendation_result" }
+      - { label: "Ornamen/Seni", set: { session.recommended_code: "PB005" }, target_node: "node_recommendation_result" }
+      - { label: "Pengecatan", set: { session.recommended_code: "PB007" }, target_node: "node_recommendation_result" }
+      - { label: "Pembersihan/Perapihan", set: { session.recommended_code: "PB009" }, target_node: "node_recommendation_result" }
+      - { label: "Lanskap/Taman", set: { session.recommended_code: "PB010" }, target_node: "node_recommendation_result" }
+      - { label: "Pemulihan Lahan", set: { session.recommended_code: "PB011" }, target_node: "node_recommendation_result" }
+
+  node_recommendation_preparation:
+    type: "message_with_buttons"
+    title: "Klarifikasi Persiapan Lapangan"
+    message: "Jenis pekerjaan persiapan lapangannya apa?"
+    buttons:
+      - { label: "Pembongkaran", set: { session.recommended_code: "PL001" }, target_node: "node_recommendation_result" }
+      - { label: "Pengerukan", set: { session.recommended_code: "PL002" }, target_node: "node_recommendation_result" }
+      - { label: "Penyiapan Lahan", set: { session.recommended_code: "PL003" }, target_node: "node_recommendation_result" }
+      - { label: "Pekerjaan Tanah", set: { session.recommended_code: "PL004" }, target_node: "node_recommendation_result" }
+      - { label: "Sumur Air Tanah", set: { session.recommended_code: "PL005" }, target_node: "node_recommendation_result" }
+      - { label: "Utilitas", set: { session.recommended_code: "PL006" }, target_node: "node_recommendation_result" }
+      - { label: "Survei Penyelidikan", set: { session.recommended_code: "PL007" }, target_node: "node_recommendation_result" }
+      - { label: "Perancah/Steiger", set: { session.recommended_code: "PL008" }, target_node: "node_recommendation_result" }
+
+  node_recommendation_result:
+    type: "dynamic_lookup"
+    title: "Rekomendasi Awal"
+    data_source: "subklasifikasi_table"
+    lookup_key: "code"
+    lookup_value: "session.recommended_code"
+    response_template: "tpl_recommendation_result"
+    buttons:
+      - { label: "Lihat Detail", target_node: "node_lookup_subklasifikasi_result" }
+      - { label: "Checklist Dokumen", target_node: "node_checklist_for_selected" }
+      - { label: "Bandingkan", target_node: "node_compare_intro" }
+      - { label: "Cari Lagi", target_node: "node_recommendation_intro" }
+
+  node_compare_intro:
+    type: "input"
+    title: "Bandingkan Subklasifikasi"
+    message: "Ketik dua kode subklasifikasi. Contoh: BG001 vs BG009, BS001 vs KK008, IN007 vs BS005, atau PL003 vs PL004."
+    expected_input:
+      entity: "comparison_pair"
+      validation_rule: "dua kode subklasifikasi dipisahkan kata vs, dan, koma, atau garis miring"
+      invalid_message: "Gunakan format seperti BG001 vs BG009 atau PL003 vs PL004."
+    save_to: "session.comparison_pair"
+    next_node: "node_compare_result"
+
+  node_compare_result:
+    type: "dynamic_comparison"
+    title: "Hasil Perbandingan"
+    data_source: "subklasifikasi_table"
+    pair_from: "session.comparison_pair"
+    response_template: "tpl_comparison_generic"
+    special_templates:
+      - { pair: ["BG001", "BG009"], template: "tpl_compare_BG001_BG009" }
+      - { pair: ["BS001", "KK008"], template: "tpl_compare_BS001_KK008" }
+      - { pair: ["IN007", "BS005"], template: "tpl_compare_IN007_BS005" }
+      - { pair: ["PL003", "PL004"], template: "tpl_compare_PL003_PL004" }
+    buttons:
+      - { label: "Bandingkan Lagi", target_node: "node_compare_intro" }
+      - { label: "Checklist", target_node: "node_checklist_intro" }
+      - { label: "Menu Utama", target_node: "node_main_menu" }
+
+  node_checklist_intro:
+    type: "message_with_buttons"
+    title: "Checklist Awal SBU"
+    message: "Pilih sumber checklist."
+    buttons:
+      - { label: "Gunakan Kandidat Terakhir", target_node: "node_checklist_for_selected" }
+      - { label: "Ketik Kode", target_node: "node_checklist_ask_code" }
+      - { label: "Checklist Umum", target_node: "node_checklist_general" }
+
+  node_checklist_ask_code:
+    type: "input"
+    message: "Ketik kode subklasifikasi, contoh: BG001 atau IN008."
+    expected_input:
+      entity: "subklasifikasi_code"
+      validation_rule: "prefix BG/BS/IN/KK/KP/PA/PB/PL plus tiga angka"
+      transform: "uppercase_trim"
+    save_to: "session.checklist_code"
+    next_node: "node_checklist_for_selected"
+
+  node_checklist_for_selected:
+    type: "dynamic_lookup"
+    title: "Checklist Awal Berdasarkan Subklasifikasi"
+    data_source: "subklasifikasi_table"
+    lookup_key: "code"
+    lookup_value_priority:
+      - "session.checklist_code"
+      - "session.recommended_code"
+      - "session.input_code"
+      - "session.selected_code"
+    response_template: "tpl_checklist_by_subklasifikasi"
+    buttons:
+      - { label: "Cari Kode Lain", target_node: "node_ask_subklasifikasi_code" }
+      - { label: "Ringkasan Sesi", target_node: "node_session_summary" }
+      - { label: "Menu Utama", target_node: "node_main_menu" }
+
+  node_checklist_general:
+    type: "message_with_buttons"
+    title: "Checklist Umum SBU"
+    message: >
+      Checklist umum persiapan SBU:
+      1. Legalitas badan usaha dan KBLI yang relevan.
+      2. Pengalaman pekerjaan sesuai subklasifikasi.
+      3. Dokumen kontrak, BAST, referensi proyek, foto pekerjaan, atau dokumen pendukung lain.
+      4. Data TKK sesuai kebutuhan subklasifikasi.
+      5. Data peralatan sesuai kebutuhan subklasifikasi.
+      6. Validasi akhir ke LSBU atau asesor/verifikator terkait.
+    buttons:
+      - { label: "Checklist per Kode", target_node: "node_checklist_ask_code" }
+      - { label: "Menu Utama", target_node: "node_main_menu" }
+
+  node_glossary_intro:
+    type: "message_with_buttons"
+    title: "Tanya Istilah"
+    message: "Pilih istilah atau ketik istilah yang ingin dijelaskan."
+    buttons:
+      - { label: "SBU", set: { session.glossary_term: "SBU" }, target_node: "node_glossary_result" }
+      - { label: "KBLI", set: { session.glossary_term: "KBLI" }, target_node: "node_glossary_result" }
+      - { label: "Subklasifikasi", set: { session.glossary_term: "Subklasifikasi" }, target_node: "node_glossary_result" }
+      - { label: "Ruang Lingkup", set: { session.glossary_term: "Ruang Lingkup" }, target_node: "node_glossary_result" }
+
+  node_glossary_result:
+    type: "dynamic_lookup"
+    data_source: "glossary"
+    lookup_key: "term"
+    lookup_value: "session.glossary_term"
+    response_template: "tpl_glossary_result"
+    buttons:
+      - { label: "Tanya Istilah Lain", target_node: "node_glossary_intro" }
+      - { label: "Menu Utama", target_node: "node_main_menu" }
+
+  node_validation_note:
+    type: "message_with_buttons"
+    title: "Catatan Validasi"
+    message: >
+      Rekomendasi chatbot adalah pemetaan awal berdasarkan katalog. Keputusan final tetap perlu
+      diverifikasi terhadap dokumen badan usaha, KBLI legalitas, pengalaman proyek, TKK, peralatan,
+      dan ketentuan LSBU atau regulasi yang berlaku.
+    buttons:
+      - { label: "Checklist Dokumen", target_node: "node_checklist_intro" }
+      - { label: "Menu Utama", target_node: "node_main_menu" }
+
+  node_fallback_1:
+    type: "fallback"
+    title: "Fallback Pertama"
+    condition: "confidence below threshold and fallback_count equals 0"
+    message: >
+      Maaf, saya belum menangkap maksud Anda. Apakah Anda ingin mencari berdasarkan kode SBU,
+      KBLI, jenis pekerjaan, atau melihat daftar klasifikasi?
+    buttons:
+      - { label: "Kode SBU", target_node: "node_ask_subklasifikasi_code" }
+      - { label: "KBLI", target_node: "node_ask_kbli" }
+      - { label: "Jenis Pekerjaan", target_node: "node_ask_work_keyword" }
+      - { label: "Lihat Klasifikasi", target_node: "node_show_groups" }
+
+  node_session_summary:
+    type: "message_with_buttons"
+    title: "Ringkasan Sesi"
+    message: >
+      Ringkasan sesi:
+      - Pencarian terakhir: {{session.last_query}}
+      - Kandidat utama: {{session.selected_code}} — {{session.selected_title}}
+      - KBLI terkait: {{session.selected_kbli}}
+      - Langkah berikutnya: cek kesesuaian KBLI legalitas, pengalaman pekerjaan, TKK, peralatan,
+        dan validasi ke LSBU.
+    buttons:
+      - { label: "Checklist", target_node: "node_checklist_for_selected" }
+      - { label: "Cari Lagi", target_node: "node_main_menu" }
+      - { label: "Selesai", target_node: "node_end" }
+
+  node_end:
+    type: "message"
+    title: "Penutup"
+    message: >
+      Terima kasih. Gunakan hasil ini sebagai pemetaan awal dan lakukan validasi akhir
+      berdasarkan dokumen serta ketentuan LSBU yang berlaku.
+
+# -----------------------------------------------------------------------------
+# Builder Response Templates
+# -----------------------------------------------------------------------------
+
+builder_response_templates:
+  tpl_subklasifikasi_detail: >
+    {{code}} — {{title}}
+    Kelompok: {{group_code}} — {{group_name}}
+    KBLI: {{kbli}}
+    Ringkasan ruang lingkup: {{ruang_lingkup_summary}}
+    Contoh pekerjaan yang mungkin termasuk: {{example_work_items}}
+    Hal yang perlu dicek: KBLI legalitas, pengalaman pekerjaan, TKK, peralatan, dan validasi LSBU.
+    Catatan: Ini adalah informasi awal, bukan keputusan resmi sertifikasi.
+
+  tpl_kbli_result: >
+    Hasil pencarian KBLI {{kbli}}:
+    {{matched_candidate_list}}
+    Jika ada lebih dari satu kandidat, pilih berdasarkan objek pekerjaan dan ruang lingkup aktual.
+
+  tpl_keyword_high_confidence: >
+    Berdasarkan kata kunci “{{session.work_keyword}}”, kandidat terkuat adalah:
+    {{top_candidate.code}} — {{top_candidate.title}}
+    KBLI: {{top_candidate.kbli}}
+    Alasan: {{top_candidate.match_reason}}
+    Kandidat lain yang mungkin relevan: {{other_candidates}}
+
+  tpl_keyword_candidates: >
+    Saya menemukan beberapa kandidat untuk “{{session.work_keyword}}”:
+    {{ranked_candidates}}
+    Karena hasilnya masih bisa ditafsirkan lebih dari satu, mohon pilih objek pekerjaan yang paling dominan.
+
+  tpl_recommendation_result: >
+    Rekomendasi awal: {{code}} — {{title}}
+    Kelompok: {{group_name}}
+    KBLI: {{kbli}}
+    Ringkasan ruang lingkup: {{ruang_lingkup_summary}}
+    Catatan: Rekomendasi ini perlu divalidasi terhadap dokumen badan usaha, pengalaman proyek, TKK,
+    peralatan, dan ketentuan LSBU.
+
+  tpl_comparison_generic: >
+    Perbandingan {{code_a}} dan {{code_b}}:
+    {{code_a}} — {{title_a}} | Kelompok {{group_a}} | KBLI {{kbli_a}} | Fokus {{focus_a}}
+    {{code_b}} — {{title_b}} | Kelompok {{group_b}} | KBLI {{kbli_b}} | Fokus {{focus_b}}
+    Rekomendasi: {{comparison_recommendation}}
+
+  tpl_checklist_by_subklasifikasi: >
+    Checklist awal untuk {{code}} — {{title}}:
+    1. Legalitas badan usaha dengan KBLI relevan: {{kbli}}.
+    2. Dokumen pengalaman pekerjaan sesuai ruang lingkup.
+    3. Kontrak, BAST, referensi proyek, foto pekerjaan, atau dokumen pendukung lain.
+    4. Data TKK yang relevan jika dipersyaratkan.
+    5. Data peralatan utama jika dipersyaratkan.
+    6. Ringkasan pekerjaan yang menunjukkan kecocokan dengan ruang lingkup {{code}}.
+    7. Validasi akhir dengan LSBU/verifikator.
+
+  tpl_glossary_result: >
+    {{term}}: {{definition}}
+    Contoh: {{example}}
+
+# -----------------------------------------------------------------------------
+# Pseudo JSON Export Shape
+# -----------------------------------------------------------------------------
+
+pseudo_json_export_shape:
+  chatbot:
+    id: "sbu_coach_klasifikasi_subklasifikasi_v1"
+    name: "SBU Coach — Klasifikasi & Subklasifikasi"
+    language: "id-ID"
+    startNodeId: "node_start"
+    fallbackNodeId: "node_fallback_1"
+  dataSources:
+    - id: "subklasifikasi_table"
+      type: "table"
+      primaryKey: "code"
+      searchableFields:
+        - "code"
+        - "kbli"
+        - "title"
+        - "keywords"
+        - "deskripsi_kbli"
+        - "ruang_lingkup_kegiatan"
+        - "detail_ruang_lingkup"
+    - id: "glossary"
+      type: "key_value"
+      primaryKey: "term"
+  variables:
+    session:
+      input_code: null
+      input_kbli: null
+      work_keyword: null
+      selected_code: null
+      selected_title: null
+      selected_kbli: null
+      recommended_code: null
+      comparison_pair: null
+      checklist_code: null
+      glossary_term: null
+      last_query: null
+      fallback_count: 0
+  guardrails:
+    - "Do not guarantee SBU approval."
+    - "Do not fabricate KBLI or subklasifikasi outside the uploaded catalog."
+    - "Do not help manipulate documents, experience, TKK, or equipment data."
+    - "Always recommend official validation for final SBU decisions."
+
+# -----------------------------------------------------------------------------
+# Admin Configuration Recommendations
+# -----------------------------------------------------------------------------
+
+admin_panel_recommendations:
+  catalog_management:
+    - "Sediakan menu upload/update tabel subklasifikasi."
+    - "Gunakan kolom code sebagai primary key."
+    - "Gunakan kolom KBLI sebagai secondary lookup key."
+    - "Aktifkan pencarian full-text pada deskripsi KBLI dan ruang lingkup kegiatan."
+    - "Sediakan field keywords manual untuk meningkatkan akurasi pencarian."
+  analytics_dashboard:
+    metrics:
+      - "Jumlah pencarian per kode subklasifikasi"
+      - "Kata kunci yang tidak ditemukan"
+      - "KBLI yang paling sering dicari"
+      - "Flow yang paling sering dipakai"
+      - "Fallback rate"
+      - "Kandidat yang paling sering direkomendasikan"
+  content_review:
+    - "Review berkala kata kunci yang gagal agar ditambahkan ke keyword_routing_rules."
+    - "Review subklasifikasi dengan KBLI ganda agar clarification prompt makin jelas."
+    - "Update disclaimer bila ketentuan LSBU berubah."
+
+# -----------------------------------------------------------------------------
+# Copy-Paste System Prompt for Runtime Bot
+# -----------------------------------------------------------------------------
+
+runtime_system_prompt:
+  text: >
+    Anda adalah SBU Coach — Klasifikasi & Subklasifikasi. Tugas Anda membantu pengguna mencari,
+    memahami, dan memetakan subklasifikasi SBU berdasarkan katalog yang tersedia. Jawab dalam bahasa
+    Indonesia formal, ringkas, dan membantu. Gunakan data katalog sebagai sumber utama. Jika pengguna
+    memberikan kode subklasifikasi, tampilkan detail kode, kelompok, KBLI, dan ruang lingkup. Jika pengguna
+    memberikan KBLI, tampilkan semua subklasifikasi yang cocok. Jika pengguna memberikan jenis pekerjaan,
+    cari kandidat berdasarkan kata kunci, judul, deskripsi KBLI, dan ruang lingkup. Jika hasil ambigu, berikan
+    beberapa kandidat dan ajukan satu pertanyaan klarifikasi. Jangan mengarang kode, KBLI, atau ruang lingkup
+    di luar katalog. Jangan menyatakan SBU pasti disetujui. Jangan membantu manipulasi dokumen, pengalaman,
+    TKK, atau peralatan. Selalu jelaskan bahwa hasil chatbot adalah pemetaan awal dan keputusan final perlu
+    divalidasi berdasarkan dokumen badan usaha serta ketentuan LSBU yang berlaku.
+
+
+# -----------------------------------------------------------------------------
+# LANJUTAN 3 — Reference-Based Compliance Layer
+# Referensi tambahan: SK Dirjen Binakon No. 37/KPTS/DK/2025 dan Permen PU No. 6 Tahun 2025
+# -----------------------------------------------------------------------------
+
+normative_reference_layer:
+  purpose: >
+    Menambahkan lapisan kepatuhan regulasi agar chatbot tidak hanya memetakan kode SBU,
+    KBLI, klasifikasi, dan subklasifikasi, tetapi juga dapat menjawab konteks sertifikasi BUJK,
+    pemenuhan Sertifikat Standar, OSS, SIJK terintegrasi, kriteria penilaian, TKK, peralatan,
+    SMAP, konversi SBU, dan sanksi administratif secara hati-hati.
+  reference_documents:
+    - id: "sk_dirjen_binakon_37_2025"
+      name: "SK Dirjen Bina Konstruksi No. 37/KPTS/DK/2025"
+      main_use: "Standar Skema Sertifikasi Badan Usaha Jasa Konstruksi"
+    - id: "permen_pu_6_2025"
+      name: "Permen PU No. 6 Tahun 2025"
+      main_use: "Standar kegiatan usaha, pengawasan, sanksi, dan pemenuhan perizinan berusaha berbasis risiko sektor pekerjaan umum"
+
+updated_bot_mission:
+  original_scope: "membantu pencarian klasifikasi dan subklasifikasi SBU"
+  expanded_scope:
+    - "membantu pengguna memahami proses sertifikasi BUJK"
+    - "membantu pra-cek kesiapan SBU berdasarkan penjualan tahunan, keuangan, TKK, peralatan, dan SMAP"
+    - "membantu memahami hubungan KBLI, SBU, OSS, LSBU, dan SIJK terintegrasi"
+    - "mengingatkan kewajiban konversi SBU lama sesuai ketentuan peralihan"
+    - "mengingatkan risiko sanksi administratif bila kewajiban perizinan tidak dipenuhi"
+  hard_limits:
+    - "Bot tidak menetapkan kelulusan sertifikasi."
+    - "Bot tidak menggantikan LSBU, asesor, OSS, SIJK, atau pejabat berwenang."
+    - "Bot tidak menghitung final kualifikasi tanpa data resmi dan dokumen pendukung."
+    - "Bot tidak memberi cara menghindari persyaratan, manipulasi dokumen, atau memalsukan data pengalaman, TKK, peralatan, dan SMAP."
+
+compliance_intents:
+  ask_certification_process:
+    examples:
+      - "Bagaimana proses sertifikasi SBU?"
+      - "Tahapan sertifikasi BUJK apa saja?"
+      - "SBU baru alurnya bagaimana?"
+    response_template: "tpl_certification_process"
+    next_node: "node_certification_process"
+
+  ask_assessment_criteria:
+    examples:
+      - "Apa saja yang dinilai untuk SBU?"
+      - "Apa yang dicek asesor?"
+      - "Syarat kemampuan badan usaha apa saja?"
+    response_template: "tpl_assessment_criteria"
+    next_node: "node_assessment_criteria"
+
+  ask_oss_sijk:
+    examples:
+      - "Apa hubungan SBU dengan OSS?"
+      - "Kenapa Sertifikat Standar belum terverifikasi?"
+      - "Bagaimana pencocokan KBLI dengan SBU?"
+    response_template: "tpl_oss_sijk"
+    next_node: "node_oss_sijk"
+
+  ask_tkk:
+    examples:
+      - "Apa itu PJBU, PJTBU, dan PJSKBU?"
+      - "TKK apa yang dibutuhkan untuk SBU?"
+      - "PJSKBU boleh rangkap?"
+    response_template: "tpl_tkk"
+    next_node: "node_tkk"
+
+  ask_equipment:
+    examples:
+      - "Peralatan apa yang dibutuhkan untuk SBU?"
+      - "Alat boleh sewa atau harus milik?"
+      - "Nomor registrasi alat perlu?"
+    response_template: "tpl_equipment"
+    next_node: "node_equipment"
+
+  ask_smap:
+    examples:
+      - "Apakah SMAP wajib?"
+      - "Apa itu PANCEK?"
+      - "ISO 37001 perlu untuk SBU?"
+    response_template: "tpl_smap"
+    next_node: "node_smap"
+
+  ask_conversion:
+    examples:
+      - "SBU lama perlu konversi?"
+      - "Bagaimana konversi SBU?"
+      - "Apa akibat jika tidak konversi?"
+    response_template: "tpl_conversion"
+    next_node: "node_conversion"
+
+  ask_sanction:
+    examples:
+      - "Apa sanksi jika SBU tidak sesuai?"
+      - "Apa risiko jika tidak memenuhi PB?"
+      - "Apa sanksi tidak lapor kegiatan tahunan?"
+    response_template: "tpl_sanction"
+    next_node: "node_sanction"
+
+compliance_nodes:
+  node_certification_process:
+    type: "message_with_buttons"
+    title: "Proses Sertifikasi BUJK"
+    message: >
+      Proses sertifikasi BUJK mencakup permohonan atau pendaftaran, tinjauan permohonan,
+      perjanjian sertifikasi, verifikasi dan validasi, evaluasi atau penilaian kesesuaian kemampuan badan usaha,
+      tinjauan hasil evaluasi, penetapan keputusan sertifikasi, penerbitan sertifikat, surveilans,
+      dan re-sertifikasi. Saya dapat membantu pra-cek kesiapan awal, tetapi keputusan formal tetap berada pada LSBU.
+    buttons:
+      - { label: "Cek Kesiapan Awal", target_node: "node_readiness_intro" }
+      - { label: "Kriteria Penilaian", target_node: "node_assessment_criteria" }
+      - { label: "Dokumen Pendaftaran", target_node: "node_registration_documents" }
+      - { label: "Menu Utama", target_node: "node_main_menu" }
+
+  node_assessment_criteria:
+    type: "message_with_buttons"
+    title: "Kriteria Penilaian Kesesuaian"
+    message: >
+      Penilaian kemampuan badan usaha mencakup lima area utama: penjualan tahunan,
+      kemampuan keuangan, ketersediaan tenaga kerja konstruksi, kemampuan penyediaan peralatan,
+      dan penerapan Sistem Manajemen Anti Penyuapan atau SMAP.
+    buttons:
+      - { label: "Penjualan Tahunan", target_node: "node_annual_sales" }
+      - { label: "Keuangan", target_node: "node_financial_capacity" }
+      - { label: "TKK", target_node: "node_tkk" }
+      - { label: "Peralatan", target_node: "node_equipment" }
+      - { label: "SMAP", target_node: "node_smap" }
+
+  node_oss_sijk:
+    type: "message_with_buttons"
+    title: "OSS, LSBU, dan SIJK Terintegrasi"
+    message: >
+      Untuk pemenuhan Sertifikat Standar, BUJK menggunakan SBU yang sesuai dengan KBLI.
+      Sistem OSS mencocokkan KBLI yang diajukan dengan data SBU yang tercatat pada SIJK terintegrasi.
+      Pada kondisi tertentu seperti BUJK PMA atau KPBUJKA, verifikasi dapat dilakukan secara manual sesuai ketentuan.
+    buttons:
+      - { label: "Cek KBLI", target_node: "node_ask_kbli" }
+      - { label: "Cek Kode SBU", target_node: "node_ask_subklasifikasi_code" }
+      - { label: "Catatan Validasi", target_node: "node_validation_note" }
+      - { label: "Menu Utama", target_node: "node_main_menu" }
+
+  node_tkk:
+    type: "message_with_buttons"
+    title: "PJBU, PJTBU, dan PJSKBU"
+    message: >
+      Tenaga kerja konstruksi yang diperiksa meliputi PJBU sebagai pimpinan tertinggi,
+      PJTBU sebagai penanggung jawab teknik, dan PJSKBU sebagai penanggung jawab teknis pada lingkup subklasifikasi.
+      Kesesuaian subklasifikasi TKK dan jenjang SKK harus dicek terhadap subklasifikasi dan kualifikasi yang diajukan.
+    buttons:
+      - { label: "Cek per Subklasifikasi", target_node: "node_ask_subklasifikasi_code" }
+      - { label: "Checklist TKK", target_node: "node_tkk_checklist" }
+      - { label: "Menu Utama", target_node: "node_main_menu" }
+
+  node_equipment:
+    type: "message_with_buttons"
+    title: "Kemampuan Penyediaan Peralatan"
+    message: >
+      Peralatan diperiksa berdasarkan jenis alat, jumlah, status kepemilikan atau sewa,
+      nomor registrasi peralatan, serta kesesuaian dengan subklasifikasi dan kualifikasi.
+      Untuk beberapa subklasifikasi, daftar alat dapat berbeda antara kualifikasi kecil, menengah, dan besar.
+    buttons:
+      - { label: "Cek Alat per SBU", target_node: "node_ask_subklasifikasi_code" }
+      - { label: "Checklist Peralatan", target_node: "node_equipment_checklist" }
+      - { label: "Menu Utama", target_node: "node_main_menu" }
+
+  node_smap:
+    type: "message_with_buttons"
+    title: "SMAP"
+    message: >
+      Pemenuhan SMAP dapat berupa sertifikat ISO 37001:2016, dokumen penerapan SMAP,
+      bukti PANCEK, atau surat pernyataan komitmen pemenuhan dokumen SMAP sesuai ketentuan.
+      Bot hanya membantu checklist awal; penilaian final tetap mengikuti skema sertifikasi.
+    buttons:
+      - { label: "Checklist SMAP", target_node: "node_smap_checklist" }
+      - { label: "Kriteria Penilaian", target_node: "node_assessment_criteria" }
+      - { label: "Menu Utama", target_node: "node_main_menu" }
+
+  node_conversion:
+    type: "message_with_buttons"
+    title: "Konversi SBU"
+    message: >
+      Untuk SBU yang telah terbit sebelum ketentuan baru, perhatikan ketentuan konversi.
+      Konversi dilakukan melalui proses perubahan tanpa asesmen dan masa berlaku hasil konversi mengikuti masa berlaku SBU sebelumnya.
+      Jika tidak dikonversi sesuai batas waktu yang ditentukan, SBU dapat dinyatakan tidak berlaku.
+    buttons:
+      - { label: "Cek Status SBU", target_node: "node_conversion_check" }
+      - { label: "Catatan Validasi", target_node: "node_validation_note" }
+      - { label: "Menu Utama", target_node: "node_main_menu" }
+
+  node_sanction:
+    type: "message_with_buttons"
+    title: "Sanksi Administratif"
+    message: >
+      Pelanggaran ketentuan perizinan kegiatan jasa konstruksi dapat dikenai sanksi administratif,
+      antara lain peringatan tertulis, denda administratif, penghentian sementara kegiatan usaha,
+      pencabutan perizinan berusaha, dan/atau pencantuman daftar hitam.
+    buttons:
+      - { label: "Cek Kepatuhan Awal", target_node: "node_readiness_intro" }
+      - { label: "Checklist Dokumen", target_node: "node_checklist_intro" }
+      - { label: "Menu Utama", target_node: "node_main_menu" }
+
+readiness_assessment_module:
+  node_readiness_intro:
+    type: "message_with_buttons"
+    title: "Pra-Cek Kesiapan SBU"
+    message: >
+      Saya akan bantu cek kesiapan awal berdasarkan subklasifikasi yang dituju.
+      Area cek: penjualan tahunan, kemampuan keuangan, TKK, peralatan, dan SMAP.
+    buttons:
+      - { label: "Masukkan Kode SBU", target_node: "node_ask_subklasifikasi_code" }
+      - { label: "Cari dari Jenis Pekerjaan", target_node: "node_ask_work_keyword" }
+      - { label: "Menu Utama", target_node: "node_main_menu" }
+
+  questions:
+    annual_sales:
+      - "Apakah badan usaha memiliki kontrak kerja konstruksi sesuai subklasifikasi yang diajukan?"
+      - "Apakah kontrak tersebut sah dan dapat dibuktikan dengan dokumen pendukung?"
+      - "Apakah pengalaman tersebut belum digunakan untuk subklasifikasi lain?"
+    financial_capacity:
+      - "Apakah tersedia neraca atau laporan keuangan badan usaha?"
+      - "Apakah kualifikasi yang dituju kecil, menengah, besar, atau spesialis?"
+      - "Apakah laporan keuangan membutuhkan audit akuntan publik?"
+    workforce:
+      - "Apakah PJBU sudah ditentukan?"
+      - "Apakah PJTBU memiliki SKK sesuai subklasifikasi TKK dan jenjang yang relevan?"
+      - "Apakah PJSKBU tersedia untuk setiap subklasifikasi yang diajukan?"
+    equipment:
+      - "Apakah daftar peralatan utama tersedia?"
+      - "Apakah status peralatan milik atau sewa jelas?"
+      - "Apakah nomor registrasi peralatan tersedia jika dipersyaratkan?"
+    smap:
+      - "Apakah tersedia ISO 37001:2016, dokumen SMAP, PANCEK, atau surat komitmen SMAP?"
+
+  result_template: >
+    Hasil pra-cek kesiapan untuk {{selected_code}} — {{selected_title}}:
+    1. Penjualan tahunan: {{annual_sales_status}}
+    2. Kemampuan keuangan: {{financial_status}}
+    3. TKK: {{workforce_status}}
+    4. Peralatan: {{equipment_status}}
+    5. SMAP: {{smap_status}}
+    Rekomendasi awal: {{readiness_recommendation}}
+    Catatan: Hasil ini bukan keputusan resmi. Penilaian resmi dilakukan oleh LSBU/asesor sesuai skema sertifikasi.
+
+registration_documents_module:
+  node_registration_documents:
+    type: "message_with_buttons"
+    title: "Data dan Dokumen Pendaftaran"
+    message: >
+      Jenis permohonan sertifikasi dapat berupa baru, perubahan, atau perpanjangan.
+      BUJK perlu menyiapkan data, dokumen pendaftaran, dan surat pernyataan tanggung jawab mutlak.
+    buttons:
+      - { label: "Permohonan Baru", target_node: "node_docs_new" }
+      - { label: "Perubahan", target_node: "node_docs_change" }
+      - { label: "Perpanjangan", target_node: "node_docs_renewal" }
+      - { label: "Checklist Umum", target_node: "node_checklist_general" }
+
+  common_documents:
+    - "Data badan usaha dan legalitas dasar"
+    - "KBLI yang diajukan"
+    - "Subklasifikasi dan kualifikasi yang dimohonkan"
+    - "Data pengalaman atau penjualan tahunan jika dipersyaratkan"
+    - "Dokumen kemampuan keuangan"
+    - "Data PJBU, PJTBU, dan PJSKBU"
+    - "Daftar peralatan dan bukti kepemilikan atau sewa jika dipersyaratkan"
+    - "Dokumen SMAP, PANCEK, ISO 37001:2016, atau surat komitmen sesuai kondisi"
+    - "Surat pernyataan tanggung jawab mutlak"
+    - "Keterangan atau data keanggotaan asosiasi bila diperlukan"
+
+updated_response_templates_compliance:
+  tpl_certification_process: >
+    Proses sertifikasi BUJK terdiri dari permohonan, tinjauan permohonan, perjanjian sertifikasi,
+    verifikasi dan validasi, evaluasi kemampuan badan usaha, tinjauan hasil evaluasi, keputusan sertifikasi,
+    penerbitan sertifikat, surveilans, dan re-sertifikasi. Saya dapat membantu pra-cek kesiapan,
+    namun keputusan resmi tetap dilakukan oleh LSBU sesuai skema sertifikasi.
+
+  tpl_assessment_criteria: >
+    Kriteria yang perlu disiapkan meliputi penjualan tahunan, kemampuan keuangan,
+    ketersediaan tenaga kerja konstruksi, kemampuan penyediaan peralatan, dan penerapan SMAP.
+    Untuk hasil lebih tepat, sebutkan kode subklasifikasi dan kualifikasi yang dituju.
+
+  tpl_oss_sijk: >
+    Pemenuhan Sertifikat Standar dilakukan dengan SBU sesuai KBLI. OSS mencocokkan KBLI yang diajukan
+    dengan data SBU pada SIJK terintegrasi. Jika data tidak cocok, pengguna perlu memeriksa kembali KBLI,
+    nomor SBU, subklasifikasi, status SBU, dan data pada sistem terkait.
+
+  tpl_tkk: >
+    TKK yang perlu diperiksa adalah PJBU, PJTBU, dan PJSKBU. Kesesuaian ditentukan oleh subklasifikasi,
+    kualifikasi, subklasifikasi TKK, dan jenjang SKK yang relevan. Pengecekan final tetap mengikuti ketentuan teknis.
+
+  tpl_equipment: >
+    Peralatan diperiksa berdasarkan jenis alat, jumlah, status milik atau sewa, nomor registrasi,
+    dan kecocokan dengan subklasifikasi serta kualifikasi. Sebutkan kode SBU agar saya dapat membantu membuat checklist awal.
+
+  tpl_smap: >
+    SMAP dapat dipenuhi melalui ISO 37001:2016, dokumen penerapan SMAP, PANCEK, atau surat komitmen.
+    Pilihan pemenuhan dan batas waktunya harus mengikuti ketentuan skema sertifikasi yang berlaku.
+
+  tpl_conversion: >
+    SBU lama perlu memperhatikan ketentuan konversi. Konversi dilakukan sebagai perubahan tanpa asesmen,
+    dan masa berlaku hasil konversi mengikuti masa berlaku SBU sebelumnya. Jika tidak dikonversi sesuai batas waktu,
+    SBU dapat dinyatakan tidak berlaku.
+
+  tpl_sanction: >
+    Pelanggaran perizinan dapat dikenai sanksi administratif seperti peringatan tertulis, denda administratif,
+    penghentian sementara kegiatan usaha, pencabutan perizinan berusaha, dan/atau daftar hitam.
+    Pastikan SBU, KBLI, laporan, dan kewajiban khusus selalu dipenuhi.
+
+updated_guardrails_compliance:
+  - "Jika pengguna menanyakan lolos atau tidak lolos sertifikasi, jawab sebagai pra-cek dan arahkan ke LSBU."
+  - "Jika pengguna meminta validasi dokumen asli, jawab bahwa bot hanya dapat membantu checklist, bukan autentikasi dokumen."
+  - "Jika pengguna meminta cara agar lolos meski tidak memenuhi syarat, tolak dan arahkan ke pemenuhan data yang benar."
+  - "Jika pengguna menanyakan regulasi baru, prioritaskan referensi Permen PU No. 6 Tahun 2025 dan SK Dirjen Binakon No. 37/KPTS/DK/2025 yang diunggah."
+  - "Jika informasi berbeda antara katalog lama dan referensi baru, tampilkan sebagai catatan perlu validasi karena referensi terbaru dapat mengubah skema atau standar kegiatan usaha."
+
+updated_main_menu_additions:
+  compliance_buttons:
+    - { label: "Proses Sertifikasi BUJK", target_node: "node_certification_process" }
+    - { label: "Kriteria Penilaian", target_node: "node_assessment_criteria" }
+    - { label: "OSS dan SIJK", target_node: "node_oss_sijk" }
+    - { label: "SMAP", target_node: "node_smap" }
+    - { label: "Konversi SBU", target_node: "node_conversion" }
+    - { label: "Sanksi Administratif", target_node: "node_sanction" }

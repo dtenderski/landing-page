@@ -1,0 +1,163 @@
+<aside>
+📜
+
+**KB-FIDIC & KB-KONTRAK** — referensi klausul utama FIDIC 2017 + kontrak konstruksi nasional (Permen PUPR 8/2023, Perpres 12/2021) + template Notice of Claim siap pakai.
+
+</aside>
+
+## 1. Tiga Buku FIDIC 2017
+
+| **Buku** | **Warna** | **Cocok Untuk** | **Pemegang Risiko Desain** |
+| --- | --- | --- | --- |
+| **Conditions of Contract for Construction** | 🔴 Red Book | Owner-design (DED dari Owner) | Owner |
+| **Conditions of Contract for Plant & Design-Build** | 🟡 Yellow Book | EPC dengan desain dari Kontraktor | Kontraktor |
+| **Conditions of Contract for EPC/Turnkey** | ⚫ Silver Book | Lump sum turnkey, Owner serahkan total ke Kontraktor | Kontraktor (full) |
+
+## 2. Klausul Kunci FIDIC Red Book 2017 (Tabel Cepat)
+
+| **Sub-Clause** | **Topik** | **Catatan Praktis** |  |  |  |
+| --- | --- | --- | --- | --- | --- |
+| **1.3** | Notices and other Communications | Bentuk komunikasi resmi (tertulis, tertanggal, alamat sesuai SCC) | **3.7** | Engineer's Determination | Mekanisme keputusan Engineer atas dispute teknis sebelum eskalasi DAB |
+| **4.12** | Unforeseeable Physical Conditions | Klaim kontraktor atas kondisi tanah/lingkungan yang tidak dapat diprediksi | **8.4** | Advance Warning | Kewajiban kontraktor melaporkan event yang berpotensi delay |
+| **8.5** | Extension of Time for Completion | Penyebab EOT yang diakui (Owner delay, force majeure, exceptionally adverse weather, dll) | **8.8** | Delay Damages | Liquidated Damages — cap & rate |
+| **10** | Employer's Taking Over | Mekanisme PHO / Taking-Over Certificate | **11** | Defects after Taking Over | Defect Notification Period (DNP, default 365 hari) + Performance Certificate |
+| **13** | Variations and Adjustments | VO mechanism, value engineering, adjustment for changes in legislation | **14** | Contract Price and Payment | Termin, retensi, advance payment, Final Statement |
+| **15** | Termination by Employer | Termination for Default & Convenience | **16** | Suspension and Termination by Contractor | Hak kontraktor menghentikan kerja & terminasi |
+| **17** | Care of the Works and Indemnities | Tanggung jawab atas kerusakan + indemnification | **18** | Exceptional Events (Force Majeure) | Definisi & konsekuensi force majeure (perang, bencana, pandemi, regulasi) |
+| **19** | Insurance | CAR/EAR, Workmen Compensation, Third Party Liability — minimum cover | **20.1** | Claims | Mekanisme klaim 28 hari notice + 42 hari fully detailed claim |
+| **20.2** | Employer's Claims | Klaim balik dari Owner (denda, biaya remedial, dll) | **21** | Disputes and Arbitration | DAB → Amicable Settlement → Arbitration (umumnya ICC, BANI, atau SIAC) |
+
+## 3. Klausul FIDIC 20.1 — Aturan Emas Klaim
+
+```
+Pasal 20.1 — Contractor's Claims for Payment and/or EOT
+
+(a) Notice of Claim:
+    Contractor wajib kirim Notice ke Engineer dalam 28 hari
+    sejak menyadari (atau seharusnya menyadari) event/kondisi yang
+    menjadi dasar klaim.
+
+    ⚠️ Jika lewat 28 hari → klaim KEHILANGAN HAK (time-bar).
+
+(b) Continuing Records:
+    Setelah Notice, Contractor wajib menyimpan kontemporer records
+    (daily report, foto, korespondensi, time sheet) sebagai bukti.
+
+(c) Fully Detailed Claim:
+    Submit detailed claim dalam 42 hari sejak Notice atau
+    waktu lain yang disetujui Engineer. Berisi:
+    - Kontraktual basis (klausul yang mendasari)
+    - Kronologi event
+    - Quantum cost (breakdown line item)
+    - Schedule impact (Time Impact Analysis pada critical path)
+    - Bukti pendukung (dokumen, foto, surat)
+
+(d) Engineer's Determination:
+    Engineer memutuskan dalam 42 hari sejak Fully Detailed Claim diterima.
+    Determinasi mengikat sementara, dapat di-challenge ke DAB / arbitrase.
+```
+
+## 4. Template Notice of Claim (FIDIC 20.1) — Bahasa Indonesia
+
+```
+[KOP SURAT PERUSAHAAN KONTRAKTOR]
+
+Nomor    : NOC-[YYYY-MM-NNN]
+Tanggal  : [DD MMMM YYYY]
+Lampiran : [Daftar lampiran]
+Perihal  : NOTICE OF CLAIM (Sub-Clause 20.1) — [Judul Singkat Event]
+
+Kepada Yth.
+[Nama Engineer / Konsultan MK]
+Proyek: [Nama Proyek]
+Kontrak No.: [Nomor Kontrak] tanggal [Tanggal Kontrak]
+
+Dengan hormat,
+
+Merujuk pada Sub-Clause 20.1 (Contractor's Claims for Payment and/or EOT)
+Kontrak Konstruksi tanggal [Tanggal Kontrak], dengan ini kami,
+[Nama BUJK], selaku Kontraktor, secara resmi mengajukan NOTICE OF CLAIM
+atas event/kondisi sebagai berikut:
+
+1. URAIAN EVENT/KONDISI
+   Pada tanggal [Tanggal Event], terjadi [uraian singkat & faktual event,
+   misal: keterlambatan penerbitan revisi gambar struktur Zone-B oleh
+   Konsultan Perencana yang baru diterima Kontraktor pada tanggal X,
+   sedangkan jadwal kontraktual mengharuskan diterima paling lambat
+   tanggal Y berdasar Master Schedule disepakati].
+
+2. DASAR KONTRAKTUAL
+   - Sub-Clause 1.9 (Errors in the Employer's Requirements / late drawings)
+   - Sub-Clause 8.5 (Extension of Time for Completion)
+   - Sub-Clause 13.3 (Variation Procedure) — bila berdampak desain
+   - [Klausul lain yang relevan]
+
+3. ESTIMASI DAMPAK AWAL
+   - Schedule Impact (estimasi awal): [N] hari kalender pada lintasan kritis.
+   - Cost Impact (estimasi awal): Rp [Nilai] (preliminary, akan dirinci
+     dalam Fully Detailed Claim).
+
+4. KEWAJIBAN PARA PIHAK
+   Kami akan terus menyimpan catatan kontemporer sesuai Sub-Clause 20.1(b)
+   dan akan menyampaikan Fully Detailed Claim dalam 42 hari sejak tanggal
+   Notice ini, atau dalam jangka waktu lain yang disepakati bersama.
+
+5. PERMOHONAN
+   Mengingat dampak kritis terhadap kemajuan pekerjaan, kami memohon:
+   a. Konfirmasi penerimaan Notice ini secara tertulis;
+   b. Site instruction lanjutan untuk mitigasi dampak;
+   c. Pertemuan koordinasi pada [tanggal usulan].
+
+Demikian Notice of Claim ini disampaikan untuk menjadi bukti terdaftar
+sesuai mekanisme kontrak. Atas perhatian Bapak/Ibu, kami ucapkan
+terima kasih.
+
+Hormat kami,
+[Nama BUJK]
+
+____________________
+[Nama Project Manager]
+Project Manager
+No. Reg. SKK: [Nomor]
+
+Tembusan:
+1. Direksi BUJK
+2. Pengguna Jasa / Owner
+3. Manajer Kontrak BUJK
+4. Arsip Proyek
+```
+
+## 5. Konversi FIDIC ↔ Kontrak PUPR (Permen PUPR 8/2023)
+
+| **FIDIC Red Book 2017** | **Permen PUPR 8/2023 / Perpres 12/2021** |
+| --- | --- |
+| Sub-Clause 8.5 (EOT) | SSUK — Pasal Perpanjangan Waktu Pelaksanaan |
+| Sub-Clause 13 (Variations) | SSUK — Pasal Perubahan Kontrak / Adendum |
+| Sub-Clause 17 (Care of Works) | SSUK — Pasal Tanggung Jawab atas Pekerjaan |
+| Sub-Clause 19 (Insurance) | SSUK — Pasal Asuransi (CAR/EAR + BPJS) |
+| Sub-Clause 21 (Arbitration) | SSUK — Pasal Penyelesaian Sengketa (umumnya BANI atau Pengadilan Negeri) |
+
+## 6. Mekanisme Eskalasi Sengketa (Dispute Resolution Ladder)
+
+```mermaid
+flowchart LR
+	NEG["🤝 Negosiasi<br>internal proyek<br>30 hari"] --> ENG["⚖️ Engineer's<br>Determination<br>(FIDIC 3.7)"]
+	ENG --> DAB["📑 Dispute Adjudication<br>Board (DAB)<br>FIDIC Clause 21"]
+	DAB --> AMS["💬 Amicable<br>Settlement<br>56 hari"]
+	AMS --> ARB["🏛️ Arbitrase<br>BANI / SIAC / ICC"]
+	ARB -. terakhir .-> COURT["📜 Pengadilan<br>(eksekusi putusan)"]
+```
+
+## 7. Tipe Kontrak Konstruksi & Pemegang Risiko
+
+| **Tipe** | **Risiko Volume** | **Risiko Harga** | **Risiko Desain** | **Cocok Untuk** |  |  |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **Lump Sum (Fixed Price)** | Kontraktor | Kontraktor | Owner (Red Book) | Scope jelas, DED matang | **Unit Price** | Owner | Owner | Owner | Pekerjaan repetitif (jalan, pondasi) |
+| **Cost-plus Fee** | Owner | Owner | Owner | Scope sangat tidak pasti, R&D | **Design-Build / EPC** | Kontraktor | Kontraktor | Kontraktor (Yellow/Silver) | Owner ingin single-point responsibility |
+| **Turnkey (Silver Book)** | Kontraktor | Kontraktor | Kontraktor (full) | Owner non-teknis ingin "kunci putar" (BOT, IPP) | **KPBU (PPP)** | Konsorsium | Konsorsium | Konsorsium | Infrastruktur jangka panjang dengan revenue stream |
+
+## 8. Halaman Terkait
+
+- [Knowledge Base KONSTRA — 7 Tipe Sumber](https://www.notion.so/Knowledge-Base-KONSTRA-7-Tipe-Sumber-cd5e1c03813b42768cadf208700366a3?pvs=21)
+- [Modul A — Pre-Construction (Engineering · Tender · Kontrak)](https://www.notion.so/Modul-A-Pre-Construction-Engineering-Tender-Kontrak-1cd3aab867324e028916ff490b33ae8f?pvs=21)
+- [Modul C — Control & Close-Out (Keuangan · Klaim/EOT · Serah Terima · Postmortem)](https://www.notion.so/Modul-C-Control-Close-Out-Keuangan-Klaim-EOT-Serah-Terima-Postmortem-e818d7460f984c948b66675ea19aaa22?pvs=21)

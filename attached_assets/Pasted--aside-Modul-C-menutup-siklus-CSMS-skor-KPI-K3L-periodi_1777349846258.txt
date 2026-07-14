@@ -1,0 +1,74 @@
+<aside>
+🏁
+
+**Modul C** menutup siklus CSMS: skor KPI K3L periodik, Final Evaluation di akhir kontrak, dan postmortem bila terjadi insiden — semuanya feed kembali ke Data Bank Kontraktor untuk keputusan tender berikutnya.
+
+</aside>
+
+## 🤖 Sub-Chatbot (Alat Bantu Level 4)
+
+| Agent | Trigger | Output |
+| --- | --- | --- |
+| **AGENT-KPI** | "KPI kontraktor", "lagging leading" | Tabel skor lagging+leading, total %, target periode berikut |
+| **AGENT-FINAL** | "skor final", "akhir kontrak" | Skor Final = (KPI×35%)+(PJA×20%)+(WIP×45%), kategori penghargaan |
+| **AGENT-CASE** | "insiden", "investigasi", "5-why" | Timeline + RCA + corrective action + lesson learned |
+
+## 📝 Formulir & Alat Bantu
+
+- [Form 6 — KPI K3L Kontraktor](https://www.notion.so/Form-6-KPI-K3L-Kontraktor-39eddd854f1444a4856c204bbd0a1f8e?pvs=21)
+- [Form 7 — Final Evaluation](https://www.notion.so/Form-7-Final-Evaluation-fc0e67a08b414c6b9cac4a8074c64d7e?pvs=21)
+- [](https://www.notion.so/efce751940844463add38887420ebf93?pvs=21)
+
+## 📊 KPI K3L — Lagging vs Leading
+
+### Lagging (target = 0 untuk indikator insiden)
+
+| Indikator | Bobot |
+| --- | --- |
+| Fatality | trigger cabut |
+| Lost Time Injury (LTI) | high |
+| Pencemaran di luar ambang KLH | trigger cabut |
+| Kerusakan aset permanen | trigger cabut |
+| Kerusakan reputasi | high |
+| Kepatuhan JSA | 20 |
+| Housekeeping | 20 |
+
+### Leading
+
+| Indikator | Bobot |
+| --- | --- |
+| Safety Meeting | 20 |
+| Toolbox Meeting | 20 |
+| Inspection / Audit | 20 |
+| Closure Action ≥ 70% | 20 |
+
+### Rumus
+
+- **Lagging:** `(ΣTarget − (ΣAktual − ΣTarget)) / ΣTarget × ScoreMax`
+- **Leading:** `ΣAktual / ΣTarget × ScoreMax`
+
+## 🏆 Final Evaluation
+
+```
+Skor Final = (KPI × 35%) + (PJA × 20%) + (WIP × 45%)
+```
+
+| Status | Threshold | Tindakan |
+| --- | --- | --- |
+| Lulus | ≥ 70 | Eligible tender berikutnya, kategori penghargaan |
+| Tidak Lulus | < 70 | Probation, pendampingan |
+| Cabut Sertifikat | 2× < 70 berturut-turut | Tidak boleh ikut tender minimal 1 tahun |
+| Cabut Otomatis | Fatality / property damage permanen / pencemaran > KLH | Cabut + blacklist + investigasi |
+
+## 🥇 Kategori Penghargaan (Opsional)
+
+- **Platinum** ≥ 90
+- **Gold** 80 – 89
+- **Silver** 70 – 79
+
+## 🔁 Feedback Loop
+
+1. Skor Final + KPI → update [](https://www.notion.so/efce751940844463add38887420ebf93?pvs=21).
+2. Insiden → trigger **AGENT-CASE** → RCA + lesson learned → update KB CSMS.
+3. Lesson learned → revisi sistem prompt CSMS Assistant + Form 1–7 bila perlu.
+4. Kontraktor probation → audit ulang PQ + verifikasi lapangan sebelum tender berikut.

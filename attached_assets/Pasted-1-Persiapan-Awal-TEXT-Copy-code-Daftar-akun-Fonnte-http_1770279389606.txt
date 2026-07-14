@@ -1,0 +1,118 @@
+1. Persiapan Awal
+
+TEXT
+
+Copy code
+- Daftar akun Fonnte: https://md.fonnte.com/new/register.php
+- Buat Device dan connect via QR code
+- Copy Token API dari dashboard
+
+
+2. Setup Webhook (Penerimaan Pesan)
+
+Fonnte akan forward semua pesan masuk ke URL webhook Anda.
+
+Contoh PHP Webhook:
+PHP
+
+Copy code
+<?php
+$input = file_get_contents('php://input');
+$data = json_decode($input, true);
+
+// Ambil pesan dari user
+$phone = $data['phone'];
+$message = $data['message'];
+
+// Proses dengan chatbot Anda
+$respon = prosesChatbot($message);
+
+// Kirim balasan via API Fonnte
+kirimPesan($phone, $respon);
+
+function prosesChatbot($pesan) {
+    // Logika chatbot Anda di sini
+    return "Ini respon dari chatbot saya!";
+}
+
+function kirimPesan($target, $pesan) {
+    $curl = curl_init();
+    curl_setopt_array($curl, [
+        CURLOPT_URL => 'https://api.fonnte.com/send',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POSTFIELDS => [
+            'target' => $target,
+            'message' => $pesan,
+            'countryCode' => '62'
+        ],
+        CURLOPT_HTTPHEADER => [
+            'Authorization: YOUR_TOKEN_HERE'
+        ],
+    ]);
+    curl_exec($curl);
+    curl_close($curl);
+}
+?>
+
+
+Set webhook di dashboard Fonnte:
+TEXT
+
+Copy code
+URL Webhook: https://domain.com/webhook.php
+
+
+3. Kirim Pesan dari Chatbot (Outbound)
+
+Gunakan API send untuk kirim pesan dari chatbot:
+
+PHP
+
+Copy code
+// Single message
+curl -X POST https://api.fonnte.com/send \
+  -H "Authorization: YOUR_TOKEN" \
+  -d "target=628123456789" \
+  -d "message=Hello dari chatbot!"
+
+
+4. Contoh Alur Lengkap
+
+TEXT
+
+Copy code
+User kirim WA → Fonnte webhook → Chatbot proses → API kirim balasan → User terima
+
+
+TEXT
+
+Copy code
+1. User: "Halo"
+2. Fonnte → webhook: {"phone":"628123456789","message":"Halo"}
+3. Chatbot: proses → "Hai! Ada yang bisa dibantu?"
+4. API kirim ke user → User terima balasan
+
+
+5. Dokumentasi Lengkap
+
+API Send: https://docs.fonnte.com/api-send-message/
+Webhook: https://docs.fonnte.com/make-whatsapp-bot-using-php-webhook/
+Postman Collection: https://documenter.getpostman.com/view/14730548/2s83zpJLnW
+
+
+6. Integrasi Populer
+
+TEXT
+
+Copy code
+✅ Google Form → WhatsApp
+✅ Contact Form 7 (WordPress plugin)
+✅ Elementor Form
+✅ WooCommerce
+✅ n8n workflow
+✅ PHP/HTML form
+
+
+Plugin WordPress gratis: Contact Form WhatsApp
+
+Sudah punya chatbot dalam bahasa pemrograman apa? Saya bisa berikan contoh kode spesifik (Node.js, Python, dll). Atau ada bagian yang perlu dijelaskan lebih detail?

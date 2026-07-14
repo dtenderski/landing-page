@@ -1,0 +1,33 @@
+
+
+SUBKLASIFIKASI	JABATAN KERJA	JENJANG JABATAN KERJA	KUALIFIKASI	JENJANG KKNI	STANDAR KOMPETENSI KERJA	LINK SKK KEMNAKER
+F	Klasifikasi Arsitektur Lanskap, Iluminasi Dan Desain Interior						
+1	Arsitektur Lanskap	Ahli Perencana Ruang Terbuka Hijau	Ahli Madya Perencana Ruang Terbuka Hijau	Ahli	8	SKKNI 63-2014	https://skkni-api.kemnaker.go.id/v1/public/documents/e843d8d1-cff0-4e0f-9073-598c725836e8/download
+Ahli Perencana Ruang Terbuka Hijau	9	SKKNI 63-2014	https://skkni-api.kemnaker.go.id/v1/public/documents/e843d8d1-cff0-4e0f-9073-598c725836e8/download
+2	Perancang Lanskap	Perancang Lanskap Muda	Ahli	7	SKKNI 209–2013	https://skkni-api.kemnaker.go.id/v1/public/documents/b9deae9e-1ad9-4296-8857-ed76ad209c8e/download
+Perancang Lanskap Madya	8	SKKNI 209–2013	https://skkni-api.kemnaker.go.id/v1/public/documents/b9deae9e-1ad9-4296-8857-ed76ad209c8e/download
+Perancang Lanskap	9	SKKNI 209–2013	https://skkni-api.kemnaker.go.id/v1/public/documents/b9deae9e-1ad9-4296-8857-ed76ad209c8e/download
+3	Tukang Taman Pada Bangunan Gedung	Tukang Taman Pada Bangunan Gedung	Operator	1	SKKNI 245-2009	https://skkni-api.kemnaker.go.id/v1/public/documents/245d7fe8-07e5-429b-927d-1c23f56aba13/download
+Tukang Taman Pada Bangunan Gedung Level 2	2	SKKNI 245-2009	https://skkni-api.kemnaker.go.id/v1/public/documents/245d7fe8-07e5-429b-927d-1c23f56aba13/download
+4	Pelaksana Taman Bangunan dan Fasilitas Umum	Pelaksana Taman Bangunan dan Fasilitas Umum Muda	Teknisi/Analis	4	SKKNI 374-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/065cb1fd-74f9-459a-b76a-54398fbb7a63/download
+Pelaksana Taman Bangunan dan Fasilitas Umum	5	SKKNI 374-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/065cb1fd-74f9-459a-b76a-54398fbb7a63/download
+Pelaksana Taman Bangunan dan Fasilitas Umum Utama	6	SKKNI 374-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/065cb1fd-74f9-459a-b76a-54398fbb7a63/download
+5	Teknik Iluminasi	Ahli Perencanaan Iluminasi	Ahli Muda Perencanaan Iluminasi	Ahli	7	SKKNI 379–2013	https://skkni-api.kemnaker.go.id/v1/public/documents/700f71e7-0000-4114-bb71-cc6c668034a1/download
+Ahli Madya Perencanaan Iluminasi	8	SKKNI 379–2013	https://skkni-api.kemnaker.go.id/v1/public/documents/700f71e7-0000-4114-bb71-cc6c668034a1/download
+Ahli Perencanaan Iluminasi	9	SKKNI 379–2013	https://skkni-api.kemnaker.go.id/v1/public/documents/700f71e7-0000-4114-bb71-cc6c668034a1/download
+6	Ahli Iluminasi (Freshgraduate)	Ahli Iluminasi (Freshgraduate)	Ahli	7	SKKNI 379–2013	https://skkni-api.kemnaker.go.id/v1/public/documents/700f71e7-0000-4114-bb71-cc6c668034a1/download
+7	Pengawas Pekerjaan Iluminasi	Pengawas Pekerjaan Iluminasi	Teknisi/Analis	4	SKKNI 339-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/3a0bd1de-e7fc-4b6b-8a90-3db665646afd/download
+Pengawas Pekerjaan Iluminasi Madya	5	SKKNI 339-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/3a0bd1de-e7fc-4b6b-8a90-3db665646afd/download
+8	Pelaksana Pekerjaan Iluminasi	Pelaksana Pekerjaan Iluminasi Level 2	Operator	2	SKKNI 312-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/e3367123-75c1-46cf-be0a-b9ee7116a867/download
+Pelaksana Pekerjaan Iluminasi Level 3	3	SKKNI 312-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/e3367123-75c1-46cf-be0a-b9ee7116a867/download
+9	Desain Interior	Arsitek Interior	Arsitek Muda Interior	Ahli	7 	SKKNI 207-2013 	https://skkni-api.kemnaker.go.id/v1/public/documents/23d8e926-654e-49f7-8e05-c222ad9c4d7e/download
+Arsitek Madya Interior	8	SKKNI 207-2013 	https://skkni-api.kemnaker.go.id/v1/public/documents/23d8e926-654e-49f7-8e05-c222ad9c4d7e/download
+Arsitek Utama Interior	9	SKKNI 207-2013 	https://skkni-api.kemnaker.go.id/v1/public/documents/23d8e926-654e-49f7-8e05-c222ad9c4d7e/download
+10	Desain Interior	Desain Interior Ahli Muda	Ahli	7	RSKKNI Desain Interior/Akan ditetapkan menjadi SKKNI/SKK Khusus	-
+Desain Interior Ahli Madya	8	RSKKNI Desain Interior/Akan ditetapkan menjadi SKKNI/SKK Khusus	-
+Desain Interior Ahli Utama	9	RSKKNI Desain Interior/Akan ditetapkan menjadi SKKNI/SKK Khusus	-
+11	Ahli Desain Interior (Freshgraduate)	Ahli Desain Interior (Freshgraduate)	Ahli	7	SKKNI 207-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/23d8e926-654e-49f7-8e05-c222ad9c4d7e/download
+12	Pengawas Pekerjaan Interior	Pengawas Pekerjaan Interior	Teknisi/Analis	5	SKKNI 342-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/ca4aafc2-d171-4a06-a189-d2985aafde3a/download
+Pengawas Pekerjaan Interior Madya	6	SKKNI 342-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/ca4aafc2-d171-4a06-a189-d2985aafde3a/download
+13	Pelaksana Pekerjaan Interior	Pelaksana Pekerjaan Interior	Teknisi/Analis	4	SKKNI 308-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/319dbaba-39e8-4443-af41-0e03cc1698e5/download
+Pelaksana Pekerjaan Interior Madya	5	SKKNI 308-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/319dbaba-39e8-4443-af41-0e03cc1698e5/download

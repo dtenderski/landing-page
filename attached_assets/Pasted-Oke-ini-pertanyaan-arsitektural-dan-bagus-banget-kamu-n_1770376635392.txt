@@ -1,0 +1,252 @@
+Oke, ini pertanyaan **arsitektural**—dan bagus banget kamu nanya sekarang, sebelum keburu “asal banyak mini app” 👍
+Aku akan jawab **lengkap tapi tetap praktis**:
+➡️ **analisa semua tipe Mini App**
+➡️ **tujuan masing-masing**
+➡️ **field apa saja yang ideal**
+➡️ **kaitannya dengan Project Brain**
+
+Anggap ini **blueprint Mini Apps Gustaffa**.
+
+---
+
+# 🧩 Prinsip Utama Mini App
+
+Sebelum masuk satu-satu, ini aturan emasnya:
+
+> **Mini App = alat kerja spesifik, bukan database besar**
+
+Ciri Mini App yang sehat:
+
+* Field **sedikit & tajam**
+* Bisa dipakai **tanpa mikir**
+* Output-nya jelas (angka, status, ringkasan)
+
+---
+
+# 1️⃣ Checklist
+
+### Fungsi
+
+Melacak **sudah / belum** (eksekusi).
+
+### Field Wajib
+
+* `item_name` (string)
+* `is_done` (boolean)
+
+### Field Opsional (kalau mau naik level)
+
+* `related_issue` (text)
+* `note` (short text)
+
+### Contoh Use Case
+
+* Checklist tahap proyek
+* Checklist penanganan isu
+* Checklist inspeksi
+
+👉 **Jangan** pakai field panjang atau numerik di sini.
+
+---
+
+# 2️⃣ Kalkulator
+
+### Fungsi
+
+Hitung cepat → **angka final**.
+
+### Field Ideal
+
+* `input_1` (number)
+* `input_2` (number)
+* `input_3` (number, opsional)
+* `calculation_type` (single choice)
+* `result` (number / text auto)
+
+### Contoh
+
+* Volume beton
+* Berat baja
+* Kebutuhan material
+
+👉 Output harus **1 hasil utama**, jangan narasi.
+
+---
+
+# 3️⃣ Penilaian Risiko
+
+### Fungsi
+
+Mengubah persepsi → **skor risiko**.
+
+### Field Wajib
+
+* `risk_category` (single choice)
+* `likelihood` (1–5)
+* `impact` (1–5)
+* `risk_level` (auto: Low / Medium / High)
+
+### Field Opsional
+
+* `mitigation` (text)
+* `owner` (text)
+
+👉 Ini *nyambung langsung* ke:
+`decision_risk_level`
+
+---
+
+# 4️⃣ Pelacak Progres
+
+### Fungsi
+
+Jawab: *“kita sudah sejauh apa?”*
+
+### Field Ideal
+
+* `activity_name` (text)
+* `planned_progress` (%)
+* `actual_progress` (%)
+* `status` (auto: Ahead / On Track / Delay)
+* `note` (short text)
+
+👉 Jangan campur dengan checklist — ini **kuantitatif**.
+
+---
+
+# 5️⃣ Generator Dokumen
+
+### Fungsi
+
+Ubah data → **dokumen formal**.
+
+### Field Ideal
+
+* `document_type` (single choice)
+* `project_name` (text)
+* `content_source` (auto dari Project Brain)
+* `output_format` (PDF / DOCX)
+* `generated_at` (date)
+
+👉 Isinya **narik dari Template**, bukan input ulang.
+
+---
+
+# 6️⃣ Custom
+
+### Fungsi
+
+Sandbox / eksperimen.
+
+### Field
+
+Bebas, tapi **aturan keras**:
+
+* Maks 5–7 field
+* Satu tujuan jelas
+
+👉 Jangan jadikan “tempat sampah logika”.
+
+---
+
+# 7️⃣ Project Snapshot ⭐
+
+### Fungsi
+
+Ringkasan 1 layar untuk decision maker.
+
+### Field Ideal (auto-filled)
+
+* `project_name`
+* `current_stage`
+* `open_issues_count`
+* `high_risk_decisions`
+* `progress_summary`
+* `last_update`
+
+👉 Hampir semua **read-only**.
+
+---
+
+# 8️⃣ Decision Summary ⭐⭐
+
+### Fungsi
+
+Menjawab *“apa saja keputusan penting proyek ini?”*
+
+### Field Ideal
+
+* `decision_title`
+* `decision_date`
+* `decision_reason`
+* `risk_level`
+* `impact_area` (Cost / Time / Quality / Safety)
+
+👉 Ini pasangan alami `decision_summary` di Project Brain.
+
+---
+
+# 9️⃣ Risk Radar ⭐⭐
+
+### Fungsi
+
+Visualisasi & prioritas risiko.
+
+### Field Ideal
+
+* `risk_category`
+* `risk_level`
+* `trend` (Increasing / Stable / Decreasing)
+* `last_reviewed`
+
+👉 Jangan terlalu detail, ini **overview**, bukan analisa teknis.
+
+---
+
+# 🔗 Mapping Mini App ↔ Project Brain (Ringkas)
+
+| Mini App          | Terkait Field         |
+| ----------------- | --------------------- |
+| Checklist         | issue_status          |
+| Kalkulator        | structural_system     |
+| Penilaian Risiko  | decision_risk_level   |
+| Pelacak Progres   | project_stage         |
+| Generator Dokumen | decision_summary      |
+| Project Snapshot  | completeness_level    |
+| Decision Summary  | decision_date         |
+| Risk Radar        | environmental_factors |
+
+---
+
+# 🧠 Rekomendasi Arsitektur Final
+
+Kalau aku yang susun:
+
+* 🧠 **1 Project Brain (Template utama)**
+* ✅ **3–4 Mini App inti**
+
+  * Checklist
+  * Penilaian Risiko
+  * Decision Summary
+  * Project Snapshot
+
+Sisanya **opsional / advanced**.
+
+---
+
+## Kesimpulan
+
+Desainmu sudah **on the right track**.
+Kalau Mini App diisi dengan field seperti di atas:
+
+👉 Chatbot kamu **bisa mikir, bukan cuma jawab**
+👉 Data tidak tumpang tindih
+👉 Sistem scalable
+
+Kalau mau, next aku bisa:
+
+* bikin **template field JSON** per Mini App
+* bantu **urutkan Mini App mana dibuat dulu**
+* atau **simulasikan satu proyek dari awal sampai closeout**
+
+Tinggal bilang 🔧🧠

@@ -1,0 +1,659 @@
+Berikut rancangan **Sistem Pelaporan Sertifikasi AJJ Nirkertas** untuk LSP. Sistem ini mencakup pelaporan internal LSP, pelaporan proses asesmen, pelaporan kendala, pelaporan audit internal, dan pelaporan berkala kepada BNSP.
+
+Acuan penting: SE BNSP tentang Sertifikasi Jarak Jauh dan Penggunaan Nirkertas tercantum pada halaman download BNSP. Dalam SE.007/BNSP/V/2023 yang tersedia publik, LSP wajib melakukan audit internal pelaksanaan sertifikasi jarak jauh setiap 6 bulan dan melaporkan hasil audit beserta tindakan perbaikannya kepada BNSP setiap Juni dan Desember paling lambat tanggal 10. LSP juga wajib menyusun laporan pelaksanaan sertifikasi jarak jauh setiap 6 bulan dan melaporkannya kepada BNSP pada periode yang sama. ([BNSP][1]) Struktur chatbot/flow di bawah mengikuti pola konfigurasi chatbot terlampir yang memakai modul, flow, checklist, response template, dan guardrails. 
+
+---
+
+# 1. Tujuan Sistem Pelaporan
+
+```yaml id="sistem_pelaporan_tujuan"
+sistem_pelaporan:
+  id: sistem_pelaporan_ajj_nirkertas
+  title: "Sistem Pelaporan Sertifikasi AJJ Nirkertas"
+  tujuan:
+    - mencatat seluruh proses sertifikasi AJJ Nirkertas secara digital
+    - memastikan setiap tahapan memiliki bukti dan output yang dapat ditelusuri
+    - menyediakan laporan untuk Manajemen LSP
+    - menyediakan laporan untuk audit internal
+    - menyediakan laporan berkala kepada BNSP
+    - mencatat kendala teknis, banding, dan tindakan perbaikan
+    - menjaga rekaman, dokumen, dan audit trail proses sertifikasi
+```
+
+---
+
+# 2. Jenis Laporan Utama
+
+```yaml id="jenis_laporan_ajj_nirkertas"
+jenis_laporan:
+  laporan_operasional_harian:
+    fungsi: "Memantau kegiatan sertifikasi harian."
+    pengguna: "Admin LSP, Manajemen LSP"
+    isi:
+      - jadwal asesmen hari berjalan
+      - daftar asesi
+      - asesor bertugas
+      - TUK yang digunakan
+      - status kehadiran
+      - kendala teknis
+      - status rekaman
+
+  laporan_pelaksanaan_asesmen:
+    fungsi: "Mencatat pelaksanaan asesmen jarak jauh per sesi."
+    pengguna: "Asesor Kompetensi, Admin LSP, Manajemen LSP"
+    isi:
+      - identitas asesi
+      - skema sertifikasi
+      - tanggal dan waktu asesmen
+      - nama asesor
+      - metode asesmen
+      - verifikasi identitas
+      - verifikasi lingkungan asesmen
+      - instrumen asesmen
+      - rekaman asesmen
+      - rekomendasi asesor
+      - catatan kendala
+
+  laporan_hasil_sertifikasi:
+    fungsi: "Mencatat keputusan sertifikasi resmi."
+    pengguna: "Manajemen LSP, Komite Teknis/Pengambil Keputusan"
+    isi:
+      - nama asesi
+      - skema
+      - hasil rekomendasi asesor
+      - hasil keputusan sertifikasi
+      - nomor keputusan
+      - tanggal keputusan
+      - status penerbitan sertifikat
+
+  laporan_kendala_teknis:
+    fungsi: "Merekam gangguan teknis selama AJJ/Nirkertas."
+    pengguna: "Admin LSP, IT/Pengelola Sistem, Manajemen LSP"
+    isi:
+      - jenis kendala
+      - waktu kejadian
+      - pihak terdampak
+      - tahap proses
+      - bukti screenshot/log/rekaman
+      - tindakan awal
+      - tindak lanjut
+      - status penyelesaian
+
+  laporan_banding:
+    fungsi: "Mencatat pengajuan dan penyelesaian banding."
+    pengguna: "Manajemen LSP, Komite Banding"
+    isi:
+      - nama asesi
+      - skema
+      - tanggal asesmen
+      - alasan banding
+      - bukti pendukung
+      - hasil telaah
+      - keputusan banding
+      - tanggal penyelesaian
+
+  laporan_audit_internal:
+    fungsi: "Mencatat hasil audit internal AJJ Nirkertas."
+    pengguna: "Manajemen Mutu LSP, Manajemen LSP"
+    isi:
+      - ruang lingkup audit
+      - auditor internal
+      - bukti objektif
+      - temuan
+      - akar masalah
+      - tindakan koreksi
+      - tindakan perbaikan
+      - status penutupan temuan
+
+  laporan_berkala_bnsp:
+    fungsi: "Laporan periodik kepada BNSP."
+    pengguna: "Manajemen LSP"
+    periode: "Setiap 6 bulan, Juni dan Desember, paling lambat tanggal 10"
+    isi:
+      - rekap pelaksanaan sertifikasi jarak jauh
+      - hasil audit internal
+      - tindakan perbaikan
+      - kendala utama
+      - status tindak lanjut
+```
+
+---
+
+# 3. Alur Data Pelaporan
+
+```text id="alur_data_pelaporan"
+Asesi mendaftar & unggah dokumen
+        ↓
+Admin LSP verifikasi permohonan
+        ↓
+Asesi mengisi asesmen mandiri
+        ↓
+Asesor meninjau bukti dan menyetujui rencana asesmen
+        ↓
+Asesmen jarak jauh dilaksanakan dan direkam
+        ↓
+Asesor mengisi instrumen dan laporan asesmen
+        ↓
+Manajemen LSP / Komite menetapkan keputusan sertifikasi
+        ↓
+Asesi mengisi umpan balik atau banding
+        ↓
+Sistem menyimpan arsip digital dan audit trail
+        ↓
+Manajemen Mutu melakukan audit internal
+        ↓
+LSP menyusun laporan berkala kepada BNSP
+```
+
+---
+
+# 4. Peran dalam Sistem Pelaporan
+
+```yaml id="peran_pelaporan"
+peran_pelaporan:
+  asesi:
+    input_data:
+      - permohonan sertifikasi
+      - dokumen persyaratan
+      - asesmen mandiri
+      - bukti kompetensi
+      - umpan balik
+      - banding jika ada
+    tanggung_jawab:
+      - memastikan data benar
+      - mengunggah dokumen yang sah
+      - melaporkan kendala teknis
+      - mengisi umpan balik secara jujur
+
+  asesor_kompetensi:
+    input_data:
+      - hasil review bukti
+      - verifikasi identitas
+      - verifikasi lingkungan
+      - instrumen asesmen terisi
+      - rekomendasi hasil asesmen
+      - catatan kendala
+    tanggung_jawab:
+      - mengisi laporan asesmen
+      - memastikan bukti asesmen cukup dan terdokumentasi
+      - mencatat kendala proses
+      - memberi rekomendasi berbasis bukti
+
+  admin_lsp:
+    input_data:
+      - status pendaftaran
+      - status dokumen
+      - jadwal asesmen
+      - status rekaman
+      - kendala teknis
+    tanggung_jawab:
+      - mengelola data operasional
+      - membantu pelaporan harian
+      - memastikan dokumen digital lengkap
+      - memastikan laporan dapat ditarik dari sistem
+
+  tuk:
+    input_data:
+      - profil TUK
+      - checklist verifikasi TUK
+      - rekaman verifikasi TUK
+      - catatan fasilitas
+    tanggung_jawab:
+      - memastikan data TUK benar
+      - mencatat kendala fasilitas
+      - mendukung bukti verifikasi TUK
+
+  manajemen_lsp:
+    input_data:
+      - laporan asesor
+      - laporan operasional
+      - laporan kendala
+      - laporan audit internal
+      - laporan banding
+    tanggung_jawab:
+      - memvalidasi laporan
+      - menetapkan keputusan sertifikasi
+      - menindaklanjuti temuan
+      - menyampaikan laporan berkala kepada BNSP
+```
+
+---
+
+# 5. Template Laporan Pelaksanaan Sertifikasi AJJ Nirkertas
+
+```yaml id="template_laporan_pelaksanaan"
+template_laporan_pelaksanaan_ajj_nirkertas:
+  identitas_laporan:
+    nama_lsp: "[Nama LSP]"
+    nomor_laporan: "[Nomor]"
+    periode: "[Januari-Juni / Juli-Desember]"
+    tanggal_laporan: "[Tanggal]"
+    penanggung_jawab: "[Nama dan Jabatan]"
+
+  ringkasan_pelaksanaan:
+    jumlah_skema_ajj_disetujui: "[Jumlah]"
+    jumlah_asesi_terdaftar: "[Jumlah]"
+    jumlah_asesmen_dilaksanakan: "[Jumlah]"
+    jumlah_asesmen_selesai: "[Jumlah]"
+    jumlah_asesmen_ditunda: "[Jumlah]"
+    jumlah_asesmen_dibatalkan: "[Jumlah]"
+
+  rekap_hasil:
+    jumlah_rekomendasi_kompeten: "[Jumlah]"
+    jumlah_rekomendasi_belum_kompeten: "[Jumlah]"
+    jumlah_keputusan_kompeten: "[Jumlah]"
+    jumlah_keputusan_belum_kompeten: "[Jumlah]"
+    jumlah_sertifikat_diterbitkan: "[Jumlah]"
+
+  rekap_kendala:
+    kendala_login: "[Jumlah]"
+    kendala_upload_dokumen: "[Jumlah]"
+    kendala_kamera_mikrofon: "[Jumlah]"
+    kendala_koneksi_internet: "[Jumlah]"
+    kendala_rekaman: "[Jumlah]"
+    kendala_lainnya: "[Jumlah]"
+
+  rekap_banding:
+    jumlah_banding_masuk: "[Jumlah]"
+    jumlah_banding_diproses: "[Jumlah]"
+    jumlah_banding_selesai: "[Jumlah]"
+    jumlah_banding_belum_selesai: "[Jumlah]"
+
+  pengendalian_mutu:
+    jumlah_audit_internal: "[Jumlah]"
+    jumlah_temuan: "[Jumlah]"
+    jumlah_tindakan_perbaikan: "[Jumlah]"
+    jumlah_temuan_closed: "[Jumlah]"
+    jumlah_temuan_open: "[Jumlah]"
+
+  kesimpulan:
+    capaian_utama: "[Ringkasan]"
+    kendala_utama: "[Ringkasan]"
+    tindakan_perbaikan_utama: "[Ringkasan]"
+    rencana_tindak_lanjut: "[Ringkasan]"
+```
+
+---
+
+# 6. Template Laporan Asesmen per Asesi
+
+```yaml id="template_laporan_asesmen_per_asesi"
+laporan_asesmen_per_asesi:
+  identitas_asesi:
+    nama: "[Nama Asesi]"
+    nomor_registrasi: "[Nomor]"
+    skema: "[Nama Skema]"
+    tanggal_asesmen: "[Tanggal]"
+    metode: "AJJ Nirkertas"
+
+  identitas_asesor:
+    nama_asesor: "[Nama Asesor]"
+    nomor_registrasi_asesor: "[Nomor]"
+    surat_tugas: "[Nomor Surat Tugas]"
+
+  verifikasi_pra_asesmen:
+    identitas_asesi_terverifikasi: "Ya/Tidak"
+    lingkungan_asesmen_terverifikasi: "Ya/Tidak"
+    perangkat_terverifikasi: "Ya/Tidak"
+    koneksi_memadai: "Ya/Tidak"
+    catatan_pra_asesmen: "[Catatan]"
+
+  pelaksanaan_asesmen:
+    waktu_mulai: "[Jam]"
+    waktu_selesai: "[Jam]"
+    instrumen_digunakan:
+      - observasi
+      - wawancara
+      - uji tulis/lisan
+      - portofolio
+      - simulasi/praktik
+    bukti_asesmen:
+      - "[Bukti 1]"
+      - "[Bukti 2]"
+    rekaman_asesmen: "[Link/File ID]"
+    kendala_teknis: "[Ada/Tidak + uraian]"
+
+  hasil_asesmen:
+    ringkasan_bukti: "[Ringkasan]"
+    rekomendasi_asesor: "Kompeten / Belum Kompeten / Perlu kaji ulang sesuai SOP"
+    catatan_asesor: "[Catatan]"
+    umpan_balik_asesi: "[Ada/Tidak]"
+```
+
+---
+
+# 7. Template Laporan Kendala Teknis
+
+```yaml id="template_laporan_kendala_teknis"
+laporan_kendala_teknis:
+  nomor_insiden: "[Nomor]"
+  tanggal_waktu: "[Tanggal dan Jam]"
+  tahap_proses:
+    - pendaftaran
+    - upload dokumen
+    - asesmen mandiri
+    - persetujuan asesmen
+    - verifikasi identitas
+    - pelaksanaan asesmen
+    - rekaman
+    - laporan asesmen
+    - banding
+  pihak_terdampak:
+    - asesi
+    - asesor
+    - admin_lsp
+    - tuk
+    - sistem
+  jenis_kendala:
+    - gagal login
+    - gagal upload
+    - koneksi putus
+    - kamera/mikrofon bermasalah
+    - rekaman gagal
+    - server lambat/down
+    - data tidak tersimpan
+    - kendala lain
+  uraian_kendala: "[Uraian]"
+  bukti_pendukung:
+    - screenshot
+    - log sistem
+    - rekaman
+    - chat/email
+  tindakan_awal: "[Tindakan]"
+  tindak_lanjut: "[Tindak lanjut]"
+  penanggung_jawab: "[Nama/Jabatan]"
+  status:
+    - open
+    - proses
+    - selesai
+    - perlu eskalasi
+```
+
+---
+
+# 8. Template Laporan Audit Internal AJJ Nirkertas
+
+```yaml id="template_laporan_audit_internal"
+laporan_audit_internal_ajj_nirkertas:
+  identitas_audit:
+    nama_lsp: "[Nama LSP]"
+    periode_audit: "[Januari-Juni / Juli-Desember]"
+    tanggal_audit: "[Tanggal]"
+    auditor_internal: "[Nama]"
+    ruang_lingkup:
+      - dokumen AJJ
+      - dokumen nirkertas
+      - sistem aplikasi
+      - hak akses
+      - rekaman asesmen
+      - laporan asesmen
+      - banding
+      - keamanan data
+
+  hasil_audit:
+    jumlah_temuan: "[Jumlah]"
+    temuan_mayor: "[Jumlah]"
+    temuan_minor: "[Jumlah]"
+    observasi: "[Jumlah]"
+    peluang_perbaikan: "[Jumlah]"
+
+  rincian_temuan:
+    - nomor_temuan: "AI-001"
+      area: "Sistem aplikasi"
+      uraian: "[Uraian temuan]"
+      bukti_objektif: "[Bukti]"
+      akar_masalah: "[Akar masalah]"
+      tindakan_koreksi: "[Tindakan segera]"
+      tindakan_perbaikan: "[Tindakan sistemik]"
+      target_selesai: "[Tanggal]"
+      status: "Open/Closed"
+
+  kesimpulan_audit:
+    status_kesesuaian: "Sesuai / Sesuai dengan catatan / Belum sesuai"
+    rekomendasi: "[Rekomendasi]"
+```
+
+---
+
+# 9. Dashboard Pelaporan
+
+```yaml id="dashboard_pelaporan"
+dashboard_pelaporan:
+  dashboard_operasional:
+    pengguna:
+      - Admin LSP
+      - Manajemen LSP
+    indikator:
+      - jumlah pendaftar
+      - jumlah asesmen terjadwal
+      - jumlah asesmen selesai
+      - jumlah asesmen tertunda
+      - status dokumen asesi
+      - status rekaman asesmen
+
+  dashboard_mutu:
+    pengguna:
+      - Manajemen Mutu LSP
+      - Manajemen LSP
+    indikator:
+      - jumlah audit internal
+      - jumlah temuan
+      - status tindakan perbaikan
+      - kendala berulang
+      - tingkat penyelesaian banding
+      - kelengkapan laporan asesor
+
+  dashboard_teknis:
+    pengguna:
+      - Pengelola Sistem
+      - Admin LSP
+    indikator:
+      - jumlah gagal login
+      - jumlah gagal upload
+      - jumlah rekaman gagal
+      - uptime sistem
+      - jumlah insiden teknis
+      - waktu rata-rata penyelesaian kendala
+
+  dashboard_bnsp:
+    pengguna:
+      - Manajemen LSP
+    indikator:
+      - rekap pelaksanaan 6 bulanan
+      - rekap hasil audit internal
+      - tindakan perbaikan
+      - kendala utama
+      - status pelaporan Juni/Desember
+```
+
+---
+
+# 10. Alur Pelaporan Berkala ke BNSP
+
+```text id="alur_pelaporan_bnsp"
+Pelaksanaan AJJ Nirkertas berjalan
+        ↓
+Data asesmen, rekaman, hasil, kendala, dan banding terkumpul
+        ↓
+Manajemen Mutu LSP melakukan audit internal 6 bulanan
+        ↓
+Temuan audit dicatat
+        ↓
+Tindakan koreksi dan perbaikan dilakukan
+        ↓
+LSP menyusun laporan audit internal
+        ↓
+LSP menyusun laporan pelaksanaan sertifikasi jarak jauh
+        ↓
+Manajemen LSP memvalidasi laporan
+        ↓
+Laporan dikirim kepada BNSP pada periode Juni dan Desember paling lambat tanggal 10
+        ↓
+Bukti pengiriman dan arsip laporan disimpan
+```
+
+---
+
+# 11. Struktur Folder Sistem Pelaporan
+
+```yaml id="struktur_folder_pelaporan"
+folder_sistem_pelaporan:
+  01_laporan_operasional:
+    - laporan_harian_asesmen
+    - laporan_jadwal
+    - laporan_kehadiran
+    - laporan_status_dokumen
+
+  02_laporan_asesmen:
+    - laporan_asesmen_per_asesi
+    - instrumen_asesmen_terisi
+    - rekomendasi_asesor
+    - rekaman_asesmen
+
+  03_laporan_hasil_sertifikasi:
+    - keputusan_sertifikasi
+    - daftar_pemegang_sertifikat
+    - notifikasi_hasil
+
+  04_laporan_kendala:
+    - kendala_login
+    - kendala_upload
+    - kendala_koneksi
+    - kendala_rekaman
+    - kendala_sistem
+
+  05_laporan_banding:
+    - form_banding
+    - register_banding
+    - hasil_tindak_lanjut_banding
+
+  06_laporan_audit_internal:
+    - rencana_audit
+    - laporan_audit
+    - daftar_temuan
+    - tindakan_perbaikan
+    - bukti_penutupan_temuan
+
+  07_laporan_bnsp:
+    - laporan_pelaksanaan_juni
+    - laporan_pelaksanaan_desember
+    - laporan_audit_internal_juni
+    - laporan_audit_internal_desember
+    - bukti_pengiriman
+```
+
+---
+
+# 12. Modul Chatbot Siap Tempel
+
+```yaml id="chatbot_module_sistem_pelaporan"
+module:
+  id: sistem_pelaporan_sertifikasi_ajj_nirkertas
+  title: "Sistem Pelaporan Sertifikasi AJJ Nirkertas"
+  purpose: >
+    Membantu LSP memahami, menyusun, dan memeriksa sistem pelaporan
+    Sertifikasi AJJ Nirkertas, mulai dari laporan operasional, laporan
+    asesmen, laporan kendala, laporan banding, audit internal, hingga
+    laporan berkala kepada BNSP.
+
+intents:
+  - id: ask_sistem_pelaporan_overview
+    sample_user_inputs:
+      - "Bagaimana sistem pelaporan AJJ Nirkertas?"
+      - "Laporan apa saja dalam sertifikasi jarak jauh?"
+      - "Sistem laporan LSP untuk AJJ apa saja?"
+    response_template: response_sistem_pelaporan_overview
+    next_node: menu_sistem_pelaporan
+
+  - id: ask_laporan_asesmen
+    sample_user_inputs:
+      - "Apa isi laporan asesmen AJJ?"
+      - "Format laporan asesor bagaimana?"
+      - "Laporan asesmen per asesi apa saja?"
+    response_template: template_laporan_asesmen_per_asesi
+    next_node: laporan_asesmen_detail
+
+  - id: ask_laporan_kendala
+    sample_user_inputs:
+      - "Bagaimana mencatat kendala teknis?"
+      - "Template laporan internet putus"
+      - "Laporan rekaman asesmen gagal bagaimana?"
+    response_template: template_laporan_kendala_teknis
+    next_node: laporan_kendala_detail
+
+  - id: ask_laporan_audit_internal
+    sample_user_inputs:
+      - "Format laporan audit internal AJJ"
+      - "Audit internal 6 bulanan laporannya apa?"
+      - "Laporan tindakan perbaikan bagaimana?"
+    response_template: template_laporan_audit_internal
+    next_node: laporan_audit_internal_detail
+
+  - id: ask_laporan_bnsp
+    sample_user_inputs:
+      - "Laporan ke BNSP apa saja?"
+      - "Kapan laporan AJJ dikirim ke BNSP?"
+      - "Laporan 6 bulanan AJJ Nirkertas bagaimana?"
+    response_template: response_laporan_bnsp
+    next_node: alur_pelaporan_bnsp
+
+flow:
+  id: menu_sistem_pelaporan
+  title: "Menu Sistem Pelaporan AJJ Nirkertas"
+  bot_message: >
+    Pilih jenis laporan yang ingin Anda susun atau periksa.
+  quick_replies:
+    - "Laporan operasional"
+    - "Laporan asesmen"
+    - "Laporan hasil sertifikasi"
+    - "Laporan kendala teknis"
+    - "Laporan banding"
+    - "Laporan audit internal"
+    - "Laporan berkala BNSP"
+    - "Dashboard pelaporan"
+
+response_template:
+  id: response_sistem_pelaporan_overview
+  text: >
+    Sistem pelaporan AJJ Nirkertas mencakup laporan operasional harian,
+    laporan pelaksanaan asesmen, laporan hasil sertifikasi, laporan kendala
+    teknis, laporan banding, laporan audit internal, dan laporan berkala kepada
+    BNSP. Setiap laporan harus memiliki sumber data, penanggung jawab, bukti
+    digital, status tindak lanjut, dan arsip yang dapat ditelusuri.
+  quick_replies:
+    - "Laporan asesmen"
+    - "Laporan kendala"
+    - "Laporan audit internal"
+    - "Laporan BNSP"
+```
+
+---
+
+# 13. Guardrails Sistem Pelaporan
+
+```yaml id="guardrails_sistem_pelaporan"
+guardrails:
+  integritas_data:
+    - "Jangan mengubah data asesmen tanpa dasar dan otorisasi."
+    - "Setiap revisi laporan harus memiliki catatan perubahan."
+    - "Rekaman asesmen tidak boleh dihapus sebelum masa retensi berakhir sesuai SOP."
+    - "Data asesi harus dilindungi dan hanya dapat diakses oleh pihak berwenang."
+
+  keputusan_sertifikasi:
+    - "Laporan asesor berisi rekomendasi, bukan keputusan final."
+    - "Keputusan resmi sertifikasi hanya ditetapkan melalui mekanisme LSP."
+
+  pelaporan_bnsp:
+    - "Laporan berkala harus divalidasi Manajemen LSP sebelum dikirim."
+    - "Bukti pengiriman laporan kepada BNSP harus disimpan."
+    - "Temuan audit internal harus disertai tindakan koreksi dan perbaikan."
+```
+
+---
+
+## Ringkasan
+
+Sistem pelaporan AJJ Nirkertas sebaiknya terdiri dari **7 laporan inti**: laporan operasional, laporan asesmen, laporan hasil sertifikasi, laporan kendala teknis, laporan banding, laporan audit internal, dan laporan berkala BNSP. Laporan berkala yang paling penting adalah **laporan pelaksanaan sertifikasi jarak jauh** dan **laporan audit internal beserta tindakan perbaikan**, yang disusun setiap 6 bulan dan dilaporkan kepada BNSP pada periode Juni dan Desember paling lambat tanggal 10. ([NAS Online][2])
+
+[1]: https://bnsp.go.id/download?hal=2&id=10&utm_source=chatgpt.com "Halaman Download - BNSP"
+[2]: https://nasonline.id/wp-content/uploads/2024/12/SE-SJJ-Paperless-Final-17.05.23.pdf?utm_source=chatgpt.com "TENTANG - nasonline.id"

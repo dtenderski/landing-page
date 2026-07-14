@@ -1,0 +1,60 @@
+<aside>
+🚧
+
+**Modul B** mengelola fase eksekusi pekerjaan: Pre-Job Activity sebelum mulai, Work in Progress selama pekerjaan, Permit to Work untuk pekerjaan khusus, dan Stop Work Authority bila ditemukan kondisi tidak aman.
+
+</aside>
+
+## 🤖 Sub-Chatbot (Alat Bantu Level 4)
+
+| Agent | Trigger | Output |
+| --- | --- | --- |
+| **AGENT-PJA** | "siap kerja", "kick-off" | Ceklist B.1–B.3, skor PJA %, status "boleh memulai" |
+| **AGENT-WIP** | "inspeksi harian", "toolbox" | Hasil 29 item + pekerjaan khusus, skor WIP %, temuan kritis |
+| **AGENT-PERMIT** | "confined space", "hotwork", "WAH", "LOTO" | Jenis permit wajib, prasyarat, kompetensi, APD, rescue plan |
+| **AGENT-SWA** | "hentikan pekerjaan", "APD lepas" | Keputusan STOP/LANJUT, dasar item kritis, BA SWA |
+
+## 📝 Formulir & Alat Bantu
+
+- [Form 4 — Pre-Job Activity (PJA)](https://www.notion.so/Form-4-Pre-Job-Activity-PJA-12ef1264783d4f42b09c608728707845?pvs=21)
+- [Form 5 — Work in Progress (WIP)](https://www.notion.so/Form-5-Work-in-Progress-WIP-b5af1c3a51184ec5b851dfecbc28de52?pvs=21)
+
+## 🪪 Permit to Work — 10 Jenis
+
+| Permit | Prasyarat Kunci |
+| --- | --- |
+| Confined Space Entry | Gas test O₂ 19,5–23,5%, LEL <10%, H₂S <10 ppm, CO <25 ppm; rescue plan; standby attendant |
+| Hotwork | Fire watch + APAR ≥6 kg + air; radius 11 m bebas flammable; gas test |
+| Working at Height (WAH) | Full body harness; anchor 100% (double lanyard); inspeksi alat; rescue plan |
+| Lifting | Crane sertifikasi & SIA; rigger kompeten; load chart; tagline; SWL ≥1,5× |
+| LOTO / Isolation | Zero energy verification; multilock; verifikasi tester berlisensi |
+| Excavation | Sloping/shoring sesuai kedalaman; gas test; barikade; akses tangga |
+| Radiasi | PPR sertifikasi; dosimeter; controlled area; SOP terpisah |
+| Underwater | Sertifikasi commercial diver; tender komunikasi; chamber standby |
+| Vicinity (energized) | Jarak aman tegangan; flame-retardant clothing; supervisor listrik |
+| Chemical Handling | SDS; APD chemical-resistant; eye-wash + emergency shower; ventilasi |
+
+## 🛑 Stop Work Authority (SWA)
+
+SWA adalah **hak & kewajiban setiap pekerja, pengawas, dan kontraktor**.
+
+### Pemicu Wajib SWA
+
+- Item kritis (*) di ceklist WIP/Permit tidak terpenuhi.
+- APD wajib tidak dipakai.
+- Permit kadaluarsa atau tidak ada.
+- Gas detector mati / kalibrasi expired.
+- Tanda-tanda fatigue, alkohol, narkoba pada pekerja.
+- Kondisi cuaca ekstrem (petir, angin >40 km/jam untuk WAH).
+
+### Wajib Dicatat di BA SWA
+
+Tanggal/jam · item kritis tidak terpenuhi · alasan · tindakan perbaikan · jam lanjut · PIC · TTD pengawas K3 + supervisor kontraktor.
+
+## 🔄 Alur Modul B
+
+1. Sebelum mulai → **PJA Meeting** (Form 4) → skor ≥ 70% & seluruh permit terbit → **boleh start**.
+2. Setiap shift / harian → **WIP inspection** (Form 5) — random audit lapangan.
+3. Bila pekerjaan khusus → terbitkan **Permit to Work** spesifik sebelum aktivitas.
+4. Bila temuan kritis → **SWA** segera, isi BA SWA, perbaikan, baru lanjut.
+5. Closure action ditargetkan ≥ 70% per periode (input ke Modul C – KPI).

@@ -1,0 +1,826 @@
+IA 04 B.docx
+Document
+IA.05 Pertanyaan Tertulis Pilihan Ganda.docx
+Document
+IA.05 Pertanyaan Tertulis Pilihan Ganda.pdf
+PDF
+Lampiran Penilaian.docx
+Document
+AK 04.pdf
+PDF
+AK 05.docx
+Document
+Lampiran Penilaian.docx
+Document
+Ahli Muda Perencana Beton Pracetak untuk Struktur Bangunan Gedung
+ini kita lagi bikin lanjutan pembuatan Chatbot SKK bidang Sipil, mengisi Knowledge Base
+Tambah Knowledge Base
+Tambahkan informasi baru untuk referensi chatbot
+
+Nama
+MUK SKK Sipil – Jabatan Resmi
+Tipe
+Text Content
+Content
+MUK SKK Sipil – 
+Jabatan Resmi 
+Deskripsi (Opsional)
+Deskripsi singkat tentang knowledge ini
+
+dengan format Knowledge Base Chatbot diatas, bagaimana mengisinya
+apakah seluruh jabatan kerja di buatkan Knowledge base ?
+saya jadi bingung.. coba kamu buatkan nanti saya tinggal upload kebutuhanmu. kalau sudah jadi saya tinggal copas
+sudah ada 17 Knowledge base untuk Chatbot Orchestrator apa saja yang masih perlu dibuat
+ya langsungs saja
+Master Architecture SKK Civil AI”
+penjelasan diatas dimasukan kemana ?
+maksudnya ini fitur baru dimasukan ke layar bagian kiri dibawah Knowledge base ?
+seperti ini.. isinya (content) 
+Membuat “Priority Retrieval Rule
+boleh 
+lanjut
+1
+2
+3
+menurutmu yang terbaik saja seperti ap
+ok saya setuju.. silahkan kamu buat. sauya tinggal copas
+
+Tidak ditampilkan sebagai materi pembelajaran kepada pengguna.
+
+ya silahkan kamu audit : mana yang dihapus
+SKK Sipil – System Brain Directive (Final Orchestrator Core)
+Text Content
+Dokumen ini adalah pusat kendali internal AI. Tidak ditampilkan sebagai materi pembelajaran kepada pengguna.
+
+Ditambahkan 11/2/2026
+
+
+
+SKK Sipil – Auto Knowledge Gap Detector (Knowledge Monitoring Engine)
+Text Content
+Sistem deteksi otomatis kekurangan Knowledge Base untuk menjaga akurasi dan kredibilitas jawaban AI.
+
+Ditambahkan 11/2/2026
+
+
+
+SKK Sipil – Cross-Jabatan Conflict Detector (Conflict & Switch Engine)
+Text Content
+Mesin deteksi konflik jabatan untuk mencegah jawaban bercampur antar jabatan serta mengatur switch konteks.
+
+Ditambahkan 11/2/2026
+
+
+
+SKK Sipil – Session Memory Logic (Context Persistence)
+Text Content
+Aturan agar chatbot mengingat jabatan/level/mode dalam satu sesi percakapan untuk meningkatkan konsistensi.
+
+Ditambahkan 11/2/2026
+
+
+
+SKK Sipil – Dynamic Prompt Control (Adaptive Response Engine)
+Text Content
+Mengatur adaptasi gaya dan kedalaman jawaban berdasarkan konteks pengguna dan jenis pertanyaan.
+
+Ditambahkan 11/2/2026
+
+
+
+SKK Sipil – Confidence Scoring Logic (Orchestrator Decision Control)
+Text Content
+Sistem penilaian tingkat keyakinan untuk menentukan apakah chatbot menjawab langsung atau melakukan klarifikasi.
+
+Ditambahkan 11/2/2026
+
+
+
+SKK Sipil – Priority Retrieval Rule (Orchestrator Retrieval Order)
+Text Content
+Aturan urutan prioritas knowledge yang harus diambil Orchestrator sebelum menyusun jawaban.
+
+Ditambahkan 11/2/2026
+
+
+
+📌 MASTER ARCHITECTURE SKK CIVIL AI – ORCHESTRATOR CORE
+Text Content
+📌 MASTER ARCHITECTURE SKK CIVIL AI – ORCHESTRATOR CORE
+
+Ditambahkan 11/2/2026
+
+
+
+Mode Respon Chatbot SKK – Asesi dan Asesor
+Text Content
+Mengatur gaya dan arah jawaban berdasarkan peran pengguna.
+
+Ditambahkan 11/2/2026
+
+
+
+Batasan dan Ruang Lingkup Jawaban Chatbot SKK
+Text Content
+Mengatur gaya dan arah jawaban berdasarkan peran pengguna.
+
+Ditambahkan 11/2/2026
+
+
+
+Logika Identifikasi Jabatan SKK Sipil
+Text Content
+Aturan internal untuk menentukan jabatan berdasarkan kata kunci percakapan.
+
+Ditambahkan 11/2/2026
+
+
+
+SKK Sipil – Mapping Jabatan ke Unit Kompetensi
+Text Content
+Mapping jabatan ke unit kompetensi untuk mencegah pencampuran informasi antar jabatan.
+
+Ditambahkan 11/2/2026
+
+
+
+MUK SKK Sipil – Jabatan Resmi
+Text Content
+Referensi jabatan resmi dan struktur MUK pada skema SKK bidang Sipil untuk kebutuhan chatbot.
+
+Ditambahkan 11/2/2026
+
+
+
+Format Wawancara Asesmen SKK Sipil
+Text Content
+Format Wawancara Asesmen SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Nama: Bank Soal Simulasi SKK Sipil (Umum)
+Text Content
+Nama: Bank Soal Simulasi SKK Sipil (Umum)
+
+Ditambahkan 11/2/2026
+
+
+
+Indikator Kekurangan Kompetensi
+Text Content
+Indikator Kekurangan Kompetensi
+
+Ditambahkan 11/2/2026
+
+
+
+Format Wawancara Kompetensi SKK
+Text Content
+Format Wawancara Kompetensi SKK
+
+Ditambahkan 11/2/2026
+
+
+
+Rubrik Penilaian SKK Sipil
+Text Content
+Rubrik Penilaian SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Bank Soal Simulasi SKK Sipil
+Text Content
+Bank Soal Simulasi SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Template Penyusunan Portofolio SKK
+Text Content
+Panduan penyusunan dokumen SKK
+
+Ditambahkan 11/2/2026
+
+
+
+Panduan Asesmen dan Rubrik Penilaian
+Text Content
+Panduan khusus untuk mode Asesor
+
+Ditambahkan 11/2/2026
+
+
+
+Format Simulasi Ujian SKK
+Text Content
+Standar format latihan dan evaluasi
+
+Ditambahkan 11/2/2026
+
+
+
+Struktur Standar Unit Kompetensi SKK
+Text Content
+Template struktur unit kompetensi
+
+Ditambahkan 11/2/2026
+
+
+
+Pemetaan Kata Kunci Teknis Sipil
+Text Content
+Digunakan untuk membantu identifikasi jabatan dari percakapan
+
+Ditambahkan 11/2/2026
+
+
+
+Struktur Jabatan SKK Sipil per Kelompok
+Text Content
+Struktur jabatan lengkap berdasarkan kelompok
+
+Ditambahkan 11/2/2026
+
+
+
+Kerangka Sistem SKK Bidang Sipil
+Text Content
+Kerangka sistem sertifikasi SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Panduan Bukti Kompetensi SKK
+Text Content
+Panduan umum bukti untuk asesmen SKK
+
+Ditambahkan 11/2/2026
+
+
+
+Daftar Jabatan SKK Sipil (Struktur Referensi)
+Text Content
+Daftar resmi jabatan kerja SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Struktur Umum SKK Bidang Sipil
+Text Content
+Struktur dasar dan pembagian kelompok SKK Sipil
+
+Ditambahkan 11/2/2026
+apakah ini sudha benar.. ada yang kehapus harusnay tetap ada atau ada yang belum terhapus harus nya sudah dihapus ?
+
+SKK Sipil – System Brain Directive (Final Orchestrator Core)
+Text Content
+Dokumen ini adalah pusat kendali internal AI. Tidak ditampilkan sebagai materi pembelajaran kepada pengguna.
+
+Ditambahkan 11/2/2026
+
+
+
+Mode Respon Chatbot SKK – Asesi dan Asesor
+Text Content
+Mengatur gaya dan arah jawaban berdasarkan peran pengguna.
+
+Ditambahkan 11/2/2026
+
+
+
+Batasan dan Ruang Lingkup Jawaban Chatbot SKK
+Text Content
+Mengatur gaya dan arah jawaban berdasarkan peran pengguna.
+
+Ditambahkan 11/2/2026
+
+
+
+Logika Identifikasi Jabatan SKK Sipil
+Text Content
+Aturan internal untuk menentukan jabatan berdasarkan kata kunci percakapan.
+
+Ditambahkan 11/2/2026
+
+
+
+SKK Sipil – Mapping Jabatan ke Unit Kompetensi
+Text Content
+Mapping jabatan ke unit kompetensi untuk mencegah pencampuran informasi antar jabatan.
+
+Ditambahkan 11/2/2026
+
+
+
+MUK SKK Sipil – Jabatan Resmi
+Text Content
+Referensi jabatan resmi dan struktur MUK pada skema SKK bidang Sipil untuk kebutuhan chatbot.
+
+Ditambahkan 11/2/2026
+
+
+
+Format Wawancara Asesmen SKK Sipil
+Text Content
+Format Wawancara Asesmen SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Nama: Bank Soal Simulasi SKK Sipil (Umum)
+Text Content
+Nama: Bank Soal Simulasi SKK Sipil (Umum)
+
+Ditambahkan 11/2/2026
+
+
+
+Indikator Kekurangan Kompetensi
+Text Content
+Indikator Kekurangan Kompetensi
+
+Ditambahkan 11/2/2026
+
+
+
+Format Wawancara Kompetensi SKK
+Text Content
+Format Wawancara Kompetensi SKK
+
+Ditambahkan 11/2/2026
+
+
+
+Rubrik Penilaian SKK Sipil
+Text Content
+Rubrik Penilaian SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Bank Soal Simulasi SKK Sipil
+Text Content
+Bank Soal Simulasi SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Template Penyusunan Portofolio SKK
+Text Content
+Panduan penyusunan dokumen SKK
+
+Ditambahkan 11/2/2026
+
+
+
+Panduan Asesmen dan Rubrik Penilaian
+Text Content
+Panduan khusus untuk mode Asesor
+
+Ditambahkan 11/2/2026
+
+
+
+Format Simulasi Ujian SKK
+Text Content
+Standar format latihan dan evaluasi
+
+Ditambahkan 11/2/2026
+
+
+
+Struktur Standar Unit Kompetensi SKK
+Text Content
+Template struktur unit kompetensi
+
+Ditambahkan 11/2/2026
+
+
+
+Pemetaan Kata Kunci Teknis Sipil
+Text Content
+Digunakan untuk membantu identifikasi jabatan dari percakapan
+
+Ditambahkan 11/2/2026
+
+
+
+Struktur Jabatan SKK Sipil per Kelompok
+Text Content
+Struktur jabatan lengkap berdasarkan kelompok
+
+Ditambahkan 11/2/2026
+
+
+
+Kerangka Sistem SKK Bidang Sipil
+Text Content
+Kerangka sistem sertifikasi SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Panduan Bukti Kompetensi SKK
+Text Content
+Panduan umum bukti untuk asesmen SKK
+
+Ditambahkan 11/2/2026
+
+
+
+Daftar Jabatan SKK Sipil (Struktur Referensi)
+Text Content
+Daftar resmi jabatan kerja SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Struktur Umum SKK Bidang Sipil
+Text Content
+Struktur dasar dan pembagian kelompok SKK Sipil
+
+Ditambahkan 11/2/2026
+
+bagaimana kalau seperti ini
+SKK Sipil – System Brain Directive (Final Orchestrator Core)
+Text Content
+Dokumen ini adalah pusat kendali internal AI. Tidak ditampilkan sebagai materi pembelajaran kepada pengguna.
+
+Ditambahkan 11/2/2026
+
+
+
+SKK Sipil – Mapping Jabatan ke Unit Kompetensi
+Text Content
+Mapping jabatan ke unit kompetensi untuk mencegah pencampuran informasi antar jabatan.
+
+Ditambahkan 11/2/2026
+
+
+
+MUK SKK Sipil – Jabatan Resmi
+Text Content
+Referensi jabatan resmi dan struktur MUK pada skema SKK bidang Sipil untuk kebutuhan chatbot.
+
+Ditambahkan 11/2/2026
+
+
+
+Format Wawancara Asesmen SKK Sipil
+Text Content
+Format Wawancara Asesmen SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Nama: Bank Soal Simulasi SKK Sipil (Umum)
+Text Content
+Nama: Bank Soal Simulasi SKK Sipil (Umum)
+
+Ditambahkan 11/2/2026
+
+
+
+Indikator Kekurangan Kompetensi
+Text Content
+Indikator Kekurangan Kompetensi
+
+Ditambahkan 11/2/2026
+
+
+
+Format Wawancara Kompetensi SKK
+Text Content
+Format Wawancara Kompetensi SKK
+
+Ditambahkan 11/2/2026
+
+
+
+Rubrik Penilaian SKK Sipil
+Text Content
+Rubrik Penilaian SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Bank Soal Simulasi SKK Sipil
+Text Content
+Bank Soal Simulasi SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Template Penyusunan Portofolio SKK
+Text Content
+Panduan penyusunan dokumen SKK
+
+Ditambahkan 11/2/2026
+
+
+
+Panduan Asesmen dan Rubrik Penilaian
+Text Content
+Panduan khusus untuk mode Asesor
+
+Ditambahkan 11/2/2026
+
+
+
+Format Simulasi Ujian SKK
+Text Content
+Standar format latihan dan evaluasi
+
+Ditambahkan 11/2/2026
+
+
+
+Struktur Standar Unit Kompetensi SKK
+Text Content
+Template struktur unit kompetensi
+
+Ditambahkan 11/2/2026
+
+
+
+Pemetaan Kata Kunci Teknis Sipil
+Text Content
+Digunakan untuk membantu identifikasi jabatan dari percakapan
+
+Ditambahkan 11/2/2026
+
+
+
+Struktur Jabatan SKK Sipil per Kelompok
+Text Content
+Struktur jabatan lengkap berdasarkan kelompok
+
+Ditambahkan 11/2/2026
+
+
+
+Kerangka Sistem SKK Bidang Sipil
+Text Content
+Kerangka sistem sertifikasi SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Panduan Bukti Kompetensi SKK
+Text Content
+Panduan umum bukti untuk asesmen SKK
+
+Ditambahkan 11/2/2026
+
+
+
+Daftar Jabatan SKK Sipil (Struktur Referensi)
+Text Content
+Daftar resmi jabatan kerja SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Struktur Umum SKK Bidang Sipil
+Text Content
+Struktur dasar dan pembagian kelompok SKK Sipil
+
+Ditambahkan 11/2/2026
+Struktur Wawancara Kompetensi SKK Sipil
+
+Wawancara bertujuan memverifikasi:
+
+Kesesuaian pengalaman
+
+Pemahaman teknis
+
+Kedalaman analisis
+
+Kesesuaian dengan jenjang
+
+Pertanyaan Standar:
+
+Jelaskan pengalaman proyek paling relevan dengan jabatan ini.
+
+Apa tanggung jawab teknis utama Anda dalam proyek tersebut?
+
+Risiko teknis terbesar yang pernah Anda hadapi?
+
+Bagaimana Anda mengendalikan mutu pekerjaan?
+
+Bagaimana Anda memastikan keselamatan kerja?
+
+Bagaimana Anda mendokumentasikan pekerjaan teknis?
+
+Indikator Jawaban Baik:
+
+Spesifik (bukan normatif)
+
+Menyebutkan peran pribadi
+
+Menjelaskan proses teknis
+
+Menyebutkan dokumen atau bukti
+
+Red Flag:
+
+Jawaban umum tanpa pengalaman nyata
+
+Tidak memahami ruang lingkup jabatan
+
+Tidak mampu menjelaskan langkah teknis
+dan
+Struktur Wawancara Kompetensi SKK Sipil
+
+Wawancara bertujuan memverifikasi:
+
+Kesesuaian pengalaman
+
+Pemahaman teknis
+
+Kedalaman analisis
+
+Kesesuaian dengan jenjang
+
+Pertanyaan Standar:
+
+Jelaskan pengalaman proyek paling relevan dengan jabatan ini.
+
+Apa tanggung jawab teknis utama Anda dalam proyek tersebut?
+
+Risiko teknis terbesar yang pernah Anda hadapi?
+
+Bagaimana Anda mengendalikan mutu pekerjaan?
+
+Bagaimana Anda memastikan keselamatan kerja?
+
+Bagaimana Anda mendokumentasikan pekerjaan teknis?
+
+Indikator Jawaban Baik:
+
+Spesifik (bukan normatif)
+
+Menyebutkan peran pribadi
+
+Menjelaskan proses teknis
+
+Menyebutkan dokumen atau bukti
+
+Red Flag:
+
+Jawaban umum tanpa pengalaman nyata
+
+Tidak memahami ruang lingkup jabatan
+
+Tidak mampu menjelaskan langkah teknis
+
+2 format wawancara .. digabung apa dipisah atau dihapus salah satunya
+final 
+SKK Sipil – System Brain Directive (Final Orchestrator Core)
+Text Content
+Dokumen ini adalah pusat kendali internal AI. Tidak ditampilkan sebagai materi pembelajaran kepada pengguna.
+
+Ditambahkan 11/2/2026
+
+
+
+SKK Sipil – Mapping Jabatan ke Unit Kompetensi
+Text Content
+Mapping jabatan ke unit kompetensi untuk mencegah pencampuran informasi antar jabatan.
+
+Ditambahkan 11/2/2026
+
+
+
+MUK SKK Sipil – Jabatan Resmi
+Text Content
+Referensi jabatan resmi dan struktur MUK pada skema SKK bidang Sipil untuk kebutuhan chatbot.
+
+Ditambahkan 11/2/2026
+
+
+
+Format Wawancara Asesmen SKK Sipil
+Text Content
+Format Wawancara Asesmen SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Indikator Kekurangan Kompetensi
+Text Content
+Indikator Kekurangan Kompetensi
+
+Ditambahkan 11/2/2026
+
+
+
+Rubrik Penilaian SKK Sipil
+Text Content
+Rubrik Penilaian SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Bank Soal Simulasi SKK Sipil
+Text Content
+Bank Soal Simulasi SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Template Penyusunan Portofolio SKK
+Text Content
+Panduan penyusunan dokumen SKK
+
+Ditambahkan 11/2/2026
+
+
+
+Panduan Asesmen dan Rubrik Penilaian
+Text Content
+Panduan khusus untuk mode Asesor
+
+Ditambahkan 11/2/2026
+
+
+
+Format Simulasi Ujian SKK
+Text Content
+Standar format latihan dan evaluasi
+
+Ditambahkan 11/2/2026
+
+
+
+Struktur Standar Unit Kompetensi SKK
+Text Content
+Template struktur unit kompetensi
+
+Ditambahkan 11/2/2026
+
+
+
+Pemetaan Kata Kunci Teknis Sipil
+Text Content
+Digunakan untuk membantu identifikasi jabatan dari percakapan
+
+Ditambahkan 11/2/2026
+
+
+
+Struktur Jabatan SKK Sipil per Kelompok
+Text Content
+Struktur jabatan lengkap berdasarkan kelompok
+
+Ditambahkan 11/2/2026
+
+
+
+Kerangka Sistem SKK Bidang Sipil
+Text Content
+Kerangka sistem sertifikasi SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Panduan Bukti Kompetensi SKK
+Text Content
+Panduan umum bukti untuk asesmen SKK
+
+Ditambahkan 11/2/2026
+
+
+
+Daftar Jabatan SKK Sipil (Struktur Referensi)
+Text Content
+Daftar resmi jabatan kerja SKK Sipil
+
+Ditambahkan 11/2/2026
+
+
+
+Struktur Umum SKK Bidang Sipil
+Text Content
+lanjut

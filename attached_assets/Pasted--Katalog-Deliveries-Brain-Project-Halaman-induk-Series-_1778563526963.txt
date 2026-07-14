@@ -1,0 +1,70 @@
+# 📦 Katalog Deliveries Brain Project
+
+> Halaman induk Series L1 — daftar dokumen / output yang dapat dihasilkan agent Brain Project atas permintaan pengguna. Mengikuti pola Katalog Deliveries KonstruKlaw.
+> 
+
+## Cara Pakai
+
+1. Pilih deliverable yang dibutuhkan dari katalog di bawah.
+2. Mention `@Brain Project` di halaman/baris terkait → minta deliverable spesifik (mis. *"Tolong susun Surat Klaim EOT untuk proyek ini"*).
+3. Agent akan minta data yang kurang (ABD-7 Section 7), lalu produksi output.
+
+## 🌅 Operasional Harian
+
+| # | Deliverable | PIC Agent | Input Min. |
+| --- | --- | --- | --- |
+| D-01 | Review LHP (analisis ABD-7) | BR-PROX | LHP hari ini + 7 hari sebelumnya |
+| D-02 | Look-ahead 3-mingguan | BR-PROX | WBS + progres + sumber daya |
+| D-03 | Script Toolbox Talk | BR-SAF | Pekerjaan hari ini |
+| D-04 | Daily K3 Walkthrough Checklist | BR-SAF | Lingkup zona kerja |
+| D-05 | Pre-Task Plan / JSA | BR-SAF | Aktivitas + bahaya |
+
+## 📅 Pengendalian Mingguan / Bulanan
+
+| # | Deliverable | PIC | Input Min. |
+| --- | --- | --- | --- |
+| D-06 | Laporan EVM (CPI/SPI/EAC/VAC + grafik) | BR-EVM | PV, EV, AC, BAC |
+| D-07 | Audit Kepatuhan SMKK (Permen PUPR 8/2023) | BR-SAF + BR-PROX | RKK proyek |
+| D-08 | Audit Kepatuhan SMK3 (PP 50/2012) | BR-SAF | Dokumen sistem K3 |
+| D-09 | Risk Register Update (P×D) | BR-PROX | Daftar isu/risiko |
+| D-10 | Trend NCR & Root-Cause Aggregate | BR-MUT | Data NCR 30 hari |
+
+## 🔍 Mutu
+
+| # | Deliverable | PIC | Input Min. |
+| --- | --- | --- | --- |
+| D-11 | ITP per item pekerjaan | BR-MUT | Item pekerjaan + spesifikasi |
+| D-12 | NCR + CAPA | BR-MUT | Temuan ketidaksesuaian |
+| D-13 | Surat RFI ke perencana | BR-MUT | Pertanyaan teknis + referensi gambar |
+| D-14 | Review hasil uji material (beton/baja/tanah) | BR-MUT | Hasil lab + spec target |
+
+## ⛑️ K3 & Lingkungan
+
+| # | Deliverable | PIC | Input Min. |
+| --- | --- | --- | --- |
+| D-15 | Investigasi Insiden 5-Why + Bowtie + CAPA | BR-SAF | Kronologi + dampak |
+| D-16 | Permit to Work (panas/ketinggian/ruang terbatas/galian) | BR-SAF | Lokasi + bahaya |
+| D-17 | Plan limbah B3 + manifest | BR-ENV | Daftar limbah |
+| D-18 | Hitung jejak karbon proyek (ISO 14064-1) | BR-ENV | BoQ material + transport |
+| D-19 | Audit ambang debu PM10 & kebisingan | BR-ENV | Hasil monitoring |
+
+## 📜 Kontrak & Komersial
+
+| # | Deliverable | PIC | Input Min. |
+| --- | --- | --- | --- |
+| D-20 | Surat klaim EOT + TIA | BR-KON | Cause-effect + dokumentasi |
+| D-21 | Usulan VO + impact analysis | BR-KON | Perubahan lingkup + harga |
+| D-22 | Notifikasi 28-hari FIDIC | BR-KON | Event date + klausul |
+| D-23 | Berita Acara MC-0 / MC-100 / PHO / FHO | BR-KON | Hasil joint survey |
+
+## 🏁 Strategis
+
+| # | Deliverable | PIC | Input Min. |
+| --- | --- | --- | --- |
+| D-24 | Postmortem proyek + Lesson Learned | BR-PROX (orchestrate semua) | Data proyek end-to-end |
+| D-25 | Skor Kesiapan PHO | BR-PROX | Punch list + defect list |
+| D-26 | Rekomendasi Continual Improvement | BR-PROX | Tren NCR + insiden + EVM |
+
+## Total: 26 Deliverables
+
+- Harian: 5 · Mingguan/Bulanan: 5 · Mutu: 4 · K3-Lingkungan: 5 · Kontrak: 4 · Strategis: 3

@@ -1,0 +1,67 @@
+
+PROMPT AI FOR WORK (LEGAL) BANKRUPTCY LAWYER
+.pdf
+saya mau bikin chatbot Konsultasi Legal/Hukum agentik/multiagen dan openclaw, dengan basis dasar knowlege base KUHP terbaru, yurisprudensi kasus-kasus hukum yang terjadi, dan Peraturan dan Perundangan yang berlaku :
+https://www.aiforwork.co/department/legal
+sebagai referensi ada link : https://replit.com/@buatanreplit/LexCom-Apps-3
+8:07 PM
+Thought
+Sebelum saya mulai membangun blueprint chatbot legal-nya, saya ingin memastikan scope-nya pas dengan kebiasaan kerja Anda (mirip SMAP & CSMS sebelumnya).
+Halaman apa saja yang ingin dibuat dulu untuk Chatbot LexCom?
+Blueprint utama (arsitektur, alur, modul, RACI), System Prompt OpenClaw multi-agent (orchestrator + spesialis), Persona Gustafta & Conversation Starters, KB Detail (KUHP, Yurisprudensi, Peraturan/Perundangan), Generator Dokumen Hukum (gugatan, MoU, legal opinion, dll), Roadmap implementasi + KPI dashboard
+Spesialis agent apa saja yang perlu disediakan?
+AGENT-PIDANA (KUHP baru UU 1/2023, hukum acara pidana), AGENT-PERDATA (KUHPerdata, kontrak, wanprestasi, PMH), AGENT-KORPORASI (PT, OJK, M&A, GCG), AGENT-KETENAGAKERJAAN (UU Cipta Kerja, PHI), AGENT-PERTANAHAN (BPN, agraria, sengketa tanah), AGENT-PAJAK (UU HPP, sengketa pajak), AGENT-YURISPRUDENSI (riset putusan MA/MK), AGENT-DRAFTER (gugatan, kontrak, legal opinion), AGENT-LITIGASI (strategi beracara, eksekusi), AGENT-KEPAILITAN/PKPU, Other
+Target pengguna utama chatbot ini?
+Campuran (advokat + korporat + awam dengan routing)
+Thought
+Baik, saya akan membangun seluruh blueprint LexCom dalam 6 halaman terstruktur. Mulai dari halaman utama, lalu 5 halaman anak.
+Thought
+Dua halaman gagal karena infrastructure error. Saya retry sekarang.
+lanjut
+8:57 PM
+Securities Lawyer
+.pdf
+Saya lanjutkan dengan 2 halaman terakhir: KB Detail dan Generator Dokumen. PDF spesialisasi lawyer aiforwork.co (Securities, Personal Injury, Family, Criminal Defense, Real Estate, Trust & Estates, Civil Rights, Bankruptcy, Immigration, IP, Employment, Tax, Corporate, Paralegal) saya jadikan referensi pemetaan ke konteks hukum Indonesia.
+Semua 6 halaman LexCom sudah selesai dibuat sebagai sub-halaman di bawah blueprint utama.
+Ringkasan struktur yang terbentuk di bawah halaman induk Chatbot LexCom:
+Blueprint utama — arsitektur, 10 agen, 3 tier (T1/T2/T3), conversation flow, RACI, guardrails.
+System Prompt OpenClaw — prompt lengkap LEX-ORCHESTRATOR + 10 agen spesialis (Pidana, Perdata, Korporasi, Ketenagakerjaan, Pertanahan, Pajak, Yurisprudensi, Drafter, Litigasi, Kepailitan).
+Persona Gustafta — nama, tagline, tone, opening message, dan 4 conversation starters per agen.
+KB Detail — 7 koleksi KB (KUHP 2023, KUHPerdata, UU Sektoral, Peraturan Pelaksana, Yurisprudensi, Doktrin, Template) + pemetaan ke 14 spesialisasi aiforwork.co.
+Generator Dokumen Hukum — katalog 50+ template (litigasi, kontrak, korporasi, pra-litigasi, LO) + alur onboarding + validator.
+Roadmap 6 Bulan — Gantt, RACI per fase, KPI lagging & leading, risk register, resource plan.
+Catatan: spesialisasi Immigration Lawyer dari aiforwork.co belum punya agen dedicated; saya pinkan ke roadmap fase 2 (UU 6/2011 Keimigrasian) — tinggal aktifkan jika ingin ditambahkan sebagai agen ke-11.
+ya tambahkan agen yang bisa multiclaw..
+9:06 PM
+Thought
+Saya tambahkan AGENT-MULTICLAW — agen lintas-domain yang bisa menangani kasus multi-disiplin (mis. korupsi + TPPU + perdata, atau ketenagakerjaan + pidana + PDP) — plus AGENT-IMIGRASI yang sebelumnya saya tandai pending. Total agen LexCom menjadi 12.
+Saya muat dulu 3 halaman terkait untuk edit presisi.
+maaf openclaw maksudnya
+9:06 PM
+Thought
+An error occurred, please try again
+lanjut multiclaw dan openclaw boleh juga
+9:08 PM
+Thought
+Saya tambahkan AGENT-MULTICLAW (lintas-domain) dan AGENT-OPENCLAW (open-domain/emerging law) ke 3 halaman terkait sekaligus.
+Selesai. AGENT-MULTICLAW ("Multa" 🕸️) dan AGENT-OPENCLAW ("Opena" 🌐) sudah ditambahkan ke 3 halaman: Blueprint, System Prompt, dan Persona — total agen LexCom kini 12 + 1 orchestrator.
+Ringkasan dua agen baru:
+Multa — MULTICLAW 🕸️​
+Opena — OPENCLAW 🌐​
+Peran
+Cross-domain coordinator
+Open-domain & emerging law
+Use case
+Korupsi+TPPU+perdata, mafia tanah, fraud korporat, kebocoran data, M&A lintas yurisdiksi
+AI law, crypto, ESG, climate litigation, perbandingan hukum, edukasi
+Doktrin kunci
+Lex specialis, ne bis in idem, concursus
+Gap analysis, comparative law, choice of law/forum
+Output
+Peta domain + mini-IRAC per domain + sintesis prioritas + forum sequencing
+Mode eksploratif/edukasi/komparasi/emerging
+Hand-off
+⇄ Drafter, Litigasi, Openclaw
+⇄ Spesialis tunggal, Multiclaw, Yurisprudensi
+Catatan teknis di System Prompt: section disclaimer & runtime variabel ikut dinomori ulang menjadi 14 & 15 agar konsisten dengan urutan baru.
+

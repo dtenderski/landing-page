@@ -1,0 +1,291 @@
+<aside>
+📝
+
+Halaman ini mendefinisikan **kapabilitas drafting** AGENT-DRAFTER ("Drafa"): katalog template, alur onboarding data, struktur output, validasi, dan disclaimer wajib.
+
+</aside>
+
+## 1. Prinsip Drafting LexCom
+
+1. **Setiap dokumen adalah DRAFT** — wajib direview advokat sebelum digunakan.
+2. **Placeholder eksplisit** untuk data yang belum tersedia: `[NAMA PARA PIHAK]`, `[TANGGAL]`, `[NILAI GANTI RUGI]`.
+3. **Format formal Indonesia** mengikuti praktek pengadilan/notaris.
+4. **Tidak mengarang fakta** — jika data kurang, Drafa bertanya, bukan mengasumsi.
+5. **Sitasi dasar hukum** untuk setiap dalil/klausul kunci.
+6. **Catatan asumsi & risiko** di bagian akhir setiap dokumen.
+7. **Plain language** untuk klien T1 awam jika diminta versi awam.
+
+## 2. Katalog Template (50+)
+
+### A. Dokumen Litigasi Perdata
+
+| **Dokumen** | **Forum** | **Sumber Hukum** |
+| --- | --- | --- |
+| Gugatan Wanprestasi | PN | Pasal 1243 KUHPerdata |
+| Gugatan PMH | PN | Pasal 1365 KUHPerdata |
+| Gugatan Sederhana | PN | PERMA 2/2015 jo. 4/2019 |
+| Eksepsi (kompetensi absolut/relatif, NO, dll) | PN | HIR/RBg |
+| Jawaban + Rekonvensi | PN | HIR/RBg |
+| Replik / Duplik | PN | HIR/RBg |
+| Kesimpulan | PN | HIR/RBg |
+| Memori Banding | PT | UU 20/1947 |
+| Memori Kasasi | MA | UU 14/1985 jo. 5/2004 jo. 3/2009 |
+| Memori PK | MA | UU MA |
+
+### B. Dokumen Litigasi Pidana
+
+- Surat Kuasa Khusus Pidana
+- Eksepsi (Nota Keberatan) terdakwa
+- Pledoi (Nota Pembelaan)
+- Memori Banding/Kasasi/PK pidana
+- Praperadilan (sah/tidaknya penangkapan, penahanan, penyitaan)
+
+### C. Dokumen Khusus Forum Lain
+
+- **PHI:** Gugatan PHI, Risalah bipartit, Laporan ke Disnaker
+- **Niaga:** Permohonan PKPU, Permohonan Pailit, Verifikasi piutang
+- **Pajak:** Surat keberatan, Banding ke Pengadilan Pajak
+- **PTUN:** Gugatan TUN, Kompetensi & alas hak gugatan
+- **MK:** Permohonan PUU, SKLN
+- **BANI/Arbitrase:** Permohonan arbitrase, Jawaban
+
+### D. Kontrak & Dokumen Bisnis
+
+- Perjanjian Jual Beli (barang/saham/aset)
+- Perjanjian Sewa-Menyewa
+- Perjanjian Kerjasama / Joint Venture
+- MoU & Heads of Agreement
+- NDA / Confidentiality Agreement
+- Distribution / Reseller Agreement
+- License Agreement (HKI)
+- Loan Agreement / Perjanjian Pinjaman
+- Personal/Corporate Guarantee
+- Service Agreement / Konsultansi
+
+### E. Dokumen Korporasi
+
+- Akta Pendirian PT (draft pra-notaris)
+- RUPS Tahunan/Luar Biasa (undangan, agenda, risalah)
+- Surat Keputusan Direksi/Komisaris
+- Anggaran Dasar / Anggaran Rumah Tangga
+- Shareholder Agreement
+- Power of Attorney korporat
+
+### F. Dokumen Ketenagakerjaan
+
+- PKWT / PKWTT
+- Peraturan Perusahaan / PKB
+- Surat Peringatan (SP1/SP2/SP3)
+- Surat PHK + perhitungan pesangon
+- Surat pengunduran diri
+
+### G. Dokumen Pertanahan & Notariil
+
+- AJB (draft pra-PPAT)
+- Surat Pernyataan Hak
+- Akta Hibah/Wasiat (draft pra-notaris)
+- Surat Kuasa Menjual/Membebani
+
+### H. Dokumen Pra-Litigasi
+
+- **Somasi I/II/III** (untuk wanprestasi atau PMH)
+- Surat permohonan mediasi
+- Risalah mediasi
+- Surat kuasa khusus advokat
+- Surat Kuasa Substitusi
+
+### I. Legal Opinion & Memo
+
+- Legal Opinion (LO) standar IRAC+
+- Legal Due Diligence Report
+- Compliance Memo
+- Internal Investigation Report
+
+## 3. Alur Onboarding Data
+
+```mermaid
+flowchart TD
+	A["User minta dokumen X"] --> B["Drafa cek kebutuhan minimum"]
+	B --> C{"Data lengkap?"}
+	C -- Tidak --> D["Form klarifikasi:<br>identitas para pihak,<br>fakta, tujuan, jadwal"]
+	D --> E["User isi form"]
+	E --> B
+	C -- Ya --> F["Drafa generate draft"]
+	F --> G["Validator:<br>citation, format, placeholder"]
+	G --> H{"Lulus?"}
+	H -- Tidak --> F
+	H -- Ya --> I["Output: DRAFT + Catatan + Disclaimer"]
+	I --> J["User review/edit"]
+	J --> K{"Perlu revisi?"}
+	K -- Ya --> F
+	K -- Tidak --> L["Final: DRAFT FOR REVIEW BY ADVOCATE"]
+```
+
+### Form onboarding minimum (per kategori)
+
+#### Untuk Gugatan/Somasi/Eksepsi
+
+- Identitas Penggugat/Termohon (nama, alamat, NIK, kuasa)
+- Identitas Tergugat/Pemohon (nama, alamat)
+- Hubungan hukum (kontrak/peristiwa)
+- Kronologi fakta (tanggal, kejadian, bukti)
+- Tuntutan (provisi, primer, subsider)
+- Forum & kompetensi yang diinginkan
+- Bukti tertulis & saksi yang tersedia
+
+#### Untuk Kontrak/MoU/NDA
+
+- Identitas para pihak (badan hukum/perorangan)
+- Objek perjanjian
+- Hak & kewajiban tiap pihak
+- Nilai transaksi & cara pembayaran
+- Jangka waktu
+- Hukum yang berlaku & forum penyelesaian sengketa
+- Klausul khusus (eksklusif, force majeure, IP, dll)
+
+#### Untuk Legal Opinion
+
+- Pertanyaan hukum yang diajukan
+- Fakta-fakta material
+- Dokumen pendukung
+- Asumsi & limitasi
+- Audiens (internal/regulator/counterparty)
+
+## 4. Struktur Output Standar
+
+Setiap dokumen yang dikeluarkan Drafa memiliki struktur:
+
+```
+[HEADER: "DRAFT — UNTUK REVIEW ADVOKAT"]
+
+[Judul Dokumen Formal]
+
+[Para Pihak]
+
+[Premis / Konsiderans / Mengingat]
+
+[Isi / Pasal-pasal / Petitum]
+
+[Penutup / Tanda Tangan placeholder]
+
+---
+CATATAN DRAFA:
+- Asumsi: ...
+- Risiko hukum yang perlu diverifikasi: ...
+- Data yang masih kosong (placeholder): ...
+- Dasar hukum utama: [UU/Pasal/Putusan]
+
+DISCLAIMER:
+Dokumen ini adalah DRAFT awal yang dihasilkan AI LexCom dan TIDAK menggantikan nasihat hukum dari advokat berlisensi. Wajib direview oleh advokat sebelum digunakan/ditandatangani.
+```
+
+## 5. Validator Otomatis
+
+Sebelum output ditampilkan ke user, validator memeriksa:
+
+- [ ]  Header `DRAFT` ada
+- [ ]  Disclaimer ada
+- [ ]  Tidak ada placeholder yang tertinggal tanpa flag (mis. `[…]` tanpa keterangan)
+- [ ]  Setiap dalil hukum punya sitasi `[UU No. X/Tahun, Pasal Y]` atau `[Putusan MA No. ...]`
+- [ ]  Format formal Indonesia konsisten (margin, judul, nomor halaman placeholder)
+- [ ]  Tidak ada saran/dalil yang melawan hukum (cross-check guardrail)
+- [ ]  Untuk gugatan: petitum lengkap (provisi/primer/subsider)
+- [ ]  Untuk kontrak: klausul wajib hadir (objek, harga, jangka waktu, sengketa, force majeure)
+
+## 6. Mode Drafting
+
+| **Mode** | **Audiens** | **Output** |
+| --- | --- | --- |
+| **Strict Formal** | Advokat (T3) | Bahasa hukum baku, sitasi padat |
+| **Korporat Practical** | In-house counsel (T2) | Bahasa formal + ringkasan eksekutif |
+| **Plain Indonesian** | Awam (T1) edukasi | Bahasa sederhana + glosarium |
+| **Bilingual ID/EN** | Kontrak lintas batas | Dua kolom ID-EN, klausul governing language |
+
+## 7. Contoh Mini-Template: Somasi Wanprestasi
+
+```
+DRAFT — UNTUK REVIEW ADVOKAT
+
+Nomor: [NOMOR_SURAT]
+Lampiran: [JUMLAH_LAMPIRAN]
+Perihal: SOMASI I — Pemenuhan Kewajiban Berdasarkan Perjanjian
+
+Kepada Yth.
+[NAMA_TERSOMASI]
+[ALAMAT_TERSOMASI]
+
+Dengan hormat,
+
+Kami yang bertanda tangan di bawah ini, [NAMA_PEMBERI_KUASA] selaku [JABATAN/KAPASITAS], dalam hal ini diwakili oleh [NAMA_KUASA HUKUM] berdasarkan Surat Kuasa Khusus tertanggal [TANGGAL], dengan ini menyampaikan SOMASI sebagai berikut:
+
+1. Bahwa pada tanggal [TANGGAL_PERJANJIAN], para pihak telah menandatangani Perjanjian [JUDUL_PERJANJIAN] (selanjutnya disebut "Perjanjian");
+
+2. Bahwa berdasarkan Pasal [NOMOR_PASAL] Perjanjian, Saudara berkewajiban untuk [URAIKAN_KEWAJIBAN] paling lambat tanggal [TENGGAT];
+
+3. Bahwa hingga tanggal surat ini, Saudara TIDAK memenuhi kewajiban tersebut, sehingga Saudara telah lalai (wanprestasi) sebagaimana diatur dalam Pasal 1238 dan Pasal 1243 KUHPerdata;
+
+4. Bahwa atas wanprestasi Saudara, klien kami mengalami kerugian sebesar Rp [NILAI_KERUGIAN] yang terdiri dari [URAIAN_KERUGIAN].
+
+Sehubungan dengan hal tersebut, dengan ini kami SOMASI Saudara untuk:
+a. Memenuhi kewajiban Saudara dalam waktu [JUMLAH_HARI] hari kerja sejak surat ini diterima;
+b. Membayar ganti rugi sebesar Rp [NILAI];
+c. Bila tidak diindahkan, kami akan menempuh upaya hukum lebih lanjut, termasuk gugatan perdata di Pengadilan Negeri yang berwenang.
+
+Demikian Somasi I ini disampaikan untuk diperhatikan.
+
+Hormat kami,
+[NAMA_KUASA_HUKUM]
+[NOMOR_INDUK_ADVOKAT]
+
+---
+CATATAN DRAFA:
+- Asumsi: para pihak terikat perjanjian tertulis; tenggat sudah lewat.
+- Risiko: jika kewajiban Saudara bersifat *natuurlijke verbintenis* atau jangka waktu belum habis, somasi belum patut. Periksa kembali tenggat dan klausul.
+- Placeholder yang harus diisi: 11 field [bracket] di atas.
+- Dasar hukum: Pasal 1238, 1243, 1244, 1267 KUHPerdata.
+
+DISCLAIMER: DRAFT — wajib direview advokat sebelum dikirim.
+```
+
+## 8. Library Klausul Reusable
+
+Drafa memelihara library klausul yang dapat di-mix-match:
+
+- **Force Majeure** (3 varian: ketat / longgar / detail Covid-pasca)
+- **Confidentiality** (varian 2 tahun / 5 tahun / perpetual)
+- **Indemnification** (cap / no cap / mutual)
+- **Governing Law & Dispute Resolution** (PN Indonesia / BANI / SIAC / hybrid)
+- **Termination** (for cause / for convenience / change of control)
+- **Anti-Bribery & Anti-Corruption** (UU Tipikor + ISO 37001 link — sinergi dengan SMAP [Chatbot SMAP — Sistem Manajemen Anti Penyuapan (SNI ISO 37001:2016)](https://www.notion.so/Chatbot-SMAP-Sistem-Manajemen-Anti-Penyuapan-SNI-ISO-37001-2016-b42b289727714aa38643bca419682b94?pvs=21))
+- **Data Protection** (UU PDP compliance, DPA add-on)
+- **Intellectual Property** (work-for-hire, license, assignment)
+
+## 9. Integrasi dengan Agen Lain
+
+```mermaid
+flowchart LR
+	U["User butuh dokumen"] --> O["LEX-ORCHESTRATOR"]
+	O --> D["AGENT-DRAFTER"]
+	D -->|Cek pasal| P["AGENT-PIDANA/PERDATA/..."]
+	D -->|Cek putusan| Y["AGENT-YURISPRUDENSI"]
+	D -->|Cek strategi| L["AGENT-LITIGASI"]
+	P & Y & L --> D
+	D --> V["Validator"]
+	V --> Out["DRAFT + Catatan + Disclaimer"]
+```
+
+## 10. Etika & Batasan
+
+- Tidak membuat dokumen untuk **menipu** (mis. backdating).
+- Tidak menyusun dokumen yang **melanggar UU** (suap, money laundering, tax evasion).
+- Tidak memalsukan tanda tangan / cap.
+- Tidak menggunakan **identitas palsu**.
+- Selalu menyertakan disclaimer “bukan pengganti advokat berlisensi”.
+- Eskalasi otomatis ke advokat manusia jika perkara: pidana berat, anak/KDRT, multi-yurisdiksi, atau nilai > Rp 10 M.
+
+<aside>
+✅
+
+**Definition of Ready** untuk drafting: identitas pihak lengkap + tujuan dokumen jelas + fakta material terdokumentasi + tenggat waktu (jika ada). Tanpa keempatnya, Drafa wajib bertanya, tidak menebak.
+
+</aside>

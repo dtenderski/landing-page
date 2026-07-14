@@ -1,0 +1,205 @@
+uploads = []
+
+[[generated]]
+id = "o56wVie7ExZegkonwZIv5"
+uri = "file://attached_assets/generated_images/a_modern_flat_illustration_8705.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "WZNcNhHcDu48Mgxkv1sfu"
+uri = "file://attached_assets/generated_images/a_vibrant_modern_illustration_f634.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "sqz0Gz20YkWV5BhGycXfJ"
+uri = "file://attached_assets/generated_images/six_floating_3d_cards_48e2.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "BOJn6v6h35Os54_CB5ALy"
+uri = "file://attached_assets/generated_images/modern_futuristic_illustration_of_e5a3.png"
+type = "image"
+title = "generated_image"
+
+[[outputs]]
+id = "jJ7MXrCMvntrSqUlRzf9w"
+uri = "file://attached_assets/generated_videos/gustafta-hero-ai-network.mp4"
+type = "video"
+title = "Clip 1 — Hero: Jaringan AI Neural (8 dtk)"
+
+[[outputs]]
+id = "ceWdmiUsWcIZp0Z723TGb"
+uri = "file://attached_assets/generated_videos/gustafta-multiclaw-agents.mp4"
+type = "video"
+title = "Clip 2 — MultiClaw: Agen Paralel (8 dtk)"
+
+[[outputs]]
+id = "POrRDXEiBs6LH2n-IVi8X"
+uri = "file://attached_assets/generated_videos/gustafta-business-results.mp4"
+type = "video"
+title = "Clip 3 — Bisnis: Dashboard AI (8 dtk)"
+
+[[outputs]]
+id = "BtQsCy2brkqaLG3hPLIn6"
+uri = "file://attached_assets/generated_videos/gustafta-logo-cta.mp4"
+type = "video"
+title = "Clip 4 — Logo/CTA: Brand Reveal (6 dtk)"
+
+[[outputs]]
+id = "yE8sBaI4jnuRFvI8277j3"
+uri = "file://attached_assets/generated_videos/gustafta-promo-combined.mp4"
+type = "video"
+title = "🎬 Gustafta Promo — Video Gabungan (30 detik)"
+
+[[outputs]]
+id = "_-Vpd_nJwOhPuBivD-GK3"
+uri = "file://attached_assets/generated_videos/gustafta-promo-problem.mp4"
+type = "video"
+title = "Video 1 — Masalah (flat design desk, malam, no people)"
+
+[[outputs]]
+id = "OMFjOVmczWl6jSRsStB3T"
+uri = "file://attached_assets/generated_videos/gustafta-promo-monolog-to-dialog.mp4"
+type = "video"
+title = "Video 2 — Monolog → Dialog (animated infographic)"
+
+[[outputs]]
+id = "znDxQ7U75LMTJgcQy-EPh"
+uri = "file://attached_assets/generated_videos/gustafta-promo-solution.mp4"
+type = "video"
+title = "Video 3 — Solusi (AI brain + orbiting agents)"
+
+[[outputs]]
+id = "U1OF9xP-63QOjSeozVx5n"
+uri = "file://attached_assets/generated_videos/gustafta-platform-overview.mp4"
+type = "video"
+title = "1 — Platform Gustafta (Overview)"
+
+[[outputs]]
+id = "knNASafWor4VgRP25Bcyf"
+uri = "file://attached_assets/generated_videos/gustafta-monolog-to-dialog.mp4"
+type = "video"
+title = "2 — Monolog → Dialog"
+
+[[outputs]]
+id = "fpBCQWpkW2QxSwCJGf0Iy"
+uri = "file://attached_assets/generated_videos/gustafta-multiclaw-suite.mp4"
+type = "video"
+title = "3 — MultiClaw Suite"
+
+[[outputs]]
+id = "FfDV2MjVlQeYN7leS1sRb"
+uri = "file://attached_assets/generated_videos/gustafta-business-opportunity.mp4"
+type = "video"
+title = "4 — Peluang Usaha"
+
+[[outputs]]
+id = "X3ENhs6ugzciyFtzupxjd"
+uri = "file://client/public/images/g04.png"
+type = "image"
+title = "g04 — AI Builder Studio (PALING builder: tampilan dashboard merakit chatbot)"
+
+[[outputs]]
+id = "v1NF5XozXfrT8TZJrXZXP"
+uri = "file://client/public/images/g18.png"
+type = "image"
+title = "g18 — No Code Build Anything (builder + orang merakit + knowledge base)"
+
+[[outputs]]
+id = "5d8Ipm0v1eeG3KuTOmIXA"
+uri = "file://client/public/images/g19.png"
+type = "image"
+title = "g19 — No-Code Platform (blok modular builder, tanpa orang)"
+
+[[outputs]]
+id = "ucp-xq8rSTv9rsZyq2AZF"
+uri = "file://client/public/images/g15.png"
+type = "image"
+title = "g15 — Trilogi: orang ngomong dengan AI (Dialog-Kolaborasi-Kreasi)"
+
+[[outputs]]
+id = "H6s9mO3CQXuHjM9fuzkeD"
+uri = "file://client/public/images/g14.png"
+type = "image"
+title = "g14 — Dialog/Kolaborasi/Kreasi (yang sekarang dipakai di Creator Personas)"
+
+[[outputs]]
+id = "3yRMtr3EJtoaD5E-szv24"
+uri = "file://client/public/images/g20.png"
+type = "image"
+title = "g20 — AI Orchestration Hub (diagram agen, teknis)"
+
+[[outputs]]
+id = "avdoSkRuZV8INWyFSVZG3"
+uri = "file://docs/blueprint-engine/01-builder-audit.md"
+type = "text"
+title = "Tahap 1 — Audit Builder Gustafta"
+
+[[outputs]]
+id = "LM5YlEmwsrV3FbXRKUTxn"
+uri = "file://docs/blueprint-engine/00-roadmap.md"
+type = "text"
+title = "Roadmap — AI Organization Builder (9 tahap)"
+
+[[outputs]]
+id = "o0JpwS_kzLOv7COw4IAWQ"
+uri = "file://attached_assets/generated_audio/music_gustafta_explainer_bed.mp3"
+type = "audio"
+title = "gustafta_explainer_bed"
+
+[[outputs]]
+id = "YDGbRlaDcaCXailVQgdks"
+uri = "file://attached_assets/generated_videos/gustafta_explainer.mp4"
+type = "video"
+title = "Gustafta — Versi Landscape 16:9 (sudah dipakai di landing)"
+
+[[outputs]]
+id = "5KM3CUnZesClaCHsgdw2v"
+uri = "file://attached_assets/generated_videos/gustafta_explainer_vertical.mp4"
+type = "video"
+title = "Gustafta — Versi Vertikal 9:16 (Reels/TikTok/Shorts)"
+
+[[outputs]]
+id = "jZwL43rttnfugjoKIRovS"
+uri = "file://attached_assets/generated_videos/gustafta_promo_24s.mp4"
+type = "video"
+title = "Gustafta — Animated Promo (24s)"
+
+[[outputs]]
+id = "-ynuz4e2XKfw1raHzpwS6"
+uri = "file://backups/gustafta-db-backup.sql.gz"
+type = "unspecified"
+title = "Cadangan Database Gustafta (SQL, terkompres)"
+
+[[outputs]]
+id = "K6d863wlL-3awNnmJ0MiK"
+uri = "file://backups/gustafta-db-backup-20260707-0023.sql.gz"
+type = "unspecified"
+title = "Cadangan Database Gustafta (lengkap — 7 Juli 2026)"
+
+[[outputs]]
+id = "LaVTdo-TPsT4EDu7AolXX"
+uri = "file://backup/gustafta-migration-20260707-1347.zip"
+type = "unspecified"
+title = "Backup Migrasi Gustafta (Database + Uploads + Panduan)"
+
+[[outputs]]
+id = "cDUVmfarQ38CNLWtFFM0S"
+uri = "file://backup/percakapan-gustafta.md"
+type = "text"
+title = "Transkrip Lengkap Percakapan Gustafta (Markdown)"
+
+[[outputs]]
+id = "BvmdtQU_Est44Icq0oGW4"
+uri = "file://backup/gustafta-paket-pindahan-20260707.zip"
+type = "unspecified"
+title = "Paket Pindahan Gustafta (backup DB + panduan)"
+
+[[outputs]]
+id = "kjPCv7HzTltbtZb33-OJz"
+uri = "file://backup/migrasi/PANDUAN-PINDAH-AKUN.md"
+type = "text"
+title = "Panduan Pindah Akun (bisa dibaca langsung)"

@@ -1,0 +1,1267 @@
+Pasted text(3).txt
+Document
+buatlah Persona untuk Alat Bantu FAQ Dokumen Peserta
+susun berurutan supaya tidak kesulitan copy paste nya 
+Identity 
+Basic information about your chatbot
+AS
+
+Avatar Chatbot
+Klik ikon kamera untuk upload gambar avatar. Format: JPG, PNG, GIF, WebP. Maksimal 5MB. Rekomendasi ukuran: 200x200 hingga 500x500 pixel (rasio 1:1).
+
+Chatbot Name
+Asisten Dokumen Peserta
+Tagline
+Panduan cepat dokumen peserta sertifikasi
+Description
+Alat bantu ini membantu peserta memahami dokumen yang perlu disiapkan dalam proses sertifikasi, mulai dari jenis dokumen yang dibutuhkan, fungsi masing-masing dokumen, format atau kelengkapan yang harus diperhatikan, hingga solusi untuk kendala umum seperti dokumen belum lengkap, data tidak sesuai, atau file tidak dapat diunggah. Gunakan alat bantu ini saat peserta menanyakan dokumen apa saja yang wajib disiapkan, kapan dokumen harus dikumpulkan, bagaimana memastikan dokumen valid, atau apa yang harus dilakukan jika ada masalah pada berkas peserta.
+Asisten digital yang membantu peserta memahami, menyiapkan, memeriksa, dan menyelesaikan kendala terkait dokumen persyaratan sertifikasi.
+Primary Language
+Bahasa Indonesia
+Business Category
+Sertifikasi & Pengembangan Kompetensi > Certification Specialist
+Welcome Experience
+First impression when users start a conversation
+Greeting Message
+Hello! Welcome to our service. How can I help you today?
+This message is shown when users first open the chat
+
+Conversation Starters
+Quick prompts users can click to start a conversation (max 5)
+
+e.g., How do I get started?
+
+Konteks Proyek
+Pertanyaan yang ditanyakan chatbot di awal percakapan untuk memahami konteks pengguna. Jawaban akan digunakan chatbot untuk menyesuaikan responnya.
+Tambah Pertanyaan Konteks
+
+Contoh: Jenis proyek apa yang Anda kelola?
+Tipe:
+
+Pilihan
+
+Wajib
+Pilihan dipisah koma: Gedung, Jalan, Irigasi, Jembatan
+Pisahkan setiap pilihan dengan tanda koma
+
+Tambah Pertanyaan
+Belum ada pertanyaan konteks. Tambahkan pertanyaan agar chatbot memahami kebutuhan pengguna di awal percakapan.
+percakapan.
+
+Personality & Behavior
+How your chatbot interacts with users
+Communication Philosophy
+Describe the communication style and values your chatbot should embody...
+System Prompt
+You are a helpful aIdentity
+Basic information about your chatbot
+AS
+
+Avatar Chatbot
+Klik ikon kamera untuk upload gambar avatar. Format: JPG, PNG, GIF, WebP. Maksimal 5MB. Rekomendasi ukuran: 200x200 hingga 500x500 pixel (rasio 1:1).
+
+Chatbot Name
+Asisten Dokumen Peserta
+Tagline
+Panduan cepat dokumen peserta sertifikasi
+Description
+Alat bantu ini membantu peserta memahami dokumen yang perlu disiapkan dalam proses sertifikasi, mulai dari jenis dokumen yang dibutuhkan, fungsi masing-masing dokumen, format atau kelengkapan yang harus diperhatikan, hingga solusi untuk kendala umum seperti dokumen belum lengkap, data tidak sesuai, atau file tidak dapat diunggah. Gunakan alat bantu ini saat peserta menanyakan dokumen apa saja yang wajib disiapkan, kapan dokumen harus dikumpulkan, bagaimana memastikan dokumen valid, atau apa yang harus dilakukan jika ada masalah pada berkas peserta.
+Asisten digital yang membantu peserta memahami, menyiapkan, memeriksa, dan menyelesaikan kendala terkait dokumen persyaratan sertifikasi.
+Primary Language
+Bahasa Indonesia
+Business Category
+Sertifikasi & Pengembangan Kompetensi > Certification Specialist
+Welcome Experience
+First impression when users start a conversation
+Greeting Message
+Hello! Welcome to our service. How can I help you today?
+This message is shown when users first open the chat
+
+Conversation Starters
+Quick prompts users can click to start a conversation (max 5)
+
+e.g., How do I get started?
+
+Konteks Proyek
+Pertanyaan yang ditanyakan chatbot di awal percakapan untuk memahami konteks pengguna. Jawaban akan digunakan chatbot untuk menyesuaikan responnya.
+Tambah Pertanyaan Konteks
+
+Contoh: Jenis proyek apa yang Anda kelola?
+Tipe:
+
+Pilihan
+
+Wajib
+Pilihan dipisah koma: Gedung, Jalan, Irigasi, Jembatan
+Pisahkan setiap pilihan dengan tanda koma
+
+Tambah Pertanyaan
+Belum ada pertanyaan konteks. Tambahkan pertanyaan agar chatbot memahami kebutuhan pengguna di awal percakapan.
+
+ssistant.
+The system prompt defines the core behavior and context for your chatbot
+
+Off-Topic Handling
+Bagaimana chatbot merespons pertanyaan di luar topik
+Strategi Respons
+Arahkan dengan Sopan
+Menentukan bagaimana chatbot menangani pertanyaan di luar cakupan yang ditentukan
+
+Respons Kustom (Opsional)
+Contoh: Maaf, saya hanya bisa membantu dengan pertanyaan seputar produk kami. Silakan hubungi customer service untuk pertanyaan lainnya.
+Tulis respons kustom yang akan diberikan chatbot ketika menerima pertanyaan di luar topik. Kosongkan untuk menggunakan respons otomatis berdasarkan strategi di atas.
+
+Konfigurasi Model AI
+Pilih model AI yang menggerakkan chatbot Anda
+Model AI
+GPT-4o Mini
+(OpenAI)
+Fast and affordable
+
+Parameter Model
+Sesuaikan parameter perilaku model AI
+Kreativitas: 0.7
+Seimbang
+Panjang Respons Maks: 1024
+Batas panjang respons
+Kontrol Akses & Keamanan
+Atur siapa saja yang dapat mengakses chatbot Anda
+Akses Publik
+Izinkan siapa saja mengakses chatbot ini tanpa otentikasi
+
+
+Access Token (untuk Integrasi)
+gus_553cc188fd1c44aba82b573e7f047ea9
+Salin
+Token ini digunakan untuk mengautentikasi permintaan API ke chatbot Anda. Gunakan saat menyematkan chatbot di website Anda atau mengintegrasikan dengan aplikasi eksternal (WhatsApp, Telegram, dll).
+
+Domain yang Diizinkan
+Batasi akses widget ke domain tertentu. Kosongkan untuk mengizinkan semua domain.
+
+e.g., example.com
+
+Tujuan & KPI Agen
+Definisikan target keberhasilan dan respons fallback saat target tidak tercapai.
+Outcome Utama
+Tujuan bisnis utama yang harus dicapai agen.
+
+
+Pilih outcome utama…
+Kondisi Percakapan Berhasil (Win Conditions)
+Deskripsikan kapan percakapan dianggap berhasil. Contoh: "Pengguna mendapatkan nomor RAB yang disetujui dan bisa diunduh."
+
+Contoh: Pengguna menerima jawaban definitif dan tidak perlu eskalasi ke manusia…
+Fallback Objective
+Tindakan terbaik saat agen tidak bisa mencapai outcome utama.
+
+
+Kumpulkan data untuk tindak lanjut
+Kumpulkan data untuk tindak lanjut
+Kebijakan Agen
+Aturan tetap yang tidak boleh diubah oleh pengguna — suara merek, batas domain, standar kualitas, dan kepatuhan.
+Spesifikasi Brand Voice
+Gaya bahasa, tingkat formalitas, dan karakter komunikasi yang harus dipertahankan.
+
+Gunakan bahasa formal namun ramah. Sapa pengguna dengan Bapak/Ibu atau Anda secara sopan. Nada komunikasi harus profesional, suportif, sabar, dan meyakinkan. Hindari jargon teknis yang tidak perlu. Jika harus menyebut istilah dokumen, selalu sertakan penjelasan singkat. Prioritaskan kalimat yang ringkas, jelas, dan berorientasi solusi.
+Kebijakan Penalaran (Reasoning Policy)
+Cara agen menyajikan proses berpikirnya kepada pengguna.
+
+
+Langkah demi langkah — tampilkan proses
+Kebijakan Interaksi
+Aturan kapan agen bertanya balik vs. menyimpulkan sendiri.
+
+Contoh: Tanya kembali jika ada lebih dari satu interpretasi. Jangan bertanya lebih dari 2 hal sekaligus…
+Domain Charter
+Topik dan tindakan yang boleh dan tidak boleh dilakukan agen.
+
+Contoh: Agen HANYA membahas topik konstruksi dan teknik sipil. Dilarang memberikan saran medis atau hukum. Dilarang membuat kontrak yang mengikat secara hukum…
+Standar Kualitas (Quality Bar)
+Standar minimum kualitas jawaban yang harus dipenuhi.
+
+Contoh: Setiap jawaban harus menyertakan referensi standar (SNI/PUPR). Jangan memberikan angka tanpa konteks. Jawaban > 3 paragraf wajib ada ringkasan…
+Kepatuhan & Risiko
+Aturan regulasi, disclaimer wajib, dan batasan risiko.
+
+
+
+mana yang dipilih
+mana yang dipilih
+AI Agents
+Atur perilaku, tingkat otonomi, dan cara AI merespons.
+
+Mode Lanjutan
+Tampilkan pengaturan detail untuk pengguna berpengalaman.
+
+
+Preset Perilaku
+Pilih gaya kerja AI yang paling cocok.
+
+Balanced
+Seimbang & Fleksibel
+Reset ke Preset
+Cocok untuk sebagian besar kasus. AI responsif, memberikan jawaban terstruktur, dan meminta klarifikasi sebelum bertindak.
+
+Otonomi Sedang
+Terstruktur
+Tanya Dulu
+Sebagian pengaturan mengikuti preset. Aktifkan Mode Lanjutan untuk detail.
+
+Tingkat Otonomi
+Seberapa aktif AI mengambil inisiatif.
+
+Terbatas
+Mode Agentic
+
+Aktifkan kemampuan lanjutan (perencanaan & langkah bertahap).
+Fitur lanjutan akan dibatasi.
+
+Peran & Mode Kerja
+Tentukan peran agen dalam sistem multi-agent dan mode operasinya.
+Peran Agen
+Posisi agen dalam ekosistem multi-agent.
+
+
+Standalone
+Mode Agentic OFF — hanya "Answer Mode" tersedia.
+
+
+·
+Answer Mode:
+Jawab cepat berbasis KB.
+·
+Advisor Mode:
+Beri opsi + tradeoff.
+·
+Task Intake Mode:
+Kumpulkan requirement tugas.
+·
+Execution Mode:
+Jalankan tool dan laporkan hasil.
+·
+Review Mode:
+Verifikasi dan minta persetujuan.
+OpenClaw
+NONAKTIF
+EXECUTION ENGINE
+Lapisan keamanan eksekusi multi-level. Setiap tindakan AI dicegat, dikategorikan, dan dikonfirmasi sebelum berjalan — memberi Anda kontrol penuh atas apa yang dilakukan AI.
+Aktifkan Mode Agentic untuk mengaktifkan OpenClaw.
+
+Gerbang Eksekusi
+Level konfirmasi sebelum AI melakukan tindakan.
+
+
+Write Gate — konfirmasi 1× untuk tindakan tulis
+Matriks Tindakan
+
+READ
+Cari KB · Hitung · Rangkum · Sarankan
+Otomatis
+WRITE
+Draft dokumen · Update rekaman · Buat laporan
+1× Konfirmasi
+DESTRUCTIVE
+Hapus data · Publish · Kirim massal
+Konfirmasi Ganda
+Aksi Selalu Diizinkan (Trusted)
+
+Aksi Selalu Diblokir (Blocked)
+
+Transparansi & Audit
+
+
+
+
+Track & Routing Dokumen
+
+Track Pengadaan
+Menentukan skema routing dan persyaratan dokumen yang dihasilkan.
+
+Komersial
+PBJ Formal
+Internal
+Kualitas Respons
+Kontrol cara jawaban disajikan.
+Kedalaman Jawaban
+Atur tingkat detail penjelasan AI.
+
+
+Terstruktur
+Format Output Utama
+Bentuk jawaban yang paling sering digunakan.
+
+
+Ringkasan + langkah
+Pemeriksaan Mandiri
+AI mengecek ulang jawaban sebelum dikirim.
+
+
+
+Klarifikasi & Ketidakpastian
+Mengurangi halusinasi dan meningkatkan kualitas dialog.
+Minta Klarifikasi Dulu
+AI bertanya jika informasi belum cukup.
+
+
+Saat Tidak Yakin
+Cara AI merespons ketika informasinya tidak pasti.
+
+
+Sarankan verifikasi ke sumber resmi
+Tampilkan Peringatan Risiko
+Tambahkan catatan kehati-hatian untuk topik sensitif.
+
+
+
+Memori & Konteks
+Kontrol apa yang diingat dan diprioritaskan AI.
+Mendengarkan dengan Teliti
+AI membaca konteks dan maksud lebih cermat.
+
+
+Retensi Konteks
+Banyaknya pesan terakhir yang jadi acuan.
+
+10 pesan
+Normal
+1 pesan
+50 pesan
+Prioritas Konteks
+Urutan konteks yang paling diutamakan.
+
+
+1.
+Pertanyaan terakhir
+
+
+
+2.
+Tujuan pengguna
+
+
+
+3.
+Riwayat percakapan
+
+
+
+Profil pengguna
+
+Data proyek
+
+Hasil tools
+Bantuan Proaktif
+Seberapa sering AI memberi bantuan tambahan.
+Bantuan Proaktif
+Seberapa sering AI memberi bantuan tambahan.
+
+
+Rendah
+Jenis Bantuan Proaktif
+Jenis bantuan yang boleh ditampilkan.
+
+
+Saran langkah berikutnya
+
+Pertanyaan klarifikasi
+
+Checklist
+
+Peringatan risiko
+
+Rekomendasi mini apps
+
+Rekomendasi chatbot spesialis
+
+Rekomendasi dokumen
+Gaya Interaksi & Empati
+Nada dan cara AI berkomunikasi.
+Gaya Interaksi
+Cara AI menyampaikan jawaban.
+
+
+Konsultatif
+Empati Kontekstual
+Seberapa peka AI terhadap emosi pengguna.
+
+
+Ringan
+Batas Tindakan & Eskalasi
+Guardrails dan aturan keamanan AI.
+Batas Tindakan AI
+Apa saja tindakan yang diizinkan.
+
+
+Hanya menjawab
+
+Boleh menyarankan
+
+Boleh bertanya balik
+
+Boleh memanggil mini apps
+
+Boleh mengarahkan ke chatbot lain
+
+Boleh memberi CTA bisnis
+Aturan Eskalasi
+Apa yang dilakukan saat kasus sensitif/rumit.
+
+
+Arahkan ke sumber resmi
+
+Sarankan konsultasi manusia
+
+Pindahkan ke chatbot spesialis
+
+Sarankan mini app terkait
+
+Tampilkan disclaimer
+Perilaku di Luar Topik
+Cara AI merespons ketika pertanyaan tidak relevan.
+Saat di Luar Topik
+Respons AI ketika pertanyaan tidak relevan.
+
+
+Jawab singkat lalu arahkan kembali
+Pembelajaran & Telemetri
+Kontrol adaptasi dan penyimpanan sinyal interaksi.
+Mode Pembelajaran Adaptif
+Apakah AI menyesuaikan diri dari interaksi.
+
+
+Off
+Simpan Sinyal Interaksi
+Simpan sinyal untuk evaluasi kualitas.
+
+
+Prioritas Sumber Jawaban
+Urutan sumber yang diprioritaskan AI.
+Geser urutan sumber yang diutamakan AI saat menjawab.
+
+1.
+System Prompt
+
+
+2.
+Knowledge Engine
+
+
+3.
+Riwayat percakapan
+
+
+4.
+Mini Apps
+
+
+5.
+Integrations
+
+
+6.
+Sumber eksternal
+
+
+Memori AI
+
+Informasi yang diingat AI dari percakapan sebelumnya dengan pengguna.
+Mode Lanjutan Aktif
+Semua pengaturan ditampilkan. Nilai tersimpan otomatis saat d
+Knowlaedge Base untuk Alat bantu ini 
+Nama 
+Contoh: FAQ NIB, Syarat OSS, Alur Pendaftaran
+Tipe Sumber
+📝 Teks / Copy-Paste
+Lapisan Knowledge
+Operational — SOP harian & prosedur aktif
+Tentukan di lapisan mana dokumen ini berada dalam hierarki knowledge agen.
+
+Konten Teks
+Tempel informasi, SOP, FAQ, atau panduan di sini...
+Gunakan judul bagian: "Syarat", "Langkah-langkah", "Biaya", "Waktu proses", "Masalah umum".
+
+Deskripsi (Opsional)
+Deskripsi singkat tentang knowledge ini
+Batal
+Tambah Knowledge
+KB lanjutnya ?
+buatlah generate AI
+✦ Generate Dokumen KB dengan AI
+Pilih tipe dokumen, isi topik, dan AI akan membuat dokumen terstruktur siap-pakai — lalu simpan ke KB dan/atau push ke Notion.
+
+Tipe Dokumen
+📋 SOP — Prosedur Operasional
+Lapisan Knowledge
+🟢 Operational — prosedur aktif
+Topik cepat (klik untuk pilih)
+SOP Persiapan Uji PBJP LKPP Level 1 (H-14 s.d. H-1)
+SOP Diagnostik Awal & Tryout 30 Soal PBJP
+SOP Latihan Harian 45 Menit PBJP (Konsep → Soal → Review)
+SOP Simulasi 90 Menit Uji Kompetensi PBJP
+SOP Menyusun HPS Secara Naratif
+SOP Menanggapi Sanggah dalam PBJP
+SOP Final Review H-1 Uji Kompetensi PBJP
+Topik Dokumen *
+Deskripsikan topik dokumen yang ingin di-generate secara spesifik...
+Level Detail
+
+⚡ Ringkas
+~400 kata, poin utama
+
+📄 Standar
+~700 kata, siap pakai
+
+📚 Lengkap
+Sangat detail, semua section
+
+▶
+Konteks tambahan (opsional)
+Push ke Notion sekaligus
+Halaman Notion dibuat otomatis saat generate, dengan struktur blok yang rapi.
+
+
+✦ Generate Dokumen
+Tutup
+lanjut
+Tambah Knowledge
+Tambahkan sumber informasi baru agar chatbot dapat menjawab lebih akurat.
+
+Nama
+Contoh: FAQ NIB, Syarat OSS, Alur Pendaftaran
+Tipe Sumber
+📄 Dokumen (PDF, Word, Excel, PPT)
+Lapisan Knowledge
+Operational — SOP harian & prosedur aktif
+Tentukan di lapisan mana dokumen ini berada dalam hierarki knowledge agen.
+
+Upload Dokumen
+Drag & drop atau klik untuk upload
+
+PDF, Word, Excel, PPT, TXT (Max 50MB)
+
+Pilih Dokumen
+Deskripsi (Opsional)
+Deskripsi singkat tentang knowledge ini
+Batal
+Tambah 
+ini sekarang sudah ada ya
+sudah ada :
+SOP Template Jawaban FAQ Dokumen Peserta Sertifikasi
+Teks
+Operational
+Memproses...
+AI-generated · sop · operational
+
+Ditambahkan 20/4/2026
+
+✦ AI
+
+
+
+
+SOP Batas Jawaban Chatbot dan Eskalasi ke Admin untuk Dokumen Peserta Sertifikasi
+Teks
+Operational
+2 chunks RAG
+AI-generated · sop · operational
+
+Ditambahkan 20/4/2026
+
+✦ AI
+
+
+
+
+SOP Alur Pengumpulan, Perbaikan, dan Verifikasi Dokumen Peserta Sertifikasi
+Teks
+Operational
+2 chunks RAG
+AI-generated · sop · operational
+
+Ditambahkan 20/4/2026
+
+✦ AI
+
+
+
+
+SOP Penanganan Kendala Umum Dokumen Peserta Sertifikasi
+Teks
+Operational
+3 chunks RAG
+AI-generated · sop · operational
+
+Ditambahkan 20/4/2026
+
+✦ AI
+
+
+
+
+SOP Pemeriksaan, Validasi, dan Penanganan Kendala Dokumen Peserta Sertifikasi
+Teks
+Operational
+3 chunks RAG
+AI-generated · sop · operational
+
+Ditambahkan 20/4/2026
+
+✦ AI
+
+
+
+
+SOP Validasi dan Pemeriksaan Kelayakan Dokumen Peserta Sertifikasi
+Teks
+Operational
+2 chunks RAG
+AI-generated · sop · operational
+
+Ditambahkan 20/4/2026
+
+✦ AI
+
+
+
+
+SOP Ketentuan Format File dan Kesiapan Upload Dokumen Peserta Sertifikasi
+Teks
+Operational
+2 chunks RAG
+AI-generated · sop · operational
+
+Ditambahkan 20/4/2026
+
+✦ AI
+
+
+
+
+Template Jawaban FAQ Dokumen Peserta
+Teks
+Operational
+1 chunks RAG
+Kumpulan template jawaban singkat, konsisten, dan mudah dipahami untuk pertanyaan FAQ peserta terkait dokumen.
+
+Ditambahkan 20/4/2026
+
+✦ AI
+
+
+
+
+Batas Jawaban dan Eskalasi Admin
+Teks
+Operational
+1 chunks RAG
+Aturan batas jawaban chatbot, kondisi saat harus memberi disclaimer, dan kapan pengguna diarahkan ke admin atau petugas resmi.
+
+Ditambahkan 20/4/2026
+
+✦ AI
+
+
+
+
+Alur Pengumpulan Dokumen Peserta
+Teks
+Operational
+1 chunks RAG
+Panduan alur umum persiapan, pemeriksaan, pengumpulan, dan perbaikan dokumen peserta sertifikasi.
+
+Ditambahkan 20/4/2026
+
+✦ AI
+
+
+
+
+Kendala Umum Upload dan Verifikasi Dokumen
+Teks
+Operational
+1 chunks RAG
+Daftar kendala umum dokumen peserta beserta penyebab dan solusi praktis saat unggah, pemeriksaan, atau verifikasi.
+
+Ditambahkan 20/4/2026
+
+✦ AI
+
+
+
+
+Validasi dan Format Dokumen Peserta
+Teks
+Operational
+1 chunks RAG
+Panduan validasi dokumen, pengecekan kesesuaian data, kualitas file, format unggahan, dan kelayakan berkas peserta.
+
+Ditambahkan 20/4/2026
+
+✦ AI
+
+
+
+
+FAQ Dokumen Peserta Sertifikasi
+Teks
+Operational
+2 chunks RAG
+Knowledge base operasional untuk membantu peserta memahami persyaratan dokumen sertifikasi, kelengkapan berkas, validitas data, format file, waktu pengumpulan, serta solusi kendala umum saat verifikasi atau unggah dokumen.
+
+Ditambahkan 20/4/2026
+
+✦ AI
+
+
+
+
+Statistik Knowledge Base
+sudah selesai kah ini ?
+SOP Template Jawaban FAQ Dokumen Peserta Sertifikasi
+Teks
+Operational
+2 chunks RAG
+AI-generated · sop · operational
+
+Ditambahkan 20/4/2026
+
+✦ AI
+RAG
+Buat Template Baru
+Definisikan field data untuk proyek chatbot Anda
+
+
+buat otak proyek untuk Alat Bantu ini :
+
+Nama Template 
+Contoh: Data Properti, Info Produk
+Deskripsi (opsional)
+Deskripsi singkat template ini...
+Fields
+Field 1
+
+Key
+project_name
+Label
+Nama Proyek
+Tipe
+Teks Singkat
+Placeholder
+Contoh: Pembangunan Jembatan Kali Brantas
+
+Wajib diisi
+Field 2
+
+Key
+project_type
+Label
+Tipe Proyek
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih tipe proyek
+Opsi (pisahkan dengan koma)
+Gedung, Jalan, Jembatan, Infrastruktur
+
+Wajib diisi
+Field 3
+
+Key
+project_stage
+Label
+Tahap Proyek
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih tahap proyek
+Opsi (pisahkan dengan koma)
+Planning, Execution, Closeout
+
+Wajib diisi
+Field 4
+
+Key
+location
+Label
+Lokasi
+Tipe
+Teks Singkat
+Placeholder
+Contoh: Surabaya, Jawa Timur
+
+Wajib diisi
+Field 5
+
+Key
+owner_client
+Label
+Owner / Client
+Tipe
+Teks Singkat
+Placeholder
+Contoh: PT Jasa Marga, Kementerian PUPR
+
+Wajib diisi
+Field 6
+
+Key
+structural_system
+Label
+Sistem Struktur
+Tipe
+Teks Singkat
+Placeholder
+Contoh: Beton bertulang, Baja, Komposit
+
+Wajib diisi
+Field 7
+
+Key
+concrete_grade
+Label
+Mutu Beton (fc')
+Tipe
+Teks Singkat
+Placeholder
+Contoh: fc' 30 MPa
+
+Wajib diisi
+Field 8
+
+Key
+construction_method
+Label
+Metode Konstruksi Utama
+Tipe
+Teks Singkat
+Placeholder
+Contoh: Konvensional, Precast, Prestress
+
+Wajib diisi
+Field 9
+
+Key
+time_constraint
+Label
+Batasan Waktu
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih batasan waktu
+Opsi (pisahkan dengan koma)
+Normal, Tight
+
+Wajib diisi
+Field 10
+
+Key
+cost_constraint
+Label
+Batasan Biaya
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih batasan biaya
+Opsi (pisahkan dengan koma)
+Normal, Tight
+
+Wajib diisi
+Field 11
+
+Key
+site_access
+Label
+Akses Lokasi
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih kondisi akses
+Opsi (pisahkan dengan koma)
+Easy, Limited
+
+Wajib diisi
+Field 12
+
+Key
+environmental_factors
+Label
+Faktor Lingkungan
+Tipe
+Teks Singkat
+Placeholder
+Contoh: Dekat sungai, area rawan banjir
+
+Wajib diisi
+Field 13
+
+Key
+issue_type
+Label
+Tipe Isu
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih tipe isu
+Opsi (pisahkan dengan koma)
+Structural, Quality, Safety, Method, Cost, Schedule, Environment
+
+Wajib diisi
+Field 14
+
+Key
+issue_location
+Label
+Lokasi/Elemen Isu
+Tipe
+Teks Singkat
+Placeholder
+Contoh: Kolom Lt.3, Pondasi zona B
+
+Wajib diisi
+Field 15
+
+Key
+issue_status
+Label
+Status Isu
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih status
+Opsi (pisahkan dengan koma)
+Open, Monitoring, Closed
+
+Wajib diisi
+Field 16
+
+Key
+issue_since
+Label
+Isu Sejak
+Tipe
+Tanggal
+Placeholder
+Placeholder teks...
+
+Wajib diisi
+Field 17
+
+Key
+decision_summary
+Label
+Ringkasan Keputusan
+Tipe
+Teks Panjang
+Placeholder
+Contoh: Ganti metode pondasi dari bored pile ke driven pile
+
+Wajib diisi
+Field 18
+
+Key
+decision_reason
+Label
+Alasan Keputusan
+Tipe
+Teks Panjang
+Placeholder
+Contoh: Kondisi tanah tidak sesuai hasil soil test
+
+Wajib diisi
+Field 19
+
+Key
+decision_risk_level
+Label
+Level Risiko Keputusan
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih level risiko
+Opsi (pisahkan dengan koma)
+Low, Medium, High
+
+Wajib diisi
+Field 20
+
+Key
+decision_date
+Label
+Tanggal Keputusan
+Tipe
+Tanggal
+Placeholder
+Placeholder teks...
+
+Wajib diisi
+Field 21
+
+Key
+decision_impact
+Label
+Dampak Keputusan
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih dampak
+Opsi (pisahkan dengan koma)
+Cost, Time, Quality, Safety, Multi
+
+Wajib diisi
+Field 22
+
+Key
+assumption_used
+Label
+Asumsi Utama
+Tipe
+Teks Panjang
+Placeholder
+Contoh: Data soil test dianggap valid hingga kedalaman 30 m
+
+Wajib diisi
+Field 23
+
+Key
+slump
+Label
+Slump
+Tipe
+Teks Singkat
+Placeholder
+Contoh: 12 ± 2 cm
+
+Wajib diisi
+Field 24
+
+Key
+concrete_strength
+Label
+Kuat Tekan Beton
+Tipe
+Teks Singkat
+Placeholder
+Contoh: 28 hari = 32 MPa (Umur / Nilai)
+
+Wajib diisi
+Field 25
+
+Key
+inspection_notes
+Label
+Catatan Inspeksi
+Tipe
+Teks Panjang
+Placeholder
+Contoh: Visual check OK, rebar spacing sesuai gambar
+
+Wajib diisi
+Field 26
+
+Key
+completeness_level
+Label
+Tingkat Kelengkapan Data
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih level
+Opsi (pisahkan dengan koma)
+Draft, Partial, Complete
+
+Wajib diisi
+Field 27
+
+Key
+last_updated
+Label
+Terakhir Diperbarui
+Tipe
+Tanggal
+Placeholder
+Placeholder teks...
+
+Wajib diisi
+Tambah Field
+Batal
+Buat Template
+
+buatlah Mini Apps
+Profil Pengguna 
+
+Klik ikon kamera untuk mengupload foto
+
+Nama *
+Nama lengkap Anda
+Jabatan
+Contoh: CEO, Marketing Manager
+Perusahaan
+Nama perusahaan Anda
+Bio
+Ceritakan sedikit tentang diri Anda...
+Batal
+Simpan Profil
+buat mini apps
+Tipe Mini App
+Checklist
+Daftar tugas yang bisa dicentang untuk melacak penyelesaian
+
+Nama
+Contoh: Checklist Dokumen KPR
+Deskripsi (opsional)
+Deskripsi singkat...
+Item Checklist
+Item 1
+Tambah Item
+Konfigurasi (JSON)
+{}
+Batal
+Buat Mini App
+Deliverables
+Output yang dihasilkan agen ini. Pilih manual atau gunakan bundle siap pakai.
+
+Default untuk preset Balanced
+0 deliverable aktif.
+Bundle Siap Pakai
+
+
+Mentor Bundle
+
+Handout + Latihan + Feedback — paket sesi belajar lengkap
+
+Handout Materi 1 Halaman
+Latihan / Kuis
+Feedback & Penilaian (Rubrik)
+
+Solve Bundle
+
+Checklist + Rencana Aksi + Snapshot masalah — dari isu ke solusi
+
+Checklist
+Rencana Aksi (Action Plan)
+Snapshot Proyek
+
+Project Update Bundle
+
+Snapshot + Timeline + Next action — laporan proyek satu klik
+
+Snapshot Proyek
+Timeline Report
+Rencana Aksi (Action Plan)
+
+Client Update Bundle
+
+Ringkasan + Pesan WA/Email siap kirim — komunikasi klien profesional
+
+Ringkasan Jawaban
+Pesan Siap Kirim (WA/Email/Slack)
+Pilih Deliverable
+
+A
+Output Percakapan
+
+Ringkasan Jawaban
+Jawaban ringkas dengan poin-poin atau langkah terstruktur. Cepat, langsung ke sasaran.
+
+
+
+Rencana Aksi (Action Plan)
+Siapa melakukan apa, dalam urutan apa, dan apa risikonya. Cocok untuk briefing tim.
+
+
+
+Checklist
+Daftar centang untuk kelengkapan, audit, langkah kerja, atau verifikasi.
+
+
+B
+Output Mentoring
+
+Handout Materi 1 Halaman
+PDF/DOCX
+Ringkasan materi pembelajaran siap cetak atau kirim. Formatnya konsisten dan profesional.
+
+
+
+Latihan / Kuis
+PDF/DOCX
+Soal latihan atau kuis dengan pembahasan. Disesuaikan dengan materi yang sedang dipelajari.
+
+
+
+Feedback & Penilaian (Rubrik)
+Penilaian terstruktur berdasarkan rubrik yang telah ditetapkan. Berbasis score_breakdown + feedback.
+
+
+C
+Output Proyek & Operasional
+
+Snapshot Proyek
+Status proyek satu pandang: isu aktif, risiko, keputusan terakhir, dan next action.
+
+
+
+Timeline Report
+Ringkasan timeline dari sumber data proyek (OSS, jadwal konstruksi, dll).
+
+
+
+Notulen / Ringkasan Sesi
+Ringkasan sesi meeting atau mentoring: poin penting, keputusan, dan tindak lanjut.
+
+
+D
+Output Dokumen Formal
+
+Dokumen Draft
+PDF/DOCX
+Surat, proposal, SOP ringkas, atau laporan audit dalam format profesional siap edit.
+
+
+
+Pesan Siap Kirim (WA/Email/Slack)
+Pesan update klien via WhatsApp, Email, atau Slack — singkat, sopan, CTA jelas.
+
+
+
+Ekspor Data (PDF/DOCX/CSV)
+PDF/DOCX
+Ekspor terstruktur dari data proyek, hasil mini app, atau scoring.
+
+
+Tombol di Chat (Preview)
+Tombol-tombol ini muncul di antarmuka chat sehingga pengguna bisa meminta deliverable hanya dengan satu klik.
+
+Belum ada deliverable aktif. Pilih deliverable di atas untuk menampilkan tombol chat.
+Default per Playbook
+
+
+Mentoring Modul
+4 output
+
+Kelas & Latihan Soal
+2 output
+
+FAQ + SOP Expert
+3 output
+
+Troubleshooting / Solve
+3 output
+
+Asisten Proposal
+3 output
+
+Audit & Compliance
+3 output
+
+Project Guardian
+3 output
+
+Intake & Kualifikasi
+3 output
+
+Research & Briefing
+2 output
+
+Ops Automation
+3 output

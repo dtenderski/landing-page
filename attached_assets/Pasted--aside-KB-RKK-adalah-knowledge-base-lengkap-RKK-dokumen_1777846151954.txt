@@ -1,0 +1,127 @@
+<aside>
+🦺
+
+**KB-RKK** adalah knowledge base lengkap RKK — dokumen wajib SMKK yang harus disusun setiap kontraktor BUJK sebelum mobilisasi & di-update per milestone proyek. Berdasar **Permen PUPR 8/2023**.
+
+</aside>
+
+## 1. Dasar Hukum RKK
+
+- **UU 2/2017** Pasal 59 (Standar Keamanan, Keselamatan, Kesehatan, dan Keberlanjutan)
+- **PP 14/2021** Pasal 84–86 (Penerapan SMKK)
+- **Permen PUPR 8/2023** — SMKK & PBJ Konstruksi terpadu (mengganti Permen PUPR 21/2019 & 10/2021)
+- **PP 50/2012** — SMK3 (untuk integrasi K3 perusahaan)
+- **UU 1/1970** — Keselamatan Kerja
+- **ISO 45001:2018** — Occupational Health & Safety Management System
+
+## 2. Tipe RKK Berdasar Tahap
+
+| **Tipe RKK** | **Tahap** | **Penanggung Jawab** | **Output** |
+| --- | --- | --- | --- |
+| **RKK Pengkajian** | Studi kelayakan | Konsultan Studi | Identifikasi bahaya awal |
+| **RKK Perancangan** | DED | Konsultan Perencana | Risk assessment desain + Design Safety Review |
+| **RKK Penawaran** | Tender | Calon Penyedia | RKK ringkas sebagai bagian dokumen tender |
+| **RKK Pelaksanaan** | Mobilisasi & eksekusi | Penyedia (Kontraktor) | RKK lengkap implementasi — dokumen utama (yang dimaksud RKK biasanya ini) |
+| **RKK Pengawasan** | Pengawasan konstruksi | Konsultan Pengawas / MK | Rencana audit + verifikasi RKK Pelaksanaan |
+
+## 3. Struktur Wajib RKK Pelaksanaan (Permen PUPR 8/2023 Lampiran)
+
+### Bab A. Kepemimpinan & Partisipasi Pekerja
+
+- A.1. Kebijakan K3 (ditandatangani Direktur BUJK)
+- A.2. Organisasi P2K3 proyek (struktur, tugas, kewenangan)
+- A.3. Kompetensi: matriks SKK Ahli K3 (Muda/Madya/Utama) sesuai risiko proyek
+- A.4. Komitmen biaya K3 (minimal sesuai Permen PUPR 21/2019 = 1.5–2.5% nilai kontrak)
+
+### Bab B. Perencanaan Keselamatan Konstruksi
+
+- B.1. **HIRA / IBPRP** (Hazard Identification, Risk Assessment, Risk Priority) untuk seluruh aktivitas
+- B.2. Sasaran & program K3 (SMART, terukur)
+- B.3. Standar & peraturan terkait per aktivitas
+
+### Bab C. Dukungan Keselamatan Konstruksi
+
+- C.1. Sumber daya (Ahli K3, peralatan APD, fasilitas medis)
+- C.2. Kompetensi personel (sertifikat operator, ahli, K3 berjenjang)
+- C.3. Komunikasi K3 (toolbox, safety induction, signage)
+- C.4. Informasi terdokumentasi (SOP, JSA, izin kerja, log)
+
+### Bab D. Operasi Keselamatan Konstruksi
+
+- D.1. Perencanaan & pengendalian operasi (JSA per aktivitas)
+- D.2. **Permit to Work (PTW)** — working at height, hot work, confined space, lifting, electrical, excavation
+- D.3. Tanggap darurat (ERP — fire, medical, evacuation, environmental spill)
+- D.4. Investigasi insiden (5-Why + Fishbone + Bow-Tie)
+
+### Bab E. Evaluasi Kinerja Keselamatan Konstruksi
+
+- E.1. Pemantauan & pengukuran (leading & lagging indicators)
+- E.2. Tinjauan manajemen (bulanan & per milestone)
+- E.3. Audit internal
+
+## 4. HIRA / IBPRP — Format Standar
+
+Setiap aktivitas memiliki baris HIRA dengan kolom:
+
+| **Aktivitas** | **Bahaya** | **Risk awal (LxC)** | **Pengendalian (HoC)** | **Risk sisa (LxC)** | **PIC** |
+| --- | --- | --- | --- | --- | --- |
+| Pekerjaan ketinggian ≥ 1.8m | Jatuh dari ketinggian → fatal | L=4 × C=5 = **20** (Ekstrim) | 1. Eliminasi tidak memungkinkan
+2. Engineering: pasang scaffold ber-tag
+3. Administrative: PTW + JSA
+4. PPE: full body harness ganda | L=2 × C=4 = **8** (Sedang) | HSE Officer + Site Manager |
+| Lifting alat berat ≥ 5T | Tertimpa beban → fatal/cacat | L=3 × C=5 = **15** (Tinggi) | 1. PTW Lifting
+2. Sertifikat SIO operator
+3. Lift plan & barricade
+4. Signaler bersertifikat | L=1 × C=4 = **4** (Rendah) | Rigger + HSE Officer |
+
+**Hierarchy of Control (HoC):** Eliminasi → Substitusi → Engineering → Administrative → PPE.
+
+## 5. Biaya K3 Wajib (Bagian dari Nilai Kontrak)
+
+Sesuai Permen PUPR 8/2023, biaya penerapan SMKK harus dialokasikan dalam HPS & kontrak. Komponen umum:
+
+- **Personel K3** (Ahli K3 Muda/Madya/Utama, P3K) — sesuai risiko proyek
+- **APD wajib** — helm, sepatu safety, rompi, sarung tangan, full body harness, kacamata, masker (sesuai aktivitas)
+- **Fasilitas pendukung K3** — P3K, klinik, ambulan standby, eyewash station
+- **Rambu, signage, barikade**
+- **Alat pengukuran lingkungan kerja** (gas detector, sound meter, lux meter)
+- **Sosialisasi & pelatihan** — induction, toolbox, refresher
+- **Asuransi K3** — BPJSTK + Workmen Compensation
+- **Audit, sertifikasi, dokumentasi** SMK3/SMKK
+
+Rumus minimum biaya SMKK biasanya **1.5–2.5% nilai kontrak** untuk proyek bangunan gedung normal, lebih tinggi untuk infrastruktur risiko ekstrim (high-rise, bendungan, terowongan).
+
+## 6. Workflow Operasional Harian
+
+```mermaid
+flowchart LR
+	IND[Safety<br>Induction] --> TBM[Toolbox<br>Meeting<br>06:30]
+	TBM --> JSA[JSA refresh<br>per aktivitas]
+	JSA --> PTW[Issue PTW<br>jika risiko tinggi]
+	PTW --> WORK[Pelaksanaan<br>+ inspeksi rutin]
+	WORK --> CLOSE[PTW close-out<br>akhir shift]
+	CLOSE --> REP[Daily HSE<br>Report]
+```
+
+## 7. Investigasi Insiden — Klasifikasi & Pelaporan
+
+| **Klasifikasi** | **Definisi** | **Lapor** | **Deadline** |
+| --- | --- | --- | --- |
+| **Near-miss** | Hampir kecelakaan tanpa cedera | Internal HSE | 24 jam |
+| **First-aid** | Cedera ringan, P3K cukup | Internal HSE | 24 jam |
+| **Medical Treatment** | Memerlukan perawatan medis di luar P3K | Internal + Owner | 24 jam |
+| **LTI (Lost Time Injury)** | Kehilangan hari kerja ≥ 1 hari | Internal + Owner + Disnaker | 2×24 jam (Permenaker 03/1998) |
+| **Fatality** | Korban jiwa | Polisi + Disnaker + KemenPUPR + Direksi | **Segera**  • investigasi 30 hari |
+
+## 8. Audit & Sertifikasi
+
+- **Audit internal SMK3/SMKK** triwulanan oleh Tim P2K3.
+- **Audit eksternal SMK3** oleh PJK3 (Sucofindo / SAI Global / TUV / Bureau Veritas).
+- Sertifikasi tingkat: **Awal (60–84%) → Transisi (85–84%) → Lanjutan (≥ 85%)**.
+- **ISO 45001:2018** — sertifikasi sukarela tetapi sering disyaratkan tender besar.
+
+## 9. Halaman Terkait
+
+- [System Prompt OpenClaw — Manajer K3 Konstruksi](https://www.notion.so/System-Prompt-OpenClaw-Manajer-K3-Konstruksi-9fcb3698ed9947b182322de711ab43c0?pvs=21)
+- [Modul B — Execution (Project · K3 · Mutu · Lingkungan · Peralatan · Logistik)](https://www.notion.so/Modul-B-Execution-Project-K3-Mutu-Lingkungan-Peralatan-Logistik-7caa170017b945dca5d2465e0f96c0af?pvs=21)
+- [Knowledge Base KONSTRA — 7 Tipe Sumber](https://www.notion.so/Knowledge-Base-KONSTRA-7-Tipe-Sumber-cd5e1c03813b42768cadf208700366a3?pvs=21)

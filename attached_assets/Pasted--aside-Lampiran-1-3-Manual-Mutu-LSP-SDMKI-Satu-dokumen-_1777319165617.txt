@@ -1,0 +1,102 @@
+<aside>
+📒
+
+**Lampiran 1–3 Manual Mutu LSP SDMKI**
+
+Satu dokumen tiga bagian: (1) Kebijakan Mutu, (2) Sasaran Mutu Tahunan, (3) Daftar Induk Dokumen.
+
+**No. Dokumen:** MM-LSP-SDMKI-001/LAMP-1-3 | **Versi:** 1.0 | **Tanggal Berlaku:** 28 April 2026
+
+</aside>
+
+# Bagian 1 — Kebijakan Mutu
+
+## Pernyataan Direktur
+
+LSP SDMKI berkomitmen menyelenggarakan sertifikasi kompetensi yang **valid, andal, autentik, adil, dan tidak memihak** sesuai SNI ISO/IEC 17024:2012 serta persyaratan KAN dan BNSP. Komitmen ini diwujudkan melalui penerapan sistem manajemen mutu yang terdokumentasi, peningkatan berkelanjutan, dan ketaatan pada peraturan perundang-undangan yang berlaku.
+
+## Komitmen Utama
+
+1. **Mutu proses** — menerapkan ISO 17024 secara konsisten pada seluruh aktivitas sertifikasi.
+2. **Ketidakberpihakan** — menjaga obyektivitas keputusan sertifikasi tanpa pengaruh komersial atau personal.
+3. **Kompetensi personel** — memastikan asesor & pengambil keputusan kompeten dan terkalibrasi.
+4. **Kepuasan pemangku kepentingan** — merespons keluhan dan banding secara cepat & adil.
+5. **Inovasi & digitalisasi** — mengembangkan asesmen jarak jauh yang aman dan terukur.
+6. **Kepatuhan** — mematuhi UU PDP, regulasi BNSP/KAN, dan kode etik profesi.
+
+## Pengesahan
+
+---
+
+**Direktur LSP SDMKI**
+
+Nama: […]
+
+Tanggal: 28 April 2026
+
+---
+
+# Bagian 2 — Sasaran Mutu Tahunan
+
+## Periode
+
+**Tahun Berjalan:** 2026 | **Tahun Anggaran Berikutnya:** 2027 (proyeksi)
+
+## Prinsip SMART
+
+Sasaran disusun **Specific, Measurable, Achievable, Relevant, Time-bound** dan ditinjau dalam Tinjauan Manajemen tahunan.
+
+## Sasaran per Fungsi
+
+| **Fungsi** | **Sasaran** | **Indikator Kinerja Kunci (KPI)** | **Target 2026** | **PIC** | Mutu | Sistem mutu memenuhi ISO 17024 | % kepatuhan audit internal | ≥ 95% | Manajer Mutu |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Mutu | Akreditasi KAN diperoleh | Status akreditasi | Sertifikat terbit Q4-2026 | Manajer Mutu | Sertifikasi | Volume sertifikasi tumbuh | Jumlah pemegang sertifikat baru |   • […]/tahun | Manajer Sertifikasi |
+| Sertifikasi | Waktu siklus efisien | Hari dari aplikasi → sertifikat | ≤ 30 hari kerja | Manajer Sertifikasi | Sertifikasi | Kualitas keputusan | % banding berhasil | ≤ 2% | Manajer Sertifikasi |
+| IT | Platform asesmen jarak jauh stabil | Uptime sistem | ≥ 99,5% | Manajer IT | IT | Tidak ada insiden keamanan major | Jumlah insiden P1 | 0 | Manajer IT |
+| Komite Skema | Skema selalu mutakhir | % skema ditinjau dalam 3 tahun | 100% | Komite Skema | Komite Ketidakberpihakan | Risiko COI terkendali | % deklarasi COI lengkap | 100% | Komite Ketidakberpihakan |
+| Pelanggan | Kepuasan tinggi | Skor survei kepuasan | ≥ 4,2/5 | Manajer Sertifikasi | Keuangan | Sustainabilitas operasional | Surplus/operating ratio | ≥ 1,1× break-even | Direktur |
+
+## Mekanisme Pemantauan
+
+- **Rapat Operasional Bulanan** — review dashboard KPI.
+- **Rapat Triwulan** — analisis tren & tindakan korektif.
+- **Tinjauan Manajemen Tahunan** — evaluasi pencapaian + penetapan sasaran tahun berikutnya.
+
+---
+
+# Bagian 3 — Daftar Induk Dokumen
+
+## Klasifikasi & Kode
+
+- **MM** — Manual Mutu
+- **KK** — Kebijakan
+- **SOP** — Standar Operasional Prosedur
+- **F** — Formulir
+- **SK** — Skema Sertifikasi
+- **REK** — Rekaman
+
+## Daftar Dokumen Aktif
+
+| **Kode** | **Judul** | **Versi** | **Tgl Berlaku** | **Pemilik** | **Status** | MM-LSP-SDMKI-001 | Manual Mutu LSP SDMKI (ISO 17024) | 1.0 | 28-04-2026 | Manajer Mutu | Aktif |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| KK-LSP-001 | Kebijakan Ketidakberpihakan | 1.0 | 28-04-2026 | Komite Ketidakberpihakan | Aktif | KK-IS-001 | Kebijakan Keamanan Informasi | 1.0 | 28-04-2026 | Manajer IT | Aktif |
+| SOP-LSP-OPS-001 | SOP Operasional P-01 s.d. P-09 | 1.0 | 28-04-2026 | Manajer Sertifikasi | Aktif | SOP-LSP-KAN-001 | SOP Onboarding LSP SDMKI menuju Akreditasi KAN | 1.0 | 28-04-2026 | Manajer Mutu | Aktif |
+| SOP-LSP-KAN-001/LAMP-A | Lampiran A — Template SK Tim Akreditasi | 1.0 | 28-04-2026 | Manajer Mutu | Aktif | SOP-LSP-KAN-001/LAMP-B | Lampiran B — Form Deklarasi COI | 1.0 | 28-04-2026 | Komite Ketidakberpihakan | Aktif |
+| SOP-LSP-KAN-001/LAMP-C | Lampiran C — Template Laporan Audit Internal | 1.0 | 28-04-2026 | Manajer Mutu | Aktif | SOP-LSP-KAN-001/LAMP-D | Lampiran D — Template Laporan Witness Internal | 1.0 | 28-04-2026 | Manajer Sertifikasi | Aktif |
+| SOP-LSP-KAN-001/LAMP-E | Lampiran E — Daftar Tilik Submission KANMIS | 1.0 | 28-04-2026 | Manajer Mutu | Aktif | SK-LSP-SDMKI-[…] | Template Dokumen Skema Sertifikasi | 1.0 | 28-04-2026 | Komite Skema | Aktif |
+| F-APL-01 | Formulir Permohonan Sertifikasi | […] | […] | Sekretariat | Aktif | F-APL-02 | Formulir Asesmen Mandiri | […] | […] | Sekretariat | Aktif |
+| F-MAK | Form Merencanakan Aktivitas Asesmen | […] | […] | Manajer Sertifikasi | Aktif | F-MMA | Form Membuat Materi Asesmen | […] | […] | Manajer Sertifikasi | Aktif |
+| F-MMR | Form Merekomendasikan Hasil Asesmen | […] | […] | Manajer Sertifikasi | Aktif | REK-SERT | Registry Pemegang Sertifikat | Live | — | Sekretariat | Aktif |
+| REK-CAR | Log Tindakan Korektif | Live | — | Manajer Mutu | Aktif | REK-COI | Registry Deklarasi COI | Live | — | Komite Ketidakberpihakan | Aktif |
+
+## Aturan Pengendalian
+
+- Setiap dokumen baru/revisi melewati alur: **Disusun → Diverifikasi → Disahkan → Distribusi → Pemberlakuan**.
+- Versi terdahulu yang sudah tidak berlaku ditandai **"Obsolete"** dan disimpan terpisah minimal 3 tahun.
+- Distribusi salinan terkendali dilacak via Daftar Distribusi.
+- Master soft-copy disimpan di KB LSP–TUK; salinan kertas yang tidak terkendali wajib bertanda "UNCONTROLLED COPY".
+
+## Pemilik Daftar
+
+- **Document Controller:** Manajer Mutu.
+- **Frekuensi tinjauan:** minimal 1× per 6 bulan.

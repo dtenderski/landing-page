@@ -1,0 +1,168 @@
+<aside>
+📑
+
+**Spesifikasi formulir digital wajib LSP** — pengganti seluruh berkas fisik untuk siklus sertifikasi. Mengacu pada **MUK 2023 (BNSP)**, **SKKNI 333/2020**, **SNI ISO/IEC 17024**, dan **Pedoman BNSP 301/302/305**. Sub-page dari [IT LSP berdasarkan Standar LPJK & BNSP — Paperless (Nir Kertas) + AJJ](https://www.notion.so/IT-LSP-berdasarkan-Standar-LPJK-BNSP-Paperless-Nir-Kertas-AJJ-e7524cfc14ba4ac6b21012c18e373c37?pvs=21).
+
+</aside>
+
+## Daftar Formulir
+
+| **Kode** | **Nama** | **Pengisi** | **Output Final** | APL-01 | Permohonan Sertifikasi | Asesi | PDF/A-3 + TTE Asesi |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| APL-02 | Asesmen Mandiri | Asesi | PDF/A-3 + TTE Asesi | MAPA-01 | Merancang Aktivitas & Proses Asesmen | Asesor + MS | PDF/A-3 + TTE Asesor |
+| FR.IA-01..09 | Instrumen Asesmen (TT, TL, Wcr, Stu, Ob, VP, PW, dst.) | Asesor | PDF/A-3 + TTE Asesor | FR.AK-01..05 | Administrasi Keputusan | Asesor + MS | PDF/A-3 + TTE ganda |
+| SKK | Sertifikat Kompetensi Kerja | LSP | PDF/A-3 + TTE LSP + e-meterai + QR BLKK | FR.MAK-01 | Banding | Asesi | PDF/A-3 + TTE Asesi |
+
+---
+
+## 1. APL-01 — Permohonan Sertifikasi
+
+### Field Wajib
+
+| **Field** | **Tipe** | **Validasi** | **Sumber** |
+| --- | --- | --- | --- |
+| Nama Lengkap | Text | Sesuai KTP-el | M1 (KYC) |
+| Tempat / Tanggal Lahir | Date | Sesuai KTP-el | M1 |
+| Email & HP | Email + Phone | OTP terverifikasi | M1 |
+| Jabatan Saat Ini | Text | — | Asesi |
+| Skema Diajukan | Relation Skema | KBLI sesuai | M4 |
+| Foto KTP-el | File | JPEG/PNG ≤ 5 MB | M1 |
+| Pernyataan Kebenaran Data | Checkbox | Wajib true | Asesi |
+| Persetujuan AJJ (opsional) | Checkbox | Bila pilih AJJ | Asesi |
+| Tanggal Pengajuan | Date | Otomatis | Sistem |
+
+---
+
+## 2. APL-02 — Asesmen Mandiri
+
+### Struktur
+
+- Untuk **setiap UK** dalam skema, asesi mengisi:
+    - Pertanyaan refleksi (apakah Anda mampu …)
+    - Bukti yang dimiliki (centang dari daftar: kontrak, BAST, foto, sertifikat, dll.)
+    - Tautan dokumen di Dossier (M3)
+    - Catatan tambahan
+- Sistem menghitung **VATM auto-score** per UK + total.
+
+### Validasi
+
+- Tidak boleh melompati UK; semua UK harus dijawab.
+- Bila skor < 60% per UK, sistem memberi peringatan + saran tambahan bukti.
+- e-Sign Asesi pada akhir form.
+
+---
+
+## 3. MAPA — Merancang Aktivitas & Proses Asesmen
+
+### Field Utama
+
+- **Identifikasi Asesi & Skema** (auto-pull dari APL-01).
+- **Pendekatan Asesmen**: Tatap Muka / AJJ / Hybrid.
+- **Strategi per UK**: kombinasi metode FR.IA (TT, TL, Wcr, Stu, Ob, VP, PW).
+- **Lokasi & Waktu**: TUK fisik atau ruang virtual.
+- **Sumber Daya**: peralatan, soal, juri tambahan, witness.
+- **Penyesuaian (Reasonable Adjustment)**: untuk asesi disabilitas.
+- **Tanda Tangan**: Asesor + MS.
+
+### Otomasi
+
+- *Builder* MAPA mengusulkan strategi default berdasarkan template skema.
+- Konflik kepentingan diperiksa otomatis (asesor vs asesi).
+
+---
+
+## 4. FR.IA — Formulir Instrumen Asesmen
+
+### Sub-formulir per Metode
+
+| **Kode** | **Metode** | **Tipe Bukti** | FR.IA-01 | Ceklis Observasi (Ob) | Direct evidence |
+| --- | --- | --- | --- | --- | --- |
+| FR.IA-02 | Tugas Praktik Demonstrasi (Stu/PW) | Direct evidence | FR.IA-03 | Pertanyaan Lisan (TL) | Supplementary |
+| FR.IA-04 | Pertanyaan Tertulis Pilihan Ganda (TT-PG) | Supplementary | FR.IA-05 | Pertanyaan Tertulis Esai (TT-Esai) | Supplementary |
+| FR.IA-06 | Verifikasi Portofolio (VP) | Indirect evidence | FR.IA-07 | Pertanyaan Wawancara (Wcr) | Supplementary |
+| FR.IA-08 | Studi Kasus (Stu-Kasus) | Direct/Supplementary | FR.IA-09 | Proyek Kerja (PW) | Direct evidence |
+
+### Struktur Field
+
+- Kepala: identifikasi (auto), UK & KUK, KKNI, indikator unjuk kerja.
+- Body: kolom *Memenuhi / Belum Memenuhi* + catatan asesor + tautan bukti.
+- Footer: rekomendasi (K/BK) per UK, tanda tangan asesor.
+
+### Kontrol Integritas (AJJ)
+
+- Setiap entri FR.IA di-*timestamp* + *hash* + *signed* secara real-time ke audit log.
+- Edit pasca-sesi memerlukan justifikasi tertulis.
+
+---
+
+## 5. FR.AK — Formulir Administrasi Keputusan
+
+| **Kode** | **Nama** | **Isi Utama** | FR.AK-01 | Persetujuan Asesmen & Kerahasiaan | Komitmen kerahasiaan + privasi |
+| --- | --- | --- | --- | --- | --- |
+| FR.AK-02 | Rekomendasi Keputusan Asesmen | K/BK per UK + total | FR.AK-03 | Umpan Balik dari Asesi | Survei kepuasan + saran |
+| FR.AK-04 | Banding | Pernyataan keberatan + alasan | FR.AK-05 | Laporan Asesmen | Ringkasan untuk MS |
+
+### Otomasi
+
+- FR.AK-02 *auto-generate* dari hasil FR.IA.
+- FR.AK-05 *auto-generate* dari MAPA + FR.IA + FR.AK-02.
+- e-Sign ganda: Asesor + MS.
+
+---
+
+## 6. SKK — Sertifikat Kompetensi Kerja
+
+### Layout PDF/A-3 (1 halaman A4 lanskap)
+
+- **Header**: logo LSP + logo BNSP + nama LSP + nomor lisensi BNSP.
+- **Body Kiri**: nomor SKK, nama lengkap, NIK termask (xxxx-xxxx-xxxx-1234), foto, skema, jenjang, KBLI, masa berlaku.
+- **Body Kanan**: QR BLKK (verifikasi publik) + watermark hash SHA-256 (8 digit awal terlihat).
+- **Footer**: tanda tangan Manajer Sertifikasi (TTE LSP), tanggal terbit, e-meterai Peruri, frase "Dokumen ini sah secara hukum berdasarkan UU ITE".
+
+### Properti File
+
+- Format **PDF/A-3** dengan *embedded XMP metadata*: issuer, issuee NIK terenkripsi, scheme code, validity, hash.
+- *Long-term validation* (LTV) — sertifikat penandatangan + OCSP response disisipkan.
+- Watermark visual + invisible *digital signature panel*.
+
+### Aturan Versi
+
+- SKK rev pertama: nomor `SKK/{LSP}/YYYY/{seq}`.
+- Re-issue: tambah suffix `-R1`, `-R2` dst.; SKK lama otomatis suspend di BLKK & SIKI.
+
+---
+
+## 7. FR.MAK-01 — Banding
+
+### Field
+
+- Identifikasi asesi + nomor APL-01.
+- Putusan yang dibanding (BK / cabut SKK).
+- Alasan banding (bebas + checklist: prosedur tidak sesuai, asesor bias, bukti diabaikan, dll.).
+- Bukti pendukung baru (file).
+- Tanggal kejadian + e-Sign Asesi.
+
+### SLA
+
+- Pengajuan banding: ≤ 14 hari kerja sejak putusan.
+- Putusan komite banding: ≤ 30 hari kerja sejak banding diterima.
+
+---
+
+## 8. Aturan Umum Semua Formulir
+
+- **Wajib** PDF/A-3 untuk arsip jangka panjang.
+- **Wajib** TTE Tersertifikasi via PSrE Berinduk Kominfo.
+- **Wajib** e-meterai untuk dokumen yang dikenakan bea meterai (mis. APL-01, FR.MAK-01).
+- **Wajib** hash SHA-256 di metadata XMP.
+- **Wajib** *audit trail* setiap perubahan dengan *who/what/when*.
+- **Klasifikasi**: dokumen putusan & SKK → PUBLIK terbatas; dossier asesi → TERBATAS; bank soal → RAHASIA.
+
+---
+
+<aside>
+📌
+
+**Status:** Sub-page siap-import ke Gustafta. Pack formulir ini menjadi *single source of truth* untuk seluruh chatbot LSP — termasuk [Chatbot SKK Nir Kertas — Arsitektur Agentic AI, Multi-Agent & OpenClaw](https://www.notion.so/Chatbot-SKK-Nir-Kertas-Arsitektur-Agentic-AI-Multi-Agent-OpenClaw-ea5d06ab6a3249d5a8afb401cc42f542?pvs=21) dan [Chatbot AJJ (Asesmen Jarak Jauh) — Arsitektur Agentic AI, Multi-Agent & OpenClaw](https://www.notion.so/Chatbot-AJJ-Asesmen-Jarak-Jauh-Arsitektur-Agentic-AI-Multi-Agent-OpenClaw-c602a25afae94a23bf0f74338a316fb1?pvs=21).
+
+</aside>

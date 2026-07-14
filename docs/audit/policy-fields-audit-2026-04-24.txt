@@ -1,0 +1,37 @@
+=== Kebijakan Agen Audit — 2026-04-24 10:37 UTC ===
+Per-series count of agents with empty policy fields (target: all zeros)
+
+                       series                       | total_agents | empty_outcome | empty_win | empty_voice | empty_inter | empty_charter | empty_qbar | empty_risk 
+----------------------------------------------------+--------------+---------------+-----------+-------------+-------------+---------------+------------+------------
+ Asesor Sertifikasi Konstruksi                      |           11 |             0 |         0 |           0 |           0 |             0 |          0 |          0
+ CIVILPRO — Professional Mentoring Sipil            |           12 |             0 |         0 |           0 |           0 |             0 |          0 |          0
+ CSMAS (Contractor Safety Management)               |           12 |             0 |         0 |           0 |           0 |             0 |          0 |          0
+ ISO 14001 — Sistem Manajemen Lingkungan Konstruksi |            9 |             0 |         0 |           0 |           0 |             0 |          0 |          0
+ ISO 9001 — Sistem Manajemen Mutu Konstruksi        |            9 |             0 |         0 |           0 |           0 |             0 |          0 |          0
+ Kompetensi Teknis Kontraktor & Konsultan           |            9 |             0 |         0 |           0 |           0 |             0 |          0 |          0
+ Manajemen LSBU — Lembaga Sertifikasi Badan Usaha   |            9 |             0 |         0 |           0 |           0 |             0 |          0 |          0
+ Manajemen LSP — Lembaga Sertifikasi Profesi        |            9 |             0 |         0 |           0 |           0 |             0 |          0 |          0
+ Odoo untuk Jasa Konstruksi                         |           12 |             0 |         0 |           0 |           0 |             0 |          0 |          0
+ Pembinaan Anggota ASPEKINDO — Kontraktor           |            9 |             0 |         0 |           0 |           0 |             0 |          0 |          0
+ Regulasi Jasa Konstruksi                           |           25 |             0 |         0 |           0 |           0 |             0 |          0 |          0
+ SIP-PJBU — Sistem Informasi Pembinaan PJBU         |            9 |             0 |         0 |           0 |           0 |             0 |          0 |          0
+ SKK AJJ — Asesmen Jarak Jauh                       |           28 |             0 |         0 |           0 |           0 |             0 |          0 |          0
+ SMAP & PANCEK                                      |           11 |             0 |         0 |           0 |           0 |             0 |          0 |          0
+ Siap Uji Kompetensi SKK                            |           10 |             0 |         0 |           0 |           0 |             0 |          0 |          0
+(15 rows)
+
+
+=== TOTAL ===
+          184 |                     0
+
+
+=== Build artifact verification ===
+$ md5sum dist/index.cjs
+b195f21293954c4f6e3ba85192e24963  dist/index.cjs
+
+$ git show HEAD:dist/index.cjs | md5sum
+b195f21293954c4f6e3ba85192e24963  -
+
+Catatan: hash identik = build deterministik. dist/index.cjs sudah merepresentasikan
+kode runtime terkini (perubahan task ini hanya skrip migrasi data + dokumentasi,
+tidak menyentuh server/, shared/, atau client/ — sehingga bundle byte-for-byte sama).

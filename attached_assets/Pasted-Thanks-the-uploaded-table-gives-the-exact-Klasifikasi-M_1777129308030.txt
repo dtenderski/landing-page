@@ -1,0 +1,733 @@
+Thanks — the uploaded table gives the exact **Klasifikasi Manajemen Pelaksanaan**, including subklasifikasi, jabatan kerja, jenjang jabatan, kualifikasi, jenjang KKNI, standar kompetensi kerja, and SKK Kemnaker links. I’ve converted it into a cleaner chatbot-ready configuration layer that can replace or extend the earlier **knowledge scope**, **role mapping**, and **certification guidance** sections. 
+
+---
+
+# Addendum Configuration
+
+## SKK Manajemen Pelaksanaan — Official Role Catalog Layer
+
+```yaml
+knowledge_source:
+  id: uploaded_skk_manajemen_pelaksanaan_catalog
+  source_type: "uploaded table"
+  classification: "E - Klasifikasi Manajemen Pelaksanaan"
+  citation_required: true
+  usage:
+    - role recommendation
+    - KKNI mapping
+    - jabatan kerja lookup
+    - competency path selection
+    - certification preparation guidance
+```
+
+---
+
+# 1. Official Competency Catalog
+
+```yaml
+competency_catalog:
+  classification_code: "E"
+  classification_name: "Manajemen Pelaksanaan"
+
+  subklasifikasi:
+
+    - id: keselamatan_konstruksi
+      name: "Keselamatan Konstruksi"
+      roles:
+        - jabatan_kerja: "Ahli Keselamatan Konstruksi"
+          jenjang:
+            - title: "Ahli Muda Keselamatan Konstruksi"
+              kualifikasi: "Ahli"
+              kkni: 7
+              standar: "SKKNI 60-2022"
+            - title: "Ahli Madya Keselamatan Konstruksi"
+              kualifikasi: "Ahli"
+              kkni: 8
+              standar: "SKKNI 60-2022"
+            - title: "Ahli Utama Keselamatan Konstruksi"
+              kualifikasi: "Ahli"
+              kkni: 9
+              standar: "SKKNI 60-2022"
+
+        - jabatan_kerja: "Ahli K3 Konstruksi"
+          jenjang:
+            - title: "Ahli Muda K3 Konstruksi"
+              kualifikasi: "Ahli"
+              kkni: 7
+              standar: "SKKNI 350-2014"
+            - title: "Ahli Madya K3 Konstruksi"
+              kualifikasi: "Ahli"
+              kkni: 8
+              standar: "SKKNI 350-2014"
+            - title: "Ahli Utama K3 Konstruksi"
+              kualifikasi: "Ahli"
+              kkni: 9
+              standar: "SKKNI 350-2014"
+
+        - jabatan_kerja: "Personil Keselamatan dan Kesehatan Kerja"
+          jenjang:
+            - title: "Personil Keselamatan dan Kesehatan Kerja"
+              kualifikasi: "Teknisi/Analis"
+              kkni: 4
+              standar: "SKKNI 038-2019"
+
+        - jabatan_kerja: "Petugas Keselamatan dan Kesehatan Kerja (K3) Konstruksi"
+          jenjang:
+            - title: "Petugas Keselamatan dan Kesehatan Kerja (K3) Konstruksi"
+              kualifikasi: "Operator"
+              kkni: 3
+              standar: "SKKNI 307-2013"
+
+        - jabatan_kerja: "Petugas Keselamatan Konstruksi"
+          jenjang:
+            - title: "Petugas Keselamatan Konstruksi"
+              kualifikasi: "Operator"
+              kkni: 3
+              standar: "SKKNI 60-2022"
+
+        - jabatan_kerja: "Supervisor K3"
+          jenjang:
+            - title: "Supervisor K3"
+              kualifikasi: "Teknisi/Analis"
+              kkni: 5
+              standar: "SKKNI 350-2014"
+            - title: "Supervisor K3 Utama"
+              kualifikasi: "Teknisi/Analis"
+              kkni: 6
+              standar: "SKKNI 350-2014"
+
+    - id: manajemen_konstruksi_proyek
+      name: "Manajemen Konstruksi / Manajemen Proyek"
+      roles:
+        - jabatan_kerja: "Manajer Logistik Proyek"
+          jenjang:
+            - title: "Manajer Logistik Proyek"
+              kualifikasi: "Ahli"
+              kkni: 7
+              standar: "SKKNI 386-2013"
+
+        - jabatan_kerja: "Ahli Bidang Keahlian Manajemen Konstruksi"
+          jenjang:
+            - title: "Ahli Muda Bidang Keahlian Manajemen Konstruksi"
+              kualifikasi: "Ahli"
+              kkni: 7
+              standar: "SKKNI 390-2015"
+            - title: "Ahli Madya Bidang Keahlian Manajemen Konstruksi"
+              kualifikasi: "Ahli"
+              kkni: 8
+              standar: "SKKNI 390-2015"
+            - title: "Ahli Utama Bidang Keahlian Manajemen Konstruksi"
+              kualifikasi: "Ahli"
+              kkni: 9
+              standar: "SKKNI 390-2015"
+
+        - jabatan_kerja: "Ahli Manajemen Proyek Konstruksi"
+          jenjang:
+            - title: "Ahli Muda Manajemen Proyek Konstruksi"
+              kualifikasi: "Ahli"
+              kkni: 7
+              standar: "SKKK 035-2022"
+            - title: "Ahli Madya Manajemen Proyek Konstruksi"
+              kualifikasi: "Ahli"
+              kkni: 8
+              standar: "SKKK 035-2022"
+            - title: "Ahli Utama Manajemen Proyek Konstruksi"
+              kualifikasi: "Ahli"
+              kkni: 9
+              standar: "SKKK 035-2022"
+
+        - jabatan_kerja: "Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat"
+          jenjang:
+            - title: "Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat"
+              kualifikasi: "Teknisi/Analis"
+              kkni: 5
+              standar: "SKKNI 260-2018"
+            - title: "Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat Utama"
+              kualifikasi: "Teknisi/Analis"
+              kkni: 6
+              standar: "SKKNI 260-2018"
+
+    - id: pengendalian_mutu
+      name: "Pengendalian Mutu Pekerjaan Konstruksi"
+      roles:
+        - jabatan_kerja: "Quality Engineer"
+          jenjang:
+            - title: "Quality Engineer Madya"
+              kualifikasi: "Teknisi/Analis"
+              kkni: 5
+              standar: "SKKNI 333-2013"
+            - title: "Quality Engineer"
+              kualifikasi: "Teknisi/Analis"
+              kkni: 6
+              standar: "SKKNI 333-2013"
+
+        - jabatan_kerja: "Quality Assurance Engineer"
+          jenjang:
+            - title: "Quality Assurance Engineer Madya"
+              kualifikasi: "Teknisi/Analis"
+              kkni: 5
+              standar: "SKKNI 387-2013"
+            - title: "Quality Assurance Engineer"
+              kualifikasi: "Teknisi/Analis"
+              kkni: 6
+              standar: "SKKNI 387-2013"
+
+        - jabatan_kerja: "Ahli Sistem Manajemen Mutu Konstruksi"
+          jenjang:
+            - title: "Ahli Muda Sistem Manajemen Mutu Konstruksi"
+              kualifikasi: "Ahli"
+              kkni: 7
+              standar: "SKKNI 145-2019"
+            - title: "Ahli Madya Sistem Manajemen Mutu Konstruksi"
+              kualifikasi: "Ahli"
+              kkni: 8
+              standar: "SKKNI 145-2019"
+            - title: "Ahli Sistem Manajemen Mutu Konstruksi"
+              kualifikasi: "Ahli"
+              kkni: 9
+              standar: "SKKNI 145-2019"
+
+    - id: hukum_kontrak
+      name: "Hukum Kontrak Konstruksi"
+      roles:
+        - jabatan_kerja: "Ahli Kontrak Kerja Konstruksi"
+          jenjang:
+            - title: "Ahli Madya Kontrak Kerja Konstruksi"
+              kualifikasi: "Ahli"
+              kkni: 8
+              standar: "SKKNI 88-2015"
+            - title: "Ahli Kontrak Kerja Konstruksi"
+              kualifikasi: "Ahli"
+              kkni: 9
+              standar: "SKKNI 88-2015"
+
+    - id: estimasi_biaya_qs
+      name: "Estimasi Biaya Konstruksi"
+      roles:
+        - jabatan_kerja: "Juru Hitung Kuantitas"
+          jenjang:
+            - title: "Juru Hitung Kuantitas Muda"
+              kualifikasi: "Teknisi/Analis"
+              kkni: 4
+              standar: "SKKK 038-2022"
+            - title: "Juru Hitung Kuantitas Madya"
+              kualifikasi: "Teknisi/Analis"
+              kkni: 5
+              standar: "SKKK 038-2022"
+            - title: "Juru Hitung Kuantitas Utama"
+              kualifikasi: "Teknisi/Analis"
+              kkni: 6
+              standar: "SKKK 038-2022"
+
+        - jabatan_kerja: "Estimator Biaya Jalan"
+          jenjang:
+            - title: "Estimator Biaya Jalan Madya"
+              kualifikasi: "Teknisi/Analis"
+              kkni: 5
+              standar: "SKKNI 385-2013"
+            - title: "Estimator Biaya Jalan"
+              kualifikasi: "Teknisi/Analis"
+              kkni: 6
+              standar: "SKKNI 385-2013"
+
+        - jabatan_kerja: "Quantity Surveyor"
+          jenjang:
+            - title: "Quantity Surveyor Madya"
+              kualifikasi: "Teknisi/Analis"
+              kkni: 5
+              standar: "SKKNI 06-2011"
+            - title: "Quantity Surveyor Utama"
+              kualifikasi: "Teknisi/Analis"
+              kkni: 6
+              standar: "SKKNI 06-2011"
+
+        - jabatan_kerja: "Ahli Quantity Surveyor"
+          jenjang:
+            - title: "Ahli Muda Quantity Surveyor"
+              kualifikasi: "Ahli"
+              kkni: 7
+              standar: "SKKNI 6-2011"
+            - title: "Ahli Madya Quantity Surveyor"
+              kualifikasi: "Ahli"
+              kkni: 8
+              standar: "SKKNI 6-2011"
+            - title: "Ahli Utama Quantity Surveyor"
+              kualifikasi: "Ahli"
+              kkni: 9
+              standar: "SKKNI 6-2011"
+```
+
+---
+
+# 2. Updated Role Selection Flow
+
+```yaml
+flow:
+  id: select_skk_role_path
+  title: "Pilih Jalur Jabatan SKK Manajemen Pelaksanaan"
+  bot_message: >
+    Dalam klasifikasi Manajemen Pelaksanaan, terdapat beberapa subklasifikasi
+    jabatan kerja. Pilih area yang paling sesuai dengan pengalaman atau tujuan
+    sertifikasi Anda.
+
+  options:
+    - label: "Keselamatan Konstruksi / K3"
+      next_node: role_path_k3
+    - label: "Manajemen Konstruksi / Manajemen Proyek"
+      next_node: role_path_project_management
+    - label: "Pengendalian Mutu Pekerjaan Konstruksi"
+      next_node: role_path_quality
+    - label: "Hukum Kontrak Konstruksi"
+      next_node: role_path_contract
+    - label: "Estimasi Biaya / Quantity Surveying"
+      next_node: role_path_cost_qs
+    - label: "Saya belum tahu"
+      next_node: role_discovery_questions
+```
+
+---
+
+# 3. Role Discovery Questions
+
+```yaml
+node:
+  id: role_discovery_questions
+  type: guided_questionnaire
+  bot_message: >
+    Baik. Saya akan bantu memetakan jalur yang paling relevan.
+    Jawab beberapa pertanyaan singkat berikut.
+
+  questions:
+    - id: q_main_activity
+      text: "Aktivitas kerja Anda paling sering berkaitan dengan apa?"
+      quick_replies:
+        - "Keselamatan kerja dan inspeksi K3"
+        - "Koordinasi proyek, jadwal, sumber daya, dan progres"
+        - "Pemeriksaan mutu dan dokumen kualitas"
+        - "Kontrak, klaim, perubahan pekerjaan, dan administrasi kontrak"
+        - "Perhitungan volume, biaya, dan progress payment"
+
+    - id: q_responsibility_level
+      text: "Tingkat tanggung jawab Anda saat ini lebih dekat ke mana?"
+      quick_replies:
+        - "Pelaksana/operator lapangan"
+        - "Teknisi/analis atau supervisor"
+        - "Ahli muda"
+        - "Ahli madya"
+        - "Ahli utama"
+
+    - id: q_target_outcome
+      text: "Apa tujuan utama Anda?"
+      quick_replies:
+        - "Belajar dasar"
+        - "Memilih jabatan SKK"
+        - "Persiapan sertifikasi"
+        - "Latihan asesmen"
+        - "Menyusun bukti portofolio"
+
+  routing_logic:
+    - if_answer_contains: "Keselamatan kerja"
+      next_node: role_path_k3
+    - if_answer_contains: "Koordinasi proyek"
+      next_node: role_path_project_management
+    - if_answer_contains: "Pemeriksaan mutu"
+      next_node: role_path_quality
+    - if_answer_contains: "Kontrak"
+      next_node: role_path_contract
+    - if_answer_contains: "Perhitungan volume"
+      next_node: role_path_cost_qs
+```
+
+---
+
+# 4. Subclassification-Specific Bot Responses
+
+## 4.1 Keselamatan Konstruksi / K3
+
+```yaml
+node:
+  id: role_path_k3
+  title: "Jalur Keselamatan Konstruksi / K3"
+  bot_message: >
+    Jalur Keselamatan Konstruksi dan K3 cocok untuk pengguna yang bekerja
+    dengan identifikasi bahaya, pengendalian risiko, inspeksi keselamatan,
+    penerapan prosedur K3, investigasi insiden, dan budaya kerja aman.
+
+    Dalam katalog SKK Manajemen Pelaksanaan, jalur ini mencakup:
+    - Petugas Keselamatan Konstruksi, KKNI 3
+    - Petugas K3 Konstruksi, KKNI 3
+    - Personil K3, KKNI 4
+    - Supervisor K3, KKNI 5–6
+    - Ahli Keselamatan Konstruksi, KKNI 7–9
+    - Ahli K3 Konstruksi, KKNI 7–9
+
+  quick_replies:
+    - "Lihat jenjang K3"
+    - "Mulai asesmen K3"
+    - "Belajar modul K3"
+    - "Checklist bukti K3"
+```
+
+---
+
+## 4.2 Manajemen Konstruksi / Manajemen Proyek
+
+```yaml
+node:
+  id: role_path_project_management
+  title: "Jalur Manajemen Konstruksi / Manajemen Proyek"
+  bot_message: >
+    Jalur ini cocok untuk pengguna yang bertanggung jawab pada perencanaan,
+    koordinasi, pengendalian waktu, biaya, mutu, risiko, logistik, komunikasi,
+    dan pelaporan proyek.
+
+    Dalam katalog SKK Manajemen Pelaksanaan, jalur ini mencakup:
+    - Manajer Logistik Proyek, KKNI 7
+    - Ahli Bidang Keahlian Manajemen Konstruksi, KKNI 7–9
+    - Ahli Manajemen Proyek Konstruksi, KKNI 7–9
+    - Fasilitator Teknis Infrastruktur Berbasis Masyarakat, KKNI 5–6
+
+  quick_replies:
+    - "Lihat jenjang Manajemen Proyek"
+    - "Mulai asesmen Manajemen Proyek"
+    - "Belajar modul Manajemen Proyek"
+    - "Studi kasus keterlambatan proyek"
+```
+
+---
+
+## 4.3 Pengendalian Mutu
+
+```yaml
+node:
+  id: role_path_quality
+  title: "Jalur Pengendalian Mutu Pekerjaan Konstruksi"
+  bot_message: >
+    Jalur Pengendalian Mutu cocok untuk pengguna yang bekerja dengan inspeksi,
+    pengujian, audit mutu, NCR, tindakan korektif, quality assurance, dan
+    quality control.
+
+    Dalam katalog SKK Manajemen Pelaksanaan, jalur ini mencakup:
+    - Quality Engineer, KKNI 5–6
+    - Quality Assurance Engineer, KKNI 5–6
+    - Ahli Sistem Manajemen Mutu Konstruksi, KKNI 7–9
+
+  quick_replies:
+    - "Bedakan QA dan QC"
+    - "Mulai asesmen mutu"
+    - "Belajar modul mutu"
+    - "Studi kasus NCR"
+```
+
+---
+
+## 4.4 Hukum Kontrak Konstruksi
+
+```yaml
+node:
+  id: role_path_contract
+  title: "Jalur Hukum Kontrak Konstruksi"
+  bot_message: >
+    Jalur Hukum Kontrak Konstruksi cocok untuk pengguna yang menangani
+    dokumen kontrak, perubahan pekerjaan, klaim, adendum, hak dan kewajiban
+    para pihak, serta penyelesaian sengketa konstruksi.
+
+    Dalam katalog SKK Manajemen Pelaksanaan, jalur ini mencakup:
+    - Ahli Madya Kontrak Kerja Konstruksi, KKNI 8
+    - Ahli Kontrak Kerja Konstruksi, KKNI 9
+
+  quick_replies:
+    - "Belajar kontrak konstruksi"
+    - "Mulai asesmen kontrak"
+    - "Checklist bukti kontrak"
+    - "Studi kasus variation order"
+```
+
+---
+
+## 4.5 Estimasi Biaya / Quantity Surveying
+
+```yaml
+node:
+  id: role_path_cost_qs
+  title: "Jalur Estimasi Biaya dan Quantity Surveying"
+  bot_message: >
+    Jalur Estimasi Biaya dan Quantity Surveying cocok untuk pengguna yang
+    bekerja dengan perhitungan volume, estimasi biaya, analisis harga satuan,
+    pengendalian biaya, progress payment, dan evaluasi kuantitas pekerjaan.
+
+    Dalam katalog SKK Manajemen Pelaksanaan, jalur ini mencakup:
+    - Juru Hitung Kuantitas, KKNI 4–6
+    - Estimator Biaya Jalan, KKNI 5–6
+    - Quantity Surveyor, KKNI 5–6
+    - Ahli Quantity Surveyor, KKNI 7–9
+
+  quick_replies:
+    - "Belajar estimasi biaya"
+    - "Belajar quantity surveying"
+    - "Mulai asesmen biaya/QS"
+    - "Studi kasus selisih volume"
+```
+
+---
+
+# 5. Updated Intent Set
+
+```yaml
+intents:
+  - id: ask_role_by_kkni
+    description: "User asks which roles exist at a specific KKNI level."
+    sample_user_inputs:
+      - "Jabatan KKNI 7 apa saja?"
+      - "Apa saja jabatan ahli muda?"
+      - "Saya mau level 5, pilihannya apa?"
+      - "Jabatan teknisi analis di Manajemen Pelaksanaan apa saja?"
+    required_entities:
+      - kkni_level
+    response_logic:
+      - search competency_catalog by kkni
+      - group by subklasifikasi
+      - show role titles, kualifikasi, and standar
+
+  - id: ask_standard_by_role
+    description: "User asks which SKKNI/SKKK applies to a role."
+    sample_user_inputs:
+      - "Ahli K3 Konstruksi pakai standar apa?"
+      - "SKKNI Quality Engineer nomor berapa?"
+      - "Quantity Surveyor pakai SKK apa?"
+      - "Standar Manajemen Proyek Konstruksi apa?"
+    required_entities:
+      - role_name
+    response_logic:
+      - match role_name to competency_catalog
+      - return jabatan kerja, jenjang, KKNI, standar
+
+  - id: ask_role_difference
+    description: "User compares two roles."
+    sample_user_inputs:
+      - "Apa beda Ahli Keselamatan Konstruksi dan Ahli K3 Konstruksi?"
+      - "Apa beda Quality Engineer dan QA Engineer?"
+      - "Apa beda Quantity Surveyor dan Ahli Quantity Surveyor?"
+      - "Apa beda Manajemen Konstruksi dan Manajemen Proyek?"
+    response_logic:
+      - explain difference by focus, responsibility, and KKNI path
+      - suggest assessment path
+
+  - id: ask_certification_path
+    description: "User asks how to prepare for a specific SKK role."
+    sample_user_inputs:
+      - "Saya mau ambil Ahli Muda Manajemen Proyek Konstruksi"
+      - "Bagaimana persiapan sertifikasi Supervisor K3?"
+      - "Saya ingin ambil Ahli Quantity Surveyor"
+    required_entities:
+      - target_role
+    response_logic:
+      - identify role in catalog
+      - show KKNI and standard
+      - recommend learning module
+      - show evidence checklist
+      - offer self-assessment
+
+  - id: ask_subclassification_overview
+    description: "User asks overview of a subclassification."
+    sample_user_inputs:
+      - "Jelaskan subklasifikasi Estimasi Biaya Konstruksi"
+      - "Apa saja jabatan di Pengendalian Mutu?"
+      - "Manajemen Konstruksi mencakup apa?"
+    required_entities:
+      - subklasifikasi
+    response_logic:
+      - show role list
+      - show competency focus
+      - offer module or assessment
+```
+
+---
+
+# 6. Example Dynamic Responses
+
+## User asks: “Jabatan KKNI 7 apa saja?”
+
+```yaml
+response_template:
+  id: response_roles_by_kkni_7
+  text: >
+    Untuk KKNI Level 7 dalam klasifikasi Manajemen Pelaksanaan, beberapa
+    jabatan yang tersedia antara lain:
+
+    Keselamatan Konstruksi / K3:
+    - Ahli Muda Keselamatan Konstruksi — SKKNI 60-2022
+    - Ahli Muda K3 Konstruksi — SKKNI 350-2014
+
+    Manajemen Konstruksi / Manajemen Proyek:
+    - Manajer Logistik Proyek — SKKNI 386-2013
+    - Ahli Muda Bidang Keahlian Manajemen Konstruksi — SKKNI 390-2015
+    - Ahli Muda Manajemen Proyek Konstruksi — SKKK 035-2022
+
+    Estimasi Biaya / Quantity Surveying:
+    - Ahli Muda Quantity Surveyor — SKKNI 6-2011
+
+    Apakah Anda ingin saya bantu memilih jalur yang paling sesuai dengan
+    pengalaman Anda?
+  quick_replies:
+    - "Ya, bantu pilih jalur"
+    - "Lihat KKNI 8"
+    - "Lihat semua jabatan ahli"
+    - "Mulai asesmen"
+```
+
+---
+
+## User asks: “Apa standar untuk Quality Engineer?”
+
+```yaml
+response_template:
+  id: response_quality_engineer_standard
+  text: >
+    Untuk jabatan Quality Engineer dalam klasifikasi Manajemen Pelaksanaan,
+    standar kompetensi kerja yang digunakan adalah SKKNI 333-2013.
+
+    Jenjang yang tercantum:
+    - Quality Engineer Madya, kualifikasi Teknisi/Analis, KKNI 5
+    - Quality Engineer, kualifikasi Teknisi/Analis, KKNI 6
+
+    Fokus kompetensi umumnya berkaitan dengan pengendalian mutu pekerjaan,
+    inspeksi, verifikasi kesesuaian, dokumentasi mutu, dan tindak lanjut
+    ketidaksesuaian.
+  quick_replies:
+    - "Belajar Quality Engineer"
+    - "Bandingkan dengan QA Engineer"
+    - "Mulai asesmen mutu"
+```
+
+---
+
+## User asks: “Saya cocok ambil jabatan apa kalau pengalaman saya QS?”
+
+```yaml
+response_template:
+  id: response_qs_path_recommendation
+  text: >
+    Jika pengalaman Anda berkaitan dengan quantity surveying, perhitungan
+    volume, estimasi biaya, evaluasi progres, atau pengendalian biaya, jalur
+    yang paling relevan adalah Estimasi Biaya Konstruksi.
+
+    Pilihan jabatan yang dapat dipertimbangkan:
+    - Juru Hitung Kuantitas, KKNI 4–6
+    - Quantity Surveyor, KKNI 5–6
+    - Ahli Quantity Surveyor, KKNI 7–9
+
+    Untuk menentukan jenjang yang paling sesuai, saya perlu mengetahui tingkat
+    tanggung jawab Anda saat ini: apakah lebih banyak menghitung volume,
+    memverifikasi progress payment, atau memimpin evaluasi komersial proyek?
+  quick_replies:
+    - "Menghitung volume"
+    - "Verifikasi progress payment"
+    - "Memimpin evaluasi biaya"
+    - "Belum yakin"
+```
+
+---
+
+# 7. Updated Assessment Routing
+
+```yaml
+assessment_routing:
+  by_target_role:
+    - target_contains:
+        - "Petugas K3"
+        - "Petugas Keselamatan"
+        - "Supervisor K3"
+        - "Ahli K3"
+        - "Ahli Keselamatan"
+      route_to: assessment_k3
+
+    - target_contains:
+        - "Manajer Logistik"
+        - "Manajemen Konstruksi"
+        - "Manajemen Proyek"
+        - "Fasilitator Teknis"
+      route_to: assessment_project_management
+
+    - target_contains:
+        - "Quality Engineer"
+        - "Quality Assurance"
+        - "Sistem Manajemen Mutu"
+      route_to: assessment_quality
+
+    - target_contains:
+        - "Kontrak"
+      route_to: assessment_contract
+
+    - target_contains:
+        - "Juru Hitung Kuantitas"
+        - "Estimator"
+        - "Quantity Surveyor"
+      route_to: assessment_cost_qs
+```
+
+---
+
+# 8. Updated Main Menu
+
+```yaml
+main_menu:
+  bot_message: >
+    Pilih kebutuhan Anda dalam SKK Manajemen Pelaksanaan:
+
+  options:
+    - label: "Lihat semua subklasifikasi dan jabatan"
+      next_node: select_skk_role_path
+
+    - label: "Cari jabatan berdasarkan KKNI"
+      next_node: ask_kkni_level
+
+    - label: "Cari standar SKKNI/SKKK berdasarkan jabatan"
+      next_node: ask_role_name
+
+    - label: "Belajar kompetensi inti"
+      next_node: learning_menu
+
+    - label: "Asesmen mandiri"
+      next_node: assessment_start
+
+    - label: "Latihan studi kasus"
+      next_node: scenario_menu
+
+    - label: "Checklist bukti sertifikasi"
+      next_node: certification_checklist
+```
+
+---
+
+# 9. Short Implementation Rule
+
+```yaml
+implementation_rule:
+  role_lookup:
+    instruction: >
+      Whenever a user mentions a role, KKNI level, standard number, or
+      subklasifikasi, first match it against competency_catalog. Then respond
+      with:
+      1. subklasifikasi
+      2. jabatan kerja
+      3. jenjang jabatan kerja
+      4. kualifikasi
+      5. KKNI level
+      6. standar kompetensi kerja
+      7. recommended learning or assessment path
+
+  uncertainty_handling:
+    instruction: >
+      If the user gives a vague role name, offer the closest matches.
+      Example: if user says “Ahli K3”, ask whether they mean
+      Ahli K3 Konstruksi, Ahli Keselamatan Konstruksi, Supervisor K3,
+      or Petugas K3 Konstruksi.
+
+  certification_disclaimer:
+    instruction: >
+      Always explain that chatbot assessment is for learning and preparation
+      only, not an official certification decision.
+```
+
+---

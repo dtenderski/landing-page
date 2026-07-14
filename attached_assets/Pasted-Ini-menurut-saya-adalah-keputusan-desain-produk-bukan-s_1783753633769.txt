@@ -1,0 +1,209 @@
+Ini menurut saya adalah **keputusan desain produk**, bukan sekadar keputusan marketing. Dan jawabannya adalah:
+
+> **Jangan di awal, jangan juga di paling akhir.**
+>
+> **Minta data pada saat AI sudah berhasil membangun rasa ingin tahu dan pengguna sudah melihat ada nilai yang akan diperoleh.**
+
+Saya menyebutnya **"Progressive Lead Capture"**.
+
+---
+
+## Yang saya TIDAK sarankan
+
+### ❌ Opsi 1 - Sebelum dialog
+
+```text
+Isi Nama
+Isi WA
+Isi Email
+
+↓
+
+Baru Dialog
+```
+
+Masalahnya:
+
+> "Saya belum tahu Gustafta itu apa, kok sudah diminta nomor WA?"
+
+Conversion biasanya turun.
+
+---
+
+### ❌ Opsi 2 - Setelah dialog selesai total
+
+```text
+Dialog
+
+↓
+
+Selesai
+
+↓
+
+Terima kasih.
+```
+
+Masalahnya:
+
+Anda kehilangan lead.
+
+Orang bisa menutup browser.
+
+---
+
+# Yang saya sarankan
+
+## Opsi 3 - Di tengah, saat AI sudah menghasilkan nilai
+
+Contohnya.
+
+```text
+Meta Ads
+
+↓
+
+Dialog dimulai
+
+↓
+
+AI bertanya 6–10 pertanyaan
+
+↓
+
+AI mulai memahami masalah
+
+↓
+
+AI berkata...
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+Saya sudah memahami kondisi perusahaan Anda.
+
+Saya sedang menyusun Blueprint Solusi.
+
+━━━━━━━━━━━━━━━━━━━━━━
+```
+
+Lalu AI menampilkan sedikit hasil.
+
+```text
+Skor Kesiapan Digital
+
+68%
+
+Prioritas
+
+✓ Administrasi
+
+✓ Tender
+
+✓ Knowledge Base
+```
+
+Kemudian AI berkata.
+
+> Blueprint lengkap beserta rekomendasi implementasi sudah siap.
+
+> Agar saya dapat menyimpan hasil analisis dan mengirimkan blueprint tersebut kepada Anda, silakan isi data berikut.
+
+Baru muncul form.
+
+---
+
+## Setelah form diisi
+
+AI melanjutkan.
+
+```text
+Terima kasih Pak Andi.
+
+Berikut Blueprint Lengkap perusahaan Anda.
+
+...
+
+...
+
+...
+```
+
+Lalu.
+
+> Ingin mendiskusikan implementasinya?
+
+> Klik WhatsApp.
+
+---
+
+# Kenapa saya memilih ini?
+
+Karena secara psikologis:
+
+Sebelum dialog:
+
+> "Saya tidak percaya."
+
+Sesudah 10 pertanyaan:
+
+> "AI ini ternyata memahami masalah saya."
+
+Sesudah melihat diagnosis:
+
+> "Saya ingin tahu hasil lengkapnya."
+
+Di titik inilah orang jauh lebih rela memberikan nomor WhatsApp atau email.
+
+---
+
+# Bahkan saya punya ide yang lebih cocok dengan Gustafta
+
+Karena Gustafta menjual **Blueprint**, bukan chatbot.
+
+Maka AI bisa berkata seperti ini:
+
+> **Blueprint Anda hampir selesai dibuat.**
+
+> Tinggal satu langkah lagi.
+
+> Masukkan nama dan WhatsApp agar blueprint dapat dipersonalisasi sesuai perusahaan Anda.
+
+Kalimat ini jauh lebih natural daripada:
+
+> Isi formulir.
+
+---
+
+## Rekomendasi untuk Gustafta
+
+Saya menyarankan alur seperti ini:
+
+```text
+1. Mulai Dialog
+
+↓
+
+2. AI menggali kebutuhan (6–10 pertanyaan)
+
+↓
+
+3. AI menampilkan ringkasan diagnosis
+
+↓
+
+4. AI meminta data pengguna
+
+↓
+
+5. AI menampilkan Blueprint lengkap
+
+↓
+
+6. AI menawarkan konsultasi / Workroom / WhatsApp
+```
+
+Menurut saya, ini paling selaras dengan filosofi Gustafta yang selama ini kita bangun:
+
+> **Dialog → Diagnosis → Blueprint → Kolaborasi**
+
+Data pengguna bukan syarat untuk memulai dialog, melainkan **bagian alami dari proses menuju solusi**. Dengan begitu, pengguna merasa mereka memberikan data karena memang diperlukan untuk menyelesaikan blueprint, bukan karena sedang dihadapkan pada formulir pemasaran.

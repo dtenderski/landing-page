@@ -1,0 +1,143 @@
+Bagus. Itu keputusan yang matang. 👍
+
+Karena memang dalam konteks **SKK Manajer Pengelolaan Bangunan Gedung**, ada dua dimensi yang tidak bisa dipisahkan:
+
+* 🧍 Subyek → kompetensi personal profesional
+* 🏢 Obyek → kinerja gedung yang dikelola
+
+Kalau hanya nilai gedung → itu seperti audit teknis.
+Kalau hanya nilai orang → itu seperti coaching motivasi.
+
+Yang kita bangun adalah **korelasi keduanya**.
+
+Dan itu sangat kuat.
+
+---
+
+# 🧠 CIVILPRO – Dual Evaluation Model (Gustafta Compliant)
+
+Kita buat 2 skor utama:
+
+---
+
+# 1️⃣ FACILITY PERFORMANCE INDEX (FPI)
+
+Mengukur kinerja gedung.
+
+Komponen:
+
+* Operational Stability
+* Maintenance Discipline
+* Vendor Control
+* Energy Efficiency
+* Service Quality
+
+Output:
+
+```yaml
+FACILITY_PERFORMANCE_INDEX:
+  skor: 68
+  level: "Terukur"
+  risiko: "Sedang"
+  area_kritis:
+    - "Preventive Maintenance"
+    - "SLA Vendor Lift"
+```
+
+Ini objektif.
+Berbasis data KPI.
+
+---
+
+# 2️⃣ PROFESSIONAL COMPETENCY INDEX (PCI)
+
+Mengukur kapasitas manajerial individu berdasarkan:
+
+* Kemampuan membaca tren
+* Kecepatan respon risiko
+* Ketepatan prioritas tindakan
+* Konsistensi pengendalian
+
+Bukan menilai pribadi.
+Menilai perilaku profesional berbasis data.
+
+Output:
+
+```yaml
+PROFESSIONAL_COMPETENCY_INDEX:
+  skor: 72
+  level: "Kompeten"
+  kekuatan:
+    - "Mampu mengidentifikasi tren penurunan"
+  pengembangan:
+    - "Belum konsisten dalam menjaga PM di atas 95%"
+```
+
+Ini langsung relevan untuk uji kompetensi.
+
+---
+
+# 🔥 Sekarang Yang Membuatnya Powerful
+
+CIVILPRO tidak hanya memberi dua skor.
+
+Dia juga memberikan:
+
+# 🔗 CORRELATION STATEMENT
+
+Contoh:
+
+> “Penurunan FPI dalam 3 bulan berkorelasi dengan inkonsistensi pengendalian PM, yang menunjukkan area penguatan pada aspek manajemen operasional.”
+
+Itu kalimat asesor-level.
+
+---
+
+# 🎓 Sekarang Naik Satu Level Lagi
+
+Karena kita fokus individu, kita bisa tambahkan:
+
+## 📘 REFLECTIVE MODE
+
+CIVILPRO akan bertanya:
+
+* Apa keputusan yang Anda ambil bulan lalu?
+* Mengapa PM turun?
+* Apa kendala strukturalnya?
+* Bagaimana Anda mengendalikan vendor?
+
+Lalu dia menilai refleksi tersebut.
+
+Itu sangat kuat untuk:
+
+✔ Portfolio
+✔ Logbook kompetensi
+✔ Bukti pengalaman
+
+---
+
+# ⚠ Penting: Jangan Terlihat Menghakimi
+
+PCI tidak boleh terasa seperti rapor sekolah.
+
+Bahasanya harus:
+
+* Profesional
+* Objektif
+* Pengembangan, bukan penilaian pribadi
+
+---
+
+# 🚀 Sekarang Saya Mau Pastikan Arah
+
+Karena kita sudah sangat dalam:
+
+Apakah Anda ingin:
+
+A) PCI dihitung otomatis hanya dari data KPI
+atau
+B) PCI kombinasi KPI + jawaban reflektif user?
+
+Kalau pilih B, itu akan jauh lebih matang dan realistis.
+
+Menurut Anda?

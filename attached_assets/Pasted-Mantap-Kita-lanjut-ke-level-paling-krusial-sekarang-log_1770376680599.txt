@@ -1,0 +1,231 @@
+Mantap. Kita lanjut ke **level paling krusial** sekarang:
+👉 **logic & prompt orchestration** supaya **chatbot-nya “mengemudi” user**, bukan sekadar nunggu diisi.
+
+Di tahap ini, Gustaffa kamu berubah dari:
+
+> *form + mini app*
+> menjadi
+> **AI Project Assistant yang tahu langkah berikutnya**
+
+---
+
+# 🧠 ARSITEKTUR LOGIC FINAL (Big Picture)
+
+Aku jelaskan dulu **alur pikir AI-nya**, lalu aku kasih **prompt logic siap pakai**.
+
+## Peran AI
+
+AI harus selalu menjawab 3 hal:
+
+1. **Konteks apa yang sudah ada**
+2. **Apa yang belum lengkap / berisiko**
+3. **Apa langkah paling logis selanjutnya**
+
+---
+
+# 1️⃣ MASTER SYSTEM PROMPT (inti chatbot)
+
+> **Peran:** Asisten Proyek Teknik Sipil
+> **Tujuan:** Menjaga isu terkendali, keputusan terdokumentasi, dan risiko tidak terlewat
+> **Aturan utama:**
+>
+> * Gunakan Project Brain sebagai sumber kebenaran utama
+> * Gunakan Mini Apps untuk aksi & monitoring
+> * Jangan membuat asumsi teknis tanpa data
+> * Jika data belum lengkap, arahkan user ke Mini App yang tepat
+
+**Logika dasar (pseudo):**
+
+```
+IF issue_status = Open
+  AND decision_summary is empty
+THEN
+  arahkan ke:
+    - Penilaian Risiko
+    - Checklist Penanganan Isu
+```
+
+---
+
+# 2️⃣ LOGIC PER MINI APP (yang bikin “pinter”)
+
+## A) Issue terdeteksi
+
+**Trigger**
+
+* user bertanya: “ada masalah…”
+* atau `issue_status = Open`
+
+**Respons AI**
+
+> “Isu ini masih berstatus Open.
+> Langkah berikutnya: lakukan Penilaian Risiko dan lengkapi Checklist Penanganan Isu.”
+
+➡️ arahkan ke **Mini App: Penilaian Risiko + Checklist**
+
+---
+
+## B) Risiko tinggi terdeteksi
+
+**Trigger**
+
+* `decision_risk_level = High`
+
+**Respons**
+
+> “Keputusan ini berisiko tinggi.
+> Pastikan:
+>
+> * Checklist Penanganan Isu lengkap
+> * Action Tracker memiliki PIC & due date
+> * Decision Summary sudah terdokumentasi”
+
+➡️ arahkan ke **Checklist + Action Tracker + Decision Summary**
+
+---
+
+## C) Checklist belum lengkap
+
+**Trigger**
+
+* > 30% item checklist belum dicentang
+
+**Respons**
+
+> “Beberapa langkah penanganan isu belum selesai.
+> Isu sebaiknya belum ditutup.”
+
+➡️ rekomendasi **jangan set issue_status = Closed**
+
+---
+
+## D) Proyek mau review / meeting
+
+**Trigger**
+
+* “ringkas proyek”
+* “weekly report”
+* “update ke owner”
+
+**Respons**
+
+> “Saya akan menampilkan Project Snapshot dan Risk Radar.
+> Apakah ingin saya buatkan laporan?”
+
+➡️ arahkan ke **Project Snapshot + Generator Dokumen**
+
+---
+
+# 3️⃣ PROMPT SIAP TEMPEL (per skenario)
+
+## Prompt: Review Isu
+
+```
+Gunakan data Project Brain dan Mini Apps.
+Ringkas:
+- status isu
+- level risiko
+- checklist yang belum selesai
+- action item yang overdue
+Berikan rekomendasi langkah berikutnya.
+```
+
+---
+
+## Prompt: Validasi Keputusan
+
+```
+Periksa apakah keputusan sudah:
+- memiliki alasan teknis
+- memiliki penilaian risiko
+- memiliki dampak yang jelas
+Jika belum lengkap, jelaskan bagian yang kurang.
+```
+
+---
+
+## Prompt: Closing Isu
+
+```
+Sebelum menutup isu, pastikan:
+- checklist selesai 100%
+- action item selesai
+- keputusan terdokumentasi
+Jika belum, beri peringatan.
+```
+
+---
+
+# 4️⃣ STATUS MACHINE (ini rahasia biar rapi)
+
+**Issue Status Rules**
+
+```
+Open →
+  (Checklist ≥50%) →
+Monitoring →
+  (Checklist 100% + Action done) →
+Closed
+```
+
+AI **tidak mengizinkan** lompat status tanpa syarat ini.
+
+---
+
+# 5️⃣ CONTOH NYATA (simulasi singkat)
+
+User:
+
+> “Isu retak pada kolom lantai 3, bisa ditutup?”
+
+AI berpikir:
+
+* issue_status = Monitoring
+* checklist = 70%
+* action tracker = 1 overdue
+
+AI jawab:
+
+> “Belum disarankan ditutup.
+> Masih ada:
+>
+> * 3 item checklist belum selesai
+> * 1 action item melewati due date
+>   Rekomendasi: selesaikan tindakan perbaikan dan verifikasi ulang.”
+
+🔥 Ini **bukan chatbot biasa**.
+
+---
+
+# 6️⃣ URUTAN IMPLEMENTASI (teknis & realistis)
+
+**Sprint 1**
+
+* Checklist
+* Penilaian Risiko
+* Decision Summary
+* Logic dasar Open / Closed
+
+**Sprint 2**
+
+* Issue Log
+* Action Tracker
+* Status machine
+
+**Sprint 3**
+
+* Snapshot
+* Risk Radar
+* Generator Dokumen
+
+---
+
+## NEXT STEP (pilih salah satu)
+
+Sekarang sistemnya sudah kebentuk. Tinggal pendalaman.
+
+1️⃣ Aku tuliskan **prompt final per Mini App** (siap copy)
+2️⃣ Aku bantu **design UX flow** (user klik apa → AI ngapain)
+3️⃣ Aku buat **contoh 1 proyek full (end-to-end)** dari hari pertama sampai closeout
+
+Pilih salah satu angka 👇

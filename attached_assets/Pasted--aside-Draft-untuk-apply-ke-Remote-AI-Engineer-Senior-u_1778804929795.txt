@@ -1,0 +1,79 @@
+<aside>
+✉️
+
+**Draft** untuk apply ke [Remote AI Engineer (Senior, up to $200K/yr)](https://www.notion.so/Remote-AI-Engineer-Senior-up-to-200K-yr-270e58094c3e48cbb4bd8fefef2b6c10?pvs=21). Tone: confident, technical, differentiated. Customize URL/dates before sending.
+
+</aside>
+
+## Cover Letter (English)
+
+**Wuryanto Kusdjali**  
+
+AI Engineer & Multi-Agent Systems Architect  
+
+Email: [penshopx@gmail.com](mailto:penshopx@gmail.com) · LinkedIn: [your profile]  
+
+Portfolio: [OpenClaw / KONSTRA / KarirHub repos]
+
+May 12, 2026
+
+**Hiring Team, Crossover (Trilogy / ESW Capital)**  
+
+Re: Remote AI Engineer (Senior)
+
+Dear Hiring Team,
+
+I'm applying for the Senior Remote AI Engineer role at Crossover. With 8 years building production multi-agent LLM systems, prompt-engineering pipelines, and AI architectures that ship real value, I believe I match the elite-team and breakthrough-solution profile you're looking for.
+
+**What I bring**
+
+- **Multi-agent LLM systems at depth.** I designed and maintain **OpenClaw**, an internal prompt and orchestration pattern that powers coordinator/worker agents with strict anti-blocking guarantees (ABD v1.1: best-effort outputs, explicit assumption tagging, confidence scoring, and structured ABD-7 output sections). It's an operational doctrine, not just a prompt template.
+- **Domain-specialized AI copilots that ship.** Two flagship systems:
+    - **KONSTRA** — 9 specialist agents for Indonesian construction project management (engineering, contract/FIDIC, HSE, quality, environment, logistics, finance), with Tender Readiness Checker, Kalkulator EOT, and KB-EVM orchestrated showcases. Built end-to-end: doctrine, KB consolidation, deployment runbook, micro-patch issue triage.
+    - **LexSkripsi** — a virtual thesis supervisor for Indonesian law undergraduates, validated on a real corporate-responsibility / strict-liability case study.
+- **Engineering rigor across the stack.** Python, prompt engineering, agent orchestration contracts (`callAgentInternal`), KB design, evaluation harnesses, smoke tests, field tests. Comfortable owning the whole lifecycle from problem framing to production hardening.
+- **An unusual edge: physical-world domain depth.** Before AI, I was a construction engineer (BNSP-certified: SKK Konstruksi Madya + Ahli K3 Konstruksi). I read project realities, contracts, and safety regimes the way most AI engineers read PyTorch docs. For any client adjacent to industrial, construction, infrastructure, or HSE workflows, that translates directly into faster grounded prototypes and fewer hallucinated requirements.
+
+**Why Crossover specifically**
+
+Your streamlined senior-exec interview in under 5 hours and global remote model match how I already work — fast cycle times, autonomy, and high-density technical feedback. I'm ready to take on autonomous-AI-agent and LLM-evaluation problems that move the needle for your portfolio companies.
+
+**Logistics**
+
+- Available: immediately, full-time, remote (UTC+7).
+- Compensation: open within your $200K USD/year band.
+- Notice period: none / freelance transition.
+
+I've completed the streamlined application; happy to jump on the senior-exec interview at your earliest slot. Portfolio links and OpenClaw whitepaper available on request.
+
+Thanks for considering my application.
+
+Best regards,  
+
+**Wuryanto Kusdjali**
+
+---
+
+## 📊 Anti-Blocking Doctrine (ABD-7) Notes
+
+**Asumsi** yang dibuat saat draft ini (silakan koreksi):
+
+- `[ASUMSI: LinkedIn URL belum diberikan — placeholder]`
+- `[ASUMSI: GitHub/portfolio public belum tentu ada — placeholder; siapkan repo demo OpenClaw + KONSTRA showcase sebelum kirim]`
+- `[ASUMSI: notice period 0 — user sedang aktif cari kerja]`
+- `[ASUMSI: compensation band Crossover up to $200K/yr, user fleksibel di rentang]`
+
+**Pertanyaan klarifikasi (max 2)**:
+
+1. LinkedIn URL & GitHub username Anda untuk diisi di header?
+2. Mau saya tambahkan 1 paragraf 'recent project' specific dengan metrik konkret (e.g., "reduced KB lookup latency 60%", "orchestrated 9-agent workflow with 92% task completion")?
+
+**Langkah lanjutan**:
+
+1. Siapkan OpenClaw whitepaper 1-2 halaman (public link) sebagai attach
+2. Buat repo demo publik (sanitize KONSTRA versi public) di GitHub
+3. Update LinkedIn headline: "AI Engineer & Multi-Agent LLM Architect · OpenClaw"
+4. Submit application via [crossover.com/jobs/ai-engineer/id](http://crossover.com/jobs/ai-engineer/id)
+5. Setelah submit: blok kalender 5 jam untuk assessment
+
+**Confidence**: Tinggi untuk struktur & framing; Sedang untuk detail metrik (perlu user konfirmasi).

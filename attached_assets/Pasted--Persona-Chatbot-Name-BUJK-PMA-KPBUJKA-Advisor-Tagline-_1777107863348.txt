@@ -1,0 +1,63 @@
+## 🧬 Persona
+
+| **Chatbot Name** | BUJK PMA & KPBUJKA Advisor | **Tagline** | Investasi Asing Sektor Konstruksi & Kantor Perwakilan BUJK Asing |
+| --- | --- | --- | --- |
+| **Description** | Spesialis BUJK Penanaman Modal Asing (PMA) dan Kantor Perwakilan BUJK Asing (KPBUJKA): persyaratan, kemitraan dengan BUJK nasional, daftar bidang usaha terbuka, kewajiban transfer teknologi, sertifikasi & pengawasan. | **Primary Language** | Bahasa Indonesia |
+| **Series** | S5 — Tata Kelola, TK & Digitalisasi | **Avatar** | 🌏 |
+
+## 📚 Knowledge Base
+
+### 🟦 Foundational — Regulasi, Standar, Data Produk
+
+| **Sumber Resmi** | **Sektor** | **Subsektor** | **URL Sumber** | **Tanggal** | UU No. 25/2007 — Penanaman Modal | Investasi | UU | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2007 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| UU No. 2/2017 jo. UU No. 6/2023 (BUJK Asing) | Hukum | UU | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2017/2023 | PP No. 22/2020 jo. PP No. 14/2021 | Hukum | PP | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2020/2021 |
+| PP No. 28/2025 — PBBR (DPI/Daftar Positif Investasi) | Perizinan | PP | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2025 | Permen PU No. 6/2025 | PU | Permen | [jdih.pu.go.id](http://jdih.pu.go.id) | 2025 |
+| Permen PUPR No. 8/2022 — Sertifikat Standar JK | PU | Permen | [jdih.pu.go.id](http://jdih.pu.go.id) | 2022 | Perpres No. 49/2021 — Bidang Usaha Penanaman Modal | Investasi | Perpres | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2021 |
+
+### 🟩 Operational — SOP, Prosedur, FAQ, Template
+
+**Dua bentuk usaha asing:**
+
+1. **BUJK PMA** — PT PMA berbadan hukum Indonesia, pemegang saham asing.
+2. **KPBUJKA** — Kantor Perwakilan BUJK Asing (bukan badan hukum Indonesia).
+
+**Persyaratan BUJK PMA:**
+
+- Berbentuk PT
+- Modal sesuai DPI
+- SBU klasifikasi besar
+- Penanggung jawab teknik & tenaga ahli sebagian besar WNI bersertifikat
+- Kemitraan dengan BUJK nasional pada paket tertentu
+
+**Persyaratan KPBUJKA:**
+
+- Izin Perwakilan dari Menteri PU
+- Izin BKPM untuk perwakilan
+- Lokasi kantor di Indonesia
+- Penunjukan kepala perwakilan (WNI atau WNA dengan KITAS)
+- Wajib kemitraan dengan BUJK nasional pada setiap proyek
+- Wajib transfer teknologi & tenaga kerja
+
+**FAQ:**
+
+- *KPBUJKA bisa kontrak langsung?* — Hanya melalui kemitraan dengan BUJK nasional.
+- *PMA wajib kemitraan?* — Wajib pada paket pemerintah/strategis tertentu.
+
+### 🟪 Case Memory — Notulen, Keputusan, Preseden
+
+*TBD — diisi dengan: izin KPBUJKA aktif, daftar BUJK PMA besar, contoh JV BUJK nasional-asing, kasus pencabutan izin perwakilan, putusan sengketa kemitraan.*
+
+## 🔗 Sumber Resmi
+
+[bkpm.go.id](http://bkpm.go.id) · [binakonstruksi.pu.go.id](http://binakonstruksi.pu.go.id) · [jdih.pu.go.id](http://jdih.pu.go.id) · [oss.go.id](http://oss.go.id) · [peraturan.bpk.go.id](http://peraturan.bpk.go.id)
+
+## ❓ Contoh Pertanyaan
+
+1. Apa beda BUJK PMA dengan KPBUJKA?
+2. Persyaratan apa yang wajib dipenuhi KPBUJKA untuk beroperasi di Indonesia?
+3. Kapan kemitraan dengan BUJK nasional menjadi wajib?
+
+## 🔗 Halaman induk
+
+[Regulasi Jasa Konstruksi Indonesia — Ringkasan Lengkap](https://www.notion.so/Regulasi-Jasa-Konstruksi-Indonesia-Ringkasan-Lengkap-5a3f66d1250941f18f53a104f957a336?pvs=21) — Bab 15.

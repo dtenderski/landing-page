@@ -1,0 +1,113 @@
+Lanjut. Saya sudah buatkan **paket prototype MekaSKK Bot** berbasis data Mekanikal yang Anda unggah. Datanya saya ubah menjadi knowledge base dengan field: subklasifikasi, jabatan kerja, jenjang jabatan, kualifikasi, jenjang KKNI, standar kompetensi, status SKK, dan link dokumen. 
+
+## 36. File yang sudah dibuat
+
+1. [Database JSON MekaSKK Bot](sandbox:/mnt/data/mekaskk_database_mekanikal.json)
+   Berisi **134 entri** hasil normalisasi dari data klasifikasi Mekanikal.
+
+2. [Prototype Website Chatbot](sandbox:/mnt/data/mekaskk_bot_prototype.html)
+   Bisa langsung dibuka di browser. Sudah ada fitur:
+
+   * pencarian jabatan,
+   * pencarian SKK/SKKNI,
+   * filter kualifikasi,
+   * filter KKNI,
+   * tampilan kartu hasil,
+   * jawaban chatbot sederhana.
+
+3. [Logic Backend JavaScript](sandbox:/mnt/data/mekaskk_bot_logic.js)
+   Bisa dipakai untuk Node.js, WhatsApp bot, Telegram bot, atau backend website.
+
+4. [README Cara Pakai](sandbox:/mnt/data/README_mekaskk_bot.md)
+   Berisi panduan singkat menjalankan file.
+
+## 37. Cara pakai prototype website
+
+Buka file ini:
+
+[MekaSKK Bot Prototype HTML](sandbox:/mnt/data/mekaskk_bot_prototype.html)
+
+Lalu coba ketik:
+
+```text
+operator crane
+```
+
+atau:
+
+```text
+HVAC
+```
+
+atau:
+
+```text
+tukang las
+```
+
+atau:
+
+```text
+KKNI level 7
+```
+
+## 38. Cara pakai logic JavaScript
+
+Jika ingin menjalankan di Node.js:
+
+```bash
+node mekaskk_bot_logic.js "operator crane"
+```
+
+Contoh hasil yang akan keluar:
+
+```text
+Jabatan:
+Operator Crane Mobile
+
+Subklasifikasi:
+Alat Berat
+
+Kualifikasi:
+Operator
+
+Jenjang KKNI:
+Level 2 / Level 3
+
+Standar Kompetensi:
+SKKNI 135-2015
+
+Link SKK/SKKNI:
+Tersedia
+```
+
+## 39. Catatan penting data
+
+Ada beberapa baris di sumber yang **tidak mencantumkan KKNI secara eksplisit**, jadi saya tandai sebagai:
+
+```text
+Tidak tercantum pada data sumber
+```
+
+Saya juga **tidak memperbaiki link yang terlihat typo**, misalnya `downloadd`, supaya chatbot tidak mengarang data baru. Link tetap mengikuti data asli.
+
+## 40. Tahap berikutnya
+
+Setelah ini, chatbot bisa dikembangkan menjadi:
+
+1. **WhatsApp Bot**
+2. **Telegram Bot**
+3. **Website chatbot online**
+4. **Custom GPT berbasis knowledge file**
+5. **API pencarian SKK/SKKNI**
+6. **Form rekomendasi sertifikasi berdasarkan pengalaman kerja**
+
+Bagian selanjutnya yang paling bagus adalah membuat **flow WhatsApp Bot MekaSKK**, supaya user bisa pilih menu angka seperti:
+
+```text
+1. Cari jabatan Mekanikal
+2. Cari SKK/SKKNI
+3. Cari berdasarkan KKNI
+4. Rekomendasi sertifikasi
+5. Lihat link dokumen SKK
+```

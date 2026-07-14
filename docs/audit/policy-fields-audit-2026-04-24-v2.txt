@@ -1,0 +1,47 @@
+=== Kebijakan Agen + Field Lengkap Audit (v2) — Apr 24, 2026 ===
+Verifikasi MENYELURUH: agent text fields + toolbox text fields + 7 policy fields
+
+ total_agents | empty_phil | empty_exp | empty_ot | total_toolboxes | empty_purp | empty_caps | empty_lims 
+--------------+------------+-----------+----------+-----------------+------------+------------+------------
+          205 |          0 |         0 |        0 |             196 |          0 |          0 |          0
+(1 row)
+
+
+=== 7 policy fields across ALL 205 agents (incl 21 orphan) ===
+ agents_with_any_empty_policy 
+------------------------------
+                            0
+(1 row)
+
+
+=== Reproducible audit queries ===
+-- Query A: Count empty TEXT fields per agent
+SELECT 
+  (SELECT COUNT(*) FROM agents) as total_agents,
+  (SELECT COUNT(*) FROM agents WHERE philosophy IS NULL OR philosophy = '') as empty_phil,
+  (SELECT COUNT(*) FROM agents WHERE expertise IS NULL OR expertise = '[]'::jsonb) as empty_exp,
+  (SELECT COUNT(*) FROM agents WHERE off_topic_response IS NULL OR off_topic_response = '') as empty_ot,
+  (SELECT COUNT(*) FROM toolboxes) as total_toolboxes,
+  (SELECT COUNT(*) FROM toolboxes WHERE purpose IS NULL OR purpose = '') as empty_purp,
+  (SELECT COUNT(*) FROM toolboxes WHERE capabilities IS NULL OR capabilities = '[]'::jsonb) as empty_caps,
+  (SELECT COUNT(*) FROM toolboxes WHERE limitations IS NULL OR limitations = '[]'::jsonb) as empty_lims;
+
+-- Query B: Count agents with ANY of the 7 policy fields empty
+SELECT COUNT(*) as agents_with_any_empty_policy
+FROM agents
+WHERE primary_outcome IS NULL OR primary_outcome = ''
+   OR conversation_win_conditions IS NULL OR conversation_win_conditions = ''
+   OR brand_voice_spec IS NULL OR brand_voice_spec = ''
+   OR interaction_policy IS NULL OR interaction_policy = ''
+   OR domain_charter IS NULL OR domain_charter = ''
+   OR quality_bar IS NULL OR quality_bar = ''
+   OR risk_compliance IS NULL OR risk_compliance = '';
+
+-- Reproduce: psql "$DATABASE_URL" -f docs/audit/policy-fields-audit-2026-04-24-v2.sql
+-- Atau jalankan ulang script: STEP=all npx tsx scripts/fill-remaining-fields.ts
+-- (idempotent: jika semua field sudah terisi, akan keluar "0 agents/toolboxes to process")
+
+=== dist/index.cjs note ===
+Tidak ada perubahan kode runtime di tugas audit ini (hanya skrip data + dokumentasi).
+Build artifact byte-identik dengan HEAD — tidak ada diff untuk di-commit.
+Verifikasi: md5sum dist/index.cjs sama dengan `git show HEAD:dist/index.cjs | md5sum`.

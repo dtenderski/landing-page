@@ -1,0 +1,426 @@
+<aside>
+🎯
+
+**Misi:** Membuat pengajuan & pengelolaan **Sertifikat Badan Usaha (SBU) Pekerjaan Konstruksi** menjadi *mudah, cepat, dan tidak rumit* untuk kontraktor BUJK — lintas bidang BS · BG · IL · IM · KO — melalui Agentic AI multi-agen berbasis **OpenClaw orchestrator + MultiClaw paralel**, dilindungi **Anti-Blocking Doctrine v1.1**.
+
+</aside>
+
+## 🧭 1. Ringkasan Eksekutif
+
+SBUClaw adalah **chatbot Agentic AI** — bukan chatbot tunggal — yang memandu BUJK dari *titik nol* (belum tahu subklasifikasi target) sampai *titik siap submit* (dossier lengkap, surat ditandatangani, pembayaran LSBU terjadwal). Sistem ini berbeda dari asisten Q&A biasa karena:
+
+- **Agentic** — agen mengambil inisiatif (asesmen, gap analysis, rekomendasi) bukan hanya menjawab.
+- **Multi-agen paralel (MultiClaw)** — satu permintaan kompleks didistribusikan ke beberapa spesialis sekaligus, lalu disintesis.
+- **State-aware** — orchestrator memelihara sesi `session_state` (profil BUJK, target subklasifikasi, checklist progress, dossier draft).
+- **ABD-compliant** — tidak pernah memblokir user; selalu memberi *best-effort answer* + `[ASUMSI:]` + confidence score.
+
+## 🎯 2. Tujuan & Non-Tujuan
+
+| Aspek | ✅ Tujuan | ❌ Non-Tujuan |
+| --- | --- | --- |
+| Pemetaan | Smart Mapping subklasifikasi BS/BG/IL/IM/KO dari portofolio & tender target | Menggantikan analisis pasar strategis jangka panjang |
+| Kualifikasi | Gap analysis K → M1 → M2 → B1 → B2 / Asing | Menerbitkan / menjanjikan terbit SBU |
+| Personel | Cocokkan SKK PJTBU/PJSKBU dgn subklasifikasi target | Mengeluarkan SKK / mengubah jenjang SKK |
+| Dokumen | Checklist + draft Surat Penunjukan, Pernyataan, Permohonan LSBU | Memalsukan NIB, KTP, SKK, pengalaman |
+| Biaya/Waktu | Estimasi biaya & timeline LSBU per skenario | Menjamin tarif final LSBU (negosiasi tarif = di LSBU) |
+| Asesmen | Skor 0–4 per 8 dimensi kesiapan BUJK | Audit hukum formal / opini legal mengikat |
+| OSS-RBA | Walkthrough langkah OSS-RBA + portal LPJK | Login / submit atas nama user |
+
+## 👥 3. Persona Pengguna Sasaran
+
+- **🏢 Direktur / Owner BUJK Kecil-Menengah** — ingin tahu *"SBU apa yang sebaiknya saya ambil?"* dan *"berapa biayanya?"*
+- **📋 Admin Legalitas / Sekretariat** — eksekutor checklist, generator surat, tracker dossier.
+- **🛠️ Calon PJTBU / PJSKBU** — verifikasi SKK pribadi terhadap subklasifikasi target.
+- **🧑‍💼 Konsultan Perizinan / Biro Jasa** — multi-klien, butuh kalkulator biaya & timeline cepat.
+- **🎓 Mahasiswa Vokasi / Akademisi** — belajar struktur regulasi SBU dan praktik klasifikasi.
+
+## 🗂️ 4. Hierarki Gustafta — L1 → L4
+
+```mermaid
+flowchart TB
+	L1["**L1: Series**<br>SBUClaw — Pembuatan SBU Konstruksi"]
+	L2["**L2: Module**<br>A. Diagnose &amp; Map · B. Prepare Dossier · C. Submit &amp; Track"]
+	L3["**L3: Chatbot**<br>SBUCLAW-ORCHESTRATOR + 10 MultiClaw Specialists"]
+	L4["**L4: Tools**<br>Calculator LSBU · Smart Mapper · Letter Generator · Readiness Scorer"]
+	L1 --> L2 --> L3 --> L4
+```
+
+## 🧠 5. Arsitektur Agentic AI — Deep Dive
+
+### 5.1 Definisi Agentic AI dalam konteks SBU
+
+Sebuah sistem disebut **Agentic** ketika memenuhi *4 atribut minimum*:
+
+1. **Goal-directed** — punya tujuan eksplisit ("SBU subklasifikasi X kualifikasi Y siap submit") bukan hanya merespons.
+2. **Tool use** — memanggil tools (kalkulator biaya, smart mapper, letter generator, KB query) bukan hanya generative chat.
+3. **Memory / state** — `session_state` persisten lintas turn (profil BUJK, dossier progress, target subklasifikasi).
+4. **Reflection & re-planning** — bila agent spesialis mengembalikan `confidence < 0.7`, orchestrator melakukan re-route atau memanggil agent kedua untuk *cross-check*.
+
+### 5.2 OpenClaw vs MultiClaw — Pembagian Peran
+
+| Layer | Nama | Peran | Eksekusi |
+| --- | --- | --- | --- |
+| Orchestrator | **SBUCLAW-ORCHESTRATOR** (OpenClaw root) | Routing intent, jaga `session_state`, sintesis multi-agen, guardrails | Serial (1 instans/sesi) |
+| Spesialis | **10 Agen MultiClaw** | Eksekusi domain (mapping, qualify, docs, surat, biaya, asesmen, OSS, dll.) | **Paralel** bila intent multi-domain |
+| Tools | Calculator · Mapper · Generator | Deterministik (rule-based / formula) | On-demand dari agen |
+| KB | KB-SBU-BS · BG · IL · IM · KO · REG · LSBU | Sumber tunggal kebenaran (regulasi & matriks) | Read-only inject ke prompt |
+
+### 5.3 Diagram Arsitektur
+
+```mermaid
+flowchart TD
+	U["👤 Pengguna<br>(Direktur · Admin · Calon PJTBU · Konsultan)"]
+	U --> ORCH
+	ORCH["🧭 SBUCLAW-ORCHESTRATOR<br>OpenClaw root<br>(intent routing · session_state · sintesis)"]
+	ORCH -->|parallel| MAP["🗺️ AGENT-MAPPER"]
+	ORCH -->|parallel| QUAL["📊 AGENT-QUALIFY"]
+	ORCH -->|parallel| DOCS["📄 AGENT-DOCS"]
+	ORCH -->|parallel| SKK["🎓 AGENT-SKKMATCH"]
+	ORCH -->|parallel| LET["✉️ AGENT-LETTERGEN"]
+	ORCH -->|parallel| COST["💰 AGENT-COST"]
+	ORCH -->|parallel| ASS["🧪 AGENT-ASSESS"]
+	ORCH -->|parallel| OSS["🌐 AGENT-OSS"]
+	ORCH -->|parallel| REG["📜 AGENT-COMPLY"]
+	ORCH -->|overlay| INT["🛡️ AGENT-INTEGRITY (ABD &amp; anti-fraud)"]
+
+	MAP --- KB[("📚 KB-SBU-BS/BG/IL/IM/KO<br>KB-REG · KB-LSBU")]
+	QUAL --- KB
+	DOCS --- KB
+	SKK --- KB
+	LET --- KB
+	COST --- KB
+	ASS --- KB
+	OSS --- KB
+	REG --- KB
+	INT --- KB
+```
+
+### 5.4 Sequence — callAgentInternal multi-domain
+
+```mermaid
+sequenceDiagram
+	participant U as 👤 User
+	participant O as 🧭 ORCHESTRATOR
+	participant M as 🗺️ MAPPER
+	participant Q as 📊 QUALIFY
+	participant D as 📄 DOCS
+	participant S as 🎓 SKKMATCH
+	participant K as 📚 KB
+
+	U->>O: "Mau ambil SBU jalan + jembatan, BUJK Kecil."
+	O->>O: detect_intent = scope_and_readiness
+	O->>O: update session_state (target: BS001+BS002, kualifikasi: K)
+	par Parallel calls
+		O->>M: callAgentInternal(map_subklas, ctx)
+		O->>Q: callAgentInternal(check_qualify, ctx)
+		O->>D: callAgentInternal(list_docs, ctx)
+		O->>S: callAgentInternal(match_skk, ctx)
+	end
+	M->>K: query KB-SBU-BS (BS001, BS002)
+	Q->>K: query KB-REG (syarat kualifikasi K)
+	D->>K: query KB-LSBU (dokumen K)
+	S->>K: query KB-REG (SKK alignment)
+	M-->>O: {confidence: 0.92, ASUMSI: bidang dominan = jalan}
+	Q-->>O: {confidence: 0.85, gap: NIB belum mencakup KBLI 42101}
+	D-->>O: {confidence: 0.95, missing: laporan keuangan audited}
+	S-->>O: {confidence: 0.78, ASUMSI: SKK Ahli Muda diasumsikan aktif}
+	O->>O: synthesize multi-agent output + ABD-7 sections
+	O-->>U: jawaban koheren + quick replies + next step
+```
+
+## 🤖 6. 10 Agen MultiClaw — Deep Dive
+
+Setiap agen mengikuti **kontrak IO standar**:
+
+```
+INPUT:  { session_state, user_message, intent, kb_refs }
+OUTPUT: {
+  agent_id,
+  confidence: 0.0-1.0,
+  assumptions: ["[ASUMSI: ...]"],
+  primary_answer,
+  abd7_sections: { best_effort, gaps, next_step, references, risks, alternatives, escalation },
+  artifacts?: [...],  // file/checklist/surat
+  inter_agent_calls?: ["callAgentInternal(X, ...)"]
+}
+```
+
+### 6.1 🗺️ AGENT-MAPPER — Smart Mapping Subklasifikasi
+
+- **Misi:** Petakan portofolio proyek / tender target → subklasifikasi BS/BG/IL/IM/KO yang paling relevan.
+- **Intent tags:** `#smart_mapping`, `#scope_subklas`, `#tender_to_sbu`.
+- **KB inject:** KB-SBU-BS, KB-SBU-BG, KB-SBU-IL, KB-SBU-IM, KB-SBU-KO, KB-REG.
+- **Algoritma ringkas:**
+    1. Ekstrak kata kunci scope (jalan, jembatan, gedung kantor, instalasi listrik, ME, dll.).
+    2. Map ke kode subklasifikasi via lookup KB.
+    3. Skor relevansi 0–1 berdasarkan frekuensi & nilai proyek.
+    4. Output Top-N (default 3) + alasan + KBLI yang harus ada di NIB.
+- **Inter-agent:** memanggil `AGENT-QUALIFY` untuk validasi kualifikasi yang cocok.
+
+### 6.2 📊 AGENT-QUALIFY — Kualifikasi & Gap Analysis
+
+- **Misi:** Tentukan kualifikasi target (K / M1 / M2 / B1 / B2 / Asing) berdasarkan kekayaan bersih, pengalaman, dan pagu pasar target. Identifikasi *gap*.
+- **Intent tags:** `#qualify_check`, `#upgrade_path`, `#gap_analysis`.
+- **KB inject:** KB-REG (Permen PUPR 8/2022 + lampiran kualifikasi), KB-LSBU.
+- **Output kunci:** matriks **Kondisi-Aktual vs Syarat-Target** + rekomendasi *closeable in 30/60/90 days*.
+
+### 6.3 📄 AGENT-DOCS — Checklist Dokumen Pengajuan
+
+- **Misi:** Generate checklist dokumen pengajuan dinamis berdasarkan (subklasifikasi target, kualifikasi target, jenis use case).
+- **Use cases didukung:** Permohonan Baru · Tambah Subklasifikasi · Perpanjangan · Naik Kualifikasi · Mutasi LSBU.
+- **Intent tags:** `#checklist_docs`, `#dossier_status`.
+- **Output:** Tabel A–F (Legalitas · Keuangan · Personel · Pengalaman · Peralatan · Domisili) dengan kolom `status: ✅/⚠️/❌` + `priority: P0/P1/P2`.
+
+### 6.4 🎓 AGENT-SKKMATCH — Pencocokan SKK Personel Kunci
+
+- **Misi:** Validasi apakah SKK PJTBU/PJSKBU yang dimiliki cocok dengan subklasifikasi target & jenjang yang dibutuhkan.
+- **Intent tags:** `#skk_align`, `#personnel_gap`.
+- **KB inject:** KB-KOM, KB-REG (Permen PUPR 9/2023 SKK).
+- **Logika:**
+    - Cek `bidang` (sipil / gedung / instalasi / mekanikal / khusus).
+    - Cek `jenjang` (Muda 7 / Madya 8 / Utama 9) vs kualifikasi BUJK.
+    - Cek `status aktif` (asumsi default = aktif jika user tidak menyatakan sebaliknya, ditandai `[ASUMSI:]`).
+- **Inter-agent:** memanggil `AGENT-LETTERGEN` jika butuh draft surat penunjukan personel kunci.
+
+### 6.5 ✉️ AGENT-LETTERGEN — Draft Surat & Pernyataan
+
+- **Misi:** Generate draft siap-tanda-tangan untuk:
+    - Surat Penunjukan PJTBU/PJSKBU
+    - Surat Pernyataan Kesediaan Penanggung Jawab
+    - Surat Permohonan Penerbitan SBU ke LSBU
+    - Surat Pernyataan Tunduk Kode Etik
+    - Surat Pernyataan Tidak dalam Pailit/Sengketa
+- **Intent tags:** `#generate_letter`.
+- **Output:** Markdown + variabel `company_name`, `director_name`, `nib`, `date`, dll.
+
+### 6.6 💰 AGENT-COST — Estimasi Biaya & Timeline LSBU
+
+- **Misi:** Hitung biaya & estimasi waktu proses LSBU.
+- **Intent tags:** `#cost_estimate`, `#timeline_estimate`.
+- **Variabel input:** kualifikasi, jumlah subklasifikasi, use case, LSBU pilihan, lokasi.
+- **Output:** Tabel `Item — Estimasi Min — Estimasi Max — Catatan` + Gantt sederhana (T-30 → T-0 → T+14 verifikasi → T+30 terbit).
+- **Disclaimer otomatis:** *"Estimasi indikatif; tarif final mengikuti tarif resmi LSBU pada saat pengajuan."*
+
+### 6.7 🧪 AGENT-ASSESS — Asesmen Kesiapan BUJK
+
+- **Misi:** Berikan skor 0–4 di 8 dimensi:
+    1. Legalitas Dasar (NIB, Akta, NPWP)
+    2. Domisili & Tempat Usaha
+    3. Personel Kunci (PJBU/PJTBU/PJKBU/PJSKBU)
+    4. SKK Konstruksi Aktif
+    5. Pengalaman Proyek (relevansi & nilai)
+    6. Kekayaan Bersih / Keuangan
+    7. Peralatan (sesuai subklasifikasi)
+    8. Sistem Mutu, K3 & Anti-Suap (ringan untuk K, ketat untuk B)
+- **Intent tags:** `#readiness_score`.
+- **Output:** Radar chart description + skor agregat + 3 rekomendasi prioritas.
+
+### 6.8 🌐 AGENT-OSS — Walkthrough OSS-RBA + Portal LPJK
+
+- **Misi:** Pandu langkah konkret di OSS-RBA & portal LPJK ([lpjk.pu.go.id](http://lpjk.pu.go.id)).
+- **Intent tags:** `#oss_walkthrough`, `#lpjk_portal`.
+- **Output:** Step-by-step urut + screenshot text description + troubleshoot 5 error tersering (KBLI tidak cocok, NIB belum migrasi, dll.).
+
+### 6.9 📜 AGENT-COMPLY — Compliance & Regulasi
+
+- **Misi:** Jelaskan dasar hukum & kepatuhan tiap langkah.
+- **Intent tags:** `#regulasi`, `#why_required`, `#sanksi_risk`.
+- **KB inject:** UU 2/2017 jo. UU 11/2020 Cipta Kerja, PP 14/2021, **Permen PUPR 8/2022 (SBU)**, Permen PUPR 9/2023 (SKK), Permen PUPR 10/2021 (SMKK).
+
+### 6.10 🛡️ AGENT-INTEGRITY — ABD & Anti-Fraud Overlay
+
+- **Misi:** *Overlay* yang dipanggil di setiap turn untuk memastikan:
+    - Tidak ada saran pemalsuan dokumen / personel.
+    - Tidak ada jaminan penerbitan SBU.
+    - Setiap output memenuhi format **ABD-7** (Best-Effort · Gaps · Next-Step · References · Risks · Alternatives · Escalation).
+- **Intent tags:** `#unsafe_request`, `#official_claim_request` (re-route safety).
+
+## 🧮 7. Routing Table — Intent → Agen yang Dipanggil
+
+| Intent | Primer | Paralel | Catatan |
+| --- | --- | --- | --- |
+| `greet` | ORCH | — | Main menu 6 quick replies |
+| `scope_and_readiness` | MAPPER | QUALIFY · DOCS · SKKMATCH | Multi-domain — full fan-out |
+| `smart_mapping` | MAPPER | COMPLY | Sebut alasan + dasar regulasi |
+| `qualify_check` | QUALIFY | DOCS · COST | Sertakan gap & estimasi biaya naik kualifikasi |
+| `checklist_docs` | DOCS | SKKMATCH | Otomatis cek SKK saat dokumen personel disorot |
+| `skk_align` | SKKMATCH | MAPPER · LETTERGEN | LETTERGEN bila SKK cocok → tawarkan surat |
+| `generate_letter` | LETTERGEN | DOCS | DOCS validasi prasyarat data sebelum generate |
+| `cost_estimate` | COST | QUALIFY | Skenario K/M/B → biaya berbeda |
+| `timeline_estimate` | COST | OSS | OSS untuk durasi langkah portal |
+| `readiness_score` | ASSESS | DOCS · SKKMATCH | Skor lengkap 8 dimensi |
+| `oss_walkthrough` | OSS | COMPLY | Sertakan dasar regulasi setiap step |
+| `regulasi` | COMPLY | — | Q&A regulasi murni |
+| `unsafe_request` | INTEGRITY | — | Reroute safety, tolak dgn alternatif legal |
+
+## 🗃️ 8. Session State Schema
+
+```yaml
+session_state:
+  user_profile:
+    role: "direktur | admin | calon_pjtbu | konsultan | akademisi"
+    badan_usaha:
+      nama: string
+      nib: string
+      kbli_existing: [string]
+      domisili: string
+      kualifikasi_existing: "K | M1 | M2 | B1 | B2 | Asing | belum_punya"
+      sbu_existing: [{ subklas, kualifikasi, masa_berlaku }]
+  target:
+    use_case: "baru | tambah_sub | perpanjangan | naik_kualifikasi | mutasi_lsbu"
+    bidang: ["BS", "BG", "IL", "IM", "KO"]
+    subklasifikasi: [string]   # e.g. ["BS001", "BS002"]
+    kualifikasi_target: "K | M1 | M2 | B1 | B2 | Asing"
+    lsbu_pilihan: string
+  dossier:
+    checklist_state: { docId: "✅ | ⚠️ | ❌" }
+    letters_drafted: [string]
+    cost_estimate: { min, max, currency }
+    timeline_estimate_days: int
+  assessment:
+    skor_per_dimensi: { d1..d8: 0-4 }
+    skor_agregat: 0-4
+    prioritas_rekomendasi: [string]
+  meta:
+    abd_compliance: true
+    last_orchestrator_turn: timestamp
+    fallback_count: int
+```
+
+## 🛡️ 9. ABD v1.1 Overlay (Ringkas)
+
+<aside>
+🛡️
+
+Setiap agen WAJIB:
+
+1. **Tidak memblokir** — selalu kasih *best-effort answer* meskipun data parsial.
+2. **Tag ASUMSI** — tulis eksplisit `[ASUMSI: ...]` saat menebak.
+3. **Confidence score** — sertakan 0.0–1.0 di setiap output.
+4. **Inter-agent call** — jika butuh data dari domain lain, panggil agen relevan, bukan mengembalikan ke user.
+5. **Format ABD-7** — Best-Effort · Gaps · Next-Step · References · Risks · Alternatives · Escalation.
+6. **Safe fallback** — jika 3x re-prompt tetap ambigu → tawarkan menu pilihan, bukan menyerah.
+7. **No fabrication** — kutip KB ID untuk klaim regulatif; bila tidak ada di KB → katakan "di luar KB" + alternatif.
+</aside>
+
+## 📚 10. Knowledge Base Inventory
+
+| KB ID | Cakupan | Status | Halaman Sumber |
+| --- | --- | --- | --- |
+| KB-SBU-BS | Klasifikasi BS001–BS020 (sipil/infrastruktur) | ✅ Ada | [KB-SBU-BS: Klasifikasi, Subklasifikasi & Kualifikasi Usaha Bangunan Sipil](https://www.notion.so/KB-SBU-BS-Klasifikasi-Subklasifikasi-Kualifikasi-Usaha-Bangunan-Sipil-9565824729dd41c283407634bedf79cc?pvs=21) |
+| KB-SBU-BG | Klasifikasi BG001–BG009 (bangunan gedung) | ✅ Ada | [KB-SBU-BG: Klasifikasi, Subklasifikasi & Kualifikasi Usaha Bangunan Gedung](https://www.notion.so/KB-SBU-BG-Klasifikasi-Subklasifikasi-Kualifikasi-Usaha-Bangunan-Gedung-14ddb2b05b7f4f3da93199d7fee8f682?pvs=21) |
+| KB-SBU-IL | Klasifikasi Instalasi (listrik, mekanikal) | ✅ Ada | [KB-SBU-IN: Klasifikasi, Subklasifikasi & Kualifikasi Spesialis Instalasi](https://www.notion.so/KB-SBU-IN-Klasifikasi-Subklasifikasi-Kualifikasi-Spesialis-Instalasi-0645760ffe5049c58a2e203cc443ff42?pvs=21) |
+| KB-SBU-IM | Klasifikasi Industri Mekanikal | ⚠️ Perlu finalisasi | (TBD — patch sprint 2) |
+| KB-SBU-KO | Klasifikasi Konstruksi Khusus | ⚠️ Perlu finalisasi | (TBD — patch sprint 2) |
+| KB-REG | UU 2/2017, PP 14/2021, Permen PUPR 8/2022, 9/2023, 10/2021 | ✅ Ada | [KB-REG — Regulasi & Perundangan Jasa Konstruksi](https://www.notion.so/KB-REG-Regulasi-Perundangan-Jasa-Konstruksi-fe7a35acbeca4e7694df08a626312810?pvs=21) |
+| KB-LSBU | Tarif & SLA LSBU, alur OSS-RBA | ⚠️ Perlu konsolidasi | (TBD — patch sprint 1) |
+| KB-KOM | SKK Konstruksi (jabatan, jenjang, LSP) | ✅ Ada | [KB-KOM — Kompetensi, Profesi & Sertifikasi Jasa Konstruksi](https://www.notion.so/KB-KOM-Kompetensi-Profesi-Sertifikasi-Jasa-Konstruksi-c623be0f20574d36b54e232548138a2f?pvs=21) |
+
+## 📦 11. Deliverables Matrix (per Agen)
+
+| Agen | Artifact Primer | Format |
+| --- | --- | --- |
+| MAPPER | Top-N subklasifikasi + KBLI | Tabel + alasan |
+| QUALIFY | Gap matrix K/M/B | Tabel kondisi vs syarat |
+| DOCS | Checklist A–F | Tabel dgn status emoji |
+| SKKMATCH | Personel-Subklas matrix | Tabel + ✅/⚠️/❌ |
+| LETTERGEN | Draft surat .md (5 jenis) | Markdown siap tanda tangan |
+| COST | Estimasi biaya + Gantt | Tabel + timeline |
+| ASSESS | Radar 8 dimensi + skor agregat | Tabel + bullet rekomendasi |
+| OSS | Step-by-step OSS+LPJK | Numbered list + troubleshoot |
+| COMPLY | Dasar regulasi tiap klaim | Footnote regulatif |
+| INTEGRITY | Safety check + alternatif legal | Inline overlay |
+
+## 💬 12. Sample Percakapan End-to-End
+
+### Skenario A — Kontraktor Sipil baru (BUJK Kecil → BS001+BS002)
+
+> 👤 *"Saya kontraktor kecil, baru bikin PT. Mau ambil SBU untuk jalan dan jembatan. Bagaimana mulai?"*
+> 
+
+> 🤖 **[scope_and_readiness]** *(→ MAPPER + QUALIFY + DOCS + SKKMATCH paralel)*
+Baik Pak/Bu. Ringkasannya:
+**🗺️ Subklasifikasi target (confidence 0.92):** **BS001** (Konstruksi Bangunan Sipil Jalan) + **BS002** (Jembatan). KBLI yang perlu ada di NIB: 42101 (jalan), 42102 (jembatan).
+**📊 Kualifikasi (confidence 0.88):** **Kecil (K)** cocok untuk awal — pagu paket s.d. ±Rp 2,5 M.
+**📄 Dokumen kunci:** Akta + NIB + NPWP + Domisili + Laporan Keuangan + 1 PJTBU + 1 PJSKBU per subklas + SKK Ahli Muda Jalan & Jembatan.
+**🎓 Personel:** Anda perlu **2 PJSKBU** (boleh 1 orang merangkap 2 subklas asalkan SKK keduanya aktif) + **1 PJTBU**. `[ASUMSI: tim teknis Anda sudah punya SKK; bila belum, sertifikasi via LSP dulu — saya bisa bantu peta jalannya.]`
+*(QR: Hitung biaya · Buat checklist · Cek SKK saya · Asesmen kesiapan)*
+> 
+
+### Skenario B — Tambah subklasifikasi BG pada BUJK Menengah
+
+> 👤 *"PT saya sudah punya SBU BS, sekarang mau tambah BG009 (bangunan komersial). BUJK M1. Apa langkahnya?"*
+> 
+
+> 🤖 **[smart_mapping + checklist_docs + cost_estimate]** *(→ MAPPER + DOCS + COST paralel)*
+**Use case:** *tambah_sub*. **Subklas baru:** BG009.
+📄 Dokumen tambahan minimum: bukti pengalaman BG (1 proyek sejenis untuk M1) + SKK Ahli Madya Bangunan Gedung + peralatan minimum sesuai BG009.
+💰 Estimasi biaya tambah-sub M1: **Rp 8–14 jt** (tarif LSBU + admin). ⏱️ Timeline: **14–30 hari kerja** sejak dossier lengkap.
+*(QR: Lihat detail biaya · Cek SKK calon PJSKBU BG · Lanjut buat surat)*
+> 
+
+### Skenario C — Perpanjangan SBU IL kualifikasi B1
+
+> 👤 *"SBU instalasi listrik kami habis 2 bulan lagi."*
+> 
+
+> 🤖 **[perpanjangan_path]** *(→ DOCS + COMPLY + COST paralel)*
+📜 Dasar: Permen PUPR 8/2022 — perpanjangan disubmit **min. 60 hari sebelum** habis. ✅ Tepat waktu.
+📄 Checklist perpanjangan B1 IL: bukti pemeliharaan personel kunci, laporan keuangan audited 2 tahun terakhir, daftar proyek 5 tahun, evaluasi pemenuhan LKUT.
+💰 Estimasi: **Rp 25–45 jt** (B1, single subklas). ⏱️ Timeline 21–45 hari kerja.
+*(QR: Detail LKUT · Buat surat permohonan · Hitung readiness score)*
+> 
+
+## 🚀 13. Roadmap Deployment — 4 Sprints
+
+| Sprint | Fokus | Output | Durasi |
+| --- | --- | --- | --- |
+| **Sprint 1** | ORCHESTRATOR + 4 agen inti (MAPPER, QUALIFY, DOCS, COMPLY) + KB-LSBU konsolidasi | 4 prompt patches ready-to-deploy + KB-LSBU finalized | 2 minggu |
+| **Sprint 2** | 3 agen menengah (SKKMATCH, LETTERGEN, COST) + KB-SBU-IM & KB-SBU-KO | 3 prompt patches + 2 KB finalisasi + 5 template surat | 2 minggu |
+| **Sprint 3** | 3 agen pelengkap (ASSESS, OSS, INTEGRITY) + ABD audit | 3 patches + ABD audit dossier | 1 minggu |
+| **Sprint 4** | E2E orchestration smoke test + 3 skenario showcase + KPI baseline | Master deployment runbook + 3 sample E2E logs | 1 minggu |
+
+## 📊 14. KPI & Metrik Sukses
+
+| Metric | Target Sprint 4 | Cara Ukur |
+| --- | --- | --- |
+| Intent classification accuracy | ≥ 90% | Spot-check 50 query |
+| Multi-agent parallel rate | ≥ 60% sesi multi-domain | Log orchestrator |
+| ABD compliance rate | 100% | Audit dossier (ABD-7 sections present) |
+| Average turns to dossier-ready | ≤ 12 turns | Session analytics |
+| User-reported "mudah" (CSAT) | ≥ 4.2/5 | Post-session survey |
+| Letter generation usable-as-is rate | ≥ 80% | User feedback per draft |
+
+## 📖 15. Glosarium Singkat
+
+- **SBU** — Sertifikat Badan Usaha (jasa konstruksi).
+- **BUJK** — Badan Usaha Jasa Konstruksi.
+- **LSBU** — Lembaga Sertifikasi Badan Usaha.
+- **LPJK** — Lembaga Pengembangan Jasa Konstruksi.
+- **OSS-RBA** — Online Single Submission Risk-Based Approach.
+- **PJBU/PJTBU/PJKBU/PJSKBU** — 4 peran penanggung jawab: Badan Usaha · Teknik · Klasifikasi · Subklasifikasi.
+- **K / M1 / M2 / B1 / B2 / Asing** — 6 tingkat kualifikasi BUJK.
+- **Bidang konstruksi:** BS (Sipil) · BG (Gedung) · IL (Instalasi) · IM (Mekanikal) · KO (Khusus).
+- **OpenClaw** — pola orchestrator-root multi-agen internal.
+- **MultiClaw** — pola eksekusi paralel agen-agen spesialis.
+- **ABD** — Anti-Blocking Doctrine v1.1.
+
+---
+
+## 🧭 16. Next Actions (Saran Eksekusi)
+
+1. **Sprint 1 patches** — saya bisa langsung generate System Prompt OpenClaw untuk SBUCLAW-ORCHESTRATOR + 4 agen inti (MAPPER, QUALIFY, DOCS, COMPLY) di sub-halaman terpisah.
+2. **KB-LSBU konsolidasi** — konsolidasi tarif & SLA dari 6 LSBU terbesar (LPJK, GAPENSI, LPJKN-Aspekindo, dll.).
+3. **Persona Gustafta config** — siapkan Identity · Welcome · Greeting · Quick Replies copy-paste ready.
+4. **Sample E2E logs** — 5 skenario lengkap (K/M/B × baru/tambah-sub/perpanjangan).
+5. **Master Deployment Runbook** — pola sama dgn [Master Deployment Runbook — BRAIN 7 Agen ABD v1.1](https://www.notion.so/Master-Deployment-Runbook-BRAIN-7-Agen-ABD-v1-1-4aa12610458e45b39034f2e9eb8a879e?pvs=21) dan [Master Deployment Runbook TENDERA — 10 Agen ABD v1.1](https://www.notion.so/Master-Deployment-Runbook-TENDERA-10-Agen-ABD-v1-1-9c44b6f12ec14f3d8ef2e20471a5b50f?pvs=21).
+
+[System Prompt OpenClaw — SBUClaw (Orchestrator + 10 Agen MultiClaw)](https://www.notion.so/System-Prompt-OpenClaw-SBUClaw-Orchestrator-10-Agen-MultiClaw-835240c7dc4648379f9d32fd222cce6b?pvs=21)
+
+[Deliverables — 5 Template Surat SBUClaw (untuk AGENT-LETTERGEN)](https://www.notion.so/Deliverables-5-Template-Surat-SBUClaw-untuk-AGENT-LETTERGEN-18a02f8a883041af9351b329075f4a5c?pvs=21)
+
+[KB-LSBU — Konsolidasi Tarif, SLA & Alur OSS-RBA + Portal LPJK](https://www.notion.so/KB-LSBU-Konsolidasi-Tarif-SLA-Alur-OSS-RBA-Portal-LPJK-634c8e3921294785a47226cf63ffadf0?pvs=21)
+
+[Master Deployment Runbook — SBUClaw 10 Agen ABD v1.1](https://www.notion.so/Master-Deployment-Runbook-SBUClaw-10-Agen-ABD-v1-1-a6ea3a0c126847b7ba5f9caec9634c64?pvs=21)
+
+[Persona Gustafta — SBUClaw (Config 11 Agen: Identity · Welcome · Greeting · Quick Replies)](https://www.notion.so/Persona-Gustafta-SBUClaw-Config-11-Agen-Identity-Welcome-Greeting-Quick-Replies-71d4084d1d2946d281590fe0a39e3111?pvs=21)

@@ -1,0 +1,197 @@
+Bagus.
+Sekarang kita masuk fase yang benar-benar membuat sistem Anda matang:
+
+> 🔗 **Standarisasi & Integrasi Antar Modul (tanpa ubah platform)**
+
+Karena Gustafta belum punya state management, maka integrasi kita bangun lewat:
+
+> ✅ Protocol Text-Based Integration
+> (alias: bahasa standar antar chatbot)
+
+Kita akan kunci 4 schema utama:
+
+1. LICENSING_SUMMARY v1 ✅ (sudah jadi)
+2. SKK_SUMMARY v1
+3. SBU_SUMMARY v1
+4. TENDER_REQ_SUMMARY v1 (rapikan final)
+
+Lalu kita buat 1 “INTEGRATION RULEBOOK” supaya semua bot baca format yang sama.
+
+---
+
+# 🔥 STEP 1 — SKK_SUMMARY v1 (Standarisasi Tenaga Ahli)
+
+Tujuan:
+
+* Bisa dipakai oleh TRC
+* Bisa dipakai oleh ECSG
+* Bisa dibaca oleh SBU Advisor
+
+---
+
+## 📌 SKK_SUMMARY v1 — Format Resmi
+
+```
+SKK_SUMMARY v1
+
+COMPANY:
+- legal_name: {text | UNKNOWN}
+
+TENAGA_AHLI_LIST:
+1)
+- name: {text}
+- role: {Ahli Muda | Ahli Madya | Ahli Utama | UNKNOWN}
+- subklasifikasi: {kode/subbidang | UNKNOWN}
+- skk_number: {text | UNKNOWN}
+- status: {ACTIVE | EXPIRED | PENDING | UNKNOWN}
+- valid_until: {YYYY-MM-DD | UNKNOWN}
+
+2)
+- name:
+- role:
+- subklasifikasi:
+- skk_number:
+- status:
+- valid_until:
+
+REKAP:
+- total_active: {number}
+- total_expired: {number}
+- critical_role_missing: {YES | NO | UNKNOWN}
+- notes: {text | NONE}
+
+OVERALL:
+- skk_status: {Memenuhi | Bersyarat | Tidak Memenuhi | UNKNOWN}
+- skk_risk_level: {Rendah | Sedang | Tinggi | Kritis | UNKNOWN}
+- primary_skk_gap: {Jumlah | Level | Subklasifikasi | Expired | Kombinasi | UNKNOWN}
+```
+
+---
+
+# 🔥 STEP 2 — SBU_SUMMARY v1
+
+Tujuan:
+
+* Mapping ke KBLI
+* Mapping ke SKK minimal
+* Dibaca oleh TRC & ECSG
+
+---
+
+## 📌 SBU_SUMMARY v1 — Format Resmi
+
+```
+SBU_SUMMARY v1
+
+COMPANY:
+- legal_name: {text | UNKNOWN}
+
+SBU_CORE:
+- sbu_number: {text | UNKNOWN}
+- qualification: {Kecil | Menengah | Besar | UNKNOWN}
+- classification: {BG | SI | SP | lainnya | UNKNOWN}
+- subklasifikasi_list: {comma-separated | UNKNOWN}
+- status: {ACTIVE | EXPIRED | PENDING | UNKNOWN}
+- valid_until: {YYYY-MM-DD | UNKNOWN}
+
+MINIMUM_REQUIREMENT_FLAG:
+- tenaga_minimum_met: {YES | NO | UNKNOWN}
+- notes: {text | NONE}
+
+OVERALL:
+- sbu_status: {Memenuhi | Bersyarat | Tidak Memenuhi | UNKNOWN}
+- sbu_risk_level: {Rendah | Sedang | Tinggi | Kritis | UNKNOWN}
+- primary_sbu_gap: {Kualifikasi | Subklasifikasi | Expired | Tenaga | Kombinasi | UNKNOWN}
+```
+
+---
+
+# 🔥 STEP 3 — TENDER_REQ_SUMMARY v1 (Rapikan Final)
+
+```
+TENDER_REQ_SUMMARY v1
+
+TENDER_INFO:
+- project_name: {text | UNKNOWN}
+- owner_type: {Pemerintah | Swasta | BUMN | UNKNOWN}
+- estimated_value: {text | UNKNOWN}
+
+LEGAL_REQUIREMENT:
+- nib_required: {YES | NO | UNKNOWN}
+- iujk_required: {YES | NO | UNKNOWN}
+- blacklist_check: {YES | NO | UNKNOWN}
+
+SBU_REQUIREMENT:
+- required_qualification: {Kecil | Menengah | Besar | UNKNOWN}
+- required_subklasifikasi: {text | UNKNOWN}
+
+SKK_REQUIREMENT:
+- required_roles:
+   - role:
+   - level:
+   - quantity:
+
+ADMIN_REQUIREMENT:
+- other_mandatory_docs: {text | NONE}
+
+OVERALL_COMPLEXITY:
+- level: {Rendah | Sedang | Tinggi | UNKNOWN}
+```
+
+---
+
+# 🔗 STEP 4 — INTEGRATION RULEBOOK (SANGAT PENTING)
+
+Semua chatbot wajib:
+
+1️⃣ Jika menerima *_SUMMARY v1*,
+→ hanya baca bagian OVERALL + CORE
+
+2️⃣ Jangan analisis ulang data mentah jika SUMMARY sudah ada.
+
+3️⃣ Jika field = UNKNOWN
+→ tandai “Butuh Verifikasi”, jangan asumsikan fatal.
+
+4️⃣ Jika status = EXPIRED atau INVALID
+→ minimal risk = Tinggi.
+
+---
+
+# 🧠 Dampak Integrasi Ini
+
+Sekarang ekosistem Anda jadi seperti ini:
+
+```
+Perizinan Usaha
+     ↓ (LICENSING_SUMMARY v1)
+SBU Advisor
+     ↓ (SBU_SUMMARY v1)
+SKK Advisor
+     ↓ (SKK_SUMMARY v1)
+Tender Readiness
+     ↓
+Executive Summary
+```
+
+Walaupun platform tidak punya state,
+user cukup copy-paste summary standar.
+
+Itu sudah cukup untuk fase sekarang.
+
+---
+
+# 🎯 Sekarang Saya Mau Pastikan
+
+Apakah Anda ingin:
+
+A) Kita tambahkan “MASTER_COMPLIANCE_SUMMARY v1”
+(gabungan otomatis dari Licensing + SBU + SKK)
+
+atau
+
+B) Kita fokus dulu memastikan semua chatbot konsisten membaca summary v1 tanpa konflik?
+
+Kalau mau integrasi paling kuat,
+A adalah langkah berikutnya.
+
+Tapi itu sedikit lebih kompleks.

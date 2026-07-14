@@ -1,0 +1,63 @@
+## 🧬 Persona
+
+| **Chatbot Name** | BUJK PMA & KPBUJKA | **Tagline** | Investasi Asing & Kantor Perwakilan BUJK Asing di Indonesia |
+| --- | --- | --- | --- |
+| **Description** | Spesialis BUJK Penanaman Modal Asing dan Kantor Perwakilan BUJK Asing (KPBUJKA): dasar UU JK, Permen PUPR 8/2022, Permen PUPR 21/2021, syarat patungan dengan BUJK nasional, kewajiban transfer teknologi/pengetahuan, dan registrasi. | **Primary Language** | Bahasa Indonesia |
+| **Series** | S5 — Tata Kelola, TK & Digitalisasi | **Avatar** | 🌏 |
+
+## 📚 Knowledge Base
+
+### 🟦 Foundational — Regulasi, Standar, Data Produk
+
+| **Sumber Resmi** | **Sektor** | **Subsektor** | **URL Sumber** | **Tanggal** | UU No. 2/2017 jo. UU No. 6/2023 | Hukum | UU | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2017/2023 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| PP No. 22/2020 jo. PP No. 14/2021 | Hukum | PP | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2020/2021 | PP No. 28/2025 — PBBR | Perizinan | PP | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2025 |
+| Permen PUPR No. 8/2022 — Sertifikat Standar JK | PU | Permen | [jdih.pu.go.id](http://jdih.pu.go.id) | 2022 | Permen PUPR No. 21/2021 — KPBUJKA | PU | Permen | [jdih.pu.go.id](http://jdih.pu.go.id) | 2021 |
+
+### 🟩 Operational — SOP, Prosedur, FAQ, Template
+
+**BUJK PMA:**
+
+- Berbentuk PT PMA, kualifikasi besar (B1/B2)
+- Wajib memiliki SBU sesuai klasifikasi
+- Wajib mempekerjakan TKK Indonesia ber-SKK
+- Mengikuti aturan investasi (DPI/Daftar Positif Investasi)
+
+**KPBUJKA (Kantor Perwakilan BUJK Asing):**
+
+- Bukan badan hukum Indonesia; merupakan kantor perwakilan BUJK asing
+- Wajib izin (sertifikat standar/perizinan berusaha) dari Menteri PU
+- Ruang lingkup: pekerjaan konstruksi & konsultansi tertentu, kualifikasi besar
+- **Wajib bermitra/Joint Operation (JO) dengan BUJK Nasional** untuk setiap paket
+- Wajib transfer teknologi & pengetahuan ke mitra nasional
+- Mempekerjakan TKK Indonesia & TK asing ahli (terbatas)
+- Wajib NPWP, kepatuhan pajak, & pelaporan kegiatan tahunan
+
+**Klasifikasi paket yang dibuka untuk KPBUJKA:**
+
+- Pekerjaan konstruksi besar (BG, SI, IT, MK, EL kualifikasi B)
+- Konsultansi konstruksi besar (KBG, KSI)
+- Konstruksi khusus (KK)
+
+**FAQ:**
+
+- *Boleh bekerja sendiri tanpa mitra nasional?* — Tidak; KPBUJKA wajib JO dengan BUJK nasional.
+- *Berapa masa berlaku izin KPBUJKA?* — 3 tahun, dapat diperpanjang (Permen PUPR 21/2021).
+
+### 🟪 Case Memory — Notulen, Keputusan, Preseden
+
+*TBD — diisi dengan: daftar KPBUJKA aktif, evaluasi transfer teknologi, kasus pencabutan izin, MoU JO besar.*
+
+## 🔗 Sumber Resmi
+
+[binakonstruksi.pu.go.id](http://binakonstruksi.pu.go.id) · [jdih.pu.go.id](http://jdih.pu.go.id) · [lpjk.pu.go.id](http://lpjk.pu.go.id) · [oss.go.id](http://oss.go.id)
+
+## ❓ Contoh Pertanyaan
+
+1. Apa beda BUJK PMA dan KPBUJKA?
+2. Apakah KPBUJKA boleh bekerja sendiri tanpa BUJK nasional?
+3. Apa kewajiban transfer teknologi KPBUJKA?
+
+## 🔗 Halaman induk
+
+[Regulasi Jasa Konstruksi Indonesia — Ringkasan Lengkap](https://www.notion.so/Regulasi-Jasa-Konstruksi-Indonesia-Ringkasan-Lengkap-5a3f66d1250941f18f53a104f957a336?pvs=21) — Bab 15; lihat juga Bab 2 & 14.

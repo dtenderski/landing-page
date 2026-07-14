@@ -1,0 +1,935 @@
+Siap. Berikut **tambahan final untuk SBU Konsultan** berdasarkan lampiran persyaratan terbaru. Lampiran ini menambahkan detail penting: **persyaratan permohonan SBU Jasa Konsultansi Konstruksi, batas maksimal permohonan baru, syarat SKA/SKK tenaga ahli, kualifikasi KMB untuk AR/AL/RK/RT, jenis usaha spesialis untuk AT/IT, serta tabel persyaratan Tenaga Ahli Tetap**. 
+
+---
+
+# TAMBAHAN — Persyaratan, Kualifikasi, dan Tenaga Ahli SBU Konsultan
+
+```yaml
+# -----------------------------------------------------------------------------
+# ADDENDUM — SBU KONSULTAN REQUIREMENT LAYER
+# Sumber: Lampiran Persyaratan Permohonan SBU Jasa Konsultansi Konstruksi
+# -----------------------------------------------------------------------------
+
+consultant_requirement_layer:
+  id: sbu_konsultan_requirement_layer_v1
+  title: "Persyaratan Permohonan SBU Jasa Konsultansi Konstruksi"
+  purpose:
+    - menambahkan checklist persyaratan permohonan SBU Konsultan
+    - menambahkan aturan batas jumlah klasifikasi dan subklasifikasi
+    - menambahkan persyaratan tenaga ahli/SKA/SKK
+    - menambahkan data kualifikasi BUJKN, BUJKPMA, dan BUJKA
+    - menambahkan pemetaan Tenaga Ahli Tetap berdasarkan sub bidang
+    - menambahkan rule validasi konflik data katalog
+```
+
+---
+
+## 1. Persyaratan Permohonan SBU Konsultan
+
+```yaml
+consultant_application_requirements:
+  title: "Persyaratan Permohonan SBU Jasa Konsultansi Konstruksi"
+  instruction: >
+    Pemohon mengisi formulir permohonan SBU Jasa Konsultansi Konstruksi
+    dan melampirkan data perusahaan, data pengurus, data PJBU/direktur,
+    serta data tenaga ahli sesuai kualifikasi dan sub bidang yang dimohonkan.
+
+  company_documents:
+    - id: DOC-CONS-001
+      name: "Formulir permohonan SBU Jasa Konsultansi Konstruksi"
+      required: true
+
+    - id: DOC-CONS-002
+      name: "Akta pendirian perusahaan"
+      required: true
+
+    - id: DOC-CONS-003
+      name: "Akta perubahan"
+      required: conditional
+      condition: "Wajib jika terdapat perubahan akta."
+
+    - id: DOC-CONS-004
+      name: "Keputusan Menteri Hukum dan Hak Asasi Manusia"
+      required: true
+
+    - id: DOC-CONS-005
+      name: "NPWP perusahaan"
+      required: true
+
+    - id: DOC-CONS-006
+      name: "Domisili perusahaan atau NIB"
+      required: true
+
+    - id: DOC-CONS-007
+      name: "E-KTP pengurus yang tertera pada akta terakhir"
+      required: true
+
+    - id: DOC-CONS-008
+      name: "NPWP pengurus yang tertera pada akta terakhir"
+      required: true
+
+    - id: DOC-CONS-009
+      name: "Riwayat hidup direktur dan wakil direktur"
+      required: true
+
+    - id: DOC-CONS-010
+      name: "Foto PJBU/Direktur dalam format JPEG"
+      required: true
+
+    - id: DOC-CONS-011
+      name: "Alamat email perusahaan aktif"
+      required: true
+
+    - id: DOC-CONS-012
+      name: "Nomor telepon perusahaan aktif"
+      required: true
+
+  management_rule:
+    rule: >
+      Direktur dan wakil direktur tidak menjadi pengurus dengan jabatan yang sama
+      pada perusahaan lain, kecuali sebagai komisaris atau komanditer.
+
+  application_limit:
+    new_application:
+      max_classifications: 3
+      max_subclassifications: 6
+      note: >
+        Untuk permohonan SBU Jasa Konsultansi Konstruksi baru, maksimal permohonan
+        adalah 3 klasifikasi dan 6 subklasifikasi.
+
+  expert_documents:
+    - id: DOC-EXPERT-001
+      name: "E-KTP tenaga ahli"
+      required: true
+
+    - id: DOC-EXPERT-002
+      name: "NPWP tenaga ahli"
+      required: true
+
+    - id: DOC-EXPERT-003
+      name: "Ijazah tenaga ahli"
+      required: true
+
+    - id: DOC-EXPERT-004
+      name: "SKA/SKK tenaga ahli yang masih berlaku"
+      required: true
+
+    - id: DOC-EXPERT-005
+      name: "CV atau pengalaman tenaga ahli"
+      required: true
+
+  expert_rule:
+    rule: >
+      Tenaga ahli tidak menjadi penanggung jawab teknik atau penanggung jawab
+      klasifikasi di perusahaan lain.
+```
+
+---
+
+## 2. Aturan Kualifikasi K1 dan M1
+
+```yaml
+consultant_qualification_rules:
+  K1:
+    title: "Kualifikasi K1"
+    expert_requirement: "SKA/SKK tenaga ahli minimal Ahli Muda per klasifikasi"
+    rule: >
+      Untuk Kualifikasi K1, pemohon harus menyediakan tenaga ahli minimal Ahli Muda
+      untuk setiap klasifikasi yang dimohonkan.
+
+  M1_without_experience:
+    title: "Kualifikasi M1 tanpa pengalaman"
+    expert_requirement: "SKA/SKK tenaga ahli minimal Ahli Madya per 2 subklasifikasi"
+    rule: >
+      Untuk Kualifikasi M1 tanpa pengalaman, pemohon harus menyediakan tenaga ahli
+      minimal Ahli Madya untuk setiap 2 subklasifikasi.
+
+  validation_questions:
+    - "Kualifikasi yang diajukan K1, M1, Menengah, Besar, atau belum tahu?"
+    - "Apakah tenaga ahli memiliki SKA/SKK yang masih berlaku?"
+    - "Apakah jenjang SKA/SKK minimal Ahli Muda atau Ahli Madya sesuai kualifikasi?"
+    - "Apakah tenaga ahli sedang menjadi penanggung jawab teknik/klasifikasi di perusahaan lain?"
+```
+
+---
+
+## 3. Update Katalog dengan Jenis Usaha dan Kualifikasi
+
+```yaml
+consultant_catalog_enrichment:
+  AR:
+    business_type: "UMUM"
+    allowed_qualification: "KMB BUJKN, BUJKPMA, BUJKA"
+    subfields:
+      - { code: "AR001", kbli: "71101", title: "Jasa Arsitektural Bangunan Gedung dan Non Hunian" }
+      - { code: "AR002", kbli: "71101", title: "Jasa Arsitektural Lainnya" }
+      - { code: "AR003", kbli: "74120", title: "Jasa Desain Interior pada Bangunan Gedung dan Bangunan Sipil" }
+
+  AL:
+    business_type: "UMUM"
+    allowed_qualification: "KMB BUJKN, BUJKPMA, BUJKA"
+    subfields:
+      - { code: "AL001", kbli: "71101", title: "Jasa Pengembangan Pemanfaatan Ruang" }
+      - { code: "AL002", kbli: "71101", title: "Jasa Pengembangan Wilayah" }
+      - { code: "AL003", kbli: "71101", title: "Jasa Pengembangan Perkotaan" }
+      - { code: "AL004", kbli: "71101", title: "Jasa Pengembangan Lingkungan Bangunan dan Lanskap" }
+
+  RK:
+    business_type: "UMUM"
+    allowed_qualification: "KMB BUJKN, BUJKPMA, BUJKA"
+    subfields:
+      - { code: "RK001", kbli: "71102", title: "Jasa Rekayasa Konstruksi Bangunan Gedung Hunian dan Non Hunian" }
+      - { code: "RK002", kbli: "71102", title: "Jasa Rekayasa Pekerjaan Teknik Sipil Sumber Daya Air" }
+      - { code: "RK003", kbli: "71102", title: "Jasa Rekayasa Pekerjaan Teknik Sipil Transportasi" }
+      - { code: "RK004", kbli: "71102", title: "Jasa Rekayasa Pekerjaan Mekanikal dalam Bangunan" }
+      - { code: "RK005", kbli: "71102", title: "Jasa Rekayasa Lainnya" }
+
+  RT:
+    business_type: "UMUM"
+    allowed_qualification: "KMB BUJKN, BUJKPMA, BUJKA"
+    subfields:
+      - { code: "RT001", kbli: "70209", title: "Jasa Pelayanan Studi Investasi Infrastruktur" }
+      - { code: "RT002", kbli: "71102", title: "Jasa Rekayasa Konstruksi Pembangkit, Jaringan Transmisi, Gardu Induk dan Distribusi Tenaga Listrik" }
+      - { code: "RT003", kbli: "71102", title: "Jasa Rekayasa Proses Industrial, Produksi dan Fasilitas Produksi" }
+
+  AT:
+    business_type: "SPESIALIS"
+    allowed_qualification: "Mengikuti ketentuan skema spesialis yang berlaku"
+    subfields:
+      - { code: "AT001", kbli: "71102", title: "Jasa Pengujian dan Analisis Teknis Geologi, Geofisika dan Geokimia" }
+      - { code: "AT002", kbli: "71102", title: "Jasa Pengujian dan Analisis Teknis Komposisi dan Tingkat Kemurnian" }
+      - { code: "AT003", kbli: "71102", title: "Jasa Pengujian Hasil Kerja Konstruksi dan Fasilitas Laboratorium" }
+      - { code: "AT004", kbli: "71102", title: "Jasa Pengujian dan Analisis Teknis Parameter Fisikal" }
+      - { code: "AT005", kbli: "71102", title: "Jasa Pengujian dan Analisis Teknis Hidrolika, Hidrologi dan Oceanography" }
+      - { code: "AT006", kbli: "71102", title: "Jasa Pengujian dan Analisis Akustik dan Vibrator Gedung Hunian dan Non Hunian" }
+      - { code: "AT007", kbli: "71106", title: "Jasa Commissioning Proses Industrial" }
+
+  IT:
+    business_type: "SPESIALIS"
+    allowed_qualification: "Mengikuti ketentuan skema spesialis yang berlaku"
+    subfields:
+      - { code: "IT001", kbli: "71102", title: "Jasa Pembuatan Prospektus Geologi dan Geofisika" }
+      - { code: "IT002", kbli: "71102", title: "Jasa Konsultasi Ilmiah dan Teknis Bawah Tanah" }
+      - { code: "IT003", kbli: "71102", title: "Jasa Konsultasi Ilmiah dan Teknis Permukaan Tanah dan Pembuatan Peta" }
+      - { code: "IT004", kbli: "71102", title: "Jasa Konsultasi Ilmiah dan Teknis Sarana dan Prasarana Umum" }
+      - { code: "IT005", kbli: "71102", title: "Jasa Konsultasi Ilmiah dan Teknis Konstruksi Sistem Pengendalian Lalu Lintas" }
+      - { code: "IT006", kbli: "71102", title: "Jasa Konsultasi Ilmiah dan Teknis Hidrolika, Hidrologi, dan Oceanography" }
+```
+
+---
+
+## 4. Catatan Konflik Data yang Perlu Ditangani Builder
+
+Ada dua perbedaan antara daftar awal yang Anda berikan dan lampiran tambahan:
+
+1. **IT Hidrolika/Hidrologi/Oceanography**
+
+   * Daftar awal: `IT007`
+   * Lampiran tambahan: `IT006`
+
+2. **AT007 Commissioning**
+
+   * Daftar awal: KBLI `71202`
+   * Lampiran tambahan: KBLI `71106`
+
+Agar aman, tambahkan rule berikut:
+
+```yaml
+consultant_data_conflict_rules:
+  conflict_IT_hydrology:
+    issue: "Kode IT untuk Hidrolika, Hidrologi, dan Oceanography berbeda antara daftar awal dan lampiran tambahan."
+    original_user_catalog:
+      code: "IT007"
+      kbli: "71102"
+      title: "Jasa Konsultansi Ilmiah & Teknis Hidrolika, Hidrologi & Oceanography"
+    latest_attachment:
+      code: "IT006"
+      kbli: "71102"
+      title: "Jasa Konsultasi Ilmiah dan Teknis Hidrolika, Hidrologi, dan Oceanography"
+    chatbot_rule: >
+      Tampilkan IT006 sebagai kode berdasarkan lampiran persyaratan terbaru,
+      tetapi simpan IT007 sebagai alias/needs_review sampai admin mengonfirmasi
+      kode final yang digunakan.
+
+  conflict_AT007_kbli:
+    issue: "KBLI AT007 berbeda antara daftar awal dan lampiran tambahan."
+    original_user_catalog:
+      code: "AT007"
+      kbli: "71202"
+      title: "Jasa Commissioning Proses Industrial"
+    latest_attachment:
+      code: "AT007"
+      kbli: "71106"
+      title: "Jasa Commisioning Proses Individual/Industrial"
+    chatbot_rule: >
+      Tandai AT007 sebagai needs_review pada field KBLI. Saat pengguna mencari AT007,
+      bot harus menampilkan catatan bahwa terdapat perbedaan referensi KBLI dan meminta
+      validasi admin/LSBU sebelum digunakan untuk pengajuan.
+
+  display_rule:
+    message: >
+      Catatan: Terdapat perbedaan data antara daftar awal dan lampiran persyaratan.
+      Gunakan data terbaru sebagai acuan kerja sementara, tetapi lakukan validasi akhir
+      ke LSBU atau admin katalog sebelum pengajuan.
+```
+
+---
+
+## 5. Pemetaan Tenaga Ahli Tetap
+
+```yaml
+consultant_permanent_expert_matrix:
+  AR001:
+    title: "Jasa Arsitektural Bangunan Gedung Hunian dan Non Hunian"
+    required_expertise:
+      - "Arsitektur"
+      - "Sipil"
+      - "Tata Lingkungan"
+
+  AR002:
+    title: "Jasa Arsitektural Lainnya"
+    required_expertise:
+      - "Arsitektur"
+
+  AR003:
+    title: "Jasa Desain Interior"
+    required_expertise:
+      - "Arsitektur"
+
+  RK001:
+    title: "Jasa Rekayasa Konstruksi Bangunan Gedung Hunian dan Non Hunian"
+    required_expertise:
+      - "Arsitektur"
+      - "Sipil"
+
+  RK002:
+    title: "Jasa Rekayasa Pekerjaan Teknik Sipil Sumber Daya Air"
+    required_expertise:
+      - "Sipil"
+
+  RK003:
+    title: "Jasa Rekayasa Pekerjaan Teknik Sipil Transportasi"
+    required_expertise:
+      - "Sipil"
+      - "Tata Lingkungan"
+
+  RK004:
+    title: "Jasa Rekayasa Pekerjaan Mekanikal dalam Bangunan"
+    required_expertise:
+      - "Mekanikal"
+      - "Elektrikal"
+
+  RK005:
+    title: "Jasa Rekayasa Lainnya"
+    required_expertise:
+      - "Arsitektur"
+      - "Sipil"
+      - "Mekanikal"
+      - "Elektrikal"
+      - "Tata Lingkungan"
+
+  RT001:
+    title: "Jasa Pelayanan Studi Investasi Infrastruktur"
+    required_expertise:
+      - "Arsitektur"
+      - "Sipil"
+      - "Mekanikal"
+      - "Elektrikal"
+      - "Tata Lingkungan"
+      - "Manajemen Pelaksanaan"
+
+  RT002:
+    title: "Jasa Rekayasa Konstruksi Pembangkit, Transmisi, Gardu Induk, dan Distribusi Tenaga Listrik"
+    required_expertise:
+      - "Mekanikal"
+      - "Elektrikal"
+      - "Manajemen Pelaksanaan"
+
+  RT003:
+    title: "Jasa Rekayasa Proses Industrial, Produksi dan Fasilitas Produksi"
+    required_expertise:
+      - "Mekanikal"
+      - "Elektrikal"
+      - "Manajemen Pelaksanaan"
+
+  AL001:
+    title: "Jasa Pengembangan Pemanfaatan Ruang"
+    required_expertise:
+      - "Arsitektur"
+      - "Sipil"
+      - "Tata Lingkungan"
+
+  AL002:
+    title: "Jasa Pengembangan Wilayah"
+    required_expertise:
+      - "Tata Lingkungan"
+
+  AL003:
+    title: "Jasa Pengembangan Perkotaan"
+    required_expertise:
+      - "Tata Lingkungan"
+
+  AL004:
+    title: "Jasa Pengembangan Lingkungan Bangunan dan Lanskap"
+    required_expertise:
+      - "Arsitektur"
+      - "Sipil"
+      - "Tata Lingkungan"
+
+  IT001:
+    title: "Jasa Pembuatan Prospektus Geologi dan Geofisika"
+    required_expertise:
+      - "Sipil - Geologi"
+      - "Sipil - Geofisika"
+
+  IT002:
+    title: "Jasa Konsultasi Ilmiah dan Teknis Bawah Tanah"
+    required_expertise:
+      - "Sipil - Geodesi"
+
+  IT003:
+    title: "Jasa Konsultasi Ilmiah dan Teknis Permukaan Tanah dan Pembuatan Peta"
+    required_expertise:
+      - "Sipil - Geodesi"
+
+  IT004:
+    title: "Jasa Konsultasi Ilmiah dan Teknis Sarana dan Prasarana Umum"
+    required_expertise:
+      - "Sipil"
+      - "Tata Lingkungan"
+
+  IT005:
+    title: "Jasa Konsultasi Ilmiah dan Teknis Konstruksi Sistem Pengendalian Lalu Lintas"
+    required_expertise:
+      - "Elektrikal"
+      - "Manajemen Pelaksanaan"
+
+  IT006:
+    title: "Jasa Konsultasi Ilmiah dan Teknis Hidrolika, Hidrologi, dan Oceanography"
+    required_expertise:
+      - "Sipil"
+      - "Tata Lingkungan"
+
+  IT007:
+    title: "Alias/Needs Review untuk Hidrolika, Hidrologi, dan Oceanography"
+    required_expertise:
+      - "Sipil"
+      - "Tata Lingkungan"
+    status: "alias_needs_review"
+
+  AT001:
+    title: "Jasa Pengujian dan Analisis Teknis Geologi, Geofisika dan Geokimia"
+    required_expertise:
+      - "Sipil - Geologi"
+      - "Sipil - Geofisika"
+
+  AT002:
+    title: "Jasa Pengujian dan Analisis Teknis Komposisi dan Tingkat Kemurnian"
+    required_expertise:
+      - "Sipil"
+      - "Tata Lingkungan"
+
+  AT003:
+    title: "Jasa Pengujian Hasil Kerja Konstruksi dan Fasilitas Laboratorium"
+    required_expertise:
+      - "Sipil"
+      - "Tata Lingkungan"
+
+  AT004:
+    title: "Jasa Pengujian dan Analisis Teknis Parameter Fisikal"
+    required_expertise:
+      - "Sipil"
+      - "Tata Lingkungan"
+
+  AT005:
+    title: "Jasa Pengujian dan Analisis Teknis Hidrolika, Hidrologi dan Oceanography"
+    required_expertise:
+      - "Sipil"
+      - "Tata Lingkungan"
+
+  AT006:
+    title: "Jasa Pengujian dan Analisis Akustik dan Vibrator Gedung Hunian dan Non Hunian"
+    required_expertise:
+      - "Mekanikal"
+      - "Elektrikal"
+
+  AT007:
+    title: "Jasa Commissioning Proses Industrial"
+    required_expertise:
+      - "Mekanikal"
+      - "Elektrikal"
+    kbli_status: "needs_review"
+```
+
+---
+
+## 6. Flow Baru: Cek Persyaratan Permohonan
+
+```yaml
+node_consultant_application_requirement_intro:
+  type: message_with_buttons
+  title: "Persyaratan Permohonan SBU Konsultan"
+  message: >
+    Saya dapat membantu mengecek kelengkapan awal permohonan SBU Jasa Konsultansi
+    Konstruksi, termasuk dokumen perusahaan, pengurus, tenaga ahli, SKA/SKK,
+    batas jumlah subklasifikasi, dan catatan rangkap jabatan.
+  buttons:
+    - label: "Checklist Dokumen Perusahaan"
+      target_node: node_consultant_company_docs
+
+    - label: "Checklist Tenaga Ahli"
+      target_node: node_consultant_expert_docs
+
+    - label: "Cek Batas Permohonan"
+      target_node: node_consultant_application_limit_check
+
+    - label: "Cek Tenaga Ahli Tetap"
+      target_node: node_consultant_permanent_expert_check
+
+    - label: "Menu Utama"
+      target_node: node_main_menu_konsultan
+```
+
+```yaml
+node_consultant_company_docs:
+  type: response_template
+  title: "Checklist Dokumen Perusahaan"
+  template: >
+    Checklist dokumen perusahaan untuk SBU Konsultan:
+
+    1. Formulir permohonan SBU Jasa Konsultansi Konstruksi.
+    2. Akta pendirian.
+    3. Akta perubahan jika ada.
+    4. Keputusan Menteri Hukum dan HAM.
+    5. NPWP perusahaan.
+    6. Domisili perusahaan atau NIB.
+    7. E-KTP pengurus pada akta terakhir.
+    8. NPWP pengurus pada akta terakhir.
+    9. Riwayat hidup direktur dan wakil direktur.
+    10. Foto PJBU/Direktur format JPEG.
+    11. Email perusahaan aktif.
+    12. Nomor telepon perusahaan aktif.
+
+    Catatan:
+    Direktur dan wakil direktur tidak boleh menjadi pengurus dengan jabatan yang sama
+    pada perusahaan lain, kecuali sebagai komisaris atau komanditer.
+```
+
+```yaml
+node_consultant_expert_docs:
+  type: response_template
+  title: "Checklist Dokumen Tenaga Ahli"
+  template: >
+    Checklist dokumen tenaga ahli:
+
+    1. E-KTP tenaga ahli.
+    2. NPWP tenaga ahli.
+    3. Ijazah.
+    4. SKA/SKK yang masih berlaku.
+    5. CV atau pengalaman.
+    6. Pernyataan/status bahwa tenaga ahli tidak menjadi penanggung jawab teknik
+       atau penanggung jawab klasifikasi di perusahaan lain.
+
+    Catatan kualifikasi:
+    - K1: minimal Ahli Muda per klasifikasi.
+    - M1 tanpa pengalaman: minimal Ahli Madya per 2 subklasifikasi.
+```
+
+---
+
+## 7. Flow Cek Batas Permohonan
+
+```yaml
+node_consultant_application_limit_check:
+  type: guided_form
+  title: "Cek Batas Permohonan SBU Konsultan"
+  questions:
+    - id: q_number_classifications
+      text: "Berapa jumlah klasifikasi yang ingin dimohonkan?"
+      expected_type: number
+      save_to: consultant_application.number_classifications
+
+    - id: q_number_subclassifications
+      text: "Berapa jumlah subklasifikasi yang ingin dimohonkan?"
+      expected_type: number
+      save_to: consultant_application.number_subclassifications
+
+    - id: q_application_type
+      text: "Jenis permohonan?"
+      quick_replies:
+        - "Permohonan baru"
+        - "Perubahan"
+        - "Perpanjangan"
+        - "Belum tahu"
+      save_to: consultant_application.application_type
+
+  completion_node: node_consultant_application_limit_result
+
+node_consultant_application_limit_result:
+  type: dynamic_response
+  title: "Hasil Cek Batas Permohonan"
+  response_template: >
+    Hasil cek batas permohonan:
+
+    Jenis permohonan:
+    {{consultant_application.application_type}}
+
+    Jumlah klasifikasi:
+    {{consultant_application.number_classifications}}
+
+    Jumlah subklasifikasi:
+    {{consultant_application.number_subclassifications}}
+
+    Ketentuan permohonan baru:
+    Maksimal 3 klasifikasi dan 6 subklasifikasi.
+
+    Status awal:
+    {{application_limit_status}}
+
+    Rekomendasi:
+    {{application_limit_recommendation}}
+```
+
+```yaml
+consultant_application_limit_logic:
+  valid_new_application:
+    condition:
+      - "application_type == Permohonan baru"
+      - "number_classifications <= 3"
+      - "number_subclassifications <= 6"
+    status: "Sesuai batas awal"
+    recommendation: "Permohonan baru masih dalam batas maksimal klasifikasi dan subklasifikasi."
+
+  exceeded_new_application:
+    condition:
+      - "application_type == Permohonan baru"
+      - "number_classifications > 3 or number_subclassifications > 6"
+    status: "Melebihi batas"
+    recommendation: >
+      Permohonan baru melebihi batas maksimal. Kurangi jumlah menjadi maksimal
+      3 klasifikasi dan 6 subklasifikasi, atau konsultasikan mekanisme pengajuan
+      yang sesuai.
+
+  unknown_application_type:
+    condition:
+      - "application_type == Belum tahu"
+    status: "Perlu klarifikasi"
+    recommendation: >
+      Tentukan terlebih dahulu apakah permohonan baru, perubahan, atau perpanjangan
+      karena batas ini berlaku untuk permohonan baru.
+```
+
+---
+
+## 8. Flow Cek Tenaga Ahli Tetap
+
+```yaml
+node_consultant_permanent_expert_check:
+  type: guided_form
+  title: "Cek Tenaga Ahli Tetap SBU Konsultan"
+  questions:
+    - id: q_consultant_code
+      text: "Masukkan kode sub bidang, contoh AR001, RK003, AL004, IT006, atau AT003."
+      save_to: expert_check.consultant_code
+
+    - id: q_qualification
+      text: "Kualifikasi yang diajukan?"
+      quick_replies:
+        - "K1"
+        - "M1 tanpa pengalaman"
+        - "Menengah/Besar"
+        - "Belum tahu"
+      save_to: expert_check.qualification
+
+    - id: q_expert_level
+      text: "Jenjang tenaga ahli yang tersedia?"
+      quick_replies:
+        - "Ahli Muda"
+        - "Ahli Madya"
+        - "Ahli Utama"
+        - "Belum ada"
+        - "Belum tahu"
+      save_to: expert_check.expert_level
+
+    - id: q_expert_field
+      text: "Bidang keahlian tenaga ahli yang tersedia?"
+      expected_type: text
+      save_to: expert_check.expert_field
+
+    - id: q_double_responsibility
+      text: "Apakah tenaga ahli menjadi penanggung jawab teknik/klasifikasi di perusahaan lain?"
+      quick_replies:
+        - "Tidak"
+        - "Ya"
+        - "Belum tahu"
+      save_to: expert_check.double_responsibility
+
+  completion_node: node_consultant_permanent_expert_result
+
+node_consultant_permanent_expert_result:
+  type: dynamic_response
+  title: "Hasil Cek Tenaga Ahli Tetap"
+  response_template: >
+    Hasil cek tenaga ahli tetap:
+
+    Sub bidang:
+    {{expert_check.consultant_code}}
+
+    Kualifikasi:
+    {{expert_check.qualification}}
+
+    Jenjang tenaga ahli:
+    {{expert_check.expert_level}}
+
+    Bidang keahlian tersedia:
+    {{expert_check.expert_field}}
+
+    Kebutuhan bidang keahlian berdasarkan katalog:
+    {{required_expertise_list}}
+
+    Status rangkap tanggung jawab:
+    {{expert_check.double_responsibility}}
+
+    Status awal:
+    {{expert_readiness_status}}
+
+    Rekomendasi:
+    {{expert_recommendation}}
+
+    Catatan:
+    Validasi final tetap mengikuti ketentuan LSBU dan skema sertifikasi yang berlaku.
+```
+
+---
+
+## 9. Logic Cek Tenaga Ahli
+
+```yaml
+consultant_expert_validation_logic:
+  K1_valid:
+    condition:
+      - "qualification == K1"
+      - "expert_level in ['Ahli Muda', 'Ahli Madya', 'Ahli Utama']"
+      - "expert_field matches required_expertise_list"
+      - "double_responsibility == Tidak"
+    status: "Memenuhi secara awal"
+    recommendation: >
+      Tenaga ahli terlihat memenuhi syarat awal untuk K1. Pastikan SKA/SKK masih berlaku
+      dan dokumen E-KTP, NPWP, ijazah, CV/pengalaman tersedia.
+
+  M1_without_experience_valid:
+    condition:
+      - "qualification == M1 tanpa pengalaman"
+      - "expert_level in ['Ahli Madya', 'Ahli Utama']"
+      - "expert_field matches required_expertise_list"
+      - "double_responsibility == Tidak"
+    status: "Memenuhi secara awal"
+    recommendation: >
+      Tenaga ahli terlihat memenuhi syarat awal untuk M1 tanpa pengalaman.
+      Pastikan jumlah tenaga ahli sesuai jumlah subklasifikasi yang dimohonkan.
+
+  field_not_match:
+    condition:
+      - "expert_field does not match required_expertise_list"
+    status: "Perlu perbaikan"
+    recommendation: >
+      Bidang keahlian tenaga ahli belum sesuai dengan kebutuhan sub bidang.
+      Siapkan tenaga ahli dengan klasifikasi/subklasifikasi keahlian yang relevan.
+
+  level_not_match:
+    condition:
+      - "qualification == K1 and expert_level not in ['Ahli Muda', 'Ahli Madya', 'Ahli Utama']"
+      - "or qualification == M1 tanpa pengalaman and expert_level not in ['Ahli Madya', 'Ahli Utama']"
+    status: "Tidak siap"
+    recommendation: >
+      Jenjang tenaga ahli belum memenuhi ketentuan awal. Untuk K1 minimal Ahli Muda.
+      Untuk M1 tanpa pengalaman minimal Ahli Madya.
+
+  double_responsibility_detected:
+    condition:
+      - "double_responsibility == Ya"
+    status: "Berisiko terkendala"
+    recommendation: >
+      Tenaga ahli tidak boleh menjadi penanggung jawab teknik/klasifikasi di perusahaan lain.
+      Siapkan tenaga ahli lain atau selesaikan status rangkap terlebih dahulu.
+```
+
+---
+
+## 10. Update Scoring Pra-Verifikasi SBU Konsultan
+
+```yaml
+consultant_pre_verification_scoring_update:
+  score_range: "0-100"
+  scoring_components:
+    company_documents:
+      weight: 15
+      description: "Kelengkapan akta, Kemenkumham, NPWP, NIB/domisili, data pengurus, CV direktur, foto PJBU, email, dan telepon."
+
+    kbli_subfield_match:
+      weight: 15
+      description: "Kesesuaian KBLI dengan sub bidang."
+
+    application_limit:
+      weight: 10
+      description: "Kesesuaian jumlah klasifikasi dan subklasifikasi dengan batas permohonan baru."
+
+    expert_documents:
+      weight: 15
+      description: "Kelengkapan E-KTP, NPWP, ijazah, SKA/SKK, CV/pengalaman tenaga ahli."
+
+    expert_level_and_field:
+      weight: 20
+      description: "Kesesuaian jenjang Ahli Muda/Ahli Madya dan bidang keahlian tenaga ahli."
+
+    consulting_experience_or_output:
+      weight: 15
+      description: "Ketersediaan pengalaman, kontrak, BAST, laporan akhir, output teknis, desain, studi, peta, atau hasil uji."
+
+    smap_and_statement:
+      weight: 10
+      description: "Ketersediaan SMAP, komitmen SMAP, dan surat pernyataan bila dipersyaratkan."
+
+  status_labels:
+    85_100: "Siap Dikonsultasikan"
+    65_84: "Perlu Perbaikan Ringan"
+    40_64: "Perlu Perbaikan Mayor"
+    0_39: "Belum Siap"
+
+  result_template: >
+    Hasil pra-verifikasi SBU Konsultan:
+
+    Sub bidang:
+    {{code}} — {{title}}
+
+    KBLI:
+    {{kbli}}
+
+    Skor:
+    {{score}} / 100
+
+    Status:
+    {{status_label}}
+
+    Rincian:
+    1. Dokumen perusahaan: {{score_company_documents}} / 15
+    2. Kesesuaian KBLI dan sub bidang: {{score_kbli_subfield}} / 15
+    3. Batas permohonan: {{score_application_limit}} / 10
+    4. Dokumen tenaga ahli: {{score_expert_documents}} / 15
+    5. Jenjang dan bidang tenaga ahli: {{score_expert_level_field}} / 20
+    6. Pengalaman/output konsultansi: {{score_experience_output}} / 15
+    7. SMAP/surat pernyataan: {{score_smap_statement}} / 10
+
+    Temuan:
+    {{issues}}
+
+    Rekomendasi:
+    {{recommendations}}
+
+    Catatan:
+    Hasil ini hanya pra-verifikasi awal. Keputusan resmi tetap melalui LSBU/asesor/OSS/SIJK.
+```
+
+---
+
+## 11. Template Jawaban Cepat Baru
+
+```yaml
+consultant_quick_answer_templates:
+  documents_required: >
+    Untuk permohonan SBU Jasa Konsultansi Konstruksi, dokumen awal yang perlu
+    disiapkan meliputi formulir permohonan, akta pendirian/perubahan, SK Kemenkumham,
+    NPWP perusahaan, domisili atau NIB, E-KTP dan NPWP pengurus, CV direktur/wakil direktur,
+    foto PJBU/Direktur JPEG, email perusahaan aktif, dan nomor telepon perusahaan.
+
+  application_limit: >
+    Untuk permohonan baru SBU Jasa Konsultansi Konstruksi, maksimal permohonan adalah
+    3 klasifikasi dan 6 subklasifikasi.
+
+  expert_requirement_K1: >
+    Untuk Kualifikasi K1, tenaga ahli minimal Ahli Muda per klasifikasi.
+
+  expert_requirement_M1: >
+    Untuk Kualifikasi M1 tanpa pengalaman, tenaga ahli minimal Ahli Madya per 2 subklasifikasi.
+
+  expert_double_responsibility: >
+    Tenaga ahli tidak boleh menjadi penanggung jawab teknik atau penanggung jawab
+    klasifikasi di perusahaan lain.
+
+  director_double_position: >
+    Direktur dan wakil direktur tidak boleh menjadi pengurus dengan jabatan yang sama
+    pada perusahaan lain, kecuali sebagai komisaris atau komanditer.
+```
+
+---
+
+## 12. Tambahan Main Menu
+
+```yaml
+main_menu_addition_for_consultant_requirements:
+  add_to_node: node_main_menu_konsultan
+  buttons:
+    - label: "Persyaratan Permohonan"
+      target_node: node_consultant_application_requirement_intro
+
+    - label: "Cek Batas 3 Klasifikasi / 6 Subklasifikasi"
+      target_node: node_consultant_application_limit_check
+
+    - label: "Cek Tenaga Ahli Tetap"
+      target_node: node_consultant_permanent_expert_check
+
+    - label: "Syarat K1 / M1"
+      target_node: node_consultant_qualification_requirement
+```
+
+```yaml
+node_consultant_qualification_requirement:
+  type: message_with_buttons
+  title: "Syarat Kualifikasi K1 dan M1"
+  message: >
+    Syarat awal tenaga ahli untuk SBU Konsultan:
+
+    1. Kualifikasi K1:
+       SKA/SKK tenaga ahli minimal Ahli Muda per klasifikasi.
+
+    2. Kualifikasi M1 tanpa pengalaman:
+       SKA/SKK tenaga ahli minimal Ahli Madya per 2 subklasifikasi.
+
+    Catatan:
+    Tenaga ahli tidak boleh menjadi penanggung jawab teknik/klasifikasi di perusahaan lain.
+  buttons:
+    - label: "Cek Tenaga Ahli Saya"
+      target_node: node_consultant_permanent_expert_check
+
+    - label: "Checklist Dokumen Tenaga Ahli"
+      target_node: node_consultant_expert_docs
+
+    - label: "Menu Utama"
+      target_node: node_main_menu_konsultan
+```
+
+---
+
+## 13. Runtime Prompt Tambahan
+
+```yaml
+runtime_prompt_addition_consultant_requirements:
+  text: >
+    Saat pengguna bertanya tentang persyaratan SBU Konsultan, gunakan layer
+    persyaratan permohonan. Jelaskan dokumen perusahaan, dokumen pengurus,
+    dokumen tenaga ahli, syarat K1, syarat M1 tanpa pengalaman, batas maksimal
+    permohonan baru 3 klasifikasi dan 6 subklasifikasi, serta larangan rangkap
+    jabatan direktur/wakil direktur dan tenaga ahli.
+
+    Jika pengguna memberi kode sub bidang, tampilkan juga jenis usaha UMUM atau
+    SPESIALIS, kualifikasi yang tersedia, dan kebutuhan tenaga ahli tetap jika data ada.
+
+    Jika ada konflik data, seperti IT006 vs IT007 atau KBLI AT007, tampilkan catatan
+    bahwa data perlu review dan harus divalidasi ke LSBU/admin katalog sebelum pengajuan.
+```
+
+---
+
+Dengan tambahan ini, chatbot **SBU Konsultan** sekarang mencakup:
+
+**Sub bidang → KBLI → jenis usaha → kualifikasi → dokumen perusahaan → dokumen tenaga ahli → syarat K1/M1 → batas permohonan → cek tenaga ahli tetap → pra-verifikasi skor → guardrail konflik data.**

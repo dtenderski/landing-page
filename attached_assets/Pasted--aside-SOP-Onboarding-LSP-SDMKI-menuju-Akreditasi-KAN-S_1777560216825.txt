@@ -1,0 +1,171 @@
+<aside>
+🛠️
+
+**SOP Onboarding LSP SDMKI menuju Akreditasi KAN**
+
+Standar Operasional Prosedur untuk seluruh tahap pengajuan akreditasi LSP SDMKI ke Komite Akreditasi Nasional (KAN) berdasarkan SNI ISO/IEC 17024 + KAN U-01 + KAN K-09.
+
+**No. Dokumen:** SOP-LSP-KAN-001 | **Versi:** 1.0 | **Tanggal Berlaku:** 28 April 2026
+
+</aside>
+
+## 1. Tujuan
+
+Menetapkan langkah baku, peran, output, dan tenggat agar LSP SDMKI dapat mencapai akreditasi KAN dengan efisien, terdokumentasi, dan dapat diaudit.
+
+## 2. Ruang Lingkup
+
+SOP ini berlaku untuk seluruh proses sejak **inisiasi internal** hingga **penerbitan sertifikat akreditasi KAN** dan **siklus surveilan pertama**.
+
+## 3. Definisi & Singkatan
+
+- **KAN** — Komite Akreditasi Nasional.
+- **LPK** — Lembaga Penilaian Kesesuaian.
+- **LSP** — Lembaga Sertifikasi Profesi.
+- **KANMIS** — KAN Management Information System (`layanan.kan.or.id`).
+- **SIMPONI** — Sistem Informasi PNBP Online (pembayaran asesmen KAN).
+- **Witness** — Penyaksian langsung uji kompetensi oleh asesor KAN.
+
+## 4. Acuan
+
+- SNI ISO/IEC 17024:2012
+- KAN U-01 Rev.1 — Syarat dan Aturan Akreditasi LPK
+- KAN K-09 — Persyaratan Khusus Lembaga Sertifikasi Personal
+- KAN U-03 Rev.2 — Penggunaan Simbol Akreditasi KAN
+- Manual Mutu LSP SDMKI v.akhir
+
+## 5. Peran & Tanggung Jawab
+
+| **Peran** | **Tanggung Jawab Utama** | Direktur LSP | Sponsor program; persetujuan komitmen sumber daya & anggaran |
+| --- | --- | --- | --- |
+| Manajer Mutu | Pemilik proses; pengelola gap-analysis, dokumen mutu, & komunikasi dengan KAN | Manajer Sertifikasi | Penyiapan skema, asesor, & TUK siap diwitness |
+| Manajer IT | Kesiapan platform e-Assessment, keamanan data, integrasi BNSP/KAN | Komite Skema | Validasi skema sertifikasi & dokumen pendukung |
+| Komite Ketidakberpihakan | Review kebijakan COI & laporan ketidakberpihakan | Tim Pusat (KB LSP–TUK) | Penyimpanan & versioning regulasi + playbook |
+
+## 6. Tahapan Proses
+
+```mermaid
+flowchart TD
+	A["Tahap 0<br>Inisiasi Internal"] --> B["Tahap 1<br>Gap-Analysis ISO 17024"]
+	B --> C["Tahap 2<br>Pemenuhan & Penguatan"]
+	C --> D["Tahap 3<br>Pre-Assessment Internal"]
+	D --> E["Tahap 4<br>Pengajuan KANMIS"]
+	E --> F["Tahap 5<br>Asesmen Awal KAN"]
+	F --> G["Tahap 6<br>Witness Assessment"]
+	G --> H["Tahap 7<br>Tindakan Perbaikan"]
+	H --> I["Tahap 8<br>Keputusan Akreditasi"]
+	I --> J["Tahap 9<br>Surveilan & Pemeliharaan"]
+```
+
+### Tahap 0 — Inisiasi Internal *(Minggu 1)*
+
+- Surat penugasan tim akreditasi oleh Direktur LSP.
+- Kick-off meeting; penetapan target tanggal pengajuan.
+- **Output:** SK Tim Akreditasi, RACI, jadwal master.
+
+### Tahap 1 — Gap-Analysis ISO 17024 *(Minggu 2–4)*
+
+- Eksekusi [Checklist Gap-Analysis SNI ISO/IEC 17024 — Persiapan Akreditasi KAN](https://www.notion.so/Checklist-Gap-Analysis-SNI-ISO-IEC-17024-Persiapan-Akreditasi-KAN-1615a00a444e4d94bba077d12ebda8ee?pvs=21).
+- Identifikasi temuan per klausul + PIC + tenggat.
+- **Output:** Laporan Gap-Analysis v.1.
+
+### Tahap 2 — Pemenuhan & Penguatan *(Minggu 5–10)*
+
+- Penyusunan/revisi: Manual Mutu, SOP P-01–P-09, formulir, kebijakan ketidakberpihakan, kebijakan keamanan informasi.
+- Pelatihan asesor & komite skema.
+- Validasi skema sertifikasi (komite skema).
+- **Output:** Paket dokumen mutu final, daftar asesor terkualifikasi, skema valid.
+
+### Tahap 3 — Pre-Assessment Internal *(Minggu 11–12)*
+
+- Audit internal lengkap berbasis ISO 17024 + KAN K-09.
+- Tinjauan manajemen formal.
+- Simulasi witness assessment minimal 1 skema.
+- **Output:** Laporan audit internal, notulen tinjauan manajemen, log simulasi witness.
+
+### Tahap 4 — Pengajuan KANMIS *(Minggu 13)*
+
+- Buat akun di `layanan.kan.or.id`.
+- Unggah: formulir permohonan, Dokumentasi Mutu, legalitas, audit internal, tinjauan manajemen, dokumen pendukung lain.
+- Generate kode billing **SIMPONI**; bayar dalam 7 hari.
+- **Output:** Tanda terima KANMIS + bukti pembayaran SIMPONI.
+
+### Tahap 5 — Asesmen Awal KAN *(Minggu 14–17)*
+
+- Tinjauan dokumen oleh asesor KAN.
+- Asesmen lapangan di kantor LSP SDMKI.
+- Fasilitasi tim KAN: ruang khusus, akses dokumen, narasumber per fungsi.
+- **Output:** Laporan asesmen lapangan, daftar temuan awal.
+
+### Tahap 6 — Witness Assessment *(Minggu 17–19)*
+
+- Jadwalkan uji kompetensi riil per skema yang diajukan.
+- Asesor KAN menyaksikan: pre-asesmen, asesmen, keputusan.
+- **Output:** Laporan witness, rekomendasi asesor.
+
+### Tahap 7 — Tindakan Perbaikan *(Maks. 30 hari kerja)*
+
+- Root-cause analysis untuk setiap temuan.
+- Tindakan korektif + bukti closing.
+- Submit ulang ke KAN melalui KANMIS.
+- **Output:** Berkas tindakan perbaikan, evidensi efektivitas.
+
+### Tahap 8 — Keputusan Akreditasi
+
+- Evaluasi panel/komite KAN.
+- Penerbitan **Sertifikat Akreditasi KAN** + ruang lingkup terlampir.
+- Sosialisasi internal & eksternal; aktivasi simbol KAN sesuai KAN U-03 Rev.2.
+- **Output:** Sertifikat KAN, lampiran ruang lingkup, panduan penggunaan simbol.
+
+### Tahap 9 — Surveilan & Pemeliharaan
+
+- Surveilan tahunan (minimal 1× per tahun).
+- Re-asesmen pada akhir siklus akreditasi.
+- Pemberitahuan KAN saat ada perubahan signifikan (kepemilikan, alamat, top management, ruang lingkup).
+- Witness ulang saat **perluasan ruang lingkup**.
+
+## 7. Indikator Keberhasilan
+
+- ✅ Pengajuan KANMIS terkirim ≤ **Minggu 13** sejak inisiasi.
+- ✅ Tidak ada **temuan kategori 1 (major)** terbuka pada penutupan tindakan perbaikan.
+- ✅ Sertifikat KAN terbit ≤ **6 bulan** sejak pengajuan.
+- ✅ Skor audit internal ≥ **90% kepatuhan** ISO 17024.
+- ✅ Surveilan tahunan tanpa **temuan major**.
+
+## 8. Manajemen Risiko
+
+| **Risiko** | **Dampak** | **Mitigasi** |
+| --- | --- | --- |
+| Asesor tidak siap witness | Tinggi | Simulasi witness internal di Tahap 3 |
+| Pembayaran SIMPONI lewat tenggat | Sedang | SOP keuangan dengan SLA 3 hari sejak terbit kode billing |
+| Perubahan regulasi KAN selama proses | Sedang | Monitoring KB LSP–TUK + langganan info KAN |
+
+## 9. Rekaman & Penyimpanan
+
+- Seluruh rekaman proses akreditasi disimpan di **KB LSP–TUK** (kategori: Lisensi LSP).
+- Masa simpan: minimal **siklus akreditasi + 2 tahun**.
+- Akses: terbatas Tim Mutu, Direktur, dan asesor KAN saat asesmen.
+
+## 10. Lampiran (Direkomendasikan)
+
+- Lampiran A: Template SK Tim Akreditasi.
+- Lampiran B: Form Deklarasi COI.
+- Lampiran C: Template Laporan Audit Internal.
+- Lampiran D: Template Laporan Witness Internal.
+- Lampiran E: Daftar Tilik Submission KANMIS.
+
+## 11. Kontak KAN
+
+- 📧 `sertifikasi@bsn.go.id`
+- ☎ +62 812 1314 0054 (Direktorat Akreditasi Lembaga Inspeksi & Lembaga Sertifikasi)
+- 🌐 `kan.or.id` | Portal: `layanan.kan.or.id`
+
+[Lampiran B — Form Deklarasi Konflik Kepentingan (COI)](https://www.notion.so/Lampiran-B-Form-Deklarasi-Konflik-Kepentingan-COI-f24bc8b30ec84ca783ab3fd88dc0626c?pvs=21)
+
+[Lampiran D — Template Laporan Witness Internal](https://www.notion.so/Lampiran-D-Template-Laporan-Witness-Internal-6611aefa238c46ce85c448509898b3e5?pvs=21)
+
+[Lampiran A — Template SK Tim Akreditasi KAN](https://www.notion.so/Lampiran-A-Template-SK-Tim-Akreditasi-KAN-75a4e646fe7b4d189e3fdd35f709fbe5?pvs=21)
+
+[Lampiran C — Template Laporan Audit Internal ISO 17024](https://www.notion.so/Lampiran-C-Template-Laporan-Audit-Internal-ISO-17024-299e16fcd7ff461db56856af71a08be8?pvs=21)
+
+[Lampiran E — Daftar Tilik Submission KANMIS](https://www.notion.so/Lampiran-E-Daftar-Tilik-Submission-KANMIS-ba3f9b756b03466885989f6dde102154?pvs=21)

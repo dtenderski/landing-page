@@ -1,0 +1,133 @@
+<aside>
+⚙️
+
+**Kalkulator OEE** — alat bantu AGENT-EQUIPRA untuk mengukur efektivitas alat berat & plant. Standar: dasar TPM (Total Productive Maintenance) Nakajima 1988, diterapkan di konstruksi via ISO 55000.
+
+</aside>
+
+## 1. Formula Inti OEE
+
+```
+OEE = Availability × Performance × Quality
+
+——————————————————————————————————————————————————————————————
+Availability  = (Planned Production Time − Downtime) / Planned Production Time
+              = Operating Time / Planned Production Time
+
+Performance   = (Actual Cycle Time × Total Pieces) / Operating Time
+              = (Standard Output / Operating Time) × (Actual Output / Standard Output)
+              = Actual Output / (Standard Rate × Operating Time)
+
+Quality       = Good Output / Total Output
+              = (Total − Rework − Reject) / Total
+```
+
+## 2. Benchmark OEE Industri
+
+| **Tier** | **OEE** | **Interpretasi** |
+| --- | --- | --- |
+| 🏆 World-Class | ≥ 85% | Manufacturing Toyota / TPM matang |
+| ✅ Excellent | 75–84% | Target ambisius proyek konstruksi besar |
+| ⚠️ Average | 60–74% | Rata-rata industri konstruksi Indonesia |
+| 🔴 Below Average | 40–59% | Banyak kehilangan; perlu intervensi |
+| 🚨 Critical | < 40% | Audit menyeluruh; pertimbangkan replace alat |
+
+## 3. The Six Big Losses (Sumber Penurunan OEE)
+
+| **Kategori** | **Loss** | **Contoh di Konstruksi** | **Mempengaruhi** |
+| --- | --- | --- | --- |
+| **Availability Losses** | Breakdown | Engine kerusakan, hidrolik bocor, ban pecah | Availability |
+| **Availability Losses** | Setup & Adjustments | Pindah lokasi kerja, tukar attachment, kalibrasi | Availability |
+| **Performance Losses** | Idling & Minor Stops | Tunggu material, tunggu signaler, tunggu dump truck | Performance |
+| **Performance Losses** | Reduced Speed | Operator hati-hati di area sempit, soil basah, akses buruk | Performance |
+| **Quality Losses** | Rework / Defect | Galian over-cut, beton tumpah, salah elevasi grading | Quality |
+| **Quality Losses** | Startup Losses | Output sub-standar saat warm-up alat | Quality |
+
+## 4. Kalkulator OEE — Template
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│  KALKULATOR OEE — per Unit Alat per Hari/Minggu                            │
+├─────────────────────────────────────────────────────────────────────┤
+│  IDENTIFIKASI ALAT                                                         │
+│  Tipe Alat              : [_____________] (mis. Excavator PC200)          │
+│  Nomor Unit             : [_____]                                         │
+│  Operator               : [_____________] (No. SIO: [_____])             │
+│  Periode                : [DD-MM-YYYY] s.d. [DD-MM-YYYY]                  │
+│                                                                           │
+│  WAKTU (jam)                                                              │
+│  Total shift time       : [____] jam (mis. 8 jam/hari × 7 hari = 56 jam)  │
+│  Planned downtime       : [____] jam (PM, isi solar, ganti shift)         │
+│  Planned production time= Total − Planned downtime = [____] jam          │
+│  Unplanned downtime     : [____] jam (breakdown, setup tidak terduga)     │
+│  Operating time         = Planned prod − Unplanned downtime = [____] jam │
+│                                                                           │
+│  AVAILABILITY                                                              │
+│  A = Operating time / Planned production time                             │
+│    = [____] / [____] = [____]%                                            │
+│                                                                           │
+│  PERFORMANCE                                                               │
+│  Standard rate (m³/jam) : [____] m³/jam (sesuai spek alat)                │
+│  Standard output        = Standard rate × Operating time = [____] m³      │
+│  Actual output (m³)     : [____] m³                                       │
+│  P = Actual output / Standard output                                       │
+│    = [____] / [____] = [____]%                                            │
+│                                                                           │
+│  QUALITY                                                                   │
+│  Good output (m³)       : [____] m³                                       │
+│  Rework + Reject (m³)   : [____] m³                                       │
+│  Q = Good / (Good + Rework+Reject) = [____]%                              │
+│                                                                           │
+│  OEE = A × P × Q = [____]% × [____]% × [____]% = [____]%                 │
+│                                                                           │
+│  TIER:  ⬜ World-Class  ⬜ Excellent  ⬜ Average  ⬜ Below  ⬜ Critical       │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+## 5. Contoh Kalkulasi: Excavator PC200 Mingguan
+
+```
+DATA:
+	Tipe alat       : Excavator Komatsu PC200-8
+	Standard rate   : 60 m³/jam (galian tanah)
+	Planned hours   : 8 jam/hari × 6 hari = 48 jam
+	Planned downtime: 4 jam (PM 2 jam + isi BBM 2 jam)
+	Unplanned down  : 6 jam (1× breakdown hidrolik 4 jam + setup pindah 2 jam)
+	Actual output   : 1,800 m³ galian total
+	Rework          : 100 m³ (over-cut harus diurug ulang)
+
+KALKULASI:
+	Planned prod time = 48 − 4 = 44 jam
+	Operating time    = 44 − 6 = 38 jam
+
+	Availability    = 38 / 44 = 86.4%
+	Standard output = 60 × 38 = 2,280 m³
+	Performance     = 1,800 / 2,280 = 78.9%
+	Quality         = (1,800 − 100) / 1,800 = 94.4%
+
+	OEE = 0.864 × 0.789 × 0.944 = 0.644 = 64.4%
+
+TIER: ⚠️ Average (di bawah target 75%)
+
+ROOT CAUSE:
+	1. Performance terlemah — 78.9%:
+	   → Investigasi tunggu dump truck? Akses jelek?
+	2. Quality 94.4% acceptable tapi over-cut bisa direduce dengan:
+	   → Marking lebih jelas, briefing operator
+	3. Availability 86.4% baik tapi 1 breakdown 4 jam menonjol
+	   → Tambah PM frequency hidrolik?
+```
+
+## 6. Fleet OEE Aggregation
+
+```
+Fleet OEE = Σ (OEEᵢ × weightᵢ)
+
+Weightᵢ = nilai sewa atau kapasitas relatif unit (sebagai bobot kontribusi).
+Untuk fleet sederhana, gunakan rata-rata aritmetik OEE per unit.
+```
+
+## 7. Halaman Terkait
+
+- [System Prompt OpenClaw — Manajer Peralatan Konstruksi](https://www.notion.so/System-Prompt-OpenClaw-Manajer-Peralatan-Konstruksi-0375d71f30e242ebbca0897e493e328e?pvs=21)
+- [Modul B — Execution (Project · K3 · Mutu · Lingkungan · Peralatan · Logistik)](https://www.notion.so/Modul-B-Execution-Project-K3-Mutu-Lingkungan-Peralatan-Logistik-7caa170017b945dca5d2465e0f96c0af?pvs=21)

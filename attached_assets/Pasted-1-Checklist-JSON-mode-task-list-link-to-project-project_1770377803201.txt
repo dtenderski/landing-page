@@ -1,0 +1,210 @@
+1) Checklist — JSON
+{
+  "mode": "task_list",
+  "link_to": {
+    "project": "project_name",
+    "issue": ["issue_type", "issue_location", "issue_status"]
+  },
+  "rules": {
+    "block_close_if_unfinished": true,
+    "show_completion_rate": true
+  },
+  "default_items": [
+    "Isu teridentifikasi & deskripsi jelas",
+    "Lokasi/elemen isu terkonfirmasi",
+    "Data pendukung terkumpul (foto/laporan/uji)",
+    "Analisa teknis dilakukan",
+    "Alternatif solusi dibandingkan",
+    "Risiko dinilai",
+    "Keputusan diambil & dicatat",
+    "PIC & due date ditetapkan",
+    "Tindak lanjut dieksekusi",
+    "Verifikasi selesai & isu ditutup"
+  ]
+}
+
+2) Kalkulator — JSON
+{
+  "mode": "calculator",
+  "presets": [
+    {
+      "name": "Volume Beton",
+      "inputs": ["panjang_m", "lebar_m", "tinggi_m"],
+      "formula": "panjang_m * lebar_m * tinggi_m",
+      "unit": "m3"
+    },
+    {
+      "name": "Luas Bekisting",
+      "inputs": ["panjang_m", "tinggi_m"],
+      "formula": "panjang_m * tinggi_m",
+      "unit": "m2"
+    }
+  ],
+  "rules": {
+    "round_result": 3,
+    "reject_negative": true
+  }
+}
+
+3) Penilaian Risiko — JSON
+{
+  "mode": "risk_scoring",
+  "risk_categories": ["Safety", "Quality", "Structural", "Cost", "Schedule", "Environment"],
+  "scoring": {
+    "likelihood_scale": [1, 2, 3, 4, 5],
+    "impact_scale": [1, 2, 3, 4, 5],
+    "method": "likelihood_x_impact",
+    "thresholds": {
+      "low_max": 6,
+      "medium_max": 14,
+      "high_min": 15
+    }
+  },
+  "sources": [
+    "time_constraint",
+    "cost_constraint",
+    "site_access",
+    "environmental_factors",
+    "issue_type",
+    "issue_location",
+    "issue_status"
+  ],
+  "outputs": ["risk_category", "likelihood", "impact", "risk_level", "mitigation"]
+}
+
+4) Pelacak Progres — JSON
+{
+  "mode": "progress_tracking",
+  "metrics": {
+    "planned_field": "planned_progress",
+    "actual_field": "actual_progress",
+    "unit": "percent"
+  },
+  "rules": {
+    "status_logic": [
+      { "if": "actual >= planned + 5", "status": "Ahead" },
+      { "if": "actual >= planned - 5", "status": "On Track" },
+      { "if": "actual < planned - 5", "status": "Delay" }
+    ],
+    "require_note_if_delay": true
+  },
+  "summary": {
+    "show_top_delays": true,
+    "limit": 5
+  }
+}
+
+5) Generator Dokumen — JSON
+{
+  "mode": "document_generator",
+  "document_types": [
+    "Weekly Report",
+    "Laporan Inspeksi",
+    "Notulen Keputusan",
+    "Ringkasan Risiko",
+    "Progress Update"
+  ],
+  "sources": [
+    "project_name",
+    "project_type",
+    "project_stage",
+    "location",
+    "owner_client",
+    "issue_type",
+    "issue_location",
+    "issue_status",
+    "issue_since",
+    "decision_summary",
+    "decision_reason",
+    "decision_risk_level",
+    "decision_date",
+    "inspection_notes",
+    "last_updated"
+  ],
+  "format": {
+    "sections": [
+      "Executive Summary",
+      "Project Context",
+      "Issues & Status",
+      "Decisions",
+      "Risks",
+      "Quality/Inspection Notes",
+      "Next Actions"
+    ],
+    "style": "bullet_first"
+  },
+  "rules": {
+    "no_hallucination": true,
+    "mark_missing_as": "Data belum tersedia"
+  }
+}
+
+6) Custom — JSON
+{
+  "mode": "custom",
+  "note": "Gunakan mini app ini untuk kebutuhan spesifik. Batasi scope dan jangan duplikasi fungsi Issue/Action/Decision/Risk.",
+  "rules": {
+    "max_fields_recommended": 7,
+    "single_purpose_only": true
+  }
+}
+
+7) Issue Log — JSON
+{
+  "mode": "issue_log",
+  "fields": [
+    "issue_type",
+    "issue_location",
+    "issue_status",
+    "issue_since",
+    "decision_risk_level",
+    "last_updated"
+  ],
+  "prioritization": {
+    "sort": ["decision_risk_level_desc", "issue_since_asc"],
+    "highlight_if": {
+      "status": ["Open", "Monitoring"],
+      "risk": ["High"]
+    }
+  },
+  "rules": {
+    "flag_if_open_days_over": 14,
+    "recommended_next_step": true
+  }
+}
+
+8) Action Tracker — JSON
+{
+  "mode": "action_tracker",
+  "fields": ["action_item", "related_issue", "assigned_to", "due_date", "status", "note"],
+  "status_values": ["Not Started", "In Progress", "Done", "Blocked"],
+  "rules": {
+    "overdue_logic": "today > due_date AND status != Done",
+    "block_issue_close_if_overdue": true,
+    "show_overdue_first": true
+  },
+  "views": {
+    "default": "overdue_then_due_soon",
+    "due_soon_days": 7
+  }
+}
+
+9) Change Log — JSON
+{
+  "mode": "change_log",
+  "change_types": ["Design", "Method", "Scope"],
+  "impact_areas": ["Cost", "Time", "Quality", "Safety", "Multi"],
+  "fields": ["change_type", "description", "reason", "impact_area", "approval_status", "date"],
+  "approval_status_values": ["Draft", "Proposed", "Approved", "Rejected"],
+  "rules": {
+    "require_reason": true,
+    "require_impact_area": true,
+    "if_impact_multi_then_recommend": "run_risk_assessment"
+  }
+}
+
+Catatan penting (biar tidak error)
+
+JSON di atas mengasumsikan kamu punya field Project Brain dengan key seperti yang kamu tulis sebelumnya: project_name, project_stage, issue_type, decision_*, last_updated, dll.
+
+Untuk Action Tracker / Change Log, ada field seperti assigned_to, due_date, action_item, approval_status yang biasanya ada di mini app-nya sendiri (bukan di Project Brain). Kalau platform kamu butuh key berbeda, kamu tinggal ganti nama fieldnya.

@@ -1,0 +1,826 @@
+Saya lanjutkan **tanpa canvas**. Bagian ini menutup sisi implementasi agar modul SBU Konsultan bisa digabungkan dengan chatbot builder sebagai paket siap pakai. Tambahan tetap mengacu pada lampiran persyaratan SBU Jasa Konsultansi Konstruksi: dokumen perusahaan, batas permohonan baru 3 klasifikasi/6 subklasifikasi, syarat K1/M1, serta persyaratan tenaga ahli tetap. 
+
+---
+
+# LANJUTAN — Final Integration Pack SBU Konsultan
+
+```yaml
+# -----------------------------------------------------------------------------
+# FINAL INTEGRATION PACK — SBU KONSULTAN
+# -----------------------------------------------------------------------------
+
+sbu_konsultan_final_integration_pack:
+  id: sbu_konsultan_final_integration_pack_v1
+  name: "SBU Konsultan Coach — Final Integration Pack"
+  status: "ready_for_builder"
+  language: "id-ID"
+  modules_included:
+    - catalog_lookup
+    - kbli_lookup
+    - keyword_search
+    - recommendation_flow
+    - requirement_check
+    - expert_check
+    - qualification_check
+    - application_limit_check
+    - pre_verification_scoring
+    - conflict_resolver
+    - document_checklist
+    - session_summary
+    - export_report
+    - guardrail
+    - fallback
+```
+
+---
+
+## 1. Final Unified Main Menu
+
+```yaml
+final_main_menu_sbu_konsultan:
+  id: node_main_menu_konsultan_final
+  type: message_with_buttons
+  title: "Menu Utama SBU Konsultan"
+  message: >
+    Silakan pilih kebutuhan Anda. Saya dapat membantu mencari sub bidang SBU Konsultan,
+    mengecek KBLI, memilih sub bidang, mengecek persyaratan permohonan, tenaga ahli,
+    kualifikasi K1/M1, serta membuat ringkasan pra-verifikasi.
+
+  buttons:
+    - label: "Cari Kode Sub Bidang"
+      target_node: node_ask_consultant_code
+
+    - label: "Cari Berdasarkan KBLI"
+      target_node: node_ask_consultant_kbli
+
+    - label: "Cari Berdasarkan Jenis Jasa"
+      target_node: node_ask_consultant_keyword
+
+    - label: "Bantu Pilih Sub Bidang"
+      target_node: node_consultant_recommendation_intro
+
+    - label: "Lihat Semua Ruang Lingkup"
+      target_node: node_show_consultant_groups
+
+    - label: "Bandingkan Sub Bidang"
+      target_node: node_compare_consultant_intro
+
+    - label: "Persyaratan Permohonan"
+      target_node: node_consultant_requirement_main
+
+    - label: "Checklist Dokumen Perusahaan"
+      target_node: node_company_document_check
+
+    - label: "Checklist Tenaga Ahli"
+      target_node: node_expert_requirement_check
+
+    - label: "Cek Batas 3 Klasifikasi / 6 Subklasifikasi"
+      target_node: node_consultant_application_limit_check
+
+    - label: "Cek Syarat K1 / M1"
+      target_node: node_consultant_qualification_requirement
+
+    - label: "Pra-Verifikasi Kesiapan"
+      target_node: node_consultant_full_requirement_check
+
+    - label: "Ringkasan Konsultasi"
+      target_node: node_consultant_session_summary
+```
+
+---
+
+## 2. Final Data Source Schema
+
+```yaml
+consultant_final_data_sources:
+  sub_bidang_konsultan_catalog:
+    primary_key: code
+    fields:
+      code:
+        type: string
+        example: "AR001"
+
+      kbli:
+        type: string
+        example: "71101"
+
+      title:
+        type: string
+        example: "Jasa Arsitektural Bangunan Gedung dan Non Hunian"
+
+      group_code:
+        type: string
+        example: "AR"
+
+      group_name:
+        type: string
+        example: "Ruang Lingkup Umum Arsitektur"
+
+      business_type:
+        type: enum
+        values:
+          - UMUM
+          - SPESIALIS
+
+      allowed_qualification:
+        type: string
+        example: "KMB BUJKN, BUJKPMA, BUJKA"
+
+      required_expertise:
+        type: array
+        example:
+          - Arsitektur
+          - Sipil
+          - Tata Lingkungan
+
+      keywords:
+        type: array
+
+      source_status:
+        type: enum
+        values:
+          - valid
+          - alias
+          - needs_review
+
+      source_note:
+        type: text_nullable
+
+  consultant_documents:
+    primary_key: document_id
+    fields:
+      document_id:
+        type: string
+        example: "DOC-CONS-001"
+
+      document_name:
+        type: string
+
+      category:
+        type: enum
+        values:
+          - perusahaan
+          - pengurus
+          - tenaga_ahli
+          - permohonan
+          - smap
+          - pendukung
+
+      required:
+        type: boolean
+
+      condition:
+        type: text_nullable
+
+  consultant_expert_matrix:
+    primary_key: code
+    fields:
+      code:
+        type: string
+      required_expertise:
+        type: array
+      minimum_level_K1:
+        type: string
+        default: "Ahli Muda"
+      minimum_level_M1_without_experience:
+        type: string
+        default: "Ahli Madya"
+      notes:
+        type: text
+```
+
+---
+
+## 3. Final Catalog Normalization Rules
+
+```yaml
+consultant_catalog_normalization_rules:
+  code_format:
+    valid_prefixes:
+      - AR
+      - RK
+      - RT
+      - AL
+      - IT
+      - AT
+    pattern_description: "dua huruf prefix + tiga digit angka"
+    examples:
+      - AR001
+      - RK003
+      - RT002
+      - AL004
+      - IT006
+      - AT007
+
+  kbli_format:
+    rule: "KBLI harus 5 digit angka."
+    examples:
+      - "71101"
+      - "71102"
+      - "74120"
+      - "70209"
+      - "71202"
+      - "71106"
+
+  title_normalization:
+    rules:
+      - "Gunakan huruf kapital normal, bukan semua huruf besar."
+      - "Samakan istilah 'non Hunian' menjadi 'Non Hunian'."
+      - "Samakan 'Commisioning' menjadi 'Commissioning' untuk display, tetapi simpan ejaan asli sebagai alias."
+      - "Samakan 'Pengambangan' menjadi 'Pengembangan' untuk display, tetapi simpan catatan koreksi."
+
+  source_priority:
+    rule: >
+      Jika terdapat konflik antara daftar awal dan lampiran persyaratan terbaru,
+      tampilkan data terbaru sebagai prioritas operasional, tetapi tandai field yang berbeda
+      sebagai needs_review sampai dikonfirmasi admin/LSBU.
+```
+
+---
+
+## 4. Final Alias and Conflict Resolver
+
+```yaml
+consultant_alias_and_conflict_resolver:
+  aliases:
+    IT007:
+      alias_of: IT006
+      reason: >
+        Daftar awal menggunakan IT007 untuk Hidrolika, Hidrologi, dan Oceanography,
+        sedangkan lampiran persyaratan menggunakan IT006.
+      display_rule: >
+        Jika pengguna mengetik IT007, bot menjawab bahwa IT007 terdeteksi sebagai alias
+        dan menyarankan verifikasi karena lampiran terbaru mencantumkan IT006.
+
+    commissioning:
+      aliases:
+        - "commisioning"
+        - "commissioning"
+        - "testing commissioning"
+        - "uji fungsi"
+        - "startup"
+      mapped_code: AT007
+
+  conflicts:
+    IT006_vs_IT007:
+      primary_code: IT006
+      alias_code: IT007
+      status: needs_review
+      bot_message: >
+        Saya menemukan perbedaan kode untuk layanan Hidrolika, Hidrologi, dan Oceanography.
+        Lampiran terbaru mencantumkan IT006, sedangkan daftar awal mencantumkan IT007.
+        Gunakan IT006 sebagai acuan sementara dan validasikan ke LSBU/admin katalog.
+
+    AT007_kbli_conflict:
+      code: AT007
+      original_kbli: "71202"
+      latest_attachment_kbli: "71106"
+      status: needs_review
+      bot_message: >
+        Untuk AT007 terdapat perbedaan KBLI antara daftar awal dan lampiran terbaru.
+        Daftar awal mencantumkan 71202, sedangkan lampiran terbaru mencantumkan 71106.
+        Kode ini harus divalidasi ke LSBU/admin katalog sebelum pengajuan.
+```
+
+---
+
+## 5. Final Lookup Response with Requirements
+
+```yaml
+tpl_consultant_code_detail_final: >
+  {{code}} — {{title}}
+
+  KBLI:
+  {{kbli}}
+
+  Ruang lingkup:
+  {{group_name}}
+
+  Jenis usaha:
+  {{business_type}}
+
+  Kualifikasi:
+  {{allowed_qualification}}
+
+  Bidang tenaga ahli yang disarankan:
+  {{required_expertise}}
+
+  Ringkasan penggunaan:
+  Sub bidang ini digunakan untuk jasa konsultansi yang berkaitan dengan {{scope_summary}}.
+
+  Checklist awal:
+  1. KBLI pada OSS sesuai dengan sub bidang.
+  2. Pengalaman jasa konsultansi sesuai ruang lingkup.
+  3. Output pekerjaan tersedia, seperti laporan, desain, studi, peta, hasil uji, atau dokumen teknis.
+  4. Tenaga ahli memiliki SKA/SKK aktif.
+  5. Jenjang tenaga ahli sesuai kualifikasi.
+  6. Tenaga ahli tidak menjadi penanggung jawab teknik/klasifikasi di perusahaan lain.
+  7. Dokumen perusahaan dan pengurus lengkap.
+
+  Catatan data:
+  {{source_note}}
+
+  Disclaimer:
+  Informasi ini adalah pemetaan awal. Keputusan resmi tetap melalui LSBU, asesor,
+  OSS, SIJK, dan/atau pejabat berwenang.
+```
+
+---
+
+## 6. Final KBLI Response
+
+```yaml
+tpl_consultant_kbli_result_final: >
+  Hasil pencarian KBLI {{kbli}}:
+
+  Kandidat sub bidang:
+  {{matched_subfields}}
+
+  Catatan:
+  KBLI ini dapat terkait dengan lebih dari satu sub bidang. Pilihan akhir harus
+  dilihat dari jenis layanan konsultansi utama, pengalaman, output pekerjaan,
+  tenaga ahli, dan dokumen pendukung.
+
+  Pertanyaan klarifikasi:
+  {{clarification_question}}
+
+  Opsi lanjutan:
+  - Lihat detail salah satu kode
+  - Bandingkan dua sub bidang
+  - Cek persyaratan permohonan
+  - Cek tenaga ahli tetap
+```
+
+---
+
+## 7. Final Requirement Score Engine
+
+```yaml
+consultant_final_score_engine:
+  score_range: "0-100"
+  components:
+    company_documents:
+      max_score: 15
+      full_score_condition: "semua dokumen perusahaan wajib tersedia"
+      partial_score_condition: "ada dokumen sebagian/tidak tahu"
+      zero_score_condition: "dokumen wajib utama belum ada"
+
+    management_compliance:
+      max_score: 10
+      full_score_condition: "direktur/wakil direktur tidak rangkap jabatan sama"
+      partial_score_condition: "ada rangkap pada posisi komisaris/komanditer dan perlu validasi"
+      zero_score_condition: "rangkap jabatan sama tanpa pengecualian"
+
+    application_limit:
+      max_score: 10
+      full_score_condition: "permohonan baru maksimal 3 klasifikasi dan 6 subklasifikasi"
+      partial_score_condition: "jenis permohonan belum jelas"
+      zero_score_condition: "permohonan baru melebihi batas"
+
+    kbli_subfield_match:
+      max_score: 15
+      full_score_condition: "KBLI sesuai dengan sub bidang"
+      partial_score_condition: "KBLI memiliki banyak kandidat dan perlu klarifikasi"
+      zero_score_condition: "KBLI tidak sesuai"
+
+    expert_documents:
+      max_score: 15
+      full_score_condition: "E-KTP, NPWP, ijazah, SKA/SKK aktif, dan CV tersedia"
+      partial_score_condition: "sebagian dokumen belum pasti"
+      zero_score_condition: "SKA/SKK belum ada atau tidak aktif"
+
+    expert_level_field:
+      max_score: 20
+      full_score_condition: "jenjang dan bidang tenaga ahli sesuai"
+      partial_score_condition: "bidang/jenjang perlu klarifikasi"
+      zero_score_condition: "jenjang atau bidang tidak sesuai"
+
+    expert_double_responsibility:
+      max_score: 5
+      full_score_condition: "tenaga ahli tidak menjadi penanggung jawab di perusahaan lain"
+      partial_score_condition: "status belum tahu"
+      zero_score_condition: "tenaga ahli menjadi penanggung jawab di perusahaan lain"
+
+    consulting_output:
+      max_score: 10
+      full_score_condition: "pengalaman/output jasa konsultansi tersedia"
+      partial_score_condition: "output ada tetapi belum sesuai sub bidang"
+      zero_score_condition: "tidak ada pengalaman/output"
+
+    smap_statement:
+      max_score: 5
+      full_score_condition: "SMAP/surat pernyataan tersedia bila dipersyaratkan"
+      partial_score_condition: "komitmen tersedia tetapi dokumen belum lengkap"
+      zero_score_condition: "tidak ada"
+```
+
+---
+
+## 8. Final Score Result Template
+
+```yaml
+tpl_consultant_final_score_result: >
+  Hasil pra-verifikasi SBU Konsultan:
+
+  Sub bidang:
+  {{code}} — {{title}}
+
+  KBLI:
+  {{kbli}}
+
+  Jenis usaha:
+  {{business_type}}
+
+  Kualifikasi:
+  {{target_qualification}}
+
+  Skor kesiapan:
+  {{score}} / 100
+
+  Status:
+  {{status_label}}
+
+  Rincian skor:
+  1. Dokumen perusahaan: {{score_company_documents}} / 15
+  2. Kepatuhan pengurus: {{score_management_compliance}} / 10
+  3. Batas permohonan: {{score_application_limit}} / 10
+  4. Kesesuaian KBLI dan sub bidang: {{score_kbli_subfield}} / 15
+  5. Dokumen tenaga ahli: {{score_expert_documents}} / 15
+  6. Jenjang dan bidang tenaga ahli: {{score_expert_level_field}} / 20
+  7. Status rangkap tenaga ahli: {{score_expert_double_responsibility}} / 5
+  8. Pengalaman/output konsultansi: {{score_consulting_output}} / 10
+  9. SMAP/surat pernyataan: {{score_smap_statement}} / 5
+
+  Temuan utama:
+  {{issues}}
+
+  Prioritas perbaikan:
+  {{priority_corrections}}
+
+  Rekomendasi:
+  {{recommendations}}
+
+  Catatan:
+  Skor ini hanya pra-verifikasi chatbot. Keputusan resmi tetap mengikuti LSBU,
+  asesor, OSS, SIJK, dan ketentuan yang berlaku.
+```
+
+---
+
+## 9. Final Status Labels
+
+```yaml
+consultant_final_status_labels:
+  85_100:
+    label: "Siap Dikonsultasikan"
+    meaning: >
+      Data awal relatif lengkap untuk dibawa ke LSBU, asesor, atau konsultan perizinan.
+
+  65_84:
+    label: "Perlu Perbaikan Ringan"
+    meaning: >
+      Sebagian data sudah tersedia, tetapi masih ada klarifikasi atau dokumen yang perlu dilengkapi.
+
+  40_64:
+    label: "Perlu Perbaikan Mayor"
+    meaning: >
+      Ada kekurangan penting pada dokumen perusahaan, KBLI, tenaga ahli, pengalaman,
+      atau batas permohonan.
+
+  0_39:
+    label: "Belum Siap"
+    meaning: >
+      Data utama belum cukup atau ada risiko besar seperti rangkap jabatan,
+      tenaga ahli tidak sesuai, atau permohonan melebihi batas.
+```
+
+---
+
+## 10. Session Summary Final
+
+```yaml
+node_consultant_session_summary:
+  type: dynamic_response
+  title: "Ringkasan Konsultasi SBU Konsultan"
+  response_template: >
+    Ringkasan konsultasi SBU Konsultan:
+
+    1. Sub bidang yang dibahas:
+    {{session.selected_code}} — {{session.selected_title}}
+
+    2. KBLI:
+    {{session.selected_kbli}}
+
+    3. Jenis usaha:
+    {{session.business_type}}
+
+    4. Kualifikasi target:
+    {{session.target_qualification}}
+
+    5. Tenaga ahli yang disarankan:
+    {{session.required_expertise}}
+
+    6. Status dokumen perusahaan:
+    {{company_document_status}}
+
+    7. Status pengurus:
+    {{management_compliance_status}}
+
+    8. Status batas permohonan:
+    {{application_limit_status}}
+
+    9. Status tenaga ahli:
+    {{expert_requirement_status}}
+
+    10. Skor kesiapan:
+    {{score}} / 100 — {{status_label}}
+
+    11. Prioritas perbaikan:
+    {{priority_corrections}}
+
+    12. Rekomendasi:
+    {{overall_recommendation}}
+
+    Disclaimer:
+    Ringkasan ini adalah hasil pra-verifikasi awal dan bukan keputusan resmi sertifikasi.
+```
+
+---
+
+## 11. Export Report Template
+
+```yaml
+consultant_export_report_template:
+  title: "Ringkasan Pra-Verifikasi SBU Konsultan"
+  format_options:
+    - pdf
+    - docx
+    - html
+
+  sections:
+    - identity:
+        title: "Identitas Sesi"
+        fields:
+          - session_id
+          - tanggal
+          - nama_perusahaan_optional
+          - jenis_badan_usaha_optional
+
+    - selected_subfield:
+        title: "Sub Bidang yang Dipilih"
+        fields:
+          - code
+          - title
+          - kbli
+          - group_name
+          - business_type
+          - allowed_qualification
+
+    - application_request:
+        title: "Permohonan"
+        fields:
+          - application_type
+          - total_classifications
+          - total_subclassifications
+          - target_qualification
+          - application_limit_status
+
+    - company_documents:
+        title: "Dokumen Perusahaan"
+        fields:
+          - application_form
+          - deed_establishment
+          - deed_amendment
+          - ministry_approval
+          - company_npwp
+          - domicile_or_nib
+          - management_ektp_npwp
+          - director_cv
+          - pjbu_photo_jpeg
+          - active_email_phone
+
+    - management_compliance:
+        title: "Kepatuhan Pengurus"
+        fields:
+          - director_same_position_other_company
+          - vice_director_same_position_other_company
+          - exception_role
+          - management_compliance_status
+
+    - expert_requirement:
+        title: "Tenaga Ahli"
+        fields:
+          - expert_level
+          - expert_field
+          - required_expertise
+          - expert_certificate
+          - expert_responsible_other_company
+          - expert_requirement_status
+
+    - score_result:
+        title: "Hasil Pra-Verifikasi"
+        fields:
+          - score
+          - status_label
+          - issues
+          - priority_corrections
+          - recommendations
+
+    - disclaimer:
+        title: "Catatan"
+        text: >
+          Dokumen ini dihasilkan oleh chatbot sebagai panduan awal. Dokumen ini bukan
+          keputusan sertifikasi, bukan pengganti penilaian LSBU/asesor, dan bukan
+          bukti pemenuhan resmi OSS/SIJK.
+```
+
+---
+
+## 12. Fallback Final
+
+```yaml
+consultant_fallback_final:
+  first_fallback:
+    condition: "intent_confidence rendah"
+    message: >
+      Maaf, saya belum menangkap maksud Anda. Apakah Anda ingin mencari kode sub bidang,
+      mencari KBLI, mengecek persyaratan, atau mengecek tenaga ahli?
+    buttons:
+      - label: "Cari Kode Sub Bidang"
+        target_node: node_ask_consultant_code
+      - label: "Cari KBLI"
+        target_node: node_ask_consultant_kbli
+      - label: "Persyaratan Permohonan"
+        target_node: node_consultant_requirement_main
+      - label: "Cek Tenaga Ahli"
+        target_node: node_expert_requirement_check
+
+  second_fallback:
+    condition: "fallback_count >= 1"
+    message: >
+      Coba tuliskan dengan format: “Saya mencari SBU Konsultan untuk [jenis jasa]”.
+      Contoh: “Saya mencari SBU Konsultan untuk desain interior” atau
+      “Saya ingin cek tenaga ahli untuk RK003”.
+    buttons:
+      - label: "Cari Berdasarkan Jenis Jasa"
+        target_node: node_ask_consultant_keyword
+      - label: "Bantu Pilih Sub Bidang"
+        target_node: node_consultant_recommendation_intro
+      - label: "Menu Utama"
+        target_node: node_main_menu_konsultan_final
+```
+
+---
+
+## 13. Guardrail Final
+
+```yaml
+consultant_guardrail_final:
+  no_approval_guarantee:
+    trigger:
+      - "pasti lolos"
+      - "pasti disetujui"
+      - "jamin SBU keluar"
+    response: >
+      Saya tidak dapat menjamin SBU disetujui atau diterbitkan. Saya hanya membantu
+      pra-verifikasi awal. Keputusan resmi tetap melalui LSBU, asesor, OSS, dan SIJK.
+
+  no_document_manipulation:
+    trigger:
+      - "cara lolos walau dokumen kurang"
+      - "tenaga ahli pinjaman"
+      - "SKA tidak sesuai"
+      - "pengalaman tidak ada"
+    response: >
+      Saya tidak dapat membantu manipulasi dokumen, tenaga ahli, pengalaman, atau data permohonan.
+      Langkah yang benar adalah melengkapi dokumen dan menyesuaikan tenaga ahli dengan sub bidang.
+
+  expert_conflict_warning:
+    trigger:
+      - "tenaga ahli di perusahaan lain"
+      - "penanggung jawab teknik di tempat lain"
+    response: >
+      Tenaga ahli tidak boleh menjadi penanggung jawab teknik atau penanggung jawab klasifikasi
+      di perusahaan lain. Kondisi ini berisiko menghambat proses permohonan.
+
+  management_conflict_warning:
+    trigger:
+      - "direktur di perusahaan lain"
+      - "wakil direktur di perusahaan lain"
+    response: >
+      Direktur dan wakil direktur tidak boleh menjadi pengurus dengan jabatan yang sama
+      pada perusahaan lain, kecuali sebagai komisaris atau komanditer.
+
+  data_conflict_warning:
+    trigger:
+      - "IT007"
+      - "IT006"
+      - "AT007"
+      - "71106"
+      - "71202"
+    response: >
+      Saya menemukan potensi perbedaan data pada kode/KBLI ini. Gunakan hasil sebagai
+      catatan awal dan validasikan ke LSBU atau admin katalog sebelum pengajuan.
+```
+
+---
+
+## 14. Final Acceptance Criteria
+
+```yaml
+consultant_acceptance_criteria:
+  lookup:
+    - "Bot dapat menjawab detail AR001, AR002, AR003."
+    - "Bot dapat menjawab detail RK001 sampai RK005."
+    - "Bot dapat menjawab detail RT001 sampai RT003."
+    - "Bot dapat menjawab detail AL001 sampai AL004."
+    - "Bot dapat menjawab detail IT001 sampai IT006/IT007 alias."
+    - "Bot dapat menjawab detail AT001 sampai AT007."
+
+  kbli:
+    - "Bot menampilkan semua kandidat untuk KBLI 71101."
+    - "Bot menampilkan semua kandidat untuk KBLI 71102."
+    - "Bot menampilkan kandidat untuk 74120, 70209, 71202, dan 71106."
+    - "Bot memberi catatan needs_review untuk konflik AT007."
+
+  requirements:
+    - "Bot menampilkan checklist dokumen perusahaan."
+    - "Bot menampilkan checklist dokumen tenaga ahli."
+    - "Bot mengecek batas 3 klasifikasi dan 6 subklasifikasi."
+    - "Bot mengecek syarat K1 minimal Ahli Muda."
+    - "Bot mengecek syarat M1 tanpa pengalaman minimal Ahli Madya."
+    - "Bot mengecek rangkap jabatan direktur/wakil direktur."
+    - "Bot mengecek tenaga ahli tidak menjadi penanggung jawab di perusahaan lain."
+
+  scoring:
+    - "Bot menghasilkan skor 0-100."
+    - "Bot menampilkan status Siap Dikonsultasikan, Perlu Perbaikan Ringan, Perlu Perbaikan Mayor, atau Belum Siap."
+    - "Bot menampilkan temuan dan prioritas perbaikan."
+
+  safety:
+    - "Bot tidak menjamin kelulusan SBU."
+    - "Bot tidak membantu manipulasi dokumen."
+    - "Bot tidak mengarang kode sub bidang atau KBLI."
+    - "Bot menandai konflik data sebagai needs_review."
+```
+
+---
+
+## 15. Final Definition of Done
+
+```yaml
+consultant_definition_of_done:
+  done_when:
+    - "Katalog sub bidang konsultan sudah dimasukkan ke data source."
+    - "Data AR, RK, RT, AL, IT, dan AT sudah bisa dilookup."
+    - "KBLI lookup sudah menampilkan kandidat ganda."
+    - "Keyword search sudah mengarah ke sub bidang yang relevan."
+    - "Requirement engine aktif."
+    - "Expert check aktif."
+    - "Application limit check aktif."
+    - "Scoring engine aktif."
+    - "Conflict resolver untuk IT006/IT007 dan AT007 aktif."
+    - "Fallback aktif."
+    - "Guardrail aktif."
+    - "Session summary aktif."
+    - "Export report template tersedia."
+```
+
+---
+
+## 16. Final Builder Prompt — Versi Gabungan
+
+```text
+Buat chatbot profesional berbahasa Indonesia bernama “SBU Konsultan Coach”.
+
+Chatbot harus menggunakan katalog sub bidang SBU Konsultan dan persyaratan permohonan SBU Jasa Konsultansi Konstruksi.
+
+Fitur wajib:
+1. Lookup kode sub bidang AR, RK, RT, AL, IT, dan AT.
+2. Lookup KBLI 71101, 71102, 74120, 70209, 71202, dan 71106.
+3. Keyword search berdasarkan jenis jasa konsultansi.
+4. Rekomendasi sub bidang melalui pertanyaan bertahap.
+5. Perbandingan dua sub bidang.
+6. Checklist dokumen perusahaan.
+7. Checklist dokumen tenaga ahli.
+8. Cek batas permohonan baru maksimal 3 klasifikasi dan 6 subklasifikasi.
+9. Cek syarat K1: minimal Ahli Muda per klasifikasi.
+10. Cek syarat M1 tanpa pengalaman: minimal Ahli Madya per 2 subklasifikasi.
+11. Cek direktur/wakil direktur tidak rangkap jabatan sama di perusahaan lain, kecuali komisaris/komanditer.
+12. Cek tenaga ahli tidak menjadi penanggung jawab teknik/klasifikasi di perusahaan lain.
+13. Cek kesesuaian bidang tenaga ahli dengan sub bidang.
+14. Pra-verifikasi dengan skor 0-100.
+15. Status hasil: Siap Dikonsultasikan, Perlu Perbaikan Ringan, Perlu Perbaikan Mayor, atau Belum Siap.
+16. Conflict resolver untuk IT006/IT007 dan AT007.
+17. Guardrail anti manipulasi data/dokumen.
+18. Ringkasan konsultasi dan export report.
+
+Aturan:
+- Jangan menjamin SBU pasti disetujui.
+- Jangan mengarang kode, KBLI, atau persyaratan.
+- Jika data konflik, beri label needs_review.
+- Jika tenaga ahli atau pengurus rangkap tidak sesuai, beri peringatan risiko.
+- Selalu jelaskan bahwa hasil chatbot hanya pra-verifikasi awal dan keputusan resmi tetap melalui LSBU, asesor, OSS, SIJK, atau pejabat berwenang.
+```
+
+Dengan ini paket **SBU Konsultan Coach** sudah siap sebagai konfigurasi builder lengkap: katalog, requirement engine, expert engine, scoring, conflict resolver, guardrail, fallback, summary, dan export report.

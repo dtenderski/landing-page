@@ -1,0 +1,127 @@
+<aside>
+🔍
+
+**Tujuan dokumen:** Audit konsistensi referensi 9 agen + 3 alat bantu (Otak Proyek modul A/B/C + 5 kalkulator) setelah ABD v1.1 live. Hasil: Capability Registry sebagai single source of truth untuk Sprint 4 orchestration + Gap Analysis KB yang harus diisi sebelum / saat orchestration aktif.
+
+</aside>
+
+## 1. Inventaris Komponen KONSTRA
+
+### 1.1 Agen Spesialis (9 agen)
+
+| **Agent** | **Domain** | **Patch Status** | **Modul Otak Proyek** |
+| --- | --- | --- | --- |
+| AGENT-PROXIMA | Project Mgmt | ✅ v1.1 ready | A, B, C |
+| AGENT-TEKNIK | Engineering | ✅ v1.1 ready | A, B |
+| AGENT-KONTRAK | Kontrak/Tender | ✅ v1.1 ready | A, B, C |
+| AGENT-SAFIRA | K3/SMKK | ✅ v1.1 ready | A, B |
+| AGENT-MUTU | Quality | ✅ v1.1 ready | B, C |
+| AGENT-ENVIRA | Environment | ✅ v1.1 ready | A, B, C |
+| AGENT-EQUIPRA | Equipment | ✅ v1.1 ready | A, B |
+| AGENT-LOGIS | Supply Chain | ✅ v1.1 ready | A, B |
+| AGENT-FINTAX | Finance & Tax | ✅ v1.1 ready | A, B, C |
+
+### 1.2 Knowledge Bases (existing)
+
+| **KB** | **Status** | **Dipakai oleh agen** |
+| --- | --- | --- |
+| [KB-EVM — Earned Value Management & Kalkulator BCWP/CPI/SPI/EAC](https://www.notion.so/KB-EVM-Earned-Value-Management-Kalkulator-BCWP-CPI-SPI-EAC-f92c7b79f82c4313814c64c3f81f2b30?pvs=21) | ✅ Live | PROXIMA, FINTAX |
+| [KB-FIDIC & KB-KONTRAK — Klausul Kunci + Template Notice of Claim](https://www.notion.so/KB-FIDIC-KB-KONTRAK-Klausul-Kunci-Template-Notice-of-Claim-9884329b945e478d9648208aff923d57?pvs=21) | ✅ Live | KONTRAK, FINTAX, PROXIMA |
+| [KB-RKK — Rencana Keselamatan Konstruksi (SMKK Permen PUPR 8/2023)](https://www.notion.so/KB-RKK-Rencana-Keselamatan-Konstruksi-SMKK-Permen-PUPR-8-2023-70e5d979615e49f8bbde7d8613a7d871?pvs=21) | ✅ Live | SAFIRA, KONTRAK |
+
+### 1.3 Alat Bantu (Kalkulator)
+
+| **Kalkulator** | **Status** | **Coordinator-Worker Sprint 4** |
+| --- | --- | --- |
+| [Alat Bantu — Kalkulator PPh Final 4(2) Jasa Konstruksi (PP 9/2022)](https://www.notion.so/Alat-Bantu-Kalkulator-PPh-Final-4-2-Jasa-Konstruksi-PP-9-2022-28f2c83f9f524a70b60bf20d2eb4aee8?pvs=21) | ✅ Live | Coord: FINTAX (sub-tool) |
+| [Alat Bantu — Kalkulator OEE (Overall Equipment Effectiveness)](https://www.notion.so/Alat-Bantu-Kalkulator-OEE-Overall-Equipment-Effectiveness-00c0f1ba37a844d5a725cf3a6951cdd4?pvs=21) | ✅ Live | Coord: EQUIPRA (sub-tool) |
+| [Alat Bantu — Kalkulator EOT (Time Impact Analysis)](https://www.notion.so/Alat-Bantu-Kalkulator-EOT-Time-Impact-Analysis-f2c7301d1b604332bf5987583cfedcd2?pvs=21) | ✅ Live | **Coord Sprint 4 Showcase B** (workers: PROXIMA + KONTRAK + FINTAX) |
+
+## 2. Capability Registry (Single Source of Truth)
+
+Matriks ini adalah **kontrak antar-agen** untuk ABD-6 (Inter-Agent Call). Update setiap kali ada agen/KB baru.
+
+| **Agent** | **Triggers OUT (panggil agen lain)** | **Triggers IN (dipanggil oleh)** | **KB Wajib** |
+| --- | --- | --- | --- |
+| PROXIMA | FINTAX (cost), KONTRAK (klaim/EOT/VO), EQUIPRA+LOGIS (resource), SAFIRA (insiden), MUTU (NCR), ENVIRA (AMDAL), TEKNIK (DED change) | KONTRAK (schedule impact), SAFIRA (insiden), MUTU (defect), LOGIS (late delivery), EQUIPRA (breakdown), ENVIRA (AMDAL revisi), TEKNIK (rev DED) | KB-EVM, KB-FIDIC (untuk EOT) |
+| TEKNIK | FINTAX+KONTRAK (VE), PROXIMA (schedule), LOGIS (material), SAFIRA (BIM clash), MUTU (test fail) | PROXIMA (rev DED), MUTU (root cause), KONTRAK (DED scope) | **KB-BIM** ⚠️ gap, KB-FIDIC, **KB-AHSP** ⚠️ gap |
+| KONTRAK | FINTAX (cost claim), PROXIMA (schedule), SAFIRA (K3 incident), MUTU (defect), ENVIRA (env breach), SBU/SKK Coach (tender) | SEMUA agen lain bila ada disputable issue | KB-FIDIC, KB-RKK, **KB-Permen-PUPR-PBJ** ⚠️ partial |
+| SAFIRA | PROXIMA+KONTRAK+FINTAX (insiden), MUTU (NC K3), ENVIRA (B3), EQUIPRA (SIA/SIO), KONTRAK (RKK tender) | EQUIPRA (alat berisiko), ENVIRA (limbah B3), MUTU (test K3) | KB-RKK, **KB-IBPR-Library** ⚠️ gap |
+| MUTU | PROXIMA+KONTRAK (NCR), LOGIS (material reject), SAFIRA (test K3), FINTAX (rework cost) | PROXIMA (NCR follow-up), TEKNIK (test fail), LOGIS (incoming) | **KB-ITP-Library** ⚠️ gap, KB-FIDIC (testing clauses) |
+| ENVIRA | SAFIRA+KONTRAK (B3 risk), PROXIMA (AMDAL revisi), FINTAX+KONTRAK (penalti) | SAFIRA (limbah B3 risiko K3), KONTRAK (env compliance) | **KB-AMDAL-UKL-UPL** ⚠️ gap, **KB-Limbah-B3** ⚠️ gap |
+| EQUIPRA | PROXIMA+LOGIS+KONTRAK (breakdown), SAFIRA (insiden alat), FINTAX (cost), LOGIS (sparepart) | PROXIMA (resource leveling), SAFIRA (SIA/SIO), MUTU (alat akurasi) | **KB-OEE-Benchmark** ⚠️ gap, KB-Permenaker-8-2020 |
+| LOGIS | PROXIMA+KONTRAK+FINTAX (late delivery), SAFIRA (storage), MUTU (reject), KONTRAK (tender pricing) | TEKNIK (material spec), MUTU (incoming), EQUIPRA (sparepart) | **KB-AVL-Vendor** ⚠️ gap, **KB-Lead-Time-Material** ⚠️ gap |
+| FINTAX | PROXIMA (schedule shift), KONTRAK (klaim biaya), LOGIS (material cost), EQUIPRA (equip cost) | SEMUA agen lain bila ada cost/tax impact | KB-EVM, **KB-PPh-PPN** ⚠️ partial (ada Kalkulator PPh tapi belum KB textual) |
+
+## 3. Gap Analysis — KB yang Harus Dibangun
+
+Dari Capability Registry, ada **8 KB gap** yang menjadi bottleneck untuk Sprint 4 orkestrasi optimal:
+
+| **KB Gap** | **Untuk agen** | **Prioritas** | **Estimasi effort** |
+| --- | --- | --- | --- |
+| KB-AHSP (Analisa Harga Satuan Pekerjaan) | TEKNIK, FINTAX, KONTRAK | 🟥 Tinggi | 2–3 hari (referensi Permen PUPR 1/2022) |
+| KB-AMDAL/UKL-UPL Library | ENVIRA, KONTRAK | 🟥 Tinggi | 3–4 hari (PP 22/2021 + Permen LHK 4/2021) |
+| KB-Permen-PUPR-PBJ (lengkap) | KONTRAK, FINTAX, LOGIS | 🟥 Tinggi | 2 hari (sudah ada partial referensi) |
+| KB-AVL Vendor Konstruksi Indonesia | LOGIS | 🟧 Sedang | 4–5 hari (perlu kurasi vendor list) |
+| KB-ITP Library per pekerjaan | MUTU | 🟧 Sedang | 3 hari (turunan dari SNI material) |
+| KB-IBPR Library K3 Konstruksi | SAFIRA | 🟧 Sedang | 3 hari (turunan dari Permen PUPR 8/2023) |
+| KB-Limbah B3 Konstruksi | ENVIRA, SAFIRA | 🟧 Sedang | 2 hari (Permen LHK 6/2021) |
+| KB-BIM Implementation Guide | TEKNIK | 🟩 Rendah | 4 hari (ISO 19650 + lokal practice) |
+| KB-OEE Benchmark Konstruksi | EQUIPRA | 🟩 Rendah | 2 hari (industry data) |
+| KB-Lead-Time Material | LOGIS | 🟩 Rendah | 2 hari (table + supplier survey) |
+| KB-PPh & PPN Konstruksi (textual) | FINTAX, KONTRAK | 🟧 Sedang | 2 hari (PP 9/2022 + UU HPP) |
+
+**Total estimasi:** 11 KB × ±3 hari = ~33 hari kerja. Bisa dikerjakan paralel oleh tim atau bertahap selama Sprint 4.
+
+## 4. Strategi Pengisian KB Gap
+
+### Opsi A — Tunda KB, pakai patch v1.1 sebagaimana adanya
+
+- Sprint 4 orkestrasi tetap jalan dengan worker-agen yang sudah ABD-compliant.
+- Heuristik default di patch v1.1 cukup untuk fallback.
+- Risiko: confidence skor rata-rata mungkin di kisaran 65–75% saja.
+
+### Opsi B (rekomendasi) — KB Tinggi dulu, paralel dengan Sprint 4
+
+- Bangun 3 KB Tinggi (AHSP, AMDAL/UKL-UPL, Permen PUPR PBJ) **paralel** dengan Sprint 4 P1–P2.
+- Workers TEKNIK, ENVIRA, KONTRAK akan upgrade saat KB live.
+- Confidence skor rata-rata bisa naik ke 75–85%.
+
+### Opsi C — Full KB sebelum Sprint 4
+
+- Selesaikan 11 KB dulu, baru aktivasi Sprint 4.
+- Hasil confidence terbaik tapi delay Sprint 4 ~6–8 minggu.
+
+## 5. Schema Capability Registry sebagai Database Notion
+
+Saran: bikin database Notion **"KONSTRA Capability Registry"** sebagai single source of truth yang dapat di-query oleh manusia & agen. Schema:
+
+| **Property** | **Type** | **Isi** |
+| --- | --- | --- |
+| Nama Agent / Tool | Title | PROXIMA, KONTRAK, KB-EVM, ... |
+| Tipe | Select | Agent / Calculator / KB / Coordinator |
+| Domain | Multi-select | Project Mgmt, Engineering, K3, ... |
+| Patch Status | Select | v1.0 / v1.1 ready / v1.1 deployed / Tested |
+| Triggers OUT | Relation → Capability Registry | Self-referential; agen yg dipanggil |
+| Triggers IN | Relation → Capability Registry | Two-way relation |
+| KB Dependencies | Relation → KB pages | KB yang dirujuk |
+| Sprint Active | Multi-select | Sprint 1, 2, 3, 4 |
+| Last Audit | Date | tanggal field test terakhir |
+| Confidence Avg | Number | rata-rata dari telemetry |
+
+Mau saya buat database-nya sekarang? Tinggal bilang saja, saya bikin + populate semua 9 agen + 3 kalkulator + 3 KB existing + 11 KB gap-flag.
+
+## 6. Action Items
+
+- [ ]  **CR-1.** Tinjau & approve Opsi A/B/C strategi pengisian KB.
+- [ ]  **CR-2.** Bila Opsi B/C: kick-off pembangunan 3 KB Tinggi (AHSP, AMDAL, Permen PUPR PBJ).
+- [ ]  **CR-3.** Bangun database "KONSTRA Capability Registry" sebagai SSOT.
+- [ ]  **CR-4.** Tambah field `kbDependencies` di setiap patch v1.1 (referensi ke KB Notion URL) saat micro-patch berikutnya.
+- [ ]  **CR-5.** Tinjau ulang Capability Registry tiap sprint — jadikan checkpoint wajib di runbook.
+
+<aside>
+🧭
+
+**Posisi strategis:** Saat 11 KB gap terisi + Sprint 4 P2 live + Capability Registry jadi database Notion, KONSTRA mencapai **maturity "agentic-native"** — user input minimal, agen kolaborasi otomatis, KB jadi referensi rutinitas, semua observable. Itulah finishing line tahap Anti-Blocking.
+
+</aside>

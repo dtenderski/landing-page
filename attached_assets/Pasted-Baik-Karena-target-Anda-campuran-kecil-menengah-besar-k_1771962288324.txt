@@ -1,0 +1,109 @@
+Baik. Karena target Anda campuran (kecil–menengah–besar + konsultan), saya sarankan gaya:
+
+> ✅ **Semi-formal (praktis, tapi tetap profesional)**
+
+Tidak terlalu kaku, tapi tetap terasa expert compliance.
+
+Berikut paket lengkap yang bisa langsung Anda tempel sebagai **Greeting + Input Instruction** di chatbot **Perizinan Usaha — Legal Compliance & Roadmap Advisor**.
+
+---
+
+# 🎯 GREETING UTAMA (Versi Semi-Formal Profesional)
+
+Silakan tempel sebagai opening message:
+
+---
+
+**Selamat datang di Legal Compliance & Roadmap Advisor – Perizinan Usaha Jasa Konstruksi.**
+
+Chatbot ini membantu Anda:
+
+✔ Memvalidasi status legalitas usaha (NIB, KBLI, IUJK, Akta, NPWP)
+✔ Mengidentifikasi risiko administratif & potensi gugur tender
+✔ Mendeteksi potensi mismatch data antar dokumen
+✔ Memberikan roadmap perbaikan 30–60 hari
+
+Untuk memulai, silakan kirimkan salah satu dari berikut:
+
+1️⃣ Ringkasan legalitas (jika sudah ada format LICENSING_SUMMARY)
+atau
+2️⃣ Data izin usaha Anda dalam bentuk bebas (boleh poin-poin atau narasi)
+
+Minimal informasi yang membantu:
+
+* Nama badan usaha:
+* Nomor & status NIB:
+* KBLI konstruksi yang dimiliki:
+* Status IUJK (jika ada):
+* Tanggal akta/perubahan terakhir:
+* NPWP badan usaha:
+
+Jika belum lengkap, kirim saja data yang tersedia. Analisis tetap bisa dilakukan dengan penandaan verifikasi.
+
+---
+
+# 🧠 VERSI SINGKAT (Jika Anda ingin lebih ringkas)
+
+Jika Anda ingin versi lebih padat:
+
+---
+
+Silakan kirim data legalitas usaha Anda (NIB, KBLI, IUJK, Akta, NPWP).
+Jika sudah memiliki LICENSING_SUMMARY, Anda bisa langsung paste di sini.
+Data tidak lengkap tetap bisa dianalisis.
+
+---
+
+---
+
+# 🔥 INPUT ACCELERATOR (Optional tapi sangat membantu UX)
+
+Anda bisa tambahkan bagian ini di bawah greeting untuk mempercepat:
+
+---
+
+### Template Cepat (boleh copy & isi)
+
+```
+Nama Badan Usaha:
+NIB (nomor + status):
+KBLI konstruksi:
+IUJK (status + berlaku sampai):
+Akta terakhir (tanggal):
+NPWP badan:
+Catatan tambahan:
+```
+
+---
+
+Ini mengurangi kebingungan user tanpa perlu fitur form builder.
+
+---
+
+# 🎯 Sekarang: Konsistensi Ekosistem
+
+Dengan ini, seri Anda sudah memiliki:
+
+* TRC → Tender Readiness
+* ECSG → Executive Compliance
+* SKK Advisor
+* SBU Advisor
+* Perizinan Usaha (Legal Compliance + Roadmap)
+* LICENSING_SUMMARY Protocol
+
+Secara arsitektur, Anda sekarang sudah punya:
+
+> Compliance Operating System untuk Jasa Konstruksi
+
+Dan semua itu tanpa mengubah fundamental platform.
+
+---
+
+# 📌 Pertanyaan Strategis Berikutnya
+
+Sekarang Anda punya dua arah perkembangan:
+
+A) Perkuat integrasi antar modul (standarisasi semua SUMMARY: SKK_SUMMARY v1, SBU_SUMMARY v1, dll)
+B) Mulai bangun positioning & packaging produk (branding, tiering layanan, struktur hybrid consulting)
+
+Mana yang ingin kita dorong dulu?

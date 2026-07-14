@@ -1,0 +1,82 @@
+<aside>
+🏛️
+
+**Playbook Akreditasi LSP oleh KAN**
+
+Acuan kerja Tim Pusat LSP SDMKI untuk pengajuan, pemeliharaan, dan perluasan ruang lingkup akreditasi LSP berdasarkan **SNI ISO/IEC 17024**, **KAN U-01**, dan **KAN K-09**.
+
+**Versi:** 1.0 | **Berlaku:** 28 April 2026
+
+</aside>
+
+## 1. Tujuan & Ruang Lingkup
+
+- Memastikan LSP SDMKI memenuhi seluruh persyaratan **SNI ISO/IEC 17024** sebelum mengajukan akreditasi ke KAN.
+- Menjadi rujukan baku bagi Tim Pusat dalam menyiapkan dokumentasi, asesmen lapangan, witness assessment, hingga keputusan akreditasi.
+- Mengintegrasikan jalur **Lisensi BNSP** (wajib operasional) dengan **Akreditasi KAN** (pengakuan internasional IAF MLA).
+
+## 2. Dua Jalur Pengakuan LSP
+
+| **Aspek** | **Lisensi BNSP** | **Akreditasi KAN** |
+| --- | --- | --- |
+| Standar acuan | Pedoman BNSP 201, 202, 210 | SNI ISO/IEC 17024 + KAN U-01 + KAN K-09 |
+| Pasar | Tenaga kerja domestik | Regional/global (IAF MLA) |
+
+## 3. Standar & Dokumen Acuan
+
+- **SNI ISO/IEC 17024** — Persyaratan umum lembaga sertifikasi person.
+- **KAN U-01 Rev.1** — Syarat dan Aturan Akreditasi LPK.
+- **KAN K-09** — Persyaratan Khusus Lembaga Sertifikasi Personal.
+- **KAN U-03 Rev.2** — Pedoman penggunaan simbol akreditasi KAN.
+- **ISO/IEC 17011** — Standar yang dipenuhi KAN sebagai badan akreditasi.
+
+## 4. Tahapan Proses Akreditasi (Ringkas)
+
+```mermaid
+flowchart LR
+	A["1. Pendaftaran via KANMIS"] --> B["2. Evaluasi Permohonan"]
+	B --> C["3. Pembayaran SIMPONI"]
+	C --> D["4. Asesmen Awal<br>(Dokumen + Lapangan)"]
+	D --> E["5. Witness Assessment"]
+	E --> F["6. Tindakan Perbaikan"]
+	F --> G["7. Keputusan Akreditasi"]
+	G --> H["8. Surveilan & Re-asesmen"]
+```
+
+1. **Pendaftaran online** di `layanan.kan.or.id` (KANMIS) — formulir, dokumentasi mutu, legalitas, audit internal, tinjauan manajemen.
+2. **Evaluasi kelengkapan & kesiapan sumber daya** asesor.
+3. **Pembayaran asesmen** via SIMPONI (kode billing aktif 7 hari).
+4. **Asesmen awal**: tinjauan dokumen + asesmen lapangan di kantor LSP.
+5. **Witness assessment**: penyaksian langsung uji kompetensi pada skema yang diajukan.
+6. **Tindakan perbaikan** dalam batas waktu yang ditetapkan asesor.
+7. **Keputusan** oleh Council/Komite Pengambilan Keputusan KAN.
+8. **Surveilan berkala** + re-asesmen + witness saat perluasan ruang lingkup.
+
+## 5. Klausul Wajib SNI ISO/IEC 17024 (Mapping Cepat)
+
+| **Klausul** | **Tema** | **Bukti yang Disiapkan** | 4 | Persyaratan umum (legal, ketidakberpihakan, keuangan, akuntabilitas) | Akta pendirian, SK, laporan keuangan, kebijakan ketidakberpihakan |
+| --- | --- | --- | --- | --- | --- |
+| 5 | Persyaratan struktural | Struktur organisasi, komite skema, mekanisme pengambilan keputusan | 6 | Sumber daya (personel, subkontraktor, fasilitas) | Daftar asesor, kontrak, MoU TUK, daftar fasilitas |
+| 7 | Rekaman & informasi | SOP rekaman, kebijakan kerahasiaan, log audit, e-archive | 8 | Skema sertifikasi | Dokumen skema per jabatan kerja, validasi skema, komite skema |
+| 9 | Persyaratan proses (aplikasi, asesmen, keputusan, sertifikasi, surveilan, re-sertifikasi, banding & keluhan) | SOP P-01 s.d. P-09, formulir APL-01/02, MMA, MAK, MMR, log keputusan | 10 | Sistem manajemen | Manual mutu, audit internal, tinjauan manajemen, tindakan korektif |
+
+## 6. Output Tim Pusat untuk Setiap Tahap
+
+- **Pra-pengajuan:** Manual Mutu v.akhir, register skema, register asesor, register TUK, hasil audit internal terbaru, notulen tinjauan manajemen.
+- **Pengajuan:** Paket dokumen KANMIS lengkap + bukti pembayaran SIMPONI.
+- **Asesmen lapangan:** Daftar hadir, log temuan, dokumen pendukung, demonstrasi proses.
+- **Witness:** Skema yang akan diwitness + jadwal uji riil + jadwal asesor + asesi.
+- **Pasca-temuan:** Berkas tindakan perbaikan, evidensi closing, root-cause analysis.
+- **Pasca-keputusan:** Sertifikat akreditasi, simbol KAN aktif, sosialisasi internal.
+
+## 7. Keterkaitan dengan Playbook Lain
+
+- Saling rujuk dengan **SOP Onboarding LSP SDMKI menuju Akreditasi KAN**.
+- Input dari **Gap-Analysis ISO/IEC 17024**.
+- Sinkron dengan kebijakan **Sertifikasi Nir Kertas & Asesmen Jarak Jauh** (proposal LSP SDMKI v.1.0, 19 April 2026) — KAN K-09 mengizinkan asesmen jarak jauh selama integritas terjaga.
+
+## 8. Kontak Resmi KAN
+
+- 📧 `sertifikasi@bsn.go.id`
+- ☎ +62 812 1314 0054 (Direktorat Akreditasi Lembaga Inspeksi & Lembaga Sertifikasi)
+- 🌐 `kan.or.id` | Portal: `layanan.kan.or.id`

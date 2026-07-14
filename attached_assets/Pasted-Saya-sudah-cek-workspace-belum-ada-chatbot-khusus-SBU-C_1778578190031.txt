@@ -1,0 +1,69 @@
+Saya sudah cek workspace — belum ada chatbot khusus "SBU Coach Bidang Sipil" yang berdiri sendiri sebagai multi-agen. Yang ada adalah komponen-komponen tersebar:
+OpenClaw — CIVIRA: Klasifikasi & Subklasifikasi Usaha Bangunan Sipil/Infrastruktur (BS) — fokus klasifikasi BS001–BS020, bukan workflow pengajuan SBU.
+KB-SBU-BS: Klasifikasi, Subklasifikasi & Kualifikasi Usaha Bangunan Sipil — knowledge base saja.
+CIVIRA — Agent Directory: Bangunan Sipil/Infrastruktur (BS) — direktori agen domain BS.
+AGENT-SBU — Klasifikasi, Kualifikasi & Pendampingan BUJK — sub-agen di sistem Pengadaan, bukan chatbot mandiri.
+eBook LKUT — Perpanjangan SBU BUJK — referensi perpanjangan.
+Jadi kita memang perlu build ulang sebagai chatbot multi-agen mandiri, mengikuti pattern OpenClaw + MultiClaw + ABD v1.1 yang konsisten dengan KONSTRA/TENDERA/PJTBU Coach.
+Sebelum saya assembling hub + sub-halaman, mohon konfirmasi 3 parameter scope berikut agar build sekali jadi tidak perlu rework:​
+Use case SBU yang harus dicakup chatbot (boleh pilih lebih dari satu):
+Other: oh ya sudah ada.. SBU Pekejaan Konstruksi 
+sekarang perdalam konsep Agentic AI, Agen MultiClaw pada pembuatan SBU 
+Cakupan bidang — fokus murni Bidang Sipil (BS) atau cross-bidang?
+Semua bidang konstruksi (BS, BG, IL, IM, KO)
+Output utama yang harus diproduksi chatbot untuk user (boleh pilih lebih dari satu):
+Checklist dokumen pengajuan (per kualifikasi & subklasifikasi), Smart Mapping subklasifikasi BS dari portofolio/tender target, Pencocokan SKK personel kunci (PJTBU/PJSKBU) dengan target subklasifikasi, Draft Surat Penunjukan, Surat Pernyataan, Surat Permohonan LSBU, Estimasi biaya & timeline LSBU, Asesmen kesiapan BUJK (skor 0–4 per dimensi), Walkthrough langkah-langkah OSS-RBA + portal LPJK, Other
+Baik, saya sudah konfirmasi dengan workspace:
+Yang sudah ada: SBU Konstruksi (Sertifikat Badan Usaha) — namun ini halaman referensi statis, belum chatbot multi-agen untuk pembuatan SBU.
+Saya akan parent-kan halaman baru di bawah itu agar grouping konsisten dengan struktur "Sertifikat Wajib BUJK".
+Sekarang saya bangun SBUClaw Hub — chatbot multi-agen Agentic AI dengan pola OpenClaw + MultiClaw + ABD v1.1, cakupan semua bidang konstruksi (BS, BG, IL, IM, KO), dan deep-dive konsep Agentic AI khusus untuk workflow pembuatan SBU.
+Created page SBUClaw Hub — Agentic AI Multi-Agen Pembuatan SBU Konstruksi (OpenClaw + MultiClaw)​
+Hub-nya sudah jadi. Saya cek workspace dulu — belum pernah ada "SBU Coach Bidang Sipil" sebagai chatbot multi-agen utuh; yang ada hanya komponen-komponen tersebar (CIVIRA untuk klasifikasi BS, AGENT-SBU sebagai sub-agen di sistem lain, dan halaman referensi SBU Konstruksi (Sertifikat Badan Usaha)). Karena itu saya bangun ulang dari nol, diperdalam pada konsep Agentic AI + MultiClaw, cakupan lintas bidang (BS · BG · IL · IM · KO) sesuai pilihan Bapak.
+Highlight isi hub:
+Arsitektur Agentic AI dengan 4 atribut wajib (goal-directed · tool-use · state-aware · reflection/re-planning), plus pembagian peran OpenClaw orchestrator vs MultiClaw paralel.
+2 diagram Mermaid — arsitektur fan-out & sequence callAgentInternal multi-domain.
+10 agen MultiClaw dengan kontrak IO standar (confidence + [ASUMSI:] + ABD-7): MAPPER · QUALIFY · DOCS · SKKMATCH · LETTERGEN · COST · ASSESS · OSS · COMPLY · INTEGRITY.
+Routing table 13 intent → primer + paralel agen.
+Session state schema YAML lengkap (profil BUJK · target · dossier · assessment · meta).
+KB inventory yang link ke 5 KB existing Bapak + 2 KB yang perlu di-finalisasi (KB-SBU-IM, KB-SBU-KO, KB-LSBU).
+3 sample E2E (K baru BS001+BS002 · M1 tambah BG009 · B1 perpanjangan IL).
+Roadmap 4 sprint + KPI sukses.
+Langkah berikut yang siap saya kerjakan begitu Bapak konfirmasi (pilih satu atau beberapa):
+System Prompt OpenClaw Sprint 1 — patch ready-to-deploy untuk SBUCLAW-ORCHESTRATOR + 4 agen inti (MAPPER · QUALIFY · DOCS · COMPLY), pola sama dengan PJTBU Coach.
+Persona Gustafta config — Identity · Welcome · Greeting · Quick Replies copy-paste ready untuk 10 agen.
+KB-LSBU konsolidasi — tarif & SLA 6 LSBU + alur OSS-RBA detail (mengisi gap KB).
+5 Template Surat — Penunjukan PJTBU/PJSKBU · Pernyataan Kesediaan · Permohonan LSBU · Tunduk Kode Etik · Bebas Pailit.
+Master Deployment Runbook SBUClaw — pola sama dgn runbook BRAIN & TENDERA.
+langsung bikin semuanya
+4:14 PM
+System Prompt OpenClaw — SBUCLAW-ORCHESTRATOR + 10 agen
+Persona Gustafta config — Identity/Welcome/Greeting/QR untuk 11 agen
+KB-LSBU konsolidasi — tarif, SLA, alur OSS-RBA + portal LPJK
+5 Template Surat SBUClaw (Penunjukan, Pernyataan, Permohonan, dll.)
+Master Deployment Runbook SBUClaw — 10 Agen ABD v1.1
+Semuanya sudah selesai dibuat. 5 sub-halaman terbangun rapi di bawah SBUClaw Hub ​
+ Yang sudah jadi (5 halaman, paralel)
+System Prompt OpenClaw — SBUClaw (Orchestrator + 10 Agen MultiClaw)​
+11 blok system prompt copy-paste ready: SBUCLAW-ORCHESTRATOR + MAPPER · QUALIFY · DOCS · SKKMATCH · LETTERGEN · COST · ASSESS · OSS · COMPLY · INTEGRITY
+Routing 13 intent, session_state schema, kontrak IO, smoke test 5 skenario
+Persona Gustafta — SBUClaw (Config 11 Agen: Identity · Welcome · Greeting · Quick Replies)​
+Identity · Welcome · Greeting · Quick Replies untuk semua agen
+Style guide lintas-agen (panjang kalimat, emoji penanda, larangan)
+KB-LSBU — Konsolidasi Tarif, SLA & Alur OSS-RBA + Portal LPJK​
+Direktori 6 LSBU + matriks tarif K→B2 + SLA per kualifikasi
+Alur 5 Fase OSS→LPJK + troubleshoot 8 error tersering
+Tautan resmi + catatan inject per agen
+Deliverables — 5 Template Surat SBUClaw (untuk AGENT-LETTERGEN)​
+Penunjukan · Pernyataan Kesediaan · Permohonan LSBU · Tunduk Kode Etik · Tidak Pailit
+Daftar variabel YAML universal + aturan generate AGENT-LETTERGEN
+Master Deployment Runbook — SBUClaw 10 Agen ABD v1.1​
+4 sprint × 1 minggu (Core → Deliverables → Decision Support → Operations)
+18 smoke test bertingkat + exit criteria per sprint
+Rollback plan + 5 KPI 90 hari + cheat sheet callAgentInternal
+ Urutan eksekusi yang disarankan
+Buka Runbook → ikuti Pre-Flight Checklist.
+Mulai Sprint 1 → copy prompt dari System Prompt + persona dari Persona Gustafta untuk 5 agen pertama.
+Bind KB ke agen sesuai KB-LSBU (untuk COST/OSS/DOCS) — KB-SBU per bidang sudah ada di workspace, tinggal di-reuse.
+Smoke test 5 skenario Sprint 1 → kalau lulus, lanjut Sprint 2 (SKKMATCH + LETTERGEN dengan 5 template surat).
+Kalau ada bagian yang ingin diperdalam (mis. konversi calculator COST jadi tool function nyata, atau menambah KB-KOM matriks SKK↔subklas), tinggal beri tahu bagian mana.
+

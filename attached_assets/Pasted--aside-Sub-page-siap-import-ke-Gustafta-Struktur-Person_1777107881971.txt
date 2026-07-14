@@ -1,0 +1,72 @@
+<aside>
+🤝
+
+**Sub-page siap-import ke Gustafta.** Struktur: Persona → Knowledge Base 3 lapisan → Sumber Resmi.
+
+</aside>
+
+## 🧬 Persona
+
+| **Chatbot Name** | Akreditasi Asosiasi Jasa Konstruksi | **Tagline** | Pencatatan & Akreditasi Asosiasi BU/Profesi Konstruksi |
+| --- | --- | --- | --- |
+| **Description** | Spesialis akreditasi & pencatatan asosiasi badan usaha dan asosiasi profesi jasa konstruksi: dasar Permen PUPR 10/2020, peran Menteri PU & LPJK, SE pendukung, syarat keanggotaan, layanan akreditasi. | **Primary Language** | Bahasa Indonesia |
+| **Series** | S2 — Sertifikasi & Asesor | **Avatar** | 🤝 |
+
+## 📚 Knowledge Base
+
+### 🟦 Foundational — Regulasi, Standar, Data Produk
+
+| **Sumber Resmi** | **Sektor** | **Subsektor** | **URL Sumber** | **Tanggal** |
+| --- | --- | --- | --- | --- |
+| PP No. 22/2020 jo. PP No. 14/2021 | Hukum | PP | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2020/2021 |
+| Permen PUPR No. 9/2020 — Pembentukan LPJK | PU | Permen | [jdih.pu.go.id](http://jdih.pu.go.id) | 2020 |
+| SE Dirjen Bina Konstruksi No. 214/SE/Dk/2022 | PU | SE | [binakonstruksi.pu.go.id](http://binakonstruksi.pu.go.id) | 2022 |
+
+### 🟩 Operational — SOP, Prosedur, FAQ, Template
+
+**Dua jenis asosiasi:**
+
+1. **Asosiasi Badan Usaha (ABU/Asosiasi BU)** — syarat untuk membentuk LSBU.
+2. **Asosiasi Profesi (AP)** — syarat untuk membentuk LSP konstruksi.
+
+**Tiga status:**
+
+- **Tercatat** — didaftarkan di LPJK, syarat awal.
+- **Terakreditasi** — dinilai memenuhi standar (anggota, layanan, organisasi); kompetensi membentuk LPK.
+- **Tidak Terakreditasi** — tidak boleh membentuk LSBU/LSP.
+
+**Kriteria akreditasi (Permen PUPR 10/2020):**
+
+1. Jumlah anggota minimum (provinsi/kab-kota)
+2. Cakupan klasifikasi/subklasifikasi
+3. Pengurus & sekretariat
+4. Sistem manajemen mutu organisasi
+5. Layanan kepada anggota
+6. Akuntabilitas keuangan
+
+**Alur akreditasi:**
+
+Pendaftaran LPJK → Verifikasi dokumen → Penilaian lapangan → Putusan Menteri PU c.q. LPJK → SK Akreditasi (jangka waktu).
+
+**FAQ:**
+
+- *Berapa lama akreditasi?* — Sesuai SK; biasanya 5 tahun, dapat surveilans tahunan.
+- *Asosiasi tercatat tanpa akreditasi boleh apa?* — Kegiatan asosiasi biasa, tidak dapat membentuk LPK konstruksi.
+
+### 🟪 Case Memory — Notulen, Keputusan, Preseden
+
+*TBD — diisi dengan: SK akreditasi asosiasi, surat penolakan akreditasi, daftar asosiasi terakreditasi LPJK, hasil surveilans, kasus pencabutan akreditasi.*
+
+## 🔗 Sumber Resmi
+
+[lpjk.pu.go.id](http://lpjk.pu.go.id) · [binakonstruksi.pu.go.id](http://binakonstruksi.pu.go.id) · [jdih.pu.go.id](http://jdih.pu.go.id) · [peraturan.bpk.go.id](http://peraturan.bpk.go.id)
+
+## ❓ Contoh Pertanyaan
+
+1. Apa beda asosiasi tercatat dan terakreditasi?
+2. Permen PUPR mana yang menjadi dasar akreditasi asosiasi konstruksi?
+3. Sebutkan 6 kriteria utama akreditasi asosiasi.
+
+## 🔗 Halaman induk
+
+[Regulasi Jasa Konstruksi Indonesia — Ringkasan Lengkap](https://www.notion.so/Regulasi-Jasa-Konstruksi-Indonesia-Ringkasan-Lengkap-5a3f66d1250941f18f53a104f957a336?pvs=21) — Bab 16.

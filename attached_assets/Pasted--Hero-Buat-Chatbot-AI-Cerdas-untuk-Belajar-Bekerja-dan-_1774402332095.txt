@@ -1,0 +1,470 @@
+## Hero
+
+**Buat Chatbot AI Cerdas untuk Belajar, Bekerja, dan Berusaha — Tanpa Coding**
+
+<aside>
+⚡
+
+**Versi terbaru landing page (copy + struktur)** untuk Gustafta AI Chatbot Builder.
+
+- Cocok untuk website utama
+- Bisa langsung dipakai untuk desain / implementasi
+</aside>
+
+Platform all-in-one untuk membangun, mengkonfigurasi, dan men-deploy chatbot AI yang memahami konteks Anda. Cocok untuk customer service dan juga untuk **learning & mentoring**, termasuk **BIMTEK (training konstruksi), sertifikasi, quiz, dan toolbox perhitungan** seperti konsep di BimtekKita.
+
+Jawab pertanyaan pelanggan, bantu tim internal, dan tangkap leads 24/7 — sekaligus jadi asisten belajar yang terstruktur.
+
+- **Data terenkripsi**
+- **99,9% uptime**
+- **Support 24/7**
+- **Multi-sektor & multi-channel**
+
+**CTA utama:** Mulai Gratis Sekarang
+
+**CTA sekunder:** Lihat Fitur
+
+*Gratis untuk memulai. Tanpa kartu kredit. Setup ± 7 menit.*
+
+---
+
+## Social Proof (Angka Utama)
+
+### 30+ Sektor Usaha
+
+Dipakai untuk kebutuhan bisnis lintas industri.
+
+### 12 Mini Apps
+
+Tools siap pakai + AI-powered untuk analisis.
+
+### 6+ Channel
+
+Satu chatbot untuk banyak channel.
+
+### 24/7 Aktif
+
+AI selalu siap melayani kapan pun.
+
+---
+
+## Masalah yang Diselesaikan
+
+### Tantangan yang umum terjadi
+
+- Tim customer service kewalahan menjawab pertanyaan berulang
+- Informasi bisnis tersebar dan sulit diakses
+- Peluang hilang di luar jam operasional
+- Biaya operasional naik karena harus melayani multi-channel
+
+### Solusi dengan Gustafta
+
+- **FAQ otomatis 24/7** dengan respons instan
+- **Knowledge base terpusat** sebagai “otak” bisnis
+- **Lead capture otomatis** saat bisnis tutup
+- **Satu chatbot untuk banyak channel** dengan konteks yang konsisten
+
+---
+
+## Cara Kerja (± 30 Menit Sampai Deploy)
+
+Lebih realistis untuk sebagian besar bisnis, terutama jika menyiapkan dokumen dan integrasi pertama kali.
+
+1. **Buat Big Idea & Chatbot (± 10 menit)**
+    - Definisikan brand dan persona
+    - Tentukan tujuan dan gaya jawaban
+2. **Isi Knowledge Base (± 10–15 menit)**
+    - Upload dokumen penting (PDF/PPT/Excel) atau masukkan URL
+    - Rapikan kategori/topik agar mudah ditanya
+3. **Setup Fitur & Mini Apps (± 5–7 menit)**
+    - Aktifkan Mini Apps yang dibutuhkan
+    - Atur “Project Brain” untuk konteks
+4. **Deploy & Uji Coba (± 3–5 menit)**
+    - Hubungkan WhatsApp / web widget
+    - Tes beberapa pertanyaan kunci
+    - Bagikan link chatbot
+
+**CTA:** Coba Sekarang — Gratis
+
+---
+
+## Fitur Utama
+
+### Project Brain
+
+Pusat data & konteks bisnis dalam satu tempat. AI menjawab lebih akurat karena memahami konteks internal.
+
+### Mini Apps (12 Tools)
+
+Gabungan tools siap pakai untuk kebutuhan operasional, seperti:
+
+- Checklist
+- Kalkulator
+- Risk Assessment
+- Progress Tracker
+- Doc Generator
+- Custom Tool
+
+### Hierarki Terstruktur (Domain → Tujuan → Modul → Toolbox → Agen)
+
+Struktur ini dibuat supaya user bisa membangun chatbot **secara bertahap** dan tetap rapi ketika skala bertambah.
+
+- **Domain (Topik)**
+    
+    Payung besar untuk mengelompokkan knowledge dan pengalaman chat.
+    
+    - Output yang diharapkan: daftar topik besar yang konsisten.
+    - Contoh Domain: *Konstruksi*, *Sertifikasi SKK*, *Manajemen Proyek*, *RAB & Estimasi*, *PKB*.
+- **Tujuan**
+    
+    Definisi “user outcome” yang ingin dicapai di dalam satu Domain.
+    
+    - 1 Domain bisa punya banyak Tujuan.
+    - Tujuan sebaiknya spesifik dan terukur (misalnya: *lulus ujian*, *buat RAB*, *cek persyaratan SKK*).
+    - Contoh Tujuan di Domain *Sertifikasi SKK*: *Persiapan ujian*, *Cek persyaratan*, *Simulasi quiz*.
+- **Modul (Big Idea)**
+    
+    Susunan materi/aktivitas untuk mencapai Tujuan.
+    
+    - 1 Tujuan biasanya butuh beberapa Modul.
+    - Modul itu “unit pembelajaran/pekerjaan” yang bisa selesai satu per satu.
+    - Contoh Modul untuk Tujuan *Persiapan ujian*: *Ringkasan materi*, *Latihan soal per bab*, *Tryout*.
+- **Toolbox (Kumpulan Tools & Mini Apps)**
+    
+    Kumpulan alat yang dipakai oleh Modul/Agen.
+    
+    Toolbox sebaiknya tidak berisi “narasi”, melainkan **alat dan template**.
+    
+    - Mini Apps (Checklist, Kalkulator, Risk Assessment, Doc Generator, Progress Tracker, dll.)
+    - Template (template perhitungan, format laporan, format RAB, rubrik penilaian)
+    - Workflow standar (alur mentoring, alur evaluasi kompetensi, alur review dokumen)
+    
+    Prinsipnya:
+    
+    - **Modul = apa yang dikerjakan**
+    - **Toolbox = alat untuk mengerjakan**
+- **Agen (Alat Bantu / Expert Agent)**
+    
+    “Pelaksana” yang berinteraksi dengan user.
+    
+    Agen mengeksekusi Tujuan/Modul dengan bantuan Toolbox dan Knowledge Base.
+    
+    - 1 Domain/Tujuan bisa punya beberapa Agen.
+    - Agen bisa dipisah berdasarkan peran: *Mentor*, *Exam Coach*, *Estimator*, *Reviewer*.
+    - Contoh: *Agen Mentor BIMTEK*, *Agen Quiz & Pembahasan*, *Agen Estimator RAB*, *Agen Konsultan K3*.
+- **OpenClaw**
+    
+    Layer eksekusi untuk Agen agar bisa kerja bertahap (agentic), memakai tools, dan menyelesaikan pekerjaan end-to-end.
+    
+
+---
+
+### Usulan “Wizard” Pembuatan Chatbot (Supaya User Tidak Bingung)
+
+Agar user yang tidak mau mengisi detail tetap bisa membuat chatbot, sebaiknya ada **mode wizard** dengan standar minimal.
+
+<aside>
+🧭
+
+**Tujuan wizard:** 1) cepat deploy, 2) hasil cukup bagus, 3) user tidak perlu paham semua opsi advanced.
+
+</aside>
+
+#### Level 1 — Quick Setup (Minimal wajib, bisa deploy)
+
+**Step 1: Nama Chatbot + Domain**
+
+- Nama chatbot
+- Domain (pilih dari template atau buat baru)
+
+**Step 2: Tujuan Utama**
+
+- Pilih 1 tujuan utama (dropdown template) atau tulis sendiri
+- Output style (pilih): *ringkas*, *detail*, *step-by-step*
+
+**Step 3: Sumber Pengetahuan (Knowledge Base minimal)**
+
+- Pilih salah satu:
+    - Upload 1–3 dokumen, atau
+    - Tempel 1 URL, atau
+    - Tulis ringkasan 5–10 poin (manual)
+
+**Step 4: Channel Deploy**
+
+- Pilih channel: *Web widget* atau *Share link* (default paling mudah)
+
+**Step 5: Test & Deploy**
+
+- Wizard menampilkan 5 pertanyaan contoh (auto-generated)
+- User klik: **Deploy**
+
+**Output setelah selesai (auto dibuat oleh sistem):**
+
+- 1 Domain
+- 1 Tujuan
+- 1 Modul (default) bernama “Modul Inti”
+- 1 Toolbox (default) dengan tools dasar
+- 1 Agen “Agen Utama”
+
+#### Level 2 — Guided Setup (Opsional, hasil lebih tajam)
+
+- Tambah 2–5 FAQ prioritas (pertanyaan yang paling sering ditanya)
+- Tambah 1–3 Modul (misalnya: *Materi*, *Latihan*, *Evaluasi*)
+- Pilih Toolbox (ceklist tools yang diperlukan)
+- Atur persona lebih spesifik: *mentor*, *konsultan*, *coach ujian*
+
+#### Level 3 — Advanced (Untuk power user)
+
+- Multi-agent (mentor + quiz + estimator)
+- Rules & guardrails (boleh/tidak boleh, batasan legal)
+- Integrasi channel tambahan (WhatsApp, API, dll.)
+- Analytics, access control, domain control
+
+---
+
+### Template Wizard Khusus “Mentoring & Learning BIMTEK” (Contoh)
+
+- **Domain:** Konstruksi / Sertifikasi SKK
+- **Tujuan:** Persiapan ujian / Peningkatan kompetensi
+- **Modul default:** Materi Inti, Latihan Soal, Tryout
+- **Toolbox default:** Quiz generator, progress tracker, checklist PKB, kalkulator sederhana
+- **Agen default:** Mentor BIMTEK (utama) + Agen Quiz (opsional)
+
+<aside>
+✅
+
+Dengan desain wizard seperti ini, user cukup isi **minimal** dan chatbot tetap bisa dibuat, sementara detail yang lebih kompleks bisa ditambahkan nanti.
+
+</aside>
+
+### Agentic AI
+
+Kemampuan percakapan yang lebih cerdas:
+
+- Mendengar aktif
+- Retensi konteks
+- Koreksi diri
+- Pemahaman mendalam terhadap bisnis
+
+### Knowledge Base
+
+Upload dan hubungkan sumber data:
+
+- PDF, PPT
+- Excel
+- Gambar, video
+- URL
+
+### Multi-Channel
+
+Satu chatbot, banyak channel:
+
+- WhatsApp
+- Telegram
+- Discord
+- Slack
+- Web Widget
+- REST API
+
+---
+
+## Use Case (Belajar, Kerja, Usaha)
+
+Pilih kebutuhan untuk melihat contoh penerapan:
+
+- **Mentoring & Learning (BIMTEK/Sertifikasi):** modul pembelajaran, progress tracking, quiz interaktif, bank soal, dan AI expert agents (contoh inspirasi: BimtekKita)
+- **Konstruksi & Engineering:** laporan proyek, risk assessment, K3, template perhitungan, RAB, mix design
+- **Pendidikan:** tutor AI, FAQ kampus, dan panduan belajar
+- **Customer Service:** helpdesk otomatis, ticketing, dan eskalasi cerdas
+- **Marketing & Sales:** lead generation, copywriting, dan analisis pasar
+- **Retail & E-Commerce:** rekomendasi produk dan CS otomatis
+- **Keuangan & Perbankan:** analisis finansial, edukasi pajak
+- **Hukum & Legal:** konsultasi awal, review dokumen, panduan regulasi
+- **Hospitality & Pariwisata:** concierge AI, reservasi, info wisata
+- **Properti & Real Estate:** info proyek, simulasi KPR
+- **Kreatif & Media:** brainstorming, content planning, review desain
+- **Logistik & Supply Chain:** tracking pengiriman, optimasi rute, manajemen stok
+
+<aside>
+🔗
+
+Referensi konsep platform BIMTEK: https://linear-snow-8672.d.kiloapps.io/
+
+</aside>
+
+---
+
+## Monetisasi SaaS (Untuk Anda yang Menjual Chatbot)
+
+Gustafta bisa dipakai untuk **membuat chatbot untuk klien** dan memonetisasi sebagai SaaS, tanpa perlu membangun sistem billing dari nol.
+
+### Model monetisasi yang didukung
+
+- **Subscription per chatbot**
+    
+    Contoh: Basic / Pro / Enterprise per chatbot (atau per brand).
+    
+- **Subscription per seat (tim)**
+    
+    Cocok untuk perusahaan yang butuh akses multi-user dan role-based access.
+    
+- **Pay-as-you-go (usage-based)**
+    
+    Tarif berdasarkan kuota pesan, token, atau jumlah sesi.
+    
+- **Add-on berbayar**
+    
+    Misalnya: channel WhatsApp, analytics lanjutan, custom model, domain control, SLA.
+    
+- **Voucher & kupon**
+    
+    Diskon onboarding, promo event, atau paket pelatihan.
+    
+
+### Pengaturan billing yang sederhana
+
+- Tentukan paket, harga, dan limit (misalnya: pesan/bulan, jumlah dokumen KB, jumlah agent)
+- Atur trial (misalnya 7–14 hari) dan upgrade/downgrade
+- Pantau pemakaian lewat analytics untuk dorong upsell
+
+### Contoh paket (bisa disesuaikan)
+
+<aside>
+🟦
+
+**Starter**
+
+- 1 chatbot
+- Web widget + share link
+- Knowledge base dasar
+- Mini apps dasar
+</aside>
+
+<aside>
+🟪
+
+**Pro**
+
+- Multi-channel (termasuk WhatsApp)
+- Analytics dashboard
+- Multi-agent
+- Access control
+</aside>
+
+<aside>
+⬛
+
+**Business/Enterprise**
+
+- SLA & support prioritas
+- Domain control
+- Webhook & API
+- Model custom / private deployment
+</aside>
+
+**CTA:** Lihat Harga
+
+---
+
+## Perbandingan
+
+### Mengapa Gustafta lebih unggul
+
+| Fitur | Gustafta | Kompetitor |
+| --- | --- | --- |
+| Project Brain (data terpusat) | ✅ | ⚠️ Terbatas |
+| Mini Apps (12 tools) | ✅ | ⚠️ Sedikit |
+| Hierarki Series → Big Idea → Toolbox → Agent | ✅ | ❌ |
+| Multi-channel | 6+ channel | 1–2 channel |
+| Multi-model AI (GPT-4o, Claude, DeepSeek, dll.) | ✅ | ⚠️ Limited |
+| Widget & PWA customization | ✅ Lanjutan | Basic |
+| Analytics & laporan otomatis | ✅ | Basic |
+| Monetisasi & voucher system | ✅ | ⚠️ Tidak umum |
+
+---
+
+## Fitur Lanjutan
+
+### Project Snapshot AI
+
+Ringkasan otomatis: status, isu, risiko, dan keputusan terakhir dalam satu laporan.
+
+### Analytics Dashboard
+
+Pantau metrik penting: pesan, sesi, engagement, dan peak hours secara real-time.
+
+### Multi-Model AI
+
+Pilih model sesuai kebutuhan: GPT-4o, GPT-3.5, DeepSeek, Claude, atau model custom via API.
+
+### Widget Customization
+
+Kustomisasi penuh sesuai brand: warna, posisi, ukuran, logo, dan pesan sapaan.
+
+### Access Control & Keamanan
+
+Token per chatbot, mode publik/privat, kontrol domain, dan enkripsi data.
+
+### API & Webhook
+
+REST API dan webhook untuk integrasi dengan CRM/ERP/sistem internal.
+
+---
+
+## Testimoni
+
+> “Gustafta membantu kami membuat chatbot untuk 15 klien dari berbagai industri. Setup cepat dan fleksibel untuk setiap sektor.”
+> 
+
+**Rina Kusuma** — CEO, Digital Agency Jakarta
+
+> “Chatbot WhatsApp kami menjawab 80% pertanyaan pelanggan otomatis. Tim CS bisa fokus pada kasus yang benar-benar butuh sentuhan manusia.”
+> 
+
+**Ahmad Fadli** — Head of Digital, Retail Company
+
+> “Knowledge Base dan Mini Apps sangat powerful. Tutor AI kami sekarang bisa menjawab berdasarkan materi kuliah yang di-upload.”
+> 
+
+**Dewi Pratiwi** — Founder, EdTech Startup
+
+---
+
+## FAQ
+
+- **Apa itu Gustafta?**
+    
+    Gustafta adalah platform untuk membangun chatbot AI yang memahami konteks bisnis Anda, bisa di-deploy ke berbagai channel, dan mudah dikelola tanpa coding.
+    
+- **Apakah saya perlu keahlian coding?**
+    
+    Tidak. Anda bisa membuat, mengatur, dan deploy chatbot lewat dashboard, termasuk upload dokumen untuk Knowledge Base.
+    
+- **Channel apa saja yang didukung?**
+    
+    WhatsApp, Telegram, Discord, Slack, Web Widget, dan REST API.
+    
+- **Bagaimana dengan keamanan data?**
+    
+    Data terenkripsi, ada kontrol akses per chatbot, dan opsi kontrol domain untuk widget.
+    
+- **Bisa digunakan untuk sektor usaha apa saja?**
+    
+    Bisa. Gustafta dibuat fleksibel untuk 30+ sektor, dan Anda bisa menyesuaikan persona, knowledge base, dan mini apps sesuai kebutuhan.
+    
+
+---
+
+## Penutup (Final CTA)
+
+### Siap membangun chatbot AI untuk bisnis Anda?
+
+Gabung dengan bisnis dari berbagai sektor yang sudah menggunakan Gustafta.
+
+- Setup ± 7 menit
+- 30+ sektor usaha
+- Tanpa coding
+
+**CTA utama:** Mulai Gratis Sekarang
+
+**CTA sekunder:** Lihat Harga

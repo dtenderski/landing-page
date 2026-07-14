@@ -1,0 +1,56 @@
+Saya setuju dengan rekomendasi kamu: “JSON hanya untuk mode Agentic (internal orchestration), bukan wajib untuk semua agent”. Itu strategi paling aman untuk menghindari regresi pada 944 agent yang sudah live dan mencegah JSON mentah tampil ke end-user widget.
+Karena saya tidak punya akses untuk mengubah repo/Replit kamu langsung dari sini, saya tidak bisa “mengimplementasikan” flag tersebut di kode. Tapi saya bisa turunkan spesifikasi implementasi yang paling kecil risikonya (dan titik keputusan desain yang perlu kamu kunci dulu) supaya tim kamu/ kamu sendiri bisa commit dengan aman.
+1) Keputusan desain yang sudah “benar” dari usulan kamu
+Backward compatible: agent lama tetap output teks (ABD v1.1 tidak disentuh).
+Only internal sub-agent reports dibuat terstruktur (JSON) agar orchestrator bisa parse/merge/evaluate.
+Widget/public chat tetap teks agar UX tidak rusak.
+Ini juga memungkinkan kamu naik ke Level 4 bertahap: structured reports → critic gate → planner programatik → tool-calling.
+2) Spesifikasi implementasi minimal (flag + injection response_format)
+2.1 Tambah field config
+Di tabel/config agent (atau agenticSubAgents config), tambahkan:
+agenticOutputFormat: "text" | "json" (default "text")
+(opsional tapi saya sarankan) agenticSchemaVersion: "subAgentReport.v1" untuk future-proof
+Aktifkan hanya untuk sub-agent yang dipanggil via orchestrator (bukan standalone).
+2.2 Perubahan di callAgentInternal()
+Jika agenticOutputFormat === "json":
+set response_format ke json_schema kalau provider kamu mendukung pada path itu; kalau belum, minimal json_object.
+tambahkan system instruction pendek: “Output must be valid JSON only. No markdown. No backticks.”
+Jika "text": tidak berubah.
+2.3 Safe parsing & fallback
+Agar tidak bikin error produksi ketika model melenceng:
+try { JSON.parse(text) } catch {
+1) repair attempt 1x (prompt singkat “Return ONLY valid JSON …” sambil menyertakan output sebelumnya)
+2) kalau tetap gagal: fallback treat as text → bungkus ke bentuk JSON darurat:
+{
+  "agentName": "...",
+  "summary": "(unparsed) ...",
+  "confidence": 0.3,
+  "claims": [],
+  "questions": [],
+  "actions": []
+}
+​
+Dengan ini, orchestrator tidak crash.
+3) Satu keputusan desain yang masih perlu kamu konfirmasi (penting)
+Kamu sudah bilang: “Sub-agent di dalam orchestrator JSON (baru)”.
+Pertanyaan yang perlu kamu kunci sebelum coding:
+Apakah JSON ini hanya untuk “laporan hasil” (post-run), atau juga untuk “intermediate reasoning / plan”?
+Rekomendasi saya:
+Tahap 1 (aman): JSON hanya untuk report sub-agent (SubAgentReport).
+Tahap 2 (Level 4): planner + critic juga output JSON (PlanSchema, CriticSchema).
+Jangan memaksa “reasoning trace” masuk JSON—cukup ringkasan + claims + questions + actions (lebih stabil, lebih aman).
+4) Checklist perubahan orchestrator (agar tidak “ubah total”)
+Kamu tidak perlu rewrite besar. Cukup ubah cara kamu menyuntikkan LAPORAN SUB-AGEN:
+Sekarang: inject sebagai blok teks panjang.
+Baru: inject sebagai:
+JSON array ringkas dari SubAgentReport atau
+versi teks yang sudah disintesis dari JSON (untuk menjaga prompt tetap manusiawi).
+Saran praktis: simpan JSON di state internal, tapi untuk LLM orchestrator cukup injek ringkasan terformat yang dibangkitkan dari JSON (lebih hemat token dan lebih robust).
+5) Jawaban atas pertanyaan kamu: “perlu konfirmasi lain dulu?”
+Sebelum kamu membuat PR pertama, cukup konfirmasi 2 hal ini (kecil tapi menentukan):
+1) Untuk agentic JSON, kamu mau pakai json_schema (paling stabil) atau cukup json_object dulu (lebih kompatibel)?
+2) Kamu ingin flag ini ditempel di:
+(a) agent (tiap agent punya setting), atau
+(b) link sub-agent di orchestrator (satu agent bisa dipakai di konteks lain tanpa JSON)?
+Rekomendasi saya: (b) di level “orchestrator-subagent link/config”, karena agent yang sama mungkin dipakai untuk widget publik (harus teks) dan untuk orchestrator internal (boleh JSON).
+Kalau kamu jawab 2 poin itu, saya bisa tuliskan “spec PR #1” yang sangat konkret: struktur config, perubahan signature call, fallback behavior, dan contoh payload untuk 1–2 sub-agent pilot tanpa menyentuh 944 agent lainnya.

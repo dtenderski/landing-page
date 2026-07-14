@@ -1,0 +1,41 @@
+Starter Kit	/starter-kit	Sales page Rp 245.000 (variant 533205)
+Per Industri	/industri	K3, Legal, Edukasi, Kesehatan, Properti, ESG
+Affiliate	/affiliate	Program komisi 15–30%, 3 tier (Affiliate / Creator / Reseller)
+MultiClaw Suite	/multiclaw-suite	Katalog 80+ AI tools, 10 kategori
+Per Persona	/persona	Asesor, Konsultan, Trainer, K3, Legal, Akademisi
+si halaman /konstruksi:
+Halaman	URL	Tema	Highlight
+Ketenagalistrikan, Migas & Pertambangan	/energi	Kuning-oranye	3 sub-sektor (listrik, migas, tambang) masing-masing dengan tools, use cases & regulasi
+Transisi Energi & Lingkungan	/transisi-energi	Hijau-teal	4 pilar: EBT, Lingkungan/AMDAL, ESG, K3 Safety
+Tender & Pengadaan Proyek	/tender	Indigo-biru	Siklus lengkap 5 tahap: Scouting → Eligibility → Win Probability → Dokumen → Kontrak
+Halaman	URL	Tema	Isi Utama
+LKUT BUJK	/lkut	Cyan-biru	Penjelasan LKUT + 5 tahap proses + 4 AI tools (LKUTClaw, PUB-LKUTClaw, ESIMPANClaw, SBUClaw)
+PKB Konstruksi	/pkb	Violet-ungu	Penjelasan PKB/SKK + 4 layanan AI + 8 jalur SKK (Sipil, Arsitektur, K3, Elektrikal…)
+OSS & LKPM	/lkpm	Emerald-teal	Penjelasan OSS-RBA & LKPM + 4 AI tools (OSSClaw, LKPMClaw, KorporasiClaw, ESIMPANClaw)
+
+Halaman	URL	Tema	Highlight
+Riset & Skripsi	/riset-skripsi	Violet-biru	5 tahap skripsi end-to-end + simulasi 50+ pertanyaan penguji + 12 bidang studi
+Content Creator	/content-creator	Rose-pink-violet	4 AI tools (Brand, Marketing, Commerce, CRM) + 12 niche + 3 level kreator
+Konseling Akademik	/academic-counselor	Teal-cyan-indigo	4 layanan AI (Counsel · Test · Riset · Tutor) + journey SMA→wisuda + solusi untuk institusi BK/SAC
+Halaman	URL	Tema	Highlight Konten
+Konsultan Hukum	/konsultan-hukum	Slate-hitam	4 area: Kontrak (KontrakClaw), Korporasi, Anti-Korupsi (SMAP+PancekClaw), Pengadaan
+Konsultan Pajak	/konsultan-pajak	Amber-kuning	PajakClaw 8 sub-agen + 4 area: Badan/OP, UMKM, Kepatuhan SPT, Sengketa DJP
+Konsultan Keuangan	/konsultan-keuangan	Emerald-hijau	4 tools: KeuanganClaw, PajakClaw (rekonsiliasi fiskal), ESGClaw (GRI/TCFD), KorporasiClaw (DCF/valuasi)
+Executive Summary	/executive-summary	Cyan-biru-indigo	4 tipe: Hasil Belajar, Penugasan, Pelaksanaan Proyek, Riset — lengkap dengan anatomi 5 elemen ES
+Biro Jasa SBU	/biro-jasa-sbu	Amber-orange	4 layanan: SBU (SkemaClaw+ESIMPANClaw), SKK (PanduanASKOM), OSS-NIB (OSSClaw), LKUT — 3 cara biro jasa gunakan AI
+Halaman	URL	Tema	Highlight
+Brain Project	/brain-project	Cyan-teal	BrainClaw 6 sub-agen: Intelligence, Risk-Radar, EVM/CPI/SPI, Forecast, Stakeholder, Decision
+Konsultan Kontrak	/konsultan-kontrak	Red-rose	KontrakClaw 7 sub-agen: Review, Klaim EoT, Sengketa BANI/ICC, Notice, VO, Risk, Final Account
+Dokumen Proyek	/konsultan-dokumen-proyek	Slate-gelap	KonstraClaw + BrainClaw — 4 fase: Perencanaan → Pelaksanaan → Mutu → Close-out
+Pancek-SMAP	/konsultan-pancek-smap	Teal+Red dual	SMAPClaw (ISO 37001, 8 sub-agen) + PancekClaw (KPK gratifikasi, 5 sub-agen)
+ISO 9001 SMM	/konsultan-iso-smm	Biru-indigo	ISOClaw 9001 — PDCA 4 fase penuh per klausul, Risk-Based Thinking
+ISO 14001 SML	/konsultan-iso-sml	Hijau-emerald	ISOClaw 14001 — Aspek lingkungan, KLHK, PROPER, ESG/GRI/TCFD terintegrasi
+SKK Pedoman BNSP	/skk-pedoman-bnsp	Indigo-violet	J3–J9 semua jenjang + 6 AI Tools (PanduanASKOM, Manprojak, Sipil, K3Man, dll)
+Pedoman KAN	/pedoman-kan	Slate-biru-indigo	4 program akreditasi: Lab (17025), LS (17021/17024), Inspeksi (17020), GRK/Karbon (14065)
+Halaman	URL	Tema	Highlight Konten
+Lisensi LSP BNSP	/lisensi-lsp-bnsp	Amber-orange	5 tahap lisensi + 3 tipe LSP (Pihak 1/2/3) + 10 dokumen kunci (Panduan Mutu, Skema, MUK)
+Akreditasi LPK KAN	/akreditasi-lpk-kan	Slate-biru-indigo	4 tipe LPK: Lab (17025), LSP (17024), LSPro (17065), Inspeksi (17020) — alur 5 tahap assessmen
+Paperless & AJJ	/paperless-asesmen	Cyan-biru-violet	3 pilar: Paperless + AJJ + AI Asisten — panduan untuk LSP, asesor, asesi, & perusahaan
+Manajemen LSP-TUK	/manajemen-lsp-tuk	Indigo-biru-violet	6 domain: Asesor · TUK Mandiri · Skema · Operasional Harian · Kepatuhan/Audit · Pengembangan
+Lex Konstruksi Sengketa	/lex-konstruksi-sengketa	Slate gelap	5 mekanisme eskalasi: Negosiasi → Mediasi → DAB/DRBF → Arbitrase BANI/ICC → Litigasi
+

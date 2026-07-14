@@ -1,0 +1,161 @@
+Siap. Ini paket yang bisa langsung Anda tempel ke **system prompt TRC** (Tender Readiness Checker) agar:
+
+* Output **standar & stabil** (ada `READINESS_STATUS` + `RISK_LEVEL`)
+* Ada **blok “NEXT_STEP”** yang hanya muncul jika risk ≥ Sedang
+* Ada **INPUT_PACKET** yang siap di-copy-paste ke ECSG (on-demand)
+* Tetap *domain compliance* (perizinan & sertifikasi), tidak melebar
+
+> Catatan: karena platform belum punya state/branching UI, “conditional” kita lakukan via aturan prompt: TRC wajib memutuskan risk dulu, lalu menampilkan bagian tertentu sesuai risk.
+
+---
+
+## 1) TRC OUTPUT TEMPLATE (WAJIB) — “Protocol v1”
+
+**Instruksi untuk TRC (tempel ke system prompt):**
+
+Gunakan format output persis seperti ini (header dan label harus sama):
+
+### A. MACHINE HEADER (selalu ada)
+
+* `READINESS_STATUS: {Siap | Bersyarat | Tidak Siap}`
+* `RISK_LEVEL: {Rendah | Sedang | Tinggi | Kritis}`
+* `PRIMARY_CAUSE: {Legalitas | SBU | SKK | Administratif Tender | Kombinasi}`
+
+### B. EXECUTIVE SNAPSHOT (selalu ada, singkat)
+
+* 4 baris area table: Legalitas / SBU / SKK / Administratif Tender
+* `TOP_RISKS` maksimal 3 poin
+* `CRITICAL_GAPS` maksimal 5 poin
+
+### C. ACTION PLAN 30–60 hari (selalu ada)
+
+* `PRIORITY_1`, `PRIORITY_2`, `PRIORITY_3` (ringkas, actionable)
+
+### D. NEXT_STEP (kondisional)
+
+* Hanya tampil jika `RISK_LEVEL` = Sedang/Tinggi/Kritis
+* Berisi:
+
+  * CTA soft: ajak generate executive summary
+  * Link/arah ke ECSG (placeholder link)
+  * Instruksi copy-paste `INPUT_PACKET`
+
+### E. INPUT_PACKET (kondisional)
+
+* Hanya tampil jika `RISK_LEVEL` = Sedang/Tinggi/Kritis
+* Berisi ringkasan input yang dibutuhkan ECSG (bukan analisis ulang)
+
+---
+
+## 2) TEMPLATE OUTPUT (yang akan dihasilkan TRC)
+
+Berikut bentuk finalnya (ini contoh format, nanti kontennya diisi dari evaluasi):
+
+**(TRC harus output seperti ini)**
+
+```
+READINESS_STATUS: Tidak Siap
+RISK_LEVEL: Tinggi
+PRIMARY_CAUSE: Kombinasi
+
+EXECUTIVE_SNAPSHOT:
+- Legalitas: Tidak Memenuhi | Catatan: IUJK belum valid / status belum jelas
+- SBU: Bersyarat | Catatan: subklasifikasi belum match requirement tender
+- SKK: Tidak Memenuhi | Catatan: tenaga kunci tidak tersedia / expired
+- Administratif Tender: Bersyarat | Catatan: beberapa dokumen pendukung belum siap
+
+TOP_RISKS:
+1) Risiko gugur administrasi karena legalitas tidak valid/kurang jelas
+2) Risiko diskualifikasi teknis akibat gap tenaga SKK kunci
+3) Risiko gagal evaluasi kualifikasi akibat mismatch subklasifikasi SBU
+
+CRITICAL_GAPS:
+- IUJK status: tidak valid / tidak tersedia bukti
+- NIB/Legal entity status: perlu verifikasi
+- SKK {Role}: expired / tidak tersedia
+- SBU subklasifikasi: tidak match requirement
+- Dokumen pendukung: {sebutkan yang krusial}
+
+ACTION_PLAN_30_60:
+PRIORITY_1: Bereskan legalitas (NIB/IUJK/entitas) + bukti dokumen
+PRIORITY_2: Tutup gap SKK tenaga kunci (renewal / penambahan personel)
+PRIORITY_3: Sesuaikan SBU subklasifikasi & kualifikasi terhadap requirement tender
+
+NEXT_STEP:
+Untuk ringkasan 1 halaman yang siap dibawa ke pimpinan + rekomendasi strategi compliance, lanjutkan ke Executive Compliance Summary Generator (ECSG).
+Buka ECSG: {LINK_ECSG_DI_SINI}
+Lalu copy-paste INPUT_PACKET di bawah ke ECSG.
+
+INPUT_PACKET (copy-paste ke ECSG):
+TENDER_REQ_SUMMARY:
+{paste tender req summary di sini}
+
+LICENSING_SUMMARY:
+{paste licensing summary di sini}
+
+SBU_SUMMARY:
+{paste sbu summary di sini}
+
+SKK_SUMMARY:
+{paste skk summary di sini}
+
+TRC_RESULT:
+READINESS_STATUS: Tidak Siap
+RISK_LEVEL: Tinggi
+PRIMARY_CAUSE: Kombinasi
+TOP_RISKS:
+- ...
+CRITICAL_GAPS:
+- ...
+ACTION_PLAN_30_60:
+- PRIORITY_1: ...
+- PRIORITY_2: ...
+- PRIORITY_3: ...
+```
+
+---
+
+## 3) RULES PENENTUAN STATUS & RISK (supaya konsisten)
+
+Tempel ini juga (ringkas tapi mengunci perilaku TRC):
+
+### READINESS_STATUS
+
+* **Siap**: semua area “Memenuhi” atau hanya minor issue administratif non-fatal
+* **Bersyarat**: ada gap, tapi masih bisa diperbaiki tanpa mengubah kelayakan inti (mis. dokumen pendukung kurang, atau SBU/SKK minor mismatch non-kunci)
+* **Tidak Siap**: ada gap fatal pada legalitas/SBU/SKK yang menyebabkan gugur administrasi atau diskualifikasi teknis
+
+### RISK_LEVEL
+
+* **Rendah**: tidak ada gap fatal, hanya minor improvement
+* **Sedang**: ada gap non-fatal tapi berpotensi jadi fatal jika deadline dekat
+* **Tinggi**: ada gap besar pada minimal 1 area (legalitas/SBU/SKK) yang berisiko gugur
+* **Kritis**: ada gap fatal + deadline dekat/atau indikasi blacklist/illegal/expired massal (gunakan jika benar-benar berat)
+
+> Kalau Anda belum punya “deadline info”, maka “Kritis” hanya dipakai jika gap fatalnya lebih dari satu area atau ada legal red flag.
+
+---
+
+## 4) ECSG PROMPT REQUIREMENT (agar packet diterima mulus)
+
+Di ECSG, instruksinya sederhana:
+
+* Input utama adalah `INPUT_PACKET`
+* ECSG wajib membaca bagian `TRC_RESULT` dan tidak menilai ulang kecuali perlu klarifikasi
+* ECSG output 1 halaman: status, risk, top risks, dampak, rencana 30–60, rekomendasi, CTA consulting (hanya tinggi/kritis)
+
+---
+
+## 5) Yang Anda perlu isi sekarang
+
+Satu-satunya hal yang masih placeholder:
+
+* `{LINK_ECSG_DI_SINI}`
+
+Kalau Anda sudah punya URL chatbot ECSG (atau path di dashboard), kirimkan ke saya, nanti saya rapikan wording “NEXT_STEP”-nya supaya sesuai format link yang benar di Gustafta.
+
+Kalau belum ada URL publik, kita tetap bisa pakai:
+
+* “Cari chatbot: **ECSG — Executive Compliance Summary** di dashboard → lalu paste INPUT_PACKET.”
+
+Mau saya buatkan juga **system prompt ECSG versi final** yang cocok dengan INPUT_PACKET di atas?

@@ -1,0 +1,74 @@
+Lanjut — saya buatkan **runtime engine MVP** untuk Chatbot SKK Bidang Sipil. Ini bukan hanya konfigurasi, tetapi sudah berupa **aplikasi Node.js siap jalan**: membaca database SKK Sipil dari CSV, menyediakan endpoint chat, role lookup, KKNI lookup, rekomendasi SKK, dan demo web UI.
+
+Pola fitur tetap mengikuti chatbot Manajemen Pelaksanaan yang memakai flow, intent, lookup, assessment, scenario, checklist, fallback, dan guardrails.  Database tetap memakai data SKK Sipil yang berisi subklasifikasi, jabatan kerja, jenjang, kualifikasi, KKNI, standar kompetensi, dan link SKK. 
+
+## Download paket runtime
+
+[Paket Runtime Engine SKK Sipil](sandbox:/mnt/data/paket_runtime_engine_skk_sipil.zip)
+
+## Isi paket
+
+1. [server.js](sandbox:/mnt/data/skk_sipil_runtime_engine/server.js)
+   Backend Express.js dengan endpoint chatbot.
+
+2. [package.json](sandbox:/mnt/data/skk_sipil_runtime_engine/package.json)
+   Dependency dan script start.
+
+3. [public/index.html](sandbox:/mnt/data/skk_sipil_runtime_engine/public/index.html)
+   Demo web chat UI.
+
+4. [data/roles_skk_sipil.seed.csv](sandbox:/mnt/data/skk_sipil_runtime_engine/data/roles_skk_sipil.seed.csv)
+   Knowledge base SKK Sipil.
+
+5. [scripts/manual_test.js](sandbox:/mnt/data/skk_sipil_runtime_engine/scripts/manual_test.js)
+   Script test manual endpoint `/api/chat`.
+
+6. [README_RUNTIME_SKK_SIPIL.md](sandbox:/mnt/data/skk_sipil_runtime_engine/README_RUNTIME_SKK_SIPIL.md)
+   Panduan menjalankan runtime.
+
+7. [DEPLOYMENT_RUNTIME_SKK_SIPIL.md](sandbox:/mnt/data/skk_sipil_runtime_engine/DEPLOYMENT_RUNTIME_SKK_SIPIL.md)
+   Panduan deploy ke Replit/VPS/Render/Railway.
+
+8. [.env.example](sandbox:/mnt/data/skk_sipil_runtime_engine/.env.example)
+   Contoh environment variable.
+
+## Endpoint yang tersedia
+
+```text
+GET  /health
+POST /api/chat
+GET  /api/roles/search?q=Ahli Teknik Jalan
+GET  /api/roles/kkni/7
+POST /api/recommend
+```
+
+## Cara menjalankan
+
+```bash
+npm install
+npm start
+```
+
+Lalu buka:
+
+```text
+http://localhost:3000
+```
+
+## Contoh request
+
+```bash
+curl -X POST http://localhost:3000/api/chat \
+  -H "Content-Type: application/json" \
+  -d '{"message":"Cari Ahli Teknik Jalan"}'
+```
+
+## Contoh integrasi widget
+
+Pada file widget sebelumnya, ubah endpoint menjadi:
+
+```javascript
+const CHATBOT_API_URL = "https://domain-anda.com/api/chat";
+```
+
+Tahap berikutnya yang bisa dilanjutkan adalah membuat **versi RAG/LLM hybrid**, supaya runtime ini tidak hanya rule-based, tetapi bisa membaca database SKK dan menjawab lebih natural seperti chatbot builder.

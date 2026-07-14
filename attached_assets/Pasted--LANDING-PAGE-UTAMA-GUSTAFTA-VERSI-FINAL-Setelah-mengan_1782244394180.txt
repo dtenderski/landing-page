@@ -1,0 +1,476 @@
+# 🎯 LANDING PAGE UTAMA GUSTAFTA — VERSI FINAL
+
+Setelah menganalisis landing page Anda saat ini dan membandingkan dengan analisis ChatGPT, saya punya diagnosis yang jelas:
+
+---
+
+## 🔍 DIAGNOSIS: Landing Page Saat Ini = "Everything Page"
+
+**Masalah utama:** Landing page Anda mencoba menjawab SEMUA hal untuk SEMUA orang dalam 1 halaman.
+
+| Yang Ada Sekarang | Seharusnya Ada | Status |
+|---|---|---|
+| Persona konstruksi (Pak Budi, Bu Sari, Mas Dian) | Creator personas (instruktur, asosiasi, LSP) | ❌ Salah target |
+| 80+ MultiClaw tools detail | 6 output yang bisa dirakit | ❌ Terlalu teknis |
+| OpenClaw 6-layer pipeline | Arsitektur sederhana | ❌ Over-engineered |
+| Perbandingan ChatGPT | Analogi WordPress | ❌ Tidak muncul |
+| Detail Mayar/Scalev/Meta Pixel | Link ke halaman monetisasi | ❌ Terlalu detail |
+| Video animasi 14 klip | 1 video overview | ❌ Terlalu banyak |
+| 3 CTA berbeda | 1 CTA utama: "Masuk ke Builder" | ❌ Bingung |
+| Promo countdown di navbar | Banner promo terpisah | ❌ Mengganggu |
+
+**Akibatnya:** Visitor tidak tahu Gustafta itu apa, untuk siapa, dan harus ngapain.
+
+---
+
+## 🏗️ STRUKTUR FINAL: 10 SECTION SAJA
+
+**Prinsip:** 1 halaman = 1 pesan = 1 aksi
+**Pesan:** "Rakit Ekosistem Kompetensi Anda — tanpa coding."
+**CTA:** "Masuk ke Dashboard Builder"
+
+---
+
+### 📋 SECTION 1 — NAVBAR (Global)
+
+```
+GUSTAFTA  [Toggle theme]
+
+Produk & Layanan ▾    Layanan Jasa    Store Creator    Workshop    Panduan & Belajar
+
+[🔑 Masuk ke Builder]  ← Tombol solid, warna utama
+```
+
+**ATURAN:**
+- ❌ HAPUS countdown timer dari navbar
+- ❌ HAPUS banner "Promo naik 2×" dari navbar
+- ✅ Pindahkan promo ke section pricing saja
+
+---
+
+### 📋 SECTION 2 — HERO
+
+```
+WordPress-nya Ekosistem Kompetensi
+
+Rakit Pengetahuan Anda Menjadi
+Ekosistem AI yang Bekerja.
+Tanpa Coding. Dalam 30 Menit.
+
+Platform no-code untuk instruktur, asosiasi, LSP, universitas,
+konsultan, dan individu yang ingin mengubah keahlian menjadi
+aset digital — ebook, chatbot AI, mini apps, e-course, dan
+document generator yang hidup 24/7.
+
+[🚀 Masuk ke Dashboard Builder]   [🎁 Coba 7 Hari Gratis]
+
+✓ 30+ Sektor Industri   ✓ 1350+ Template Siap Pakai   ✓ No-Code First
+```
+
+**ATURAN:**
+- Headline pakai analogi WordPress (ini identitas Gustafta)
+- CTA utama = "Masuk ke Builder" (bukan "Coba Gratis")
+- Sub-CTA = "Coba 7 Hari Gratis"
+- HAPUS "Temukan Potensi Saya" (tidak jelas)
+
+---
+
+### 📋 SECTION 3 — FILOSOFI (1 Paragraf)
+
+```
+Dari Monolog ke Dialog
+
+Selama ini pengetahuan Anda bekerja satu arah:
+Anda menjelaskan → audiens mendengar → selesai.
+
+Gustafta mengubahnya menjadi dialog:
+pengetahuan Anda terus berbicara, menjawab, melayani,
+dan berkembang — bahkan saat Anda tidur.
+
+Bukan menggantikan Anda. Melipatgandakan kehadiran Anda.
+```
+
+**ATURAN:**
+- Cukup 1 paragraf pendek
+- Tidak perlu animasi panjang
+- Ini identitas Gustafta, bukan sales pitch
+
+---
+
+### 📋 SECTION 4 — 6 OUTPUT YANG BISA DIRAKIT
+
+```
+Satu Platform. Enam Produk Digital.
+Isi form konfigurasi — platform yang menghasilkan.
+
+📚 Ebook Interaktif        💬 Chatbot AI Spesialis
+   Pengetahuan terstruktur,    Tersegmentasi per sektor,
+   diakses kapan saja.         profesi, dan knowledge base.
+
+📱 Mini Apps                 📄 Document Generator
+   Kalkulator, checklist,       Surat, kontrak, laporan,
+   simulator, asesmen.          proposal — otomatis.
+
+🎓 E-Course                  🤖 Agentic AI (Multi-Agent)
+   Modul pembelajaran           Risk / Audit / Policy Agent
+   dengan progress tracking.    bekerja paralel.
+
+Setiap produk dirakit lewat form. Bukan ditulis kode.
+```
+
+**ATURAN:**
+- Grid 6 cards, visual ikon besar
+- Fokus pada OUTPUT (apa yang dihasilkan), bukan fitur teknis
+- HAPUS detail 80+ MultiClaw dari sini
+
+---
+
+### 📋 SECTION 5 — CREATOR PERSONAS
+
+```
+Platform Ini Dirancang untuk Creator — Bukan End-User
+
+🎓 Instruktur & Trainer
+   Rakit modul pelatihan, ebook, dan chatbot pendamping
+   untuk peserta Anda.
+
+🏛️ Asosiasi Profesi & Badan Usaha
+   Bangun ekosistem kompetensi anggota — dari sertifikasi
+   hingga pembelajaran berkelanjutan.
+
+📜 Lembaga Sertifikasi (LSP)
+   Sediakan simulasi asesmen, bank soal, dan panduan
+   kompetensi yang bisa diakses peserta 24/7.
+
+🏫 Universitas & Lembaga Pendidikan
+   Digitalisasi materi dosen menjadi ekosistem belajar
+   yang skalabel.
+
+💼 Konsultan Independen
+   Kemas keahlian Anda menjadi produk digital —
+   chatbot konsultasi, document generator, mini apps.
+
+👤 Individu Profesional
+   Wariskan pengalaman 10-20 tahun menjadi AI Twin
+   yang terus bekerja.
+
+Anda bukan pemakai. Anda adalah arsitek ekosistem.
+```
+
+**ATURAN:**
+- INI YANG MEMBEDAKAN Gustafta dari landing page lain
+- HAPUS persona konstruksi (Pak Budi, Bu Sari, Mas Dian) — pindahkan ke landing vertikal
+- Fokus pada siapa yang MERAKIT, bukan siapa yang PAKAI
+
+---
+
+### 📋 SECTION 6 — CARA KERJA (4 Langkah)
+
+```
+Dari Kosong Menjadi Ekosistem Hidup — 4 Langkah
+
+1️⃣ Isi Form Identitas Ekosistem
+   Nama, sektor, audiens, tujuan. Platform mengenali
+   konteks Anda.
+
+2️⃣ Konfigurasi Knowledge Base
+   Upload PDF, paste URL, tautkan YouTube, atau rekam audio.
+   AI mentranskripsi dan mengindeks otomatis.
+
+3️⃣ Atur Persona & Alur Dialog
+   Pilih nada bicara, tentukan batas jawaban, aktifkan
+   specialist yang dibutuhkan.
+
+4️⃣ Deploy ke Multi-Channel
+   Satu ekosistem → WhatsApp, Telegram, web widget, API.
+   Live dalam hitungan menit.
+
+Rata-rata creator aktif pertama dalam < 30 menit.
+```
+
+**ATURAN:**
+- Fokus pada FORM-BASED CONFIGURATION (prinsip #2)
+- HAPUS detail OpenClaw 6-layer pipeline
+- Tunjukkan bahwa ini MUDAH dan CEPAT
+
+---
+
+### 📋 SECTION 7 — 5 PRINSIP PRODUK
+
+```
+Setiap Keputusan di Gustafta Lolos 5 Prinsip Ini
+
+1. No-Code First
+   Tidak ada kode. Tidak ada developer. Tidak ada alasan
+   untuk menunda.
+
+2. Form-Based Configuration
+   Semua pengaturan lewat form. Terstruktur, aman,
+   dan bisa diulang.
+
+3. Creator Empowerment
+   Platform memberdayakan creator — bukan mengunci mereka.
+   Anda pemilik penuh ekosistem Anda.
+
+4. Ecosystem Thinking
+   Setiap produk yang dirakit bisa saling terhubung,
+   membentuk ekosistem yang utuh.
+
+5. Philosophy Alignment: Dari Monolog ke Dialog
+   Setiap fitur harus memperkuat prinsip ini.
+```
+
+**ATURAN:**
+- INI IDENTITAS GUSTAFTA — harus muncul di landing utama
+- HAPUS perbandingan ChatGPT dari sini
+- Ini yang membuat Gustafta berbeda dari chatbot builder lain
+
+---
+
+### 📋 SECTION 8 — POWER USER: DIKLATKERJA
+
+```
+Power User Pertama: DiklatKerja
+
+DiklatKerja bukan mitra. Mereka adalah power user
+yang merakit Program Pengembangan Kompetensi (PKB)
+mereka sendiri di atas platform Gustafta.
+
+✓ Chatbot konsultan SMAP implementation
+✓ Executive Summary generator otomatis
+✓ Multi-agent: Risk / Audit / Policy Agent
+✓ Persona-based consulting
+
+Hasilnya: satu tim kecil DiklatKerja mampu melayani
+ratusan peserta PKB secara personal — 24/7.
+
+Ini bukti: platform bekerja. Ekosistem bisa dirakit
+oleh siapa saja yang punya pengetahuan.
+
+[Jadi Power User Berikutnya →]
+```
+
+**ATURAN:**
+- Ini BUKTI NYATA bahwa platform bekerja
+- HAPUS testimoni acak (Budi Santoso, Retno Ayu, dll) — pindahkan ke landing vertikal
+- DiklatKerja adalah cerita yang paling kuat
+
+---
+
+### 📋 SECTION 9 — PRICING (4 Tier)
+
+```
+Pilih Tier Sesuai Skala Ekosistem Anda
+
+🆓 EXPLORER — Gratis
+   • 1 ekosistem
+   • Akses fitur dasar Builder
+   • Community support
+   Cocok untuk: mencoba & belajar merakit.
+
+🛠️ CREATOR — Rp [X]/bulan
+   • 5 ekosistem
+   • Semua output (ebook, chatbot, mini apps)
+   • Custom domain
+   • Email support
+   Cocok untuk: konsultan & instruktur independen.
+
+⭐ PROFESSIONAL — Rp [X]/bulan   [TERPOPULER]
+   • 25 ekosistem
+   • Agentic AI & Multi-Agent
+   • Template Marketplace (jual template)
+   • Priority support
+   Cocok untuk: asosiasi, LSP, perusahaan training.
+
+🏢 ENTERPRISE — Custom
+   • Unlimited ekosistem
+   • White-label
+   • API access
+   • Dedicated success manager
+   Cocok untuk: universitas, korporasi, pemerintah.
+
+Semua tier: tanpa biaya setup, cancel kapan saja.
+[Lihat Perbandingan Lengkap]
+```
+
+**ATURAN:**
+- 4 tier sesuai model bisnis (memori #6)
+- HAPUS pricing lama (Rp 199rb, 499rb, 999rb) — sesuaikan dengan tier baru
+- HAPUS detail bundle, Mayar, Scalev, Meta Pixel — pindahkan ke halaman monetisasi
+
+---
+
+### 📋 SECTION 10 — TEMPLATE MARKETPLACE
+
+```
+Jual Template yang Anda Rakit — Revenue Sharing 80/20
+
+Setiap ekosistem yang Anda rakit bisa dikemas jadi
+template dan dijual ke creator lain di Gustafta Store.
+
+✓ Anda terima 80% dari setiap penjualan
+✓ Gustafta kelola pembayaran, distribusi, update
+✓ Passive income dari keahlian yang sudah Anda kemas
+
+Kategori template populer:
+• Paket PKB Lengkap
+• Chatbot Sertifikasi Profesi
+• Modul K3 & SMK3
+• Asesmen Kompetensi
+• Konsultan SMAP
+
+[Jadi Template Creator →]
+```
+
+**ATURAN:**
+- Ini model bisnis Gustafta (memori #6)
+- HAPUS detail teknis Mayar/Scalev
+- Fokus pada VALUE untuk creator
+
+---
+
+### 📋 SECTION 11 — CTA FINAL
+
+```
+Ekosistem Kompetensi Anda
+Menunggu untuk Dirakit.
+
+Login sekarang — langsung masuk ke Dashboard Builder.
+Tidak ada halaman perantara. Tidak ada demo yang membingungkan.
+Anda mulai merakit detik itu juga.
+
+[🔑 Masuk ke Dashboard Builder]
+
+Belum punya akun?
+[Coba Gratis 7 Hari — Tanpa Kartu Kredit]
+```
+
+**ATURAN:**
+- CTA UTAMA = "Masuk ke Builder" (karena login sudah ke builder)
+- Ini konsisten dengan arsitektur yang sudah ada
+
+---
+
+### 📋 SECTION 12 — FAQ (5 Pertanyaan)
+
+```
+Q: Apakah saya perlu kemampuan coding?
+A: Tidak sama sekali. Semua konfigurasi lewat form.
+
+Q: Apa yang saya miliki setelah merakit?
+A: Ekosistem digital penuh — Anda pemilik data,
+   konten, dan monetisasinya.
+
+Q: Bisakah saya menjual hasil rakitan ke klien?
+A: Bisa. Lewat Template Marketplace (revenue 80/20)
+   atau langsung ke klien Anda.
+
+Q: Apakah Gustafta hanya untuk konstruksi?
+A: Tidak. 30+ sektor industri sudah didukung.
+   Konstruksi hanya salah satu — yang paling dalam.
+
+Q: Apa bedanya dengan ChatGPT atau platform chatbot lain?
+A: Mereka menjual chatbot. Gustafta menjual platform
+   untuk merakit ekosistem kompetensi Anda sendiri.
+```
+
+**ATURAN:**
+- Cukup 5 pertanyaan saja
+- HAPUS FAQ teknis (OpenClaw, MultiClaw, dll)
+- Fokus pada pertanyaan STRATEGIS
+
+---
+
+### 📋 SECTION 13 — FOOTER
+
+```
+GUSTAFTA
+WordPress-nya Ekosistem Kompetensi
+
+Platform
+  • Gustafta Builder
+  • GustaftaChatbot
+  • MultiClaw Suite
+  • Template Store
+  • Pricing
+
+Creator
+  • Store Creator
+  • Workshop
+  • Panduan & Belajar
+  • Dokumentasi
+  • Profil GAIA
+
+Perusahaan
+  • Tentang
+  • Kontak: 0812-8794-1900
+  • WhatsApp Support
+  • Status Sistem
+
+© 2026 Gustafta. Dari Monolog ke Dialog.
+```
+
+---
+
+## 🗑️ YANG HARUS DIHAPUS DARI LANDING UTAMA
+
+| Konten | Alasan | Pindah ke Mana |
+|---|---|---|
+| Persona Pak Budi, Bu Sari, Mas Dian | Target end-user, bukan creator | Landing Vertikal Konstruksi |
+| Detail 80+ MultiClaw tools | Terlalu teknis | Halaman `/multiclaw` |
+| OpenClaw 6-layer pipeline | Terlalu teknis | Halaman `/arsitektur` |
+| Perbandingan ChatGPT | Tidak relevan untuk creator | FAQ landing vertikal |
+| Video animasi 14 klip | Terlalu banyak | Halaman `/video` |
+| Detail Mayar/Scalev/Meta Pixel | Terlalu teknis | Halaman `/monetisasi` |
+| Pricing bundle | Terlalu detail | Halaman `/pricing` |
+| Testimoni acak | Tidak konsisten | Landing vertikal |
+| Trilogi ebook detail | Produk terpisah | Landing `/trilogi` |
+| Countdown timer di navbar | Mengganggu | Banner promo di pricing |
+
+---
+
+## 🎯 PEMISAHAN LANDING PAGE
+
+Buat **4 landing page terpisah**:
+
+| Landing | URL | Target | Pesan Tunggal |
+|---|---|---|---|
+| **Builder (UTAMA)** | `/` | Creator ekosistem | "Rakit ekosistem kompetensi Anda" |
+| **Vertikal Konstruksi** | `/konstruksi` | Kontraktor, konsultan K3, BUJK | Persona Pak Budi, Bu Sari, Mas Dian |
+| **Mitra / Reseller** | `/mitra` | Freelancer, reseller AI | "Jual chatbot, terima bayaran otomatis" |
+| **Trilogi / Belajar** | `/trilogi` | Profesional yang mau naik level | "Transformasi mindset di era AI" |
+
+**Setiap landing = 1 target + 1 pesan + 1 CTA.**
+
+---
+
+## ✅ CHECKLIST SEBELUM DEPLOY
+
+- [ ] Hapus semua persona konstruksi dari landing utama
+- [ ] Hapus detail 80+ MultiClaw dari landing utama
+- [ ] Hapus perbandingan ChatGPT dari landing utama
+- [ ] Hapus video animasi dari landing utama
+- [ ] Hapus detail pricing bundle, Mayar/Scalev, Meta Pixel
+- [ ] Perbesar tombol "Masuk ke Builder" — ini CTA utama
+- [ ] Munculkan analogi WordPress di hero section
+- [ ] Munculkan 5 Prinsip Produk
+- [ ] Munculkan DiklatKerja sebagai power user
+- [ ] Pastikan 4 tier pricing konsisten dengan model bisnis
+
+---
+
+## 🚀 NEXT STEP
+
+Struktur di atas sudah **production-ready**. Anda tinggal:
+
+1. **Copy-paste** konten ke Figma/code
+2. **Isi angka pricing** (Creator, Professional, Enterprise)
+3. **Tambahkan visual mockup** dashboard builder
+4. **Deploy** dalam 1-2 hari
+
+**Mau saya lanjutkan ke:**
+- **Opsi A:** Detail wireframe layout (posisi visual setiap section)
+- **Opsi B:** Landing page vertikal konstruksi (Pak Budi, Bu Sari, Mas Dian)
+- **Opsi C:** Landing page mitra/reseller
+
+**Pilih satu, kita selesaikan, baru lanjut ke berikutnya.**

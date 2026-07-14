@@ -1,0 +1,112 @@
+Kamu bertindak sebagai Seorang Pakar Pendidikan dan Praktisi sebagai Tutor yang memberikan Bimbingan Belajar kepada Siswa, saya akan membuat chatbot tentang Bimbingan Belajar yang akan membantu siswa belajar mempelajari pelajaran dengan lebih mendalam melalui chat interaktif. Sekaligus belajar teori, literasi, triyout, belajar ujian, gamification, dan bentuk pendalaman materi lainnya. yang pasti belajar melalui chatbot ini harus lebih menarik, dan merangsang siswa untuk terus belajar.   
+Tugas kamu membuat fitur-fitur yang canggih dalam chatbot bimbingan belajar di chatbot AI Tutor ini.
+10:46 AM
+Thought
+Saya akan menyusun blueprint fitur lengkap untuk chatbot AI Tutor ini sebagai sebuah halaman Notion terstruktur — mengikuti pola OpenClaw + ABD yang sudah Anda gunakan di KONSTRA & LexSkripsi, sehingga langsung bisa Anda turunkan ke prompt agent.
+Created page AI Tutor — Blueprint Fitur Chatbot Bimbingan Belajar (OpenClaw Edition)​
+Blueprint lengkap sudah saya susun sebagai halaman Notion baru — terstruktur ala OpenClaw + ABD agar langsung bisa Anda turunkan jadi system prompt per agent.
+Isi singkatnya mencakup 15 bagian:
+Prinsip pedagogis (Socratic, scaffolding, mastery, spaced repetition, growth mindset, ABD-7)
+Arsitektur 9 agent (TutorCoordinator + 8 specialist)
+6 mode belajar inti: Diagnostic & Onboarding, Teori (Socratic), Literasi, Tryout, Drill, Pendalaman
+Gamifikasi (XP, level, streak, badge, quest, boss battle, story mode, guild) + anti-adiksi
+Personalisasi adaptif (ZPD, forgetting curve, tone adapter)
+Multi-modal (OCR foto soal, TTS/STT, diagram, AR)
+Asesmen formatif/sumatif/diagnostik + rubrik feedback 5 lapis
+Study OS (planner, Pomodoro, flashcard, mind map, cheat sheet)
+Fitur sosial (study buddy, teach-back, parent/teacher console)
+Modul khusus Indonesia (UTBK-SNBT, ANBK, OSN, Kurikulum Merdeka)
+Safety & integritas akademik (no-direct-answer, plagiarism guard, mental health triage)
+Format output standar ABD-7
+Roadmap 8 sprint
+KPI sukses
+8 ide *wow-factor* (Tutor klon guru favorit, AR Math, Voice Debate, Time Machine, Career Simulator, Whiteboard real-time, Wellness Check, Offline Pack)
+Mau saya lanjutkan dengan salah satu langkah turunan ini?
+(A) Tulis System Prompt OpenClaw v1.0 untuk TutorCoordinator + TheoryAgent + DiagnosticAgent (paket MVP Sprint S1).
+(B) Bangun KB skeleton di Notion (database bank soal, rubrik, doktrin pedagogis, profil siswa) siap diisi.
+(C) Detailkan 1 mode secara mendalam (mis. mekanik gamifikasi lengkap dengan tabel XP & badge, atau flow Tryout adaptif).
+lanjut
+10:52 AM
+Thought
+Sebelum saya lanjut, mau pastikan arah yang Anda pilih agar saya bisa fokus dan tidak buang waktu. Pilih salah satu di bawah ini ya:
+Lanjut ke arah mana?
+Kerjakan semuanya berurutan (A → B → C)
+Saya kerjakan A → B → C. Strategi: buat 3 sub-halaman secara paralel di bawah blueprint, lalu isi KB skeleton dengan 5 database aktual.
+Tahap 1: Buat 3 halaman pendamping (paralel)
+Thought
+Tahap 2: Buat 5 database di bawah KB Skeleton (paralel)
+Sesi Belajar gagal karena multi_select butuh options. Retry dengan perbaikan:
+Created database Sesi Belajar​
+Thought
+Semua 5 database sudah jadi. Sekarang saya hubungkan dengan two-way relations agar Agent dapat lintas-database (sesuai diagram di KB Skeleton):
+Semua paket A + B + C tuntas. Berikut ringkasan deliverable:
+ A — System Prompts OpenClaw v1.0 (3 prompt siap-pakai)
+Berisi prompt lengkap untuk TutorCoordinator, TheoryAgent, dan DiagnosticAgent dengan kontrak callAgentInternal, routing table 8 specialist, format output ABD-7, dan safety guardrails.
+ B — KB Skeleton (5 database aktif + 4 two-way relation)
+Bank Soal — 16 properti (Bloom C1–C6, IRT logit, status review, tag UTBK/ANBK/OSN) + 4 view (Tabel, Per Mapel, Per Kesulitan, Siap Pakai)
+Profil Siswa — 17 properti (jenjang, target, VARK, XP, streak, rank, mood, consent) + 3 view (termasuk Leaderboard XP)
+Sesi Belajar — 18 properti (mode, durasi, θ akhir, formula akurasi, miskonsepsi) + 4 view (termasuk Kalender Belajar & Chart XP per Hari)
+Miskonsepsi Log — 13 properti (kategori 6 jenis, keparahan, frekuensi, remediasi) + 3 view
+Rubrik Penilaian — 16 properti (8 jenis asesmen, skala, 6 kriteria + deskriptor) + 3 view
+Relasi antar database (otomatis dua arah):
+Sesi Belajar ↔ Profil Siswa (Siswa / Sesi Belajar)
+Miskonsepsi Log ↔ Profil Siswa (Siswa Terdeteksi / Miskonsepsi Tercatat)
+Bank Soal ↔ Miskonsepsi Log (Miskonsepsi Terkait / Soal Pemicu)
+Sesi Belajar ↔ Rubrik Penilaian (Rubrik Dipakai / Sesi Pemakaian)
+ C — Detail Mode
+Gamification Engine: tabel XP resmi (11 baris + cap harian 1.000), kurva level Lv 1–100 dengan 5 rank, 7 kategori badge × 4 kelangkaan, sistem quest harian/mingguan/seasonal, mekanik Boss Battle lengkap, wellness gate anti-adiksi.
+Adaptive Tryout: 5 mode tryout, algoritma IRT 1-PL (Rasch) dengan pseudocode, anti-cheating, post-mortem 5-bagian (skor + heatmap + time-per-question + mistake taxonomy + 3-step roadmap).
+Langkah konkret berikutnya yang siap dieksekusi (pilih kapanpun):
+Isi seed Bank Soal — generate 50 soal pilot 1 mapel (saran: Matematika SMP atau B. Indonesia SMA) lengkap dengan b-logit, Bloom, dan kunci.
+Tulis 5 specialist prompt lanjutan — DrillAgent, TryoutAgent, LiteracyAgent, GamificationAgent, MentorAgent (Sprint S2–S5).
+Buat halaman Smoke Test ABD — 10 skenario per agent + rubrik acceptance, paralel dengan pola audit KONSTRA Anda.
+Bangun Parent Dashboard — database laporan mingguan + view dashboard chart untuk orang tua.
+lanjut
+11:20 AM
+Thought
+Lanjut dengan 4 deliverable sekaligus: (#3) Smoke Test ABD, (#2) 5 specialist prompt lanjutan, (#4) Parent Dashboard, lalu (#1) seed Bank Soal. Saya jalankan paralel di mana memungkinkan.
+Tahap 1: 3 halaman konten + 1 dashboard (paralel)
+Tahap 2: Seed Bank Soal. Saya cek dulu skema persis Bank Soal supaya property names akurat:
+Schema Bank Soal sudah jelas. Sekarang saya seed 20 soal Matematika SMP berkualitas (variasi Mudah/Sedang/Sulit + Bloom C2–C5, mencakup AKM/UTBK/OSN/Ujian Sekolah) — semua paralel:
+Semua 4 deliverable tuntas. Ringkasan tambahan turn ini:
+ D — Smoke Test ABD (D — Smoke Test ABD: Skenario Acceptance per Agent)
+30 skenario uji (10 per agent S1) × rubrik 5 kriteria (C1 Non-blocking, C2 Format ABD-7, C3 Confidence, C4 Pedagogi, C5 Safety). Termasuk template Markdown skenario & acceptance matrix 9 agent.
+ E — System Prompts Specialist (S2–S5) (E — System Prompts Specialist Agent (Sprint S2–S5))
+5 prompt v1.0 lengkap: DrillAgent (Hint Ladder 3 tingkat + Worked Example + Spaced Review), TryoutAgent (IRT 1-PL + 5 mode + anti-cheating + post-mortem 5-bagian), GamificationAgent (wellness gate + anti-pattern guard), MentorAgent (protokol triase emosi 2-tingkat + hotline 119 ext 8), LiteracyAgent (rubrik 6+1 Traits + Plagiarism Guard co-writing 4-tahap).
+ F — Parent Dashboard (F — Parent Dashboard: Ringkasan Progres untuk Orang Tua & Guru)
+Kartu Ringkas Mingguan otomatis (template naratif siap pakai), 7 widget metrik visual, kontrol parental (jam aktif/mapel prioritas/kanal), framework privacy & consent (anak <13 wajib consent), 4 template pertanyaan reflektif ortu–anak.
+ Seed Bank Soal — 20 soal Matematika SMP (status Siap Pakai)
+Spektrum lengkap:
+Topik (10): Bilangan Bulat, PLSV, SPLDV, Persamaan Kuadrat, Pythagoras, Lingkaran, Tabung, Statistika, Peluang, Operasi Aljabar, Perbandingan, Aritmetika Sosial, Komposisi Bangun Datar, Fungsi Linear, Pola Bilangan, Sudut, Kesebangunan, Eksponen, Literasi Statistika, PLSV+Geometri.
+Bloom: C2 (5), C3 (8), C4 (4), C5 (3).
+Kesulitan: Mudah (8), Sedang (8), Sulit (4).
+b-logit IRT: −1.8 sampai +1.8 (cakupan adaptif baik).
+Tag: Kurikulum Merdeka, K-13, Ujian Sekolah, ANBK/AKM, OSN, UTBK.
+Setiap soal punya kunci jawaban + pembahasan rinci; soal HOTS #12 & #18 sudah menyertakan catatan miskonsepsi umum yang bisa langsung dipakai DiagnosticAgent.
+Status keseluruhan AI Tutor Blueprint:
+Komponen
+Status
+Hub blueprint ​
+​
+A — Prompts S1 (Coordinator + Theory + Diagnostic)
+​
+B — KB Skeleton (5 DB + 4 relasi)
+​
+C — Detail Mode (Gamifikasi + Tryout)
+​
+D — Smoke Test ABD (Sprint S1)
+​
+E — Prompts S2–S5 (Drill + Tryout + Gamif + Mentor + Literacy)
+​
+F — Parent Dashboard (struktur)
+​
+Seed Bank Soal Matematika SMP
+ 20/20
+Seed mapel lain
+​
+ParentDashboardAgent prompt
+ Sprint S7
+Eksekusi smoke test (jalankan skenario)
+​
+Cetak biru AI Tutor versi MVP sudah lengkap dan siap diserahkan ke tim engineering untuk implementasi Sprint S1.
+

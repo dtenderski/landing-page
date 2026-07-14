@@ -1,0 +1,650 @@
+Saya lanjutkan **di chat saja**.
+
+## LANJUTAN 9 — Data Import Schema & Knowledge Base Engine
+
+Modul ini membuat chatbot punya struktur database yang rapi untuk menampung data dari tabel SBU, Permen PU No. 6 Tahun 2025, dan SK Dirjen Binakon No. 37/KPTS/DK/2025. Tujuannya agar bot tidak hanya menjawab dari teks bebas, tetapi bisa melakukan **lookup terstruktur**: kode SBU → KBLI → kualifikasi → TKK → peralatan → persyaratan → verifikasi OSS/SIJK. Permen PU No. 6 Tahun 2025 menampilkan standar per KBLI, termasuk ruang lingkup, subklasifikasi jasa konstruksi, kualifikasi, TKK, peralatan, persyaratan, verifikasi, dan kewajiban.  SK Dirjen Binakon No. 37/KPTS/DK/2025 memuat skema sertifikasi, kriteria penilaian, dokumen pendaftaran, surveilans, re-sertifikasi, dan formulir asesor. 
+
+```yaml
+# -----------------------------------------------------------------------------
+# LANJUTAN 9 — DATA IMPORT SCHEMA & KNOWLEDGE BASE ENGINE
+# -----------------------------------------------------------------------------
+
+knowledge_base_engine:
+  id: sbu_knowledge_base_engine_v1
+  title: "Mesin Knowledge Base SBU"
+  purpose:
+    - menyimpan data SBU secara terstruktur
+    - mendukung pencarian kode SBU, KBLI, klasifikasi, subklasifikasi, TKK, peralatan, dan persyaratan
+    - mendukung validasi awal KBLI dengan SBU
+    - mendukung checklist dokumen dan pra-verifikasi
+    - mendukung pembaruan regulasi jika ada referensi baru
+```
+
+## 1. Tabel Utama: `subklasifikasi_master`
+
+```yaml
+subklasifikasi_master:
+  description: "Tabel utama untuk semua kode SBU/subklasifikasi."
+  primary_key: "sbu_code"
+  fields:
+    sbu_code:
+      type: string
+      example: "BG001"
+      description: "Kode subklasifikasi SBU."
+
+    sbu_title:
+      type: string
+      example: "Konstruksi Gedung Hunian"
+
+    classification_code:
+      type: string
+      example: "BG"
+
+    classification_name:
+      type: string
+      example: "Bangunan Gedung"
+
+    kbli_code:
+      type: string
+      example: "41011"
+
+    kbli_title:
+      type: string
+      example: "Konstruksi Gedung Hunian"
+
+    business_type:
+      type: string
+      example: "Pekerjaan Konstruksi"
+
+    business_nature:
+      type: string
+      example: "Umum"
+
+    scope_summary:
+      type: text
+      description: "Ringkasan ruang lingkup."
+
+    scope_detail:
+      type: text
+      description: "Detail ruang lingkup dari lampiran/regulasi."
+
+    keywords:
+      type: array
+      example:
+        - "rumah"
+        - "hunian"
+        - "apartemen"
+        - "rusun"
+
+    source_reference:
+      type: string
+      example: "Permen PU 6/2025 Lampiran I"
+
+    active_status:
+      type: enum
+      values:
+        - active
+        - inactive
+        - needs_review
+
+    last_reviewed:
+      type: date
+```
+
+## 2. Tabel KBLI: `kbli_master`
+
+```yaml
+kbli_master:
+  description: "Tabel untuk pemetaan KBLI ke satu atau banyak subklasifikasi."
+  primary_key: "kbli_code"
+  fields:
+    kbli_code:
+      type: string
+      example: "41011"
+
+    kbli_title:
+      type: string
+      example: "Konstruksi Gedung Hunian"
+
+    risk_level:
+      type: string
+      example: "Menengah Tinggi"
+
+    business_license_type:
+      type: string
+      example: "NIB dan Sertifikat Standar"
+
+    related_sbu_codes:
+      type: array
+      example:
+        - "BG001"
+        - "GT001"
+
+    oss_verification_method:
+      type: string
+      example: "automatic_or_manual"
+
+    notes:
+      type: text
+```
+
+## 3. Tabel Kualifikasi: `qualification_matrix`
+
+```yaml
+qualification_matrix:
+  description: "Matriks kualifikasi yang tersedia untuk setiap subklasifikasi."
+  primary_key:
+    - "sbu_code"
+    - "qualification"
+  fields:
+    sbu_code:
+      type: string
+      example: "BG001"
+
+    qualification:
+      type: enum
+      values:
+        - "Kecil 1"
+        - "Kecil 2"
+        - "Kecil 3"
+        - "Menengah"
+        - "Besar"
+
+    is_allowed:
+      type: boolean
+      example: true
+
+    financial_requirement:
+      type: text
+
+    annual_sales_requirement:
+      type: text
+
+    workforce_requirement:
+      type: text
+
+    equipment_requirement:
+      type: text
+
+    smap_requirement:
+      type: text
+
+    notes:
+      type: text
+```
+
+## 4. Tabel TKK: `tkk_requirement_matrix`
+
+```yaml
+tkk_requirement_matrix:
+  description: "Tabel kesesuaian TKK untuk PJTBU dan PJSKBU."
+  primary_key:
+    - "sbu_code"
+    - "role"
+  fields:
+    sbu_code:
+      type: string
+      example: "BG001"
+
+    role:
+      type: enum
+      values:
+        - "PJBU"
+        - "PJTBU"
+        - "PJSKBU"
+
+    required_tkk_subclassification:
+      type: array
+      example:
+        - "Arsitektural"
+        - "Gedung"
+        - "Manajemen Konstruksi/Manajemen Proyek"
+
+    minimum_level_small:
+      type: string
+      example: "Jenjang 7 / Ahli Muda"
+
+    minimum_level_medium:
+      type: string
+      example: "Jenjang 8 / Ahli Madya"
+
+    minimum_level_large:
+      type: string
+      example: "Jenjang 9 / Ahli Utama"
+
+    can_double_role:
+      type: string
+      example: "Mengikuti ketentuan skema sertifikasi"
+
+    notes:
+      type: text
+```
+
+## 5. Tabel Peralatan: `equipment_requirement_matrix`
+
+```yaml
+equipment_requirement_matrix:
+  description: "Tabel kebutuhan peralatan per subklasifikasi dan kualifikasi."
+  primary_key:
+    - "sbu_code"
+    - "qualification_group"
+  fields:
+    sbu_code:
+      type: string
+      example: "BG001"
+
+    qualification_group:
+      type: enum
+      values:
+        - "K"
+        - "M/B"
+        - "B"
+        - "Not Required"
+
+    required_equipment:
+      type: array
+      example:
+        - "concrete mixer"
+        - "tamping rammer"
+        - "generator set"
+        - "bar bending machine"
+        - "scaffolding"
+
+    ownership_status_allowed:
+      type: array
+      example:
+        - "milik sendiri"
+        - "sewa"
+
+    registration_required:
+      type: boolean
+
+    supporting_documents:
+      type: array
+      example:
+        - "bukti kepemilikan"
+        - "perjanjian sewa"
+        - "nomor registrasi alat"
+
+    notes:
+      type: text
+```
+
+## 6. Tabel Dokumen: `document_requirement_matrix`
+
+```yaml
+document_requirement_matrix:
+  description: "Tabel dokumen berdasarkan jenis permohonan."
+  primary_key:
+    - "application_type"
+    - "document_code"
+  fields:
+    application_type:
+      type: enum
+      values:
+        - "baru"
+        - "perubahan"
+        - "perpanjangan"
+        - "konversi"
+        - "surveilans"
+        - "banding"
+        - "keluhan"
+
+    document_code:
+      type: string
+      example: "DOC-LEGAL-001"
+
+    document_name:
+      type: string
+      example: "NIB dan data OSS"
+
+    document_category:
+      type: enum
+      values:
+        - "legalitas"
+        - "kbli_sbu"
+        - "pengalaman"
+        - "keuangan"
+        - "tkk"
+        - "peralatan"
+        - "smap"
+        - "pernyataan"
+        - "pendukung"
+
+    required:
+      type: boolean
+
+    condition:
+      type: text
+      example: "Wajib untuk permohonan baru."
+
+    validation_question:
+      type: text
+      example: "Apakah dokumen ini sudah tersedia dan sesuai data badan usaha?"
+
+    notes:
+      type: text
+```
+
+## 7. Tabel SMAP: `smap_requirement_matrix`
+
+```yaml
+smap_requirement_matrix:
+  description: "Tabel bentuk pemenuhan SMAP."
+  fields:
+    smap_type:
+      type: enum
+      values:
+        - "ISO 37001:2016"
+        - "PANCEK KPK"
+        - "Dokumen Penerapan SMAP"
+        - "Surat Komitmen SMAP"
+
+    accepted_as_initial_evidence:
+      type: boolean
+
+    needs_follow_up:
+      type: boolean
+
+    follow_up_period:
+      type: string
+      example: "Mengikuti kualifikasi dan ketentuan skema"
+
+    required_signatory:
+      type: string
+      example: "Pimpinan tertinggi BUJK"
+
+    notes:
+      type: text
+```
+
+## 8. Tabel Regulasi: `regulation_reference`
+
+```yaml
+regulation_reference:
+  description: "Tabel referensi regulasi agar chatbot tahu sumber jawaban."
+  primary_key: "regulation_id"
+  fields:
+    regulation_id:
+      type: string
+      example: "PERMEN_PU_6_2025"
+
+    title:
+      type: string
+      example: "Permen PU No. 6 Tahun 2025"
+
+    topic:
+      type: array
+      example:
+        - "PBBR"
+        - "SBU"
+        - "OSS"
+        - "SIJK"
+        - "Sanksi"
+
+    effective_status:
+      type: enum
+      values:
+        - "active"
+        - "partially_active"
+        - "revoked"
+        - "needs_review"
+
+    used_for:
+      type: array
+      example:
+        - "jawaban regulasi"
+        - "validasi KBLI"
+        - "ketentuan verifikasi"
+        - "sanksi administratif"
+
+    priority:
+      type: integer
+      example: 1
+
+    notes:
+      type: text
+```
+
+## 9. Data Import Pipeline
+
+```yaml
+data_import_pipeline:
+  id: sbu_data_import_pipeline_v1
+  stages:
+    - stage: "extract"
+      description: "Ambil data dari Excel/PDF/tabel regulasi."
+      output:
+        - raw_rows
+        - raw_text_blocks
+
+    - stage: "normalize"
+      description: "Samakan format kode, KBLI, judul, klasifikasi, dan kualifikasi."
+      rules:
+        - "uppercase semua kode SBU"
+        - "hapus spasi ganda"
+        - "KBLI harus 5 digit"
+        - "pisahkan kode SBU dan kode rancang bangun/terintegrasi bila ada"
+        - "kelompokkan alat berdasarkan K, M/B, atau B"
+
+    - stage: "map"
+      description: "Petakan data ke tabel master."
+      target_tables:
+        - subklasifikasi_master
+        - kbli_master
+        - qualification_matrix
+        - tkk_requirement_matrix
+        - equipment_requirement_matrix
+        - document_requirement_matrix
+        - regulation_reference
+
+    - stage: "validate"
+      description: "Cek kualitas data."
+      checks:
+        - "setiap sbu_code punya kbli_code"
+        - "setiap kbli_code punya minimal satu related_sbu_code"
+        - "setiap sbu_code punya scope_summary"
+        - "kode duplikat ditandai needs_review"
+        - "KBLI ganda ditandai ambiguous"
+
+    - stage: "publish"
+      description: "Data siap dipakai chatbot."
+      output:
+        - searchable_catalog
+        - lookup_index
+        - keyword_index
+        - compliance_index
+```
+
+## 10. Index Pencarian Chatbot
+
+```yaml
+search_indexes:
+  exact_code_index:
+    purpose: "Pencarian langsung kode SBU."
+    input_examples:
+      - "BG001"
+      - "IN008"
+      - "PL003"
+    lookup_table: subklasifikasi_master
+    lookup_key: sbu_code
+
+  kbli_index:
+    purpose: "Pencarian berdasarkan KBLI."
+    input_examples:
+      - "41011"
+      - "43224"
+      - "43120"
+    lookup_table: kbli_master
+    lookup_key: kbli_code
+
+  keyword_index:
+    purpose: "Pencarian berdasarkan kata kunci pekerjaan."
+    fields:
+      - sbu_title
+      - kbli_title
+      - scope_summary
+      - scope_detail
+      - keywords
+    output:
+      - ranked_sbu_candidates
+
+  compliance_index:
+    purpose: "Pencarian regulasi dan kepatuhan."
+    fields:
+      - certification_process
+      - annual_sales
+      - financial_capacity
+      - tkk
+      - equipment
+      - smap
+      - oss_sijk
+      - conversion
+      - sanction
+      - complaint_appeal
+```
+
+## 11. Data Quality Rules
+
+```yaml
+data_quality_rules:
+  sbu_code_format:
+    rule: "Kode harus diawali BG, BS, IN, KK, KP, PA, PB, PL, atau kode lain yang valid sesuai regulasi."
+    action_if_invalid: "mark_as_needs_review"
+
+  kbli_format:
+    rule: "KBLI harus 5 digit angka."
+    action_if_invalid: "mark_as_invalid_kbli"
+
+  multiple_sbu_for_same_kbli:
+    rule: "Jika satu KBLI memiliki banyak subklasifikasi, tampilkan semua kandidat dan ajukan klarifikasi."
+    action_if_detected: "mark_as_ambiguous_kbli"
+
+  missing_scope:
+    rule: "Jika ruang lingkup kosong, jangan jawab detail; minta admin melengkapi data."
+    action_if_detected: "fallback_to_general_response"
+
+  outdated_reference:
+    rule: "Jika ada referensi lebih baru, gunakan referensi dengan priority tertinggi."
+    action_if_detected: "show_regulatory_update_note"
+
+  equipment_by_qualification:
+    rule: "Jangan tampilkan daftar alat tanpa memperhatikan kualifikasi."
+    action_if_detected: "ask_target_qualification"
+
+  tkk_by_qualification:
+    rule: "Jangan menilai jenjang TKK tanpa mengetahui kualifikasi target."
+    action_if_detected: "ask_target_qualification"
+```
+
+## 12. Response Resolver
+
+```yaml
+response_resolver:
+  priority_order:
+    - safety_guardrail
+    - exact_sbu_code
+    - exact_kbli
+    - exact_regulatory_question
+    - keyword_search
+    - guided_recommendation
+    - compliance_check
+    - fallback
+
+  exact_sbu_code_response:
+    required_fields:
+      - sbu_code
+      - sbu_title
+      - classification_name
+      - kbli_code
+      - scope_summary
+    optional_fields:
+      - allowed_qualification
+      - tkk_summary
+      - equipment_summary
+      - verification_note
+
+  exact_kbli_response:
+    if_single_candidate:
+      action: "show_sbu_detail"
+    if_multiple_candidates:
+      action: "show_candidate_list_and_clarification"
+
+  regulatory_question_response:
+    required_style:
+      - "jawab ringkas"
+      - "sebutkan status sebagai informasi awal"
+      - "ingatkan validasi resmi"
+      - "jangan menyatakan keputusan final"
+```
+
+## 13. Contoh Data Record
+
+```yaml
+sample_records:
+  subklasifikasi_master_BG001:
+    sbu_code: "BG001"
+    sbu_title: "Konstruksi Gedung Hunian"
+    classification_code: "BG"
+    classification_name: "Bangunan Gedung"
+    kbli_code: "41011"
+    kbli_title: "Konstruksi Gedung Hunian"
+    business_type: "Pekerjaan Konstruksi"
+    business_nature: "Umum"
+    scope_summary: >
+      Pembangunan, pemeliharaan, pembongkaran dan/atau pembangunan kembali
+      bangunan hunian seperti rumah tinggal, rumah susun, asrama, apartemen,
+      dan kondominium.
+    keywords:
+      - "rumah"
+      - "hunian"
+      - "apartemen"
+      - "rusun"
+      - "asrama"
+      - "kondominium"
+    source_reference: "Permen PU 6/2025 Lampiran I"
+    active_status: "active"
+
+  kbli_master_41011:
+    kbli_code: "41011"
+    kbli_title: "Konstruksi Gedung Hunian"
+    related_sbu_codes:
+      - "BG001"
+      - "GT001"
+    oss_verification_method: "automatic_for_BUJK_general_manual_for_specific_cases"
+    notes: >
+      Untuk pekerjaan konstruksi umum, kandidat utama BG001. Untuk pekerjaan
+      konstruksi terintegrasi/rancang bangun, kandidat dapat mengarah ke GT001
+      sesuai ketentuan.
+```
+
+## 14. Prompt untuk Admin Saat Upload Data
+
+```yaml
+admin_upload_prompt:
+  text: >
+    Upload data katalog SBU dalam format tabel dengan kolom minimal:
+    kode subklasifikasi, judul subklasifikasi, KBLI, judul KBLI, klasifikasi,
+    ruang lingkup, kualifikasi, TKK PJTBU, TKK PJSKBU, peralatan, persyaratan,
+    verifikasi, kewajiban, dan sumber referensi. Setelah upload, sistem akan
+    melakukan normalisasi kode, validasi KBLI, pencarian duplikasi, dan pembuatan
+    index pencarian.
+```
+
+## 15. Runtime Prompt Tambahan
+
+```yaml
+runtime_prompt_addition_data_engine:
+  text: >
+    Gunakan knowledge base terstruktur sebelum menjawab. Jika pengguna memberi
+    kode SBU, lakukan exact lookup ke subklasifikasi_master. Jika pengguna memberi
+    KBLI, lakukan lookup ke kbli_master dan tampilkan semua kandidat. Jika pengguna
+    menanyakan TKK atau peralatan, minta kualifikasi target bila belum disebutkan.
+    Jika data tidak lengkap, jangan mengarang; tampilkan status “data perlu review”
+    dan minta admin melengkapi katalog. Jika ada perbedaan antara katalog lama dan
+    referensi regulasi terbaru, tampilkan catatan validasi regulasi.
+```
+
+Dengan modul ini, chatbot sudah punya fondasi data yang kuat untuk dijadikan aplikasi yang bisa di-update dari admin panel:
+
+**Upload katalog → normalisasi data → validasi KBLI/SBU → index pencarian → lookup detail → pra-verifikasi → rekomendasi dokumen/kepatuhan.**

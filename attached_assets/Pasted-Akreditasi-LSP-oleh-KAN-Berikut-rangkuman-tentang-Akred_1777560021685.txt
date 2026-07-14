@@ -1,0 +1,168 @@
+Akreditasi LSP oleh KAN
+Berikut rangkuman tentang Akreditasi LSP (Lembaga Sertifikasi Profesi) oleh KAN (Komite Akreditasi Nasional) — gabungan konteks regulasi resmi dan referensi internal di workspace SOBAT NETWORK.
+1. Posisi KAN dalam Sertifikasi Kompetensi
+KAN adalah lembaga non-struktural yang dibentuk berdasarkan Keppres No. 78/2001 dan diperkuat UU No. 20/2014 tentang Standardisasi dan Penilaian Kesesuaian. KAN bertanggung jawab langsung kepada Presiden melalui Kepala BSN, dan menjadi satu-satunya badan akreditasi nasional Indonesia.⁠
+⁠⁠
+⁠​
+KAN beroperasi sesuai ISO/IEC 17011 dan merupakan anggota penuh APAC, IAF, dan ILAC, sehingga sertifikat yang diterbitkan LSP terakreditasi KAN diakui dalam skema MLA/MRA internasional.⁠
+⁠​
+Catatan penting di Indonesia: LSP memiliki dua jalur pengakuan yang sering berjalan paralel:
+- Lisensi BNSP — wajib agar LSP dapat menyelenggarakan sertifikasi kompetensi profesi nasional.
+- Akreditasi KAN — pengakuan kompetensi LSP berbasis SNI ISO/IEC 17024 (Lembaga Sertifikasi Person), memberikan pengakuan internasional.
+Contoh nyata: LSP Survei & Pemetaan ISI memegang Lisensi BNSP + Akreditasi KAN (mengacu KAN U-01 Rev.1) + Rekomendasi LPJK.⁠
+⁠⁠
+⁠​
+2. Standar Acuan Akreditasi LSP
+Dokumen
+Fungsi
+SNI ISO/IEC 17024
+Standar internasional persyaratan umum untuk Lembaga Sertifikasi Person (LSP)
+KAN U-01 — Syarat dan Aturan Akreditasi LPK
+Aturan umum akreditasi semua Lembaga Penilaian Kesesuaian (LPK), termasuk LSP⁠
+⁠​
+KAN K-09 — Persyaratan Khusus Lembaga Sertifikasi Personal
+Persyaratan tambahan khusus untuk akreditasi LSP, dipakai bersama KAN U-01⁠
+⁠​
+KAN U-03 Rev.2
+Pedoman penggunaan simbol/marka akreditasi KAN
+3. Proses Akreditasi LSP oleh KAN
+Berdasarkan publikasi resmi KAN:⁠
+⁠​
+Tahap 1 — Pendaftaran Online
+Pendaftaran dilakukan melalui KANMIS / Laman Informasi Publik KAN (layanan.kan.or.id). Berkas yang harus disiapkan:
+Formulir permohonan akreditasi (lengkap)
+Dokumentasi Mutu termutakhir (Manual Mutu, SOP, formulir)
+Legalitas hukum organisasi
+Laporan audit internal
+Laporan tinjauan manajemen
+Dokumen/rekaman terkait lainnya
+Tahap 2 — Evaluasi Permohonan
+Evaluasi kelengkapan permohonan
+Evaluasi ketersediaan sumber daya KAN (asesor dengan ruang lingkup yang sesuai)⁠
+⁠​
+Tahap 3 — Pembayaran (SIMPONI)
+Pembayaran biaya asesmen melalui SIMPONI (Sistem Informasi PNBP Online) dengan kode billing yang berlaku 7 hari sejak diterbitkan.⁠
+⁠​
+Tahap 4 — Asesmen Awal
+Tinjauan dokumen (kesesuaian terhadap ISO 17024 + KAN K-09)
+Asesmen lapangan di kantor LSP
+Witness Assessment — penyaksian langsung pelaksanaan uji kompetensi terhadap skema yang diajukan. Contoh kasus: tim asesor KAN melakukan witness pada LSP DKKN BAPETEN untuk skema "Ahli Uji Kesesuaian Pesawat Sinar-X".⁠
+⁠​
+Tahap 5 — Tindakan Perbaikan (Corrective Action)
+LSP wajib menutup temuan ketidaksesuaian dalam batas waktu yang ditetapkan asesor.
+Tahap 6 — Keputusan Akreditasi
+Diputuskan oleh Council/Komite Pengambilan Keputusan KAN berdasarkan rekomendasi tim asesor.
+Tahap 7 — Surveilan & Re-asesmen
+Surveilan berkala selama siklus akreditasi
+Re-asesmen / perpanjangan sebelum masa akreditasi berakhir
+Witness tambahan saat ada perluasan ruang lingkup
+Kontak resmi:
+ sertifikasi@bsn.go.id  +62 812 1314 0054 (Direktorat Akreditasi Lembaga Inspeksi & Lembaga Sertifikasi).⁠
+⁠​
+4. Konteks dalam Workspace Anda
+Beberapa halaman SOBAT NETWORK yang sudah menyentuh isu LSP/KAN dan dapat menjadi kanvas untuk perluasan modul ini:
+Proposal Pelaksanaan Sertifikasi Kompetensi Nir Kertas & Asesmen Jarak Jauh — LSP SDMKI — sudah memetakan standar BNSP, perlu suplemen ISO 17024 + KAN K-09 jika LSP SDMKI menargetkan akreditasi KAN.⁠
+⁠​
+KB LSP–TUK (Regulasi & Knowledge) — knowledge base yang cocok untuk menyimpan dokumen KAN U-01, KAN K-09, dan SOP akreditasi.⁠
+⁠​
+LSP K3 ICCOSH (Indonesian Construction Safety & Health) dan BNSP (Badan Nasional Sertifikasi Profesi) — referensi mitra sertifikasi pada Program Kompetensi Manajerial BUJK ASPEKINDO.⁠
+⁠⁠
+⁠​
+Paket IMS Terintegrasi — ISO 9001 + 14001 + 45001 + 37001 (Corporate Tier) — sudah menyebut kemitraan dengan LSM/LS-SMAP terakreditasi KAN, menunjukkan konsistensi pola "akreditasi KAN" di ekosistem ASPEKINDO.⁠
+⁠​
+5. Ringkasan Dua Jalur (Cheat Sheet)
+Aspek
+Lisensi BNSP
+Akreditasi KAN
+Dasar hukum
+UU 13/2003, PP 10/2018
+UU 20/2014, Keppres 78/2001
+Standar
+Pedoman BNSP 201, 202, 210
+SNI ISO/IEC 17024 + KAN K-09
+Sifat
+Wajib untuk LSP beroperasi di Indonesia
+Sukarela, untuk pengakuan internasional (IAF MLA)
+Output
+Sertifikat kompetensi BNSP
+Marka akreditasi KAN pada sertifikat
+Cocok untuk
+Pasar tenaga kerja domestik
+Pasar regional/global, ekspor jasa profesi
+Kalau Anda ingin, saya bisa menurunkan ini menjadi: (a) halaman knowledge-base resmi di KB LSP–TUK, (b) checklist persiapan akreditasi (gap-analysis ISO 17024), atau (c) SOP onboarding LSP SDMKI menuju akreditasi KAN. Tinggal bilang yang mana.
+lanjut a b c
+Apr 28
+Saya akan membuat ketiganya secara paralel: (a) Playbook + 3 entry Regulasi di KB LSP–TUK, (b) Gap-Analysis ISO 17024 sebagai sub-page proposal, (c) SOP Onboarding Akreditasi KAN sebagai sub-page proposal.
+Ketiganya sudah jadi. Berikut ringkasannya:
+(a) KB LSP–TUK — 1 Playbook utama + 3 entry Regulasi pendukung (KAN U-01, KAN K-09, SNI ISO/IEC 17024).
+(b) Gap-Analysis ISO 17024 — checklist 38 item (klausul 4–10 + KAN K-09) sebagai sub-page proposal LSP SDMKI.
+(c) SOP Onboarding Akreditasi KAN — 10 tahap (Inisiasi → Surveilan), peran, KPI, manajemen risiko, sebagai sub-page proposal LSP SDMKI.
+Catatan: di SOP, Tahap 1 sebaiknya merujuk langsung ke checklist gap-analysis (saat ini menyebut induknya proposal). Mau saya perbaiki tautannya supaya menunjuk persis ke halaman Checklist Gap-Analysis?
+lanjut
+Apr 28
+Thought
+Saya perbaiki tautan Tahap 1 dan tambahkan 5 lampiran template (A–E) sebagai sub-page SOP secara paralel.
+Tautan Tahap 1 sudah diperbaiki dan 5 lampiran template (A–E) sudah dibuat sebagai sub-page SOP.
+Beberapa catatan tampilan: pada beberapa tabel, baris pertama (header) ter-merge dengan baris berikutnya saat di-render Notion. Bila perlu, saya bisa rapikan tabel-tabel tersebut menjadi struktur baris yang konsisten. Kalau Anda ingin lanjut, opsi berikutnya yang masuk akal:
+<ask-survey>
+<questions>
+[
+{
+"id": "next-step",
+"prompt": "Lanjutan apa yang Anda inginkan?",
+"allowOther": true,
+"options": [
+{"id": "fix-tables", "label": "Rapikan tabel di SOP & lampiran"},
+{"id": "manual-mutu", "label": "Draft Manual Mutu LSP SDMKI (ISO 17024)"},
+{"id": "sop-p01-p09", "label": "Draft SOP operasional P-01 s.d. P-09"},
+{"id": "skema-template", "label": "Template dokumen Skema Sertifikasi"},
+{"id": "kebijakan-ketidakberpihakan", "label": "Kebijakan Ketidakberpihakan & Keamanan Informasi"}
+]
+}
+]
+</questions>
+</ask-survey>
+lanjut
+Apr 28
+Saya lanjutkan dengan tiga dokumen fondasi yang paling sering dirujuk SOP & lampiran: Manual Mutu, paket SOP Operasional P-01 s.d. P-09, dan Kebijakan Ketidakberpihakan & Keamanan Informasi — semuanya sebagai sub-page proposal LSP SDMKI.
+Tiga dokumen fondasi sudah tersedia sebagai sub-page proposal LSP SDMKI.
+Catatan: beberapa baris tabel masih ter-render menyatu (artefak konversi tabel berkolom banyak). Inti isinya tetap terbaca; nanti bisa dirapikan terpisah.
+Pilihan lanjutan berikutnya:
+<ask-survey>
+<questions>
+[
+{
+"id": "next-step-2",
+"prompt": "Lanjut ke deliverable mana?",
+"allowOther": true,
+"options": [
+{"id": "fix-tables-all", "label": "Rapikan semua tabel (SOP + Manual Mutu + Kebijakan)"},
+{"id": "skema-template", "label": "Template dokumen Skema Sertifikasi per jabatan kerja"},
+{"id": "kebijakan-mutu-lampiran", "label": "Kebijakan Mutu, Sasaran Mutu, Daftar Induk Dokumen"},
+{"id": "matriks-kompetensi", "label": "Matriks Kompetensi Personel + Job Description"},
+{"id": "kanmis-checklist-sheet", "label": "Lembar kerja checklist KANMIS yang siap-print"}
+]
+}
+]
+</questions>
+</ask-survey>
+lanjut
+Apr 28
+Thought
+Saya lanjutkan dengan tiga deliverable berikutnya secara paralel: Template Skema Sertifikasi, Paket Kebijakan + Sasaran Mutu + Daftar Induk Dokumen (Lampiran 1–3 Manual Mutu), dan Matriks Kompetensi + Job Description.
+Tiga deliverable lanjutan sudah selesai sebagai sub-page proposal LSP SDMKI.
+Dengan ini paket dokumen fondasi LSP SDMKI sudah lengkap (Manual Mutu + 5 Lampiran + Kebijakan + SOP Operasional + SOP Onboarding KAN + 5 Lampiran KAN + Template Skema + Matriks Kompetensi/JD). Catatan: artefak konversi tabel kolom-banyak masih tampak pada beberapa halaman.
+Pilihan lanjutan:
+<ask-survey>
+<questions>
+[
+{
+"id": "next-step-3",
+"prompt": "Lanjut ke deliverable mana?",
+"allowOther": true,
+"options": [
+{"id": "fix-tables-batch", "label": "Rapikan semua tabel multi-kolom"},
+{"id": "form-apl-mak", "label": "Set lengkap formulir asesmen (APL-01/02, MAK, MMA, MMR)"},
+{"id": "kode-etik", "label": "Kode Etik & Kerahasiaan personel + asesor"},
+{"id": "rencana-implementasi", "label": "Rencana implementasi 6 bulan akreditasi KAN (Gantt)"},
+{"id": "index-paket", "label": "Halaman indeks 'Paket Dokumen Akreditasi LSP SDMKI'"}

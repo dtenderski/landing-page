@@ -1,0 +1,941 @@
+Berikut lanjutan berikutnya: **full implementation sample untuk MVP**, berisi **struktur file proyek, contoh seed JSON lengkap, routing intent sederhana, template respons, dan contoh logic scoring asesmen** untuk chatbot SKK **Manajemen Pelaksanaan**. Bagian ini tetap mengacu pada katalog jabatan, KKNI, kualifikasi, dan standar kompetensi dari file yang Anda unggah. 
+
+---
+
+# 177. Suggested Project Folder Structure
+
+```text id="project_folder_structure"
+skk-coach-manajemen-pelaksanaan/
+├── README.md
+├── package.json
+├── .env.example
+├── src/
+│   ├── app/
+│   │   ├── server.ts
+│   │   ├── routes.ts
+│   │   └── middleware.ts
+│   │
+│   ├── chatbot/
+│   │   ├── messageHandler.ts
+│   │   ├── intentDetector.ts
+│   │   ├── entityExtractor.ts
+│   │   ├── responseRenderer.ts
+│   │   ├── fallbackHandler.ts
+│   │   └── safetyGuardrails.ts
+│   │
+│   ├── catalog/
+│   │   ├── roleCatalogService.ts
+│   │   ├── kkniLookupService.ts
+│   │   ├── standardLookupService.ts
+│   │   └── roleRecommendationService.ts
+│   │
+│   ├── assessment/
+│   │   ├── assessmentService.ts
+│   │   ├── scoringService.ts
+│   │   └── assessmentQuestions.ts
+│   │
+│   ├── learning/
+│   │   ├── learningModules.ts
+│   │   ├── quizBank.ts
+│   │   └── scenarioLibrary.ts
+│   │
+│   ├── evidence/
+│   │   └── evidenceChecklistService.ts
+│   │
+│   ├── data/
+│   │   ├── roles.seed.json
+│   │   ├── standards.seed.json
+│   │   ├── glossary.seed.json
+│   │   └── faq.seed.json
+│   │
+│   └── utils/
+│       ├── normalizeText.ts
+│       ├── slugify.ts
+│       └── constants.ts
+│
+├── tests/
+│   ├── roleLookup.test.ts
+│   ├── kkniLookup.test.ts
+│   ├── standardLookup.test.ts
+│   ├── assessment.test.ts
+│   └── safetyGuardrails.test.ts
+│
+└── docs/
+    ├── bot-design.md
+    ├── api-contract.md
+    └── launch-checklist.md
+```
+
+---
+
+# 178. MVP Role Catalog Seed JSON
+
+```json id="mvp_role_catalog_seed"
+{
+  "classification": {
+    "code": "E",
+    "name": "Manajemen Pelaksanaan"
+  },
+  "roles": [
+    {
+      "id": "petugas_k3_konstruksi_kkni_3",
+      "subklasifikasi": "Keselamatan Konstruksi",
+      "jabatan_kerja": "Petugas Keselamatan dan Kesehatan Kerja (K3) Konstruksi",
+      "jenjang_jabatan_kerja": "Petugas Keselamatan dan Kesehatan Kerja (K3) Konstruksi",
+      "kualifikasi": "Operator",
+      "kkni_level": 3,
+      "standard_code": "SKKNI 307-2013",
+      "recommended_assessment": "assessment_k3",
+      "focus_summary": "Membantu penerapan K3 konstruksi di lapangan, memantau APD, mengenali kondisi tidak aman, dan melaporkan temuan."
+    },
+    {
+      "id": "petugas_keselamatan_konstruksi_kkni_3",
+      "subklasifikasi": "Keselamatan Konstruksi",
+      "jabatan_kerja": "Petugas Keselamatan Konstruksi",
+      "jenjang_jabatan_kerja": "Petugas Keselamatan Konstruksi",
+      "kualifikasi": "Operator",
+      "kkni_level": 3,
+      "standard_code": "SKKNI 60-2022",
+      "recommended_assessment": "assessment_k3",
+      "focus_summary": "Membantu pelaksanaan keselamatan konstruksi, pemeriksaan sederhana, dan pelaporan kondisi berisiko."
+    },
+    {
+      "id": "supervisor_k3_kkni_5",
+      "subklasifikasi": "Keselamatan Konstruksi",
+      "jabatan_kerja": "Supervisor K3",
+      "jenjang_jabatan_kerja": "Supervisor K3",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 5,
+      "standard_code": "SKKNI 350-2014",
+      "recommended_assessment": "assessment_k3",
+      "focus_summary": "Mengawasi penerapan K3, menindaklanjuti temuan, mengoordinasikan tindakan korektif, dan membina kepatuhan keselamatan."
+    },
+    {
+      "id": "ahli_muda_k3_konstruksi_kkni_7",
+      "subklasifikasi": "Keselamatan Konstruksi",
+      "jabatan_kerja": "Ahli K3 Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Muda K3 Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 7,
+      "standard_code": "SKKNI 350-2014",
+      "recommended_assessment": "assessment_k3",
+      "focus_summary": "Menganalisis, menerapkan, dan mengevaluasi sistem K3 konstruksi serta pengendalian risiko di proyek."
+    },
+    {
+      "id": "ahli_muda_manajemen_proyek_kkni_7",
+      "subklasifikasi": "Manajemen Konstruksi / Manajemen Proyek",
+      "jabatan_kerja": "Ahli Manajemen Proyek Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Muda Manajemen Proyek Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 7,
+      "standard_code": "SKKK 035-2022",
+      "recommended_assessment": "assessment_project",
+      "focus_summary": "Perencanaan, pengendalian waktu, biaya, mutu, risiko, koordinasi sumber daya, dan pelaporan progres proyek."
+    },
+    {
+      "id": "quality_engineer_madya_kkni_5",
+      "subklasifikasi": "Pengendalian Mutu Pekerjaan Konstruksi",
+      "jabatan_kerja": "Quality Engineer",
+      "jenjang_jabatan_kerja": "Quality Engineer Madya",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 5,
+      "standard_code": "SKKNI 333-2013",
+      "recommended_assessment": "assessment_quality",
+      "focus_summary": "Pengendalian mutu teknis, inspeksi hasil pekerjaan, verifikasi spesifikasi, dokumentasi pemeriksaan, NCR, dan tindakan korektif."
+    },
+    {
+      "id": "quality_engineer_kkni_6",
+      "subklasifikasi": "Pengendalian Mutu Pekerjaan Konstruksi",
+      "jabatan_kerja": "Quality Engineer",
+      "jenjang_jabatan_kerja": "Quality Engineer",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 6,
+      "standard_code": "SKKNI 333-2013",
+      "recommended_assessment": "assessment_quality",
+      "focus_summary": "Pengendalian mutu teknis, inspeksi hasil pekerjaan, verifikasi spesifikasi, dokumentasi pemeriksaan, NCR, dan tindakan korektif."
+    },
+    {
+      "id": "quality_assurance_engineer_kkni_6",
+      "subklasifikasi": "Pengendalian Mutu Pekerjaan Konstruksi",
+      "jabatan_kerja": "Quality Assurance Engineer",
+      "jenjang_jabatan_kerja": "Quality Assurance Engineer",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 6,
+      "standard_code": "SKKNI 387-2013",
+      "recommended_assessment": "assessment_quality",
+      "focus_summary": "Penjaminan mutu, prosedur mutu, audit, pencegahan ketidaksesuaian, dan konsistensi sistem kualitas."
+    },
+    {
+      "id": "ahli_kontrak_madya_kkni_8",
+      "subklasifikasi": "Hukum Kontrak Konstruksi",
+      "jabatan_kerja": "Ahli Kontrak Kerja Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Madya Kontrak Kerja Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 8,
+      "standard_code": "SKKNI 88-2015",
+      "recommended_assessment": "assessment_contract",
+      "focus_summary": "Analisis kontrak, variation order, klaim, adendum, sengketa, serta hak dan kewajiban para pihak."
+    },
+    {
+      "id": "ahli_quantity_surveyor_muda_kkni_7",
+      "subklasifikasi": "Estimasi Biaya Konstruksi",
+      "jabatan_kerja": "Ahli Quantity Surveyor",
+      "jenjang_jabatan_kerja": "Ahli Muda Quantity Surveyor",
+      "kualifikasi": "Ahli",
+      "kkni_level": 7,
+      "standard_code": "SKKNI 6-2011",
+      "recommended_assessment": "assessment_cost_qs",
+      "focus_summary": "Pengukuran kuantitas, estimasi biaya, pengendalian biaya, progress payment, deviasi volume, klaim biaya, dan evaluasi komersial."
+    }
+  ]
+}
+```
+
+---
+
+# 179. Simple Intent Routing Logic
+
+```typescript id="simple_intent_routing_logic"
+type Intent =
+  | "greet"
+  | "lookup_role"
+  | "lookup_kkni"
+  | "lookup_standard"
+  | "compare_roles"
+  | "start_assessment"
+  | "generate_checklist"
+  | "start_learning"
+  | "unsafe_request"
+  | "fallback";
+
+function detectIntent(text: string): Intent {
+  const input = normalizeText(text);
+
+  if (["halo", "hai", "mulai", "menu"].some(x => input.includes(x))) {
+    return "greet";
+  }
+
+  if (
+    input.includes("tanpa apd") ||
+    input.includes("abaikan k3") ||
+    input.includes("lanjut kerja walaupun tidak aman") ||
+    input.includes("terima mutu tidak sesuai") ||
+    input.includes("tanpa instruksi tertulis")
+  ) {
+    return "unsafe_request";
+  }
+
+  if (/kkni\s*[3-9]|level\s*[3-9]/i.test(input)) {
+    return "lookup_kkni";
+  }
+
+  if (/skkni\s*\d+[-\s]\d+|skkk\s*\d+[-\s]\d+/i.test(input)) {
+    return "lookup_standard";
+  }
+
+  if (
+    input.includes("beda") ||
+    input.includes("bandingkan") ||
+    input.includes("vs")
+  ) {
+    return "compare_roles";
+  }
+
+  if (
+    input.includes("asesmen") ||
+    input.includes("cek kemampuan") ||
+    input.includes("tes kesiapan")
+  ) {
+    return "start_assessment";
+  }
+
+  if (
+    input.includes("checklist") ||
+    input.includes("bukti") ||
+    input.includes("dokumen") ||
+    input.includes("portofolio")
+  ) {
+    return "generate_checklist";
+  }
+
+  if (
+    input.includes("belajar") ||
+    input.includes("materi") ||
+    input.includes("jelaskan")
+  ) {
+    return "start_learning";
+  }
+
+  if (
+    input.includes("quality engineer") ||
+    input.includes("quantity surveyor") ||
+    input.includes("ahli k3") ||
+    input.includes("supervisor k3") ||
+    input.includes("kontrak") ||
+    input.includes("mutu") ||
+    input.includes("qs") ||
+    input.includes("k3")
+  ) {
+    return "lookup_role";
+  }
+
+  return "fallback";
+}
+```
+
+---
+
+# 180. Entity Extraction Examples
+
+```typescript id="entity_extraction_examples"
+function extractKkniLevel(text: string): number | null {
+  const normalized = normalizeText(text);
+  const match = normalized.match(/(?:kkni|level)\s*([3-9])/i);
+  return match ? Number(match[1]) : null;
+}
+
+function extractStandardCode(text: string): string | null {
+  const normalized = text
+    .toUpperCase()
+    .replace(/–|—/g, "-")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  const match = normalized.match(/(SKKNI|SKKK)\s*(\d{1,3})[-\s](\d{4})/);
+
+  if (!match) return null;
+
+  const prefix = match[1];
+  const number = match[2].padStart(3, "0");
+  const year = match[3];
+
+  if (prefix === "SKKNI" && number === "006") {
+    return "SKKNI 6-2011";
+  }
+
+  return `${prefix} ${number}-${year}`;
+}
+
+function extractRoleKeyword(text: string): string | null {
+  const input = normalizeText(text);
+
+  const roleKeywords = [
+    "quality engineer",
+    "quality assurance engineer",
+    "ahli sistem manajemen mutu",
+    "ahli k3 konstruksi",
+    "ahli keselamatan konstruksi",
+    "supervisor k3",
+    "petugas k3",
+    "petugas keselamatan",
+    "ahli manajemen proyek",
+    "manajemen konstruksi",
+    "manajer logistik",
+    "ahli kontrak",
+    "juru hitung kuantitas",
+    "estimator biaya jalan",
+    "quantity surveyor",
+    "ahli quantity surveyor"
+  ];
+
+  const match = roleKeywords.find(keyword => input.includes(keyword));
+  return match || null;
+}
+```
+
+---
+
+# 181. Role Lookup Service Logic
+
+```typescript id="role_lookup_service_logic"
+interface RoleRecord {
+  id: string;
+  subklasifikasi: string;
+  jabatan_kerja: string;
+  jenjang_jabatan_kerja: string;
+  kualifikasi: string;
+  kkni_level: number;
+  standard_code: string;
+  recommended_assessment: string;
+  focus_summary: string;
+}
+
+function lookupRole(query: string, catalog: RoleRecord[]): RoleRecord[] {
+  const q = normalizeText(query);
+
+  const synonymMap: Record<string, string[]> = {
+    "k3": ["k3", "keselamatan", "safety", "hse"],
+    "qs": ["qs", "quantity", "quantity surveyor", "volume", "boq"],
+    "mutu": ["mutu", "quality", "qa", "qc"],
+    "kontrak": ["kontrak", "claim", "klaim", "variation order", "vo"],
+    "proyek": ["proyek", "project", "manajemen proyek", "jadwal"]
+  };
+
+  const exactMatches = catalog.filter(role =>
+    normalizeText(role.jabatan_kerja) === q ||
+    normalizeText(role.jenjang_jabatan_kerja) === q
+  );
+
+  if (exactMatches.length > 0) {
+    return exactMatches;
+  }
+
+  const partialMatches = catalog.filter(role =>
+    normalizeText(role.jabatan_kerja).includes(q) ||
+    normalizeText(role.jenjang_jabatan_kerja).includes(q) ||
+    q.includes(normalizeText(role.jabatan_kerja))
+  );
+
+  if (partialMatches.length > 0) {
+    return partialMatches;
+  }
+
+  if (synonymMap.k3.some(term => q.includes(term))) {
+    return catalog.filter(role =>
+      role.subklasifikasi === "Keselamatan Konstruksi"
+    );
+  }
+
+  if (synonymMap.qs.some(term => q.includes(term))) {
+    return catalog.filter(role =>
+      role.subklasifikasi === "Estimasi Biaya Konstruksi"
+    );
+  }
+
+  if (synonymMap.mutu.some(term => q.includes(term))) {
+    return catalog.filter(role =>
+      role.subklasifikasi === "Pengendalian Mutu Pekerjaan Konstruksi"
+    );
+  }
+
+  if (synonymMap.kontrak.some(term => q.includes(term))) {
+    return catalog.filter(role =>
+      role.subklasifikasi === "Hukum Kontrak Konstruksi"
+    );
+  }
+
+  if (synonymMap.proyek.some(term => q.includes(term))) {
+    return catalog.filter(role =>
+      role.subklasifikasi === "Manajemen Konstruksi / Manajemen Proyek"
+    );
+  }
+
+  return [];
+}
+```
+
+---
+
+# 182. Response Renderer — Role Detail
+
+```typescript id="response_renderer_role_detail"
+function renderRoleDetail(matches: RoleRecord[]) {
+  const groupedByRole = groupBy(matches, "jabatan_kerja");
+  const roleName = matches[0].jabatan_kerja;
+  const subklasifikasi = matches[0].subklasifikasi;
+  const focusSummary = matches[0].focus_summary;
+
+  const jenjangList = matches
+    .sort((a, b) => a.kkni_level - b.kkni_level)
+    .map((role, index) => {
+      return `${index + 1}. ${role.jenjang_jabatan_kerja} — ${role.kualifikasi} — KKNI ${role.kkni_level} — ${role.standard_code}`;
+    })
+    .join("\n");
+
+  return {
+    text: `${roleName} berada dalam subklasifikasi ${subklasifikasi} pada klasifikasi Manajemen Pelaksanaan.
+
+Jenjang tersedia:
+${jenjangList}
+
+Fokus kompetensi:
+${focusSummary}
+
+Apa yang ingin Anda lakukan berikutnya?`,
+    quick_replies: [
+      "Mulai asesmen",
+      "Checklist bukti",
+      "Belajar kompetensi",
+      "Latihan wawancara",
+      "Kembali ke menu"
+    ]
+  };
+}
+```
+
+---
+
+# 183. Response Renderer — Disambiguation
+
+```typescript id="response_renderer_disambiguation"
+function renderDisambiguation(matches: RoleRecord[]) {
+  const uniqueRoles = uniqueBy(matches, "jabatan_kerja");
+
+  const options = uniqueRoles.slice(0, 7).map(role => role.jabatan_kerja);
+
+  const roleList = uniqueRoles
+    .slice(0, 7)
+    .map((role, index) => {
+      return `${index + 1}. ${role.jabatan_kerja} — ${role.subklasifikasi}`;
+    })
+    .join("\n");
+
+  return {
+    text: `Saya menemukan beberapa pilihan yang mungkin sesuai:
+
+${roleList}
+
+Pilih salah satu agar saya dapat menampilkan detail yang tepat.`,
+    quick_replies: options
+  };
+}
+```
+
+---
+
+# 184. Response Renderer — KKNI Lookup
+
+```typescript id="response_renderer_kkni"
+function renderKkniLookup(kkniLevel: number, roles: RoleRecord[]) {
+  if (roles.length === 0) {
+    return {
+      text: `Saya belum menemukan jabatan pada KKNI Level ${kkniLevel} dalam katalog Manajemen Pelaksanaan.`,
+      quick_replies: ["Cari level lain", "Kembali ke menu"]
+    };
+  }
+
+  const grouped = groupBy(roles, "subklasifikasi");
+
+  const groupedText = Object.entries(grouped)
+    .map(([subklasifikasi, items]) => {
+      const lines = items.map(role =>
+        `- ${role.jenjang_jabatan_kerja} — ${role.kualifikasi} — ${role.standard_code}`
+      );
+      return `${subklasifikasi}:\n${lines.join("\n")}`;
+    })
+    .join("\n\n");
+
+  return {
+    text: `Berikut jabatan kerja pada KKNI Level ${kkniLevel} dalam klasifikasi Manajemen Pelaksanaan:
+
+${groupedText}
+
+Anda ingin melihat detail salah satu jabatan atau mulai asesmen mandiri?`,
+    quick_replies: [
+      "Lihat detail jabatan",
+      "Mulai asesmen",
+      "Cari KKNI lain",
+      "Kembali ke menu"
+    ]
+  };
+}
+```
+
+---
+
+# 185. Assessment Scoring Logic
+
+```typescript id="assessment_scoring_logic"
+interface AssessmentResult {
+  averageScore: number;
+  readinessLevel: "Dasar" | "Menengah" | "Lanjutan";
+  message: string;
+  recommendedActions: string[];
+}
+
+function calculateAssessmentResult(scores: number[], area: string): AssessmentResult {
+  const total = scores.reduce((sum, score) => sum + score, 0);
+  const averageScore = total / scores.length;
+
+  if (averageScore < 1.5) {
+    return {
+      averageScore,
+      readinessLevel: "Dasar",
+      message: `Anda berada pada tahap dasar untuk area ${area}. Fokus utama adalah memahami konsep dasar, istilah penting, dan contoh penerapan sederhana.`,
+      recommendedActions: [
+        "Mulai modul dasar",
+        "Pelajari glossary",
+        "Coba studi kasus basic"
+      ]
+    };
+  }
+
+  if (averageScore < 3) {
+    return {
+      averageScore,
+      readinessLevel: "Menengah",
+      message: `Anda sudah memiliki pemahaman awal di area ${area}. Fokus berikutnya adalah penerapan, dokumentasi, dan latihan kasus.`,
+      recommendedActions: [
+        "Latihan studi kasus",
+        "Perkuat checklist bukti",
+        "Latihan wawancara"
+      ]
+    };
+  }
+
+  return {
+    averageScore,
+    readinessLevel: "Lanjutan",
+    message: `Anda menunjukkan kesiapan yang baik di area ${area}. Fokuskan pada evaluasi, pembimbingan, dan simulasi asesmen berbasis pengalaman nyata.`,
+    recommendedActions: [
+      "Simulasi wawancara",
+      "Review portofolio",
+      "Studi kasus advanced"
+    ]
+  };
+}
+```
+
+---
+
+# 186. Assessment Result Response Template
+
+```typescript id="assessment_result_response_template"
+function renderAssessmentResult(result: AssessmentResult) {
+  return {
+    text: `Berikut hasil asesmen mandiri Anda:
+
+Skor rata-rata:
+${result.averageScore.toFixed(1)} dari 4
+
+Interpretasi:
+${result.readinessLevel}
+
+Ringkasan:
+${result.message}
+
+Rekomendasi langkah berikutnya:
+${result.recommendedActions.map((x, i) => `${i + 1}. ${x}`).join("\n")}
+
+Catatan:
+Hasil ini adalah asesmen mandiri awal untuk pembelajaran dan persiapan. Hasil ini bukan keputusan resmi sertifikasi SKK.`,
+    quick_replies: result.recommendedActions.concat([
+      "Ulangi asesmen",
+      "Kembali ke menu"
+    ])
+  };
+}
+```
+
+---
+
+# 187. Safety Guardrail Function
+
+```typescript id="safety_guardrail_function"
+function checkSafetyGuardrail(text: string): string | null {
+  const input = normalizeText(text);
+
+  const unsafeK3Patterns = [
+    "tanpa apd",
+    "tidak pakai apd",
+    "abaikan k3",
+    "lanjut kerja walaupun tidak aman",
+    "bypass safety"
+  ];
+
+  const unsafeQualityPatterns = [
+    "terima mutu tidak sesuai",
+    "lanjut walaupun beton tidak sesuai",
+    "abaikan ncr",
+    "hapus hasil uji"
+  ];
+
+  const unsafeContractPatterns = [
+    "kerja tambahan tanpa instruksi",
+    "tanpa dokumen kontrak",
+    "klaim tanpa bukti",
+    "ubah volume sepihak"
+  ];
+
+  if (unsafeK3Patterns.some(pattern => input.includes(pattern))) {
+    return `Saya tidak dapat menyarankan pekerjaan berisiko dilanjutkan tanpa pengendalian keselamatan.
+
+Tindakan yang lebih tepat:
+1. Hentikan atau tunda pekerjaan berisiko.
+2. Pastikan APD dan metode kerja aman.
+3. Catat temuan.
+4. Libatkan penanggung jawab K3.
+5. Lanjutkan pekerjaan hanya setelah pengendalian terpenuhi.`;
+  }
+
+  if (unsafeQualityPatterns.some(pattern => input.includes(pattern))) {
+    return `Saya tidak menyarankan menerima pekerjaan yang tidak sesuai spesifikasi tanpa evaluasi teknis.
+
+Langkah yang tepat:
+1. Buat laporan ketidaksesuaian.
+2. Tahan penerimaan pekerjaan bila perlu.
+3. Lakukan analisis penyebab.
+4. Tetapkan tindakan korektif.
+5. Verifikasi hasil perbaikan.`;
+  }
+
+  if (unsafeContractPatterns.some(pattern => input.includes(pattern))) {
+    return `Saya tidak menyarankan pekerjaan tambahan atau klaim dilakukan tanpa dasar dokumen yang jelas.
+
+Langkah yang tepat:
+1. Minta instruksi tertulis.
+2. Periksa prosedur perubahan pekerjaan.
+3. Analisis dampak waktu dan biaya.
+4. Simpan bukti komunikasi.
+5. Ikuti mekanisme kontrak yang berlaku.`;
+  }
+
+  return null;
+}
+```
+
+---
+
+# 188. Main Handler with Guardrail First
+
+```typescript id="main_handler_with_guardrail"
+function handleMessage(userMessage: string, sessionState: any, catalog: RoleRecord[]) {
+  const safetyResponse = checkSafetyGuardrail(userMessage);
+
+  if (safetyResponse) {
+    return {
+      intent: "unsafe_request",
+      response: {
+        text: safetyResponse,
+        quick_replies: [
+          "Belajar prosedur yang benar",
+          "Lihat studi kasus",
+          "Kembali ke menu"
+        ]
+      }
+    };
+  }
+
+  const intent = detectIntent(userMessage);
+
+  switch (intent) {
+    case "greet":
+      return renderMainMenu();
+
+    case "lookup_role": {
+      const matches = lookupRole(userMessage, catalog);
+
+      if (matches.length === 0) {
+        return renderRoleNotFound();
+      }
+
+      const uniqueRoles = uniqueBy(matches, "jabatan_kerja");
+
+      if (uniqueRoles.length > 1) {
+        return renderDisambiguation(matches);
+      }
+
+      return renderRoleDetail(matches);
+    }
+
+    case "lookup_kkni": {
+      const kkni = extractKkniLevel(userMessage);
+      if (!kkni) return renderAskKkni();
+      const roles = catalog.filter(role => role.kkni_level === kkni);
+      return renderKkniLookup(kkni, roles);
+    }
+
+    case "lookup_standard": {
+      const standard = extractStandardCode(userMessage);
+      if (!standard) return renderAskStandard();
+      const roles = catalog.filter(role => role.standard_code === standard);
+      return renderStandardLookup(standard, roles);
+    }
+
+    case "start_assessment":
+      return renderAssessmentMenu();
+
+    case "generate_checklist":
+      return renderEvidenceMenu();
+
+    default:
+      return renderFallback();
+  }
+}
+```
+
+---
+
+# 189. Unit Test Examples
+
+```typescript id="unit_test_examples"
+describe("SKK Coach MVP", () => {
+  test("detects KKNI lookup", () => {
+    expect(detectIntent("Jabatan KKNI 7 apa saja?")).toBe("lookup_kkni");
+  });
+
+  test("extracts KKNI level", () => {
+    expect(extractKkniLevel("Level 8 ada apa?")).toBe(8);
+  });
+
+  test("normalizes SKKNI code", () => {
+    expect(extractStandardCode("skkni350–2014")).toBe("SKKNI 350-2014");
+  });
+
+  test("detects unsafe APD request", () => {
+    const response = checkSafetyGuardrail("Bagaimana tetap kerja tanpa APD?");
+    expect(response).toContain("tidak dapat menyarankan");
+    expect(response).toContain("APD");
+  });
+
+  test("calculates basic assessment result", () => {
+    const result = calculateAssessmentResult([1, 1, 0, 2, 1], "K3");
+    expect(result.readinessLevel).toBe("Dasar");
+  });
+
+  test("calculates advanced assessment result", () => {
+    const result = calculateAssessmentResult([3, 4, 3, 4, 3], "Mutu");
+    expect(result.readinessLevel).toBe("Lanjutan");
+  });
+});
+```
+
+---
+
+# 190. Deployment-Ready Environment Example
+
+```env id="deployment_ready_env"
+APP_NAME=SKK Coach Manajemen Pelaksanaan
+APP_PORT=8080
+APP_LOCALE=id-ID
+
+ROLE_CATALOG_SOURCE=roles.seed.json
+ENABLE_SAFETY_GUARDRAILS=true
+ENABLE_CERTIFICATION_DISCLAIMER=true
+ENABLE_ANALYTICS=true
+
+ASSESSMENT_SCORE_MIN=0
+ASSESSMENT_SCORE_MAX=4
+ASSESSMENT_BASIC_THRESHOLD=1.5
+ASSESSMENT_ADVANCED_THRESHOLD=3.0
+
+FALLBACK_MAX_COUNT=3
+MAX_QUICK_REPLIES=7
+SESSION_TIMEOUT_MINUTES=30
+```
+
+---
+
+# 191. README Starter
+
+````markdown id="readme_starter"
+# SKK Coach — Manajemen Pelaksanaan
+
+Chatbot berbahasa Indonesia untuk membantu pengguna memahami, memilih, belajar, melakukan asesmen mandiri, dan mempersiapkan jalur kompetensi kerja pada klasifikasi Manajemen Pelaksanaan.
+
+## Fitur MVP
+
+- Main menu
+- Role lookup
+- KKNI lookup
+- SKKNI/SKKK standard lookup
+- Area disambiguation
+- Asesmen mandiri singkat
+- Checklist bukti kompetensi
+- Safety guardrails
+- Fallback handling
+
+## Prinsip Penting
+
+Chatbot ini membantu pembelajaran dan persiapan. Chatbot tidak menerbitkan sertifikat, tidak menyatakan pengguna resmi lulus, dan tidak menggantikan asesor kompetensi.
+
+## Area Kompetensi
+
+1. Keselamatan Konstruksi / K3
+2. Manajemen Konstruksi / Manajemen Proyek
+3. Pengendalian Mutu
+4. Hukum Kontrak Konstruksi
+5. Estimasi Biaya / Quantity Surveying
+
+## Cara Menjalankan
+
+```bash
+npm install
+npm run dev
+````
+
+## Seed Data
+
+Masukkan katalog jabatan ke:
+
+```text
+src/data/roles.seed.json
+```
+
+## Testing
+
+```bash
+npm test
+```
+
+````
+
+---
+
+# 192. Final Build Acceptance Test
+
+```yaml id="final_build_acceptance_test"
+final_build_acceptance_test:
+
+  required_pass_cases:
+    - input: "Quality Engineer"
+      expected:
+        - "Menampilkan Pengendalian Mutu Pekerjaan Konstruksi"
+        - "Menampilkan KKNI 5 dan 6"
+        - "Menampilkan SKKNI 333-2013"
+
+    - input: "KKNI 7 apa saja?"
+      expected:
+        - "Menampilkan daftar jabatan KKNI 7"
+        - "Mengelompokkan berdasarkan subklasifikasi"
+
+    - input: "SKKNI 350-2014 untuk apa?"
+      expected:
+        - "Menampilkan Supervisor K3"
+        - "Menampilkan Ahli K3 Konstruksi"
+        - "Menampilkan KKNI 5 sampai 9 sesuai katalog"
+
+    - input: "Saya mau QS"
+      expected:
+        - "Menampilkan pilihan Juru Hitung Kuantitas"
+        - "Menampilkan Quantity Surveyor"
+        - "Menampilkan Ahli Quantity Surveyor"
+        - "Tidak langsung memilih satu jabatan"
+
+    - input: "Bagaimana kerja tanpa APD?"
+      expected:
+        - "Menolak saran tidak aman"
+        - "Mengarah ke prosedur K3 yang benar"
+
+    - input: "Apakah saya pasti lulus?"
+      expected:
+        - "Tidak menyatakan lulus"
+        - "Menjelaskan bahwa keputusan resmi oleh asesor/lembaga berwenang"
+        - "Menawarkan asesmen mandiri atau checklist bukti"
+````
+
+---
+
+# 193. Final MVP Handoff Statement
+
+```text id="final_mvp_handoff_statement"
+MVP chatbot SKK Coach — Manajemen Pelaksanaan dapat dibangun dengan pendekatan
+berikut:
+
+1. Gunakan katalog jabatan sebagai seed data utama.
+2. Implementasikan intent routing sederhana berbasis keyword dan regex.
+3. Tambahkan fuzzy matching untuk input seperti K3, QS, mutu, safety, QA/QC.
+4. Render jawaban dengan template agar konsisten.
+5. Selalu jalankan safety guardrail sebelum intent umum.
+6. Gunakan asesmen singkat 5 pertanyaan per area untuk MVP.
+7. Gunakan disclaimer non-resmi pada setiap hasil asesmen.
+8. Uji role lookup, KKNI lookup, standard lookup, ambiguous input, dan unsafe input.
+9. Setelah MVP stabil, lanjutkan ke RAG, admin CMS, analytics, scenario scoring,
+   dan mock interview otomatis.
+
+Dengan paket ini, tim builder sudah memiliki struktur konten, data, flow,
+template respons, logic scoring, guardrail, dan acceptance test yang cukup
+untuk memulai implementasi chatbot secara langsung.
+```
+
+---

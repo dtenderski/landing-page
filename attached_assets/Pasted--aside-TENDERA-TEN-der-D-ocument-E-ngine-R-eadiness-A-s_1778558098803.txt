@@ -1,0 +1,265 @@
+<aside>
+🎯
+
+**TENDERA** = **TEN**der **D**ocument **E**ngine & **R**eadiness **A**ssistant.
+
+Chatbot Agentic AI Multi-Agen untuk BUJK Indonesia — memandu **persiapan dokumen tender** dan menghasilkan **Win Probability Score** yang terukur. Dibangun di atas **Gustafta Chatbot Builder** dengan arsitektur **OpenClaw (orchestrator) + MultiClaw (parallel specialists)**, compliant **ABD v1.1**.
+
+</aside>
+
+## 0. Ringkasan Eksekutif
+
+| Aspek | Spesifikasi |
+| --- | --- |
+| Nama Produk | TENDERA — AI Tender Assistant for BUJK |
+| Domain | Pengadaan & Tender Konstruksi (PBJ Pemerintah + Swasta + BUMN) |
+| Engine | OpenClaw Execution Engine + MultiClaw Parallel Dispatcher |
+| Builder | Gustafta Chatbot Builder (4-level hierarchy) |
+| Target Pengguna | BUJK Kecil/Menengah/Besar (K1–B2), Tender Officer, Manager Tender, Direksi |
+| Bahasa | Bahasa Indonesia (default) + English on demand |
+| Compliance | ABD v1.1, Perpres 12/2021, Permen PUPR 8/2023, UU 2/2017, FIDIC 2017 |
+| Output Andalan | **Tender Readiness Report**, **Bid Document Package**, **Win Probability Score 0–100** |
+| Versi | v1.0 (2026-05-12) — pra-aktivasi |
+
+## 1. Hierarki Gustafta — 4 Level
+
+```mermaid
+flowchart TB
+	L1["**L1 · SERIES**<br>TENDERA — AI Tender BUJK"]
+	L2A["**L2 · MODULE A**<br>Pre-Bid<br>(Scouting · Eligibility · Risk Scan)"]
+	L2B["**L2 · MODULE B**<br>Bid Preparation<br>(Admin · Teknis · Harga)"]
+	L2C["**L2 · MODULE C**<br>Bid Submission & Post-Bid<br>(Compliance · Sanggah · Win-Loss)"]
+	L3["**L3 · AGENT**<br>TENDERA-ORCHESTRATOR (OpenClaw)<br>+ 10 Agen MultiClaw Spesialis"]
+	L4["**L4 · TOOLS**<br>Mini-Apps · Forms · KB · Simulator · Scoring Engine"]
+	L1 --> L2A --> L3
+	L1 --> L2B --> L3
+	L1 --> L2C --> L3
+	L3 --> L4
+```
+
+## 2. Arsitektur Multi-Agen — OpenClaw + MultiClaw
+
+```mermaid
+flowchart TB
+	USER(["👤 User BUJK<br>Tender Officer / Manager / Direksi"])
+	ORCH["🧭 TENDERA-ORCHESTRATOR<br>OpenClaw — routing intent · state · ABD guardrails"]
+	subgraph MC ["🦾 MULTICLAW — 10 Agen Spesialis Paralel"]
+		A1["🔭 AGENT-SCOUT<br>Tender Opportunity Hunter"]
+		A2["✅ AGENT-ELIGIBILITY<br>SBU · SKK · KBLI Checker"]
+		A3["🛡️ AGENT-RISKSCAN<br>Tender Risk Scanner (RKS/SDP)"]
+		A4["📄 AGENT-ADMIN<br>Document Generator (Pakta · Surat · Neraca)"]
+		A5["🛠️ AGENT-TEKNIS<br>Technical Proposal Builder"]
+		A6["💰 AGENT-HPS<br>HPS & Bid Price Optimizer (AHSP/BoQ)"]
+		A7["📜 AGENT-KONTRAK<br>SSUK/SSKK & FIDIC Analyzer"]
+		A8["📊 AGENT-WINPROB<br>Win Probability Calculator"]
+		A9["🕊️ AGENT-INTEGRITY<br>SMAP · Anti-Suap · Etika Tender"]
+		A10["⚖️ AGENT-SANGGAH<br>Post-Bid · Klarifikasi · Sanggah"]
+	end
+	KB[("📚 Knowledge Base<br>KB-REG · KB-PROC · KB-DOC · KB-AHSP · KB-MARKET · KB-CASE")]
+	TOOLS["🧰 Mini-Apps<br>HPS Validator · Doc Generator · Scoring Engine · LPSE Monitor"]
+	USER <--> ORCH
+	ORCH <--> MC
+	MC <--> KB
+	MC <--> TOOLS
+	ORCH -. ABD-7 Output Synthesis .-> USER
+```
+
+**Prinsip kerja:**
+
+- **OpenClaw (Orchestrator)** — satu titik masuk, melakukan *intent classification*, *state management*, *guardrail*, dan **sintesis output ABD-7** dari beberapa agen.
+- **MultiClaw (Parallel Dispatch)** — orchestrator memanggil >1 agen secara **paralel** (mis. saat upload paket SDP: SCOUT + ELIGIBILITY + RISKSCAN + HPS bekerja serentak, hasil disatukan).
+- **Inter-agent Call (ABD-6)** — agen dapat memanggil agen lain (`callAgentInternal`) tanpa menyuruh user pindah chatbot.
+
+## 3. 10 Agen Spesialis MultiClaw — Capability Registry
+
+| Kode | Agen | Misi | Input Minimal | Output Utama | KB Inject |
+| --- | --- | --- | --- | --- | --- |
+| A1 | 🔭 **AGENT-SCOUT** | Memantau LPSE/SPSE/INAPROC + portal swasta, screening peluang tender sesuai SBU & kapasitas BUJK. | Profil BUJK (SBU, kualifikasi, lokasi), preferensi paket (nilai, sektor) | **Opportunity Long-list**  • Fit Score 0–100 per paket | KB-MARKET, KB-REG |
+| A2 | ✅ **AGENT-ELIGIBILITY** | Cek kelaikan BUJK ikut paket tertentu: SBU subklasifikasi, kualifikasi (K/M/B), KBLI, SKK personel kunci, PKP, pengalaman sejenis, KSO/JV. | Profil BUJK + Dokumen Pemilihan (SDP) | **Eligibility Verdict** (GO/CONDITIONAL/NO-GO) + Gap List | KB-REG, KB-PROC |
+| A3 | 🛡️ **AGENT-RISKSCAN** | Memindai RKS/SDP/SSKK untuk klausul jebakan: persyaratan sulit, denda ekstrem, retensi besar, time-bar klaim, single-source spec. | File SDP/RKS (upload) atau klausul yang di-paste | **Risk Heat-Map**  • rekomendasi sanggah/abstain | KB-PROC, KB-DOC, KB-REG |
+| A4 | 📄 **AGENT-ADMIN** | Generate dokumen administrasi: Pakta Integritas, Surat Penawaran, Surat Kuasa, Neraca, Daftar Pengalaman, Dukungan Bank, ABD/AKD. | Profil BUJK + paket tender | **Bundle Dokumen Administrasi** siap tanda tangan | KB-DOC, KB-REG |
+| A5 | 🛠️ **AGENT-TEKNIS** | Susun Dokumen Teknis: metode pelaksanaan, schedule (Gantt/Kurva-S), organisasi proyek, RKK, daftar peralatan, daftar personel. | Lingkup pekerjaan, durasi, lokasi, BoQ ringkas | **Technical Proposal Draft**  • Lampiran metode/schedule/RKK | KB-DOC, KB-PROC (call AGENT-TEKNIK KONSTRA jika kompleks) |
+| A6 | 💰 **AGENT-HPS** | Validasi HPS owner + susun **bid price** kompetitif (AHSP Cipta Karya, BoQ, markup, kontingensi, PPh Final, PPN). | BoQ, HPS owner, target margin, kompetitor (opsional) | **Bid Price Matrix** (3 skenario: aggressive/balanced/safe) + sensitivity | KB-AHSP, KB-MARKET, KB-REG |
+| A7 | 📜 **AGENT-KONTRAK** | Review SSUK/SSKK/FIDIC: alokasi risiko, jaminan, EOT/VO/klaim, force majeure, dispute resolution. Merah-Kuning-Hijau klausul. | Draft kontrak / SSKK | **Contract Risk Memo**  • usulan adendum/sanggah klausul | KB-DOC, KB-REG (FIDIC, Perpres 12/2021) |
+| A8 | 📊 **AGENT-WINPROB** | Hitung **Win Probability Score 0–100**  • Confidence; agregasi sinyal dari semua agen lain. (Detail rumus di §5.) | Hasil 7 agen di atas + intel kompetitor (opsional) | **Win Probability Report**  • Sensitivity & Action Levers | KB-MARKET, KB-CASE |
+| A9 | 🕊️ **AGENT-INTEGRITY** | Guardrail SMAP/ISO 37001: deteksi red-flag suap, konflik kepentingan, gratifikasi; siapkan due-diligence agen/konsultan. | Konteks interaksi user (otomatis termonitor) | **Integrity Alert**  • script penolakan/escalation | KB-REG (UU Tipikor, ISO 37001) |
+| A10 | ⚖️ **AGENT-SANGGAH** | Pasca-evaluasi: susun sanggah/sanggah-banding, klarifikasi harga timpang, lesson-learned win/loss. | Berita Acara Hasil Evaluasi (BAHE) / pengumuman pemenang | **Sanggah Draft**  • Win-Loss Postmortem | KB-PROC, KB-REG |
+
+## 4. Alur Kerja End-to-End (User Journey)
+
+```mermaid
+sequenceDiagram
+	participant U as 👤 User BUJK
+	participant O as 🧭 TENDERA-ORCHESTRATOR
+	participant S as 🔭 SCOUT
+	participant E as ✅ ELIGIBILITY
+	participant R as 🛡️ RISKSCAN
+	participant H as 💰 HPS
+	participant W as 📊 WINPROB
+	U->>O: Profil BUJK + paket tender (SDP upload / link LPSE)
+	O->>S: Cari & filter peluang sejenis (paralel)
+	O->>E: Cek kelaikan ikut paket
+	O->>R: Scan klausul risiko di SDP
+	O->>H: Estimasi bid price kompetitif
+	S-->>O: Long-list + Fit Score
+	E-->>O: Eligibility Verdict + Gap List
+	R-->>O: Risk Heat-Map
+	H-->>O: Bid Price Matrix
+	O->>W: Agregasi sinyal
+	W-->>O: Win Probability Score + Levers
+	O-->>U: **Tender Readiness Report ABD-7**<br>(Skor, Confidence, Asumsi, Gap, Next Steps)
+```
+
+## 5. Win Probability Score — Rumus Terukur
+
+Skor 0–100 dihitung sebagai pembobotan 7 dimensi:
+
+| Kode | Dimensi | Bobot | Sumber | Cara Ukur (ringkas) |
+| --- | --- | --- | --- | --- |
+| D1 | Eligibility Fit | 20% | AGENT-ELIGIBILITY | % persyaratan terpenuhi (SBU, SKK, KBLI, modal, pengalaman) |
+| D2 | Technical Fit | 20% | AGENT-TEKNIS | Kelengkapan & kualitas metode/schedule/personel/peralatan vs bobot RKS |
+| D3 | Price Competitiveness | 20% | AGENT-HPS | Posisi bid vs estimasi HPS pemenang historis (sweet-spot 85–95% HPS) |
+| D4 | Track Record | 15% | AGENT-SCOUT + profil | Pengalaman sejenis 5/10 tahun terakhir, nilai kontrak terbesar, performa |
+| D5 | Risk Exposure | 10% | AGENT-RISKSCAN + KONTRAK | Inverse dari skor risiko klausul + kapasitas menanggung |
+| D6 | Administrative Completeness | 10% | AGENT-ADMIN | % dokumen administrasi siap, valid, dan ter-tandatangan |
+| D7 | Integrity & Compliance | 5% | AGENT-INTEGRITY | Tidak ada red-flag SMAP, blacklist LKPP, sanksi PUPR |
+
+**Formula:**
+
+$$
+WP = \sum_{i=1}^{7} (w_i \times s_i) \quad ; \quad s_i \in [0,100], \sum w_i = 1
+$$
+
+Dilaporkan bersama **Confidence Score 0–100** (kualitas data input) dan **Top-3 Action Levers** (rekomendasi paling efektif untuk menaikkan WP).
+
+**Kategori hasil:**
+
+- 🟢 **80–100** — *Strong Bid* — kirim penawaran agresif.
+- 🟡 **60–79** — *Conditional* — tutup 2–3 gap prioritas dulu.
+- 🟠 **40–59** — *Long-Shot* — pertimbangkan KSO atau abstain.
+- 🔴 **0–39** — *No-Bid* — fokuskan resource ke paket lain.
+
+## 6. Anti-Blocking Doctrine (ABD v1.1) — Wajib di Setiap Agen
+
+| Kode | Prinsip | Implementasi di TENDERA |
+| --- | --- | --- |
+| ABD-1 | Dilarang menolak hanya karena data minim | Cukup 5 field input minimal per agen |
+| ABD-2 | Inferensi terbaik dari data + standar | Pakai default AHSP/Permen PUPR bila user kosong |
+| ABD-3 | Tag `[ASUMSI: ...]` di tiap inferensi | Eksplisit di laporan |
+| ABD-4 | Confidence Score 0–100 + breakdown | Selalu disertakan |
+| ABD-5 | Permintaan data tambahan **setelah** jawaban awal | Bukan blocking di awal |
+| ABD-6 | Inter-agent call otomatis multi-domain | `callAgentInternal` paralel |
+| ABD-7 | Struktur output standar | 7 seksi: Verdict · Skor · Confidence · Asumsi · Gap · Next · Sumber |
+
+## 7. Knowledge Base — 6 Modul
+
+| Modul | Isi Utama | Gunakan Saat |
+| --- | --- | --- |
+| **KB-REG** | UU 2/2017, PP 14/2021, Perpres 12/2021, Permen PUPR 8/2023, PP 9/2022, UU Tipikor, ISO 37001 | Dasar hukum, sanksi, klasifikasi |
+| **KB-PROC** | 10 fase tender LPSE, e-SPSE, e-Katalog, metode pemilihan, evaluasi (sistem nilai/gugur/harga), sanggah | Panduan proses tender |
+| **KB-DOC** | Template SDP, RKS, BoQ, Pakta Integritas, surat penawaran, neraca, RKK, SSKK, FIDIC Red/Yellow/Silver | Generate & review dokumen |
+| **KB-AHSP** | AHSP Cipta Karya Bina Marga SDA, harga satuan upah/bahan/alat regional, indeks BPS | Estimasi harga & HPS |
+| **KB-MARKET** | Historis pemenang LPSE 3 tahun, win-rate per subklasifikasi, pola harga pemenang vs HPS | Win Probability scoring |
+| **KB-CASE** | Kasus sanggah berhasil, putusan PPK/Pokja, lesson-learned win/loss | Sanggah & postmortem |
+
+## 8. Persona Gustafta — Hub TENDERA-ORCHESTRATOR (Siap Copy-Paste)
+
+### 8.1 Identity
+
+- **Avatar**: 🎯 (helm + ceklist + grafik naik, latar biru tua #1E3A8A)
+- **Chatbot Name**: `TENDERA-ORCHESTRATOR — AI Tender Multi-Agent BUJK`
+- **Tagline**: *Persiapan Dokumen Tender & Prediksi Menang Terukur untuk BUJK*
+- **Description**: Hub multi-agent OpenClaw + MultiClaw yang merutekan Anda ke 10 spesialis tender (Scout, Eligibility, Risk Scan, Admin, Teknis, HPS, Kontrak, Win-Prob, Integrity, Sanggah). Mendampingi BUJK dari scouting peluang hingga sanggah pasca-evaluasi — semua jawaban dilengkapi Skor 0–100 + Confidence + Asumsi eksplisit (ABD v1.1).
+- **Primary Language**: Bahasa Indonesia
+- **Business Category**: Construction Procurement / Tender Management
+
+### 8.2 Greeting Message
+
+```
+Selamat datang di TENDERA 🎯 — AI Tender Assistant Anda.
+
+Saya orkestrator dari 10 agen spesialis tender. Ceritakan:
+
+1) Profil BUJK (SBU, kualifikasi K/M/B, lokasi)
+2) Paket tender yang Anda incar (link LPSE / unggah SDP / paste judul paket)
+3) Tujuan Anda hari ini:
+   • 🔭 Cari peluang tender baru
+   • ✅ Cek apakah kami layak ikut paket X
+   • 🛡️ Pindai risiko di RKS/SSKK
+   • 📄 Siapkan dokumen administrasi & teknis
+   • 💰 Susun harga penawaran kompetitif
+   • 📊 Hitung probabilitas menang
+   • ⚖️ Susun sanggah/klarifikasi
+
+Minimum cukup 5 input — sisanya saya isi pakai standar (AHSP, Permen PUPR) dan tandai [ASUMSI:].
+```
+
+### 8.3 Conversation Starters (Quick Replies)
+
+1. "🔭 Carikan peluang tender gedung Rp 5–25 M di Jabodetabek bulan ini."
+2. "✅ Cek apakah PT [X] (M1, BG009) layak ikut paket [Y]."
+3. "🛡️ Scan risiko di SDP yang saya upload."
+4. "💰 Susun bid price 3 skenario untuk paket Rp 15 M, durasi 240 hari."
+5. "📊 Hitung Win Probability paket [Y] dengan profil BUJK saya."
+6. "📄 Generate Pakta Integritas + Surat Penawaran + Daftar Pengalaman."
+7. "⚖️ Bantu susun sanggah karena kami digugurkan di evaluasi administrasi."
+
+## 9. Tools Layer (L4) — Mini-Apps Pendamping
+
+- 🧮 **HPS Validator AI** → kalkulator AHSP + BoQ + sensitivity.
+- 📄 **Document Generator Tender** → auto-fill 12 dokumen standar LPSE.
+- 🔍 **LPSE Monitor** → cron-job scraping peluang LPSE (web/connector).
+- 📊 **Win Probability Scoring Engine** → API skoring 7 dimensi.
+- 🛡️ **Tender Risk Scanner** → upload PDF → klausul merah-kuning-hijau.
+- 🎯 **Bid/No-Bid Decision Board** → dashboard 1 layar untuk Direksi.
+
+## 10. Compliance & Guardrails
+
+- ⚠️ **Disclaimer**: TENDERA adalah **asisten persiapan**, bukan pengganti Pokja/PPK/auditor. Keputusan akhir tetap di tangan Direksi BUJK.
+- 🕊️ **Integrity Guardrail**: AGENT-INTEGRITY otomatis menolak permintaan yang menjurus pada suap, kolusi, atau pemecahan paket.
+- 🔐 **Data Privacy**: Profil BUJK & dokumen tender tidak dibagi lintas sesi; SDP yang diunggah disimpan terenkripsi dan dihapus 30 hari setelah selesai paket.
+- 📚 **Citation Wajib**: setiap klaim regulasi disertai pasal & nomor regulasi (mis. *"Perpres 12/2021 Pasal 39 ayat (2)"*).
+
+## 11. Roadmap Aktivasi (4 Sprint)
+
+| Sprint | Fokus | Deliverable | Estimasi |
+| --- | --- | --- | --- |
+| **S1 — Skeleton** | Setup Gustafta hub + 3 agen prioritas (ELIGIBILITY, RISKSCAN, WINPROB) | System Prompt deployable + 5 test scenarios | 1 minggu |
+| **S2 — Document Stack** | ADMIN + TEKNIS + KONTRAK | Bundle dokumen 12 template + draft kontrak | 2 minggu |
+| **S3 — Pricing & Market** | HPS + SCOUT + KB-MARKET historis | HPS Validator integrated + LPSE Monitor | 2 minggu |
+| **S4 — Post-Bid & Integrity** | SANGGAH + INTEGRITY + orchestration callAgentInternal | E2E pilot dengan 1 BUJK mitra | 2 minggu |
+
+**Total: ±7 minggu** sampai pilot production.
+
+## 12. Sub-Halaman (akan dibuat berikutnya)
+
+- 🧭 *System Prompt OpenClaw — TENDERA-ORCHESTRATOR* (siap copy-paste ke Gustafta)
+- 🦾 *MultiClaw — 10 Agen Spesialis (Prompt Patches Ready-to-Deploy)*
+- 📊 *Win Probability Spec — Rumus, Bobot, Kalibrasi*
+- 📚 *Knowledge Base TENDERA — 6 Modul Lengkap*
+- 💬 *Sample Conversations End-to-End*
+
+---
+
+<aside>
+📌
+
+**Next Action**: minta saya lanjut bangun salah satu sub-halaman di atas (rekomendasi: mulai dari *System Prompt OpenClaw — TENDERA-ORCHESTRATOR* agar bisa langsung di-deploy ke Gustafta Builder).
+
+</aside>
+
+[MultiClaw — 10 Agen Spesialis TENDERA (Prompt Patches Ready-to-Deploy)](https://www.notion.so/MultiClaw-10-Agen-Spesialis-TENDERA-Prompt-Patches-Ready-to-Deploy-9f109311dc67452888d1e32da3fb7da5?pvs=21)
+
+[Win Probability Spec — Rumus, Bobot, Kalibrasi & Action Levers](https://www.notion.so/Win-Probability-Spec-Rumus-Bobot-Kalibrasi-Action-Levers-de9759d70fb44e1db564e6385c9397fb?pvs=21)
+
+[System Prompt OpenClaw — TENDERA-ORCHESTRATOR (Ready to Deploy)](https://www.notion.so/System-Prompt-OpenClaw-TENDERA-ORCHESTRATOR-Ready-to-Deploy-f77281852cd64ada87a18fbcf95ec429?pvs=21)
+
+[KB TENDERA — Knowledge Base 6 Modul (Inject Ready)](https://www.notion.so/KB-TENDERA-Knowledge-Base-6-Modul-Inject-Ready-7d62b8a835334e58ab47e84ccfdfb810?pvs=21)
+
+[Sprint 1 — Test Scenarios TENDERA (ELIGIBILITY · RISKSCAN · WINPROB)](https://www.notion.so/Sprint-1-Test-Scenarios-TENDERA-ELIGIBILITY-RISKSCAN-WINPROB-e4258e789b9240d3a84ed6e6e293610f?pvs=21)
+
+[Integrasi TENDERA ↔ KONSTRA — Handoff Pre-Tender → Execution](https://www.notion.so/Integrasi-TENDERA-KONSTRA-Handoff-Pre-Tender-Execution-d4852863a71845be876c8153f09eec35?pvs=21)
+
+[Sample Conversations End-to-End TENDERA (3 Skenario BUJK)](https://www.notion.so/Sample-Conversations-End-to-End-TENDERA-3-Skenario-BUJK-57e2dfed74c34366804c0fe65904cbd8?pvs=21)
+
+[Master Deployment Runbook TENDERA — 10 Agen ABD v1.1](https://www.notion.so/Master-Deployment-Runbook-TENDERA-10-Agen-ABD-v1-1-9c44b6f12ec14f3d8ef2e20471a5b50f?pvs=21)

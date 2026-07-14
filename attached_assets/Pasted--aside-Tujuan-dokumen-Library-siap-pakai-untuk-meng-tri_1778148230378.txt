@@ -1,0 +1,277 @@
+<aside>
+🔧
+
+**Tujuan dokumen:** Library siap-pakai untuk meng-triage kegagalan field test 9 agen ABD v1.1. Setiap micro-patch dapat di-append ke system prompt agen tanpa rewrite menyeluruh, lalu re-test. Kompanion [Master Deployment Runbook — 9 Agen KONSTRA ABD v1.1](https://www.notion.so/Master-Deployment-Runbook-9-Agen-KONSTRA-ABD-v1-1-635a80d593c2408092176a9d57ebee04?pvs=21) Section 6 (Rollback) & Section 7 (Issue Log).
+
+</aside>
+
+## 1. Decision Tree Triage
+
+```mermaid
+flowchart TB
+    F["Test FAIL"] --> S{"Severity?"}
+    S -->|Critical AC-4| MP4["MP-004 Anti-Blocking"]
+    S -->|Major| AC{"AC mana yang fail?"}
+    AC --> MP1["AC-1 → MP-001"]
+    AC --> MP2["AC-2 → MP-002"]
+    AC --> MP3["AC-3 → MP-003"]
+    AC --> MP5["AC-5 → MP-005"]
+    AC --> MP6["AC-6 → MP-006"]
+    AC --> MP7["AC-7 → MP-007"]
+    S -->|≥ 3 AC fail| MP8["MP-008 Full Rewrite"]
+    MP1 --> RT["Re-test"]
+    MP2 --> RT
+    MP3 --> RT
+    MP4 --> RT
+    MP5 --> RT
+    MP6 --> RT
+    MP7 --> RT
+    MP8 --> RT
+    RT --> P{"PASS?"}
+    P -->|Yes| C["Close issue"]
+    P -->|No, round 2| ESC["Escalate audit ulang"]
+```
+
+## 2. Severity Matrix
+
+| **Severity** | **Definisi** | **Action** |
+| --- | --- | --- |
+| **Critical** | AC-4 fail (anti-pattern blocking masih muncul); atau lebih dari 1 produksi mempengaruhi user real | Rollback patch + emergency micro-fix + retest hari yang sama |
+| **Major** | 1–2 dari AC-1–AC-6 fail; output rusak signifikan | Apply micro-patch sesuai library + retest |
+| **Minor** | Hanya AC-7 fail (match dengan expected <70% tapi struktur OK) | Tune heuristik / tambah few-shot example + retest |
+
+## 3. Micro-Patch Library
+
+### MP-001 — AC-1 Fail (struktur ABD-7 tidak muncul)
+
+**Symptom:** Output bebas-form, tidak ada section header standar.
+
+**Root cause hypothesis:** Section "STRUKTUR OUTPUT WAJIB" di patch hilang atau ter-override prompt user.
+
+**Patch (append sebelum bagian SITASI WAJIB):**
+
+```
+## ENFORCEMENT: STRUKTUR OUTPUT (HARD CONSTRAINT)
+Setiap respons WAJIB diawali dengan separator '═══' dan diakhiri
+dengan separator '═══'. Section yang WAJIB ada (urut):
+1. Konteks Diterima
+2. Confidence + Breakdown
+3. Jawaban Inti
+4. ASUMSI
+5. Inter-Agent Input
+6. Gap & Risiko
+7. Rekomendasi Aksi Cepat
+8. Sitasi
+9. Closing "Untuk akurasi X% → Y%, lengkapi: ..."
+
+Bila ada section yang tidak relevan, tetap tampilkan dengan
+isi "N/A" — jangan dihilangkan.
+```
+
+**Re-test:** ulangi test case original.
+
+---
+
+### MP-002 — AC-2 Fail (Confidence Score tidak ada)
+
+**Symptom:** Output langsung memberi jawaban tanpa angka kepastian.
+
+**Patch:**
+
+```
+## ENFORCEMENT: CONFIDENCE SCORE (HARD CONSTRAINT)
+Setiap respons WAJIB mengandung baris:
+"Confidence: <0-100>%"
+Dihitung dari rata-rata BREAKDOWN per komponen.
+
+Formula default:
+- Bila semua data minimal cukup: 65-85%
+- Bila ada inter-agent fallback heuristik: -5 sampai -15 poin
+- Bila ada ASUMSI-KRITIS: maksimal cap 50%
+- Bila tidak ada sama sekali: minimal floor 35%
+```
+
+---
+
+### MP-003 — AC-3 Fail (ASUMSI tag tidak ada)
+
+**Symptom:** Output mengandung inferensi tapi tanpa tag eksplisit.
+
+**Patch:**
+
+```
+## ENFORCEMENT: ASUMSI TAGGING (HARD CONSTRAINT)
+Setiap inferensi yang TIDAK langsung dari input user WAJIB ditandai
+dengan format eksak:
+[ASUMSI: <isi inferensi> | dasar: <heuristik / regulasi / tabel default>]
+
+Untuk asumsi yang dapat membuat output salah signifikan, gunakan:
+[ASUMSI-KRITIS: <isi> | dasar: <...>]
+
+MINIMUM 1 ASUMSI per respons. Bila benar-benar tidak ada,
+tulis: "[ASUMSI: tidak ada inferensi tambahan, semua dari input user]"
+```
+
+---
+
+### MP-004 — AC-4 Fail (anti-pattern blocking masih muncul) 🚨 CRITICAL
+
+**Symptom:** Agen masih menjawab dengan "Mohon lengkapi data X dulu" sebagai jawaban utama.
+
+**Root cause:** Section LARANGAN tidak cukup eksplisit, atau training data lama mendominasi.
+
+**Patch (replace section LARANGAN dengan ini, taruh sebelum INPUT MINIMAL):**
+
+```
+## LARANGAN ABSOLUT (HARD BLOCK)
+Agen ini DILARANG menulis kalimat berikut sebagai respons utama:
+- "Mohon lengkapi data X dulu"
+- "Saya tidak bisa membantu tanpa data Y"
+- "Silakan kembali setelah punya dokumen Z"
+- "Tanpa informasi tambahan saya tidak bisa"
+- "Kirim/upload/lampirkan file W"
+
+Bila tergoda menulis kalimat seperti itu, AGENT WAJIB:
+1. STOP. Reset.
+2. Inferensi terbaik dari input minimal yang ada
+3. Output dengan tag [ASUMSI-KRITIS: ...] untuk gap data
+4. TUTUP dengan permintaan data tambahan untuk MENAIKKAN AKURASI
+   (bukan untuk MEMULAI jawaban)
+
+INI HARD CONSTRAINT. Pelanggaran = output ditolak oleh sistem audit.
+```
+
+**Few-shot example to append:**
+
+```
+## CONTOH PATTERN BENAR vs SALAH
+
+[USER]: "Saya kontraktor gedung 12 lantai di Jakarta. Apa yang harus disiapkan?"
+
+[SALAH — DILARANG]:
+"Mohon lengkapi: berapa luas bangunan, jumlah basement, lokasi tepat,
+zona seismik, dll. Tanpa data ini saya tidak bisa membantu."
+
+[BENAR]:
+"Konteks: gedung 12 lantai di Jakarta = mid-high rise.
+Confidence: 72%
+[ASUMSI: Jakarta = zona seismik tinggi SDC D | dasar: SNI 1726:2019]
+[ASUMSI: 12 lantai → LOD 300 BIM minimal | dasar: heuristik TEKNIK]
+
+Jawaban Inti:
+- Standar wajib: SNI 2847, 1726, 1729 + ACI 318
+- Peer review struktur: WAJIB (SK Gub DKI 2017)
+- BIM Level 2 minimal
+...
+
+Untuk akurasi 72% → 90%, lengkapi: luas tipikal lantai, lateral system, tipe pondasi."
+```
+
+**Re-test wajib 2 round** karena ini critical violation.
+
+---
+
+### MP-005 — AC-5 Fail (sitasi regulasi tidak ada)
+
+**Symptom:** Output tidak menyertakan rujukan SNI/Permen/UU/dll.
+
+**Patch:**
+
+```
+## ENFORCEMENT: SITASI WAJIB (HARD CONSTRAINT)
+MINIMUM 1 sitasi per respons, format:
+- Nama regulasi/standar + nomor + (pasal bila spesifik)
+
+Bila tidak yakin regulasi yang tepat, gunakan kategori umum dari
+daftar SITASI WAJIB di bagian akhir prompt + tag [ASUMSI: rujukan
+bersifat umum, perlu verifikasi pasal spesifik | dasar: ...].
+JANGAN keluarkan output tanpa sitasi sama sekali.
+```
+
+---
+
+### MP-006 — AC-6 Fail (closing line untuk akurasi tidak ada)
+
+**Symptom:** Output langsung berhenti tanpa ajakan menaikkan akurasi.
+
+**Patch:**
+
+```
+## ENFORCEMENT: CLOSING LINE (HARD CONSTRAINT)
+Setiap respons WAJIB ditutup dengan format eksak:
+"Untuk akurasi <skor saat ini>% → <target +15-20 poin>%, lengkapi:
+- <data spesifik 1>
+- <data spesifik 2>
+- <data spesifik 3>"
+
+Bila confidence sudah ≥ 90%, format alternatif:
+"Untuk validasi final, konfirmasi: <1-2 item>."
+```
+
+---
+
+### MP-007 — AC-7 Fail (match expected <70%)
+
+**Symptom:** Struktur ABD-7 OK tapi isi/angka jauh dari expected test case.
+
+**Diagnosis:** Heuristik default tidak match konteks; few-shot kurang representatif.
+
+**Patch (di section HEURISTIK DEFAULT):**
+
+1. Review ulang test case yang fail — expected vs actual.
+2. Tambah baris di tabel heuristik untuk konteks yang tidak ter-cover.
+3. Tambah 1–2 few-shot example baru di system prompt yang mirip dengan kasus fail.
+
+**Catatan:** Bila AC-7 fail di 2+ test, kemungkinan heuristik tabel butuh revisi sistematis. Eskalasi ke audit ulang dossier (lihat [Sprint 2 — Audit Dossier 3 Agen Prioritas Tinggi (PROXIMA · KONTRAK · FINTAX)](https://www.notion.so/Sprint-2-Audit-Dossier-3-Agen-Prioritas-Tinggi-PROXIMA-KONTRAK-FINTAX-a08c2baae1604cca8869ef749cc039f3?pvs=21) / [Sprint 2 (Lanjutan) — Audit Dossier 6 Agen Sedang & Rendah](https://www.notion.so/Sprint-2-Lanjutan-Audit-Dossier-6-Agen-Sedang-Rendah-04601f57399e4f2a876de1562b240f68?pvs=21)).
+
+---
+
+### MP-008 — ≥ 3 AC Fail (Full Rewrite)
+
+**Symptom:** Patch agen rusak parah; banyak constraint tidak diikuti.
+
+**Action:**
+
+1. **Tidak pakai micro-patch** — sudah tidak efektif.
+2. **Rollback** ke prompt v1.0 (snapshot dari Section 3 runbook).
+3. **Audit ulang dossier** untuk agen ini.
+4. **Re-write patch** dari awal, mengacu ke template patch yang sukses (PROXIMA jika belum, atau yang lain bila sudah).
+5. **Re-deploy** dari runbook Wave dari awal untuk agen ini.
+6. Eskalasi ke chat thread — saya bantu rewrite.
+
+## 4. Re-Test Protocol Setelah Micro-Patch
+
+Ulangi langkah berikut setelah apply patch:
+
+1. **Apply patch** ke system prompt agen di Gustafta Builder.
+2. **Save** konfigurasi.
+3. **Smoke test:** kirim pesan singkat test koneksi ("Sebut nama dan misi").
+4. **Run test case original** yang sebelumnya fail.
+5. **Run 1 test case variant** (modifikasi parameter sedikit) untuk anti-overfit.
+6. **Update Field Test Tracker** di runbook Section 5 dengan hasil baru.
+7. Bila keduanya PASS → mark issue **Closed** di Issue Log.
+8. Bila ada yang masih FAIL → eskalasi ke MP-008 atau audit ulang.
+
+## 5. Anti-Overfit — Variant Test
+
+Micro-patch yang terlalu spesifik bisa lulus test original tapi gagal varian. Untuk setiap test PASS post-patch, **wajib** jalankan satu variant:
+
+| **Test Original** | **Variant (ubah satu parameter)** |
+| --- | --- |
+| TC-PROXIMA-1: gedung 12 lt 18 bln | gedung 8 lt 12 bln (skala turun) |
+| TC-FINTAX-1: cashflow Rp 100M 12 bln | cashflow Rp 25M 6 bln (skala turun) |
+| TC-KONTRAK-1: EOT hujan ekstrem | EOT change of law (jenis event lain) |
+
+## 6. Eskalasi Path
+
+- **Round 1 fail →** apply micro-patch → retest.
+- **Round 2 fail (post micro-patch) →** audit ulang dossier agen + revisi heuristik.
+- **Round 3 fail →** archive konfig agen v1.1, rebuild dari Sprint 2 dossier dengan revisi struktural.
+- **Critical AC-4 violation →** stop deploy wave, freeze sampai resolved.
+
+<aside>
+📚
+
+Micro-patch library ini akan tumbuh berdasarkan failure pattern real saat field test. Tambah entry MP-009, MP-010, dst di section 3 begitu issue baru ditemukan saat eksekusi runbook.
+
+</aside>

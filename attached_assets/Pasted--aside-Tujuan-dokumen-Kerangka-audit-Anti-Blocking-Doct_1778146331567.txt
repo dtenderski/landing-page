@@ -1,0 +1,244 @@
+<aside>
+🔍
+
+**Tujuan dokumen:** Kerangka audit Anti-Blocking Doctrine (ABD) untuk 3 agen prioritas Tinggi: **AGENT-PROXIMA**, **AGENT-KONTRAK**, dan **AGENT-FINTAX**. Setiap agen punya: (a) profil & trigger, (b) hipotesis temuan tipikal, (c) tabel audit C1–C8, (d) tabel heuristik default ABD-2, (e) 2 mini test case. Referensi prinsip: Section 6A pada [System Prompt OpenClaw — KONSTRA Multi-Agent (Manajemen Konstruksi)](https://www.notion.so/System-Prompt-OpenClaw-KONSTRA-Multi-Agent-Manajemen-Konstruksi-95f11fc694964145aa36338ba31c2a46?pvs=21). Master checklist: Section 4 pada [Anti-Blocking Doctrine — Implementasi & Audit 9 Agen KONSTRA](https://www.notion.so/Anti-Blocking-Doctrine-Implementasi-Audit-9-Agen-KONSTRA-a22523df455f4a9d9823d2ee0db7d2de?pvs=21).
+
+</aside>
+
+## Cara Pakai Dossier
+
+1. Buka prompt aktual agen di Gustafta Builder.
+2. Untuk tiap agen, baca **Hipotesis Temuan** dulu — ini prediksi pelanggaran ABD yang paling sering terjadi di domain tersebut.
+3. Isi kolom **Temuan Aktual** di tabel audit dengan ✅ / ❌ / ⚠️ berdasar prompt aktual.
+4. Eksekusi **Retrofit Action** yang ditandai ❌.
+5. Validasi dengan 2 mini test case di akhir setiap section.
+6. Update kolom Status di parent page setelah semua C1–C8 ✅.
+
+---
+
+# A. AGENT-PROXIMA — Manajer Proyek Konstruksi
+
+## A.1 Profil
+
+```jsx
+DOMAIN     : Project Management end-to-end (Inisiasi -> Closure)
+STANDAR    : PMBOK 7th, ISO 21500, Permen PUPR 8/2023, Permen PUPR 21/2019
+TRIGGER    : charter, WBS, schedule, S-curve, EVM, weekly progress, risk register, integrasi
+KEY OUTPUT : Project Charter, WBS, Master Schedule, Risk Register, EVM Report, Weekly Progress
+FREQUENCY  : Sangat tinggi (digunakan harian oleh PM/Site Engineer)
+```
+
+## A.2 Hipotesis Temuan (sebelum audit aktual)
+
+<aside>
+⚠️
+
+**Risiko ABD tertinggi di PROXIMA:** kemungkinan besar masih meminta user mengisi WBS detail / schedule baseline / risk register lengkap **sebelum** memberikan template atau analisis. Padahal user yang baru memulai proyek biasanya hanya tahu: jenis proyek, nilai, lokasi, durasi, owner.
+
+</aside>
+
+Hipotesis pelanggaran umum:
+
+- **C1 ❌ diduga:** "Mohon Anda upload baseline schedule terlebih dahulu untuk dapat analisis EVM."
+- **C2 ❌ diduga:** Tidak bisa generate WBS draft hanya dari 5 field input — minta semua deliverable terlebih dulu.
+- **C5 ❌ diduga:** Belum punya tabel heuristik WBS depth / risk register baseline per jenis proyek.
+- **C6 ❌ diduga:** Saat user tanya EVM dengan delay, tidak otomatis call AGENT-KONTRAK (klaim) + AGENT-FINTAX (cashflow impact).
+
+## A.3 Tabel Audit C1–C8
+
+| **Kode** | **Pertanyaan Audit** | **Hipotesis** | **Temuan Aktual** | **Retrofit Action** |
+| --- | --- | --- | --- | --- |
+| C1 | Pola "Mohon lengkapi X dulu"? | ❌ (kemungkinan ada untuk EVM/baseline) | — | Hapus instruksi blocking; ganti ke template + [ASUMSI:] |
+| C2 | Bisa jawab dari 3–5 field minimal? | ⚠️ (parsial — OK untuk konsep, gagal untuk EVM) | — | Tambah heuristik default WBS/EVM baseline |
+| C3 | Tag `[ASUMSI: ... | dasar: ...]`? | ❌ (belum ada di prompt) | — | Tambahkan instruksi ABD-3 ke system prompt agent |
+| C4 | Confidence Score 0–100? | ❌ | — | Wajibkan output ABD-7 dengan Confidence breakdown |
+| C5 | Tabel heuristik default? | ❌ | — | Tambahkan tabel A.4 di prompt agent |
+| C6 | Inter-agent call otomatis? | ❌ | — | Tambah trigger map: delay -> KONTRAK + FINTAX; budget -> FINTAX; K3 -> SAFIRA |
+| C7 | Closing "Untuk akurasi x% -> y%, lengkapi: ..."? | ❌ | — | Tambah closing template di prompt |
+| C8 | Sitasi regulasi tetap ada? | ✅ (PMBOK/ISO/PUPR sudah disebut) | — | Pertahankan |
+
+## A.4 Heuristik Default ABD-2 untuk PROXIMA
+
+| **Jenis Proyek** | **WBS Depth** | **Risk Register Baseline** | **EVM Cadence** | **S-curve Granularity** |
+| --- | --- | --- | --- | --- |
+| Gedung Kecil (≤ Rp 15 M) | 3 level | 10–15 risk items, 5 kategori | Bi-weekly | Bulanan |
+| Gedung Mid-size (Rp 15–250 M) | 4 level | 20–30 risk items, 7 kategori | Weekly | Weekly |
+| Gedung High-Rise / Mega (> Rp 250 M) | 5 level | 40+ risk items, 10 kategori | Weekly + daily KPI | Weekly + per-zone |
+| Infrastruktur Linear (jalan/jembatan) | 4–5 level | 25–40 risk items + cuaca/lahan | Weekly per km/segmen | Weekly per km |
+| EPC (PLTU/PLTA/Industri) | 5–6 level + IPMR | 50+ risk + interface matrix | Weekly EVM + cashflow | Weekly + commissioning gate |
+| KPBU / Konsesi | 5+ level (build phase) + O&M plan | 60+ risk + concession risk matrix | Weekly EVM + revenue tracking | Build: weekly; Operate: monthly |
+
+## A.5 Mini Test Case
+
+**TC-PROXIMA-1** — "Saya baru dapat SPK gedung Rp 80 M durasi 300 hari di Bandung. Buatkan kerangka project management."
+
+*Expected:* Bot langsung generate WBS skeleton 4 level + risk register 25 item baseline + S-curve weekly + RACI 8 peran. Tag `[ASUMSI: WBS depth = 4 level | dasar: gedung mid-size Rp 50–250 M per heuristik PROXIMA]`. Closing "Untuk akurasi 65% → 90%, mohon lengkapi: BoQ detail, sumber pendanaan, tanggal mulai resmi, daftar key personnel."
+
+**TC-PROXIMA-2** — "Progress saya bulan ke-3 = 18%, tapi schedule planned 25%. Apa risk-nya?"
+
+*Expected:* Bot menghitung SPI=0.72, kategorikan delay sebagai significant, **otomatis call AGENT-KONTRAK** (potensi EOT) + **AGENT-FINTAX** (impact cashflow termin). Tag `[ASUMSI: assume actual cost mengikuti BCWP linier | dasar: tidak ada data AC dari user]`. Output sintesis dari 3 agent.
+
+---
+
+# B. AGENT-KONTRAK — Manajer Kontrak & Tender
+
+## B.1 Profil
+
+```jsx
+DOMAIN     : Tender, kontrak, klaim, EOT, dispute, FIDIC
+STANDAR    : Perpres 12/2021, FIDIC Red/Yellow/Silver 2017, UU 2/2017, Permen PUPR 8/2023
+TRIGGER    : tender, HPS, kontrak, FIDIC, klausul, VO, klaim, EOT, dispute, sanggah
+KEY OUTPUT : Tender Readiness Report, Notice of Claim, EOT calculation, VO draft, Dispute brief
+FREQUENCY  : Tinggi (kritikal untuk fase tender & klaim)
+```
+
+## B.2 Hipotesis Temuan
+
+<aside>
+⚠️
+
+**Risiko ABD tertinggi di KONTRAK:** kemungkinan besar masih meminta user upload **kontrak penuh** sebelum bisa kasih analisis klausul. Padahal user paling sering hanya tahu: jenis kontrak (Lump Sum/FIDIC), nilai, durasi, owner. Tender Readiness Checker (sub-agen) sudah dipiloti di Sprint 1.
+
+</aside>
+
+Hipotesis pelanggaran umum:
+
+- **C1 ❌ diduga:** "Untuk menganalisis klaim EOT, mohon upload kontrak lengkap dan baseline schedule."
+- **C2 ❌ diduga:** Belum bisa kasih draft Notice of Claim hanya dari deskripsi delay event.
+- **C5 ❌ diduga:** Tidak punya quick-reference matriks klausul kunci per tipe kontrak.
+- **C6 ❌ diduga:** Saat user tanya "VO Rp 5 M apakah masuk batas?", tidak otomatis call FINTAX (impact pajak/cashflow) + PROXIMA (impact schedule).
+
+## B.3 Tabel Audit C1–C8
+
+| **Kode** | **Hipotesis** | **Temuan Aktual** | **Retrofit Action** |
+| --- | --- | --- | --- |
+| C1 | ❌ (minta upload kontrak) | — | Ganti ke quick analysis dari tipe kontrak + nilai + durasi |
+| C2 | ⚠️ (parsial via Tender Readiness) | — | Replicate pola Tender Readiness ke EOT/VO/Claim sub-agen |
+| C3 | ❌ | — | Tambah ABD-3 di system prompt |
+| C4 | ❌ (Tender Readiness sudah punya, sub-agen lain belum) | — | Wajibkan Confidence Score di output EOT/VO/Claim |
+| C5 | ❌ | — | Tambahkan tabel B.4 (matriks klausul kunci per tipe) |
+| C6 | ❌ | — | Trigger map: VO -> FINTAX + PROXIMA; EOT -> PROXIMA + LOGIS; dispute -> escalate human (E2) |
+| C7 | ❌ | — | Tambah closing template |
+| C8 | ✅ (FIDIC/Perpres sudah disitasi) | — | Pertahankan |
+
+## B.4 Heuristik Default ABD-2 untuk KONTRAK
+
+| **Tipe Kontrak** | **Klausul Kunci Wajib Cek** | **Standar Klaim** | **Notice Period** | **Dispute Mechanism** |
+| --- | --- | --- | --- | --- |
+| Lump Sum Pemerintah (Perpres 12/2021) | SSKK + SSUK Permen PUPR 8/2023; LD; Retensi 5% | Klaim teknis via Adendum | 14 hari kerja | Mediasi -> Arbitrase BANI |
+| Unit Price Pemerintah | SSKK + SSUK; eskalasi; volume rebalance | Klaim volume + eskalasi | 14 hari kerja | Mediasi -> Arbitrase BANI |
+| FIDIC Red Book 2017 | SC 8.4 (EOT), SC 13 (Variations), SC 20 (Claims), SC 17 (Risk) | Notice of Claim wajib < 28 hari | 28 hari (FIDIC SC 20.2) | DAB/DAAB -> Arbitrase ICC |
+| FIDIC Yellow Book 2017 (EPC Plant) | SC 4 (Contractor's design), SC 8.5, SC 13, SC 17, SC 20 | Klaim design risk shifted to contractor | 28 hari (SC 20.2) | DAB/DAAB -> Arbitrase ICC |
+| FIDIC Silver Book 2017 (EPC Turnkey) | SC 4, SC 5, SC 8, SC 17 (limited Force Majeure), SC 20 | Risk allocation paling agresif ke contractor | 28 hari (SC 20.2) | Arbitrase ICC langsung |
+| KPBU (Perpres 38/2015) | Konsesi, change in law, force majeure, termination compensation | Equity buy-out + compensation matrix | 30 hari (varies) | Mediasi -> Arbitrase BANI/SIAC |
+
+## B.5 Mini Test Case
+
+**TC-KONTRAK-1** — "Owner late handover lahan 45 hari. Kontrak FIDIC Red Book. Bagaimana saya harus respon?"
+
+*Expected:* Bot langsung kasih draft Notice of Claim FIDIC SC 20.2, ingatkan deadline 28 hari, identifikasi SC 8.4 sebagai dasar EOT + SC 17.4 (Owner's Risk). Otomatis call PROXIMA (impact CPM) + FINTAX (cost compensation calc). Tag `[ASUMSI-KRITIS: late handover lahan = Owner's Risk yang excusable & compensable per FIDIC SC 17.4 | dasar: tipikal interpretasi DAB FIDIC]`.
+
+**TC-KONTRAK-2** — "VO penambahan lift 2 unit Rp 800 jt di gedung saya, kontrak Lump Sum Pemerintah. Apakah masuk?"
+
+*Expected:* Bot cek terhadap batas 10% Pasal 54 Perpres 12/2021, hitung % terhadap nilai kontrak (asumsi nilai dari context), kasih lampu hijau/kuning/merah. Otomatis call FINTAX (PPh Final dampak + e-Faktur) + PROXIMA (schedule extension).
+
+---
+
+# C. AGENT-FINTAX — Manajer Keuangan & Perpajakan
+
+## C.1 Profil
+
+```jsx
+DOMAIN     : Cash flow, akuntansi konstruksi (PSAK 34), pajak (PPh Final, PPN, e-Faktur, CoreTax)
+STANDAR    : PSAK 34, PP 9/2022, UU PPN, PER DJP CoreTax, Permen PUPR 8/2023
+TRIGGER    : cash flow, S-curve cash, akuntansi, PSAK 34, PPh Final, PPN, e-Faktur, retensi, termin
+KEY OUTPUT : Cash flow projection, PPh Final calculation, PPN/e-Faktur compliance, Termin schedule
+FREQUENCY  : Tinggi (mudah retrofit karena rumus tetap)
+```
+
+## C.2 Hipotesis Temuan
+
+<aside>
+✅
+
+**Peluang quick-win di FINTAX:** karena rumus pajak dan PSAK 34 bersifat deterministik, retrofit ABD-2 sangat mudah — cukup tabel heuristik yang akurat berdasarkan tipe BUJK dan profil owner.
+
+</aside>
+
+Hipotesis pelanggaran umum:
+
+- **C1 ❌ diduga:** "Untuk projection cashflow, mohon upload semua termin yang sudah disepakati di kontrak."
+- **C2 ⚠️ diduga:** Bisa hitung PPh Final dengan input lengkap, tapi tidak bisa estimasi tanpa kualifikasi BUJK.
+- **C5 ❌ diduga:** Belum punya tabel cepat tarif PPh Final per kualifikasi + skenario PPN.
+- **C6 ❌ diduga:** Saat user tanya cash flow gap, tidak otomatis call PROXIMA (S-curve plan) + KONTRAK (skema termin per kontrak).
+
+## C.3 Tabel Audit C1–C8
+
+| **Kode** | **Hipotesis** | **Temuan Aktual** | **Retrofit Action** |
+| --- | --- | --- | --- |
+| C1 | ❌ | — | Quick estimate dari 3 field: nilai kontrak, durasi, kualifikasi BUJK |
+| C2 | ⚠️ | — | Pakai default kualifikasi M2 + skema termin standar bila tidak diberi |
+| C3 | ❌ | — | Tambah ABD-3 |
+| C4 | ❌ | — | Wajibkan Confidence Score (untuk pajak: tinggi, untuk cashflow: bergantung asumsi) |
+| C5 | ❌ | — | Tambahkan tabel C.4 (PPh Final + skema termin + retensi) |
+| C6 | ❌ | — | Trigger map: cashflow -> PROXIMA + KONTRAK; klaim -> KONTRAK; pajak VO -> KONTRAK |
+| C7 | ❌ | — | Tambah closing template |
+| C8 | ✅ (PSAK/PP 9/2022 sudah disitasi) | — | Pertahankan; tambah PER DJP CoreTax terbaru |
+
+## C.4 Heuristik Default ABD-2 untuk FINTAX
+
+### C.4.1 Tarif PPh Final 4(2) Jasa Konstruksi (PP 9/2022)
+
+| **Klasifikasi BUJK** | **Pelaksana** | **Perencana/Pengawas** | **Catatan** |
+| --- | --- | --- | --- |
+| BUJK Kecil bersertifikat (K1/K2) | 1,75% | 3,5% | Sertifikat aktif wajib |
+| BUJK Spesialis bersertifikat | 2,65% | 3,5% | — |
+| BUJK Menengah/Besar bersertifikat (M1/M2/B1/B2) | 2,65% | 3,5% | — |
+| BUJK tidak bersertifikat / asing tanpa BUT | 4% | 6% | Hindari skema ini |
+| Pekerjaan terintegrasi (EPC) bersertifikat | 2,65% | — | Sesuai PP 9/2022 |
+| Pekerjaan terintegrasi tidak bersertifikat | 4% | — | — |
+
+### C.4.2 Skema Termin & Retensi Standar
+
+| **Profil Owner** | **Skema Termin Tipikal** | **Retensi** | **Cash Gap Tipikal** |
+| --- | --- | --- | --- |
+| Pemerintah Pusat / Pemda | UM 10–20% + termin progress 5–6 tahap | 5% (cair PHO/FHO) | 30–60 hari (SP2D process) |
+| BUMN | UM 10–15% + termin progress 4–5 tahap | 5–10% | 45–75 hari |
+| Swasta Bonafide | UM 20–30% + termin bulanan | 5% | 15–30 hari |
+| KPBU | Milestone build + tariff revenue O&M | Sesuai concession agreement | Variable (cashflow O&M jangka panjang) |
+| FIDIC Internasional | IPC bulanan + retention 5–10% | 5–10% (release per FIDIC SC 14.9) | 56 hari (FIDIC SC 14.7) |
+
+## C.5 Mini Test Case
+
+**TC-FINTAX-1** — "Saya BUJK M2, dapat proyek Rp 50 M dari Pemda. Berapa PPh Final dan estimasi cashflow gap?"
+
+*Expected:* Bot langsung jawab: PPh Final = 2,65% × Rp 50 M = Rp 1,325 M. Cash gap proyeksi: UM 15% (Rp 7,5 M) di awal, lalu termin progress; gap puncak ~Rp 4–6 M di bulan 3–4 karena SP2D 30–60 hari. Tag `[ASUMSI: skema termin Pemda standar 5 tahap | dasar: tabel C.4.2 FINTAX]`. Closing "Untuk akurasi 70% → 92%, mohon lengkapi: termin spesifik di SSKK, tanggal SPK, tarif kontrak."
+
+**TC-FINTAX-2** — "Termin saya tertahan 90 hari karena dispute teknis. Apa exposure saya?"
+
+*Expected:* Bot hitung opportunity cost (cost of capital  *Rp termin*  90 hari), identifikasi risiko cashflow ke vendor & gaji, **otomatis call AGENT-KONTRAK** (untuk strategi klaim interest on late payment per FIDIC SC 14.8 / Pasal 22 SSUK). Tag `[ASUMSI: cost of capital BUJK = 10% p.a. | dasar: rata-rata kredit modal kerja konstruksi]`.
+
+---
+
+# D. Dashboard Konsolidasi Audit
+
+| **Agen** | **C1** | **C2** | **C3** | **C4** | **C5** | **C6** | **C7** | **C8** | **Skor** | **Status** |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| PROXIMA | — | — | — | — | — | — | — | — | —/8 | Pending audit |
+| KONTRAK | — | — | — | — | — | — | — | — | —/8 | Pending audit |
+| FINTAX | — | — | — | — | — | — | — | — | —/8 | Pending audit |
+
+## D.1 Kriteria Lulus Sprint 2 (3 agen Tinggi)
+
+- [ ]  Skor minimal 7/8 untuk **ketiga** agen
+- [ ]  Tabel heuristik default per agen sudah ditambahkan ke prompt
+- [ ]  Trigger map inter-agent call sudah didefinisikan
+- [ ]  Mini test case (2 per agen) sudah diuji dan lulus
+
+## D.2 Output Sprint 2
+
+Setelah ketiga agen lulus, hasilkan:
+
+1. **Patch system prompt** untuk PROXIMA, KONTRAK, FINTAX (siap di-deploy ke Gustafta Builder)
+2. **Trigger map matrix** — dokumentasi inter-agent call lengkap untuk Sprint 4
+3. **Lessons learned** untuk diterapkan ke 5 agen Sedang & 1 agen Rendah di Sprint 2 lanjutan

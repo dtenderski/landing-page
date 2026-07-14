@@ -1,0 +1,346 @@
+Pelayanan Klasifikasi & Sub Klasifikasi
+Klasifikasi Arsitektur (AR)   
+
+NO	KODE KBLI	JUDUL KBLI	KODE SUBKLASIFIKASI	JENIS USAHA	KUALIFIKASI
+1	71101	Jasa Arsitektural Bangunan Gedung dan non Hunian	AR001	UMUM	KMB BUJKN, BUJKPMA, BUJKA
+2	71101	Jasa Arsitektural Lainnya	AR002	UMUM	KMB BUJKN, BUJKPMA, BUJKA
+3	74120	Jasa Desain Interior Pada Bangunan Gedung dan Bangunan Sipil	AR003	UMUM	KMB BUJKN, BUJKPMA, BUJKA
+Klasifikasi Arsitektur Lanskap dan Perencanaan Wilayah (AL)
+TIDAK	KBLI	JUDUL KBLI	KODE SUBKLASIFIKASI	 JENIS USAHA	KUALIFIKASI
+1	71101	Jasa Pengembangan Pemanfaatan Ruang	AL001	UMUM	KMB BUJKN, BUJKPMA, BUJKA
+2	71101	Jasa Pengembangan Wilayah	AL002	UMUM	KMB BUJKN, BUJKPMA, BUJKA
+3	71101	Jasa Pengembangan	AL003	UMUM	KMB BUJKN, BUJKPMA, BUJKA
+4	71101	Jasa Pengembangan Lingkungan Bangunan dan Lanskap	AL004	UMUM	KMB BUJKN, BUJKPMA, BUJKA
+Klasifikasi Rekayasa (RK)
+NO	KODE KBLI	JUDUL KBLI	KODE SUBKLASIFIKASI	JENIS USAHA	KUALIFIKASI
+1	71102	Jasa Rekayasa Konstruksi Bangunan Gedung Hunian dan Non Hunian	RK001	UMUM	KMB BUJKN, BUJKPMA, BUJKA
+2	71102	Jasa Rekayasa Pekerjaan Teknik Sipil Sumber Daya Air	RK002	UMUM	KMB BUJKN, BUJKPMA, BUJKA
+3	71102	Jasa Rekayasa Pekerjaan Teknik Sipil Transportasi	RK003	UMUM	KMB BUJKN, BUJKPMA, BUJKA
+4	71102	Jasa Rekayasa Pekerjaan Mekanikal Dalam Bangunan	RK004	UMUM	KMB BUJKN, BUJKPMA, BUJKA
+5	71102	Jasa Rekayasa Lainnya	RK005	UMUM	KMB BUJKN, BUJKPMA, BUJKA
+Klasifikasi Rekayasa Terpadu (RT)
+NO.	KODE KBLI	JUDUL KBLI	KODE SUBKLASIFIKASI	JENIS USAHA	KUALIFIKASI
+1	70209	Jasa Pelayanan Studi Investasi Infrastruktur	RT001	UMUM	KMB BUJKN, BUJKPMA, BUJKA
+2	71102	Jasa Rekayasa Konstruksi Pembangkit, Jaringan Transmisi, Gardu Induk dan Distribusi Tenaga Listrik	RT002	UMUM	KMB BUJKN, BUJKPMA, BUJKA
+3	71102	Jasa Rekayasa Proses Industrial, Produksi dan Fasilitas Produksi	RT003	UMUM	KMB BUJKN, BUJKPMA, BUJKA
+KMB BUJKN, BUJKPMA, BUJKA
+Klasifikasi Pengujian dan Analisa Teknis (AT)
+NO	KODE KBLI	JUDUL KBLI	KODE SUBKLASIFIKASI	JENIS USAHA
+1	71102	Jasa Pengujian dan Analisis Teknis Geologi, Geofisika dan Geokimia	AT001	SPESIALIS
+2	71102	Jasa Pengujian dan Analisis Teknis Komposisi dan Tingkat Kemurnian	AT002	SPESIALIS
+3	71102	Jasa Pengujian Hasil Kerja Konstruksi dan Fasilitas Laboratorium	AT003	SPESIALIS
+4	71102	Jasa Pengujian dan Analisis Teknis Parameter Fisikal	AT004	SPESIALIS
+5	71102	Jasa Pengujian dan Analisis Teknis Hidrolika, Hidrologi dan Oceanography	AT005	SPESIALIS
+6	71102	Jasa Pengujian dan Analisis Akustik dan Vibrator Gedung Hunian dan Non Hunian	AT006	SPESIALIS
+7	71106	 Jasa Commisioning Proses Individual	AT007	SPESIALIS
+Klasifikasi Konsultansi Ilmiah dan Teknis (IT)
+NO	KODE KBLI	JUDUL KBLI	KODE SUBKLASIFIKASI	JENIS USAHA
+1	71102	Jasa Pembuatan Prospektus Geologi dan Geofisika	IT001	SPESIALIS
+2	71102	Jasa Konsultasi Ilmiah dan Teknis Bawah Tanah	IT002	SPESIALIS
+3	71102	Jasa Konsultasi Ilmiah dan Teknis Permukaan Tanah dan Pembuatan Peta	IT003	SPESIALIS
+4	71102	Jasa Konsultasi Ilmiah dan Teknis Sarana dan Prasarana Umum	IT004	SPESIALIS
+5	71102	Jasa Konsultasi Ilmiah dan Teknis Konstruksi Sistem Pengendalian Lalu Lindas	IT005	SPESIALIS
+6	71102	Jasa Konsultasi Ilmiah dan Teknis Hidrolika, Hidrologi, dan Oceanography	IT006	SPESIALIS
+iconPersyaratan Permohonan
+Persyaratan Tenaga Ahli Tetap
+NO
+
+SUBKLASIFIKASI USAHA
+
+KLASIFIKASI/ SUBKLASIFIKASI
+
+1
+
+Jasa Nasihat dan Pra Desain Arsitektural
+
+Arsitektur Sipil
+
+Tata Lingkungan
+
+2
+
+Jasa Desain Arsitektural
+
+Arsitektur
+
+3
+
+Jasa Penilai Perawatan dan Kelayakan Bangunan Gedung
+
+Arsitektur Sipil
+
+Manajemen Pelaksanaan
+
+4
+
+Jasa Desain Interior
+
+Arsitektur
+
+5
+
+Jasa Arsitektur lainnya
+
+Arsitektur
+
+6
+
+Subklasifikasi Jasa Nasehat dan Konsultansi Rekayasa Teknik
+
+Arsitektur Sipil Mekanikal Elektrikal
+
+Tata Lingkungan
+
+7
+
+Jasa Desain Rekayasa untuk Konstruksi Pondasi serta Struktur Bangunan
+
+Arsitektur
+
+Sipil
+
+8
+
+Jasa Desain Rekayasa untuk Pekerjaan Teknik Sipil Air
+
+Sipil
+
+9
+
+Jasa Desain Rekayasa untuk Pekerjaan Teknik Sipil Transportasi
+
+Sipil
+
+Tata Lingkungan
+
+10
+
+Jasa Desain Rekayasa untuk Pekerjaan Mekanikal dan Elektrikal Dalam Bangunan
+
+Mekanikal
+
+Elektrikal
+
+11
+
+Jasa Desain Rekayasa untuk Proses Industrial Produksi
+
+Mekanikal
+
+Elektrikal
+
+12
+
+Jasa Nasehat dan Konsultansi Jasa Rekayasa Konstruksi
+
+Arsitektur Sipil Mekanikal Elektrikal
+
+Tata Lingkungan
+
+13
+
+Jasa Desain Rekayasa Lainnya
+
+  Arsitektur   Sipil     Mekanikal   Elektrikal
+
+ Tata Lingkungan
+
+14
+
+Jasa Perencanaan dan Perancangan Perkotaan
+
+ Tata Lingkungan
+
+15
+
+Jasa Perencanaan Wilayah
+
+ Tata Lingkungan
+
+16
+
+Jasa Perencanaan dan Perancangan lingkungan bangunan dan lansekap
+
+ Arsitektur   Sipil
+
+ Tata Lingkungan
+
+17
+
+Jasa Pengembangan Pemanfaatan Ruang
+
+Arsitektur Sipil
+
+  Tata Lingkungan
+
+18
+
+Jasa Pengawas Administrasi Kontrak
+
+  Arsitektur    Sipil   Mekanikal   Elektrikal
+
+ Tata Lingkungan
+
+ Manajemen Pelaksanaan
+
+19
+
+Jasa Pengawas Pekerjaan Konstruksi Bangunan Gedung
+
+  Arsitektur
+
+  Sipil
+
+20
+
+Jasa Pengawas Pekerjaan Konstruksi Teknik Sipil Transportasi
+
+  Sipil
+
+21
+
+Jasa Pengawas Pekerjaan Konstruksi Teknik Sipil Air
+
+  Sipil
+
+22
+
+Jasa Pengawas Pekerjaan Konstruksi dan Instalasi Proses dan Fasilitas Industri
+
+ Mekanikal
+
+ Elektrikal
+
+23
+
+Jasa Pengawas dan Pengendali Penataan Ruang
+
+  Tata Lingkungan
+
+  Sipil (Geografi)
+
+24
+
+Jasa Pembuatan Prospektus Geologi dan Geofisika
+
+  Sipil (Geologi ,Geofisika)
+
+25
+
+Jasa Survey bawah Tanah
+
+  Sipil (Geodesi)
+
+26
+
+Jasa Survey Permukaan Tanah
+
+  Sipil (Geodesi)
+
+27
+
+Jasa Pembuatan Peta
+
+  Sipil (Geodesi)
+
+28
+
+Jasa Pengujian dan Analisa Komposisi dan Tingkat kemurnian
+
+  Sipil
+
+  Tata Lingkungan
+
+29
+
+Jasa Pengujian dan Analisa Parameter fisikal
+
+  Sipil
+
+  Tata Lingkungan
+
+30
+
+Jasa Pengujian dan Analisa Sistem Mekanikal dan Elektrikal
+
+  Mekanikal
+
+  Elektrikal
+
+31
+
+Jasa Inspeksi Teknikal
+
+  Mekanikal
+
+  Elektrikal
+
+32
+
+Jasa Konsultansi Lingkungan
+
+  Tata Lingkungan
+
+33
+
+Jasa Konsultansi Estimasi Nilai Lahan dan Bangunan
+
+  Arsitektur    Sipil
+
+  Tata Lingkungan
+
+34
+
+Jasa Manajemen Proyek Terkait Konstruksi Pekerjaan Teknik Sipil Transportasi
+
+  Sipil
+
+Tata Lingkungan Manajemen Pelaksanaan
+
+35
+
+Jasa Manajemen Proyek Terkait Konstruksi Pekerjaan Teknik Sipil Keairan
+
+  Sipil
+
+  Manajemen Pelaksanaan
+
+36
+
+Jasa Manajemen Proyek Terkait Konstruksi Pekerjaan Teknik Sipil Lainnya
+
+  Manajemen Pelaksanaan
+
+  Sipil
+
+37
+
+Jasa Manajemen Proyek Terkait Konstruksi Pekerjaan konstruksi proses dan fasilitas industrial
+
+Mekanikal Elektrikal
+
+  Manajenemen Pelaksanaan
+
+38
+
+Jasa Manajemen Proyek Terkait Konstruksi Pekerjaan Sistem Kendali Lalu Lintas
+
+  Elektrikal
+
+  Manajenemen Pelaksanaan
+
+39
+
+jasa rekayasa (engineering) terpadu
+
+  Arsitektur
+
+  Sipil
+
+  Mekanikal
+
+  Elektrikal
+
+  Tata Lingkungan
+
+  Manajenemen Pelaksanaan

@@ -1,0 +1,848 @@
+Berikut lanjutan **konfigurasi Chatbot SBUJPTL Coach**, sekarang ditambahkan layer baru dari bahan yang Anda unggah: **alur SBUJPTL sampai IUJPTL, kualifikasi kecil/menengah/besar, kebutuhan tenaga teknik SKTTK, subbidang pembangkitan/transmisi/distribusi/instalasi pemanfaatan, dan BUJPTL kantor perwakilan asing**. Bahan tambahan ini menyebut alur: persiapan data perusahaan, tenaga ahli teknik listrik bersertifikat SKTTK, pengajuan SBUJPTL, penggunaan SBUJPTL untuk pengajuan IUJPTL, lalu perusahaan siap menjalankan proyek. 
+
+## 53. IUJPTL extension flow
+
+```yaml id="iujptl_flow_01"
+flow:
+  id: sbujptl_to_iujptl_flow
+  title: "Alur SBUJPTL sampai IUJPTL"
+  purpose: >
+    Membantu pengguna memahami bahwa SBUJPTL dapat menjadi bagian dari
+    proses lanjutan untuk pengajuan IUJPTL, terutama bagi badan usaha yang
+    akan menjalankan kegiatan jasa penunjang tenaga listrik.
+
+  bot_message: >
+    Alur umum yang perlu disiapkan adalah:
+
+    1. Persiapkan data perusahaan.
+    2. Persiapkan tenaga teknik listrik yang memiliki SKTTK sesuai okupasi pekerjaan.
+    3. Ajukan proses SBUJPTL sesuai klasifikasi dan kualifikasi.
+    4. Gunakan SBUJPTL sebagai salah satu dokumen untuk proses IUJPTL.
+    5. Setelah legalitas lengkap, perusahaan dapat lebih siap mengikuti proyek
+       pemerintah maupun swasta.
+
+    Apakah Anda ingin saya bantu mulai dari pemilihan klasifikasi,
+    pengecekan kualifikasi, atau dokumen IUJPTL?
+  quick_replies:
+    - "Pilih klasifikasi SBUJPTL"
+    - "Cek kualifikasi kecil/menengah/besar"
+    - "Cek kebutuhan SKTTK"
+    - "Tanya IUJPTL"
+    - "Konsultasi admin"
+```
+
+## 54. Intent tambahan IUJPTL
+
+```yaml id="intent_iujptl_01"
+intents:
+  - id: ask_iujptl
+    description: "Pengguna bertanya tentang IUJPTL atau hubungan SBUJPTL dengan IUJPTL."
+    sample_user_inputs:
+      - "Apa itu IUJPTL?"
+      - "SBUJPTL untuk pengajuan IUJPTL?"
+      - "Setelah SBUJPTL, apakah perlu IUJPTL?"
+      - "Alur sampai IUJPTL bagaimana?"
+      - "Saya mau urus SBUJPTL sampai IUJPTL"
+    entities:
+      - target_license
+      - business_activity
+    response_template: iujptl_explanation_response
+    next_node: sbujptl_to_iujptl_flow
+
+response_template:
+  id: iujptl_explanation_response
+  text: >
+    IUJPTL adalah izin usaha untuk menjalankan kegiatan jasa penunjang tenaga
+    listrik. Dalam alur pengurusan, SBUJPTL dapat menjadi salah satu dokumen
+    penting sebelum badan usaha melanjutkan proses pengajuan IUJPTL.
+
+    Secara umum, perusahaan perlu menyiapkan data perusahaan, tenaga teknik
+    bersertifikat SKTTK, klasifikasi dan kualifikasi SBUJPTL, lalu melanjutkan
+    ke proses IUJPTL sesuai ketentuan yang berlaku.
+
+    Saya bisa bantu cek kesiapan Anda dari sisi klasifikasi, kualifikasi,
+    tenaga teknik, dan dokumen awal.
+  quick_replies:
+    - "Cek klasifikasi"
+    - "Cek kualifikasi"
+    - "Cek SKTTK"
+    - "Cek dokumen"
+    - "Konsultasi admin"
+```
+
+## 55. Business entity eligibility flow
+
+```yaml id="eligibility_bujptl_01"
+flow:
+  id: bujptl_eligibility_check
+  title: "Cek Bentuk Badan Usaha BUJPTL"
+  purpose: >
+    Menentukan apakah bentuk badan usaha pengguna sesuai untuk proses
+    BUJPTL/SBUJPTL awal.
+
+  bot_message: >
+    Untuk proses BUJPTL/SBUJPTL, badan usaha dapat berupa badan usaha lokal
+    seperti PT atau CV, serta dalam kondisi tertentu kantor perwakilan asing.
+
+    Bentuk badan usaha Anda apa?
+  quick_replies:
+    - "PT"
+    - "CV"
+    - "Koperasi"
+    - "BUMN/BUMD"
+    - "Kantor Perwakilan Asing"
+    - "Belum tahu"
+
+node:
+  id: bujptl_eligibility_result
+  type: conditional_response
+  logic:
+    - condition: "legal_entity_type in ['PT', 'CV', 'Koperasi', 'BUMN/BUMD']"
+      bot_message: >
+        Bentuk badan usaha Anda dapat dilanjutkan untuk pemetaan awal
+        SBUJPTL. Langkah berikutnya adalah memilih jenis usaha, bidang,
+        subbidang, dan kualifikasi.
+      quick_replies:
+        - "Pilih jenis usaha"
+        - "Cek kualifikasi"
+        - "Cek dokumen"
+
+    - condition: "legal_entity_type == 'Kantor Perwakilan Asing'"
+      bot_message: >
+        Untuk kantor perwakilan asing, ketentuannya berbeda dan biasanya
+        setara dengan kualifikasi besar. Jenis usaha yang dapat dipetakan
+        meliputi konsultansi, pembangunan dan pemasangan, serta pemeliharaan
+        instalasi tenaga listrik.
+
+        Saya dapat bantu tampilkan ketentuan khusus kantor perwakilan asing.
+      quick_replies:
+        - "Lihat ketentuan asing"
+        - "Konsultasi admin"
+
+    - condition: "legal_entity_type == 'Belum tahu'"
+      bot_message: >
+        Tidak masalah. Anda dapat mulai dari menjelaskan bentuk perusahaan
+        atau kegiatan usaha yang dijalankan. Saya akan bantu arahkan pilihan
+        yang paling mendekati.
+      quick_replies:
+        - "Saya jelaskan kegiatan usaha"
+        - "Konsultasi admin"
+```
+
+## 56. Kualifikasi usaha kecil, menengah, besar
+
+```yaml id="qualification_engine_01"
+qualification_catalog:
+  id: bujptl_qualification_catalog
+  qualification_levels:
+    - id: kecil
+      label: "Kecil"
+      net_worth_range: "Rp50 juta sampai Rp2 miliar"
+      max_single_project_value: "Maksimal Rp2,5 miliar"
+      general_description: >
+        Cocok untuk badan usaha dengan kemampuan usaha awal sampai kecil,
+        dengan batas nilai satu pekerjaan yang lebih rendah.
+
+    - id: menengah
+      label: "Menengah"
+      net_worth_range: "Lebih dari Rp2 miliar sampai Rp25 miliar"
+      max_single_project_value: "Maksimal Rp50 miliar"
+      general_description: >
+        Cocok untuk badan usaha dengan kemampuan usaha lebih besar dan
+        kapasitas pekerjaan menengah.
+
+    - id: besar
+      label: "Besar"
+      net_worth_range: "Lebih dari Rp25 miliar"
+      max_single_project_value: "Tidak terbatas"
+      general_description: >
+        Cocok untuk badan usaha dengan kemampuan usaha besar dan kapasitas
+        pekerjaan tinggi.
+
+flow:
+  id: qualification_check_start
+  title: "Cek Kualifikasi BUJPTL"
+  bot_message: >
+    Kualifikasi BUJPTL umumnya digolongkan menjadi kecil, menengah, dan besar.
+    Penentuan awal dapat dilihat dari kemampuan usaha, nilai kekayaan bersih,
+    batas nilai pekerjaan, serta dukungan tenaga teknik bersertifikat SKTTK.
+
+    Berapa perkiraan nilai kekayaan bersih perusahaan Anda?
+  quick_replies:
+    - "Rp50 juta - Rp2 miliar"
+    - "> Rp2 miliar - Rp25 miliar"
+    - "> Rp25 miliar"
+    - "Belum tahu"
+```
+
+## 57. Qualification recommendation logic
+
+```yaml id="qualification_logic_01"
+qualification_recommendation_logic:
+  input_variables:
+    - net_worth_range
+    - target_field
+    - pjt_level_available
+    - tt_level_available
+    - tt_count
+    - max_project_value
+
+  rules:
+    - id: recommend_kecil
+      condition: "net_worth_range == '50jt_2m'"
+      output:
+        qualification: "Kecil"
+        bot_message: >
+          Berdasarkan nilai kekayaan bersih yang Anda pilih, kualifikasi awal
+          yang mungkin sesuai adalah Kecil.
+
+          Untuk kualifikasi ini, batas nilai satu pekerjaan umumnya sampai
+          Rp2,5 miliar. Anda juga perlu menyiapkan PJT dan Tenaga Teknik
+          dengan level SKTTK yang sesuai bidang atau subbidang.
+        quick_replies:
+          - "Cek kebutuhan SKTTK"
+          - "Cek bidang usaha"
+          - "Cek dokumen"
+
+    - id: recommend_menengah
+      condition: "net_worth_range == '2m_25m'"
+      output:
+        qualification: "Menengah"
+        bot_message: >
+          Berdasarkan nilai kekayaan bersih yang Anda pilih, kualifikasi awal
+          yang mungkin sesuai adalah Menengah.
+
+          Pada kualifikasi ini, batas nilai satu pekerjaan umumnya sampai
+          Rp50 miliar. Pastikan jumlah dan level SKTTK tenaga teknik memenuhi
+          kebutuhan bidang atau subbidang yang diajukan.
+        quick_replies:
+          - "Cek kebutuhan tenaga teknik"
+          - "Pilih subbidang"
+          - "Konsultasi admin"
+
+    - id: recommend_besar
+      condition: "net_worth_range == 'above_25m'"
+      output:
+        qualification: "Besar"
+        bot_message: >
+          Berdasarkan nilai kekayaan bersih yang Anda pilih, kualifikasi awal
+          yang mungkin sesuai adalah Besar.
+
+          Pada kualifikasi besar, batas nilai satu pekerjaan dapat tidak
+          terbatas, tetapi kebutuhan tenaga teknik dan dokumen pendukung perlu
+          diverifikasi lebih ketat.
+        quick_replies:
+          - "Cek SKTTK"
+          - "Cek dokumen"
+          - "Konsultasi admin"
+
+    - id: unknown_net_worth
+      condition: "net_worth_range == 'unknown'"
+      output:
+        qualification: "Belum dapat ditentukan"
+        bot_message: >
+          Jika nilai kekayaan bersih belum diketahui, saya sarankan mulai
+          dari cek dokumen keuangan atau laporan keuangan perusahaan.
+          Kualifikasi final perlu dipetakan berdasarkan kemampuan usaha dan
+          tenaga teknik yang tersedia.
+        quick_replies:
+          - "Cek dokumen keuangan"
+          - "Cek dokumen umum"
+          - "Konsultasi admin"
+```
+
+## 58. SKTTK requirement matrix
+
+```yaml id="skttk_matrix_01"
+skttk_requirement_matrix:
+  general_fields:
+    pembangkitan:
+      label: "Pembangkitan Tenaga Listrik"
+      small:
+        pjt_min_level: 5
+        pjt_min_count: 1
+        tt_min_level: 3
+        tt_min_count: 1
+      medium:
+        pjt_min_level: 5
+        pjt_min_count: 1
+        tt_min_level: 3
+        tt_min_count: 2
+      large:
+        pjt_min_level: 5
+        pjt_min_count: 1
+        tt_min_level: 3
+        tt_min_count: 3
+
+    transmisi:
+      label: "Transmisi Tenaga Listrik"
+      small:
+        pjt_min_level: 5
+        pjt_min_count: 1
+        tt_min_level: 3
+        tt_min_count: 1
+      medium:
+        pjt_min_level: 5
+        pjt_min_count: 1
+        tt_min_level: 3
+        tt_min_count: 2
+      large:
+        pjt_min_level: 5
+        pjt_min_count: 1
+        tt_min_level: 3
+        tt_min_count: 3
+
+    distribusi:
+      label: "Distribusi Tenaga Listrik"
+      small:
+        pjt_min_level: 5
+        pjt_min_count: 1
+        tt_min_level: 3
+        tt_min_count: 1
+      medium:
+        pjt_min_level: 5
+        pjt_min_count: 1
+        tt_min_level: 3
+        tt_min_count: 2
+      large:
+        pjt_min_level: 5
+        pjt_min_count: 1
+        tt_min_level: 3
+        tt_min_count: 3
+
+    instalasi_pemanfaatan:
+      label: "Instalasi Pemanfaatan Tenaga Listrik"
+      small:
+        pjt_min_level: 4
+        pjt_min_count: 1
+        tt_min_level: 2
+        tt_min_count: 1
+      medium:
+        pjt_min_level: 4
+        pjt_min_count: 1
+        tt_min_level: 2
+        tt_min_count: 2
+      large:
+        pjt_min_level: 4
+        pjt_min_count: 1
+        tt_min_level: 2
+        tt_min_count: 3
+```
+
+## 59. SKTTK checker flow
+
+```yaml id="skttk_checker_01"
+flow:
+  id: skttk_requirement_checker
+  title: "Cek Kebutuhan SKTTK PJT dan Tenaga Teknik"
+  bot_message: >
+    Saya akan bantu cek kebutuhan minimal PJT dan Tenaga Teknik berdasarkan
+    bidang serta kualifikasi yang Anda pilih.
+
+    Pilih bidang usaha Anda.
+  quick_replies:
+    - "Pembangkitan"
+    - "Transmisi"
+    - "Distribusi"
+    - "Instalasi Pemanfaatan"
+
+node:
+  id: ask_qualification_for_skttk
+  bot_message: >
+    Pilih kualifikasi badan usaha yang ditargetkan.
+  quick_replies:
+    - "Kecil"
+    - "Menengah"
+    - "Besar"
+    - "Belum tahu"
+
+node:
+  id: show_skttk_requirement
+  type: dynamic_lookup
+  lookup_source: skttk_requirement_matrix
+  response_template: >
+    Untuk bidang {{target_field}} dengan kualifikasi {{qualification}},
+    kebutuhan awal tenaga teknik adalah:
+
+    Penanggung Jawab Teknik:
+    - Minimal {{pjt_min_count}} orang
+    - Kompetensi minimal level {{pjt_min_level}}
+
+    Tenaga Teknik:
+    - Minimal {{tt_min_count}} orang
+    - Kompetensi minimal level {{tt_min_level}}
+
+    Catatan:
+    Kesesuaian final tetap perlu dicek berdasarkan okupasi pekerjaan,
+    subbidang, dokumen SKTTK, dan ketentuan lembaga terkait.
+  quick_replies:
+    - "Cek dokumen PJT/TT"
+    - "Cek subbidang"
+    - "Konsultasi admin"
+```
+
+## 60. Subbidang catalog
+
+```yaml id="subbidang_catalog_01"
+subbidang_catalog:
+  pembangkitan:
+    title: "Pembangkitan Tenaga Listrik"
+    subbidang:
+      - "PLTU"
+      - "PLTG"
+      - "PLTGU"
+      - "PLTP"
+      - "PLTA"
+      - "PLTA Skala Kecil dan Menengah"
+      - "PLTD"
+      - "PLTMGU"
+      - "PLTN"
+      - "PLTS"
+      - "PLTB"
+      - "PLT Biomassa"
+      - "PLT Biogas"
+      - "BESS"
+      - "Pembangkit listrik energi baru terbarukan lainnya"
+
+  transmisi:
+    title: "Transmisi Tenaga Listrik"
+    subbidang:
+      - "Transmisi Tenaga Listrik Tegangan Tinggi"
+      - "Transmisi Tenaga Listrik Tegangan Ekstra Tinggi"
+      - "Transmisi Tenaga Listrik Tegangan Ultra Tinggi"
+      - "Gardu Induk"
+
+  distribusi:
+    title: "Distribusi Tenaga Listrik"
+    subbidang:
+      - "Jaringan Distribusi Tenaga Listrik Tegangan Menengah"
+      - "Jaringan Distribusi Tenaga Listrik Tegangan Rendah"
+
+  instalasi_pemanfaatan:
+    title: "Instalasi Pemanfaatan Tenaga Listrik"
+    subbidang:
+      - "Instalasi Pemanfaatan Tenaga Listrik Tegangan Tinggi"
+      - "Instalasi Pemanfaatan Tenaga Listrik Tegangan Menengah"
+      - "Instalasi Pemanfaatan Tenaga Listrik Tegangan Rendah"
+```
+
+## 61. Subbidang selection flow
+
+```yaml id="subbidang_flow_01"
+flow:
+  id: subbidang_selection_flow
+  title: "Pilih Subbidang Usaha"
+  bot_message: >
+    Setelah memilih bidang, Anda perlu menentukan subbidang yang paling sesuai
+    dengan pekerjaan perusahaan.
+
+    Pilih bidang terlebih dahulu.
+  quick_replies:
+    - "Pembangkitan"
+    - "Transmisi"
+    - "Distribusi"
+    - "Instalasi Pemanfaatan"
+
+node:
+  id: show_subbidang_options
+  type: dynamic_options
+  lookup_source: subbidang_catalog
+  response_template: >
+    Berikut pilihan subbidang untuk {{target_field}}:
+
+    {{subbidang_list}}
+
+    Pilih subbidang yang paling sesuai dengan pekerjaan perusahaan Anda.
+  next_node: subbidang_confirmation
+
+node:
+  id: subbidang_confirmation
+  type: confirmation
+  bot_message: >
+    Baik. Subbidang yang Anda pilih adalah {{selected_subbidang}}.
+
+    Selanjutnya, saya bisa bantu cek kualifikasi, kebutuhan SKTTK,
+    atau dokumen pengurusan.
+  quick_replies:
+    - "Cek kualifikasi"
+    - "Cek SKTTK"
+    - "Cek dokumen"
+    - "Konsultasi admin"
+```
+
+## 62. Jenis usaha yang dapat dibantu
+
+```yaml id="supported_services_01"
+supported_services:
+  title: "Jenis Usaha yang Dapat Dibantu"
+  services:
+    - id: konsultansi
+      name: "Konsultansi dalam Bidang Instalasi Penyediaan Tenaga Listrik"
+      support_status: "supported"
+      bot_label: "Bisa dibantu"
+
+    - id: pembangunan_pemasangan
+      name: "Pembangunan dan Pemasangan Instalasi Penyediaan Tenaga Listrik"
+      support_status: "supported"
+      bot_label: "Bisa dibantu"
+
+    - id: pemeriksaan_pengujian
+      name: "Pemeriksaan dan Pengujian Instalasi Tenaga Listrik"
+      support_status: "limited"
+      bot_label: "Belum bisa / perlu konfirmasi admin"
+
+    - id: pengoperasian
+      name: "Pengoperasian Instalasi Tenaga Listrik"
+      support_status: "supported"
+      bot_label: "Bisa dibantu"
+
+    - id: pemeliharaan
+      name: "Pemeliharaan Instalasi Tenaga Listrik"
+      support_status: "supported"
+      bot_label: "Bisa dibantu"
+
+flow:
+  id: supported_services_flow
+  title: "Cek Jenis Usaha yang Dapat Dibantu"
+  bot_message: >
+    Saat ini jenis usaha yang dapat dibantu meliputi konsultansi,
+    pembangunan dan pemasangan, pengoperasian, serta pemeliharaan.
+
+    Untuk pemeriksaan dan pengujian, perlu konfirmasi lebih lanjut dengan admin.
+  quick_replies:
+    - "Konsultansi"
+    - "Pembangunan/Pemasangan"
+    - "Pengoperasian"
+    - "Pemeliharaan"
+    - "Pemeriksaan/Pengujian"
+    - "Konsultasi admin"
+```
+
+## 63. Response khusus pemeriksaan dan pengujian
+
+```yaml id="limited_service_01"
+node:
+  id: classification_pemeriksaan_pengujian_limited
+  title: "Pemeriksaan dan Pengujian Instalasi Tenaga Listrik"
+  bot_message: >
+    Pemeriksaan dan Pengujian Instalasi Tenaga Listrik termasuk salah satu
+    jenis usaha BUJPTL. Namun, untuk layanan pengurusan saat ini statusnya
+    perlu dikonfirmasi lebih lanjut.
+
+    Saya tetap dapat membantu menjelaskan bidang dan subbidangnya, tetapi
+    untuk kepastian pengurusan sebaiknya konsultasi dengan admin.
+  quick_replies:
+    - "Lihat bidang/subbidang"
+    - "Konsultasi admin"
+    - "Pilih jenis usaha lain"
+```
+
+## 64. Kantor perwakilan asing flow
+
+```yaml id="foreign_office_flow_01"
+flow:
+  id: foreign_representative_office_flow
+  title: "BUJPTL Kantor Perwakilan Asing"
+  purpose: >
+    Menjelaskan ketentuan awal untuk kantor perwakilan asing yang ingin
+    menjalankan jasa penunjang tenaga listrik.
+
+  bot_message: >
+    Untuk BUJPTL kantor perwakilan asing, jenis usaha yang dapat dipetakan
+    meliputi:
+
+    1. Konsultansi dalam bidang instalasi tenaga listrik.
+    2. Pembangunan dan pemasangan instalasi tenaga listrik.
+    3. Pemeliharaan instalasi tenaga listrik.
+
+    Kualifikasinya umumnya setara dengan kualifikasi besar dan terdapat
+    ketentuan khusus seperti kerja sama operasi dengan BUJPTL dalam negeri,
+    penggunaan tenaga kerja Indonesia, dan ketentuan nilai pekerjaan tertentu.
+
+    Apakah Anda ingin melihat ketentuan nilai pekerjaan atau langsung
+    konsultasi admin?
+  quick_replies:
+    - "Lihat nilai pekerjaan"
+    - "Lihat kewajiban kantor asing"
+    - "Konsultasi admin"
+
+node:
+  id: foreign_project_value_requirements
+  bot_message: >
+    Untuk kantor perwakilan asing, pekerjaan yang dapat dilakukan umumnya
+    merupakan pekerjaan berbiaya tinggi, antara lain:
+
+    - Pembangunan dan pemasangan instalasi tenaga listrik dengan nilai paling
+      sedikit Rp100 miliar.
+    - Konsultansi atau pemeliharaan instalasi tenaga listrik dengan nilai
+      paling sedikit Rp10 miliar.
+
+    Karena ketentuannya khusus, saya sarankan melakukan konsultasi lanjutan
+    sebelum menentukan jalur pengurusan.
+  quick_replies:
+    - "Konsultasi admin"
+    - "Lihat kewajiban lainnya"
+    - "Kembali ke menu utama"
+
+node:
+  id: foreign_obligations
+  bot_message: >
+    Beberapa kewajiban penting kantor perwakilan asing antara lain:
+
+    1. Melakukan kerja sama operasi dengan BUJPTL dalam negeri.
+    2. Mempekerjakan lebih banyak tenaga kerja Indonesia daripada tenaga kerja asing.
+    3. Penanggung jawab kantor perwakilan di Indonesia adalah WNI.
+    4. Mengutamakan penggunaan produk dalam negeri.
+    5. Memiliki teknologi tinggi, mutakhir, efisien, dan berwawasan lingkungan.
+    6. Melaksanakan proses alih teknologi.
+
+    Untuk validasi dokumen dan struktur kerja sama, sebaiknya lanjut konsultasi admin.
+  quick_replies:
+    - "Konsultasi admin"
+    - "Cek dokumen"
+    - "Kembali"
+```
+
+## 65. Updated main menu dengan IUJPTL dan kualifikasi
+
+```yaml id="updated_main_menu_02"
+main_menu:
+  bot_message: >
+    Pilih kebutuhan Anda terkait SBUJPTL:
+  options:
+    - label: "1. Apa itu SBUJPTL?"
+      next_node: explain_sbujptl
+
+    - label: "2. Pilih jenis usaha dan klasifikasi"
+      next_node: classification_menu
+
+    - label: "3. Pilih bidang dan subbidang"
+      next_node: subbidang_selection_flow
+
+    - label: "4. Cek kualifikasi kecil/menengah/besar"
+      next_node: qualification_check_start
+
+    - label: "5. Cek kebutuhan SKTTK PJT/TT"
+      next_node: skttk_requirement_checker
+
+    - label: "6. Cek dokumen pengurusan"
+      next_node: document_assessment_start
+
+    - label: "7. Alur SBUJPTL sampai IUJPTL"
+      next_node: sbujptl_to_iujptl_flow
+
+    - label: "8. Kantor Perwakilan Asing"
+      next_node: foreign_representative_office_flow
+
+    - label: "9. Konsultasi admin"
+      next_node: lead_capture_start
+```
+
+## 66. Updated lead capture dengan data teknis
+
+```yaml id="lead_capture_technical_01"
+flow:
+  id: lead_capture_with_technical_profile
+  title: "Form Konsultasi Teknis SBUJPTL"
+  bot_message: >
+    Saya akan mencatat data awal agar admin dapat menindaklanjuti kebutuhan
+    pengurusan SBUJPTL Anda dengan lebih tepat.
+  questions:
+    - id: q_contact_name
+      text: "Nama Anda siapa?"
+      save_to: contact.contact_name
+
+    - id: q_company_name
+      text: "Nama perusahaan Anda?"
+      save_to: company_profile.company_name
+
+    - id: q_legal_entity
+      text: "Bentuk badan usaha Anda?"
+      quick_replies:
+        - "PT"
+        - "CV"
+        - "Koperasi"
+        - "BUMN/BUMD"
+        - "Kantor Perwakilan Asing"
+        - "Belum tahu"
+      save_to: company_profile.legal_entity_type
+
+    - id: q_phone
+      text: "Nomor WhatsApp yang bisa dihubungi?"
+      save_to: contact.phone_number
+
+    - id: q_service_type
+      text: "Jenis usaha yang ingin diajukan?"
+      quick_replies:
+        - "Konsultansi"
+        - "Pembangunan/Pemasangan"
+        - "Pemeriksaan/Pengujian"
+        - "Pengoperasian"
+        - "Pemeliharaan"
+        - "Belum tahu"
+      save_to: company_profile.target_classification
+
+    - id: q_field
+      text: "Bidang yang dituju?"
+      quick_replies:
+        - "Pembangkitan"
+        - "Transmisi"
+        - "Distribusi"
+        - "Instalasi Pemanfaatan"
+        - "Belum tahu"
+      save_to: company_profile.target_field
+
+    - id: q_qualification
+      text: "Target kualifikasi?"
+      quick_replies:
+        - "Kecil"
+        - "Menengah"
+        - "Besar"
+        - "Belum tahu"
+      save_to: company_profile.target_qualification
+
+    - id: q_skttk_status
+      text: "Apakah sudah memiliki tenaga teknik dengan SKTTK?"
+      quick_replies:
+        - "Sudah"
+        - "Belum"
+        - "Sebagian"
+        - "Belum tahu"
+      save_to: technical.has_skttk
+
+  completion_response:
+    text: >
+      Terima kasih. Berikut ringkasan kebutuhan konsultasi Anda:
+
+      Nama: {{contact.contact_name}}
+      Perusahaan: {{company_profile.company_name}}
+      Bentuk badan usaha: {{company_profile.legal_entity_type}}
+      Jenis usaha: {{company_profile.target_classification}}
+      Bidang: {{company_profile.target_field}}
+      Kualifikasi target: {{company_profile.target_qualification}}
+      Status SKTTK: {{technical.has_skttk}}
+
+      Admin dapat menindaklanjuti untuk validasi klasifikasi, subbidang,
+      kualifikasi, SKTTK, dan dokumen pengurusan.
+    quick_replies:
+      - "Cek dokumen"
+      - "Kembali ke menu utama"
+      - "Selesai"
+```
+
+## 67. Dynamic response: contoh cek SKTTK
+
+```yaml id="dynamic_skttk_example_01"
+example_conversation:
+  - user: "Saya mau SBU pemeliharaan distribusi kualifikasi menengah. Butuh SKTTK berapa?"
+  - bot: >
+      Untuk bidang Distribusi Tenaga Listrik dengan kualifikasi Menengah,
+      kebutuhan awal tenaga teknik adalah:
+
+      Penanggung Jawab Teknik:
+      - Minimal 1 orang
+      - Kompetensi minimal level 5
+
+      Tenaga Teknik:
+      - Minimal 2 orang
+      - Kompetensi minimal level 3
+
+      Karena Anda memilih pemeliharaan distribusi, kesesuaian final tetap
+      perlu dicek berdasarkan subbidang, okupasi pekerjaan, dan dokumen SKTTK.
+
+      Apakah Anda ingin lanjut cek dokumen PJT/TT?
+    quick_replies:
+      - "Cek dokumen PJT/TT"
+      - "Konsultasi admin"
+      - "Cek kualifikasi lain"
+```
+
+## 68. Dynamic response: contoh kualifikasi
+
+```yaml id="dynamic_qualification_example_01"
+example_conversation:
+  - user: "Kekayaan bersih perusahaan saya sekitar 3 miliar."
+  - bot: >
+      Berdasarkan nilai kekayaan bersih sekitar Rp3 miliar, kualifikasi awal
+      yang mungkin sesuai adalah Menengah.
+
+      Untuk kualifikasi Menengah:
+      - Nilai kekayaan bersih: lebih dari Rp2 miliar sampai Rp25 miliar.
+      - Batas nilai satu pekerjaan: maksimal Rp50 miliar.
+      - Kebutuhan tenaga teknik bergantung pada bidang yang dipilih.
+
+      Bidang usaha Anda yang dituju apa?
+    quick_replies:
+      - "Pembangkitan"
+      - "Transmisi"
+      - "Distribusi"
+      - "Instalasi Pemanfaatan"
+```
+
+## 69. Dynamic response: contoh subbidang
+
+```yaml id="dynamic_subbidang_example_01"
+example_conversation:
+  - user: "Saya pekerjaan PLTS."
+  - bot: >
+      PLTS termasuk dalam bidang Pembangkitan Tenaga Listrik.
+
+      Untuk bidang pembangkitan, subbidang yang tersedia antara lain PLTU,
+      PLTG, PLTGU, PLTP, PLTA, PLTD, PLTS, PLTB, PLT Biomassa, PLT Biogas,
+      BESS, dan pembangkit energi baru terbarukan lainnya.
+
+      Jadi, subbidang yang paling sesuai untuk pekerjaan Anda adalah PLTS.
+      Selanjutnya, apakah Anda ingin cek kualifikasi atau kebutuhan SKTTK?
+    quick_replies:
+      - "Cek kualifikasi"
+      - "Cek SKTTK"
+      - "Cek dokumen"
+      - "Konsultasi admin"
+```
+
+## 70. Final addendum prompt untuk builder
+
+```text id="builder_prompt_addendum_01"
+Tambahkan modul lanjutan ke chatbot “SBUJPTL Coach”:
+
+1. Alur SBUJPTL sampai IUJPTL:
+   - Persiapan data perusahaan
+   - Persiapan tenaga teknik bersertifikat SKTTK
+   - Pengajuan SBUJPTL
+   - Penggunaan SBUJPTL untuk pengajuan IUJPTL
+   - Perusahaan siap mengikuti proyek
+
+2. Kualifikasi BUJPTL:
+   - Kecil: kekayaan bersih Rp50 juta sampai Rp2 miliar, batas satu pekerjaan maksimal Rp2,5 miliar
+   - Menengah: lebih dari Rp2 miliar sampai Rp25 miliar, batas satu pekerjaan maksimal Rp50 miliar
+   - Besar: lebih dari Rp25 miliar, batas satu pekerjaan tidak terbatas
+
+3. Kebutuhan SKTTK:
+   - Pembangkitan, Transmisi, Distribusi:
+     - Kecil: PJT min level 5 satu orang, TT min level 3 satu orang
+     - Menengah: PJT min level 5 satu orang, TT min level 3 dua orang
+     - Besar: PJT min level 5 satu orang, TT min level 3 tiga orang
+   - Instalasi Pemanfaatan:
+     - Kecil: PJT min level 4 satu orang, TT min level 2 satu orang
+     - Menengah: PJT min level 4 satu orang, TT min level 2 dua orang
+     - Besar: PJT min level 4 satu orang, TT min level 2 tiga orang
+
+4. Subbidang:
+   - Pembangkitan: PLTU, PLTG, PLTGU, PLTP, PLTA, PLTA skala kecil dan menengah, PLTD, PLTMGU, PLTN, PLTS, PLTB, PLT Biomassa, PLT Biogas, BESS, dan pembangkit EBT lainnya
+   - Transmisi: tegangan tinggi, ekstra tinggi, ultra tinggi, gardu induk
+   - Distribusi: jaringan distribusi tegangan menengah dan tegangan rendah
+   - Instalasi Pemanfaatan: tegangan tinggi, tegangan menengah, tegangan rendah
+
+5. Kantor Perwakilan Asing:
+   - Jenis usaha: konsultansi, pembangunan dan pemasangan, pemeliharaan
+   - Setara kualifikasi besar
+   - Pekerjaan pembangunan/pemasangan minimal Rp100 miliar
+   - Konsultansi atau pemeliharaan minimal Rp10 miliar
+   - Wajib kerja sama operasi dengan BUJPTL dalam negeri
+   - Mempekerjakan lebih banyak tenaga kerja Indonesia
+   - Penanggung jawab di Indonesia adalah WNI
+   - Mengutamakan produk dalam negeri
+   - Melaksanakan alih teknologi
+
+Gunakan quick replies, dynamic lookup, document checklist, lead capture, dan disclaimer bahwa hasil chatbot adalah panduan awal, bukan keputusan resmi sertifikasi.
+```

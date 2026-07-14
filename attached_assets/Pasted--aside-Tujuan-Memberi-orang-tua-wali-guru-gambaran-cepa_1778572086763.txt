@@ -1,0 +1,100 @@
+<aside>
+📊
+
+**Tujuan.** Memberi orang tua / wali / guru gambaran cepat & dapat ditindaklanjuti tentang progres belajar anak. Dirancang **read-only** untuk ortu, **read-write** untuk guru pengampu.
+
+**Frekuensi.** Update otomatis tiap akhir hari; ringkasan tertulis tiap Minggu malam (WIB).
+
+</aside>
+
+## Prinsip Desain
+
+1. **One-glance summary** — ortu paham dalam 30 detik.
+2. **Strength first** — selalu tampilkan kekuatan sebelum area pertumbuhan.
+3. **Actionable** — setiap insight punya 1 langkah konkret yang bisa dilakukan ortu.
+4. **Privacy-aware** — hanya tampilkan data anak sendiri; izin orangtua wajib untuk anak <13 tahun.
+5. **No shame** — jangan bandingkan langsung dengan teman; gunakan benchmark cohort anonim.
+
+## Komponen Dashboard
+
+### 1. Kartu Ringkas Mingguan (Auto-Generated)
+
+Format naratif yang dikirim ke ortu via Notion / WhatsApp / Email tiap Senin pagi:
+
+```
+Laporan Mingguan — [Nama Anak]
+[Periode: 6–12 Mei 2026]
+
+🔍 Ringkasan:
+Minggu ini [Nama] belajar [X jam Y menit] dalam [N sesi].
+Fokus utama: [Mapel A, Mapel B].
+
+🌟 Kekuatan minggu ini:
+- [Topik 1]: akurasi 85%, naik dari 70% minggu lalu.
+- Streak [N hari] berturut-turut.
+- Lulus 1 Boss Battle [Bab X].
+
+🌱 Area pertumbuhan:
+- [Topik 2]: akurasi 45%, masih perlu pendalaman konsep.
+- Sesi cenderung pendek (<15 menit) — mungkin perlu jadwal yang lebih konsisten.
+
+💡 Saran untuk Ayah/Bunda:
+- Tanya: "Coba ceritain ke Bunda apa itu [Topik 2]?" (teknik Feynman, 5 menit).
+- Sediakan ruang belajar tenang 30 menit/hari.
+- Apresiasi effort, bukan nilai ("Bunda lihat kamu konsisten, hebat.").
+
+⚠️ Catatan kesejahteraan:
+- Mood rata-rata: 3.8 / 5 (Baik).
+- Tidak ada sinyal stres berat terdeteksi.
+```
+
+### 2. Metrik Visual (Live)
+
+Di halaman ini akan ditampilkan **linked view** dari database Sesi Belajar & Profil Siswa untuk:
+
+| Widget | Sumber data | Tipe |
+| --- | --- | --- |
+| Total jam belajar 7 hari terakhir | Sesi Belajar | Chart kolom per hari |
+| Sebaran mode (Theory/Drill/Tryout/…) | Sesi Belajar | Donut chart |
+| Akurasi per mapel | Sesi Belajar | Bar chart |
+| Tren XP harian | Sesi Belajar | Line chart |
+| Streak & level saat ini | Profil Siswa | Number widget |
+| Mood 7 hari | Profil Siswa | Tabel + trend |
+| Top 3 miskonsepsi aktif | Miskonsepsi Log | List |
+
+*(Linked database di bawah — di-render otomatis oleh Notion.)*
+
+### 3. Kontrol Orang Tua
+
+Fitur yang ortu bisa atur (di luar dashboard ini, melalui ParentDashboardAgent):
+
+- **Jam aktif yang diizinkan** (mis. blokir 22:00–05:00).
+- **Mapel prioritas** untuk minggu depan.
+- **Frekuensi laporan** (harian / 3-harian / mingguan).
+- **Kanal pengiriman** (Notion / Email / WhatsApp / SMS).
+- **Akses guru/wali tambahan** (multi-parent or homeroom teacher).
+
+### 4. Privacy & Consent
+
+- Anak < 13 tahun: parental consent **wajib** sebelum aktivasi.
+- Konten chat siswa–AI: ortu **tidak melihat** transkrip mentah secara default; hanya ringkasan terstruktur.
+- Sinyal distress → ortu **diberitahu** sesuai protokol MentorAgent.
+- Data dihapus 90 hari setelah akun nonaktif.
+
+### 5. Template Pertanyaan Reflektif untuk Ortu
+
+Setiap minggu, AI tutor menyarankan 1–2 pertanyaan untuk dialog ortu–anak:
+
+- "Topik apa minggu ini yang paling kamu suka? Kenapa?"
+- "Soal mana yang bikin kamu mikir paling lama?"
+- "Kalau kamu jadi guru, gimana cara kamu jelasin ke temanmu?"
+- "Apa yang Ayah/Bunda bisa bantu minggu depan?"
+
+---
+
+<aside>
+⬇️
+
+Di bawah ini akan dipasang **linked database views** ke Sesi Belajar, Profil Siswa, dan Miskonsepsi Log agar dashboard hidup secara real-time.
+
+</aside>

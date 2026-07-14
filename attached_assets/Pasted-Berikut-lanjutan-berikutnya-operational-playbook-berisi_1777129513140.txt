@@ -1,0 +1,722 @@
+Berikut lanjutan berikutnya: **operational playbook**, berisi **complete production behavior rules, import validation, frontend component map, admin dashboard spec, role catalog expansion plan, dan launch checklist** untuk chatbot SKK **Manajemen Pelaksanaan**. Data jabatan, KKNI, kualifikasi, dan standar tetap mengacu pada katalog yang Anda unggah. 
+
+---
+
+# 134. Production Behavior Matrix
+
+```yaml id="production_behavior_matrix"
+production_behavior_matrix:
+  purpose: >
+    Menentukan perilaku chatbot dalam berbagai situasi pengguna agar konsisten,
+    aman, dan mudah diimplementasikan.
+
+  cases:
+
+    user_knows_exact_role:
+      example_inputs:
+        - "Quality Engineer"
+        - "Ahli K3 Konstruksi"
+        - "Ahli Quantity Surveyor"
+      bot_behavior:
+        - "Cari exact match di role_catalog."
+        - "Tampilkan subklasifikasi, jenjang, kualifikasi, KKNI, dan standar."
+        - "Tambahkan fokus kompetensi praktis."
+        - "Tawarkan belajar, asesmen, checklist, atau wawancara."
+
+    user_mentions_area_only:
+      example_inputs:
+        - "K3"
+        - "Mutu"
+        - "Kontrak"
+        - "QS"
+        - "Manajemen Proyek"
+      bot_behavior:
+        - "Jangan langsung memilih jabatan."
+        - "Tampilkan pilihan jabatan dalam area tersebut."
+        - "Minta pengguna memilih atau jawab pertanyaan pemetaan."
+
+    user_mentions_kkni:
+      example_inputs:
+        - "Level 7"
+        - "KKNI 8 apa saja?"
+        - "Saya cari jabatan KKNI 5"
+      bot_behavior:
+        - "Validasi KKNI 3 sampai 9."
+        - "Tampilkan jabatan berdasarkan level."
+        - "Kelompokkan hasil berdasarkan subklasifikasi."
+        - "Tawarkan detail jabatan."
+
+    user_mentions_standard:
+      example_inputs:
+        - "SKKNI 350-2014"
+        - "SKKK 035-2022"
+        - "SKKNI 6-2011 untuk apa?"
+      bot_behavior:
+        - "Normalisasi kode standar."
+        - "Cari standar di catalog."
+        - "Tampilkan jabatan yang menggunakan standar tersebut."
+        - "Tawarkan modul atau asesmen terkait."
+
+    user_wants_certification:
+      example_inputs:
+        - "Saya mau sertifikasi"
+        - "Saya mau ambil SKK"
+        - "Persiapan uji kompetensi"
+      bot_behavior:
+        - "Tanyakan target jabatan bila belum ada."
+        - "Jika target sudah ada, tampilkan alur persiapan."
+        - "Mulai dari asesmen mandiri atau checklist bukti."
+        - "Selalu tampilkan disclaimer non-resmi."
+
+    user_asks_out_of_scope:
+      example_inputs:
+        - "Desain struktur beton"
+        - "Hitung balok"
+        - "Sertifikasi arsitektur"
+      bot_behavior:
+        - "Jelaskan bahwa chatbot fokus pada Manajemen Pelaksanaan."
+        - "Jika masih terkait proyek, arahkan ke area terdekat."
+        - "Tawarkan kembali ke menu utama."
+```
+
+---
+
+# 135. Import Validation Pipeline
+
+```yaml id="import_validation_pipeline"
+import_validation_pipeline:
+  purpose: >
+    Memastikan data katalog SKK yang diimpor ke sistem bersih, konsisten,
+    dan siap digunakan chatbot.
+
+  pipeline_steps:
+
+    step_1_read_source:
+      description: "Baca file CSV, spreadsheet, atau input tabel."
+      required_columns:
+        - "subklasifikasi"
+        - "jabatan_kerja"
+        - "jenjang_jabatan_kerja"
+        - "kualifikasi"
+        - "kkni_level"
+        - "standard_code"
+        - "official_link"
+
+    step_2_normalize_text:
+      actions:
+        - "Trim leading/trailing spaces."
+        - "Convert multiple spaces to single space."
+        - "Normalize dash variants."
+        - "Normalize SKKNI/SKKK capitalization."
+        - "Standardize KKNI as integer."
+
+    step_3_validate_required_fields:
+      checks:
+        - "subklasifikasi must not be empty."
+        - "jabatan_kerja must not be empty."
+        - "jenjang_jabatan_kerja must not be empty."
+        - "kkni_level must be present."
+        - "standard_code must be present."
+
+    step_4_validate_allowed_values:
+      kkni_level_allowed: [3, 4, 5, 6, 7, 8, 9]
+      kualifikasi_allowed:
+        - "Operator"
+        - "Teknisi/Analis"
+        - "Ahli"
+
+    step_5_detect_duplicates:
+      duplicate_key:
+        - "jabatan_kerja"
+        - "jenjang_jabatan_kerja"
+        - "kkni_level"
+        - "standard_code"
+      action_if_duplicate: "flag_for_review"
+
+    step_6_generate_role_id:
+      format: "role_{slug_jabatan}_{slug_jenjang}_kkni_{kkni_level}"
+      example: "role_quality_engineer_quality_engineer_kkni_6"
+
+    step_7_publish_or_review:
+      if_no_errors: "publish_to_role_catalog"
+      if_warnings: "send_to_admin_review"
+      if_errors: "reject_import_and_show_report"
+```
+
+---
+
+# 136. Import Error Report Template
+
+```yaml id="import_error_report"
+import_error_report:
+  report_title: "Laporan Validasi Import Katalog SKK"
+
+  summary_fields:
+    - total_rows
+    - valid_rows
+    - warning_rows
+    - error_rows
+    - duplicate_rows
+
+  error_types:
+    missing_required_field:
+      message: >
+        Baris {{row_number}} tidak memiliki field wajib: {{field_name}}.
+
+    invalid_kkni:
+      message: >
+        Baris {{row_number}} memiliki KKNI {{value}}, tetapi nilai yang valid
+        adalah 3 sampai 9.
+
+    invalid_kualifikasi:
+      message: >
+        Baris {{row_number}} memiliki kualifikasi {{value}}. Nilai yang
+        disarankan: Operator, Teknisi/Analis, atau Ahli.
+
+    duplicate_role:
+      message: >
+        Baris {{row_number}} tampak duplikat dengan role_id {{existing_role_id}}.
+
+    invalid_standard_format:
+      message: >
+        Baris {{row_number}} memiliki format standar tidak konsisten:
+        {{standard_code}}. Contoh format: SKKNI 350-2014.
+
+  admin_actions:
+    - "Download error report"
+    - "Edit row"
+    - "Ignore warning"
+    - "Re-upload corrected file"
+    - "Publish valid rows only"
+```
+
+---
+
+# 137. Frontend Component Map
+
+```yaml id="frontend_component_map"
+frontend_components:
+
+  ChatWindow:
+    purpose: "Menampilkan percakapan utama."
+    states:
+      - "loading"
+      - "ready"
+      - "waiting_for_user"
+      - "error"
+    child_components:
+      - MessageBubble
+      - QuickReplyGroup
+      - RoleCard
+      - AssessmentQuestion
+      - ScenarioCard
+      - ResultSummary
+
+  MessageBubble:
+    props:
+      - sender: "user | bot"
+      - text: "string"
+      - timestamp: "datetime"
+
+  QuickReplyGroup:
+    props:
+      - options: "array"
+      - max_visible: 7
+    behavior:
+      - "Click sends selected value as user message."
+      - "Disable after selection."
+
+  RoleCard:
+    props:
+      - role_name
+      - subklasifikasi
+      - kkni_level
+      - kualifikasi
+      - standard_code
+      - focus_summary
+      - actions
+    actions:
+      - "Belajar"
+      - "Asesmen"
+      - "Checklist"
+      - "Wawancara"
+
+  AssessmentQuestion:
+    props:
+      - question_number
+      - total_questions
+      - question_text
+      - scale_options
+    behavior:
+      - "Only one score can be selected."
+      - "Submit triggers /api/assessment/answer."
+
+  ScenarioCard:
+    props:
+      - scenario_title
+      - difficulty
+      - situation
+      - user_tasks
+    behavior:
+      - "User must submit answer before model answer is shown."
+
+  ResultSummary:
+    props:
+      - score
+      - readiness_level
+      - strong_points
+      - improvement_areas
+      - recommended_modules
+      - disclaimer
+```
+
+---
+
+# 138. Admin Dashboard Specification
+
+```yaml id="admin_dashboard_spec"
+admin_dashboard:
+  purpose: >
+    Memberi admin kemampuan mengelola katalog, modul belajar, asesmen,
+    skenario, dan glossary.
+
+  pages:
+
+    dashboard_home:
+      widgets:
+        - "Total role catalog records"
+        - "Most searched roles"
+        - "Fallback rate"
+        - "Assessment completion rate"
+        - "Unsafe request count"
+
+    role_catalog_manager:
+      features:
+        - "Search role"
+        - "Filter by subklasifikasi"
+        - "Filter by KKNI"
+        - "Filter by standard code"
+        - "Create new version"
+        - "Archive role"
+        - "View official link"
+
+    learning_module_manager:
+      features:
+        - "Create/edit module"
+        - "Attach module to role or subklasifikasi"
+        - "Add quiz question"
+        - "Preview as chatbot response"
+        - "Submit for review"
+
+    assessment_manager:
+      features:
+        - "Edit assessment questions"
+        - "Set scoring scale"
+        - "Configure result logic"
+        - "Preview result summary"
+        - "Version control"
+
+    scenario_manager:
+      features:
+        - "Create basic/intermediate/advanced scenario"
+        - "Define ideal answer points"
+        - "Configure feedback template"
+        - "Tag target roles"
+
+    glossary_manager:
+      features:
+        - "Add technical term"
+        - "Add example"
+        - "Add related terms"
+        - "Publish glossary update"
+
+    audit_log_viewer:
+      features:
+        - "Filter by admin"
+        - "Filter by content type"
+        - "Filter by date"
+        - "Compare old and new values"
+```
+
+---
+
+# 139. Admin Permission Matrix
+
+```yaml id="admin_permission_matrix"
+admin_permissions:
+
+  roles:
+
+    super_admin:
+      permissions:
+        - "manage_users"
+        - "publish_content"
+        - "archive_content"
+        - "approve_high_impact_updates"
+        - "view_audit_logs"
+        - "manage_system_settings"
+
+    content_editor:
+      permissions:
+        - "create_draft"
+        - "edit_draft"
+        - "submit_for_review"
+        - "preview_content"
+
+    subject_matter_expert:
+      permissions:
+        - "review_content"
+        - "approve_content"
+        - "request_changes"
+        - "comment_on_content"
+
+    analyst:
+      permissions:
+        - "view_analytics"
+        - "export_reports"
+        - "view_fallback_queries"
+
+  restrictions:
+    - "Only super_admin can publish changes to role_catalog."
+    - "Only SME or super_admin can approve assessment changes."
+    - "High-impact updates require review before publishing."
+    - "Audit logs cannot be edited."
+```
+
+---
+
+# 140. Role Catalog Expansion Plan
+
+```yaml id="role_catalog_expansion_plan"
+role_catalog_expansion:
+  purpose: >
+    Menyiapkan struktur jika chatbot nantinya diperluas ke klasifikasi lain
+    di luar Manajemen Pelaksanaan.
+
+  current_scope:
+    classification_code: "E"
+    classification_name: "Manajemen Pelaksanaan"
+
+  future_classifications:
+    - "Arsitektur"
+    - "Sipil"
+    - "Mekanikal"
+    - "Tata Lingkungan"
+    - "Manajemen Konstruksi lainnya"
+    - "Klasifikasi lain sesuai katalog SKK"
+
+  required_changes_for_expansion:
+    database:
+      - "Tambahkan classification_code sebagai filter utama."
+      - "Pastikan role_id unik lintas klasifikasi."
+      - "Tambahkan classification_name ke semua query."
+
+    conversation:
+      - "Tambahkan menu pilih klasifikasi."
+      - "Tambahkan fallback jika user menyebut jabatan dari klasifikasi lain."
+      - "Tambahkan learning module per klasifikasi."
+
+    admin:
+      - "Tambahkan filter klasifikasi di dashboard."
+      - "Tambahkan workflow review per klasifikasi."
+      - "Tambahkan SME per bidang."
+
+  migration_strategy:
+    phase_1: "Stabilkan Manajemen Pelaksanaan."
+    phase_2: "Tambahkan satu klasifikasi baru sebagai pilot."
+    phase_3: "Standarkan template katalog untuk semua klasifikasi."
+    phase_4: "Aktifkan multi-classification search."
+```
+
+---
+
+# 141. Complete Bot Menu Copy
+
+```yaml id="complete_bot_menu_copy"
+bot_menu_copy:
+
+  main_menu:
+    text: >
+      Apa yang ingin Anda lakukan hari ini?
+    options:
+      - "Pilih jalur jabatan"
+      - "Cari jabatan berdasarkan KKNI"
+      - "Cari standar SKKNI/SKKK"
+      - "Belajar kompetensi"
+      - "Asesmen mandiri"
+      - "Latihan studi kasus"
+      - "Simulasi wawancara"
+      - "Checklist bukti"
+
+  role_path_menu:
+    text: >
+      Pilih subklasifikasi Manajemen Pelaksanaan:
+    options:
+      - "Keselamatan Konstruksi / K3"
+      - "Manajemen Konstruksi / Manajemen Proyek"
+      - "Pengendalian Mutu"
+      - "Hukum Kontrak"
+      - "Estimasi Biaya / QS"
+      - "Saya belum tahu"
+
+  learning_menu:
+    text: >
+      Pilih modul pembelajaran:
+    options:
+      - "K3 dan Keselamatan Konstruksi"
+      - "Manajemen Proyek Konstruksi"
+      - "Pengendalian Mutu"
+      - "Kontrak Konstruksi"
+      - "Estimasi Biaya dan QS"
+
+  assessment_menu:
+    text: >
+      Pilih asesmen mandiri:
+    options:
+      - "Asesmen K3"
+      - "Asesmen Manajemen Proyek"
+      - "Asesmen Mutu"
+      - "Asesmen Kontrak"
+      - "Asesmen Biaya/QS"
+
+  scenario_menu:
+    text: >
+      Pilih studi kasus:
+    options:
+      - "Near miss di area kerja"
+      - "Keterlambatan material"
+      - "NCR mutu pekerjaan"
+      - "Variation order lisan"
+      - "Selisih volume dan progress payment"
+```
+
+---
+
+# 142. Role Lookup Response Library
+
+```yaml id="role_lookup_response_library"
+role_lookup_response_library:
+
+  response_for_k3_area:
+    text: >
+      Jalur Keselamatan Konstruksi/K3 mencakup jabatan dari level petugas
+      sampai ahli. Area ini cocok untuk pengguna yang bekerja dengan APD,
+      identifikasi bahaya, pengendalian risiko, inspeksi K3, near miss,
+      investigasi insiden, dan pembinaan keselamatan.
+    next_options:
+      - "Petugas K3 / Petugas Keselamatan"
+      - "Personil K3"
+      - "Supervisor K3"
+      - "Ahli K3 / Ahli Keselamatan"
+
+  response_for_project_area:
+    text: >
+      Jalur Manajemen Konstruksi/Manajemen Proyek cocok untuk pengguna yang
+      menangani perencanaan pelaksanaan, koordinasi sumber daya, jadwal,
+      progres, logistik, risiko, biaya, mutu, dan pelaporan proyek.
+    next_options:
+      - "Manajer Logistik Proyek"
+      - "Ahli Manajemen Konstruksi"
+      - "Ahli Manajemen Proyek Konstruksi"
+      - "Fasilitator Teknis Infrastruktur"
+
+  response_for_quality_area:
+    text: >
+      Jalur Pengendalian Mutu cocok untuk pengguna yang menangani inspeksi,
+      pengujian, spesifikasi teknis, ITP, NCR, audit mutu, dan tindakan
+      korektif.
+    next_options:
+      - "Quality Engineer"
+      - "Quality Assurance Engineer"
+      - "Ahli Sistem Manajemen Mutu Konstruksi"
+
+  response_for_contract_area:
+    text: >
+      Jalur Hukum Kontrak Konstruksi cocok untuk pengguna yang menangani
+      dokumen kontrak, variation order, klaim, adendum, sengketa, dan analisis
+      hak serta kewajiban para pihak.
+    next_options:
+      - "Ahli Kontrak Kerja Konstruksi"
+      - "Belajar kontrak"
+      - "Studi kasus variation order"
+
+  response_for_cost_qs_area:
+    text: >
+      Jalur Estimasi Biaya/QS cocok untuk pengguna yang menangani volume,
+      BOQ, backup quantity, estimasi biaya, analisis harga satuan, progress
+      payment, dan klaim biaya.
+    next_options:
+      - "Juru Hitung Kuantitas"
+      - "Estimator Biaya Jalan"
+      - "Quantity Surveyor"
+      - "Ahli Quantity Surveyor"
+```
+
+---
+
+# 143. Launch Readiness Checklist
+
+```yaml id="launch_readiness_checklist"
+launch_readiness_checklist:
+
+  content:
+    - "Semua role katalog utama sudah terinput."
+    - "Semua KKNI 3-9 dapat dicari."
+    - "Semua standar SKKNI/SKKK dapat dicari."
+    - "Semua subklasifikasi memiliki learning intro."
+    - "Setiap area memiliki asesmen mandiri."
+    - "Setiap area memiliki minimal satu studi kasus."
+    - "Checklist bukti tersedia untuk setiap area."
+
+  functional:
+    - "Main menu berjalan."
+    - "Role lookup berjalan."
+    - "KKNI lookup berjalan."
+    - "Standard lookup berjalan."
+    - "Disambiguation berjalan."
+    - "Assessment scoring berjalan."
+    - "Fallback berjalan."
+    - "Session resume berjalan."
+
+  safety:
+    - "Bot tidak menyatakan pengguna pasti lulus."
+    - "Bot menolak saran kerja tidak aman."
+    - "Bot tidak menyarankan pekerjaan tanpa dokumen kontraktual."
+    - "Bot tidak menyarankan penerimaan mutu yang tidak sesuai."
+    - "Bot menyarankan eskalasi untuk risiko tinggi."
+
+  technical:
+    - "Database migration berhasil."
+    - "Seed data berhasil diimpor."
+    - "Health check aktif."
+    - "Logging aktif."
+    - "Audit log aktif untuk admin."
+    - "Rate limit aktif."
+    - "Backup database aktif."
+
+  user_testing:
+    - "Uji dengan pengguna pemula."
+    - "Uji dengan pengguna yang sudah punya target jabatan."
+    - "Uji dengan asesor atau instruktur."
+    - "Uji input ambigu."
+    - "Uji input berbahaya."
+```
+
+---
+
+# 144. Soft Launch Script
+
+```yaml id="soft_launch_script"
+soft_launch:
+  target_users:
+    - "calon peserta sertifikasi"
+    - "instruktur pelatihan"
+    - "staf proyek"
+    - "admin LSP atau training center"
+    - "subject matter expert konstruksi"
+
+  pilot_duration: "2-4 minggu"
+
+  pilot_goals:
+    - "Validasi apakah pengguna mudah menemukan jabatan."
+    - "Validasi apakah asesmen mandiri mudah dipahami."
+    - "Validasi apakah rekomendasi belajar relevan."
+    - "Identifikasi pertanyaan yang sering gagal dipahami."
+    - "Mengumpulkan masukan untuk modul belajar dan studi kasus."
+
+  feedback_questions:
+    - "Apakah Anda mudah menemukan jabatan yang dicari?"
+    - "Apakah penjelasan KKNI dan standar cukup jelas?"
+    - "Apakah pertanyaan asesmen mudah dijawab?"
+    - "Apakah studi kasus terasa realistis?"
+    - "Apa fitur yang paling membantu?"
+    - "Apa informasi yang masih kurang?"
+
+  success_metrics:
+    - "role_lookup_success_rate >= 90%"
+    - "fallback_rate <= 15%"
+    - "assessment_completion_rate >= 60%"
+    - "positive_feedback >= 80%"
+```
+
+---
+
+# 145. Post-Launch Improvement Backlog
+
+```yaml id="post_launch_backlog"
+post_launch_backlog:
+
+  priority_high:
+    - item: "Improve fuzzy matching for role names."
+      reason: "Pengguna sering memakai singkatan seperti QS, QA/QC, K3, safety."
+
+    - item: "Add more scenario cases per subklasifikasi."
+      reason: "Studi kasus meningkatkan latihan penerapan kompetensi."
+
+    - item: "Add downloadable summary."
+      reason: "Pengguna sertifikasi membutuhkan ringkasan belajar dan checklist."
+
+    - item: "Add official-link viewer."
+      reason: "Pengguna ingin membuka dokumen standar dari sumber resmi."
+
+  priority_medium:
+    - item: "Add bilingual glossary."
+      reason: "Banyak istilah proyek memakai bahasa Inggris."
+
+    - item: "Add admin content preview."
+      reason: "Admin perlu melihat respons seperti tampilan pengguna."
+
+    - item: "Add learning progress badges."
+      reason: "Meningkatkan engagement tanpa klaim kompetensi resmi."
+
+  priority_low:
+    - item: "Add voice interface."
+      reason: "Berguna untuk pelatihan lapangan, tetapi bukan kebutuhan MVP."
+
+    - item: "Add multi-classification expansion."
+      reason: "Dapat dilakukan setelah Manajemen Pelaksanaan stabil."
+```
+
+---
+
+# 146. Final Implementation Snapshot
+
+```text id="final_implementation_snapshot"
+Pada tahap ini, chatbot SKK Coach — Manajemen Pelaksanaan sudah memiliki:
+
+1. Katalog jabatan kerja berbasis subklasifikasi.
+2. Pencarian jabatan berdasarkan nama, KKNI, dan SKKNI/SKKK.
+3. Alur pemetaan jalur berdasarkan pengalaman pengguna.
+4. Modul pembelajaran per area kompetensi.
+5. Asesmen mandiri dengan skor 0-4.
+6. Studi kasus proyek konstruksi.
+7. Simulasi wawancara berbasis STAR.
+8. Checklist bukti kompetensi.
+9. Glossary dan FAQ.
+10. Fallback dan disambiguation.
+11. Safety controls.
+12. API design.
+13. Database schema.
+14. Admin CMS specification.
+15. Testing, analytics, audit log, dan deployment checklist.
+
+MVP yang paling disarankan untuk dibangun terlebih dahulu:
+- main menu,
+- role lookup,
+- KKNI lookup,
+- standard lookup,
+- role disambiguation,
+- asesmen mandiri dasar,
+- checklist bukti,
+- fallback aman.
+
+Setelah MVP stabil, tambahkan:
+- studi kasus lanjutan,
+- simulasi wawancara,
+- adaptive learning,
+- admin dashboard,
+- analytics dashboard,
+- export ringkasan belajar.
+```
+
+---

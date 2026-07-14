@@ -1,0 +1,138 @@
+<aside>
+📋
+
+**Lampiran E — Daftar Tilik Submission KANMIS**
+
+Check final sebelum klik *Submit* di portal `layanan.kan.or.id`. Semua item harus tercentang & terverifikasi oleh Manajer Mutu.
+
+**No. Dokumen:** SOP-LSP-KAN-001/LAMP-E | **Versi:** 1.0
+
+</aside>
+
+## 1. Informasi Submission
+
+| **Item** | **Detail** |
+| --- | --- |
+| Akun KANMIS | […] |
+| Verifikator | Direktur LSP SDMKI |
+
+## 2. Dokumen Wajib (KAN U-01 Rev.1)
+
+### 2.1 Formulir & Permohonan
+
+- [ ]  Formulir Permohonan Akreditasi LSP — terisi lengkap & ditandatangani Direktur.
+- [ ]  Surat Pengantar resmi LSP SDMKI ke KAN.
+- [ ]  Pakta integritas / pernyataan kebenaran data.
+
+### 2.2 Legalitas Organisasi
+
+- [ ]  Akta pendirian + perubahan terakhir.
+- [ ]  SK Pengesahan Kemenkumham.
+- [ ]  NPWP LSP SDMKI.
+- [ ]  Lisensi BNSP yang masih berlaku (lampiran wajib).
+- [ ]  Struktur organisasi terkini.
+
+### 2.3 Dokumentasi Mutu (ISO 17024)
+
+- [ ]  Manual Mutu versi terakhir.
+- [ ]  Daftar Induk Dokumen + revisi terakhir per dokumen.
+- [ ]  Kebijakan Ketidakberpihakan.
+- [ ]  Kebijakan Kerahasiaan & Keamanan Informasi.
+- [ ]  Kebijakan Keuangan & Tanggung Jawab.
+- [ ]  Kode Etik Personel & Asesor.
+
+### 2.4 SOP Operasional (P-01 s.d. P-09)
+
+- [ ]  P-01 Aplikasi & Pendaftaran.
+- [ ]  P-02 Pelaksanaan Asesmen.
+- [ ]  P-03 Keputusan Sertifikasi.
+- [ ]  P-04 Penangguhan / Pencabutan Sertifikat.
+- [ ]  P-05 Re-sertifikasi.
+- [ ]  P-06 Penggunaan Logo / Marka.
+- [ ]  P-07 Banding.
+- [ ]  P-08 Keluhan.
+- [ ]  P-09 Pengelolaan Asesor & TUK.
+
+### 2.5 Skema Sertifikasi
+
+- [ ]  Daftar skema yang diajukan akreditasi.
+- [ ]  Dokumen skema lengkap per jabatan kerja (ruang lingkup, prasyarat, kompetensi, metode, kriteria, masa berlaku).
+- [ ]  Bukti validasi skema oleh Komite Skema.
+- [ ]  Notulen rapat komite skema 12 bulan terakhir.
+
+### 2.6 Sumber Daya
+
+- [ ]  Daftar asesor aktif + sertifikat asesor + skema yang diampu.
+- [ ]  Log pemantauan kinerja asesor.
+- [ ]  Daftar TUK + perjanjian / MoU.
+- [ ]  Daftar fasilitas & infrastruktur TI.
+- [ ]  Bukti kompetensi personel kunci (Direktur, Manajer Mutu, Manajer Sertifikasi).
+
+### 2.7 Bukti Operasi & Sistem Manajemen
+
+- [ ]  Laporan **Audit Internal** terakhir (Lampiran C terisi).
+- [ ]  Notulen **Tinjauan Manajemen** terakhir.
+- [ ]  Log tindakan korektif (CAR) + status closing.
+- [ ]  Daftar Deklarasi COI seluruh personel (Lampiran B terisi).
+- [ ]  Rekaman keputusan sertifikasi 12 bulan terakhir (sample).
+- [ ]  Rekaman banding & keluhan + penanganan.
+
+### 2.8 Persyaratan Tambahan KAN K-09
+
+- [ ]  Bukti penerapan witness assessment internal (Lampiran D terisi).
+- [ ]  Kebijakan ketidakberpihakan diperluas (kepemilikan, hubungan komersial).
+- [ ]  Mekanisme pelaporan perubahan signifikan ke KAN.
+
+### 2.9 Keuangan
+
+- [ ]  Laporan keuangan ≥ 2 tahun terakhir.
+- [ ]  Bukti asuransi / jaminan tanggung jawab profesi.
+- [ ]  Bukti pembayaran SIMPONI (kode billing aktif).
+
+## 3. Verifikasi Teknis
+
+- [ ]  Semua file ber-format **PDF terkunci edit** (kecuali yang diminta lain).
+- [ ]  Penamaan file mengikuti konvensi: `[KODE]-[NAMA-DOKUMEN]-[VERSI]-[TGL].pdf`
+- [ ]  Total ukuran upload sesuai batas KANMIS.
+- [ ]  Tanda tangan elektronik valid (jika digital signing dipakai).
+- [ ]  Metadata file bersih (tidak mengandung versi draft).
+
+## 4. Verifikasi Pra-Submit (Hari H-1)
+
+- [ ]  Login ke `layanan.kan.or.id` berhasil.
+- [ ]  Seluruh field formulir KANMIS sudah terisi.
+- [ ]  Lampiran terupload tanpa error.
+- [ ]  Preview submission ditinjau Direktur.
+- [ ]  Backup paket dokumen lengkap di KB LSP–TUK + cloud terenkripsi.
+
+## 5. Eksekusi Submit
+
+- [ ]  **Klik Submit** di KANMIS.
+- [ ]  Simpan tanda terima (PDF + screenshot).
+- [ ]  Catat **Nomor Registrasi KANMIS**:
+- [ ]  Notifikasi internal ke seluruh Tim Akreditasi.
+- [ ]  Update status di KB LSP–TUK → "Pengajuan KAN — Menunggu Asesmen".
+
+## 6. Pasca-Submit (D+1 s.d. D+7)
+
+- [ ]  Konfirmasi penerimaan dari Sekretariat KAN (`sertifikasi@bsn.go.id`).
+- [ ]  Bayar **SIMPONI** sebelum kode billing kedaluwarsa (7 hari).
+- [ ]  Siapkan tim untuk asesmen awal (Tahap 5 SOP).
+
+## 7. Verifikasi Akhir
+
+**Diverifikasi — Manajer Mutu**
+
+---
+
+Nama: […]
+
+Tanggal: […]
+
+**Disetujui Submit — Direktur LSP**
+
+---
+
+Nama: […]
+
+Tanggal: […]

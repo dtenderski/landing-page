@@ -1,0 +1,120 @@
+<aside>
+👥
+
+**Matriks Kompetensi & Job Description Personel LSP SDMKI**
+
+Lampiran 4–5 Manual Mutu. Mengatur peran, kompetensi minimum, dan tanggung jawab seluruh personel kunci LSP SDMKI.
+
+**No. Dokumen:** MM-LSP-SDMKI-001/LAMP-4-5 | **Versi:** 1.0 | **Tanggal Berlaku:** 28 April 2026
+
+</aside>
+
+# Bagian 1 — Matriks Kompetensi Personel
+
+## Skala Kompetensi
+
+- **A** — Awareness (paham konsep, dapat menjelaskan).
+- **W** — Working (mampu menjalankan tugas dengan supervisi).
+- **P** — Practitioner (mandiri, akurat, konsisten).
+- **E** — Expert (mampu mengajar, mereview, & mengambil keputusan kompleks).
+
+## Matriks Peran × Kompetensi
+
+| **Kompetensi** | **Direktur** | **Manajer Mutu** | **Manajer Sertifikasi** | **Manajer IT** | **Asesor** | **Sekretariat** |
+| --- | --- | --- | --- | --- | --- | --- |
+| KAN U-01 / K-09 | P | E | P | W | W | A |
+| Metodologi Asesmen (VRAF) | W | P | E | A | E | A |
+| Manajemen Risiko | P | P | W | P | A | A |
+| Online Proctoring & e-Assessment | A | W | P | E | P | W |
+| Komunikasi & Pelayanan Pelanggan | P | P | P | W | P | E |
+
+## Cara Pemenuhan
+
+- **Pelatihan internal** — modul wajib onboarding + refreshment tahunan.
+- **Pelatihan eksternal** — BNSP, KAN, lembaga pelatihan ISO.
+- **OJT & mentoring** — pendampingan oleh personel level Practitioner/Expert.
+- **Witness internal** — verifikasi kompetensi praktik (asesor & manajer sertifikasi).
+
+## Bukti Kompetensi
+
+Untuk setiap personel disimpan:
+
+- Sertifikat formal (asesor BNSP, ISO 17024 awareness, dll.).
+- Logbook OJT.
+- Hasil evaluasi tahunan.
+- Catatan witness internal.
+
+---
+
+# Bagian 2 — Job Description (JD) per Peran
+
+## 2.1 Direktur LSP
+
+- **Tanggung jawab utama:** akuntabilitas penuh atas kinerja LSP, termasuk legalitas, ketidakberpihakan, dan keuangan.
+- **Wewenang:** mengesahkan dokumen mutu tertinggi, menunjuk komite, menandatangani sertifikat akreditasi & lisensi.
+- **Kualifikasi minimum:** S1, pengalaman manajerial ≥ 8 tahun, pemahaman regulasi sertifikasi profesi.
+- **KPI utama:** akreditasi KAN tercapai, sustainabilitas finansial, 0 sanksi otoritas.
+
+## 2.2 Manajer Mutu
+
+- **Tanggung jawab utama:** pemilik sistem manajemen mutu; mengelola dokumen, audit internal, tinjauan manajemen, tindakan korektif.
+- **Wewenang:** menghentikan proses yang tidak sesuai mutu; menerbitkan CAR.
+- **Kualifikasi minimum:** S1, sertifikat Lead Auditor ISO 17024 atau setara, pengalaman QMS ≥ 5 tahun.
+- **KPI utama:** ≥ 95% kepatuhan audit internal; 0 temuan major berulang.
+
+## 2.3 Manajer Sertifikasi
+
+- **Tanggung jawab utama:** mengelola siklus sertifikasi end-to-end; pengelolaan asesor & TUK; eksekusi SOP P-01 s.d. P-09.
+- **Wewenang:** menugaskan asesor, menyetujui jadwal asesmen, mengusulkan keputusan sertifikasi.
+- **Kualifikasi minimum:** S1, sertifikat asesor BNSP aktif, pengalaman sertifikasi ≥ 5 tahun.
+- **KPI utama:** waktu siklus ≤ 30 hari kerja; tingkat keluhan terhadap asesmen < 2%.
+
+## 2.4 Manajer IT
+
+- **Tanggung jawab utama:** keandalan & keamanan platform e-Assessment; kepatuhan UU PDP; manajemen insiden.
+- **Wewenang:** memutus akses sistem yang berisiko; eskalasi insiden ke Direktur.
+- **Kualifikasi minimum:** S1 IT/CS, sertifikat keamanan informasi (mis. CISSP / ISO 27001 LA), pengalaman ≥ 5 tahun.
+- **KPI utama:** uptime ≥ 99,5%; 0 insiden P1; lulus audit keamanan tahunan.
+
+## 2.5 Komite Skema
+
+- **Tanggung jawab utama:** mengembangkan, memvalidasi, dan meninjau skema sertifikasi.
+- **Wewenang:** menolak pemberlakuan skema yang tidak memenuhi syarat.
+- **Kualifikasi minimum:** ahli teknis di bidangnya; minimal 3 anggota dengan keterwakilan industri, akademisi, dan profesi.
+- **KPI utama:** 100% skema ditinjau dalam 3 tahun.
+
+## 2.6 Komite Ketidakberpihakan
+
+- **Tanggung jawab utama:** mengawasi penerapan kebijakan ketidakberpihakan; review COI; melapor ke Direktur dan KAN bila ada konflik signifikan.
+- **Wewenang:** menghentikan proses sertifikasi yang melanggar prinsip ketidakberpihakan.
+- **Kualifikasi minimum:** independen dari manajemen LSP; 3 anggota dari unsur pengguna jasa, pemohon, dan pakar.
+- **KPI utama:** 100% deklarasi COI lengkap; 0 konflik signifikan tidak ditangani.
+
+## 2.7 Asesor Kompetensi
+
+- **Tanggung jawab utama:** melaksanakan asesmen sesuai metode, menjaga VRAF, mendokumentasikan bukti, dan merekomendasikan hasil.
+- **Wewenang:** memutuskan rekomendasi kompeten / belum kompeten berdasar bukti.
+- **Kualifikasi minimum:** sertifikat asesor BNSP aktif, kompetensi teknis di bidang skema, pengalaman kerja relevan ≥ 3 tahun.
+- **KPI utama:** witness internal valid; 0 banding berhasil karena cacat asesmen.
+
+## 2.8 Sekretariat LSP
+
+- **Tanggung jawab utama:** administrasi aplikasi, registry, distribusi dokumen, komunikasi pemohon, pengarsipan rekaman.
+- **Wewenang:** mengembalikan aplikasi yang tidak lengkap untuk perbaikan.
+- **Kualifikasi minimum:** D3/S1, kompetensi administrasi & pelayanan, pemahaman dasar ISO 17024.
+- **KPI utama:** 100% aplikasi diregistrasi ≤ 2 hari kerja; 0 dokumen hilang.
+
+## 2.9 Pengambil Keputusan Sertifikasi
+
+- **Tanggung jawab utama:** mengambil keputusan akhir sertifikasi berdasar rekomendasi asesor & verifikasi Manajer Sertifikasi; **wajib bukan asesor untuk asesi yang sama**.
+- **Wewenang:** menerbitkan, menahan, atau menolak sertifikat.
+- **Kualifikasi minimum:** sertifikat asesor BNSP aktif + pengalaman ≥ 5 tahun atau ditunjuk sebagai pejabat keputusan oleh Direktur.
+- **KPI utama:** 100% keputusan sesuai bukti; pemisahan dari asesor 100%.
+
+---
+
+## Aturan Pemeliharaan
+
+- Matriks & JD ditinjau minimal 1× per tahun atau saat ada perubahan struktur, regulasi, atau hasil tinjauan manajemen.
+- Setiap personel menandatangani **Letter of Acknowledgement** atas JD yang berlaku baginya.
+- Hasil evaluasi kompetensi tahunan menjadi basis program pelatihan tahun berikutnya.

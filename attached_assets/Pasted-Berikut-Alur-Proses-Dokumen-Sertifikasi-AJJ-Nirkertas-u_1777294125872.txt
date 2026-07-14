@@ -1,0 +1,730 @@
+Berikut **Alur Proses Dokumen & Sertifikasi AJJ Nirkertas** untuk LSP. Saya susun sebagai **alur end-to-end** dari persiapan pengajuan ke BNSP sampai pelaksanaan sertifikasi setelah disetujui, dengan format yang bisa dimasukkan ke chatbot seperti pola konfigurasi terlampir. 
+
+BNSP masih menampilkan SE tentang **Sertifikasi Jarak Jauh dan Penggunaan Nirkertas** pada halaman download resminya, dan salinan SE.007/BNSP/V/2023 yang tersedia publik menyebut bahwa permohonan AJJ yang tidak sesuai klausul B.1 serta permohonan nirkertas yang tidak sesuai klausul D.II.1 tidak akan diproses oleh BNSP. ([BNSP][1])
+
+---
+
+# 1. Gambaran Besar Alur
+
+```yaml id="alur_besar_ajj_nirkertas"
+alur_besar:
+  jalur_1_pengajuan_lsp_ke_bnsp:
+    tujuan: "LSP meminta persetujuan AJJ dan/atau Nirkertas kepada BNSP."
+    hasil_akhir: "Keputusan persetujuan atau belum disetujui dari BNSP."
+
+  jalur_2_pelaksanaan_sertifikasi_setelah_disetujui:
+    tujuan: "LSP menjalankan sertifikasi kompetensi secara AJJ dan nirkertas."
+    hasil_akhir: "Keputusan sertifikasi resmi, rekaman, laporan, umpan balik, dan arsip digital."
+```
+
+Secara praktis, alurnya:
+
+```text
+Persiapan LSP
+→ Penyusunan Dokumen Permohonan
+→ Pengiriman Permohonan ke BNSP
+→ Verifikasi / Audit / Witness BNSP
+→ Perbaikan jika ada temuan
+→ Keputusan Persetujuan BNSP
+→ Pelaksanaan Sertifikasi AJJ Nirkertas
+→ Audit Internal & Pelaporan Berkala
+```
+
+---
+
+# 2. Alur Proses Dokumen Pengajuan LSP
+
+## Tahap 1 — Persiapan Internal LSP
+
+```yaml id="tahap_1_persiapan_internal"
+tahap_1:
+  nama_tahap: "Persiapan Internal LSP"
+  penanggung_jawab:
+    - Manajemen LSP
+    - Admin LSP
+    - Pengelola Sistem/IT
+    - Koordinator Asesor
+    - Tim Verifikasi TUK
+  kegiatan:
+    - menetapkan skema sertifikasi yang akan diajukan untuk AJJ/Nirkertas
+    - memastikan LSP memiliki sistem/aplikasi yang siap digunakan
+    - menyusun SOP AJJ dan SOP Nirkertas
+    - menetapkan personil pengelola sistem
+    - menetapkan personil pemelihara sistem
+    - menyiapkan asesor, admin, TUK, dan komite teknis
+    - melakukan sosialisasi internal
+    - melakukan uji coba aplikasi dan proses sertifikasi jarak jauh
+  output_dokumen:
+    - daftar skema yang diajukan
+    - SOP AJJ
+    - SOP Nirkertas
+    - SK personil pengelola sistem
+    - SK pemelihara sistem
+    - daftar asesor/admin/TUK/komite
+    - bukti sosialisasi internal
+    - bukti uji coba sistem
+```
+
+**Catatan penting:** LSP tidak boleh langsung menjalankan AJJ/Nirkertas kepada peserta nyata sebelum mendapatkan persetujuan yang dipersyaratkan dari BNSP; SE publik menyebut pelaksanaan harus mendapat persetujuan terlebih dahulu. ([NAS Online][2])
+
+---
+
+## Tahap 2 — Penyusunan Dokumen Permohonan
+
+Dokumen dibagi menjadi dua paket: **paket AJJ** dan **paket Nirkertas**.
+
+```yaml id="tahap_2_penyusunan_dokumen"
+tahap_2:
+  nama_tahap: "Penyusunan Dokumen Permohonan"
+  paket_dokumen:
+    paket_ajj:
+      - surat permohonan persetujuan pelaksanaan sertifikasi kompetensi jarak jauh
+      - SOP Melayani Pelaksanaan Kegiatan Sertifikasi Kompetensi Jarak Jauh
+      - SOP Melaksanakan Asesmen Jarak Jauh
+      - SOP Verifikasi TUK Jarak Jauh
+      - SOP Banding Jarak Jauh
+      - SK penetapan personil pengelola sistem
+      - SK penetapan pemeliharaan sistem
+      - daftar sarana-prasarana kantor LSP
+      - bukti internet berlangganan
+      - penjelasan sistem aplikasi dan server
+      - surat pernyataan software legal
+      - surat pernyataan keamanan dan kerahasiaan rekaman
+      - surat pernyataan penyimpanan rekaman
+      - bukti sosialisasi internal
+      - rekaman uji coba AJJ
+      - rekaman uji coba verifikasi TUK jarak jauh
+
+    paket_nirkertas:
+      - surat permohonan persetujuan penggunaan nirkertas/paperless
+      - SOP pelayanan sertifikasi yang relevan dengan nirkertas
+      - rekaman uji coba aplikasi nirkertas
+      - dokumen keluaran hasil uji coba dalam PDF
+      - contoh permohonan digital
+      - contoh asesmen mandiri digital
+      - contoh persetujuan asesmen digital
+      - contoh instrumen asesmen digital
+      - contoh laporan asesmen digital
+      - contoh umpan balik digital
+      - contoh peninjauan proses asesmen digital
+```
+
+---
+
+## Tahap 3 — Validasi Internal Sebelum Dikirim
+
+```yaml id="tahap_3_validasi_internal"
+tahap_3:
+  nama_tahap: "Validasi Internal Dokumen"
+  pemeriksa:
+    - Ketua/Direktur LSP
+    - Manajemen Mutu LSP
+    - Admin LSP
+    - Pengelola Sistem
+  checklist:
+    - "[ ] Surat permohonan sudah ditandatangani"
+    - "[ ] Nama skema konsisten di semua dokumen"
+    - "[ ] SOP sudah disahkan"
+    - "[ ] SK personil lengkap"
+    - "[ ] Sistem dapat didemokan"
+    - "[ ] Rekaman uji coba dapat dibuka"
+    - "[ ] Output PDF hasil uji coba tersedia"
+    - "[ ] Hak akses admin, asesor, asesi, TUK, dan komite sudah dibedakan"
+    - "[ ] Link folder digital dapat diakses"
+    - "[ ] Bukti sosialisasi internal tersedia"
+```
+
+---
+
+## Tahap 4 — Pengiriman Permohonan ke BNSP
+
+```yaml id="tahap_4_pengiriman_permohonan"
+tahap_4:
+  nama_tahap: "Pengiriman Permohonan"
+  kegiatan:
+    - mengirim surat permohonan kepada BNSP
+    - melampirkan dokumen PDF
+    - menyertakan tautan folder rekaman/video uji coba
+    - menyimpan bukti pengiriman
+  output:
+    - email terkirim
+    - bukti pengiriman
+    - folder dokumen permohonan final
+```
+
+---
+
+## Tahap 5 — Verifikasi, Audit, dan Witness BNSP
+
+```yaml id="tahap_5_audit_witness_bnsp"
+tahap_5:
+  nama_tahap: "Verifikasi / Audit / Witness BNSP"
+  kegiatan_yang_ditunjukkan:
+    - pembukaan dan penjelasan ruang lingkup permohonan
+    - pemeriksaan dokumen permohonan
+    - pemeriksaan SOP
+    - demo aplikasi
+    - demo manajemen akun dan hak akses
+    - demo permohonan sertifikasi digital
+    - demo asesmen mandiri digital
+    - demo persetujuan asesmen digital
+    - demo verifikasi TUK jarak jauh
+    - demo asesmen jarak jauh
+    - demo rekaman asesmen
+    - demo laporan asesmen
+    - demo umpan balik
+    - demo banding
+    - demo peninjauan proses asesmen
+  output:
+    - catatan audit/witness
+    - daftar pertanyaan auditor
+    - potensi LKS/temuan jika ada
+    - daftar tindak lanjut
+```
+
+Untuk AJJ, SE publik menyebut BNSP melakukan asesmen lapangan dan menyaksikan uji coba pelaksanaan sertifikasi jarak jauh; untuk nirkertas, BNSP melakukan verifikasi permohonan. ([NAS Online][2])
+
+---
+
+## Tahap 6 — Perbaikan Temuan
+
+```yaml id="tahap_6_perbaikan_temuan"
+tahap_6:
+  nama_tahap: "Perbaikan Temuan / LKS"
+  kegiatan:
+    - mencatat temuan
+    - menganalisis akar masalah
+    - melakukan koreksi
+    - melakukan tindakan perbaikan
+    - mengunggah atau mengirim bukti perbaikan
+    - melakukan uji ulang jika diperlukan
+  output:
+    - form tindakan perbaikan
+    - bukti perbaikan
+    - dokumen revisi
+    - screenshot sistem setelah diperbaiki
+    - rekaman ulang jika diminta
+```
+
+---
+
+## Tahap 7 — Keputusan Persetujuan BNSP
+
+```yaml id="tahap_7_keputusan_bnsp"
+tahap_7:
+  nama_tahap: "Keputusan Persetujuan"
+  kemungkinan_hasil:
+    disetujui:
+      tindakan_lsp:
+        - menyimpan keputusan persetujuan
+        - mensosialisasikan kepada internal LSP
+        - menjalankan AJJ/Nirkertas sesuai ruang lingkup yang disetujui
+    belum_disetujui:
+      tindakan_lsp:
+        - mempelajari alasan belum disetujui
+        - memperbaiki dokumen/sistem/proses
+        - mengajukan kembali sesuai ketentuan
+```
+
+---
+
+# 3. Alur Sertifikasi AJJ Nirkertas Setelah Disetujui
+
+Setelah LSP memperoleh persetujuan, alur operasional sertifikasi dapat berjalan seperti ini:
+
+```text
+Publikasi Skema/Jadwal
+→ Pendaftaran Asesi
+→ Verifikasi Dokumen
+→ Asesmen Mandiri
+→ Persetujuan Asesmen
+→ Verifikasi TUK / Kesiapan AJJ
+→ Pelaksanaan Asesmen Jarak Jauh
+→ Rekaman dan Pengumpulan Bukti
+→ Rekomendasi Asesor
+→ Keputusan Sertifikasi LSP
+→ Umpan Balik
+→ Banding jika ada
+→ Arsip Digital dan Pelaporan
+```
+
+---
+
+## Tahap 1 — Publikasi Skema dan Jadwal
+
+```yaml id="sertifikasi_tahap_1_publikasi"
+sertifikasi_tahap_1:
+  nama_tahap: "Publikasi Skema dan Jadwal"
+  penanggung_jawab:
+    - Manajemen LSP
+    - Admin LSP
+  kegiatan:
+    - membuka skema yang sudah disetujui untuk AJJ/Nirkertas
+    - menetapkan jadwal
+    - menetapkan TUK
+    - menetapkan asesor
+    - menyiapkan link pendaftaran
+  dokumen_output:
+    - informasi skema
+    - jadwal asesmen
+    - daftar TUK
+    - daftar asesor
+```
+
+---
+
+## Tahap 2 — Pendaftaran Asesi Digital
+
+```yaml id="sertifikasi_tahap_2_pendaftaran"
+sertifikasi_tahap_2:
+  nama_tahap: "Pendaftaran Asesi Digital"
+  penanggung_jawab:
+    - Asesi
+    - Admin LSP
+  kegiatan_asesi:
+    - membuat akun atau login
+    - memilih skema sertifikasi
+    - mengisi form permohonan sertifikasi
+    - mengunggah dokumen persyaratan
+    - menyetujui pernyataan kebenaran data
+  kegiatan_admin:
+    - memeriksa kelengkapan permohonan
+    - memverifikasi dokumen awal
+    - mengonfirmasi status pendaftaran
+  dokumen_output:
+    - form permohonan sertifikasi digital
+    - dokumen persyaratan asesi
+    - status verifikasi pendaftaran
+```
+
+---
+
+## Tahap 3 — Asesmen Mandiri Digital
+
+```yaml id="sertifikasi_tahap_3_asesmen_mandiri"
+sertifikasi_tahap_3:
+  nama_tahap: "Asesmen Mandiri Digital"
+  penanggung_jawab:
+    - Asesi
+    - Asesor Kompetensi
+  kegiatan_asesi:
+    - mengisi asesmen mandiri
+    - menyatakan mampu/belum mampu
+    - mengaitkan jawaban dengan bukti kompetensi
+  kegiatan_asesor:
+    - meninjau asesmen mandiri
+    - menilai kecukupan awal bukti
+    - mengidentifikasi bukti yang perlu diklarifikasi
+  dokumen_output:
+    - form asesmen mandiri digital
+    - daftar bukti kompetensi
+    - catatan review asesor
+```
+
+---
+
+## Tahap 4 — Persetujuan Asesmen
+
+```yaml id="sertifikasi_tahap_4_persetujuan"
+sertifikasi_tahap_4:
+  nama_tahap: "Persetujuan Asesmen"
+  penanggung_jawab:
+    - Asesor Kompetensi
+    - Asesi
+  kegiatan:
+    - asesor menjelaskan rencana asesmen
+    - metode asesmen disepakati
+    - jadwal dan media asesmen dikonfirmasi
+    - tata tertib AJJ dijelaskan
+    - asesi menyetujui rencana asesmen
+  dokumen_output:
+    - persetujuan asesmen digital
+    - jadwal asesmen
+    - link/platform AJJ
+```
+
+---
+
+## Tahap 5 — Verifikasi Kesiapan AJJ
+
+```yaml id="sertifikasi_tahap_5_verifikasi_kesiapan"
+sertifikasi_tahap_5:
+  nama_tahap: "Verifikasi Kesiapan AJJ"
+  penanggung_jawab:
+    - Asesi
+    - Asesor Kompetensi
+    - Admin LSP
+    - TUK jika digunakan
+  kegiatan:
+    - cek kamera
+    - cek mikrofon
+    - cek koneksi internet
+    - cek identitas asesi
+    - cek ruang asesmen
+    - cek akses platform
+    - cek kesiapan rekaman
+  dokumen_output:
+    - checklist kesiapan AJJ
+    - catatan verifikasi identitas
+    - catatan verifikasi lingkungan
+```
+
+---
+
+## Tahap 6 — Pelaksanaan Asesmen Jarak Jauh
+
+```yaml id="sertifikasi_tahap_6_pelaksanaan_asesmen"
+sertifikasi_tahap_6:
+  nama_tahap: "Pelaksanaan Asesmen Jarak Jauh"
+  penanggung_jawab:
+    - Asesor Kompetensi
+    - Asesi
+  kegiatan_asesor:
+    - membuka sesi asesmen
+    - memverifikasi identitas asesi
+    - memverifikasi lingkungan asesmen
+    - menjelaskan tata tertib
+    - menggunakan instrumen asesmen digital
+    - melakukan tanya jawab, observasi, simulasi, atau uji praktik sesuai skema
+    - mencatat bukti dan jawaban
+    - mencatat kendala teknis
+  kegiatan_asesi:
+    - mengikuti asesmen tepat waktu
+    - menjawab berdasarkan pengalaman dan bukti sendiri
+    - menjaga kamera/mikrofon sesuai arahan
+    - tidak menerima bantuan tidak sah
+    - melaporkan kendala teknis bila terjadi
+  dokumen_output:
+    - rekaman asesmen
+    - instrumen asesmen terisi
+    - catatan asesmen
+    - catatan kendala teknis jika ada
+```
+
+---
+
+## Tahap 7 — Rekomendasi Asesor dan Laporan Asesmen
+
+```yaml id="sertifikasi_tahap_7_laporan_asesmen"
+sertifikasi_tahap_7:
+  nama_tahap: "Rekomendasi dan Laporan Asesmen"
+  penanggung_jawab:
+    - Asesor Kompetensi
+  kegiatan:
+    - mengevaluasi bukti asesmen
+    - mengisi hasil asesmen
+    - menyusun rekomendasi
+    - mengisi laporan asesmen digital
+    - memberikan umpan balik kepada asesi
+  dokumen_output:
+    - laporan asesmen digital
+    - rekomendasi asesor
+    - umpan balik asesor
+```
+
+Catatan: asesor memberikan **rekomendasi**, sedangkan keputusan sertifikasi resmi tetap diproses melalui mekanisme LSP.
+
+---
+
+## Tahap 8 — Keputusan Sertifikasi LSP
+
+```yaml id="sertifikasi_tahap_8_keputusan"
+sertifikasi_tahap_8:
+  nama_tahap: "Keputusan Sertifikasi"
+  penanggung_jawab:
+    - Manajemen LSP
+    - Komite Teknis / Pengambil Keputusan Sertifikasi
+  kegiatan:
+    - meninjau laporan asesmen
+    - meninjau rekomendasi asesor
+    - memeriksa kelengkapan dokumen
+    - menetapkan keputusan sertifikasi
+    - menerbitkan hasil resmi
+  dokumen_output:
+    - SK hasil keputusan sertifikasi
+    - notifikasi hasil kepada asesi
+    - database pemegang sertifikat jika kompeten
+```
+
+---
+
+## Tahap 9 — Umpan Balik dan Banding
+
+```yaml id="sertifikasi_tahap_9_umpan_balik_banding"
+sertifikasi_tahap_9:
+  nama_tahap: "Umpan Balik dan Banding"
+  penanggung_jawab:
+    - Asesi
+    - Manajemen LSP
+    - Komite Banding jika ada
+  kegiatan:
+    - asesi mengisi umpan balik
+    - LSP merekap umpan balik
+    - asesi mengajukan banding jika keberatan
+    - LSP memproses banding sesuai SOP
+  dokumen_output:
+    - form umpan balik digital
+    - register umpan balik
+    - form banding digital
+    - register banding
+    - hasil tindak lanjut banding
+```
+
+---
+
+## Tahap 10 — Arsip Digital, Audit Internal, dan Pelaporan
+
+```yaml id="sertifikasi_tahap_10_arsip_audit"
+sertifikasi_tahap_10:
+  nama_tahap: "Arsip Digital, Audit Internal, dan Pelaporan"
+  penanggung_jawab:
+    - Manajemen LSP
+    - Manajemen Mutu LSP
+    - Pengelola Sistem
+  kegiatan:
+    - menyimpan dokumen digital
+    - menyimpan rekaman asesmen
+    - menjaga kerahasiaan data
+    - melakukan backup
+    - melakukan audit internal berkala
+    - membuat laporan pelaksanaan
+    - melakukan tindakan perbaikan jika ada temuan
+  dokumen_output:
+    - arsip digital asesmen
+    - rekaman asesmen
+    - laporan audit internal
+    - laporan pelaksanaan AJJ/Nirkertas
+    - bukti tindakan perbaikan
+```
+
+---
+
+# 4. Alur Dokumen Berdasarkan Aktor
+
+## Asesi
+
+```yaml id="alur_dokumen_asesi"
+asesi:
+  input:
+    - identitas diri
+    - dokumen pendidikan/pelatihan
+    - bukti pengalaman kerja
+    - bukti kompetensi/portofolio
+  proses:
+    - mengisi permohonan
+    - mengisi asesmen mandiri
+    - menyetujui rencana asesmen
+    - mengikuti AJJ
+    - mengisi umpan balik
+    - mengajukan banding jika perlu
+  output:
+    - form permohonan digital
+    - asesmen mandiri digital
+    - persetujuan asesmen
+    - bukti kompetensi
+    - umpan balik
+    - form banding jika ada
+```
+
+## TUK
+
+```yaml id="alur_dokumen_tuk"
+tuk:
+  input:
+    - profil TUK
+    - daftar fasilitas
+    - foto/video sarana-prasarana
+  proses:
+    - mengikuti verifikasi TUK jarak jauh
+    - menunjukkan fasilitas
+    - mendukung pelaksanaan asesmen bila digunakan
+  output:
+    - checklist verifikasi TUK
+    - rekaman verifikasi TUK
+    - rekomendasi verifikasi
+    - SK penetapan TUK
+```
+
+## Asesor Kompetensi
+
+```yaml id="alur_dokumen_asesor"
+asesor_kompetensi:
+  input:
+    - surat tugas asesor
+    - data asesi
+    - asesmen mandiri
+    - bukti kompetensi
+    - instrumen asesmen
+  proses:
+    - meninjau bukti
+    - menyepakati rencana asesmen
+    - memverifikasi identitas dan lingkungan
+    - melaksanakan asesmen
+    - mengisi instrumen
+    - menyusun rekomendasi
+  output:
+    - catatan review bukti
+    - persetujuan asesmen
+    - instrumen asesmen terisi
+    - rekaman asesmen
+    - laporan asesmen
+    - rekomendasi asesor
+```
+
+## Manajemen LSP
+
+```yaml id="alur_dokumen_manajemen_lsp"
+manajemen_lsp:
+  input:
+    - laporan asesor
+    - rekaman asesmen
+    - dokumen asesi
+    - rekomendasi asesor
+    - hasil verifikasi TUK
+  proses:
+    - verifikasi administrasi
+    - penetapan jadwal
+    - penugasan asesor
+    - penetapan TUK
+    - peninjauan proses asesmen
+    - keputusan sertifikasi
+    - audit internal
+  output:
+    - SK penugasan
+    - SK penetapan TUK
+    - SK keputusan sertifikasi
+    - laporan pelaksanaan
+    - laporan audit internal
+    - arsip digital
+```
+
+---
+
+# 5. Flowchart Ringkas
+
+```text
+[Mulai]
+   ↓
+[LSP Menyiapkan SOP, Sistem, Personil, TUK, Uji Coba]
+   ↓
+[LSP Mengajukan Permohonan AJJ/Nirkertas ke BNSP]
+   ↓
+[BNSP Verifikasi Dokumen]
+   ↓
+[Audit / Asesmen Lapangan / Witness Uji Coba]
+   ↓
+{Ada Temuan?}
+   ├─ Ya → [LSP Melakukan Perbaikan] → [BNSP Meninjau Perbaikan]
+   └─ Tidak
+   ↓
+[Keputusan Persetujuan BNSP]
+   ↓
+{Disetujui?}
+   ├─ Tidak → [LSP Perbaiki dan Ajukan Kembali Sesuai Ketentuan]
+   └─ Ya
+        ↓
+   [LSP Membuka Sertifikasi AJJ Nirkertas]
+        ↓
+   [Asesi Daftar & Unggah Dokumen]
+        ↓
+   [Asesmen Mandiri Digital]
+        ↓
+   [Persetujuan Asesmen]
+        ↓
+   [Verifikasi Kesiapan AJJ]
+        ↓
+   [Pelaksanaan Asesmen Jarak Jauh]
+        ↓
+   [Rekaman + Instrumen + Laporan Asesmen]
+        ↓
+   [Keputusan Sertifikasi oleh LSP]
+        ↓
+   [Umpan Balik / Banding]
+        ↓
+   [Arsip Digital + Audit Internal + Pelaporan]
+        ↓
+[Selesai]
+```
+
+---
+
+# 6. Modul Chatbot Siap Tempel
+
+```yaml id="chatbot_module_alur_dokumen_sertifikasi_ajj_nirkertas"
+module:
+  id: alur_dokumen_sertifikasi_ajj_nirkertas
+  title: "Alur Proses Dokumen dan Sertifikasi AJJ Nirkertas"
+  purpose: >
+    Menjelaskan alur dokumen dan proses sertifikasi AJJ Nirkertas dari
+    persiapan LSP, pengajuan ke BNSP, audit/witness, persetujuan, sampai
+    pelaksanaan sertifikasi dan pelaporan.
+
+intents:
+  - id: ask_alur_dokumen_ajj
+    sample_user_inputs:
+      - "Bagaimana alur dokumen AJJ Nirkertas?"
+      - "Urutan dokumen pengajuan AJJ apa saja?"
+      - "Flow dokumen LSP untuk AJJ Nirkertas"
+    response_template: response_alur_dokumen_pengajuan
+    next_node: alur_pengajuan_lsp
+
+  - id: ask_alur_sertifikasi_ajj
+    sample_user_inputs:
+      - "Bagaimana alur sertifikasi AJJ Nirkertas?"
+      - "Proses sertifikasi jarak jauh nirkertas bagaimana?"
+      - "Alur dari pendaftaran sampai hasil sertifikasi"
+    response_template: response_alur_sertifikasi
+    next_node: alur_operasional_sertifikasi
+
+  - id: ask_alur_by_role
+    sample_user_inputs:
+      - "Alur dokumen asesi apa saja?"
+      - "Alur asesor dalam AJJ apa?"
+      - "Dokumen TUK mengalir ke mana?"
+      - "Manajemen LSP membuat dokumen apa?"
+    response_template: response_alur_by_role
+    next_node: pilih_peran_alur_dokumen
+
+flow:
+  id: alur_pengajuan_lsp
+  title: "Alur Pengajuan LSP ke BNSP"
+  steps:
+    - "Persiapan internal LSP"
+    - "Penyusunan dokumen permohonan"
+    - "Validasi internal"
+    - "Pengiriman permohonan"
+    - "Verifikasi/audit/witness BNSP"
+    - "Perbaikan temuan"
+    - "Keputusan persetujuan BNSP"
+
+flow:
+  id: alur_operasional_sertifikasi
+  title: "Alur Operasional Sertifikasi AJJ Nirkertas"
+  steps:
+    - "Publikasi skema dan jadwal"
+    - "Pendaftaran asesi digital"
+    - "Verifikasi dokumen"
+    - "Asesmen mandiri"
+    - "Persetujuan asesmen"
+    - "Verifikasi kesiapan AJJ"
+    - "Pelaksanaan asesmen jarak jauh"
+    - "Rekomendasi asesor dan laporan"
+    - "Keputusan sertifikasi LSP"
+    - "Umpan balik dan banding"
+    - "Arsip digital dan pelaporan"
+
+guardrails:
+  - "Jangan menyatakan AJJ/Nirkertas dapat dilaksanakan sebelum persetujuan yang dipersyaratkan."
+  - "Jangan menyatakan asesi kompeten sebelum keputusan resmi LSP."
+  - "Jangan membantu pemalsuan dokumen atau manipulasi rekaman."
+  - "Jika pengguna menanyakan ketentuan terbaru, arahkan untuk memeriksa BNSP dan SOP LSP."
+```
+
+---
+
+## Ringkasan
+
+**Alur dokumen** dimulai dari dokumen pengajuan LSP: surat permohonan, SOP, SK personil, sistem aplikasi, sarana-prasarana, TUK, pernyataan keamanan, uji coba, dan output nirkertas. Setelah disetujui, **alur sertifikasi** berjalan dari pendaftaran asesi digital, asesmen mandiri, persetujuan asesmen, verifikasi kesiapan AJJ, pelaksanaan asesmen jarak jauh, rekaman, laporan asesor, keputusan sertifikasi LSP, umpan balik, banding, arsip digital, audit internal, dan pelaporan.
+
+[1]: https://bnsp.go.id/download?hal=2&id=10&utm_source=chatgpt.com "Halaman Download - BNSP"
+[2]: https://nasonline.id/wp-content/uploads/2024/12/SE-SJJ-Paperless-Final-17.05.23.pdf?utm_source=chatgpt.com "TENTANG - nasonline.id"

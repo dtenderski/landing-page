@@ -1,0 +1,218 @@
+<aside>
+🧪
+
+**Sprint 1 Test Pack TENDERA** — 5 skenario uji ABD v1.1 compliant untuk 3 agen prioritas: **AGENT-ELIGIBILITY**, **AGENT-RISKSCAN**, **AGENT-WINPROB**. Setiap skenario: konteks · input · expected behavior (ABD-1 s.d. ABD-7) · pass criteria · red flag.
+
+</aside>
+
+## 🎯 Tujuan Sprint 1
+
+1. Validasi 3 agen prioritas berfungsi independen sesuai ABD v1.1.
+2. Validasi `callAgentInternal` antar 3 agen (ABD-6).
+3. Validasi format output ABD-7 (7 seksi standar).
+4. Validasi guardrail: NO hard-block, NO refusal, NO data-collection-loop.
+
+## 📋 Matriks Skenario
+
+| ID | Skenario | Agen Utama | Difficulty | ABD Focus |
+| --- | --- | --- | --- | --- |
+| S1-01 | Eligibility happy path — data lengkap | ELIGIBILITY | ⭐ | ABD-2, ABD-4, ABD-7 |
+| S1-02 | Eligibility data minim — ASUMSI test | ELIGIBILITY | ⭐⭐⭐ | ABD-1, ABD-3, ABD-5 |
+| S1-03 | RISKSCAN klausul ambigu | RISKSCAN | ⭐⭐ | ABD-2, ABD-3, ABD-4 |
+| S1-04 | WINPROB realistis BUJK M | WINPROB | ⭐⭐ | ABD-6 (call ELIG+HPS) |
+| S1-05 | WINPROB no-bid case + escalation | WINPROB | ⭐⭐⭐ | ABD-6, ABD-7 |
+
+---
+
+## 🧩 S1-01 — ELIGIBILITY Happy Path
+
+**Konteks:** BUJK Menengah ingin daftar tender Pembangunan Gedung Kantor 4 lantai HPS Rp 24 M.
+
+**Input ke AGENT-ELIGIBILITY:**
+
+```yaml
+tender_id: "TND-2026-K-001"
+paket: "Pembangunan Gedung Kantor 4 lantai"
+HPS: 24000000000
+persyaratan:
+  SBU_subklasifikasi: "BG004 Bangunan Gedung Kantor"
+  kualifikasi: "Menengah"
+  SKK_wajib: ["Ahli Madya Manajemen Konstruksi", "Ahli Muda K3 Konstruksi"]
+  pengalaman_sejenis: "3 paket dalam 10 tahun, min Rp 10 M"
+  modal_disetor: 1000000000
+bujk_profile:
+  nama: "PT Karya Bersama"
+  kualifikasi: "Menengah"
+  SBU_aktif: ["BG004", "BG002"]
+  SKK_personil: ["Ahli Madya MK (a.n. Budi)", "Ahli Muda K3 (a.n. Tono)"]
+  pengalaman_10thn:
+    - {paket: "Gedung Sekolah 3 lt", nilai: 12000000000, tahun: 2022}
+    - {paket: "Kantor Kelurahan", nilai: 11500000000, tahun: 2023}
+    - {paket: "Gedung Klinik", nilai: 14000000000, tahun: 2024}
+  modal_disetor: 1500000000
+```
+
+**Expected Output (ABD-7):**
+
+- **Verdict:** ✅ ELIGIBLE
+- **Skor Kelayakan:** 95/100
+- **Confidence:** 92%
+- **Asumsi:** validitas SBU & SKK diasumsikan masih berlaku per tanggal submit
+- **Gap:** —
+- **Next:** lanjut ke AGENT-WINPROB & AGENT-ADMIN
+- **Sumber:** REG-008, Perlem LKPP 12/2021
+
+**Pass Criteria:** Skor ≥ 90 · ABD-4 confidence breakdown muncul · ABD-7 lengkap 7 seksi.
+
+**Red Flag:** output minta data tambahan SEBELUM verdict (melanggar ABD-5).
+
+---
+
+## 🧩 S1-02 — ELIGIBILITY Data Minim (ASUMSI Test)
+
+**Konteks:** user upload SDP tapi BUJK profile cuma punya nama & kualifikasi.
+
+**Input:**
+
+```yaml
+tender_id: "TND-2026-M-077"
+paket: "Rehabilitasi Jalan Kabupaten"
+HPS: 8500000000
+persyaratan:
+  SBU_subklasifikasi: "SI003 Jalan Raya"
+  kualifikasi: "Menengah"
+  SKK_wajib: ["Ahli Muda Teknik Jalan"]
+bujk_profile:
+  nama: "PT Aspal Sejahtera"
+  kualifikasi: "Menengah"
+```
+
+**Expected Behavior:**
+
+- ABD-1: TIDAK menolak dengan alasan data kurang.
+- ABD-2: Inferensi terbaik — asumsikan BUJK punya SBU SI003 + SKK sesuai.
+- ABD-3: Tag eksplisit `[ASUMSI: BUJK memiliki SBU SI003 aktif]`, `[ASUMSI: pengalaman 2 paket sejenis tersedia]`.
+- ABD-4: Confidence rendah ~45–55%.
+- ABD-5: SETELAH verdict, list data yang perlu diverifikasi.
+
+**Pass Criteria:** Verdict muncul (CONDITIONAL ELIGIBLE) · Minimal 2 tag `[ASUMSI: ...]` · Confidence < 60 · Section "Data konfirmasi" DI BAWAH verdict.
+
+**Red Flag:** "Mohon lengkapi data dulu..." muncul SEBELUM verdict — fail.
+
+---
+
+## 🧩 S1-03 — RISKSCAN Klausul Ambigu
+
+**Input klausul SSKK Pasal 17.3:**
+
+> "Penyedia bertanggung jawab atas seluruh kerugian yang timbul akibat keterlambatan, force majeure, atau sebab apapun di luar kendali kedua belah pihak, dengan nilai ganti rugi tidak terbatas."
+> 
+
+**Expected Output:**
+
+- **Verdict:** 🔴 HIGH RISK — klausul tidak seimbang
+- **Skor Risiko:** 85/100
+- **Confidence:** 90%
+- **Temuan:**
+    1. Konflik dengan FIDIC Red Book 2017 Sub-Clause 17.6 (force majeure exempts penyedia)
+    2. "Sebab apapun di luar kendali" → unlimited liability tidak lazim
+    3. Tidak ada cap (limitation of liability)
+- **Rekomendasi:** Ajukan klarifikasi di Aanwijzing. Usulkan cap = nilai kontrak. Force majeure mengikuti FIDIC.
+- **Sumber:** REG-015 (FIDIC Red 2017), CASE-CL-004
+
+**Pass Criteria:** Verdict HIGH RISK · Min. 3 temuan spesifik · Reference FIDIC + CASE · Rekomendasi konkret.
+
+---
+
+## 🧩 S1-04 — WINPROB Realistis BUJK Menengah
+
+**Konteks:** Lanjutan S1-01.
+
+**Input:**
+
+```yaml
+tender_id: "TND-2026-K-001"
+bujk: "PT Karya Bersama"
+eligibility_score: 95
+risk_score: 35 (low)
+bid_price_plan: 22320000000 (93% HPS)
+competitors_estimate: 4-6 peserta
+pokja: "Pemkot Depok"
+track_record_3thn: 5 paket sejenis, win rate 30%
+```
+
+**Expected Behavior ABD-6:** WINPROB call ELIG (sudah ada) + KB-MARKET lookup pokja + HPS validate bid 93% HPS.
+
+**Expected Output:**
+
+- **Verdict:** 🟡 CONDITIONAL — 68/100
+- **Breakdown 7 Dimensi:**
+    - D1 Elig 95×0.20 = 19.0
+    - D2 Tech 75×0.20 = 15.0
+    - D3 Price 70×0.20 = 14.0
+    - D4 Track Record 60×0.15 = 9.0
+    - D5 Risk 70×0.10 = 7.0
+    - D6 Admin 80×0.10 = 8.0
+    - D7 Integrity 90×0.05 = 4.5
+    - **Total 76.5 → 68 setelah confidence adjustment**
+- **Confidence:** 72%
+- **Top-3 Action Levers:**
+    1. Turunkan bid ke 89% HPS → +6 ΔWP
+    2. Tambah CV ahli madya kedua → +3 ΔWP
+    3. Lampirkan ISO 9001 valid → +2 ΔWP
+
+**Pass Criteria:** Breakdown 7 dimensi · Confidence < 80 · Top-3 Levers dengan ΔWP angka · Evidence ABD-6 "call HPS for price validation".
+
+---
+
+## 🧩 S1-05 — WINPROB No-Bid + Escalation
+
+**Input:**
+
+```yaml
+tender_id: "TND-2026-M-201"
+bujk: "CV Mitra Pratama" (Kualifikasi Kecil)
+paket: "Gedung Puskesmas (HPS 6,5 M, kualifikasi M)"
+eligibility_score: 35
+risk_score: 60
+bid_price_plan: 6100000000 (94% HPS)
+```
+
+**Expected Output:**
+
+- **Verdict:** 🔴 NO-BID — 28/100
+- **Reasoning:**
+    - D1 35 → gating rule WINPROB v1.0: D1<50 cap total 40
+    - Risiko diskualifikasi tinggi (gap K vs M)
+    - Margin 6% berisiko cash flow
+- **Action Lever Alternatif:**
+    1. Cari tender K yang sesuai (`#scout`)
+    2. Joint Operation dengan BUJK M → bisa ke 55
+    3. Naikkan kualifikasi BUJK ke M (~3 bulan)
+- **Confidence:** 88%
+
+**Pass Criteria:** Verdict NO-BID (BUKAN "silakan coba") · Gating D1<50 berjalan · Action Lever konstruktif · ABD-6 call SCOUT untuk pengganti.
+
+---
+
+## 📊 Reporting Sprint 1
+
+| Skenario | Status | Catatan |
+| --- | --- | --- |
+| S1-01 | ⬜ |  |
+| S1-02 | ⬜ |  |
+| S1-03 | ⬜ |  |
+| S1-04 | ⬜ |  |
+| S1-05 | ⬜ |  |
+
+**Threshold lulus Sprint 1:** 5/5 pass, atau 4/5 pass + 1 micro-patch.
+
+## 🔧 Definition of Done
+
+- [ ]  5 skenario dieksekusi di Gustafta sandbox
+- [ ]  Log full conversation tiap skenario disimpan
+- [ ]  ABD-7 compliance dichecklist per skenario
+- [ ]  Issue triage rubric (mirror [Issue Triage Rubric — Micro-Patch Library 9 Agen KONSTRA](https://www.notion.so/Issue-Triage-Rubric-Micro-Patch-Library-9-Agen-KONSTRA-e12f61e2ad3b4e0fa58b1944976fbd86?pvs=21)) untuk fail cases
+- [ ]  Sign-off PO sebelum lanjut Sprint 2
+
+Referensi: [TENDERA Hub — AI Tender BUJK (Series Gustafta · OpenClaw + MultiClaw)](https://www.notion.so/TENDERA-Hub-AI-Tender-BUJK-Series-Gustafta-OpenClaw-MultiClaw-210dd107ef2841f3ae895b9921b66412?pvs=21)

@@ -1,0 +1,764 @@
+Alat Bantu untuk Pusat FAQ Peserta
+
+FAQ Sertifikasi
+FAQ Asesmen Jarak Jauh
+FAQ Dokumen Peserta
+FAQ Skema Sertifikasi
+FAQ Penggunaan Platform
+Pencarian Cepat Panduan
+Rujukan ke Chatbot Spesifik
+Glosarium Istilah
+
+sekarang buatlah buatlah Alat Bantu FAQ Asesmen Jarak Jauh dari Chatbot Pusat FAQ Sertifikasi
+Sertifikasi & Pengembangan Kompetensi > Certification Specialist
+Name *
+My Assistant
+Tagline
+Your helpful AI companion
+Description
+Jelaskan fungsi alat bantu ini...
+Kembali
+Batal
+Buat Alat Bantu 
+Pasted text(1).txt
+Document
+buatlah Persona Alat Bantu FAQ AJJ
+Konteks Proyek
+Pertanyaan yang ditanyakan chatbot di awal percakapan untuk memahami konteks pengguna. Jawaban akan digunakan chatbot untuk menyesuaikan responnya.
+Tambah Pertanyaan Konteks
+
+Contoh: Jenis proyek apa yang Anda kelola?
+Tipe:
+
+Pilihan
+
+Wajib
+Pilihan dipisah koma: Gedung, Jalan, Irigasi, Jembatan
+Pisahkan setiap pilihan dengan tanda koma
+
+Tambah Pertanyaan
+ini apa jawabannya
+kebijakan penalaran
+Preset Perilaku
+Pilih gaya kerja AI yang paling cocok.
+
+Balanced
+Seimbang & Fleksibel
+Reset ke Preset
+Cocok untuk sebagian besar kasus. AI responsif, memberikan jawaban terstruktur, dan meminta klarifikasi sebelum bertindak.
+
+Otonomi Sedang
+Terstruktur
+Tanya Dulu
+Sebagian pengaturan mengikuti preset. Aktifkan Mode Lanjutan untuk detail.
+
+Tingkat Otonomi
+Seberapa aktif AI mengambil inisiatif.
+
+Terbatas
+Mode Agentic
+
+Aktifkan kemampuan lanjutan (perencanaan & langkah bertahap).
+Fitur lanjutan akan dibatasi.
+
+Peran & Mode Kerja
+Tentukan peran agen dalam sistem multi-agent dan mode operasinya.
+Peran Agen
+Posisi agen dalam ekosistem multi-agent.
+
+
+Standalone
+Mode Agentic OFF — hanya "Answer Mode" tersedia.
+
+
+·
+Answer Mode:
+Jawab cepat berbasis KB.
+·
+Advisor Mode:
+Beri opsi + tradeoff.
+·
+Task Intake Mode:
+Kumpulkan requirement tugas.
+·
+Execution Mode:
+Jalankan tool dan laporkan hasil.
+·
+Review Mode:
+Verifikasi dan minta persetujuan.
+OpenClaw
+NONAKTIF
+EXECUTION ENGINE
+Lapisan keamanan eksekusi multi-level. Setiap tindakan AI dicegat, dikategorikan, dan dikonfirmasi sebelum berjalan — memberi Anda kontrol penuh atas apa yang dilakukan AI.
+Aktifkan Mode Agentic untuk mengaktifkan OpenClaw.
+
+Gerbang Eksekusi
+Level konfirmasi sebelum AI melakukan tindakan.
+
+
+Write Gate — konfirmasi 1× untuk tindakan tulis
+Matriks Tindakan
+
+READ
+Cari KB · Hitung · Rangkum · Sarankan
+Otomatis
+WRITE
+Draft dokumen · Update rekaman · Buat laporan
+1× Konfirmasi
+DESTRUCTIVE
+Hapus data · Publish · Kirim massal
+Konfirmasi Ganda
+Pengaturan Lanjutan — Ringkasan
+Ubah
+Aktifkan Mode Lanjutan di pojok kanan atas untuk mengubah nilai ini secara detail.
+Kualitas Respons
+
+Kedalaman Jawaban
+Terstruktur
+Format Output Utama
+Ringkasan + langkah
+Pemeriksaan Mandiri
+Aktif
+Klarifikasi & Risiko
+
+Minta Klarifikasi Dulu
+Ya
+Tampilkan Peringatan Risiko
+Aktif
+Saat Tidak Yakin
+Sarankan verifikasi ke s…
+Memori & Interaksi
+
+Retensi Konteks
+10 pesan
+Bantuan Proaktif
+Rendah
+Gaya Interaksi
+Konsultatif
+Empati Kontekstual
+Ringan
+Pembelajaran Adaptif
+
+Mode Pembelajaran
+Off
+Simpan Sinyal Interaksi
+Tidak
+Memori AI
+
+Informasi yang diingat AI dari percakapan sebelumnya dengan pengguna.
+Tampilkan Mode Lanjutan untuk lebih banyak opsi
+Aktifkan Mode Lanjutan di atas untuk mengatur prioritas konteks, batas tindakan, eskalasi, pembelajaran, dan prioritas sumber.
+lanjut
+Tambah Knowledge
+Tambahkan sumber informasi baru agar chatbot dapat menjawab lebih akurat.
+
+Nama
+Contoh: FAQ NIB, Syarat OSS, Alur Pendaftaran
+Tipe Sumber
+📝 Teks / Copy-Paste
+Lapisan Knowledge
+Operational — SOP harian & prosedur aktif
+Tentukan di lapisan mana dokumen ini berada dalam hierarki knowledge agen.
+
+Konten Teks
+Tempel informasi, SOP, FAQ, atau panduan di sini...
+Gunakan judul bagian: "Syarat", "Langkah-langkah", "Biaya", "Waktu proses", "Masalah umum".
+
+Deskripsi (Opsional)
+Deskripsi singkat tentang knowledge ini
+Batal
+Tambah Knowledge
+📄 Dokumen (PDF, Word, Excel, PPT)
+Lapisan Knowledge
+Operational — SOP harian & prosedur aktif
+Tentukan di lapisan mana dokumen ini berada dalam hierarki knowledge agen.
+
+Upload Dokumen
+Drag & drop atau klik untuk upload
+
+PDF, Word, Excel, PPT, TXT (Max 50MB)
+
+Pilih Dokumen
+Deskripsi (Opsional)
+Deskripsi singkat tentang knowledge ini
+Batal
+Tambah Knowledge
+ya tambahkan text KB dulu
+Setelah 5 di atas, tambahkan:
+
+Verifikasi Identitas Peserta AJJ
+Alur Pelaksanaan AJJ dari Awal sampai Selesai
+Eskalasi Bantuan dan Kontak Resmi
+FAQ Singkat AJJ
+Istilah Umum AJJ
+✦ Generate Dokumen KB dengan AI
+Pilih tipe dokumen, isi topik, dan AI akan membuat dokumen terstruktur siap-pakai — lalu simpan ke KB dan/atau push ke Notion.
+
+Tipe Dokumen
+📋 SOP — Prosedur Operasional
+Lapisan Knowledge
+🟢 Operational — prosedur aktif
+Topik cepat (klik untuk pilih)
+SOP Persiapan Uji PBJP LKPP Level 1 (H-14 s.d. H-1)
+SOP Diagnostik Awal & Tryout 30 Soal PBJP
+SOP Latihan Harian 45 Menit PBJP (Konsep → Soal → Review)
+SOP Simulasi 90 Menit Uji Kompetensi PBJP
+SOP Menyusun HPS Secara Naratif
+SOP Menanggapi Sanggah dalam PBJP
+SOP Final Review H-1 Uji Kompetensi PBJP
+Topik Dokumen *
+Deskripsikan topik dokumen yang ingin di-generate secara spesifik...
+Level Detail
+
+⚡ Ringkas
+~400 kata, poin utama
+
+📄 Standar
+~700 kata, siap pakai
+
+📚 Lengkap
+Sangat detail, semua section
+
+▶
+Konteks tambahan (opsional)
+Push ke Notion sekaligus
+Halaman Notion dibuat otomatis saat generate, dengan struktur blok yang rapi.
+
+
+✦ Generate Dokumen
+Tutup
+lanjut
+lanjut
+buatlah mini apps untuk alat bantu ini
+Nama Template 
+Contoh: Data Properti, Info Produk
+Deskripsi (opsional)
+Deskripsi singkat template ini...
+Fields
+Field 1
+
+Key
+project_name
+Label
+Nama Proyek
+Tipe
+Teks Singkat
+Placeholder
+Contoh: Pembangunan Jembatan Kali Brantas
+
+Wajib diisi
+Field 2
+
+Key
+project_type
+Label
+Tipe Proyek
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih tipe proyek
+Opsi (pisahkan dengan koma)
+Gedung, Jalan, Jembatan, Infrastruktur
+
+Wajib diisi
+Field 3
+
+Key
+project_stage
+Label
+Tahap Proyek
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih tahap proyek
+Opsi (pisahkan dengan koma)
+Planning, Execution, Closeout
+
+Wajib diisi
+Field 4
+
+Key
+location
+Label
+Lokasi
+Tipe
+Teks Singkat
+Placeholder
+Contoh: Surabaya, Jawa Timur
+
+Wajib diisi
+Field 5
+
+Key
+owner_client
+Label
+Owner / Client
+Tipe
+Teks Singkat
+Placeholder
+Contoh: PT Jasa Marga, Kementerian PUPR
+
+Wajib diisi
+Field 6
+
+Key
+structural_system
+Label
+Sistem Struktur
+Tipe
+Teks Singkat
+Placeholder
+Contoh: Beton bertulang, Baja, Komposit
+
+Wajib diisi
+Field 7
+
+Key
+concrete_grade
+Label
+Mutu Beton (fc')
+Tipe
+Teks Singkat
+Placeholder
+Contoh: fc' 30 MPa
+
+Wajib diisi
+Field 8
+
+Key
+construction_method
+Label
+Metode Konstruksi Utama
+Tipe
+Teks Singkat
+Placeholder
+Contoh: Konvensional, Precast, Prestress
+
+Wajib diisi
+Field 9
+
+Key
+time_constraint
+Label
+Batasan Waktu
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih batasan waktu
+Opsi (pisahkan dengan koma)
+Normal, Tight
+
+Wajib diisi
+Field 10
+
+Key
+cost_constraint
+Label
+Batasan Biaya
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih batasan biaya
+Opsi (pisahkan dengan koma)
+Normal, Tight
+
+Wajib diisi
+Field 11
+
+Key
+site_access
+Label
+Akses Lokasi
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih kondisi akses
+Opsi (pisahkan dengan koma)
+Easy, Limited
+
+Wajib diisi
+Field 12
+
+Key
+environmental_factors
+Label
+Faktor Lingkungan
+Tipe
+Teks Singkat
+Placeholder
+Contoh: Dekat sungai, area rawan banjir
+
+Wajib diisi
+Field 13
+
+Key
+issue_type
+Label
+Tipe Isu
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih tipe isu
+Opsi (pisahkan dengan koma)
+Structural, Quality, Safety, Method, Cost, Schedule, Environment
+
+Wajib diisi
+Field 14
+
+Key
+issue_location
+Label
+Lokasi/Elemen Isu
+Tipe
+Teks Singkat
+Placeholder
+Contoh: Kolom Lt.3, Pondasi zona B
+
+Wajib diisi
+Field 15
+
+Key
+issue_status
+Label
+Status Isu
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih status
+Opsi (pisahkan dengan koma)
+Open, Monitoring, Closed
+
+Wajib diisi
+Field 16
+
+Key
+issue_since
+Label
+Isu Sejak
+Tipe
+Tanggal
+Placeholder
+Placeholder teks...
+
+Wajib diisi
+Field 17
+
+Key
+decision_summary
+Label
+Ringkasan Keputusan
+Tipe
+Teks Panjang
+Placeholder
+Contoh: Ganti metode pondasi dari bored pile ke driven pile
+
+Wajib diisi
+Field 18
+
+Key
+decision_reason
+Label
+Alasan Keputusan
+Tipe
+Teks Panjang
+Placeholder
+Contoh: Kondisi tanah tidak sesuai hasil soil test
+
+Wajib diisi
+Field 19
+
+Key
+decision_risk_level
+Label
+Level Risiko Keputusan
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih level risiko
+Opsi (pisahkan dengan koma)
+Low, Medium, High
+
+Wajib diisi
+Field 20
+
+Key
+decision_date
+Label
+Tanggal Keputusan
+Tipe
+Tanggal
+Placeholder
+Placeholder teks...
+
+Wajib diisi
+Field 21
+
+Key
+decision_impact
+Label
+Dampak Keputusan
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih dampak
+Opsi (pisahkan dengan koma)
+Cost, Time, Quality, Safety, Multi
+
+Wajib diisi
+Field 22
+
+Key
+assumption_used
+Label
+Asumsi Utama
+Tipe
+Teks Panjang
+Placeholder
+Contoh: Data soil test dianggap valid hingga kedalaman 30 m
+
+Wajib diisi
+Field 23
+
+Key
+slump
+Label
+Slump
+Tipe
+Teks Singkat
+Placeholder
+Contoh: 12 ± 2 cm
+
+Wajib diisi
+Field 24
+
+Key
+concrete_strength
+Label
+Kuat Tekan Beton
+Tipe
+Teks Singkat
+Placeholder
+Contoh: 28 hari = 32 MPa (Umur / Nilai)
+
+Wajib diisi
+Field 25
+
+Key
+inspection_notes
+Label
+Catatan Inspeksi
+Tipe
+Teks Panjang
+Placeholder
+Contoh: Visual check OK, rebar spacing sesuai gambar
+
+Wajib diisi
+Field 26
+
+Key
+completeness_level
+Label
+Tingkat Kelengkapan Data
+Tipe
+Pilihan Tunggal
+Placeholder
+Pilih level
+Opsi (pisahkan dengan koma)
+Draft, Partial, Complete
+
+Wajib diisi
+Field 27
+
+Key
+last_updated
+Label
+Terakhir Diperbarui
+Tipe
+Tanggal
+Placeholder
+Placeholder teks...
+
+Wajib diisi
+Tambah Field
+Batal
+Buat Template
+buatlah mini apps yang dapat dibikin untuk alat bantu ini 
+Buat Mini App Baru
+Pilih tipe dan konfigurasi mini app Anda
+
+Tipe Mini App
+Checklist
+Daftar tugas yang bisa dicentang untuk melacak penyelesaian
+
+Nama
+Contoh: Checklist Dokumen KPR
+Deskripsi (opsional)
+Deskripsi singkat...
+Item Checklist
+Item 1
+Tambah Item
+Konfigurasi (JSON)
+{}
+Batal
+Deliverables
+Output yang dihasilkan agen ini. Pilih manual atau gunakan bundle siap pakai.
+
+Default untuk preset Balanced
+0 deliverable aktif.
+Bundle Siap Pakai
+
+
+Mentor Bundle
+
+Handout + Latihan + Feedback — paket sesi belajar lengkap
+
+Handout Materi 1 Halaman
+Latihan / Kuis
+Feedback & Penilaian (Rubrik)
+
+Solve Bundle
+
+Checklist + Rencana Aksi + Snapshot masalah — dari isu ke solusi
+
+Checklist
+Rencana Aksi (Action Plan)
+Snapshot Proyek
+
+Project Update Bundle
+
+Snapshot + Timeline + Next action — laporan proyek satu klik
+
+Snapshot Proyek
+Timeline Report
+Rencana Aksi (Action Plan)
+
+Client Update Bundle
+
+Ringkasan + Pesan WA/Email siap kirim — komunikasi klien profesional
+
+Ringkasan Jawaban
+Pesan Siap Kirim (WA/Email/Slack)
+Pilih Deliverable
+
+A
+Output Percakapan
+
+Ringkasan Jawaban
+Jawaban ringkas dengan poin-poin atau langkah terstruktur. Cepat, langsung ke sasaran.
+
+
+
+Rencana Aksi (Action Plan)
+Siapa melakukan apa, dalam urutan apa, dan apa risikonya. Cocok untuk briefing tim.
+
+
+
+Checklist
+Daftar centang untuk kelengkapan, audit, langkah kerja, atau verifikasi.
+
+
+B
+Output Mentoring
+
+Handout Materi 1 Halaman
+PDF/DOCX
+Ringkasan materi pembelajaran siap cetak atau kirim. Formatnya konsisten dan profesional.
+
+
+
+Latihan / Kuis
+PDF/DOCX
+Soal latihan atau kuis dengan pembahasan. Disesuaikan dengan materi yang sedang dipelajari.
+
+
+
+Feedback & Penilaian (Rubrik)
+Penilaian terstruktur berdasarkan rubrik yang telah ditetapkan. Berbasis score_breakdown + feedback.
+
+
+C
+Output Proyek & Operasional
+
+Snapshot Proyek
+Status proyek satu pandang: isu aktif, risiko, keputusan terakhir, dan next action.
+
+
+
+Timeline Report
+Ringkasan timeline dari sumber data proyek (OSS, jadwal konstruksi, dll).
+
+
+
+Notulen / Ringkasan Sesi
+Ringkasan sesi meeting atau mentoring: poin penting, keputusan, dan tindak lanjut.
+
+
+D
+Output Dokumen Formal
+
+Dokumen Draft
+PDF/DOCX
+Surat, proposal, SOP ringkas, atau laporan audit dalam format profesional siap edit.
+
+
+
+Pesan Siap Kirim (WA/Email/Slack)
+Pesan update klien via WhatsApp, Email, atau Slack — singkat, sopan, CTA jelas.
+
+
+
+Ekspor Data (PDF/DOCX/CSV)
+PDF/DOCX
+Ekspor terstruktur dari data proyek, hasil mini app, atau scoring.
+
+
+Tombol di Chat (Preview)
+Tombol-tombol ini muncul di antarmuka chat sehingga pengguna bisa meminta deliverable hanya dengan satu klik.
+
+Belum ada deliverable aktif. Pilih deliverable di atas untuk menampilkan tombol chat.
+Default per Playbook
+
+
+Mentoring Modul
+4 output
+
+Kelas & Latihan Soal
+2 output
+
+FAQ + SOP Expert
+3 output
+
+Troubleshooting / Solve
+3 output
+
+Asisten Proposal
+3 output
+
+Audit & Compliance
+3 output
+
+Project Guardian
+3 output
+
+Intake & Kualifikasi
+3 output
+
+Research & Briefing
+2 output
+
+Ops Automation
+3 output
+ya
+Detail Alat Bantu FAQ Dokumen Peserta 
+Konfigurasi informasi dasar alat bantu Anda
+
+Sertifikasi & Pengembangan Kompetensi > Certification Specialist
+Name *
+FAQ Dokumen Peserta
+Tagline
+Your helpful AI companion
+Description
+Jelaskan fungsi alat bantu ini...
+Kembali
+Batal
+Buat Alat Bantu

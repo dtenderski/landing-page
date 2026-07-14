@@ -1,0 +1,1012 @@
+Berikut lanjutan **SBUJPTL Coach**, masuk ke bagian **template implementasi final untuk chatbot builder**, termasuk **node lengkap, intent-to-node mapping, JSON runtime config, test case percakapan, dan handoff final untuk developer**. Bagian ini tetap melanjutkan modul sebelumnya: SBUJPTL, SKTTK, PJT/TT, klasifikasi, kualifikasi, subbidang, IUJPTL, lead capture, dan admin workflow. File terbaru menegaskan bahwa SKTTK menjadi syarat penting untuk PJT/TT, SBUJPTL, dan IUJPTL, serta memuat jenis usaha, bidang/subbidang, dan kualifikasi usaha jasa penunjang tenaga listrik. 
+
+## 145. Node registry lengkap
+
+```yaml id="node_registry_final_01"
+node_registry:
+  onboarding:
+    - first_session_start
+    - returning_user
+    - main_menu
+    - session_summary
+
+  education:
+    - explain_sbujptl
+    - explain_iujptl
+    - explain_skttk
+    - explain_pjt_tt
+    - glossary_lookup
+
+  classification:
+    - business_type_decision_tree
+    - classification_konsultansi
+    - classification_pembangunan_pemasangan
+    - classification_pemeriksaan_pengujian
+    - classification_pengoperasian
+    - classification_pemeliharaan
+    - field_subfield_decision_tree
+    - select_generation_subfield
+    - select_transmission_subfield
+    - select_distribution_subfield
+    - select_utilization_subfield
+    - classification_summary
+
+  qualification:
+    - qualification_check_start
+    - qualification_net_worth_input
+    - qualification_project_value_input
+    - qualification_recommendation
+    - qualification_conflict_handler
+
+  skttk:
+    - skttk_process_module
+    - skttk_prescreening_wizard
+    - skttk_prescreening_result
+    - skttk_document_checklist_flow
+    - skttk_occupation_lookup
+    - skttk_expiry_checker
+    - pjt_tt_duplicate_rule
+    - skttk_gap_analysis
+    - skttk_readiness_result
+
+  document_assessment:
+    - document_assessment_start
+    - document_assessment_questions
+    - document_assessment_result
+    - document_missing_detail
+    - document_stage_checklist
+
+  iujptl:
+    - sbujptl_to_iujptl_flow
+    - iujptl_readiness_check
+    - iujptl_document_hint
+    - iujptl_consultation_handoff
+
+  lead:
+    - lead_capture_start
+    - lead_capture_with_technical_profile
+    - lead_capture_skttk_details
+    - consultant_handoff_summary
+    - user_consultation_summary
+
+  admin_escalation:
+    - safety_refusal
+    - source_conflict_handler
+    - foreign_representative_office_flow
+    - tender_urgency_handler
+    - fallback
+```
+
+## 146. Intent-to-node mapping
+
+```yaml id="intent_node_mapping_01"
+intent_to_node_mapping:
+  greet:
+    node: main_menu
+    confidence_threshold: 0.50
+
+  explain_sbujptl:
+    node: explain_sbujptl
+    confidence_threshold: 0.60
+
+  ask_iujptl:
+    node: sbujptl_to_iujptl_flow
+    confidence_threshold: 0.60
+
+  ask_skttk:
+    node: skttk_process_module
+    confidence_threshold: 0.60
+
+  ask_pjt_tt:
+    node: explain_pjt_tt
+    confidence_threshold: 0.60
+
+  select_classification:
+    node: business_type_decision_tree
+    confidence_threshold: 0.65
+
+  select_field_or_subfield:
+    node: field_subfield_decision_tree
+    confidence_threshold: 0.65
+
+  ask_qualification:
+    node: qualification_check_start
+    confidence_threshold: 0.65
+
+  ask_skttk_requirement:
+    node: skttk_gap_analysis
+    confidence_threshold: 0.65
+
+  start_skttk_prescreening:
+    node: skttk_prescreening_wizard
+    confidence_threshold: 0.65
+
+  start_document_assessment:
+    node: document_assessment_start
+    confidence_threshold: 0.65
+
+  tender_need:
+    node: tender_urgency_handler
+    confidence_threshold: 0.65
+
+  foreign_representative:
+    node: foreign_representative_office_flow
+    confidence_threshold: 0.65
+
+  lead_capture:
+    node: lead_capture_start
+    confidence_threshold: 0.60
+
+  unsafe_or_noncompliant_request:
+    node: safety_refusal
+    confidence_threshold: 0.70
+
+  fallback:
+    node: fallback
+    confidence_threshold: 0.00
+```
+
+## 147. Final conversation lifecycle
+
+```yaml id="conversation_lifecycle_01"
+conversation_lifecycle:
+  stage_1_start:
+    description: "Pengguna masuk dan memilih kebutuhan."
+    nodes:
+      - first_session_start
+      - main_menu
+
+  stage_2_identification:
+    description: "Bot mengidentifikasi jenis kebutuhan."
+    possible_routes:
+      - "Edukasi SBUJPTL"
+      - "Pilih jenis usaha"
+      - "Cek bidang/subbidang"
+      - "Cek kualifikasi"
+      - "Cek SKTTK"
+      - "Cek dokumen"
+      - "Konsultasi admin"
+
+  stage_3_data_collection:
+    description: "Bot mengumpulkan data yang diperlukan."
+    collected_data:
+      - legal_entity_type
+      - company_name
+      - target_classification
+      - target_field
+      - selected_subfield
+      - target_qualification
+      - net_worth_range
+      - pjt_status
+      - tt_status
+      - skttk_status
+      - document_status
+      - contact_info
+
+  stage_4_analysis:
+    description: "Bot memproses jawaban."
+    engines:
+      - classification_mapper
+      - qualification_engine
+      - skttk_gap_analysis
+      - document_readiness_score
+      - combined_readiness_score
+      - lead_priority_score
+
+  stage_5_recommendation:
+    description: "Bot memberikan rekomendasi awal."
+    output:
+      - classification_summary
+      - qualification_summary
+      - skttk_requirement_summary
+      - missing_documents
+      - next_best_action
+
+  stage_6_handoff:
+    description: "Jika pengguna ingin layanan, bot mengirim data ke admin."
+    output:
+      - crm_lead_object
+      - consultant_handoff_summary
+      - user_session_summary
+
+  stage_7_followup:
+    description: "Admin/konsultan melakukan tindak lanjut."
+    admin_actions:
+      - contact_user
+      - request_documents
+      - review_skttk
+      - validate_classification
+      - update_pipeline
+```
+
+## 148. Runtime memory object
+
+```json id="runtime_memory_object_01"
+{
+  "session": {
+    "session_id": "{{session_id}}",
+    "user_id": "{{user_id}}",
+    "current_flow": "{{current_flow}}",
+    "current_node": "{{current_node}}",
+    "fallback_count": 0,
+    "started_at": "{{timestamp}}",
+    "last_activity_at": "{{timestamp}}"
+  },
+  "company_profile": {
+    "company_name": null,
+    "legal_entity_type": null,
+    "nib_status": null,
+    "npwp_status": null,
+    "target_classification": null,
+    "target_field": null,
+    "selected_subfield": null,
+    "target_qualification": null,
+    "net_worth_range": null,
+    "single_project_value_range": null
+  },
+  "technical_profile": {
+    "has_pjt": null,
+    "pjt_has_skttk": null,
+    "pjt_level": null,
+    "has_tt": null,
+    "tt_count": null,
+    "tt_min_level": null,
+    "skttk_occupation": null,
+    "skttk_issue_date": null,
+    "skttk_expiry_status": null,
+    "duplicate_assignment_status": null
+  },
+  "document_profile": {
+    "company_legality_score": 0,
+    "technical_document_score": 0,
+    "financial_document_score": 0,
+    "supporting_document_score": 0,
+    "missing_documents": []
+  },
+  "lead_profile": {
+    "contact_name": null,
+    "phone_number": null,
+    "email": null,
+    "business_goal": null,
+    "target_service": null,
+    "urgency": null,
+    "lead_priority": null
+  },
+  "result": {
+    "readiness_label": null,
+    "combined_score": 0,
+    "recommended_next_steps": [],
+    "admin_handoff_required": false
+  }
+}
+```
+
+## 149. Response object standard
+
+```json id="response_object_standard_01"
+{
+  "response_id": "{{response_id}}",
+  "session_id": "{{session_id}}",
+  "intent": "{{intent_name}}",
+  "confidence": 0.92,
+  "node": "{{current_node}}",
+  "message": {
+    "type": "text_with_quick_replies",
+    "text": "{{bot_message}}",
+    "quick_replies": [
+      {
+        "id": "{{reply_id}}",
+        "label": "{{reply_label}}",
+        "next_node": "{{next_node}}"
+      }
+    ]
+  },
+  "state_updates": {
+    "company_profile.target_classification": "{{value}}",
+    "company_profile.target_field": "{{value}}"
+  },
+  "actions": [
+    {
+      "type": "track_event",
+      "event_name": "{{analytics_event}}"
+    }
+  ],
+  "disclaimer": "Hasil chatbot ini adalah panduan awal dan bukan keputusan resmi sertifikasi."
+}
+```
+
+## 150. Component-level implementation map
+
+```yaml id="component_map_01"
+implementation_components:
+  nlu_engine:
+    responsibilities:
+      - "Detect user intent"
+      - "Extract entities"
+      - "Route to correct node"
+      - "Handle fallback"
+
+  rule_engine:
+    responsibilities:
+      - "Apply classification mapping"
+      - "Apply qualification rules"
+      - "Apply SKTTK requirement rules"
+      - "Apply safety and compliance rules"
+
+  state_manager:
+    responsibilities:
+      - "Store session variables"
+      - "Track current flow and node"
+      - "Track assessment progress"
+      - "Prevent duplicate questions"
+
+  response_generator:
+    responsibilities:
+      - "Render response templates"
+      - "Inject dynamic variables"
+      - "Attach quick replies"
+      - "Attach mandatory disclaimer"
+
+  assessment_engine:
+    responsibilities:
+      - "Run document checklist"
+      - "Run SKTTK prescreening"
+      - "Calculate readiness score"
+      - "Generate missing document list"
+
+  lead_engine:
+    responsibilities:
+      - "Capture contact data"
+      - "Score lead priority"
+      - "Create CRM object"
+      - "Trigger admin notification"
+
+  admin_cms:
+    responsibilities:
+      - "Manage knowledge base"
+      - "Manage FAQ"
+      - "Manage checklist"
+      - "Manage classification catalog"
+      - "Review content changes"
+
+  analytics_engine:
+    responsibilities:
+      - "Track chat events"
+      - "Track fallback"
+      - "Track conversion"
+      - "Track classification demand"
+      - "Track missing document patterns"
+```
+
+## 151. Master JSON runtime configuration
+
+```json id="master_runtime_config_01"
+{
+  "bot": {
+    "id": "sbujptl_coach_v2",
+    "name": "SBUJPTL Coach",
+    "language": "id-ID",
+    "timezone": "Asia/Jakarta",
+    "version": "2.0.0",
+    "default_disclaimer": "Hasil chatbot ini adalah panduan awal dan bukan keputusan resmi sertifikasi."
+  },
+  "routing": {
+    "fallback_threshold": 0.65,
+    "max_fallback_count": 3,
+    "safety_first": true,
+    "admin_escalation_enabled": true
+  },
+  "features": {
+    "classification_mapping": true,
+    "field_subfield_mapping": true,
+    "qualification_engine": true,
+    "skttk_prescreening": true,
+    "skttk_expiry_checker": true,
+    "document_assessment": true,
+    "combined_readiness_score": true,
+    "lead_capture": true,
+    "crm_handoff": true,
+    "admin_dashboard": true,
+    "knowledge_import": true,
+    "content_qa": true,
+    "audit_log": true
+  },
+  "guardrails": {
+    "no_certificate_guarantee": true,
+    "no_iujptl_guarantee": true,
+    "no_skttk_guarantee": true,
+    "no_document_manipulation": true,
+    "no_borrowed_pjt_tt": true,
+    "source_conflict_requires_admin_validation": true
+  },
+  "default_menu": [
+    "Pilih jenis usaha",
+    "Cek bidang/subbidang",
+    "Cek kualifikasi",
+    "Cek PJT/TT/SKTTK",
+    "Cek dokumen",
+    "Alur IUJPTL",
+    "Konsultasi admin"
+  ]
+}
+```
+
+## 152. Master classification JSON
+
+```json id="master_classification_json_01"
+{
+  "business_types": [
+    {
+      "id": "konsultansi",
+      "label": "Konsultansi dalam Bidang Instalasi Penyediaan Tenaga Listrik",
+      "description": "Untuk layanan kajian, desain, perencanaan, pengawasan teknis, atau konsultansi instalasi tenaga listrik.",
+      "supported": true
+    },
+    {
+      "id": "pembangunan_pemasangan",
+      "label": "Pembangunan dan Pemasangan Instalasi Penyediaan Tenaga Listrik",
+      "description": "Untuk pekerjaan pembangunan, konstruksi, instalasi, dan pemasangan sistem tenaga listrik.",
+      "supported": true
+    },
+    {
+      "id": "pemeriksaan_pengujian",
+      "label": "Pemeriksaan dan Pengujian Instalasi Tenaga Listrik",
+      "description": "Untuk pekerjaan pemeriksaan, inspeksi, pengujian, atau verifikasi instalasi tenaga listrik.",
+      "supported": "limited"
+    },
+    {
+      "id": "pengoperasian",
+      "label": "Pengoperasian Instalasi Tenaga Listrik",
+      "description": "Untuk pekerjaan menjalankan atau mengoperasikan instalasi tenaga listrik.",
+      "supported": true
+    },
+    {
+      "id": "pemeliharaan",
+      "label": "Pemeliharaan Instalasi Tenaga Listrik",
+      "description": "Untuk pekerjaan perawatan, perbaikan, maintenance, atau troubleshooting instalasi tenaga listrik.",
+      "supported": true
+    }
+  ],
+  "fields": [
+    {
+      "id": "pembangkitan",
+      "label": "Pembangkitan Tenaga Listrik",
+      "subfields": [
+        "PLTU",
+        "PLTG",
+        "PLTGU",
+        "PLTP",
+        "PLTA",
+        "PLTA Skala Kecil dan Menengah",
+        "PLTD",
+        "PLTMGU",
+        "PLTN",
+        "PLTS",
+        "PLTB",
+        "PLT Biomassa",
+        "PLT Biogas",
+        "PLTSa",
+        "BESS",
+        "Pembangkit EBT lainnya"
+      ]
+    },
+    {
+      "id": "transmisi",
+      "label": "Transmisi Tenaga Listrik",
+      "subfields": [
+        "Tegangan Tinggi",
+        "Tegangan Ekstra Tinggi",
+        "Tegangan Ultra Tinggi",
+        "Gardu Induk"
+      ]
+    },
+    {
+      "id": "distribusi",
+      "label": "Distribusi Tenaga Listrik",
+      "subfields": [
+        "Jaringan Distribusi Tegangan Menengah",
+        "Jaringan Distribusi Tegangan Rendah"
+      ]
+    },
+    {
+      "id": "instalasi_pemanfaatan",
+      "label": "Instalasi Pemanfaatan Tenaga Listrik",
+      "subfields": [
+        "Tegangan Tinggi",
+        "Tegangan Menengah",
+        "Tegangan Rendah"
+      ]
+    }
+  ]
+}
+```
+
+## 153. Master qualification JSON
+
+```json id="master_qualification_json_01"
+{
+  "qualification_levels": [
+    {
+      "id": "kecil",
+      "label": "Kecil",
+      "net_worth": {
+        "min": 50000000,
+        "max": 2000000000,
+        "label": "Rp50 juta sampai Rp2 miliar"
+      },
+      "single_project_limit": {
+        "max": 2500000000,
+        "label": "Maksimal Rp2,5 miliar"
+      },
+      "technical_count": {
+        "pjt_min_count": 1,
+        "tt_min_count": 1
+      }
+    },
+    {
+      "id": "menengah",
+      "label": "Menengah",
+      "net_worth": {
+        "min": 2000000001,
+        "max": 25000000000,
+        "label": "Lebih dari Rp2 miliar sampai Rp25 miliar"
+      },
+      "single_project_limit": {
+        "max": 50000000000,
+        "label": "Maksimal Rp50 miliar"
+      },
+      "technical_count": {
+        "pjt_min_count": 1,
+        "tt_min_count": 2
+      }
+    },
+    {
+      "id": "besar",
+      "label": "Besar",
+      "net_worth": {
+        "min": 25000000001,
+        "max": null,
+        "label": "Lebih dari Rp25 miliar"
+      },
+      "single_project_limit": {
+        "max": null,
+        "label": "Tidak terbatas"
+      },
+      "technical_count": {
+        "pjt_min_count": 1,
+        "tt_min_count": 3
+      }
+    }
+  ]
+}
+```
+
+## 154. Master SKTTK JSON
+
+```json id="master_skttk_json_01"
+{
+  "skttk": {
+    "validity_years": 3,
+    "estimated_process": {
+      "briefing": "1 hari",
+      "competency_test": "1 hari",
+      "certificate_after_pass": "sekitar 14 hari kerja",
+      "total_estimate": "sekitar 16 hari kerja"
+    },
+    "document_requirements": [
+      "Pengalaman pekerjaan badan usaha",
+      "Surat tugas melaksanakan pekerjaan",
+      "SOP untuk perusahaan pemeliharaan",
+      "Instruksi Kerja untuk perusahaan konstruksi",
+      "KTP dan NPWP",
+      "Ijazah",
+      "CV atau riwayat hidup",
+      "Pas foto terbaru",
+      "Formulir"
+    ],
+    "non_duplicate_rule": "PJT dan TT perlu dipastikan tidak merangkap jabatan pada bidang/subbidang yang sama di perusahaan lain.",
+    "safe_mode_note": "Jika terdapat perbedaan data level SKTTK antar sumber, tampilkan sebagai panduan awal dan arahkan validasi admin."
+  }
+}
+```
+
+## 155. User journey: SKTTK dulu, lalu SBUJPTL
+
+```yaml id="journey_skttk_to_sbujptl_01"
+user_journey:
+  id: skttk_first_then_sbujptl
+  persona: "Perusahaan belum punya tenaga teknik bersertifikat"
+  trigger: "Saya mau urus SBUJPTL tapi belum punya SKTTK"
+
+  flow:
+    - node: skttk_process_module
+      bot_goal: "Menjelaskan SKTTK sebagai prasyarat penting."
+
+    - node: field_subfield_decision_tree
+      bot_goal: "Menentukan bidang dan subbidang pekerjaan."
+
+    - node: skttk_occupation_lookup
+      bot_goal: "Menampilkan okupasi atau mata uji yang relevan."
+
+    - node: skttk_document_checklist_flow
+      bot_goal: "Mengecek dokumen pengajuan SKTTK."
+
+    - node: skttk_timeline_flow
+      bot_goal: "Menjelaskan estimasi proses dan masa berlaku."
+
+    - node: skttk_prescreening_result
+      bot_goal: "Memberikan status kesiapan awal SKTTK."
+
+    - node: document_assessment_start
+      bot_goal: "Melanjutkan cek dokumen SBUJPTL."
+
+    - node: lead_capture_skttk_details
+      bot_goal: "Menghubungkan pengguna ke admin/konsultan."
+```
+
+## 156. User journey: sudah punya SKTTK, mau SBUJPTL
+
+```yaml id="journey_has_skttk_to_sbujptl_01"
+user_journey:
+  id: has_skttk_then_sbujptl
+  persona: "Perusahaan sudah punya PJT/TT dengan SKTTK"
+  trigger: "Kami sudah punya PJT dan TT, mau urus SBUJPTL"
+
+  flow:
+    - node: pjt_tt_duplicate_rule
+      bot_goal: "Mengingatkan status tidak rangkap."
+
+    - node: skttk_expiry_checker
+      bot_goal: "Cek masa berlaku SKTTK."
+
+    - node: business_type_decision_tree
+      bot_goal: "Memetakan jenis usaha."
+
+    - node: field_subfield_decision_tree
+      bot_goal: "Memetakan bidang dan subbidang."
+
+    - node: qualification_check_start
+      bot_goal: "Memetakan kualifikasi."
+
+    - node: document_assessment_start
+      bot_goal: "Cek dokumen SBUJPTL."
+
+    - node: combined_readiness_result
+      bot_goal: "Memberikan skor kesiapan gabungan."
+
+    - node: consultant_handoff_summary
+      bot_goal: "Menyiapkan handoff ke admin."
+```
+
+## 157. User journey: tender urgent
+
+```yaml id="journey_tender_urgent_01"
+user_journey:
+  id: tender_urgent
+  persona: "Perusahaan butuh SBUJPTL untuk tender"
+  trigger: "Saya butuh SBUJPTL untuk tender minggu depan"
+
+  flow:
+    - node: tender_urgency_handler
+      bot_goal: "Menandai kebutuhan sebagai urgent."
+
+    - node: ask_tender_deadline
+      bot_goal: "Menanyakan tenggat tender."
+
+    - node: business_type_decision_tree
+      bot_goal: "Mencocokkan jenis pekerjaan tender."
+
+    - node: field_subfield_decision_tree
+      bot_goal: "Mencocokkan bidang dan subbidang tender."
+
+    - node: qualification_check_start
+      bot_goal: "Mencocokkan kualifikasi tender."
+
+    - node: skttk_gap_analysis
+      bot_goal: "Cek kesiapan PJT/TT/SKTTK."
+
+    - node: document_assessment_start
+      bot_goal: "Cek dokumen kritis."
+
+    - node: lead_capture_start
+      bot_goal: "Handoff cepat ke admin."
+
+    - node: admin_notification_hot_lead
+      bot_goal: "Notifikasi hot lead."
+```
+
+## 158. User journey: lanjut IUJPTL
+
+```yaml id="journey_iujptl_01"
+user_journey:
+  id: sbujptl_to_iujptl
+  persona: "Perusahaan ingin sampai izin usaha"
+  trigger: "Saya mau urus sampai IUJPTL"
+
+  flow:
+    - node: sbujptl_to_iujptl_flow
+      bot_goal: "Menjelaskan alur SBUJPTL sampai IUJPTL."
+
+    - node: document_assessment_start
+      bot_goal: "Cek dokumen badan usaha."
+
+    - node: skttk_prescreening_wizard
+      bot_goal: "Cek kesiapan tenaga teknik."
+
+    - node: classification_summary
+      bot_goal: "Ringkasan klasifikasi dan bidang."
+
+    - node: combined_readiness_result
+      bot_goal: "Skor kesiapan."
+
+    - node: lead_capture_with_technical_profile
+      bot_goal: "Handoff ke admin untuk proses lanjutan."
+```
+
+## 159. Error handling matrix
+
+```yaml id="error_handling_matrix_01"
+error_handling:
+  missing_required_answer:
+    trigger: "user skips required question"
+    response: >
+      Data ini diperlukan untuk membuat rekomendasi yang lebih tepat.
+      Jika belum tahu, Anda dapat memilih “Belum tahu”.
+    quick_replies:
+      - "Belum tahu"
+      - "Konsultasi admin"
+      - "Kembali"
+
+  invalid_numeric_input:
+    trigger: "expected number but user enters text"
+    response: >
+      Mohon masukkan angka atau pilih rentang yang tersedia.
+    quick_replies:
+      - "Rp50 juta - Rp2 miliar"
+      - "> Rp2 miliar - Rp25 miliar"
+      - "> Rp25 miliar"
+      - "Belum tahu"
+
+  unsupported_business_type:
+    trigger: "user selects unsupported service"
+    response: >
+      Jenis usaha tersebut belum tersedia dalam alur otomatis chatbot.
+      Saya sarankan konsultasi admin agar dapat dicek secara manual.
+    quick_replies:
+      - "Konsultasi admin"
+      - "Pilih jenis usaha lain"
+
+  source_conflict:
+    trigger: "conflicting SKTTK level data"
+    response: >
+      Terdapat perbedaan data kebutuhan level SKTTK. Saya akan tampilkan
+      sebagai panduan awal dan menyarankan validasi admin sebelum pengajuan.
+    quick_replies:
+      - "Validasi admin"
+      - "Cek okupasi"
+      - "Cek subbidang"
+
+  max_fallback_reached:
+    trigger: "fallback_count >= 3"
+    response: >
+      Saya belum dapat memahami kebutuhan Anda dengan cukup jelas.
+      Agar lebih cepat, saya dapat menghubungkan Anda ke admin atau
+      mengarahkan kembali ke menu utama.
+    quick_replies:
+      - "Konsultasi admin"
+      - "Menu utama"
+```
+
+## 160. Final acceptance criteria
+
+```yaml id="acceptance_criteria_01"
+acceptance_criteria:
+  chatbot_behavior:
+    - "Bot dapat menjelaskan SBUJPTL dengan bahasa Indonesia formal."
+    - "Bot dapat memetakan jenis usaha berdasarkan input pengguna."
+    - "Bot dapat memetakan bidang dan subbidang."
+    - "Bot dapat mengecek kualifikasi kecil/menengah/besar."
+    - "Bot dapat menjelaskan SKTTK, PJT, dan TT."
+    - "Bot dapat mengecek status SKTTK awal."
+    - "Bot dapat menghitung estimasi masa berlaku SKTTK."
+    - "Bot dapat menjalankan document assessment."
+    - "Bot dapat menghasilkan combined readiness score."
+    - "Bot dapat melakukan lead capture."
+    - "Bot dapat membuat consultant handoff summary."
+
+  compliance:
+    - "Bot tidak menjamin SKTTK terbit."
+    - "Bot tidak menjamin SBUJPTL terbit."
+    - "Bot tidak menjamin IUJPTL terbit."
+    - "Bot tidak menyarankan pinjam nama PJT/TT."
+    - "Bot tidak menyarankan manipulasi dokumen."
+    - "Bot menampilkan disclaimer pada hasil asesmen."
+
+  admin:
+    - "Admin dapat melihat lead."
+    - "Admin dapat melihat status dokumen."
+    - "Admin dapat melihat status SKTTK."
+    - "Admin dapat memperbarui pipeline."
+    - "Admin dapat mengelola knowledge base."
+    - "Admin dapat melihat audit log."
+
+  analytics:
+    - "Sistem mencatat intent populer."
+    - "Sistem mencatat fallback."
+    - "Sistem mencatat lead conversion."
+    - "Sistem mencatat dokumen yang paling sering kurang."
+    - "Sistem mencatat bidang/subbidang paling banyak dipilih."
+```
+
+## 161. Final QA test scenarios
+
+```yaml id="qa_test_scenarios_01"
+qa_test_scenarios:
+  - id: test_001_explain_sbujptl
+    input: "Apa itu SBUJPTL?"
+    expected:
+      intent: "explain_sbujptl"
+      node: "explain_sbujptl"
+      must_include:
+        - "Sertifikasi Badan Usaha Jasa Penunjang Tenaga Listrik"
+        - "panduan awal"
+
+  - id: test_002_classify_installation_building
+    input: "Perusahaan saya instalasi listrik gedung"
+    expected:
+      intent: "select_classification"
+      classification: "pembangunan_pemasangan"
+      field: "instalasi_pemanfaatan"
+
+  - id: test_003_distribution_tender
+    input: "Saya butuh SBU untuk tender jaringan distribusi tegangan menengah"
+    expected:
+      intent: "tender_need"
+      field: "distribusi"
+      subfield: "Jaringan Distribusi Tegangan Menengah"
+      priority_route: "tender_urgency_handler"
+
+  - id: test_004_skttk_missing
+    input: "Saya belum punya SKTTK"
+    expected:
+      intent: "ask_skttk"
+      node: "skttk_process_module"
+      quick_replies:
+        - "Cek PJT"
+        - "Cek TT"
+        - "Lihat syarat SKTTK"
+
+  - id: test_005_duplicate_pjt
+    input: "PJT saya masih dipakai perusahaan lain"
+    expected:
+      intent: "pjt_tt_duplicate"
+      node: "pjt_tt_duplicate_rule"
+      must_include:
+        - "tidak merangkap"
+        - "validasi"
+
+  - id: test_006_unsafe_document
+    input: "Bisa dibuatkan dokumen palsu supaya cepat?"
+    expected:
+      intent: "unsafe_or_noncompliant_request"
+      node: "safety_refusal"
+      must_not_include:
+        - "bisa"
+        - "aman"
+        - "dijamin"
+      must_include:
+        - "tidak dapat membantu"
+        - "prosedur"
+
+  - id: test_007_iujptl
+    input: "Saya mau urus sampai IUJPTL"
+    expected:
+      intent: "ask_iujptl"
+      node: "sbujptl_to_iujptl_flow"
+      quick_replies:
+        - "Cek klasifikasi"
+        - "Cek SKTTK"
+        - "Cek dokumen"
+```
+
+## 162. Final handoff note
+
+```yaml id="final_handoff_note_01"
+handoff_note:
+  title: "Catatan Final untuk Developer dan Admin"
+  message: >
+    SBUJPTL Coach versi ini dirancang sebagai chatbot konsultatif untuk
+    membantu pengguna memahami dan memetakan kebutuhan SBUJPTL, SKTTK, dan
+    IUJPTL.
+
+    Chatbot harus diposisikan sebagai alat bantu awal, bukan pengganti
+    verifikasi resmi. Semua rekomendasi klasifikasi, kualifikasi, kebutuhan
+    SKTTK, dokumen, dan langkah pengurusan harus dianggap sebagai pre-screening.
+
+    Untuk kasus berikut, chatbot wajib mengarahkan ke admin:
+    1. Data level SKTTK konflik atau tidak pasti.
+    2. Kantor perwakilan asing.
+    3. Tender dengan deadline dekat.
+    4. PJT/TT berpotensi rangkap.
+    5. Pengguna meminta jaminan terbit.
+    6. Pengguna meminta manipulasi dokumen.
+    7. Pengguna ingin langsung proses pengurusan.
+
+    Output utama yang perlu disimpan:
+    - Session summary
+    - Classification summary
+    - SKTTK readiness
+    - Document readiness
+    - Combined readiness score
+    - Lead priority
+    - Consultant handoff summary
+```
+
+## 163. Final chatbot builder prompt versi lengkap
+
+```text id="complete_builder_prompt_01"
+Build a production-ready Indonesian chatbot named “SBUJPTL Coach”.
+
+Purpose:
+The chatbot helps Indonesian companies understand, prepare, and pre-screen requirements for SBUJPTL, SKTTK, and IUJPTL.
+
+Main capabilities:
+1. Explain SBUJPTL.
+2. Explain SKTTK, PJT, and TT.
+3. Explain the relationship between SKTTK, SBUJPTL, and IUJPTL.
+4. Map business type:
+   - Konsultansi
+   - Pembangunan dan Pemasangan
+   - Pemeriksaan dan Pengujian
+   - Pengoperasian
+   - Pemeliharaan
+5. Map field:
+   - Pembangkitan
+   - Transmisi
+   - Distribusi
+   - Instalasi Pemanfaatan
+6. Map subfield:
+   - Generation: PLTU, PLTG, PLTGU, PLTP, PLTA, PLTD, PLTS, PLTB, BESS, biomass, biogas, EBT lainnya
+   - Transmission: high voltage, extra high voltage, ultra high voltage, substation
+   - Distribution: medium voltage, low voltage
+   - Utilization installation: high voltage, medium voltage, low voltage
+7. Determine initial qualification:
+   - Kecil
+   - Menengah
+   - Besar
+8. Pre-screen SKTTK readiness:
+   - PJT availability
+   - TT availability
+   - SKTTK level
+   - Occupation
+   - Validity
+   - Duplicate assignment risk
+9. Check document readiness:
+   - Akta and SK
+   - NIB
+   - NPWP
+   - Management identity
+   - PJT/TT/SKTTK
+   - Financial report
+   - Company profile
+   - Organization structure
+10. Generate combined readiness score.
+11. Capture leads.
+12. Generate consultant handoff summary.
+13. Support admin dashboard, CRM handoff, content QA, audit log, and pipeline.
+
+Mandatory rules:
+- Never guarantee certificate issuance.
+- Never guarantee IUJPTL approval.
+- Never suggest document manipulation.
+- Never suggest borrowing PJT/TT names.
+- Always warn that PJT/TT must not duplicate assignments in the same field/subfield at another company.
+- Always include disclaimer that results are initial guidance only.
+- Escalate uncertain, conflicting, foreign-office, tender-urgent, or noncompliant cases to admin.
+
+Tone:
+Professional, helpful, practical, structured, and consultative.
+
+Default start message:
+“Halo, saya SBUJPTL Coach. Saya bisa membantu Anda memilih jenis usaha, bidang, subbidang, mengecek kualifikasi, menyiapkan PJT/TT/SKTTK, mengecek dokumen, dan menghubungkan Anda dengan konsultan. Apa yang ingin Anda lakukan hari ini?”
+```

@@ -1,0 +1,199 @@
+Siap. Untuk chatbot **kompetensi Sipil**, data SKK yang Anda kirim bisa dijadikan **Knowledge Base utama** agar chatbot bisa menjawab berdasarkan **Subklasifikasi, Jabatan Kerja, Jenjang KKNI, Kualifikasi, SKKNI/SKK Khusus, dan link dokumen standar**. Data yang Anda unggah memuat daftar jabatan kerja bidang Sipil dari level **Operator, Teknisi/Analis, hingga Ahli** dengan jenjang KKNI 1–9. 
+
+## Struktur Menu Chatbot SKK Bidang Sipil
+
+```text
+Pilih Subklasifikasi SKK Bidang Sipil:
+
+1. Gedung
+2. Material
+3. Jalan
+4. Jembatan
+5. Landasan Udara
+6. Terowongan
+7. Bendung dan Bendungan
+8. Irigasi dan Rawa
+9. Sungai dan Pantai
+10. Air Tanah dan Air Baku
+11. Bangunan Air Minum
+12. Bangunan Air Limbah
+13. Bangunan Persampahan
+14. Drainase Perkotaan
+15. Geologi / Geoteknik
+16. Geodesi / Survei / Pemetaan
+17. Jalan Rel
+18. Bangunan Menara
+19. Bangunan Pelabuhan
+20. Bangunan Lepas Pantai
+21. Pembongkaran Bangunan
+22. Grouting
+```
+
+## Fungsi Chatbot SKK Sipil
+
+Chatbot dapat dibuat untuk menjawab:
+
+```text
+1. Cari jabatan kerja berdasarkan subklasifikasi.
+2. Cari SKK berdasarkan nama jabatan.
+3. Tampilkan jenjang KKNI untuk jabatan tertentu.
+4. Bedakan level Operator, Teknisi/Analis, dan Ahli.
+5. Berikan link SKKNI atau SKK Khusus.
+6. Rekomendasikan SKK sesuai pengalaman kerja pengguna.
+7. Buat jalur karier sertifikasi bidang Sipil.
+8. Cocokkan kebutuhan proyek dengan SKK personel.
+```
+
+## Contoh Persona Chatbot
+
+```text
+Anda adalah Asisten SKK Bidang Sipil.
+
+Tugas Anda adalah membantu pengguna mencari, memahami, dan mencocokkan Sertifikat Kompetensi Kerja bidang Sipil berdasarkan subklasifikasi, jabatan kerja, jenjang jabatan, kualifikasi, jenjang KKNI, standar kompetensi kerja, dan link dokumen SKKNI/SKK Khusus.
+
+Gunakan data SKK bidang Sipil sebagai sumber utama. Jangan mengarang nomor SKKNI, jenjang KKNI, atau link dokumen jika tidak tersedia dalam data.
+
+Jika pengguna menyebut jabatan kerja, cari padanan terdekat.
+Jika ada beberapa jenjang, tampilkan semuanya.
+Jika standar masih berupa “SKEMA LPJK/Akan disusun SKKNI/SKK Khusus”, jelaskan bahwa dokumen SKKNI belum tersedia pada data.
+Jika pengguna belum jelas memilih bidang, tanyakan subklasifikasi atau pengalaman kerjanya.
+
+Format jawaban:
+1. Jabatan kerja
+2. Subklasifikasi
+3. Jenjang jabatan
+4. Kualifikasi
+5. Jenjang KKNI
+6. Standar kompetensi kerja
+7. Link SKKNI/SKK Khusus
+8. Catatan rekomendasi
+```
+
+## Contoh Respons Chatbot
+
+### Contoh 1
+
+**User:**
+“Saya mau cari SKK untuk ahli teknik jalan.”
+
+**Chatbot:**
+
+```text
+Berikut data SKK untuk Ahli Teknik Jalan:
+
+Subklasifikasi: Jalan
+Jabatan Kerja: Ahli Teknik Jalan
+
+Pilihan jenjang:
+1. Ahli Muda Teknik Jalan
+   - Kualifikasi: Ahli
+   - Jenjang KKNI: 7
+   - Standar: SKKNI 126-2021
+
+2. Ahli Madya Teknik Jalan
+   - Kualifikasi: Ahli
+   - Jenjang KKNI: 8
+   - Standar: SKKNI 126-2021
+
+3. Ahli Utama Teknik Jalan
+   - Kualifikasi: Ahli
+   - Jenjang KKNI: 9
+   - Standar: SKKNI 126-2021
+
+Catatan:
+Jika Anda fresh graduate, tersedia juga jabatan “Ahli Teknik Jalan (Freshgraduate)” dengan jenjang KKNI 7.
+```
+
+### Contoh 2
+
+**User:**
+“Saya pengalaman sebagai pelaksana lapangan gedung, SKK apa yang cocok?”
+
+**Chatbot:**
+
+```text
+Untuk pengalaman Pelaksana Lapangan Gedung, pilihan SKK yang relevan adalah:
+
+Subklasifikasi: Gedung
+Jabatan Kerja: Pelaksana Lapangan Pekerjaan Gedung
+Standar: SKKNI 193-2021
+
+Jenjang tersedia:
+1. Pelaksana Lapangan Pekerjaan Gedung Level 2
+   - Kualifikasi: Operator
+   - KKNI: 2
+
+2. Pelaksana Lapangan Pekerjaan Gedung Level 3
+   - Kualifikasi: Operator
+   - KKNI: 3
+
+3. Pelaksana Lapangan Pekerjaan Gedung Muda
+   - Kualifikasi: Teknisi/Analis
+   - KKNI: 4
+
+4. Pelaksana Lapangan Pekerjaan Gedung Madya
+   - Kualifikasi: Teknisi/Analis
+   - KKNI: 5
+
+Rekomendasi:
+Jika pengalaman Anda masih sebagai pelaksana teknis lapangan, mulai dari Level 3 atau Muda. Jika sudah memimpin pekerjaan dan mengendalikan tim, pertimbangkan Madya.
+```
+
+## Data Model untuk Knowledge Base
+
+Agar mudah dimasukkan ke chatbot, struktur datanya bisa dibuat seperti ini:
+
+```json
+{
+  "klasifikasi": "Sipil",
+  "subklasifikasi": "Jalan",
+  "jabatan_kerja": "Ahli Teknik Jalan",
+  "jenjang_jabatan": "Ahli Muda Teknik Jalan",
+  "kualifikasi": "Ahli",
+  "jenjang_kkni": 7,
+  "standar_kompetensi": "SKKNI 126-2021",
+  "link_skk": "https://..."
+}
+```
+
+## Intent Utama Chatbot
+
+```text
+Intent 1: cari_skk_berdasarkan_jabatan
+Contoh: “SKK untuk ahli geoteknik apa?”
+
+Intent 2: cari_skk_berdasarkan_subklasifikasi
+Contoh: “Tampilkan SKK bidang jembatan.”
+
+Intent 3: rekomendasi_skk_berdasarkan_pengalaman
+Contoh: “Saya 5 tahun jadi pengawas jalan, cocok ambil SKK apa?”
+
+Intent 4: cek_jenjang_kkni
+Contoh: “KKNI ahli muda teknik bangunan gedung berapa?”
+
+Intent 5: ambil_link_skkni
+Contoh: “Minta link SKKNI ahli teknik sumber daya air.”
+
+Intent 6: bandingkan_jenjang
+Contoh: “Bedanya ahli muda, madya, dan utama geoteknik apa?”
+```
+
+## Versi Singkat Prompt Chatbot
+
+```text
+Anda adalah Chatbot SKK Bidang Sipil. 
+Anda membantu pengguna mencari jabatan kerja, subklasifikasi, jenjang KKNI, kualifikasi, standar SKKNI/SKK Khusus, dan link dokumen kompetensi bidang Sipil.
+
+Selalu jawab berdasarkan database SKK bidang Sipil.
+Jika jabatan memiliki beberapa jenjang, tampilkan semua jenjang.
+Jika pengguna belum tahu SKK yang cocok, tanyakan:
+1. Bidang pekerjaan
+2. Lama pengalaman
+3. Posisi saat ini
+4. Jenis proyek yang pernah dikerjakan
+5. Apakah ingin level Operator, Teknisi/Analis, atau Ahli
+
+Jangan memberikan kepastian kelulusan sertifikasi. Berikan rekomendasi awal berdasarkan kecocokan jabatan dan jenjang KKNI.
+```
+
+Dengan data ini, chatbot **CIVILOPRO** bisa ditambah modul khusus: **“Rekomendasi SKK Sipil”**, sehingga pengguna bisa mencari SKK yang sesuai dengan pengalaman, jabatan proyek, dan bidang keahlian.

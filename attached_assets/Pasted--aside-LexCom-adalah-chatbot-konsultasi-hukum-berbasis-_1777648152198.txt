@@ -1,0 +1,203 @@
+<aside>
+⚖️
+
+**LexCom** adalah chatbot konsultasi hukum berbasis arsitektur **multi-agent OpenClaw** dengan 1 orchestrator dan 12 agen spesialis. Knowledge base mencakup **KUHP baru (UU 1/2023)**, **KUHPerdata**, **yurisprudensi MA/MK**, dan **peraturan perundangan Indonesia** yang berlaku.
+
+**Target pengguna:** Advokat/Law Firm · In-house Counsel/Korporat · Masyarakat Umum (dengan routing otomatis berdasarkan tier).
+
+</aside>
+
+## 1. Ringkasan Eksekutif
+
+LexCom dirancang sebagai *Legal AI Assistant* yang mampu:
+
+- Memberikan **konsultasi hukum awal** dengan rujukan pasal & yurisprudensi.
+- Melakukan **legal research** lintas KUHP, KUHPerdata, UU sektoral, putusan MA/MK.
+- Membuat **draft dokumen hukum** (gugatan, kontrak, legal opinion, somasi, MoU).
+- Menyusun **strategi litigasi** dan analisis risiko hukum.
+- Mengedukasi pengguna awam dengan bahasa sederhana dan disclaimer yang tepat.
+
+<aside>
+⚠️
+
+**Disclaimer Inti:** LexCom adalah *legal information system*, **bukan pengganti advokat berlisensi**. Semua output bersifat informatif dan harus diverifikasi oleh advokat/penasihat hukum sebelum digunakan dalam proses formal.
+
+</aside>
+
+## 2. Arsitektur Multi-Agent
+
+```mermaid
+flowchart TD
+	U["User<br>(Advokat / Korporat / Awam)"] --> ROUTER["Tier Router<br>Identifikasi profil & kebutuhan"]
+	ROUTER --> ORCH["LEX-ORCHESTRATOR<br>(Routing & Sintesis)"]
+	ORCH --> A1["AGENT-PIDANA"]
+	ORCH --> A2["AGENT-PERDATA"]
+	ORCH --> A3["AGENT-KORPORASI"]
+	ORCH --> A4["AGENT-KETENAGAKERJAAN"]
+	ORCH --> A5["AGENT-PERTANAHAN"]
+	ORCH --> A6["AGENT-PAJAK"]
+	ORCH --> A7["AGENT-YURISPRUDENSI"]
+	ORCH --> A8["AGENT-DRAFTER"]
+	ORCH --> A9["AGENT-LITIGASI"]
+	ORCH --> A10["AGENT-KEPAILITAN/PKPU"]
+	ORCH --> A11["AGENT-MULTICLAW"]
+	ORCH --> A12["AGENT-OPENCLAW"]
+	A1 --> KB["Knowledge Base<br>KUHP · KUHPerdata · UU · Yurisprudensi"]
+	A2 --> KB
+	A3 --> KB
+	A4 --> KB
+	A5 --> KB
+	A6 --> KB
+	A7 --> KB
+	A8 --> TPL["Template Library<br>Gugatan · Kontrak · LO · Somasi"]
+	A9 --> KB
+	A10 --> KB
+	A11 --> KB
+	A12 --> KB
+	KB --> ORCH
+	TPL --> ORCH
+	ORCH --> OUT["Output:<br>Jawaban · Dokumen · Strategi<br>+ Citation + Disclaimer"]
+```
+
+## 3. Daftar Agen Spesialis
+
+| **Agent** | **Domain** | **KB Utama** | **Output Khas** |
+| --- | --- | --- | --- |
+| LEX-ORCHESTRATOR | Routing, klarifikasi, sintesis multi-agen | Meta KB (taksonomi domain hukum) | Routing decision, jawaban tergabung |
+| AGENT-PIDANA | Hukum pidana materiil & formil | UU 1/2023 (KUHP baru), UU 8/1981 (KUHAP), UU Tipikor, UU TPPU, UU ITE | Analisis unsur tindak pidana, ancaman, pembelaan |
+| AGENT-PERDATA | Hukum perdata, kontrak, PMH | KUHPerdata (BW), HIR/RBg, PERMA terkait | Analisis wanprestasi, PMH, ganti rugi |
+| AGENT-KORPORASI | Hukum perusahaan & pasar modal | UU 40/2007 (PT), UU Cipta Kerja, POJK, UU Pasar Modal | GCG, M&A, RUPS, due diligence |
+| AGENT-KETENAGAKERJAAN | Hukum perburuhan & PHI | UU 13/2003, UU 6/2023 (Cipta Kerja), PP 35/2021, UU PPHI | PHK, perselisihan industrial, perjanjian kerja |
+| AGENT-PERTANAHAN | Hukum agraria & pertanahan | UU 5/1960 (UUPA), PP 18/2021, peraturan BPN/ATR | Sengketa tanah, sertifikasi, ganti rugi pengadaan tanah |
+| AGENT-PAJAK | Hukum perpajakan & sengketa pajak | UU KUP, UU 7/2021 (HPP), UU Pengadilan Pajak, PMK terkait | Keberatan, banding, gugatan pajak |
+| AGENT-YURISPRUDENSI | Riset putusan MA, MK, PT | Database putusan, anotasi, kaidah hukum | Ringkasan kasus + ratio decidendi + relevansi |
+| AGENT-DRAFTER | Drafting dokumen hukum | Template gugatan, kontrak, LO, somasi, MoU | Draft dokumen siap-revisi advokat |
+| AGENT-LITIGASI | Strategi beracara & eksekusi | HIR/RBg, PERMA, taktik beracara | Strategi pembuktian, eksepsi, eksekusi putusan |
+| AGENT-KEPAILITAN | Kepailitan & PKPU | UU 37/2004, putusan Pengadilan Niaga | Permohonan PKPU/pailit, verifikasi piutang |
+| **AGENT-MULTICLAW** | Perkara lintas-domain (cross-cutting): korupsi+TPPU, mafia tanah, fraud korporat, kebocoran data, M&A lintas yurisdiksi | Cross-references antar KB + doktrin lex specialis, ne bis in idem, concursus | Peta domain + analisis per domain + sintesis prioritas & forum |
+| **AGENT-OPENCLAW** | Hukum emerging (AI, crypto, ESG, climate), perbandingan hukum, edukasi & eksplorasi domain | EU AI Act, GDPR, MiCA, POJK 27/2024, POJK 51/2017, taksonomi hijau OJK, jurisprudensi global | Komparasi yurisdiksi + gap analysis Indonesia + edukasi konseptual |
+
+## 4. Tier Pengguna & Routing
+
+| **Tier** | **Profil** | **Bahasa** | **Kedalaman** | **Output** |
+| --- | --- | --- | --- | --- |
+| **T1 – Awam** | Masyarakat umum, klien individu | Bahasa sederhana, analogi sehari-hari | Konsep dasar + langkah praktis | Penjelasan + rekomendasi cari advokat |
+| **T2 – Korporat** | In-house counsel, manajer, direksi | Bahasa bisnis-legal | Risiko, mitigasi, opsi komersial | Memo, risk matrix, draft kontrak |
+| **T3 – Advokat** | Lawyer, paralegal, akademisi | Bahasa hukum teknis penuh | Pasal, doktrin, yurisprudensi, ratio | Legal opinion, gugatan, eksepsi |
+
+## 5. Knowledge Base — Struktur Inti
+
+- **KB-KUHP-2023** — UU 1/2023 + transisi dari KUHP lama (Wetboek van Strafrecht).
+- **KB-KUHPERDATA** — Buku I–IV BW + interpretasi modern.
+- **KB-UU-SEKTORAL** — UU Cipta Kerja, UU PT, UU Pasar Modal, UU Perlindungan Konsumen, UU PDP, UU ITE, UU Tipikor, UU TPPU, dll.
+- **KB-PERATURAN-PELAKSANA** — PP, Perpres, Permen, POJK, PERMA, SEMA.
+- **KB-YURISPRUDENSI** — Putusan MA (kasasi/PK), MK (judicial review), PT, Pengadilan Niaga, Pengadilan Pajak, PHI.
+- **KB-DOKTRIN** — Pendapat ahli, buku teks, jurnal hukum.
+- **KB-TEMPLATE** — Gugatan, jawaban, replik, duplik, kontrak, LO, somasi, MoU, NDA, kuasa.
+
+→ Detail lengkap di halaman anak **KB Detail**.
+
+## 6. Alur Konsultasi (Conversation Flow)
+
+```mermaid
+sequenceDiagram
+	participant U as User
+	participant O as LEX-ORCHESTRATOR
+	participant S as Specialist Agent
+	participant Y as AGENT-YURISPRUDENSI
+	participant D as AGENT-DRAFTER
+	U->>O: Pertanyaan/kasus
+	O->>O: Klasifikasi tier (T1/T2/T3) + domain
+	O->>O: Klarifikasi fakta (5W1H legal)
+	O->>S: Delegasi ke spesialis (mis. PERDATA)
+	S->>Y: Cari yurisprudensi pendukung
+	Y-->>S: Putusan + ratio decidendi
+	S-->>O: Analisis hukum + rekomendasi
+	alt User minta dokumen
+		O->>D: Generate draft
+		D-->>O: Dokumen draft
+	end
+	O-->>U: Jawaban + citation + disclaimer + next-step
+```
+
+## 7. RACI Tim Implementasi
+
+| **Aktivitas** | **Legal Lead** | **AI Engineer** | **Knowledge Curator** | **QA Legal** | **Product Owner** |
+| --- | --- | --- | --- | --- | --- |
+| Definisi domain & taksonomi | R/A | C | R | C | I |
+| Kurasi KUHP, UU, yurisprudensi | A | C | R | C | I |
+| Penulisan system prompt | C | R | C | C | A |
+| Integrasi multi-agent | I | R/A | I | I | C |
+| QA jawaban hukum | C | I | C | R/A | I |
+| Validasi template dokumen | R/A | I | C | R | I |
+| Update KB rutin | C | I | R/A | C | I |
+
+## 8. Guardrails & Etika
+
+<aside>
+🛡️
+
+**Hard Rules — Tidak Boleh Dilanggar**
+
+</aside>
+
+- ❌ **Tidak memberikan saran untuk menghindari hukum**, melakukan tindak pidana, suap, pemalsuan dokumen, atau penghindaran pajak ilegal.
+- ❌ **Tidak menyamar sebagai advokat berlisensi** atau memberikan kepastian putusan.
+- ❌ **Tidak menyimpan/membocorkan data klien** di luar sesi tanpa izin (privilege & confidentiality).
+- ❌ **Tidak membuat klaim faktual tanpa rujukan** (pasal/putusan/peraturan).
+- ✅ **Selalu cantumkan disclaimer** bahwa output bukan pengganti advokat.
+- ✅ **Selalu cantumkan citation** (UU/Pasal/Nomor Putusan/Tanggal).
+- ✅ **Selalu sarankan verifikasi** ke advokat berlisensi atau lembaga resmi.
+- ✅ **Hormati attorney-client privilege** jika digunakan oleh advokat.
+
+## 9. Format Jawaban Standar
+
+Setiap jawaban LexCom mengikuti struktur **IRAC+**:
+
+1. **Issue** — Pertanyaan hukum yang diidentifikasi.
+2. **Rule** — Pasal, peraturan, doktrin yang berlaku (dengan citation).
+3. **Application** — Analisis fakta terhadap rule.
+4. **Conclusion** — Kesimpulan + tingkat keyakinan.
+5. **Next Steps** — Tindakan praktis yang disarankan.
+6. **Sources** — Daftar rujukan formal.
+7. **Disclaimer** — Pengingat batasan AI.
+
+## 10. Halaman Anak
+
+Dokumentasi lengkap dipecah ke halaman-halaman berikut:
+
+- **System Prompt OpenClaw** — instruksi lengkap orchestrator + 10 agen spesialis.
+- **Persona Gustafta & Conversation Starters** — konfigurasi UI builder.
+- **KB Detail** — struktur knowledge base KUHP/yurisprudensi/peraturan.
+- **Generator Dokumen Hukum** — template & alur drafting.
+- **Roadmap Implementasi + KPI Dashboard** — 6 bulan rollout.
+
+## 11. Referensi Eksternal
+
+- [aiforwork.co](http://aiforwork.co) [— Legal Department](https://www.aiforwork.co/department/legal) — referensi prompt library legal.
+- [LexCom Apps (Replit)](https://replit.com/@buatanreplit/LexCom-Apps-3) — prototype aplikasi referensi.
+- Database putusan: [putusan3.mahkamahagung.go.id](http://putusan3.mahkamahagung.go.id), [mkri.id](http://mkri.id).
+- Database peraturan: [peraturan.bpk.go.id](http://peraturan.bpk.go.id), [peraturan.go.id](http://peraturan.go.id).
+
+<aside>
+📌
+
+Dokumen ini adalah **blueprint hidup** — diperbarui seiring evolusi regulasi (KUHP baru efektif 2 Januari 2026), yurisprudensi baru, dan feedback pengguna.
+
+</aside>
+
+[System Prompt OpenClaw — LexCom (Multi-Agent Legal Consultation)](https://www.notion.so/System-Prompt-OpenClaw-LexCom-Multi-Agent-Legal-Consultation-3329225f581e471eb97467a863fbcaa9?pvs=21)
+
+[Generator Dokumen Hukum — Template & Onboarding Drafting](https://www.notion.so/Generator-Dokumen-Hukum-Template-Onboarding-Drafting-7910f466d92b4023a69fca36e6d09cd5?pvs=21)
+
+[Roadmap Implementasi LexCom — 6 Bulan, RACI & KPI Dashboard](https://www.notion.so/Roadmap-Implementasi-LexCom-6-Bulan-RACI-KPI-Dashboard-4f857d27956342cb92c7cac4ee2dfc1b?pvs=21)
+
+[KB Detail — KUHP, KUHPerdata, Yurisprudensi & Peraturan Perundangan](https://www.notion.so/KB-Detail-KUHP-KUHPerdata-Yurisprudensi-Peraturan-Perundangan-1d7546d555734f97a54e4170f551fac4?pvs=21)
+
+[Roadmap Implementasi LexCom — 6 Bulan, RACI & KPI Dashboard](https://www.notion.so/Roadmap-Implementasi-LexCom-6-Bulan-RACI-KPI-Dashboard-0854b6c598724625a0e93c198a9fe0dd?pvs=21)
+
+[Persona Gustafta — Konfigurasi LEX-ORCHESTRATOR & 10 Agen Spesialis](https://www.notion.so/Persona-Gustafta-Konfigurasi-LEX-ORCHESTRATOR-10-Agen-Spesialis-662f4b10cfeb4ddc9f6bdeb131d98f67?pvs=21)
+
+[KB Detail — KUHP, KUHPerdata, Yurisprudensi & Peraturan Perundangan](https://www.notion.so/KB-Detail-KUHP-KUHPerdata-Yurisprudensi-Peraturan-Perundangan-42de65efd01b43cb9208e52667e5e6cb?pvs=21)
+
+[Generator Dokumen Hukum — Drafa, Template, & Onboarding Data](https://www.notion.so/Generator-Dokumen-Hukum-Drafa-Template-Onboarding-Data-f7bbf44190024ae0ab6d6e1035c12039?pvs=21)

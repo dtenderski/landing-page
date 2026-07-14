@@ -1,0 +1,332 @@
+uatlah tema Series CIVILPRO dengan struktur dibawah ini :
+Buat Series Baru
+Isi detail series chatbot.
+
+Nama Series *
+CIVILRO
+Slug (URL)
+c
+Tagline
+Deskripsi singkat
+Deskripsi
+Deskripsi lengkap series...
+Kategori
+Bisnis, Edukasi, dll
+Bahasa
+Indonesia
+Warna
+
+#6366f1
+Cover Image URL
+https://...
+Tags (pisahkan dengan koma)
+bisnis, online, chatbot
+Publik
+
+Aktif
+
+Unggulan
+
+Batal
+
+kalau ada history CIVILOPRO ganti ya jadi CIVILPRO
+aku koreksi ya.. aku tambahkan informasinya CIVILPRO itu tentang Profesi Civil Engineering berasal dari gabung beberapa prompt profesi Civil Engineering, mana dari Prompp yang lebih dekat ke Pekerjaan Insinyur Teknis Sipil  :
+🌉 Consult an Expert: Civil Engineer
+
+🌍 Create An Environmental Impact Assessment Document
+
+🏗️ Create a Construction Schedule
+
+🏗️ Create a Structural Analysis Report
+
+💰 Create A Cost Estimate Report
+
+📅 Create A Project Plan
+
+📊 Create A Feasibility Study
+
+📊 Create A Final Project Report
+
+📊 Create A Progress Report
+
+📊 Create A Risk Assessment Report
+
+📋 Create A Geotechnical Report
+
+📋 Create A Health And Safety Plan
+
+📋 Create A Site Investigation Report
+
+📋 Create An As-Built Drawings Document
+
+📋 Create An Inspection Report
+
+📝 Create A Change Request Form
+
+📝 Create A Project Design Document
+
+🔍 Create A Quality Assurance Plan
+
+🔧 Create A Maintenance Plan
+
+🔬 Create A Materials Testing Report
+
+🚦 Create A Traffic Impact Study
+apa bedanya dengan profesi Manajemen Proyek Konstruksi, jadi coba kamu pilah berapa profesi spesialis dari Civil Engineering ini yang dapat dibuat, apa saja itu 
+🌉 Consult an Expert: Civil Engineer
+
+🌍 Create An Environmental Impact Assessment Document
+
+🏗️ Create a Construction Schedule
+
+🏗️ Create a Structural Analysis Report
+
+💰 Create A Cost Estimate Report
+
+📅 Create A Project Plan
+
+📊 Create A Feasibility Study
+
+📊 Create A Final Project Report
+
+📊 Create A Progress Report
+
+📊 Create A Risk Assessment Report
+
+📋 Create A Geotechnical Report
+
+📋 Create A Health And Safety Plan
+
+📋 Create A Site Investigation Report
+
+📋 Create An As-Built Drawings Document
+
+📋 Create An Inspection Report
+
+📝 Create A Change Request Form
+
+📝 Create A Project Design Document
+
+🔍 Create A Quality Assurance Plan
+
+🔧 Create A Maintenance Plan
+
+🔬 Create A Materials Testing Report
+
+🚦 Create A Traffic Impact Study
+ok saya mengikuti saranmu... jadi dari 4 kategori tersebut diatas, memperhatikan prompt yag ada :
+🌉 Consult an Expert: Civil Engineer
+
+🌍 Create An Environmental Impact Assessment Document
+
+🏗️ Create a Construction Schedule
+
+🏗️ Create a Structural Analysis Report
+
+💰 Create A Cost Estimate Report
+
+📅 Create A Project Plan
+
+📊 Create A Feasibility Study
+
+📊 Create A Final Project Report
+
+📊 Create A Progress Report
+
+📊 Create A Risk Assessment Report
+
+📋 Create A Geotechnical Report
+
+📋 Create A Health And Safety Plan
+
+📋 Create A Site Investigation Report
+
+📋 Create An As-Built Drawings Document
+
+📋 Create An Inspection Report
+
+📝 Create A Change Request Form
+
+📝 Create A Project Design Document
+
+🔍 Create A Quality Assurance Plan
+
+🔧 Create A Maintenance Plan
+
+🔬 Create A Materials Testing Report
+
+🚦 Create A Traffic Impact Study
+bantu saya mengelompokan prompt itu masuk ke CIVILPRO yang sudah kita tetapkan diatas
+urutan rilis (basic-advanced)
+ok sepertinya batusan series ini ya dari yang tadi.. coba bandingkan 2 pendekatan yang sudah kamu buat 
+kalau untuk proses sertifikasi kopmetensi kerja (SKK), misalkan pemberian pembekalan untuk user yang akan mengikuti uji kompetensi.. yuang mana sebaiknya yang dipilih.. atua ada pembagian berikutnya dari kamu 
+ya setuju lanjut
+mapping ke Skema tertentu 
+berarti dalm hubungannya kita membuat chatbot yang berorientasi pada pemecahan masalah, edukasi, inspirasi dan inovasi.. dalam pendekatannya untuk solve problem, edukasi, dan sertifikasi kompetensi kerja. seperti apa pembagiannya
+ok saya setuju kita namakan saja seriesnya CIVILPRO Master.. begitu ya
+kita bagi menjadi 4 Big Idea : CIVILPRO Solver, CIVILPRO Learn, CIVILPRO SKK, CIVILPRO Inspire.
+masing-masing Big Idea memiliki Toolbox, dan setiap Toolbox memiliki agen... 
+hanya saja untuk CIVILPRO SKK mungkin toolbox nya seperti pembagian yang sudah kamu lakukan untuk SKK .. coba kamu rangkum lagi kesimpulan saaya dari diskusi kita
+kita akan buat series chatbot yang akan kita buat.
+Isilah detail series chatbot. 
+
+Nama Series *
+CIVILPRO
+Slug (URL)
+civilpro
+Tagline
+Solusi Digital & Bisnis Profesional untuk Masa Depan
+Deskripsi
+Deskripsi lengkap series...
+Kategori
+Bisnis, Edukasi, dll
+Bahasa
+Indonesia
+Warna
+
+#6366f1
+Cover Image URL
+https://...
+Tags (pisahkan dengan koma)
+bisnis, online, chatbot
+Publik
+
+Aktif
+
+Unggulan
+ULANGI YA
+Isi detail series chatbot.
+
+Nama Series *
+Contoh: Chatbot Bisnis Online
+Slug (URL)
+chatbot-bisnis-online
+Tagline
+Deskripsi singkat
+Deskripsi
+Deskripsi lengkap series...
+Kategori
+Bisnis, Edukasi, dll
+Bahasa
+Indonesia
+Warna
+
+#6366f1
+Cover Image URL
+https://...
+Tags (pisahkan dengan koma)
+bisnis, online, chatbot
+Publik
+
+Aktif
+
+Unggulan
+
+Buat Big Idea Baru
+Tipe Big Idea
+
+Problem - Masalah yang akan diatasi
+
+Idea - Ide untuk mencapai sesuatu
+
+Inspiration - Inspirasi untuk inovasi
+
+Mentoring - Edukasi dan pendampingan
+Nama Big Idea *  
+Contoh: Otomasi Customer Service
+Deskripsi *
+Jelaskan secara detail tentang problem/idea/inspirasi Anda...
+Tujuan
+Tujuan 1
+Tambah Tujuan
+Target Audiens
+Contoh: UMKM di Indonesia
+Hasil yang Diharapkan
+Jelaskan hasil yang ingin dicapai...
+
+Buatkan isian form tersebut untuk 4 Big Idea :
+CIVILPRO Solver untuk pemecahan masalah teknis proyek nyata
+
+CIVILPRO Learn untuk edukasi dan pengembangan kompetensi bertahap
+
+CIVILPRO SKK untuk pembekalan dan simulasi uji sertifikasi kompetensi kerja
+
+CIVILPRO Inspire untuk eksplorasi ide, inovasi, dan masa depan teknik sipil
+menyusun Toolbox per Big Idea
+
+isilah form Toolbox 1 dari Big Idea CivilPro Inspire 
+Apa itu Toolbox?
+Toolbox adalah kumpulan kemampuan dan tools yang akan digunakan oleh chatbot Anda. Toolbox berasal dari Big Idea dan menentukan apa yang bisa dilakukan chatbot.
+
+Contoh: Dari Big Idea "Layanan Customer Service", Anda bisa membuat Toolbox untuk "FAQ Handler", "Complaint Resolution", atau "Product Recommendation".
+
+Dari Big Idea:
+inspiration
+CIVILPRO Inspire
+CIVILPRO Inspire bertujuan untuk mendorong pemikiran inovatif dan eksplorasi masa depan di bidang teknik sipil. Big Idea ini menjadi ruang bagi pengguna untuk mengeksplorasi ide baru, penerapan teknologi, efisiensi proses, keberlanjutan, serta transformasi digital dalam konstruksi dan infrastruktur.
+
+Nama Toolbox *
+Innovation & Optimization Toolbox
+Deskripsi
+Jelaskan tentang toolbox ini...
+Tujuan Toolbox
+Tujuan utama dari toolbox ini...
+Kapabilitas
+Kapabilitas 1
+Tambah Kapabilitas
+Batasan
+Batasan 1
+Tambah Batasan
+Batal
+toolbox ke 2
+Toolbox ke-3
+lanjut toolbox ke-4
+kita lanjut ke toolbok ke 2 dulu ya.. baru setelah toolbok selesai masuk ke chatbot
+eh maksud saya kita rampungkan dulu Toolbox untuk Big Idea Solver
+sama seperti proses pembuatan Toolbox dari Big Idea, demikin isilah form dibawah ini
+Buat Toolbox Baru 
+Apa itu Toolbox?
+Toolbox adalah kumpulan kemampuan dan tools yang akan digunakan oleh chatbot Anda. Toolbox berasal dari Big Idea dan menentukan apa yang bisa dilakukan chatbot.
+
+Contoh: Dari Big Idea "Layanan Customer Service", Anda bisa membuat Toolbox untuk "FAQ Handler", "Complaint Resolution", atau "Product Recommendation".
+
+Dari Big Idea:
+problem
+CIVILPRO Solver
+CIVILPRO Solver difokuskan pada pemecahan masalah teknis nyata yang dihadapi Insinyur Sipil dalam proyek konstruksi dan infrastruktur. Big Idea ini membantu pengguna menganalisis permasalahan lapangan dan perencanaan, seperti kegagalan struktur, permasalahan tanah, mutu pekerjaan, keterlambatan konstruksi, hingga risiko keselamatan dan kualitas. Pendekatan yang digunakan berbasis studi kasus, analisis teknis, dan rekomendasi solusi yang dapat diterapkan secara praktis.
+
+Nama Toolbox *
+Contoh: Customer Service Toolbox
+Deskripsi
+Jelaskan tentang toolbox ini...
+Tujuan Toolbox
+Tujuan utama dari toolbox ini...
+Kapabilitas
+Kapabilitas 1
+Tambah Kapabilitas
+Batasan
+Batasan 1
+Tambah Batasan
+lanjut toolbox ke-2
+
+* Tidak memberikan keputusan final yang bersifat legal atau persetujuan teknis resmi
+
+toolbox ke 3
+lanjut toolbox ke 4
+lanjut toolbox ke 5
+1
+lanjut Toolbox 2
+lanjut Toolbox 3
+lanjut toolbox 4
+lanjut 1
+lanjut ke 2
+lanut ke 3
+lanjut
+untuk klasifikasi SKK bagaimana .. by jabatan kerja ? Ahli Gedung, Jalan, Irigas, dan seterusnya 
+saya masih belum paham yang kamu maksudkan. apakah toolbox yang ada sekarang usdah cukup, ataukah membuat toolbox baru berdasarkan jabatan kerhja, atau seperti apa ?
+berarti teknisnya bagaimana merumuskan nya dalam aplikasi ini apakah perlu field baru antara Big Idea dan Toolbox ? atau bagaimana ?
+berarti cukup misalkan bikin chatbot klasifikasi Jalan.. selanjutnya baru toolbox dan stetemanmt nay dilekatkan pada toolboxnya.. begitu ?
+oh berarti cukup bikin check list saja ? 
+ok berarti bisa juga disebutkan di toolbox atau agent nya.. sebagai penegas yang akan dibikin itu jabatan kerja apa.
+ok sekarang untuk toolbox CIVILPRO sudah selesai ya.. berarti kita masuk ke Agent nya.. 
+koreksi 4 atau 5 toolbox.. kan ada mentoring.. apakah sama dengan CIVILPRO learn ?

@@ -1,0 +1,351 @@
+<aside>
+🗺️
+
+**Dokumen:** Roadmap operasional 6 bulan untuk implementasi **SMAP — SNI ISO 37001:2016** di BUJK, lengkap dengan **RACI**, **KPI Dashboard**, dan **decision gates** menuju audit Stage 1.
+
+**Selaras dengan:** [Chatbot SMAP — Sistem Manajemen Anti Penyuapan (SNI ISO 37001:2016)](https://www.notion.so/Chatbot-SMAP-Sistem-Manajemen-Anti-Penyuapan-SNI-ISO-37001-2016-b42b289727714aa38643bca419682b94?pvs=21) · [](https://www.notion.so/ec4bf89def7e40c5bb92d9f9d1602e97?pvs=21) · [](https://www.notion.so/57ce809991524a329edba82689127992?pvs=21).
+
+</aside>
+
+## 1. Ringkasan Eksekutif
+
+Implementasi SMAP yang efektif untuk BUJK Madya/Utama membutuhkan **4–6 bulan** sebelum siap audit Stage 1, dengan asumsi:
+
+- Komitmen Top Management didapat sejak bulan pertama.
+- Anggaran FKAP & training dialokasikan terpisah.
+- Tim inti (FKAP + 2–3 PIC) mendedikasikan minimal **30% kapasitas**.
+- Tidak ada legacy issue besar yang perlu diselesaikan dulu (misal kasus tipidana berjalan).
+
+Roadmap ini dibagi menjadi **7 fase** → dipetakan ke **6 bulan kalender** (M-1 s/d M-6) + persiapan audit Stage 1 di bulan ke-7.
+
+```mermaid
+gantt
+	title Roadmap Implementasi SMAP — BUJK (6 Bulan)
+	dateFormat YYYY-MM-DD
+	axisFormat %b
+
+	section Fase 1 — Komitmen & Konteks
+	Kick-off & Komitmen Top Management :crit, f1a, 2026-05-01, 14d
+	Analisis Konteks (PESTEL/SWOT)     :f1b, after f1a, 14d
+	Penetapan Ruang Lingkup SMAP       :f1c, after f1b, 7d
+
+	section Fase 2 — Tata Kelola & FKAP
+	Penetapan FKAP (SK + JD)           :crit, f2a, 2026-05-22, 14d
+	Finalisasi Kebijakan SMAP          :crit, f2b, after f2a, 7d
+	Komunikasi Kebijakan ke Personel   :f2c, after f2b, 14d
+
+	section Fase 3 — Risk & Planning
+	Bribery Risk Assessment Workshop   :f3a, 2026-06-12, 14d
+	Populasi Bribery Risk Register     :crit, f3b, after f3a, 14d
+	Sasaran SMAP & Risk Treatment Plan :f3c, after f3b, 14d
+
+	section Fase 4 — Dokumen & SOP
+	Finalisasi SOP (DD, Hadiah, COI, WB):crit, f4a, 2026-07-10, 21d
+	Form & Register operasional         :f4b, after f4a, 14d
+	Klausul anti-suap di kontrak        :f4c, after f4a, 21d
+
+	section Fase 5 — Training & Komunikasi
+	Training FKAP (Lead Implementer)    :crit, f5a, 2026-07-20, 21d
+	Training Direksi & Manajer Kunci    :f5b, after f5a, 14d
+	Training Awareness Personel         :f5c, after f5b, 21d
+	Kampanye Komitmen Mitra             :f5d, 2026-08-15, 30d
+
+	section Fase 6 — Operasionalisasi
+	Deployment Kanal Whistleblowing     :crit, f6a, 2026-08-25, 30d
+	Due Diligence batch 1 (mitra TINGGI):f6b, 2026-09-01, 30d
+	Eksekusi Risk Treatment Plan        :f6c, 2026-09-01, 60d
+
+	section Fase 7 — Audit & Tinjauan
+	Audit Internal SMAP                 :crit, f7a, 2026-10-15, 14d
+	CAPA Closure                        :f7b, after f7a, 14d
+	Tinjauan Manajemen Perdana          :crit, f7c, after f7b, 7d
+	Audit Stage 1 (Document Review)     :crit, f7d, 2026-11-15, 7d
+```
+
+---
+
+## 2. Detail Per Fase
+
+### Fase 1 — Komitmen & Konteks (M-1)
+
+<aside>
+🔑
+
+**Decision Gate G1:** Top Management menandatangani komitmen tertulis untuk implementasi SMAP. Tanpa G1, fase berikutnya **TIDAK BOLEH** dimulai.
+
+</aside>
+
+**Aktivitas:**
+
+- Workshop kick-off dengan Direksi (paparan ROI SMAP, risiko legal, manfaat reputasi).
+- Analisis PESTEL/SWOT untuk faktor anti-suap.
+- Identifikasi pemangku kepentingan & ekspektasinya.
+- Penetapan ruang lingkup SMAP (entitas, fungsi, lokasi, proyek).
+
+**Deliverable wajib:**
+
+- Memo komitmen signed Direksi
+- Dokumen analisis konteks (PESTEL/SWOT)
+- Daftar pemangku kepentingan
+- Scope statement SMAP
+
+### Fase 2 — Tata Kelola & FKAP (M-2)
+
+<aside>
+🔑
+
+**Decision Gate G2:** SK FKAP terbit + Kebijakan SMAP signed Direksi + dikomunikasikan ke seluruh personel.
+
+</aside>
+
+**Aktivitas:**
+
+- Penunjukan FKAP (Compliance Officer) — internal atau outsource.
+- Drafting & finalisasi Kebijakan Anti-Penyuapan (gunakan template [Paket Draft Dokumen SMAP — Kebijakan, SK FKAP, SOP (Template AGENT-POLICY)](https://www.notion.so/Paket-Draft-Dokumen-SMAP-Kebijakan-SK-FKAP-SOP-Template-AGENT-POLICY-89b74c8386ec403a9e559eac63ce65a0?pvs=21)).
+- Komunikasi kebijakan via email blast, town hall, & poster di kantor pusat + proyek.
+- Setup anggaran FKAP independen.
+
+**Deliverable wajib:**
+
+- SK Pembentukan FKAP + JD
+- Kebijakan SMAP signed (POL-SMAP-001)
+- Bukti komunikasi kebijakan (screenshot email, foto town hall, poster terpasang)
+- RAB FKAP tahun pertama disetujui
+
+### Fase 3 — Risk & Planning (M-3)
+
+<aside>
+🔑
+
+**Decision Gate G3:** Bribery Risk Register terisi penuh untuk P1–P10, dengan skor L×I & treatment plan yang disepakati Direksi.
+
+</aside>
+
+**Aktivitas:**
+
+- Workshop Bribery Risk Assessment per proses bisnis (P1–P10) dengan process owner.
+- Populasi [](https://www.notion.so/57ce809991524a329edba82689127992?pvs=21) dengan skenario, L×I, kontrol existing, residual.
+- Penetapan sasaran SMAP SMART tahunan.
+- Risk treatment plan dengan PIC, due date, KPI.
+
+**Deliverable wajib:**
+
+- Bribery Risk Assessment Report
+- Risk Register populated (10 baris minimum)
+- Daftar Sasaran SMAP signed Direksi
+- Risk Treatment Plan
+
+### Fase 4 — Dokumen & SOP (M-4)
+
+**Aktivitas:**
+
+- Finalisasi SOP: Due Diligence, Hadiah & Hospitality, COI, Whistleblowing, Investigasi.
+- Generate Register Hadiah, Form COI, Form Komitmen Mitra.
+- Review & adendum klausul anti-suap di template kontrak (vendor, KSO, subkon, agen).
+- Daftar Induk Dokumen SMAP & SOP pengendalian dokumen.
+
+**Deliverable wajib:**
+
+- 5 SOP utama (signed FKAP & Direksi)
+- Set form & register operasional
+- Template kontrak baru dengan klausul anti-suap
+- Daftar Induk Dokumen SMAP
+
+### Fase 5 — Training & Komunikasi (M-5)
+
+<aside>
+🔑
+
+**Decision Gate G5:** Coverage training ≥ 80% personel kunci + 100% Direksi + FKAP ber-sertifikasi Lead Implementer.
+
+</aside>
+
+**Aktivitas:**
+
+- Sertifikasi FKAP: ISO 37001 Lead Implementer (24 jam + ujian).
+- Training Direksi: 8 jam fokus governance & tone-from-the-top.
+- Training PIC operasional (Tender, Pengadaan, Perizinan, PM, HR): 16 jam fokus operasional + simulasi.
+- Training awareness seluruh personel: 4 jam (online module + workshop).
+- Kampanye penandatanganan **Komitmen Anti-Suap Mitra** ke seluruh vendor & subkon aktif.
+
+**Deliverable wajib:**
+
+- Training matrix per role + status coverage
+- Sertifikat & daftar hadir per pelatihan
+- Test pre/post (skor minimum 75)
+- Komitmen Mitra signed (target 100% mitra utama)
+
+### Fase 6 — Operasionalisasi (M-6)
+
+**Aktivitas:**
+
+- Deployment kanal Whistleblowing (web form + email + hotline + kotak fisik) sesuai [Spec Teknis Kanal Whistleblowing — AGENT-WHISTLE & FKAP Backend](https://www.notion.so/Spec-Teknis-Kanal-Whistleblowing-AGENT-WHISTLE-FKAP-Backend-17ae74c937624e15b0427f58fb12527d?pvs=21).
+- Soft-launch dengan drill simulasi laporan dummy.
+- Eksekusi Due Diligence batch 1 untuk semua mitra RISIKO TINGGI.
+- Mulai eksekusi Risk Treatment Plan.
+
+**Deliverable wajib:**
+
+- Kanal WBS operasional (uptime ≥ 99%)
+- DD Report untuk minimum 5 mitra RISIKO TINGGI
+- Bukti progres Risk Treatment Plan (≥ 50% kontrol tambahan implemented)
+
+### Fase 7 — Audit Internal & Stage 1 (M-7)
+
+<aside>
+🔑
+
+**Decision Gate G7 (Audit Stage 1 readiness):** ≥ 80% item Gap Checklist berstatus Compliant; semua item Critical = Compliant.
+
+</aside>
+
+**Aktivitas:**
+
+- Audit internal SMAP oleh Internal Audit (auditor independen dari area diaudit).
+- CAPA Closure untuk temuan major.
+- Tinjauan Manajemen perdana.
+- Pendaftaran ke Lembaga Sertifikasi (LS) terakreditasi KAN.
+- Audit Stage 1 (Document Review).
+
+**Deliverable wajib:**
+
+- Laporan audit internal
+- CAPA Log dengan closure rate ≥ 80% on-time
+- Notulen Tinjauan Manajemen + keputusan
+- Surat penunjukan LS + jadwal audit Stage 1 & 2
+
+---
+
+## 3. RACI Matrix — Aktivitas Kunci
+
+**Legenda:** R=Responsible (eksekutor) · A=Accountable (penanggung jawab) · C=Consulted · I=Informed
+
+| **Aktivitas** | **Direktur Utama** | **Direksi Lain** | **FKAP** | **Legal** | **HRD** | **Pengadaan** | **IT/Security** | **Internal Audit** | **Manajer Lini** | Komitmen kebijakan SMAP | **A/R** | C | R | C | I | I | I | I | I |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Penetapan FKAP (SK+JD) | **A** | C | I | R | R | I | I | I | I | Analisis konteks SMAP | A | C | **R** | C | C | C | I | C | C |
+| Bribery Risk Assessment | A | C | **R** | C | C | C | I | C | R | Sasaran SMAP & treatment plan | **A** | C | R | C | C | C | I | C | C |
+| SOP Due Diligence | I | A | **R** | C | I | R | I | C | I | SOP Hadiah & Register | I | A | **R** | C | I | I | I | I | C |
+| SOP Whistleblowing & WBS | I | A | **R** | C | I | I | R | I | I | Klausul anti-suap kontrak | I | A | C | **R** | I | R | I | I | I |
+| Training SMAP | I | A | C | I | **R** | I | I | I | I | Komitmen Anti-Suap Mitra | I | A | C | R | I | **R** | I | I | I |
+| Deployment WBS | I | A | C | I | I | I | **R** | I | I | Audit Internal SMAP | I | A | C | I | I | I | I | **R** | I |
+| Tinjauan Manajemen | **A/R** | R | R | C | C | C | C | C | I | Eskalasi kasus major | **A** | C | **R** | R | I | I | I | I | I |
+
+---
+
+## 4. KPI Dashboard SMAP
+
+### 4.1 KPI Utama (Tier 1 — di-monitor Direksi)
+
+| **KPI** | **Definisi** | **Target** | **Frekuensi** | **Owner** | **Sumber Data** |
+| --- | --- | --- | --- | --- | --- |
+| Training Coverage Personel Kunci | % personel kunci yang lulus training SMAP berlaku | ≥ 95% | Bulanan | HRD + FKAP | LMS / training record |
+| Klausul Anti-Suap di Kontrak Baru | % kontrak baru memuat klausul anti-suap | **100%** | Bulanan | Legal | Contract management system |
+| Audit CAPA Closure Rate | % temuan audit ditutup on-time | ≥ 90% | Bulanan | Internal Audit | CAPA log |
+
+### 4.2 KPI Operasional (Tier 2 — di-monitor FKAP)
+
+| **KPI** | **Target** | **Frekuensi** |
+| --- | --- | --- |
+| Register Hadiah — entries per kuartal | ≥ 1 (sistem aktif) | Kuartalan |
+| WBS MTTT (Mean Time to Triage) | ≤ 2 hari kerja | Bulanan |
+| COI Disclosure Rate | ≥ 95% personel mengisi tahunan | Tahunan |
+| Kebijakan SMAP — Awareness Score | ≥ 80% (survey personel) | Tahunan |
+
+### 4.3 Dashboard Layout (Konsep)
+
+```mermaid
+flowchart TB
+	subgraph TIER1["📊 TIER 1 — Direksi (Kuartalan)"]
+		A1["🔴 Bribery Incident Rate"]
+		A2["🎓 Training Coverage"]
+		A3["🤝 Komitmen Mitra %"]
+		A4["📄 Klausul Kontrak %"]
+		A5["🔐 WBS Volume"]
+		A6["✅ CAPA Closure %"]
+	end
+	subgraph TIER2["📈 TIER 2 — FKAP (Bulanan)"]
+		B1["DD Coverage TINGGI"]
+		B2["Register Hadiah"]
+		B3["WBS MTTA/MTTT/MTTC"]
+		B4["COI Disclosure"]
+		B5["Retaliation = 0"]
+		B6["Awareness Score"]
+	end
+	subgraph SOURCES["📁 Data Sources"]
+		S1["LMS / Training"]
+		S2["Vendor Master"]
+		S3["Contract Mgmt"]
+		S4["WBS Backend"]
+		S5["CAPA Log"]
+		S6["Risk Register"]
+	end
+	SOURCES --> TIER2
+	TIER2 --> TIER1
+```
+
+---
+
+## 5. Risiko Implementasi & Mitigasi
+
+| **Risiko Implementasi** | **Likelihood** | **Impact** | **Mitigasi** | Komitmen Top Management menurun setelah kick-off | Sedang | Tinggi | Update Direksi bulanan dengan KPI dashboard; tie-in ke RKAP & insentif |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| FKAP yang ditunjuk tidak independen (rangkap fungsi berisiko) | Tinggi | Tinggi | Outsource FKAP eksternal di awal; transisi ke internal setelah sertifikasi tersedia | Resistensi PIC tender/pengadaan terhadap kontrol baru | Tinggi | Sedang | Workshop perubahan; quick wins (otomasi DD checklist); insentif kepatuhan |
+| Kanal WBS sepi laporan (sistem tidak dipercaya) | Sedang | Sedang | Drill dummy report; testimoni anonim FKAP; komunikasi anti-retaliasi yang konsisten | Mitra menolak menandatangani Komitmen Anti-Suap | Sedang | Sedang | Roll-out bertahap (mitra utama dulu); klausul mandatory di kontrak baru; phase-out mitra non-cooperative |
+| Anggaran SMAP dipotong di tengah jalan | Sedang | Tinggi | Lock-in budget di RKAP awal; show ROI: pencegahan denda tipikor & blacklist PBJ | Audit Stage 1 ditolak karena dokumen incomplete | Sedang | Tinggi | Pre-assessment internal sebulan sebelum Stage 1; mock audit dengan konsultan eksternal |
+
+---
+
+## 6. Estimasi Sumber Daya
+
+### 6.1 Tim Inti
+
+| **Role** | **Effort** | **Durasi** |
+| --- | --- | --- |
+| FKAP Support (1–2 orang) | 30% kapasitas | 6 bulan |
+| Top Management Sponsor (Dirut) | 4–8 jam/bulan | Permanen |
+
+### 6.2 Kategori Biaya (Range Estimasi)
+
+| **Kategori** | **Range (BUJK Madya/Utama)** | **Catatan** | Konsultan implementasi (opsional) | Rp 80–250 juta | Untuk yang baru pertama kali; bisa di-skip dengan FKAP berpengalaman |
+| --- | --- | --- | --- | --- | --- |
+| Sertifikasi Lead Implementer (PECB/IRCA/sejenis) | Rp 15–25 juta / orang | Minimal untuk FKAP Lead + 1 backup | Sertifikasi Internal Auditor | Rp 8–15 juta / orang | Minimal 2 personel non-FKAP |
+| Training awareness seluruh personel | Rp 50–150 juta | Online module + workshop offline | Platform WBS (build atau SaaS) | Rp 30–120 juta setup + Rp 5–20 juta/bulan | SaaS lebih cepat & murah; build untuk kontrol penuh |
+| Hotline provider eksternal | Rp 3–8 juta/bulan | 24/7 multilingual coverage | Sertifikasi ISO 37001 (LS terakreditasi KAN) | Rp 60–180 juta | Stage 1 + Stage 2; tergantung scope |
+| Surveillance audit (tahunan) | Rp 30–80 juta/tahun | 2x dalam 3 tahun siklus sertifikasi | **Total kasar Tahun 1** | **Rp 250 juta – Rp 800 juta** | Spread tergantung skala BUJK |
+
+<aside>
+💰
+
+**ROI Argumen:** Sanksi tipikor untuk korporasi (UU 31/1999 jo. 20/2001) dapat mencapai **Rp 1–10 miliar** + denda + uang pengganti + blacklist PBJ. Investasi SMAP ≤ 10% dari potensi exposure tahun pertama.
+
+</aside>
+
+---
+
+## 7. Decision Gates Lengkap
+
+| **Gate** | **Bulan** | **Kriteria Lulus** | **Konsekuensi Tidak Lulus** | **G1 — Komitmen** | Akhir M-1 | Memo komitmen signed Dirut + scope statement disetujui | Pause; re-align dengan Dirut |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **G2 — Tata Kelola** | Akhir M-2 | SK FKAP terbit; Kebijakan SMAP signed; komunikasi tuntas | Tunda Fase 3; outsource FKAP jika perlu | **G3 — Risk & Sasaran** | Akhir M-3 | Risk Register P1–P10 terisi; sasaran SMAP signed | Workshop ulang dengan process owner |
+| **G4 — Dokumen** | Akhir M-4 | 5 SOP utama signed FKAP & Direksi; template kontrak baru siap | Tunda training; sewa drafter dokumen | **G5 — Training** | Akhir M-5 | Coverage ≥ 80% personel kunci; FKAP ber-sertifikasi | Extend training 1 bulan |
+| **G6 — Operasionalisasi** | Akhir M-6 | WBS live; DD batch 1 selesai; treatment plan ≥ 50% jalan | Tunda audit Stage 1 | **G7 — Audit Ready** | Akhir M-7 | Gap Checklist ≥ 80% Compliant; semua Critical = Compliant; Tinjauan Manajemen tuntas | Tunda Stage 1; siklus CAPA tambahan |
+
+---
+
+## 8. Integrasi dengan Chatbot SMAP
+
+Roadmap ini dirancang untuk dimonitor melalui Chatbot SMAP — setiap fase, gate, dan KPI dapat ditanyakan langsung ke agent yang relevan:
+
+| **Pertanyaan Pengguna** | **Agent yang Aktif** | **Output** | "Apa progress SMAP kita bulan ini?" | SMAP-ORCHESTRATOR → AGENT-AUDIT | Status fase + gate + KPI dashboard snippet |
+| --- | --- | --- | --- | --- | --- |
+| "Item apa yang masih Non-Compliant di Klausul 8?" | AGENT-GAP | Filtered checklist + PIC + target closure | "Apakah kita siap Stage 1?" | AGENT-AUDIT → AGENT-GAP | Skor readiness + 3 risiko utama |
+| "Berapa MTTC laporan WB bulan lalu?" | AGENT-WHISTLE → KPI dashboard | Metric + trend 3 bulan | "Risiko penyuapan tertinggi di proyek mana?" | AGENT-RISK | Top 3 dari Risk Register diurutkan L×I |
+
+---
+
+<aside>
+🎯
+
+**Komitmen utama implementasi:** SMAP yang efektif **bukan hanya** sertifikasi di dinding kantor. Ini adalah **perubahan budaya** yang menjadikan integritas sebagai keunggulan kompetitif BUJK. Roadmap ini hanya akan berhasil bila Top Management hadir setiap bulan, FKAP diberi independensi nyata, dan setiap pelanggaran ditindak konsisten — termasuk di level senior.
+
+</aside>

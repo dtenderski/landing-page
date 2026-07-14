@@ -1,0 +1,158 @@
+<aside>
+🚀
+
+**Tujuan dokumen:** Runbook operasional untuk men-deploy 9 patch system prompt KONSTRA (ABD-Compliant v1.1) ke Gustafta Builder secara terkontrol, plus framework field test untuk validasi runtime. Output: 9 agen ABD-compliant + 16 test case tervalidasi + sign-off untuk lanjut Sprint 4.
+
+</aside>
+
+## 1. Pre-Deployment Checklist (WAJIB sebelum deploy patch apa pun)
+
+- [ ]  **PRE-1.** System Prompt master v1.1 sudah ter-update di workspace KONSTRA — verifikasi Section 6A ABD ada di [System Prompt OpenClaw — KONSTRA Multi-Agent (Manajemen Konstruksi)](https://www.notion.so/System-Prompt-OpenClaw-KONSTRA-Multi-Agent-Manajemen-Konstruksi-95f11fc694964145aa36338ba31c2a46?pvs=21).
+- [ ]  **PRE-2.** Snapshot konfigurasi 9 agen saat ini (export/screenshot system prompt lama) — untuk rollback bila perlu.
+- [ ]  **PRE-3.** Akses ke Gustafta Builder dengan permission edit pada 9 agen target.
+- [ ]  **PRE-4.** Browser tab baru dibuka untuk Gustafta Builder (jangan tutup tab Notion ini).
+- [ ]  **PRE-5.** Notif team yang pakai KONSTRA: "Akan ada update prompt 9 agen — mungkin ada output style berbeda 1–2 jam ke depan."
+
+## 2. Urutan Deploy (Wave-Based)
+
+<aside>
+⚠️
+
+**Prinsip wave deploy:** Tinggi dulu (showcase + paling sering dipakai), Sedang berikutnya, Rendah terakhir. Antar wave, **wajib smoke test** sebelum lanjut.
+
+</aside>
+
+| **Wave** | **Agen** | **Source Patch** | **Smoke Test** |
+| --- | --- | --- | --- |
+| **Wave 1** (Tinggi) | PROXIMA | [Sprint 3 — Prompt Patch AGENT-PROXIMA (Ready to Deploy)](https://www.notion.so/Sprint-3-Prompt-Patch-AGENT-PROXIMA-Ready-to-Deploy-ec484bb59f534d90b5e75a194a1d890a?pvs=21) | TC-PROXIMA-1 + TC-PROXIMA-2 |
+| **Wave 1** (Tinggi) | KONTRAK | [Sprint 3 — Prompt Patch AGENT-KONTRAK (Ready to Deploy)](https://www.notion.so/Sprint-3-Prompt-Patch-AGENT-KONTRAK-Ready-to-Deploy-b97e9a5288b54ef9a20863514452c68c?pvs=21) | TC-KONTRAK-1 + TC-KONTRAK-2 |
+| **Wave 1** (Tinggi) | FINTAX | [Sprint 3 — Prompt Patch AGENT-FINTAX (Ready to Deploy)](https://www.notion.so/Sprint-3-Prompt-Patch-AGENT-FINTAX-Ready-to-Deploy-9e6f36d415a340e1b12c5e5b851cdf03?pvs=21) | TC-FINTAX-1 + TC-FINTAX-2 |
+| **Wave 1.5** (Pilot) | Tender Readiness Checker | [Anti-Blocking Doctrine — Implementasi & Audit 9 Agen KONSTRA](https://www.notion.so/Anti-Blocking-Doctrine-Implementasi-Audit-9-Agen-KONSTRA-a22523df455f4a9d9823d2ee0db7d2de?pvs=21) Section 3 | 5 skenario S-A s.d. S-E ([Sprint 1 — 5 Test Scenarios Tender Readiness Checker](https://www.notion.so/Sprint-1-5-Test-Scenarios-Tender-Readiness-Checker-3d4a31cb48f641cdb949d8a3cd12d703?pvs=21)) |
+| **Wave 2** (Sedang) | TEKNIK · SAFIRA · MUTU · EQUIPRA · LOGIS | [Sprint 3 (Lanjutan) — Prompt Patches 6 Agen Sedang & Rendah](https://www.notion.so/Sprint-3-Lanjutan-Prompt-Patches-6-Agen-Sedang-Rendah-601d0d58babe4bea9afd8a7b0aba2230?pvs=21) | 1 test case per agen (TC-X-1) |
+| **Wave 3** (Rendah) | ENVIRA | [Sprint 3 (Lanjutan) — Prompt Patches 6 Agen Sedang & Rendah](https://www.notion.so/Sprint-3-Lanjutan-Prompt-Patches-6-Agen-Sedang-Rendah-601d0d58babe4bea9afd8a7b0aba2230?pvs=21) Section F | TC-ENVIRA-1 |
+
+## 3. Step-by-Step Deploy per Agen
+
+Ulangi langkah ini untuk **setiap agen** sesuai urutan wave di atas:
+
+1. **Buka** konfigurasi agen target di Gustafta Builder.
+2. **Snapshot** system prompt lama (copy ke file backup `agent-XXX-prompt-v1.0-backup.txt` di local).
+3. **Buka** patch source (link di tabel atas) di Notion.
+4. **Copy** seluruh blok `text` di section *PATCH — System Prompt AGENT-XXX (v1.1)*.
+5. **Replace** isi system prompt agen di Gustafta Builder dengan blok yang dicopy. *(Atau append jika ingin pertahankan instruksi spesifik tambahan; pastikan tidak terjadi duplikasi misi/identitas.)*
+6. **Save** konfigurasi agen.
+7. **Sanity check:** buka mode chat dengan agen tersebut, kirim pesan: "Test koneksi. Sebut nama dan misi singkat Anda." — verifikasi nama, misi, dan referensi ABD muncul di output.
+8. **Jalankan smoke test** sesuai tabel Wave (Section 2).
+9. **Isi** Field Test Tracker (Section 5) dengan hasil.
+10. **Bila smoke test gagal acceptance criteria** → jalankan Rollback Procedure (Section 6) dan log issue.
+
+## 4. Acceptance Criteria (per smoke test)
+
+Smoke test agen dianggap **LULUS** bila:
+
+- [ ]  **AC-1.** Output mengikuti struktur ABD-7 (8 section: Konteks, Confidence+Breakdown, Jawaban Inti, Asumsi, Inter-Agent Input, Gap, Rekomendasi, Sitasi, Closing untuk akurasi).
+- [ ]  **AC-2.** Confidence Score 0–100 muncul + breakdown per komponen.
+- [ ]  **AC-3.** Minimum 1 tag `[ASUMSI: ... | dasar: ...]` muncul di output.
+- [ ]  **AC-4.** Tidak ada anti-pattern blocking (no "Mohon lengkapi data X dulu" sebagai jawaban utama).
+- [ ]  **AC-5.** Minimum 1 sitasi regulasi/standar muncul.
+- [ ]  **AC-6.** Closing line "Untuk akurasi <X>% → <Y>%, lengkapi: ..." muncul.
+- [ ]  **AC-7.** Match dengan expected output di test case ≥ 70% (subjective by reviewer).
+
+**Skor lulus = minimum 6 dari 7 AC ✅.** Bila < 6 → Rollback + log issue.
+
+## 5. Field Test Tracker Konsolidasi (16 Test Cases)
+
+| **Test ID** | **Agen** | **Wave** | **Tanggal Test** | **AC Lulus** | **Match %** | **Status** | **Catatan / Issue** |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| S-A | Tender Readiness | 1.5 | __ | __/7 | __% | ☐ PASS ☐ FAIL |  |
+| S-B | Tender Readiness | 1.5 | __ | __/7 | __% | ☐ PASS ☐ FAIL |  |
+| S-C | Tender Readiness | 1.5 | __ | __/7 | __% | ☐ PASS ☐ FAIL |  |
+| S-D | Tender Readiness | 1.5 | __ | __/7 | __% | ☐ PASS ☐ FAIL |  |
+| S-E | Tender Readiness | 1.5 | __ | __/7 | __% | ☐ PASS ☐ FAIL |  |
+| TC-PROXIMA-1 | PROXIMA | 1 | __ | __/7 | __% | ☐ PASS ☐ FAIL |  |
+| TC-PROXIMA-2 | PROXIMA | 1 | __ | __/7 | __% | ☐ PASS ☐ FAIL |  |
+| TC-KONTRAK-1 | KONTRAK | 1 | __ | __/7 | __% | ☐ PASS ☐ FAIL |  |
+| TC-KONTRAK-2 | KONTRAK | 1 | __ | __/7 | __% | ☐ PASS ☐ FAIL |  |
+| TC-FINTAX-1 | FINTAX | 1 | __ | __/7 | __% | ☐ PASS ☐ FAIL |  |
+| TC-FINTAX-2 | FINTAX | 1 | __ | __/7 | __% | ☐ PASS ☐ FAIL |  |
+| TC-TEKNIK-1 | TEKNIK | 2 | __ | __/7 | __% | ☐ PASS ☐ FAIL |  |
+| TC-SAFIRA-1 | SAFIRA | 2 | __ | __/7 | __% | ☐ PASS ☐ FAIL |  |
+| TC-MUTU-1 | MUTU | 2 | __ | __/7 | __% | ☐ PASS ☐ FAIL |  |
+| TC-EQUIPRA-1 | EQUIPRA | 2 | __ | __/7 | __% | ☐ PASS ☐ FAIL |  |
+| TC-LOGIS-1 | LOGIS | 2 | __ | __/7 | __% | ☐ PASS ☐ FAIL |  |
+| TC-ENVIRA-1 | ENVIRA | 3 | __ | __/7 | __% | ☐ PASS ☐ FAIL |  |
+
+## 6. Rollback Procedure
+
+Bila smoke test gagal AC-criteria atau ditemukan defect kritis:
+
+1. **Stop** deployment wave berikutnya. Jangan lanjut ke agen lain dulu.
+2. **Restore** system prompt agen target dari file backup snapshot (langkah 2 di Section 3).
+3. **Save** konfigurasi agen.
+4. **Verify** rollback berhasil dengan kirim pesan test "Sebut nama dan misi." — output harus match v1.0 lama.
+5. **Log issue** di Section 7 dengan detail: agen, test ID, AC mana yang gagal, sample output yang fail, root cause hypothesis.
+6. **Triage:** issue minor (AC-7 saja) → patch micro-fix; issue major (AC-1–6 ≥ 2 fail) → audit ulang patch source.
+
+## 7. Issue Log
+
+| **ID** | **Tanggal** | **Agen** | **Test ID** | **AC Gagal** | **Root Cause** | **Severity** | **Resolusi** | **Status** |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| I-001 | __ | __ | __ | __ | __ | ☐ Minor ☐ Major ☐ Critical | __ | ☐ Open ☐ Fix ☐ Closed |
+| I-002 | __ | __ | __ | __ | __ | ☐ Minor ☐ Major ☐ Critical | __ | ☐ Open ☐ Fix ☐ Closed |
+| I-003 | __ | __ | __ | __ | __ | ☐ Minor ☐ Major ☐ Critical | __ | ☐ Open ☐ Fix ☐ Closed |
+
+*(Tambah row baru dengan ID berurutan untuk setiap issue.)*
+
+## 8. Sign-Off Criteria untuk Lanjut Sprint 4
+
+Sprint 4 (`callAgentInternal` orchestration) baru dimulai bila **semua kriteria** berikut terpenuhi:
+
+- [ ]  **SO-1.** ≥ 14 dari 16 test case **PASS** (87,5% pass rate).
+- [ ]  **SO-2.** Tidak ada issue **Critical** yang masih Open.
+- [ ]  **SO-3.** Issue **Major** maksimal 1 yang masih Open, dengan workaround terdokumentasi.
+- [ ]  **SO-4.** 3 agen prioritas Tinggi (PROXIMA, KONTRAK, FINTAX) **wajib 100% PASS** (6/6 test).
+- [ ]  **SO-5.** Tender Readiness Checker pilot ≥ 4 dari 5 skenario PASS.
+- [ ]  **SO-6.** User experience confirmation: minimal 1 sesi dummy walkthrough oleh user (penshop) dengan rating subjektif ≥ 7/10 untuk "effort to result quality ratio".
+
+<aside>
+📝
+
+**Bila SO-1 s.d. SO-6 terpenuhi:** Update Section 4.2 status audit menjadi "Lulus ABD" untuk semua agen, lalu kick off Sprint 4 dengan blueprint orchestration.
+
+</aside>
+
+## 9. Estimasi Waktu Eksekusi
+
+| **Aktivitas** | **Estimasi** | **Ketergantungan** |
+| --- | --- | --- |
+| Pre-deployment checklist (PRE-1 s.d. PRE-5) | 30 menit | Akses Gustafta Builder |
+| Wave 1 deploy + smoke test (3 agen Tinggi, 6 test) | 2–3 jam | PRE complete |
+| Wave 1.5 Tender Readiness Checker (5 skenario) | 1–1,5 jam | Wave 1 PASS |
+| Wave 2 deploy + smoke test (5 agen Sedang, 5 test) | 2–2,5 jam | Wave 1.5 PASS |
+| Wave 3 deploy + smoke test (1 agen Rendah, 1 test) | 30–45 menit | Wave 2 PASS |
+| Issue triage + retest (bila ada) | variable | Per issue |
+| Sign-off review | 30 menit | Semua wave selesai |
+| **Total (skenario optimis, no major rollback)** | **6–8 jam** |  |
+
+## 10. Checklist Eksekusi (Single Source of Truth)
+
+- [ ]  **PRE.** Pre-deployment checklist complete
+- [ ]  **W1.** Wave 1 deploy: PROXIMA · KONTRAK · FINTAX
+- [ ]  **W1-test.** Wave 1 smoke test 6/6 PASS
+- [ ]  **W1.5.** Tender Readiness Checker pilot deploy
+- [ ]  **W1.5-test.** 5 skenario S-A s.d. S-E executed
+- [ ]  **W2.** Wave 2 deploy: TEKNIK · SAFIRA · MUTU · EQUIPRA · LOGIS
+- [ ]  **W2-test.** Wave 2 smoke test 5/5 PASS
+- [ ]  **W3.** Wave 3 deploy: ENVIRA
+- [ ]  **W3-test.** Wave 3 smoke test 1/1 PASS
+- [ ]  **TRIAGE.** Semua issue Major/Critical resolved
+- [ ]  **SIGN-OFF.** SO-1 s.d. SO-6 verified → lanjut Sprint 4
+
+---
+
+<aside>
+🎯
+
+**Tolok ukur akhir:** Semua 9 agen + Tender Readiness Checker output **"effort minimum, hasil maksimum"** — user cukup input 5 field, dapat jawaban lengkap berstruktur ABD-7, tanpa pernah disuruh "lengkapi data X dulu" sebagai jawaban utama. Bila tolok ukur ini dipenuhi di lapangan, tahap Anti-Blocking Doctrine **sukses** dan KONSTRA siap masuk fase orchestration (Sprint 4).
+
+</aside>

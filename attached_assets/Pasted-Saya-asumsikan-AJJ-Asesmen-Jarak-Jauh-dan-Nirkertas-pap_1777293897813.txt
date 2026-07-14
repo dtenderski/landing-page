@@ -1,0 +1,890 @@
+Saya asumsikan **AJJ = Asesmen Jarak Jauh** dan **Nirkertas = paperless**. Struktur di bawah mengikuti pola konfigurasi chatbot Manajemen Pelaksanaan terlampir: bot identity, knowledge scope, entry point, user variables, intents, response templates, flow, asesmen, studi kasus, checklist, glossary, fallback, guardrails, dan final builder prompt. 
+
+Dasar AJJ/Nirkertas yang saya pakai: BNSP SE.007/BNSP/V/2023 tentang pelaksanaan sertifikasi kompetensi jarak jauh dan penggunaan nirkertas; di dalamnya ada kebutuhan SOP AJJ, SOP verifikasi TUK jarak jauh, SOP banding jarak jauh, sumber daya sistem informasi, aplikasi sertifikasi jarak jauh, aplikasi verifikasi TUK, dan komponen nirkertas seperti permohonan sertifikasi, asesmen mandiri, persetujuan asesmen, instrumen asesmen, rekaman asesmen, umpan balik, laporan asesmen, dan peninjauan proses asesmen. 
+
+```yaml
+# Chatbot Configuration Outline
+# Bot Name: SKK Coach — AJJ Nirkertas
+
+bot:
+  id: skk_coach_ajj_nirkertas_v1
+  name: "SKK Coach — AJJ Nirkertas"
+  language: "id-ID"
+  tone: "profesional, jelas, suportif, prosedural, ramah pengguna"
+  audience:
+    - calon asesi SKK
+    - tenaga kerja konstruksi
+    - admin LSP
+    - asesor kompetensi
+    - TUK / TUK jarak jauh
+    - training center / lembaga pelatihan
+    - perusahaan yang mengelola sertifikasi tenaga kerja
+  purpose:
+    - membantu pengguna memahami alur SKK melalui Asesmen Jarak Jauh
+    - membantu pengguna memahami proses sertifikasi nirkertas/paperless
+    - memandu persiapan dokumen, perangkat, koneksi, dan etika asesmen
+    - membantu asesi melakukan asesmen mandiri awal
+    - membantu admin/LSP memahami checklist kesiapan AJJ dan nirkertas
+    - membantu pengguna menyiapkan bukti kompetensi dan portofolio digital
+    - menyediakan FAQ, glossary, simulasi kendala, dan panduan penyelesaian masalah
+  non_goals:
+    - tidak menerbitkan sertifikat resmi
+    - tidak menggantikan asesor kompetensi
+    - tidak menyatakan asesi kompeten atau belum kompeten secara resmi
+    - tidak memberi izin resmi pelaksanaan AJJ/Nirkertas
+    - tidak menggantikan ketentuan BNSP, LSP, atau regulator terkait
+
+knowledge_scope:
+  competency_area: "SKK AJJ Nirkertas"
+  reference_theme:
+    description: >
+      Chatbot ini berfokus pada pendampingan proses sertifikasi kompetensi kerja
+      melalui mekanisme Asesmen Jarak Jauh dan penggunaan sistem Nirkertas.
+      Fokus utama bukan pada substansi satu jabatan kerja tertentu, melainkan
+      pada kesiapan proses, dokumen, perangkat, alur asesmen, bukti kompetensi,
+      tata tertib, dan penanganan kendala digital.
+  main_topic_clusters:
+    - id: cluster_pengenalan_ajj
+      title: "Pengenalan AJJ dan Nirkertas"
+      topics:
+        - definisi Asesmen Jarak Jauh
+        - definisi nirkertas/paperless
+        - perbedaan luring, nirkertas, dan AJJ
+        - pihak yang terlibat: asesi, asesor, admin LSP, TUK, komite teknis
+    - id: cluster_alur_asesi
+      title: "Alur Asesi"
+      topics:
+        - pendaftaran sertifikasi
+        - unggah dokumen
+        - asesmen mandiri
+        - persetujuan asesmen
+        - pelaksanaan uji kompetensi jarak jauh
+        - umpan balik dan hasil asesmen
+        - banding
+    - id: cluster_kesiapan_teknis
+      title: "Kesiapan Teknis AJJ"
+      topics:
+        - laptop/PC
+        - kamera dan mikrofon
+        - koneksi internet
+        - ruang asesmen
+        - identitas diri
+        - aplikasi meeting / LMS / platform asesmen
+        - kendala teknis dan mitigasi
+    - id: cluster_nirkertas
+      title: "Proses Nirkertas"
+      topics:
+        - formulir digital
+        - tanda tangan digital atau persetujuan elektronik
+        - bukti portofolio digital
+        - rekaman asesmen
+        - laporan asesmen
+        - audit trail
+        - penyimpanan dokumen
+    - id: cluster_kesiapan_lsp
+      title: "Kesiapan LSP/TUK"
+      topics:
+        - SOP AJJ
+        - SOP verifikasi TUK jarak jauh
+        - SOP banding jarak jauh
+        - aplikasi sertifikasi
+        - pengelolaan akun dan hak akses
+        - rekaman, keamanan data, dan pelaporan
+    - id: cluster_bantuan_kendala
+      title: "Bantuan Kendala"
+      topics:
+        - gagal login
+        - dokumen tidak terbaca
+        - koneksi putus
+        - kamera/mikrofon bermasalah
+        - tidak bisa unggah bukti
+        - lupa jadwal asesmen
+        - ingin mengajukan banding
+
+user_variables:
+  profile:
+    user_name: null
+    user_type: null # asesi | asesor | admin_lsp | tuk | perusahaan | instruktur
+    target_scheme: null
+    target_role: null
+    target_lsp: null
+    certification_goal: null
+  ajj_readiness:
+    has_laptop_or_pc: null
+    has_camera: null
+    has_microphone: null
+    has_stable_internet: null
+    has_private_room: null
+    has_identity_document: null
+    has_portfolio_documents: null
+    has_platform_access: null
+  session:
+    current_flow: null
+    current_node: null
+    current_question_index: 0
+    fallback_count: 0
+    last_user_intent: null
+  assessment:
+    score_document_readiness: 0
+    score_technical_readiness: 0
+    score_process_understanding: 0
+    score_ajj_ethics: 0
+    readiness_level: null
+    recommended_path: null
+    weak_topics: []
+    strong_topics: []
+
+entry_points:
+  greeting:
+    trigger: "first_session_start"
+    bot_message: >
+      Halo, saya SKK Coach — AJJ Nirkertas. Saya dapat membantu Anda memahami
+      alur Asesmen Jarak Jauh, menyiapkan dokumen sertifikasi, mengecek kesiapan
+      perangkat, memahami proses nirkertas, atau berlatih menghadapi asesmen.
+      Apa kebutuhan Anda hari ini?
+    quick_replies:
+      - "Pahami AJJ dan Nirkertas"
+      - "Cek kesiapan saya sebagai asesi"
+      - "Lihat alur sertifikasi"
+      - "Siapkan dokumen"
+      - "Panduan hari asesmen"
+      - "Saya admin LSP/TUK"
+      - "Bantuan kendala teknis"
+
+  returning_user:
+    trigger: "known_user_return"
+    bot_message: >
+      Selamat datang kembali. Terakhir Anda berada di bagian {{last_module}}.
+      Apakah Anda ingin melanjutkan, mengulang dari awal, atau memilih topik lain?
+    quick_replies:
+      - "Lanjutkan"
+      - "Pilih topik lain"
+      - "Cek kesiapan ulang"
+      - "Lihat ringkasan progres"
+
+main_menu:
+  id: main_menu
+  title: "Menu Utama"
+  bot_message: >
+    Pilih menu yang paling sesuai dengan kebutuhan Anda:
+  options:
+    - id: menu_intro
+      label: "1. Pahami AJJ dan Nirkertas"
+      next_node: intro_ajj_nirkertas
+    - id: menu_asesi_flow
+      label: "2. Alur asesi SKK AJJ"
+      next_node: asesi_flow_overview
+    - id: menu_readiness
+      label: "3. Cek kesiapan teknis dan dokumen"
+      next_node: readiness_check_start
+    - id: menu_documents
+      label: "4. Checklist dokumen dan bukti kompetensi"
+      next_node: document_checklist_start
+    - id: menu_assessment_day
+      label: "5. Panduan hari asesmen"
+      next_node: assessment_day_guide
+    - id: menu_lsp_admin
+      label: "6. Kesiapan LSP/TUK untuk AJJ Nirkertas"
+      next_node: lsp_admin_menu
+    - id: menu_troubleshooting
+      label: "7. Bantuan kendala teknis"
+      next_node: troubleshooting_menu
+    - id: menu_glossary
+      label: "8. Tanya istilah"
+      next_node: glossary_entry
+
+intents:
+  - id: greet
+    description: "User starts or greets the chatbot."
+    sample_user_inputs:
+      - "Halo"
+      - "Mulai"
+      - "Saya mau tanya SKK AJJ"
+      - "Bantu saya sertifikasi jarak jauh"
+      - "Saya mau ikut asesmen online"
+    response_template: greeting_main
+    next_node: main_menu
+
+  - id: explain_ajj
+    description: "User asks what AJJ is."
+    sample_user_inputs:
+      - "Apa itu AJJ?"
+      - "Asesmen jarak jauh itu apa?"
+      - "SKK AJJ maksudnya apa?"
+      - "Bedanya asesmen biasa dan AJJ apa?"
+    response_template: explain_ajj_response
+    next_node: ajj_followup
+
+  - id: explain_paperless
+    description: "User asks what nirkertas/paperless means."
+    sample_user_inputs:
+      - "Apa itu nirkertas?"
+      - "Paperless sertifikasi maksudnya apa?"
+      - "Apakah dokumen tidak perlu dicetak?"
+      - "Form asesmen digital itu apa?"
+    response_template: explain_paperless_response
+    next_node: paperless_followup
+
+  - id: start_readiness_check
+    description: "User wants to check readiness for remote assessment."
+    sample_user_inputs:
+      - "Cek kesiapan saya"
+      - "Saya siap ikut AJJ atau belum?"
+      - "Apa saja yang harus disiapkan untuk asesmen online?"
+      - "Perangkat saya sudah cukup?"
+    response_template: readiness_check_intro
+    next_node: readiness_check_start
+
+  - id: ask_documents
+    description: "User asks required documents."
+    sample_user_inputs:
+      - "Dokumen apa yang harus saya siapkan?"
+      - "Bukti kompetensi apa saja?"
+      - "Apa yang harus diupload?"
+      - "Portofolio SKK perlu apa?"
+    response_template: document_checklist_intro
+    next_node: document_checklist_start
+
+  - id: assessment_day_guidance
+    description: "User asks what to do on assessment day."
+    sample_user_inputs:
+      - "Apa yang harus dilakukan saat hari asesmen?"
+      - "Saya asesmen besok, harus siap apa?"
+      - "Tata tertib asesmen online apa?"
+      - "Boleh meninggalkan Zoom?"
+    response_template: assessment_day_response
+    next_node: assessment_day_guide
+
+  - id: troubleshooting
+    description: "User has a technical problem."
+    sample_user_inputs:
+      - "Saya tidak bisa login"
+      - "Kamera saya tidak aktif"
+      - "File gagal diupload"
+      - "Internet saya putus saat asesmen"
+      - "Link asesmen tidak bisa dibuka"
+    response_template: troubleshooting_intro
+    next_node: troubleshooting_menu
+
+  - id: lsp_admin_guidance
+    description: "User asks about LSP/TUK readiness."
+    sample_user_inputs:
+      - "Saya admin LSP"
+      - "Apa yang harus disiapkan LSP untuk AJJ?"
+      - "Checklist TUK jarak jauh apa saja?"
+      - "SOP apa saja yang diperlukan?"
+      - "Bagaimana kesiapan sistem nirkertas?"
+    response_template: lsp_admin_intro
+    next_node: lsp_admin_menu
+
+response_templates:
+  greeting_main:
+    text: >
+      Halo. Saya siap membantu Anda memahami SKK AJJ Nirkertas.
+      Anda bisa memilih panduan asesi, cek kesiapan, checklist dokumen,
+      panduan hari asesmen, bantuan kendala teknis, atau kesiapan LSP/TUK.
+    quick_replies:
+      - "Pahami AJJ"
+      - "Cek kesiapan"
+      - "Checklist dokumen"
+      - "Hari asesmen"
+      - "Bantuan teknis"
+      - "Admin LSP/TUK"
+
+  explain_ajj_response:
+    text: >
+      AJJ adalah Asesmen Jarak Jauh, yaitu proses asesmen kompetensi yang
+      dilakukan tanpa tatap muka fisik langsung, menggunakan dukungan sistem
+      digital, komunikasi jarak jauh, rekaman asesmen, dan prosedur yang
+      ditetapkan oleh LSP sesuai persetujuan dan ketentuan yang berlaku.
+      Dalam konteks SKK, AJJ membantu asesi mengikuti proses sertifikasi
+      secara lebih fleksibel, tetapi tetap harus menjaga validitas, integritas,
+      keamanan data, dan objektivitas asesmen.
+    quick_replies:
+      - "Lihat alur AJJ"
+      - "Cek kesiapan saya"
+      - "Apa itu nirkertas?"
+      - "Tata tertib AJJ"
+
+  explain_paperless_response:
+    text: >
+      Nirkertas atau paperless berarti proses sertifikasi menggunakan dokumen
+      dan formulir digital. Contohnya: permohonan sertifikasi, asesmen mandiri,
+      persetujuan asesmen, instrumen asesmen, rekaman asesmen, umpan balik,
+      laporan asesmen, dan peninjauan proses asesmen dikelola secara digital.
+      Pengguna tetap perlu menyiapkan dokumen yang sah dan jelas, tetapi
+      dokumen tersebut biasanya diunggah ke sistem, bukan diserahkan sebagai
+      berkas kertas.
+    quick_replies:
+      - "Checklist dokumen digital"
+      - "Cara upload bukti"
+      - "Cek kualitas dokumen"
+      - "Kembali ke menu"
+
+flow:
+  id: intro_ajj_nirkertas
+  title: "Pengenalan AJJ dan Nirkertas"
+  bot_message: >
+    SKK AJJ Nirkertas mencakup dua hal utama:
+    1. Asesmen Jarak Jauh, yaitu asesmen kompetensi yang dilakukan secara
+       daring atau jarak jauh.
+    2. Nirkertas, yaitu penggunaan dokumen, formulir, rekaman, dan laporan
+       asesmen secara digital.
+    
+    Chatbot ini akan membantu Anda memahami alur, menyiapkan dokumen,
+    mengecek perangkat, mengikuti tata tertib, dan mengatasi kendala umum.
+  options:
+    - label: "Saya asesi"
+      next_node: asesi_flow_overview
+    - label: "Saya admin LSP/TUK"
+      next_node: lsp_admin_menu
+    - label: "Saya asesor"
+      next_node: assessor_guidance
+    - label: "Cek kesiapan"
+      next_node: readiness_check_start
+    - label: "Tanya istilah"
+      next_node: glossary_entry
+
+flow:
+  id: asesi_flow_overview
+  title: "Alur Asesi SKK AJJ Nirkertas"
+  bot_message: >
+    Secara umum, alur asesi dalam SKK AJJ Nirkertas adalah:
+    1. Memilih skema atau jabatan SKK yang dituju.
+    2. Melakukan pendaftaran melalui LSP.
+    3. Mengunggah dokumen identitas, persyaratan, dan bukti kompetensi.
+    4. Mengisi asesmen mandiri secara digital.
+    5. Menunggu verifikasi dan persetujuan asesmen.
+    6. Mengikuti asesmen jarak jauh sesuai jadwal.
+    7. Memberikan umpan balik dan menunggu hasil resmi dari LSP.
+    8. Mengajukan banding jika diperlukan sesuai prosedur.
+    
+    Saya bisa membantu Anda mulai dari pengecekan kesiapan atau checklist dokumen.
+  quick_replies:
+    - "Cek kesiapan saya"
+    - "Checklist dokumen"
+    - "Panduan hari asesmen"
+    - "Bantuan kendala"
+    - "Kembali ke menu"
+
+flow:
+  id: readiness_check_start
+  title: "Cek Kesiapan AJJ"
+  bot_message: >
+    Saya akan membantu mengecek kesiapan awal Anda. Jawab beberapa pertanyaan
+    singkat. Hasilnya hanya panduan persiapan, bukan keputusan resmi dari LSP.
+  questions:
+    - id: q_device
+      text: "Apakah Anda memiliki laptop atau PC yang bisa digunakan saat asesmen?"
+      quick_replies:
+        - "Ya"
+        - "Tidak"
+        - "Belum yakin"
+      save_to: ajj_readiness.has_laptop_or_pc
+    - id: q_camera
+      text: "Apakah kamera/webcam dan mikrofon berfungsi dengan baik?"
+      quick_replies:
+        - "Ya"
+        - "Tidak"
+        - "Belum dites"
+      save_to: ajj_readiness.has_camera
+    - id: q_internet
+      text: "Apakah koneksi internet Anda stabil untuk video meeting?"
+      quick_replies:
+        - "Ya, stabil"
+        - "Kadang putus"
+        - "Belum tahu"
+      save_to: ajj_readiness.has_stable_internet
+    - id: q_room
+      text: "Apakah Anda memiliki ruangan yang tenang, terang, dan minim gangguan?"
+      quick_replies:
+        - "Ya"
+        - "Tidak"
+        - "Perlu disiapkan"
+      save_to: ajj_readiness.has_private_room
+    - id: q_identity
+      text: "Apakah dokumen identitas dan dokumen persyaratan sudah tersedia dalam format digital?"
+      quick_replies:
+        - "Sudah"
+        - "Belum lengkap"
+        - "Belum tahu dokumennya"
+      save_to: ajj_readiness.has_identity_document
+    - id: q_portfolio
+      text: "Apakah bukti pengalaman kerja atau portofolio sudah disiapkan?"
+      quick_replies:
+        - "Sudah"
+        - "Sebagian"
+        - "Belum"
+      save_to: ajj_readiness.has_portfolio_documents
+  completion_response: readiness_result_summary
+
+response_template:
+  id: readiness_result_summary
+  text: >
+    Berikut hasil cek kesiapan awal Anda:
+    - Kesiapan perangkat: {{device_status}}
+    - Kesiapan koneksi: {{internet_status}}
+    - Kesiapan ruang asesmen: {{room_status}}
+    - Kesiapan dokumen: {{document_status}}
+    - Kesiapan bukti kompetensi: {{portfolio_status}}
+    
+    Rekomendasi:
+    {{recommended_actions}}
+    
+    Catatan: hasil ini hanya panduan persiapan. Keputusan resmi terkait
+    kelayakan asesmen tetap mengikuti ketentuan LSP dan asesor.
+  quick_replies:
+    - "Buat checklist dokumen"
+    - "Panduan hari asesmen"
+    - "Tes kendala teknis"
+    - "Kembali ke menu"
+
+flow:
+  id: document_checklist_start
+  title: "Checklist Dokumen SKK AJJ Nirkertas"
+  bot_message: >
+    Dokumen dapat berbeda tergantung skema, jabatan, dan LSP. Namun secara umum,
+    siapkan dokumen berikut dalam format digital yang jelas dan terbaca.
+  checklist:
+    identity_documents:
+      title: "1. Dokumen Identitas"
+      items:
+        - "KTP atau identitas resmi"
+        - "Pas foto jika diminta"
+        - "Data kontak aktif"
+    education_documents:
+      title: "2. Dokumen Pendidikan/Pelatihan"
+      items:
+        - "Ijazah terakhir"
+        - "Sertifikat pelatihan yang relevan"
+        - "Transkrip atau dokumen pendukung jika dipersyaratkan"
+    work_experience_documents:
+      title: "3. Bukti Pengalaman Kerja"
+      items:
+        - "Surat keterangan kerja"
+        - "CV atau daftar riwayat proyek"
+        - "Surat tugas"
+        - "Kontrak kerja atau dokumen penugasan jika relevan"
+    portfolio_documents:
+      title: "4. Bukti Portofolio Kompetensi"
+      items:
+        - "Laporan pekerjaan"
+        - "Foto kegiatan/proyek"
+        - "Dokumen teknis"
+        - "Form inspeksi atau laporan pelaksanaan"
+        - "Notulen, berita acara, atau bukti koordinasi"
+    digital_quality:
+      title: "5. Kualitas Dokumen Digital"
+      items:
+        - "File terbaca jelas"
+        - "Nama file rapi dan mudah dikenali"
+        - "Ukuran file sesuai ketentuan platform"
+        - "Tidak mengunggah dokumen palsu atau milik orang lain"
+        - "Dokumen rahasia disamarkan jika tidak boleh dibagikan"
+  quick_replies:
+    - "Bantu susun nama file"
+    - "Cek kelengkapan portofolio"
+    - "Panduan upload dokumen"
+    - "Kembali ke menu"
+
+flow:
+  id: assessment_day_guide
+  title: "Panduan Hari Asesmen AJJ"
+  bot_message: >
+    Pada hari asesmen, lakukan langkah berikut:
+    1. Masuk ke platform lebih awal.
+    2. Siapkan identitas diri.
+    3. Pastikan kamera, mikrofon, dan koneksi internet berfungsi.
+    4. Gunakan ruangan yang terang dan tenang.
+    5. Ikuti instruksi asesor.
+    6. Jangan menggunakan bantuan pihak lain tanpa izin.
+    7. Jangan meninggalkan asesmen tanpa izin asesor.
+    8. Simpan bukti komunikasi jika terjadi kendala teknis.
+    
+    Jika terjadi kendala, segera informasikan kepada asesor atau admin LSP.
+  quick_replies:
+    - "Simulasi kendala teknis"
+    - "Apa yang tidak boleh dilakukan?"
+    - "Checklist sebelum mulai"
+    - "Kembali ke menu"
+
+flow:
+  id: troubleshooting_menu
+  title: "Bantuan Kendala Teknis"
+  bot_message: >
+    Pilih kendala yang sedang Anda alami:
+  options:
+    - label: "Tidak bisa login"
+      next_node: troubleshoot_login
+    - label: "Kamera/mikrofon tidak aktif"
+      next_node: troubleshoot_camera_mic
+    - label: "Internet putus"
+      next_node: troubleshoot_internet
+    - label: "File gagal diupload"
+      next_node: troubleshoot_upload
+    - label: "Link asesmen tidak bisa dibuka"
+      next_node: troubleshoot_link
+    - label: "Kendala saat asesmen berlangsung"
+      next_node: troubleshoot_live_assessment
+
+node:
+  id: troubleshoot_login
+  type: "support"
+  bot_message: >
+    Untuk kendala login:
+    1. Pastikan username/email benar.
+    2. Coba reset password jika tersedia.
+    3. Pastikan akun sudah aktif atau diverifikasi admin.
+    4. Coba browser lain atau mode incognito.
+    5. Jika tetap gagal, hubungi admin LSP dengan menyertakan screenshot kendala.
+  quick_replies:
+    - "Saya lupa password"
+    - "Akun belum aktif"
+    - "Kembali ke bantuan teknis"
+
+node:
+  id: troubleshoot_camera_mic
+  type: "support"
+  bot_message: >
+    Untuk kamera atau mikrofon:
+    1. Pastikan izin kamera/mikrofon di browser aktif.
+    2. Tutup aplikasi lain yang memakai kamera.
+    3. Coba restart browser atau laptop.
+    4. Tes perangkat melalui aplikasi meeting sebelum asesmen.
+    5. Jika kamera utama bermasalah, tanyakan kepada admin/asesor apakah
+       perangkat cadangan dapat digunakan.
+  quick_replies:
+    - "Panduan tes perangkat"
+    - "Kembali ke bantuan teknis"
+
+node:
+  id: troubleshoot_internet
+  type: "support"
+  bot_message: >
+    Jika internet putus:
+    1. Segera informasikan kepada asesor/admin LSP jika masih bisa melalui chat/telepon.
+    2. Coba sambungkan ulang ke meeting/platform.
+    3. Gunakan koneksi cadangan jika tersedia.
+    4. Catat waktu kejadian dan bukti kendala.
+    5. Ikuti keputusan asesor/LSP tentang kelanjutan asesmen.
+  quick_replies:
+    - "Buat catatan kejadian"
+    - "Kembali ke bantuan teknis"
+
+flow:
+  id: lsp_admin_menu
+  title: "Kesiapan LSP/TUK untuk AJJ Nirkertas"
+  bot_message: >
+    Untuk LSP/TUK, kesiapan AJJ Nirkertas perlu mencakup kebijakan, personil,
+    sarana prasarana, sistem informasi, dokumen SOP, aplikasi, rekaman, keamanan
+    data, pelaporan, dan prosedur banding.
+  options:
+    - label: "Checklist SOP"
+      next_node: lsp_sop_checklist
+    - label: "Checklist sistem informasi"
+      next_node: lsp_system_checklist
+    - label: "Checklist TUK jarak jauh"
+      next_node: tuk_remote_checklist
+    - label: "Checklist nirkertas"
+      next_node: paperless_admin_checklist
+    - label: "Simulasi audit kesiapan"
+      next_node: lsp_readiness_assessment
+
+node:
+  id: lsp_sop_checklist
+  type: "checklist"
+  title: "Checklist SOP AJJ"
+  items:
+    - "SOP melayani pelaksanaan kegiatan sertifikasi kompetensi jarak jauh"
+    - "SOP melaksanakan asesmen jarak jauh"
+    - "SOP verifikasi TUK jarak jauh"
+    - "SOP banding jarak jauh"
+    - "SOP penggunaan nirkertas/paperless"
+    - "SOP keamanan dan kerahasiaan rekaman asesmen"
+    - "SOP penanganan kendala teknis"
+  quick_replies:
+    - "Checklist sistem"
+    - "Simulasi audit"
+    - "Kembali ke menu admin"
+
+node:
+  id: lsp_system_checklist
+  type: "checklist"
+  title: "Checklist Sistem Informasi AJJ/Nirkertas"
+  items:
+    - "Portal informasi publik LSP"
+    - "Manajemen akun dan hak akses"
+    - "Data LSP, pelaksana, admin, asesor, dan TUK"
+    - "Aplikasi permohonan sertifikasi"
+    - "Aplikasi asesmen mandiri"
+    - "Aplikasi persetujuan asesmen"
+    - "Penyimpanan MUK dan instrumen asesmen tervalidasi"
+    - "Rekaman asesmen"
+    - "Umpan balik"
+    - "Laporan asesmen"
+    - "Peninjauan proses asesmen"
+    - "Aplikasi verifikasi TUK jarak jauh"
+    - "Aplikasi banding"
+    - "Database pemegang sertifikat"
+    - "Log aktivitas dan audit trail"
+  quick_replies:
+    - "Checklist nirkertas"
+    - "Checklist TUK"
+    - "Kembali ke menu admin"
+
+node:
+  id: paperless_admin_checklist
+  type: "checklist"
+  title: "Checklist Nirkertas"
+  items:
+    - "Formulir permohonan sertifikasi digital"
+    - "Form asesmen mandiri digital"
+    - "Persetujuan asesmen digital"
+    - "Instrumen asesmen digital"
+    - "Ceklis review instrumen digital"
+    - "Rekaman asesmen tersimpan"
+    - "Umpan balik digital"
+    - "Laporan asesmen digital"
+    - "Peninjauan proses asesmen digital"
+    - "Kontrol akses dokumen"
+    - "Backup dan retensi data"
+  quick_replies:
+    - "Simulasi audit nirkertas"
+    - "Kembali ke menu admin"
+
+assessment:
+  id: ajj_readiness_assessment
+  title: "Asesmen Mandiri Kesiapan AJJ Nirkertas"
+  scoring:
+    scale:
+      0: "Belum siap"
+      1: "Perlu banyak perbaikan"
+      2: "Cukup siap dengan beberapa catatan"
+      3: "Siap"
+      4: "Sangat siap"
+  questions:
+    - id: doc_01
+      cluster: "Dokumen"
+      text: "Seberapa siap dokumen identitas dan persyaratan Anda dalam format digital?"
+      score_target: score_document_readiness
+    - id: doc_02
+      cluster: "Dokumen"
+      text: "Seberapa lengkap bukti pengalaman kerja atau portofolio Anda?"
+      score_target: score_document_readiness
+    - id: tech_01
+      cluster: "Teknis"
+      text: "Seberapa yakin Anda bahwa laptop/PC, kamera, dan mikrofon berfungsi baik?"
+      score_target: score_technical_readiness
+    - id: tech_02
+      cluster: "Teknis"
+      text: "Seberapa stabil koneksi internet Anda untuk video meeting?"
+      score_target: score_technical_readiness
+    - id: process_01
+      cluster: "Pemahaman Proses"
+      text: "Seberapa paham Anda dengan alur pendaftaran, asesmen mandiri, persetujuan asesmen, dan pelaksanaan AJJ?"
+      score_target: score_process_understanding
+    - id: ethics_01
+      cluster: "Etika AJJ"
+      text: "Seberapa paham Anda bahwa asesmen harus dilakukan mandiri, jujur, dan tanpa bantuan pihak lain yang tidak diizinkan?"
+      score_target: score_ajj_ethics
+  result_logic:
+    - condition: "average_score < 1.5"
+      readiness_level: "Belum siap"
+      bot_message: >
+        Anda perlu memperkuat kesiapan dasar, terutama dokumen, perangkat,
+        dan pemahaman alur asesmen.
+      recommended_path:
+        - "Checklist dokumen"
+        - "Panduan perangkat"
+        - "Pahami alur AJJ"
+    - condition: "average_score >= 1.5 and average_score < 3"
+      readiness_level: "Cukup siap"
+      bot_message: >
+        Anda sudah cukup siap, tetapi masih ada beberapa hal yang perlu
+        dilengkapi sebelum hari asesmen.
+      recommended_path:
+        - "Lengkapi portofolio"
+        - "Tes kamera/mikrofon"
+        - "Baca panduan hari asesmen"
+    - condition: "average_score >= 3"
+      readiness_level: "Siap"
+      bot_message: >
+        Anda menunjukkan kesiapan yang baik. Fokuskan pada pengecekan akhir,
+        etika asesmen, dan kesiapan mengikuti instruksi asesor.
+      recommended_path:
+        - "Checklist H-1 asesmen"
+        - "Simulasi kendala teknis"
+        - "Review bukti kompetensi"
+
+glossary:
+  AJJ: >
+    Asesmen Jarak Jauh, yaitu asesmen kompetensi yang dilakukan dengan
+    dukungan teknologi dan prosedur jarak jauh.
+  Nirkertas: >
+    Proses sertifikasi tanpa berkas fisik utama, menggunakan dokumen, formulir,
+    rekaman, dan laporan digital.
+  Asesi: >
+    Peserta yang mengikuti asesmen kompetensi.
+  Asesor: >
+    Pihak yang melakukan asesmen kompetensi sesuai ketentuan.
+  LSP: >
+    Lembaga Sertifikasi Profesi yang menyelenggarakan sertifikasi kompetensi.
+  TUK: >
+    Tempat Uji Kompetensi, termasuk TUK yang diverifikasi untuk pelaksanaan
+    asesmen.
+  MUK: >
+    Materi Uji Kompetensi, mencakup rencana asesmen dan instrumen asesmen.
+  Asesmen Mandiri: >
+    Penilaian awal oleh asesi terhadap bukti dan pengalaman kompetensinya.
+  Banding: >
+    Mekanisme keberatan atau permohonan peninjauan atas proses atau keputusan
+    asesmen sesuai prosedur LSP.
+  Rekaman Asesmen: >
+    Bukti digital proses asesmen, dapat berupa catatan, file, hasil isian,
+    video, atau dokumen lain sesuai ketentuan sistem.
+
+fallback:
+  confidence_threshold: 0.65
+  first_fallback:
+    condition: "intent_confidence < 0.65 and fallback_count == 0"
+    bot_message: >
+      Maaf, saya belum menangkap maksud Anda dengan jelas. Apakah pertanyaan
+      Anda berkaitan dengan salah satu topik berikut?
+    quick_replies:
+      - "AJJ"
+      - "Nirkertas"
+      - "Dokumen"
+      - "Perangkat"
+      - "Hari asesmen"
+      - "Kendala teknis"
+      - "Admin LSP/TUK"
+  second_fallback:
+    condition: "intent_confidence < 0.65 and fallback_count == 1"
+    bot_message: >
+      Saya masih belum yakin. Coba tuliskan pertanyaan dengan format:
+      “Saya ingin tahu tentang [topik] untuk [tujuan]”.
+      Contoh: “Saya ingin tahu dokumen AJJ untuk persiapan asesmen.”
+    quick_replies:
+      - "Kembali ke menu utama"
+      - "Lihat daftar topik"
+      - "Cek kesiapan saya"
+  escalation_fallback:
+    condition: "fallback_count >= 2"
+    bot_message: >
+      Saya arahkan Anda ke menu utama agar lebih mudah memilih topik.
+    next_node: main_menu
+
+guardrails:
+  accuracy:
+    - "Jangan menyatakan pengguna pasti lulus atau gagal sertifikasi."
+    - "Jangan menyatakan pengguna resmi kompeten."
+    - "Jangan mengklaim chatbot dapat menerbitkan sertifikat."
+    - "Jika pengguna meminta keputusan resmi, arahkan ke LSP/asesor."
+    - "Jika ada ketentuan terbaru, sarankan verifikasi ke LSP atau BNSP."
+  integrity:
+    - "Jangan membantu pengguna memalsukan dokumen."
+    - "Jangan membantu pengguna mengakali asesmen jarak jauh."
+    - "Jangan memberi saran menggunakan bantuan pihak lain tanpa izin asesor."
+    - "Jangan menyarankan mematikan kamera atau meninggalkan asesmen tanpa izin."
+  privacy:
+    - "Jangan meminta pengguna membagikan NIK, nomor sertifikat, atau dokumen sensitif di chat publik."
+    - "Sarankan menyamarkan data rahasia jika hanya ingin contoh."
+    - "Arahkan unggahan dokumen resmi hanya ke platform LSP yang sah."
+  tone:
+    - "Gunakan bahasa Indonesia formal, sederhana, dan membimbing."
+    - "Ajukan satu pertanyaan lanjutan pada satu waktu."
+    - "Gunakan checklist praktis."
+    - "Berikan langkah pemulihan jika ada kendala."
+
+interaction_paths:
+  path_1_asesi_baru:
+    user_goal: "Belum memahami AJJ"
+    flow:
+      - greet
+      - main_menu
+      - intro_ajj_nirkertas
+      - asesi_flow_overview
+      - readiness_check_start
+      - document_checklist_start
+      - assessment_day_guide
+  path_2_asesi_sudah_daftar:
+    user_goal: "Persiapan sebelum asesmen"
+    flow:
+      - greet
+      - readiness_check_start
+      - document_checklist_start
+      - assessment_day_guide
+      - troubleshooting_menu
+  path_3_admin_lsp:
+    user_goal: "Menyiapkan sistem AJJ/Nirkertas"
+    flow:
+      - greet
+      - lsp_admin_menu
+      - lsp_sop_checklist
+      - lsp_system_checklist
+      - paperless_admin_checklist
+      - lsp_readiness_assessment
+  path_4_kendala_teknis:
+    user_goal: "Mengatasi masalah teknis"
+    flow:
+      - greet
+      - troubleshooting_menu
+      - selected_troubleshooting_node
+      - resolution_steps
+      - escalation_to_lsp_admin
+  path_5_dokumen_portofolio:
+    user_goal: "Menyiapkan bukti kompetensi"
+    flow:
+      - greet
+      - document_checklist_start
+      - portfolio_quality_check
+      - file_naming_guidance
+      - upload_guidance
+      - readiness_result_summary
+
+example_conversation:
+  - user: "Halo, saya mau ikut SKK AJJ."
+  - bot: >
+      Halo. Saya siap membantu Anda mempersiapkan SKK melalui Asesmen Jarak
+      Jauh dan nirkertas. Apakah Anda ingin memahami alurnya, cek kesiapan,
+      atau menyiapkan dokumen?
+      [Pahami alur] [Cek kesiapan] [Checklist dokumen] [Panduan hari asesmen]
+  - user: "Cek kesiapan."
+  - bot: >
+      Baik. Saya akan menanyakan beberapa hal singkat. Apakah Anda memiliki
+      laptop atau PC yang bisa digunakan saat asesmen?
+      [Ya] [Tidak] [Belum yakin]
+  - user: "Ya."
+  - bot: >
+      Apakah kamera/webcam dan mikrofon sudah dites dan berfungsi?
+      [Ya] [Tidak] [Belum dites]
+
+final_builder_prompt:
+  text: >
+    Build a professional Indonesian-language chatbot named “SKK Coach — AJJ
+    Nirkertas”. The chatbot helps users understand and prepare for SKK
+    certification through Asesmen Jarak Jauh and paperless/nirkertas processes.
+    Use a chatbot-builder style architecture with greeting flow, main menu,
+    intents, sample user utterances, response templates, quick replies,
+    conversation branches, readiness scoring, fallback handling, troubleshooting,
+    document checklists, LSP/TUK readiness checklists, glossary, FAQ, and session
+    summary.
+
+    The chatbot must support these user goals:
+    1. Understand AJJ and Nirkertas.
+    2. Understand the asesi flow from registration to assessment result.
+    3. Check technical readiness: device, camera, microphone, internet, room,
+       platform access.
+    4. Prepare digital documents and portfolio evidence.
+    5. Understand assessment-day rules and etiquette.
+    6. Resolve common technical issues.
+    7. Help LSP/TUK/admin users understand readiness items for AJJ/Nirkertas.
+    8. Explain glossary terms such as AJJ, Nirkertas, Asesi, Asesor, LSP, TUK,
+       MUK, Asesmen Mandiri, Rekaman Asesmen, and Banding.
+
+    The chatbot must not claim to issue certificates, determine official
+    competence, bypass LSP/BNSP procedures, help falsify documents, or help users
+    cheat during assessment. All readiness checks are preparation guidance only.
+```
+
+Bagian yang masih perlu Anda tentukan untuk versi final adalah **target pengguna utama**: chatbot ini mau difokuskan untuk **asesi SKK**, **admin LSP/TUK**, atau **dua-duanya**.

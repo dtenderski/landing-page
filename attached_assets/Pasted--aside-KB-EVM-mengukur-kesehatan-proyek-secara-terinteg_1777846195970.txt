@@ -1,0 +1,137 @@
+<aside>
+📊
+
+**KB-EVM** mengukur kesehatan proyek secara terintegrasi: schedule + cost dengan satu set indikator. Gunakan minimal **mingguan** dan dilampirkan ke Weekly/Monthly Progress Report. Standar acuan: **PMBOK 7th Section 2.6 — Measurement Performance Domain**.
+
+</aside>
+
+## 1. Tiga Variabel Inti
+
+| **Variabel** | **Singkatan** | **Definisi** | **Sumber Data** |
+| --- | --- | --- | --- |
+| **Planned Value** | PV / BCWS | Budgeted Cost of Work Scheduled — anggaran yang seharusnya sudah terpakai sesuai baseline | Master Schedule + Budget |
+| **Earned Value** | EV / BCWP | Budgeted Cost of Work Performed — nilai pekerjaan yang **benar-benar selesai** diukur dalam anggaran | % progress fisik aktual × BAC item |
+| **Actual Cost** | AC / ACWP | Actual Cost of Work Performed — biaya yang sudah dikeluarkan | Akuntansi proyek (PSAK 34) |
+| **Budget at Completion** | BAC | Total anggaran proyek di baseline (= nilai kontrak − keuntungan & contingency) | Estimating |
+
+## 2. Formula Dasar
+
+```
+Varian:
+    CV (Cost Variance)        = EV − AC      → ≥ 0 = under/on budget
+    SV (Schedule Variance)    = EV − PV      → ≥ 0 = ahead/on schedule
+
+Indeks:
+    CPI (Cost Performance)    = EV / AC      → ≥ 1 = sehat
+    SPI (Schedule Performance)= EV / PV      → ≥ 1 = sehat
+
+Forecast:
+    EAC (Estimate at Completion) — 4 metode:
+        EAC₁ = AC + (BAC − EV)              (sisa pekerjaan dgn rate baseline)
+        EAC₂ = BAC / CPI                    (asumsi CPI tetap)
+        EAC₃ = AC + (BAC − EV) / CPI        (paling umum dipakai)
+        EAC₄ = AC + (BAC − EV) / (CPI × SPI) (kondisi schedule juga buruk)
+
+    ETC (Estimate to Complete) = EAC − AC
+    VAC (Variance at Completion) = BAC − EAC
+    TCPI (To-Complete Performance Index) = (BAC − EV) / (BAC − AC)
+```
+
+## 3. Interpretasi Kombinasi CPI × SPI
+
+| **Kondisi** | **CPI** | **SPI** | **Diagnosis** | **Tindakan** |  |  |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| ✅ Sehat | ≥1.0 | ≥1.0 | On/under budget, on/ahead schedule | Pertahankan; review kemungkinan acceleration jika menguntungkan | ⚠️ Late but cheap | ≥1.0 | <1.0 | Hemat tapi terlambat | Mobilisasi tambahan resources; review critical path; potensi acceleration |
+| ⚠️ Fast but expensive | <1.0 | ≥1.0 | Cepat tapi over budget | Cost control review; cek waste, scope creep, perubahan harga | 🔴 Crisis | <1.0 | <1.0 | Late + over budget | Eskalasi Direksi; re-baseline; potensi terminasi atau klaim VO |
+
+## 4. Contoh Kalkulasi (Proyek 100 Miliar IDR, Minggu 26 dari 52)
+
+```
+Diketahui:
+    BAC = Rp 100,000,000,000
+    PV  (plan minggu 26)        = Rp 50,000,000,000   (50% baseline)
+    EV  (% fisik aktual = 45%)  = Rp 45,000,000,000
+    AC                          = Rp 48,000,000,000
+
+Varian:
+    CV = 45,000 − 48,000 = −Rp 3,000,000,000  → over budget
+    SV = 45,000 − 50,000 = −Rp 5,000,000,000  → behind schedule (5% late)
+
+Indeks:
+    CPI = 45,000 / 48,000 = 0.9375  (over budget 6.25%)
+    SPI = 45,000 / 50,000 = 0.9000  (behind 10%)
+
+Forecast (metode EAC₃):
+    EAC = 48,000 + (100,000 − 45,000) / 0.9375
+        = 48,000 + 58,667
+        = Rp 106,667,000,000
+    → forecasted overrun: VAC = 100,000 − 106,667 = −Rp 6,667,000,000
+
+Diagnosis: 🔴 CRISIS (CPI<1 & SPI<1)
+Aksi:
+    1. Eskalasi Direksi BUJK
+    2. Root cause analysis: cost (vendor markup? scope creep?)
+                          + schedule (productivity? RFI delays?)
+    3. Recovery plan: re-sequencing, acceleration, atau klaim VO/EOT
+```
+
+## 5. Mengukur % Fisik per Item Pekerjaan
+
+Teknik kuantifikasi EV per item pekerjaan:
+
+| **Metode** | **Cocok Untuk** | **Cara** |
+| --- | --- | --- |
+| **0/100** | Pekerjaan singkat/atomic | 0% sampai selesai 100%, lompat ke 100% |
+| **Weighted Milestones** | Pekerjaan multi-tahap (mis. struktur lantai) | Bobot per milestone (bekisting 30%, pembesian 30%, cor 30%, curing 10%) |
+| **Apportioned Effort** | QA/QC, supervisi | Mengikuti % progress paket pekerjaan utama yang didukung |
+
+## 6. Template Excel Kalkulator EVM
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  EVM CALCULATOR — Mingguan                                                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  INPUT                                                                      │
+│  ──────────                                                                  │
+│  Periode (Mingguke)        : [____]                                         │
+│  BAC                       : Rp [_______________]                           │
+│  PV (Planned Value)        : Rp [_______________]  (% plan × BAC)           │
+│  EV (Earned Value)         : Rp [_______________]  (% aktual × BAC)         │
+│  AC (Actual Cost)          : Rp [_______________]  (dari akuntansi)         │
+│                                                                             │
+│  HASIL                                                                      │
+│  ──────────                                                                  │
+│  CV  = EV − AC             : Rp [_______________]                           │
+│  SV  = EV − PV             : Rp [_______________]                           │
+│  CPI = EV / AC             : [_____]                                        │
+│  SPI = EV / PV             : [_____]                                        │
+│                                                                             │
+│  FORECAST (EAC method 3)                                                    │
+│  ──────────────────────                                                     │
+│  EAC = AC + (BAC − EV)/CPI : Rp [_______________]                           │
+│  ETC = EAC − AC            : Rp [_______________]                           │
+│  VAC = BAC − EAC           : Rp [_______________]                           │
+│  TCPI=(BAC−EV)/(BAC−AC)    : [_____]                                        │
+│                                                                             │
+│  DIAGNOSIS:  ⬜ Sehat   ⬜ Late but Cheap   ⬜ Fast but Expensive   ⬜ Crisis │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+*Implementasi di Excel:* gunakan rumus standar di sel `=B5/B7` dst., tambahkan conditional formatting untuk indikator (hijau jika ≥1, kuning 0.95–1, merah <0.95).
+
+## 7. Integrasi EVM ke Weekly Progress Report
+
+Weekly Progress Report dengan EVM minimal mencakup:
+
+1. **S-Curve fisik** (% plan vs % actual) — grafik kumulatif minggu 1–N.
+2. **S-Curve cash** (cash plan vs cash actual) — untuk koordinasi ke AGENT-FINTAX.
+3. **Tabel EVM ringkas** — BAC, PV, EV, AC, CV, SV, CPI, SPI, EAC, VAC.
+4. **Heat-map per WBS Level 2/3** — status CPI/SPI per paket pekerjaan.
+5. **Top 5 risiko** yang menyebabkan penurunan CPI/SPI.
+6. **Recovery action** plan jika CPI atau SPI <0.9.
+
+## 8. Halaman Terkait
+
+- [System Prompt OpenClaw — Manajer Proyek Konstruksi](https://www.notion.so/System-Prompt-OpenClaw-Manajer-Proyek-Konstruksi-bd5ece9df10e4eca823e9c76f96d331c?pvs=21)
+- [Modul B — Execution (Project · K3 · Mutu · Lingkungan · Peralatan · Logistik)](https://www.notion.so/Modul-B-Execution-Project-K3-Mutu-Lingkungan-Peralatan-Logistik-7caa170017b945dca5d2465e0f96c0af?pvs=21)
+- [Knowledge Base KONSTRA — 7 Tipe Sumber](https://www.notion.so/Knowledge-Base-KONSTRA-7-Tipe-Sumber-cd5e1c03813b42768cadf208700366a3?pvs=21)

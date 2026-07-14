@@ -1,0 +1,317 @@
+Baik. Sekarang kita masuk ke **FLOW CHATBOT PJBU – SIAP DIIMPLEMENTASIKAN DI GUSTAFTA BUILDER**.
+
+Saya akan buat:
+
+* 🔹 Struktur percakapan lengkap
+* 🔹 Logika percabangan
+* 🔹 Skema penjumlahan skor
+* 🔹 Output otomatis + rekomendasi
+* 🔹 Siap Anda copy ke builder
+
+---
+
+# 🏗 FLOW CHATBOT
+
+# ASESMEN LEVEL PJBU
+
+---
+
+# 🔷 STEP 1 – OPENING
+
+```
+Selamat datang di Asesmen Level PJBU.
+
+Asesmen ini berbasis Permen PUPR No. 7 Tahun 2024
+dan digunakan untuk menentukan level kapasitas PJBU Anda.
+
+Silakan pilih jenis usaha:
+
+1️⃣ PJBU-Kontraktor (Pekerjaan Konstruksi)
+2️⃣ PJBU-Konsultan (Jasa Konsultansi)
+```
+
+➡ Buat 2 branch berbeda.
+
+---
+
+# 🟥 BRANCH A – PJBU KONTRAKTOR
+
+---
+
+# 🔷 BAGIAN A – DIMENSI PROYEK (40 POIN)
+
+## Q1 – Kesesuaian Tenaga Ahli
+
+```
+Berapa persen kesesuaian tenaga ahli dengan kontrak proyek Anda?
+
+1️⃣ < 60%
+2️⃣ 60–79%
+3️⃣ ≥ 80%
+```
+
+Skor:
+
+* 1 = 4
+* 2 = 7
+* 3 = 10
+
+---
+
+## Q2 – Sertifikat Kompetensi
+
+```
+Apakah seluruh tenaga ahli memiliki sertifikat kompetensi sesuai kontrak?
+
+1️⃣ Tidak lengkap
+2️⃣ Sebagian sesuai
+3️⃣ Semua sesuai
+```
+
+Skor:
+
+* 1 = 2
+* 2 = 3
+* 3 = 5
+
+---
+
+## Q3 – Mutu Pekerjaan
+
+```
+Bagaimana tingkat rework dalam proyek Anda?
+
+1️⃣ Banyak rework
+2️⃣ Koreksi minor
+3️⃣ Sesuai standar kontrak
+```
+
+Skor:
+
+* 1 = 4
+* 2 = 7
+* 3 = 10
+
+---
+
+## Q4 – Ketepatan Waktu
+
+```
+Rata-rata keterlambatan proyek Anda?
+
+1️⃣ > 10%
+2️⃣ 5–10%
+3️⃣ ≤ 5%
+```
+
+Skor:
+
+* 1 = 5
+* 2 = 10
+* 3 = 15
+
+---
+
+# 🔷 BAGIAN B – DIMENSI MANAJEMEN (60 POIN)
+
+## Q5 – Laporan Keuangan
+
+```
+Bagaimana pengelolaan laporan keuangan perusahaan?
+
+1️⃣ Tidak rutin
+2️⃣ Ada laporan tapi tidak dianalisis
+3️⃣ Rasio keuangan dianalisis rutin
+```
+
+Skor:
+
+* 1 = 5
+* 2 = 10
+* 3 = 15
+
+---
+
+## Q6 – SOP & Sistem Manajemen
+
+```
+Apakah perusahaan memiliki SOP dan sistem manajemen mutu?
+
+1️⃣ Tidak ada
+2️⃣ SOP dasar
+3️⃣ SMM / ISO aktif
+```
+
+Skor:
+
+* 1 = 5
+* 2 = 10
+* 3 = 15
+
+---
+
+## Q7 – Teknologi
+
+```
+Bagaimana sistem manajemen proyek Anda?
+
+1️⃣ Manual
+2️⃣ Excel dasar
+3️⃣ Software manajemen proyek
+```
+
+Skor:
+
+* 1 = 3
+* 2 = 6
+* 3 = 10
+
+---
+
+## Q8 – Pelatihan SDM
+
+```
+Berapa kali pelatihan karyawan dalam setahun?
+
+1️⃣ Tidak ada
+2️⃣ 1–2 kali
+3️⃣ ≥3 kali
+```
+
+Skor:
+
+* 1 = 3
+* 2 = 6
+* 3 = 10
+
+---
+
+## Q9 – Struktur Organisasi
+
+```
+Apakah struktur organisasi terdokumentasi jelas?
+
+1️⃣ Tidak jelas
+2️⃣ Struktur dasar
+3️⃣ Struktur lengkap & terdokumentasi
+```
+
+Skor:
+
+* 1 = 3
+* 2 = 6
+* 3 = 10
+
+---
+
+# 🔷 TOTAL SKOR OTOMATIS
+
+Jumlahkan seluruh skor.
+
+---
+
+# 🎯 OUTPUT OTOMATIS
+
+## Jika < 50
+
+```
+Level Anda: PJBU PEMULA
+
+Rekomendasi:
+- Bangun sistem administrasi proyek
+- Buat laporan keuangan rutin
+- Mulai susun SOP dasar
+```
+
+---
+
+## 50–64
+
+```
+Level Anda: PJBU MUDA
+
+Rekomendasi:
+- Tingkatkan kontrol mutu
+- Perbaiki sistem pelaporan
+- Perbanyak pelatihan SDM
+```
+
+---
+
+## 65–79
+
+```
+Level Anda: PJBU MADYA
+
+Rekomendasi:
+- Implementasikan dashboard proyek
+- Audit internal rutin
+- Perkuat manajemen risiko
+```
+
+---
+
+## 80–89
+
+```
+Level Anda: PJBU UTAMA
+
+Rekomendasi:
+- Digitalisasi penuh
+- ISO / Sertifikasi tambahan
+- Portfolio management
+```
+
+---
+
+## ≥ 90
+
+```
+Level Anda: PJBU CORPORATE
+
+Anda berada pada level manajemen tertinggi.
+Disarankan fokus pada ekspansi, diversifikasi,
+dan proyek skala nasional/internasional.
+```
+
+---
+
+# 🟦 BRANCH B – PJBU KONSULTAN
+
+Struktur sama, tapi bobot berbeda:
+
+* 60 poin proyek
+* 40 poin manajemen
+
+Pertanyaannya fokus pada:
+
+* Ketepatan waktu dokumen
+* Kualitas output teknis
+* Tenaga ahli
+* Fasilitas pendukung
+
+Kalau Anda mau, saya bisa tuliskan detail lengkap branch Konsultan juga (versi siap tempel).
+
+---
+
+# 🚀 NEXT LEVEL STRATEGI
+
+Setelah ini kita bisa tambah:
+
+✔ Generate Sertifikat Digital otomatis
+✔ Kirim hasil ke email
+✔ Dashboard admin asosiasi
+✔ Database nasional PJBU Leveling
+✔ Reminder upgrade level
+
+---
+
+Sekarang saya tanya:
+
+Apakah chatbot ini akan digunakan untuk:
+
+A. Internal pembinaan anggota asosiasi?
+B. Publik untuk menarik kontraktor baru?
+C. Keduanya?
+
+Karena strategi messaging & positioning akan berbeda.

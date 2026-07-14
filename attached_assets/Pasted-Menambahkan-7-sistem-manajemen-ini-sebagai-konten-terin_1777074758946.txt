@@ -1,0 +1,135 @@
+Menambahkan 7 sistem manajemen ini sebagai konten terintegrasi di 4 database. Tidak ada ketergantungan — saya paralelkan semua insert.
+Sistem manajemen global & nasional sudah terintegrasi ke knowledge base. Total 21 baris baru masuk:
+ Regulasi Referensi (+6)
+SNI ISO 9001:2015 (QMS) · SNI ISO 14001:2015 (EMS) · SNI ISO 45001:2018 (OHSMS)
+PP 50/2012 SMK3 · Pedoman CSMS · Panduan Pencegahan Korupsi KPK (Pancek)
+ISO 37001 sudah ada dari batch sebelumnya.
+ Kurikulum Modul (+6) — 3 ditandai Prioritas MVP 2026: SMK3, CSMS, Pancek KPK (3 kebutuhan tender tercepat di pasar Indonesia).
+ Toolkit / Mini Apps (+4)
+IMS Gap Analysis — analisis 4 ISO sekaligus via mapping HLS (9001/14001/45001/37001)
+SMK3 Self-Assessment — 166 kriteria PP 50/2012 dengan prediksi bendera emas/perak
+CSMS Pre-Qualification Builder — paket dokumen siap submit migas/EPC
+Pancek KPK Self-Assessment — peta risiko fraud + draft kebijakan gratifikasi/WBS (FREE-tier untuk akuisisi luas)
+ Competency Matrix (+5) — auditor internal ISO (Madya) · IMS leadership (Utama) · SMK3 preparation (Madya) · CSMS pre-qual (Muda) · Pancek implementasi (Madya).
+Catatan strategis yang tertangkap:
+Cluster
+Value Proposition
+ISO 9001+14001+45001+37001
+Paket "BUJK Siap Ekspor/IFC/Multilateral" — satu IMS, empat sertifikat.
+SMK3 + CSMS
+Unlock tender migas, EPC, pertambangan — segmen margin tinggi.
+Pancek KPK + ISO 37001
+Integritas dua-lapis: nasional (KPK) + internasional (ISO). Selaras Permen PUPR 8/2022 & SK Dirjen BK 37/2025.
+Opsi lanjut:
+Modul bundling — sub-page Paket IMS Terintegrasi (9001+14001+45001+37001) sebagai produk pelatihan premium Corporate tier.
+Roadmap implementasi — timeline sertifikasi multi-standar 12–18 bulan per BUJK (studi kasus).
+Matriks klausul HLS — tabel di hub page untuk menunjukkan overlap klausul 4 ISO (efisiensi training & audit).
+Spec detail salah satu toolkit prioritas (SMK3 Self-Assessment dengan 166 kriteria lengkap, atau CSMS Builder).
+Section baru di Hub page — "Integrated Management Systems sebagai Pintu Masuk Tender Berkelas Global" dengan narasi strategis.
+lanjut 1 4
+Apr 24
+Thought
+Siap. Dua sub-page paralel di bawah Hub: Paket IMS Terintegrasi (produk bundling Corporate) + Spec SMK3 Self-Assessment Toolkit (desain MVP 166 kriteria).
+Thought
+Kedua sub-page sudah jadi, tapi saya perhatikan tabel HLS matrix di Paket IMS Terintegrasi terpotong (parser Notion tidak mendukung colspan campuran — hanya 2 kolom yang terender, bukan 5). Saya perbaiki sekarang.
+Updated page Paket IMS Terintegrasi — ISO 9001 + 14001 + 45001 + 37001 (Corporate Tier)​
+Dua sub-page premium sudah terpasang di bawah Hub, lengkap dengan matriks HLS yang benar.
+ Paket IMS Terintegrasi (Corporate Tier) — 9 seksi lengkap:
+Matriks klausul HLS lintas 4 standar (9001/14001/45001/37001) — baris biru menandai klausul 7/9/10 yang identik sebagai basis efisiensi 40%
+Roadmap implementasi 12–18 bulan (4 fase: Foundation → Design → Implementasi → Audit)
+Deliverables paket (9 item: Manual Terintegrasi, 5 prosedur HLS, integrated risk register, training 56 jam, pendampingan Stage 1–2, dll.)
+Pricing indikatif: saving ~40% vs 4 sertifikasi terpisah
+Target pasar, metrik sukses, risk & mitigation
+ Spec Toolkit SMK3 Self-Assessment (166 Kriteria) — 12 seksi lengkap:
+12 elemen SMK3 terpetakan (elemen 6 "Keamanan Bekerja" = 41 kriteria, bobot tertinggi)
+Logic skoring bertingkat: Gate-1 kritikal (veto power) → Gate-2 persentase (< 60% gagal / 60–84% perak / ≥ 85% emas)
+User flow (mermaid), Input/Output JSON Schema, pseudo-code scoring
+6 fitur differensiasi (AI Evidence Validator, Kritikal Early Warning, Benchmark Anonim, Auto-generate RKK, Timeline Audit, Bendera Simulator)
+Integrasi ke KCI Dashboard, CSMS Builder, IMS Gap
+Roadmap build Q1 2026 → Q1 2027 (pilot 10 → beta 50 → prod 200 → benchmark module)
+Metrik sukses: ≥ 85% akurasi prediksi bendera vs audit aktual, time-to-audit turun dari 3 bulan → 4 minggu
+Opsi lanjutan berikutnya:
+Spec CSMS Pre-Qualification Builder — pasangan SMK3, target proyek migas/EPC.
+Spec Pancek KPK Self-Assessment — Free-tier, untuk akuisisi luas.
+Section baru di Hub page — "IMS sebagai Pintu Tender Global" dengan link ke kedua sub-page ini.
+Database Milestones 2026–2028 — timeline terpusat dengan relation ke Kurikulum & Toolkit.
+Sub-page Matriks Klausul HLS Detail — klausul 4–10 pecah per sub-klausul lintas 4 ISO (dokumen internal auditor).
+lanjut
+6:38 AM
+Thought
+Eksekusi 3 langkah: spec CSMS, spec Pancek KPK, dan section baru di Hub. Saya paralelkan create 2 sub-page + load hub untuk persiapan section.
+Thought
+Lanjut ke spec dua toolkit prioritas berikutnya (CSMS untuk segmen migas/EPC + Pancek KPK Free-tier untuk akuisisi luas). Paralel.
+Dua spec toolkit kompleks tambahan sudah lengkap di bawah Hub. ASPEKINDO sekarang punya 5 sub-page strategis: Governance, Roadmap, Paket IMS, SMK3, CSMS, Pancek KPK.
+ Spec CSMS Pre-Qualification Builder (https://www.notion.so/371d5d4373e5448cbe023db9c21a8c2f) — 12 seksi:
+6 tahap CSMS, fokus utama tahap 2 (Pre-Qual) + 4 (Pre-Job) + 6 (Final Eval)
+9 kategori dokumen pre-qual dengan bobot tipikal — Statistik & Performa (15%) di-flag sebagai deal-breaker utama
+4 tier scoring (Tier-1 ≥ 85% → Failed < 60%)
+User flow mermaid, Input/Output JSON Schema lengkap
+6 fitur differensiasi (Multi-Principal Library Pertamina/Medco/Vale/Freeport/Adaro/Pamapersada, Auto-calc TRIR/LTIFR/SR, Bridging Doc Generator, Tier Predictor, Re-apply Coach, Version Control)
+Roadmap Q2 2026 → Q2 2027 (Spec → MVP → Beta → Production → Re-apply Coach)
+Metrik: ≥ 70% win rate (vs baseline industri ~40%), time-to-submit dari 3–4 minggu → ≤ 5 hari
+ Spec Pancek KPK Self-Assessment Free Tier (https://www.notion.so/7f346a293f2548c9b7d9d373c04da3a3) — 13 seksi:
+Strategic rationale Free tier: akuisisi luas + funnel premium + posisioning ASPEKINDO sebagai pembina (bukan payer of dues)
+8 titik rawan korupsi konstruksi × 30 pertanyaan + 5 pilar kontrol × 8 pertanyaan = 38 item self-assessment
+5 pilar: Gratifikasi · Konflik Kepentingan · WBS · Due Diligence Mitra · Pakta Integritas
+Scoring komposit: 40% paparan + 60% kontrol → 4 kategori (Integritas Kuat ≥ 80 → Rawan Tinggi < 40)
+Privacy & Trust Design — anonymous mode default, no-data-sharing policy ke APH, server lokal UU PDP, hak hapus
+Funnel Premium matrix — setiap kategori hasil punya upgrade path spesifik (SOP Gratifikasi → ISO 37001 → IMS Bundle)
+Roadmap Q1 2026 → Q1 2027 (Industry Insight Report tahunan jadi PR/advocacy ASPEKINDO)
+Metrik: 2.000 BUJK terdaftar 2026, ≥ 65% completion, 5–8% conversion ke premium
+Status portfolio toolkit ASPEKINDO sekarang:
+Toolkit
+Spec Page
+Tier
+Status
+SMK3 Self-Assessment
+ https://www.notion.so/88cc046804ef4ed093da893a9bb37991
+Professional
+Spec lengkap
+CSMS Pre-Qual Builder
+ https://www.notion.so/371d5d4373e5448cbe023db9c21a8c2f
+Professional
+Spec lengkap
+Pancek KPK Self-Assessment
+ https://www.notion.so/7f346a293f2548c9b7d9d373c04da3a3
+Free
+Spec lengkap
+Paket IMS Terintegrasi
+ https://www.notion.so/ac516eea5f044336a8610b6c91593dc7
+Corporate
+Bundle product
+IMS Gap Analysis
+ row only
+Corporate
+Spec belum
+Risk Register Mini App
+ row only
+Corporate
+Spec belum
+Tax Compliance Engine
+ row only
+Professional
+Spec belum
+HPS Validator AI
+ row only
+Professional
+Spec belum
+Generator BAR/PHO
+ row only
+Professional
+Spec belum
+KCI Dashboard
+ row only
+Corporate
+Spec belum
+Lanjutan strategis berikutnya:
+Section "IMS sebagai Pintu Tender Global" di Hub body — link 4 sub-page (IMS Bundle, SMK3, CSMS, Pancek) jadi narasi terpadu sebagai value proposition ASPEKINDO ke BUJK.
+Spec KCI Dashboard — alat unggulan Corporate tier yang mengonsolidasikan skor SMK3/CSMS/Pancek/IMS/Kompetensi seluruh BUJK anggota → benchmark industri.
+Database Milestones 2026–2028 — timeline terpusat (rows = milestone, props = quarter, owner, status, related modul/toolkit) untuk eksekusi roadmap.
+Cross-relation 4 database (Kurikulum ↔ Toolkit ↔ Competency ↔ Regulasi) via createTwoWayRelation — dependency graph eksplisit.
+Sub-page Sales Playbook ASPEKINDO — pricing, paket, demo script, FAQ, channel akuisisi untuk tim PUB.
+lanjut
+6:47 AM
+Thought
+Lanjut ke 2 produk strategis berikutnya secara paralel: Spec KCI Dashboard (alat flagship Corporate tier) + Database Milestones 2026–2028 (struktur eksekusi roadmap terpusat).

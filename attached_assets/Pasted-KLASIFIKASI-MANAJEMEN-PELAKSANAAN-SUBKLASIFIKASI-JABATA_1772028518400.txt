@@ -1,0 +1,43 @@
+KLASIFIKASI MANAJEMEN PELAKSANAAN
+
+SUBKLASIFIKASI	JABATAN KERJA	JENJANG JABATAN KERJA	KUALIFIKASI	JENJANG KKNI	STANDAR KOMPETENSI KERJA	LINK SKK KEMNAKER
+E	Klasifikasi Manajemen Pelaksanaan						
+1	Keselamatan Konstruksi	Ahli Keselamatan Konstruksi	Ahli Muda Keselamatan Konstruksi	Ahli	7	SKKNI 60-2022	https://skkni-api.kemnaker.go.id/v1/public/documents/88f9fdba-5fa4-465d-b963-b59af5d642d7/download
+Ahli Madya Keselamatan Konstruksi	Ahli	8	SKKNI 60-2022	https://skkni-api.kemnaker.go.id/v1/public/documents/88f9fdba-5fa4-465d-b963-b59af5d642d7/download
+Ahli Utama Keselamatan Konstruksi	Ahli	9	SKKNI 60-2022	https://skkni-api.kemnaker.go.id/v1/public/documents/88f9fdba-5fa4-465d-b963-b59af5d642d7/download
+2	Ahli K3 Konstruksi	Ahli Muda K3 Konstruksi	Ahli	7	SKKNI 350–2014	https://skkni-api.kemnaker.go.id/v1/public/documents/de9bf21b-f0ef-4cb9-bce5-7813da449476/download
+Ahli Madya K3 Konstruksi	8	SKKNI 350–2014	https://skkni-api.kemnaker.go.id/v1/public/documents/de9bf21b-f0ef-4cb9-bce5-7813da449476/download
+Ahli Utama K3 Konstruksi	9	SKKNI 350–2014	https://skkni-api.kemnaker.go.id/v1/public/documents/de9bf21b-f0ef-4cb9-bce5-7813da449476/download
+3	Personil Keselamatan dan Kesehatan Kerja	Personil Keselamatan dan Kesehatan Kerja	Teknisi/Analis	4	SKKNI 038-2019	https://skkni-api.kemnaker.go.id/v1/public/documents/b079dc8b-5343-4dc0-8615-20fb163781f9/download
+4	Petugas Keselamatan dan Kesehatan Kerja (K3) Konstruksi	Petugas Keselamatan dan Kesehatan Kerja (K3) Konstruksi	Operator	3	SKKNI 307-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/1230bb07-0c70-48be-84b3-1e1ff98af6ff/download
+5	Petugas Keselamatan Konstruksi	Petugas Keselamatan Konstruksi	3	SKKNI 60-2022	https://skkni-api.kemnaker.go.id/v1/public/documents/88f9fdba-5fa4-465d-b963-b59af5d642d7/download
+6	Supervisor K3	Supervisor K3	Teknisi/Analis	5	SKKNI 350-2014	https://skkni-api.kemnaker.go.id/v1/public/documents/de9bf21b-f0ef-4cb9-bce5-7813da449476/download
+Supervisor K3 Utama	6	SKKNI 350-2014	https://skkni-api.kemnaker.go.id/v1/public/documents/de9bf21b-f0ef-4cb9-bce5-7813da449476/download
+7	Manajemen Konstruksi/ Manajemen Proyek	Manajer Logistik Proyek	Manajer Logistik Proyek	Ahli	7	SKKNI 386-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/10767d9c-c0e1-4956-8381-422938a3fb2b/download
+8	Ahli Bidang Keahlian Manajemen Konstruksi	Ahli Muda Bidang Keahlian Manajemen Konstruksi	Ahli	7	SKKNI 390–2015	https://skkni-api.kemnaker.go.id/v1/public/documents/2c1416a6-2773-444f-91a2-d6aeb2fc089c/download
+Ahli Madya Bidang Keahlian Manajemen Konstruksi	8	SKKNI 390–2015	https://skkni-api.kemnaker.go.id/v1/public/documents/2c1416a6-2773-444f-91a2-d6aeb2fc089c/download
+Ahli Utama Bidang Keahlian Manajemen Konstruksi	9	SKKNI 390–2015	https://skkni-api.kemnaker.go.id/v1/public/documents/2c1416a6-2773-444f-91a2-d6aeb2fc089c/download
+9	Ahli Manajemen Proyek Konstruksi	Ahli Muda Manajemen Proyek Konstruksi	Ahli	7	SKKK 035–2022	https://skkni.kemnaker.go.id/tentang-skkk-skki/dokumen?limit=20&page=1&title=Manajemen%20Proyek
+Ahli Madya Manajemen Proyek Konstruksi	8	SKKK 035–2022	https://skkni.kemnaker.go.id/tentang-skkk-skki/dokumen?limit=20&page=1&title=Manajemen%20Proyek
+Ahli Utama Manajemen Proyek Konstruksi	9	SKKK 035–2022	https://skkni.kemnaker.go.id/tentang-skkk-skki/dokumen?limit=20&page=1&title=Manajemen%20Proyek
+10	Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat	Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat	Teknisi/Analis	5	SKKNI 260-2018	https://skkni-api.kemnaker.go.id/v1/public/documents/0376e503-2f8a-4f6f-af02-924cc016b71d/download
+Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat Utama	6	SKKNI 260-2018	https://skkni-api.kemnaker.go.id/v1/public/documents/0376e503-2f8a-4f6f-af02-924cc016b71d/download
+11	Pengendalian Mutu Pekerjaan Konstruksi	Quality Engineer	Quality Engineer Madya	Teknisi/Analis	5	SKKNI 333-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/de38d51f-9d5c-475c-adc3-df962fd2b8b5/download
+Quality Engineer	Teknisi/Analis	6	SKKNI 333-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/de38d51f-9d5c-475c-adc3-df962fd2b8b5/download
+12	Quality Assurance Engineer	Quality Assurance Engineer Madya	Teknisi/Analis	5	SKKNI 387-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/357c9c51-155d-472a-9b15-cc5d4fd5d702/download
+Quality Assurance Engineer	6	SKKNI 387-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/357c9c51-155d-472a-9b15-cc5d4fd5d702/download
+13	Ahli Sistem Manajemen Mutu Konstruksi	Ahli Muda Sistem Manajemen Mutu Konstruksi	Ahli	7	SKKNI 145–2019	https://skkni-api.kemnaker.go.id/v1/public/documents/97ba4c97-e296-4bd9-8125-6967ec3b88ec/download
+Ahli Madya Sistem Manajemen Mutu Konstruksi	8	SKKNI 145–2019	https://skkni-api.kemnaker.go.id/v1/public/documents/97ba4c97-e296-4bd9-8125-6967ec3b88ec/download
+Ahli Sistem Manajemen Mutu Konstruksi	9	SKKNI 145–2019	https://skkni-api.kemnaker.go.id/v1/public/documents/97ba4c97-e296-4bd9-8125-6967ec3b88ec/download
+14	Hukum Kontrak Konstruksi	Ahli Kontrak Kerja Konstruksi	Ahli Madya Kontrak Kerja Konstruksi	Ahli	8	SKKNI 88-2015	https://skkni-api.kemnaker.go.id/v1/public/documents/8d1ba9f8-c11d-47e7-bafe-93a29e5b3084/download
+Ahli Kontrak Kerja Konstruksi	9	SKKNI 88-2015	https://skkni-api.kemnaker.go.id/v1/public/documents/8d1ba9f8-c11d-47e7-bafe-93a29e5b3084/download
+15	Estimasi Biaya Konstruksi	Juru Hitung Kuantitas	Juru Hitung Kuantitas Muda	Teknisi/Analis	4	SKKK 038-2022	https://skkni.kemnaker.go.id/tentang-skkk-skki/dokumen?limit=20&page=1&title=juru%20hitung%20kuantitas
+Juru Hitung Kuantitas Madya	5	SKKK 038-2022	https://skkni.kemnaker.go.id/tentang-skkk-skki/dokumen?limit=20&page=1&title=juru%20hitung%20kuantitas
+Juru Hitung Kuantitas Utama	6	SKKK 038-2022	https://skkni.kemnaker.go.id/tentang-skkk-skki/dokumen?limit=20&page=1&title=juru%20hitung%20kuantitas
+16	Estimator Biaya Jalan	Estimator Biaya Jalan Madya	Teknisi/Analis	5	SKKNI 385-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/f3f393bc-00d9-43d9-a6f5-17df2b92d4e9/download
+Estimator Biaya Jalan	6	SKKNI 385-2013	https://skkni-api.kemnaker.go.id/v1/public/documents/f3f393bc-00d9-43d9-a6f5-17df2b92d4e9/download
+17	Quantity Surveyor	Quantity Surveyor Madya	Teknisi/Analis	5	SKKNI 06-2011	https://skkni-api.kemnaker.go.id/v1/public/documents/5f16bf68-2cb3-42d8-b60b-4dc4ae3054c1/download
+Quantity Surveyor Utama	6	SKKNI 06-2011	https://skkni-api.kemnaker.go.id/v1/public/documents/5f16bf68-2cb3-42d8-b60b-4dc4ae3054c1/download
+18	Ahli Quantity Surveyor	Ahli Muda Quantity Surveyor	Ahli	7	SKKNI 6-2011	https://skkni-api.kemnaker.go.id/v1/public/documents/5f16bf68-2cb3-42d8-b60b-4dc4ae3054c1/download
+Ahli Madya Quantity Surveyor	8	SKKNI 6-2011	https://skkni-api.kemnaker.go.id/v1/public/documents/5f16bf68-2cb3-42d8-b60b-4dc4ae3054c1/download
+Ahli Utama Quantity Surveyor	9	SKKNI 6-2011	https://skkni-api.kemnaker.go.id/v1/public/documents/5f16bf68-2cb3-42d8-b60b-4dc4ae3054c1/download

@@ -1,0 +1,542 @@
+Berikut **lanjutan modul Surveilans BNSP Sertifikasi AJJ Nirkertas**, fokus pada **metode sampling, simulasi pemeriksaan, CAPA/tindakan perbaikan, dashboard, agenda hari-H, dan modul chatbot siap tempel**.
+
+BNSP masih menampilkan SE tentang **Sertifikasi Jarak Jauh dan Penggunaan Nirkertas** pada halaman download resminya, dan juga menampilkan dokumen terkait **pembekuan, pencabutan, dan tindakan perbaikan pelaksanaan SKJJ dan/atau penggunaan nirkertas/paperless**. Ini berarti LSP perlu menyiapkan surveilans bukan hanya sebagai pemeriksaan dokumen, tetapi juga sebagai bukti konsistensi pelaksanaan dan pengendalian risiko pasca-persetujuan. ([BNSP][1])
+
+---
+
+# 10. Metode Sampling Surveilans
+
+```yaml
+sampling_surveillance:
+  tujuan: >
+    Menentukan contoh data yang akan diperiksa BNSP untuk memastikan
+    pelaksanaan AJJ Nirkertas berjalan sesuai SOP, persetujuan, dan sistem.
+
+  jenis_sampling:
+    sampling_asesi:
+      tujuan: "Memeriksa kelengkapan dokumen dan rekaman proses per asesi."
+      data_yang_disampling:
+        - permohonan sertifikasi
+        - asesmen mandiri
+        - persetujuan asesmen
+        - bukti kompetensi
+        - rekaman asesmen
+        - instrumen asesmen terisi
+        - laporan asesmen
+        - keputusan sertifikasi
+        - umpan balik
+        - banding jika ada
+
+    sampling_asesor:
+      tujuan: "Memastikan asesor menjalankan asesmen sesuai SOP AJJ."
+      data_yang_disampling:
+        - surat tugas asesor
+        - catatan review bukti
+        - catatan verifikasi identitas
+        - catatan verifikasi lingkungan
+        - instrumen asesmen
+        - rekomendasi asesor
+        - laporan asesmen
+
+    sampling_tuk:
+      tujuan: "Memastikan TUK yang digunakan sudah diverifikasi dan ditetapkan."
+      data_yang_disampling:
+        - profil TUK
+        - SPT verifikasi TUK
+        - checklist verifikasi TUK
+        - rekaman verifikasi TUK
+        - SK penetapan TUK
+
+    sampling_sistem:
+      tujuan: "Memastikan sistem memiliki fitur, hak akses, rekaman, dan audit trail."
+      data_yang_disampling:
+        - log login
+        - log perubahan data
+        - log unggah dokumen
+        - log persetujuan asesmen
+        - log laporan asesmen
+        - log banding
+        - bukti backup
+
+    sampling_kendala:
+      tujuan: "Memastikan kendala teknis dicatat dan ditindaklanjuti."
+      data_yang_disampling:
+        - laporan kendala teknis
+        - screenshot/log error
+        - catatan keputusan asesor
+        - tindak lanjut admin/IT
+        - status penyelesaian
+```
+
+---
+
+# 11. Kriteria Sampling yang Disarankan
+
+```yaml
+kriteria_sampling:
+  periode:
+    - "Ambil sampel dari periode pelaporan terakhir."
+    - "Prioritaskan asesmen yang sudah selesai dan memiliki hasil resmi."
+    - "Sertakan minimal satu sampel yang memiliki kendala teknis jika ada."
+
+  variasi_sampel:
+    - "Sampel asesi kompeten."
+    - "Sampel asesi belum kompeten jika ada."
+    - "Sampel asesmen yang berjalan normal."
+    - "Sampel asesmen yang mengalami kendala."
+    - "Sampel TUK yang pernah diverifikasi jarak jauh."
+    - "Sampel banding jika pernah terjadi."
+
+  prinsip:
+    - "Semua sampel harus dapat ditelusuri dari pendaftaran sampai arsip akhir."
+    - "Dokumen digital dan rekaman harus konsisten."
+    - "Data pada laporan harus sama dengan data pada sistem."
+```
+
+---
+
+# 12. Simulasi Pertanyaan Surveilans BNSP
+
+## A. Pertanyaan untuk Manajemen LSP
+
+```yaml
+pertanyaan_manajemen_lsp:
+  - "Apakah pelaksanaan AJJ hanya dilakukan pada skema yang telah disetujui?"
+  - "Bagaimana LSP memastikan SOP AJJ diterapkan oleh admin, asesor, dan TUK?"
+  - "Bagaimana mekanisme pengendalian perubahan sistem aplikasi?"
+  - "Bagaimana LSP menjamin keamanan rekaman asesmen?"
+  - "Bagaimana LSP melakukan audit internal 6 bulanan?"
+  - "Bagaimana tindak lanjut temuan audit internal dilakukan?"
+  - "Bagaimana laporan pelaksanaan AJJ disusun dan dikirim?"
+  - "Bagaimana LSP menangani banding dari asesi?"
+```
+
+## B. Pertanyaan untuk Admin LSP
+
+```yaml
+pertanyaan_admin_lsp:
+  - "Tunjukkan data asesi yang mengikuti AJJ pada periode ini."
+  - "Tunjukkan status dokumen asesi dari pendaftaran sampai hasil."
+  - "Tunjukkan cara sistem menampilkan rekaman asesmen."
+  - "Tunjukkan laporan kendala teknis jika ada."
+  - "Tunjukkan rekap umpan balik asesi."
+  - "Tunjukkan register banding."
+  - "Tunjukkan bukti pengiriman laporan berkala kepada BNSP."
+```
+
+## C. Pertanyaan untuk Asesor Kompetensi
+
+```yaml
+pertanyaan_asesor:
+  - "Bagaimana Anda memverifikasi identitas asesi secara jarak jauh?"
+  - "Bagaimana Anda memastikan lingkungan asesmen bebas dari bantuan tidak sah?"
+  - "Bagaimana Anda menggunakan instrumen asesmen digital?"
+  - "Bagaimana Anda mencatat kendala teknis saat asesmen?"
+  - "Bagaimana Anda membuat rekomendasi hasil asesmen?"
+  - "Apa batas kewenangan asesor dalam keputusan sertifikasi?"
+```
+
+## D. Pertanyaan untuk Pengelola Sistem / IT
+
+```yaml
+pertanyaan_it:
+  - "Di mana rekaman asesmen disimpan?"
+  - "Bagaimana backup rekaman dilakukan?"
+  - "Siapa saja yang dapat mengakses rekaman asesmen?"
+  - "Bagaimana audit trail ditampilkan?"
+  - "Bagaimana sistem membedakan hak akses admin, asesor, asesi, TUK, dan komite?"
+  - "Apa prosedur jika server atau rekaman gagal?"
+```
+
+## E. Pertanyaan untuk TUK
+
+```yaml
+pertanyaan_tuk:
+  - "Bagaimana TUK diverifikasi secara jarak jauh?"
+  - "Tunjukkan bukti rekaman verifikasi TUK."
+  - "Apa fasilitas TUK yang digunakan untuk mendukung AJJ?"
+  - "Bagaimana TUK mencegah bantuan tidak sah kepada asesi?"
+  - "Bagaimana TUK melaporkan kendala fasilitas?"
+```
+
+---
+
+# 13. Matriks Kesesuaian Surveilans
+
+```yaml
+matriks_kesesuaian_surveillance:
+  - area: "Persetujuan BNSP"
+    kriteria: "LSP hanya menjalankan AJJ/Nirkertas pada ruang lingkup yang disetujui."
+    bukti:
+      - SK persetujuan
+      - daftar skema disetujui
+      - rekap pelaksanaan per skema
+    status: "Sesuai / Tidak sesuai / Catatan"
+
+  - area: "SOP"
+    kriteria: "SOP tersedia, disahkan, dan diterapkan."
+    bukti:
+      - SOP AJJ
+      - SOP Nirkertas
+      - bukti sosialisasi
+      - bukti penerapan pada sampel asesmen
+    status: "Sesuai / Tidak sesuai / Catatan"
+
+  - area: "Sistem"
+    kriteria: "Aplikasi mendukung proses digital end-to-end."
+    bukti:
+      - dashboard aplikasi
+      - output PDF
+      - rekaman asesmen
+      - audit trail
+      - hak akses
+    status: "Sesuai / Tidak sesuai / Catatan"
+
+  - area: "Rekaman"
+    kriteria: "Rekaman asesmen dan verifikasi TUK tersedia, aman, dan dapat dibuka."
+    bukti:
+      - rekaman asesmen
+      - rekaman TUK
+      - log akses
+      - backup
+    status: "Sesuai / Tidak sesuai / Catatan"
+
+  - area: "Audit Internal"
+    kriteria: "Audit internal dilakukan 6 bulanan dan temuan ditindaklanjuti."
+    bukti:
+      - rencana audit
+      - laporan audit
+      - daftar temuan
+      - tindakan perbaikan
+    status: "Sesuai / Tidak sesuai / Catatan"
+
+  - area: "Pelaporan"
+    kriteria: "Laporan pelaksanaan dan audit internal dikirim kepada BNSP sesuai periode."
+    bukti:
+      - laporan pelaksanaan
+      - laporan audit internal
+      - bukti pengiriman
+    status: "Sesuai / Tidak sesuai / Catatan"
+```
+
+---
+
+# 14. CAPA / Tindakan Koreksi dan Perbaikan
+
+Gunakan format **CAPA** agar setiap temuan surveilans memiliki tindak lanjut yang jelas. **Tindakan koreksi** adalah tindakan cepat untuk memperbaiki masalah yang ditemukan, sedangkan **tindakan perbaikan** adalah tindakan sistemik agar masalah tidak berulang.
+
+```yaml
+capa_surveillance_template:
+  identitas_temuan:
+    nomor_temuan: "SV-001"
+    tanggal_temuan: "[Tanggal]"
+    area_temuan: "[Sistem / SOP / Rekaman / TUK / Laporan / Audit Internal]"
+    sumber_temuan: "Surveilans BNSP / Audit Internal / Keluhan / Monitoring"
+    uraian_temuan: "[Uraian singkat]"
+
+  bukti_objektif:
+    - "[Bukti 1]"
+    - "[Bukti 2]"
+
+  analisis_akar_masalah:
+    metode: "5 Why / Fishbone / Analisis sederhana"
+    akar_masalah: "[Akar masalah]"
+
+  tindakan_koreksi:
+    uraian: "[Tindakan langsung]"
+    penanggung_jawab: "[Nama/Jabatan]"
+    target_selesai: "[Tanggal]"
+    bukti_koreksi: "[Dokumen/screenshot/log]"
+
+  tindakan_perbaikan:
+    uraian: "[Tindakan sistemik]"
+    penanggung_jawab: "[Nama/Jabatan]"
+    target_selesai: "[Tanggal]"
+    bukti_perbaikan: "[SOP revisi/pelatihan/log sistem/uji ulang]"
+
+  verifikasi_efektivitas:
+    metode_verifikasi:
+      - uji ulang sistem
+      - sampling dokumen
+      - wawancara personil
+      - audit internal ulang
+    hasil_verifikasi: "Efektif / Belum efektif"
+    status_temuan: "Open / Closed / Pending"
+```
+
+---
+
+# 15. Contoh CAPA Temuan Surveilans
+
+```yaml
+contoh_capa:
+  temuan_1:
+    area: "Rekaman Asesmen"
+    uraian_temuan: "Satu sampel asesmen tidak memiliki rekaman lengkap."
+    akar_masalah: "Koneksi perekaman terputus dan tidak ada pengecekan pasca-asesmen."
+    tindakan_koreksi:
+      - "Mengumpulkan bukti asesmen pendukung yang tersedia."
+      - "Membuat berita acara kendala rekaman."
+      - "Meninjau kecukupan bukti asesmen bersama manajemen LSP."
+    tindakan_perbaikan:
+      - "Menambahkan checklist pemeriksaan rekaman setelah setiap sesi."
+      - "Menetapkan backup recording."
+      - "Melatih asesor dan admin tentang prosedur pengecekan rekaman."
+    bukti_penutupan:
+      - checklist baru
+      - screenshot rekaman backup
+      - daftar hadir pelatihan
+      - hasil uji coba ulang
+
+  temuan_2:
+    area: "Hak Akses"
+    uraian_temuan: "Akun asesor dapat melihat fitur keputusan sertifikasi."
+    akar_masalah: "Role permission belum dipisahkan secara ketat."
+    tindakan_koreksi:
+      - "Menonaktifkan akses keputusan pada akun asesor."
+      - "Memeriksa seluruh akun asesor."
+    tindakan_perbaikan:
+      - "Merevisi matriks hak akses."
+      - "Menambahkan review hak akses bulanan."
+      - "Membuat log perubahan akses."
+    bukti_penutupan:
+      - matriks hak akses revisi
+      - screenshot role permission
+      - log review akses
+```
+
+---
+
+# 16. Dashboard Surveilans Internal LSP
+
+```yaml
+dashboard_surveillance:
+  dashboard_kepatuhan:
+    indikator:
+      - jumlah skema AJJ disetujui
+      - jumlah skema AJJ aktif
+      - jumlah asesmen AJJ per skema
+      - jumlah pelaksanaan di luar ruang lingkup persetujuan
+    target:
+      - "0 pelaksanaan di luar ruang lingkup persetujuan"
+
+  dashboard_rekaman:
+    indikator:
+      - jumlah asesmen selesai
+      - jumlah rekaman tersedia
+      - jumlah rekaman tidak lengkap
+      - jumlah rekaman gagal
+      - status backup rekaman
+    target:
+      - "100% asesmen memiliki rekaman atau bukti sesuai SOP"
+
+  dashboard_kendala:
+    indikator:
+      - jumlah kendala login
+      - jumlah kendala koneksi
+      - jumlah kendala upload
+      - jumlah kendala rekaman
+      - rata-rata waktu penyelesaian kendala
+    target:
+      - "Semua kendala memiliki status tindak lanjut"
+
+  dashboard_audit_internal:
+    indikator:
+      - jadwal audit internal
+      - jumlah temuan
+      - jumlah temuan open
+      - jumlah temuan closed
+      - efektivitas tindakan perbaikan
+    target:
+      - "Semua temuan memiliki CAPA"
+
+  dashboard_pelaporan_bnsp:
+    indikator:
+      - status laporan Juni
+      - status laporan Desember
+      - bukti pengiriman laporan
+      - status tindak lanjut dari BNSP
+    target:
+      - "Laporan terkirim sebelum atau paling lambat tanggal 10 periode pelaporan"
+```
+
+---
+
+# 17. Agenda Hari-H Surveilans
+
+```yaml
+agenda_hari_h_surveillance:
+  durasi_total: "2-4 jam, menyesuaikan ruang lingkup"
+  susunan_acara:
+    - waktu: "00:00 - 00:10"
+      agenda: "Pembukaan oleh Manajemen LSP"
+      output: "Penjelasan ruang lingkup surveilans"
+
+    - waktu: "00:10 - 00:30"
+      agenda: "Paparan pelaksanaan AJJ Nirkertas"
+      output: "Rekap skema, asesi, TUK, asesor, hasil, kendala"
+
+    - waktu: "00:30 - 01:00"
+      agenda: "Review dokumen persetujuan, SOP, dan laporan"
+      output: "Catatan review dokumen"
+
+    - waktu: "01:00 - 01:45"
+      agenda: "Sampling data asesi dan rekaman asesmen"
+      output: "Daftar sampel dan hasil pemeriksaan"
+
+    - waktu: "01:45 - 02:15"
+      agenda: "Demo sistem, hak akses, dan audit trail"
+      output: "Catatan kesesuaian sistem"
+
+    - waktu: "02:15 - 02:45"
+      agenda: "Review TUK, banding, kendala, dan tindakan perbaikan"
+      output: "Catatan tindak lanjut"
+
+    - waktu: "02:45 - 03:15"
+      agenda: "Wawancara personil"
+      output: "Catatan wawancara"
+
+    - waktu: "03:15 - 03:45"
+      agenda: "Pembahasan temuan/catatan"
+      output: "Daftar temuan atau peluang perbaikan"
+
+    - waktu: "03:45 - 04:00"
+      agenda: "Penutup"
+      output: "Kesepakatan tindak lanjut"
+```
+
+---
+
+# 18. Struktur Folder Surveilans
+
+```yaml
+folder_surveillance:
+  01_persetujuan_bnsp:
+    - sk_persetujuan_ajj_nirkertas.pdf
+    - daftar_skema_disetujui.pdf
+    - ruang_lingkup_persetujuan.pdf
+
+  02_sop:
+    - sop_ajj.pdf
+    - sop_nirkertas.pdf
+    - sop_verifikasi_tuk.pdf
+    - sop_banding.pdf
+    - bukti_sosialisasi_sop.pdf
+
+  03_data_pelaksanaan:
+    - rekap_asesi.xlsx
+    - rekap_asesmen.xlsx
+    - rekap_asesor.xlsx
+    - rekap_tuk.xlsx
+    - rekap_hasil_sertifikasi.xlsx
+
+  04_sampling_asesi:
+    - sampel_asesi_01
+    - sampel_asesi_02
+    - sampel_asesi_03
+
+  05_rekaman:
+    - rekaman_asesmen
+    - rekaman_verifikasi_tuk
+    - rekaman_kendala_teknis
+
+  06_laporan:
+    - laporan_asesmen
+    - laporan_pelaksanaan_ajj
+    - laporan_audit_internal
+    - laporan_banding
+
+  07_temuan_dan_capa:
+    - daftar_temuan.xlsx
+    - capa_temuan
+    - bukti_penutupan_temuan
+
+  08_bukti_pelaporan_bnsp:
+    - bukti_kirim_laporan_juni.pdf
+    - bukti_kirim_laporan_desember.pdf
+    - korespondensi_bnsp.pdf
+```
+
+---
+
+# 19. Modul Chatbot Lanjutan Siap Tempel
+
+```yaml
+module:
+  id: surveillance_bnsp_lanjutan
+  title: "Surveilans BNSP AJJ Nirkertas — Sampling, CAPA, Dashboard, dan Hari-H"
+  purpose: >
+    Membantu LSP menyiapkan pemeriksaan surveilans pasca-persetujuan
+    AJJ Nirkertas, termasuk sampling dokumen, simulasi pertanyaan,
+    CAPA temuan, dashboard internal, dan agenda hari-H.
+
+intents:
+  - id: ask_sampling_surveillance
+    sample_user_inputs:
+      - "Bagaimana sampling surveilans AJJ?"
+      - "Data apa yang biasanya disampling BNSP?"
+      - "Sampel surveilans AJJ Nirkertas apa saja?"
+    response_template: response_sampling_surveillance
+    next_node: sampling_surveillance
+
+  - id: ask_capa_surveillance
+    sample_user_inputs:
+      - "Bagaimana membuat CAPA temuan surveilans?"
+      - "Tindakan perbaikan surveilans bagaimana?"
+      - "Contoh CAPA AJJ Nirkertas"
+    response_template: response_capa_surveillance
+    next_node: capa_surveillance_template
+
+  - id: ask_dashboard_surveillance
+    sample_user_inputs:
+      - "Dashboard surveilans apa saja?"
+      - "Indikator surveilans AJJ Nirkertas"
+      - "Apa KPI pengawasan AJJ?"
+    response_template: response_dashboard_surveillance
+    next_node: dashboard_surveillance
+
+  - id: ask_agenda_surveillance
+    sample_user_inputs:
+      - "Agenda hari H surveilans bagaimana?"
+      - "Susunan acara surveilans BNSP"
+      - "Run down surveilans AJJ"
+    response_template: response_agenda_surveillance
+    next_node: agenda_hari_h_surveillance
+
+response_template:
+  id: response_sampling_surveillance
+  text: >
+    Sampling surveilans AJJ Nirkertas sebaiknya mencakup sampel asesi,
+    asesor, TUK, sistem, rekaman, kendala teknis, banding, dan laporan.
+    Setiap sampel harus dapat ditelusuri dari permohonan sertifikasi,
+    asesmen mandiri, persetujuan asesmen, pelaksanaan asesmen, rekaman,
+    laporan asesor, keputusan sertifikasi, sampai arsip digital.
+  quick_replies:
+    - "Sampling asesi"
+    - "Sampling rekaman"
+    - "Sampling TUK"
+    - "Sampling sistem"
+    - "CAPA temuan"
+
+response_template:
+  id: response_capa_surveillance
+  text: >
+    CAPA surveilans terdiri dari identitas temuan, bukti objektif,
+    analisis akar masalah, tindakan koreksi, tindakan perbaikan,
+    penanggung jawab, target penyelesaian, bukti penutupan, dan
+    verifikasi efektivitas. Tindakan koreksi memperbaiki masalah saat ini,
+    sedangkan tindakan perbaikan mencegah masalah terulang.
+  quick_replies:
+    - "Template CAPA"
+    - "Contoh temuan rekaman"
+    - "Contoh temuan hak akses"
+    - "Dashboard surveilans"
+```
+
+---
+
+## Ringkasan Lanjutan
+
+Pada tahap surveilans, LSP harus siap menunjukkan **sampel nyata**, bukan hanya rekap. Sampel ideal mencakup asesi, asesor, TUK, sistem, rekaman, laporan asesmen, kendala teknis, banding, dan bukti pelaporan. Setiap temuan perlu ditangani dengan **CAPA**: koreksi langsung, perbaikan sistemik, bukti penutupan, dan verifikasi efektivitas.
+
+[1]: https://bnsp.go.id/download?hal=2&id=10&utm_source=chatgpt.com "Halaman Download - BNSP"

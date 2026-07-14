@@ -1,0 +1,78 @@
+> Halaman induk Series L1 — KB siap-upload ke Gustafta Builder. Mengikuti pola **KB KONSTRA 7-tipe**. Sebagian besar sumber **di-link-back ke KB KONSTRA existing** untuk hindari duplikasi.
+> 
+
+## Prinsip
+
+1. **Single source of truth**: regulasi & standar inti ada di KB KONSTRA. Brain Project pakai-ulang via link.
+2. **Operasional-centric**: Brain Project hanya menambah KB-konten yang spesifik untuk **pendampingan harian lapangan** (template, checklist, threshold).
+3. **Upload ke Gustafta**: setiap halaman KB di-export ke PDF/Markdown → upload ke field *Knowledge Base* chatbot.
+
+## KB-1 — REG: Regulasi & Perundangan
+
+**Status**: pakai-ulang KB KONSTRA → [KB-REG — Regulasi & Perundangan Jasa Konstruksi](https://www.notion.so/KB-REG-Regulasi-Perundangan-Jasa-Konstruksi-fe7a35acbeca4e7694df08a626312810?pvs=21)
+
+Cakupan inti:
+
+- UU 2/2017 jo UU 11/2020 — Jasa Konstruksi
+- PP 14/2021 — Pelaksanaan UU Jasa Konstruksi
+- Permen PUPR 1/2025 — Pengganti pedoman PBJ konstruksi
+- Permen PUPR 8/2023 — SMKK & PBJ Konstruksi terpadu
+- UU 1/1970 — Keselamatan Kerja
+- PP 50/2012 — SMK3
+- Permenaker 5/2018 — K3 Lingkungan Kerja
+- UU 32/2009 — PPLH
+- Permen LHK 5/2021 — Persetujuan Lingkungan
+
+## KB-2 — STANTEK: Standar Teknis Engineering
+
+**Status**: pakai-ulang KB KONSTRA → [KB-STANTEK: Standar Teknis Engineering Konstruksi](https://www.notion.so/KB-STANTEK-Standar-Teknis-Engineering-Konstruksi-fc029aa2a69140a1bd37aa305ebc4950?pvs=21)
+
+Cakupan: SNI 2847 (beton), SNI 1729 (baja), SNI 1726 (gempa), SNI 1727 (beban), ASTM/ACI/AISC pendukung.
+
+## KB-3 — KONTRAK: Kontrak & Klaim Konstruksi
+
+**Status**: KB baru (Brain Project) — akan dibuat sub-halaman *KB-KONTRAK Brain Project*.
+
+Fokus: FIDIC 1999 & 2017 (Red/Yellow/Silver Book), SBD Permen PUPR 14/2020, klausul EOT, VO, klaim, sub-letting, terminasi.
+
+## KB-4 — MUTU: Sistem Manajemen Mutu
+
+**Status**: pakai-ulang KB KONSTRA → [KB-MUTU: Sistem Manajemen Mutu Konstruksi](https://www.notion.so/KB-MUTU-Sistem-Manajemen-Mutu-Konstruksi-d6df297036274383b0cad66c90a8962c?pvs=21) + [KB-DOKMUTU: Dokumen Mutu Konstruksi — Template & Panduan](https://www.notion.so/KB-DOKMUTU-Dokumen-Mutu-Konstruksi-Template-Panduan-126f71df9e3449c2876e8097b61fbbbf?pvs=21)
+
+Isi: RMPK, ITP template, NCR template, prosedur uji material, kalibrasi alat ukur.
+
+## KB-5 — RKK: Rencana Keselamatan Konstruksi (SMKK)
+
+**Status**: pakai-ulang KB KONSTRA → [KB-RKK — Rencana Keselamatan Konstruksi (SMKK Permen PUPR 8/2023)](https://www.notion.so/KB-RKK-Rencana-Keselamatan-Konstruksi-SMKK-Permen-PUPR-8-2023-70e5d979615e49f8bbde7d8613a7d871?pvs=21)
+
+Isi: RKK proyek, JSA library, PTW template, Toolbox Talk script, prosedur investigasi insiden.
+
+## KB-6 — ENV: Lingkungan & Berkelanjutan
+
+**Status**: KB baru (Brain Project) — akan dibuat sub-halaman *KB-ENV Brain Project*.
+
+Fokus: AMDAL/UKL-UPL, manifest limbah B3, ambang batas debu PM10 & kebisingan, jejak karbon proyek (per ISO 14064-1), Greenship NB v1.2.
+
+## KB-7 — FIN: Finance & EVM
+
+**Status**: pakai-ulang KB KONSTRA → [KB-FIN — Keuangan Proyek Konstruksi](https://www.notion.so/KB-FIN-Keuangan-Proyek-Konstruksi-414b812c11904e54a239e41be616979e?pvs=21)
+
+Isi: struktur RAB, cashflow proyek, EVM (PV/EV/AC, CPI/SPI/EAC/VAC), termin pembayaran, retensi 5%, PPh Final 4(2), PPN konstruksi.
+
+## Matriks KB × Agent
+
+| KB | PROXIMA | EVM | MUTU | SAFIRA | ENVIRA | KONTRAK |
+| --- | --- | --- | --- | --- | --- | --- |
+| REG | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| STANTEK | ✅ | — | ✅ | — | — | — |
+| KONTRAK | ✅ | ✅ | — | — | — | ✅ |
+| MUTU | ✅ | — | ✅ | — | — | — |
+| RKK | ✅ | — | — | ✅ | — | — |
+| ENV | ✅ | — | — | ✅ | ✅ | — |
+| FIN | ✅ | ✅ | — | — | — | ✅ |
+
+## Roadmap
+
+- [ ]  Buat sub-halaman **KB-KONTRAK Brain Project** (FIDIC threshold operasional)
+- [ ]  Buat sub-halaman **KB-ENV Brain Project** (Greenship + jejak karbon worksheet)
+- [ ]  Audit konsistensi sitasi antar agent (target: 100% jawaban substantif punya ≥1 sitasi)

@@ -1,0 +1,490 @@
+Berikut rancangan **Surveillance/Surveilans oleh BNSP untuk Sertifikasi AJJ Nirkertas**. Saya gunakan istilah **surveilans** sebagai kegiatan pemantauan/pengawasan pasca-persetujuan untuk memastikan LSP tetap menjalankan Sertifikasi Jarak Jauh/AJJ dan Nirkertas sesuai persetujuan, SOP, sistem, rekaman, audit internal, dan laporan berkala.
+
+Struktur ini bisa langsung menjadi modul lanjutan chatbot SKK AJJ Nirkertas, mengikuti pola konfigurasi chatbot yang sudah Anda lampirkan. 
+
+---
+
+# 1. Tujuan Surveilans BNSP
+
+```yaml id="surveillance_objective"
+surveillance_bnsp:
+  title: "Surveilans BNSP Sertifikasi AJJ Nirkertas"
+  tujuan:
+    - memastikan LSP menjalankan AJJ Nirkertas sesuai persetujuan BNSP
+    - memastikan SOP AJJ dan SOP Nirkertas benar-benar diterapkan
+    - memastikan sistem aplikasi tetap berfungsi dan dapat diaudit
+    - memastikan rekaman asesmen, laporan, umpan balik, dan banding terdokumentasi
+    - memastikan verifikasi TUK jarak jauh berjalan sesuai SOP
+    - memastikan keamanan data dan rekaman asesmen terjaga
+    - memastikan LSP melakukan audit internal dan pelaporan berkala
+    - memastikan tindakan perbaikan atas temuan telah dilakukan
+```
+
+Dalam SE.007/BNSP/V/2023, LSP wajib melakukan audit internal pelaksanaan sertifikasi jarak jauh **setiap 6 bulan** dan melaporkan hasil audit beserta tindakan perbaikannya kepada BNSP setiap **Juni dan Desember paling lambat tanggal 10**. LSP juga wajib menyusun laporan pelaksanaan sertifikasi jarak jauh setiap 6 bulan dan melaporkannya kepada BNSP pada periode yang sama. 
+
+---
+
+# 2. Posisi Surveilans dalam Siklus AJJ Nirkertas
+
+```text id="alur_surveillance"
+Persetujuan AJJ/Nirkertas dari BNSP
+        ↓
+LSP melaksanakan sertifikasi AJJ Nirkertas
+        ↓
+LSP menyimpan dokumen, rekaman, laporan, umpan balik, banding, dan audit trail
+        ↓
+LSP melakukan audit internal 6 bulanan
+        ↓
+LSP menyusun laporan pelaksanaan dan laporan audit internal
+        ↓
+LSP melaporkan kepada BNSP
+        ↓
+BNSP melakukan surveilans / pemantauan / evaluasi
+        ↓
+Jika ada temuan:
+  tindakan koreksi → tindakan perbaikan → bukti penutupan temuan
+        ↓
+LSP tetap menjalankan AJJ Nirkertas sesuai persetujuan dan perbaikan
+```
+
+BNSP juga mencantumkan dokumen terkait **pembekuan, pencabutan, dan tindakan perbaikan pelaksanaan SKJJ dan/atau penggunaan nirkertas/paperless** pada halaman download resminya, sehingga LSP perlu memperlakukan surveilans sebagai mekanisme pengendalian serius terhadap kepatuhan pasca-persetujuan. ([BNSP][1])
+
+---
+
+# 3. Ruang Lingkup Surveilans BNSP
+
+```yaml id="ruang_lingkup_surveillance"
+ruang_lingkup_surveillance:
+  1_kepatuhan_persetujuan:
+    diperiksa:
+      - SK persetujuan pelaksanaan AJJ/Nirkertas
+      - skema yang disetujui
+      - metode asesmen yang disetujui
+      - kesesuaian pelaksanaan dengan ruang lingkup persetujuan
+
+  2_sop_dan_penerapan:
+    diperiksa:
+      - SOP pelayanan sertifikasi jarak jauh
+      - SOP melaksanakan asesmen jarak jauh
+      - SOP verifikasi TUK jarak jauh
+      - SOP banding jarak jauh
+      - SOP nirkertas/paperless
+      - bukti bahwa SOP diterapkan dalam proses nyata
+
+  3_sistem_aplikasi:
+    diperiksa:
+      - permohonan sertifikasi digital
+      - asesmen mandiri digital
+      - persetujuan asesmen digital
+      - instrumen asesmen digital
+      - rekaman asesmen
+      - umpan balik
+      - laporan asesmen
+      - peninjauan proses asesmen
+      - banding
+      - audit trail dan hak akses
+
+  4_rekaman_dan_arsip:
+    diperiksa:
+      - rekaman asesmen
+      - rekaman verifikasi TUK
+      - rekaman kendala teknis
+      - laporan asesmen
+      - laporan keputusan sertifikasi
+      - arsip umpan balik dan banding
+
+  5_tuk_jarak_jauh:
+    diperiksa:
+      - profil TUK
+      - SPT verifikasi TUK
+      - rekaman verifikasi TUK
+      - SK penetapan TUK
+      - kesesuaian fasilitas TUK dengan skema
+
+  6_audit_internal:
+    diperiksa:
+      - rencana audit internal
+      - laporan audit internal 6 bulanan
+      - daftar temuan
+      - tindakan koreksi
+      - tindakan perbaikan
+      - bukti penutupan temuan
+
+  7_pelaporan_bnsp:
+    diperiksa:
+      - laporan pelaksanaan sertifikasi jarak jauh
+      - laporan audit internal
+      - bukti pengiriman laporan ke BNSP
+      - bukti tindak lanjut atas permintaan/perbaikan
+```
+
+Aplikasi AJJ/Nirkertas minimal perlu mampu menampilkan atau menyimpan komponen seperti permohonan sertifikasi, asesmen mandiri, persetujuan asesmen, instrumen asesmen, ceklis review instrumen, rekaman asesmen, umpan balik, laporan asesmen, peninjauan proses asesmen, dan banding. 
+
+---
+
+# 4. Dokumen yang Disiapkan untuk Surveilans
+
+```yaml id="dokumen_surveillance"
+dokumen_surveillance:
+  dokumen_persetujuan:
+    - SK persetujuan AJJ/Nirkertas dari BNSP
+    - daftar skema dan metode yang disetujui
+    - ruang lingkup persetujuan
+
+  dokumen_sop:
+    - SOP pelayanan sertifikasi jarak jauh
+    - SOP asesmen jarak jauh
+    - SOP verifikasi TUK jarak jauh
+    - SOP banding jarak jauh
+    - SOP nirkertas/paperless
+    - bukti sosialisasi SOP
+
+  dokumen_operasional:
+    - daftar asesi periode berjalan
+    - jadwal asesmen
+    - surat tugas asesor
+    - data TUK
+    - SPT verifikasi TUK
+    - SK penetapan TUK
+    - daftar hasil sertifikasi
+
+  dokumen_asesmen:
+    - permohonan sertifikasi
+    - asesmen mandiri
+    - persetujuan asesmen
+    - instrumen asesmen terisi
+    - rekaman asesmen
+    - laporan asesmen
+    - rekomendasi asesor
+    - keputusan sertifikasi LSP
+
+  dokumen_kendala_dan_banding:
+    - laporan kendala teknis
+    - log gangguan sistem
+    - bukti tindak lanjut kendala
+    - form banding
+    - register banding
+    - hasil penyelesaian banding
+
+  dokumen_mutu:
+    - rencana audit internal
+    - laporan audit internal 6 bulanan
+    - daftar temuan audit
+    - tindakan koreksi
+    - tindakan perbaikan
+    - bukti penutupan temuan
+
+  dokumen_pelaporan:
+    - laporan pelaksanaan AJJ 6 bulanan
+    - laporan audit internal kepada BNSP
+    - bukti pengiriman laporan bulan Juni/Desember
+    - arsip korespondensi dengan BNSP
+```
+
+SE.007 juga memuat format laporan pelaksanaan sertifikasi jarak jauh yang berisi identitas LSP, nomor SK persetujuan, skema dan metode yang disetujui, rekap jumlah asesi, serta lampiran rekap data asesi. 
+
+---
+
+# 5. Alur Surveilans oleh BNSP
+
+```yaml id="alur_surveillance_bnsp"
+alur_surveillance_bnsp:
+  tahap_1_pemberitahuan_atau_permintaaan_data:
+    aktivitas:
+      - BNSP meminta laporan, bukti, atau data pelaksanaan AJJ/Nirkertas
+      - LSP menyiapkan dokumen dan akses sistem
+      - LSP menunjuk penanggung jawab pendamping surveilans
+    output:
+      - surat/tindak lanjut permintaan data
+      - daftar dokumen yang akan diperiksa
+      - jadwal surveilans jika ada
+
+  tahap_2_review_dokumen:
+    aktivitas:
+      - pemeriksaan laporan pelaksanaan AJJ
+      - pemeriksaan laporan audit internal
+      - pemeriksaan tindakan perbaikan
+      - pemeriksaan bukti rekaman dan dokumen digital
+    output:
+      - catatan review dokumen
+      - daftar klarifikasi
+      - potensi temuan awal
+
+  tahap_3_demo_sistem_atau_sampling:
+    aktivitas:
+      - sampling data asesi
+      - sampling rekaman asesmen
+      - sampling laporan asesmen
+      - sampling verifikasi TUK
+      - sampling banding atau kendala teknis
+      - demo hak akses dan audit trail
+    output:
+      - daftar sampel
+      - catatan kesesuaian sistem
+      - catatan temuan
+
+  tahap_4_wawancara_personil:
+    aktivitas:
+      - wawancara manajemen LSP
+      - wawancara admin LSP
+      - wawancara asesor
+      - wawancara pengelola sistem
+      - wawancara TUK jika diperlukan
+    output:
+      - catatan wawancara
+      - bukti pemahaman peran
+      - bukti implementasi SOP
+
+  tahap_5_temuan_dan_tindakan_perbaikan:
+    aktivitas:
+      - BNSP menyampaikan temuan atau catatan
+      - LSP menyusun tindakan koreksi dan tindakan perbaikan
+      - LSP mengirim bukti perbaikan
+      - BNSP meninjau bukti penutupan temuan
+    output:
+      - daftar temuan
+      - rencana tindakan perbaikan
+      - bukti penutupan temuan
+      - status closed/open
+```
+
+---
+
+# 6. Checklist Surveilans per Area
+
+## A. Kepatuhan Persetujuan
+
+```yaml id="checklist_kepatuhan_persetujuan"
+checklist_kepatuhan_persetujuan:
+  - "[ ] LSP memiliki SK persetujuan AJJ/Nirkertas"
+  - "[ ] Skema yang dijalankan sesuai dengan yang disetujui"
+  - "[ ] Metode asesmen sesuai dengan persetujuan"
+  - "[ ] Tidak ada skema di luar persetujuan yang dijalankan secara AJJ"
+  - "[ ] Perubahan sistem/proses dikendalikan dan terdokumentasi"
+```
+
+## B. Sistem Aplikasi
+
+```yaml id="checklist_sistem_surveillance"
+checklist_sistem:
+  - "[ ] Sistem dapat menampilkan permohonan sertifikasi"
+  - "[ ] Sistem dapat menampilkan asesmen mandiri"
+  - "[ ] Sistem dapat menampilkan persetujuan asesmen"
+  - "[ ] Sistem dapat menampilkan instrumen asesmen"
+  - "[ ] Sistem menyimpan rekaman asesmen"
+  - "[ ] Sistem menghasilkan laporan asesmen"
+  - "[ ] Sistem menyediakan umpan balik"
+  - "[ ] Sistem menyediakan proses banding"
+  - "[ ] Sistem memiliki manajemen akun dan hak akses"
+  - "[ ] Sistem memiliki audit trail/log aktivitas"
+```
+
+## C. Rekaman dan Arsip
+
+```yaml id="checklist_rekaman_arsip"
+checklist_rekaman_arsip:
+  - "[ ] Rekaman asesmen tersedia untuk sampel yang diminta"
+  - "[ ] Rekaman verifikasi TUK tersedia"
+  - "[ ] Rekaman dapat dibuka kembali"
+  - "[ ] Rekaman diberi identitas sesi"
+  - "[ ] Rekaman disimpan sesuai masa retensi SOP"
+  - "[ ] Akses rekaman dibatasi untuk pihak berwenang"
+  - "[ ] Backup rekaman tersedia"
+```
+
+## D. Audit Internal dan Pelaporan
+
+```yaml id="checklist_audit_pelaporan"
+checklist_audit_pelaporan:
+  - "[ ] Audit internal AJJ dilakukan setiap 6 bulan"
+  - "[ ] Laporan audit internal tersedia"
+  - "[ ] Tindakan koreksi tersedia untuk setiap temuan"
+  - "[ ] Tindakan perbaikan tersedia untuk temuan berulang/sistemik"
+  - "[ ] Bukti penutupan temuan tersedia"
+  - "[ ] Laporan pelaksanaan AJJ disusun setiap 6 bulan"
+  - "[ ] Laporan dikirim kepada BNSP bulan Juni dan Desember"
+  - "[ ] Bukti pengiriman laporan disimpan"
+```
+
+---
+
+# 7. Potensi Temuan Surveilans
+
+```yaml id="potensi_temuan_surveillance"
+potensi_temuan_surveillance:
+  kepatuhan:
+    - temuan: "LSP menjalankan skema AJJ di luar ruang lingkup persetujuan"
+      risiko: "Pelaksanaan tidak sesuai persetujuan"
+      tindakan: "Hentikan pelaksanaan pada skema tersebut dan ajukan penyesuaian/persetujuan sesuai prosedur"
+
+  sistem:
+    - temuan: "Hak akses admin, asesor, dan asesi tidak dibedakan"
+      risiko: "Kontrol sistem lemah"
+      tindakan: "Terapkan role-based access control dan uji ulang hak akses"
+
+    - temuan: "Audit trail tidak tersedia"
+      risiko: "Perubahan data tidak dapat ditelusuri"
+      tindakan: "Aktifkan log aktivitas dan tetapkan prosedur review log"
+
+  rekaman:
+    - temuan: "Rekaman asesmen tidak tersedia untuk sampel tertentu"
+      risiko: "Bukti proses asesmen tidak dapat diverifikasi"
+      tindakan: "Investigasi penyebab, lakukan tindakan koreksi, dan perbaiki sistem penyimpanan"
+
+    - temuan: "Rekaman verifikasi TUK tidak terdokumentasi"
+      risiko: "Kelayakan TUK tidak dapat dibuktikan"
+      tindakan: "Ulangi verifikasi jika diperlukan dan simpan rekaman sesuai SOP"
+
+  laporan:
+    - temuan: "Laporan 6 bulanan belum dikirim"
+      risiko: "Tidak memenuhi kewajiban pelaporan"
+      tindakan: "Segera susun, validasi, kirim laporan, dan tetapkan reminder pelaporan"
+
+  audit_internal:
+    - temuan: "Audit internal tidak dilakukan setiap 6 bulan"
+      risiko: "Pengendalian mutu AJJ tidak berjalan"
+      tindakan: "Tetapkan jadwal audit, auditor internal, dan rencana audit berkala"
+
+  banding:
+    - temuan: "Fitur atau prosedur banding tidak berjalan"
+      risiko: "Hak asesi tidak terfasilitasi"
+      tindakan: "Perbaiki SOP, form banding, register banding, dan alur tindak lanjut"
+```
+
+---
+
+# 8. Template Laporan Kesiapan Surveilans
+
+```yaml id="template_laporan_kesiapan_surveillance"
+laporan_kesiapan_surveillance:
+  identitas:
+    nama_lsp: "[Nama LSP]"
+    nomor_sk_persetujuan_ajj: "[Nomor SK]"
+    periode_pelaksanaan: "[Januari-Juni / Juli-Desember]"
+    tanggal_persiapan: "[Tanggal]"
+    penanggung_jawab: "[Nama/Jabatan]"
+
+  ruang_lingkup:
+    skema_ajj_disetujui:
+      - "[Nama Skema 1]"
+      - "[Nama Skema 2]"
+    metode_asesmen:
+      - "[Metode 1]"
+      - "[Metode 2]"
+
+  rekap_pelaksanaan:
+    jumlah_asesi: "[Jumlah]"
+    jumlah_asesmen: "[Jumlah]"
+    jumlah_rekaman_asesmen: "[Jumlah]"
+    jumlah_tuk_digunakan: "[Jumlah]"
+    jumlah_banding: "[Jumlah]"
+    jumlah_kendala_teknis: "[Jumlah]"
+
+  status_dokumen:
+    sop_ajj: "tersedia/belum"
+    sop_nirkertas: "tersedia/belum"
+    laporan_asesmen: "lengkap/belum"
+    rekaman_asesmen: "lengkap/belum"
+    laporan_audit_internal: "tersedia/belum"
+    laporan_bnsp: "terkirim/belum"
+
+  temuan_internal:
+    jumlah_temuan: "[Jumlah]"
+    temuan_open: "[Jumlah]"
+    temuan_closed: "[Jumlah]"
+    tindakan_perbaikan_utama:
+      - "[Tindakan 1]"
+      - "[Tindakan 2]"
+
+  kesimpulan:
+    status_kesiapan: "Siap / Siap dengan catatan / Belum siap"
+    catatan_manajemen: "[Catatan]"
+```
+
+---
+
+# 9. Modul Chatbot Siap Tempel
+
+```yaml id="chatbot_module_surveillance_bnsp"
+module:
+  id: surveillance_bnsp_ajj_nirkertas
+  title: "Surveilans BNSP Sertifikasi AJJ Nirkertas"
+  purpose: >
+    Membantu LSP memahami, menyiapkan, dan memeriksa kesiapan surveilans BNSP
+    pasca-persetujuan Sertifikasi AJJ dan Nirkertas.
+
+intents:
+  - id: ask_surveillance_overview
+    sample_user_inputs:
+      - "Apa itu surveilans BNSP untuk AJJ Nirkertas?"
+      - "Bagaimana surveillance BNSP setelah LSP disetujui?"
+      - "Apa yang dicek BNSP setelah AJJ Nirkertas berjalan?"
+    response_template: response_surveillance_overview
+    next_node: surveillance_menu
+
+  - id: ask_surveillance_documents
+    sample_user_inputs:
+      - "Dokumen surveilans BNSP apa saja?"
+      - "Apa yang harus disiapkan untuk surveilans AJJ?"
+      - "Checklist surveillance AJJ Nirkertas"
+    response_template: response_surveillance_documents
+    next_node: dokumen_surveillance
+
+  - id: ask_surveillance_findings
+    sample_user_inputs:
+      - "Temuan surveilans biasanya apa?"
+      - "Apa risiko saat surveilans BNSP?"
+      - "Potensi LKS surveilans AJJ Nirkertas"
+    response_template: response_surveillance_findings
+    next_node: potensi_temuan_surveillance
+
+  - id: ask_surveillance_reporting
+    sample_user_inputs:
+      - "Laporan surveilans ke BNSP apa saja?"
+      - "Kapan laporan AJJ dikirim ke BNSP?"
+      - "Audit internal AJJ dilaporkan kapan?"
+    response_template: response_surveillance_reporting
+    next_node: checklist_audit_pelaporan
+
+flow:
+  id: surveillance_menu
+  title: "Menu Surveilans BNSP AJJ Nirkertas"
+  bot_message: >
+    Pilih area surveilans yang ingin diperiksa.
+  quick_replies:
+    - "Ruang lingkup surveilans"
+    - "Dokumen yang disiapkan"
+    - "Checklist sistem"
+    - "Checklist rekaman"
+    - "Audit internal & pelaporan"
+    - "Potensi temuan"
+    - "Template laporan kesiapan"
+
+response_template:
+  id: response_surveillance_overview
+  text: >
+    Surveilans BNSP untuk AJJ Nirkertas adalah pemantauan pasca-persetujuan
+    untuk memastikan LSP tetap menjalankan sertifikasi jarak jauh dan nirkertas
+    sesuai persetujuan, SOP, sistem, rekaman, pelaporan, dan pengendalian mutu.
+    
+    Area yang biasanya diperiksa meliputi:
+    1. Kesesuaian ruang lingkup persetujuan.
+    2. Penerapan SOP AJJ dan nirkertas.
+    3. Fungsi sistem aplikasi.
+    4. Rekaman asesmen dan verifikasi TUK.
+    5. Laporan asesmen, keputusan, umpan balik, dan banding.
+    6. Audit internal dan laporan berkala ke BNSP.
+  quick_replies:
+    - "Checklist dokumen"
+    - "Checklist sistem"
+    - "Potensi temuan"
+    - "Laporan 6 bulanan"
+```
+
+---
+
+## Ringkasan Praktis
+
+**Surveilans BNSP** untuk AJJ Nirkertas berfokus pada bukti bahwa LSP tidak hanya pernah disetujui, tetapi **tetap konsisten menjalankan AJJ/Nirkertas sesuai persetujuan**. Yang harus paling siap ditunjukkan adalah: SK persetujuan, daftar skema disetujui, SOP, sistem aplikasi, rekaman asesmen, laporan asesmen, verifikasi TUK, banding, audit internal 6 bulanan, laporan pelaksanaan 6 bulanan, bukti pengiriman laporan ke BNSP, dan bukti tindakan perbaikan.
+
+[1]: https://bnsp.go.id/download?utm_source=chatgpt.com "Halaman Download - BNSP"

@@ -1,0 +1,123 @@
+<aside>
+📐
+
+**Modul A** mencakup seluruh aktivitas sebelum mobilisasi: review/finalisasi DED, proses tender, drafting & signing kontrak, serta penyusunan RKK/RMPK awal. Output: kesiapan dokumen lengkap saat hari pertama mobilisasi.
+
+</aside>
+
+## A1 — Engineering & Design
+
+**Owner agent:** AGENT-TEKNIK (didampingi AGENT-PROXIMA untuk integrasi & AGENT-MUTU untuk material spec).
+
+### Aktivitas Kunci
+
+- **Review DED & spesifikasi teknis** — cek konsistensi arsitektur ↔ struktur ↔ MEP, SNI compliance.
+- **BIM coordination** — model federated di Navisworks/Solibri, clash detection, LoD per disiplin (ISO 19650).
+- **Shop drawing development** — dari DED ke gambar kerja workshop-ready.
+- **RFI tracking** — log pertanyaan klarifikasi ke konsultan + response time monitoring.
+- **Value Engineering** — alternatif desain hemat biaya tanpa korbankan fungsi (target saving 5–10%).
+
+### Output / Deliverables
+
+1. **DED Approval Log** — stamping setiap drawing oleh QC + Konsultan MK.
+2. **Shop Drawing Submittal Register** — status: Draft / Under Review / Approved / Approved as Noted / Rejected.
+3. **RFI Log** — nomor, deskripsi, agent, target response, status.
+4. **VE Proposal Pack** — alternatif + cost comparison + impact analysis.
+5. **BIM Clash Report** — zero major clash sebelum mobilisasi.
+
+### Sitasi
+
+- ISO 19650-1/2 (BIM)
+- Permen PUPR 22/2018 (Pedoman Teknis Bangunan Gedung)
+- SNI 2847:2019 (Beton Struktural), SNI 1729:2020 (Baja), SNI 1726:2019 (Gempa)
+- AHSP Bidang Cipta Karya
+
+## A2 — Tender & Pengadaan
+
+**Owner agent:** AGENT-KONTRAK (didampingi AGENT-LOGIS untuk vendor onboarding).
+
+### Aktivitas Kunci
+
+- **Penyusunan HPS / Engineering Estimate** berbasis AHSP + harga pasar terkini.
+- **Tender announcement** via SPSE (Owner pemerintah) atau invitation (Owner swasta).
+- **Aanwijzing & site visit** — Q&A peserta, briefing scope.
+- **Evaluasi penawaran** — administrasi → teknis → harga → kualifikasi.
+- **Sanggah & sanggah banding** — (khusus Perpres 12/2021).
+- **Penetapan pemenang & SPPBJ** — surat penunjukan penyedia.
+
+### Output / Deliverables
+
+1. **HPS / Engineering Estimate** — file XLSX dengan breakdown per item.
+2. **Tender Document Package** — RKS, BoQ, gambar tender, draft kontrak.
+3. **Aanwijzing Minutes** — notulensi + addendum tender.
+4. **Bid Evaluation Report** — skoring administrasi + teknis + harga.
+5. **Vendor AVL Update** — hasil evaluasi masuk database AVL.
+
+### Sitasi
+
+- Perpres 12/2021 jo. Perpres 16/2018 (PBJ Pemerintah)
+- Perlem LKPP 12/2021 (PBJ Pekerjaan Konstruksi)
+- UU 2/2017 Pasal 38–42 (Pemilihan Penyedia)
+- Permen PUPR 8/2023 (PBJ Konstruksi terpadu)
+
+## A3 — Kontrak Konstruksi
+
+**Owner agent:** AGENT-KONTRAK.
+
+### Aktivitas Kunci
+
+- **Drafting / review SSUK & SSKK** — atau FIDIC Red/Yellow Book untuk Owner internasional.
+- **Negosiasi klausul kritis:**
+    - **Time:** durasi pelaksanaan, milestone, jenis EOT yang diakui (Sub-Clause 8.5 FIDIC).
+    - **Money:** nilai kontrak, escalation clause, retention 5%, performance bond 5–10%.
+    - **Risk:** Liquidated Damages cap (umumnya 5–10% nilai kontrak), force majeure scope.
+    - **Quality:** standar mutu (SNI / ASTM), defect liability period 12–24 bulan.
+    - **Variation:** mekanisme VO + cap 10–20% nilai kontrak.
+    - **Dispute:** mekanisme bertingkat (negosiasi → mediasi → dispute board → arbitrase BANI/SIAC).
+- **Tanda tangan kontrak & jaminan** — Performance Bond + Asuransi (CAR/EAR + Workmen Comp).
+- **Pre-mobilization meeting** dengan Owner & Konsultan MK.
+
+### Output / Deliverables
+
+1. **Kontrak signed** + lampiran (BoQ, gambar tender, spesifikasi teknis, RKK awal, RMPK awal).
+2. **Performance Bond** — dari bank / asuransi.
+3. **Insurance Policy** — CAR/EAR, TLO alat, Workmen Compensation.
+4. **Risk & Insurance Register** — alokasi risiko per klausul.
+5. **Pre-Mobilization Meeting Minutes** + commitment list.
+
+### Sitasi
+
+- UU 2/2017 Pasal 46–55 (Kontrak Kerja Konstruksi)
+- PP 14/2021 Pasal 95–135 (Pelaksanaan Kontrak)
+- FIDIC Red Book 2017 (Conditions of Contract for Construction)
+- FIDIC Yellow Book 2017 (Plant & Design-Build)
+- ISO 31000:2018 (Risk Management)
+
+## Alur Kerja Modul A
+
+```mermaid
+flowchart LR
+	DED[A1 — DED Review<br>+ BIM + RFI] --> VE[A1 — Value<br>Engineering]
+	VE --> HPS[A2 — HPS &<br>Tender Doc]
+	HPS --> TND[A2 — Tender<br>Process]
+	TND --> EVAL[A2 — Bid<br>Evaluation]
+	EVAL --> WIN[A2 — Pemenang<br>SPPBJ]
+	WIN --> NEG[A3 — Kontrak<br>Negotiation]
+	NEG --> SIGN[A3 — Kontrak<br>Signed]
+	SIGN --> PMM[A3 — Pre-Mob<br>Meeting]
+	PMM --> MOB[➜ Modul B — Mobilisasi]
+```
+
+## Quick Reference — Conversation Starters Modul A
+
+1. "Review DED proyek high-rise 25 lantai — fokus konsistensi struktur vs MEP"
+2. "Susun HPS untuk proyek jalan tol 12 km berdasarkan AHSP terbaru"
+3. "Bantu drafting klausul EOT yang melindungi kontraktor di FIDIC Red Book"
+4. "Evaluasi tender 5 peserta — berikan rekomendasi pemenang"
+5. "Susun risk register pre-mobilization untuk proyek bendungan"
+
+## Halaman Terkait
+
+- [Persona Gustafta — Konfigurasi KONSTRA-ORCHESTRATOR & 9 Agen Spesialis](https://www.notion.so/Persona-Gustafta-Konfigurasi-KONSTRA-ORCHESTRATOR-9-Agen-Spesialis-a167db1ae46d45e698038fcc00a5165d?pvs=21)
+- [System Prompt OpenClaw — Manajer Teknik / Engineering Konstruksi](https://www.notion.so/System-Prompt-OpenClaw-Manajer-Teknik-Engineering-Konstruksi-14dec5bd3a58442f826ce712deb59960?pvs=21)
+- [System Prompt OpenClaw — Manajer Rantai Pasok & Logistik Konstruksi](https://www.notion.so/System-Prompt-OpenClaw-Manajer-Rantai-Pasok-Logistik-Konstruksi-f56c48fbad0d4d75b947e2a346e6a41a?pvs=21)

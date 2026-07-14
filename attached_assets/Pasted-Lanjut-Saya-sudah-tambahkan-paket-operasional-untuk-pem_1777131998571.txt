@@ -1,0 +1,53 @@
+Lanjut. Saya sudah tambahkan **paket operasional** untuk pemasangan, pengujian, WhatsApp flow, SOP implementasi, dan bundle ZIP lengkap. Struktur tetap mengikuti pola chatbot Manajemen Pelaksanaan: konfigurasi builder, intent, flow, fallback, asesmen, studi kasus, checklist, dan session summary.  Data tetap mengacu pada klasifikasi Mekanikal yang memuat jabatan kerja, KKNI, kualifikasi, standar kompetensi, dan link SKK/SKKNI. 
+
+## 91. File tambahan yang dibuat
+
+1. [Test Prompts Mekanikal](sandbox:/mnt/data/mekaskk_test_prompts.txt)
+   Untuk menguji greeting, role lookup, SKKNI lookup, KKNI lookup, rekomendasi, asesmen, studi kasus, checklist, safety response, dan glossary.
+
+2. [Flow WhatsApp Bot](sandbox:/mnt/data/mekaskk_whatsapp_flow.md)
+   Berisi menu angka, template jawaban, fallback, dan safety response untuk WhatsApp bot.
+
+3. [Go-Live Checklist](sandbox:/mnt/data/mekaskk_go_live_checklist.md)
+   Checklist final sebelum chatbot dipublikasikan.
+
+4. [SOP Implementasi](sandbox:/mnt/data/mekaskk_implementation_sop.md)
+   Panduan pemasangan, pengujian, monitoring, dan update knowledge base.
+
+5. [Full Bundle ZIP](sandbox:/mnt/data/skk_coach_mekanikal_full_bundle.zip)
+   Paket lengkap berisi konfigurasi, knowledge base, panduan, test prompt, flow WhatsApp, SOP, dan checklist.
+
+## 92. Paket utama yang dipakai di dashboard
+
+Untuk dashboard builder, urutan file yang paling penting:
+
+1. Upload knowledge base:
+   [Database JSON MekaSKK Bot](sandbox:/mnt/data/mekaskk_database_mekanikal.json)
+
+2. Upload dokumentasi:
+   [README MekaSKK Bot](sandbox:/mnt/data/README_mekaskk_bot.md)
+
+3. Pakai konfigurasi:
+   [Konfigurasi YAML](sandbox:/mnt/data/skk_coach_mekanikal_config.yaml)
+   atau
+   [Konfigurasi JSON](sandbox:/mnt/data/skk_coach_mekanikal_config.json)
+
+4. Uji dengan:
+   [Test Prompts Mekanikal](sandbox:/mnt/data/mekaskk_test_prompts.txt)
+
+## 93. Tahap berikutnya
+
+Setelah ini, bagian lanjutan yang paling berguna adalah membuat **versi import-ready** dalam format yang lebih spesifik sesuai dashboard builder Replit tersebut, misalnya:
+
+```text id="rxqqlu"
+bot_name:
+description:
+welcome_message:
+system_prompt:
+knowledge_files:
+quick_replies:
+fallback_message:
+test_prompts:
+```
+
+Itu bisa dibuat sebagai satu file `.txt` yang tinggal copy-paste ke form dashboard.

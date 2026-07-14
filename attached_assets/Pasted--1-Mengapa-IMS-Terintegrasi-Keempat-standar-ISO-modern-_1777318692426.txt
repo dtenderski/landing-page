@@ -1,0 +1,121 @@
+## 1. Mengapa IMS Terintegrasi?
+
+Keempat standar ISO modern sudah menggunakan struktur yang sama — **High Level Structure (HLS) / Annex SL**. Ini berarti klausul inti bisa dirancang sekali dan dipakai empat kali, asalkan dokumentasi disusun dengan benar sejak awal.
+
+- **Efisiensi dokumentasi**: satu Manual Terintegrasi, satu set prosedur wajib, satu risk register.
+- **Efisiensi audit**: auditor internal & eksternal mengaudit empat standar dalam satu siklus.
+- **Efisiensi biaya**: total biaya sertifikasi turun 30–40% dibanding empat audit terpisah.
+- **Efisiensi kompetensi**: internal auditor dilatih sekali untuk empat standar.
+
+## 2. Matriks Klausul High Level Structure (HLS)
+
+| **Klausul HLS** | **ISO 9001 (Mutu)** | **ISO 14001 (Lingkungan)** | **ISO 45001 (K3)** | **ISO 37001 (Anti-Suap)** |
+| --- | --- | --- | --- | --- |
+| 4. Konteks Organisasi | Kebutuhan pelanggan | Aspek-dampak lingkungan | Hazard workplace | Risiko penyuapan |
+| 5. Kepemimpinan | Quality policy | Environmental policy | OH&S policy | Anti-bribery policy + FKAP |
+| 6. Perencanaan | Risk-based thinking | Aspek signifikan | HIRADC | Bribery risk assessment |
+| 7. Dukungan | Identik lintas 4 standar | Identik lintas 4 standar | Identik lintas 4 standar | Identik lintas 4 standar |
+| 8. Operasi | Operational control mutu | Operational control lingkungan | Operational control K3 | Due diligence + kontrol keuangan |
+| 9. Evaluasi Kinerja | Monitoring · audit internal · management review (identik) | Monitoring · audit internal · management review (identik) | Monitoring · audit internal · management review (identik) | Monitoring · audit internal · management review (identik) |
+| 10. Peningkatan | Nonconformity · CAPA · continual improvement (identik) | Nonconformity · CAPA · continual improvement (identik) | Nonconformity · CAPA · continual improvement (identik) | Nonconformity · CAPA · continual improvement (identik) |
+
+<aside>
+💡
+
+**Insight kritikal**: Klausul 7, 9, dan 10 **identik** lintas empat standar. Artinya 40% dokumentasi IMS adalah shared. Inilah basis efisiensi biaya & waktu.
+
+</aside>
+
+## 3. Roadmap Implementasi 12–18 Bulan
+
+### Fase 1 — Foundation (Bulan 1–3)
+
+- Gap analysis terintegrasi (pakai *IMS Gap Analysis* toolkit).
+- Penetapan scope IMS & konteks organisasi.
+- Penunjukan Management Representative IMS + Komite IMS.
+- Training awareness 4 standar untuk seluruh personel.
+
+### Fase 2 — Design (Bulan 4–6)
+
+- Penyusunan Integrated Manual (struktur HLS).
+- Prosedur wajib: Document Control · Record Control · Internal Audit · Management Review · CAPA.
+- Risk register terintegrasi: risiko mutu + aspek lingkungan + hazard K3 + risiko suap.
+- Policy terintegrasi atau empat policy sejajar (opsi strategis).
+
+### Fase 3 — Implementasi (Bulan 7–10)
+
+- Rollout ke seluruh proyek & fungsi.
+- Pelaksanaan operational control per standar.
+- Pencatatan evidence: inspeksi, insiden, due diligence mitra, quality check.
+- Training Internal Auditor IMS (pakai modul *Internal Auditor ISO 9001/14001/45001*).
+
+### Fase 4 — Audit & Sertifikasi (Bulan 11–18)
+
+- Internal audit IMS — satu tim, empat standar, satu laporan terintegrasi.
+- Management Review IMS.
+- Stage-1 audit eksternal (dokumen).
+- Stage-2 audit eksternal (implementasi).
+- Issuance sertifikat (dapat bertahap: 37001 dulu → 9001 → 45001 → 14001, atau bersamaan).
+
+## 4. Deliverables Paket
+
+- [ ]  **Integrated Manual** (template & pendampingan penyusunan)
+- [ ]  **5 prosedur wajib HLS** siap-pakai (customizable)
+- [ ]  **Integrated Risk Register** (mutu + lingkungan + K3 + anti-suap)
+- [ ]  **4 policy statement** (dapat digabung jadi Integrated Policy)
+- [ ]  **Integrated Audit Checklist** (klausul mapping HLS)
+- [ ]  **Training package**: 40 jam e-course + 16 jam workshop + simulasi audit
+- [ ]  **Pendampingan Stage-1 & Stage-2** via LSM mitra (ISO 9001/14001/45001) & LS-SMAP (ISO 37001)
+- [ ]  **Dashboard IMS**: monitoring KPI empat standar dalam satu tampilan
+- [ ]  **Sertifikasi Internal Auditor IMS** untuk minimal 3 personel per BUJK
+
+## 5. Kurikulum & Toolkit Terkait
+
+### Modul Kurikulum yang Harus Ditempuh
+
+- ISO 9001:2015 — Quality Management System
+- ISO 14001:2015 — Environmental Management System
+- ISO 45001:2018 — OHS Management System
+- Kepatuhan Anti Penyuapan (ISO 37001 / SMAP / FKAP)
+- Internal Auditor ISO 9001 / 14001 / 45001 (jenjang Madya)
+- Memimpin implementasi Integrated Management System (jenjang Utama)
+
+### Toolkit yang Dipakai Sepanjang Program
+
+- **IMS Gap Analysis** — gap analysis awal & review periodik
+- **Risk Register Mini App** — integrated risk register
+- **Pancek KPK Self-Assessment** — komplementer ISO 37001 (nasional + internasional)
+- **Knowledge Capacity Index Dashboard** — monitoring kompetensi tim IMS
+
+## 6. Struktur Pricing (Indikatif)
+
+| **Komponen** | **Single Standard** | **IMS Bundle (4 standar)** | **Saving** |
+| --- | --- | --- | --- |
+| Training & awareness | 100% | 60% | 40% |
+| Penyusunan dokumen | 100% | 55% | 45% |
+| Internal audit | 100% | 50% | 50% |
+| Audit eksternal & sertifikasi | 100% | 70% | 30% |
+| **Total effort & biaya** | **100% × 4 = 400%** | **~60% × 4 = 240%** | **~40%** |
+
+## 7. Target Pasar & Posisi
+
+- **Primary**: BUJK Madya–Utama yang sudah punya proyek aktif & ingin naik kelas (IFC, donor, multinational, migas/EPC).
+- **Secondary**: BUJK subkontraktor yang menjadi vendor EPC besar yang mensyaratkan multi-sertifikasi.
+- **Tier**: **Corporate** (akses dashboard konsolidasi BUJK, benchmark antar-anggota).
+- **Positioning**: *"Dari BUJK Indonesia menjadi BUJK kelas global — tanpa biaya kelas global."*
+
+## 8. Metrik Sukses Program
+
+- **Lead indicator**: jumlah BUJK yang menyelesaikan Fase 2 (dokumen IMS siap audit) dalam 6 bulan.
+- **Lag indicator**: jumlah BUJK yang memperoleh ≥ 2 sertifikat ISO dalam 12 bulan.
+- **Impact indicator**: pertumbuhan nilai proyek yang dimenangkan BUJK peserta IMS Bundle (YoY).
+- **Health indicator**: skor kepuasan peserta ≥ 4.2/5 dan tingkat penyelesaian program ≥ 80%.
+
+## 9. Risk & Mitigation Singkat
+
+| **Risiko** | **Mitigasi** |
+| --- | --- |
+| BUJK drop-out di tengah program (12–18 bulan terlalu panjang) | Milestone gate per fase; sertifikat parsial (modul completion) agar ada win berkala. |
+| Budget stretch di sisi BUJK anggota | Skema installment; paket parsial (mulai 2 standar dulu, 2 lainnya fase kedua). |
+| Ketersediaan auditor eksternal 4 standar lokal | Kemitraan strategis dengan LSM & LS-SMAP terakreditasi KAN; cadangan auditor regional. |
+| Resistensi internal BUJK (birokrasi dokumentasi) | Integrasi langsung ke SOP proyek berjalan; hindari paper-based system; pakai toolkit digital dari awal. |

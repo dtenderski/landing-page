@@ -1,0 +1,87 @@
+# 🧠 Otak Proyek Brain Project
+
+> Halaman induk Series L1 — konteks bisnis, stakeholder map, KPI utama, dan glosarium yang dipakai SELURUH agent Brain Project sebagai sumber semantik bersama.
+> 
+
+## 1. Konteks Bisnis
+
+Brain Project melayani **praktisi konstruksi lapangan** (Site Engineer, Pelaksana, Pengawas/MK, K3 Officer, Project Manager) yang butuh pendampingan **real-time** untuk:
+
+- Menjaga **Mutu (Q) — Biaya (C) — Waktu (T)** sesuai kontrak
+- Memenuhi standar **K3 & Lingkungan** (SMK3 PP 50/2012, SMKK Permen PUPR 8/2023, AMDAL/UKL-UPL)
+- Mendeteksi dini indikasi **penyimpangan** sebelum jadi NCR mayor atau insiden
+
+**Segmen utama**: BUJK kelas Kecil-Menengah-Besar; proyek Gedung / Jalan-Jembatan / EPC ringan; nilai kontrak Rp 1 M – Rp 500 M.
+
+**Posisi vs Series lain**:
+
+- KONSTRA → strategis BUJK end-to-end (Tender → PHO/FHO)
+- TENDERA → spesialis tender BUJK
+- **Brain Project** → **pendampingan lapangan harian** (Execution-centric), bersifat **operasional & deteksi dini**
+
+## 2. Stakeholder Map
+
+### Internal Proyek
+
+| Pihak | Peran terhadap Brain Project |
+| --- | --- |
+| Owner / Pengguna Jasa | Konsumen akhir laporan QCT |
+| MK / Konsultan Pengawas | Verifikator harian |
+| Konsultan Perencana | Pemilik DED & spesifikasi |
+| Kontraktor Utama | Pelaksana pekerjaan |
+| Subkontraktor & Vendor | Penyuplai jasa/material |
+| Tenaga Kerja Lapangan | Pelaku langsung |
+
+### Eksternal & Regulator
+
+- Kementerian PUPR (Bina Konstruksi, SMKK)
+- KLHK (lingkungan, limbah B3)
+- Kemnaker (K3, BPJSTK)
+- LPJK / LSBU / LSP (sertifikasi)
+- Asosiasi (ASPEKINDO, GAPENSI, dll.)
+
+## 3. KPI Utama & Threshold Alert
+
+| Dimensi | Indikator | 🟢 Aman | 🟡 Watch | 🔴 Alert |
+| --- | --- | --- | --- | --- |
+| **Biaya** | CPI | ≥ 0,95 | 0,85–0,95 | < 0,85 |
+| **Biaya** | EAC vs BAC | EAC ≤ BAC | EAC 100–105% BAC | EAC > 105% BAC |
+| **Biaya** | VO kumulatif | ≤ 5% | 5–10% | > 10% |
+| **Waktu** | SPI | ≥ 0,95 | 0,85–0,95 | < 0,85 |
+| **Waktu** | Deviasi kurva-S | ≤ 5% | 5–10% | > 10% |
+| **Mutu** | NCR mayor terbuka | 0 | 1–2 | ≥ 3 atau > 3 hari |
+| **Mutu** | %Uji material gagal | 0% | 1–5% | > 5% |
+| **K3** | TRIR (per 200.000 jam) | 0 | 0–1 | > 1 atau insiden mayor |
+| **K3** | Near miss / minggu | < 3 | 3–5 | > 5 |
+| **Lingkungan** | Limbah B3 tak ter-manifest | 0 | — | ≥ 1 |
+| **Lingkungan** | Ambang debu PM10 / kebisingan | normal | mendekati ambang | terlampaui |
+
+## 4. Glosarium
+
+| Istilah | Definisi |
+| --- | --- |
+| **ABD** | Anti-Blocking Doctrine — 7 prinsip output agen |
+| **SMKK** | Sistem Manajemen Keselamatan Konstruksi (Permen PUPR 8/2023) |
+| **SMK3** | Sistem Manajemen K3 (PP 50/2012) |
+| **RKK** | Rencana Keselamatan Konstruksi |
+| **RMPK** | Rencana Mutu Pekerjaan Konstruksi |
+| **EVM** | Earned Value Management (PV, EV, AC, CPI, SPI, EAC, VAC) |
+| **EOT** | Extension of Time |
+| **VO** | Variation Order |
+| **TIA** | Time Impact Analysis |
+| **MC-0 / MC-100** | Mutual Check awal / akhir |
+| **PHO / FHO** | Provisional / Final Hand Over |
+| **ITP** | Inspection & Test Plan |
+| **NCR** | Non-Conformance Report |
+| **RFI** | Request for Information |
+| **JSA** | Job Safety Analysis |
+| **PTW** | Permit to Work |
+| **CAPA** | Corrective & Preventive Action |
+| **B3** | Bahan Berbahaya & Beracun |
+| **BUJK** | Badan Usaha Jasa Konstruksi |
+
+## 5. Hubungan dengan KB & Agent
+
+- Otak Proyek ini **wajib di-include** di semua System Prompt agent Brain Project (Section *Konteks*).
+- Semua referensi regulasi/standar di sini merujuk ke **📚 Knowledge Base Brain Project — 7 Tipe Sumber**.
+- Update glosarium = update koordinatif antar agent.

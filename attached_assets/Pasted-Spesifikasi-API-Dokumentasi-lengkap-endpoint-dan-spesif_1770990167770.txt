@@ -1,0 +1,99 @@
+Spesifikasi API
+Dokumentasi lengkap endpoint dan spesifikasi Inaproc API Gateway
+
+Spesifikasi API
+Selamat datang di dokumentasi spesifikasi Inaproc API Gateway. Di sini Anda akan menemukan dokumentasi lengkap tentang semua endpoint API yang tersedia.
+
+Inaproc API Gateway Endpoints
+Legacy ISB API
+Tender
+RUP
+E-Katalog
+E-Katalog Archive
+GET
+List jadwal tahapan non tender
+GET /api/v1/tender/jadwal-tahapan-non-tender
+
+GET
+List jadwal tahapan tender
+GET /api/v1/tender/jadwal-tahapan-tender
+
+GET
+List non tender eKontrak kontrak
+GET /api/v1/tender/non-tender-ekontrak-kontrak
+
+GET
+List non tender pengumuman
+GET /api/v1/tender/non-tender-pengumuman
+
+GET
+List non tender selesai
+GET /api/v1/tender/non-tender-selesai
+
+GET
+List pencatatan non tender realisasi
+GET /api/v1/tender/pencatatan-non-tender-realisasi
+
+GET
+List pencatatan non tender
+GET /api/v1/tender/pencatatan-non-tender
+
+GET
+List pencatatan swakelola realisasi
+GET /api/v1/tender/pencatatan-swakelola-realisasi
+
+GET
+List pencatatan swakelola
+GET /api/v1/tender/pencatatan-swakelola
+
+GET
+List pengumuman
+GET /api/v1/tender/pengumuman
+
+GET
+List peserta tender
+GET /api/v1/tender/peserta-tender
+
+GET
+List tender ekontrak kontrak
+GET /api/v1/tender/tender-ekontrak-kontrak
+
+GET
+List tender selesai nilai
+GET /api/v1/tender/tender-selesai-nilai
+
+Informasi Umum
+Base URL
+
+Production: https://data.inaproc.id
+Staging: https://data.eproc.dev
+Local: http://localhost:8080
+Format Response
+Semua response API menggunakan format JSON dengan struktur standar:
+
+
+{
+  "success": boolean,
+  "message": "string",
+  "data": object | array,
+  "meta": {
+    "timestamp": "string",
+    "version": "string"
+  }
+}
+Authentication
+API endpoint memerlukan autentikasi menggunakan salah satu metode berikut:
+
+API Key:
+
+
+X-API-Key: YOUR_API_KEY
+Bearer Token:
+
+
+Authorization: Bearer YOUR_JWT_TOKEN
+Rate Limiting
+Endpoint infrastruktur: Tidak ada batasan
+Endpoint query: Sesuai dengan kapasitas data source
+Endpoint legacy: 100 requests per minute
+Detail

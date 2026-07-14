@@ -1,0 +1,76 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1777531137805,
+      "tag": "0000_cooing_skin",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1746000000000,
+      "tag": "0001_mini_app_results_source",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1777650841412,
+      "tag": "0002_dry_hairball",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1746718200000,
+      "tag": "0003_remove_product_slug",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1778295603195,
+      "tag": "0004_whole_vindicator",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1782459773784,
+      "tag": "0005_tiny_onslaught",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1782818268639,
+      "tag": "0006_marvelous_harpoon",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1783055208375,
+      "tag": "0007_woozy_molecule_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1783401600000,
+      "tag": "0008_rate_limit_buckets",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1752192000000,
+      "tag": "0009_otp_channel_phone",
+      "breakpoints": true
+    }
+  ]
+}

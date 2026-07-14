@@ -1,0 +1,281 @@
+saya mau membuat chatbot menggunakan Gustafta Chatbot Builder, dimana chatbot disusun berdasarkan hierarky : series, core, big idea, toolbox, agent
+series nya adalah tentant SKK Serifikat Kompeten Kerja dengan metode uji Asesment Jarak Jauh (AJJ)  
+saat isilah form series dibawah ini :>
+Buat Series Baru
+Isi detail Series baru Anda.
+
+Nama Series *
+Contoh: Chatbot Bisnis Online
+Slug (URL)
+chatbot-bisnis-online
+Tagline
+Deskripsi singkat
+Deskripsi
+Deskripsi lengkap Series...
+Kategori
+Bisnis, Edukasi, dll
+Bahasa
+Indonesia
+Warna
+
+#6366f1
+Cover Image URL
+https://...
+Tags (pisahkan dengan koma)
+bisnis, online, chatbot
+Publik
+
+Aktif
+
+Unggulan
+
+Batal
+Buat Series 
+
+Buat Chatbot Baru
+Apa itu Chatbot?
+Chatbot adalah unit utuh yang menangani satu area operasional di bawah suatu Modul. Setiap Chatbot memiliki Alat Bantu (modul spesifik) di dalamnya.
+
+Contoh: Dari Modul "Kepatuhan & Compliance", Anda bisa membuat Chatbot untuk "SBU & Klasifikasi", "SKK & Tenaga Ahli", atau "Perijinan Usaha".
+
+Dari Modul:
+problem
+Perizinan Usaha
+Modul Perizinan Usaha mengelola legalitas badan usaha konstruksi berbasis OSS RBA (PP 5/2021, UU Cipta Kerja). 7 chatbot spesialis mencakup: KBLI & Klasifikasi Risiko Usaha, Prasyarat & Kelengkapan Dasar NIB, Pendaftaran NIB & OSS, Sertifikat Standar & Perizinan Berbasis Risiko, IUJK & Izin Pelaksana Konstruksi, Validasi Badan Hukum, serta Kepatuhan & Audit Perizinan. Menghasilkan LICENSING_SUMMARY v1 yang kompatibel dengan TRC dan ECSG.
+
+Nama Chatbot *
+Contoh: SBU & Klasifikasi
+Deskripsi
+Jelaskan tentang chatbot ini...
+Tujuan Chatbot
+Tujuan utama dari chatbot ini...
+Kapabilitas
+Kapabilitas 1
+Tambah Kapabilitas
+Batasan
+Batasan 1
+Tambah Batasan
+Batal
+Buat Chatbot
+Generate Big Idea dari Referensi
+Masukkan referensi (upload file, teks, URL, atau topik) — AI akan menyarankan Big Idea chatbot terbaik.
+
+Topik / Bidang
+Contoh: Konstruksi gedung, SKK Sipil, ISO 9001, UMKM retail...
+Teks Referensi
+(paste manual dari dokumen)
+Paste teks dari PDF, dokumen Word, modul pelatihan, catatan kuliah, artikel, atau konten apapun yang ingin dijadikan dasar saran...
+AI membaca hingga 8.000 karakter pertama · 0 karakter total
+
+Upload File Referensi
+(PDF, DOCX, TXT — maks 5 MB/file)
+Klik atau seret beberapa file ke sini
+
+PDF, DOCX, atau TXT (maks 5 MB per file)
+
+URL Referensi
+(link YouTube, artikel, website)
+https://youtube.com/watch?v=... atau https://artikel.com/...
+Tambah URL
+Jumlah Saran yang Dihasilkan
+4
+6
+8
+10
+Generate Saran Big Idea
+Generate Big Idea dari Referensi
+Masukkan referensi (upload file, teks, URL, atau topik) — AI akan menyarankan Big Idea chatbot terbaik.
+
+Topik / Bidang
+Contoh: Konstruksi gedung, SKK Sipil, ISO 9001, UMKM retail...
+Teks Referensi
+(paste manual dari dokumen)
+Paste teks dari PDF, dokumen Word, modul pelatihan, catatan kuliah, artikel, atau konten apapun yang ingin dijadikan dasar saran...
+AI membaca hingga 8.000 karakter pertama · 0 karakter total
+
+Upload File Referensi
+(PDF, DOCX, TXT — maks 5 MB/file)
+Klik atau seret beberapa file ke sini
+
+PDF, DOCX, atau TXT (maks 5 MB per file)
+
+URL Referensi
+(link YouTube, artikel, website)
+https://youtube.com/watch?v=... atau https://artikel.com/...
+Tambah URL
+Jumlah Saran yang Dihasilkan
+4
+6
+8
+10
+Generate Saran Big Ide
+Buat Chatbot Orkestrator
+Apa itu Chatbot Orkestrator?
+Chatbot Orkestrator (HUB) adalah pintu masuk utama ekosistem multi-chatbot. Ia mengarahkan pengguna ke chatbot spesialis yang tepat, menjaga alur prasyarat, dan menyimpan konteks lintas chatbot. Setiap Series hanya memiliki 1 Orkestrator.
+
+Nama Orkestrator *
+Contoh: HUB Regulasi Konstruksi
+Deskripsi
+Jelaskan peran orkestrator ini...
+Batal
+Buat Ork
+Pasted markdown.md
+File
+buat Persona Hub AJJ
+Tujuan & KPI Agen
+Definisikan target keberhasilan dan respons fallback saat target tidak tercapai.
+Outcome Utama
+Tujuan bisnis utama yang harus dicapai agen.
+
+
+Pilih outcome utama…
+Kondisi Percakapan Berhasil (Win Conditions)
+Deskripsikan kapan percakapan dianggap berhasil. Contoh: "Pengguna mendapatkan nomor RAB yang disetujui dan bisa diunduh."
+
+Contoh: Pengguna menerima jawaban definitif dan tidak perlu eskalasi ke manusia…
+Fallback Objective
+Tindakan terbaik saat agen tidak bisa mencapai outcome utama.
+
+
+Kumpulkan data untuk tindak lanjut
+Kebijakan Agen
+Aturan tetap yang tidak boleh diubah oleh pengguna — suara merek, batas domain, standar kualitas, dan kepatuhan.
+Spesifikasi Brand Voice
+Gaya bahasa, tingkat formalitas, dan karakter komunikasi yang harus dipertahankan.
+
+Contoh: Gunakan bahasa formal namun ramah. Hindari jargon teknis. Selalu gunakan sapaan 'Bapak/Ibu'. Nada: profesional, suportif, berbasis data…
+Kebijakan Penalaran (Reasoning Policy)
+Cara agen menyajikan proses berpikirnya kepada pengguna.
+
+
+Langkah demi langkah — tampilkan proses
+Kebijakan Interaksi
+Aturan kapan agen bertanya balik vs. menyimpulkan sendiri.
+
+Contoh: Tanya kembali jika ada lebih dari satu interpretasi. Jangan bertanya lebih dari 2 hal sekaligus…
+Domain Charter
+Topik dan tindakan yang boleh dan tidak boleh dilakukan agen.
+
+Contoh: Agen HANYA membahas topik konstruksi dan teknik sipil. Dilarang memberikan saran medis atau hukum. Dilarang membuat kontrak yang mengikat secara hukum…
+Standar Kualitas (Quality Bar)
+Standar minimum kualitas jawaban yang harus dipenuhi.
+
+Contoh: Setiap jawaban harus menyertakan referensi standar (SNI/PUPR). Jangan memberikan angka tanpa konteks. Jawaban > 3 paragraf wajib ada ringkasan…
+Kepatuhan & Risiko
+Aturan regulasi, disclaimer wajib, dan batasan risiko.
+
+pilih
+Kebijakan Agen
+Aturan tetap yang tidak boleh diubah oleh pengguna — suara merek, batas domain, standar kualitas, dan kepatuhan.
+Spesifikasi Brand Voice
+Gaya bahasa, tingkat formalitas, dan karakter komunikasi yang harus dipertahankan.
+
+Contoh: Gunakan bahasa formal namun ramah. Hindari jargon teknis. Selalu gunakan sapaan 'Bapak/Ibu'. Nada: profesional, suportif, berbasis data…
+Kebijakan Penalaran (Reasoning Policy)
+Cara agen menyajikan proses berpikirnya kepada pengguna.
+
+
+Langkah demi langkah — tampilkan proses
+Kebijakan Interaksi
+Aturan kapan agen bertanya balik vs. menyimpulkan sendiri.
+
+Contoh: Tanya kembali jika ada lebih dari satu interpretasi. Jangan bertanya lebih dari 2 hal sekaligus…
+Domain Charter
+Topik dan tindakan yang boleh dan tidak boleh dilakukan agen.
+
+Contoh: Agen HANYA membahas topik konstruksi dan teknik sipil. Dilarang memberikan saran medis atau hukum. Dilarang membuat kontrak yang mengikat secara hukum…
+Standar Kualitas (Quality Bar)
+Standar minimum kualitas jawaban yang harus dipenuhi.
+
+Contoh: Setiap jawaban harus menyertakan referensi standar (SNI/PUPR). Jangan memberikan angka tanpa konteks. Jawaban > 3 paragraf wajib ada ringkasan…
+Kepatuhan & Risiko
+Aturan regulasi, disclaimer wajib, dan batasan risiko.
+
+Contoh: Tambahkan disclaimer 'Konsultasikan dengan ahli bersertifikat' untuk semua saran struktural. Patuhi UU ITE. Jangan simpan data sensitif pengguna…
+Buat Modul Baru
+Series (L1)
+SKK AJJ – Asesmen-Jarak-Jauh
+Tipe Modul
+
+Problem - Masalah yang akan diatasi
+
+Idea - Ide untuk mencapai sesuatu
+
+Inspiration - Inspirasi untuk inovasi
+
+Mentoring - Edukasi dan pendampingan
+Nama Modul *
+Contoh: Kepatuhan & Compliance
+Deskripsi *
+Jelaskan secara detail tentang problem/idea/inspirasi Anda...
+Tujuan
+Tujuan 1
+Tambah Tujuan
+Target Audiens
+Contoh: UMKM di Indonesia
+Hasil yang Diharapkan
+Jelaskan hasil yang ingin dicapai...
+Monetisasi Modul
+Atur harga bundle untuk akses semua chatbot dalam Modul ini. HUB/Orkestrator tetap gratis.
+
+Harga Bulanan (IDR)
+0
+Aktifkan Trial
+
+Durasi Trial (hari)
+7
+Wajib Registrasi
+
+Batal
+Buat Modul
+Buat Chatbot Baru
+Apa itu Chatbot?
+Chatbot adalah unit utuh yang menangani satu area operasional di bawah suatu Modul. Setiap Chatbot memiliki Alat Bantu (modul spesifik) di dalamnya.
+
+Contoh: Dari Modul "Kepatuhan & Compliance", Anda bisa membuat Chatbot untuk "SBU & Klasifikasi", "SKK & Tenaga Ahli", atau "Perijinan Usaha".
+
+Dari Modul:
+problem
+Perizinan Usaha
+Modul Perizinan Usaha mengelola legalitas badan usaha konstruksi berbasis OSS RBA (PP 5/2021, UU Cipta Kerja). 7 chatbot spesialis mencakup: KBLI & Klasifikasi Risiko Usaha, Prasyarat & Kelengkapan Dasar NIB, Pendaftaran NIB & OSS, Sertifikat Standar & Perizinan Berbasis Risiko, IUJK & Izin Pelaksana Konstruksi, Validasi Badan Hukum, serta Kepatuhan & Audit Perizinan. Menghasilkan LICENSING_SUMMARY v1 yang kompatibel dengan TRC dan ECSG.
+
+Nama Chatbot *
+Contoh: SBU & Klasifikasi
+Deskripsi
+Jelaskan tentang chatbot ini...
+Tujuan Chatbot
+Tujuan utama dari chatbot ini...
+Kapabilitas
+Kapabilitas 1
+Tambah Kapabilitas
+Batasan
+Batasan 1
+Tambah Batasan
+Buat Chatbot Baru
+Apa itu Chatbot?
+Chatbot adalah unit utuh yang menangani satu area operasional di bawah suatu Modul. Setiap Chatbot memiliki Alat Bantu (modul spesifik) di dalamnya.
+
+Contoh: Dari Modul "Kepatuhan & Compliance", Anda bisa membuat Chatbot untuk "SBU & Klasifikasi", "SKK & Tenaga Ahli", atau "Perijinan Usaha".
+
+Dari Modul:
+mentoring
+Persiapan Administrasi SKK AJJ
+Modul ini berfokus pada edukasi dan pendampingan pengguna dalam menyiapkan persyaratan administrasi untuk proses Sertifikat Kompeten Kerja (SKK) dengan metode Asesmen Jarak Jauh (AJJ). Cakupannya meliputi pemahaman alur administrasi, identifikasi persyaratan dasar, pengecekan kelengkapan dokumen, validasi kesiapan awal peserta, serta arahan tindak lanjut sebelum masuk ke tahap teknis atau pelaksanaan asesmen. Modul ini dirancang agar pengguna tidak bingung, tidak melewatkan prasyarat penting, dan dapat mengikuti proses secara lebih tertib, terarah, dan efisien.
+
+Nama Chatbot *
+Contoh: SBU & Klasifikasi
+Deskripsi
+Jelaskan tentang chatbot ini...
+Tujuan Chatbot
+Tujuan utama dari chatbot ini...
+Kapabilitas
+Kapabilitas 1
+Tambah Kapabilitas
+Batasan
+Batasan 1
+Tambah Batasan
+Batal
+Buat Chatbot
+Pasted text.txt
+Document
+buatlah chatbot

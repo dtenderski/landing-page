@@ -1,0 +1,158 @@
+Sistem Agen AI
+Agen khusus untuk riset & audit seluruh chatbot secara otomatis
+
+
+Bulk Field Fill Agent
+Isi otomatis semua field kosong (tagline, deskripsi, kepribadian, dll) untuk seluruh chatbot sekaligus
+
+❌ Error
+Mulai: 14.43.35
+Selesai: 14.43.35
+Lihat log (2 entri)
+🤖 Bulk Fill Agent dimulai...
+💥 Fatal: OpenAI API key tidak ditemukan. Pastikan OPENAI_API_KEY sudah dikonfigurasi.
+Field yang akan diisi otomatis:
+
+Tagline · Deskripsi · Kepribadian · Filosofi · Pesan Sambutan · Nada Bicara · Gaya Komunikasi · Respons Off-Topic · Primary Outcome · Domain Charter · Reasoning Policy · Interaction Policy · Quality Bar · Risk Compliance · Product Summary · Keahlian · Conversation Starters · Key Phrases
+
+Jalankan Bulk Fill Agent
+KB Research Agent
+✅ Selesai
+Secara otomatis menghasilkan 3 Knowledge Base per agen (Foundational, Operational, Compliance) menggunakan AI. Hanya memproses agen yang belum memiliki KB.
+
+0
+Agen Diproses
+0
+Total KB Dibuat
+769
+Gagal
+Mulai: 14.42.20
+Selesai: 14.43.23
+Lihat log (772 entri)
+❌ #1031 Manager Rantai Pasok Material → Missing credentials. Please pass an `apiKey`, `workloadIdent
+❌ #1032 Manager / Petugas K3 Konstruks → Missing credentials. Please pass an `apiKey`, `workloadIdent
+❌ #1033 Manager Keuangan → Missing credentials. Please pass an `apiKey`, `workloadIdent
+❌ #1034 Manager Legal / Administrasi → Missing credentials. Please pass an `apiKey`, `workloadIdent
+✅ Selesai: 0 agen | ❌ Gagal: 769 | 📚 Total KB: 0
+769 agen gagal dibuat KB-nya
+
+ID: 4, 17, 12, 24, 23, 29, 28, 34 +761 lainnya
+
+↺ Ulangi 769 Gagal
+Jalankan KB Research Agent
+Field Audit Agent
+✅ Selesai
+Memeriksa kelengkapan semua field penting setiap chatbot (persona, keahlian, otak proyek, produk) dan menghasilkan laporan skor per agen.
+
+
+Auto-Fill dengan AI
+Otomatis isi field yang kosong menggunakan AI setelah audit
+
+89%
+Rata-rata Skor
+0
+Lengkap (100%)
+769
+Tanpa KB
+0
+Auto-fill
+Field Paling Sering Kosong
+
+key_phrases
+774 agen (100%)
+personality
+542 agen (70%)
+category
+314 agen (41%)
+off_topic_response
+26 agen (3%)
+product_summary
+26 agen (3%)
+philosophy
+14 agen (2%)
+Agen Perlu Perhatian (Skor Terendah)
+
+57%
+○
+EduCounsel Orchestrator
+57%
+○
+AGENT-SAFETY
+57%
+○
+AGENT-PROFIL
+57%
+○
+AGENT-AKADEMIK
+57%
+○
+AGENT-DIAGNOSTIK
+57%
+○
+AGENT-INTERVENSI
+57%
+○
+AGENT-HABIT
+57%
+○
+AGENT-PATHWAY-DN
+57%
+○
+AGENT-PATHWAY-LN
+57%
+○
+AGENT-ORTU
+57%
+○
+AGENT-DOK
+57%
+○
+AGENT-ESKUL
+62%
+○
+BRAIN-ORCHESTRATOR
+62%
+○
+BRAIN-ORCHESTRATOR
+62%
+○
+BRAIN-ORCHESTRATOR
+62%
+○
+BRAIN-ORCHESTRATOR
+62%
+○
+HUB Personel Manajerial BUJK
+62%
+○
+Penanggung Jawab Badan Usaha (PJBU)
+62%
+○
+Penanggung Jawab Teknik Badan Usaha (PJTBU)
+62%
+○
+Penanggung Jawab Klasifikasi Badan Usaha (PJKBU)
+● = punya KB ○ = tanpa KB ⚠ = field kritis kosong
+
+Mulai: 14.42.07
+Selesai: 14.42.08
+Lihat log (4 entri)
+🔍 Field Audit Agent dimulai...
+📊 Total agen aktif: 774
+✅ Audit selesai: rata-rata 89% | Lengkap: 0 | Tanpa KB: 769
+🤖 Auto-fill: 0 agen diisi
+Jalankan Field Audit Agent
+KB Research Agent
+
+Generate 3 KB per agen: Foundational, Operational, Compliance
+Setiap KB otomatis dipecah menjadi knowledge chunks untuk RAG
+Idempotent — skip agen yang sudah punya KB
+Fallback ke DeepSeek jika OpenAI gagal
+Proses 4 agen paralel untuk efisiensi
+Field Audit Agent
+
+Periksa 21 field penting per chatbot dengan skor 0-100%
+Field kritis: nama, tagline, deskripsi, kepribadian, keahlian, outcome
+Mode Auto-Fill: isi field kosong secara otomatis dengan AI
+Laporan: distribusi skor, field paling sering kosong
+Proses 8 agen paralel untuk kecepatan

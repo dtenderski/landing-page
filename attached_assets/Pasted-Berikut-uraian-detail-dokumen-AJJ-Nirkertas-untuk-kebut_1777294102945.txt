@@ -1,0 +1,1297 @@
+Berikut uraian **detail dokumen AJJ Nirkertas** untuk kebutuhan **LSP mengajukan permohonan, menghadapi audit/witness BNSP, dan menyiapkan implementasi operasional**. Saya susun sebagai daftar dokumen kerja: **nama dokumen, fungsi, isi minimal, format bukti, penanggung jawab, dan catatan audit**. Struktur ini juga bisa langsung dimasukkan ke chatbot AJJ Nirkertas seperti pola konfigurasi chatbot yang sudah Anda lampirkan. 
+
+BNSP menampilkan dokumen “Surat Edaran Ketentuan Pelaksanaan Sertifikasi Jarak Jauh dan Penggunaan Nirkertas dalam Pelaksanaan Sertifikasi Kompetensi” pada halaman download resminya. ([BNSP][1]) Dalam salinan SE.007/BNSP/V/2023 yang tersedia publik, disebutkan bahwa permohonan sertifikasi jarak jauh yang tidak sesuai klausul B.1 dan permohonan nirkertas yang tidak sesuai klausul D.II.1 tidak diproses oleh BNSP. ([NAS Online][2])
+
+---
+
+# A. Kelompok Dokumen Permohonan Utama
+
+## 1. Surat Permohonan Persetujuan AJJ
+
+**Nama dokumen:**
+Surat Permohonan Persetujuan Pelaksanaan Sertifikasi Kompetensi Jarak Jauh / AJJ.
+
+**Fungsi:**
+Menjadi dokumen resmi LSP kepada BNSP untuk meminta persetujuan pelaksanaan sertifikasi kompetensi secara jarak jauh.
+
+**Isi minimal:**
+
+* Kop surat LSP.
+* Nomor, tanggal, lampiran, dan perihal.
+* Identitas LSP.
+* Dasar pengajuan.
+* Daftar skema sertifikasi yang diajukan.
+* Pernyataan kesiapan LSP.
+* Daftar lampiran dokumen.
+* Tanda tangan Ketua/Direktur LSP.
+* Stempel LSP jika digunakan.
+
+**Format:**
+PDF.
+
+**Penanggung jawab:**
+Ketua/Direktur LSP atau Manajemen LSP.
+
+**Catatan audit:**
+Nama skema dalam surat permohonan harus sama dengan skema yang ditampilkan pada sistem, SOP, rekaman uji coba, dan dokumen output.
+
+---
+
+## 2. Surat Permohonan Persetujuan Nirkertas / Paperless
+
+**Nama dokumen:**
+Surat Permohonan Persetujuan Penggunaan Nirkertas / Paperless dalam Pelaksanaan Sertifikasi Kompetensi.
+
+**Fungsi:**
+Meminta persetujuan BNSP agar proses sertifikasi dapat menggunakan dokumen, formulir, rekaman, dan laporan digital.
+
+**Isi minimal:**
+
+* Identitas LSP.
+* Pernyataan pengajuan penggunaan nirkertas.
+* Ruang lingkup proses yang dibuat digital.
+* Nama skema uji coba.
+* Daftar lampiran: SOP, video uji coba aplikasi, dan PDF keluaran sistem.
+* Tanda tangan pejabat LSP.
+
+**Format:**
+PDF.
+
+**Penanggung jawab:**
+Manajemen LSP.
+
+**Catatan audit:**
+Permohonan AJJ dan nirkertas dapat disusun terpisah atau dalam satu paket pengajuan, tetapi lampiran AJJ dan nirkertas harus tetap jelas.
+
+---
+
+# B. Kelompok Dokumen SOP
+
+## 3. SOP Melayani Pelaksanaan Kegiatan Sertifikasi Kompetensi Jarak Jauh
+
+**Fungsi:**
+Mengatur layanan sertifikasi jarak jauh dari awal sampai akhir.
+
+**Isi minimal:**
+
+* Tujuan dan ruang lingkup.
+* Definisi AJJ.
+* Peran Manajemen LSP, admin, asesor, asesi, TUK, dan IT.
+* Alur pendaftaran.
+* Verifikasi dokumen asesi.
+* Penjadwalan asesmen.
+* Penugasan asesor.
+* Penggunaan platform digital.
+* Pengendalian dokumen.
+* Penanganan kendala.
+* Rekaman dan pelaporan.
+* Umpan balik dan tindak lanjut.
+
+**Format:**
+PDF, disahkan dan dikendalikan.
+
+**Penanggung jawab:**
+Manajemen Mutu LSP / Manajemen LSP.
+
+**Catatan audit:**
+SOP harus sesuai dengan alur nyata di aplikasi. Jika SOP menyebut fitur tertentu, fitur tersebut harus bisa ditunjukkan saat witness.
+
+---
+
+## 4. SOP Melaksanakan Asesmen Jarak Jauh
+
+**Fungsi:**
+Mengatur proses teknis asesmen kompetensi yang dilakukan secara jarak jauh.
+
+**Isi minimal:**
+
+* Persiapan pra-asesmen.
+* Verifikasi identitas asesi.
+* Verifikasi lingkungan asesmen.
+* Pemeriksaan perangkat, kamera, mikrofon, dan koneksi.
+* Tata tertib AJJ.
+* Pelaksanaan asesmen.
+* Penggunaan instrumen asesmen digital.
+* Rekaman asesmen.
+* Penanganan gangguan teknis.
+* Penghentian, penundaan, atau penjadwalan ulang asesmen.
+* Penyusunan laporan asesmen.
+* Umpan balik asesi.
+
+**Format:**
+PDF, disahkan.
+
+**Penanggung jawab:**
+Manajemen LSP dan Koordinator Asesor.
+
+**Catatan audit:**
+Auditor biasanya akan melihat apakah asesor benar-benar melakukan verifikasi identitas dan lingkungan asesmen saat simulasi/witness.
+
+---
+
+## 5. SOP Verifikasi TUK Jarak Jauh
+
+**Fungsi:**
+Mengatur bagaimana LSP memverifikasi kelayakan TUK secara jarak jauh.
+
+**Isi minimal:**
+
+* Kriteria TUK.
+* Penugasan verifikator TUK.
+* Dokumen yang harus disiapkan TUK.
+* Pemeriksaan sarana-prasarana.
+* Pemeriksaan fasilitas digital.
+* Video call/verifikasi visual.
+* Rekaman verifikasi TUK.
+* Checklist verifikasi.
+* Rekomendasi hasil verifikasi.
+* SK penetapan TUK.
+* Tindak lanjut jika TUK belum memenuhi.
+
+**Format:**
+PDF.
+
+**Penanggung jawab:**
+Manajemen LSP / Tim Verifikasi TUK.
+
+**Catatan audit:**
+LSP harus bisa menunjukkan **SPT verifikasi TUK, rekaman verifikasi TUK, checklist, dan SK penetapan TUK**.
+
+---
+
+## 6. SOP Banding Jarak Jauh
+
+**Fungsi:**
+Mengatur proses banding secara digital jika asesi mengajukan keberatan.
+
+**Isi minimal:**
+
+* Hak asesi untuk mengajukan banding.
+* Media pengajuan banding.
+* Form banding digital.
+* Batas waktu pengajuan.
+* Penerimaan dan registrasi banding.
+* Penelaahan banding.
+* Tim/pihak yang menangani banding.
+* Komunikasi hasil banding.
+* Rekaman dan arsip banding.
+
+**Format:**
+PDF.
+
+**Penanggung jawab:**
+Manajemen LSP / Komite Banding.
+
+**Catatan audit:**
+Fitur atau formulir banding harus bisa ditunjukkan di sistem, bukan hanya dijelaskan secara lisan.
+
+---
+
+## 7. SOP Pelayanan Sertifikasi Berbasis Nirkertas
+
+**Fungsi:**
+Mengatur penggunaan dokumen digital dalam proses sertifikasi.
+
+**Isi minimal:**
+
+* Jenis dokumen yang dikelola digital.
+* Alur permohonan digital.
+* Asesmen mandiri digital.
+* Persetujuan asesmen digital.
+* Instrumen asesmen digital.
+* Laporan asesmen digital.
+* Umpan balik digital.
+* Peninjauan proses asesmen digital.
+* Pengendalian versi dokumen.
+* Hak akses.
+* Penyimpanan, backup, dan retensi data.
+* Keamanan dan kerahasiaan dokumen.
+
+**Format:**
+PDF.
+
+**Penanggung jawab:**
+Manajemen Mutu LSP / Pengelola Sistem.
+
+**Catatan audit:**
+Harus ada bukti bahwa sistem menghasilkan dokumen output, misalnya PDF permohonan, PDF asesmen mandiri, PDF persetujuan asesmen, PDF laporan asesmen, dan rekaman asesmen.
+
+---
+
+# C. Kelompok Dokumen Personil dan Penetapan
+
+## 8. SK Penetapan Personil Pengelola Sistem Sertifikasi Jarak Jauh
+
+**Fungsi:**
+Menetapkan siapa yang bertanggung jawab mengelola sistem AJJ.
+
+**Isi minimal:**
+
+* Nama personil.
+* Jabatan/peran.
+* Tugas dan kewenangan.
+* Masa berlaku penetapan.
+* Tanda tangan pejabat LSP.
+
+**Format:**
+PDF.
+
+**Penanggung jawab:**
+Ketua/Direktur LSP.
+
+**Catatan audit:**
+Personil yang tercantum harus mampu menjelaskan sistem, hak akses, backup, rekaman, dan kendala teknis.
+
+---
+
+## 9. SK Penetapan Pemeliharaan Sistem Sertifikasi Jarak Jauh
+
+**Fungsi:**
+Menetapkan pihak/personil yang bertanggung jawab atas pemeliharaan aplikasi, server, backup, dan dukungan teknis.
+
+**Isi minimal:**
+
+* Nama personil/tim.
+* Tugas pemeliharaan.
+* Jadwal monitoring.
+* Tanggung jawab backup.
+* Penanganan insiden.
+* Kontak teknis.
+
+**Format:**
+PDF.
+
+**Penanggung jawab:**
+Manajemen LSP.
+
+**Catatan audit:**
+Auditor dapat menanyakan siapa yang bertanggung jawab jika sistem down, rekaman gagal tersimpan, atau data hilang.
+
+---
+
+## 10. Daftar Personil Pelaksana AJJ Nirkertas
+
+**Fungsi:**
+Menunjukkan pembagian peran operasional.
+
+**Isi minimal:**
+
+* Manajemen LSP.
+* Admin LSP.
+* Pengelola sistem/IT.
+* Asesor kompetensi.
+* Petugas TUK.
+* Komite teknis/pengambil keputusan.
+* Petugas banding.
+* Notulis/audit internal jika ada.
+
+**Format:**
+PDF atau spreadsheet.
+
+**Penanggung jawab:**
+Admin LSP / Manajemen LSP.
+
+**Catatan audit:**
+Harus selaras dengan hak akses di aplikasi.
+
+---
+
+# D. Kelompok Dokumen Sarana-Prasarana dan Infrastruktur
+
+## 11. Daftar Sarana dan Prasarana Kantor LSP
+
+**Fungsi:**
+Membuktikan LSP memiliki dukungan fisik dan digital untuk mengelola AJJ.
+
+**Isi minimal:**
+
+* Ruang kerja admin.
+* Perangkat komputer/laptop.
+* Kamera, mikrofon, headset.
+* Scanner jika ada.
+* Perangkat jaringan.
+* Akses internet.
+* Ruang kendali/monitoring jika tersedia.
+* Media penyimpanan/backup.
+
+**Format:**
+PDF atau spreadsheet dengan foto pendukung.
+
+**Penanggung jawab:**
+Admin LSP / Bagian Umum / Pengelola Sistem.
+
+**Catatan audit:**
+Daftar sarana-prasarana sebaiknya dilengkapi foto dan kondisi aktual.
+
+---
+
+## 12. Bukti Internet Berlangganan di Kantor LSP
+
+**Fungsi:**
+Membuktikan LSP memiliki koneksi internet yang memadai.
+
+**Isi minimal:**
+
+* Nama penyedia layanan internet.
+* Paket/kapasitas internet.
+* Alamat pemasangan.
+* Bukti tagihan/langganan.
+* Tanggal aktif.
+* Jika ada, bukti internet cadangan.
+
+**Format:**
+PDF.
+
+**Penanggung jawab:**
+Manajemen LSP / Pengelola Sistem.
+
+**Catatan audit:**
+Sebaiknya siapkan juga hasil uji kecepatan internet dan rencana mitigasi jika koneksi utama bermasalah.
+
+---
+
+# E. Kelompok Dokumen Sistem Aplikasi
+
+## 13. Penjelasan Sistem Aplikasi Sertifikasi Jarak Jauh
+
+**Fungsi:**
+Menjelaskan aplikasi yang digunakan LSP untuk AJJ.
+
+**Isi minimal:**
+
+* Nama aplikasi.
+* Pemilik/pengelola aplikasi.
+* Alamat aplikasi.
+* Infrastruktur server.
+* Arsitektur sederhana.
+* Modul aplikasi.
+* Peran pengguna.
+* Alur proses.
+* Mekanisme login.
+* Hak akses.
+* Rekaman asesmen.
+* Backup dan keamanan data.
+
+**Format:**
+PDF dengan screenshot.
+
+**Penanggung jawab:**
+Pengelola Sistem / IT LSP.
+
+**Catatan audit:**
+Sistem harus bisa didemokan live, bukan hanya dijelaskan dalam dokumen.
+
+---
+
+## 14. Manual Penggunaan Aplikasi untuk Admin LSP
+
+**Fungsi:**
+Menjadi panduan admin dalam mengelola proses AJJ dan nirkertas.
+
+**Isi minimal:**
+
+* Login admin.
+* Membuka skema.
+* Mendaftarkan asesi.
+* Verifikasi dokumen.
+* Menugaskan asesor.
+* Menjadwalkan asesmen.
+* Mengelola TUK.
+* Mengelola rekaman.
+* Mengunduh laporan.
+* Mengelola banding.
+* Mengelola akun dan hak akses.
+
+**Format:**
+PDF/manual digital.
+
+**Penanggung jawab:**
+Pengelola Sistem / Admin LSP.
+
+**Catatan audit:**
+Admin yang hadir saat witness harus menguasai manual ini.
+
+---
+
+## 15. Manual Penggunaan Aplikasi untuk Asesor
+
+**Fungsi:**
+Memandu asesor dalam menjalankan asesmen jarak jauh.
+
+**Isi minimal:**
+
+* Login asesor.
+* Melihat daftar asesi.
+* Membuka asesmen mandiri.
+* Meninjau bukti kompetensi.
+* Membuka instrumen asesmen.
+* Melakukan verifikasi identitas.
+* Mengisi hasil asesmen.
+* Memberi umpan balik.
+* Membuat rekomendasi.
+* Menyelesaikan laporan asesmen.
+
+**Format:**
+PDF.
+
+**Penanggung jawab:**
+Koordinator Asesor / Pengelola Sistem.
+
+**Catatan audit:**
+Asesor harus bisa menunjukkan proses pengisian instrumen dan laporan asesmen digital.
+
+---
+
+## 16. Manual Penggunaan Aplikasi untuk Asesi
+
+**Fungsi:**
+Memandu asesi menggunakan sistem digital.
+
+**Isi minimal:**
+
+* Cara login.
+* Cara mengisi permohonan.
+* Cara mengunggah dokumen.
+* Cara mengisi asesmen mandiri.
+* Cara menyetujui rencana asesmen.
+* Cara mengikuti AJJ.
+* Cara mengisi umpan balik.
+* Cara mengajukan banding.
+* Cara menghubungi admin jika ada kendala.
+
+**Format:**
+PDF, video tutorial, atau halaman bantuan.
+
+**Penanggung jawab:**
+Admin LSP / Pengelola Sistem.
+
+**Catatan audit:**
+Manual ini menunjukkan bahwa LSP memberi informasi yang cukup kepada asesi.
+
+---
+
+## 17. Dokumen Manajemen Akun dan Hak Akses
+
+**Fungsi:**
+Menunjukkan bahwa setiap pengguna hanya dapat mengakses fitur sesuai kewenangannya.
+
+**Isi minimal:**
+
+* Jenis akun: admin, asesor, asesi, TUK, komite, auditor/internal.
+* Hak akses masing-masing akun.
+* Prosedur pembuatan akun.
+* Prosedur reset password.
+* Prosedur penonaktifan akun.
+* Prosedur audit akses.
+* Log aktivitas.
+
+**Format:**
+PDF atau matriks spreadsheet.
+
+**Penanggung jawab:**
+Pengelola Sistem.
+
+**Catatan audit:**
+Salah satu red flag audit adalah akun admin, asesor, dan asesi memiliki akses yang tidak dibedakan.
+
+---
+
+# F. Kelompok Dokumen Proses Nirkertas
+
+## 18. Form Permohonan Sertifikasi Digital
+
+**Fungsi:**
+Menjadi formulir awal pendaftaran asesi secara digital.
+
+**Isi minimal:**
+
+* Identitas asesi.
+* Skema yang dipilih.
+* Data kontak.
+* Data pendidikan/pelatihan.
+* Data pengalaman kerja.
+* Pernyataan kebenaran data.
+* Persetujuan pemrosesan data.
+* Tanda tangan/persetujuan elektronik jika digunakan.
+
+**Output:**
+PDF permohonan atau data tersimpan di sistem.
+
+**Penanggung jawab:**
+Asesi mengisi; Admin LSP memverifikasi.
+
+---
+
+## 19. Form Asesmen Mandiri Digital
+
+**Fungsi:**
+Mencatat penilaian mandiri asesi terhadap unit/elemen/kriteria unjuk kerja dalam skema.
+
+**Isi minimal:**
+
+* Daftar unit kompetensi.
+* Elemen kompetensi.
+* Kriteria unjuk kerja.
+* Pernyataan mampu/belum mampu.
+* Bukti pendukung.
+* Catatan asesi.
+* Catatan asesor jika ada.
+* Persetujuan asesi.
+
+**Output:**
+PDF asesmen mandiri atau rekaman digital.
+
+**Penanggung jawab:**
+Asesi dan Asesor Kompetensi.
+
+---
+
+## 20. Persetujuan Asesmen Digital
+
+**Fungsi:**
+Membuktikan bahwa asesi dan asesor menyepakati rencana asesmen.
+
+**Isi minimal:**
+
+* Nama asesi.
+* Nama asesor.
+* Skema sertifikasi.
+* Metode asesmen.
+* Jadwal asesmen.
+* Media/platform asesmen.
+* Hak dan kewajiban asesi.
+* Tata tertib AJJ.
+* Persetujuan asesi dan asesor.
+
+**Output:**
+PDF persetujuan asesmen.
+
+**Penanggung jawab:**
+Asesor dan Asesi.
+
+---
+
+## 21. Instrumen Asesmen Digital
+
+**Fungsi:**
+Menjadi perangkat penilaian kompetensi dalam sistem.
+
+**Isi minimal:**
+
+* Rencana asesmen.
+* Unit kompetensi.
+* Metode asesmen.
+* Pertanyaan lisan/tulis.
+* Checklist observasi.
+* Instruksi praktik/simulasi.
+* Kriteria penilaian.
+* Kolom bukti.
+* Kolom rekomendasi asesor.
+
+**Output:**
+Form digital terisi / PDF instrumen.
+
+**Penanggung jawab:**
+Asesor, Koordinator Asesor, Manajemen LSP.
+
+---
+
+## 22. Ceklis Meninjau Instrumen Asesmen
+
+**Fungsi:**
+Membuktikan instrumen asesmen telah ditinjau sebelum digunakan.
+
+**Isi minimal:**
+
+* Nama instrumen.
+* Skema.
+* Unit kompetensi.
+* Pemeriksa/reviewer.
+* Aspek review: validitas, kejelasan, kesesuaian metode, kelengkapan bukti.
+* Catatan perbaikan.
+* Status layak digunakan/tidak.
+* Tanggal review.
+
+**Output:**
+PDF checklist review instrumen.
+
+**Penanggung jawab:**
+Koordinator Asesor / Manajemen Mutu LSP.
+
+---
+
+## 23. Rekaman Asesmen
+
+**Fungsi:**
+Menjadi bukti proses asesmen jarak jauh.
+
+**Isi minimal:**
+
+* Rekaman video/audio asesmen jika dipersyaratkan.
+* Identitas sesi.
+* Tanggal dan jam.
+* Nama asesi.
+* Nama asesor.
+* Skema.
+* Catatan kendala jika ada.
+* Link/file rekaman.
+* Status penyimpanan.
+
+**Format:**
+Video, audio, log sistem, atau bentuk rekaman digital lain sesuai SOP.
+
+**Penanggung jawab:**
+Asesor dan Pengelola Sistem.
+
+**Catatan audit:**
+SE publik menyebut adanya kewajiban menjamin kerahasiaan dan keamanan rekaman serta penyimpanan rekaman minimal satu periode masa berlaku sertifikat dalam persyaratan permohonan AJJ. ([NAS Online][2])
+
+---
+
+## 24. Umpan Balik Asesi Digital
+
+**Fungsi:**
+Mencatat masukan asesi terhadap proses asesmen.
+
+**Isi minimal:**
+
+* Identitas asesi.
+* Skema.
+* Tanggal asesmen.
+* Nama asesor.
+* Penilaian terhadap informasi, proses, sistem, asesor, dan kendala.
+* Saran/perbaikan.
+* Pernyataan pengisian.
+
+**Output:**
+PDF/rekap umpan balik.
+
+**Penanggung jawab:**
+Asesi mengisi; LSP meninjau.
+
+---
+
+## 25. Laporan Asesmen Digital
+
+**Fungsi:**
+Menjadi dokumen resmi hasil pelaksanaan asesmen dari asesor kepada LSP.
+
+**Isi minimal:**
+
+* Identitas asesi.
+* Skema sertifikasi.
+* Nama asesor.
+* Metode asesmen.
+* Bukti yang dinilai.
+* Hasil asesmen.
+* Catatan asesmen.
+* Rekomendasi asesor.
+* Umpan balik.
+* Tanda tangan/persetujuan digital jika digunakan.
+
+**Output:**
+PDF laporan asesmen.
+
+**Penanggung jawab:**
+Asesor Kompetensi.
+
+**Catatan audit:**
+Asesor memberi rekomendasi; keputusan resmi sertifikasi tetap berada pada mekanisme LSP.
+
+---
+
+## 26. Form Peninjauan Proses Asesmen
+
+**Fungsi:**
+Menjadi bukti bahwa LSP meninjau proses asesmen, terutama untuk pengendalian mutu.
+
+**Isi minimal:**
+
+* Nomor asesmen.
+* Nama asesi.
+* Nama asesor.
+* Skema.
+* Kelengkapan dokumen.
+* Kelengkapan rekaman.
+* Kesesuaian SOP.
+* Kendala yang terjadi.
+* Catatan tindak lanjut.
+* Status peninjauan.
+
+**Output:**
+PDF/rekap peninjauan.
+
+**Penanggung jawab:**
+Manajemen Mutu LSP / Manajemen LSP.
+
+---
+
+# G. Kelompok Dokumen TUK
+
+## 27. Data Profil TUK
+
+**Fungsi:**
+Menunjukkan identitas dan kesiapan TUK.
+
+**Isi minimal:**
+
+* Nama TUK.
+* Alamat.
+* Penanggung jawab.
+* Skema yang didukung.
+* Sarana-prasarana.
+* Foto fasilitas.
+* Kontak PIC.
+* Status verifikasi.
+
+**Format:**
+PDF/spreadsheet.
+
+**Penanggung jawab:**
+TUK dan Admin LSP.
+
+---
+
+## 28. SPT Verifikasi TUK
+
+**Fungsi:**
+Menugaskan personil untuk melakukan verifikasi TUK.
+
+**Isi minimal:**
+
+* Nomor surat.
+* Nama verifikator.
+* Nama TUK.
+* Tanggal verifikasi.
+* Skema yang diverifikasi.
+* Metode verifikasi jarak jauh.
+* Tanda tangan pejabat LSP.
+
+**Format:**
+PDF.
+
+**Penanggung jawab:**
+Manajemen LSP.
+
+---
+
+## 29. Checklist Verifikasi TUK Jarak Jauh
+
+**Fungsi:**
+Mencatat hasil pemeriksaan TUK.
+
+**Isi minimal:**
+
+* Identitas TUK.
+* Sarana-prasarana.
+* Perangkat digital.
+* Koneksi internet.
+* Ruang asesmen.
+* Kesesuaian dengan skema.
+* Catatan temuan.
+* Rekomendasi verifikator.
+
+**Output:**
+PDF checklist.
+
+**Penanggung jawab:**
+Verifikator TUK.
+
+---
+
+## 30. Rekaman Verifikasi TUK Jarak Jauh
+
+**Fungsi:**
+Menjadi bukti proses verifikasi TUK dilakukan secara jarak jauh.
+
+**Isi minimal:**
+
+* Video/screenshot proses verifikasi.
+* Tanggal dan waktu.
+* PIC TUK.
+* Verifikator.
+* Fasilitas yang ditunjukkan.
+* Catatan hasil verifikasi.
+
+**Format:**
+Video/PDF.
+
+**Penanggung jawab:**
+Verifikator TUK dan Pengelola Sistem.
+
+---
+
+## 31. SK Penetapan TUK
+
+**Fungsi:**
+Menetapkan TUK yang layak digunakan.
+
+**Isi minimal:**
+
+* Nama TUK.
+* Skema yang ditetapkan.
+* Masa berlaku.
+* Dasar penetapan.
+* Hasil verifikasi.
+* Tanda tangan pejabat LSP.
+
+**Format:**
+PDF.
+
+**Penanggung jawab:**
+Manajemen LSP.
+
+---
+
+# H. Kelompok Dokumen Pernyataan dan Keamanan
+
+## 32. Surat Pernyataan Tidak Menggunakan Software/Aplikasi Ilegal
+
+**Fungsi:**
+Menyatakan bahwa sistem yang digunakan LSP tidak menggunakan software ilegal.
+
+**Isi minimal:**
+
+* Identitas LSP.
+* Nama aplikasi/sistem.
+* Pernyataan legalitas penggunaan software.
+* Komitmen kepatuhan.
+* Tanda tangan Ketua Dewan Pengarah dan Ketua/Direktur LSP jika mengikuti format SE.
+
+**Format:**
+PDF.
+
+**Penanggung jawab:**
+Manajemen LSP.
+
+---
+
+## 33. Surat Pernyataan Menjamin Kerahasiaan dan Keamanan Rekaman
+
+**Fungsi:**
+Menjamin rekaman asesmen dilindungi.
+
+**Isi minimal:**
+
+* Jenis rekaman.
+* Lokasi penyimpanan.
+* Pihak yang memiliki akses.
+* Larangan penyebaran tanpa izin.
+* Mekanisme pengamanan.
+* Tanda tangan pejabat LSP.
+
+**Format:**
+PDF.
+
+**Penanggung jawab:**
+Manajemen LSP.
+
+---
+
+## 34. Surat Pernyataan Penyimpanan Rekaman
+
+**Fungsi:**
+Menyatakan komitmen LSP menyimpan rekaman sertifikasi kompetensi minimal sesuai periode yang dipersyaratkan.
+
+**Isi minimal:**
+
+* Jenis rekaman.
+* Durasi penyimpanan.
+* Media penyimpanan.
+* Backup.
+* Penanggung jawab retensi.
+* Mekanisme pemusnahan arsip jika masa retensi selesai.
+
+**Format:**
+PDF.
+
+**Penanggung jawab:**
+Manajemen LSP / Pengelola Sistem.
+
+---
+
+# I. Kelompok Dokumen Sosialisasi dan Uji Coba
+
+## 35. Bukti Sosialisasi Internal Sistem AJJ/Nirkertas
+
+**Fungsi:**
+Membuktikan personil LSP telah memahami sistem dan SOP.
+
+**Isi minimal:**
+
+* Undangan sosialisasi.
+* Tanggal kegiatan.
+* Materi sosialisasi.
+* Daftar hadir.
+* Foto kegiatan.
+* Berita acara.
+* Pernyataan telah dilakukan sosialisasi.
+
+**Format:**
+PDF.
+
+**Penanggung jawab:**
+Manajemen LSP.
+
+---
+
+## 36. Rekaman Uji Coba Sertifikasi Jarak Jauh
+
+**Fungsi:**
+Membuktikan LSP telah melakukan simulasi AJJ.
+
+**Isi minimal:**
+
+* Video proses dari awal sampai akhir.
+* Skema yang digunakan.
+* Asesi simulasi.
+* Asesor simulasi.
+* Admin LSP.
+* Verifikasi identitas.
+* Pelaksanaan asesmen.
+* Rekaman asesmen.
+* Laporan asesmen.
+
+**Format:**
+Video dan PDF ringkasan.
+
+**Penanggung jawab:**
+Manajemen LSP, Asesor, Admin, Pengelola Sistem.
+
+---
+
+## 37. Rekaman Uji Coba Verifikasi TUK Jarak Jauh
+
+**Fungsi:**
+Membuktikan LSP dapat melakukan verifikasi TUK secara jarak jauh.
+
+**Isi minimal:**
+
+* Video verifikasi TUK.
+* Checklist verifikasi.
+* Foto/screenshot fasilitas.
+* Hasil verifikasi.
+* Rekomendasi penetapan TUK.
+
+**Format:**
+Video dan PDF.
+
+**Penanggung jawab:**
+Tim Verifikasi TUK.
+
+---
+
+## 38. Rekaman Uji Coba Aplikasi Nirkertas
+
+**Fungsi:**
+Membuktikan aplikasi dapat menghasilkan proses dan output digital.
+
+**Isi minimal:**
+
+* Permohonan digital.
+* Asesmen mandiri digital.
+* Persetujuan asesmen.
+* Instrumen asesmen.
+* Umpan balik.
+* Laporan asesmen.
+* Peninjauan proses asesmen.
+* Output PDF.
+
+**Format:**
+Video.
+
+**Penanggung jawab:**
+Pengelola Sistem dan Admin LSP.
+
+---
+
+## 39. Dokumen Keluaran Hasil Uji Coba Nirkertas
+
+**Fungsi:**
+Menjadi bukti bahwa sistem tidak hanya menampilkan form, tetapi juga menghasilkan dokumen keluaran.
+
+**Isi minimal:**
+
+* PDF permohonan sertifikasi.
+* PDF asesmen mandiri.
+* PDF persetujuan asesmen.
+* PDF instrumen asesmen terisi.
+* PDF laporan asesmen.
+* PDF umpan balik.
+* PDF peninjauan proses asesmen.
+* PDF banding jika fitur diuji.
+
+**Format:**
+PDF.
+
+**Penanggung jawab:**
+Admin LSP / Pengelola Sistem.
+
+---
+
+# J. Kelompok Dokumen Banding
+
+## 40. Form Banding Digital
+
+**Fungsi:**
+Memberikan kanal resmi kepada asesi untuk mengajukan banding.
+
+**Isi minimal:**
+
+* Identitas asesi.
+* Skema.
+* Tanggal asesmen.
+* Alasan banding.
+* Bukti pendukung.
+* Pernyataan asesi.
+* Tanggal pengajuan.
+* Status tindak lanjut.
+
+**Output:**
+PDF banding.
+
+**Penanggung jawab:**
+Asesi mengisi; Manajemen LSP memproses.
+
+---
+
+## 41. Register Banding
+
+**Fungsi:**
+Mencatat seluruh pengajuan banding.
+
+**Isi minimal:**
+
+* Nomor register.
+* Nama asesi.
+* Skema.
+* Tanggal pengajuan.
+* Alasan.
+* Status.
+* Penanggung jawab.
+* Hasil tindak lanjut.
+* Tanggal penyelesaian.
+
+**Format:**
+Spreadsheet/PDF sistem.
+
+**Penanggung jawab:**
+Manajemen LSP / Komite Banding.
+
+---
+
+# K. Kelompok Dokumen Audit Internal dan Pelaporan
+
+## 42. Rencana Audit Internal AJJ/Nirkertas
+
+**Fungsi:**
+Menunjukkan bahwa LSP memiliki mekanisme pengendalian mutu setelah mendapat persetujuan.
+
+**Isi minimal:**
+
+* Jadwal audit.
+* Area audit.
+* Auditor internal.
+* Kriteria audit.
+* Metode audit.
+* Dokumen yang diperiksa.
+* Rencana tindak lanjut.
+
+**Format:**
+PDF.
+
+**Penanggung jawab:**
+Manajemen Mutu LSP.
+
+---
+
+## 43. Laporan Audit Internal
+
+**Fungsi:**
+Merekam hasil audit internal pelaksanaan AJJ/Nirkertas.
+
+**Isi minimal:**
+
+* Tanggal audit.
+* Area audit.
+* Auditor.
+* Bukti objektif.
+* Temuan.
+* Kategori temuan.
+* Akar masalah.
+* Tindakan koreksi.
+* Tindakan perbaikan.
+* Status penutupan temuan.
+
+**Format:**
+PDF.
+
+**Penanggung jawab:**
+Manajemen Mutu LSP.
+
+---
+
+## 44. Laporan Pelaksanaan Sertifikasi Jarak Jauh
+
+**Fungsi:**
+Merekam pelaksanaan sertifikasi jarak jauh secara periodik.
+
+**Isi minimal:**
+
+* Periode laporan.
+* Jumlah permohonan.
+* Jumlah asesi.
+* Jumlah asesmen.
+* Jumlah kompeten/belum kompeten sesuai keputusan resmi.
+* Kendala teknis.
+* Banding.
+* Tindakan perbaikan.
+* Ringkasan audit internal.
+
+**Format:**
+PDF/spreadsheet.
+
+**Penanggung jawab:**
+Manajemen LSP.
+
+---
+
+# L. Struktur Folder Dokumen AJJ Nirkertas
+
+```yaml id="struktur_folder_dokumen_ajj_nirkertas"
+folder_pengajuan_ajj_nirkertas:
+  01_surat_permohonan:
+    - surat_permohonan_ajj.pdf
+    - surat_permohonan_nirkertas.pdf
+    - daftar_skema_diajukan.pdf
+
+  02_sop:
+    - sop_pelayanan_sertifikasi_jarak_jauh.pdf
+    - sop_asesmen_jarak_jauh.pdf
+    - sop_verifikasi_tuk_jarak_jauh.pdf
+    - sop_banding_jarak_jauh.pdf
+    - sop_pelayanan_sertifikasi_nirkertas.pdf
+
+  03_sk_personil:
+    - sk_pengelola_sistem.pdf
+    - sk_pemelihara_sistem.pdf
+    - daftar_admin_lsp.pdf
+    - daftar_asesor.pdf
+    - daftar_komite_teknis.pdf
+
+  04_sarana_prasarana:
+    - daftar_sarpras_lsp.pdf
+    - bukti_internet_berlangganan.pdf
+    - foto_ruang_dan_perangkat.pdf
+
+  05_sistem_aplikasi:
+    - penjelasan_aplikasi_ajj.pdf
+    - penjelasan_server.pdf
+    - manual_admin.pdf
+    - manual_asesor.pdf
+    - manual_asesi.pdf
+    - matriks_hak_akses.pdf
+
+  06_tuk:
+    - profil_tuk.pdf
+    - spt_verifikasi_tuk.pdf
+    - checklist_verifikasi_tuk.pdf
+    - rekaman_verifikasi_tuk.mp4
+    - sk_penetapan_tuk.pdf
+
+  07_pernyataan:
+    - pernyataan_software_legal.pdf
+    - pernyataan_keamanan_rekaman.pdf
+    - pernyataan_penyimpanan_rekaman.pdf
+    - pernyataan_sosialisasi_internal.pdf
+
+  08_uji_coba:
+    - video_uji_coba_ajj.mp4
+    - video_uji_coba_nirkertas.mp4
+    - ringkasan_uji_coba_ajj.pdf
+    - ringkasan_uji_coba_nirkertas.pdf
+
+  09_output_nirkertas:
+    - permohonan_sertifikasi_output.pdf
+    - asesmen_mandiri_output.pdf
+    - persetujuan_asesmen_output.pdf
+    - instrumen_asesmen_output.pdf
+    - laporan_asesmen_output.pdf
+    - umpan_balik_output.pdf
+    - peninjauan_proses_asesmen_output.pdf
+    - banding_output.pdf
+
+  10_audit_pelaporan:
+    - rencana_audit_internal.pdf
+    - template_laporan_audit_internal.pdf
+    - template_laporan_pelaksanaan_ajj.pdf
+```
+
+---
+
+# M. Checklist Validasi Kelengkapan
+
+```yaml id="checklist_kelengkapan_dokumen_ajj_nirkertas"
+checklist_kelengkapan:
+  dokumen_permohonan:
+    - "[ ] Surat permohonan AJJ tersedia"
+    - "[ ] Surat permohonan nirkertas tersedia"
+    - "[ ] Daftar skema yang diajukan tersedia"
+
+  sop:
+    - "[ ] SOP pelayanan sertifikasi jarak jauh tersedia"
+    - "[ ] SOP asesmen jarak jauh tersedia"
+    - "[ ] SOP verifikasi TUK jarak jauh tersedia"
+    - "[ ] SOP banding jarak jauh tersedia"
+    - "[ ] SOP nirkertas tersedia"
+
+  personil:
+    - "[ ] SK pengelola sistem tersedia"
+    - "[ ] SK pemelihara sistem tersedia"
+    - "[ ] Daftar admin, asesor, TUK, dan komite tersedia"
+
+  sistem:
+    - "[ ] Penjelasan aplikasi tersedia"
+    - "[ ] Penjelasan server tersedia"
+    - "[ ] Manual pengguna tersedia"
+    - "[ ] Matriks hak akses tersedia"
+    - "[ ] Audit trail/log aktivitas dapat ditampilkan"
+
+  nirkertas:
+    - "[ ] Permohonan digital tersedia"
+    - "[ ] Asesmen mandiri digital tersedia"
+    - "[ ] Persetujuan asesmen digital tersedia"
+    - "[ ] Instrumen asesmen digital tersedia"
+    - "[ ] Rekaman asesmen tersedia"
+    - "[ ] Umpan balik digital tersedia"
+    - "[ ] Laporan asesmen digital tersedia"
+    - "[ ] Peninjauan proses asesmen tersedia"
+
+  tuk:
+    - "[ ] Profil TUK tersedia"
+    - "[ ] SPT verifikasi TUK tersedia"
+    - "[ ] Checklist verifikasi TUK tersedia"
+    - "[ ] Rekaman verifikasi TUK tersedia"
+    - "[ ] SK penetapan TUK tersedia"
+
+  keamanan:
+    - "[ ] Pernyataan software legal tersedia"
+    - "[ ] Pernyataan keamanan rekaman tersedia"
+    - "[ ] Pernyataan penyimpanan rekaman tersedia"
+    - "[ ] Mekanisme backup tersedia"
+
+  uji_coba:
+    - "[ ] Video uji coba AJJ tersedia"
+    - "[ ] Video uji coba nirkertas tersedia"
+    - "[ ] Output PDF hasil uji coba tersedia"
+    - "[ ] Catatan evaluasi uji coba tersedia"
+```
+
+---
+
+## Ringkasan Praktis
+
+Dokumen AJJ Nirkertas dapat dibagi menjadi **10 kelompok besar**: surat permohonan, SOP, SK/personil, sarana-prasarana, sistem aplikasi, proses nirkertas, TUK, pernyataan keamanan/legalitas, uji coba, serta audit-pelaporan. Yang paling krusial saat pengajuan dan audit adalah **SOP yang sah, sistem yang bisa didemokan, rekaman yang tersimpan, output PDF yang lengkap, hak akses yang jelas, verifikasi TUK jarak jauh, dan bukti uji coba dari awal sampai akhir**.
+
+[1]: https://bnsp.go.id/download?hal=2&id=10&utm_source=chatgpt.com "Halaman Download - BNSP"
+[2]: https://nasonline.id/wp-content/uploads/2024/12/SE-SJJ-Paperless-Final-17.05.23.pdf?utm_source=chatgpt.com "TENTANG - nasonline.id"

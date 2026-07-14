@@ -1,0 +1,252 @@
+<aside>
+📑
+
+**Tujuan dokumen:** Melengkapi cakupan audit Anti-Blocking Doctrine (ABD) untuk 6 agen sisanya — 5 prioritas **Sedang** (TEKNIK, SAFIRA, MUTU, EQUIPRA, LOGIS) + 1 prioritas **Rendah** (ENVIRA). Format ringkas: profil, hipotesis C1+C5+C6 (paling sering bermasalah), tabel heuristik default ABD-2, dan 1 mini test case per agen. Master checklist C1–C8 tetap mengacu ke [Anti-Blocking Doctrine — Implementasi & Audit 9 Agen KONSTRA](https://www.notion.so/Anti-Blocking-Doctrine-Implementasi-Audit-9-Agen-KONSTRA-a22523df455f4a9d9823d2ee0db7d2de?pvs=21) Section 4. Untuk 3 agen prioritas Tinggi, lihat [Sprint 2 — Audit Dossier 3 Agen Prioritas Tinggi (PROXIMA · KONTRAK · FINTAX)](https://www.notion.so/Sprint-2-Audit-Dossier-3-Agen-Prioritas-Tinggi-PROXIMA-KONTRAK-FINTAX-a08c2baae1604cca8869ef749cc039f3?pvs=21).
+
+</aside>
+
+## Pola Audit Ringkas
+
+Untuk efisiensi, dossier ini fokus pada **3 checkpoint paling sering dilanggar**:
+
+- **C1** — pola "Mohon lengkapi X dulu"
+- **C5** — ada/tidaknya tabel heuristik default
+- **C6** — inter-agent call otomatis untuk multi-domain
+
+C2/C3/C4/C7/C8 audit tetap memakai master checklist di Section 4 parent page.
+
+---
+
+# A. AGENT-TEKNIK — Manajer Engineering
+
+## A.1 Profil
+
+```jsx
+DOMAIN     : DED, gambar, BIM, RFI, shop drawing, value engineering, as-built
+STANDAR    : SNI 2847/1726/1729/1725, ACI 318, AISC, AASHTO, ISO 19650, AHSP
+KEY OUTPUT : Design package, BIM model, RFI log, VE proposal, As-built drawing
+FREQUENCY  : Sedang (lonjakan saat fase DED & shop drawing review)
+```
+
+## A.2 Hipotesis Pelanggaran ABD
+
+- **C1 ❌ diduga:** "Untuk review struktur, mohon upload gambar DED + perhitungan struktur lengkap." → retrofit: kasih checklist code compliance + identifikasi gap dari deskripsi naratif.
+- **C5 ❌ diduga:** Tidak ada tabel cepat "jenis proyek → standar wajib + LOD BIM".
+- **C6 ❌ diduga:** Saat user tanya VE, tidak otomatis call FINTAX (impact biaya) + KONTRAK (impact VO).
+
+## A.3 Heuristik Default ABD-2
+
+| **Jenis Struktur** | **Standar Wajib** | **LOD BIM** | **Code Compliance** | **DED Effort Tipikal** |
+| --- | --- | --- | --- | --- |
+| Gedung ≤ 4 lantai | SNI 2847, 1726 | LOD 200 | SNI minimal | 3–6 minggu |
+| Gedung 5–12 lantai | SNI 2847, 1726, 1729 | LOD 300 | SNI + ASCE 7 | 8–12 minggu |
+| Gedung > 12 lantai (high-rise) | SNI 2847, 1726, ACI 318, ASCE 7 | LOD 350+ | SNI + ACI + ASCE + peer review | 16–24 minggu |
+| Jembatan bentang ≤ 60 m | SNI 1725, RSNI 1729 | LOD 300 | SNI + AASHTO LRFD | 6–10 minggu |
+| Jembatan bentang > 60 m | SNI 1725, AASHTO, Eurocode | LOD 400 | Multi-code + wind tunnel | 12–20 minggu |
+| EPC Industri / Pembangkit | API, ASME, SNI, IEC | LOD 400+ | API/ASME + ATEX bila zona ledak | 24–40 minggu |
+
+## A.4 Mini Test Case
+
+**TC-TEKNIK-1** — "Saya kontraktor gedung apartemen 18 lantai. Apa standar struktur yang wajib diterapkan?"
+
+*Expected:* Bot langsung jawab daftar SNI 2847 + 1726 + ACI 318 + ASCE 7 + peer review wajib (SK Gub DKI bila Jakarta). Tag `[ASUMSI: 18 lantai = high-rise menurut SNI 1726 (>40 m) | dasar: SNI 1726:2019]`. Closing: "Untuk akurasi 70% → 92%, mohon lengkapi: lokasi (zona seismik), tipe lateral system (SRPMK/SRPMM), tipe pondasi."
+
+---
+
+# B. AGENT-SAFIRA — Manajer K3 Konstruksi
+
+## B.1 Profil
+
+```jsx
+DOMAIN     : K3 Konstruksi, RKK, JSA, PTW, insiden, audit SMK3/SMKK
+STANDAR    : UU 1/1970, PP 50/2012, Permen PUPR 8/2023, ISO 45001, Permenaker 5/2018
+KEY OUTPUT : RKK, JSA, PTW, Toolbox materials, IBPR, Audit prep, Investigation report
+FREQUENCY  : Sedang (rutinitas harian) + spike saat insiden
+```
+
+## B.2 Hipotesis Pelanggaran ABD
+
+- **C1 ❌ diduga:** "Untuk RKK, mohon lengkapi daftar pekerjaan dan IBPR existing terlebih dahulu." → retrofit: generate RKK skeleton + IBPR baseline dari jenis proyek.
+- **C5 ❌ diduga:** Tidak ada tabel "tingkat risiko konstruksi → dokumen RKK wajib + personel HSE".
+- **C6 ❌ diduga:** Insiden → tidak otomatis call PROXIMA (impact schedule) + KONTRAK (notifikasi Owner).
+
+## B.3 Heuristik Default ABD-2
+
+| **Tingkat Risiko Konstruksi** | **Dokumen RKK Wajib** | **Personel HSE Min** | **Frekuensi Audit** | **KPI Target** |
+| --- | --- | --- | --- | --- |
+| Kecil (≤ Rp 15 M) | RKK ringkas + JSA pekerjaan kritis | 1 Petugas K3 | Bulanan | Zero fatality + 0 LTI |
+| Sedang (Rp 15–100 M) | RKK + JSA per pekerjaan + IBPR | 1 Ahli Muda K3 Konstruksi | Mingguan | LTIFR < 1, TRIFR < 3 |
+| Besar (Rp 100 M–1 T) | RKK lengkap + RMPK + emergency response plan | 1 Ahli Madya K3 + 2–3 petugas | Mingguan + monthly Direksi review | LTIFR < 0,5, TRIFR < 2 |
+| Mega / risiko ekstrim (EPC, high-rise > 30 lt) | RKK lengkap + ISO 45001 cert + 3rd party audit | 1 Ahli Utama K3 + tim 5+ | Daily site walk + weekly + monthly | Zero fatality + LTIFR < 0,3 |
+
+## B.4 Mini Test Case
+
+**TC-SAFIRA-1** — "Saya start proyek high-rise 30 lantai. Susun RKK awalnya."
+
+*Expected:* Bot generate RKK skeleton lengkap (kebijakan + IBPR baseline 30+ item + struktur HSE + emergency response + audit plan) berdasarkan kategori Mega. Tag `[ASUMSI: tingkat risiko = Mega | dasar: high-rise > 12 lantai per heuristik SAFIRA]`. Sitasi PP 50/2012 + Permen PUPR 8/2023.
+
+---
+
+# C. AGENT-MUTU — Manajer Pengendalian Mutu
+
+## C.1 Profil
+
+```jsx
+DOMAIN     : ITP, NCR, CAR, material approval, mock-up, audit ISO 9001
+STANDAR    : ISO 9001:2015, SNI material, ASTM, Permen PUPR 21/2019, RMPK Permen PUPR 8/2023
+KEY OUTPUT : ITP per pekerjaan, NCR/CAR log, Material Approval Sheet, Mock-up plan
+FREQUENCY  : Sedang (rutin per pour/install)
+```
+
+## C.2 Hipotesis Pelanggaran ABD
+
+- **C1 ❌ diduga:** "Untuk susun ITP, mohon kirim spesifikasi teknis lengkap dari Owner." → retrofit: generate ITP skeleton dari jenis pekerjaan + standar SNI default.
+- **C5 ❌ diduga:** Tidak ada tabel "jenis pekerjaan → ITP coverage + NCR threshold + mill cert frequency".
+- **C6 ❌ diduga:** NCR → tidak otomatis call PROXIMA (impact schedule) + KONTRAK (defect liability).
+
+## C.3 Heuristik Default ABD-2
+
+| **Jenis Pekerjaan** | **ITP Coverage** | **NCR Threshold** | **Mock-up?** | **Mill Cert / Test Frequency** |
+| --- | --- | --- | --- | --- |
+| Beton struktural | Per zona/lantai/pour | Slump dev > 2 cm; fc' < 90% target | Wajib bila fc' ≥ 30 MPa | Per delivery + cube test 3/7/28 hari |
+| Baja struktural | Per shipment + per joint kritis | Mill cert mismatch; UT/MT defect | Sample joint welding | Per shipment + UT 100% pada full-pen |
+| Finishing arsitektural | Per area / per system | Toleransi visual & dimensi | Wajib untuk facade & lantai prestige | N/A |
+| MEP | Per system + commissioning | Functional test fail; pressure leak | Komisioning sebagai mock-up | Per equipment cert + factory test |
+| Pekerjaan tanah | Per layer compaction | CBR < 95%; density < 95% | Test pit / test embankment | Per layer (sand cone / nuclear gauge) |
+
+## C.4 Mini Test Case
+
+**TC-MUTU-1** — "Saya butuh ITP untuk pekerjaan kolom & balok beton fc' 35 MPa di gedung saya."
+
+*Expected:* Bot generate ITP skeleton (inspection points: penulangan, bekisting, slump, cube cast, curing, demolding, post-pour) + threshold + mock-up wajib karena fc' ≥ 30 MPa + frekuensi test. Tag `[ASUMSI: kolom/balok = pekerjaan struktural kritis | dasar: SNI 2847 + heuristik MUTU]`.
+
+---
+
+# D. AGENT-EQUIPRA — Manajer Peralatan & Plant
+
+## D.1 Profil
+
+```jsx
+DOMAIN     : Alat berat, mob-demob, OEE, fuel, maintenance, SIA/SIO
+STANDAR    : SNI alat, Permenaker 8/2020, OSHA Crane, ISO 55000
+KEY OUTPUT : Equipment plan, OEE tracker, PM schedule, SIA/SIO compliance log, fuel report
+FREQUENCY  : Sedang (rutin operasional)
+```
+
+## D.2 Hipotesis Pelanggaran ABD
+
+- **C1 ❌ diduga:** "Untuk equipment plan, mohon kirim daftar alat existing dan utilisasinya." → retrofit: kasih equipment list rekomendasi dari jenis & nilai proyek.
+- **C5 ❌ diduga:** Tidak ada tabel "kategori alat → OEE target + PM frequency + SIA/SIO".
+- **C6 ❌ diduga:** Breakdown alat kritis → tidak otomatis call PROXIMA (schedule) + LOGIS (sparepart) + KONTRAK (klaim).
+
+## D.3 Heuristik Default ABD-2
+
+| **Kategori Alat** | **OEE Target** | **PM Frequency** | **SIA/SIO Wajib** | **Fuel Tracking** |
+| --- | --- | --- | --- | --- |
+| Tower Crane | 65–75% | Bulanan + harian inspection | SIA alat + SIO operator | N/A |
+| Excavator / Loader / Bulldozer | 70–80% | Per 250 jam operasi | SIO operator | Per shift (litre/jam) |
+| Concrete Pump / Mixer Truck | 60–75% | Per 100 jam + per 1000 m³ | SIO operator | Per delivery |
+| Genset / Generator | 80–90% | Per 250 jam + load test bulanan | N/A (tetap perlu kompetensi) | Per shift |
+| Heavy Hauler / Dump Truck | 70–85% | Per 300 jam + tire rotation | SIO + SIM B2 Umum | Per trip |
+| Pile Driver / Bored Pile Rig | 55–70% | Per 200 jam + harian inspeksi hammer | SIA alat + SIO | Per shift |
+
+## D.4 Mini Test Case
+
+**TC-EQUIPRA-1** — "Saya butuh equipment plan untuk gedung mid-size 12 lantai durasi 18 bulan."
+
+*Expected:* Bot generate daftar alat + jumlah + durasi sewa berbasis tipikal: 1 TC L=50m, 2 concrete pump, 4 mixer truck, 1 bored pile rig, 1 genset 500 kVA, 2 dump truck. Plus OEE target + SIA/SIO + PM schedule. Tag `[ASUMSI: workhour 8 jam/shift, single shift | dasar: tipikal gedung mid-size]`.
+
+---
+
+# E. AGENT-LOGIS — Manajer Rantai Pasok & Logistik
+
+## E.1 Profil
+
+```jsx
+DOMAIN     : Vendor, AVL, PO, GRN, gudang, FIFO, expediting, subkon
+STANDAR    : SCOR Model, Permen PUPR 8/2023 (PBJ), ISO 28000
+KEY OUTPUT : AVL, PO log, GRN, stock report, expediting matrix
+FREQUENCY  : Sedang (rutin pengadaan)
+```
+
+## E.2 Hipotesis Pelanggaran ABD
+
+- **C1 ❌ diduga:** "Untuk planning logistik, mohon kirim BoQ + RAB lengkap dulu." → retrofit: kasih lead-time matrix + buffer rekomendasi dari jenis proyek.
+- **C5 ❌ diduga:** Tidak ada tabel "kategori material → lead time + stock buffer + storage requirement".
+- **C6 ❌ diduga:** Late delivery → tidak otomatis call PROXIMA (impact schedule) + KONTRAK (klaim ke vendor / EOT) + FINTAX (cashflow shift).
+
+## E.3 Heuristik Default ABD-2
+
+| **Kategori Material** | **Lead Time Tipikal** | **Stock Buffer** | **Vendor Tier** | **Storage Requirement** |
+| --- | --- | --- | --- | --- |
+| Semen, agregat, batu (lokal) | 1–3 hari | 7 hari konsumsi | AVL Tier 2 | Open + cover; bin terpisah |
+| Baja struktural domestik | 2–4 minggu | 14 hari konsumsi | AVL Tier 1 + mill audit | Covered + lifting access |
+| Baja struktural impor | 8–12 minggu | Per pour milestone | AVL Tier 1 + factory acceptance | Covered yard |
+| Pre-cast concrete | 2–6 minggu | Per pour schedule | AVL Tier 1 + factory audit | Yard layout + crane access |
+| MEP equipment (lift, AHU, panel) | 8–16 minggu (impor) | Per commissioning gate | AVL Tier 1 + FAT/SAT | Climate-controlled warehouse |
+| Curtain wall / facade | 12–20 minggu | Per zone install | AVL Tier 1 + mock-up sign-off | Vertical rack + crane access |
+
+## E.4 Mini Test Case
+
+**TC-LOGIS-1** — "Saya butuh procurement plan high-level untuk gedung 12 lantai durasi 18 bulan."
+
+*Expected:* Bot generate procurement timeline mundur dari milestone install: PO baja H-12 minggu, PO MEP H-16 minggu, PO facade H-20 minggu, PO pre-cast H-6 minggu sebelum erection. Plus AVL minimum 3 vendor per kategori + buffer. Tag `[ASUMSI: 80% material lokal, 20% impor MEP & facade | dasar: tipikal gedung mid-size]`.
+
+---
+
+# F. AGENT-ENVIRA — Manajer Lingkungan *(prioritas Rendah)*
+
+## F.1 Profil
+
+```jsx
+DOMAIN     : AMDAL, UKL-UPL, RKL-RPL, limbah B3, air, udara, kebisingan, PROPER
+STANDAR    : UU 32/2009, PP 22/2021, ISO 14001, PROPER KLHK, PerMen LHK 5/2021
+KEY OUTPUT : Persetujuan Lingkungan, RKL-RPL semester report, manifest B3, monitoring report
+FREQUENCY  : Rendah (mostly rutin reporting)
+```
+
+## F.2 Hipotesis Pelanggaran ABD
+
+- **C1 ❌ diduga:** "Untuk persetujuan lingkungan, mohon kirim luas lahan + KBLI + lokasi koordinat." → retrofit: kasih klasifikasi awal dari jenis proyek + rekomendasi dokumen.
+- **C5 ❌ diduga:** Tidak ada tabel "jenis proyek → dokumen lingkungan wajib + monitoring + reporting".
+- **C6 ❌ diduga:** Limbah B3 unmanaged → tidak otomatis call SAFIRA (K3 risk) + KONTRAK (defect Owner).
+
+## F.3 Heuristik Default ABD-2
+
+| **Jenis Proyek** | **Persetujuan Lingkungan** | **Limbah B3 Mgmt** | **Monitoring Wajib** | **Reporting** |
+| --- | --- | --- | --- | --- |
+| Renovasi interior | SPPL | Cat/oli bekas via licensed B3 | N/A | Per closure |
+| Gedung baru < 5 ha | UKL-UPL | Manifest B3 + TPS izin | Quarterly dust + noise | Semesterly RKL-RPL |
+| Gedung baru ≥ 5 ha / multi-tower | AMDAL | TPS B3 izin + manifest harian | Continuous PM10/PM2.5 + noise | Quarterly RKL-RPL + PROPER prep |
+| Infrastruktur jalan baru | UKL-UPL atau AMDAL (per panjang & lokasi) | Aspal panas + oil B3 + manifest | Mobile air & noise monitoring | Per kemajuan + adendum |
+| Pembangkit listrik (PLTU/PLTA/PLTGU) | AMDAL penuh + izin emisi cerobong | TPS B3 lengkap + insinerator on-site | Continuous emisi cerobong + air limbah | Monthly + PROPER tahunan |
+| TPA / Waste-to-Energy | AMDAL + izin leachate + izin emisi insinerator | Insinerator + leachate plant | Continuous emisi + leachate + odour | Monthly + PROPER tahunan |
+
+## F.4 Mini Test Case
+
+**TC-ENVIRA-1** — "Proyek saya pembangunan gedung baru 8 ha di Surabaya. Apa kewajiban lingkungannya?"
+
+*Expected:* Bot langsung jawab: wajib AMDAL penuh karena ≥ 5 ha; TPS B3 ber-izin; continuous monitoring PM10/PM2.5 + noise; reporting RKL-RPL kuartalan + persiapan PROPER. Tag `[ASUMSI: Surabaya — ada potensi Kawasan Strategis Provinsi atau RDTR yang menambah persyaratan | dasar: PP 22/2021 + Perda RDTR Surabaya]`. Sitasi PP 22/2021 + UU 32/2009.
+
+---
+
+# G. Dashboard Konsolidasi 9 Agen
+
+| **Agen** | **Prioritas** | **Heuristik C5 Siap?** | **Trigger Map C6 Siap?** | **Mini Test Case Siap?** |
+| --- | --- | --- | --- | --- |
+| PROXIMA | Tinggi | ✅ (lihat Sprint 2 Tinggi) | ✅ | ✅ (2 TC) |
+| KONTRAK | Tinggi | ✅ (lihat Sprint 2 Tinggi) | ✅ | ✅ (2 TC) |
+| FINTAX | Tinggi | ✅ (lihat Sprint 2 Tinggi) | ✅ | ✅ (2 TC) |
+| TEKNIK | Sedang | ✅ | ✅ | ✅ (1 TC) |
+| SAFIRA | Sedang | ✅ | ✅ | ✅ (1 TC) |
+| MUTU | Sedang | ✅ | ✅ | ✅ (1 TC) |
+| EQUIPRA | Sedang | ✅ | ✅ | ✅ (1 TC) |
+| LOGIS | Sedang | ✅ | ✅ | ✅ (1 TC) |
+| ENVIRA | Rendah | ✅ | ✅ | ✅ (1 TC) |
+
+<aside>
+✅
+
+**Sprint 2 scaffolding LENGKAP untuk 9 agen.** Selanjutnya Sprint 3: tulis patch system prompt yang siap di-deploy ke Gustafta Builder per agen.
+
+</aside>

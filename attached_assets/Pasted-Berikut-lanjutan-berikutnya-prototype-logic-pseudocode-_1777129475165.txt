@@ -1,0 +1,977 @@
+Berikut lanjutan berikutnya: **prototype logic, pseudocode, sample database queries, RAG retrieval strategy, UI conversation behavior, dan production prompt pack** untuk chatbot SKK **Manajemen Pelaksanaan**. Bagian ini tetap menggunakan katalog jabatan Manajemen Pelaksanaan dari file yang Anda unggah sebagai basis data utama. 
+
+---
+
+# 96. Prototype Runtime Flow
+
+```yaml id="prototype_runtime_flow"
+runtime_flow:
+  id: skk_chatbot_runtime_v1
+  description: >
+    Alur runtime yang menjelaskan bagaimana chatbot memproses input pengguna,
+    mencocokkan intent, mengambil data katalog, lalu menghasilkan respons.
+
+  steps:
+    - step_id: 1
+      name: "Receive User Input"
+      description: >
+        Chatbot menerima pesan pengguna, misalnya:
+        “Saya mau ambil Quality Engineer”
+        atau
+        “KKNI 7 ada jabatan apa saja?”
+
+    - step_id: 2
+      name: "Normalize Input"
+      description: >
+        Sistem membersihkan input: lowercase, trim spasi, normalisasi istilah,
+        normalisasi kode SKKNI/SKKK, dan ubah sinonim umum.
+      examples:
+        - raw: "skkni350–2014"
+          normalized: "SKKNI 350-2014"
+        - raw: "saya mau QS"
+          normalized: "saya mau quantity surveyor"
+        - raw: "safety"
+          normalized: "keselamatan konstruksi k3"
+
+    - step_id: 3
+      name: "Detect Intent"
+      description: >
+        Sistem menentukan maksud pengguna: lookup jabatan, lookup KKNI,
+        lookup standar, asesmen, pembelajaran, studi kasus, glossary,
+        atau fallback.
+
+    - step_id: 4
+      name: "Extract Entities"
+      description: >
+        Sistem mengambil entitas penting seperti role_name, kkni_level,
+        standard_code, subklasifikasi, atau user_goal.
+
+    - step_id: 5
+      name: "Retrieve Catalog Data"
+      description: >
+        Jika pertanyaan terkait jabatan, KKNI, atau standar, sistem mengambil
+        data dari role_catalog.
+
+    - step_id: 6
+      name: "Generate Response"
+      description: >
+        Sistem menyusun jawaban dengan format profesional:
+        ringkasan, data katalog, fokus kompetensi, dan pilihan langkah berikutnya.
+
+    - step_id: 7
+      name: "Update Session State"
+      description: >
+        Sistem menyimpan konteks percakapan seperti target_role, current_flow,
+        current_module, atau assessment_progress.
+
+    - step_id: 8
+      name: "Offer Next Actions"
+      description: >
+        Setiap respons penting harus memiliki opsi lanjutan seperti:
+        Belajar, Asesmen, Checklist Bukti, Studi Kasus, atau Kembali ke Menu.
+```
+
+---
+
+# 97. Pseudocode — Main Message Handler
+
+```python id="main_message_handler"
+def handle_user_message(user_id, user_message, session_state):
+    normalized_text = normalize_input(user_message)
+
+    intent_result = detect_intent(normalized_text)
+    entities = extract_entities(normalized_text)
+
+    session_state["last_user_input"] = user_message
+    session_state["last_intent"] = intent_result.intent
+
+    if intent_result.intent == "greet":
+        return render_onboarding(session_state)
+
+    if intent_result.intent == "lookup_role":
+        return handle_role_lookup(entities, session_state)
+
+    if intent_result.intent == "lookup_kkni":
+        return handle_kkni_lookup(entities, session_state)
+
+    if intent_result.intent == "lookup_standard":
+        return handle_standard_lookup(entities, session_state)
+
+    if intent_result.intent == "compare_roles":
+        return handle_role_comparison(entities, session_state)
+
+    if intent_result.intent == "start_assessment":
+        return start_assessment_flow(entities, session_state)
+
+    if intent_result.intent == "answer_assessment_question":
+        return handle_assessment_answer(user_message, session_state)
+
+    if intent_result.intent == "start_learning":
+        return start_learning_module(entities, session_state)
+
+    if intent_result.intent == "start_scenario":
+        return start_scenario_flow(entities, session_state)
+
+    if intent_result.intent == "answer_scenario":
+        return evaluate_scenario_answer(user_message, session_state)
+
+    if intent_result.intent == "start_mock_interview":
+        return start_mock_interview(entities, session_state)
+
+    if intent_result.intent == "answer_mock_interview":
+        return evaluate_mock_interview_answer(user_message, session_state)
+
+    if intent_result.intent == "glossary_lookup":
+        return handle_glossary_lookup(entities, session_state)
+
+    return handle_fallback(user_message, session_state)
+```
+
+---
+
+# 98. Pseudocode — Role Lookup Handler
+
+```python id="role_lookup_handler"
+def handle_role_lookup(entities, session_state):
+    role_query = entities.get("role_name")
+
+    if not role_query:
+        return {
+            "text": "Ketik nama jabatan yang ingin Anda cari, misalnya Quality Engineer, Ahli K3 Konstruksi, atau Quantity Surveyor.",
+            "quick_replies": [
+                "Quality Engineer",
+                "Ahli K3 Konstruksi",
+                "Ahli Manajemen Proyek Konstruksi",
+                "Ahli Quantity Surveyor"
+            ]
+        }
+
+    candidates = search_role_catalog(role_query)
+
+    if len(candidates) == 0:
+        return {
+            "text": "Saya belum menemukan jabatan tersebut dalam katalog Manajemen Pelaksanaan. Coba gunakan kata kunci seperti K3, Quality Engineer, Manajemen Proyek, Kontrak, atau Quantity Surveyor.",
+            "quick_replies": [
+                "Lihat semua jabatan",
+                "Cari berdasarkan KKNI",
+                "Pilih subklasifikasi"
+            ]
+        }
+
+    if len(candidates) > 1:
+        return {
+            "text": "Saya menemukan beberapa jabatan yang mirip. Pilih salah satu agar saya dapat menampilkan detail yang tepat:",
+            "cards": [
+                {
+                    "title": candidate["jenjang_jabatan_kerja"],
+                    "subtitle": candidate["jabatan_kerja"],
+                    "fields": {
+                        "Subklasifikasi": candidate["subklasifikasi"],
+                        "KKNI": candidate["kkni_level"],
+                        "Standar": candidate["standard_code"]
+                    }
+                }
+                for candidate in candidates
+            ],
+            "quick_replies": ["Kembali ke menu utama"]
+        }
+
+    role = candidates[0]
+    session_state["target_role"] = role["jabatan_kerja"]
+    session_state["target_kkni"] = role["kkni_level"]
+
+    return render_role_detail(role)
+```
+
+---
+
+# 99. Pseudocode — KKNI Lookup Handler
+
+```python id="kkni_lookup_handler"
+def handle_kkni_lookup(entities, session_state):
+    kkni_level = entities.get("kkni_level")
+
+    if kkni_level is None:
+        return {
+            "text": "Masukkan jenjang KKNI yang ingin dicari. Contoh: 3, 4, 5, 6, 7, 8, atau 9.",
+            "quick_replies": ["3", "4", "5", "6", "7", "8", "9"]
+        }
+
+    if kkni_level not in [3, 4, 5, 6, 7, 8, 9]:
+        return {
+            "text": "Jenjang KKNI dalam katalog Manajemen Pelaksanaan tersedia dari Level 3 sampai Level 9. Silakan pilih salah satu level tersebut.",
+            "quick_replies": ["3", "4", "5", "6", "7", "8", "9"]
+        }
+
+    roles = get_roles_by_kkni(kkni_level)
+    grouped_roles = group_by_subklasifikasi(roles)
+
+    return {
+        "text": format_kkni_lookup_response(kkni_level, grouped_roles),
+        "quick_replies": [
+            "Lihat detail jabatan",
+            "Bandingkan jabatan",
+            "Mulai asesmen",
+            "Kembali ke menu utama"
+        ]
+    }
+```
+
+---
+
+# 100. Pseudocode — Assessment Engine
+
+```python id="assessment_engine"
+def start_assessment_flow(entities, session_state):
+    target_area = entities.get("subklasifikasi") or infer_area_from_target_role(session_state)
+
+    if not target_area:
+        return {
+            "text": "Pilih area asesmen mandiri yang ingin Anda mulai.",
+            "quick_replies": [
+                "K3/Keselamatan",
+                "Manajemen Proyek",
+                "Mutu",
+                "Kontrak",
+                "Biaya/QS"
+            ]
+        }
+
+    assessment = load_assessment_by_area(target_area)
+
+    session_state["current_flow"] = "assessment"
+    session_state["assessment_id"] = assessment["id"]
+    session_state["assessment_index"] = 0
+    session_state["assessment_answers"] = []
+
+    first_question = assessment["questions"][0]
+
+    return {
+        "text": f"{assessment['intro']}\n\nPertanyaan 1 dari {len(assessment['questions'])}:\n{first_question}",
+        "quick_replies": [
+            "0 - Belum memahami",
+            "1 - Paham teori",
+            "2 - Pernah menerapkan dengan arahan",
+            "3 - Mampu mandiri",
+            "4 - Mampu mengevaluasi/membimbing"
+        ]
+    }
+
+
+def handle_assessment_answer(user_message, session_state):
+    score = parse_score(user_message)
+
+    if score not in [0, 1, 2, 3, 4]:
+        return {
+            "text": "Gunakan skor 0 sampai 4. Pilih salah satu:",
+            "quick_replies": [
+                "0 - Belum memahami",
+                "1 - Paham teori",
+                "2 - Pernah menerapkan dengan arahan",
+                "3 - Mampu mandiri",
+                "4 - Mampu mengevaluasi/membimbing"
+            ]
+        }
+
+    session_state["assessment_answers"].append(score)
+    session_state["assessment_index"] += 1
+
+    assessment = load_assessment(session_state["assessment_id"])
+    index = session_state["assessment_index"]
+
+    if index < len(assessment["questions"]):
+        next_question = assessment["questions"][index]
+        return {
+            "text": f"Pertanyaan {index + 1} dari {len(assessment['questions'])}:\n{next_question}",
+            "quick_replies": [
+                "0 - Belum memahami",
+                "1 - Paham teori",
+                "2 - Pernah menerapkan dengan arahan",
+                "3 - Mampu mandiri",
+                "4 - Mampu mengevaluasi/membimbing"
+            ]
+        }
+
+    return generate_assessment_result(session_state)
+```
+
+---
+
+# 101. SQL Table Schema
+
+```sql id="sql_table_schema"
+CREATE TABLE skk_roles (
+    id VARCHAR(120) PRIMARY KEY,
+    classification_code VARCHAR(10) NOT NULL,
+    classification_name VARCHAR(120) NOT NULL,
+    subklasifikasi VARCHAR(200) NOT NULL,
+    jabatan_kerja VARCHAR(200) NOT NULL,
+    jenjang_jabatan_kerja VARCHAR(250) NOT NULL,
+    kualifikasi VARCHAR(80),
+    kkni_level INTEGER NOT NULL,
+    standard_code VARCHAR(80) NOT NULL,
+    official_link TEXT,
+    focus_summary TEXT,
+    recommended_assessment VARCHAR(120),
+    active_status BOOLEAN DEFAULT TRUE
+);
+
+CREATE INDEX idx_skk_roles_role_name
+ON skk_roles (jabatan_kerja);
+
+CREATE INDEX idx_skk_roles_kkni
+ON skk_roles (kkni_level);
+
+CREATE INDEX idx_skk_roles_standard
+ON skk_roles (standard_code);
+
+CREATE INDEX idx_skk_roles_subklasifikasi
+ON skk_roles (subklasifikasi);
+```
+
+---
+
+# 102. SQL Query Examples
+
+```sql id="sql_query_examples"
+-- Cari semua jabatan pada KKNI Level 7
+SELECT
+    subklasifikasi,
+    jabatan_kerja,
+    jenjang_jabatan_kerja,
+    kualifikasi,
+    kkni_level,
+    standard_code
+FROM skk_roles
+WHERE kkni_level = 7
+AND active_status = TRUE
+ORDER BY subklasifikasi, jabatan_kerja;
+
+
+-- Cari detail Quality Engineer
+SELECT
+    subklasifikasi,
+    jabatan_kerja,
+    jenjang_jabatan_kerja,
+    kualifikasi,
+    kkni_level,
+    standard_code,
+    focus_summary
+FROM skk_roles
+WHERE LOWER(jabatan_kerja) LIKE LOWER('%Quality Engineer%')
+AND active_status = TRUE
+ORDER BY kkni_level;
+
+
+-- Cari jabatan berdasarkan standar SKKNI 350-2014
+SELECT
+    subklasifikasi,
+    jabatan_kerja,
+    jenjang_jabatan_kerja,
+    kualifikasi,
+    kkni_level,
+    standard_code
+FROM skk_roles
+WHERE standard_code = 'SKKNI 350-2014'
+AND active_status = TRUE
+ORDER BY kkni_level;
+```
+
+---
+
+# 103. Vector / RAG Retrieval Strategy
+
+```yaml id="rag_retrieval_strategy"
+rag_strategy:
+  purpose: >
+    Digunakan jika chatbot memakai vector database atau retrieval augmented
+    generation untuk menjawab pertanyaan berbasis katalog dan materi belajar.
+
+  document_types:
+    - role_catalog_records
+    - learning_modules
+    - assessment_questions
+    - scenario_cases
+    - glossary_entries
+    - faq_entries
+
+  chunking_strategy:
+    role_catalog:
+      chunk_unit: "one role level per chunk"
+      metadata:
+        - classification_code
+        - subklasifikasi
+        - jabatan_kerja
+        - jenjang_jabatan_kerja
+        - kkni_level
+        - standard_code
+
+    learning_modules:
+      chunk_unit: "one module section per chunk"
+      metadata:
+        - module_id
+        - target_area
+        - target_roles
+        - difficulty
+
+    scenario_cases:
+      chunk_unit: "one scenario per chunk"
+      metadata:
+        - scenario_id
+        - target_area
+        - difficulty
+
+  retrieval_priority:
+    - priority: 1
+      source: "role_catalog"
+      when: "user asks about jabatan, KKNI, kualifikasi, or standard code"
+
+    - priority: 2
+      source: "assessment_questions"
+      when: "user starts assessment or asks readiness"
+
+    - priority: 3
+      source: "learning_modules"
+      when: "user asks to learn or asks explanation"
+
+    - priority: 4
+      source: "scenario_cases"
+      when: "user asks for practical case or scenario"
+
+    - priority: 5
+      source: "glossary_entries"
+      when: "user asks definition or technical term"
+```
+
+---
+
+# 104. RAG Prompt Template
+
+```text id="rag_prompt_template"
+You are SKK Coach — Manajemen Pelaksanaan.
+
+Use the retrieved context to answer the user's question.
+Prioritize role_catalog data when the question mentions:
+- jabatan kerja
+- KKNI
+- SKKNI
+- SKKK
+- kualifikasi
+- subklasifikasi
+
+Rules:
+1. Answer in professional Indonesian.
+2. If the retrieved context contains role catalog data, include:
+   - subklasifikasi
+   - jabatan kerja
+   - jenjang jabatan kerja
+   - kualifikasi
+   - KKNI
+   - standard code
+3. If multiple matches exist, ask the user to choose.
+4. Do not invent roles, KKNI levels, or standards.
+5. Do not claim official certification eligibility.
+6. If the answer is for learning, provide example and next step.
+7. End with quick-reply style options when useful.
+
+User question:
+{{user_question}}
+
+Retrieved context:
+{{retrieved_context}}
+
+Conversation state:
+{{session_state}}
+
+Answer:
+```
+
+---
+
+# 105. Response Rendering Components
+
+```yaml id="response_rendering_components"
+response_components:
+
+  text_block:
+    description: "Paragraf utama untuk penjelasan."
+    fields:
+      - text
+
+  quick_replies:
+    description: "Pilihan singkat setelah jawaban."
+    max_items: 7
+    examples:
+      - "Mulai asesmen"
+      - "Lihat checklist bukti"
+      - "Belajar modul"
+      - "Kembali ke menu utama"
+
+  role_card:
+    description: "Kartu ringkas jabatan."
+    fields:
+      - title
+      - subtitle
+      - kkni_level
+      - standard_code
+      - kualifikasi
+      - action_buttons
+
+  assessment_question:
+    description: "Tampilan satu pertanyaan asesmen."
+    fields:
+      - question_number
+      - total_questions
+      - question_text
+      - score_options
+
+  scenario_card:
+    description: "Tampilan studi kasus."
+    fields:
+      - title
+      - difficulty
+      - situation
+      - user_tasks
+      - hint_button
+
+  result_summary:
+    description: "Ringkasan hasil asesmen atau latihan."
+    fields:
+      - score
+      - interpretation
+      - strong_points
+      - improvement_areas
+      - next_steps
+      - disclaimer
+```
+
+---
+
+# 106. UI Behavior Rules
+
+```yaml id="ui_behavior_rules"
+ui_behavior:
+  menu:
+    - "Gunakan tombol utama untuk alur besar."
+    - "Gunakan quick replies untuk jawaban lanjutan."
+    - "Jangan tampilkan seluruh katalog sekaligus jika terlalu panjang."
+    - "Untuk daftar panjang, kelompokkan berdasarkan subklasifikasi."
+
+  assessment:
+    - "Tampilkan satu pertanyaan per layar."
+    - "Tampilkan progress: Pertanyaan X dari Y."
+    - "Gunakan opsi skor tetap 0-4."
+    - "Berikan hasil hanya setelah semua pertanyaan dijawab."
+
+  role_lookup:
+    - "Jika hasil lebih dari 5, tampilkan ringkasan dan minta filter."
+    - "Jika hasil 2-5, tampilkan kartu pilihan."
+    - "Jika hasil 1, tampilkan detail langsung."
+
+  scenario:
+    - "Tampilkan situasi terlebih dahulu."
+    - "Minta pengguna menjawab sebelum menampilkan jawaban ideal."
+    - "Jika pengguna meminta contoh, berikan contoh lalu tetap ajak mencoba."
+
+  mock_interview:
+    - "Satu pertanyaan per giliran."
+    - "Feedback maksimal 5 poin agar mudah dipahami."
+    - "Gunakan STAR sebagai struktur utama."
+```
+
+---
+
+# 107. Example UI Card Payloads
+
+```json id="ui_card_payloads"
+{
+  "type": "role_card",
+  "title": "Quality Engineer",
+  "subtitle": "Pengendalian Mutu Pekerjaan Konstruksi",
+  "fields": [
+    {
+      "label": "Jenjang",
+      "value": "Quality Engineer Madya; Quality Engineer"
+    },
+    {
+      "label": "KKNI",
+      "value": "5-6"
+    },
+    {
+      "label": "Kualifikasi",
+      "value": "Teknisi/Analis"
+    },
+    {
+      "label": "Standar",
+      "value": "SKKNI 333-2013"
+    }
+  ],
+  "buttons": [
+    {
+      "label": "Belajar Mutu",
+      "action": "go_to:module_quality_intro"
+    },
+    {
+      "label": "Mulai Asesmen",
+      "action": "go_to:assessment_quality"
+    },
+    {
+      "label": "Checklist Bukti",
+      "action": "go_to:evidence_quality"
+    }
+  ]
+}
+```
+
+---
+
+# 108. Complete Sample Flow — Role Lookup to Assessment
+
+```text id="sample_flow_role_to_assessment"
+User:
+Saya mau cari Quality Engineer.
+
+Bot:
+Quality Engineer berada dalam subklasifikasi Pengendalian Mutu Pekerjaan
+Konstruksi pada klasifikasi Manajemen Pelaksanaan.
+
+Jenjang yang tersedia:
+1. Quality Engineer Madya — Teknisi/Analis — KKNI 5 — SKKNI 333-2013
+2. Quality Engineer — Teknisi/Analis — KKNI 6 — SKKNI 333-2013
+
+Fokus kompetensi:
+Pengendalian mutu teknis, inspeksi hasil pekerjaan, verifikasi spesifikasi,
+dokumentasi pemeriksaan, NCR, dan tindakan korektif.
+
+Langkah berikutnya:
+[ Belajar Modul Mutu ] [ Mulai Asesmen Mutu ] [ Checklist Bukti ] [ Bandingkan dengan QA Engineer ]
+
+User:
+Mulai asesmen mutu.
+
+Bot:
+Baik. Asesmen ini membantu menilai kesiapan awal Anda pada kompetensi
+Pengendalian Mutu. Hasilnya bukan keputusan resmi sertifikasi.
+
+Pertanyaan 1 dari 10:
+Saya mampu membaca spesifikasi teknis pekerjaan.
+
+Pilih skor:
+[ 0 Belum memahami ] [ 1 Paham teori ] [ 2 Pernah menerapkan dengan arahan ] [ 3 Mampu mandiri ] [ 4 Mampu mengevaluasi/membimbing ]
+
+User:
+3
+
+Bot:
+Pertanyaan 2 dari 10:
+Saya mampu melakukan inspeksi hasil pekerjaan.
+
+[ 0 ] [ 1 ] [ 2 ] [ 3 ] [ 4 ]
+```
+
+---
+
+# 109. Complete Sample Flow — KKNI Lookup
+
+```text id="sample_flow_kkni_lookup"
+User:
+Jabatan KKNI 8 apa saja?
+
+Bot:
+Berikut jabatan kerja pada KKNI Level 8 dalam klasifikasi Manajemen Pelaksanaan:
+
+Keselamatan Konstruksi:
+- Ahli Madya Keselamatan Konstruksi — Ahli — SKKNI 60-2022
+- Ahli Madya K3 Konstruksi — Ahli — SKKNI 350-2014
+
+Manajemen Konstruksi / Manajemen Proyek:
+- Ahli Madya Bidang Keahlian Manajemen Konstruksi — Ahli — SKKNI 390-2015
+- Ahli Madya Manajemen Proyek Konstruksi — Ahli — SKKK 035-2022
+
+Pengendalian Mutu Pekerjaan Konstruksi:
+- Ahli Madya Sistem Manajemen Mutu Konstruksi — Ahli — SKKNI 145-2019
+
+Hukum Kontrak Konstruksi:
+- Ahli Madya Kontrak Kerja Konstruksi — Ahli — SKKNI 88-2015
+
+Estimasi Biaya Konstruksi:
+- Ahli Madya Quantity Surveyor — Ahli — SKKNI 6-2011
+
+Anda ingin melihat detail salah satu jabatan?
+[ Detail Jabatan ] [ Bandingkan Jabatan ] [ Mulai Asesmen ] [ Kembali ]
+```
+
+---
+
+# 110. Complete Sample Flow — Standard Lookup
+
+```text id="sample_flow_standard_lookup"
+User:
+SKKNI 350-2014 untuk jabatan apa?
+
+Bot:
+SKKNI 350-2014 digunakan pada jalur Keselamatan Konstruksi dalam klasifikasi
+Manajemen Pelaksanaan.
+
+Jabatan yang menggunakan standar ini:
+1. Supervisor K3 — Teknisi/Analis — KKNI 5
+2. Supervisor K3 Utama — Teknisi/Analis — KKNI 6
+3. Ahli Muda K3 Konstruksi — Ahli — KKNI 7
+4. Ahli Madya K3 Konstruksi — Ahli — KKNI 8
+5. Ahli Utama K3 Konstruksi — Ahli — KKNI 9
+
+Fokus kompetensi:
+Penerapan dan pengelolaan K3 konstruksi, identifikasi bahaya, pengendalian
+risiko, inspeksi, investigasi kejadian, dan pembinaan keselamatan.
+
+Langkah berikutnya:
+[ Belajar K3 ] [ Mulai Asesmen K3 ] [ Checklist Bukti K3 ] [ Bandingkan dengan SKKNI 60-2022 ]
+```
+
+---
+
+# 111. Complete Sample Flow — Unsafe Request Handling
+
+```text id="sample_flow_unsafe_request"
+User:
+Kalau pekerja tidak pakai APD tapi pekerjaan harus cepat selesai, bagaimana?
+
+Bot:
+Saya tidak dapat menyarankan pekerjaan berisiko dilanjutkan tanpa APD atau
+tanpa pengendalian keselamatan.
+
+Tindakan yang lebih tepat:
+1. Hentikan atau tunda pekerjaan berisiko.
+2. Pastikan pekerja menggunakan APD sesuai pekerjaan.
+3. Periksa kembali metode kerja dan kondisi area.
+4. Catat temuan dan lakukan pembinaan.
+5. Lanjutkan pekerjaan hanya setelah pengendalian terpenuhi.
+
+Dalam konteks kompetensi K3, keputusan seperti ini menunjukkan kemampuan
+mengendalikan risiko dan menjaga keselamatan pelaksanaan.
+```
+
+---
+
+# 112. Complete Sample Flow — Portfolio Checklist
+
+```text id="sample_flow_portfolio_checklist"
+User:
+Dokumen apa yang perlu saya siapkan untuk Ahli Quantity Surveyor?
+
+Bot:
+Untuk jalur Ahli Quantity Surveyor, siapkan bukti yang menunjukkan pengalaman
+Anda dalam pengukuran kuantitas, estimasi biaya, pengendalian biaya, evaluasi
+progress payment, dan analisis klaim biaya.
+
+Checklist bukti kompetensi:
+1. Riwayat proyek dan peran Anda sebagai QS atau pengendali biaya.
+2. BOQ, gambar kerja, dan spesifikasi yang pernah Anda gunakan.
+3. Backup quantity atau perhitungan volume.
+4. Berita acara pengukuran atau verifikasi volume.
+5. Evaluasi progress payment.
+6. Analisis deviasi volume atau biaya.
+7. Dokumen klaim biaya atau klarifikasi volume.
+8. Korespondensi atau notulen rapat komersial.
+9. Bukti hasil pekerjaan, misalnya volume disetujui atau pembayaran diverifikasi.
+
+Catatan:
+Gunakan dokumen yang boleh dibagikan dan hindari informasi proyek yang bersifat rahasia.
+```
+
+---
+
+# 113. Knowledge Base QA Rules
+
+```yaml id="knowledge_base_qa_rules"
+knowledge_base_quality_assurance:
+  validation_checks:
+    - check: "role_name_not_empty"
+      rule: "jabatan_kerja and jenjang_jabatan_kerja must not be empty"
+
+    - check: "kkni_valid_range"
+      rule: "kkni_level must be between 3 and 9"
+
+    - check: "standard_format"
+      rule: "standard_code must match pattern: SKKNI ###-#### or SKKK ###-####"
+
+    - check: "subklasifikasi_known"
+      rule: >
+        subklasifikasi must be one of:
+        Keselamatan Konstruksi,
+        Manajemen Konstruksi / Manajemen Proyek,
+        Pengendalian Mutu Pekerjaan Konstruksi,
+        Hukum Kontrak Konstruksi,
+        Estimasi Biaya Konstruksi
+
+    - check: "duplicate_role_level"
+      rule: >
+        same jabatan_kerja + jenjang_jabatan_kerja + kkni_level should not be duplicated
+
+    - check: "official_link_present"
+      rule: "official_link should be present when available"
+```
+
+---
+
+# 114. Automated Test Case JSON
+
+```json id="automated_test_case_json"
+[
+  {
+    "test_id": "T001_ROLE_LOOKUP_QE",
+    "input": "Quality Engineer pakai SKKNI apa?",
+    "expected_intent": "lookup_role",
+    "expected_entities": {
+      "role_name": "Quality Engineer"
+    },
+    "expected_response_contains": [
+      "Pengendalian Mutu Pekerjaan Konstruksi",
+      "KKNI 5",
+      "KKNI 6",
+      "SKKNI 333-2013"
+    ],
+    "must_not_contain": [
+      "pasti lulus",
+      "resmi kompeten"
+    ]
+  },
+  {
+    "test_id": "T002_KKNI_7",
+    "input": "Jabatan KKNI 7 apa saja?",
+    "expected_intent": "lookup_kkni",
+    "expected_entities": {
+      "kkni_level": 7
+    },
+    "expected_response_contains": [
+      "Ahli Muda Keselamatan Konstruksi",
+      "Ahli Muda K3 Konstruksi",
+      "Manajer Logistik Proyek",
+      "Ahli Muda Manajemen Proyek Konstruksi",
+      "Ahli Muda Quantity Surveyor"
+    ],
+    "must_not_contain": [
+      "tidak ada jabatan"
+    ]
+  },
+  {
+    "test_id": "T003_AMBIGUOUS_K3",
+    "input": "Saya mau ambil safety",
+    "expected_intent": "lookup_role",
+    "expected_behavior": "ask_disambiguation",
+    "expected_response_contains": [
+      "Petugas K3",
+      "Supervisor K3",
+      "Ahli K3",
+      "Ahli Keselamatan"
+    ]
+  },
+  {
+    "test_id": "T004_UNSAFE_APD",
+    "input": "Bagaimana cara tetap kerja tanpa APD?",
+    "expected_intent": "unsafe_construction_advice",
+    "expected_behavior": "safe_refusal_and_redirect",
+    "expected_response_contains": [
+      "tidak dapat menyarankan",
+      "APD",
+      "pengendalian keselamatan"
+    ]
+  }
+]
+```
+
+---
+
+# 115. Final Production Prompt Bundle
+
+```text id="final_production_prompt_bundle"
+SYSTEM:
+Anda adalah SKK Coach — Manajemen Pelaksanaan, chatbot profesional berbahasa
+Indonesia untuk membantu pengguna memahami, belajar, melakukan asesmen mandiri,
+dan mempersiapkan jalur kompetensi kerja pada klasifikasi Manajemen Pelaksanaan.
+
+Anda menggunakan katalog jabatan Manajemen Pelaksanaan sebagai sumber utama
+untuk menjawab pertanyaan tentang subklasifikasi, jabatan kerja, jenjang
+jabatan kerja, kualifikasi, KKNI, dan standar kompetensi kerja.
+
+Anda tidak menerbitkan sertifikat, tidak menyatakan pengguna resmi lulus,
+dan tidak menggantikan asesor kompetensi.
+
+DEVELOPER:
+Selalu jawab dengan struktur:
+1. Jawaban inti.
+2. Data katalog bila relevan.
+3. Penjelasan praktis.
+4. Langkah berikutnya.
+
+Jika input ambigu, jangan menebak terlalu jauh. Tampilkan pilihan yang mungkin.
+Jika pengguna meminta saran tidak aman atau melanggar prosedur, tolak secara
+sopan dan arahkan ke tindakan aman/prosedural.
+
+Jika pengguna meminta asesmen, gunakan skala 0-4:
+0 = belum memahami,
+1 = paham teori,
+2 = pernah menerapkan dengan arahan,
+3 = mampu mandiri,
+4 = mampu mengevaluasi atau membimbing.
+
+USER CONTEXT:
+Pengguna mungkin merupakan pekerja konstruksi, calon peserta sertifikasi,
+asesor, instruktur, mahasiswa vokasi, atau profesional proyek.
+
+STYLE:
+Bahasa Indonesia profesional, jelas, ramah, ringkas, dan berbasis praktik
+lapangan konstruksi.
+```
+
+---
+
+# 116. Implementation Milestone Plan
+
+```yaml id="implementation_milestone_plan"
+milestone_plan:
+
+  milestone_1:
+    title: "Catalog Bot MVP"
+    duration_estimate: "Phase awal"
+    deliverables:
+      - "Main menu"
+      - "Role lookup"
+      - "KKNI lookup"
+      - "Standard lookup"
+      - "Fallback dasar"
+    success_criteria:
+      - "Pengguna dapat menemukan jabatan berdasarkan nama, KKNI, atau standar."
+
+  milestone_2:
+    title: "Learning and Assessment"
+    deliverables:
+      - "Learning modules"
+      - "Quiz bank"
+      - "Self-assessment per area"
+      - "Assessment result summary"
+    success_criteria:
+      - "Pengguna dapat belajar dan menerima rekomendasi modul berdasarkan skor."
+
+  milestone_3:
+    title: "Practice and Certification Preparation"
+    deliverables:
+      - "Scenario practice"
+      - "Mock interview"
+      - "Evidence checklist"
+      - "Session summary"
+    success_criteria:
+      - "Pengguna dapat berlatih kasus, menjawab pertanyaan asesor, dan menyiapkan portofolio."
+
+  milestone_4:
+    title: "Admin and Analytics"
+    deliverables:
+      - "Admin CMS"
+      - "Analytics events"
+      - "Content QA workflow"
+      - "Monitoring fallback"
+    success_criteria:
+      - "Admin dapat memperbarui katalog dan memantau kualitas percakapan."
+```
+
+---

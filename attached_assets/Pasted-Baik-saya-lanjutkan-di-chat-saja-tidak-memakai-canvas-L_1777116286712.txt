@@ -1,0 +1,362 @@
+Baik, saya lanjutkan **di chat saja**, tidak memakai canvas.
+
+## LANJUTAN 5 — Layer Pra-Verifikasi SBU Berbasis Referensi 2025
+
+Bagian ini ditambahkan ke konfigurasi chatbot agar bot bisa menjawab bukan hanya “kode SBU apa?”, tetapi juga **apakah data awal pengguna sudah siap untuk proses SBU**.
+
+Referensi yang dipakai:
+
+* **SK Dirjen Binakon No. 37/KPTS/DK/2025** sebagai standar skema sertifikasi BUJK. Dokumen ini memuat ruang lingkup sertifikasi, prosedur penilaian kesesuaian, persyaratan sertifikasi, proses sertifikasi, surveilans, re-sertifikasi, pembekuan/pencabutan, dan data/dokumen pendaftaran. 
+* **Permen PU No. 6 Tahun 2025** sebagai standar kegiatan usaha, pengawasan, sanksi, serta pengaturan PBBR sektor pekerjaan umum. Di dalamnya, pemenuhan standar kegiatan jasa konstruksi mencakup kemampuan BUJK/SBU, OSS, SIJK terintegrasi, konversi SBU, dan sanksi administratif. 
+
+```yaml
+# -----------------------------------------------------------------------------
+# LANJUTAN 5 — PRA-VERIFIKASI SBU
+# -----------------------------------------------------------------------------
+
+pre_verification_module:
+  id: pre_verification_sbu
+  title: "Pra-Verifikasi Kesiapan SBU"
+  purpose:
+    - membantu pengguna mengecek kesiapan awal sebelum pengajuan SBU
+    - memetakan kekurangan dokumen berdasarkan subklasifikasi yang dituju
+    - memberi rekomendasi langkah persiapan sebelum masuk ke LSBU/OSS/SIJK
+  disclaimer: >
+    Hasil pra-verifikasi chatbot bersifat panduan awal. Keputusan resmi tetap
+    dilakukan oleh LSBU, asesor BUJK, OSS, SIJK terintegrasi, dan/atau pejabat
+    berwenang sesuai ketentuan yang berlaku.
+```
+
+## 1. Menu Baru untuk Pra-Verifikasi
+
+```yaml
+main_menu_addition:
+  - label: "Pra-Verifikasi Kesiapan SBU"
+    next_node: node_pre_verification_start
+  - label: "Cek Kesesuaian KBLI dan SBU"
+    next_node: node_oss_sijk_check
+  - label: "Cek TKK PJBU/PJTBU/PJSKBU"
+    next_node: node_tkk_check
+  - label: "Cek Peralatan"
+    next_node: node_equipment_check
+  - label: "Cek SMAP"
+    next_node: node_smap_check
+  - label: "Cek Konversi SBU"
+    next_node: node_conversion_check
+```
+
+## 2. Flow Pra-Verifikasi
+
+```yaml
+node_pre_verification_start:
+  type: message_with_buttons
+  title: "Pra-Verifikasi Kesiapan SBU"
+  message: >
+    Saya akan membantu mengecek kesiapan awal pengajuan SBU berdasarkan:
+    1. KBLI dan subklasifikasi
+    2. kualifikasi yang dituju
+    3. penjualan tahunan/pengalaman
+    4. kemampuan keuangan
+    5. tenaga kerja konstruksi
+    6. peralatan
+    7. SMAP
+    8. status OSS/SIJK
+  buttons:
+    - label: "Mulai Pra-Verifikasi"
+      next_node: node_pre_verification_form
+    - label: "Cek Kode SBU Dulu"
+      next_node: node_ask_subklasifikasi_code
+    - label: "Menu Utama"
+      next_node: node_main_menu
+
+node_pre_verification_form:
+  type: guided_form
+  title: "Form Pra-Verifikasi"
+  questions:
+    - id: q_business_type
+      text: "Jenis badan usaha Anda?"
+      quick_replies:
+        - "BUJK Nasional"
+        - "BUJK PMA"
+        - "KPBUJKA"
+        - "Belum tahu"
+      save_to: profile.business_type
+
+    - id: q_kbli
+      text: "Masukkan KBLI yang diajukan di OSS."
+      expected_type: text
+      save_to: profile.kbli
+
+    - id: q_subklasifikasi
+      text: "Masukkan kode subklasifikasi SBU yang dituju, contoh BG001 atau IN008."
+      expected_type: text
+      save_to: profile.target_subklasifikasi
+
+    - id: q_qualification
+      text: "Kualifikasi yang dituju?"
+      quick_replies:
+        - "Kecil 1"
+        - "Kecil 2"
+        - "Kecil 3"
+        - "Menengah"
+        - "Besar"
+        - "Belum tahu"
+      save_to: profile.target_qualification
+
+    - id: q_experience
+      text: "Apakah sudah memiliki pengalaman/kontrak pekerjaan sesuai subklasifikasi?"
+      quick_replies:
+        - "Ada"
+        - "Belum ada"
+        - "Ada, tapi belum yakin sesuai"
+      save_to: profile.experience_status
+
+    - id: q_finance
+      text: "Apakah laporan keuangan atau neraca sudah tersedia?"
+      quick_replies:
+        - "Ada neraca internal"
+        - "Ada laporan audit KAP"
+        - "Belum ada"
+      save_to: profile.finance_status
+
+    - id: q_tkk
+      text: "Apakah PJBU, PJTBU, dan PJSKBU sudah tersedia?"
+      quick_replies:
+        - "Lengkap"
+        - "Sebagian"
+        - "Belum"
+        - "Belum yakin"
+      save_to: profile.tkk_status
+
+    - id: q_equipment
+      text: "Apakah peralatan utama sudah tersedia atau dikuasai?"
+      quick_replies:
+        - "Milik sendiri"
+        - "Sewa"
+        - "Sebagian"
+        - "Belum"
+      save_to: profile.equipment_status
+
+    - id: q_smap
+      text: "Dokumen SMAP yang tersedia?"
+      quick_replies:
+        - "ISO 37001"
+        - "Dokumen penerapan SMAP"
+        - "PANCEK"
+        - "Surat komitmen SMAP"
+        - "Belum ada"
+      save_to: profile.smap_status
+
+  completion_node: node_pre_verification_result
+```
+
+## 3. Template Hasil Pra-Verifikasi
+
+```yaml
+node_pre_verification_result:
+  type: dynamic_response
+  title: "Hasil Pra-Verifikasi Kesiapan SBU"
+  response_template: tpl_pre_verification_result
+
+tpl_pre_verification_result: >
+  Berikut hasil pra-verifikasi awal:
+
+  1. KBLI dan Subklasifikasi
+  KBLI yang diajukan: {{profile.kbli}}
+  Subklasifikasi target: {{profile.target_subklasifikasi}}
+  Status awal: {{kbli_sbu_match_status}}
+
+  2. Kualifikasi
+  Kualifikasi target: {{profile.target_qualification}}
+  Catatan: {{qualification_note}}
+
+  3. Pengalaman/Penjualan Tahunan
+  Status: {{profile.experience_status}}
+  Catatan: pengalaman harus sesuai dengan lingkup pekerjaan utama pada subklasifikasi.
+
+  4. Kemampuan Keuangan
+  Status: {{profile.finance_status}}
+  Catatan: kebutuhan neraca internal atau laporan audit bergantung pada kualifikasi dan jenis badan usaha.
+
+  5. Tenaga Kerja Konstruksi
+  Status: {{profile.tkk_status}}
+  Catatan: periksa PJBU, PJTBU, PJSKBU, kesesuaian subklasifikasi TKK, dan jenjang SKK.
+
+  6. Peralatan
+  Status: {{profile.equipment_status}}
+  Catatan: periksa jenis alat, status milik/sewa, nomor registrasi, dan kesesuaian dengan subklasifikasi.
+
+  7. SMAP
+  Status: {{profile.smap_status}}
+  Catatan: siapkan ISO 37001, dokumen SMAP, PANCEK, atau surat komitmen sesuai ketentuan.
+
+  Rekomendasi:
+  {{pre_verification_recommendation}}
+
+  Catatan penting:
+  Hasil ini bukan keputusan sertifikasi. Gunakan sebagai daftar persiapan sebelum pengajuan ke LSBU/OSS/SIJK.
+```
+
+## 4. Logic Penilaian Awal
+
+```yaml
+pre_verification_logic:
+  kbli_sbu_match:
+    if: "profile.kbli matches catalog[profile.target_subklasifikasi].kbli"
+    result: "Selaras awal"
+    message: "KBLI dan subklasifikasi terlihat selaras berdasarkan katalog."
+  kbli_sbu_not_match:
+    if: "profile.kbli does not match catalog[profile.target_subklasifikasi].kbli"
+    result: "Perlu diperiksa"
+    message: "KBLI dan subklasifikasi belum selaras. Periksa kembali KBLI OSS dan SBU yang dituju."
+
+  readiness_green:
+    condition:
+      - "KBLI selaras"
+      - "pengalaman ada"
+      - "keuangan ada"
+      - "TKK lengkap"
+      - "peralatan tersedia"
+      - "SMAP tersedia"
+    message: >
+      Data awal tampak cukup siap untuk dikonsultasikan atau diajukan.
+      Tetap lakukan validasi final ke LSBU.
+
+  readiness_yellow:
+    condition:
+      - "sebagian data belum lengkap"
+    message: >
+      Data belum sepenuhnya siap. Lengkapi bagian yang masih kurang sebelum pengajuan.
+
+  readiness_red:
+    condition:
+      - "KBLI tidak selaras"
+      - "pengalaman belum ada"
+      - "TKK belum tersedia"
+      - "SMAP belum ada"
+    message: >
+      Pengajuan berisiko terkendala. Perbaiki kesesuaian KBLI/SBU dan lengkapi dokumen utama terlebih dahulu.
+```
+
+## 5. Modul Cek KBLI dan SBU untuk OSS/SIJK
+
+```yaml
+node_oss_sijk_check:
+  type: guided_form
+  title: "Cek Kesesuaian KBLI dan SBU"
+  message: >
+    Cek ini membantu melihat apakah KBLI yang diajukan di OSS sesuai dengan subklasifikasi SBU.
+  questions:
+    - id: q_oss_kbli
+      text: "Masukkan KBLI di OSS."
+      save_to: session.oss_kbli
+    - id: q_sbu_code
+      text: "Masukkan kode SBU/subklasifikasi."
+      save_to: session.sbu_code
+  completion_node: node_oss_sijk_result
+
+node_oss_sijk_result:
+  type: dynamic_validation
+  title: "Hasil Cek KBLI dan SBU"
+  validation:
+    source: subklasifikasi_catalog
+    match: "session.oss_kbli == catalog[session.sbu_code].kbli"
+  response_if_match: >
+    KBLI {{session.oss_kbli}} selaras dengan {{session.sbu_code}} — {{catalog.title}}.
+    Untuk pemenuhan Sertifikat Standar, pastikan nomor SBU tercatat dan sesuai pada SIJK terintegrasi.
+  response_if_not_match: >
+    KBLI {{session.oss_kbli}} belum selaras dengan {{session.sbu_code}}.
+    Periksa kembali KBLI pada OSS, kode SBU, dan subklasifikasi yang tercatat pada SIJK terintegrasi.
+```
+
+## 6. Modul TKK
+
+```yaml
+node_tkk_check:
+  type: input
+  title: "Cek TKK untuk Subklasifikasi"
+  message: "Masukkan kode SBU, contoh BG001 atau BS001."
+  save_to: session.tkk_sbu_code
+  next_node: node_tkk_result
+
+node_tkk_result:
+  type: dynamic_lookup
+  data_source: subklasifikasi_table
+  lookup_key: code
+  lookup_value: session.tkk_sbu_code
+  response_template: >
+    Kebutuhan TKK awal untuk {{code}} — {{title}}:
+
+    PJBU:
+    - pimpinan tertinggi badan usaha
+    - 1 orang per badan usaha
+
+    PJTBU:
+    - mengacu pada subklasifikasi TKK: {{tkk_pjtbu}}
+    - jenjang SKK bergantung pada kualifikasi yang diajukan
+
+    PJSKBU:
+    - mengacu pada subklasifikasi TKK: {{tkk_pjskbu}}
+    - tersedia untuk setiap subklasifikasi usaha
+
+    Catatan:
+    Periksa ketentuan rangkap jabatan dan status tenaga tetap sesuai skema sertifikasi.
+```
+
+## 7. Modul SMAP
+
+```yaml
+node_smap_check:
+  type: message_with_buttons
+  title: "Cek SMAP"
+  message: >
+    Pilih dokumen SMAP yang sudah dimiliki badan usaha.
+  buttons:
+    - label: "ISO 37001"
+      set:
+        session.smap_type: "ISO 37001"
+      target_node: node_smap_result
+    - label: "Dokumen penerapan SMAP"
+      set:
+        session.smap_type: "Dokumen SMAP"
+      target_node: node_smap_result
+    - label: "PANCEK"
+      set:
+        session.smap_type: "PANCEK"
+      target_node: node_smap_result
+    - label: "Surat komitmen"
+      set:
+        session.smap_type: "Surat Komitmen"
+      target_node: node_smap_result
+    - label: "Belum ada"
+      set:
+        session.smap_type: "Belum Ada"
+      target_node: node_smap_result
+
+node_smap_result:
+  type: dynamic_response
+  response_template: >
+    Status SMAP: {{session.smap_type}}
+
+    Catatan:
+    SMAP merupakan salah satu area yang diperiksa dalam penilaian kemampuan badan usaha.
+    Dokumen dapat berupa sertifikat ISO 37001, dokumen penerapan SMAP, PANCEK,
+    atau surat pernyataan komitmen sesuai ketentuan.
+
+    Rekomendasi:
+    {{smap_recommendation}}
+```
+
+## 8. Guardrail Tambahan untuk Referensi 2025
+
+```yaml
+regulatory_guardrails_2025:
+  - "Jika pengguna bertanya apakah pasti lolos SBU, jawab bahwa bot hanya melakukan pra-cek."
+  - "Jika pengguna meminta cara melewati syarat TKK, peralatan, SMAP, atau pengalaman, tolak dan arahkan ke pemenuhan yang benar."
+  - "Jika KBLI dan SBU tidak cocok, jangan memaksakan rekomendasi; tampilkan status perlu validasi."
+  - "Jika pengguna memiliki SBU lama, ingatkan potensi kebutuhan konversi sesuai ketentuan peralihan."
+  - "Jika pengguna bertanya sanksi, jelaskan secara administratif dan sarankan pemenuhan kewajiban."
+  - "Jika dokumen referensi berubah, gunakan referensi terbaru yang diunggah pengguna."
+```
+
+Bagian ini bisa ditempel sebagai **module tambahan** setelah konfigurasi chatbot utama.

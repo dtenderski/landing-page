@@ -1,0 +1,148 @@
+<aside>
+📅
+
+**Kalkulator EOT** — alat bantu AGENT-KONTRAK + AGENT-PROXIMA untuk mengkuantifikasi Extension of Time menggunakan **Time Impact Analysis (TIA)** sesuai praktik terbaik FIDIC 2017 & SCL Delay Protocol 2017.
+
+</aside>
+
+## 1. Empat Metode TIA — Pilih Sesuai Konteks
+
+| **Metode** | **Cara** | **Cocok Untuk** |
+| --- | --- | --- |
+| **Impacted As-Planned** | Tambahkan delay event ke baseline schedule original | Klaim prospektif (sebelum event terjadi penuh) |
+| **Time Impact Analysis (TIA)** | Update schedule ke kondisi tepat sebelum event, lalu insert delay | **Standar industri** — paling banyak diterima Engineer/DAB |
+| **As-Planned vs As-Built** | Bandingkan baseline vs aktual akhir | Klaim retrospektif setelah project complete |
+| **Window Analysis** | Bagi proyek per window (mis. 30 hari) lalu analisa per window | Proyek panjang dengan multiple delay events |
+
+## 2. Workflow TIA Standar (8 Langkah)
+
+```mermaid
+flowchart TD
+	S1["1. Identify<br>Delay Event"] --> S2["2. Tentukan tanggal<br>kejadian event"]
+	S2 --> S3["3. Update schedule<br>ke kondisi sesaat<br>sebelum event"]
+	S3 --> S4["4. Identify activity<br>yang ter-delay"]
+	S4 --> S5["5. Insert delay<br>fragnet ke schedule"]
+	S5 --> S6["6. Recalculate CPM<br>dengan delay fragnet"]
+	S6 --> S7["7. Hitung selisih<br>completion date"]
+	S7 --> S8["8. Tentukan EOT<br>= selisih hari kerja"]
+```
+
+## 3. Kalkulator EOT — Template
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│  KALKULATOR EOT — Time Impact Analysis (FIDIC 8.5)                          │
+├─────────────────────────────────────────────────────────────────────┤
+│  IDENTIFIKASI EVENT                                                         │
+│  Nomor NOC               : NOC-[YYYY-MM-NNN]                                │
+│  Deskripsi Event         : [____________________________________________]  │
+│  Tanggal Event           : [DD-MM-YYYY]                                    │
+│  Klausul Dasar           : Sub-Clause [_____] FIDIC/SSUK                   │
+│  Pemegang Risiko         : ⬜ Owner   ⬜ Contractor   ⬜ Force Majeure        │
+│                                                                            │
+│  BASELINE                                                                   │
+│  Tanggal Mulai Kontrak   : [DD-MM-YYYY]                                    │
+│  Durasi Kontrak (hari)   : [_____] hari kalender                           │
+│  Original Completion     : [DD-MM-YYYY]                                    │
+│                                                                            │
+│  IMPACT ANALYSIS                                                            │
+│  Activity Affected (ID)  : [_____] (mis. STR-3F-RC-COL)                    │
+│  Activity di Critical?   : ⬜ Ya  ⬜ Tidak (jika tidak → cek free float)      │
+│  Free Float availabe     : [_____] hari                                    │
+│  Delay (kalender hari)   : [_____] hari                                    │
+│  Mitigasi yang sudah     : ⬜ Acceleration  ⬜ Resequencing  ⬜ Tidak ada      │
+│    diupayakan                                                              │
+│                                                                            │
+│  PERHITUNGAN EOT                                                            │
+│  Net Delay                = Delay − Free Float (jika non-critical)         │
+│                           = [_____] hari                                   │
+│  Concurrent Delay         = [_____] hari (delay paralel oleh kontraktor)   │
+│    → Apportionment        : [____]% dari total delay (SCL Protocol)        │
+│  EOT yang dapat diklaim   = Net Delay − Concurrent Apportionment           │
+│                           = [_____] hari kalender                          │
+│  New Completion Date      = Original Completion + EOT                      │
+│                           = [DD-MM-YYYY]                                   │
+│                                                                            │
+│  COST IMPACT (Prolongation Cost)                                            │
+│  Site Overhead (Rp/hari)  : Rp [_____________]                             │
+│  HQ Overhead (Rp/hari)    : Rp [_____________] (formula Hudson/Eichleay)   │
+│  Equipment Idle (Rp/hari) : Rp [_____________]                             │
+│  Loss of Productivity     : Rp [_____________]                             │
+│  Total Cost Impact        = (Sum/hari) × EOT                               │
+│                           = Rp [_____________]                             │
+└───────────────────────────────────────────────────────────────────────┘
+```
+
+## 4. Contoh Kalkulasi Lengkap
+
+**Skenario:** Late drawing struktur Zone-B — baru diterima 45 hari setelah deadline kontraktual. Activity di critical path. Tidak ada concurrent delay.
+
+```
+IDENTIFIKASI:
+	Event          : Late issuance of structural drawing Rev-2 Zone-B
+	Tanggal Event  : 15-Mar-2026 (drawing diterima); deadline 31-Jan-2026
+	Delay raw      : 43 hari kalender
+	Klausul        : Sub-Clause 1.9 (Errors in Employer's Requirements)
+	                 + Sub-Clause 8.5 (EOT)
+	Pemegang risiko: Owner
+
+BASELINE:
+	Start contract : 01-Sep-2025
+	Durasi         : 365 hari
+	Original compl : 31-Aug-2026
+
+IMPACT ANALYSIS:
+	Activity      : STR-ZB-3F (3rd floor structure Zone-B)
+	Critical?     : YA (lintasan kritis)
+	Free float    : 0 hari
+	Delay impact  : 43 hari (langsung ke critical path)
+	Concurrent    : 0 hari (tidak ada delay paralel kontraktor)
+	Mitigasi      : Resequencing 5 hari (Zone-A diakselerasi)
+
+PERHITUNGAN EOT:
+	EOT klaim     = 43 − 5 (mitigasi) − 0 (concurrent)
+	              = 38 hari kalender
+	New completion= 31-Aug-2026 + 38 hari = 08-Oct-2026
+
+COST IMPACT:
+	Site Overhead : Rp 25,000,000/hari × 38 = Rp 950,000,000
+	HQ Overhead   : Rp 8,000,000/hari × 38 = Rp 304,000,000
+	Equipment idle: Rp 12,000,000/hari × 38 = Rp 456,000,000
+	Productivity  : Rp 5,000,000/hari × 38 = Rp 190,000,000
+	Total Cost    = Rp 1,900,000,000
+
+KESIMPULAN:
+	Klaim EOT  = 38 hari kalender
+	Klaim Cost = Rp 1,900,000,000
+	Notice of Claim diajukan 14-Mar-2026 (≤ 28 hari sejak event aware)
+	Fully Detailed Claim due: 25-Apr-2026 (42 hari setelah Notice)
+```
+
+## 5. Tips Penting (Sering Salah)
+
+<aside>
+⚠️
+
+**Concurrent Delay** — jika delay terjadi paralel oleh kontraktor sendiri, EOT umumnya tidak dapat diklaim untuk porsi tersebut. Pakai "apportionment" (SCL Delay Protocol 2017).
+
+</aside>
+
+<aside>
+⚠️
+
+**Float Ownership** — free float biasanya milik proyek (project's float), bukan eksklusif kontraktor. Konsumsi float oleh delay Owner mengurangi safety margin proyek tetapi belum tentu memberi hak EOT, kecuali kontrak menyatakan sebaliknya.
+
+</aside>
+
+<aside>
+⚠️
+
+**Time-Bar 28 Hari (FIDIC 20.1)** — jika Notice of Claim lewat 28 hari, klaim **kehilangan hak**. Selalu kirim NOC saat menyadari event, bahkan jika impact belum terkuantifikasi.
+
+</aside>
+
+## 6. Halaman Terkait
+
+- [KB-FIDIC & KB-KONTRAK — Klausul Kunci + Template Notice of Claim](https://www.notion.so/KB-FIDIC-KB-KONTRAK-Klausul-Kunci-Template-Notice-of-Claim-9884329b945e478d9648208aff923d57?pvs=21)
+- [Modul C — Control & Close-Out (Keuangan · Klaim/EOT · Serah Terima · Postmortem)](https://www.notion.so/Modul-C-Control-Close-Out-Keuangan-Klaim-EOT-Serah-Terima-Postmortem-e818d7460f984c948b66675ea19aaa22?pvs=21)
+- [KB-EVM — Earned Value Management & Kalkulator BCWP/CPI/SPI/EAC](https://www.notion.so/KB-EVM-Earned-Value-Management-Kalkulator-BCWP-CPI-SPI-EAC-f92c7b79f82c4313814c64c3f81f2b30?pvs=21)

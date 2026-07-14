@@ -1,0 +1,150 @@
+# 🧪 Sprint 1 — Test Scenarios BRAIN
+
+> Halaman L4 — 6 skenario smoke test untuk validasi ABD v1.1 sebelum go-live. Mengikuti pola Sprint 1 TENDERA.
+> 
+
+**Target lulus**: ≥ 80% per skenario · **Penilai**: manual review oleh tim QA prompt
+
+---
+
+## Skenario T-01 — Review LHP Holistik (Orchestrator + cross-call)
+
+**Target Agen**: BRAIN-ORCHESTRATOR → BR-PROX + BR-EVM + BR-SAF
+
+**Input**:
+
+```
+Proyek gedung kantor 5 lantai, Bekasi, nilai Rp 28 M, hari ke-90 dari 240.
+LHP minggu ini: progres aktual 32% vs target 39% (deviasi -7%).
+Hasil uji beton kolom L3: 24 MPa (target fc' = 30 MPa).
+4 hari hujan deras. Near miss: harness lepas saat scaffolding L4.
+VO kumulatif 8%.
+```
+
+**Kriteria Lulus**:
+
+- [ ]  Output dalam format ABD-7 lengkap
+- [ ]  Analisis Q-C-T + K3-S semua terisi
+- [ ]  CrossCall ke minimal 2 spesialis (BR-MUT, BR-EVM, BR-SAF, BR-KON)
+- [ ]  Min 3 sitasi (SNI 2847, PP 50/2012, FIDIC/SBD)
+- [ ]  Confidence 60-85%
+- [ ]  Early warning 🔴/🟡 di min 2 dimensi
+
+## Skenario T-02 — EVM Calculation
+
+**Target Agen**: BRAIN-EVM
+
+**Input**:
+
+```
+BAC = Rp 28 M
+PV (data date) = Rp 10,92 M (39% rencana)
+EV (data date) = Rp 8,96 M (32% actual earned)
+AC (data date) = Rp 10,2 M
+Data date: 2026-05-10
+```
+
+**Kriteria Lulus**:
+
+- [ ]  CPI dihitung benar: 8,96/10,2 = 0,878 → 🟡 Watch
+- [ ]  SPI dihitung benar: 8,96/10,92 = 0,821 → 🔴 Alert
+- [ ]  EAC = 28/0,878 ≈ Rp 31,9 M
+- [ ]  VAC = 28 - 31,9 = -3,9 M (over-budget)
+- [ ]  Rekomendasi corrective action H/M
+- [ ]  CrossCall ke BR-KON (klaim?)
+
+## Skenario T-03 — NCR Mayor Beton Underspec
+
+**Target Agen**: BRAIN-MUTU
+
+**Input**:
+
+```
+Kolom struktur K3-L3 dicor 2026-05-05.
+Uji 28-hari: 3 silinder = 22, 24, 26 MPa. Target fc' = 30 MPa.
+Volume cor lot: 12 m³.
+```
+
+**Kriteria Lulus**:
+
+- [ ]  Identifikasi sebagai NCR mayor (rata-rata 24 MPa < fc' + 0,82·σ)
+- [ ]  Sitasi SNI 2847 (acceptance criteria)
+- [ ]  Rekomendasi: core drill / uji NDT / strengthening / rework
+- [ ]  CrossCall ke BR-KON (klausul rework) & BR-EVM (impact biaya)
+- [ ]  CAPA: investigasi mix design, batching plant, curing
+
+## Skenario T-04 — Investigasi Near Miss Harness
+
+**Target Agen**: BRAIN-SAFIRA
+
+**Input**:
+
+```
+Near miss: 2026-05-09, 14:30, pekerja S (28 thn) scaffolding L4, 
+harness terlepas dari anchor point saat reposisi. Tidak jatuh. 
+APD lengkap kecuali double lanyard.
+```
+
+**Kriteria Lulus**:
+
+- [ ]  Output 5-Why minimal 5 pertanyaan-jawaban
+- [ ]  Bowtie diagram (threat/top event/consequence/barrier)
+- [ ]  CAPA min 3 corrective + 2 preventive
+- [ ]  Sitasi: UU 1/1970, Permenaker 8/2010 (APD), Kepmenaker 386/2014
+- [ ]  Rekomendasi stop-work bila harness anchor tidak sesuai EN 795
+- [ ]  PIC + due-date setiap CAPA
+
+## Skenario T-05 — Klaim EOT Cuaca Buruk
+
+**Target Agen**: BRAIN-KONTRAK
+
+**Input**:
+
+```
+Kontrak FIDIC Red Book 1999. Event: hujan deras 4 hari berturut
+(2026-05-04 s/d 2026-05-07), pekerjaan luar terhenti.
+BA cuaca dari BMKG tersedia. Belum ada notifikasi resmi.
+```
+
+**Kriteria Lulus**:
+
+- [ ]  Surat klaim format resmi (kop, no, perihal)
+- [ ]  Sitasi FIDIC Sub-Clause 20.1 (1999) + 8.4 (EOT)
+- [ ]  Notifikasi 28-hari (jelaskan time-bar)
+- [ ]  TIA tabel (event date → affected activity → delay days)
+- [ ]  Cause-effect kronologis
+- [ ]  Lampiran: BA cuaca BMKG, LHP terdampak
+
+## Skenario T-06 — Limbah B3 Tidak Termanifest
+
+**Target Agen**: BRAIN-ENVIRA
+
+**Input**:
+
+```
+Ditemukan 12 drum oli bekas alat berat tersimpan di pojok stockyard
+selama 60 hari tanpa manifest, tanpa simbol B3, tanpa secondary
+containment.
+```
+
+**Kriteria Lulus**:
+
+- [ ]  Identifikasi pelanggaran PP 101/2014
+- [ ]  Sanksi potensial UU 32/2009 (sanksi administratif & pidana)
+- [ ]  Rekomendasi H: segera ke TPS-LB3, manifest, kontrak pengangkut berizin
+- [ ]  CAPA preventif: SOP limbah, training, signage
+- [ ]  Sitasi: PP 101/2014, Permen LHK 6/2021, UU 32/2009
+- [ ]  CrossCall ke BR-SAF (risiko paparan kesehatan)
+
+## Rekap Skoring
+
+| Skenario | Bobot | Min Lulus |
+| --- | --- | --- |
+| T-01 Orchestrator | 25% | 80% |
+| T-02 EVM | 15% | 80% |
+| T-03 Mutu | 15% | 80% |
+| T-04 K3 | 15% | 80% |
+| T-05 Kontrak | 15% | 80% |
+| T-06 Lingkungan | 15% | 80% |
+
+**Total min lulus untuk go-live**: 80% · **Re-test setelah hotfix**: dalam 48 jam

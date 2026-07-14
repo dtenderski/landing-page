@@ -1,0 +1,67 @@
+**Sub-page siap-import ke Gustafta.** Struktur: Persona → Knowledge Base 3 lapisan → Sumber Resmi.
+
+| **Chatbot Name** | Ruang Lingkup LSBU Konstruksi Indonesia | **Tagline** | 8 Klasifikasi BUJK & Pemetaan KBLI — Skema LSBU Konstruksi Indonesia |
+| --- | --- | --- | --- |
+| **Description** | Spesialis cakupan layanan sertifikasi LSBU Konstruksi Indonesia: 8 klasifikasi BUJK (Pekerjaan Konstruksi: BG/SI/IT/MK/EL; Konsultansi: BG/SI; Konstruksi Khusus), pemetaan KBLI, kualifikasi (kecil/menengah/besar), serta contoh subklasifikasi dengan KBLI 5-digit. | **Primary Language** | Bahasa Indonesia |
+| **Series** | S2 — Sertifikasi & Asesor | **Avatar** | 🏢 |
+
+## 📚 Knowledge Base
+
+### 🟦 Foundational — Regulasi, Standar, Data Produk
+
+| **Sumber Resmi** | **Sektor** | **Subsektor** | **URL Sumber** | **Tanggal** | PP No. 22/2020 jo. PP No. 14/2021 | Hukum | PP | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2020/2021 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| PP No. 28/2025 — PBBR | Perizinan | PP | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2025 | Permen PUPR No. 8/2022 — Sertifikat Standar JK | PU | Permen | [jdih.pu.go.id](http://jdih.pu.go.id) | 2022 |
+| SK Dirjen Bina Konstruksi No. 37/KPTS/DK/2025 — Skema Sertifikasi BUJK | PU | SK Dirjen | [binakonstruksi.pu.go.id](http://binakonstruksi.pu.go.id) | 2025 | Kepala BPS — KBLI 2020 (Klasifikasi Baku Lapangan Usaha Indonesia) | Statistik | Klasifikasi | [oss.go.id](http://oss.go.id) | 2020 |
+
+### 🟩 Operational — SOP, Prosedur, FAQ, Template
+
+**8 Klasifikasi BUJK:**
+
+#### Pekerjaan Konstruksi (5)
+
+1. **BG — Bangunan Gedung** — perumahan, perkantoran, gedung komersial, fasilitas umum.
+2. **SI — Bangunan Sipil** — jalan, jembatan, bendungan, pelabuhan, prasarana sumber daya air.
+3. **IT — Instalasi** — mekanikal, elektrikal, plumbing, telekomunikasi, sistem proteksi.
+4. **MK — Mekanikal** — instalasi mesin, lift/eskalator, HVAC, sistem industri.
+5. **EL — Elektrikal** — transmisi/distribusi listrik, pembangkit, sistem kontrol.
+
+#### Konsultansi (2)
+
+1. **KBG — Konsultansi Konstruksi Bangunan Gedung** — perencanaan, pengawasan, manajemen konstruksi BG.
+2. **KSI — Konsultansi Konstruksi Bangunan Sipil** — perencanaan, pengawasan, MK sipil.
+
+#### Konstruksi Khusus (1)
+
+1. **KK — Konstruksi Khusus** — fondasi khusus, pekerjaan tanah, pengeboran, pemasangan baja, pekerjaan ketinggian, pekerjaan air dalam.
+
+**Kualifikasi:** Kecil (K1, K2), Menengah (M1, M2), Besar (B1, B2). Menentukan paket nilai dan persyaratan modal/pengalaman.
+
+**Contoh subklasifikasi & KBLI:**
+
+- BG006 (Bangunan Gedung Pendidikan) → KBLI 41011/41012
+- SI001 (Jalan Raya, Jalan Rel, Landas Pacu) → KBLI 42101
+- IT003 (Instalasi Mekanikal) → KBLI 43223
+
+**FAQ:**
+
+- *Berapa total subklasifikasi?* — Ratusan; merujuk Lampiran Permen PUPR 8/2022 + SK Dirjen 37/KPTS/DK/2025.
+- *Boleh punya lebih dari satu klasifikasi?* — Boleh, sesuai pemenuhan syarat.
+
+### 🟪 Case Memory — Notulen, Keputusan, Preseden
+
+*TBD — diisi dengan: portofolio LSBU Konstruksi Indonesia per klasifikasi, daftar subklasifikasi paling diminati, keputusan akreditasi KAN per ruang lingkup, kasus pengembangan ruang lingkup baru.*
+
+## 🔗 Sumber Resmi
+
+[binakonstruksi.pu.go.id](http://binakonstruksi.pu.go.id) · [jdih.pu.go.id](http://jdih.pu.go.id) · [lpjk.pu.go.id](http://lpjk.pu.go.id) · [oss.go.id](http://oss.go.id) · [kan.or.id](http://kan.or.id)
+
+## ❓ Contoh Pertanyaan
+
+1. Sebutkan 8 klasifikasi BUJK menurut Permen PUPR 8/2022.
+2. Apa perbedaan klasifikasi MK dan IT?
+3. Bagaimana hubungan klasifikasi BUJK dengan KBLI?
+
+## 🔗 Halaman induk
+
+[Regulasi Jasa Konstruksi Indonesia — Ringkasan Lengkap](https://www.notion.so/Regulasi-Jasa-Konstruksi-Indonesia-Ringkasan-Lengkap-5a3f66d1250941f18f53a104f957a336?pvs=21) — Bab 18; lihat juga Bab 2 & 17.

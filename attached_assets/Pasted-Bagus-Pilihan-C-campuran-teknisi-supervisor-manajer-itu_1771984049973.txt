@@ -1,0 +1,178 @@
+Bagus. Pilihan **C (campuran: teknisi → supervisor → manajer)** itu paling realistis untuk domain Gedung 👌
+
+Tapi supaya tidak jadi “terlalu umum dan dangkal”, kita harus desain sistemnya **bertingkat (tiered intelligence)**.
+
+Kalau tidak, nanti:
+
+* Terlalu teknis → manajer merasa kurang strategis
+* Terlalu strategis → teknisi bingung
+
+Jadi kita buat CIVILPRO Gedung seperti ini 👇
+
+---
+
+# 🏗 CIVILPRO GEDUNG – TIERED PROFESSIONAL SYSTEM
+
+## 🎯 LEVEL 1 – Operasional (Teknisi / Analis / Operator)
+
+Fokus:
+
+* Troubleshooting
+* Checklist
+* SOP teknis
+* Diagnosis cepat
+
+Bahasa:
+
+* Praktis
+* Step-by-step
+* Teknis
+
+Contoh:
+
+> “Periksa arus beban panel utama, cek MCCB trip log, ukur tegangan…”
+
+---
+
+## 🎯 LEVEL 2 – Supervisory (Supervisor / Koordinator)
+
+Fokus:
+
+* Pengendalian tim
+* Monitoring PM
+* Vendor control
+* SLA
+* Dokumentasi
+
+Bahasa:
+
+* Sistematis
+* Kontrol & pengawasan
+* Pelaporan
+
+Contoh:
+
+> “Pastikan PM plan terealisasi minimal 95%, lakukan audit bulanan vendor…”
+
+---
+
+## 🎯 LEVEL 3 – Managerial (KKNI 7 ke atas)
+
+Fokus:
+
+* Risk management
+* Cost control
+* KPI
+* Strategic planning
+* Compliance
+
+Bahasa:
+
+* Dampak finansial
+* Reputasi
+* Keputusan
+* Sistem jangka panjang
+
+Contoh:
+
+> “Tanpa KPI downtime lift, Anda tidak bisa mempertanggungjawabkan biaya kontrak maintenance…”
+
+---
+
+# 🔥 Bagaimana CIVILPRO Menangani Campuran?
+
+Di awal analisis, bot akan klasifikasi:
+
+> “Posisi Anda saat ini apa?”
+>
+> * Teknisi
+> * Supervisor
+> * Manajer
+
+Jika user tidak jawab, bot membaca dari cara bertanya.
+
+Lalu:
+
+* Jawaban disesuaikan levelnya
+* Tapi tetap diarahkan naik satu level
+
+Misalnya:
+Teknisi → diarahkan berpikir supervisor
+Supervisor → diarahkan berpikir manajer
+Manajer → diarahkan berpikir strategis
+
+Ini membuat CIVILPRO bukan hanya menjawab,
+tapi menaikkan kelas user.
+
+---
+
+# 🎓 Sekarang Kita Perkuat Mode 1 (Uji Kompetensi)
+
+Karena target campuran, kita perlu:
+
+* Skema Ahli (KKNI 7–9)
+* Skema Teknisi (KKNI 4–6)
+* Skema Operator (KKNI 1–3)
+
+Artinya scoring system harus adaptif.
+
+---
+
+# 🔥 Upgrade Scoring System (Versi Adaptif)
+
+Untuk Teknisi:
+
+* 40% teknis
+* 30% prosedural
+* 20% dokumentasi
+* 10% K3
+
+Untuk Supervisor:
+
+* 30% teknis
+* 30% kontrol & dokumentasi
+* 20% vendor
+* 20% K3 & risiko
+
+Untuk Manajer:
+
+* 20% teknis
+* 20% vendor
+* 20% cost control
+* 20% risk management
+* 20% strategic control
+
+Ini membuat simulasi lebih realistis.
+
+---
+
+# 🎯 Sekarang Kita Naik Level Lagi
+
+Karena Anda memilih campuran, saya sarankan kita buat:
+
+## 🧠 "Automatic Level Detection Rule"
+
+CIVILPRO membaca dari:
+
+* Bahasa pertanyaan
+* Kompleksitas masalah
+* Jabatan yang disebut
+
+Dan otomatis menyesuaikan kedalaman analisis.
+
+Tanpa user harus pilih level.
+
+---
+
+# 🚀 Pertanyaan Strategis Berikutnya
+
+Karena Gedung sudah kita kunci sebagai domain pertama,
+apakah Anda ingin:
+
+1️⃣ Fokus dulu ke **Manajer Pengelolaan Gedung** sebagai flagship
+2️⃣ Atau langsung aktifkan 4 jabatan utama Gedung sekaligus?
+
+Kalau ingin sistem cepat matang dan premium,
+saya cenderung sarankan 1️⃣ dulu sebagai flagship.
+
+Menurut Anda?

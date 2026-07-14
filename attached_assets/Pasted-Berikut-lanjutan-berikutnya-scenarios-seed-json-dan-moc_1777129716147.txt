@@ -1,0 +1,630 @@
+Berikut lanjutan berikutnya: **`scenarios.seed.json` dan `mockInterview.seed.json`** untuk melengkapi chatbot SKK **Manajemen Pelaksanaan** dengan latihan studi kasus dan simulasi wawancara asesor. Struktur ini mengikuti area kompetensi dan jabatan pada katalog Manajemen Pelaksanaan yang Anda unggah. 
+
+---
+
+# 219. `scenarios.seed.json`
+
+```json id="scenarios_seed_json"
+{
+  "version": "1.0.0",
+  "classification": {
+    "code": "E",
+    "name": "Manajemen Pelaksanaan"
+  },
+  "scenarios": [
+    {
+      "id": "scenario_k3_near_miss_basic",
+      "area_slug": "k3",
+      "target_subklasifikasi": "Keselamatan Konstruksi",
+      "difficulty": "basic",
+      "title": "Near Miss di Area Kerja",
+      "target_roles": [
+        "Petugas Keselamatan Konstruksi",
+        "Petugas K3 Konstruksi",
+        "Personil Keselamatan dan Kesehatan Kerja",
+        "Supervisor K3",
+        "Ahli K3 Konstruksi",
+        "Ahli Keselamatan Konstruksi"
+      ],
+      "situation": "Pada proyek gedung, seorang pekerja hampir tertimpa material yang jatuh dari lantai atas. Tidak ada korban, tetapi area kerja belum diberi pembatas dan sebagian pekerja tidak menggunakan APD lengkap.",
+      "user_tasks": [
+        "Identifikasi masalah keselamatan utama.",
+        "Tentukan tindakan segera di lapangan.",
+        "Sebutkan dokumen atau laporan yang perlu dibuat.",
+        "Usulkan tindakan pencegahan agar kejadian tidak berulang."
+      ],
+      "ideal_answer_points": [
+        "Menghentikan sementara aktivitas di area berisiko.",
+        "Mengamankan area dengan pembatas, rambu, atau pengawasan.",
+        "Memastikan pekerja menggunakan APD sesuai risiko pekerjaan.",
+        "Mencatat kejadian sebagai near miss.",
+        "Melakukan investigasi penyebab.",
+        "Menetapkan tindakan korektif dan pencegahan.",
+        "Melakukan toolbox meeting atau briefing keselamatan."
+      ],
+      "feedback_template": "Jawaban Anda akan dinilai dari kemampuan mengidentifikasi risiko, mengambil tindakan segera, mendokumentasikan kejadian, dan menyusun pencegahan."
+    },
+    {
+      "id": "scenario_k3_work_at_height_intermediate",
+      "area_slug": "k3",
+      "target_subklasifikasi": "Keselamatan Konstruksi",
+      "difficulty": "intermediate",
+      "title": "Pekerjaan di Ketinggian Tanpa Pengendalian Lengkap",
+      "target_roles": [
+        "Supervisor K3",
+        "Ahli K3 Konstruksi",
+        "Ahli Keselamatan Konstruksi"
+      ],
+      "situation": "Tim lapangan akan melakukan pekerjaan di ketinggian. Beberapa pekerja sudah siap bekerja, tetapi lifeline belum diperiksa, izin kerja belum lengkap, dan supervisor proyek meminta pekerjaan tetap dimulai karena jadwal terlambat.",
+      "user_tasks": [
+        "Tentukan apakah pekerjaan boleh dimulai.",
+        "Identifikasi risiko utama.",
+        "Tentukan pengendalian yang harus dipenuhi.",
+        "Jelaskan cara mengomunikasikan keputusan kepada tim proyek."
+      ],
+      "ideal_answer_points": [
+        "Pekerjaan tidak boleh dimulai sebelum pengendalian keselamatan terpenuhi.",
+        "Risiko utama meliputi jatuh dari ketinggian, kegagalan alat, dan kurangnya pengawasan.",
+        "Memeriksa lifeline, body harness, anchor point, izin kerja, dan metode kerja.",
+        "Melakukan briefing sebelum pekerjaan.",
+        "Mendokumentasikan temuan dan tindakan korektif.",
+        "Mengomunikasikan bahwa keselamatan tidak boleh dikorbankan demi jadwal."
+      ],
+      "feedback_template": "Jawaban kuat harus menunjukkan prioritas keselamatan, prosedur kerja aman, dokumentasi, dan komunikasi profesional."
+    },
+    {
+      "id": "scenario_project_material_delay_basic",
+      "area_slug": "project",
+      "target_subklasifikasi": "Manajemen Konstruksi / Manajemen Proyek",
+      "difficulty": "basic",
+      "title": "Keterlambatan Material Utama",
+      "target_roles": [
+        "Manajer Logistik Proyek",
+        "Ahli Bidang Keahlian Manajemen Konstruksi",
+        "Ahli Manajemen Proyek Konstruksi",
+        "Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat"
+      ],
+      "situation": "Material utama untuk pekerjaan struktur terlambat 10 hari. Sebagian tenaga kerja menjadi idle dan jadwal proyek mulai bergeser dari rencana.",
+      "user_tasks": [
+        "Identifikasi dampak keterlambatan.",
+        "Tentukan tindakan koordinasi awal.",
+        "Susun opsi pengendalian jadwal.",
+        "Sebutkan dokumen yang perlu diperbarui."
+      ],
+      "ideal_answer_points": [
+        "Membandingkan jadwal rencana dan progres aktual.",
+        "Mengidentifikasi pekerjaan terdampak.",
+        "Mengevaluasi pekerjaan alternatif yang dapat dilakukan.",
+        "Berkoordinasi dengan pemasok dan tim lapangan.",
+        "Menyusun rencana pemulihan atau recovery plan.",
+        "Memperbarui laporan progres dan jadwal.",
+        "Mengomunikasikan dampak kepada pihak terkait."
+      ],
+      "feedback_template": "Jawaban akan dinilai dari kemampuan menganalisis dampak, menyusun tindakan korektif, dan mendokumentasikan perubahan rencana."
+    },
+    {
+      "id": "scenario_project_delay_advanced",
+      "area_slug": "project",
+      "target_subklasifikasi": "Manajemen Konstruksi / Manajemen Proyek",
+      "difficulty": "advanced",
+      "title": "Keterlambatan Proyek Multi-Penyebab",
+      "target_roles": [
+        "Ahli Bidang Keahlian Manajemen Konstruksi",
+        "Ahli Manajemen Proyek Konstruksi"
+      ],
+      "situation": "Proyek terlambat 18 hari karena kombinasi perubahan desain, keterlambatan persetujuan gambar kerja, cuaca buruk, dan keterlambatan material. Pemilik proyek meminta rencana pemulihan yang jelas.",
+      "user_tasks": [
+        "Pisahkan penyebab keterlambatan berdasarkan sumbernya.",
+        "Tentukan data yang diperlukan untuk analisis.",
+        "Susun strategi recovery plan.",
+        "Jelaskan komunikasi kepada owner dan tim proyek."
+      ],
+      "ideal_answer_points": [
+        "Membuat kronologi keterlambatan.",
+        "Membandingkan baseline schedule dan progres aktual.",
+        "Mengidentifikasi pekerjaan pada jalur kritis.",
+        "Memisahkan penyebab internal dan eksternal.",
+        "Menyusun opsi percepatan atau resequencing.",
+        "Menghitung dampak waktu dan biaya bila relevan.",
+        "Membuat laporan tertulis dan rencana tindak lanjut.",
+        "Melakukan koordinasi dengan owner, konsultan, pemasok, dan tim lapangan."
+      ],
+      "feedback_template": "Jawaban kuat harus menghubungkan jadwal, risiko, koordinasi, dokumentasi, dan pengambilan keputusan."
+    },
+    {
+      "id": "scenario_quality_ncr_basic",
+      "area_slug": "quality",
+      "target_subklasifikasi": "Pengendalian Mutu Pekerjaan Konstruksi",
+      "difficulty": "basic",
+      "title": "Ketidaksesuaian Mutu Pekerjaan",
+      "target_roles": [
+        "Quality Engineer",
+        "Quality Assurance Engineer",
+        "Ahli Sistem Manajemen Mutu Konstruksi"
+      ],
+      "situation": "Hasil inspeksi menunjukkan pekerjaan finishing tidak sesuai spesifikasi. Tim pelaksana meminta pekerjaan tetap diterima agar tidak menghambat progres.",
+      "user_tasks": [
+        "Tentukan tindakan awal.",
+        "Jelaskan risiko jika pekerjaan diterima tanpa evaluasi.",
+        "Sebutkan dokumen mutu yang perlu dibuat.",
+        "Usulkan tindakan korektif."
+      ],
+      "ideal_answer_points": [
+        "Tidak langsung menerima pekerjaan yang tidak sesuai.",
+        "Membuat NCR atau laporan ketidaksesuaian.",
+        "Membandingkan hasil pekerjaan dengan spesifikasi.",
+        "Menganalisis penyebab ketidaksesuaian.",
+        "Menetapkan tindakan korektif.",
+        "Melakukan verifikasi hasil perbaikan.",
+        "Mendokumentasikan penutupan temuan."
+      ],
+      "feedback_template": "Jawaban akan dinilai dari kemampuan menjaga mutu, membuat dokumentasi, dan menindaklanjuti ketidaksesuaian."
+    },
+    {
+      "id": "scenario_quality_structural_advanced",
+      "area_slug": "quality",
+      "target_subklasifikasi": "Pengendalian Mutu Pekerjaan Konstruksi",
+      "difficulty": "advanced",
+      "title": "Mutu Struktur Tidak Memenuhi Spesifikasi",
+      "target_roles": [
+        "Quality Engineer",
+        "Quality Assurance Engineer",
+        "Ahli Sistem Manajemen Mutu Konstruksi"
+      ],
+      "situation": "Hasil uji beton menunjukkan kuat tekan tidak memenuhi spesifikasi. Pekerjaan lanjutan di atas struktur tersebut dijadwalkan mulai besok. Tim proyek khawatir jadwal semakin terlambat.",
+      "user_tasks": [
+        "Tentukan prioritas keputusan.",
+        "Jelaskan risiko mutu dan keselamatan.",
+        "Tentukan pihak yang perlu dilibatkan.",
+        "Susun langkah korektif dan verifikasi."
+      ],
+      "ideal_answer_points": [
+        "Menahan pekerjaan lanjutan yang berisiko.",
+        "Membuat NCR.",
+        "Melibatkan tim mutu, perencana, pengawas, dan manajemen proyek.",
+        "Melakukan evaluasi teknis terhadap hasil uji.",
+        "Menentukan tindakan korektif berdasarkan hasil evaluasi.",
+        "Memverifikasi hasil perbaikan atau keputusan teknis.",
+        "Memisahkan tekanan jadwal dari keputusan mutu dan keselamatan.",
+        "Mendokumentasikan seluruh proses."
+      ],
+      "feedback_template": "Jawaban kuat harus menunjukkan bahwa mutu dan keselamatan tidak boleh dikorbankan demi jadwal."
+    },
+    {
+      "id": "scenario_contract_verbal_vo_basic",
+      "area_slug": "contract",
+      "target_subklasifikasi": "Hukum Kontrak Konstruksi",
+      "difficulty": "basic",
+      "title": "Perubahan Pekerjaan Secara Lisan",
+      "target_roles": [
+        "Ahli Kontrak Kerja Konstruksi"
+      ],
+      "situation": "Pemilik proyek meminta tambahan pekerjaan secara lisan di lapangan. Tim pelaksana ingin langsung mengerjakan karena dianggap sederhana.",
+      "user_tasks": [
+        "Identifikasi risiko kontraktual.",
+        "Tentukan respons yang tepat.",
+        "Sebutkan dokumen yang diperlukan.",
+        "Jelaskan dampak jika pekerjaan dilakukan tanpa dokumen."
+      ],
+      "ideal_answer_points": [
+        "Tidak langsung melaksanakan perubahan tanpa dasar tertulis.",
+        "Meminta instruksi tertulis atau mengikuti prosedur variation order.",
+        "Menganalisis dampak waktu, biaya, mutu, dan risiko.",
+        "Mencatat komunikasi resmi.",
+        "Menyiapkan dokumen pendukung perubahan pekerjaan.",
+        "Menghindari risiko pekerjaan tidak diakui atau tidak dibayar."
+      ],
+      "feedback_template": "Jawaban akan dinilai dari pemahaman prosedur kontrak, dokumentasi, dan risiko perubahan pekerjaan."
+    },
+    {
+      "id": "scenario_contract_claim_advanced",
+      "area_slug": "contract",
+      "target_subklasifikasi": "Hukum Kontrak Konstruksi",
+      "difficulty": "advanced",
+      "title": "Klaim Waktu dan Biaya Akibat Perubahan Desain",
+      "target_roles": [
+        "Ahli Kontrak Kerja Konstruksi"
+      ],
+      "situation": "Perubahan desain menyebabkan tambahan pekerjaan dan keterlambatan. Kontraktor mengajukan klaim waktu dan biaya, tetapi owner meminta bukti yang lebih lengkap.",
+      "user_tasks": [
+        "Tentukan bukti yang harus dikumpulkan.",
+        "Susun struktur klaim.",
+        "Jelaskan analisis dampak waktu dan biaya.",
+        "Tentukan langkah komunikasi resmi."
+      ],
+      "ideal_answer_points": [
+        "Menyusun kronologi kejadian.",
+        "Mengumpulkan instruksi perubahan atau gambar revisi.",
+        "Mengumpulkan korespondensi resmi.",
+        "Menganalisis dampak terhadap jadwal.",
+        "Menghitung dampak biaya yang relevan.",
+        "Menghubungkan klaim dengan klausul kontrak.",
+        "Menyusun dokumen klaim secara sistematis.",
+        "Mengomunikasikan klaim melalui jalur resmi."
+      ],
+      "feedback_template": "Jawaban kuat harus memuat kronologi, bukti, dasar kontrak, analisis dampak, dan komunikasi resmi."
+    },
+    {
+      "id": "scenario_cost_qs_volume_difference_basic",
+      "area_slug": "cost_qs",
+      "target_subklasifikasi": "Estimasi Biaya Konstruksi",
+      "difficulty": "basic",
+      "title": "Selisih Volume antara BOQ dan Lapangan",
+      "target_roles": [
+        "Juru Hitung Kuantitas",
+        "Estimator Biaya Jalan",
+        "Quantity Surveyor",
+        "Ahli Quantity Surveyor"
+      ],
+      "situation": "Volume pekerjaan aktual di lapangan berbeda dari BOQ. Kontraktor mengajukan pembayaran tambahan, tetapi backup quantity belum lengkap.",
+      "user_tasks": [
+        "Tentukan langkah verifikasi volume.",
+        "Sebutkan dokumen pendukung yang diperlukan.",
+        "Jelaskan rekomendasi sementara.",
+        "Tentukan risiko jika pembayaran langsung disetujui."
+      ],
+      "ideal_answer_points": [
+        "Melakukan pengukuran ulang.",
+        "Membandingkan gambar, BOQ, spesifikasi, dan kondisi lapangan.",
+        "Menyusun backup quantity.",
+        "Membuat berita acara pengukuran.",
+        "Memeriksa dasar kontraktual perubahan volume.",
+        "Menunda persetujuan pembayaran tambahan sampai bukti lengkap.",
+        "Mendokumentasikan klarifikasi volume."
+      ],
+      "feedback_template": "Jawaban akan dinilai dari kemampuan memverifikasi volume, menyusun bukti, dan menjaga dasar pembayaran."
+    },
+    {
+      "id": "scenario_cost_qs_claim_advanced",
+      "area_slug": "cost_qs",
+      "target_subklasifikasi": "Estimasi Biaya Konstruksi",
+      "difficulty": "advanced",
+      "title": "Klaim Biaya karena Deviasi Volume Besar",
+      "target_roles": [
+        "Quantity Surveyor",
+        "Ahli Quantity Surveyor"
+      ],
+      "situation": "Pada proyek jalan, volume pekerjaan tanah meningkat signifikan karena kondisi aktual berbeda dari data awal. Kontraktor mengajukan klaim biaya tambahan dan meminta pembayaran progres segera.",
+      "user_tasks": [
+        "Tentukan data teknis dan komersial yang harus diperiksa.",
+        "Susun langkah verifikasi volume.",
+        "Jelaskan analisis biaya yang diperlukan.",
+        "Berikan rekomendasi terhadap progress payment."
+      ],
+      "ideal_answer_points": [
+        "Memeriksa gambar, spesifikasi, BOQ, dan data lapangan.",
+        "Melakukan pengukuran ulang bersama pihak terkait.",
+        "Menyusun backup quantity dan berita acara.",
+        "Memeriksa dasar kontraktual perubahan volume.",
+        "Menganalisis harga satuan dan dampak biaya.",
+        "Memastikan mutu pekerjaan memenuhi persyaratan.",
+        "Memberikan rekomendasi pembayaran berdasarkan bukti terverifikasi.",
+        "Mendokumentasikan seluruh proses klarifikasi."
+      ],
+      "feedback_template": "Jawaban kuat harus menghubungkan volume, bukti teknis, dasar kontrak, mutu, biaya, dan rekomendasi pembayaran."
+    }
+  ]
+}
+```
+
+---
+
+# 220. Scenario Evaluation Rubric
+
+```json id="scenario_evaluation_rubric"
+{
+  "scenario_evaluation_rubric": {
+    "score_scale": {
+      "0": "Jawaban tidak relevan atau tidak menjawab tugas.",
+      "1": "Jawaban sangat umum dan belum menunjukkan tindakan praktis.",
+      "2": "Jawaban mencakup sebagian poin penting tetapi masih kurang bukti atau urutan tindakan.",
+      "3": "Jawaban cukup lengkap, tindakan relevan, dan menunjukkan pemahaman prosedur.",
+      "4": "Jawaban sangat lengkap, sistematis, berbasis bukti, aman, dan sesuai praktik pelaksanaan."
+    },
+    "dimensions": [
+      {
+        "id": "problem_identification",
+        "label": "Identifikasi masalah utama"
+      },
+      {
+        "id": "immediate_action",
+        "label": "Tindakan awal yang tepat"
+      },
+      {
+        "id": "documentation",
+        "label": "Dokumentasi dan bukti pendukung"
+      },
+      {
+        "id": "risk_awareness",
+        "label": "Kesadaran risiko keselamatan, mutu, kontrak, biaya, atau jadwal"
+      },
+      {
+        "id": "follow_up",
+        "label": "Tindak lanjut dan pencegahan"
+      }
+    ],
+    "feedback_template": {
+      "positive": "Jawaban Anda sudah mencakup beberapa poin penting: {{matched_points}}.",
+      "improvement": "Jawaban dapat diperkuat dengan menambahkan: {{missing_points}}.",
+      "model_answer_intro": "Contoh jawaban yang lebih kuat:",
+      "disclaimer": "Feedback ini adalah latihan pembelajaran, bukan penilaian resmi kompetensi."
+    }
+  }
+}
+```
+
+---
+
+# 221. `mockInterview.seed.json`
+
+```json id="mock_interview_seed_json"
+{
+  "version": "1.0.0",
+  "classification": {
+    "code": "E",
+    "name": "Manajemen Pelaksanaan"
+  },
+  "framework": {
+    "name": "STAR",
+    "description": "Gunakan struktur Situation, Task, Action, Result untuk membantu pengguna menjawab pertanyaan asesor secara jelas dan berbasis pengalaman."
+  },
+  "question_sets": [
+    {
+      "id": "mock_k3",
+      "area_slug": "k3",
+      "title": "Simulasi Wawancara K3 / Keselamatan Konstruksi",
+      "target_roles": [
+        "Petugas Keselamatan Konstruksi",
+        "Petugas K3 Konstruksi",
+        "Personil Keselamatan dan Kesehatan Kerja",
+        "Supervisor K3",
+        "Ahli K3 Konstruksi",
+        "Ahli Keselamatan Konstruksi"
+      ],
+      "questions": [
+        {
+          "id": "mock_k3_q1",
+          "question": "Ceritakan pengalaman Anda mengidentifikasi bahaya sebelum pekerjaan dimulai.",
+          "expected_answer_points": [
+            "Menjelaskan konteks proyek atau pekerjaan.",
+            "Menyebutkan bahaya yang ditemukan.",
+            "Menjelaskan cara menilai risiko.",
+            "Menjelaskan pengendalian yang diterapkan.",
+            "Menyebutkan hasil atau dampak tindakan."
+          ]
+        },
+        {
+          "id": "mock_k3_q2",
+          "question": "Apa tindakan Anda jika menemukan pekerja tidak menggunakan APD pada pekerjaan berisiko?",
+          "expected_answer_points": [
+            "Menghentikan atau menunda pekerjaan berisiko.",
+            "Memberikan instruksi keselamatan.",
+            "Memastikan APD digunakan.",
+            "Mencatat temuan.",
+            "Melakukan tindak lanjut atau pembinaan."
+          ]
+        },
+        {
+          "id": "mock_k3_q3",
+          "question": "Bagaimana Anda menindaklanjuti near miss di proyek?",
+          "expected_answer_points": [
+            "Mengamankan area.",
+            "Mencatat kejadian.",
+            "Melakukan investigasi penyebab.",
+            "Menetapkan tindakan korektif.",
+            "Memonitor efektivitas tindakan."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mock_project",
+      "area_slug": "project",
+      "title": "Simulasi Wawancara Manajemen Proyek / Konstruksi",
+      "target_roles": [
+        "Manajer Logistik Proyek",
+        "Ahli Bidang Keahlian Manajemen Konstruksi",
+        "Ahli Manajemen Proyek Konstruksi",
+        "Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat"
+      ],
+      "questions": [
+        {
+          "id": "mock_project_q1",
+          "question": "Ceritakan pengalaman Anda mengendalikan keterlambatan proyek.",
+          "expected_answer_points": [
+            "Menjelaskan data rencana dan aktual.",
+            "Mengidentifikasi penyebab keterlambatan.",
+            "Menjelaskan dampak terhadap jadwal, biaya, mutu, atau risiko.",
+            "Menyusun tindakan korektif atau recovery plan.",
+            "Menyebutkan hasil tindakan."
+          ]
+        },
+        {
+          "id": "mock_project_q2",
+          "question": "Bagaimana Anda mengoordinasikan tenaga kerja, material, alat, dan subkontraktor?",
+          "expected_answer_points": [
+            "Menjelaskan perencanaan kebutuhan sumber daya.",
+            "Menjelaskan koordinasi jadwal.",
+            "Mengendalikan ketersediaan material dan alat.",
+            "Berkomunikasi dengan pihak terkait.",
+            "Melaporkan progres atau kendala."
+          ]
+        },
+        {
+          "id": "mock_project_q3",
+          "question": "Apa indikator yang Anda gunakan untuk memantau pelaksanaan proyek?",
+          "expected_answer_points": [
+            "Progres fisik.",
+            "Deviasi jadwal.",
+            "Deviasi biaya.",
+            "Temuan mutu.",
+            "Risiko dan isu lapangan."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mock_quality",
+      "area_slug": "quality",
+      "title": "Simulasi Wawancara Pengendalian Mutu",
+      "target_roles": [
+        "Quality Engineer",
+        "Quality Assurance Engineer",
+        "Ahli Sistem Manajemen Mutu Konstruksi"
+      ],
+      "questions": [
+        {
+          "id": "mock_quality_q1",
+          "question": "Ceritakan pengalaman Anda menangani ketidaksesuaian mutu pekerjaan.",
+          "expected_answer_points": [
+            "Menjelaskan jenis ketidaksesuaian.",
+            "Menyebutkan spesifikasi atau standar yang tidak terpenuhi.",
+            "Membuat atau menindaklanjuti NCR.",
+            "Melakukan analisis penyebab.",
+            "Menjelaskan tindakan korektif dan verifikasi."
+          ]
+        },
+        {
+          "id": "mock_quality_q2",
+          "question": "Bagaimana Anda memastikan pekerjaan sesuai spesifikasi?",
+          "expected_answer_points": [
+            "Memeriksa dokumen teknis.",
+            "Menggunakan ITP atau checklist inspeksi.",
+            "Melakukan pengujian atau verifikasi.",
+            "Mendokumentasikan hasil pemeriksaan.",
+            "Menindaklanjuti temuan."
+          ]
+        },
+        {
+          "id": "mock_quality_q3",
+          "question": "Apa perbedaan QA dan QC dalam pengalaman kerja Anda?",
+          "expected_answer_points": [
+            "Menjelaskan QA sebagai sistem pencegahan.",
+            "Menjelaskan QC sebagai pemeriksaan hasil.",
+            "Memberikan contoh dokumen QA.",
+            "Memberikan contoh aktivitas QC.",
+            "Menjelaskan hubungan QA dan QC dalam proyek."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mock_contract",
+      "area_slug": "contract",
+      "title": "Simulasi Wawancara Hukum Kontrak Konstruksi",
+      "target_roles": [
+        "Ahli Kontrak Kerja Konstruksi"
+      ],
+      "questions": [
+        {
+          "id": "mock_contract_q1",
+          "question": "Ceritakan pengalaman Anda menangani perubahan pekerjaan dalam proyek.",
+          "expected_answer_points": [
+            "Menjelaskan dasar permintaan perubahan.",
+            "Menyebutkan instruksi tertulis atau dokumen kontraktual.",
+            "Menganalisis dampak waktu.",
+            "Menganalisis dampak biaya.",
+            "Menjelaskan persetujuan atau tindak lanjut."
+          ]
+        },
+        {
+          "id": "mock_contract_q2",
+          "question": "Bagaimana Anda menyiapkan bukti pendukung klaim?",
+          "expected_answer_points": [
+            "Menyusun kronologi kejadian.",
+            "Mengumpulkan korespondensi resmi.",
+            "Mengumpulkan instruksi lapangan atau perubahan.",
+            "Mengumpulkan data waktu dan biaya.",
+            "Menyusun dokumen klaim secara sistematis."
+          ]
+        },
+        {
+          "id": "mock_contract_q3",
+          "question": "Apa risiko jika pekerjaan tambahan dilakukan tanpa instruksi tertulis?",
+          "expected_answer_points": [
+            "Risiko tidak diakui.",
+            "Risiko tidak dibayar.",
+            "Risiko sengketa.",
+            "Kesulitan pembuktian.",
+            "Ketidaksesuaian dengan prosedur kontrak."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mock_cost_qs",
+      "area_slug": "cost_qs",
+      "title": "Simulasi Wawancara Estimasi Biaya / Quantity Surveying",
+      "target_roles": [
+        "Juru Hitung Kuantitas",
+        "Estimator Biaya Jalan",
+        "Quantity Surveyor",
+        "Ahli Quantity Surveyor"
+      ],
+      "questions": [
+        {
+          "id": "mock_cost_qs_q1",
+          "question": "Ceritakan pengalaman Anda menghitung volume pekerjaan.",
+          "expected_answer_points": [
+            "Menjelaskan jenis pekerjaan.",
+            "Menyebutkan dasar gambar atau spesifikasi.",
+            "Menjelaskan metode pengukuran.",
+            "Menyusun backup quantity.",
+            "Menjelaskan verifikasi atau persetujuan."
+          ]
+        },
+        {
+          "id": "mock_cost_qs_q2",
+          "question": "Bagaimana Anda menangani selisih volume antara BOQ dan kondisi aktual?",
+          "expected_answer_points": [
+            "Melakukan pengukuran ulang.",
+            "Membandingkan gambar, BOQ, dan kondisi lapangan.",
+            "Menyusun berita acara pengukuran.",
+            "Memeriksa dasar kontraktual.",
+            "Memberi rekomendasi pembayaran atau klaim."
+          ]
+        },
+        {
+          "id": "mock_cost_qs_q3",
+          "question": "Apa yang Anda periksa sebelum merekomendasikan progress payment?",
+          "expected_answer_points": [
+            "Volume terpasang.",
+            "Dokumen pengukuran.",
+            "Mutu pekerjaan.",
+            "Persetujuan lapangan.",
+            "Kesesuaian dengan kontrak."
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+---
+
+# 222. Mock Interview Feedback Template
+
+```json id="mock_interview_feedback_template"
+{
+  "mock_interview_feedback": {
+    "score_scale": {
+      "0": "Tidak menjawab atau tidak relevan.",
+      "1": "Jawaban sangat umum dan belum menunjukkan pengalaman nyata.",
+      "2": "Jawaban menjawab sebagian, tetapi belum lengkap atau belum berbasis bukti.",
+      "3": "Jawaban cukup lengkap, relevan, dan menunjukkan tindakan nyata.",
+      "4": "Jawaban sangat kuat, sistematis, berbasis pengalaman, bukti, dan hasil terukur."
+    },
+    "star_components": {
+      "situation": "Konteks proyek atau masalah dijelaskan.",
+      "task": "Tanggung jawab pengguna dijelaskan.",
+      "action": "Tindakan pengguna dijelaskan secara konkret.",
+      "result": "Hasil atau dampak tindakan dijelaskan."
+    },
+    "feedback_template": "Jawaban Anda sudah mencakup {{matched_points}}. Agar lebih kuat, tambahkan {{missing_points}}. Gunakan struktur STAR: Situation, Task, Action, Result.",
+    "improved_answer_template": "Contoh jawaban yang lebih kuat: Pada {{situation}}, saya bertanggung jawab untuk {{task}}. Saya melakukan {{action}}. Hasilnya, {{result}}."
+  }
+}
+```
+
+---

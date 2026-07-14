@@ -1,0 +1,295 @@
+<aside>
+📚
+
+Struktur **Knowledge Base (KB)** LexCom: arsitektur sumber, taksonomi, skema metadata, pipeline ingest, dan strategi pencarian. Mencakup KUHP baru, KUHPerdata, UU sektoral, peraturan pelaksana, yurisprudensi, doktrin, dan template dokumen.
+
+</aside>
+
+## 1. Arsitektur KB — 7 Koleksi
+
+```mermaid
+flowchart LR
+	Q["Pertanyaan User"] --> R["Retrieval Layer"]
+	R --> KB1["KB-KUHP-2023"]
+	R --> KB2["KB-KUHPERDATA"]
+	R --> KB3["KB-UU-SEKTORAL"]
+	R --> KB4["KB-PERATURAN-PELAKSANA"]
+	R --> KB5["KB-YURISPRUDENSI"]
+	R --> KB6["KB-DOKTRIN"]
+	R --> KB7["KB-TEMPLATE"]
+	KB1 & KB2 & KB3 & KB4 & KB5 & KB6 & KB7 --> S["Synthesis + Citation"]
+	S --> A["Jawaban IRAC+"]
+```
+
+| **Koleksi KB** | **Cakupan** | **Volume Awal (target)** | **Refresh** |
+| --- | --- | --- | --- |
+| KB-KUHP-2023 | UU 1/2023 (KUHP baru) per Bab/Pasal + KUHP lama transisi | 624 pasal | Saat amandemen |
+| KB-KUHPERDATA | Buku I–IV BW + HIR/RBg + UU Perkawinan | 1.993 pasal | Saat amandemen |
+| KB-UU-SEKTORAL | UU CK, PT, ITE, Tipikor, TPPU, PDP, dll (≥50 UU) | 50+ UU | Mingguan |
+| KB-PERATURAN-PELAKSANA | PP, Perpres, Permen, POJK, PERMA, SEMA | 500+ peraturan | Mingguan |
+| KB-YURISPRUDENSI | Putusan MA, MK, PT, PN, PHI, Niaga, Pajak, PTUN | 500–2.000 putusan landmark | Bulanan |
+| KB-DOKTRIN | Buku ajar, jurnal, opini hukum | 100+ dokumen | Triwulanan |
+| KB-TEMPLATE | Template dokumen hukum | 50+ template | On-demand |
+
+## 2. KB-KUHP-2023 (UU 1/2023)
+
+- **Sumber otoritatif:** [peraturan.bpk.go.id/Details/234935/uu-no-1-tahun-2023](http://peraturan.bpk.go.id/Details/234935/uu-no-1-tahun-2023)
+- **Status:** Berlaku efektif **2 Januari 2026** (3 tahun sejak diundangkan)
+- **Periode transisi:** KUHP lama (WvS) masih dipakai untuk delik sebelum 2 Jan 2026 (asas legalitas Pasal 1 KUHP — lex temporis delicti).
+- **Struktur 2 Buku:**
+    - **Buku Kesatu** — Aturan Umum (Pasal 1–187)
+    - **Buku Kedua** — Tindak Pidana (Pasal 188–624)
+
+### Indeks Bab Buku Kedua (sebagian)
+
+- Bab I Tindak Pidana terhadap Keamanan Negara
+- Bab II Tindak Pidana terhadap Martabat Presiden/Wakil Presiden
+- Bab III Tindak Pidana terhadap Negara Sahabat
+- Bab IV Tindak Pidana terhadap Penyelenggaraan Peradilan
+- Bab V Tindak Pidana terhadap Ketertiban Umum
+- Bab VI Tindak Pidana terhadap Proses Peradilan
+- Bab VII Tindak Pidana terhadap Agama, Kepercayaan, dan Kehidupan Beragama
+- Bab VIII Tindak Pidana yang Membahayakan Keamanan Umum
+- ... (sampai Bab XXXVII)
+
+### Highlights perubahan vs KUHP lama
+
+- Hukuman mati → *alternative penalty* dengan masa percobaan 10 tahun (Pasal 100–101)
+- Pidana denda **kategori I–VIII** (Pasal 79–80) menggantikan nominal
+- **Restorative justice** terkodifikasi (Pasal 132 dst.)
+- Tindak pidana adat hidup (*living law*) diakui (Pasal 2)
+- **Korporasi** sebagai subjek tindak pidana (Pasal 45–50)
+- Penyederhanaan delik kesusilaan, penghinaan, dan ujaran kebencian
+
+### Skema metadata pasal
+
+```json
+{
+	"id": "KUHP2023-Pasal-XXX",
+	"buku": "I|II",
+	"bab": "...",
+	"bagian": "...",
+	"pasal": 0,
+	"ayat": [],
+	"teks": "...",
+	"tags": ["..."],
+	"unsur": ["..."],
+	"ancaman": { "penjara": "...", "denda_kategori": "..." },
+	"delik_aduan": false,
+	"berlaku_sejak": "2026-01-02",
+	"riwayat": [],
+	"sumber_url": "https://peraturan.bpk.go.id/..."
+}
+```
+
+## 3. KB-KUHPERDATA & Acara Perdata
+
+- **KUHPerdata (BW):** Buku I (Orang), Buku II (Benda), Buku III (Perikatan), Buku IV (Pembuktian & Daluwarsa)
+- **Acara perdata:** HIR (Jawa-Madura), RBg (luar Jawa-Madura), UU 14/1985 jo. 5/2004 jo. 3/2009 (MA)
+- **PERMA penting:** PERMA 1/2016 (Mediasi), PERMA 2/2015 (Gugatan Sederhana), PERMA 1/2019 (Administrasi/Persidangan elektronik), PERMA 7/2022 (Pedoman Mengadili).
+- **UU Perkawinan:** UU 1/1974 jo. UU 16/2019
+- **Waris:** BW, KHI (Inpres 1/1991), Hukum Adat
+
+## 4. KB-UU-SEKTORAL (50+ UU)
+
+### Hukum Pidana Khusus
+
+- UU 8/1981 (KUHAP)
+- UU 31/1999 jo. 20/2001 (Tipikor)
+- UU 8/2010 (TPPU)
+- UU 11/2008 jo. 19/2016 jo. 1/2024 (ITE)
+- UU 21/2007 (TPPO), UU 35/2009 (Narkotika), UU 23/2004 jo. 16/2019 (KDRT)
+- UU 11/2012 (SPPA — Anak)
+
+### Korporasi & Pasar Modal
+
+- UU 40/2007 (PT)
+- UU 6/2023 (Cipta Kerja)
+- UU 8/1995 + UU 4/2023 (P2SK — Pasar Modal & Keuangan)
+- UU 21/2011 (OJK), UU 24/2004 (LPS)
+- UU 5/1999 (Anti Monopoli/KPPU), UU 8/1999 (Konsumen)
+
+### Ketenagakerjaan
+
+- UU 13/2003 (Ketenagakerjaan)
+- UU 6/2023 (CK — klaster ketenagakerjaan)
+- PP 35/2021, PP 36/2021, UU 2/2004 (PPHI)
+
+### Pertanahan & SDA
+
+- UU 5/1960 (UUPA)
+- PP 18/2021 (Hak Pengelolaan, HAT, Satuan Rumah Susun, Pendaftaran Tanah)
+- PP 19/2021 (Pengadaan Tanah)
+- UU 2/2012 (Pengadaan Tanah Kepentingan Umum)
+- UU 41/2009 (LP2B), UU 32/2009 (PPLH)
+
+### Perpajakan
+
+- UU KUP (UU 6/1983 dst.)
+- UU 7/2021 (HPP)
+- UU 14/2002 (Pengadilan Pajak)
+
+### Hukum Niaga & Insolvensi
+
+- UU 37/2004 (Kepailitan & PKPU)
+- UU 42/1999 (Jaminan Fidusia), UU 4/1996 (Hak Tanggungan)
+- UU 30/1999 (Arbitrase & APS)
+
+### Privasi, Data & Teknologi
+
+- UU 27/2022 (PDP)
+- UU 36/1999 (Telekomunikasi), UU 1/2024 (perubahan kedua ITE)
+
+### Lainnya (HKI, Lingkungan, Kesehatan, Pemilu, dll)
+
+- UU 28/2014 (Hak Cipta), UU 13/2016 (Paten), UU 20/2016 (Merek)
+- UU 32/2009 (PPLH), UU 17/2023 (Kesehatan)
+- UU 7/2017 (Pemilu)
+
+## 5. KB-PERATURAN-PELAKSANA
+
+- **PP & Perpres:** Hierarki UU → PP → Perpres → Permen
+- **POJK & SE-OJK:** Pasar modal, IKNB, fintech
+- **PERMA & SEMA:** Mahkamah Agung
+- **PerKa BPN/ATR, Permenaker, PMK, Permentan**
+- **Perda Provinsi/Kabupaten/Kota** (untuk konteks lokal)
+
+### Sumber resmi yang dikrol otomatis
+
+- [peraturan.go.id](http://peraturan.go.id) (BPHN/Kemenkumham)
+- [peraturan.bpk.go.id](http://peraturan.bpk.go.id) (BPK)
+- [jdih.bpk.go.id](http://jdih.bpk.go.id), JDIH-JDIH K/L
+- [setneg.go.id](http://setneg.go.id)
+
+## 6. KB-YURISPRUDENSI
+
+### Sumber utama
+
+- [putusan3.mahkamahagung.go.id](http://putusan3.mahkamahagung.go.id) — MA & pengadilan di bawahnya
+- [mkri.id](http://mkri.id) — Putusan MK (judicial review)
+- Direktori Putusan Pengadilan Niaga, PHI, PTUN
+- Direktori Putusan Pengadilan Pajak ([setpp.kemenkeu.go.id](http://setpp.kemenkeu.go.id))
+
+### Taksonomi putusan
+
+```mermaid
+flowchart TD
+	A["Yurisprudensi"] --> B["MA"]
+	A --> C["MK"]
+	A --> D["Pengadilan Tk. Banding/Tk. Pertama"]
+	B --> B1["Pidana"]
+	B --> B2["Perdata"]
+	B --> B3["TUN"]
+	B --> B4["Agama"]
+	B --> B5["Niaga (Pailit/PKPU/HKI)"]
+	B --> B6["PHI"]
+	B --> B7["Pajak"]
+	B --> B8["Militer"]
+	C --> C1["PUU - Pengujian UU"]
+	C --> C2["SKLN"]
+	C --> C3["Pemilu/PHPU"]
+```
+
+### Skema metadata putusan
+
+```json
+{
+	"id": "PUTUSAN-MA-XXX-K-PDT-2024",
+	"nomor": "...",
+	"jenis": "MA|MK|PT|PN|PHI|Niaga|Pajak|PTUN",
+	"kamar": "Pidana|Perdata|TUN|Agama|...",
+	"tahun": 2024,
+	"tanggal_putus": "YYYY-MM-DD",
+	"para_pihak": ["..."],
+	"objek_perkara": "...",
+	"dasar_hukum": ["Pasal 1365 KUHPerdata", "..."],
+	"amar": "Mengabulkan|Menolak|Tidak Dapat Diterima|...",
+	"ratio_decidendi": "...",
+	"obiter_dictum": "...",
+	"yurisprudensi_tetap": false,
+	"link_pdf": "https://putusan3.mahkamahagung.go.id/..."
+}
+```
+
+### Aturan citation putusan
+
+- **MA:** `Putusan MA No. [Nomor]/[Kamar]/[Tahun]` — contoh: `Putusan MA No. 1234 K/Pdt/2024`
+- **MK:** `Putusan MK No. [Nomor]/PUU-[Roman]/[Tahun]` — contoh: `Putusan MK No. 50/PUU-XX/2022`
+- Selalu sertakan tautan verifikasi.
+
+## 7. KB-DOKTRIN
+
+- Buku ajar standar (Subekti, Satjipto Rahardjo, Mochtar Kusumaatmadja, Andi Hamzah, dll.)
+- Jurnal hukum terindeks SINTA/DOAJ
+- Opini hukum lembaga (Komisi Yudisial, Komnas HAM, KPK, OJK)
+- Diberi label kekuatan: *primer* (UU/putusan) vs *sekunder* (doktrin) vs *tersier* (kamus, ensiklopedia)
+
+## 8. KB-TEMPLATE
+
+- Lihat halaman 58 untuk daftar lengkap template (gugatan, kontrak, LO, somasi, kuasa, PKPU/Pailit).
+
+## 9. Pemetaan ke Spesialisasi Internasional
+
+Referensi [aiforwork.co](http://aiforwork.co) (14 spesialisasi lawyer) dipetakan ke 10 agen LexCom:
+
+| [**aiforwork.co**](http://aiforwork.co) | **Agen LexCom** | **Catatan Konteks Indonesia** |
+| --- | --- | --- |
+| Criminal Defense Lawyer | AGENT-PIDANA | KUHP baru, KUHAP, restoratif |
+| Family Lawyer | AGENT-PERDATA | UU Perkawinan + KHI + adat |
+| Trust and Estates Lawyer | AGENT-PERDATA (waris) | BW + KHI + adat (3 sistem) |
+| Civil Rights Lawyer | AGENT-PERDATA + PIDANA | UU HAM, UU Diskriminasi Ras |
+| Personal Injury Lawyer | AGENT-PERDATA (PMH) | Pasal 1365 KUHPerdata |
+| Real Estate Lawyer | AGENT-PERTANAHAN | UUPA, PP 18/2021 |
+| Tax Lawyer | AGENT-PAJAK | UU HPP, KUP, Pengadilan Pajak |
+| Corporate Lawyer | AGENT-KORPORASI | UU PT, GCG, POJK |
+| Securities Lawyer | AGENT-KORPORASI (pasar modal) | UU 4/2023 P2SK, POJK |
+| Bankruptcy Lawyer | AGENT-KEPAILITAN | UU 37/2004 |
+| Employment Lawyer | AGENT-KETENAGAKERJAAN | UU 13/2003 + UU CK |
+| Intellectual Property Lawyer | AGENT-KORPORASI (HKI subdomain) | UU Hak Cipta/Paten/Merek |
+| Immigration Lawyer | (Roadmap fase 2) | UU 6/2011 Keimigrasian |
+| Paralegal | AGENT-DRAFTER | Drafting & dokumentasi |
+
+## 10. Pipeline Ingest & Kurasi
+
+```mermaid
+flowchart LR
+	S1["Sumber Resmi (peraturan.bpk.go.id, putusan3, mkri.id)"] --> C1["Crawler/Scraper"]
+	C1 --> P1["Parser PDF/HTML"]
+	P1 --> N["Normalisasi: Pasal/Ayat/Bab"]
+	N --> M["Metadata Tagger (LLM)"]
+	M --> Q["QA Legal Review (paralegal)"]
+	Q --> E["Embedding"]
+	E --> V["Vector Store + Keyword Index"]
+	V --> R["Retrieval API"]
+```
+
+### Aturan kurasi
+
+- **Sumber primer hanya** untuk UU/peraturan: [peraturan.bpk.go.id](http://peraturan.bpk.go.id) atau lembaran negara.
+- **Versi konsolidasi** disimpan beserta riwayat amandemen.
+- **Putusan MA/MK** disitasi langsung dari portal resmi (link verifikasi wajib).
+- Setiap dokumen di-review paralegal sebelum masuk index.
+- Tag *deprecated* untuk pasal yang dicabut/dibatalkan MK.
+
+## 11. Strategi Retrieval
+
+- **Hybrid search:** vector (semantic) + BM25 (keyword) + filter metadata.
+- **Reranker** untuk relevansi top-K → top-N.
+- **Citation forcing:** sintesis hanya boleh menggunakan dokumen yang tertarik.
+- **Negative retrieval:** filter pasal/putusan yang sudah tidak berlaku.
+- **Cross-collection:** orchestrator memilih koleksi yang relevan berdasarkan klasifikasi domain.
+
+## 12. Tata Kelola & Keamanan
+
+- **Logging:** setiap retrieval & sitasi dicatat untuk audit.
+- **Privasi:** input pengguna dianonimisasi sebelum disimpan.
+- **Akses:** KB read-only ke agen; mutation hanya via pipeline kurasi.
+- **Backup:** harian, retensi 90 hari.
+- **Compliance UU PDP:** data klien tidak di-fine-tune ke model.
+
+<aside>
+⚠️
+
+**Catatan kritis:** KB harus **selalu terhubung ke sumber primer resmi**. Tidak ada "hafalan" pasal di model — semua jawaban hukum **wajib** mengutip dokumen yang ada di KB dengan tautan verifikasi.
+
+</aside>

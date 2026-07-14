@@ -1,0 +1,231 @@
+Siap. Aku lanjutin dengan versi yang **langsung bisa kamu copy-paste**:
+
+1. **Urutan mini apps (final)**
+2. **Nama + deskripsi** (buat di UI)
+3. **Item/field yang disarankan** per mini app (ringkas tapi tajam)
+4. **Alur kerja** biar nyambung ke Project Brain
+
+---
+
+# A) Urutan Mini Apps (Final Roadmap)
+
+## Fase 1 — Wajib (biar kepakai dari hari pertama)
+
+1. **Checklist Penanganan Isu**
+2. **Decision Summary**
+3. **Penilaian Risiko**
+
+## Fase 2 — Operasional (biar tim jalan rapi)
+
+4. **Issue Log**
+5. **Action Tracker**
+6. **Pelacak Progres**
+
+## Fase 3 — Manajerial (biar 1 layar beres)
+
+7. **Project Snapshot**
+8. **Risk Radar**
+9. **Generator Dokumen**
+
+## Fase 4 — Advanced (kalau proyek kompleks/sering berubah)
+
+10. **Change Log**
+11. **Kalkulator**
+12. **Custom**
+
+---
+
+# B) Copy-Paste: Nama & Deskripsi Mini App (UI)
+
+### 1) Checklist Penanganan Isu
+
+**Deskripsi:** Daftar langkah standar untuk memastikan isu dianalisa, diputuskan, ditindaklanjuti, dan ditutup.
+
+**Item checklist (contoh siap tempel):**
+
+* Isu teridentifikasi & deskripsi jelas
+* Lokasi/elemen isu terkonfirmasi
+* Data pendukung terkumpul (foto, laporan, hasil uji)
+* Analisa teknis dilakukan
+* Alternatif solusi dibuat
+* Risiko dinilai
+* Keputusan diambil & dicatat
+* PIC & due date ditetapkan
+* Tindak lanjut dieksekusi
+* Verifikasi selesai & isu ditutup
+
+---
+
+### 2) Decision Summary
+
+**Deskripsi:** Ringkasan keputusan penting proyek untuk audit trail dan pembelajaran.
+
+**Field ideal (kalau tipe mini app kamu mendukung field):**
+
+* Judul keputusan
+* Tanggal keputusan
+* Ringkasan
+* Alasan
+* Risiko (Low/Medium/High)
+* Dampak (Cost/Time/Quality/Safety/Multi)
+
+---
+
+### 3) Penilaian Risiko
+
+**Deskripsi:** Menilai risiko isu/keputusan dengan skor likelihood x impact dan prioritas mitigasi.
+
+**Field:**
+
+* Kategori risiko (Safety/Quality/Structural/Cost/Schedule/Environment)
+* Likelihood (1–5)
+* Impact (1–5)
+* Risk level (auto: Low/Medium/High)
+* Mitigasi (opsional)
+* PIC (opsional)
+
+---
+
+### 4) Issue Log
+
+**Deskripsi:** Daftar isu aktif dan histori isu untuk monitoring proyek.
+
+**Field:**
+
+* ID isu (mis. ISU-001)
+* Tipe isu
+* Lokasi/elemen
+* Status (Open/Monitoring/Closed)
+* Level risiko
+* PIC
+* Update terakhir
+
+---
+
+### 5) Action Tracker
+
+**Deskripsi:** Pelacakan tugas tindak lanjut (who does what by when).
+
+**Field:**
+
+* Action item
+* Terkait isu (ID/teks)
+* PIC
+* Due date
+* Status (Not started/In progress/Done/Blocked)
+* Catatan
+
+---
+
+### 6) Pelacak Progres
+
+**Deskripsi:** Monitoring progres rencana vs aktual untuk paket pekerjaan utama.
+
+**Field:**
+
+* Aktivitas / paket kerja
+* Planned (%)
+* Actual (%)
+* Status (Ahead/On track/Delay)
+* Catatan kendala
+
+---
+
+### 7) Project Snapshot
+
+**Deskripsi:** Ringkasan kondisi proyek dalam satu tampilan (untuk owner/manajemen).
+
+**Isi ideal (banyak yang auto):**
+
+* Tahap proyek saat ini
+* Jumlah isu open
+* Jumlah risiko high
+* Ringkasan progres
+* Keputusan terbaru
+* Update terakhir
+
+---
+
+### 8) Risk Radar
+
+**Deskripsi:** Peta risiko per kategori dan tren (naik/stabil/turun).
+
+**Field:**
+
+* Kategori
+* Level (Low/Medium/High)
+* Tren (Increasing/Stable/Decreasing)
+* Tanggal review
+
+---
+
+### 9) Generator Dokumen
+
+**Deskripsi:** Menghasilkan dokumen standar dari data Project Brain (notulen, laporan inspeksi, weekly report).
+
+**Field:**
+
+* Jenis dokumen
+* Periode
+* Output format (PDF/DOCX)
+* Catatan tambahan (opsional)
+
+---
+
+### 10) Change Log
+
+**Deskripsi:** Catatan perubahan desain/metode/scope dan dampaknya.
+
+**Field:**
+
+* Tipe perubahan (Design/Method/Scope)
+* Deskripsi perubahan
+* Alasan
+* Dampak (Cost/Time/Quality)
+* Status approval
+* Tanggal
+
+---
+
+### 11) Kalkulator
+
+**Deskripsi:** Hitung cepat volume/berat/kebutuhan material.
+
+**Field:**
+
+* Jenis kalkulasi
+* Input angka (1–3)
+* Result
+
+---
+
+# C) Alur Kerja yang Nyambung ke Project Brain (Simple)
+
+**1. Isi Project Brain** (konteks proyek + isu)
+→ `issue_type`, `issue_status`, `issue_since`, `decision_*`
+
+**2. Saat ada isu**
+
+* buka **Issue Log** → buat entri isu
+* buka **Penilaian Risiko** → tentukan risk
+* buka **Checklist Penanganan Isu** → pastikan steps beres
+* buka **Action Tracker** → assign PIC & due date
+* setelah keputusan → catat di **Decision Summary**
+
+**3. Mingguan**
+
+* update **Pelacak Progres**
+* lihat **Project Snapshot** + **Risk Radar**
+* generate report via **Generator Dokumen**
+
+---
+
+## Next step (langsung eksekusi)
+
+Karena kamu bilang “lanjut”, pilih salah satu mode ini:
+
+1. **Aku buatin 10 item checklist final** khusus proyek sipil (lebih “lapangan”)
+2. **Aku buatin template opsinya** (dropdown) yang paling pas (issue_type, risk_category, status, dll)
+3. **Aku buatin prompt/logic** supaya chatbot otomatis ngarahin: “kamu harus isi mini app apa sekarang”
+
+Kamu mau lanjut yang nomor berapa?

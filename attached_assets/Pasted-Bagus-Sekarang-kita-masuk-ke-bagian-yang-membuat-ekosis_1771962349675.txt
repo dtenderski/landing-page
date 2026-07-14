@@ -1,0 +1,178 @@
+Bagus.
+Sekarang kita masuk ke bagian yang membuat ekosistem Anda benar-benar terasa “terintegrasi” tanpa perlu ubah platform:
+
+> 🔁 **SUMMARY GENERATOR MODE (Reusable Across All Bots)**
+
+Ini adalah kemampuan standar:
+
+Jika user memberi data bebas →
+bot menawarkan →
+“Ubah ke *_SUMMARY v1 agar bisa dipakai di bot lain.”
+
+Tanpa state.
+Tanpa subflow.
+Tanpa perubahan arsitektur.
+
+Hanya disiplin format.
+
+---
+
+# 🎯 1️⃣ SUMMARY GENERATOR MODE — KONSEP GENERIK
+
+Tambahkan blok ini ke semua chatbot (di system prompt):
+
+---
+
+```
+SUMMARY_GENERATOR_MODE
+
+Jika user memberikan data mentah (narasi / poin-poin / dokumen ringkas),
+dan belum dalam format *_SUMMARY v1,
+
+Maka setelah analisis selesai, tawarkan:
+
+"Apakah Anda ingin saya ubah data ini menjadi format *_SUMMARY v1
+agar bisa digunakan di chatbot lain (TRC / ECSG / SBU / SKK)?"
+
+Jika user setuju:
+→ Outputkan *_SUMMARY v1 saja (tanpa analisis ulang panjang).
+→ Gunakan format schema resmi.
+→ Jangan tambahkan opini di dalam summary.
+```
+
+---
+
+Itu saja.
+
+Sekarang kita buat versi spesifik per bot.
+
+---
+
+# 🏛 2️⃣ PERIZINAN USAHA → LICENSING_SUMMARY GENERATOR
+
+Tambahkan di akhir respons:
+
+---
+
+**Ingin menggunakan data ini di modul lain (Tender / Executive)?**
+
+Saya bisa mengubahnya menjadi format standar `LICENSING_SUMMARY v1`
+yang bisa langsung dipaste ke chatbot lain.
+
+Ketik:
+👉 **GENERATE LICENSING_SUMMARY**
+
+---
+
+### Jika user ketik itu → output hanya:
+
+```
+LICENSING_SUMMARY v1
+...
+```
+
+Tanpa analisis tambahan.
+
+---
+
+# 🏗 3️⃣ SBU ADVISOR → SBU_SUMMARY GENERATOR
+
+Tambahkan:
+
+---
+
+Saya dapat merangkum hasil ini ke format standar `SBU_SUMMARY v1`
+agar bisa digunakan di Tender Readiness Checker.
+
+Ketik:
+👉 **GENERATE SBU_SUMMARY**
+
+---
+
+---
+
+# 👷 4️⃣ SKK ADVISOR → SKK_SUMMARY GENERATOR
+
+Tambahkan:
+
+---
+
+Jika Anda ingin menggunakan data tenaga ini untuk evaluasi tender,
+saya dapat mengubahnya menjadi `SKK_SUMMARY v1`.
+
+Ketik:
+👉 **GENERATE SKK_SUMMARY**
+
+---
+
+---
+
+# 📑 5️⃣ TRC → INPUT_PACKET GENERATOR (Sudah Ada, Tinggal Konsistenkan)
+
+Di TRC sudah ada:
+
+INPUT_PACKET
+
+Pastikan itu benar-benar bersih dan bisa dipakai ECSG.
+
+---
+
+# 🧠 Kenapa Ini Sangat Powerful?
+
+Karena sekarang alur user jadi seperti ini:
+
+User masuk SKK bot
+→ isi data bebas
+→ generate SKK_SUMMARY
+→ paste ke TRC
+→ generate INPUT_PACKET
+→ paste ke ECSG
+
+Tanpa platform state.
+
+Tapi terasa seperti sistem terpadu.
+
+---
+
+# 🔒 RULE PENTING UNTUK SUMMARY GENERATOR
+
+Tambahkan ini agar summary tetap bersih:
+
+```
+SUMMARY_OUTPUT_RULE
+
+Ketika menghasilkan *_SUMMARY v1:
+- Jangan sertakan opini panjang.
+- Jangan sertakan rekomendasi.
+- Jangan sertakan CTA.
+- Hanya isi field sesuai schema.
+- Gunakan UNKNOWN jika data tidak tersedia.
+```
+
+---
+
+# 🚀 Dampak Strategis
+
+Dengan ini Anda sudah punya:
+
+* Standardized Protocol
+* Integration Rulebook
+* Cross-Bot Compatibility
+* Portable Compliance Snapshot
+* Hybrid Consulting Bridge
+
+Tanpa satu baris kode platform tambahan.
+
+---
+
+Sekarang kita sudah siap untuk level berikutnya.
+
+Pertanyaannya:
+
+Apakah Anda ingin kita sekarang:
+
+A) Bangun MASTER_COMPLIANCE_SUMMARY v1 (gabungan Licensing + SBU + SKK)
+atau
+B) Uji seluruh ekosistem dengan 1 simulasi kasus nyata end-to-end?
+
+Saya sarankan B dulu untuk stress-test integrasi.

@@ -1,0 +1,440 @@
+Lanjut. Ini **rancangan modul inti chatbot SKK Bidang Sipil** agar chatbot tidak hanya menjawab daftar SKK, tetapi bisa **merekomendasikan jabatan kerja SKK yang paling cocok** berdasarkan pengalaman pengguna. Data dasarnya mengacu pada daftar SKK Sipil yang Anda unggah, yang memuat klasifikasi Sipil, subklasifikasi, jabatan kerja, jenjang jabatan, kualifikasi, KKNI, standar kompetensi, dan link dokumen SKK. 
+
+# 1. Modul Utama: Rekomendasi SKK Sipil
+
+## Tujuan Modul
+
+Chatbot harus bisa menjawab pertanyaan seperti:
+
+```text
+Saya pengalaman 6 tahun di proyek gedung sebagai pelaksana, SKK apa yang cocok?
+
+Saya ahli struktur bangunan, ambil SKK yang mana?
+
+Saya biasa kerja jalan dan jembatan, cocoknya Ahli Teknik Jalan atau Manajer Pelaksanaan Jalan/Jembatan?
+
+Saya fresh graduate teknik sipil, bisa ambil SKK apa?
+```
+
+## Data yang Harus Ditanyakan Chatbot
+
+Saat pengguna meminta rekomendasi, chatbot wajib menggali data berikut:
+
+```text
+1. Bidang pekerjaan utama:
+   Gedung, Jalan, Jembatan, Bendungan, Irigasi, Drainase, Geoteknik, Geodesi, Pelabuhan, Terowongan, dan lain-lain.
+
+2. Posisi saat ini:
+   Tukang, mandor, pelaksana, pengawas, teknisi, engineer, manajer, ahli, konsultan, perencana.
+
+3. Lama pengalaman:
+   0 tahun / fresh graduate
+   1–3 tahun
+   4–6 tahun
+   7–10 tahun
+   lebih dari 10 tahun
+
+4. Jenis proyek yang pernah dikerjakan:
+   Gedung, jalan, jembatan, SDA, drainase, pelabuhan, rel, bendungan, dan sebagainya.
+
+5. Tanggung jawab utama:
+   Pelaksanaan lapangan, perencanaan, pengawasan, pemeliharaan, audit, penilaian kegagalan, manajemen proyek, survei, laboratorium.
+
+6. Target level:
+   Operator, Teknisi/Analis, atau Ahli.
+```
+
+# 2. Logika Rekomendasi SKK
+
+Gunakan aturan sederhana berikut.
+
+## A. Jika pengguna fresh graduate
+
+Rekomendasikan jabatan yang memang tersedia sebagai **Freshgraduate**, misalnya dalam data terdapat:
+
+```text
+- Ahli Teknik Bangunan Gedung (Freshgraduate)
+- Ahli Teknik Jalan (Freshgraduate)
+- Ahli Teknik Jembatan (Freshgraduate)
+- Ahli Teknik Sumber Daya Air (Freshgraduate)
+- Ahli Geoteknik (Freshgraduate)
+```
+
+Contoh jawaban:
+
+```text
+Karena Anda fresh graduate Teknik Sipil, pilihan SKK yang relevan adalah jalur Ahli Freshgraduate. 
+Silakan pilih sesuai bidang minat:
+
+1. Gedung: Ahli Teknik Bangunan Gedung (Freshgraduate)
+2. Jalan: Ahli Teknik Jalan (Freshgraduate)
+3. Jembatan: Ahli Teknik Jembatan (Freshgraduate)
+4. SDA: Ahli Teknik Sumber Daya Air (Freshgraduate)
+5. Geoteknik: Ahli Geoteknik (Freshgraduate)
+
+Rekomendasi awal: pilih bidang yang paling sesuai dengan pengalaman magang, skripsi, proyek kampus, atau pekerjaan pertama Anda.
+```
+
+## B. Jika pengguna pengalaman lapangan 1–3 tahun
+
+Umumnya arahkan ke:
+
+```text
+- Operator Level 2 atau Level 3
+- Pelaksana Lapangan Level 2 atau Level 3
+- Mandor Level 2 atau Level 3
+- Juru Gambar Level 2 atau Level 3
+```
+
+Contoh:
+
+```text
+Dengan pengalaman 1–3 tahun sebagai pelaksana lapangan, Anda lebih cocok memulai dari jalur Operator atau Pelaksana Level 2/3, tergantung bidang proyek Anda.
+
+Jika bidangnya Gedung:
+- Pelaksana Lapangan Pekerjaan Gedung Level 2
+- Pelaksana Lapangan Pekerjaan Gedung Level 3
+
+Jika bidangnya Jalan:
+- Pelaksana Lapangan Pekerjaan Jalan Level 2
+- Pelaksana Lapangan Pekerjaan Jalan Level 3
+```
+
+## C. Jika pengguna pengalaman 4–6 tahun
+
+Arahkan ke:
+
+```text
+- Teknisi/Analis jenjang KKNI 4–6
+- Pelaksana Muda/Madya
+- Pengawas Muda/Madya
+- Teknisi laboratorium
+- Surveyor
+```
+
+Contoh:
+
+```text
+Dengan pengalaman 4–6 tahun, Anda bisa mempertimbangkan jenjang Teknisi/Analis.
+
+Untuk bidang Gedung:
+- Pelaksana Lapangan Pekerjaan Gedung Muda, KKNI 4
+- Pelaksana Lapangan Pekerjaan Gedung Madya, KKNI 5
+- Pengawas Pekerjaan Struktur Bangunan Gedung, KKNI 4–6
+
+Untuk bidang Jalan:
+- Pelaksana Lapangan Pekerjaan Jalan, KKNI 4
+- Pelaksana Lapangan Pekerjaan Jalan Madya, KKNI 5
+```
+
+## D. Jika pengguna pengalaman 7 tahun ke atas
+
+Arahkan ke:
+
+```text
+- Ahli Muda, KKNI 7
+- Ahli Madya, KKNI 8
+- Ahli Utama, KKNI 9
+```
+
+Contoh:
+
+```text
+Dengan pengalaman di atas 7 tahun dan tanggung jawab teknis yang kuat, Anda dapat mempertimbangkan jalur Ahli.
+
+Jika bidang Anda Gedung:
+- Ahli Muda Teknik Bangunan Gedung, KKNI 7
+- Ahli Madya Teknik Bangunan Gedung, KKNI 8
+- Ahli Teknik Bangunan Gedung, KKNI 9
+
+Jika bidang Anda Jalan:
+- Ahli Muda Teknik Jalan, KKNI 7
+- Ahli Madya Teknik Jalan, KKNI 8
+- Ahli Utama Teknik Jalan, KKNI 9
+```
+
+# 3. Rumus Matching Rekomendasi
+
+Chatbot bisa memakai skor sederhana:
+
+```text
+Skor kecocokan =
+40% kesesuaian bidang proyek
+25% kesesuaian jabatan saat ini
+20% lama pengalaman
+10% tanggung jawab teknis
+5% target karier pengguna
+```
+
+Output rekomendasi:
+
+```text
+Rekomendasi Utama: paling cocok
+Rekomendasi Alternatif: masih relevan
+Tidak Direkomendasikan: bidang/level terlalu jauh
+```
+
+# 4. Template Jawaban Rekomendasi
+
+Gunakan format ini:
+
+```text
+Berdasarkan informasi Anda:
+
+Bidang utama: [bidang]
+Posisi saat ini: [posisi]
+Pengalaman: [tahun]
+Jenis proyek: [proyek]
+Target: [operator/teknisi/ahli]
+
+Rekomendasi SKK paling sesuai:
+
+1. [Nama jabatan SKK]
+   - Subklasifikasi:
+   - Jenjang jabatan:
+   - Kualifikasi:
+   - KKNI:
+   - Standar kompetensi:
+   - Link dokumen:
+
+Alasan rekomendasi:
+[Jelaskan kenapa cocok]
+
+Alternatif:
+[SKK lain yang masih relevan]
+
+Catatan:
+Rekomendasi ini bersifat awal. Persyaratan final tetap perlu mengikuti ketentuan lembaga sertifikasi/proses asesmen yang berlaku.
+```
+
+# 5. Contoh Percakapan Lengkap
+
+## User
+
+```text
+Saya pengalaman 8 tahun di proyek jalan, pernah jadi site engineer dan sekarang mengawasi pekerjaan perkerasan. SKK apa yang cocok?
+```
+
+## Chatbot
+
+```text
+Berdasarkan profil Anda:
+
+Bidang utama: Jalan
+Pengalaman: 8 tahun
+Peran: Site engineer / pengawas pekerjaan perkerasan
+Tanggung jawab: pengawasan teknis lapangan
+
+Rekomendasi utama:
+
+1. Ahli Teknik Jalan
+   - Subklasifikasi: Jalan
+   - Jenjang: Ahli Muda Teknik Jalan / Ahli Madya Teknik Jalan / Ahli Utama Teknik Jalan
+   - Kualifikasi: Ahli
+   - KKNI: 7, 8, atau 9
+   - Standar: SKKNI 126-2021
+
+Rekomendasi alternatif:
+
+2. Pelaksana Pemeliharaan Jalan
+   - Kualifikasi: Teknisi/Analis
+   - KKNI: 4–6
+   - Cocok jika fokus Anda lebih banyak pada pelaksanaan dan pemeliharaan lapangan.
+
+3. Pelaksana Lapangan Pekerjaan Jalan
+   - Kualifikasi: Operator sampai Teknisi/Analis
+   - KKNI: 2–5
+   - Cocok jika tanggung jawab Anda masih dominan pada pelaksanaan lapangan.
+
+Kesimpulan:
+Dengan pengalaman 8 tahun dan pernah menjadi site engineer, Anda lebih cocok diarahkan ke Ahli Teknik Jalan, minimal Ahli Muda, dan bisa dipertimbangkan Ahli Madya bila portofolio serta tanggung jawab proyek Anda sudah memadai.
+```
+
+# 6. Modul Pencarian Cepat
+
+Tambahkan fitur pencarian seperti ini:
+
+```text
+/cari ahli geoteknik
+/cari pelaksana jalan
+/cari pengawas gedung
+/cari jembatan
+/cari freshgraduate
+/cari KKNI 7
+/cari SKKNI 126-2021
+```
+
+Contoh respons:
+
+```text
+Ditemukan beberapa hasil untuk “Ahli Geoteknik”:
+
+1. Ahli Muda Geoteknik
+   - Subklasifikasi: Geoteknik
+   - Kualifikasi: Ahli
+   - KKNI: 7
+   - Standar: SKKNI 305-2016
+
+2. Ahli Madya Geoteknik
+   - Subklasifikasi: Geoteknik
+   - Kualifikasi: Ahli
+   - KKNI: 8
+   - Standar: SKKNI 305-2016
+
+3. Ahli Geoteknik
+   - Subklasifikasi: Geoteknik
+   - Kualifikasi: Ahli
+   - KKNI: 9
+   - Standar: SKKNI 305-2016
+```
+
+# 7. Intent Tambahan untuk Chatbot
+
+```json
+{
+  "intent": "rekomendasi_skk",
+  "contoh_user": [
+    "Saya cocok ambil SKK apa?",
+    "Saya pengalaman 5 tahun di gedung",
+    "Saya site engineer jalan",
+    "Saya fresh graduate teknik sipil"
+  ],
+  "slot_wajib": [
+    "bidang",
+    "posisi",
+    "pengalaman",
+    "jenis_proyek",
+    "target_level"
+  ]
+}
+```
+
+```json
+{
+  "intent": "cari_jabatan_skk",
+  "contoh_user": [
+    "Cari ahli teknik jalan",
+    "Ada SKK geoteknik?",
+    "Tampilkan SKK jembatan",
+    "Link SKKNI ahli bangunan gedung"
+  ],
+  "slot_wajib": [
+    "kata_kunci_jabatan"
+  ]
+}
+```
+
+```json
+{
+  "intent": "bandingkan_skk",
+  "contoh_user": [
+    "Bedanya ahli teknik jalan dan manajer jalan jembatan apa?",
+    "Bandingkan ahli geoteknik dan ahli perencana pondasi",
+    "Apa beda pelaksana dan pengawas?"
+  ],
+  "slot_wajib": [
+    "jabatan_1",
+    "jabatan_2"
+  ]
+}
+```
+
+# 8. Prompt Final untuk Chatbot SKK Sipil
+
+```text
+Anda adalah Asisten SKK Bidang Sipil.
+
+Anda membantu pengguna mencari dan merekomendasikan Sertifikat Kompetensi Kerja bidang Sipil berdasarkan database yang berisi:
+- Subklasifikasi
+- Jabatan kerja
+- Jenjang jabatan kerja
+- Kualifikasi
+- Jenjang KKNI
+- Standar kompetensi kerja
+- Link SKK Kemnaker/SKK Khusus
+
+Tugas Anda:
+1. Menjawab pencarian SKK berdasarkan jabatan.
+2. Menampilkan semua jenjang jika satu jabatan memiliki beberapa level.
+3. Merekomendasikan SKK berdasarkan bidang, pengalaman, posisi, dan jenis proyek pengguna.
+4. Menjelaskan perbedaan Operator, Teknisi/Analis, dan Ahli.
+5. Memberikan link standar kompetensi jika tersedia.
+6. Menjelaskan jika standar masih dalam status SKEMA LPJK/Akan disusun SKKNI/SKK Khusus.
+7. Tidak mengarang data yang tidak tersedia.
+8. Tidak menjamin kelulusan sertifikasi.
+
+Jika pengguna meminta rekomendasi tetapi datanya belum cukup, tanyakan:
+- Bidang proyek utama
+- Posisi saat ini
+- Lama pengalaman
+- Jenis proyek yang pernah dikerjakan
+- Target level sertifikasi
+
+Format jawaban:
+1. Ringkasan profil pengguna
+2. Rekomendasi SKK utama
+3. Alternatif SKK
+4. Alasan kecocokan
+5. Jenjang KKNI
+6. Link dokumen jika tersedia
+7. Catatan kehati-hatian
+```
+
+# 9. Modul Menu WhatsApp
+
+```text
+Halo, saya Asisten SKK Sipil.
+
+Silakan pilih menu:
+
+1. Cari SKK berdasarkan jabatan
+2. Cari SKK berdasarkan subklasifikasi
+3. Rekomendasi SKK sesuai pengalaman
+4. Cek jenjang KKNI
+5. Ambil link SKKNI/SKK Khusus
+6. Bandingkan dua jabatan SKK
+7. Daftar SKK Freshgraduate
+8. Daftar SKK Ahli
+9. Daftar SKK Teknisi/Analis
+10. Daftar SKK Operator
+
+Ketik angka menu atau langsung tulis kebutuhan Anda.
+Contoh:
+“Saya pengalaman 6 tahun di proyek gedung, cocok ambil SKK apa?”
+```
+
+# 10. Catatan Penting untuk Knowledge Base
+
+Data perlu dibersihkan agar chatbot mudah membaca:
+
+```text
+Kolom wajib:
+- id
+- klasifikasi
+- subklasifikasi
+- jabatan_kerja
+- jenjang_jabatan
+- kualifikasi
+- kkni
+- standar_kompetensi
+- link_skk
+- status_dokumen
+```
+
+Status dokumen bisa dibagi:
+
+```text
+available = link SKK tersedia
+not_available = link tidak tersedia / tanda "-"
+draft = RSKKNI atau akan ditetapkan
+lpjk_scheme = SKEMA LPJK / akan disusun
+skk_khusus = SKK Khusus
+```
+
+Dengan ini, chatbot bisa menjawab lebih rapi, misalnya:
+
+```text
+Dokumen SKKNI untuk jabatan ini belum tersedia pada database. Statusnya masih SKEMA LPJK/Akan disusun SKKNI/SKK Khusus.
+```
+
+Tahap berikutnya yang paling tepat adalah membuat **database JSON/CSV siap pakai** dari daftar SKK Sipil tersebut, lalu membuat **prompt + alur chatbot WhatsApp** yang langsung bisa dipasang ke bot.

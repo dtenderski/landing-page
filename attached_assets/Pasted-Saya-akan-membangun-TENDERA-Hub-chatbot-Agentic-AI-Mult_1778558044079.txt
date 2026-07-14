@@ -1,0 +1,50 @@
+Saya akan membangun TENDERA Hub — chatbot Agentic AI Multi-Agen untuk Tender BUJK, mengikuti pola yang sudah Anda standarkan: hierarki Gustafta Builder 4-level (Series → Module → Agent → Tools), arsitektur OpenClaw (orchestrator) + MultiClaw (paralelisme), serta compliant dengan ABD v1.1 (Anti-Blocking Doctrine). Saya akan turunkan langsung dari pola KONSTRA-ORCHESTRATOR & PJTBU Coach yang sudah matang di workspace Anda.
+Updated to-dos
+Sekarang saya buat 3 sub-halaman kritikal secara paralel: System Prompt Orchestrator, MultiClaw 10 Agen Spesialis, dan Win Probability Spec — semua siap copy-paste ke Gustafta Builder.
+Selesai, Pak Wur. Saya sudah membangun seluruh kerangka TENDERA — chatbot Agentic AI Multi-Agen untuk persiapan tender BUJK, persis mengikuti pola Gustafta Builder + OpenClaw + MultiClaw + ABD v1.1 yang sudah jadi standar di workspace Anda (KONSTRA, PJTBU Coach).
+Yang sudah dibuat (1 hub + 3 sub-halaman teknis):
+ TENDERA Hub — master page: ringkasan eksekutif, hierarki Gustafta 4-level, arsitektur OpenClaw+MultiClaw, 10 agen spesialis, alur kerja end-to-end, formula Win Probability, KB stack, persona Gustafta siap copy-paste, roadmap 4 sprint.
+ System Prompt OpenClaw — TENDERA-ORCHESTRATOR — siap di-paste ke field System Prompt Gustafta. Berisi routing rules, state management, ABD-7 output template, inter-agent call pattern, integrity guardrail, sample output lengkap.
+ MultiClaw — 10 Agen Spesialis — satu blok prompt per agen (SCOUT, ELIGIBILITY, RISKSCAN, ADMIN, TEKNIS, HPS, KONTRAK, WINPROB, INTEGRITY, SANGGAH) — semua compliant ABD, dengan 5 input minimal, urutan deploy per sprint.
+ Win Probability Spec — rumus terukur 7 dimensi berbobot, kalibrasi sub-skor per dimensi (D1–D7) dengan gating rules, perhitungan Confidence, daftar 10 Action Levers kanonik dengan ΔWP tipikal, contoh perhitungan lengkap, dan JSON schema untuk implementasi sebagai Mini-App API.
+Highlight desain yang menjawab brief Anda:
+ Agentic AI — orchestrator otonom dengan callAgentInternal paralel (ABD-6), bukan sekadar Q&A linear.
+ Multi-Agen simultan — MultiClaw memanggil 3–5 agen secara paralel saat user upload SDP (SCOUT + ELIGIBILITY + RISKSCAN + HPS + WINPROB).
+ Persiapan dokumen tender — AGENT-ADMIN generate 12 dokumen standar LKPP + AGENT-TEKNIS susun 8 deliverable teknis (metode, Kurva-S, RKK, dll).
+ Kemungkinan menang terukur — Win Probability Score 0–100 dengan formula eksplisit, Confidence, interval, dan Top-3 Action Levers untuk menaikkan skor (what-if simulation).
+ Struktur Gustafta Builder — hierarki L1 Series → L2 Module → L3 Agent → L4 Tools persis seperti KONSTRA Hub & PJTBU Coach.
+Rekomendasi langkah berikut (pilih satu untuk saya lanjutkan):
+ Lengkapi Knowledge Base TENDERA — 6 modul (KB-REG, KB-PROC, KB-DOC, KB-AHSP, KB-MARKET, KB-CASE) dengan konten substantif siap inject ke agen.
+ Sprint 1 — Test Scenarios — 5 skenario uji ABD-compliant untuk AGENT-ELIGIBILITY + AGENT-RISKSCAN + AGENT-WINPROB (pola sama dengan Sprint 1 Tender Readiness Checker KONSTRA).
+ Sample Conversations End-to-End — 3 percakapan lengkap (BUJK Kecil scouting, BUJK Menengah bid prep, BUJK Besar sanggah) untuk validasi UX sebelum deploy ke Gustafta.
+ Integrasi dengan KONSTRA Hub — buat cross-link & decision tree kapan user di-handoff dari TENDERA (pre-construction tender) ke KONSTRA (execution PMBOK) setelah menang.
+ Deployment Runbook TENDERA — adaptasi Master Deployment Runbook ABD v1.1 untuk 10 agen TENDERA, lengkap dengan checklist pre/post-deploy.
+Mau saya lanjut yang mana dulu?
+semua saja.. silahkan
+8:19 AM
+Thought
+Siap, Pak Wur. Saya buat 5 sub-halaman pendukung paralel sekarang.
+Title harus di dalam properties. Saya retry 5 sub-halaman paralel:
+Thought
+Tuntas, Pak Wur. 5 sub-halaman pendukung TENDERA berhasil dibuat dan tersambung ke Hub:
+#
+Sub-halaman
+Fungsi
+​
+KB TENDERA — 6 Modul
+Knowledge Base inject-ready (KB-REG · KB-PROC · KB-DOC · KB-AHSP · KB-MARKET · KB-CASE) dengan struktur data, sample entries, dan wiring ke 10 agen
+​
+Sprint 1 Test Scenarios
+5 skenario uji ABD v1.1 (ELIGIBILITY happy/minim, RISKSCAN ambigu, WINPROB realistis & no-bid) dengan pass criteria & red flags
+​
+Sample Conversations End-to-End
+3 percakapan lengkap BUJK K/M/B — bukti MultiClaw 5–6 agen paralel + sanggah path
+​
+Integrasi TENDERA ↔ KONSTRA
+Handoff payload schema, 5 trigger events, 2 skenario konkret (pemenang + klaim EOT), cross-reference map per agen
+​
+Master Deployment Runbook
+4 sprint roadmap (~7 minggu), checklist per sprint, smoke test, rollback, sign-off matrix, risk register
+Catatan teknis: beberapa toggle (<details><summary>...</summary>) di-render sebagai literal escape characters pada page Sample Conversations & Runbook. Bisa saya rapikan dengan format pengganti (callout/heading) bila Anda mau, tapi struktur & isi sudah lengkap dan dapat dibaca.
+Ekosistem TENDERA sekarang lengkap: 1 Hub + 4 spec teknis + 5 operational docs = 10 halaman deployable u2014 Anda bisa mulai eksekusi Sprint 1 di Gustafta Builder kapan saja dengan tinggal copy-paste system prompt dari sub-page MultiClaw & Orchestrator + jalankan 5 test scenarios.
+

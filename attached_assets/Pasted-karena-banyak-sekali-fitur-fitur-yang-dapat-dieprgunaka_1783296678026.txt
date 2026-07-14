@@ -1,0 +1,548 @@
+karena banyak sekali fitur-fitur yang dapat dieprgunakan .. barangklai kamu ada work flow dan pipeline-framework yang agentic multiclaw dan openclaw sehingga memiliki struktur dan konfigurasi yang mudah dipahami.
+
+14 hours ago
+
+Show less
+
+Planning agent orchestrator framework selection (20 seconds)
+Pertanyaan Anda menarik — dengan puluhan fitur di aplikasi ini, wajar kalau butuh satu "peta alur" yang jelas. Sebelum saya bangun, saya ingin memastikan bentuk yang paling Anda maksud, karena arahnya cukup berbeda-beda.
+
+Bentuk 'workflow / pipeline framework' seperti apa yang paling Anda inginkan untuk merapikan banyaknya fitur?
+
+Auto-pilot agentic — AI menjalankan beberapa tool berurutan secara otomatis dari 1 input (misal: masukkan produk, AI hasilkan riset+audience+copy+iklan sekaligus)
+inginnya seperti ini.. tetapi sepertinya seluruh opsi saling terkait.. sehingga kalau dikelompokan dan juga dirapikan juga lebih bagus. sehingga ap[likasi ini bersih tidak terkesan berantakan dan berserakan fitur
+14 hours ago
+
+Worked for 33 seconds
+
+Show less
+
+Planning agentic feature implementation (27 seconds)
+Baik — saya buat Auto-Pilot Agentic: satu input produk → AI menjalankan rangkaian tool secara berurutan (riset → audience → interest → angle → copy → follow-up) dengan progress yang terlihat. Sekaligus saya jadikan halaman ini sebagai "pusat" yang rapi agar fitur tidak terasa berserakan.
+
+Mari saya pahami dulu pola kode yang ada.
+
+
+Ran cd
+Let me examine one non-streaming JSON handler, the campaign store, routing, and sidebar in parallel.
+
+
+4 actions
+Let me see the Router body/layout and sidebar structure, plus how existing endpoints return data (for a JSON-returning handler to model my endpoint on).
+
+
+3 actions
+Let me read the sidebar's group definitions and render section to place the new Autopilot entry prominently.
+
+
+3 actions
+Now let me see the render section where NavGroups are placed and the campaign indicator.
+
+
+2 actions
+I have enough context. Let me check the route registration structure and insertion point.
+
+
+3 actions
+Now I'll build the backend endpoint. Let me insert the /api/autopilot handler before return httpServer.
+
+
+Edited routes.ts
+Backend endpoint added. Now the frontend page.
+
+
+Created autopilot.tsx
+Now let me register the route in App.tsx and add the sidebar entry.
+
+
+2 actions
+Now the sidebar entry. I'll add Autopilot prominently at the top as a highlighted item.
+
+
+Opened app-sidebar.tsx
+I'll add a prominent Autopilot entry at the top of the sidebar. Rocket icon is already imported.
+
+
+Edited app-sidebar.tsx
+Now let me render the Autopilot item prominently in the sidebar, right after MainNav.
+
+
+Edited app-sidebar.tsx
+Now I'll add the AutopilotNav component. Let me place it near MainNav.
+
+
+Edited app-sidebar.tsx
+Now let me verify everything compiles and check for stray characters.
+
+
+2 actions
+All errors are pre-existing in other files (Badge size prop, Set iteration, integration files) — none are in my new autopilot.tsx, the routes.ts additions, or app-sidebar.tsx. Let me confirm and take a screenshot of the running app.
+
+
+Ran cd
+My new files are clean. Let me verify the app runs and the page renders.
+
+
+2 actions
+Expected — the preview redirects to landing when not logged in (auth-protected). The app runs fine and my code compiles. Now the required code review.
+
+
+3 actions
+Selesai. Auto-Pilot Agentic sudah jadi dan lolos code review.
+
+Cara kerjanya: buka menu Auto-Pilot Agentic (tombol menonjol di atas sidebar) → isi 1 data produk (hanya nama produk yang wajib) → klik Jalankan Auto-Pilot. AI lalu menjalankan 6 tahap secara berurutan, tiap tahap memakai hasil tahap sebelumnya sebagai konteks:
+
+Riset Pasar & Kompetitor
+Target Audience & Persona
+Interest Targeting FB/IG
+Sales Angle & Positioning
+Ad Copy Siap Pakai (3 variasi)
+WA Follow-up Sequence
+Setiap tahap tampil sebagai kartu dengan status berjalan/selesai, ada progress bar, tombol Salin per hasil, Salin Semua, dan Simpan ke Campaign (nyambung ke sistem sinkronisasi yang sudah ada, jadi bisa dilanjut ke tool lain). Kalau ada tahap gagal, prosesnya berhenti di situ dan bisa diulang.
+
+Halaman ini juga berfungsi sebagai "pusat" yang rapi — cukup satu input, semua tool jalan, jadi fitur tidak terasa berserakan.
+
+Catatan: pratinjau tadi mengarah ke halaman landing karena butuh login dulu (halaman ini terproteksi auth). Silakan login untuk mencobanya langsung.
+
+Soal permintaan Anda merapikan/mengelompokkan menu sidebar — itu bisa saya kerjakan sebagai langkah berikutnya kalau Anda mau. Beri tahu saja.
+
+
+Checkpoint made
+14 hours ago
+
+Worked for 5 minutes
+ok coba kamu periksa seluruh fitur si side kiri.. mana saja yang bisa dijadikan sebagai Agentic AI.. mulitclaw-openclaw.. juga agar tidak mudah ditiru karena prompt nya ada dibackhend
+
+terkhusus juga untuk riset sepertinya perlu ada ftur Agentic AI.. agar hasilnya presisi dan akurat.
+
+14 hours ago
+
+Show less
+
+Planning agentic workflow for research (53 seconds)
+Bagus, ini permintaan dua bagian: (1) audit fitur sidebar mana yang layak jadi Agentic AI, dan (2) bangun Riset Agentic AI yang presisi. Prompt tetap di backend, jadi tidak mudah ditiru.
+
+Mari saya lihat sekilas fitur riset yang ada agar tidak duplikat, lalu saya bangun.
+
+
+2 actions
+The existing research is niche-based JSON output — my agentic research (deep multi-step on any topic with a critique loop) complements it. Let me build the backend endpoint.
+
+
+Edited routes.ts
+Now the frontend page. I'll reuse the sequential-stage pattern with a research-type selector.
+
+
+Created agentic-research.tsx
+Now register the route and add the sidebar entry. ScanSearch needs importing.
+
+
+4 actions
+The bump badge count for "Produk Digital" was "9" — now 10 items. Let me update it and typecheck.
+
+
+2 actions
+Clean typecheck, no stray characters. Now the required code review.
+
+
+3 actions
+The review flagged one real functional bug plus input-bounds hardening. I'll fix both (the TanStack refactor I'll skip — it keeps parity with the existing autopilot pattern). Let me fix the campaign-save bug and add input bounds.
+
+
+Edited agentic-research.tsx
+Now let me add lightweight input bounds to the backend endpoint to cap cost/abuse.
+
+
+2 actions
+I need to wire detailBersih into the prompt and bound the context values. Let me update those.
+
+
+Edited routes.ts
+Let me verify everything still compiles cleanly after the fixes.
+
+
+Ran cd
+All fixes compile clean. Both agentic features are done and reviewed. Let me give the user the audit they asked for plus a summary.
+
+The Riset Agentic AI is built and the fixes from review are applied. Now here's the audit you asked for.
+
+Fitur sidebar → kandidat "Agentic AI" (Multi-Claw)
+Prinsip agentic (multi-claw): AI bekerja bertahap — merencanakan → mengerjakan → mengkritik diri → merumuskan. Cocok untuk fitur yang butuh presisi & analisa, bukan sekali tembak. Semua prompt tetap di backend, jadi tidak mudah ditiru.
+
+Prioritas tinggi (paling untung dijadikan agentic):
+
+Riset Produk Digital, Validasi Ide Produk, Riset Keyword Marketplace, Spy Kompetitor → semua ini "riset". Sudah saya tangani lewat mesin Riset Agentic AI (bisa dijadikan satu pintu, atau saya sambungkan tiap tool ke engine ini).
+Funnel Planner & Customer Journey Map → perlu perencanaan bertahap (plan → detail per tahap → cek celah).
+Ad Scale Advisor, Profit Lab, Auto Rule Builder → ini "agen keputusan": analisa data → rekomendasi → kritik risiko.
+Campaign Wizard, Audience Builder, Interest Finder, Audience Overlap → sudah dirangkai otomatis oleh Auto-Pilot Agentic.
+Prioritas sedang:
+
+Ad Creator, Hook Generator, A/B Variant, Story Telling, Article Creator → bisa ditingkatkan dengan loop "tulis → kritik → revisi" agar hasil lebih tajam.
+Tidak perlu agentic (cukup single-shot / halaman statis):
+
+Image/Banner/Video Creator, TTS/STT, Hashtag Generator, LP HTML Builder — output tunggal.
+Roadmap Winning, Panduan Praktis, Katalog Produk, TikTok Ads, Meta Ads — halaman panduan/konten.
+Yang sudah jadi: Riset Agentic AI
+Menu Produk Digital → Riset Agentic AI. Masukkan topik + pilih jenis riset (pasar / kompetitor / audience / produk / tren) → AI jalan 4 tahap terlihat:
+
+Perencanaan (Planner) — susun dimensi & pertanyaan kunci
+Investigasi (Researcher) — jawab tiap dimensi, tandai mana fakta vs estimasi
+Peninjauan Kritis (Critic) — tandai klaim lemah, celah, dan tingkat keyakinan
+Laporan Final (Synthesizer) — ringkasan + rekomendasi + checklist "yang perlu divalidasi"
+Tahap kritik + jujur soal ketidakpastian inilah yang bikin hasilnya lebih presisi & tidak asal meyakinkan. Prompt & orkestrasi semuanya di backend.
+
+Kalau Anda mau, langkah berikutnya saya bisa: (a) sambungkan Funnel Planner + Customer Journey ke pola agentic yang sama, atau (b) jadikan Ad Scale Advisor/Profit Lab sebagai "agen keputusan". Beri tahu mana yang diprioritaskan.
+
+
+Checkpoint made
+14 hours ago
+
+Worked for 5 minutes
+lanjut
+
+14 hours ago
+
+Show less
+
+Planning agentic upgrade for decision tools (34 seconds)
+Lanjut — saya buat agentic berikutnya untuk Funnel & Customer Journey (opsi a): satu alur agentic yang merancang arsitektur funnel → peta journey → audit kebocoran → blueprint final ber-KPI. Prompt tetap di backend.
+
+Let me add the backend endpoint.
+
+
+Edited routes.ts
+Now the frontend page.
+
+
+Created agentic-funnel.tsx
+Now register the route and add the sidebar entry in the Sistem Sales group.
+
+
+4 actions
+Let me typecheck and check for stray characters.
+
+
+Ran cd
+Clean. Now the required code review.
+
+
+3 actions
+Review passed. One real fix — the Sistem Sales badge should be 8 (actual item count). Let me correct it and check the browser logs.
+
+
+3 actions
+Selesai. Fitur agentic ketiga sudah jadi dan lolos review. (Catatan: error AutopilotNav is not defined di log itu sesaat saat HMR di tengah pengeditan tadi — kode final sudah benar dan compile bersih; log terbaru tidak ada error.)
+
+Baru: Funnel & Journey Agentic AI
+Menu Sistem Sales → Funnel Agentic AI. Masukkan produk + pilih tujuan funnel (leads / closing / langganan / high ticket) → AI jalan 4 tahap:
+
+Arsitektur Funnel (Architect) — tahapan TOFU/MOFU/BOFU, offer & offer ladder
+Peta Customer Journey (Mapper) — awareness → advocacy: emosi, touchpoint, CTA, titik drop-off
+Audit Kebocoran (Auditor) — titik rawan, bagian lemah, 3 perbaikan prioritas
+Blueprint Final (Strategist) — rencana ber-KPI + ide konten per tahap + eksekusi 30 hari
+Tahap audit kebocoran inilah yang bikin funnel lebih rapat, bukan sekadar template. Prompt & orkestrasi semuanya di backend.
+
+Status keseluruhan fitur agentic
+Auto-Pilot Agentic — 1 input → riset+audience+interest+angle+copy+follow-up
+Riset Agentic AI — plan → investigasi → kritik → laporan final
+Funnel Agentic AI — arsitektur → journey → audit → blueprint
+Sesuai audit tadi, kandidat berikutnya yang paling bernilai adalah "Agen Keputusan": mengubah Ad Scale Advisor & Profit Lab jadi agentic (analisa data → rekomendasi → kritik risiko → keputusan). Mau saya lanjut ke situ, atau rapikan/kelompokkan sidebar dulu supaya makin bersih? Ketik "lanjut" kalau mau saya teruskan ke Agen Keputusan.
+
+Optimized Agent memory
+
+Checkpoint made
+14 hours ago
+
+Worked for 3 minutes
+lanjut
+
+14 hours ago
+
+Show less
+
+Planning Ad Scale Advisor integration
+Lanjut — saya buat Agen Keputusan AI (decision agent) yang menganalisa data performa iklan lalu memutuskan aksi scaling & profit. Biar konsisten, saya lihat dulu tool Ad Scale Advisor & Profit Lab yang sudah ada.
+
+
+Ran cd
+Let me look at the existing endpoints and page inputs to stay consistent.
+
+
+3 actions
+Now I'll build the Agen Keputusan AI — a 4-stage decision engine (diagnose → profit analysis → risk audit → final verdict). Backend first.
+
+
+Edited routes.ts
+Now the frontend page.
+
+
+Created agentic-decision.tsx
+Now register the route and add the sidebar entry to the Otomasi AI group.
+
+
+2 actions
+Now the sidebar entry in the Otomasi AI group. Let me check the current group items and badge.
+
+
+5 actions
+Now I need to verify Gauge is imported in the sidebar. Let me check and typecheck.
+
+
+Ran cd
+Gauge isn't imported. Let me add it to the lucide-react import in the sidebar.
+
+
+3 actions
+Now let me verify the typecheck passes with Gauge imported.
+
+
+Ran cd
+Clean. Now the required code review.
+
+
+3 actions
+Selesai dan lolos review. Agen Keputusan AI kini aktif di menu Otomasi AI → Agen Keputusan AI.
+
+Cara kerja
+Masukkan data campaign & metrik (platform, budget, ROAS, CPA, harga, modal/HPP, dll — minimal salah satu dari budget harian / total spend / ROAS) → AI jalan 4 tahap:
+
+Diagnosa Performa (Analyst) — metrik mana sehat/bermasalah, cari bottleneck utama, jujur soal data yang kurang
+Analisa Profit (Profit Analyst) — hitung break-even ROAS, untung/impas/rugi, headroom naik budget, di mana profit bocor
+Audit Risiko (Risk Auditor) — tantang asumsi, risiko scale up / kill terlalu cepat, tingkat keyakinan
+Keputusan Final (Decision Maker) — verdict tegas: SCALE UP / SCALE OUT / OPTIMIZE / KILL / WAIT + rencana ber-angka + trigger metrik + langkah 7 hari
+Tahap audit risiko + hitung profit inilah yang bikin keputusannya berbobot, bukan sekadar "naikkan budget". Semua prompt & orkestrasi di backend.
+
+Ringkasan fitur agentic yang sudah jadi
+Auto-Pilot Agentic — 1 input → riset + audience + interest + angle + copy + follow-up
+Riset Agentic AI — plan → investigasi → kritik → laporan
+Funnel Agentic AI — arsitektur → journey → audit kebocoran → blueprint
+Agen Keputusan AI — diagnosa → profit → risiko → verdict
+Kandidat agentic berikutnya (dari audit): loop "tulis → kritik → revisi" untuk Ad Creator / Hook / A/B Variant / Story Telling agar copy makin tajam. Atau, sesuai permintaan awal Anda, saya bisa rapikan & kelompokkan ulang sidebar supaya fitur agentic tampil jadi satu grup menonjol dan tidak berserakan. Ketik "lanjut" untuk copy-agentic, atau "rapikan" untuk merapikan sidebar.
+
+
+Checkpoint made
+14 hours ago
+
+Worked for 4 minutes
+lanjut
+
+13 hours ago
+
+Show less
+
+Designing ad copy generation endpoint (7 seconds)
+Lanjut — saya buat Copy Agentic AI: mesin copywriting dengan loop tulis → kritik → revisi (Strategist → Copywriter → Critic → Editor). Saya cek dulu grup sidebar tempat Ad Creator agar penempatannya rapi.
+
+
+2 actions
+Now I'll build the backend endpoint for Copy Agentic AI (write → critique → revise loop).
+
+
+Edited routes.ts
+Now the frontend page, route, and sidebar entry.
+
+
+Created agentic-copy.tsx
+Now register the route and add the sidebar entry.
+
+
+4 actions
+I need to verify PenTool is imported in the sidebar. Let me check and typecheck.
+
+
+Ran cd
+PenTool needs importing. Let me add it.
+
+
+Edited app-sidebar.tsx
+Now let me verify the typecheck passes.
+
+
+Ran cd
+Clean. Now the required code review.
+
+
+3 actions
+Selesai dan lolos review. Copy Agentic AI kini aktif di menu AI Creator → Copy Agentic AI.
+
+Cara kerja (loop tulis → kritik → revisi)
+Isi brief (produk wajib; harga/target/USP + pilih platform, format, tone) → AI jalan 4 tahap:
+
+Strategi Pesan (Strategist) — pilih angle terkuat, level kesadaran audiens, big idea, emosi & objection
+Draft Copy (Copywriter) — 3 hook + body utuh (AIDA/PAS) + CTA
+Kritik Copy (Critic) — skor hook/kejelasan/relevansi/objection/CTA + bongkar bagian lemah + instruksi revisi
+Copy Final + A/B (Editor) — versi final terpoles + 3 variasi hook + 3 variasi CTA siap A/B test
+Tahap kritik yang membongkar kelemahan draft inilah yang bikin hasilnya jauh lebih tajam daripada sekali-tembak. Semua prompt di backend.
+
+Peta lengkap fitur Agentic AI sekarang
+Auto-Pilot Agentic — 1 input → riset + audience + interest + angle + copy + follow-up
+Riset Agentic AI — plan → investigasi → kritik → laporan
+Funnel Agentic AI — arsitektur → journey → audit → blueprint
+Agen Keputusan AI — diagnosa → profit → risiko → verdict
+Copy Agentic AI — strategi → draft → kritik → final + A/B
+Lima mesin agentic inti sudah terbangun. Langkah berikutnya yang saya sarankan: rapikan sidebar — kumpulkan semua fitur Agentic ke satu grup menonjol (mis. "🤖 Agentic AI" di paling atas) supaya tidak berserakan di banyak grup, sesuai permintaan awal Anda agar app terasa rapi. Ketik "rapikan" kalau setuju, atau beri arahan lain.
+
+
+Checkpoint made
+13 hours ago
+
+Worked for 3 minutes
+ok.. good.
+tambahkan fitur roadmap winning ini agar bertambah powerfull, agar meta ads bertambah powerfull.
+fitur ini juga bagus kalau diterapkan untuk media iklan lainnya.
+
+13 hours ago
+
+Show less
+
+Analyzing winning-dashboard.tsx implementation
+Baik. Saya lihat dulu isi fitur Roadmap Winning saat ini agar penambahannya pas dan tidak merusak yang ada.
+
+
+Ran cd
+Let me read the full winning-dashboard to understand its current structure before enhancing.
+
+
+2 actions
+The current Roadmap Winning is fully static (hardcoded 5 steps, no platform awareness, no AI, completion always false). I'll make it powerful and platform-aware: an AI generator that builds a tailored winning roadmap per platform (Meta Ads deeply, plus TikTok/IG/Google/YouTube/LinkedIn), and make the step tracker actually interactive/persistent.
+
+Let me check an existing JSON endpoint's style and the campaign store shape.
+
+
+2 actions
+Now I'll add the backend endpoint. Let me check the JSON parsing pattern used.
+
+
+Opened routes.ts
+Now I'll add the backend endpoint for the AI winning roadmap generator.
+
+
+2 actions
+Backend added. Now I'll rewrite the frontend page to add the platform-aware AI roadmap generator and make the step tracker interactive/persistent.
+
+
+Edited winning-dashboard.tsx
+Now let me verify react-icons exports and typecheck.
+
+
+3 actions
+No new route needed — this enhances the existing page. Let me check browser logs for runtime errors.
+
+
+2 actions
+The app-sidebar errors are stale (from earlier HMR mid-edit at 11:37; tsc passes clean). The winning-dashboard updated fine and the accordion dependency was optimized. Now the required code review.
+
+
+3 actions
+Review passed. I'll apply the two cheap robustness fixes (clipboard try/catch + sanitizing persisted step state).
+
+
+Edited winning-dashboard.tsx
+Now the clipboard error handling.
+
+
+2 actions
+Selesai. Fitur Roadmap Winning sekarang jauh lebih powerful dan berlaku untuk semua platform iklan.
+
+Yang baru
+Generator Roadmap Winning per Platform (AI) — di bagian atas halaman:
+
+Pilih platform: Meta Ads, TikTok, Instagram, Google, YouTube, atau LinkedIn
+Isi produk (wajib) + tujuan (closing/leads/awareness/traffic/install) + budget & target (opsional, otomatis terisi dari campaign aktif)
+AI menyusun roadmap khusus karakteristik platform itu:
+Fase eksekusi (accordion) — tiap fase punya durasi, tujuan, daftar tugas, target KPI, saran budget, dan kesalahan yang harus dihindari
+Tabel Benchmark KPI realistis untuk pasar Indonesia (zona sehat / waspada / aksi)
+Rencana Budget bertahap (testing → optimasi → scaling)
+Sinyal SCALE UP vs Sinyal KILL/STOP
+Tips rahasia spesifik per platform
+Tombol Salin Roadmap + roadmap terakhir tersimpan otomatis (localStorage), jadi tidak hilang saat pindah halaman.
+Step tracker jadi interaktif — sebelumnya mati (selalu 0%). Sekarang tiap langkah bisa dicentang, progress-nya tersimpan permanen, dan tautannya diarahkan ke tool agentic yang relevan (Riset → Persona → Copy → Analyzer → Keputusan).
+
+Semua prompt tetap di server, pakai gpt-5. Sudah lolos type-check dan code review.
+
+Untuk Meta Ads output-nya paling dalam (algoritma, CBO/ABO, format), tapi ganti platform ke TikTok/Google dll dan seluruh roadmap ikut menyesuaikan. Silakan coba generate satu untuk memastikan hasilnya sesuai selera Anda.
+
+
+Checkpoint made
+12 hours ago
+
+Worked for 5 minutes
+simulai beriklan meta ads kalu memungkinkan dipertajam lagi agar bertambah kuat untuk mencapai tujuannya yaitu konversi utamanya
+buat juga hal serupa untuk media iklan lainnya seperti generator roadmap winning
+
+12 hours ago
+
+Show less
+
+Planning ad channel simulation expansion
+Let me inspect the current Simulasi Beriklan feature.
+
+
+6 actions
+Now I understand the structure. I'll add an AI-powered Blueprint Konversi generator (mirroring the roadmap pattern) that sharpens each platform's simulation toward the conversion goal. First, the backend endpoint.
+
+
+Edited routes.ts
+Backend added. Now I'll wire the frontend into ad-simulation.tsx: add imports, blueprint state, generate logic, and a render section.
+
+
+Edited ad-simulation.tsx
+Now I'll add the state and generate logic in the component, then the render section.
+
+
+Edited ad-simulation.tsx
+Now I'll add the render section for the AI Blueprint generator, placing it right after the platform header card.
+
+
+Edited ad-simulation.tsx
+I need to remove the unused FileText, Image, etc.? No—those were pre-existing. Let me verify the imports I added are all used and typecheck. Wand2, Loader2, Copy, Wallet, Layers, Crosshair, ListChecks, Gauge, AlertTriangle — all used. Let me typecheck.
+
+
+Ran cd
+Need to add useEffect import.
+
+
+3 actions
+The Accordion import is unused (I used cards instead). Let me remove it.
+
+
+2 actions
+Clean. Let me check the browser logs for runtime errors.
+
+
+Ran cd
+Let me refresh logs to confirm the HMR compiled the ad-simulation cleanly.
+
+
+2 actions
+The useEffect is not defined errors are stale — from HMR mid-edit before I added the import (11:49); the final HMR update at 11:50:08 has no errors after it, and tsc is clean. Now the required code review.
+
+
+3 actions
+Review passed. I'll apply the per-platform persistence fix so switching platforms loads the matching blueprint instead of a stale one.
+
+
+Edited ad-simulation.tsx
+Now I need to update the save to use the per-platform key.
+
+
+2 actions
+Clean typecheck. The Simulasi Beriklan feature is now sharpened toward conversion and works per-platform, just like the roadmap generator.
+
+Yang baru: Blueprint Konversi AI
+Di setiap platform (Meta, TikTok, Instagram, Google, YouTube, LinkedIn), ada kartu generator di atas. Isi produk (+budget/target opsional, auto-terisi dari campaign aktif) → AI menyusun cetak biru khusus konversi untuk platform itu:
+
+Objective + Event Optimasi yang tepat (mis. Meta: Sales → Purchase/Complete Payment)
+Struktur Campaign (CBO vs ABO, jumlah adset, iklan per adset)
+Funnel TOF/MOF/BOF — audiens, share budget, angle creative tiap tahap
+Strategi Audiens & Setup Tracking Konversi (pixel/CAPI/tag)
+Strategi Bidding (lowest cost / cost cap / target CPA)
+Creative pendorong konversi & Checklist optimasi harian/mingguan
+Tabel Benchmark KPI konversi (CPA/ROAS/CVR + aksi bila meleset)
+Pembunuh Konversi yang harus dihindari
+Tombol Salin Blueprint, hasil tersimpan per platform (pindah platform → muncul blueprint platform itu)
+Simulasi step-by-step statik yang lama tetap ada di bawah sebagai panduan dasar. Untuk Meta output-nya paling dalam, tapi ganti platform dan seluruh blueprint ikut menyesuaikan.
+
+Sudah lolos type-check dan code review (termasuk perbaikan penyimpanan per-platform). Semua prompt tetap di server, pakai gpt-5.
+
+Silakan buka Simulasi Beriklan, pilih Meta Ads, isi produk, dan klik Generate Blueprint Konversi untuk mengecek hasilnya sesuai harapan.

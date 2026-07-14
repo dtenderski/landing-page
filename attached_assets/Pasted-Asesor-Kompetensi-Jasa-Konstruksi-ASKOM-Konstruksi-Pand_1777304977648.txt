@@ -1,0 +1,1966 @@
+Asesor Kompetensi Jasa Konstruksi (ASKOM Konstruksi) — Panduan Lengkap
+1. Definisi & Posisi Kelembagaan
+Asesor Kompetensi (ASKOM) Jasa Konstruksi adalah personel yang memenuhi dua lapis kompetensi sekaligus:
+Kompetensi Metodologi Asesmen — sesuai Pedoman BNSP 303 + SKKNI 333/2020 (unit MAPA, MA, MKVA).
+Kompetensi Teknis Konstruksi — sesuai jabatan kerja, jenjang KKNI, dan subklasifikasi konstruksi yang akan diuji.
+Ditugaskan oleh LSP terlisensi BNSP & tercatat di LPJK untuk melaksanakan uji kompetensi tenaga kerja konstruksi dalam rangka penerbitan SKK Konstruksi.⁠
+⁠⁠
+⁠​
+Pemisahan kewenangan tegas: ASKOM melaksanakan asesmen + memberikan rekomendasi (kompeten/belum kompeten) berbasis bukti. Keputusan sertifikasi & penerbitan SKK ditetapkan oleh LSP sesuai mekanisme BNSP. ASKOM tidak menerbitkan sertifikat secara mandiri.
+Posisi dalam piramida kelembagaan:
+flowchart TD
+	BNSP["BNSP<br>Lisensi LSP, akreditasi asesor, kode etik"] --> LSP
+	PUPR["PUPR/Ditjen Bina Konstruksi<br>Skema sektoral, SKKNI konstruksi"] --> LSP
+	LPJK["LPJK<br>Pencatatan LSP & ASKOM konstruksi"] --> LSP
+	LSP["LSP Konstruksi<br>Berlisensi BNSP + Tercatat LPJK"] --> ASKOM
+	ASKOM["ASKOM Konstruksi<br>Penilai berbasis bukti"] --> ASESI["Asesi / TKK"]
+BNSP
+Lisensi LSP, akreditasi asesor, kode etik
+
+LSP Konstruksi
+Berlisensi BNSP + Tercatat LPJK
+
+PUPR/Ditjen Bina Konstruksi
+Skema sektoral, SKKNI konstruksi
+
+LPJK
+Pencatatan LSP & ASKOM konstruksi
+
+ASKOM Konstruksi
+Penilai berbasis bukti
+
+Asesi / TKK
+
+​
+2. Dasar Hukum & Acuan Utama
+No.
+Regulasi/Acuan
+Relevansi
+1
+UU No. 2/2017 jo. UU No. 6/2023
+TKK wajib SKK; SKK diperoleh via uji kompetensi oleh LSP
+2
+PP No. 22/2020 jo. PP No. 14/2021
+Pelaksanaan UU Jasa Konstruksi (TKK & sertifikasi)
+3
+PP No. 10/2018
+Kelembagaan BNSP
+4
+Permen PUPR No. 8/2022
+Sertifikasi kompetensi konstruksi oleh LSP berlisensi BNSP & tercatat LPJK
+5
+Pedoman BNSP 303 (Per.BNSP No. 10/BNSP.303/XI/2013)
+Persyaratan umum ASKOM, Master Asesor, Lead Asesor
+6
+Pedoman BNSP 301 (Per.BNSP No. 09/BNSP.301/XI/2013)
+Pelaksanaan asesmen kompetensi oleh LSP
+7
+Pedoman BNSP 201, 208
+Persyaratan umum & lisensi LSP
+8
+SK Ketua BNSP No. 1224/BNSP/VII/2020
+Kode Etik ASKOM & Master Asesor
+9
+Juknis ASKOM 2025, SK BNSP 1511/VII/2025
+Pelatihan, RCC, sertifikasi ulang, biaya 2025
+10
+SE Dirjen BK No. 214/SE/Dk/2022
+Sertifikasi via LSP → PTUK → Menteri via LPJK
+11
+SE Ketua LPJK No. 14/SE/LPJK/2021
+Pencatatan ASKOM & ABU di LPJK
+12
+SNI ISO/IEC 17024
+Persyaratan lembaga sertifikasi person
+13
+SKKNI No. 333 Tahun 2020
+SKKNI ASKOM terbaru — mencabut SKKNI 185/2018 (unit MAPA, MA, MKVA)
+⁠
+⁠​
+3. Syarat Menjadi ASKOM Konstruksi
+A. Persyaratan dasar (Pedoman BNSP 303)
+Komponen
+Ketentuan
+Pemahaman skema
+Memahami skema sertifikasi yang akan diases
+Latar belakang teknis
+Pendidikan, pelatihan, & pengalaman relevan dengan subklasifikasi konstruksi
+Rekomendasi
+Diusulkan oleh LSP terkait; bila belum ada LSP → asosiasi profesi/industri/instansi teknis/diklat yang direkomendasikan BNSP
+Pelatihan ASKOM
+Mengikuti penuh 40 JP sesuai modul BNSP terbaru
+Sertifikasi
+Mengajukan FR.APL.01, lengkapi FR.APL.02; dinyatakan kompeten oleh Lead Asesor; bersedia ikuti surveilans
+B. Kekhususan Konstruksi (lapis tambahan)
+Kompetensi metodologi — sertifikat ASKOM BNSP (Pedoman 303 + SKKNI 333/2020).
+Kompetensi teknis konstruksi — jabatan kerja, jenjang KKNI, subklasifikasi spesifik (mis. K3 Konstruksi, Arsitek, Geoteknik).
+Pemahaman skema LSP konstruksi yang akan dipakai.
+Pencatatan LPJK — wajib sesuai SE Ketua LPJK 14/SE/LPJK/2021.
+Penugasan resmi LSP — LSP harus berlisensi BNSP & tercatat LPJK.
+Bebas konflik kepentingan — tidak menguji asesi yang punya hubungan kerja/keluarga/konsultansi.⁠
+⁠​
+4. Unit Kompetensi ASKOM (SKKNI 333/2020)
+Kode Unit
+Kompetensi
+Singkatan
+M.74SPS03.088.2
+Merencanakan Aktivitas dan Proses Asesmen
+MAPA
+M.74SPS03.090.1
+Melaksanakan Asesmen
+MA
+M.74SPS03.095.1
+Memberikan Kontribusi dalam Validasi Asesmen
+MKVA
+Versi lama (SKKNI 185/2018: TAAASS401C/402C/403B) sudah dicabut.⁠
+⁠​
+Bukti praktik minimum (Pedoman BNSP 303):
+Merencanakan asesmen — min. 3 kali
+Mengembangkan perangkat asesmen — min. 3 kali
+Melaksanakan asesmen (simulasi/riil di bawah supervisi Master Asesor) — min. 3 kali
+5. Fungsi & Peran Pokok ASKOM
+5.1 Lima fungsi utama
+flowchart LR
+	F1["Perencanaan<br>FR.MAPA"] --> F2["Pengembangan<br>perangkat<br>FR.IA"]
+	F2 --> F3["Pelaksanaan<br>asesmen"]
+	F3 --> F4["Pengambilan<br>keputusan<br>K/BK"]
+	F4 --> F5["Pelaporan<br>& validasi<br>FR.AK, FR.VA"]
+Perencanaan
+FR.MAPA
+
+Pengembangan
+perangkat
+FR.IA
+
+Pelaksanaan
+asesmen
+
+Pengambilan
+keputusan
+K/BK
+
+Pelaporan
+& validasi
+FR.AK, FR.VA
+
+​
+5.2 Peran multifaset
+Peran
+Aktivitas
+Penekanan
+Penilai
+Mengumpulkan & mengevaluasi bukti
+Objektivitas berbasis VRFA-CASR
+Pemberi pendekatan/pendamping
+Menjelaskan proses, hak banding, penyesuaian wajar
+Asesi memahami & nyaman
+Penjaga mutu MUK
+Menggunakan & mengembangkan instrumen sesuai skema
+Konsistensi antar asesmen
+Pencatat resmi
+Mengisi formulir, menyusun laporan, dokumentasi
+Auditable trail
+Perekomendasi
+Memberikan keputusan teknis K/BK ke LSP
+Bukan pemutus akhir
+Validator sejawat
+Berkontribusi pada validasi asesmen rekan (FR.VA)
+Continuous improvement
+6. Empat Prinsip Asesmen (VRFA) & Aturan Bukti (CASR)
+Prinsip Asesmen (VRFA)
+Prinsip
+Makna Teknis
+Valid
+Menilai apa yang seharusnya dinilai; bukti cukup, terkini, asli
+Reliabel
+Hasil konsisten antar waktu, tempat, atau asesor
+Fleksibel
+Metode disesuaikan dengan kondisi asesi & tempat asesmen
+Adil
+Tidak diskriminatif; semua asesi diperlakukan sesuai prosedur
+Aturan Bukti (CASR)
+Aturan
+Makna
+Cukup (sufficient)
+Bukti cukup mendukung kesimpulan kompeten
+Asli (authentic)
+Benar milik/hasil kerja asesi
+Saat ini (current)
+Menunjukkan kompetensi terkini
+Relevan (relevant)
+Sesuai standar kompetensi yang diuji
+7. Lima Dimensi Kompetensi yang Wajib Dinilai
+ASKOM wajib memastikan bukti meliputi:
+Dimensi
+Penjelasan
+TS — Task Skill
+Mampu melaksanakan tugas individu
+TMS — Task Management Skill
+Mampu mengelola beberapa tugas berbeda secara bersamaan
+CMS — Contingency Management Skill
+Mampu menangani masalah/penyimpangan tak terduga
+JRES — Job Role/Environment Skill
+Mampu menyesuaikan tanggung jawab & lingkungan kerja
+TRS — Transfer Skill
+Mampu mentransfer kompetensi ke konteks baru
+8. Tanggung Jawab Detail per Tahap
+8.1 Sebelum asesmen
+Mempelajari skema sertifikasi & SKKNI subklasifikasi yang akan diuji.
+Menandatangani surat tugas LSP + pakta imparsialitas/kerahasiaan/bebas konflik.
+Menyusun FR.MAPA.01 (rencana aktivitas & proses asesmen):
+Identitas asesi, tujuan, konteks, jalur sertifikasi
+Strategi & acuan pembanding (SKKNI/SKKK/SKKI)
+Bukti yang dibutuhkan, jenis bukti, metode, perangkat, sumber daya, tempat, waktu
+Menyusun FR.MAPA.02 (peta instrumen) — memetakan unit, KUK, metode, jenis bukti, instrumen.
+Menyiapkan/menggunakan perangkat FR.IA.01–11 sesuai skema.
+Memverifikasi kelayakan TUK & alat/bahan praktik.
+8.2 Pra-asesmen (hari-H, sesi pembukaan)
+Memperkenalkan diri & memverifikasi identitas asesi.
+Menjelaskan: tujuan, ruang lingkup unit, metode, durasi, kriteria K/BK, hak banding, kerahasiaan, K3.
+Memandu penandatanganan FR.AK.01 (Persetujuan Asesmen & Kerahasiaan).
+Mengkonfirmasi FR.AK.07 (penyesuaian wajar) bila ada disabilitas/kebutuhan khusus.
+Memeriksa portofolio fisik asesi vs FR.APL.02.
+8.3 Pelaksanaan asesmen
+Mengumpulkan bukti melalui kombinasi metode (sesuai FR.MAPA.02):
+FR.IA.01 — Ceklis observasi aktivitas di tempat kerja/simulasi
+FR.IA.02 — Tugas praktik demonstrasi
+FR.IA.03 — Pertanyaan untuk mendukung observasi
+FR.IA.04A/B — Daftar instruksi terstruktur / penilaian proyek singkat
+FR.IA.05 — Pertanyaan tertulis pilihan ganda
+FR.IA.06 — Pertanyaan tertulis esai
+FR.IA.07 — Pertanyaan lisan
+FR.IA.08 — Ceklis verifikasi portofolio
+FR.IA.09 — Pertanyaan wawancara
+FR.IA.10 — Klarifikasi/verifikasi pihak ketiga
+FR.IA.11 — Ceklis reviu produk
+Menjaga objektivitas, kerahasiaan, & K3.
+Mendukung asesi tanpa memberi jawaban; memberi waktu yang adil.
+Memastikan setiap unit kompetensi tercakup dengan 5 dimensi (TS-TMS-CMS-JRES-TRS).
+8.4 Pengambilan keputusan
+Menganalisis bukti per unit dengan aturan CASR.
+Memutuskan Kompeten (K) / Belum Kompeten (BK) per unit di FR.AK.02 (Rekaman Asesmen).
+Memberikan rekomendasi keseluruhan ke LSP.
+8.5 Pasca-asesmen
+Mengisi FR.AK.03 (Umpan Balik & Catatan) → menyampaikan ke asesi.
+Menyusun FR.AK.05 (Laporan Asesmen) lengkap dengan justifikasi.
+Menerima/memfasilitasi FR.AK.04 (Banding) bila asesi keberatan.
+Menyerahkan seluruh berkas ke LSP via berita acara serah terima.
+Mengikuti FR.AK.06 (Meninjau Proses Asesmen) & FR.VA / FR.AK.07 (validasi sejawat) untuk perbaikan berkelanjutan.
+9. Alur Proses Kerja End-to-End ASKOM
+flowchart TD
+	A["1. Permohonan asesi ke LSP<br>FR.APL.01 + FR.APL.02"] --> B["2. LSP verifikasi persyaratan dasar"]
+	B --> C["3. LSP tugaskan ASKOM<br>+ surat tugas + pakta imparsialitas"]
+	C --> D["4. ASKOM susun FR.MAPA.01 & 02"]
+	D --> E["5. ASKOM siapkan FR.IA.01-11<br>+ verifikasi TUK"]
+	E --> F["6. Pra-asesmen<br>FR.AK.01 + briefing"]
+	F --> G["7. Pelaksanaan asesmen<br>VRFA + CASR + 5 dimensi"]
+	G --> H["8. ASKOM rekam keputusan<br>FR.AK.02 per unit"]
+	H --> I["9. Umpan balik FR.AK.03"]
+	I --> J{"Asesi banding?"}
+	J -->|Tidak| K["10. ASKOM susun laporan FR.AK.05"]
+	J -->|Ya| L["FR.AK.04 → panel banding<br>ASKOM berbeda"]
+	L --> K
+	K --> M["11. Serah terima berkas ke LSP"]
+	M --> N["12. LSP: tinjauan hasil oleh peninjau ≠ ASKOM"]
+	N --> O["13. LSP: keputusan oleh Komite ≠ ASKOM ≠ peninjau"]
+	O --> P["14. LSP terbitkan SKK<br>atas nama Menteri PU"]
+	P --> Q["15. Unggah SIKI-LPJK / SIJK"]
+	Q --> R["16. ASKOM ikut FR.AK.06<br>+ FR.VA validasi sejawat"]
+	R --> S["17. Surveilans tahunan<br>+ laporan rekaman 6-bulanan"]
+1. Permohonan asesi ke LSP
+FR.APL.01 + FR.APL.02
+2. LSP verifikasi persyaratan dasar
+3. LSP tugaskan ASKOM
++ surat tugas + pakta imparsialitas
+4. ASKOM susun FR.MAPA.01 & 02
+5. ASKOM siapkan FR.IA.01-11
++ verifikasi TUK
+6. Pra-asesmen
+FR.AK.01 + briefing
+7. Pelaksanaan asesmen
+VRFA + CASR + 5 dimensi
+8. ASKOM rekam keputusan
+FR.AK.02 per unit
+9. Umpan balik FR.AK.03
+Asesi banding?
+
+10. ASKOM susun laporan FR.AK.05
+FR.AK.04 → panel banding
+ASKOM berbeda
+
+11. Serah terima berkas ke LSP
+12. LSP: tinjauan hasil oleh peninjau ≠ ASKOM
+13. LSP: keputusan oleh Komite ≠ ASKOM ≠ peninjau
+14. LSP terbitkan SKK
+atas nama Menteri PU
+15. Unggah SIKI-LPJK / SIJK
+16. ASKOM ikut FR.AK.06
++ FR.VA validasi sejawat
+17. Surveilans tahunan
++ laporan rekaman 6-bulanan
+Tidak
+
+Ya
+
+​
+Catatan kritis pada alur:
+Langkah 7–10: domain ASKOM (penilai-perekomendasi).
+Langkah 12–14: domain LSP (peninjau, pemutus, penerbit) — dilarang dirangkap dengan ASKOM penilai.
+Langkah 15: domain administrasi LSP ke ekosistem LPJK.
+Langkah 16–17: domain mutu & continuous improvement.
+10. Perangkat Kerja Standar — MUK Versi 2023
+A. Dokumen pra-asesmen
+Kode
+Dokumen
+FR.APL.01
+Permohonan Sertifikasi Kompetensi
+FR.APL.02
+Asesmen Mandiri — Portofolio asesi vs SKKNI/SKKK/SKKI
+B. Perencanaan
+Kode
+Dokumen
+FR.MAPA.01
+Merencanakan Aktivitas & Proses Asesmen
+FR.MAPA.02
+Peta Instrumen Asesmen
+C. Instrumen Asesmen (FR.IA) — 11 jenis
+(Lihat poin 8.3 di atas — FR.IA.01 sampai FR.IA.11)
+D. Keputusan, Laporan, & Validasi
+Kode
+Dokumen
+FR.AK.01
+Persetujuan Asesmen & Kerahasiaan
+FR.AK.02
+Rekaman Asesmen Kompetensi
+FR.AK.03
+Umpan Balik & Catatan Asesmen
+FR.AK.04
+Formulir Banding
+FR.AK.05
+Laporan Asesmen
+FR.AK.06
+Meninjau Proses Asesmen
+FR.AK.07
+Ceklis Penyesuaian yang Wajar (reasonable adjustment)
+FR.VA
+Memberikan Kontribusi dalam Validasi Asesmen
+Format MUK 2023 menstandarkan struktur perangkat; isi tetap dikembangkan per skema (per SKKNI subklas konstruksi).⁠
+⁠​
+11. Kode Etik ASKOM (SK BNSP 1224/2020)
+ASKOM wajib:
+Melaksanakan kebijakan BNSP/LSP dengan disiplin.
+Melakukan asesmen berkualitas: jujur, objektif, berintegritas, profesional.
+Menerapkan prinsip VRFA secara konsisten.
+Menjaga kerahasiaan hasil asesmen, MUK, & dokumen asesi.
+Menghindari konflik kepentingan (kerja, keluarga, konsultansi sebelumnya, finansial).
+Tidak menerima janji/imbalan di luar kontrak/honor resmi.
+Bersedia dievaluasi oleh BNSP, LSP, & asesi (umpan balik).
+Sanksi pelanggaran
+Tingkat
+Sanksi
+Ringan
+Peringatan tertulis
+Sedang
+Pembekuan sertifikat ASKOM 6–12 bulan
+Berat
+Pencabutan sertifikat ASKOM + blacklist
+Berat + pidana
+Laporan ke APH (mis. pemalsuan dokumen, gratifikasi)
+12. Surveilans, Pelaporan, RCC
+12.1 Surveilans
+Frekuensi: min. 1× per tahun.
+Bentuk: uji profisiensi, evaluasi rekaman, asesmen ulang, witness oleh Master Asesor, evaluasi pemangku kepentingan.
+12.2 Pelaporan rekaman kegiatan
+Frekuensi: setiap 6 bulan (Juni & Desember) ke BNSP/LSP induk.
+Isi: daftar penugasan, jumlah asesmen, hasil, temuan, perbaikan.
+12.3 Masa berlaku & RCC (Recognition Current Competency)
+Sertifikat ASKOM/Master Asesor: umumnya 3 tahun.
+Perpanjangan via RCC sebelum sertifikat habis.
+Kategori RCC
+Kondisi
+Konsekuensi
+Durasi
+A
+Memenuhi seluruh persyaratan
+RCC/refreshment saja
+11 JP
+B
+Memenuhi syarat dasar tetapi sebagian bukti kurang
+RCC + asesmen ulang di TUK
+11 JP + 1 hari TUK
+Di luar A/B
+Tidak memenuhi syarat dasar
+Wajib Pelatihan ASKOM ulang 40 JP
+—
+Toleransi waktu RCC: umumnya min. 3 bulan sebelum & maks. 3 bulan setelah sertifikat berakhir (1 JP = 60 menit).
+12.4 Persyaratan peserta RCC (Juknis BNSP)
+Sertifikat kompetensi teknis atau bukti pengalaman bidang teknis min. 3 tahun.
+Diusulkan oleh LSP tempat asesor menginduk.
+Membawa SKKNI & skema yang dipakai.
+Bukti min. 2× menyusun MAPA (dengan surat tugas).
+Bukti min. 2× menyusun/validasi perangkat asesmen.
+Bukti min. 6× pelaksanaan asesmen (dengan surat tugas).
+13. Mekanisme Sertifikasi SKK Konstruksi (Permen PUPR 8/2022)
+flowchart LR
+	A["Pemohon ajukan ke LSP"] --> B["LSP verifikasi pembayaran"]
+	B --> C["LSP jadwalkan uji<br>+ tugaskan ASKOM"]
+	C --> D["Tatap Muka /<br>Daring / Hybrid /<br>Onsite"]
+	D --> E["ASKOM lakukan asesmen<br>sesuai skema & MUK"]
+	E --> F["ASKOM sampaikan<br>rekomendasi via berita acara"]
+	F --> G["LSP putuskan & terbitkan SKK<br>atas nama Menteri PU"]
+	G --> H["Pencatatan SIKI-LPJK / SIJK"]
+Pemohon ajukan ke LSP
+
+LSP verifikasi pembayaran
+
+LSP jadwalkan uji
++ tugaskan ASKOM
+
+Tatap Muka /
+Daring / Hybrid /
+Onsite
+
+ASKOM lakukan asesmen
+sesuai skema & MUK
+
+ASKOM sampaikan
+rekomendasi via berita acara
+
+LSP putuskan & terbitkan SKK
+atas nama Menteri PU
+
+Pencatatan SIKI-LPJK / SIJK
+
+​
+Jalur cadangan (SE Dirjen BK 214/SE/Dk/2022)
+Bila jabatan/subklasifikasi belum dapat dilayani:
+LSP (jalur utama) →
+  (bila belum tersedia) PTUK (Panitia Teknis Uji Kompetensi) →
+    (bila belum terbentuk) Menteri via LPJK
+​
+14. Kekhususan Konstruksi — Lapis Persyaratan ASKOM
+Lapis
+Yang Diperiksa
+1. Metodologi
+Sertifikat ASKOM BNSP (Pedoman 303 + SKKNI 333/2020)
+2. Teknis konstruksi
+Sesuai jabatan kerja, jenjang KKNI, subklasifikasi
+3. Skema
+Pemahaman skema sertifikasi LSP konstruksi
+4. Pencatatan
+Tercatat di LPJK (SE LPJK 14/SE/LPJK/2021)
+5. Penugasan
+Surat tugas resmi LSP yang berlisensi BNSP & tercatat LPJK
+6. Imparsialitas
+Bebas konflik kepentingan dengan asesi
+⁠
+⁠​
+Acuan SKKNI bidang konstruksi (DJBK)
+Untuk menyusun skema, MUK, & penugasan asesor, gunakan Daftar Jabatan Kerja, Jenjang, Kualifikasi, & Acuan Standar Kompetensi Bidang Konstruksi dari Ditjen Bina Konstruksi: binakonstruksi.pu.go.id/dokumen-skkni.
+Alur penggunaan:
+Pilih Klasifikasi → Subklasifikasi → Jabatan Kerja →
+Jenjang KKNI/Kualifikasi → Unduh SKKNI/SKKK/SKKI →
+Susun FR.MAPA.01, FR.MAPA.02, FR.IA, & FR.AK
+​
+Contoh acuan SKKNI yang sering dipakai
+Klasifikasi/Subklas
+Jabatan Kerja (contoh)
+SKKNI
+Arsitektur
+Asisten Arsitek, Arsitek Madya, Arsitek Utama
+SKKNI 196/2021
+Manajemen Pelaksanaan / Keselamatan Konstruksi
+Ahli Keselamatan Konstruksi Muda/Madya/Utama
+SKKNI 60/2022
+Manajemen Pelaksanaan / K3 Konstruksi
+Ahli K3 Konstruksi Muda/Madya/Utama
+SKKNI 350/2014
+Sipil
+Ahli Rekayasa Konstruksi Bangunan Gedung; Ahli Penilai Bangunan Hijau; Tukang Pasang Bata; dll.
+SKKNI per jabatan (DJBK)
+15. Hubungan ASKOM dengan Aktor Lain
+Aktor
+Hubungan dengan ASKOM
+Asesi
+Subjek penilaian; ASKOM wajib obyektif, mendampingi, menjaga hak banding
+LSP
+Pemberi tugas, pengarsip, pemutus, penerbit SKK; ASKOM wajib lapor & patuh SOP
+TUK
+Penyedia sarana; ASKOM koordinasi kesiapan ruang, alat, K3
+Master Asesor
+Pembina/witness/supervisi; bantu validasi & RCC
+Lead Asesor
+Asesor yang mengases calon ASKOM saat sertifikasi awal
+Komite Skema LSP
+Penyusun skema & MUK; ASKOM bisa beri masukan teknis
+Komite Keputusan LSP
+Pemutus akhir K/BK; menerima rekomendasi ASKOM
+Peninjau LSP
+Mengkaji laporan ASKOM sebelum keputusan; bukan menyalin
+BNSP
+Penerbit sertifikat ASKOM, pengawas mutu, pemegang kode etik
+LPJK
+Mencatat ASKOM konstruksi; pemilik SIKI-LPJK
+Asosiasi Profesi
+Pemberi rekomendasi awal & dukungan PKB
+16. Master Asesor & Lead Asesor — Hierarki Kewenangan
+Level
+Kewenangan
+ASKOM
+Melaksanakan asesmen, beri rekomendasi K/BK
+Lead Asesor
+Mengases calon ASKOM saat sertifikasi awal (FR.APL.01/02)
+Master Asesor
+Membina ASKOM, jadi narasumber pelatihan, witness surveilans, narasumber RCC
+Tanggung jawab pengembangan kapasitas ASKOM ada pada Master Asesor (Kode Etik 1224/2020).
+17. Klausul Rumusan Baku (Siap Pakai untuk SOP/Handbook LSP)
+"Asesor Kompetensi Jasa Konstruksi adalah personel yang kompeten secara metodologi sesuai Pedoman BNSP 303 & SKKNI No. 333 Tahun 2020, sekaligus kompeten secara teknis pada jabatan kerja/subklasifikasi konstruksi yang diuji. Asesor wajib bersertifikat ASKOM BNSP, terdaftar pada LSP yang berlisensi BNSP & tercatat di LPJK, mengikuti pencatatan ASKOM di LPJK sesuai SE Ketua LPJK No. 14/SE/LPJK/2021, melaksanakan asesmen sesuai Pedoman BNSP 301, MUK Versi 2023, & skema sertifikasi LSP, serta menjaga imparsialitas, kerahasiaan, & bebas konflik kepentingan.
+Asesor melaksanakan asesmen & memberikan rekomendasi kompeten/belum kompeten kepada LSP melalui berita acara hasil uji kompetensi. Keputusan sertifikasi & penerbitan SKK Konstruksi tetap berada pada LSP sesuai mekanisme BNSP & ketentuan Permen PUPR No. 8 Tahun 2022. Asesor wajib mengikuti surveilans tahunan, melaporkan rekaman kegiatan setiap 6 bulan, & memperpanjang sertifikat melalui mekanisme RCC sesuai juknis BNSP terbaru."⁠
+⁠​
+18. Indikator Kinerja ASKOM (KPI)
+Indikator
+Target
+Ketepatan waktu penyelesaian laporan asesmen
+≤ 3 hari kerja pasca-uji
+Kelengkapan berkas FR.AK saat serah terima
+100%
+Konsistensi keputusan dengan bukti CASR
+≥ 95% (auditable)
+Tingkat banding asesi yang dimenangkan
+≤ 5%
+Kepatuhan kode etik
+0 pelanggaran
+Surveilans BNSP
+0 temuan major
+RCC tepat waktu
+Sebelum sertifikat habis
+Pelaporan 6-bulanan
+100% on time
+Pelatihan/refreshment per tahun
+≥ 16 JP
+19. Risiko Profesi & Mitigasi
+Risiko
+Mitigasi
+Sertifikat kedaluwarsa saat menilai
+Kalender RCC pribadi + reminder LSP 6 bulan sebelumnya
+Konflik kepentingan tidak terdeteksi
+Deklarasi tertulis sebelum tiap penugasan + cek silang LSP
+Bukti palsu lolos
+Klarifikasi pihak ketiga (FR.IA.10) untuk setiap dokumen meragukan
+Tekanan asesi/atasan untuk meluluskan
+Pakta imparsialitas + whistleblowing channel LSP + support Master Asesor
+Beban kerja berlebih → mutu turun
+Maks. 8–10 asesi/asesor/hari; rotasi penugasan
+Tertuduh pemalsuan keputusan
+Rekam jejak FR.MAPA → FR.IA → FR.AK lengkap & auditable
+Gugatan asesi pasca-keputusan
+Patuhi proses banding; libatkan tim hukum LSP
+20. Daftar Periksa Mandiri ASKOM Sebelum Hari-H
+☐ Surat tugas LSP saya tandatangani
+☐ Pakta imparsialitas saya tandatangani
+☐ Sertifikat ASKOM saya masih berlaku
+☐ Pencatatan LPJK saya aktif
+☐ Saya memahami skema & SKKNI yang akan diuji
+☐ FR.MAPA.01 & FR.MAPA.02 sudah disusun
+☐ FR.IA.01–11 yang relevan sudah disiapkan/dicetak
+☐ Saya tidak punya hubungan kerja/keluarga/konsultansi dengan asesi
+☐ TUK sudah diverifikasi (atau saya akan verifikasi hari-H)
+☐ Saya membawa: surat tugas, ID, MUK tersegel, ATK, materai
+☐ Saya mengetahui prosedur banding & kontak LSP
+☐ Saya memahami protokol K3 di TUK
+​
+21. Klausul Etika Operasional Harian
+Situasi
+Tindakan ASKOM
+Asesi membawa hadiah
+Tolak halus, jelaskan kode etik, lapor LSP bila berulang
+Asesi memohon "kelolosan" karena alasan keluarga
+Tegas tolak, tetap ases berbasis bukti, beri umpan balik membangun
+Asesi minta soal di-spoiler
+Tolak; ingatkan kerahasiaan MUK
+Atasan/kolega meminta intervensi keputusan
+Tolak, lapor ke Master Asesor & LSP
+Saya ragu atas keputusan saya sendiri
+Konsultasi dengan Master Asesor; gunakan FR.IA.10 untuk tambahan bukti
+Asesi di luar dugaan kompeten lebih tinggi dari yang diminta
+Tetap ases sesuai jenjang yang diminta; sarankan re-asesmen jenjang lebih tinggi
+Bukti tampak meragukan
+Klarifikasi (FR.IA.10) — jangan asumsi, jangan tutupi
+22. Penutup
+Asesor Kompetensi Jasa Konstruksi adalah penjaga gerbang mutu sektor konstruksi nasional. Setiap SKK yang lahir dari rekomendasi ASKOM kelak akan menjadi dasar:
+SBU badan usaha (kontraktor/konsultan) — karena BUJK butuh TKK ber-SKK.
+Penugasan PJBU/PJTBU/PJSKBU dalam BUJK.
+Eligibilitas tender pekerjaan konstruksi pemerintah & swasta.
+Keselamatan publik atas bangunan & infrastruktur.
+Karena itu kompetensi, integritas, dan imparsialitas ASKOM tidak boleh dikompromikan. Sistem pemisahan kewenangan, bukti VRFA-CASR, kode etik 1224/2020, surveilans tahunan, dan RCC periodik adalah penjaga sistemik agar ASKOM tetap pada jalurnya.⁠
+⁠⁠
+⁠​
+Bila ingin, materi ini dapat saya susun menjadi halaman Notion siap pakai (mis. Handbook ASKOM Konstruksi) dengan sub-halaman: SOP Penugasan, Template FR Pra-Asesmen, Checklist Hari-H, FAQ, dan Daftar SKKNI Acuan. Tinggal sebut parent page-nya.
+lanjut
+10:37 PM
+Thought
+Lanjutan (Bagian 2) — Karier, Pengembangan, & Praktik Lanjutan ASKOM Konstruksi
+23. Jenjang Karier ASKOM Konstruksi
+flowchart LR
+	A["Calon ASKOM<br>TKK senior bersertifikat<br>+ rekomendasi LSP"] --> B["Pelatihan ASKOM 40 JP"]
+	B --> C["ASKOM Junior<br>0-3 tahun, supervised"]
+	C --> D["ASKOM Mandiri<br>3-7 tahun, full assignment"]
+	D --> E["Lead Asesor<br>mengases calon ASKOM"]
+	D --> F["Master Asesor<br>pembina, narasumber RCC"]
+	E --> G["Anggota Komite Skema LSP"]
+	F --> G
+	G --> H["Penilai Surveilans BNSP /<br>Auditor LSP"]
+Calon ASKOM
+TKK senior bersertifikat
++ rekomendasi LSP
+
+Pelatihan ASKOM 40 JP
+
+ASKOM Junior
+0-3 tahun, supervised
+
+ASKOM Mandiri
+3-7 tahun, full assignment
+
+Lead Asesor
+mengases calon ASKOM
+
+Master Asesor
+pembina, narasumber RCC
+
+Anggota Komite Skema LSP
+
+Penilai Surveilans BNSP /
+Auditor LSP
+
+​
+Kriteria naik tingkat
+Dari → Ke
+Persyaratan Tipikal
+Junior → Mandiri
+Min. 30 asesmen sukses, 0 banding berhasil melawan, 1 RCC
+Mandiri → Lead
+Min. 5 tahun aktif, lulus pelatihan Lead Asesor, rekomendasi BNSP
+Mandiri → Master
+Min. 7 tahun, kontribusi pembinaan, lulus pelatihan Master Asesor, rekomendasi BNSP/LSP induk
+Master → Auditor
+Reputasi nasional, kompetensi audit ISO 17024, ditunjuk BNSP/LPJK
+24. Perbedaan ASKOM vs ABU — Sering Tertukar
+Aspek
+ASKOM (Asesor Kompetensi)
+ABU (Asesor Badan Usaha)
+Objek penilaian
+Personel/individu (TKK)
+Badan usaha (BUJK)
+Output sertifikasi
+SKK (Sertifikat Kompetensi Kerja)
+SBU (Sertifikat Badan Usaha)
+Lembaga penaung
+LSP — berlisensi BNSP, tercatat LPJK
+LSBU — terakreditasi KAN, dilisensi LPJK
+Standar kompetensi
+SKKNI 333/2020 (MAPA-MA-MKVA)
+SKKNI ABU (Kepmenaker 273/2024)
+Pedoman utama
+Pedoman BNSP 301, 303
+SK Dirjen BK 37/KPTS/DK/2025
+Akreditasi lembaga
+SNI ISO/IEC 17024 (person certification)
+SNI ISO/IEC 17065 (product/process)
+Bukti utama
+Portofolio personel + observasi praktik
+Penjualan tahunan, keuangan, TKK, peralatan, SMAP
+Pencatatan
+LPJK (SE 14/SE/LPJK/2021)
+LPJK (SE 14/SE/LPJK/2021)
+Kode etik
+SK BNSP 1224/2020
+SOP LSBU + ISO 17065
+Sertifikasi ulang
+RCC ASKOM
+RCC ABU (LSP berskema ABU)
+Singkatnya: ASKOM mengases manusia, ABU mengases badan usaha. Keduanya beroperasi di sektor jasa konstruksi tetapi dengan rezim, standar, dan lembaga yang berbeda.
+25. Worked Example — Asesmen Ahli Muda K3 Konstruksi (Jenjang 7)
+Profil asesi
+Nama: Rudi Hartono (fiktif)
+Pendidikan: S1 Teknik Sipil
+Pengalaman: 4 tahun supervisi K3 di proyek gedung & infrastruktur
+Skema: Ahli Muda Keselamatan Konstruksi
+Acuan: SKKNI 60/2022 (Keselamatan Konstruksi)
+Langkah 1 — FR.MAPA.01 (Cuplikan)
+Tujuan asesmen     : Sertifikasi Pertama
+Konteks            : Proyek aktif (gedung 12 lantai)
+Acuan pembanding   : SKKNI 60/2022 — 8 unit kompetensi inti
+Strategi           : Kombinasi observasi + portofolio + wawancara + tertulis
+Tempat             : TUK Sewaktu di kantor proyek
+Waktu              : 1 hari (08.00-16.30)
+​
+Langkah 2 — FR.MAPA.02 (Peta Instrumen — Cuplikan)
+Unit
+Metode Utama
+Metode Pendukung
+Instrumen
+Menerapkan peraturan K3
+Tertulis pilihan ganda
+Wawancara
+FR.IA.05 + FR.IA.07
+Mengidentifikasi bahaya
+Observasi
+Pertanyaan pendukung
+FR.IA.01 + FR.IA.03
+Mengevaluasi risiko
+Tugas demonstrasi
+Reviu produk
+FR.IA.02 + FR.IA.11
+Investigasi insiden
+Verifikasi portofolio
+Wawancara mendalam
+FR.IA.08 + FR.IA.09
+Menyusun RKK
+Reviu produk
+Klarifikasi pihak ketiga
+FR.IA.11 + FR.IA.10
+Langkah 3 — Pelaksanaan (cuplikan FR.IA.01 observasi)
+Aktivitas: Inspeksi K3 harian di area pengecoran lantai 8
+Kriteria:                                         Ya  Tdk  N/A
+[ ] Memakai APD lengkap                            ✓
+[ ] Memeriksa railing perimeter                    ✓
+[ ] Memeriksa scaffolding                          ✓
+[ ] Mengidentifikasi pekerja tanpa APD             ✓
+[ ] Mencatat temuan di logbook                     ✓
+[ ] Memberi instruksi koreksi langsung             ✓
+[ ] Eskalasi temuan kritis ke PM                   ✓
+
+Catatan ASKOM: Asesi menemukan 2 pekerja tanpa harness di tepi
+lantai, langsung menghentikan pekerjaan, melapor ke mandor &
+PM via radio. Tindakan tepat waktu, dokumentasi jelas.
+
+Hasil: KOMPETEN
+​
+Langkah 4 — FR.AK.02 (Rekaman Per Unit)
+Unit
+TS
+TMS
+CMS
+JRES
+TRS
+Keputusan
+---
+:-:
+:-:
+:-:
+:-:
+:-:
+:-:
+Menerapkan peraturan K3
+✓
+✓
+✓
+✓
+✓
+K
+Mengidentifikasi bahaya
+✓
+✓
+✓
+✓
+✓
+K
+Mengevaluasi risiko
+✓
+✓
+✓
+✓
+✓
+K
+Investigasi insiden
+✓
+✓
+✓
+✓
+—
+K (TRS lemah, beri catatan)
+Menyusun RKK
+✓
+✓
+✓
+✓
+✓
+K
+...
+Langkah 5 — Rekomendasi & Umpan Balik
+Rekomendasi: KOMPETEN untuk Skema Ahli Muda Keselamatan Konstruksi (Jenjang 7).
+Catatan pengembangan: Asesi disarankan memperkaya pengalaman lintas-sektor (mis. proyek migas/pertambangan) untuk memperkuat TRS menuju Jenjang 8 di masa depan.
+Langkah 6 — FR.AK.05 (Laporan ke LSP)
+Memuat: identitas asesi & ASKOM, tanggal & TUK, ringkasan unit, bukti yang digunakan, justifikasi keputusan per unit, anomali (bila ada), rekomendasi keseluruhan, tanda tangan ASKOM + asesi.
+26. Bobot & Variasi Metode per Subklasifikasi
+Tidak semua jabatan menggunakan kombinasi metode yang sama. Rule of thumb:
+Karakter Jabatan
+Metode Dominan
+Catatan
+Tukang/Operator (Jenjang 1-3)
+Observasi praktik (FR.IA.01/02) ≥ 60%
+Bukti fisik/keterampilan langsung
+Teknisi/Analis (Jenjang 4-5)
+Observasi 40% + Tertulis 30% + Wawancara 30%
+Kombinasi keterampilan & pengetahuan
+Ahli Muda/Madya (Jenjang 6-8)
+Portofolio 40% + Wawancara mendalam 30% + Tertulis esai 30%
+Pengalaman & analisis
+Ahli Utama (Jenjang 9)
+Portofolio 50% + Wawancara strategis 30% + Reviu produk 20%
+Kepemimpinan & visi
+ASKOM wajib menyesuaikan FR.MAPA.02 dengan karakter jabatan. Memberi soal pilihan ganda berbobot 80% kepada tukang las yang lulusan SD adalah pelanggaran prinsip Adil (A dari VRFA).
+27. Penanganan Asesi dengan Kebutuhan Khusus — FR.AK.07
+Penyesuaian wajar (reasonable adjustment) yang dapat diberikan:
+Kondisi Asesi
+Penyesuaian
+Disabilitas penglihatan
+Soal cetak besar / dibacakan; pendamping netral
+Disabilitas pendengaran
+Penerjemah bahasa isyarat; instruksi tertulis
+Disabilitas mobilitas
+TUK aksesibel; pengaturan ruang sesuai kebutuhan
+Hamil/menyusui
+Jadwal istirahat tambahan; ruang laktasi
+Kemampuan baca-tulis terbatas
+Soal lisan dominan; durasi tambahan
+Bahasa daerah dominan
+Penerjemah/asesor lokal; terjemahan instruksi
+Trauma / kecemasan
+Pendekatan bertahap; ASKOM yang pengalaman
+Yang tidak boleh dimodifikasi:
+Standar kompetensi (SKKNI tetap)
+Kriteria K/BK
+Bukti yang dibutuhkan
+Prinsip VRFA-CASR
+Penyesuaian pada proses, bukan pada standar.
+28. Kontribusi pada Validasi Asesmen (FR.VA / MKVA)
+Unit MKVA M.74SPS03.095.1 mewajibkan ASKOM ikut dalam validasi sejawat.
+Bentuk validasi
+Jenis
+Penjelasan
+Pre-assessment validation
+Reviu FR.MAPA & FR.IA sebelum digunakan; biasanya tim 2-3 ASKOM
+Concurrent validation
+Witness oleh ASKOM/Master Asesor saat pelaksanaan
+Post-assessment validation
+Reviu sampel laporan FR.AK.05 untuk konsistensi keputusan
+Cross-LSP validation
+Studi banding antar LSP yang menggunakan skema sama
+Output validasi
+Laporan FR.VA dengan temuan & rekomendasi.
+Revisi MUK bila ditemukan ketidakkonsistenan.
+Pelatihan kalibrasi asesor bila ditemukan disparitas keputusan.
+29. Pengembangan Profesional Berkelanjutan (PKB) ASKOM
+Asosiasi profesi mensyaratkan PKB tahunan untuk menjaga relevansi:
+Jenis Aktivitas
+Bobot SKP/JP/Tahun
+Melaksanakan asesmen aktif
+1 SKP per uji (max. 20 SKP)
+Menjadi narasumber pelatihan
+5 SKP per sesi
+Menulis artikel/kajian regulasi
+5-10 SKP per artikel
+Mengikuti seminar/webinar K3/Konstruksi
+1 SKP per 2 jam
+Pelatihan refreshment 8 JP
+4 SKP
+Sertifikasi terkait (mis. ISO 45001 lead auditor)
+10 SKP
+Kontribusi pada penyusunan SKKNI baru
+15 SKP
+Target tahunan
+≥ 25 SKP
+Bukti PKB diperlukan saat RCC untuk menentukan kategori A/B.
+30. Etika Digital ASKOM (Era Hybrid)
+Walau topik utama kita hard copy, ASKOM modern juga harus paham etika digital:
+Risiko Digital
+Pencegahan
+Memposting foto asesmen di media sosial
+Larangan total kecuali persetujuan tertulis & anonim
+Menyimpan MUK di cloud pribadi
+Hanya di sistem LSP terotorisasi
+WhatsApp grup asesi pasca-uji
+Hindari; gunakan kanal LSP resmi
+Memberi "tips lulus uji" di YouTube/TikTok
+Pelanggaran kerahasiaan MUK; sanksi pencabutan
+Menerima endorsement produk K3 sebagai influencer
+Konflik kepentingan; deklarasi wajib ke LSP
+Tanda tangan elektronik asal-asalan
+Gunakan e-sign tersertifikasi BSrE/PSrE
+31. Hubungan ASKOM ↔ Master Asesor
+Master Asesor adalah pembina, mentor, & jaring pengaman sistem ASKOM.
+Tugas Master Asesor terhadap ASKOM:
+Witness asesmen ASKOM (terutama junior).
+Pelatihan kalibrasi untuk konsistensi keputusan.
+Konsultasi kasus sulit (bukti meragukan, asesi banding).
+Pemetaan kompetensi ASKOM untuk penugasan tepat.
+Narasumber RCC & pelatihan ASKOM ulang.
+Mediator bila ada konflik internal LSP terkait keputusan.
+Penjamin mutu sektor — laporan ke BNSP bila ada sistemik issue.
+Kapan ASKOM wajib konsultasi ke Master Asesor:
+Bukti asesi terindikasi palsu/diragukan.
+Asesi mengajukan banding dengan argumen kuat.
+Konflik kepentingan terdeteksi setelah penugasan.
+Asesmen pertama untuk skema baru.
+Tekanan eksternal untuk meluluskan/menggagalkan.
+32. Daftar Sumber Belajar ASKOM Konstruksi
+A. Wajib (regulasi)
+UU 2/2017 jo. UU 6/2023 — Jasa Konstruksi
+PP 22/2020 jo. PP 14/2021 — Pelaksanaan UU
+Permen PUPR 8/2022 — Sertifikat Standar JK
+Pedoman BNSP 201, 208, 301, 302, 303, 305
+SK BNSP 1224/2020 — Kode Etik
+SK BNSP 1511/VII/2025 — Biaya 2025
+SE Dirjen BK 214/SE/Dk/2022; SE LPJK 14/SE/LPJK/2021
+B. SKKNI yang sering dipakai
+SKKNI 333/2020 — Asesor Kompetensi
+SKKNI 196/2021 — Arsitektur
+SKKNI 60/2022 — Keselamatan Konstruksi
+SKKNI 350/2014 — K3 Konstruksi
+DJBK: binakonstruksi.pu.go.id/dokumen-skkni
+C. Standar internasional
+SNI ISO/IEC 17024 — Person certification body
+ISO 19011 — Audit guidelines
+ISO 31000 — Risk management
+D. Bacaan praktik baik
+Handbook BNSP
+Modul ASKOM Versi 2023
+Juknis ASKOM 2024-2025
+Kajian KAN tentang skema sertifikasi person
+E. Komunitas
+Forum Asesor Kompetensi Indonesia
+ASPEKINDO (untuk konteks asosiasi)
+Asosiasi profesi sub-sektor (mis. A2K4, HAKI, IKA-IATKI)
+33. Indikator ASKOM "Bermutu Tinggi" (Profil Ideal)
+Dimensi
+Ciri
+Teknis
+Up-to-date dengan SKKNI subklasifikasi; terus update regulasi & teknologi
+Metodologi
+Konsisten gunakan VRFA-CASR & 5 dimensi; dokumentasi rapi
+Etika
+Tidak pernah dilaporkan, tidak pernah menerima gratifikasi, deklarasi konflik proaktif
+Komunikasi
+Mampu menjelaskan ke asesi semua kalangan (dari tukang ke direksi)
+Kalibrasi
+Aktif ikut validasi sejawat; keputusan konsisten dengan ASKOM lain
+Pengembangan
+PKB ≥ 25 SKP/tahun; rajin baca regulasi baru
+Reputasi
+Direkomendasikan LSP-LSP; jadi narasumber pelatihan
+Kontribusi sektor
+Ikut menyusun MUK, memberi masukan revisi SKKNI
+34. Rangkuman Komitmen ASKOM Konstruksi
+Saya, sebagai Asesor Kompetensi Jasa Konstruksi, berkomitmen:
+
+1. Menilai setiap asesi dengan VRFA & CASR — tanpa pandang bulu.
+2. Menjaga kerahasiaan MUK & data asesi seumur hidup karier saya.
+3. Mendeklarasikan konflik kepentingan secara proaktif.
+4. Tidak menerima imbalan di luar honor resmi LSP.
+5. Mengikuti RCC tepat waktu & menjaga kompetensi terkini.
+6. Berkontribusi pada validasi sejawat & continuous improvement.
+7. Menghormati kewenangan LSP sebagai pemutus & penerbit SKK.
+8. Mendukung asesi yang BK dengan umpan balik konstruktif.
+9. Melaporkan pelanggaran sistemik ke Master Asesor / BNSP.
+10. Menjunjung tinggi marwah profesi & sektor jasa konstruksi nasional.
+​
+35. Penutup Total
+ASKOM Konstruksi bukan sekadar "tukang menilai"; ia adalah:
+Penjaga gerbang mutu TKK nasional — keputusannya menentukan siapa yang berhak memegang SKK.
+Mitra LSP — tanpa ASKOM kompeten, LSP tidak bisa beroperasi.
+Penegak kode etik sektor — konsistensi etika adalah modal kepercayaan publik.
+Agen pengembangan kapasitas — umpan balik konstruktif membantu TKK tumbuh.
+Pelaku continuous improvement — kontribusi validasi memperbaiki sistem dari dalam.
+Setiap SKK yang diterbitkan adalah hasil keputusan kolektif — asesi yang membuktikan, ASKOM yang menilai, peninjau yang mengkaji, komite yang memutuskan, dan LSP yang menerbitkan. Semuanya bermuara pada satu hal: keselamatan & mutu pekerjaan konstruksi nasional.⁠
+⁠⁠
+⁠​
+Materi ASKOM Konstruksi pada thread ini sudah komprehensif dari A sampai Z: regulasi, syarat, unit kompetensi, fungsi, peran, tanggung jawab, alur kerja, perangkat MUK, kode etik, surveilans, RCC, hierarki profesi, dan praktik etis. Bila ingin dikemas menjadi Handbook ASKOM Konstruksi sebagai halaman Notion siap pakai, sebut parent page-nya — saya akan langsung susun.
+lanjut
+10:40 PM
+Thought
+Lanjutan (Bagian 3) — Template Lengkap, Studi Kasus, & Roadmap Karier
+36. Template Lengkap FR.MAPA.01 (Siap Pakai)
+═════════════════════════════════════════════════════════════════
+FR.MAPA.01 — MERENCANAKAN AKTIVITAS DAN PROSES ASESMEN
+═════════════════════════════════════════════════════════════════
+
+Skema Sertifikasi    : ___________________________________________
+Judul Skema          : ___________________________________________
+Nomor Skema          : ___________________________________________
+Tanggal Asesmen      : ___________________________________________
+
+A. PENDEKATAN ASESMEN
+
+A.1 Karakteristik Asesi
+  Nama              : __________________________
+  Kelompok asesi    : [ ] Hasil pelatihan [ ] Pengalaman [ ] RPL
+  Tujuan            : [ ] Sertifikasi [ ] RCC [ ] PKT [ ] Lainnya
+  Konteks           : [ ] Tempat kerja  [ ] TUK Sewaktu  [ ] Mandiri
+
+A.2 Strategi Asesmen
+  Prinsip asesmen   : Valid, Reliabel, Fleksibel, Adil
+  Aturan bukti      : Cukup, Asli, Saat ini, Relevan
+
+A.3 Acuan Pembanding
+  [ ] SKKNI No. _______ Tahun _______
+  [ ] SKKK         _______
+  [ ] SKKI         _______
+
+B. RENCANA ASESMEN PER UNIT
+
+┌──────────────────────────┬──────────┬─────────────────┬──────────┐
+│ Unit Kompetensi          │ Bukti    │ Jenis Bukti     │ Metode   │
+├──────────────────────────┼──────────┼─────────────────┼──────────┤
+│ [Kode + nama unit 1]     │ Langs/   │ TS/TMS/CMS/     │ Obs/Tert/│
+│                          │ Tdk lgs/ │ JRES/TRS        │ Wwc/Port │
+│                          │ Tambahan │                 │          │
+├──────────────────────────┼──────────┼─────────────────┼──────────┤
+│ [Kode + nama unit 2]     │ ...      │ ...             │ ...      │
+└──────────────────────────┴──────────┴─────────────────┴──────────┘
+
+C. PENGORGANISASIAN ASESMEN
+
+C.1 Sumber Daya
+  Bahan/peralatan   : ____________________
+  Personel          : Asesor ____ orang, Penyelia ____ orang
+  Komunikasi        : [ ] Tatap muka [ ] Daring [ ] Hybrid
+
+C.2 Jadwal
+  08.00–09.00       : Registrasi & FR.AK.01
+  09.00–10.30       : Asesmen mandiri & verifikasi portofolio
+  10.30–12.00       : Tertulis (FR.IA.05/06)
+  13.00–15.00       : Observasi praktik (FR.IA.01/02/03)
+  15.00–16.00       : Wawancara mendalam (FR.IA.07/09)
+  16.00–16.30       : Umpan balik & FR.AK.03
+
+C.3 Tempat
+  Nama TUK          : ____________________
+  Alamat            : ____________________
+  Jenis             : [ ] Tempat Kerja [ ] Sewaktu [ ] Mandiri
+
+D. PERSETUJUAN
+
+  Asesor                       Penyelia LSP (bila ada)
+  [Nama & TTD]                 [Nama & TTD]
+
+  Tanggal: __________          Tanggal: __________
+
+═════════════════════════════════════════════════════════════════
+​
+37. Template Lengkap FR.AK.01 — Persetujuan Asesmen & Kerahasiaan
+═════════════════════════════════════════════════════════════════
+FR.AK.01 — PERSETUJUAN ASESMEN & KERAHASIAAN
+═════════════════════════════════════════════════════════════════
+
+Nama Asesi          : ___________________________________________
+NIK                 : ___________________________________________
+No. Reg LSP         : ___________________________________________
+Skema               : ___________________________________________
+Tanggal Asesmen     : ___________________________________________
+
+A. PERSETUJUAN ASESMEN
+
+Saya, asesi yang bertanda tangan di bawah ini, MENYATAKAN bahwa:
+
+1. Saya telah mendapat penjelasan dari asesor mengenai:
+   [✓] Tujuan asesmen
+   [✓] Skema, unit kompetensi, & kriteria penilaian
+   [✓] Metode & instrumen asesmen
+   [✓] Jadwal & lokasi asesmen
+   [✓] Hak & kewajiban saya selama asesmen
+   [✓] Mekanisme banding bila tidak puas atas keputusan
+   [✓] Mekanisme pengaduan & whistleblowing
+
+2. Saya MENYETUJUI rencana asesmen yang telah disampaikan asesor.
+
+3. Saya BERSEDIA mengikuti seluruh tahap asesmen dengan jujur,
+   penuh tanggung jawab, dan tanpa paksaan.
+
+4. Saya MEMAHAMI bahwa keputusan akhir K/BK ditetapkan oleh LSP
+   berdasarkan rekomendasi asesor dan tinjauan komite.
+
+B. PERSETUJUAN KERAHASIAAN
+
+Saya MENJAMIN tidak akan:
+
+1. Menyebarluaskan isi materi uji kompetensi (MUK) kepada pihak lain.
+2. Mendokumentasikan (foto/video/copy) materi uji tanpa izin LSP.
+3. Memberi/menerima jawaban dari peserta uji lain selama asesmen.
+4. Memalsukan bukti portofolio atau dokumen pendukung lainnya.
+
+Pelanggaran atas pernyataan ini saya pahami dapat berakibat:
+- Pembatalan hasil asesmen
+- Larangan ikut uji kompetensi pada periode tertentu
+- Tindakan hukum sesuai ketentuan yang berlaku
+
+C. KEBUTUHAN PENYESUAIAN WAJAR
+
+Apakah Anda memerlukan penyesuaian wajar?
+[ ] Tidak
+[ ] Ya, sebutkan: __________________________
+    (jika Ya, lanjutkan ke FR.AK.07)
+
+D. TANDA TANGAN
+
+  Asesi                        Asesor (ASKOM)
+  [Nama & TTD]                 [Nama & TTD + No. Reg]
+
+  Tanggal: __________          Tanggal: __________
+
+═════════════════════════════════════════════════════════════════
+​
+38. Studi Kasus Banding Detail — Sengketa Keputusan
+Profil sengketa
+Aspek
+Keterangan
+Asesi
+Ir. Bambang S. — kandidat Ahli Madya Geoteknik (Jenjang 8)
+ASKOM penilai
+Asesor X
+Tanggal uji
+15 Maret 2026
+Hasil awal
+BK pada 2 unit (analisis stabilitas lereng & investigasi geoteknik)
+Banding diajukan
+22 Maret 2026 — dalam 7 hari kerja
+Argumen asesi (FR.AK.04)
+"Saya telah menyertakan 12 laporan investigasi geoteknik proyek bendungan & terowongan dengan tanda tangan saya sebagai PJ Geoteknik. Asesor menilai 'bukti tidak cukup' tanpa menjelaskan kekurangan spesifiknya. Saya keberatan atas penilaian yang tidak transparan."
+Penanganan LSP
+Hari 1–3: Manajer Sertifikasi LSP menerima banding, memeriksa kelengkapan, membentuk panel banding 3 ASKOM senior bidang geoteknik (semua berbeda dari Asesor X).
+Hari 4–7: Panel mengkaji ulang:
+FR.MAPA.01 & FR.MAPA.02 yang dibuat Asesor X
+FR.AK.05 (laporan asesmen)
+Bukti portofolio asli asesi
+Berita acara pelaksanaan
+Wawancara klarifikasi dengan Asesor X
+Wawancara dengan asesi (opsional)
+Hari 8–10: Panel menemukan:
+Bukti portofolio asesi sudah memenuhi CASR untuk 12 dari 15 indikator unit.
+Asesor X tidak menggunakan FR.IA.10 untuk mengklarifikasi 3 indikator yang dianggap meragukan.
+Asesor X tidak menulis catatan spesifik di FR.IA.08 — hanya tanda BK.
+Tidak ada wawancara tambahan untuk menggali kompetensi pengganti bukti tertulis.
+Hari 11–12: Panel rekomendasi:
+Status asesi diubah menjadi K (Kompeten) untuk kedua unit.
+SKK diterbitkan dalam 7 hari setelah keputusan komite.
+Asesor X mendapat coaching dari Master Asesor terkait penggunaan FR.IA.10.
+MUK direvisi untuk mempertegas kriteria bukti unit yang disengketakan.
+Hari 13–14: Komite Keputusan LSP menyetujui rekomendasi panel; SKK diterbitkan.
+Pelajaran sistemik
+Untuk ASKOM
+Untuk LSP
+Wajib gunakan FR.IA.10 bila bukti meragukan
+Audit periodik laporan ASKOM
+Tulis catatan spesifik di setiap FR.IA
+Pelatihan kalibrasi rutin
+Beri umpan balik konstruktif di FR.AK.03
+Sistem tracking banding
+Konsultasi Master Asesor saat ragu
+Komite banding terlembaga
+Banding bukan musuh sistem; banding adalah penjaga mutu. LSP yang sehat menyambut banding sebagai feedback, bukan menghindarinya.
+39. Aspek Profesional & Administratif ASKOM
+39.1 Honor & pajak
+Komponen
+Penjelasan
+Honor per uji
+Bervariasi per LSP & jenjang KKNI; mengacu Kepmen PUPR 713/KPTS/M/2022 untuk biaya sertifikasi
+Kontrak
+Surat tugas + surat perjanjian kerja per penugasan; bukan karyawan tetap LSP
+PPh 21
+Dipotong LSP sebagai pemberi penghasilan; ASKOM dapat bukti potong (1721-A2 / e-Bupot)
+PKP/non-PKP
+ASKOM dengan omset > Rp 4,8M/tahun wajib jadi PKP & terbitkan e-Faktur
+NPWP
+Wajib; dilampirkan ke FR.APL pelatihan ASKOM & ke LSP
+BPJS
+LSP umumnya tidak mendaftarkan ASKOM ke BPJS Ketenagakerjaan (karena kontrak); ASKOM disarankan mandiri
+39.2 Dokumen administrasi pribadi ASKOM
+📁 ARSIP PRIBADI ASKOM
+├── 1. Sertifikat ASKOM BNSP (asli + scan)
+├── 2. Kartu pencatatan LPJK
+├── 3. Sertifikat kompetensi teknis konstruksi
+├── 4. Logbook penugasan (per LSP, per uji, per tanggal)
+├── 5. Surat tugas asli per penugasan
+├── 6. Pakta imparsialitas asli per penugasan
+├── 7. Bukti potong PPh 21 (1721-A2)
+├── 8. NPWP
+├── 9. Bukti pelatihan & PKB (sertifikat seminar, dll.)
+├── 10. Catatan kasus banding & temuan surveilans
+└── 11. Dokumen RCC (sertifikat ulang, bukti aktivitas)
+​
+39.3 Disiplin waktu
+ASKOM yang aktif biasanya melayani 3–6 LSP sebagai eksternal (tidak ada larangan jumlah LSP, asal tidak konflik kepentingan). Tantangan utama:
+Konflik jadwal antar LSP → kalender personal terpadu
+Beban administrasi laporan → template otomatis
+RCC tepat waktu → reminder 6 bulan sebelumnya
+PKB ≥ 25 SKP/tahun → log otomatis
+40. ASKOM Menilai Jabatan Manajerial BUJK (PJBU/PJTBU/PJSKBU)
+Salah satu jenis SKK yang sering diuji adalah jabatan manajerial badan usaha:
+Jabatan
+Fungsi
+SKKNI Acuan
+PJBU — Penanggung Jawab Badan Usaha
+Penanggung jawab keseluruhan BUJK
+Per jabatan tertinggi
+PJTBU — Penanggung Jawab Teknis Badan Usaha
+Penanggung jawab aspek teknis
+Sesuai klasifikasi
+PJSKBU — Penanggung Jawab Subklasifikasi BU
+Penanggung jawab per subklas
+Sesuai subklas
+PJKBU — Penanggung Jawab Kualifikasi BU
+Penanggung jawab kualifikasi tertentu
+Sesuai kualifikasi
+Karakter asesmen jabatan manajerial:
+Bukti dominan portofolio — SK pengangkatan, kontrak proyek, dokumen tanggung jawab.
+Wawancara mendalam — strategi, leadership, manajemen risiko.
+Tertulis esai — analisis kasus manajerial.
+Klarifikasi pihak ketiga — verifikasi ke pemilik proyek/atasan.
+Reviu produk — laporan kemajuan, RKK, rencana mutu.
+Tantangan ASKOM saat menilai PJBU/PJTBU senior:
+Asimetri usia/pengalaman — ASKOM kadang lebih muda dari asesi. Jaga sopan santun tanpa kehilangan ketegasan penilaian.
+Asesi sangat berpengaruh — Direktur/Komisaris BUJK besar. Risiko tekanan halus untuk meluluskan.
+Bukti rahasia perusahaan — Asesi mungkin enggan tunjukkan dokumen sensitif. Solusi: NDA tambahan + verifikasi terbatas.
+Konflik jadwal — Asesi sangat sibuk. Solusi: TUK onsite di kantor mereka dengan jadwal khusus.
+41. Roadmap Menjadi Master Asesor
+flowchart TD
+	A["TKK Senior dengan SKK<br>min. Madya"] --> B["Pelatihan ASKOM 40 JP"]
+	B --> C["Sertifikasi ASKOM Junior"]
+	C --> D["3 tahun aktif:<br>min. 30 asesmen sukses<br>+ RCC tepat waktu"]
+	D --> E["ASKOM Mandiri<br>+ Lead Asesor lulus"]
+	E --> F["5-7 tahun aktif:<br>kontribusi MUK<br>kontribusi validasi<br>narasumber pelatihan"]
+	F --> G["Pelatihan Master Asesor"]
+	G --> H["Asesmen Master Asesor<br>oleh BNSP/Master senior"]
+	H --> I["Master Asesor"]
+	I --> J["Pembinaan ASKOM<br>witness surveilans<br>narasumber RCC<br>kontribusi nasional"]
+TKK Senior dengan SKK
+min. Madya
+
+Pelatihan ASKOM 40 JP
+
+Sertifikasi ASKOM Junior
+
+3 tahun aktif:
+min. 30 asesmen sukses
++ RCC tepat waktu
+
+ASKOM Mandiri
++ Lead Asesor lulus
+
+5-7 tahun aktif:
+kontribusi MUK
+kontribusi validasi
+narasumber pelatihan
+
+Pelatihan Master Asesor
+
+Asesmen Master Asesor
+oleh BNSP/Master senior
+
+Master Asesor
+
+Pembinaan ASKOM
+witness surveilans
+narasumber RCC
+kontribusi nasional
+
+​
+Persyaratan tambahan Master Asesor:
+Aspek
+Ketentuan
+Pengalaman aktif sebagai ASKOM
+≥ 5–7 tahun
+Jumlah asesmen
+≥ 100 asesmen sukses
+Lead Asesor
+Sudah lulus & aktif
+Kontribusi penyusunan MUK
+≥ 1 skema
+Kontribusi validasi
+≥ 5 sesi FR.VA
+Narasumber pelatihan
+≥ 3 sesi pelatihan ASKOM
+Tidak pernah kena sanksi etik
+Wajib
+Rekomendasi LSP induk + BNSP
+Wajib
+Tanggung jawab Master Asesor:
+Membina ASKOM junior (mentoring formal & informal).
+Witness surveilans tahunan ASKOM aktif.
+Narasumber pelatihan ASKOM 40 JP & RCC.
+Mediator kasus sulit (banding kompleks, konflik kepentingan).
+Penjamin mutu sektor — laporkan isu sistemik ke BNSP.
+Kontributor revisi SKKNI & MUK.
+42. Tips Lulus Pelatihan ASKOM 40 JP & Sertifikasi Awal
+A. Persiapan sebelum pelatihan
+Pelajari SKKNI 333/2020 secara mendalam — fokus pada elemen MAPA, MA, MKVA.
+Pelajari Pedoman BNSP 301 & 303 — minimal baca 2× sebelum hari pertama.
+Siapkan portofolio teknis konstruksi: SK penugasan, sertifikat pelatihan, dokumentasi proyek 3 tahun terakhir.
+Identifikasi 3 skema sertifikasi yang akan jadi spesialisasi Anda.
+B. Selama pelatihan 40 JP
+Aktif bertanya — terutama pada simulasi role-play.
+Buat catatan praktis — formula, urutan FR, contoh keputusan.
+Latihan menulis FR.MAPA.01 untuk minimal 3 skema berbeda.
+Latihan menggunakan FR.IA.01–11 dalam simulasi peer.
+Pahami logika keputusan K/BK berbasis dimensi 5+CASR.
+C. Asesmen sertifikasi (oleh Lead Asesor)
+FR.APL.01 — isi lengkap, tidak ada kolom kosong.
+FR.APL.02 — lampirkan bukti per unit (3 MAPA, 3 perangkat, 3 pelaksanaan).
+Saat asesmen:
+Tegas, percaya diri, jujur (jangan mengaku tahu padahal tidak).
+Tunjukkan bukti fisik portofolio dengan rapi.
+Jawab pertanyaan dengan kerangka VRFA-CASR.
+Saat simulasi melakukan asesmen, konsisten ikuti urutan FR.
+D. Kesalahan umum yang harus dihindari
+Kesalahan
+Akibat
+Tidak memahami beda metode (observasi vs portofolio vs wawancara)
+BK pada unit MAPA
+Lupa menulis catatan di FR.IA
+BK pada unit MA
+Tidak konsisten antara FR.MAPA.02 & FR.IA yang dipakai
+BK pada unit MAPA
+Memberi umpan balik negatif tanpa solusi
+BK pada unit MA
+Tidak ikut sesi validasi sejawat
+BK pada unit MKVA
+Tidak menyiapkan portofolio teknis konstruksi
+BK pada lapis kompetensi teknis
+43. Glosarium ASKOM Konstruksi
+Singkatan
+Kepanjangan
+ASKOM
+Asesor Kompetensi
+BNSP
+Badan Nasional Sertifikasi Profesi
+LSP
+Lembaga Sertifikasi Profesi
+LPJK
+Lembaga Pengembangan Jasa Konstruksi
+TUK
+Tempat Uji Kompetensi
+PTUK
+Panitia Teknis Uji Kompetensi
+MUK
+Materi Uji Kompetensi
+SKKNI
+Standar Kompetensi Kerja Nasional Indonesia
+SKKK
+Standar Kompetensi Kerja Khusus
+SKKI
+Standar Kompetensi Kerja Internasional
+SKK
+Sertifikat Kompetensi Kerja
+TKK
+Tenaga Kerja Konstruksi
+KKNI
+Kerangka Kualifikasi Nasional Indonesia
+MAPA
+Merencanakan Aktivitas dan Proses Asesmen
+MA
+Melaksanakan Asesmen
+MKVA
+Memberikan Kontribusi Validasi Asesmen
+VRFA
+Valid, Reliabel, Fleksibel, Adil
+CASR
+Cukup, Asli, Saat ini, Relevan
+TS/TMS/CMS/JRES/TRS
+5 dimensi kompetensi
+RCC
+Recognition Current Competency
+PKB
+Pengembangan Keprofesian Berkelanjutan
+JP
+Jam Pelajaran (1 JP = 60 menit untuk konteks BNSP)
+SKP
+Satuan Kredit Profesi
+K / BK
+Kompeten / Belum Kompeten
+FR
+Formulir
+APL
+Aplikasi (Permohonan)
+AK
+Asesmen Kompetensi
+IA
+Instrumen Asesmen
+VA
+Validasi Asesmen
+44. Daftar Periksa Akhir Calon ASKOM Konstruksi
+Sebelum mengajukan diri sebagai calon ASKOM ke LSP/BNSP, pastikan:
+☐ Saya memiliki pengalaman teknis konstruksi min. 3 tahun
+☐ Saya memiliki SKK pada subklasifikasi yang akan saya ases
+☐ Saya memahami SKKNI 333/2020 + Pedoman BNSP 301 & 303
+☐ Saya siap mengikuti pelatihan ASKOM 40 JP penuh
+☐ Saya bersedia membayar biaya sesuai SK BNSP 1511/VII/2025
+☐ Saya memiliki dukungan/rekomendasi LSP/asosiasi
+☐ Saya memahami komitmen waktu surveilans tahunan & RCC 3-tahunan
+☐ Saya memahami beban administrasi (FR.MAPA, FR.IA, FR.AK)
+☐ Saya bebas dari pelanggaran etika profesi sebelumnya
+☐ Saya siap menjadi penjaga gerbang mutu sektor konstruksi
+​
+Bila semua tercentang ✓ — Anda siap untuk memulai perjalanan menjadi ASKOM Konstruksi.
+45. Penutup Akhir
+ASKOM Konstruksi adalah profesi mulia sekaligus berat tanggung jawab. Dari thread panjang ini, lima takeaway utama:
+Kompetensi ganda adalah kunci — metodologi (BNSP) + teknis (konstruksi). Salah satunya saja tidak cukup.
+Bukti adalah segalanya — VRFA-CASR-5dimensi adalah jangkar setiap keputusan.
+Imparsialitas adalah harga mati — sekali kompromi, reputasi seumur karier rusak.
+Pemisahan kewenangan adalah perisai — ASKOM tidak boleh "merasa" sebagai pemutus; LSP yang memutus.
+Continuous improvement bukan slogan — RCC, PKB, validasi sejawat adalah realitas operasional, bukan dokumentasi semata.
+Setiap SKK Konstruksi yang sah di Indonesia hari ini adalah hasil kerja kolektif ribuan ASKOM yang menjalankan tugas dengan integritas. Sektor ini tidak akan tegak tanpa mereka.
+Materi ASKOM Konstruksi pada thread ini sudah sangat lengkap — mencakup regulasi, syarat, fungsi, peran, tanggung jawab, alur kerja end-to-end, perangkat MUK, kode etik, surveilans, RCC, hierarki profesi, template form siap pakai, studi kasus banding, aspek administratif, roadmap karier hingga Master Asesor, tips kelulusan, dan glosarium. 
+Bila ingin, saya dapat:
+Mengemas seluruh materi ini menjadi Handbook ASKOM Konstruksi sebagai halaman Notion siap pakai dengan sub-halaman per topik.
+Membuat database template form (FR.MAPA, FR.IA, FR.AK) yang bisa di-duplicate per uji.
+Menyusun modul pelatihan internal LSP berdasarkan materi ini.
+Sebut saja yang diinginkan beserta parent page-nya, dan saya langsung kerjakan.
+lanjut
+10:44 PM
+Thought
+Lanjutan (Bagian 4) — Kurikulum Pelatihan, Contoh FR.IA Lengkap & Studi Kasus Etika
+46. Kurikulum Pelatihan ASKOM 40 JP — Hari per Hari
+Pelatihan ASKOM resmi BNSP berdurasi 40 JP (1 JP = 60 menit), umumnya dilaksanakan 5 hari kerja dengan komposisi 60% teori-praktik dan 40% simulasi-asesmen.
+Hari 1 — Pengantar & Regulasi (8 JP)
+Sesi
+Durasi
+Materi
+1.1
+1 JP
+Pembukaan, kontrak belajar, profil peserta
+1.2
+2 JP
+Sistem sertifikasi nasional: BNSP, KKNI, SKKNI
+1.3
+2 JP
+Lembaga: BNSP, LSP, TUK, asesor — peran & hubungan
+1.4
+2 JP
+Pedoman BNSP 201, 208, 301, 303 — overview
+1.5
+1 JP
+Kode Etik ASKOM SK 1224/2020 + diskusi kasus
+Output Hari 1: Peserta paham peta regulasi & ekosistem.
+Hari 2 — Merencanakan Asesmen (MAPA) (8 JP)
+Sesi
+Durasi
+Materi
+2.1
+1 JP
+Unit MAPA — kerangka SKKNI 333/2020
+2.2
+2 JP
+Pendekatan asesmen: tujuan, konteks, jalur, strategi
+2.3
+2 JP
+Prinsip VRFA & aturan bukti CASR — latihan kasus
+2.4
+2 JP
+Praktik mengisi FR.MAPA.01 untuk skema simulasi
+2.5
+1 JP
+Praktik mengisi FR.MAPA.02 (peta instrumen)
+Output Hari 2: 1 paket FR.MAPA.01 + FR.MAPA.02 per peserta.
+Hari 3 — Mengembangkan Perangkat & Melaksanakan Asesmen (MA) (8 JP)
+Sesi
+Durasi
+Materi
+3.1
+2 JP
+Mengembangkan FR.IA.01–11 — kapan pakai metode mana
+3.2
+2 JP
+Pra-asesmen: FR.AK.01, briefing, FR.AK.07 (penyesuaian wajar)
+3.3
+2 JP
+Pengumpulan bukti: 5 dimensi (TS-TMS-CMS-JRES-TRS)
+3.4
+2 JP
+Praktik wawancara (FR.IA.07/09) — simulasi peer
+Output Hari 3: 1 set instrumen FR.IA + transkrip simulasi wawancara.
+Hari 4 — Keputusan, Umpan Balik & Validasi (8 JP)
+Sesi
+Durasi
+Materi
+4.1
+2 JP
+Pengambilan keputusan K/BK — analisis bukti
+4.2
+1 JP
+Mengisi FR.AK.02 (rekaman) per unit
+4.3
+1 JP
+FR.AK.03 umpan balik — komunikasi konstruktif
+4.4
+2 JP
+FR.AK.04 banding & FR.AK.05 laporan
+4.5
+2 JP
+Unit MKVA — validasi sejawat (FR.VA / FR.AK.06)
+Output Hari 4: 1 paket FR.AK lengkap untuk 1 asesi simulasi.
+Hari 5 — Simulasi Penuh & Asesmen Sertifikasi (8 JP)
+Sesi
+Durasi
+Materi
+5.1
+4 JP
+Simulasi asesmen penuh: peer mengases peer (rotasi peran)
+5.2
+2 JP
+Debrief simulasi + masukan Master Asesor narasumber
+5.3
+1 JP
+Pengisian FR.APL.01 & FR.APL.02 sebagai calon ASKOM
+5.4
+1 JP
+Penutupan + RTL (rencana tindak lanjut)
+Output Hari 5: Berkas FR.APL siap diserahkan ke Lead Asesor untuk asesmen sertifikasi.
+Pasca-pelatihan (Asesmen Sertifikasi)
+Asesmen oleh Lead Asesor dengan FR.APL.01/02 yang telah diisi peserta.
+Bukti praktik wajib: 3 MAPA + 3 perangkat + 3 pelaksanaan (di bawah supervisi Master Asesor) — biasanya dilengkapi dalam 3–6 bulan setelah pelatihan.
+Setelah lulus → Sertifikat ASKOM BNSP terbit, masa berlaku 3 tahun.
+47. Contoh Konkret Pengisian FR.IA.01 — Ceklis Observasi Aktivitas
+Konteks: Asesmen Tukang Pasang Bata (Jenjang 3), proyek perumahan.
+═════════════════════════════════════════════════════════════════
+FR.IA.01 — CEKLIS OBSERVASI AKTIVITAS DI TEMPAT KERJA
+═════════════════════════════════════════════════════════════════
+
+Asesi      : Slamet Riyadi
+Unit       : F.41XXX01.XXX.X — Memasang Bata Merah/Hebel
+Tanggal    : 18 April 2026
+Lokasi     : Proyek Perumahan Griya Asri (Tipe 36/72)
+Asesor     : Ir. Hartono (No. Reg ASKOM-BNSP-2024-XXXX)
+
+═════════════════════════════════════════════════════════════════
+Aktivitas yang diobservasi: Memasang dinding bata 12m² selama 3 jam
+═════════════════════════════════════════════════════════════════
+
+  No  │ Kriteria Unjuk Kerja             │ Ya │ Tdk│ Catatan
+  ────┼──────────────────────────────────┼────┼────┼──────────────
+   1  │ Memakai APD lengkap              │ ✓  │    │ Helm, sarung
+      │  (helm, sarung tangan, sepatu)   │    │    │ tangan OK
+  ────┼──────────────────────────────────┼────┼────┼──────────────
+   2  │ Menyiapkan alat & bahan          │ ✓  │    │ Cepat, tertata
+  ────┼──────────────────────────────────┼────┼────┼──────────────
+   3  │ Membaca gambar kerja             │ ✓  │    │ Konfirmasi
+      │                                  │    │    │ ke mandor
+  ────┼──────────────────────────────────┼────┼────┼──────────────
+   4  │ Menentukan elevasi awal dengan   │ ✓  │    │ Profil &
+      │ profil/water pass                │    │    │ benang
+  ────┼──────────────────────────────────┼────┼────┼──────────────
+   5  │ Mencampur mortar 1:5 dengan      │ ✓  │    │ Konsistensi
+      │ konsistensi tepat                │    │    │ pas
+  ────┼──────────────────────────────────┼────┼────┼──────────────
+   6  │ Memasang lapis 1 dengan kekuatan │ ✓  │    │ Lurus, level
+      │ tekan & meratakan mortar         │    │    │
+  ────┼──────────────────────────────────┼────┼────┼──────────────
+   7  │ Memeriksa siar (tegak & datar)   │ ✓  │    │ Standar
+      │  10mm                            │    │    │ tercapai
+  ────┼──────────────────────────────────┼────┼────┼──────────────
+   8  │ Memasang stek/angker bila perlu  │ ✓  │    │ Per 4 lapis
+  ────┼──────────────────────────────────┼────┼────┼──────────────
+   9  │ Membersihkan area kerja          │ ✓  │    │ Selesai rapi
+  ────┼──────────────────────────────────┼────┼────┼──────────────
+  10  │ Melaporkan kemajuan ke mandor    │ ✓  │    │ Jelas, foto
+      │                                  │    │    │ progres
+  ────┴──────────────────────────────────┴────┴────┴──────────────
+
+DIMENSI KOMPETENSI YANG TERAMATI:
+  [✓] TS    Aktivitas pasang bata dilakukan benar
+  [✓] TMS   Mengelola: bahan, alat, pengukuran simultan
+  [✓] CMS   Saat siar tidak rapi, langsung koreksi
+  [✓] JRES  Komunikasi dengan mandor & rekan tukang
+  [✓] TRS   Mampu adaptasi saat bata berubah dari merah ke hebel
+
+KESIMPULAN OBSERVASI: [✓] KOMPETEN  [ ] BELUM KOMPETEN
+
+Catatan asesor:
+Asesi menunjukkan keterampilan yang konsisten, sigap menyesuaikan
+saat menemukan bata pecah (mengganti tanpa instruksi). Komunikasi
+ke mandor proaktif. Bukti cukup, asli, terkini, relevan.
+
+  Asesor               Asesi                Saksi (mandor)
+  [TTD]                [TTD]                [TTD]
+​
+48. Contoh Pengisian FR.IA.05 — Pertanyaan Tertulis Pilihan Ganda
+Konteks: Asesmen Ahli Muda K3 Konstruksi.
+FR.IA.05 — PERTANYAAN TERTULIS PILIHAN GANDA
+
+Skema  : Ahli Muda Keselamatan Konstruksi (Jenjang 7)
+Unit   : M.71KKK01.001.1 Menerapkan Peraturan K3 Konstruksi
+Durasi : 60 menit | Jumlah soal: 25 | Bobot lulus: ≥ 80%
+
+═════════════════════════════════════════════════════════════════
+1. UU yang menjadi payung hukum K3 di Indonesia adalah:
+   A. UU No. 1/1970 tentang Keselamatan Kerja        ← Kunci
+   B. UU No. 13/2003 tentang Ketenagakerjaan
+   C. UU No. 2/2017 tentang Jasa Konstruksi
+   D. UU No. 6/2023 tentang Cipta Kerja
+
+2. RKK dalam SMKK adalah singkatan dari:
+   A. Rencana Keselamatan Konstruksi                 ← Kunci
+   B. Rencana Kerja Konstruksi
+   C. Rencana Kontrol Kualitas
+   D. Rencana Kepatuhan Konstruksi
+
+3. Hierarki pengendalian risiko dari yang paling efektif:
+   A. APD → Administrasi → Eliminasi
+   B. Eliminasi → Substitusi → Engineering → Adm → APD  ← Kunci
+   C. Engineering → Substitusi → APD → Eliminasi
+   D. Administrasi → APD → Engineering → Substitusi
+
+[... 22 soal lainnya ...]
+
+═════════════════════════════════════════════════════════════════
+PENILAIAN
+
+  Jumlah benar : ____ dari 25
+  Persentase   : ____ %
+  Keputusan    : [ ] K (≥ 80%)  [ ] BK (< 80%)
+
+Asesor
+[Nama & TTD]
+═════════════════════════════════════════════════════════════════
+​
+49. Contoh FR.IA.07 — Pertanyaan Lisan (Wawancara Singkat)
+FR.IA.07 — PERTANYAAN LISAN
+
+Asesi   : ____________   Asesor : ____________   Tanggal: __________
+Unit    : Mengevaluasi Risiko Konstruksi
+
+  No │ Pertanyaan                              │ Jawaban  │ Skor
+  ───┼─────────────────────────────────────────┼──────────┼──────
+   1 │ Bagaimana Anda menentukan probabilitas  │ Asesi    │ 4/5
+     │ suatu bahaya?                            │ menjawab │
+     │                                         │ matriks  │
+     │                                         │ 5×5      │
+  ───┼─────────────────────────────────────────┼──────────┼──────
+   2 │ Sebutkan minimal 3 metode evaluasi      │ HIRARC,  │ 5/5
+     │ risiko konstruksi.                      │ JSA,     │
+     │                                         │ HAZID    │
+  ───┼─────────────────────────────────────────┼──────────┼──────
+   3 │ Bila mendapati risiko ekstrim,          │ Stop     │ 5/5
+     │ langkah pertama Anda?                   │ kerja +  │
+     │                                         │ eskalasi │
+  ───┼─────────────────────────────────────────┼──────────┼──────
+   4 │ Beri contoh kasus risiko ekstrim yang   │ Cerita   │ 5/5
+     │ pernah Anda tangani.                    │ tower    │
+     │                                         │ crane    │
+     │                                         │ runtuh   │
+  ───┴─────────────────────────────────────────┴──────────┴──────
+
+  Total skor   : 19/20 = 95%
+  Keputusan    : [✓] K  [ ] BK
+
+  Asesor                           Asesi
+  [TTD]                            [TTD]
+​
+50. Contoh FR.IA.08 — Ceklis Verifikasi Portofolio
+FR.IA.08 — CEKLIS VERIFIKASI PORTOFOLIO
+
+Asesi: ____________   Skema: Ahli Muda K3 Konstruksi
+
+  No │ Bukti Portofolio                  │ Ada│ Asli│ Saat │ Relev│
+     │                                    │    │     │ ini  │ an   │
+  ───┼────────────────────────────────────┼────┼─────┼──────┼──────┤
+   1 │ Sertifikat Pelatihan AK3 Konstruksi│ ✓  │ ✓   │ ✓    │ ✓    │
+     │ (Kemnaker, 2023)                   │    │     │      │      │
+  ───┼────────────────────────────────────┼────┼─────┼──────┼──────┤
+   2 │ SK Penugasan sbg Petugas K3        │ ✓  │ ✓   │ ✓    │ ✓    │
+     │ Proyek Tol XYZ (2024-2025)         │    │     │      │      │
+  ───┼────────────────────────────────────┼────┼─────┼──────┼──────┤
+   3 │ Laporan investigasi insiden        │ ✓  │ ✓   │ ✓    │ ✓    │
+     │ (3 dokumen)                        │    │     │      │      │
+  ───┼────────────────────────────────────┼────┼─────┼──────┼──────┤
+   4 │ Logbook inspeksi K3 harian         │ ✓  │ ✓   │ ✓    │ ✓    │
+     │ (6 bulan terakhir)                 │    │     │      │      │
+  ───┼────────────────────────────────────┼────┼─────┼──────┼──────┤
+   5 │ Sertifikat ISO 45001 Awareness     │ ✓  │ ?   │ ✓    │ ✓    │
+     │ (perlu klarifikasi penerbit)       │    │     │      │      │
+  ───┴────────────────────────────────────┴────┴─────┴──────┴──────┘
+
+Tindakan untuk bukti yang meragukan:
+[✓] Klarifikasi pihak ketiga (FR.IA.10) — verifikasi ke
+    lembaga penerbit ISO 45001
+[ ] Bukti tambahan diminta dari asesi
+[ ] Wawancara mendalam terkait (FR.IA.09)
+
+Asesor: [TTD]   Tanggal: __________
+​
+51. Studi Kasus Pelanggaran Kode Etik & Sanksinya
+Kasus 1 — Gratifikasi Halus
+Fakta: Asesor X menerima "uang transport tambahan" Rp 2 juta dari direktur BUJK setelah meluluskan 5 stafnya. Tidak melaporkan ke LSP.
+Pelanggaran:
+Kode Etik 1224/2020: poin 6 — menerima imbalan di luar kontrak.
+Pakta imparsialitas yang ditandatangani.
+Sanksi:
+Pemeriksaan oleh komite etik LSP + BNSP.
+Pencabutan sertifikat ASKOM 2 tahun.
+5 SKK yang dia rekomendasikan dievaluasi ulang — bila tidak memadai, dibatalkan.
+Larangan praktik di sektor konstruksi 5 tahun.
+Bila terbukti ada quid pro quo → laporan APH (gratifikasi UU Tipikor).
+Kasus 2 — Konflik Kepentingan Tidak Dideklarasikan
+Fakta: Asesor Y menjadi konsultan freelance untuk BUJK Z selama 2 tahun. Setelah berhenti, 1 bulan kemudian mengases stafnya untuk SKK.
+Pelanggaran:
+Konflik kepentingan tidak dideklarasikan (≥ 12 bulan cooling-off period idealnya).
+Sanksi:
+Peringatan tertulis pertama.
+Asesmen yang dia lakukan divalidasi ulang panel independen.
+Wajib ikut pelatihan etika 8 JP.
+Pelaporan ke pencatatan LPJK; bila terulang → pencabutan.
+Kasus 3 — Kebocoran MUK
+Fakta: Asesor Z memfoto soal FR.IA.05 dan menyebar ke grup WhatsApp "calon asesi".
+Pelanggaran:
+Kerahasiaan MUK (Kode Etik & SOP LSP).
+Pelanggaran berat — sistemik dampaknya.
+Sanksi:
+Pencabutan sertifikat ASKOM permanen.
+Larangan menjadi asesor di seluruh LSP.
+MUK harus direvisi total atas biaya LSP.
+Bila terbukti komersial (jual soal) → pidana sesuai UU Tipikor + UU ITE.
+Kasus 4 — Asesmen "Kilat" Tanpa Bukti
+Fakta: Asesor W mengases 25 asesi dalam 1 hari, hanya 15 menit per asesi, dan langsung memberi rekomendasi K untuk semuanya tanpa bukti memadai di FR.IA.
+Pelanggaran:
+Pelanggaran prinsip VRFA-CASR.
+Kompromi mutu sektor.
+Sanksi:
+Audit menyeluruh oleh BNSP.
+Pembekuan sertifikat 1 tahun + RCC ulang.
+25 SKK yang dia rekomendasikan dievaluasi ulang.
+LSP yang menugaskan juga kena temuan major surveilans.
+52. Workflow Asesmen Massal (50–100 Asesi Sekaligus)
+Tantangan khas LSP saat melayani sertifikasi massal (mis. permintaan asosiasi atau program pemerintah).
+Tahapan kunci:
+flowchart TD
+	A["LSP terima permintaan<br>massal 100 asesi"] --> B["Verifikasi skema<br>& kapasitas LSP"]
+	B --> C["Tim ASKOM:<br>10-15 orang<br>(rasio 1:8)"]
+	C --> D["TUK Sewaktu besar<br>kapasitas 100 orang"]
+	D --> E["Pra-screening:<br>FR.APL.01 & 02 cek<br>kelengkapan"]
+	E --> F["Pembagian kelompok<br>10 asesi per ASKOM"]
+	F --> G["Pelaksanaan paralel<br>3-5 hari"]
+	G --> H["Pertemuan kalibrasi<br>ASKOM tiap hari"]
+	H --> I["Konsolidasi laporan<br>FR.AK.05"]
+	I --> J["Tinjauan peninjau LSP<br>sampling 30%"]
+	J --> K["Komite Keputusan<br>per kelompok"]
+	K --> L["Penerbitan SKK massal<br>+ unggah SIKI-LPJK"]
+LSP terima permintaan
+massal 100 asesi
+
+Verifikasi skema
+& kapasitas LSP
+
+Tim ASKOM:
+10-15 orang
+(rasio 1:8)
+
+TUK Sewaktu besar
+kapasitas 100 orang
+
+Pra-screening:
+FR.APL.01 & 02 cek
+kelengkapan
+
+Pembagian kelompok
+10 asesi per ASKOM
+
+Pelaksanaan paralel
+3-5 hari
+
+Pertemuan kalibrasi
+ASKOM tiap hari
+
+Konsolidasi laporan
+FR.AK.05
+
+Tinjauan peninjau LSP
+sampling 30%
+
+Komite Keputusan
+per kelompok
+
+Penerbitan SKK massal
++ unggah SIKI-LPJK
+
+​
+Risiko spesifik & mitigasi:
+Risiko
+Mitigasi
+Inkonsistensi keputusan antar-ASKOM
+Pertemuan kalibrasi setiap akhir hari + Master Asesor witness
+Kelelahan asesor → mutu turun
+Maks. 8 asesi/asesor/hari + rotasi asesor
+Berkas tertukar
+Sistem nomor unik per asesi + map berkode warna
+MUK bocor antar-kelompok
+Soal diacak + jadwal berbeda antar-kelompok
+Komite Keputusan kewalahan
+Komite besar + agenda khusus + peninjauan sampling
+Pelaporan SIKI-LPJK terlambat
+Tim admin terdedikasi + template otomasi
+KPI khusus asesmen massal:
+Konsistensi keputusan antar-ASKOM ≥ 90% (deviasi standar < 10%).
+Penyelesaian dari hari uji ke penerbitan SKK ≤ 21 hari kerja.
+Tingkat banding ≤ 7% (toleransi sedikit lebih tinggi karena volume).
+0 berkas hilang/tertukar.
+53. Kalender Tahunan ASKOM Aktif (Idealisasi)
+Bulan
+Aktivitas Wajib & Disarankan
+Januari
+Audit pribadi: cek masa berlaku sertifikat, target PKB tahun ini
+Februari
+Mulai aktif mengambil penugasan; update logbook
+Maret
+Refreshment 8 JP (regulasi terbaru)
+April
+Aktivitas asesmen rutin
+Mei
+Reviu portofolio personal (untuk RCC mendatang)
+Juni
+Lapor rekaman 6-bulanan ke BNSP/LSP induk
+Juli
+Surveilans tahunan oleh BNSP/LSP (siapkan dokumen)
+Agustus
+Aktivitas asesmen rutin; ikut validasi sejawat
+September
+Pelatihan/seminar (PKB)
+Oktober
+Aktivitas asesmen; persiapan RCC bila sertifikat habis dalam 6 bulan
+November
+Persiapan RCC tahun depan; daftar ke LSP penyelenggara
+Desember
+Lapor rekaman 6-bulanan; tutup tahun; rencana tahun depan
+Catatan: Sertifikat 3 tahun → maksimal 1× RCC besar setiap 3 tahun, ditambah refreshment kecil tahunan.
+54. Cara Menjadi ASKOM yang Dicari LSP
+Reputasi positif dibangun dari:
+Konsistensi waktu — selalu tepat janji, laporan diserahkan dalam 3 hari kerja.
+Kualitas dokumentasi — FR.AK.05 yang jelas, tidak ambigu, mudah ditinjau peninjau LSP.
+Etika tanpa kompromi — tidak pernah ada laporan/keluhan.
+Adaptabilitas metode — siap kertas, daring, hybrid, onsite proyek.
+Komunikasi profesional — sopan ke asesi, jelas ke LSP, responsif WhatsApp/email.
+Kontribusi nilai tambah — beri masukan revisi MUK, ikut diskusi skema baru.
+Mengikuti regulasi terbaru — selalu up-to-date SK Dirjen, SE LPJK, juknis BNSP.
+Networking sehat — aktif di forum ASKOM/asosiasi tanpa terlibat politik internal.
+Yang membuat LSP tidak ingin menugaskan ulang:
+Sering reschedule mendadak
+Laporan terlambat / minimalis / banyak typo
+Keputusan tidak konsisten dari uji ke uji
+Sering kena banding berhasil
+Dilaporkan asesi atau pemilik proyek
+Tidak responsif komunikasi
+Mengeluh terus soal honor
+Diketahui mengkomersialkan jasa "tips lulus uji"
+55. Daftar LSP Konstruksi Terlisensi (Kategori Umum)
+LSP konstruksi di Indonesia dibentuk oleh Asosiasi Profesi Konstruksi terakreditasi LPJK. Beberapa kategori umum:
+Kategori
+Jenis Layanan
+LSP Konstruksi Umum
+Multi-skema lintas klasifikasi (BG, BS, IN, KK)
+LSP K3/Keselamatan Konstruksi
+Fokus skema Keselamatan Konstruksi & K3 Konstruksi
+LSP Arsitektur
+Skema Arsitek Madya/Utama
+LSP Sipil
+Skema rekayasa sipil, struktur, jalan, jembatan
+LSP MEP
+Mekanikal, Elektrikal, Plumbing
+LSP Geoteknik
+Skema Geoteknik, Pondasi, Bendungan
+LSP TKI/Migas
+Tenaga kerja konstruksi sektor migas
+LSP Manajerial
+PJBU, PJTBU, PJSKBU, PJKBU
+Daftar resmi LSP terlisensi & tercatat LPJK: dapat diakses melalui portal bnsp.go.id dan lpjk.pu.go.id. ASKOM disarankan terdaftar di 2–4 LSP yang ruang lingkupnya saling melengkapi.
+56. Kalkulasi Sederhana: Layakkah Karier ASKOM?
+Untuk memberi gambaran realistis (angka indikatif, bukan resmi):
+Asumsi konservatif:
+Aktif sebagai ASKOM 4 hari/minggu = 16 hari/bulan
+5 asesi/hari rata-rata = 80 asesi/bulan
+Honor bersih per asesi (setelah pajak): Rp 200.000 (varies per skema/jenjang)
+Bulanan: 80 × Rp 200.000 = Rp 16 juta/bulan
+Tambahan:
+Honor sebagai narasumber pelatihan/RCC: Rp 3–5 juta/sesi × 2 sesi = Rp 8 juta
+Total potensial: Rp 20–25 juta/bulan
+Biaya operasional ASKOM:
+Transportasi & akomodasi (bila ke luar kota)
+Pelatihan PKB tahunan: Rp 5–10 juta
+Biaya RCC 3-tahunan: Rp 5–15 juta (sesuai SK BNSP 1511/2025)
+ATK, internet, peralatan dokumentasi
+Pajak penghasilan
+Realita:
+Penghasilan tidak stabil — bulan rame bisa 30 juta, bulan sepi 5 juta.
+Cocok untuk: TKK senior yang sudah punya penghasilan utama lain (konsultan, dosen, pensiunan PNS) dan ingin berkontribusi sekaligus tambahan penghasilan.
+Kurang cocok untuk: Yang berharap full-time income stabil tanpa basis profesi lain.
+57. Panduan Praktis Membangun Portofolio Calon ASKOM
+Bagi yang sedang mempersiapkan diri menjadi ASKOM, mulai bangun:
+A. Aspek teknis (lapis konstruksi)
+SKK aktif pada subklasifikasi yang akan diases — minimum jenjang Madya.
+Pengalaman proyek terdokumentasi — SK penugasan, BAST, foto, gambar kerja.
+Logbook 3 tahun — aktivitas teknis, tanggung jawab, output.
+Sertifikat pelatihan teknis — Ahli K3 Konstruksi, ISO, dll.
+Tulisan/kajian teknis — artikel, presentasi, kontribusi diskusi profesi.
+B. Aspek metodologi (lapis ASKOM)
+Pelatihan ASKOM 40 JP dari LSP/lembaga diklat ter-register BNSP.
+Bukti praktik:
+3× menyusun FR.MAPA (di bawah supervisi)
+3× mengembangkan FR.IA
+3× pelaksanaan asesmen simulasi
+Pemahaman SKKNI 333/2020 + Pedoman BNSP 301/303 — minimal 1× baca tuntas.
+Pakta imparsialitas pribadi — siap ditandatangani.
+C. Aspek administratif
+NPWP, KTP, ijazah legalisir.
+Pas foto formal (3×4 dan 4×6).
+CV terkini dengan format profesional.
+Surat rekomendasi dari LSP/asosiasi/atasan.
+Pernyataan komitmen mengikuti surveilans & RCC.
+58. Rangkuman Total Materi ASKOM Konstruksi
+Thread ini telah membahas ASKOM Konstruksi dari 24 sudut pandang:
+ Definisi & posisi kelembagaan
+ Dasar hukum (13 referensi utama)
+ Peta peran institusi (BNSP-PUPR-LPJK-KAN)
+ Syarat menjadi ASKOM (umum + konstruksi)
+ Unit kompetensi SKKNI 333/2020 (MAPA-MA-MKVA)
+ Bukti praktik minimum
+ Empat prinsip asesmen (VRFA)
+ Aturan bukti (CASR)
+ Lima dimensi kompetensi (TS-TMS-CMS-JRES-TRS)
+ Tanggung jawab per tahap (pra/saat/pasca asesmen)
+ Alur proses kerja end-to-end (17 langkah)
+ Perangkat MUK Versi 2023 lengkap
+ Kode etik SK BNSP 1224/2020
+ Surveilans, pelaporan, RCC kategori A/B
+ Sanksi pelanggaran
+ Mekanisme sertifikasi SKK Konstruksi (Permen PUPR 8/2022)
+ Kekhususan konstruksi (6 lapis persyaratan)
+ Hubungan dengan aktor lain (Master/Lead Asesor, dll.)
+ Template lengkap FR.MAPA.01, FR.AK.01, FR.IA.01/05/07/08
+ Studi kasus banding & sengketa
+ Studi kasus pelanggaran kode etik
+ Aspek profesional & administratif (honor, pajak, dokumen)
+ Roadmap karier hingga Master Asesor
+ Kurikulum pelatihan ASKOM 40 JP
+59. Tindak Lanjut yang Disarankan
+Materi ASKOM Konstruksi pada thread ini sudah sangat komprehensif — setara handbook profesional setebal 50–80 halaman. Untuk mengubah ini menjadi alat kerja nyata, saran konkret:
+Format output yang dapat saya buatkan langsung:
+Output
+Manfaat
+Audiens Utama
+Handbook ASKOM Konstruksi (halaman Notion bertingkat dengan TOC)
+Referensi ringkas, cari cepat
+ASKOM, LSP, calon asesor
+Database Template MUK (tiap FR jadi 1 row, dapat di-duplicate per uji)
+Operasional harian
+ASKOM aktif, admin LSP
+Modul Pelatihan ASKOM 40 JP (slide deck via presentation mode + lampiran)
+Trainer/penyelenggara pelatihan
+LSP, lembaga diklat
+Checklist Operasional (database to-do per uji)
+Tidak ada langkah terlewat
+ASKOM, pengelola TUK
+Roadmap Karier Personal (halaman dengan goal-tracking)
+Pengembangan profesional
+Calon ASKOM, ASKOM aktif
+FAQ Interaktif (database pertanyaan-jawaban tag)
+Self-service knowledge
+Asesi, asosiasi anggota
+Sebut output yang diinginkan beserta parent page tempat menempatkannya, dan saya akan langsung kerjakan menggunakan kemampuan pembuatan halaman/database Notion. Bila tidak ada permintaan output spesifik, materi pada thread ini sudah cukup mendalam untuk dijadikan referensi mandiri kapanpun dibutuhkan.

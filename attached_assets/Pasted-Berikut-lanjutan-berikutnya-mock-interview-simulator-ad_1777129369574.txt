@@ -1,0 +1,1059 @@
+Berikut lanjutan berikutnya: **mock interview simulator, adaptive coaching, scoring rubric, data schema, prompt engineering, dan contoh implementasi intent-response** untuk chatbot SKK **Manajemen Pelaksanaan**. Struktur ini tetap mengacu pada katalog jabatan Manajemen Pelaksanaan yang Anda unggah. 
+
+---
+
+# 35. Mock Interview Simulator
+
+```yaml id="mock_interview_simulator"
+flow:
+  id: mock_interview_start
+  title: "Simulasi Wawancara Asesmen"
+  purpose: >
+    Membantu pengguna berlatih menjawab pertanyaan asesor berdasarkan
+    pengalaman kerja, bukti portofolio, dan kompetensi jabatan yang dituju.
+
+  bot_message: >
+    Kita akan melakukan simulasi wawancara asesmen. Saya akan bertanya seperti
+    asesor, lalu Anda menjawab berdasarkan pengalaman nyata. Setelah itu, saya
+    akan memberi umpan balik.
+
+  options:
+    - "Simulasi K3/Keselamatan"
+    - "Simulasi Manajemen Proyek"
+    - "Simulasi Mutu"
+    - "Simulasi Kontrak"
+    - "Simulasi Biaya/QS"
+    - "Simulasi berdasarkan jabatan tertentu"
+
+  rules:
+    - "Ajukan satu pertanyaan per giliran."
+    - "Minta pengguna menjawab dengan contoh pengalaman nyata."
+    - "Berikan feedback menggunakan format STAR: Situation, Task, Action, Result."
+    - "Jangan menyatakan lulus/gagal secara resmi."
+```
+
+---
+
+# 36. STAR Answer Coaching
+
+```yaml id="star_answer_coaching"
+coaching_framework:
+  id: star_method
+  name: "STAR Method"
+  usage: "Membantu pengguna menyusun jawaban wawancara asesmen."
+
+  components:
+    situation:
+      label: "Situation"
+      prompt: "Apa konteks proyek atau masalah yang terjadi?"
+      example: "Pada proyek gedung 8 lantai, terjadi keterlambatan material struktur."
+
+    task:
+      label: "Task"
+      prompt: "Apa tanggung jawab Anda dalam situasi tersebut?"
+      example: "Saya bertanggung jawab mengevaluasi dampak keterlambatan terhadap jadwal."
+
+    action:
+      label: "Action"
+      prompt: "Apa tindakan yang Anda lakukan?"
+      example: "Saya membandingkan jadwal rencana dan aktual, menyusun recovery plan, dan mengoordinasikan pemasok."
+
+    result:
+      label: "Result"
+      prompt: "Apa hasil dari tindakan Anda?"
+      example: "Keterlambatan dapat dikurangi dari 10 hari menjadi 4 hari dan progres kembali terkendali."
+
+  bot_feedback_template: >
+    Jawaban Anda sudah memuat:
+    - Situation: {{has_situation}}
+    - Task: {{has_task}}
+    - Action: {{has_action}}
+    - Result: {{has_result}}
+
+    Saran perbaikan:
+    {{improvement_suggestions}}
+
+    Coba lengkapi jawaban Anda dengan hasil yang lebih terukur, misalnya
+    pengurangan keterlambatan, penurunan temuan, persetujuan klaim, atau
+    penyelesaian NCR.
+```
+
+---
+
+# 37. Mock Interview Question Sets by Area
+
+## 37.1 K3 / Keselamatan Konstruksi
+
+```yaml id="mock_k3"
+mock_interview_questions:
+  area: "Keselamatan Konstruksi / K3"
+  target_roles:
+    - "Petugas Keselamatan Konstruksi"
+    - "Petugas K3 Konstruksi"
+    - "Personil K3"
+    - "Supervisor K3"
+    - "Ahli K3 Konstruksi"
+    - "Ahli Keselamatan Konstruksi"
+
+  questions:
+    - id: k3_q1
+      question: "Ceritakan pengalaman Anda mengidentifikasi bahaya sebelum pekerjaan dimulai."
+      expected_points:
+        - "Jenis pekerjaan dan lokasi"
+        - "Bahaya yang ditemukan"
+        - "Metode identifikasi risiko"
+        - "Pengendalian yang diterapkan"
+        - "Hasil atau dampak tindakan"
+
+    - id: k3_q2
+      question: "Apa tindakan Anda jika menemukan pekerja tidak menggunakan APD pada pekerjaan berisiko?"
+      expected_points:
+        - "Menghentikan atau menunda pekerjaan berisiko"
+        - "Memberi instruksi keselamatan"
+        - "Memastikan APD digunakan"
+        - "Mencatat temuan"
+        - "Melakukan tindak lanjut atau pembinaan"
+
+    - id: k3_q3
+      question: "Bagaimana Anda menindaklanjuti near miss di proyek?"
+      expected_points:
+        - "Mengamankan area"
+        - "Mencatat kejadian"
+        - "Melakukan investigasi penyebab"
+        - "Menetapkan tindakan korektif"
+        - "Memonitor efektivitas tindakan"
+```
+
+---
+
+## 37.2 Manajemen Proyek / Konstruksi
+
+```yaml id="mock_project"
+mock_interview_questions:
+  area: "Manajemen Konstruksi / Manajemen Proyek"
+  target_roles:
+    - "Manajer Logistik Proyek"
+    - "Ahli Bidang Keahlian Manajemen Konstruksi"
+    - "Ahli Manajemen Proyek Konstruksi"
+    - "Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat"
+
+  questions:
+    - id: pm_q1
+      question: "Ceritakan pengalaman Anda mengendalikan keterlambatan proyek."
+      expected_points:
+        - "Data rencana dan aktual"
+        - "Penyebab keterlambatan"
+        - "Dampak terhadap jadwal, biaya, mutu, dan risiko"
+        - "Recovery plan"
+        - "Hasil tindakan"
+
+    - id: pm_q2
+      question: "Bagaimana Anda mengoordinasikan tenaga kerja, material, alat, dan subkontraktor?"
+      expected_points:
+        - "Perencanaan kebutuhan sumber daya"
+        - "Koordinasi jadwal"
+        - "Pengendalian ketersediaan material dan alat"
+        - "Komunikasi dengan pihak terkait"
+        - "Pelaporan progres"
+
+    - id: pm_q3
+      question: "Apa indikator yang Anda gunakan untuk memantau pelaksanaan proyek?"
+      expected_points:
+        - "Progres fisik"
+        - "Deviasi jadwal"
+        - "Deviasi biaya"
+        - "Temuan mutu"
+        - "Risiko dan isu lapangan"
+```
+
+---
+
+## 37.3 Pengendalian Mutu
+
+```yaml id="mock_quality"
+mock_interview_questions:
+  area: "Pengendalian Mutu Pekerjaan Konstruksi"
+  target_roles:
+    - "Quality Engineer"
+    - "Quality Assurance Engineer"
+    - "Ahli Sistem Manajemen Mutu Konstruksi"
+
+  questions:
+    - id: quality_q1
+      question: "Ceritakan pengalaman Anda menangani ketidaksesuaian mutu pekerjaan."
+      expected_points:
+        - "Jenis ketidaksesuaian"
+        - "Standar atau spesifikasi yang tidak terpenuhi"
+        - "Pencatatan NCR"
+        - "Analisis penyebab"
+        - "Tindakan korektif dan verifikasi"
+
+    - id: quality_q2
+      question: "Bagaimana Anda memastikan pekerjaan sesuai spesifikasi?"
+      expected_points:
+        - "Pemeriksaan dokumen teknis"
+        - "Inspection and Test Plan"
+        - "Checklist inspeksi"
+        - "Pengujian atau verifikasi"
+        - "Dokumentasi hasil pemeriksaan"
+
+    - id: quality_q3
+      question: "Apa perbedaan QA dan QC dalam pengalaman kerja Anda?"
+      expected_points:
+        - "QA sebagai sistem pencegahan"
+        - "QC sebagai pemeriksaan hasil"
+        - "Contoh dokumen QA"
+        - "Contoh kegiatan QC"
+        - "Hubungan keduanya dalam pengendalian mutu"
+```
+
+---
+
+## 37.4 Hukum Kontrak Konstruksi
+
+```yaml id="mock_contract"
+mock_interview_questions:
+  area: "Hukum Kontrak Konstruksi"
+  target_roles:
+    - "Ahli Kontrak Kerja Konstruksi"
+
+  questions:
+    - id: contract_q1
+      question: "Ceritakan pengalaman Anda menangani perubahan pekerjaan dalam proyek."
+      expected_points:
+        - "Dasar permintaan perubahan"
+        - "Instruksi tertulis atau dokumen kontraktual"
+        - "Analisis dampak waktu"
+        - "Analisis dampak biaya"
+        - "Persetujuan atau tindak lanjut"
+
+    - id: contract_q2
+      question: "Bagaimana Anda menyiapkan bukti pendukung klaim?"
+      expected_points:
+        - "Kronologi kejadian"
+        - "Korespondensi resmi"
+        - "Instruksi lapangan"
+        - "Data waktu dan biaya"
+        - "Dokumentasi pendukung"
+
+    - id: contract_q3
+      question: "Apa risiko jika pekerjaan tambahan dilakukan tanpa instruksi tertulis?"
+      expected_points:
+        - "Risiko tidak dibayar"
+        - "Risiko sengketa"
+        - "Kesulitan pembuktian"
+        - "Ketidaksesuaian prosedur kontrak"
+        - "Perlunya dokumentasi formal"
+```
+
+---
+
+## 37.5 Estimasi Biaya / Quantity Surveying
+
+```yaml id="mock_cost_qs"
+mock_interview_questions:
+  area: "Estimasi Biaya Konstruksi / Quantity Surveying"
+  target_roles:
+    - "Juru Hitung Kuantitas"
+    - "Estimator Biaya Jalan"
+    - "Quantity Surveyor"
+    - "Ahli Quantity Surveyor"
+
+  questions:
+    - id: qs_q1
+      question: "Ceritakan pengalaman Anda menghitung volume pekerjaan."
+      expected_points:
+        - "Jenis pekerjaan"
+        - "Dasar gambar atau spesifikasi"
+        - "Metode pengukuran"
+        - "Backup quantity"
+        - "Verifikasi atau persetujuan"
+
+    - id: qs_q2
+      question: "Bagaimana Anda menangani selisih volume antara BOQ dan kondisi aktual?"
+      expected_points:
+        - "Pengukuran ulang"
+        - "Perbandingan gambar, BOQ, dan lapangan"
+        - "Berita acara pengukuran"
+        - "Dasar kontraktual"
+        - "Rekomendasi pembayaran atau klaim"
+
+    - id: qs_q3
+      question: "Apa yang Anda periksa sebelum merekomendasikan progress payment?"
+      expected_points:
+        - "Volume terpasang"
+        - "Dokumen pengukuran"
+        - "Mutu pekerjaan"
+        - "Persetujuan lapangan"
+        - "Kesesuaian dengan kontrak"
+```
+
+---
+
+# 38. Mock Interview Feedback Engine
+
+```yaml id="mock_feedback_engine"
+feedback_engine:
+  id: interview_feedback_engine
+  scoring_method: "expected_points_matching"
+
+  score_scale:
+    0: "Tidak menjawab atau tidak relevan"
+    1: "Jawaban sangat umum, belum menunjukkan pengalaman"
+    2: "Menjawab sebagian, tetapi bukti dan hasil belum jelas"
+    3: "Jawaban cukup lengkap dengan tindakan yang relevan"
+    4: "Jawaban kuat, sistematis, berbasis bukti, dan memiliki hasil terukur"
+
+  evaluation_dimensions:
+    - id: relevance
+      label: "Kesesuaian dengan pertanyaan"
+    - id: evidence
+      label: "Bukti pengalaman kerja"
+    - id: action
+      label: "Kejelasan tindakan"
+    - id: result
+      label: "Hasil atau dampak"
+    - id: terminology
+      label: "Penggunaan istilah teknis/SKK yang tepat"
+
+  feedback_template: >
+    Evaluasi jawaban Anda:
+
+    Skor sementara: {{score}} dari 4
+
+    Yang sudah baik:
+    {{positive_points}}
+
+    Yang perlu diperkuat:
+    {{missing_points}}
+
+    Contoh perbaikan jawaban:
+    {{improved_answer}}
+
+    Tips:
+    Gunakan struktur STAR agar jawaban lebih mudah dinilai:
+    Situasi → Tugas → Tindakan → Hasil.
+```
+
+---
+
+# 39. Adaptive Learning Recommendation
+
+```yaml id="adaptive_learning"
+adaptive_learning:
+  id: adaptive_learning_recommendation
+  purpose: >
+    Memberikan rekomendasi modul berdasarkan hasil asesmen, jawaban studi kasus,
+    dan simulasi wawancara.
+
+  input_signals:
+    - assessment_scores
+    - failed_quiz_questions
+    - weak_expected_points
+    - selected_target_role
+    - preferred_learning_area
+    - repeated_fallback_topics
+
+  recommendation_rules:
+    - condition: "score_k3 < 2"
+      recommend:
+        - "Dasar Identifikasi Bahaya dan Risiko"
+        - "Checklist Inspeksi K3"
+        - "Studi Kasus Near Miss"
+
+    - condition: "score_project_management < 2"
+      recommend:
+        - "Dasar Pengendalian Jadwal"
+        - "Analisis Keterlambatan Proyek"
+        - "Recovery Plan"
+
+    - condition: "score_quality < 2"
+      recommend:
+        - "Dasar QA/QC"
+        - "NCR dan Corrective Action"
+        - "Inspection and Test Plan"
+
+    - condition: "score_contract < 2"
+      recommend:
+        - "Dasar Kontrak Konstruksi"
+        - "Variation Order"
+        - "Dokumentasi Klaim"
+
+    - condition: "score_cost_qs < 2"
+      recommend:
+        - "Dasar BOQ dan Volume"
+        - "Backup Quantity"
+        - "Progress Payment"
+
+  response_template: >
+    Berdasarkan jawaban Anda, area yang paling perlu diperkuat adalah
+    {{weakest_area}}.
+
+    Saya sarankan urutan belajar berikut:
+    1. {{recommendation_1}}
+    2. {{recommendation_2}}
+    3. {{recommendation_3}}
+
+    Setelah menyelesaikan modul tersebut, Anda dapat mencoba kembali asesmen
+    mandiri atau latihan studi kasus.
+```
+
+---
+
+# 40. Learning Module Detail Template
+
+```yaml id="learning_module_template"
+learning_module_template:
+  module_id: "{{module_id}}"
+  title: "{{module_title}}"
+  target_roles:
+    - "{{role_1}}"
+    - "{{role_2}}"
+  estimated_time: "10-15 menit"
+  difficulty: "{{basic | intermediate | advanced}}"
+
+  structure:
+    - section: "Tujuan Pembelajaran"
+      content: >
+        Setelah menyelesaikan modul ini, pengguna diharapkan mampu:
+        {{learning_objectives}}
+
+    - section: "Konsep Inti"
+      content: >
+        {{core_concept_explanation}}
+
+    - section: "Contoh Lapangan"
+      content: >
+        {{field_example}}
+
+    - section: "Checklist Kompetensi"
+      content:
+        - "{{competency_check_1}}"
+        - "{{competency_check_2}}"
+        - "{{competency_check_3}}"
+
+    - section: "Pertanyaan Pemahaman"
+      content:
+        question: "{{quiz_question}}"
+        options:
+          A: "{{option_a}}"
+          B: "{{option_b}}"
+          C: "{{option_c}}"
+          D: "{{option_d}}"
+        correct_answer: "{{correct_answer}}"
+        explanation: "{{answer_explanation}}"
+
+    - section: "Langkah Berikutnya"
+      content:
+        quick_replies:
+          - "Latihan studi kasus"
+          - "Mulai asesmen"
+          - "Lihat checklist bukti"
+          - "Pilih modul lain"
+```
+
+---
+
+# 41. Microlearning Content Examples
+
+## 41.1 Microlearning — Variation Order
+
+```yaml id="micro_variation_order"
+learning_module:
+  module_id: contract_variation_order
+  title: "Memahami Variation Order"
+  target_area: "Hukum Kontrak Konstruksi"
+  difficulty: "intermediate"
+
+  objective: >
+    Membantu pengguna memahami risiko dan prosedur dasar perubahan pekerjaan
+    dalam proyek konstruksi.
+
+  explanation: >
+    Variation Order adalah mekanisme perubahan pekerjaan yang biasanya
+    berdampak pada lingkup, waktu, biaya, metode, atau spesifikasi. Dalam
+    pelaksanaan proyek, perubahan pekerjaan perlu dikelola secara tertulis
+    agar hak dan kewajiban para pihak tetap jelas.
+
+  field_example: >
+    Pemilik proyek meminta tambahan pekerjaan drainase di luar gambar kontrak.
+    Sebelum pekerjaan dilakukan, tim proyek perlu memastikan instruksi tertulis,
+    analisis dampak biaya dan waktu, serta persetujuan sesuai prosedur kontrak.
+
+  competency_checklist:
+    - "Dapat mengenali pekerjaan yang termasuk perubahan lingkup."
+    - "Dapat menjelaskan risiko pekerjaan tambahan tanpa instruksi tertulis."
+    - "Dapat menyusun daftar dokumen pendukung perubahan pekerjaan."
+
+  quiz:
+    question: "Apa tindakan terbaik saat menerima instruksi perubahan pekerjaan secara lisan?"
+    options:
+      A: "Langsung kerjakan agar proyek cepat selesai"
+      B: "Meminta instruksi tertulis dan mengikuti prosedur perubahan kontrak"
+      C: "Menolak semua instruksi tambahan"
+      D: "Menunggu sampai akhir proyek"
+    correct_answer: "B"
+    explanation: >
+      Instruksi tertulis penting untuk memastikan perubahan pekerjaan dapat
+      dibuktikan, dievaluasi dampaknya, dan diproses sesuai kontrak.
+```
+
+---
+
+## 41.2 Microlearning — NCR
+
+```yaml id="micro_ncr"
+learning_module:
+  module_id: quality_ncr
+  title: "Menangani NCR dalam Pengendalian Mutu"
+  target_area: "Pengendalian Mutu"
+  difficulty: "intermediate"
+
+  explanation: >
+    NCR atau Non-Conformance Report adalah laporan ketidaksesuaian ketika
+    pekerjaan, material, atau proses tidak memenuhi spesifikasi atau persyaratan.
+    NCR bukan sekadar catatan kesalahan, tetapi alat untuk memastikan
+    ketidaksesuaian dianalisis dan diperbaiki.
+
+  field_example: >
+    Hasil uji beton menunjukkan kuat tekan tidak memenuhi spesifikasi.
+    Tim mutu perlu mencatat NCR, menahan penerimaan pekerjaan, menganalisis
+    penyebab, menentukan tindakan korektif, dan memverifikasi hasil perbaikan.
+
+  quiz:
+    question: "Apa langkah awal saat ditemukan pekerjaan tidak sesuai spesifikasi?"
+    options:
+      A: "Menerima pekerjaan karena sudah selesai"
+      B: "Membuat NCR dan menahan penerimaan sampai evaluasi dilakukan"
+      C: "Menghapus hasil pengujian"
+      D: "Melanjutkan pekerjaan berikutnya"
+    correct_answer: "B"
+```
+
+---
+
+## 41.3 Microlearning — Backup Quantity
+
+```yaml id="micro_backup_quantity"
+learning_module:
+  module_id: qs_backup_quantity
+  title: "Backup Quantity untuk Quantity Surveying"
+  target_area: "Estimasi Biaya / Quantity Surveying"
+  difficulty: "basic"
+
+  explanation: >
+    Backup quantity adalah dokumen pendukung perhitungan volume pekerjaan.
+    Dokumen ini membantu menjelaskan dasar angka volume, seperti gambar,
+    dimensi, lokasi pekerjaan, metode perhitungan, dan hasil pengukuran.
+
+  field_example: >
+    Untuk pekerjaan pasangan batu, QS menghitung panjang, tinggi, dan tebal
+    berdasarkan gambar kerja serta pengukuran lapangan. Hasilnya dilampirkan
+    sebagai backup quantity untuk mendukung progress payment.
+
+  quiz:
+    question: "Apa fungsi utama backup quantity?"
+    options:
+      A: "Mengganti kontrak"
+      B: "Menjadi bukti pendukung perhitungan volume"
+      C: "Menghapus kebutuhan pengukuran lapangan"
+      D: "Mengubah harga satuan secara sepihak"
+    correct_answer: "B"
+```
+
+---
+
+# 42. User Profile Data Schema
+
+```yaml id="user_profile_schema"
+data_schema:
+  user_profile:
+    user_id: "string"
+    display_name: "string | null"
+    current_role: "string | null"
+    target_role: "string | null"
+    target_subklasifikasi: "string | null"
+    target_kkni: "number | null"
+    experience_years: "number | null"
+    project_type_experience:
+      type: "array"
+      examples:
+        - "gedung"
+        - "jalan"
+        - "jembatan"
+        - "infrastruktur permukiman"
+        - "irigasi"
+        - "lainnya"
+
+  learning_state:
+    completed_modules: "array"
+    current_module: "string | null"
+    assessment_history: "array"
+    scenario_history: "array"
+    mock_interview_history: "array"
+    recommended_next_steps: "array"
+
+  assessment_record:
+    assessment_id: "string"
+    target_area: "string"
+    target_role: "string | null"
+    date_completed: "datetime"
+    score_average: "number"
+    score_by_dimension:
+      k3: "number | null"
+      project_management: "number | null"
+      quality: "number | null"
+      contract: "number | null"
+      cost_qs: "number | null"
+    readiness_level: "basic | intermediate | advanced"
+    recommended_modules: "array"
+
+  evidence_checklist_record:
+    target_role: "string"
+    generated_items: "array"
+    user_marked_ready: "array"
+    user_marked_missing: "array"
+```
+
+---
+
+# 43. Intent Classification Schema
+
+```yaml id="intent_classification_schema"
+nlu_schema:
+  intents:
+    greet:
+      examples:
+        - "Halo"
+        - "Mulai"
+        - "Saya mau belajar"
+        - "Bisa bantu saya?"
+
+    explain_scope:
+      examples:
+        - "Apa itu Manajemen Pelaksanaan?"
+        - "Ruang lingkupnya apa?"
+        - "Bidang ini mencakup apa saja?"
+
+    lookup_role:
+      examples:
+        - "Cari jabatan Quality Engineer"
+        - "Jelaskan Ahli K3 Konstruksi"
+        - "Apa itu Ahli Quantity Surveyor?"
+
+    lookup_kkni:
+      examples:
+        - "Jabatan KKNI 7 apa saja?"
+        - "Level 5 ada jabatan apa?"
+        - "Saya mau lihat KKNI 8"
+
+    lookup_standard:
+      examples:
+        - "SKKNI Quality Engineer nomor berapa?"
+        - "Standar untuk Ahli Kontrak apa?"
+        - "SKKNI 350-2014 untuk jabatan apa?"
+
+    compare_roles:
+      examples:
+        - "Bedanya QA dan QC apa?"
+        - "Quality Engineer vs Quality Assurance Engineer"
+        - "Apa beda QS dan Ahli QS?"
+
+    start_assessment:
+      examples:
+        - "Mulai asesmen"
+        - "Saya mau tes kemampuan"
+        - "Cek kesiapan saya"
+
+    start_scenario:
+      examples:
+        - "Latihan studi kasus"
+        - "Beri saya kasus proyek"
+        - "Saya mau latihan kasus keterlambatan"
+
+    generate_checklist:
+      examples:
+        - "Buat checklist bukti"
+        - "Dokumen apa yang harus saya siapkan?"
+        - "Portofolio untuk sertifikasi apa saja?"
+
+    start_mock_interview:
+      examples:
+        - "Simulasi wawancara"
+        - "Latihan jawab asesor"
+        - "Tanya saya seperti asesor"
+
+    glossary_lookup:
+      examples:
+        - "Apa itu SKKNI?"
+        - "Apa arti NCR?"
+        - "Apa itu variation order?"
+
+    fallback:
+      examples:
+        - "Saya bingung"
+        - "Tidak tahu"
+        - "Jelaskan lagi"
+```
+
+---
+
+# 44. Entity Extraction Schema
+
+```yaml id="entity_extraction_schema"
+entities:
+  role_name:
+    type: "string"
+    examples:
+      - "Ahli K3 Konstruksi"
+      - "Quality Engineer"
+      - "Ahli Quantity Surveyor"
+      - "Petugas Keselamatan Konstruksi"
+      - "Ahli Kontrak Kerja Konstruksi"
+
+  subklasifikasi:
+    type: "enum"
+    values:
+      - "Keselamatan Konstruksi"
+      - "Manajemen Konstruksi / Manajemen Proyek"
+      - "Pengendalian Mutu Pekerjaan Konstruksi"
+      - "Hukum Kontrak Konstruksi"
+      - "Estimasi Biaya Konstruksi"
+
+  kkni_level:
+    type: "number"
+    values: [3, 4, 5, 6, 7, 8, 9]
+
+  standard_code:
+    type: "string"
+    examples:
+      - "SKKNI 60-2022"
+      - "SKKNI 350-2014"
+      - "SKKNI 333-2013"
+      - "SKKNI 88-2015"
+      - "SKKK 035-2022"
+
+  user_goal:
+    type: "enum"
+    values:
+      - "belajar"
+      - "asesmen"
+      - "sertifikasi"
+      - "pilih jabatan"
+      - "latihan kasus"
+      - "checklist bukti"
+
+  experience_level:
+    type: "enum"
+    values:
+      - "pemula"
+      - "pelaksana"
+      - "teknisi/analis"
+      - "supervisor"
+      - "ahli muda"
+      - "ahli madya"
+      - "ahli utama"
+```
+
+---
+
+# 45. System Prompt for the Chatbot
+
+```text id="system_prompt_skk_bot"
+You are “SKK Coach — Manajemen Pelaksanaan”, a professional Indonesian-language chatbot that helps users understand, learn, self-assess, and prepare for competency pathways in the SKK Manajemen Pelaksanaan area.
+
+Your users may be construction workers, project staff, supervisors, engineers, assessors, students, or professionals preparing for SKK-related competency assessment.
+
+You must:
+- Use clear, formal, supportive Indonesian.
+- Explain concepts in practical construction-project language.
+- Guide users through role selection, KKNI lookup, competency learning, self-assessment, evidence checklist preparation, practical scenarios, and mock interview practice.
+- Use the Manajemen Pelaksanaan catalog as the primary reference for roles, subklasifikasi, KKNI levels, qualifications, and standards.
+- Never claim that the user officially passes or fails certification.
+- Never issue official certification.
+- Always describe self-assessment results as learning guidance only.
+- Ask one question at a time when collecting information.
+- Give quick-reply style options when possible.
+- If the user’s role name is ambiguous, offer likely matches.
+- If the topic is outside Manajemen Pelaksanaan, politely clarify the scope and offer to return to the main menu.
+
+Primary competency areas:
+1. Keselamatan Konstruksi / K3
+2. Manajemen Konstruksi / Manajemen Proyek
+3. Pengendalian Mutu Pekerjaan Konstruksi
+4. Hukum Kontrak Konstruksi
+5. Estimasi Biaya Konstruksi / Quantity Surveying
+
+Default conversation style:
+- Start with a short answer.
+- Provide structured options.
+- Offer next steps.
+- Use examples from construction projects.
+```
+
+---
+
+# 46. Developer Prompt / Runtime Instructions
+
+```text id="developer_prompt_skk_bot"
+Runtime behavior rules:
+
+1. Intent Handling
+   - Detect whether the user wants explanation, lookup, comparison, assessment, scenario, checklist, or interview practice.
+   - If confidence is low, ask a clarifying question using predefined quick replies.
+
+2. Role Lookup
+   - Match role names against the competency catalog.
+   - Return subklasifikasi, jabatan kerja, jenjang, kualifikasi, KKNI, and standard.
+   - If multiple matches exist, list candidates.
+
+3. KKNI Lookup
+   - If user asks about a KKNI level, list all roles at that level grouped by subklasifikasi.
+   - Offer to show details or start assessment.
+
+4. Assessment
+   - Use 0–4 scoring.
+   - Interpret as basic, intermediate, or advanced.
+   - Recommend learning modules based on weak areas.
+   - Include disclaimer: “Hasil ini bukan keputusan resmi sertifikasi.”
+
+5. Scenario Practice
+   - Present the situation.
+   - Ask the user to respond.
+   - Evaluate against ideal answer points.
+   - Give practical feedback.
+
+6. Mock Interview
+   - Ask one assessor-style question.
+   - Evaluate using STAR.
+   - Suggest improved answer.
+   - Ask whether the user wants another question.
+
+7. Evidence Checklist
+   - Generate role-specific or area-specific evidence checklist.
+   - Group evidence into experience, technical documents, control documents, communication, and results.
+
+8. Fallback
+   - First fallback: offer topic choices.
+   - Second fallback: suggest question format.
+   - Third fallback: return to main menu.
+
+9. Safety and Accuracy
+   - Do not encourage unsafe site practices.
+   - Do not suggest bypassing contract, quality, or K3 procedures.
+   - For official requirements, advise checking the latest official source or certification body.
+```
+
+---
+
+# 47. API-Ready Intent Response Object Example
+
+```json id="api_ready_intent_response"
+{
+  "intent": "lookup_role",
+  "confidence": 0.92,
+  "entities": {
+    "role_name": "Quality Engineer"
+  },
+  "matched_catalog_item": {
+    "classification": "Manajemen Pelaksanaan",
+    "subklasifikasi": "Pengendalian Mutu Pekerjaan Konstruksi",
+    "jabatan_kerja": "Quality Engineer",
+    "jenjang": [
+      {
+        "title": "Quality Engineer Madya",
+        "kualifikasi": "Teknisi/Analis",
+        "kkni": 5,
+        "standard": "SKKNI 333-2013"
+      },
+      {
+        "title": "Quality Engineer",
+        "kualifikasi": "Teknisi/Analis",
+        "kkni": 6,
+        "standard": "SKKNI 333-2013"
+      }
+    ]
+  },
+  "bot_response": {
+    "text": "Quality Engineer berada dalam subklasifikasi Pengendalian Mutu Pekerjaan Konstruksi. Jabatan ini tersedia pada KKNI 5 dan 6 dengan standar SKKNI 333-2013. Fokus kompetensinya meliputi pengendalian mutu pekerjaan, inspeksi, verifikasi kesesuaian, dokumentasi hasil pemeriksaan, dan tindak lanjut ketidaksesuaian.",
+    "quick_replies": [
+      "Belajar modul mutu",
+      "Mulai asesmen mutu",
+      "Latihan studi kasus NCR",
+      "Bandingkan dengan QA Engineer"
+    ]
+  },
+  "next_node": "role_detail_followup"
+}
+```
+
+---
+
+# 48. Conversation State Machine
+
+```yaml id="conversation_state_machine"
+state_machine:
+  initial_state: onboarding
+
+  states:
+    onboarding:
+      on:
+        user_selects_scope: scope_overview
+        user_selects_role: role_discovery
+        user_selects_assessment: assessment_start
+        user_selects_learning: learning_menu
+        user_selects_scenario: scenario_menu
+
+    scope_overview:
+      on:
+        select_subklasifikasi: subklasifikasi_detail
+        ask_role_catalog: role_catalog
+        start_assessment: assessment_start
+
+    role_discovery:
+      on:
+        profile_complete: role_recommendation
+        ambiguous_answer: role_discovery_clarification
+
+    role_catalog:
+      on:
+        role_selected: role_detail
+        kkni_selected: kkni_lookup
+        standard_selected: standard_lookup
+
+    role_detail:
+      on:
+        start_learning: learning_menu
+        start_assessment: role_assessment
+        generate_checklist: evidence_checklist
+        start_mock_interview: mock_interview_start
+
+    learning_menu:
+      on:
+        module_selected: learning_module
+        module_complete: module_quiz
+        quiz_complete: learning_recommendation
+
+    assessment_start:
+      on:
+        assessment_selected: assessment_questions
+        assessment_complete: assessment_result
+
+    scenario_menu:
+      on:
+        scenario_selected: scenario_prompt
+        user_submits_answer: scenario_feedback
+
+    mock_interview_start:
+      on:
+        question_asked: user_answer_wait
+        user_submits_answer: mock_feedback
+        continue_interview: next_mock_question
+
+    evidence_checklist:
+      on:
+        checklist_generated: checklist_followup
+        user_requests_detail: checklist_detail
+
+    fallback:
+      on:
+        user_selects_topic: corresponding_state
+        repeated_failure: main_menu
+```
+
+---
+
+# 49. End-of-Session Summary Template
+
+```yaml id="session_summary_template"
+session_summary:
+  trigger:
+    - "user says selesai"
+    - "user asks ringkasan"
+    - "session timeout"
+    - "after assessment completion"
+    - "after mock interview completion"
+
+  bot_message_template: >
+    Berikut ringkasan sesi Anda:
+
+    Tujuan sesi:
+    {{user_goal}}
+
+    Area yang dibahas:
+    {{covered_areas}}
+
+    Jabatan/jenjang yang diminati:
+    {{target_role_or_kkni}}
+
+    Aktivitas yang diselesaikan:
+    {{completed_activities}}
+
+    Kekuatan yang terlihat:
+    {{strong_points}}
+
+    Area yang disarankan untuk diperkuat:
+    {{improvement_areas}}
+
+    Rekomendasi langkah berikutnya:
+    1. {{next_step_1}}
+    2. {{next_step_2}}
+    3. {{next_step_3}}
+
+    Catatan:
+    Ringkasan ini adalah bantuan belajar dan persiapan awal, bukan hasil
+    asesmen resmi sertifikasi SKK.
+
+  quick_replies:
+    - "Lanjut belajar"
+    - "Mulai asesmen lain"
+    - "Latihan wawancara"
+    - "Kembali ke menu utama"
+```
+
+---
+
+# 50. Full Example: Mock Interview Conversation
+
+```text id="mock_interview_example"
+User:
+Saya mau latihan wawancara untuk Ahli Quantity Surveyor.
+
+Bot:
+Baik. Ahli Quantity Surveyor berada dalam jalur Estimasi Biaya Konstruksi
+dengan jenjang KKNI 7–9. Kita akan latihan dengan format wawancara asesmen.
+
+Pertanyaan 1:
+Ceritakan pengalaman Anda menangani selisih volume antara BOQ dan kondisi aktual.
+
+User:
+Saya pernah menemukan volume pekerjaan tanah lebih besar dari BOQ. Saya ukur ulang
+bersama tim lapangan dan membuat laporan.
+
+Bot:
+Jawaban Anda sudah relevan, tetapi masih bisa diperkuat.
+
+Yang sudah baik:
+- Anda menyebutkan adanya selisih volume.
+- Anda melakukan pengukuran ulang.
+- Anda membuat laporan.
+
+Yang perlu diperkuat:
+- Sebutkan dasar pengukuran: gambar, spesifikasi, atau kondisi lapangan.
+- Jelaskan apakah dibuat berita acara pengukuran.
+- Jelaskan dampak ke biaya atau progress payment.
+- Tambahkan hasil akhir, misalnya volume disetujui atau klaim diproses.
+
+Contoh jawaban yang lebih kuat:
+“Pada proyek jalan, saya menemukan volume pekerjaan tanah aktual lebih besar
+daripada BOQ karena perbedaan kondisi lapangan. Tugas saya adalah memverifikasi
+volume untuk dasar pembayaran. Saya melakukan pengukuran ulang bersama tim
+lapangan, membandingkan hasilnya dengan gambar dan BOQ, lalu menyusun backup
+quantity serta berita acara pengukuran. Hasilnya, selisih volume dapat
+diklarifikasi dan menjadi dasar evaluasi progress payment.”
+
+Apakah Anda ingin pertanyaan berikutnya?
+[ Ya, lanjut ] [ Ulangi dengan jawaban saya ] [ Lihat checklist bukti QS ]
+```
+
+---

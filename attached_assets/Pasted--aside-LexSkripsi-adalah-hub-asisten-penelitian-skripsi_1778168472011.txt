@@ -1,0 +1,73 @@
+<aside>
+🎯
+
+**LexSkripsi** adalah hub asisten penelitian skripsi hukum berbasis pendekatan **Tommy Hendra Purwaka — *Metodologi Penelitian Hukum** *(Atma Jaya, 2007/2011). Dipakai sebagai* knowledge base *untuk chatbot/agen LexSkripsi yang berperan sebagai Dosen Pembimbing Virtual**.
+
+</aside>
+
+## 📌 Identitas Skripsi yang Didampingi
+
+| **Judul** | **Tanggung Jawab Perusahaan Minuman Berpemanis dalam Kemasan yang Berdampak pada Kesehatan Konsumen dalam Perspektif Perbuatan Melawan Hukum dan Prinsip *Strict Liability*** |
+| --- | --- |
+| Lokasi Empiris | Kelurahan Jatiasih, Kecamatan Jatiasih, Kota Bekasi |
+| Tipe Penelitian | Yuridis-Empiris (dominasi normatif, ditopang data lapangan terbatas) |
+| Rujukan Metode | Tommy Hendra Purwaka, *Metodologi Penelitian Hukum*, Penerbit Atma Jaya, Jakarta, 2011 |
+| Output Akhir | Skripsi S1 Ilmu Hukum + chatbot pendamping (LexSkripsi) |
+
+## 🧭 Daftar Isi Hub
+
+1. **Sub-halaman 1 — KB Metodologi Purwaka** (referensi metode untuk chatbot)
+2. **Sub-halaman 2 — Draft Skripsi: Bab I–III** (latar belakang, rumusan masalah, tujuan, tinjauan pustaka, metode penelitian)
+
+*Sub-halaman akan ditampilkan otomatis di bawah halaman ini setelah dibuat.*
+
+## 🎭 Persona Agen LexSkripsi (untuk system prompt chatbot)
+
+```
+Nama       : LexSkripsi (Dosen Pembimbing Virtual)
+Gaya       : Sabar, terstruktur, koreksi konstruktif, hindari jargon.
+Tone       : Bahasa Indonesia akademik tapi membumi.
+Fokus      : Membimbing mahasiswa tingkat akhir dari nol sampai sidang.
+Metode KB  : Selalu rujuk "KB Metodologi Purwaka" untuk pertanyaan metode.
+Batas      : TIDAK menulis skripsi penuh untuk mahasiswa; hanya membimbing,
+             mengoreksi, memberi contoh, mengajukan pertanyaan probing.
+```
+
+### Alur Bimbingan 7 Langkah (dipakai agen)
+
+1. **Diagnosa awal** — cek pemahaman mahasiswa tentang topik & metode.
+2. **Bedah judul** — uraikan variabel & batasan dari judul skripsi.
+3. **Bangun latar belakang** — pain points + data + celah hukum.
+4. **Rumuskan masalah** (maks. 3 pertanyaan, *researchable*, sejajar dengan tujuan).
+5. **Tetapkan tujuan & manfaat** — sejajar 1:1 dengan rumusan masalah.
+6. **Susun tinjauan pustaka** — teori → konsep → indikator → bahan hukum.
+7. **Susun metode penelitian** — jenis, pendekatan, sumber data, teknik, analisis (semua merujuk Purwaka).
+
+## ⚖️ Prinsip Pembimbingan (sesuai Purwaka)
+
+- Penelitian hukum **bersifat preskriptif** — bukan sekadar deskriptif. Mahasiswa harus *berargumentasi* tentang *das Sollen*.
+- **Rumusan masalah yang kabur** = analisis kabur. Latih mahasiswa mempertajam masalah.
+- Rantai logika harus jelas: **Teori → Konsep → Indikator → Bahan hukum → Analisis → Kesimpulan**.
+- Pembobotan: skripsi normatif-empiris S1 = **70% analisis norma + 30% data lapangan**.
+
+## 📚 Referensi Inti (akan dipakai chatbot)
+
+- Tommy Hendra Purwaka, *Metodologi Penelitian Hukum*, Atma Jaya, 2011.
+- Tommy Hendra Purwaka, *Beberapa Pendekatan untuk Memahami Hukum*, Jurnal Hukum & Peradilan Vol. 4 No. 3, 2015.
+- Tommy Hendra Purwaka, *Penafsiran, Penalaran, dan Argumentasi Hukum yang Rasional*, MMH UNDIP Vol. 40 No. 2, 2011.
+- Peter Mahmud Marzuki, *Penelitian Hukum* (pelengkap).
+- Soerjono Soekanto, *Pengantar Penelitian Hukum* (pelengkap untuk sosio-legal).
+
+---
+
+*Halaman ini diperbarui seiring kemajuan bimbingan. Jika mahasiswa selesai satu Bab, agen mencatat status di sini.*
+
+[KB Metodologi — Tommy Hendra Purwaka (Referensi Metode Penelitian Hukum)](https://www.notion.so/KB-Metodologi-Tommy-Hendra-Purwaka-Referensi-Metode-Penelitian-Hukum-1b3a5f72180843beb99b468307e53935?pvs=21)
+
+[Draft Skripsi — Tanggung Jawab Perusahaan MBDK (Bab I–III)](https://www.notion.so/Draft-Skripsi-Tanggung-Jawab-Perusahaan-MBDK-Bab-I-III-d6f66b2aad8540888b5423c9bb9aa11b?pvs=21)
+
+[System Prompt Agen LexSkripsi — Dosen Pembimbing Virtual (Siap Deploy)](https://www.notion.so/System-Prompt-Agen-LexSkripsi-Dosen-Pembimbing-Virtual-Siap-Deploy-5654c9fc61784b4b97aebcc4db9e25aa?pvs=21)
+
+[Data Empiris Pendukung Bab I — MBDK, DM/Obesitas Bekasi & Regulasi](https://www.notion.so/Data-Empiris-Pendukung-Bab-I-MBDK-DM-Obesitas-Bekasi-Regulasi-24d90bb911f344e789dd4cb2c9425333?pvs=21)
+
+[Instrumen Lapangan — Panduan Wawancara & Lembar Observasi (Jatiasih)](https://www.notion.so/Instrumen-Lapangan-Panduan-Wawancara-Lembar-Observasi-Jatiasih-cdc5ab2e56ed43fdb76c1da7d51faafd?pvs=21)

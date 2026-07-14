@@ -1,0 +1,1013 @@
+Berikut lanjutan berikutnya: **koreksi catalog count, `learningModules.seed.json`, `assessments.seed.json`, dan `evidenceChecklists.seed.json`** agar konfigurasi chatbot makin siap diimplementasikan. Struktur tetap mengacu pada katalog Manajemen Pelaksanaan yang Anda unggah. 
+
+---
+
+# 213. Correction — Expected Catalog Counts
+
+```yaml id="corrected_catalog_counts"
+corrected_catalog_counts:
+  classification_code: "E"
+  classification_name: "Manajemen Pelaksanaan"
+
+  counting_methods:
+    by_main_jabatan_kerja:
+      description: "Menghitung jabatan kerja utama dalam katalog."
+      total: 18
+
+    by_role_level_record:
+      description: "Menghitung setiap jenjang jabatan sebagai satu record individual."
+      total: 41
+
+  by_subklasifikasi_role_level_records:
+    Keselamatan Konstruksi: 12
+    Manajemen Konstruksi / Manajemen Proyek: 9
+    Pengendalian Mutu Pekerjaan Konstruksi: 7
+    Hukum Kontrak Konstruksi: 2
+    Estimasi Biaya Konstruksi: 11
+
+  validation_note: >
+    Jumlah 12 + 9 + 7 + 2 + 11 = 41 role-level records.
+    Jadi, jika database memecah setiap jenjang jabatan menjadi satu record,
+    expected total adalah 41, bukan 35.
+```
+
+---
+
+# 214. `learningModules.seed.json` — Structure
+
+```json id="learning_modules_seed_structure"
+{
+  "version": "1.0.0",
+  "classification": {
+    "code": "E",
+    "name": "Manajemen Pelaksanaan"
+  },
+  "modules": []
+}
+```
+
+---
+
+# 215. `learningModules.seed.json` — Core Modules
+
+```json id="learning_modules_seed_json"
+{
+  "version": "1.0.0",
+  "classification": {
+    "code": "E",
+    "name": "Manajemen Pelaksanaan"
+  },
+  "modules": [
+    {
+      "id": "module_k3_basic",
+      "area_slug": "k3",
+      "title": "Dasar Keselamatan Konstruksi dan K3",
+      "target_subklasifikasi": "Keselamatan Konstruksi",
+      "target_roles": [
+        "Petugas Keselamatan Konstruksi",
+        "Petugas K3 Konstruksi",
+        "Personil Keselamatan dan Kesehatan Kerja",
+        "Supervisor K3",
+        "Ahli K3 Konstruksi",
+        "Ahli Keselamatan Konstruksi"
+      ],
+      "difficulty": "basic",
+      "estimated_time_minutes": 15,
+      "learning_objectives": [
+        "Memahami peran keselamatan dalam pelaksanaan konstruksi.",
+        "Mengenali bahaya dan risiko pekerjaan di lapangan.",
+        "Memahami pentingnya APD, prosedur kerja aman, dan pelaporan kondisi tidak aman."
+      ],
+      "concept_explanation": "Keselamatan konstruksi dan K3 bertujuan memastikan pekerjaan dilaksanakan dengan risiko yang terkendali. Kompetensi ini mencakup identifikasi bahaya, penilaian risiko, pengendalian risiko, inspeksi, pelaporan, dan tindakan korektif.",
+      "field_example": "Sebelum pekerjaan di ketinggian dimulai, petugas atau supervisor perlu memastikan area aman, APD lengkap, metode kerja dipahami, dan potensi jatuh telah dikendalikan.",
+      "competency_checklist": [
+        "Dapat mengenali kondisi tidak aman.",
+        "Dapat menjelaskan fungsi APD.",
+        "Dapat melaporkan temuan K3.",
+        "Dapat mengikuti atau membantu toolbox meeting."
+      ],
+      "quiz": {
+        "question": "Apa tindakan awal saat menemukan pekerjaan berisiko dilakukan tanpa APD yang sesuai?",
+        "options": {
+          "A": "Membiarkan pekerjaan berjalan agar target tercapai",
+          "B": "Menghentikan atau menunda pekerjaan berisiko sampai pengendalian terpenuhi",
+          "C": "Melaporkan setelah pekerjaan selesai",
+          "D": "Mengabaikan karena belum terjadi kecelakaan"
+        },
+        "correct_answer": "B",
+        "explanation": "Pekerjaan berisiko perlu dihentikan atau ditunda sampai APD, metode kerja, dan pengendalian keselamatan terpenuhi."
+      },
+      "next_modules": [
+        "module_k3_risk_control",
+        "module_k3_near_miss"
+      ]
+    },
+    {
+      "id": "module_k3_risk_control",
+      "area_slug": "k3",
+      "title": "Identifikasi Bahaya dan Pengendalian Risiko",
+      "target_subklasifikasi": "Keselamatan Konstruksi",
+      "target_roles": [
+        "Supervisor K3",
+        "Ahli K3 Konstruksi",
+        "Ahli Keselamatan Konstruksi"
+      ],
+      "difficulty": "intermediate",
+      "estimated_time_minutes": 20,
+      "learning_objectives": [
+        "Mengidentifikasi bahaya pada aktivitas konstruksi.",
+        "Menilai tingkat risiko berdasarkan kemungkinan dan dampak.",
+        "Menentukan pengendalian risiko yang sesuai."
+      ],
+      "concept_explanation": "Identifikasi bahaya dilakukan sebelum pekerjaan dimulai untuk menemukan sumber bahaya. Risiko kemudian dinilai dan dikendalikan melalui eliminasi, substitusi, rekayasa teknis, administrasi, dan APD.",
+      "field_example": "Pada pekerjaan penggalian, bahaya dapat berupa longsor, alat berat, akses keluar masuk, dan utilitas bawah tanah. Pengendaliannya dapat berupa slope protection, barricade, izin kerja, dan pengawasan.",
+      "competency_checklist": [
+        "Dapat membuat daftar bahaya pekerjaan.",
+        "Dapat menentukan risiko prioritas.",
+        "Dapat memilih pengendalian risiko yang sesuai.",
+        "Dapat memantau efektivitas tindakan pengendalian."
+      ],
+      "quiz": {
+        "question": "Mengapa pengendalian risiko harus ditetapkan sebelum pekerjaan dimulai?",
+        "options": {
+          "A": "Agar pekerjaan terlihat formal",
+          "B": "Agar risiko dapat dikurangi sebelum menimbulkan insiden",
+          "C": "Agar tidak perlu inspeksi lapangan",
+          "D": "Agar laporan proyek lebih panjang"
+        },
+        "correct_answer": "B",
+        "explanation": "Pengendalian risiko bertujuan mencegah insiden dengan mengurangi kemungkinan atau dampak bahaya sebelum pekerjaan dilakukan."
+      },
+      "next_modules": [
+        "module_k3_near_miss"
+      ]
+    },
+    {
+      "id": "module_project_basic",
+      "area_slug": "project",
+      "title": "Dasar Manajemen Proyek Konstruksi",
+      "target_subklasifikasi": "Manajemen Konstruksi / Manajemen Proyek",
+      "target_roles": [
+        "Manajer Logistik Proyek",
+        "Ahli Bidang Keahlian Manajemen Konstruksi",
+        "Ahli Manajemen Proyek Konstruksi",
+        "Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat"
+      ],
+      "difficulty": "basic",
+      "estimated_time_minutes": 20,
+      "learning_objectives": [
+        "Memahami unsur utama pengelolaan proyek konstruksi.",
+        "Mengenali hubungan antara lingkup, waktu, biaya, mutu, risiko, dan sumber daya.",
+        "Memahami pentingnya data progres dan koordinasi."
+      ],
+      "concept_explanation": "Manajemen proyek konstruksi berfokus pada perencanaan, koordinasi, pelaksanaan, pengendalian, dan evaluasi pekerjaan agar proyek berjalan sesuai target waktu, biaya, mutu, keselamatan, dan kontrak.",
+      "field_example": "Jika material utama terlambat, manajer proyek perlu menganalisis dampak terhadap jadwal, mengatur ulang urutan pekerjaan, dan mengomunikasikan rencana pemulihan.",
+      "competency_checklist": [
+        "Dapat membaca rencana pelaksanaan.",
+        "Dapat memantau progres aktual.",
+        "Dapat mengenali deviasi jadwal.",
+        "Dapat menyusun rencana tindak lanjut."
+      ],
+      "quiz": {
+        "question": "Apa data utama untuk mengetahui proyek terlambat atau tidak?",
+        "options": {
+          "A": "Jadwal rencana dan progres aktual",
+          "B": "Jumlah pekerja saja",
+          "C": "Opini lapangan tanpa data",
+          "D": "Harga material saja"
+        },
+        "correct_answer": "A",
+        "explanation": "Keterlambatan dianalisis dengan membandingkan jadwal rencana dan progres aktual, lalu melihat penyebab dan dampaknya."
+      },
+      "next_modules": [
+        "module_project_delay_control",
+        "module_project_recovery_plan"
+      ]
+    },
+    {
+      "id": "module_project_delay_control",
+      "area_slug": "project",
+      "title": "Pengendalian Keterlambatan Proyek",
+      "target_subklasifikasi": "Manajemen Konstruksi / Manajemen Proyek",
+      "target_roles": [
+        "Ahli Bidang Keahlian Manajemen Konstruksi",
+        "Ahli Manajemen Proyek Konstruksi",
+        "Manajer Logistik Proyek"
+      ],
+      "difficulty": "intermediate",
+      "estimated_time_minutes": 20,
+      "learning_objectives": [
+        "Menganalisis penyebab keterlambatan.",
+        "Menilai dampak keterlambatan terhadap jadwal dan biaya.",
+        "Menyusun rencana korektif atau recovery plan."
+      ],
+      "concept_explanation": "Pengendalian keterlambatan dilakukan dengan membandingkan rencana dan realisasi, mengidentifikasi penyebab, menilai dampak, lalu menyusun tindakan pemulihan seperti resequencing, penambahan sumber daya, atau percepatan pekerjaan.",
+      "field_example": "Ketika pekerjaan struktur terlambat karena material, tim proyek dapat mengevaluasi jalur kritis, mengalihkan tenaga ke pekerjaan lain, mempercepat pengadaan, dan menyusun jadwal pemulihan.",
+      "competency_checklist": [
+        "Dapat membaca deviasi jadwal.",
+        "Dapat mengidentifikasi penyebab keterlambatan.",
+        "Dapat menyusun opsi tindakan korektif.",
+        "Dapat mengomunikasikan rencana pemulihan."
+      ],
+      "quiz": {
+        "question": "Apa tujuan recovery plan?",
+        "options": {
+          "A": "Menghapus catatan keterlambatan",
+          "B": "Mengembalikan progres proyek ke target yang realistis",
+          "C": "Mengurangi mutu pekerjaan",
+          "D": "Mengganti seluruh kontrak"
+        },
+        "correct_answer": "B",
+        "explanation": "Recovery plan bertujuan mengurangi dampak deviasi dan mengembalikan proyek ke target yang disepakati."
+      },
+      "next_modules": [
+        "module_project_reporting"
+      ]
+    },
+    {
+      "id": "module_quality_basic",
+      "area_slug": "quality",
+      "title": "Dasar Pengendalian Mutu Konstruksi",
+      "target_subklasifikasi": "Pengendalian Mutu Pekerjaan Konstruksi",
+      "target_roles": [
+        "Quality Engineer",
+        "Quality Assurance Engineer",
+        "Ahli Sistem Manajemen Mutu Konstruksi"
+      ],
+      "difficulty": "basic",
+      "estimated_time_minutes": 15,
+      "learning_objectives": [
+        "Memahami fungsi mutu dalam pelaksanaan konstruksi.",
+        "Membedakan QA dan QC secara sederhana.",
+        "Memahami pentingnya inspeksi, pengujian, dan dokumentasi mutu."
+      ],
+      "concept_explanation": "Pengendalian mutu memastikan pekerjaan memenuhi spesifikasi, gambar, metode kerja, dan persyaratan kontrak. QA berfokus pada sistem pencegahan, sedangkan QC berfokus pada pemeriksaan hasil pekerjaan.",
+      "field_example": "Sebelum pekerjaan beton diterima, tim mutu memeriksa hasil uji, checklist inspeksi, metode kerja, dan kesesuaian terhadap spesifikasi.",
+      "competency_checklist": [
+        "Dapat membaca spesifikasi teknis.",
+        "Dapat menjelaskan perbedaan QA dan QC.",
+        "Dapat melakukan atau memahami inspeksi mutu.",
+        "Dapat mendokumentasikan hasil pemeriksaan."
+      ],
+      "quiz": {
+        "question": "Apa perbedaan sederhana antara QA dan QC?",
+        "options": {
+          "A": "QA fokus sistem pencegahan, QC fokus pemeriksaan hasil",
+          "B": "QA dan QC sama persis",
+          "C": "QC hanya untuk administrasi",
+          "D": "QA hanya untuk menghitung volume"
+        },
+        "correct_answer": "A",
+        "explanation": "QA berfokus pada sistem dan pencegahan ketidaksesuaian, sedangkan QC memeriksa hasil pekerjaan."
+      },
+      "next_modules": [
+        "module_quality_ncr"
+      ]
+    },
+    {
+      "id": "module_quality_ncr",
+      "area_slug": "quality",
+      "title": "NCR dan Tindakan Korektif",
+      "target_subklasifikasi": "Pengendalian Mutu Pekerjaan Konstruksi",
+      "target_roles": [
+        "Quality Engineer",
+        "Quality Assurance Engineer",
+        "Ahli Sistem Manajemen Mutu Konstruksi"
+      ],
+      "difficulty": "intermediate",
+      "estimated_time_minutes": 20,
+      "learning_objectives": [
+        "Memahami fungsi NCR.",
+        "Menentukan tindakan awal saat ditemukan ketidaksesuaian.",
+        "Memahami proses tindakan korektif dan verifikasi."
+      ],
+      "concept_explanation": "NCR atau Non-Conformance Report digunakan untuk mencatat ketidaksesuaian pekerjaan, material, atau proses terhadap persyaratan. NCR harus ditindaklanjuti melalui analisis penyebab, tindakan korektif, dan verifikasi hasil.",
+      "field_example": "Jika hasil uji beton tidak memenuhi spesifikasi, tim mutu membuat NCR, menahan penerimaan pekerjaan, melakukan evaluasi teknis, dan memverifikasi tindakan perbaikan.",
+      "competency_checklist": [
+        "Dapat mengenali ketidaksesuaian.",
+        "Dapat menjelaskan isi NCR.",
+        "Dapat menentukan tindakan korektif.",
+        "Dapat memverifikasi hasil perbaikan."
+      ],
+      "quiz": {
+        "question": "Apa langkah awal saat pekerjaan tidak sesuai spesifikasi?",
+        "options": {
+          "A": "Menerima pekerjaan karena sudah selesai",
+          "B": "Membuat NCR dan menahan penerimaan sampai evaluasi dilakukan",
+          "C": "Menghapus hasil pengujian",
+          "D": "Melanjutkan pekerjaan tanpa komunikasi"
+        },
+        "correct_answer": "B",
+        "explanation": "Ketidaksesuaian harus dicatat, dievaluasi, dan ditindaklanjuti sebelum pekerjaan diterima."
+      },
+      "next_modules": [
+        "module_quality_audit"
+      ]
+    },
+    {
+      "id": "module_contract_basic",
+      "area_slug": "contract",
+      "title": "Dasar Hukum Kontrak Konstruksi",
+      "target_subklasifikasi": "Hukum Kontrak Konstruksi",
+      "target_roles": [
+        "Ahli Kontrak Kerja Konstruksi"
+      ],
+      "difficulty": "basic",
+      "estimated_time_minutes": 20,
+      "learning_objectives": [
+        "Memahami fungsi kontrak dalam pelaksanaan proyek.",
+        "Mengenali hak dan kewajiban para pihak.",
+        "Memahami pentingnya dokumen tertulis dalam perubahan pekerjaan."
+      ],
+      "concept_explanation": "Kontrak konstruksi menjadi dasar pelaksanaan pekerjaan, pembayaran, perubahan lingkup, klaim, sengketa, dan tanggung jawab para pihak. Dalam pelaksanaan, setiap perubahan penting perlu didukung dokumen yang sah.",
+      "field_example": "Jika pemilik proyek meminta pekerjaan tambahan, tim proyek perlu meminta instruksi tertulis dan menganalisis dampak waktu serta biaya sebelum pelaksanaan.",
+      "competency_checklist": [
+        "Dapat memahami struktur dokumen kontrak.",
+        "Dapat mengenali perubahan pekerjaan.",
+        "Dapat menjelaskan risiko pekerjaan tanpa instruksi tertulis.",
+        "Dapat menyusun bukti pendukung klaim."
+      ],
+      "quiz": {
+        "question": "Apa risiko pekerjaan tambahan tanpa instruksi tertulis?",
+        "options": {
+          "A": "Tidak ada risiko",
+          "B": "Sulit dibuktikan dan berpotensi tidak diakui atau menjadi sengketa",
+          "C": "Pasti dibayar penuh",
+          "D": "Kontrak otomatis berubah"
+        },
+        "correct_answer": "B",
+        "explanation": "Tanpa dokumen tertulis, perubahan pekerjaan sulit dibuktikan dan dapat menimbulkan sengketa pembayaran atau waktu."
+      },
+      "next_modules": [
+        "module_contract_variation_order"
+      ]
+    },
+    {
+      "id": "module_contract_variation_order",
+      "area_slug": "contract",
+      "title": "Variation Order dan Klaim",
+      "target_subklasifikasi": "Hukum Kontrak Konstruksi",
+      "target_roles": [
+        "Ahli Kontrak Kerja Konstruksi"
+      ],
+      "difficulty": "intermediate",
+      "estimated_time_minutes": 25,
+      "learning_objectives": [
+        "Memahami konsep variation order.",
+        "Mengidentifikasi dokumen pendukung perubahan pekerjaan.",
+        "Menyusun struktur awal klaim waktu atau biaya."
+      ],
+      "concept_explanation": "Variation order adalah mekanisme perubahan pekerjaan yang dapat berdampak pada lingkup, waktu, biaya, mutu, atau metode kerja. Klaim perlu didukung kronologi, instruksi, bukti lapangan, dan analisis dampak.",
+      "field_example": "Perubahan desain menyebabkan tambahan volume pekerjaan. Tim kontrak perlu mengumpulkan instruksi tertulis, gambar revisi, pengukuran volume, analisis biaya, dan dampak jadwal.",
+      "competency_checklist": [
+        "Dapat mengenali perubahan lingkup.",
+        "Dapat menyusun kronologi kejadian.",
+        "Dapat mengumpulkan bukti klaim.",
+        "Dapat menjelaskan dampak waktu dan biaya."
+      ],
+      "quiz": {
+        "question": "Dokumen apa yang penting untuk mendukung klaim perubahan pekerjaan?",
+        "options": {
+          "A": "Kronologi, instruksi tertulis, bukti lapangan, dan analisis dampak",
+          "B": "Opini tanpa bukti",
+          "C": "Foto tanpa tanggal dan lokasi",
+          "D": "Daftar pekerja saja"
+        },
+        "correct_answer": "A",
+        "explanation": "Klaim yang kuat membutuhkan kronologi, dasar kontrak, instruksi, bukti, dan analisis dampak."
+      },
+      "next_modules": []
+    },
+    {
+      "id": "module_cost_qs_basic",
+      "area_slug": "cost_qs",
+      "title": "Dasar Estimasi Biaya dan Quantity Surveying",
+      "target_subklasifikasi": "Estimasi Biaya Konstruksi",
+      "target_roles": [
+        "Juru Hitung Kuantitas",
+        "Estimator Biaya Jalan",
+        "Quantity Surveyor",
+        "Ahli Quantity Surveyor"
+      ],
+      "difficulty": "basic",
+      "estimated_time_minutes": 20,
+      "learning_objectives": [
+        "Memahami peran volume, BOQ, dan estimasi biaya.",
+        "Mengenali hubungan gambar, spesifikasi, volume, dan harga.",
+        "Memahami fungsi backup quantity."
+      ],
+      "concept_explanation": "Estimasi biaya dan QS berfokus pada pengukuran volume, penyusunan biaya, analisis harga satuan, evaluasi progress payment, dan pengendalian deviasi volume atau biaya.",
+      "field_example": "Untuk pekerjaan pasangan batu, QS menghitung volume berdasarkan gambar dan pengukuran lapangan, lalu menyusun backup quantity sebagai dasar verifikasi pembayaran.",
+      "competency_checklist": [
+        "Dapat membaca gambar untuk volume sederhana.",
+        "Dapat memahami BOQ.",
+        "Dapat menjelaskan backup quantity.",
+        "Dapat memahami dasar progress payment."
+      ],
+      "quiz": {
+        "question": "Apa fungsi utama backup quantity?",
+        "options": {
+          "A": "Mengganti kontrak",
+          "B": "Menjadi bukti pendukung perhitungan volume",
+          "C": "Menghapus kebutuhan pengukuran",
+          "D": "Mengubah harga sepihak"
+        },
+        "correct_answer": "B",
+        "explanation": "Backup quantity menjelaskan dasar perhitungan volume agar dapat diverifikasi."
+      },
+      "next_modules": [
+        "module_cost_qs_progress_payment"
+      ]
+    },
+    {
+      "id": "module_cost_qs_progress_payment",
+      "area_slug": "cost_qs",
+      "title": "Progress Payment dan Verifikasi Volume",
+      "target_subklasifikasi": "Estimasi Biaya Konstruksi",
+      "target_roles": [
+        "Quantity Surveyor",
+        "Ahli Quantity Surveyor",
+        "Juru Hitung Kuantitas"
+      ],
+      "difficulty": "intermediate",
+      "estimated_time_minutes": 25,
+      "learning_objectives": [
+        "Memahami dasar evaluasi progress payment.",
+        "Menjelaskan dokumen pendukung pembayaran progres.",
+        "Menganalisis selisih volume rencana dan aktual."
+      ],
+      "concept_explanation": "Progress payment harus didukung volume pekerjaan yang terpasang, mutu yang memenuhi persyaratan, dokumen pengukuran, dan persetujuan sesuai kontrak.",
+      "field_example": "Jika volume aktual lebih besar dari BOQ, QS perlu melakukan pengukuran ulang, menyusun berita acara, memeriksa dasar kontraktual, dan menyiapkan dokumen pendukung.",
+      "competency_checklist": [
+        "Dapat mengevaluasi volume terpasang.",
+        "Dapat memeriksa dokumen pengukuran.",
+        "Dapat menyiapkan berita acara.",
+        "Dapat memberi rekomendasi pembayaran berdasarkan bukti."
+      ],
+      "quiz": {
+        "question": "Apa yang harus diperiksa sebelum progress payment direkomendasikan?",
+        "options": {
+          "A": "Volume terpasang, mutu, dokumen pengukuran, dan persetujuan",
+          "B": "Permintaan lisan saja",
+          "C": "Estimasi awal tanpa verifikasi",
+          "D": "Jumlah pekerja tanpa progres"
+        },
+        "correct_answer": "A",
+        "explanation": "Progress payment perlu diverifikasi berdasarkan volume aktual, mutu, dokumen pengukuran, dan ketentuan kontrak."
+      },
+      "next_modules": []
+    }
+  ]
+}
+```
+
+---
+
+# 216. `assessments.seed.json`
+
+```json id="assessments_seed_json"
+{
+  "version": "1.0.0",
+  "classification": {
+    "code": "E",
+    "name": "Manajemen Pelaksanaan"
+  },
+  "scale": {
+    "0": "Belum memahami",
+    "1": "Memahami teori dasar",
+    "2": "Pernah menerapkan dengan arahan",
+    "3": "Mampu menerapkan mandiri",
+    "4": "Mampu mengevaluasi dan membimbing orang lain"
+  },
+  "assessments": [
+    {
+      "id": "assessment_k3",
+      "area_slug": "k3",
+      "title": "Asesmen Mandiri Keselamatan Konstruksi / K3",
+      "target_subklasifikasi": "Keselamatan Konstruksi",
+      "intro": "Asesmen ini membantu menilai kesiapan awal Anda pada kompetensi keselamatan konstruksi dan K3.",
+      "questions": [
+        {
+          "id": "k3_q1",
+          "text": "Saya mampu mengidentifikasi bahaya sebelum pekerjaan dimulai."
+        },
+        {
+          "id": "k3_q2",
+          "text": "Saya mampu menilai tingkat risiko pekerjaan di lapangan."
+        },
+        {
+          "id": "k3_q3",
+          "text": "Saya mampu menentukan tindakan pengendalian risiko yang sesuai."
+        },
+        {
+          "id": "k3_q4",
+          "text": "Saya mampu memeriksa kepatuhan APD dan prosedur kerja aman."
+        },
+        {
+          "id": "k3_q5",
+          "text": "Saya mampu melaporkan near miss, insiden, atau kondisi tidak aman."
+        },
+        {
+          "id": "k3_q6",
+          "text": "Saya mampu menindaklanjuti tindakan korektif K3 sampai selesai."
+        }
+      ],
+      "result_rules": {
+        "basic": {
+          "condition": "average_score < 1.5",
+          "message": "Anda berada pada tahap dasar. Fokuskan pada pemahaman bahaya, APD, prosedur kerja aman, dan pelaporan kondisi tidak aman.",
+          "recommended_modules": [
+            "module_k3_basic"
+          ]
+        },
+        "intermediate": {
+          "condition": "average_score >= 1.5 && average_score < 3",
+          "message": "Anda sudah memiliki pemahaman awal. Perkuat kemampuan identifikasi risiko, inspeksi, dokumentasi, dan tindakan korektif.",
+          "recommended_modules": [
+            "module_k3_risk_control",
+            "module_k3_near_miss"
+          ]
+        },
+        "advanced": {
+          "condition": "average_score >= 3",
+          "message": "Anda menunjukkan kesiapan baik. Lanjutkan ke simulasi wawancara, studi kasus kompleks, dan review portofolio K3.",
+          "recommended_modules": [
+            "module_k3_risk_control"
+          ]
+        }
+      }
+    },
+    {
+      "id": "assessment_project",
+      "area_slug": "project",
+      "title": "Asesmen Mandiri Manajemen Konstruksi / Manajemen Proyek",
+      "target_subklasifikasi": "Manajemen Konstruksi / Manajemen Proyek",
+      "intro": "Asesmen ini membantu menilai kesiapan awal Anda pada kompetensi manajemen pelaksanaan proyek konstruksi.",
+      "questions": [
+        {
+          "id": "project_q1",
+          "text": "Saya mampu membaca atau menyusun rencana pelaksanaan proyek."
+        },
+        {
+          "id": "project_q2",
+          "text": "Saya mampu memantau progres aktual terhadap jadwal rencana."
+        },
+        {
+          "id": "project_q3",
+          "text": "Saya mampu menganalisis penyebab keterlambatan proyek."
+        },
+        {
+          "id": "project_q4",
+          "text": "Saya mampu mengoordinasikan tenaga kerja, material, alat, dan subkontraktor."
+        },
+        {
+          "id": "project_q5",
+          "text": "Saya mampu menyusun laporan progres berbasis data."
+        },
+        {
+          "id": "project_q6",
+          "text": "Saya mampu menyusun rencana korektif atau recovery plan."
+        }
+      ],
+      "result_rules": {
+        "basic": {
+          "condition": "average_score < 1.5",
+          "message": "Anda perlu memperkuat dasar perencanaan, jadwal, progres, dan koordinasi proyek.",
+          "recommended_modules": [
+            "module_project_basic"
+          ]
+        },
+        "intermediate": {
+          "condition": "average_score >= 1.5 && average_score < 3",
+          "message": "Anda sudah memahami dasar. Perkuat analisis keterlambatan, koordinasi sumber daya, dan recovery plan.",
+          "recommended_modules": [
+            "module_project_delay_control"
+          ]
+        },
+        "advanced": {
+          "condition": "average_score >= 3",
+          "message": "Anda menunjukkan kesiapan baik. Lanjutkan ke studi kasus keterlambatan kompleks dan simulasi wawancara proyek.",
+          "recommended_modules": [
+            "module_project_delay_control"
+          ]
+        }
+      }
+    },
+    {
+      "id": "assessment_quality",
+      "area_slug": "quality",
+      "title": "Asesmen Mandiri Pengendalian Mutu",
+      "target_subklasifikasi": "Pengendalian Mutu Pekerjaan Konstruksi",
+      "intro": "Asesmen ini membantu menilai kesiapan awal Anda pada kompetensi pengendalian mutu pekerjaan konstruksi.",
+      "questions": [
+        {
+          "id": "quality_q1",
+          "text": "Saya mampu membaca spesifikasi teknis pekerjaan."
+        },
+        {
+          "id": "quality_q2",
+          "text": "Saya mampu melakukan inspeksi hasil pekerjaan."
+        },
+        {
+          "id": "quality_q3",
+          "text": "Saya mampu memahami perbedaan QA dan QC."
+        },
+        {
+          "id": "quality_q4",
+          "text": "Saya mampu mengenali ketidaksesuaian mutu pekerjaan."
+        },
+        {
+          "id": "quality_q5",
+          "text": "Saya mampu membuat atau menindaklanjuti NCR."
+        },
+        {
+          "id": "quality_q6",
+          "text": "Saya mampu memverifikasi hasil tindakan korektif."
+        }
+      ],
+      "result_rules": {
+        "basic": {
+          "condition": "average_score < 1.5",
+          "message": "Anda perlu memperkuat dasar spesifikasi, inspeksi mutu, QA/QC, dan dokumentasi hasil pemeriksaan.",
+          "recommended_modules": [
+            "module_quality_basic"
+          ]
+        },
+        "intermediate": {
+          "condition": "average_score >= 1.5 && average_score < 3",
+          "message": "Anda sudah memahami dasar. Perkuat NCR, tindakan korektif, verifikasi, dan audit mutu.",
+          "recommended_modules": [
+            "module_quality_ncr"
+          ]
+        },
+        "advanced": {
+          "condition": "average_score >= 3",
+          "message": "Anda menunjukkan kesiapan baik. Lanjutkan ke studi kasus NCR kompleks dan simulasi wawancara mutu.",
+          "recommended_modules": [
+            "module_quality_ncr"
+          ]
+        }
+      }
+    },
+    {
+      "id": "assessment_contract",
+      "area_slug": "contract",
+      "title": "Asesmen Mandiri Hukum Kontrak Konstruksi",
+      "target_subklasifikasi": "Hukum Kontrak Konstruksi",
+      "intro": "Asesmen ini membantu menilai kesiapan awal Anda pada kompetensi kontrak, klaim, dan perubahan pekerjaan.",
+      "questions": [
+        {
+          "id": "contract_q1",
+          "text": "Saya mampu membaca klausul penting dalam kontrak konstruksi."
+        },
+        {
+          "id": "contract_q2",
+          "text": "Saya mampu mengenali perubahan pekerjaan atau variation order."
+        },
+        {
+          "id": "contract_q3",
+          "text": "Saya mampu menyusun kronologi kejadian proyek."
+        },
+        {
+          "id": "contract_q4",
+          "text": "Saya mampu mengumpulkan bukti pendukung klaim."
+        },
+        {
+          "id": "contract_q5",
+          "text": "Saya mampu menganalisis dampak waktu dan biaya."
+        },
+        {
+          "id": "contract_q6",
+          "text": "Saya mampu menjelaskan risiko pekerjaan tambahan tanpa instruksi tertulis."
+        }
+      ],
+      "result_rules": {
+        "basic": {
+          "condition": "average_score < 1.5",
+          "message": "Anda perlu memperkuat dasar kontrak, perubahan pekerjaan, dan pentingnya dokumen tertulis.",
+          "recommended_modules": [
+            "module_contract_basic"
+          ]
+        },
+        "intermediate": {
+          "condition": "average_score >= 1.5 && average_score < 3",
+          "message": "Anda sudah memahami dasar. Perkuat variation order, klaim, kronologi, dan analisis dampak.",
+          "recommended_modules": [
+            "module_contract_variation_order"
+          ]
+        },
+        "advanced": {
+          "condition": "average_score >= 3",
+          "message": "Anda menunjukkan kesiapan baik. Lanjutkan ke studi kasus klaim kompleks dan simulasi wawancara kontrak.",
+          "recommended_modules": [
+            "module_contract_variation_order"
+          ]
+        }
+      }
+    },
+    {
+      "id": "assessment_cost_qs",
+      "area_slug": "cost_qs",
+      "title": "Asesmen Mandiri Estimasi Biaya / Quantity Surveying",
+      "target_subklasifikasi": "Estimasi Biaya Konstruksi",
+      "intro": "Asesmen ini membantu menilai kesiapan awal Anda pada kompetensi estimasi biaya, quantity surveying, dan progress payment.",
+      "questions": [
+        {
+          "id": "cost_qs_q1",
+          "text": "Saya mampu membaca gambar untuk menghitung volume pekerjaan."
+        },
+        {
+          "id": "cost_qs_q2",
+          "text": "Saya mampu memahami BOQ dan item pekerjaan."
+        },
+        {
+          "id": "cost_qs_q3",
+          "text": "Saya mampu menyusun backup quantity."
+        },
+        {
+          "id": "cost_qs_q4",
+          "text": "Saya mampu mengevaluasi progress payment."
+        },
+        {
+          "id": "cost_qs_q5",
+          "text": "Saya mampu membandingkan volume rencana dan aktual."
+        },
+        {
+          "id": "cost_qs_q6",
+          "text": "Saya mampu menganalisis deviasi volume atau biaya."
+        }
+      ],
+      "result_rules": {
+        "basic": {
+          "condition": "average_score < 1.5",
+          "message": "Anda perlu memperkuat dasar BOQ, membaca gambar, volume, dan backup quantity.",
+          "recommended_modules": [
+            "module_cost_qs_basic"
+          ]
+        },
+        "intermediate": {
+          "condition": "average_score >= 1.5 && average_score < 3",
+          "message": "Anda sudah memahami dasar. Perkuat progress payment, verifikasi volume, dan analisis deviasi.",
+          "recommended_modules": [
+            "module_cost_qs_progress_payment"
+          ]
+        },
+        "advanced": {
+          "condition": "average_score >= 3",
+          "message": "Anda menunjukkan kesiapan baik. Lanjutkan ke studi kasus klaim volume dan simulasi wawancara QS.",
+          "recommended_modules": [
+            "module_cost_qs_progress_payment"
+          ]
+        }
+      }
+    }
+  ]
+}
+```
+
+---
+
+# 217. `evidenceChecklists.seed.json`
+
+```json id="evidence_checklists_seed_json"
+{
+  "version": "1.0.0",
+  "classification": {
+    "code": "E",
+    "name": "Manajemen Pelaksanaan"
+  },
+  "checklists": [
+    {
+      "id": "evidence_k3",
+      "area_slug": "k3",
+      "title": "Checklist Bukti Kompetensi K3 / Keselamatan Konstruksi",
+      "target_roles": [
+        "Petugas Keselamatan Konstruksi",
+        "Petugas K3 Konstruksi",
+        "Personil Keselamatan dan Kesehatan Kerja",
+        "Supervisor K3",
+        "Ahli K3 Konstruksi",
+        "Ahli Keselamatan Konstruksi"
+      ],
+      "items": {
+        "experience_evidence": [
+          "Riwayat pekerjaan atau surat tugas di proyek konstruksi",
+          "Dokumentasi peran dalam pelaksanaan K3 atau keselamatan konstruksi"
+        ],
+        "technical_documents": [
+          "Checklist inspeksi K3",
+          "HIRADC/JSA/IBPRP atau dokumen identifikasi bahaya dan risiko",
+          "Prosedur kerja aman",
+          "Dokumentasi penggunaan APD"
+        ],
+        "control_documents": [
+          "Laporan kondisi tidak aman",
+          "Laporan near miss atau insiden",
+          "Tindakan korektif dan pencegahan",
+          "Bukti penutupan temuan K3"
+        ],
+        "communication_documents": [
+          "Notulen atau dokumentasi toolbox meeting",
+          "Briefing keselamatan",
+          "Korespondensi tindak lanjut temuan K3"
+        ],
+        "result_documents": [
+          "Bukti perbaikan kondisi tidak aman",
+          "Bukti pengurangan temuan berulang",
+          "Ringkasan hasil inspeksi atau audit K3"
+        ]
+      }
+    },
+    {
+      "id": "evidence_project",
+      "area_slug": "project",
+      "title": "Checklist Bukti Kompetensi Manajemen Konstruksi / Manajemen Proyek",
+      "target_roles": [
+        "Manajer Logistik Proyek",
+        "Ahli Bidang Keahlian Manajemen Konstruksi",
+        "Ahli Manajemen Proyek Konstruksi",
+        "Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat"
+      ],
+      "items": {
+        "experience_evidence": [
+          "Riwayat proyek dan peran dalam koordinasi pelaksanaan",
+          "Surat tugas sebagai pengelola, koordinator, fasilitator, atau manajer proyek"
+        ],
+        "technical_documents": [
+          "Rencana pelaksanaan proyek",
+          "Jadwal proyek",
+          "Rencana sumber daya",
+          "Rencana logistik",
+          "Risk register"
+        ],
+        "control_documents": [
+          "Laporan progres mingguan atau bulanan",
+          "Analisis keterlambatan",
+          "Recovery plan",
+          "Laporan pengendalian waktu, biaya, mutu, dan risiko"
+        ],
+        "communication_documents": [
+          "Notulen rapat koordinasi",
+          "Instruksi lapangan",
+          "Korespondensi proyek",
+          "Dokumentasi koordinasi dengan owner, konsultan, kontraktor, atau masyarakat"
+        ],
+        "result_documents": [
+          "Bukti pencapaian milestone",
+          "Bukti penyelesaian masalah proyek",
+          "Ringkasan hasil pengendalian proyek"
+        ]
+      }
+    },
+    {
+      "id": "evidence_quality",
+      "area_slug": "quality",
+      "title": "Checklist Bukti Kompetensi Pengendalian Mutu",
+      "target_roles": [
+        "Quality Engineer",
+        "Quality Assurance Engineer",
+        "Ahli Sistem Manajemen Mutu Konstruksi"
+      ],
+      "items": {
+        "experience_evidence": [
+          "Riwayat keterlibatan dalam pengendalian mutu proyek",
+          "Surat tugas sebagai QA, QC, Quality Engineer, atau pengelola sistem mutu"
+        ],
+        "technical_documents": [
+          "Spesifikasi teknis",
+          "Inspection and Test Plan",
+          "Checklist inspeksi mutu",
+          "Laporan hasil uji material atau pekerjaan"
+        ],
+        "control_documents": [
+          "NCR",
+          "Corrective Action Report",
+          "Laporan audit mutu",
+          "Verifikasi hasil perbaikan"
+        ],
+        "communication_documents": [
+          "Notulen rapat mutu",
+          "Korespondensi tindak lanjut ketidaksesuaian",
+          "Koordinasi dengan kontraktor, konsultan, atau owner terkait mutu"
+        ],
+        "result_documents": [
+          "Bukti penutupan NCR",
+          "Bukti pekerjaan diterima setelah verifikasi",
+          "Ringkasan peningkatan mutu atau penurunan temuan"
+        ]
+      }
+    },
+    {
+      "id": "evidence_contract",
+      "area_slug": "contract",
+      "title": "Checklist Bukti Kompetensi Hukum Kontrak Konstruksi",
+      "target_roles": [
+        "Ahli Kontrak Kerja Konstruksi"
+      ],
+      "items": {
+        "experience_evidence": [
+          "Riwayat keterlibatan dalam administrasi kontrak, klaim, atau sengketa",
+          "Surat tugas terkait pengelolaan kontrak proyek"
+        ],
+        "technical_documents": [
+          "Dokumen kontrak",
+          "Daftar klausul penting",
+          "Dokumen variation order",
+          "Adendum",
+          "Instruksi tertulis perubahan pekerjaan"
+        ],
+        "control_documents": [
+          "Kronologi kejadian",
+          "Analisis dampak waktu",
+          "Analisis dampak biaya",
+          "Dokumen klaim",
+          "Matriks risiko kontraktual"
+        ],
+        "communication_documents": [
+          "Korespondensi resmi",
+          "Notulen rapat klarifikasi",
+          "Berita acara",
+          "Dokumen persetujuan atau penolakan klaim"
+        ],
+        "result_documents": [
+          "Persetujuan perubahan pekerjaan",
+          "Penyelesaian klaim",
+          "Penyelesaian sengketa",
+          "Rekomendasi kontraktual yang terdokumentasi"
+        ]
+      }
+    },
+    {
+      "id": "evidence_cost_qs",
+      "area_slug": "cost_qs",
+      "title": "Checklist Bukti Kompetensi Estimasi Biaya / Quantity Surveying",
+      "target_roles": [
+        "Juru Hitung Kuantitas",
+        "Estimator Biaya Jalan",
+        "Quantity Surveyor",
+        "Ahli Quantity Surveyor"
+      ],
+      "items": {
+        "experience_evidence": [
+          "Riwayat pekerjaan sebagai QS, estimator, atau juru hitung kuantitas",
+          "Surat tugas terkait pengukuran volume, estimasi biaya, atau evaluasi pembayaran"
+        ],
+        "technical_documents": [
+          "BOQ",
+          "Gambar kerja",
+          "Spesifikasi teknis",
+          "Backup quantity",
+          "Perhitungan volume",
+          "Analisis harga satuan"
+        ],
+        "control_documents": [
+          "Evaluasi progress payment",
+          "Laporan deviasi volume",
+          "Laporan deviasi biaya",
+          "Berita acara pengukuran",
+          "Dokumen klarifikasi volume"
+        ],
+        "communication_documents": [
+          "Korespondensi klarifikasi volume atau biaya",
+          "Notulen rapat komersial",
+          "Instruksi terkait perubahan volume atau pekerjaan"
+        ],
+        "result_documents": [
+          "Persetujuan volume",
+          "Rekomendasi pembayaran",
+          "Dokumen klaim biaya atau kuantitas",
+          "Ringkasan hasil evaluasi komersial proyek"
+        ]
+      }
+    }
+  ]
+}
+```
+
+---
+
+# 218. Next Seed Files Recommended
+
+```yaml id="next_seed_files_recommended"
+next_seed_files_recommended:
+  after_roles_learning_assessments_evidence:
+    - file_name: "scenarios.seed.json"
+      purpose: "Menyimpan studi kasus basic, intermediate, dan advanced per area."
+
+    - file_name: "mockInterview.seed.json"
+      purpose: "Menyimpan pertanyaan wawancara asesor dan expected answer points."
+
+    - file_name: "glossary.seed.json"
+      purpose: "Menyimpan istilah SKK/SKKNI/SKKK/KKNI dan istilah teknis proyek."
+
+    - file_name: "faq.seed.json"
+      purpose: "Menyimpan pertanyaan umum pengguna."
+
+    - file_name: "responseTemplates.seed.json"
+      purpose: "Menyimpan template jawaban agar gaya chatbot konsisten."
+
+    - file_name: "fallback.seed.json"
+      purpose: "Menyimpan fallback, disambiguation, dan safety response."
+```
+
+---

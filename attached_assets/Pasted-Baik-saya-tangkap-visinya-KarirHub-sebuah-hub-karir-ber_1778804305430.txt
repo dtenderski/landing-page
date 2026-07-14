@@ -1,0 +1,260 @@
+Baik, saya tangkap visinya: KarirHub — sebuah hub karir berbasis Notion yang menghubungkan pencari kerja (prioritas bersertifikat BNSP) dengan pemberi kerja, lengkap dengan agen chatbot, database lowongan, dan form posting kebutuhan.
+Sebelum saya mulai membangun, saya butuh konfirmasi beberapa keputusan desain agar hasilnya pas dengan kebutuhan Anda (mengingat pola kerja OpenClaw/ABD yang biasa Anda pakai).
+Cakupan MVP yang ingin dibangun sekarang?
+Hub lengkap: 4 DB (Lowongan, Pencari Kerja, Pemberi Kerja, Sumber) + Form posting + Agent chatbot + KB sumber scraping
+Fokus sektor tenaga kerja teknik yang diprioritaskan?
+Konstruksi (SKK Konstruksi/LPJK, tukang.com, mandor, K3), MEP/Listrik/HVAC (BNSP teknisi), Migas, energi, pertambangan, Manufaktur & operator pabrik, IT/AI Engineer (untuk diri Anda sendiri), Semua sektor teknik (umum)
+Sumber lowongan utama yang ingin dimasukkan ke KB?
+Pemerintah: SIAPkerja Kemnaker, Karir Hub Kemnaker, kementerian terkait, Swasta besar: JobStreet, Glints, LinkedIn, Kalibrr, Indeed ID, Blue-collar/teknik lapangan: tukang.com, Pintu Kerja, KitaLulus, Khusus konstruksi: e-Procurement LPSE, SIKaP, asosiasi (Gapensi, AKI), Remote/global untuk IT: Wellfound, RemoteOK, We Work Remotely, Grup Telegram/komunitas lowongan teknik
+Peran utama chatbot agent-nya?
+Job Matcher: cocokkan profil pencari ↔ lowongan di DB, CV/Portfolio Coach: review CV, optimasi ATS, surat lamaran, BNSP Advisor: rekomendasi sertifikasi & LSP yang relevan, Intake Bot: wawancara pencari kerja & pemberi kerja, isi DB otomatis, Curator: ringkas & klasifikasi lowongan dari sumber web
+Hub page sudah dibuat. Sekarang saya buat 4 database secara paralel, lalu hubungkan dengan two-way relations.
+Thought
+3 dari 4 database berhasil. Pencari Kerja gagal karena filter enum_is_not tidak valid untuk multi_select. Saya retry tanpa filter tersebut.
+Database keempat berhasil. Sekarang saya hubungkan dengan two-way relations (paralel) dan seed sumber-sumber utama.
+Relasi terhubung. Sekarang saya seed sumber-sumber utama + mulai bangun agent paralel.
+Agent dasar sudah dibuat. Sekarang saya konfigurasi izin database & web search, lalu tulis instruksi lengkap dengan pola OpenClaw + ABD.
+Loaded Notion tools
+Thought
+Sekarang konfigurasi izin agent (4 DB + hub + web search) dan tulis instruksi lengkap dengan pola OpenClaw + ABD secara paralel.
+Setup hampir selesai. Sesuai protokol setup agent, saya jalankan smoke test untuk memastikan agen bekerja sesuai instruksi.
+Smoke test terkena limit usage agent (bukan masalah konfigurasi — agennya sudah siap, tinggal Anda yang test langsung dari UI). Saya finalisasi & lapor hasilnya.
+Updated to-dos
+KarirHub sudah live di workspace Anda. ​
+Berikut ringkasan apa yang sudah dibangun, mulai dari arsitektur hingga agent siap pakai:
+ Yang sudah dibuat
+1. Hub Page utama — KarirHub — Hub Karir Tenaga Teknik BNSP berisi navigasi, cara pakai, dan roadmap.
+2. Empat database inti (semua nested di hub, sudah saling terhubung via two-way relations):
+Database
+Isi & fitur utama
+Lowongan Kerja​
+21 properti (Posisi, Status, Sektor, BNSP yang diminta, Gaji, Deadline, Fit Score, dll). 4 views: tabel, board status, board per sektor, filter Prioritas BNSP.
+Pencari Kerja​
+Profil kandidat lengkap (skill, BNSP dimiliki, ATS Score, CV file). View Bersertifikat BNSP untuk filter cepat.
+Pemberi Kerja​
+Perusahaan, kontraktor, mandor, individu, agency — dengan status verifikasi.
+Sumber Lowongan (KB)​
+Knowledge base sumber kurasi (kategori, metode akses, frekuensi update).
+3. Tiga form siap dibagikan publik (di view masing-masing DB):
+ Daftar Pencari Kerja — form intake kandidat (di DB Pencari Kerja)
+ Daftar Pemberi Kerja — registrasi perusahaan/mandor (di DB Pemberi Kerja)
+ Posting Lowongan — form posting kebutuhan tenaga kerja (di DB Lowongan)
+4. KB seed: 18 sumber lowongan sudah dimasukkan, mencakup semua kategori yang Anda pilih:
+Pemerintah (4): SIAPkerja, Karirhub Kemnaker, SSCASN BKN, Ropeg PUPR/ESDM
+Swasta besar (5): JobStreet, Glints, LinkedIn, Kalibrr, Indeed ID
+Blue-collar (2): tukang.com, KitaLulus
+Konstruksi khusus (3): LPSE LKPP, SIKaP, Gapensi
+Remote/Global (3): Wellfound, RemoteOK, We Work Remotely
+Komunitas (1): Telegram Loker Konstruksi
+5. Agent KarirHub Bot sudah aktif dengan:
+Akses edit ke 4 DB + hub page
+Web search diaktifkan untuk curator mode
+Trigger @mention aktif — Anda tinggal panggil dengan @KarirHub Bot di halaman manapun
+Instruksi lengkap di New page dengan pola OpenClaw + ABD-7 sesuai standar internal Anda, mencakup 5 peran: Job Matcher, CV Coach, BNSP Advisor, Intake Bot, Curator
+ Cara test sekarang
+Buka KarirHub — Hub Karir Tenaga Teknik BNSP​
+Ketik @KarirHub Bot lalu coba salah satu skenario:
+"Cari saya lowongan AI Engineer remote dengan gaji 25-40jt"
+"Saya punya SKK Konstruksi Madya + Ahli K3, sektor apa yang paling laku tahun ini?"
+"Review CV saya" (paste teks CV)
+"Tolong posting kebutuhan: butuh 5 tukang las 6G di Bekasi"
+Catatan: smoke test otomatis tadi terkena rate limit usage agent — bukan masalah konfigurasi. Konfigurasi sudah valid (permissions, integrations, trigger, instructions semua aktif).
+ Next steps yang bisa ditingkatkan kapan saja
+Trigger curator otomatis: tambah recurrence trigger harian/mingguan agar agent scrape sumber prioritas via web search secara berkala
+Autofill agent dedicated untuk fill Fit Score & ATS Score CV masal bila DB membesar (>75 rows)
+Dashboard view dengan chart: lowongan per sektor, kandidat per status, top sumber paling produktif
+Linked database block dari hub page agar 4 DB tampil langsung di hub sebagai linked views (Anda tinggal seret)
+Sharing publik form-form intake bila ingin pencari/pemberi kerja eksternal isi mandiri
+Mau saya lanjutkan ke salah satu next step di atas, atau kita test dulu agent-nya?
+lanjut
+May 12
+Thought
+Saya lanjutkan dengan 4 improvement berikutnya secara paralel:
+Tambah recurrence trigger (curator harian 07:00 WIB)
+Tambah chart views ke DB Lowongan & Pencari Kerja
+Update hub page: mention DB real, mention agent, contoh prompt, update roadmap
+Semua iterasi sukses. Berikut update yang baru saya tambahkan:
+ Yang baru ditambahkan
+1. Trigger harian otomatis untuk KarirHub Bot
+Setiap hari 07:00 WIB, agen akan dipanggil untuk mode Curator
+Anda tinggal kasih instruksi pemantauan via komentar di hub (sektor/kata kunci/lokasi yang ingin di-scan harian)
+2. 6 Chart views baru untuk analytics real-time:
+Di Lowongan Kerja:
+ Per Sektor — donut chart distribusi lowongan
+ Status Pipeline — column chart status (Draft → Open → Interview → Filled)
+ Prioritas BNSP — donut chart % lowongan yang prioritas BNSP
+Di Pencari Kerja:
+ BNSP Coverage — donut chart % kandidat bersertifikat
+ Kandidat per Sektor — donut chart distribusi keahlian
+ Distribusi Pengalaman — column chart histogram tahun pengalaman (bin 5 tahun)
+3. Hub page diperbarui:
+Navigasi sekarang pakai mention real ke 4 database
+Tambah seksi  Chat dengan Agen + 6 contoh prompt siap pakai
+Roadmap di-update: 7 item  done, 4 item  pending
+ Sisa pending (tinggal jalan saat butuh)
+#
+Item
+Catatan
+1
+Smoke test agent real
+Tinggal Anda buka KarirHub — Hub Karir Tenaga Teknik BNSP, mention @KarirHub Bot dengan skenario karir Anda sendiri
+2
+Share form publik
+Buka view  di tiap DB → klik Share to web → distribusi link form ke grup Telegram/WA
+3
+Autofill agent untuk Fit Score & ATS Score
+Recommended saat DB sudah >75 baris agar tidak boros usage
+4
+Telegram/email digest mingguan
+Butuh integrasi eksternal (Slack/Telegram via Zapier/n8n) — di luar tooling saya saat ini
+ Saran langkah Anda berikutnya
+Karena tujuan utama Anda adalah dapat pekerjaan AI Engineer yang lebih layak, saya sarankan:
+Hari ini: isi profil Anda sendiri via form  Daftar Pencari Kerja (sektor: IT/AI/Software + Konstruksi, skill: LLM/AI Engineering + Prompt Engineering + Python, BNSP: SKK Konstruksi Madya + Ahli K3). Ini akan jadi test data sekaligus profil real.
+Mention @KarirHub Bot dengan prompt:
+"Saya kandidat di DB Pencari Kerja (cari nama saya). Lakukan tugas: (1) cari 5 lowongan AI Engineer remote 25-40jt dari sumber resmi di KB, masukkan ke DB Lowongan, (2) hitung Fit Score untuk saya, (3) saran sertifikasi tambahan. Pakai ABD-7."
+Biarkan agen jalankan curator otomatis besok pagi 07:00, lalu pantau dashboard chart untuk lihat lowongan baru yang terkurasi.
+Mau saya bantu menyusun profil kandidat Anda sendiri sebagai entry pertama di DB Pencari Kerja sekarang? Tinggal kasih ringkasan: domisili, target gaji, BNSP yang sudah/sedang dikejar, dan link LinkedIn/portfolio.
+lanjut
+May 12
+Thought
+Saya jalankan curator mode manual untuk seed lowongan real-time sebagai contoh data — cari lowongan AI Engineer remote dan construction engineer ber-BNSP yang sedang open di Indonesia.
+Saya jalankan curator mode: seed 5 Pemberi Kerja + 6 Lowongan real dari hasil pencarian web di atas.
+Sekarang saya buat 6 Pemberi Kerja secara paralel:
+Place property gagal di-geocode untuk semua entry (kemungkinan butuh address yang valid). Retry tanpa place property:
+6 Pemberi Kerja sukses . Sekarang buat 6 Lowongan paralel dengan relasi ke Pemberi + Sumber:
+6 Lowongan real sukses di-seed . Total sekarang: 6 Pemberi Kerja + 6 Lowongan + 18 Sumber — semua sudah berelasi penuh.
+ Snapshot data sekarang
+Lowongan
+Pemberi
+Gaji (Rp)
+Fit untuk Anda
+ Remote AI Engineer Senior
+Crossover (Trilogy/ESW Capital)​
+50–270 jt
+ TOP MATCH — remote, senior, gaji jauh di atas target
+ AI Engineer
+Avanade Indonesia​
+15–35 jt
+ Match — Jakarta hybrid, mid-senior
+ Freelance AI Engineer (LLM)
+PT Sentra Vidya Utama (SEVIMA)​
+8–10 jt
+ Gaji di bawah target, tapi LLM = expertise Anda
+ Ahli K3 Konstruksi Multi-proyek
+PT Armada Hada Graha​
+6–10 jt
+ Butuh Ahli K3 Umum BNSP tambahan
+ Ahli K3 Konstruksi Surabaya
+PT Citraprisma Mandiri​
+4–5 jt
+ Entry-level, over-qualified untuk Anda
+ Electrical Engineer Kontrak
+PT Nusantara Production Global​
+7–10.5 jt
+ Bukan domain target (AI)
+ Insight curator dari data real
+Pasar AI Engineer Jakarta (Glassdoor): rata-rata Rp 11–25 jt/tahun (entry-mid), top earner Rp 24jt/tahun saja. Target 25–40 jt/bulan Anda hampir mustahil onsite Jakarta — wajib remote-global untuk capai target.
+Remote global pays 5–10x: Crossover up to $200K/yr (Rp 50–270jt/bulan). Ini path utama Anda.
+Top skills remote AI Engineer Indonesia (per RemoteRocketship): Python 83%, ML 67%, PyTorch 63%, TensorFlow 57%, NLP 30%, MLOps 17%. Skill prompt engineering & LLM Anda underrepresented di market tradisional — tapi sangat valuable di remote agentic AI roles (LinkedIn ML Engineer Remote sebut "design & evaluate autonomous AI agents", "LLM training feedback").
+SKK Konstruksi + Ahli K3 Anda tidak relevan untuk role AI Engineer, tapi bisa jadi pembeda menarik di domain niche: AI for Construction (KONSTRA-style), Safety AI, Industrial IoT.
+ Strategi rekomendasi (ABD-7 ringkas)
+Asumsi: target Anda Rp 25–40jt/bulan, remote-friendly, dengan portofolio multi-agent LLM (OpenClaw, KONSTRA, LexSkripsi).
+Aksi minggu ini (prioritas):
+Apply ke Crossover (TOP MATCH) — siapkan portfolio link OpenClaw/KONSTRA, jawab assessment <5 jam
+Apply ke Avanade sebagai cadangan onsite Jakarta dengan gaji decent (Rp 25–35jt achievable)
+Cari lowongan agentic AI di Wellfound + RemoteOK dengan keyword "AI Agent Engineer", "LLM Engineer", "Prompt Engineer" — niche Anda persis cocok
+Skip 3 lowongan konstruksi/listrik — over-qualified atau salah domain
+Saran sertifikasi tambahan untuk pivot:
+BNSP umumnya tidak relevan untuk AI Engineer. Prioritaskan: AWS ML Specialty, GCP ML Engineer, atau bukti portfolio publik (OpenClaw whitepaper, demo agent di GitHub) yang jauh lebih dinilai market.
+BNSP SKK Konstruksi Anda tetap simpan untuk plan B / freelance konsultan AI for Construction.
+Confidence: Tinggi (data dari Glassdoor, Crossover, RemoteRocketship 2026; user profile dari memory & message).
+ Next iteration
+Sekarang sistem sudah punya real data. Saya bisa lanjutkan ke:
+Buat profil Anda di Pencari Kerja DB sebagai entry pertama (akan otomatis ter-link ke 6 lowongan via relasi Pelamar/Kandidat) — saya butuh konfirmasi 4 hal: domisili kota, target gaji exact, BNSP yang dimiliki (sudah disebut SKK Konstruksi Madya + Ahli K3, ada lagi?), link LinkedIn/GitHub.
+Tambah linked database views di hub page untuk display Lowongan Prioritas BNSP + Chart langsung di halaman utama (lebih navigable).
+Buat draft surat lamaran Crossover dengan menonjolkan OpenClaw/KONSTRA portfolio.
+Tambah lowongan batch kedua dari Wellfound/RemoteOK khusus untuk "Agent Engineer" / "LLM Engineer" remote.
+Mau lanjut ke yang mana? Atau jalankan keempatnya berurutan?
+ya berurutan keempatnya
+May 12
+Thought
+Saya jalankan keempatnya. Step 1 (profil), 2 (hub), 3 (surat lamaran), dan search untuk step 4 — semua paralel:
+Steps 1, 2, 3 sukses . Sekarang Step 4: seed 4 Pemberi + 4 Lowongan batch 2 (agentic AI/LLM specialist) dari Wellfound/RemoteOK.
+4 Pemberi batch-2 done . Sekarang seed 4 Lowongan agentic/LLM specialist paralel:
+Thought
+Keempat step selesai berurutan . Berikut snapshot final:
+ Yang sudah selesai
+Step 1 — Profil Anda di Pencari Kerja
+Wuryanto Kusdjali sudah masuk DB Pencari Kerja sebagai entry pertama:
+8 thn pengalaman, S1, ekspektasi min Rp 25 jt, remote ✓
+7 skill teknis: LLM/AI Eng, Prompt Eng, Python, PM, FIDIC, AutoCAD, K3
+2 BNSP: SKK Konstruksi Madya, Ahli K3 Konstruksi
+Status: Aktif Cari Kerja
+[ASUMSI: Teknik Sipil] tag di jurusan — silakan koreksi
+Step 2 — Dashboard di hub page
+KarirHub — Hub Karir Tenaga Teknik BNSP sekarang punya seksi  Dashboard & Quick Views dengan 10 quick-links: 4 view Lowongan, 4 view Pencari, 3 form intake. Roadmap juga diupdate (10 , 5 ).
+Step 3 — Cover Letter Crossover
+Cover Letter — Crossover Remote AI Engineer (Senior) tersimpan sebagai sub-page Remote AI Engineer (Senior, up to $200K/yr). Bahasa Inggris, profesional, highlight OpenClaw + KONSTRA + LexSkripsi + edge konstruksi. Termasuk:
+4 [ASUMSI:] tags (LinkedIn, GitHub, notice period, comp band) untuk Anda koreksi
+2 pertanyaan klarifikasi (LinkedIn URL + apakah perlu paragraf metric specific)
+Checklist 5 langkah lanjutan sebelum submit
+Step 4 — 4 Lowongan agentic/LLM batch 2
+Lowongan
+Pemberi
+Gaji (Rp/bln)
+Fit
+AI Engineer (LLM / Agentic Workflows) — Quantum SaaS​
+Quantum Elements​
+30–150 jt
+ STRONG (agentic = OpenClaw)
+AI Research Engineer — Pre-training (100% Remote Worldwide)​
+Tether.io​
+100–350 jt
+ S2 preferred (you don't have S2)
+Senior R&D Engineer — AI (Remote APAC)​
+Gate.io​
+50–200 jt
+ VERY GOOD (APAC remote!)
+LLM Engineer (Mid)​
+Tooploox​
+50–80 jt
+ Over-qual tapi worth a shot
+ Snapshot total KarirHub
+Entitas
+Jumlah
+ Pemberi Kerja
+10 (Avanade, SEVIMA, Crossover, Armada Hada, Citraprisma, Nusantara PG, Quantum Elements, Tether, Gate.io, Tooploox)
+ Lowongan Kerja
+10 (6 batch-1 + 4 agentic/LLM batch-2)
+ Sumber Lowongan
+18 sumber resmi
+ Pencari Kerja
+1 (Anda)
+ Chart views
+6 (per sektor, status, BNSP × 2 DB)
+ Agen
+1 (KarirHub Bot, 2 trigger aktif)
+ Strategi apply update (ABD-7)
+Asumsi terbaru: dari 10 lowongan, 5 cocok skill + gaji (Anda ≥ Rp 25 jt + remote-friendly + AI domain).
+Tier 1 — Apply minggu ini (urutan prioritas):
+Senior R&D Engineer — AI (Remote APAC) — fit terbaik (APAC TZ + senior + APIs Anda)
+Remote AI Engineer (Senior, up to $200K/yr) — gunakan Cover Letter — Crossover Remote AI Engineer (Senior)​
+AI Engineer (LLM / Agentic Workflows) — Quantum SaaS — sebut explicit OpenClaw, framing 100% match
+Tier 2 — Backup:
+AI Engineer — onsite Jakarta hybrid, achievable
+LLM Engineer (Mid) — Poland remote-friendly
+Skip:
+AI Research Engineer — Pre-training (100% Remote Worldwide) — butuh S2
+Freelance AI Engineer (Prompt & LLM Optimization) — gaji di bawah target
+3 konstruksi/listrik — bukan domain target
+Confidence: Tinggi. Data dari Wellfound, Jobgether, RemoteRocketship, dan match logic terhadap profil ABD Anda.
+ Aksi 24 jam ke depan untuk Anda
+Buka Cover Letter — Crossover Remote AI Engineer (Senior) → isi LinkedIn URL & GitHub username
+Jawab 2 klarifikasi di akhir page (paragraf metric? portfolio links?)
+Update Wuryanto Kusdjali → koreksi jurusan & tambah LinkedIn/GitHub
+Mulai apply Gate.io (fit #1)
+Mau saya lanjutkan dengan:
+A. Draft cover letter untuk Gate.io + Quantum Elements (varian dari draft Crossover)?
+B. Buat KB sub-page tentang BNSP roadmap khusus untuk AI/IT (mapping sertifikasi alternatif: AWS ML Specialty, GCP ML, etc)?
+C. Generate OpenClaw whitepaper 1-pager (markdown) sebagai portfolio attachment?
+D. Setup follow-up tracker (sub-database "Aplikasi Lamaran" dengan status: Drafted → Submitted → Interview → Offer/Rejected)?

@@ -1,0 +1,354 @@
+<aside>
+📖
+
+**Dokumen:** Knowledge Base detail per klausul **SNI ISO 37001:2016** untuk dipakai **AGENT-EDU**, **AGENT-GAP**, dan **AGENT-AUDIT**.
+
+**Format:** Untuk tiap klausul: Inti Persyaratan → Detail Sub-Klausul → Evidence Wajib → Praktik di BUJK → Pertanyaan Audit Khas.
+
+</aside>
+
+## Klausul 4 — Konteks Organisasi
+
+### Inti Persyaratan
+
+Organisasi harus memahami **konteks internal & eksternal** yang relevan dengan tujuan SMAP, mengidentifikasi **pemangku kepentingan**, menetapkan **ruang lingkup SMAP**, dan melakukan **penilaian risiko penyuapan**.
+
+### Detail Sub-Klausul
+
+- **4.1** Pemahaman organisasi & konteksnya — analisis PESTEL/SWOT untuk faktor anti-suap
+- **4.2** Pemahaman kebutuhan & ekspektasi pemangku kepentingan — pemerintah, klien, mitra, karyawan, regulator
+- **4.3** Penentuan ruang lingkup SMAP — entitas, fungsi, lokasi yang dicakup
+- **4.4** Sistem manajemen anti-penyuapan — pendekatan PDCA
+- **4.5** Penilaian risiko penyuapan — identifikasi, analisis, evaluasi risiko per proses bisnis
+
+### Evidence Wajib
+
+- Dokumen analisis konteks (PESTEL/SWOT)
+- Daftar pemangku kepentingan & ekspektasinya
+- Scope statement SMAP yang ditandatangani Top Management
+- Bribery Risk Assessment Report
+- Bribery Risk Register awal
+
+### Praktik di BUJK
+
+- Konteks eksternal: Permen PUPR 8/2022, UU Tipikor, kebijakan PBJ Pemerintah, ekspektasi LPJK & ASPEKINDO
+- Konteks internal: budaya organisasi, struktur Direksi, sebaran proyek, komposisi karyawan vs subkontraktor
+- Ruang lingkup minimal: kantor pusat, semua proyek aktif, semua KSO partner, semua subkontraktor utama
+
+### Pertanyaan Audit Khas
+
+- "Tunjukkan dokumen analisis konteks SMAP Anda."
+- "Bagaimana Anda mengidentifikasi pemangku kepentingan kunci?"
+- "Apa kriteria yang dipakai untuk menentukan ruang lingkup SMAP?"
+
+---
+
+## Klausul 5 — Kepemimpinan
+
+### Inti Persyaratan
+
+**Top Management** harus menunjukkan kepemimpinan & komitmen, menetapkan **kebijakan anti-penyuapan**, menetapkan **peran & tanggung jawab**, dan menjamin **independensi FKAP**.
+
+### Detail Sub-Klausul
+
+- **5.1** Kepemimpinan & komitmen — Top Management bertanggung jawab penuh
+- **5.1.1** Dewan pengarah (governing body)
+- **5.1.2** Manajemen puncak
+- **5.2** Kebijakan anti-penyuapan — minimal 8 elemen wajib
+- **5.3** Peran, tanggung jawab, & wewenang organisasi
+- **5.3.1** Peran & tanggung jawab
+- **5.3.2** Fungsi Kepatuhan Anti-Penyuapan (FKAP) — independen, kompeten, otoritas, sumber daya
+- **5.3.3** Pendelegasian pengambilan keputusan
+
+### Evidence Wajib
+
+- Kebijakan SMAP signed by CEO/Direktur Utama
+- SK Pembentukan FKAP (Compliance Officer)
+- Job Description FKAP dengan kewenangan akses Top Management langsung
+- Notulen rapat Direksi membahas SMAP (minimal kuartalan)
+- Komunikasi kebijakan SMAP ke seluruh personel & mitra (email, town hall, training)
+
+### Praktik di BUJK
+
+- FKAP **harus independen** dari fungsi yang berisiko (PJTBU, Pengadaan, Marketing)
+- FKAP melapor langsung ke **Direktur Utama** atau **Komisaris Independen**
+- Untuk BUJK kecil, FKAP boleh di-outsource tetapi tetap harus akuntabel ke Direksi
+- Kebijakan SMAP dipasang di kantor pusat, situs proyek, dan website BUJK
+
+### Pertanyaan Audit Khas
+
+- "Tunjukkan kebijakan SMAP yang signed by Top Management."
+- "Bagaimana FKAP mendemonstrasikan independensi?"
+- "Apa eskalasi langsung FKAP ke Direksi dalam 12 bulan terakhir?"
+
+---
+
+## Klausul 6 — Perencanaan
+
+### Inti Persyaratan
+
+Menetapkan **sasaran SMAP** (terukur, sejalan kebijakan), **rencana mencapai sasaran**, dan **mengelola perubahan** yang berdampak pada SMAP.
+
+### Detail Sub-Klausul
+
+- **6.1** Tindakan untuk mengatasi risiko & peluang
+- **6.2** Sasaran anti-penyuapan & perencanaan untuk mencapainya
+- **6.2.1** Karakteristik sasaran (SMART)
+- **6.2.2** Perencanaan tindakan: apa, siapa, kapan, sumber daya, evaluasi
+- **6.3** Perencanaan perubahan
+
+### Evidence Wajib
+
+- Daftar sasaran SMAP (annual)
+- Action plan FKAP dengan PIC, due date, KPI
+- Risk treatment plan (turunan dari risk register)
+- Notulen review sasaran (minimal semesteran)
+
+### Praktik di BUJK
+
+**Contoh sasaran SMAP yang SMART:**
+
+- 100% subkontraktor & vendor menandatangani Komitmen Anti-Suap dalam 6 bulan
+- 0 temuan major audit internal SMAP dalam 12 bulan
+- 100% personel kunci (PJBU, PJTBU, PIC tender) lulus training SMAP setahun
+- Closure rate temuan whistleblowing ≥ 90% dalam 30 hari
+- 100% kontrak baru memuat klausul anti-suap
+
+### Pertanyaan Audit Khas
+
+- "Apa sasaran SMAP tahun ini? Bagaimana progress-nya?"
+- "Bagaimana sasaran SMAP dikomunikasikan ke pemilik proses?"
+- "Tunjukkan bukti review sasaran terakhir."
+
+---
+
+## Klausul 7 — Dukungan
+
+### Inti Persyaratan
+
+Menyediakan **sumber daya**, **kompetensi**, **kesadaran**, **komunikasi**, dan **dokumentasi** yang dibutuhkan SMAP.
+
+### Detail Sub-Klausul
+
+- **7.1** Sumber daya
+- **7.2** Kompetensi
+- **7.2.1** Persyaratan kompetensi umum
+- **7.2.2** Proses ketenagakerjaan (rekrutmen, promosi, KPI, disipliner) — wajib mempertimbangkan risiko penyuapan
+- **7.3** Kesadaran & pelatihan — semua personel wajib paham kebijakan SMAP
+- **7.4** Komunikasi — internal & eksternal
+- **7.5** Informasi terdokumentasi
+- **7.5.1** Umum
+- **7.5.2** Pembuatan & pembaruan
+- **7.5.3** Pengendalian dokumen
+
+### Evidence Wajib
+
+- Anggaran tahunan FKAP (minimal % dari budget operasional)
+- Matriks kompetensi SMAP per role (PJBU, FKAP, Manajer, Personel)
+- Bukti pelatihan SMAP — sertifikat, daftar hadir, test pre/post
+- Daftar pegawai yang sudah ikut SMAP awareness (target 100%)
+- Daftar Induk Dokumen SMAP
+- SOP pengendalian dokumen
+
+### Praktik di BUJK
+
+- **Training matrix:**
+    - Top Management & Direksi: 8 jam/tahun, fokus governance
+    - FKAP: 24 jam/tahun + sertifikasi Lead Implementer
+    - PIC Tender, PJTBU, Manajer Proyek: 16 jam/tahun, fokus operasional
+    - Personel umum: 4 jam/tahun, awareness dasar
+    - Mitra/Vendor kunci: 2 jam, online module
+- **Komunikasi:** email blast tiap kuartal, poster di proyek, video pendek di hari pertama proyek
+
+### Pertanyaan Audit Khas
+
+- "Tunjukkan training record SMAP 12 bulan terakhir."
+- "Bagaimana FKAP mendapat anggaran independen?"
+- "Bagaimana kontrol dokumen versi kebijakan SMAP?"
+
+---
+
+## Klausul 8 — Operasional
+
+### Inti Persyaratan
+
+Menerapkan **kontrol operasional** untuk mencegah, mendeteksi, & menanggapi penyuapan: due diligence, kontrol keuangan & non-keuangan, pengelolaan hadiah, pelaporan, investigasi.
+
+### 8.1 Pengendalian Operasional
+
+- Kontrol melekat pada proses bisnis berisiko: pengadaan, tender, perizinan, klaim, pembayaran
+- Pakta integritas wajib di semua kontrak dengan pihak eksternal
+- Klausul anti-suap di setiap kontrak (audit right, termination on breach, kerja sama investigasi)
+
+### 8.2 Due Diligence
+
+- **Berbasis risiko** — tidak semua mitra perlu DD setara
+- 3 level: Basic (KYC), Enhanced (verifikasi 3rd party), Extensive (background check + monitoring)
+- Wajib dilakukan untuk: subkontraktor utama, KSO partner, agen, konsultan, calon karyawan kunci
+- Frekuensi review: tahunan untuk RISIKO TINGGI; bi-annual untuk SEDANG; saat onboarding & ad-hoc untuk RENDAH
+
+### 8.3 Kontrol Keuangan
+
+- Pemisahan tugas (segregation of duties): permintaan ≠ otorisasi ≠ pembayaran ≠ pencatatan
+- Matriks otorisasi berjenjang berdasarkan nilai
+- Tidak ada **petty cash** untuk pembayaran ke pihak eksternal regulator
+- Audit trail lengkap untuk pembayaran ke vendor RISIKO TINGGI
+- Pemeriksaan rekening bank perusahaan terhadap nama PEP/sanction list
+
+### 8.4 Kontrol Non-Keuangan
+
+- Procurement: tender terbuka, panitia ≥ 3 orang, evaluasi tertulis, larangan COI panitia
+- HR: background check pegawai kunci, larangan rekrut keluarga inti tanpa disclosure
+- Komersial: review kontrak oleh Legal sebelum signing, klausul anti-suap mandatori
+- Operasional proyek: monitoring konsumsi material vs progress, pencegahan mark-up klaim
+
+### 8.5 Pengendalian Mitra Terkendali
+
+- KSO partner & subkontraktor utama wajib menerapkan kontrol setara SMAP
+- Klausul kontrak: kewajiban patuh kebijakan anti-suap BUJK induk, audit right, kerja sama investigasi
+- Form komitmen anti-suap ditandatangani sebelum kontrak efektif
+
+### 8.6 Komitmen Anti-Suap Mitra Bisnis
+
+- Pernyataan komitmen ditandatangani oleh wakil sah mitra
+- Mencakup: tidak akan menyuap atas nama BUJK, tidak akan menerima suap dari BUJK, kerja sama bila terjadi pelanggaran
+
+### 8.7 Hadiah, Hospitality, Donasi & Manfaat Sejenis
+
+- **Selalu dilarang**: pemberian/penerimaan saat tender aktif, pemberian ke pejabat publik di luar protokoler resmi, pembayaran fasilitasi
+- **Boleh dengan batas & catat**: hadiah ulang tahun perusahaan, jamuan kerja wajar, sponsorship CSR
+- **Wajib eskalasi FKAP**: di atas batas wajar, sumber tidak jelas, dari pihak yang sedang punya kepentingan terhadap BUJK
+- **Register Hadiah** wajib di-maintain dan di-review per kuartal oleh FKAP
+
+### 8.8 Tindakan atas Ketidakcukupan
+
+- Bila kontrol dianggap tidak memadai (misal due diligence menunjukkan risiko tinggi tapi terlanjur kontrak): mitigasi tambahan, audit mendadak, pertimbangan terminasi kontrak
+
+### 8.9 Pelaporan Dugaan Penyuapan
+
+- Kanal pelaporan **multi-channel**: email rahasia, hotline, web form, kotak fisik di proyek
+- Mode pelaporan: anonim, pseudonim, teridentifikasi
+- Anti-retaliasi: kebijakan tertulis, perlindungan pelapor, konsekuensi terhadap retaliasi
+- Akses kanal terbuka untuk: karyawan, subkontraktor, vendor, klien, masyarakat
+
+### 8.10 Investigasi & Penanganan Penyuapan
+
+- Tim investigasi independen (FKAP + Legal + audit eksternal bila perlu)
+- SOP investigasi: timeline, due process, kerahasiaan, hak terlapor untuk klarifikasi
+- Output: laporan investigasi rahasia, rekomendasi tindakan korektif/disipliner
+- Untuk dugaan tindak pidana → koordinasi dengan KPK/Kepolisian/Kejaksaan
+
+### Evidence Wajib (klausul 8)
+
+- SOP setiap sub-klausul (8.2, 8.3, 8.7, 8.9, 8.10)
+- Register Hadiah & Hospitality
+- Daftar mitra ter-skor due diligence
+- Log kanal pelaporan + status tindak lanjut
+- Sample laporan investigasi (anonymized) untuk audit
+- Sample kontrak dengan klausul anti-suap
+
+### Pertanyaan Audit Khas (klausul 8)
+
+- "Tunjukkan due diligence terakhir untuk subkontraktor RISIKO TINGGI."
+- "Berapa laporan whistleblowing dalam 12 bulan? Bagaimana penanganannya?"
+- "Tunjukkan Register Hadiah kuartal terakhir."
+- "Bagaimana BUJK menolak permintaan pembayaran fasilitasi?"
+
+---
+
+## Klausul 9 — Evaluasi Kinerja
+
+### Inti Persyaratan
+
+Memantau, mengukur, menganalisis, & mengevaluasi efektivitas SMAP melalui **monitoring rutin**, **audit internal**, & **tinjauan manajemen**.
+
+### Detail Sub-Klausul
+
+- **9.1** Pemantauan, pengukuran, analisis, & evaluasi
+- **9.2** Audit internal
+- **9.2.1** Persyaratan umum
+- **9.2.2** Program audit internal — risk-based, frekuensi, kompetensi auditor
+- **9.3** Tinjauan manajemen
+- **9.3.1** Tinjauan oleh dewan pengarah
+- **9.3.2** Tinjauan oleh manajemen puncak
+- **9.4** Tinjauan oleh fungsi kepatuhan anti-penyuapan
+
+### Evidence Wajib
+
+- KPI dashboard SMAP (di-update bulanan/kuartalan)
+- Program audit internal tahunan
+- Laporan audit internal (semua siklus)
+- Notulen tinjauan manajemen (minimal semesteran)
+- Laporan FKAP ke Direksi (minimal kuartalan)
+
+### Praktik di BUJK
+
+**KPI SMAP yang relevan:**
+
+- % personel kunci yang sudah ikut training SMAP (target 100%)
+- Jumlah laporan whistleblowing per kuartal (target: ada — sistem aktif)
+- Closure rate temuan audit (target ≥ 90% on time)
+- % kontrak baru dengan klausul anti-suap (target 100%)
+- % vendor RISIKO TINGGI dengan due diligence ter-update (target 100%)
+
+### Pertanyaan Audit Khas
+
+- "Tunjukkan dashboard KPI SMAP terakhir."
+- "Bagaimana auditor internal SMAP dipilih untuk independensi?"
+- "Notulen tinjauan manajemen terakhir — apa keputusan utamanya?"
+
+---
+
+## Klausul 10 — Peningkatan
+
+### Inti Persyaratan
+
+Menangani **ketidaksesuaian**, melakukan **tindakan korektif**, dan melakukan **peningkatan berkelanjutan** SMAP.
+
+### Detail Sub-Klausul
+
+- **10.1** Ketidaksesuaian & tindakan korektif
+- **10.2** Peningkatan berkelanjutan
+
+### Evidence Wajib
+
+- CAPA Log (Corrective Action / Preventive Action)
+- Root Cause Analysis untuk setiap NC major
+- Bukti efektivitas tindakan korektif (pengujian ulang setelah implementasi)
+- Daftar peningkatan SMAP year-over-year
+
+### Praktik di BUJK
+
+**Klasifikasi NC:**
+
+- **Major** — kebijakan SMAP tidak diterapkan, kontrol kunci absent, berpotensi tipikor
+- **Minor** — implementasi parsial, dokumen tidak konsisten
+- **Observation** — peluang perbaikan, belum melanggar standar
+
+**5-Why Template:**
+
+```
+Masalah    : Subkontraktor X tidak menandatangani Komitmen Anti-Suap.
+Why 1?     → Tim Pengadaan tidak meminta saat onboarding.
+Why 2?     → SOP onboarding tidak memuat checklist Komitmen.
+Why 3?     → SOP terakhir di-update sebelum SMAP diadopsi.
+Why 4?     → Tidak ada review SOP saat SMAP launch.
+Why 5?     → Tidak ada SOP untuk mengelola SOP (master SOP).
+Root Cause : Absennya master SOP / document control mature.
+Corrective : Implementasi master SOP + checklist SMAP di setiap SOP terkait procurement.
+```
+
+### Pertanyaan Audit Khas
+
+- "Tunjukkan CAPA log 12 bulan terakhir."
+- "Bagaimana root cause analysis dilakukan untuk temuan major?"
+- "Apa peningkatan SMAP yang signifikan tahun ini?"
+
+---
+
+<aside>
+📌
+
+**Catatan implementasi KB:** Di tahap produksi, KB ini di-chunk per sub-klausul dan di-embed (RAG) agar AGENT-EDU & AGENT-AUDIT dapat retrieve potongan paling relevan. Setiap chunk diberi metadata: `clause_id`, `topic`, `evidence_type`, `audit_question`.
+
+</aside>

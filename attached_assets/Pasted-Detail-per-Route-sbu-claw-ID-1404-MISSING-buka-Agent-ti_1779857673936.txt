@@ -1,0 +1,600 @@
+Detail per Route
+/sbu-claw
+ID 1404
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: SBU
+
+/smap-claw
+ID 272
+OK
+buka
+Nama di DB: SMAP-ORCHESTRATOR — Hub Multi-Agent Anti Penyuapan(Routing intent SMAP — 1 Hub + 8 Spesialis OpenClaw)
+
+/pancek-claw
+ID 281
+OK
+buka
+Nama di DB: PANCEK-ORCHESTRATOR — Hub Multi-Agent SMAP Nasional & PanCEK(Routing intent PanCEK — 1 Hub + 5 Spesialis untuk Corporate Integrity)
+
+/iso-claw-9001
+ID 140
+OK
+buka
+Nama di DB: HUB ISO 9001 Jasa Konstruksi(Navigator ISO 9001 Jasa Konstruksi)
+
+/iso-claw-14001
+ID 131
+OK
+buka
+Nama di DB: HUB ISO 14001 Jasa Konstruksi(Navigator ISO 14001 Jasa Konstruksi)
+
+/smk3-claw
+ID 307
+OK
+buka
+Nama di DB: HUB IMS & SMK3 Terintegrasi(Sistem Manajemen BUJK — IMS · SMK3 · CSMS · Pancek · KCI)
+
+/lkut-claw
+ID 302
+OK
+buka
+Nama di DB: LKUT Hub(Kompetensi Laporan Keuangan BUJK)
+
+/pjbu-claw
+ID 1008
+MISMATCH
+buka
+Nama di DB: Kontrak Kerja & Legal Rekrutmen(REK-KONTRAK)
+
+⚠️ Nama "Kontrak Kerja & Legal Rekrutmen" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: PJBU / Personel
+
+/keuangan-claw
+ID 298
+MISMATCH
+buka
+Nama di DB: HUB Kompetensi Manajerial BUJK(Revitalisasi Kompetensi Manajerial BUJK — ASPEKINDO)
+
+⚠️ Nama "HUB Kompetensi Manajerial BUJK" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: Keuangan
+
+/csms-claw
+ID 69
+OK
+buka
+Nama di DB: CSMS-ASSISTANT-ORCHESTRATOR (CSIA) — Hub Multi-Agent CSMS Indonesia(Routing 13 intent CSMS — 1 Orkestrator + 13 Spesialis OPTIA)
+
+/safira-claw
+ID 501
+OK
+buka
+Nama di DB: HUB SKK Coach K3 Konstruksi
+
+/tendera-claw
+ID 663
+OK
+buka
+Nama di DB: TENDERA-ORCHESTRATOR(AI Tender Multi-Agent BUJK — OpenClaw + MultiClaw)
+
+/konstra-tender-claw
+ID 652
+OK
+buka
+Nama di DB: KONSTRA-TENDER-ORCHESTRATOR(AI Multi-Agent Monitoring & Strategi Tender Konstruksi)
+
+/bg-claw
+ID 1033
+MISMATCH
+buka
+Nama di DB: RG-ASESOR — Simulasi Wawancara Asesor + Rubrik Lisan 6 Dimensi(Latih jawab wawancara asesor — bank soal per unit)
+
+⚠️ Nama "RG-ASESOR — Simulasi Wawancara Asesor + Rubrik Lisan 6 Dimensi" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: BGClaw / Bangunan Gedung
+
+/bs-claw
+ID 1043
+MISMATCH
+buka
+Nama di DB: MPBG-QUIZ-CASE — Latihan Soal & Studi Kasus SKKNI 115-2015(Latihan & kasus berbasis SKKNI 115-2015)
+
+⚠️ Nama "MPBG-QUIZ-CASE — Latihan Soal & Studi Kasus SKKNI 115-2015" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: BSClaw / Bangunan Sipil
+
+/im-claw
+ID 1054
+MISMATCH
+buka
+Nama di DB: MPK-EDU — Materi & Orientasi Unit Kompetensi MPK(Edukasi terstruktur MPK)
+
+⚠️ Nama "MPK-EDU — Materi & Orientasi Unit Kompetensi MPK" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: IMClaw / Instalasi / Mekanikal
+
+/ko-claw
+ID 1064
+MISMATCH
+buka
+Nama di DB: QS-PORTO-ASESOR — Portofolio + Simulasi Wawancara Asesor QS(Portofolio + simulasi wawancara QS)
+
+⚠️ Nama "QS-PORTO-ASESOR — Portofolio + Simulasi Wawancara Asesor QS" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: KOClaw / Spesialis
+
+/kk-claw
+ID 1073
+MISMATCH
+buka
+Nama di DB: K3K-DOC-REG — Generator Dokumen + Regulasi & Standar K3K(Draft dokumen + hierarki regulasi K3K)
+
+⚠️ Nama "K3K-DOC-REG — Generator Dokumen + Regulasi & Standar K3K" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: KKClaw / Konsultansi
+
+/migas-claw
+ID 564
+OK
+buka
+Nama di DB: HUB SBU Kompetensi Migas EBT Tambang v1
+
+/dev-properti-claw
+ID 575
+OK
+buka
+Nama di DB: HUB DevProperti Pro v1
+
+/estate-care-claw
+ID 586
+OK
+buka
+Nama di DB: HUB EstateCare Pro v1
+
+/skema-claw
+ID 1448
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: Skema / SBU
+
+/panduan-sbu
+ID 1458
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: PanduanSBU / SBU
+
+/abu-claw
+ID 1459
+OK
+buka
+Nama di DB: Hub Konsultan ABU & LSBU(Panduan teknis ABU, audit SBU, manajemen LSBU — 8 agen spesialis, berbasis Permen PU 6/2025 & LPJK)
+
+/panduan-askom
+ID 1460
+OK
+buka
+Nama di DB: PanduanASKOM(Tanya apa saja tentang ASKOM, SKK, dan uji kompetensi — jawaban langsung, bahasa sederhana)
+
+/manprojak-claw
+ID 1383
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: Manprojak / Manajemen Pelaksanaan
+
+/arsitektur-claw
+ID 1391
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: Arsitektur
+
+/surveipemetaan-claw
+ID 1399
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: Survei / Pemetaan
+
+/geoteknik-claw
+ID 1879
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: Geoteknik
+
+/jalanjembatan-claw
+ID 1887
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: Jalan / Jembatan
+
+/tatalingkungan-claw
+ID 1895
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: TataLingkungan / Tata Lingkungan
+
+/elektrikal-claw
+ID 1903
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: Elektrikal
+
+/mep-claw
+ID 1831
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: MEP / Mekanikal
+
+/sipil-claw
+ID 1823
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: SipilClaw / Teknik Sipil
+
+/lingkungan-claw
+ID 1847
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: Lingkungan
+
+/qs-claw
+ID 1911
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: QS / Quantity Surveying
+
+/pengawas-claw
+ID 1919
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: Pengawas
+
+/kontrak-claw
+ID 1927
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: Kontrak
+
+/k3man-claw
+ID 1935
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: K3Man / K3
+
+/konstra-claw
+ID 1281
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: Konstra / Manajemen Proyek
+
+/brain-claw
+ID 806
+MISMATCH
+buka
+Nama di DB: K3M-CSMS — Spesialis Contractor Safety Management(CSMS, audit kontraktor & KPI K3)
+
+⚠️ Nama "K3M-CSMS — Spesialis Contractor Safety Management" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: Brain / Project Intelligence
+
+/educounsel-claw
+ID 899
+MISMATCH
+buka
+Nama di DB: Integrasi Grid & Power Quality PLTS(SOL-GRID)
+
+⚠️ Nama "Integrasi Grid & Power Quality PLTS" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: EduCounsel / Konseling
+
+/ibtu-claw
+ID 1953
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: IBTU / IB Testing
+
+/etlo-academy-claw
+ID 964
+MISMATCH
+buka
+Nama di DB: Merger, Akuisisi & Restrukturisasi(KOR-MA)
+
+⚠️ Nama "Merger, Akuisisi & Restrukturisasi" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: ETLOAcademy / ETLO
+
+/etlo-bizdev-claw
+ID 975
+MISMATCH
+buka
+Nama di DB: Sales Pipeline & CRM Management(CRM-PIPELINE)
+
+⚠️ Nama "Sales Pipeline & CRM Management" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: ETLOBizDev / BizDev
+
+/bim-claw
+ID 1031
+MISMATCH
+buka
+Nama di DB: RG-QUIZ — Quiz Bank 9 Unit + Engine Remedial(Latihan soal terstruktur per unit kompetensi)
+
+⚠️ Nama "RG-QUIZ — Quiz Bank 9 Unit + Engine Remedial" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: BIM
+
+/desain-claw
+ID 1040
+MISMATCH
+buka
+Nama di DB: PKBG-ARS-PORTO-ASESOR — Portofolio + Simulasi Wawancara Asesor SKKNI 113-2015(Portofolio + simulasi wawancara PKBG-ARS)
+
+⚠️ Nama "PKBG-ARS-PORTO-ASESOR — Portofolio + Simulasi Wawancara Asesor SKKNI 113-2015" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: Desain / Arsitektur
+
+/siteops-claw
+ID 1049
+MISMATCH
+buka
+Nama di DB: PKFS-REG — Regulasi & Standar Acuan SKKNI 193-2013(Hierarki regulasi & standar PKFS)
+
+⚠️ Nama "PKFS-REG — Regulasi & Standar Acuan SKKNI 193-2013" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: SiteOps / Operasional
+
+/ketenagalistrikan-claw
+ID 994
+MISMATCH
+buka
+Nama di DB: Product Listing & Catalog Optimization(EC-PRODUK)
+
+⚠️ Nama "Product Listing & Catalog Optimization" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: Ketenagalistrikan
+
+/energi-claw
+ID 1003
+MISMATCH
+buka
+Nama di DB: Sourcing & Talent Acquisition(REK-SOURCING)
+
+⚠️ Nama "Sourcing & Talent Acquisition" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: Energi / EBT
+
+/pertambangan-claw
+ID 1012
+MISMATCH
+buka
+Nama di DB: Desain Kurikulum & Learning Path(LD-KURIKULUM)
+
+⚠️ Nama "Desain Kurikulum & Learning Path" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: Pertambangan
+
+/digital-marketing-claw
+ID 1159
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: DigitalMarketing / Marketing
+
+/crm-sales-claw
+ID 1168
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: CRM / Sales
+
+/brand-content-claw
+ID 1177
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: Brand / Content
+
+/ecommerce-claw
+ID 1186
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: Ecommerce / E-Commerce
+
+/rekrutmen-claw
+ID 1195
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: Rekrutmen / Talent
+
+/ld-kompetensi-claw
+ID 1204
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: LdKompetensi / Learning
+
+/penilaian-kinerja-claw
+ID 1213
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: Penilaian Kinerja / PK
+
+/ebt-solar-claw
+ID 1068
+MISMATCH
+buka
+Nama di DB: QE-PORTO-ASESOR — Portofolio + Simulasi Wawancara Asesor QE(Portofolio + simulasi wawancara QE)
+
+⚠️ Nama "QE-PORTO-ASESOR — Portofolio + Simulasi Wawancara Asesor QE" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: EBTSolar / Solar / PLTS
+
+/geologi-claw
+ID 1077
+MISMATCH
+buka
+Nama di DB: JLN-DOC-REG — Generator Dokumen + Regulasi & Standar JLN(Draft dokumen + hierarki regulasi JLN)
+
+⚠️ Nama "JLN-DOC-REG — Generator Dokumen + Regulasi & Standar JLN" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: Geologi
+
+/offshore-safety-claw
+ID 1086
+MISMATCH
+buka
+Nama di DB: TWG-EDU — Materi & Orientasi Unit Kompetensi TWG(Edukasi terstruktur TWG)
+
+⚠️ Nama "TWG-EDU — Materi & Orientasi Unit Kompetensi TWG" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: Offshore
+
+/transisi-energi-claw
+ID 1105
+MISMATCH
+buka
+Nama di DB: SDR-DOC-REG — Generator Dokumen + Regulasi & Standar SDR(Draft dokumen + hierarki regulasi SDR)
+
+⚠️ Nama "SDR-DOC-REG — Generator Dokumen + Regulasi & Standar SDR" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: Transisi Energi
+
+/tutor-teknik-claw
+ID 1114
+MISMATCH
+buka
+Nama di DB: GEO-EDU — Materi & Orientasi Unit Kompetensi GEO(Edukasi terstruktur GEO)
+
+⚠️ Nama "GEO-EDU — Materi & Orientasi Unit Kompetensi GEO" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: Tutor Teknik / Tutor
+
+/riset-skripsi-claw
+ID 1122
+MISMATCH
+buka
+Nama di DB: INV-EDU — Materi & Orientasi Unit Kompetensi INV(Edukasi terstruktur INV)
+
+⚠️ Nama "INV-EDU — Materi & Orientasi Unit Kompetensi INV" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: Riset / Skripsi
+
+/nspk-navigator-claw
+ID 1131
+MISMATCH
+buka
+Nama di DB: LRG-QUIZ-CASE — Latihan Soal & Studi Kasus LRG(Latihan & kasus berbasis SKKNI Geoteknik Slope Stability + SNI 8460:2017)
+
+⚠️ Nama "LRG-QUIZ-CASE — Latihan Soal & Studi Kasus LRG" tidak mengandung keyword yang diharapkan
+
+Keyword diharapkan: NSPK
+
+/korporasi-claw
+ID 1140
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Agent ID tidak ditemukan di DB
+
+Keyword diharapkan: Korporasi

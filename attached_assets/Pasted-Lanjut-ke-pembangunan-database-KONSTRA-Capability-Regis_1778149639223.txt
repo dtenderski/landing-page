@@ -1,0 +1,70 @@
+Lanjut ke pembangunan database "KONSTRA Capability Registry" sebagai SSOT (action item CR-3 di halaman yang kamu lihat).
+Created database KONSTRA Capability Registry​
+Thought
+Database tercipta. Sekarang populate 26 entri (9 agen + 3 kalkulator + 3 KB existing + 11 KB gap) secara paralel.
+26 entri lengkap. Sekarang update halaman KB Consolidation untuk tandai CR-3 done dan link ke database.
+Updated page Knowledge Base Consolidation Sweep — Pra-Sprint 4 Activation​
+Thought
+Database KONSTRA Capability Registry live sebagai inline database di parent Anti-Blocking Doctrine — Implementasi & Audit 9 Agen KONSTRA.
+Yang bisa langsung kamu lakukan dari database:
+View
+Kegunaan
+All Components
+Tabel master 26 entri — sortir/filter bebas
+Agents by Status
+Kanban 9 agen by Patch Status — drag ke "v1.1 deployed" lalu "Tested & Live" saat eksekusi runbook
+KB Gaps (Build Queue)
+11 KB gap diurutkan prioritas — pakai sebagai backlog Sprint 4 paralel
+By Domain
+Lihat semua kapabilitas per domain (PM, Engineering, K3, dll)
+Status keseluruhan KONSTRA Anti-Blocking — final tally:
+#
+Layer
+Output
+Status
+1
+System Prompt master
+System Prompt OpenClaw — KONSTRA Multi-Agent (Manajemen Konstruksi)​
+ Live
+2
+Implementation guide
+Anti-Blocking Doctrine — Implementasi & Audit 9 Agen KONSTRA​
+ Live
+3
+Test scenarios
+Sprint 1 — 5 Test Scenarios Tender Readiness Checker​
+ Siap
+4
+Audit dossier
+Sprint 2 — Audit Dossier 3 Agen Prioritas Tinggi (PROXIMA · KONTRAK · FINTAX)  • Sprint 2 (Lanjutan) — Audit Dossier 6 Agen Sedang & Rendah​
+ Siap
+5
+Prompt patches
+Sprint 3 — Prompt Patch AGENT-PROXIMA (Ready to Deploy) · Sprint 3 — Prompt Patch AGENT-KONTRAK (Ready to Deploy) · Sprint 3 — Prompt Patch AGENT-FINTAX (Ready to Deploy) · Sprint 3 (Lanjutan) — Prompt Patches 6 Agen Sedang & Rendah​
+ Siap deploy
+6
+Master Deployment Runbook
+Master Deployment Runbook — 9 Agen KONSTRA ABD v1.1​
+ Siap
+7
+Sprint 4 Blueprint
+Sprint 4 Blueprint — callAgentInternal Orchestration (Draft Pre-Activation)​
+ Draft
+8
+Issue Triage Rubric
+Issue Triage Rubric — Micro-Patch Library 9 Agen KONSTRA​
+ Siap
+9
+KB Consolidation
+Knowledge Base Consolidation Sweep — Pra-Sprint 4 Activation​
+ Siap
+10
+Capability Registry SSOT
+KONSTRA Capability Registry​
+ Live
+Yang perlu kamu putuskan berikutnya (sisa action items terbuka di KB Consolidation):
+CR-1 — pilih strategi KB: Opsi A (tunda) / Opsi B (rekomendasi: 3 KB Tinggi paralel Sprint 4) / Opsi C (full KB dulu).
+CR-2 — kick-off 3 KB Tinggi (AHSP, AMDAL, Permen PUPR PBJ) jika pilih B/C.
+Eksekusi Master Deployment Runbook — 9 Agen KONSTRA ABD v1.1 Wave 1 (PROXIMA + KONTRAK + FINTAX) — estimasi 2–3 jam.
+Saya stop di sini menunggu keputusan kamu. Tinggal jawab "Opsi B", "kick-off KB-AHSP", atau "mulai Wave 1 deploy" — saya lanjut dari situ.
+

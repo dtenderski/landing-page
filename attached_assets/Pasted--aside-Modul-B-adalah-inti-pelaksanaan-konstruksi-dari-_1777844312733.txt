@@ -1,0 +1,171 @@
+<aside>
+🚧
+
+**Modul B** adalah inti pelaksanaan konstruksi: dari mobilisasi hingga Mechanical Completion. 6 sub-modul berjalan paralel, dikoordinasikan oleh AGENT-PROXIMA. Output: progres fisik **on-time, on-budget, on-quality, zero accident, zero non-compliance**.
+
+</aside>
+
+## B1 — Project Management
+
+**Owner agent:** AGENT-PROXIMA.
+
+### Aktivitas Harian / Mingguan / Bulanan
+
+- **Daily:** site walk, daily report (manpower, equipment, weather, progress, issues).
+- **Weekly:** Weekly Progress Meeting (WPM) dengan Owner + Konsultan MK; update S-Curve & EVM.
+- **Monthly:** Monthly Progress Report (MPR), invoice termin, KPI review.
+
+### Tools & Output
+
+- **Master Schedule (CPM/PDM)** — di Primavera P6 atau MS Project.
+- **S-Curve fisik & finansial** — plan vs actual.
+- **Earned Value Management:**
+    - BCWS (Plan) = % plan × Budget at Completion
+    - BCWP (Earned) = % aktual × BAC
+    - ACWP (Actual Cost)
+    - **CV** = BCWP − ACWP → ≥0 = on/under budget
+    - **SV** = BCWP − BCWS → ≥0 = on/ahead schedule
+    - **CPI** = BCWP/ACWP → ≥1 = sehat
+    - **SPI** = BCWP/BCWS → ≥1 = sehat
+    - **EAC** = BAC/CPI (estimate at completion)
+- **Risk Register update** mingguan — 5×5 matrix.
+- **Change Management Log** — setiap perubahan scope/desain.
+
+### Sitasi: PMBOK 7th Performance Domain (Planning, Project Work, Delivery, Measurement); ISO 21500.
+
+## B2 — K3 Konstruksi (SMKK)
+
+**Owner agent:** AGENT-SAFIRA.
+
+### Aktivitas Kunci
+
+- **RKK** harus aktif & di-review per progres milestone.
+- **JSA** disusun per pekerjaan baru, di-toolbox-kan ke pekerja.
+- **PTW (Permit to Work)** untuk pekerjaan: working at height >2m, hot work, confined space, lifting >5T, electrical isolation, excavation >1.2m.
+- **Toolbox Meeting** harian, dokumentasi rekap mingguan.
+- **HSE Inspection** mingguan (Walk-Down) + tindak lanjut finding.
+- **Investigasi insiden** (5-Why + Fishbone + Bow-Tie) dalam 24 jam, lapor Disnaker dalam 48 jam (Permenaker 03/1998).
+- **Audit SMK3 internal** triwulanan + persiapan audit eksternal (Sucofindo/SAI Global).
+
+### KPI K3
+
+- **TRIR** (Total Recordable Incident Rate) target ≤0.5
+- **LTIFR** (Lost Time Injury Frequency Rate) target 0
+- **Near-miss reporting rate** ≥ 5× actual incidents (leading indicator)
+- **PTW compliance** 100%
+
+### Sitasi: UU 1/1970, PP 50/2012, Permen PUPR 8/2023, Permenaker 5/2018, ISO 45001:2018.
+
+## B3 — Pengendalian Mutu
+
+**Owner agent:** AGENT-MUTU.
+
+### Aktivitas Kunci
+
+- **ITP** aktif per disiplin (struktur, arsitektur, MEP) — hold/witness/review point.
+- **Material Approval** — mill cert + sample test + mock-up sebelum mass installation.
+- **Inspection harian** — ceklist per item, foto, di-share ke Konsultan MK.
+- **NCR (Non-Conformance Report)** — issued saat defect ditemukan; level: Major / Minor / Observation.
+- **CAR (Corrective Action Request)** — root cause + corrective + preventive action.
+- **Internal Quality Audit** triwulanan + persiapan ISO 9001 surveillance.
+
+### KPI Mutu
+
+- **NCR closure rate** dalam 14 hari ≥ 90%
+- **First-time-right ratio** inspeksi ≥ 85%
+- **Material rejection rate** ≤ 3%
+- **Mock-up approval first attempt** ≥ 80%
+
+### Sitasi: ISO 9001:2015, Permen PUPR 21/2019, SNI material, ASTM, ACI.
+
+## B4 — Manajemen Lingkungan
+
+**Owner agent:** AGENT-ENVIRA.
+
+### Aktivitas Kunci
+
+- **Implementasi RKL-RPL** sesuai persetujuan lingkungan (AMDAL/UKL-UPL).
+- **Manifest Limbah B3** untuk oli bekas, baterai, kaleng cat, sludge — disimpan di TPS B3 berizin.
+- **Pengelola Limbah B3 berizin** — hanya gunakan vendor terdaftar di KLHK.
+- **Monitoring kualitas:**
+    - Air permukaan & sumur sekitar (BOD, COD, TSS, pH, minyak)
+    - Udara ambient (CO, NOx, SOx, PM10, PM2.5)
+    - Kebisingan (siang ≤70 dB, malam ≥55 dB)
+- **Laporan RKL-RPL** ke DLH/KLHK per **6 bulan**.
+- **Persiapan PROPER** (untuk proyek skala besar / EPC industri).
+
+### Sitasi: UU 32/2009, PP 22/2021, Permen LHK 5/2022 (PROPER), ISO 14001:2015.
+
+## B5 — Peralatan & Plant
+
+**Owner agent:** AGENT-EQUIPRA.
+
+### Aktivitas Kunci
+
+- **Mobilisasi alat** sesuai mob-demob plan; pastikan SIA (Surat Izin Alat) & SIO (Operator) valid.
+- **Daily Equipment Report** — jam operasi, breakdown, fuel consumption.
+- **Preventive Maintenance Schedule** — berbasis service hours interval (250/500/1000/2000 jam).
+- **OEE Calculation:**
+    - Availability = (Planned Time − Downtime) / Planned Time
+    - Performance = (Actual Output / Standard Output)
+    - Quality = (Good Output / Total Output)
+    - **OEE = A × P × Q** (target world-class ≥85%)
+- **Fuel Ratio Analysis** — L/jam vs benchmark per tipe alat (deteksi pencurian/leakage).
+- **Audit SIO operator** triwulanan (Permenaker 8/2020).
+
+### Sitasi: Permenaker 8/2020 (K3 Pesawat Angkat & Angkut), SNI alat berat, ISO 55000.
+
+## B6 — Rantai Pasok & Logistik
+
+**Owner agent:** AGENT-LOGIS.
+
+### Aktivitas Kunci
+
+- **Vendor Scoring (AVL)** triwulanan: Quality · Delivery · Cost · Service · HSE.
+- **PO (Purchase Order)** — sesuai BoQ + spesifikasi yang sudah di-approve AGENT-MUTU.
+- **GRN (Goods Receipt Note)** + **incoming inspection** sebelum diterima ke gudang.
+- **Stock Control gudang** — FIFO untuk semen, batching mix, item dengan shelf-life.
+- **Expediting** untuk material kritis (baja struktur, peralatan MEP, lift) — weekly call dengan vendor.
+- **Subkontraktor management** — koordinasi dengan AGENT-KONTRAK untuk kontrak subkon, kinerja masuk AVL.
+
+### KPI Logistik
+
+- **On-Time Delivery (OTD)** material kritis ≥ 95%
+- **Stock-out frequency** = 0 untuk fast-moving items
+- **Inventory turnover** ≥ 12×/tahun
+- **Vendor scorecard** ≥ 80% rata-rata
+
+### Sitasi: Permen PUPR 8/2023 (PBJ Konstruksi), SCOR Model, ISO 28000.
+
+## Alur Kerja Modul B (Daily Cycle)
+
+```mermaid
+flowchart TD
+	MORN["🌅 06:30–07:00<br>Toolbox Meeting<br>+ JSA refresh"]
+	WORK["🚧 07:00–16:00<br>Pelaksanaan + PTW + Inspeksi rutin"]
+	BREAK["🍳 12:00–13:00<br>Lunch + housekeeping"]
+	END["🌆 16:00–17:00<br>Daily Report:<br>manpower, equipment, progress, issues"]
+	COORD["🤝 17:00–17:30<br>Coord Meeting tim proyek<br>(PM + 6 disiplin)"]
+	NEXT["📝 17:30+<br>Plan besok:<br>JSA, PTW, schedule, material delivery"]
+
+	MORN --> WORK --> BREAK --> WORK
+	WORK --> END --> COORD --> NEXT
+```
+
+## Quick Reference — Conversation Starters Modul B
+
+1. "Hitung EVM proyek minggu ini — BCWP/ACWP/BCWS"
+2. "Susun JSA untuk pekerjaan erection baja struktur lantai 15"
+3. "Issue NCR untuk defect honeycomb di kolom K-12"
+4. "Manifest limbah B3 oli bekas excavator bulan ini"
+5. "Hitung OEE 5 unit excavator minggu ini"
+6. "Vendor scoring triwulan untuk semen, baja, batu pecah"
+
+## Halaman Terkait
+
+- [System Prompt OpenClaw — Manajer Proyek Konstruksi](https://www.notion.so/System-Prompt-OpenClaw-Manajer-Proyek-Konstruksi-bd5ece9df10e4eca823e9c76f96d331c?pvs=21)
+- [System Prompt OpenClaw — Manajer K3 Konstruksi](https://www.notion.so/System-Prompt-OpenClaw-Manajer-K3-Konstruksi-9fcb3698ed9947b182322de711ab43c0?pvs=21)
+- [System Prompt OpenClaw — Manajer Pengendalian Mutu Konstruksi](https://www.notion.so/System-Prompt-OpenClaw-Manajer-Pengendalian-Mutu-Konstruksi-ae885abce3cc4384aea3fc7c7137cf5f?pvs=21)
+- [System Prompt OpenClaw — Manajer Lingkungan Konstruksi](https://www.notion.so/System-Prompt-OpenClaw-Manajer-Lingkungan-Konstruksi-6d90c01e458748b1bf29bee92297be86?pvs=21)
+- [System Prompt OpenClaw — Manajer Peralatan Konstruksi](https://www.notion.so/System-Prompt-OpenClaw-Manajer-Peralatan-Konstruksi-0375d71f30e242ebbca0897e493e328e?pvs=21)
+- [System Prompt OpenClaw — Manajer Rantai Pasok & Logistik Konstruksi](https://www.notion.so/System-Prompt-OpenClaw-Manajer-Rantai-Pasok-Logistik-Konstruksi-f56c48fbad0d4d75b947e2a346e6a41a?pvs=21)

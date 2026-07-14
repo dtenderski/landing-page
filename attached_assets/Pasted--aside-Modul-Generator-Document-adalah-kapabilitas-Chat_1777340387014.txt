@@ -1,0 +1,442 @@
+<aside>
+📝
+
+**Modul:** Generator Document adalah kapabilitas Chatbot SMAP untuk **menghasilkan draft dokumen SMAP siap-pakai** berdasarkan data internal perusahaan yang di-onboarding melalui dialog terstruktur. Powered by **AGENT-POLICY** dengan dukungan AGENT-RISK, AGENT-GAP, dan AGENT-DUEDIL.
+
+**Selaras dengan:** [Chatbot SMAP — Sistem Manajemen Anti Penyuapan (SNI ISO 37001:2016)](https://www.notion.so/Chatbot-SMAP-Sistem-Manajemen-Anti-Penyuapan-SNI-ISO-37001-2016-b42b289727714aa38643bca419682b94?pvs=21) · [Paket Draft Dokumen SMAP — Kebijakan, SK FKAP, SOP (Template AGENT-POLICY)](https://www.notion.so/Paket-Draft-Dokumen-SMAP-Kebijakan-SK-FKAP-SOP-Template-AGENT-POLICY-89b74c8386ec403a9e559eac63ce65a0?pvs=21) · [System Prompt OpenClaw — Chatbot SMAP (Multi-Agent)](https://www.notion.so/System-Prompt-OpenClaw-Chatbot-SMAP-Multi-Agent-64521b160b8d43b283e4091b1ad5dff6?pvs=21).
+
+</aside>
+
+## 1. Tujuan & Value Proposition
+
+Generator Document dirancang untuk **memangkas waktu drafting dokumen SMAP dari berminggu-minggu menjadi hitungan jam**, dengan kualitas yang konsisten dengan SNI ISO 37001:2016 dan konteks BUJK Indonesia.
+
+| **Aspek** | **Manual (Tanpa Generator)** | **Dengan Generator Document** |
+| --- | --- | --- |
+| Waktu drafting Kebijakan SMAP | 2–4 minggu (konsultan/internal) | 30–60 menit (review + signing) |
+| Konsistensi antar dokumen | Variatif, sering kontradiktif | Cross-reference otomatis |
+| Penyesuaian konteks BUJK | Sering generic / template kaku | Adaptive ke ukuran, klasifikasi, lingkup |
+| Versioning & traceability | Manual filename `_v3_final_FINAL` | Otomatis dengan changelog |
+| Update saat regulasi berubah | Refactor manual seluruh dokumen | Re-generate dengan delta diff |
+
+---
+
+## 2. Daftar Dokumen yang Dapat Di-generate
+
+### 2.1 Tier-1 — Wajib Audit Stage 1
+
+| **Kode** | **Dokumen** | **Klausul ISO 37001** | **Owner Approval** |
+| --- | --- | --- | --- |
+| POL-001 | Kebijakan Anti-Penyuapan SMAP | 5.2 | Direksi |
+| SK-FKAP-001 | SK Pembentukan Fungsi Kepatuhan Anti-Penyuapan | 5.1.2 / 5.3.2 | Dirut |
+| JD-FKAP-001 | Job Description FKAP & Tim | 5.3.2 / 7.1 | HRD + FKAP |
+| SOP-DD-001 | SOP Due Diligence Mitra & Personel | 8.2 | FKAP + Pengadaan |
+| SOP-HOS-001 | SOP Hadiah & Hospitality | 8.7 | FKAP |
+| SOP-COI-001 | SOP Konflik Kepentingan | 7.3 | FKAP + HRD |
+| SOP-WBS-001 | SOP Whistleblowing & Kanal Pelaporan | 8.9 / 8.10 | FKAP + IT |
+| SOP-INV-001 | SOP Investigasi Internal | 8.10 | FKAP + Internal Audit |
+| FORM-KOM-001 | Form Komitmen Anti-Suap Mitra | 8.5 / 8.6 | Legal |
+| FORM-COI-001 | Form Disclosure Konflik Kepentingan | 7.3 | HRD |
+
+### 2.2 Tier-2 — Pendukung Operasional
+
+| **Kode** | **Dokumen** | **Penggunaan** |
+| --- | --- | --- |
+| REG-HOS-001 | Register Hadiah & Jamuan | Logging operasional harian |
+| CLAUSE-001 | Klausul Anti-Suap untuk Kontrak Vendor/KSO/Subkon | Insert ke template kontrak |
+| CLAUSE-002 | Klausul Anti-Suap untuk MoU & LoA | Insert ke template kerjasama |
+| BRA-001 | Bribery Risk Assessment Report | Output workshop tahunan |
+| RTP-001 | Risk Treatment Plan | Action plan dari BRA |
+| OBJ-001 | Sasaran SMAP & KPI Tahunan | Annual objectives |
+| TRAIN-MAT-001 | Training Matrix per Role | Training planning |
+| COM-PLAN-001 | Communication Plan SMAP | Internal/external messaging |
+| DOC-MAS-001 | Daftar Induk Dokumen SMAP | Document control register |
+| SOP-DOC-001 | SOP Pengendalian Dokumen & Rekaman | Document & records control |
+
+### 2.3 Tier-3 — Audit & Tinjauan
+
+| **Kode** | **Dokumen** | **Frekuensi** |
+| --- | --- | --- |
+| AUD-PROG-001 | Program Audit Internal SMAP | Tahunan |
+| AUD-CHK-001 | Audit Checklist per Klausul | Per audit cycle |
+| AUD-REP-001 | Laporan Audit Internal | Per audit cycle |
+| CAPA-001 | CAPA (Corrective Action) Form | Per finding |
+| MR-AGN-001 | Agenda Tinjauan Manajemen | ≥ 1x/tahun |
+| MR-MIN-001 | Notulen Tinjauan Manajemen | ≥ 1x/tahun |
+
+---
+
+## 3. Onboarding Data Internal Perusahaan
+
+Sebelum men-generate dokumen, chatbot **wajib** melakukan onboarding data perusahaan melalui **Wizard Profil BUJK** — dialog terstruktur 7 tahap.
+
+```mermaid
+flowchart LR
+	Start([User: "Buatkan kebijakan SMAP"]) --> Check{Profil sudah<br>lengkap?}
+	Check -->|Belum| W1[Wizard Tahap 1<br>Identitas BUJK]
+	W1 --> W2[Tahap 2<br>Klasifikasi & Lingkup]
+	W2 --> W3[Tahap 3<br>Struktur Organisasi]
+	W3 --> W4[Tahap 4<br>Proses Bisnis]
+	W4 --> W5[Tahap 5<br>Mitra & Vendor]
+	W5 --> W6[Tahap 6<br>FKAP & Tata Kelola]
+	W6 --> W7[Tahap 7<br>Konteks & Regulasi]
+	W7 --> Save[(Simpan Profil<br>BUJK)]
+	Check -->|Sudah| Save
+	Save --> Generate[Generate Draft]
+```
+
+### 3.1 Schema Profil BUJK
+
+| **Tahap** | **Field** | **Tipe** | **Wajib?** | **Digunakan di** |
+| --- | --- | --- | --- | --- |
+| 1. Identitas | Nama Resmi PT | text | ✅ | Semua dokumen |
+| 1. Identitas | NPWP / NIB | text | ✅ | Header dokumen, kontrak |
+| 1. Identitas | Alamat Kantor Pusat | text | ✅ | Header dokumen |
+| 1. Identitas | Tahun Berdiri | number | — | Konteks |
+| 1. Identitas | Nama Dirut | text | ✅ | SK, signature block |
+| 2. Klasifikasi | Kualifikasi (K1/K2/K3/M1/M2/B1/B2) | select | ✅ | Konteks, scope, penyesuaian rigor |
+| 2. Klasifikasi | Sub-klasifikasi (BS/SI/AT) | multi-select | ✅ | Risk Register, SOP DD |
+| 2. Klasifikasi | Pasar utama (PBJ Pemerintah / Swasta / Mix) | select | ✅ | Bobot risiko P2 vs P3 |
+| 2. Klasifikasi | Wilayah operasi | multi-select provinsi | ✅ | Konteks, perizinan |
+| 2. Klasifikasi | Jumlah personel tetap & non-tetap | number | ✅ | Training matrix, scope |
+| 2. Klasifikasi | Omset tahunan range | select | — | Threshold materialitas hadiah |
+| 3. Struktur | Bagan Organisasi (upload / fill) | file / form | ✅ | JD FKAP, RACI, scope |
+| 3. Struktur | Daftar Direksi & Komisaris | list (nama, jabatan) | ✅ | SK, signature, RACI |
+| 3. Struktur | Daftar Manajer Lini Kunci | list (nama, divisi) | ✅ | RACI, training matrix |
+| 3. Struktur | Internal Audit ada? | boolean | ✅ | Penyesuaian SOP audit |
+| 4. Proses Bisnis | Proses aktif (P1–P10 checklist) | multi-select | ✅ | Risk Register, SOP DD scope |
+| 4. Proses Bisnis | Volume tender PBJ /tahun | number | — | Bobot P2 |
+| 4. Proses Bisnis | Volume kontrak swasta /tahun | number | — | Bobot P3 |
+| 4. Proses Bisnis | Penggunaan agen/perantara | boolean | ✅ | SOP DD agen, SK FKAP scope |
+| 5. Mitra | Jumlah vendor aktif | number | — | DD batch sizing |
+| 5. Mitra | Vendor RISIKO TINGGI (estimasi %) | number | — | Sasaran SMAP |
+| 5. Mitra | Praktik KSO/JV | boolean | ✅ | Klausul kontrak khusus |
+| 6. FKAP | FKAP sudah ditunjuk? | boolean | ✅ | SK FKAP — generate / update |
+| 6. FKAP | Nama FKAP (jika ada) | text | — | SK, signature |
+| 6. FKAP | FKAP internal atau outsource? | select | ✅ | JD penyesuaian |
+| 6. FKAP | Reporting line FKAP | select (Dirut/Dewas/Komisaris) | ✅ | JD, governance |
+| 7. Konteks | Sejarah kasus suap/etika | text (opsional) | — | BRA bobot, RTP urgency |
+| 7. Konteks | Sertifikasi ISO existing | multi-select | — | Integrasi IMS, document master |
+| 7. Konteks | Ketergantungan regulasi khusus | text | — | Konteks, perizinan |
+
+### 3.2 Sumber Onboarding
+
+Data dapat di-onboarding melalui **5 saluran**:
+
+1. **Dialog interaktif** dengan chatbot (default, paling user-friendly).
+2. **Form upload** template `.xlsx` profil BUJK (download → fill → upload).
+3. **Integrasi sistem** existing (HRIS, ERP, Vendor Master) via API/CSV import.
+4. **Dokumen unggah** (Akta Pendirian, SK Direksi, struktur organisasi PDF) → AI ekstraksi.
+5. **Bulk import** untuk grup BUJK multi-entitas (1 file → N profil).
+
+### 3.3 Validasi & Quality Check
+
+Sebelum profil di-save, chatbot menjalankan validasi:
+
+- **Mandatory field** lengkap (kolom ✅).
+- **Konsistensi internal** (mis. jumlah personel ≥ jumlah Direksi + Manajer Lini).
+- **Format check** (NPWP 15 digit, NIB 13 digit, alamat punya kota+provinsi).
+- **Cross-check eksternal** (opsional): NIB ke OSS, NPWP ke DJP, daftar hitam LKPP.
+- **Confidence score** profil (0–100%) — di bawah 70% chatbot akan minta klarifikasi tambahan.
+
+---
+
+## 4. Mekanisme Generation
+
+### 4.1 Arsitektur Pipeline
+
+```mermaid
+flowchart TB
+	U[👤 User Request] --> O[SMAP-ORCHESTRATOR]
+	O --> P[AGENT-POLICY]
+	P --> Profile[(Profil BUJK)]
+	P --> KB[(Knowledge Base<br>Klausul + Template)]
+	P --> Risk[(Risk Register)]
+	P --> Gap[(Gap Checklist)]
+	Profile --> Engine[Template Engine<br>+ Variable Substitution]
+	KB --> Engine
+	Risk --> Engine
+	Gap --> Engine
+	Engine --> Draft[Draft v0.1]
+	Draft --> QC{Quality Gate<br>self-check}
+	QC -->|Lulus| Preview[Preview ke User]
+	QC -->|Gagal| Engine
+	Preview --> Edit{User edit?}
+	Edit -->|Ya| Iter[Iterasi v0.2 / v0.3]
+	Edit -->|Tidak| Approve[Routing ke Approver]
+	Approve --> Sign[Approver e-sign]
+	Sign --> Pub[(Daftar Induk Dokumen<br>v1.0 Effective)]
+```
+
+### 4.2 Template Engine
+
+Dokumen di-generate dari template **terstruktur** dengan slot:
+
+- **Static text** — kalimat baku ISO 37001 yang wajib ada (tidak boleh di-edit AI).
+- **Variable** — `nama_pt`, `nama_dirut`, `tanggal_efektif`, `kualifikasi`.
+- **Conditional block** — paragraf yang muncul/hilang berdasar profil (mis. klausul agen hanya untuk BUJK yang menggunakan agen).
+- **AI-generated section** — bagian narasi adaptif (mis. "Konteks Organisasi" disesuaikan tipe BUJK).
+- **Reference section** — auto-pull dari database (mis. daftar proses bisnis dari Risk Register).
+
+### 4.3 Contoh Mapping Variabel — Kebijakan SMAP (POL-001)
+
+| **Slot di Template** | **Sumber Data** | **Contoh Output** |
+| --- | --- | --- |
+| `nama_pt` | Profil BUJK · Identitas | PT Karya Bangun Persada |
+| `lingkup_smap` | Profil · Klasifikasi + Wilayah | seluruh aktivitas konstruksi gedung & sipil di wilayah Jawa, Sumatera, dan Sulawesi |
+| `komitmen_dirut` | AI-generated dari template komitmen + nama Dirut | Saya, Ir. Hartono Wijaya, sebagai Direktur Utama PT Karya Bangun Persada, menyatakan komitmen penuh ... |
+| `daftar_kategori_risiko` | Auto-pull [](https://www.notion.so/57ce809991524a329edba82689127992?pvs=21) · proses aktif | P1, P2, P5, P6, P9 (5 kategori dari 10 diaktifkan) |
+| `nama_fkap` | Profil · FKAP | Bapak/Ibu [TBD] (akan diangkat melalui SK terlampir) |
+| `tanggal_efektif` | Auto = tanggal approve + 7 hari kerja | 15 Mei 2026 |
+| `nomor_dokumen` | Auto-increment dari Daftar Induk Dokumen | POL-SMAP-001/V1.0/2026 |
+
+### 4.4 Conditional Block — Contoh
+
+```
+#IF profil.menggunakan_agen
+6.4 Penggunaan Agen, Konsultan, dan Perantara
+Perusahaan menerapkan due diligence khusus terhadap setiap agen, 
+konsultan, dan perantara yang ditunjuk untuk memfasilitasi hubungan 
+dengan pihak ketiga, termasuk verifikasi independensi, struktur 
+komisi, dan kepemilikan beneficial ownership sesuai SOP-DD-001.
+/IF
+
+#IF profil.kso_jv
+6.5 Kerjasama Operasi (KSO) dan Joint Venture
+Dalam setiap KSO/JV, mitra wajib menandatangani komitmen anti-suap 
+yang setara dengan kebijakan ini, dengan klausul pengakhiran sepihak 
+bila terbukti melakukan praktik penyuapan.
+/IF
+```
+
+---
+
+## 5. Conversation Flow — Sample Dialog
+
+### 5.1 Skenario A: User Baru, Belum Onboard
+
+```
+👤 User    : Tolong buatkan draft Kebijakan SMAP untuk perusahaan saya.
+🤖 Bot     : Senang membantu. Saya perlu mengenal perusahaan Anda dulu 
+             agar kebijakan benar-benar sesuai konteks BUJK Anda 
+             (bukan template generic). 
+             
+             Saya akan tanya 7 tahap singkat (sekitar 10–15 menit). 
+             Anda bisa pause kapan saja, profil tersimpan otomatis.
+             
+             [Mulai Wizard] [Upload Template Excel] [Lewati - pakai default]
+
+👤 User    : Mulai Wizard
+🤖 Bot     : 📋 Tahap 1/7 — Identitas Perusahaan
+             Nama lengkap PT?
+👤 User    : PT Karya Bangun Persada
+🤖 Bot     : Baik. NPWP atau NIB?
+👤 User    : NIB 9120000123456
+🤖 Bot     : ✓ Format valid. 
+             Alamat kantor pusat? (kota minimal)
+... [berlanjut sampai tahap 7] ...
+
+🤖 Bot     : ✅ Profil tersimpan. Confidence score: 87/100.
+             Catatan: Anda belum mengisi sejarah kasus etika 
+             — ini opsional tapi memengaruhi rekomendasi BRA.
+             
+             [Generate Kebijakan SMAP sekarang] [Edit Profil] [Lihat Profil]
+```
+
+### 5.2 Skenario B: User Sudah Onboard, Generate Multi-Dokumen
+
+```
+👤 User    : Buatkan paket lengkap dokumen Tier-1 untuk audit Stage 1.
+🤖 Bot     : Saya akan generate 10 dokumen Tier-1 berdasar Profil BUJK Anda 
+             (PT Karya Bangun Persada, M2, KSO aktif, agen aktif).
+             
+             Estimasi waktu: 8–12 menit.
+             Output: 10 file Notion + opsi export .docx/.pdf.
+             
+             Penyesuaian otomatis yang akan saya lakukan:
+             • Klausul agen aktif → SOP DD dengan section 7.4
+             • KSO aktif → Klausul kontrak v2 (lebih ketat)
+             • PBJ-dominan → Bobot risiko P2 lebih tinggi di BRA
+             
+             [Lanjutkan] [Pilih sebagian] [Tinjau profil dulu]
+
+👤 User    : Lanjutkan
+🤖 Bot     : 🔄 Generating...
+             [1/10] POL-001 Kebijakan SMAP ✓
+             [2/10] SK-FKAP-001 ✓
+             [3/10] JD-FKAP-001 ✓
+             ...
+             [10/10] FORM-COI-001 ✓
+             
+             ✅ Selesai. 10 dokumen telah dibuat di folder 
+             "Draft SMAP — PT Karya Bangun Persada — 28 Apr 2026".
+             
+             Quality self-check: 9/10 PASS, 1/10 PERLU REVIEW MANUAL
+             ⚠️ SOP-WBS-001: alamat hotline dan email belum tersedia 
+                di profil — silakan isi sebelum approval.
+             
+             [Lihat Folder] [Routing ke Approver] [Export ZIP]
+```
+
+### 5.3 Skenario C: Update Karena Regulasi Berubah
+
+```
+👤 User    : Permen PUPR baru terbit, ada perubahan untuk BUJK. 
+             Update dokumen kita.
+🤖 Bot     : Saya cek update terbaru di knowledge base...
+             
+             📰 Detected: Permen PUPR No. X/2026 (efektif 1 Jul 2026).
+             Dampak ke dokumen SMAP Anda:
+             
+             • POL-001: tidak terdampak
+             • SOP-DD-001: tambahan field "Sertifikat SBU baru" → MINOR
+             • CLAUSE-001 (kontrak): klausul anti-fronting baru → MAJOR
+             • Risk Register P2: skenario "manipulasi SBU" baru → MAJOR
+             
+             [Generate semua revisi] [Generate hanya MAJOR] [Tunjukkan diff]
+```
+
+---
+
+## 6. Quality Control — Self-Check
+
+Sebelum draft di-show ke user, AGENT-POLICY menjalankan **8 quality gate**:
+
+| **Gate** | **Cek** | **Tools** |
+| --- | --- | --- |
+| Q1 Completeness | Semua section wajib ada (per checklist klausul) | Klausul checker |
+| Q2 Clause Coverage | Setiap requirement ISO 37001 ter-cover ≥ 1 paragraf | Cross-ref dengan [](https://www.notion.so/ec4bf89def7e40c5bb92d9f9d1602e97?pvs=21) |
+| Q3 Consistency | Nomor dokumen, nama PT, tanggal konsisten lintas dokumen | Variable diff |
+| Q4 Regulatory Fit | Klausul tidak bertentangan dengan UU Tipikor, Permen PUPR, PanCEK | KB regulasi |
+| Q5 Variable Filled | Tidak ada `...` tersisa di output final | Regex scanner |
+| Q6 Tone & Bahasa | Bahasa Indonesia formal, tense konsisten | Style linter |
+| Q7 Cross-Reference | Setiap rujukan dokumen lain valid (POL → SOP → Form) | Document master check |
+| Q8 Risk Alignment | Kontrol di SOP cover Top-5 risiko di Risk Register | Risk-control mapping |
+
+Dokumen hanya di-publish ke **Daftar Induk Dokumen** jika lulus **8/8 gates**. Jika ada warning, ditunjukkan ke user dengan rekomendasi perbaikan.
+
+---
+
+## 7. Approval & Versioning Workflow
+
+```mermaid
+stateDiagram-v2
+	[*] --> Draft
+	Draft --> ReviewFKAP : Submit for review
+	ReviewFKAP --> Draft : Comment / revisi
+	ReviewFKAP --> ApproveDireksi : FKAP approve
+	ApproveDireksi --> Draft : Direksi minta revisi
+	ApproveDireksi --> Effective : Direksi approve + e-sign
+	Effective --> Periodic : Periodic review
+	Periodic --> Effective : No change
+	Periodic --> Draft : Major change → versi baru
+	Effective --> Obsolete : Superseded oleh versi baru
+	Obsolete --> [*]
+```
+
+### 7.1 Versioning Rule
+
+- **v0.x** — draft, belum di-approve.
+- **v1.0** — approved, effective.
+- **v1.1, v1.2** — minor revision (typo, klarifikasi); tidak butuh approve ulang Direksi.
+- **v2.0** — major revision (perubahan substansi, regulasi); butuh re-approve Direksi.
+- Maksimal 1 versi effective per dokumen pada satu waktu.
+
+### 7.2 Audit Trail
+
+Setiap draft & revisi otomatis log:
+
+- Tanggal & waktu generate
+- User yang request
+- AI model & versi prompt
+- Profil BUJK snapshot saat generate
+- Diff dengan versi sebelumnya
+- Approval chain (siapa approve, kapan, ID e-sign)
+
+---
+
+## 8. Integrasi dengan Modul Lain
+
+| **Modul** | **Arah Integrasi** | **Use Case** |
+| --- | --- | --- |
+| AGENT-GAP | Bidirectional | Setelah generate, update Gap Checklist status item terkait jadi "Partial/Compliant" |
+| AGENT-RISK | Read | SOP otomatis cover Top-5 risiko Risk Register |
+| AGENT-DUEDIL | Read | Form DD generated mengikuti tier risiko mitra |
+| AGENT-WHISTLE | Read · Write | SOP-WBS generate sesuai spec kanal di [Spec Teknis Kanal Whistleblowing — AGENT-WHISTLE & FKAP Backend](https://www.notion.so/Spec-Teknis-Kanal-Whistleblowing-AGENT-WHISTLE-FKAP-Backend-17ae74c937624e15b0427f58fb12527d?pvs=21) |
+| AGENT-EDU | Trigger | Setelah dokumen effective, auto-trigger materi training awareness |
+| AGENT-AUDIT | Read | Audit checklist auto-generate dari kewajiban di SOP yang aktif |
+
+---
+
+## 9. Format Output
+
+| **Format** | **Default** | **Use Case** |
+| --- | --- | --- |
+| Notion Page | ✅ Default | Living document, kolaboratif, comment, version |
+| .docx (Word) | On-demand | Distribusi formal, signing fisik |
+| .pdf | On-demand | Lampiran kontrak, audit submission, e-sign |
+| .html (intranet) | Opsional | Publikasi internal portal SMAP |
+| .md (markdown) | Opsional | Integrasi ke wiki / GitHub Pages |
+
+Setiap output otomatis menyertakan:
+
+- **Header standar**: nama PT, logo, nomor dokumen, versi, tanggal efektif, klasifikasi (Internal/Confidential).
+- **Footer standar**: nomor halaman, footer kerahasiaan, kode QR ke versi terbaru di Notion.
+- **Watermark** "DRAFT — TIDAK BERLAKU" untuk semua versi v0.x.
+- **Signature block** sesuai approval chain.
+
+---
+
+## 10. Keamanan & Privacy
+
+<aside>
+🔒
+
+**Prinsip:** Data internal perusahaan yang di-onboarding adalah **rahasia** dan tidak boleh keluar dari workspace BUJK.
+
+</aside>
+
+- **Tenancy isolation** — profil BUJK terisolasi per workspace.
+- **Encryption at rest & in transit** untuk semua field profil.
+- **PII handling** — nama Dirut, FKAP, manajer di-hash di log; full-name hanya di output dokumen.
+- **No training contamination** — data internal **tidak digunakan** untuk training model.
+- **RBAC** — hanya user dengan role `policy.draft` boleh generate; role `policy.approve` untuk approve.
+- **Audit log** retensi minimal 5 tahun (sesuai best practice ISO 37001 + UU Tipikor).
+- **Data deletion** — request hapus profil & semua draft via FKAP, executed dalam 14 hari kerja.
+
+---
+
+## 11. Roadmap Pengembangan Generator Document
+
+| **Milestone** | **Scope** | **Target** |
+| --- | --- | --- |
+| **M1** Foundation | Wizard Profil + 3 dokumen Tier-1 (POL, SK-FKAP, SOP-DD) | Bulan 1 |
+| **M2** Tier-1 Complete | 10 dokumen Tier-1, 8 quality gate, audit log | Bulan 2 |
+| **M3** Multi-format | Export .docx, .pdf; signature block; QR code | Bulan 3 |
+| **M4** Tier-2 & Tier-3 | Register, Klausul kontrak, Audit checklist, CAPA, MR | Bulan 4 |
+| **M5** Smart Update | Diff regulasi → patch dokumen otomatis; bulk regenerate | Bulan 5 |
+| **M6** Multi-tenant | Group BUJK; bulk profile import; konsolidasi grup | Bulan 6 |
+| **M7+** Enterprise | Integrasi HRIS/ERP/Vendor Master via API; e-sign integration | Bulan 7+ |
+
+---
+
+## 12. Success Metrics — Generator Document
+
+| **Metric** | **Definisi** | **Target Tahun 1** |
+| --- | --- | --- |
+| Time-to-Draft (T2D) | Median menit dari request → draft v0.1 | ≤ 10 menit per dokumen |
+| Time-to-Effective (T2E) | Median hari dari draft v0.1 → v1.0 effective | ≤ 7 hari kerja |
+| First-Pass Quality Rate | % draft lulus 8/8 quality gate tanpa retry | ≥ 85% |
+| User Edit Rate | Median % token diubah user sebelum approve | ≤ 15% |
+| Audit Acceptance Rate | % dokumen lulus document review Stage 1 | ≥ 95% |
+| NPS Generator (FKAP) | Net Promoter Score dari FKAP user | ≥ 40 |
+| Onboarding Completion Rate | % user mulai wizard → finish 7 tahap | ≥ 75% |
+
+---
+
+<aside>
+📝
+
+**Prinsip Utama Generator Document:** Mengubah dokumen SMAP dari **"barang yang harus dibuat"** menjadi **"barang yang otomatis ada, terus disesuaikan, dan terbukti compliant"**. AI menghasilkan draft, FKAP & Direksi tetap pemilik keputusan; chatbot menjamin **kecepatan, konsistensi, dan auditability**.
+
+</aside>

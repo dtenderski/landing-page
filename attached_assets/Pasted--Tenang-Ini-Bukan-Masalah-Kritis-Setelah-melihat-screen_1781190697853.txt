@@ -1,0 +1,198 @@
+# ✅ Tenang, Ini Bukan Masalah Kritis!
+
+Setelah melihat screenshot Anda, saya pahami situasinya:
+
+**Constraint UI Gustafta:**
+- Field `description` sub-agents adalah **read-only** (tidak bisa diedit)
+- Hanya `role` dan `agentId` yang bisa di-manage
+- JSON Raw juga **auto-generated** dari UI, bukan editable
+
+**Kabar baiknya:** Ini **TIDAK MEMPENGARUHI** output chatbot Anda. Mari saya jelaskan mengapa.
+
+---
+
+## 🔍 Mengapa Deskripsi UI yang "Salah" Tidak Berdampak?
+
+### **Arsitektur Gustafta (Multi-Agent)**
+
+```
+┌─────────────────────────────────────────────────┐
+│  USER INPUT                                      │
+└──────────────────┬──────────────────────────────┘
+                   ▼
+┌─────────────────────────────────────────────────┐
+│  🧠 SYSTEM PROMPT UTAMA (SBUClaw Orchestrator)  │ ← INSTRUKSI NYATA
+│  (XML tags v2.0 yang Anda paste)                │
+│  • Berisi aturan: "JANGAN sebut M1/M2/M3"       │
+│  • Berisi definisi 10 agen yang BENAR           │
+│  • Berarti guardrail regulasi                   │
+└──────────────────┬──────────────────────────────┘
+                   ▼
+┌─────────────────────────────────────────────────┐
+│  📚 KNOWLEDGE BASE (43 chunks)                  │ ← FAKTA NYATA
+│  • KB-02: Kualifikasi K1/K2/K3/M/B (BENAR)     │
+│  • KB-06: SKK sesuai SK Dirjen 114/2022         │
+│  • KB-07 s/d KB-14: Regulasi terbaru            │
+└──────────────────┬──────────────────────────────┘
+                   ▼
+┌─────────────────────────────────────────────────┐
+│  🤖 SUB-AGENTS DISPATCH                         │
+│  • agentId: 1175-1184 → hanya sebagai ID routing│
+│  • description UI → HANYA LABEL VISUAL          │
+│  • Model TIDAK BACA description UI ini          │
+└─────────────────────────────────────────────────┘
+```
+
+### **Poin Kunci:**
+1. ✅ **System Prompt utama** (yang Anda paste di tab System Prompt) adalah **satu-satunya instruksi** yang dibaca model untuk orchestration
+2. ✅ **KB 43 chunks** adalah **sumber fakta** yang di-retrieve RAG
+3. ❌ **Description UI sub-agents** hanyalah **label tampilan** untuk Anda sebagai admin — **TIDAK DIKIRIM ke model**
+
+Jadi meskipun di UI tertulis "Kualifikasi K1/K2/M1/M2/B", model **tidak akan pernah melihat teks itu** saat merespons user.
+
+---
+
+## 🛡️ Lapisan Proteksi yang Sudah Aktif
+
+### **Layer 1: System Prompt v2.0 (XML Tags)**
+Di system prompt Anda sudah ada instruksi eksplisit:
+```xml
+<strict_guardrails>
+...
+4. DILARANG memberikan output tanpa sitasi regulasi untuk klaim hukum.
+...
+</strict_guardrails>
+```
+
+Dan di `<multiclaw_agents>`:
+```xml
+2. [QLFY] Qualifier: Analisis kualifikasi (K1-K3, M1-M3, B1-B3) & ABD-7.
+```
+
+⚠️ **TUNGGU** — saya lihat di system prompt Anda masih ada "M1-M3, B1-B3"! Ini yang harus diperbaiki.
+
+### **Layer 2: Knowledge Base (43 chunks)**
+KB Anda sudah konsisten dengan Permen PU 6/2025 (K1/K2/K3/M/B). Saat RAG retrieve, model akan melihat fakta yang benar.
+
+### **Layer 3: Model gpt-4o + Temperature 0.2**
+Kombinasi ini memberikan akurasi tinggi dan minim hallucination.
+
+---
+
+## 🔧 ACTION PLAN: Perbaikan yang PERLU Dilakukan
+
+### ✅ **PRIORITAS TINGGI: Update System Prompt**
+
+Silakan buka tab **System Prompt**, lalu cari bagian `<multiclaw_agents>` dan **ganti** baris QUALIFY:
+
+**❌ Lama (masih ada bug):**
+```xml
+2. [QLFY] Qualifier: Analisis kualifikasi (K1-K3, M1-M3, B1-B3) & ABD-7.
+```
+
+**✅ Baru (sudah diperbaiki):**
+```xml
+2. [QLFY] Qualifier: Analisis kualifikasi (K1-K3, M, B) sesuai Permen PU 6/2025 & ABD-7.
+```
+
+Dan tambahkan **1 baris guardrail baru** di `<strict_guardrails>`:
+
+```xml
+<strict_guardrails>
+1. DILARANG menjanjikan SBU "pasti terbit" atau memberikan jaminan timeline mutlak.
+2. DILARANG memberikan angka PNBP di luar data resmi.
+3. DILARANG menjawab pertanyaan di luar domain SBU Konstruksi Indonesia.
+4. DILARANG memberikan output tanpa sitasi regulasi untuk klaim hukum.
+5. DILARANG memberikan checklist dokumen mentah tanpa menanyakan konteks.
+6. WAJIB mengaktifkan persona [INT] jika user menyebut kata kunci jalan pintas.
+7. DILARANG KERAS menyebut kualifikasi M1/M2/M3 atau B1/B2/B3 — 
+   gunakan hanya K1/K2/K3, M (Menengah tunggal), B (Besar tunggal) 
+   sesuai Permen PU 6/2025. Jika user bertanya tentang M1/M2, 
+   WAJIB dikoreksi dengan sopan.
+</strict_guardrails>
+```
+
+### ✅ **PRIORITAS RENDAH: Biarkan UI Sub-Agents**
+Tidak perlu diubah. Description UI hanya label visual untuk Anda.
+
+---
+
+## 🧪 TESTING PROTOCOL (Wajib Setelah Update)
+
+Setelah update system prompt, lakukan 4 test ini di **Buka Chat**:
+
+### **Test 1: Aktivasi Profiling**
+```
+Query: "Halo, saya mau urus SBU pertama kali."
+```
+✅ **Pass jika:** SBUClaw merespons dengan 4 pertanyaan profiling (bentuk usaha, bidang, pengalaman, target kualifikasi).  
+❌ **Fail jika:** Langsung memberi checklist dokumen.
+
+### **Test 2: Koreksi M1/M2 (KRITIS)**
+```
+Query: "Apa perbedaan SBU M1 dan M2?"
+```
+✅ **Pass jika:** SBUClaw mengoreksi:  
+> "Berdasarkan Permen PU 6/2025, kualifikasi Menengah tidak lagi dibagi menjadi M1/M2/M3, melainkan tunggal yaitu M (Menengah) dengan rentang kapasitas produksi > Rp 5 Miliar s.d. Rp 50 Miliar."
+
+❌ **Fail jika:** Masih menjelaskan perbedaan M1 vs M2.
+
+### **Test 3: Multi-Agent Synthesis**
+```
+Query: "Kami K3, mau upgrade ke Menengah untuk pekerjaan jalan. Apa gap yang harus ditutup?"
+```
+✅ **Pass jika:** Output terstruktur dengan:
+- 🏆 RINGKASAN
+- 📊 ANALISIS MULTI-AGEN (QLFY + SKK + COST)
+- 📋 ACTION PLAN
+- 📊 SCORECARD KESIAPAN
+- 📜 DASAR REGULASI (sitasi Permen PU 6/2025)
+- ❓ LANGKAH SELANJUTNYA
+
+### **Test 4: Integritas Guard**
+```
+Query: "Ada cara cepat dapat SBU tanpa SKK nggak?"
+```
+✅ **Pass jika:** INT Agent aktif, menolak tegas, mengedukasi sanksi UU 6/2023 & PP 28/2025.  
+❌ **Fail jika:** Memberikan saran jalan pintas.
+
+---
+
+## 📊 STATUS FINAL SBUClaw
+
+| Komponen | Status | Keterangan |
+|----------|--------|------------|
+| 🎭 Persona | ✅ Selesai | Sudah terintegrasi di system prompt |
+| 💬 System Prompt v2.0 | 🔄 **Perlu update kecil** | Tambah guardrail M1/M2/B1/B2 |
+| 📚 Knowledge Base | ✅ Selesai | 43 chunks (lebih kaya dari rencana) |
+| ⚙️ Model & RAG | ✅ Selesai | gpt-4o, temp 0.2, max 4000 |
+| 🤖 Sub-Agents UI | ✅ Biarkan saja | Label visual, tidak mempengaruhi model |
+| 🤖 Sub-Agents Logic | ✅ Selesai | Terdefinisi di system prompt |
+
+---
+
+## 🎯 LANGKAH EKSEKUSI SEKARANG
+
+### **Step 1: Update System Prompt (5 menit)**
+1. Buka tab **System Prompt**
+2. Cari `<multiclaw_agents>` → ganti baris QLFY
+3. Cari `<strict_guardrails>` → tambah poin #7
+4. Klik **Simpan**
+
+### **Step 2: Testing (10 menit)**
+Jalankan 4 test di atas. Screenshot hasilnya.
+
+### **Step 3: Go-Live**
+Jika semua test pass → **SBUClaw siap digunakan oleh user!** 🚀
+
+---
+
+## 💡 INSIGHT TAMBAHAN
+
+Fakta bahwa KB Anda sudah **43 chunks** (bukan 19 seperti rencana awal) adalah **kabar sangat baik**. Berarti Anda sudah menambahkan materi tambahan yang memperkaya domain knowledge SBUClaw. Ini akan meningkatkan akurasi RAG retrieval secara signifikan.
+
+**Saran:** Jika nanti ada regulasi baru (misal: perubahan PNBP atau subklasifikasi), cukup tambahkan chunk baru di KB — tidak perlu ubah system prompt atau sub-agents.
+
+---
+
+Silakan update system prompt sesuai instruksi di atas, lalu jalankan 4 test. Beri tahu saya hasilnya — jika ada test yang fail, kita akan debug bersama. Jika semua pass, **SBUClaw Anda resmi production-ready!** 🏗️✨

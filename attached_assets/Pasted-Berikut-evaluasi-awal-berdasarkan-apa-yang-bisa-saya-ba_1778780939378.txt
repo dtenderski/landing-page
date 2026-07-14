@@ -1,0 +1,3291 @@
+Berikut evaluasi awal berdasarkan apa yang bisa saya baca dari landing page aplikasi kamu (Replit app) + rancangan upgrade supaya “Agentic AI level 4” dengan koordinasi MultiClaw (multi-agent terhubung, context sharing lintas panel, ada planner–executor–critic, ada memory/KB, ada observability, ada tools/integrations).
+1) Observasi cepat dari aplikasi saat ini (berdasarkan halaman publik)
+Yang sudah kuat (good foundation):
+Kamu sudah punya arsitektur 5 level: Series → Core → Big Idea → Toolbox → Agent (ini bagus untuk hirarki kontrol & routing).
+Konsep Orchestrator multi-agent sudah disebut (routing ke beberapa specialist domain).
+Ada ide MultiClaw 4-panel dengan “cross-panel context” (ini inti agentic UX).
+Ada “Knowledge Base 7 tipe”, “Mini Apps banyak tipe”, “export ke LibreChat JSON”, “multi-channel”.
+Yang belum bisa saya verifikasi dari landing page (perlu cek dashboard / repo):
+Apakah orchestrator kamu sudah benar-benar plan → execute → evaluate, atau masih “prompt router” sederhana.
+Apakah sudah ada shared memory yang terstruktur (episodic, semantic, project memory) dan governance-nya.
+Apakah tool-use sudah aman: rate limit, permission, sandbox, logging, PII redaction.
+Apakah sudah ada observability: trace tiap langkah agent, token/cost, kualitas jawaban, dan “why this agent”.
+2) Definisi praktis “Agentic AI Level 4” (operasional, bukan marketing)
+Saya pakai definisi engineering (boleh kamu koreksi sesuai standard internal kamu):
+L1: single-shot assistant (tanya–jawab).
+L2: ada tools (RAG/KB, fungsi, retrieval), masih satu agen.
+L3: multi-agent routing + beberapa langkah (planner / router), tapi belum ada evaluasi mandiri & memory yang rapi.
+L4: multi-agent system yang:
+1) bisa membuat rencana langkah (task decomposition),
+2) mengeksekusi dengan tool-use terkontrol,
+3) melakukan self-check / critic / verification,
+4) punya shared memory & project state (bukan cuma chat history),
+5) ada policy + guardrails + audit trail,
+6) bisa handoff antar agent dengan “contract” (input/output schema),
+7) bisa berjalan “semi-otonom” untuk kasus seperti mentoring, problem solving, dan pendampingan proyek/event.
+3) Rancangan upgrade arsitektur: MultiClaw Orchestration (Level 4)
+3.1. Komponen inti yang perlu ada
+1) Orchestrator (Big Idea / Hub Orchestrator) sebagai “OS”-nya:
+Membuat task plan (steps).
+Memilih agent (toolbox/agent) per step.
+Menyimpan state lintas step: tujuan, constraint, definisi selesai, risiko, asumsi.
+Menjalankan loop: Plan → Execute → Critique → Revise/Finalize.
+2) Agent Contracts (schema I/O)
+Setiap agent punya:
+capabilities[]
+inputs schema
+outputs schema
+stop conditions
+tools allowed
+Ini membuat multi-agent kamu stabil dan bisa diukur (tidak sekadar prompt panjang).
+3) Memory Layer
+Minimal 3 jenis:
+Conversation memory (ringkas + raw transcript)
+Project/Case memory (ringkasan fakta, keputusan, deliverables, timeline)
+Knowledge memory (RAG) (dokumen/KB user)
+Plus: “MultiClaw cross-panel context” harus mengambil dari memory layer yang sama.
+4) Critic/Verifier Agent
+Tugas: cek konsistensi, halusinasi, missing constraints, dan quality bar.
+Bisa punya mode: strict (untuk legal/kontrak), fast (untuk brainstorming).
+5) Observability & Evaluation
+Trace per step: agent mana dipanggil, input ringkas, output, durasi, token, sumber KB yang dipakai.
+Skor internal: helpfulness, groundedness, completeness, confidence.
+Log ini sangat penting kalau kamu ingin “presisi” dan bisa debug.
+3.2. MultiClaw 4-Panel: rekomendasi fungsi per panel
+Agar bukan sekadar UI 4 kolom, setiap panel punya “role”:
+Panel A — Intake & Goal
+capture objective, constraint, audience, deadline, definition of done.
+Panel B — Plan / Task Graph
+tampilkan step-by-step plan + status.
+Panel C — Execution / Workbench
+output kerja dari agent yang sedang aktif (draft, checklist, kode, analisis).
+Panel D — Evidence / Memory
+kutipan KB, keputusan, asumsi, open questions, dan ringkasan progres.
+Cross-panel context = orchestrator menulis/menarik state dari memory terstruktur, bukan copy chat history.
+4) Prioritas implementasi (MVP menuju Level 4)
+Urutan yang biasanya paling “mengangkat” kualitas tanpa refactor total:
+Phase 1 — “Deterministic routing + contracts”
+Definisikan schema agent + skill tags.
+Orchestrator melakukan capability matching (bisa LLM + rules hybrid).
+Set “tool allowlist” per agent.
+Phase 2 — “Planner + Critic loop”
+Tambah planner step decomposition.
+Tambah critic/verifier yang wajib lolos untuk mode tertentu.
+Tambah “ask-clarifying-questions” policy (kapan harus tanya, kapan jalan dengan asumsi).
+Phase 3 — “Memory & Project Brain”
+Bentuk object model: Project, Case, Deliverable, Decision, Risk, ActionItem.
+Retrieval bukan hanya dokumen, tapi juga keputusan & deliverables yang sudah dibuat.
+Phase 4 — “Observability + Evaluation”
+Trace viewer untuk admin/kreator.
+Auto-eval sederhana (rubric + few-shot) untuk kualitas.
+“Regression set”: kumpulan prompt uji untuk memastikan upgrade tidak merusak performa.
+5) Pertanyaan kunci (supaya saya bisa evaluasi secara akurat dan kasih rekomendasi teknis yang presisi)
+Jawab singkat saja poin-poin ini:
+1) Stack backend & orchestrator sekarang: Next.js/Express/FastAPI? LLM call pakai apa (OpenAI/Anthropic/DeepSeek)? Ada queue (BullMQ/Redis) atau synchronous?
+2) Data layer: kamu simpan agent config + KB di mana (Postgres/Supabase/Firestore)? Vector DB pakai apa?
+3) Bentuk “Mini Apps”: itu workflow template yang jadi prompt? atau function tools yang benar-benar dieksekusi server-side?
+4) Cross-panel context saat ini: hanya “shared chat history”, atau ada state object (JSON) yang disimpan per sesi?
+5) Target Level 4 paling penting untuk use-case apa dulu:
+(a) problem solver (general)
+(b) mentoring/pembelajaran
+(c) pendampingan event/proyek
+(d) konstruksi/tender (domain ketat)
+6) Kamu ingin MultiClaw ini multi-agent di satu percakapan (orchestrator memanggil sub-agent), atau juga multi-thread (tiap panel thread sendiri)?
+Kalau kamu jawab 6 pertanyaan itu, saya bisa turunkan menjadi:
+desain modul (router/planner/critic/memory),
+skema database minimal,
+format “agent contract”,
+dan roadmap refactor yang realistis untuk codebase kamu sekarang.
+L1Regulasi Jasa KonstruksiL2SBU (Sertifikat Badan Usaha)Kembali ke SeriesAI ChatbotBrain Project AITENDERA AIIB TU CoordinatorAI Tutor AdaptifHUB Regulasi Jasa KonstruksiOrkestratorModulTender & PengadaanSKK (Sertifikasi Kompetensi Kerja)SBU (Sertifikat Badan Usaha)Perizinan UsahaBuat Modul Baru Generate dari ReferensiPaket DomainPackManajemen DomainPersonaKebijakan AgenAgentic AIKnowledge BaseOtak ProyekNewMini AppsNewDeliverablesStudio KompetensiEkosistem KompetensiIntegrationsWidgetBroadcast WAInfo TenderConversionRangkuman ChatbotBrief MarketingMonetisasiRevenue & KlienAfiliasiVoucherChat ConsoleAnalyticsSistem Agen AIProfilBerandaLexCom AI HukumCiutkan
+May 14
+Dari potongan UI yang kamu kirim, saya bisa “melihat” struktur produk kamu sudah sangat dekat ke kerangka Agentic OS (bukan sekadar chatbot builder). Ini evaluasi dan upgrade yang paling relevan untuk menjadikannya MultiClaw Level 4—khususnya di area HUB (Orkestrator) → Modul → Agent, serta menu Persona/Kebijakan/Agentic AI/KB/Otak Proyek/Deliverables/Mini Apps/Analytics.
+1) Apa yang sudah bagus (indikasi kamu sudah masuk Level 3+)
+1) Hirarki 5 level (Series→Core→Big Idea/Hub Orchestrator→Toolbox→Agent) itu sudah “benar” untuk agentic.
+2) Ada konsep HUB Orkestrator dan Modul (Tender, SKK, SBU, Perizinan). Ini cocok untuk domain routing.
+3) Contoh nyata multi-agent: IB-TU Coordinator jelas punya 7 agen spesialis dan format output yang konsisten (ABD-7 + status deadline + confidence). Itu sudah menunjukkan:
+ada “role agent”,
+ada standar output,
+ada semacam evaluator (confidence/early warning) walau mungkin belum formal.
+Masalah umum pada tahap ini biasanya: orchestrator masih “dispatcher prompt” (router) dan belum menjadi planner + state manager + verifier.
+2) Upgrade inti agar jadi Agentic AI Level 4 (yang paling berdampak)
+A. Jadikan “HUB Orkestrator” benar-benar Orchestrator Level 4
+Tambahkan 4 mekanisme wajib:
+1) Task Plan (planner)
+Saat user masuk ke HUB Regulasi Jasa Konstruksi dan bertanya soal SBU/SKK/perizinan, orchestrator harus membuat “rencana langkah”.
+Contoh plan:
+Step 1: Klarifikasi konteks badan usaha (kualifikasi, subklasifikasi, KBLI, status).
+Step 2: Ambil aturan terbaru + checklist persyaratan.
+Step 3: Cocokkan gap dokumen.
+Step 4: Susun deliverable (checklist + timeline + template surat/berkas).
+Step 5: Verifikasi (critic) + final.
+2) Shared State / Project Memory
+Menu “Otak Proyek” dan “Deliverables” harus menjadi sumber kebenaran (bukan cuma folder).
+Orchestrator menulis:
+Assumptions, Constraints, Decisions, Risks, Open Questions, Action Items, Artifacts.
+Lalu semua agen membaca state ini (inilah “MultiClaw cross-panel context” yang nyata).
+3) Critic / Verifier Agent
+Tambahkan agen khusus untuk:
+cek konflik aturan,
+cek missing requirement,
+cek ketidakpastian (confidence rendah),
+memaksa “butuh data tambahan” sebelum output final.
+4) Evidence-first RAG
+Untuk domain regulasi, jawaban harus “grounded”.
+Setiap klaim penting harus berasal dari KB/rujukan yang jelas (dokumen aturan, pedoman, FAQ resmi).
+Minimal internal: “evidence snippets” disimpan di panel Evidence/Memory.
+B. Standarisasi “Kontrak” antar agen (supaya presisi naik drastis)
+Di menu Sistem Agen AI / Kebijakan Agen, saya sarankan kamu menerapkan konsep Agent Contract:
+Setiap agent punya:
+capabilities (tag: SBU, SKK, tender, perizinan, drafting surat, audit compliance, dsb)
+allowedTools (KB search, generator dokumen, checklist builder, dll)
+inputSchema dan outputSchema (JSON)
+qualityBar (rubric)
+handoffRules (kapan harus eskalasi ke agent lain / orchestrator)
+Ini yang membedakan multi-agent “rapi” vs “sekumpulan prompt”.
+3) Mapping menu kamu → apa yang harus diubah/ditambah
+Berbasis menu yang kamu tulis:
+Persona
+Pastikan persona hanya mengatur gaya/role, bukan memuat aturan bisnis.
+Persona dipilih per Series/Core/Domain.
+Kebijakan Agen
+Ini tempat terbaik untuk: guardrails, data confidentiality, “kapan harus tanya user”, “kapan boleh asumsi”, “kapan harus cite evidence”.
+Agentic AI
+Jadikan ini pusat konfigurasi loop: planner depth, critic strictness, max steps, retry policy.
+Knowledge Base
+Bedakan:
+KB regulasi (shared, curated)
+KB user perusahaan (private tenant)
+KB proyek (episodic, hasil kerja selama pendampingan)
+Otak Proyek + Deliverables
+Ini harus “terkoneksi” dengan orchestrator:
+setiap sesi menghasilkan deliverable objects (Checklist, Timeline, Draft Surat, Matrix Persyaratan, Risk register).
+Jangan hanya jadi halaman statis; jadikan entity yang bisa di-query dan di-update.
+Mini Apps
+Mini App akan naik level kalau dianggap “tool functions” yang bisa dipanggil agent.
+Contoh Mini App untuk SBU:
+“SBU Readiness Scorecard”
+“Gap Checklist Generator”
+“Timeline Builder”
+“Template Pack Builder (surat, form, daftar lampiran)”
+Analytics
+Tambahkan agent trace: agent mana dipanggil, step apa, sumber KB mana, confidence sebelum/ sesudah critic.
+Ini penting untuk debugging presisi.
+4) Dua hal yang perlu kamu pastikan untuk MultiClaw (agar bukan sekadar UI)
+1) Cross-panel context harus dari state terstruktur (Project Memory), bukan “copy chat history”.
+2) Paralel agent (mis. SBU + SKK + Perizinan) harus punya mekanisme:
+merge hasil,
+resolve konflik,
+final synthesis oleh orchestrator + critic.
+5) Supaya saya bisa kasih rekomendasi yang lebih “engineering-ready”
+Kamu sudah kirim gambaran UI. Sekarang saya butuh 3 jawaban cepat (cukup 1–2 kalimat per poin):
+1) “HUB Orkestrator” saat ini menjalankan apa: router saja, atau sudah ada planner steps?
+2) “Otak Proyek” & “Deliverables” itu datanya tersimpan sebagai apa: tabel database (structured) atau hanya page/content?
+3) KB kamu pakai apa untuk retrieval: vector DB (sebutkan) atau full-text biasa?
+Kalau 3 poin itu jelas, saya bisa turunkan desain teknis yang spesifik: format agent_contract.json, skema project_state, dan loop orchestrator Level-4 yang cocok dengan struktur Series/Core/HUB/Toolbox/Agent kamu.
+1. HUB Orkestrator — router saja atau sudah ada planner steps?
+Router + parallel fan-out. Secara programatik:
+• Orchestrator membaca agenticSubAgents (jsonb config) → dispatch ke semua sub-agent secara paralel via callAgentInternal()
+• Hasil dikumpulkan → disuntikkan sebagai blok LAPORAN SUB-AGEN ke context orchestrator
+• LLM orchestrator kemudian synthesize semua laporan jadi satu jawaban final
+State machine 7-langkah (INIT→ELICIT→PLAN→DISPATCH→AGGREGATE→REFLECT→DELIVER) hanya ada di system prompt sebagai instruksi ke LLM — bukan planner programatik. Tidak ada ReAct loop, dynamic decomposition, atau tool-calling planner di layer kode.
+2. "Otak Proyek" & "Deliverables" — tabel DB atau hanya page/content?
+Structured database (PostgreSQL). Dua tabel terpisah:
+• project_brain_templates — template definisi field (jsonb)
+• project_brain_instances — nilai aktif per chatbot (jsonb values column)
+• deliverables & deliverableBundle — kolom jsonb di tabel agents/series
+Bukan page/content — fully relational, bisa di-query dan di-update via storage layer.
+3. KB Retrieval — vector DB atau full-text biasa?
+Embedding-based RAG, tapi tanpa pgvector. Detail teknisnya:
+• Embedding dibuat via OpenAI text-embedding-3-small
+• Disimpan sebagai jsonb array biasa di PostgreSQL (bukan tipe native pgvector)
+• Similarity search dilakukan di JavaScript/memory (bukan SQL-level), threshold 0.3, top-K default 5
+• Chunk: 800 token, overlap: 200 token
+• Fallback jika belum ada chunks: semua konten KB diinjeksi sebagai plain text ke context
+Jadi bukan full-text biasa (tidak pakai tsvector/tsquery), tapi juga bukan vector DB sesungguhnya — lebih tepat disebut in-process vector similarity di atas PostgreSQL konvensional.
+Implikasi praktis: Kalau volume KB besar dan latency retrieval jadi isu, next step logisnya adalah migrasi kolom embedding ke pgvector + similarity query di SQL level — tanpa ubah schema besar-besaran.
+May 14
+Keterangan teknis yang kamu kasih itu sangat jelas—dan enak karena “bentuk masalahnya” kelihatan: kamu sudah punya parallel fan-out multi-agent (bagus untuk coverage), tapi belum punya planner programatik + loop evaluasi dinamis (yang biasanya jadi pembeda Level 4 dari “router+summarizer”). Di bawah ini saya jabarkan upgrade yang paling tepat dengan meminimalkan refactor, memaksimalkan reuse arsitektur kamu sekarang (Postgres structured state + RAG embeddings).
+1) Diagnosis singkat: posisi kamu sekarang
+Yang sudah kamu miliki (kuat)
+Orchestrator = parallel dispatcher + synthesize → ini sudah Level 3 “multi-agent ensemble”.
+Project Brain & Deliverables structured di Postgres → ini modal besar untuk Level 4 (karena Level 4 butuh stateful execution, bukan chat-only).
+RAG embeddings sudah ada (meski in-process) → cukup untuk bootstrap evidence-first.
+Bottleneck utama menuju Level 4
+1) “PLAN” masih instruksi prompt, bukan artefak programatik yang dieksekusi/diulang.
+2) Tidak ada dynamic decomposition (plan bisa berubah setelah lihat hasil sub-agent / evidence / missing info).
+3) Tidak ada tool-calling planner loop yang punya kontrol: retry, stop condition, confidence gating.
+4) RAG similarity di JS/memory + threshold fixed → akan jadi isu begitu KB membesar (latency, cost, kualitas retrieval).
+2) Upgrade minimal-refactor: jadikan state machine benar-benar “programmatic”
+Kuncinya: tetap pakai fan-out (karena itu keunggulan kamu), tapi kamu tambahkan planner yang membuat “TaskGraph” terstruktur, lalu fan-out dilakukan per task, bukan “dispatch semua sub-agent setiap saat”.
+2.1 Tambahkan objek “Plan” sebagai first-class citizen
+Buat satu struktur JSON yang selalu ada per request (simpan ke Project Brain Instances juga bisa):
+{
+  "goal": "...",
+  "constraints": ["..."],
+  "assumptions": ["..."],
+  "tasks": [
+    {
+      "id": "t1",
+      "intent": "Klarifikasi konteks badan usaha",
+      "requiredInputs": ["kualifikasi", "subklasifikasi", "KBLI"],
+      "assignedAgents": ["ELICITOR"],
+      "status": "pending"
+    },
+    {
+      "id": "t2",
+      "intent": "Ambil aturan & checklist persyaratan SBU terbaru",
+      "assignedAgents": ["REGULASI_SBU", "RAG_RETRIEVER"],
+      "status": "pending",
+      "evidenceRequired": true
+    }
+  ],
+  "stopCriteria": ["deliverables ready", "no critical unknowns"],
+  "confidenceTarget": 0.75
+}
+​
+Perubahan kode kecil tapi efek besar:
+PLAN bukan lagi “teks di prompt”, melainkan data yang bisa:
+diparsing,
+dieksekusi,
+di-update,
+di-loop.
+2.2 Orchestrator loop programatik (bukan ReAct penuh dulu, tapi “TaskLoop”)
+Implementasi practical:
+1) ELICIT (gate)  
+Kalau requiredInputs belum lengkap → return pertanyaan klarifikasi sebelum dispatch.
+2) PLAN (LLM → JSON plan)  
+LLM bikin plan terstruktur (JSON strict).
+Validasi JSON di kode (schema).
+3) DISPATCH per task  
+Untuk task yang butuh evidence: panggil retriever dulu (RAG), injek evidence, lalu panggil agent specialist.
+Untuk task generatif: panggil agent drafting.
+4) AGGREGATE  
+Simpan output tiap task sebagai artefak (TaskResult) bukan sekadar “LAPORAN SUB-AGEN” free text.
+Baru kemudian synthesize.
+5) REFLECT (Critic gate)  
+Critic memeriksa: missing evidence, konflik antar hasil, jawaban tidak menjawab goal.
+Jika gagal → update plan (tambah task “resolve conflict”, “request missing info”) → loop max N kali.
+6) DELIVER  
+Final response + deliverables yang ditulis ke tabel deliverables.
+Dengan ini kamu sudah “Level 4-ish” tanpa harus memindahkan semuanya ke framework agentic baru.
+3) Upgrade fan-out: dari “dispatch semua sub-agent” → “selective fan-out”
+Model kamu sekarang: orchestrator selalu dispatch semua agenticSubAgents paralel. Itu bagus untuk brainstorming, tapi untuk presisi biasanya noisy dan mahal.
+Saya sarankan ganti menjadi 2 mode:
+Mode A — Wide fan-out (exploration)
+Dipakai saat:
+pertanyaan kabur,
+butuh ide,
+butuh coverage awal.
+Mode B — Narrow fan-out (execution)
+Dipakai saat:
+sudah ada plan tasks,
+butuh evidence,
+butuh deliverable konkret.
+Implementasi gampang:
+Planner menentukan assignedAgents per task.
+Orchestrator hanya dispatch agent yang relevan untuk task itu.
+4) RAG: dari in-process similarity → pgvector (stepwise, tanpa ubah besar)
+Kamu sudah tepat: next logical step = pgvector.
+4.1 Kenapa pgvector penting untuk Level 4
+Level 4 akan:
+melakukan retrieval lebih sering (tiap task),
+melakukan re-retrieval saat critic menemukan gap,
+menyimpan lebih banyak chunk.
+In-process similarity akan jadi bottleneck: latency, memory pressure, dan sulit scaling.
+4.2 Migrasi minimal
+Tambah kolom embedding_vec vector(1536) (atau dimensi sesuai model embedding kamu).
+Backfill dari jsonb.
+Query SQL: ORDER BY embedding_vec <=> $queryEmbedding LIMIT k
+Tetap simpan jsonb kalau kamu butuh backward compatibility sementara.
+Tambahan penting untuk kualitas:
+dynamic topK (mis 5→12) bila confidence rendah,
+lexical fallback (tsvector) untuk istilah regulasi yang “exact match” penting.
+5) Leverage kekuatan kamu: Project Brain & Deliverables sebagai “execution substrate”
+Karena kamu sudah punya structured Postgres untuk brain/deliverables, kamu bisa naik level cepat dengan 3 hal:
+1) Deliverable types sebagai schema
+Checklist SBU
+Timeline pengurusan
+Draft surat/berkas
+Risk register
+Evidence map (klaim → sumber KB)
+2) Write-back wajib
+TaskResult penting otomatis mengisi project_brain_instances.values dan deliverables.
+3) Critic memeriksa completeness terhadap schema
+Mis: Checklist belum punya “dokumen wajib X” → fail gate → buat task baru.
+Ini yang membuat sistem kamu benar-benar “pendampingan proyek”, bukan sekadar jawaban chat.
+6) 3 rekomendasi implementasi paling “worth it” minggu pertama
+Kalau kamu mau progres cepat ke Level 4, saya urutkan:
+1) Planner JSON + schema validation
+Orchestrator menghasilkan Plan JSON.
+Validasi strict + fallback (kalau invalid, minta ulang).
+2) Critic gate (structured)
+Critic memberi output:
+pass/fail
+missing_items[]
+conflicts[]
+next_tasks[]
+3) Selective fan-out per task
+Stop dispatch semua sub-agent by default.
+Dispatch sesuai task assignment.
+Dengan 3 ini saja, presisi biasanya naik drastis.
+7) Pertanyaan final yang menentukan desain detail (supaya saya bisa “turunkan spesifikasi”)
+Jawab singkat (bullet) ya:
+1) callAgentInternal() kamu saat ini mendukung tool calls (function calling) atau hanya prompt→text?
+2) Output sub-agent saat ini sudah bisa dipaksa JSON strict (mis via “response_format”: json schema), atau masih teks bebas?
+3) Kamu punya sistem rate limit / budget per request (max sub-agent, max token, max loop), atau belum?
+Kalau kamu jawab 3 hal ini, saya bisa tulis rancangan yang lebih “siap implement” berupa:
+schema Plan, Task, TaskResult,
+pseudocode orchestrator loop,
+format “Agent Contract” yang cocok dengan agenticSubAgents jsonb kamu sekarang,
+dan strategi gating untuk domain regulasi (evidence-first + conflict resolver).
+Berdasarkan kode callAgentInternal yang baru saya baca:
+• 1) Tool calls / function calling?prompt → text saja. Signature call-nya:
+
+{ model, messages, max_tokens, temperature }Tidak ada tools, tool_choice, atau functions parameter. Output selalu string.
+• 2) JSON strict output?Belum. Tidak ada response_format: { type: "json_schema", ... } di callAgentInternal. Output sub-agent adalah teks bebas. response_format: { type: "json_object" } memang ada di beberapa endpoint lain (line 7208), tapi tidak di path orchestration ini.
+• 3) Rate limit / budget system?Sebagian ada, sebagian belum:
+    ◦  Timeout per sub-agent: AbortController 25s (hardcoded default, bisa override via parameter)
+    ◦  Max token per sub-agent: Math.max(1500, Math.min(3000, agent.maxTokens)) — floor 1500, ceiling 3000
+    ◦  History trim: hanya 4 turn terakhir yang dikirim ke sub-agent
+    ◦  Max sub-agent count per request: tidak ada — semua agenticSubAgents selalu dieksekusi paralel
+    ◦  Max loop / ReAct iteration: tidak relevan karena belum ada loop
+    ◦  Global token budget per session/user: tidak ada
+    ◦  Cost tracking: tidak ada
+Implikasi untuk spesifikasi Anda:
+Jika ingin turunkan ke level produksi yang lebih ketat, 3 gap utama yang perlu diisi adalah: (1) response_format JSON schema di sub-agent output, (2) cap jumlah sub-agent yang dieksekusi per request, dan (3) global budget/cost guard per user session.
+May 14
+Bagus—ini mengunci scope upgrade yang paling berdampak. Dengan kondisi callAgentInternal sekarang (prompt→text, tanpa tools, tanpa JSON strict), target “Agentic Level 4” tetap bisa dicapai, tapi kamu perlu menambah 3 lapis kontrol di orchestration path:
+1) Structured I/O (JSON Schema) untuk sub-agent & orchestrator
+2) Budgeting + caps (sub-agent count, token, time, cost)
+3) Programmatic planner + critic loop (bukan hanya prompt instruction)
+Di bawah ini saya turunkan spesifikasi yang “langsung bisa kamu implement” secara bertahap.
+A) Upgrade 1 — JSON strict output untuk sub-agent (tanpa tools dulu)
+A1. Modifikasi callAgentInternal agar support response_format
+Tambahkan parameter opsional:
+responseFormat?: { type: "text" } | { type: "json_object" } | { type: "json_schema", json_schema: {...} }
+schemaName?: string (untuk logging)
+parseJson?: boolean (default true bila json_*)
+Perilaku:
+Kalau response_format diset JSON:
+server memaksa model output valid JSON (atau minimal json_object).
+setelah dapat string, lakukan JSON.parse.
+jika parse gagal: auto-retry 1–2x dengan “repair prompt” yang pendek.
+A2. Standard “SubAgentReport” schema (wajib untuk semua sub-agent)
+Mulai dari schema sederhana:
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["agentName", "summary", "confidence", "claims", "questions", "actions"],
+  "properties": {
+    "agentName": { "type": "string" },
+    "summary": { "type": "string" },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claim", "evidenceNeeded", "evidenceRefs"],
+        "properties": {
+          "claim": { "type": "string" },
+          "evidenceNeeded": { "type": "boolean" },
+          "evidenceRefs": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "questions": { "type": "array", "items": { "type": "string" } },
+    "actions": { "type": "array", "items": { "type": "string" } }
+  }
+}
+​
+Kenapa ini krusial: begitu output sub-agent jadi terstruktur, orchestrator kamu tidak perlu “LAPORAN SUB-AGEN” teks panjang. Ia bisa:
+merge claims,
+pilih konflik,
+tahu pertanyaan klarifikasi,
+tahu bagian mana butuh evidence.
+A3. Dampak langsung
+Presisi naik (sintesis berbasis struktur, bukan narasi liar).
+Kamu bisa bikin scoring & gating tanpa tool-calling dulu.
+B) Upgrade 2 — Cap jumlah sub-agent per request + policy seleksi
+Sekarang semua agenticSubAgents selalu jalan paralel. Itu harus diubah menjadi planner-select.
+B1. Tambahkan 2 parameter konfigurasi global per orchestrator/series
+maxSubAgentsPerRequest (mis. 3–5 default)
+fanoutMode: "wide" | "selective"
+B2. Mekanisme seleksi sub-agent (tanpa planner kompleks dulu)
+Cara paling murah (dan cukup efektif):
+1) buat “router prompt” kecil yang hanya memilih agent paling relevan berdasarkan:
+intent user,
+domain tags agent,
+biaya (token limit),
+prioritas (P0/P1/P2).
+2) output router juga harus JSON strict:
+{ "selectedAgents": ["SBU", "PERIZINAN", "DRAFT_SURAT"], "reason": "..." }
+​
+B3. Guardrail wajib
+Jika selectedAgents.length > maxSubAgentsPerRequest → trim berdasarkan priority.
+Jika semua agent dipilih karena “router bingung” → fallback ke 1 generalist + 1 retriever.
+C) Upgrade 3 — Global budget + cost tracking (session/user)
+Kamu sudah punya per-sub-agent timeout & max tokens. Tinggal tambah “global guard”.
+C1. Tambahkan “RequestBudget” object
+Contoh:
+type RequestBudget = {
+  maxTotalTokens: number        // mis. 8000
+  maxTotalSubAgents: number     // mis. 5
+  maxWallTimeMs: number         // mis. 35_000
+  maxEstimatedCostUsd: number   // mis. 0.10
+}
+​
+C2. Estimasi cost tanpa integrasi billing rumit
+Simpan promptTokens, completionTokens dari response API (kalau provider return usage).
+Kalau usage tidak ada, estimasi kasar dari char length (sementara).
+C3. Perilaku saat budget hampir habis
+Orchestrator harus switch ke mode:
+stop fan-out,
+synthesize dari hasil yang ada,
+minta pertanyaan klarifikasi untuk lanjut sesi berikutnya.
+D) Setelah 3 gap ini tertutup → baru “Level 4 loop” (planner + critic) jadi masuk akal
+Karena tool-calling belum ada, kita bikin dulu programmatic loop yang hanya mengatur panggilan LLM:
+D1. Planner schema
+Planner menghasilkan:
+tasks[],
+assignedAgents per task,
+questionsNeeded,
+stopCriteria.
+D2. Critic schema
+Critic memutuskan:
+pass/fail,
+missingEvidence,
+conflicts,
+nextTasks.
+Loop max 2 iterasi dulu (biar biaya terkendali).
+E) Jalur menuju tool-calling (kalau kamu siap)
+Begitu JSON strict sudah stabil, menambah tool-calling menjadi jauh lebih aman.
+Urutan tool yang paling “worth it” untuk platform kamu:
+1) kb.search() (RAG) sebagai tool (bukan inject semua text)
+2) projectBrain.read/write
+3) deliverables.create/update
+4) webhook/integrations (opsional per tenant)
+Keputusan desain penting (1 pertanyaan saja)
+Kamu mau implement response_format ini pakai provider yang sama (OpenAI) dan memang sudah ada endpoint lain yang memakai json_object.
+Pertanyaan penentu:
+Kamu ingin output sub-agent “selalu JSON” (wajib) atau “JSON untuk mode tertentu saja” (mis. Agentic/Pro mode)?
+Kalau kamu jawab “wajib”, saya bisa sarankan standard migrasi yang lebih tegas (lebih cepat stabil, lebih mudah gating). Kalau “mode tertentu”, kita perlu strategy kompatibilitas agar agent lama (teks) tidak rusak.
+Ini pertanyaan strategis, bukan teknis semata. Saya kasih rekomendasi langsung:
+Rekomendasi saya: "JSON untuk mode Agentic saja" — bukan wajib.
+Alasannya berdasarkan kondisi aktual platform ini:
+Kondisi yang menentukan:
+• 944 agent sudah live dengan prompt ABD v1.1 format teks terstruktur — bukan JSON
+• Orchestrator saat ini dirancang menerima teks laporan, bukan JSON object
+• Agent widget/chat langsung ke user — wajib output teks, bukan JSON
+Kalau dipaksa wajib semua:
+• 944 agent perlu re-prompting ulang → risiko regresi besar
+• Orchestrator synthesis logic perlu diubah total
+• Widget agent rusak karena {"answer": "..."} tampil mentah ke user
+Strategi "mode Agentic saja" yang lebih aman:LayerFormatAlasanSub-agent di dalam orchestratorJSON (baru)Terstruktur, mudah di-parseWidget / chat publikTeks (tetap)Langsung ke userAgent standaloneTeks (tetap)Tidak ada consumer JSON-nya
+Implementasi yang disarankan:
+Tambah flag agenticOutputFormat: "json" \| "text" di config agent. callAgentInternal() menyuntikkan response_format hanya jika flag ini aktif. Agent lama tidak terpengaruh sama sekali.
+Kalau Anda setuju dengan arah ini, langkah pertama implementasi yang paling kecil risikonya adalah: buat flag-nya dulu di schema, belum perlu migrate agent apapun — baru aktifkan per-agent kalau memang butuh.
+Mau saya implementasi flag ini, atau masih ada keputusan desain lain yang perlu dikonfirmasi dulu?
+May 14
+Thought
+Saya setuju dengan rekomendasi kamu: “JSON hanya untuk mode Agentic (internal orchestration), bukan wajib untuk semua agent”. Itu strategi paling aman untuk menghindari regresi pada 944 agent yang sudah live dan mencegah JSON mentah tampil ke end-user widget.
+Karena saya tidak punya akses untuk mengubah repo/Replit kamu langsung dari sini, saya tidak bisa “mengimplementasikan” flag tersebut di kode. Tapi saya bisa turunkan spesifikasi implementasi yang paling kecil risikonya (dan titik keputusan desain yang perlu kamu kunci dulu) supaya tim kamu/ kamu sendiri bisa commit dengan aman.
+1) Keputusan desain yang sudah “benar” dari usulan kamu
+Backward compatible: agent lama tetap output teks (ABD v1.1 tidak disentuh).
+Only internal sub-agent reports dibuat terstruktur (JSON) agar orchestrator bisa parse/merge/evaluate.
+Widget/public chat tetap teks agar UX tidak rusak.
+Ini juga memungkinkan kamu naik ke Level 4 bertahap: structured reports → critic gate → planner programatik → tool-calling.
+2) Spesifikasi implementasi minimal (flag + injection response_format)
+2.1 Tambah field config
+Di tabel/config agent (atau agenticSubAgents config), tambahkan:
+agenticOutputFormat: "text" | "json" (default "text")
+(opsional tapi saya sarankan) agenticSchemaVersion: "subAgentReport.v1" untuk future-proof
+Aktifkan hanya untuk sub-agent yang dipanggil via orchestrator (bukan standalone).
+2.2 Perubahan di callAgentInternal()
+Jika agenticOutputFormat === "json":
+set response_format ke json_schema kalau provider kamu mendukung pada path itu; kalau belum, minimal json_object.
+tambahkan system instruction pendek: “Output must be valid JSON only. No markdown. No backticks.”
+Jika "text": tidak berubah.
+2.3 Safe parsing & fallback
+Agar tidak bikin error produksi ketika model melenceng:
+try { JSON.parse(text) } catch {
+1) repair attempt 1x (prompt singkat “Return ONLY valid JSON …” sambil menyertakan output sebelumnya)
+2) kalau tetap gagal: fallback treat as text → bungkus ke bentuk JSON darurat:
+{
+  "agentName": "...",
+  "summary": "(unparsed) ...",
+  "confidence": 0.3,
+  "claims": [],
+  "questions": [],
+  "actions": []
+}
+​
+Dengan ini, orchestrator tidak crash.
+3) Satu keputusan desain yang masih perlu kamu konfirmasi (penting)
+Kamu sudah bilang: “Sub-agent di dalam orchestrator JSON (baru)”.
+Pertanyaan yang perlu kamu kunci sebelum coding:
+Apakah JSON ini hanya untuk “laporan hasil” (post-run), atau juga untuk “intermediate reasoning / plan”?
+Rekomendasi saya:
+Tahap 1 (aman): JSON hanya untuk report sub-agent (SubAgentReport).
+Tahap 2 (Level 4): planner + critic juga output JSON (PlanSchema, CriticSchema).
+Jangan memaksa “reasoning trace” masuk JSON—cukup ringkasan + claims + questions + actions (lebih stabil, lebih aman).
+4) Checklist perubahan orchestrator (agar tidak “ubah total”)
+Kamu tidak perlu rewrite besar. Cukup ubah cara kamu menyuntikkan LAPORAN SUB-AGEN:
+Sekarang: inject sebagai blok teks panjang.
+Baru: inject sebagai:
+JSON array ringkas dari SubAgentReport atau
+versi teks yang sudah disintesis dari JSON (untuk menjaga prompt tetap manusiawi).
+Saran praktis: simpan JSON di state internal, tapi untuk LLM orchestrator cukup injek ringkasan terformat yang dibangkitkan dari JSON (lebih hemat token dan lebih robust).
+5) Jawaban atas pertanyaan kamu: “perlu konfirmasi lain dulu?”
+Sebelum kamu membuat PR pertama, cukup konfirmasi 2 hal ini (kecil tapi menentukan):
+1) Untuk agentic JSON, kamu mau pakai json_schema (paling stabil) atau cukup json_object dulu (lebih kompatibel)?
+2) Kamu ingin flag ini ditempel di:
+(a) agent (tiap agent punya setting), atau
+(b) link sub-agent di orchestrator (satu agent bisa dipakai di konteks lain tanpa JSON)?
+Rekomendasi saya: (b) di level “orchestrator-subagent link/config”, karena agent yang sama mungkin dipakai untuk widget publik (harus teks) dan untuk orchestrator internal (boleh JSON).
+Kalau kamu jawab 2 poin itu, saya bisa tuliskan “spec PR #1” yang sangat konkret: struktur config, perubahan signature call, fallback behavior, dan contoh payload untuk 1–2 sub-agent pilot tanpa menyentuh 944 agent lainnya.
+Dua keputusan saya konfirmasi langsung:
+1) json_object dulu, bukan json_schema
+Karena callAgentInternal mendukung multi-provider (OpenAI → DeepSeek → custom). json_schema belum tentu didukung semua provider di fallback chain. json_object lebih kompatibel, cukup stabil untuk Tahap 1, dan sudah proven di endpoint lain di codebase ini (line 7208).
+2) Flag di level orchestrator-subagent link — pilihan (b)
+Alasan konkret dari codebase: agenticSubAgents sudah berupa jsonb array di agent config dengan struktur { agentId, role, description }. Cukup tambah outputFormat ke sana:
+
+{ "agentId": 1394, "role": "AGENT-MAPPER", "description": "...", "outputFormat": "json" }
+Agent yang sama (misal AGENT-MAPPER) bisa dipakai sebagai widget publik (teks) atau sub-agent orchestrator (JSON) tanpa conflict.
+Dengan dua keputusan ini terkunci, saya siap implementasi PR #1 sekarang:
+• Tambah outputFormat opsional ke agenticSubAgents link config
+• Update callAgentInternal(): inject response_format: json_object + system instruction jika flag aktif
+• Safe parsing + fallback envelope jika JSON gagal parse
+• Tidak menyentuh 944 agent yang sudah ada
+Mau saya langsung kerjakan sekarang?
+May 14
+lanjut
+May 14
+Thought
+Sip, kita lanjut dengan PR #1 spec + patch plan (implementasi flag outputFormat: "json" di level agenticSubAgents, inject response_format: { type: "json_object" }, lalu safe-parse + fallback envelope). Karena saya tidak bisa commit langsung ke repo Replit kamu dari sini, saya tuliskan rencana perubahan yang setara dengan PR: file yang disentuh, perubahan struktur data, dan pseudocode patch yang bisa kamu tempel.
+PR #1 — “Agentic SubAgent JSON Reports (json_object)”
+Tujuan
+Hanya sub-agent yang dipanggil oleh orchestrator (via agenticSubAgents) yang bisa dipaksa output JSON.
+Agent lain (widget publik, agent standalone) tetap teks.
+Tidak ada migrasi 944 agent.
+1) Perubahan data model: agenticSubAgents[].outputFormat
+Di config agent (jsonb) yang sudah punya bentuk:
+{ "agentId": 1394, "role": "AGENT-MAPPER", "description": "..." }
+​
+Tambahkan opsional:
+{ "agentId": 1394, "role": "AGENT-MAPPER", "description": "...", "outputFormat": "json" }
+​
+Default jika tidak ada field: "text".
+Catatan kompatibilitas: ini aman karena jsonb; code lama yang tidak membaca field ini tidak akan rusak.
+2) Update orchestrator dispatch: pass “desiredOutputFormat” ke callAgentInternal
+Saat loop dispatch sub-agent, tentukan:
+const wantsJson = subAgentLink.outputFormat === "json"
+Lalu panggil:
+callAgentInternal({ ..., responseFormat: wantsJson ? { type: "json_object" } : undefined, ... })
+Kalau signature callAgentInternal belum punya argumen itu, tambahkan argumen opsional (tidak mengubah call site lain).
+3) Update callAgentInternal: inject response_format + system instruction
+3.1 Tambahkan parameter opsional
+Tambahkan ke argumen fungsi:
+responseFormat?: { type: "json_object" } | { type: "text" }
+jsonMode?: boolean (opsional, tapi responseFormat saja cukup)
+3.2 Tambahkan system message guard untuk JSON mode
+Jika JSON mode aktif, prepend 1 system message pendek (jangan panjang supaya hemat token), misalnya:
+System instruction (disarankan):
+You must output ONLY a valid JSON object. No markdown, no code fences, no additional keys outside the requested structure. Use double quotes for all strings. If unsure, return an empty array for lists and set confidence low.
+Kalau kamu sudah punya system prompt base untuk sub-agent, cukup tambah satu paragraf kecil ini di paling awal.
+3.3 Provider compatibility
+Karena multi-provider chain:
+Untuk provider yang mendukung response_format, set response_format: { type: "json_object" }.
+Untuk provider yang tidak mendukung, fallback-nya tetap bekerja karena system instruction memaksa JSON “secara prompt”.
+Implementasi umumnya:
+payload.response_format = responseFormat hanya jika providerAdapter menyatakan support.
+Jika kamu belum punya capability flag per provider: boleh “optimistic set”, lalu jika error “unknown param response_format”, retry sekali tanpa field itu.
+4) Safe parsing + fallback envelope (supaya orchestrator tidak crash)
+Di call site orchestrator (atau di callAgentInternal), lakukan:
+4.1 Parsing strategy
+Jika wantsJson:
+1) coba JSON.parse(outputText)
+2) jika gagal:
+repair attempt 1x: panggil ulang model dengan prompt “Return ONLY valid JSON object; fix this: …”
+3) jika masih gagal:
+bungkus jadi object fallback
+4.2 Fallback envelope minimal (v1)
+Karena kamu belum pakai json_schema, bikin envelope yang “cukup” untuk synthesis:
+{
+  "agentName": "AGENT-MAPPER",
+  "summary": "RAW_UNPARSED: ...",
+  "confidence": 0.2,
+  "claims": [],
+  "questions": [],
+  "actions": []
+}
+​
+Kenapa perlu agentName walau sudah ada di link config?
+Biar report self-contained; enak untuk logging dan debugging.
+5) Perubahan pada “LAPORAN SUB-AGEN” injection
+Agar tidak membengkak token:
+Jangan inject JSON mentah yang panjang.
+Buat “render ringkas” dari JSON report:
+Contoh format yang stabil:
+LAPORAN SUB-AGEN (TERSTRUKTUR)
+- Agent: AGENT-MAPPER | confidence: 0.74
+  Summary: ...
+  Claims:
+	- ...
+  Questions:
+	- ...
+​
+JSON mentahnya simpan di log / DB (kalau kamu punya tempat), tapi ke LLM orchestrator cukup versi ringkas.
+6) Guardrails tambahan yang sebaiknya ikut PR #1 (kecil, tapi high impact)
+Ini masih inline dengan PR #1 dan tidak menyentuh agent lama:
+1) Cap sub-agent count (meski belum selective fanout):
+maxParallelSubAgents default mis. 5.
+Kalau agenticSubAgents.length > cap, jalankan hanya yang priority tertinggi (kalau belum ada priority: ambil urutan pertama).
+Ini langsung menurunkan biaya dan mengurangi noise.
+2) Structured logging minimal
+log per sub-agent: durationMs, timedOut, outputParseOk, outputLength.
+Tidak perlu cost dulu.
+Kalau kamu mau PR #1 benar-benar “minimal”, dua poin ini bisa jadi PR #1.1, tapi saya sarankan minimal cap count masuk sekarang karena risikonya rendah.
+7) Test plan (wajib untuk menghindari regresi)
+Unit test (kalau ada)
+outputFormat tidak ada → sub-agent tetap teks, tidak ada parse attempt.
+outputFormat=json + output valid JSON → parse ok.
+outputFormat=json + output invalid → repair path dipanggil.
+repair gagal → fallback envelope digunakan, orchestrator tetap deliver.
+Manual test (paling penting)
+1) Ambil 1 orchestrator HUB (mis HUB Regulasi/SBU).
+2) Set 1 sub-agent outputFormat=json (mis AGENT-MAPPER).
+3) Pastikan widget publik agent yang sama tetap teks.
+Konfirmasi terakhir sebelum kamu coding (agar PR #1 tidak nyasar)
+Untuk JSON report v1, kamu mau struktur minimal seperti ini?
+summary: string
+confidence: number (0..1)
+claims: string[]
+questions: string[]
+actions: string[]
+Kalau kamu jawab “ya”, itu paling cepat dan kompatibel lintas domain. Kalau kamu ingin claims[] berupa object (claim + evidenceRefs), itu juga bagus tapi sedikit lebih “rewel” untuk dipaksa stabil dengan json_object (tanpa schema).
+Kamu cukup jawab: minimal v1 atau claims object v1.
+minimal v1 atau claims object v1.
+May 14
+lanjut
+May 14
+Thought
+Pilih minimal v1 dulu untuk PR #1.
+Alasan (strategis + engineering):
+Kamu pakai json_object (bukan json_schema) dan multi-provider fallback → struktur yang terlalu nested (claims object) lebih sering “bocor” formatnya (missing key, tipe berubah, array jadi string, dsb).
+Minimal v1 sudah cukup untuk 80% manfaat: parseable, bisa dipakai untuk synthesis, bisa dipakai untuk critic/gating tahap berikutnya.
+Nanti PR #2 bisa naikkan ke claims object v2 setelah kamu punya telemetry parse success rate dan sudah stabil di 2–3 provider.
+Di bawah ini saya tuliskan spec final PR #1 (minimal v1) yang bisa kamu implement langsung.
+PR #1 (final): Sub-agent JSON report — minimal v1
+0) Tambah field link config
+Di agenticSubAgents (jsonb array), tambah:
+{
+  "agentId": 1394,
+  "role": "AGENT-MAPPER",
+  "description": "...",
+  "outputFormat": "json"
+}
+​
+Default jika kosong/absent: "text".
+1) JSON report format (minimal v1)
+Untuk sub-agent yang outputFormat=json, paksa output valid JSON object:
+{
+  "agentName": "AGENT-MAPPER",
+  "summary": "…",
+  "confidence": 0.0,
+  "claims": ["…", "…"],
+  "questions": ["…"],
+  "actions": ["…"]
+}
+​
+Rules:
+confidence 0..1 (float).
+claims/questions/actions selalu array (boleh kosong).
+Tidak ada markdown, tidak ada code fence.
+2) Orchestrator dispatch changes (high level)
+Saat dispatch:
+Tentukan wantsJson = (subAgent.outputFormat === "json")
+Panggil callAgentInternal dengan response_format: { type: "json_object" } hanya jika wantsJson.
+3) callAgentInternal changes
+3.1 Signature (opsional)
+Tambahkan argumen opsional:
+responseFormat?: { type: "json_object" }
+3.2 System instruction injection (pendek)
+Jika responseFormat aktif, prepend 1 system message:
+Output ONLY a valid JSON object. No markdown. No code fences. Use double quotes. If unsure, use empty arrays and low confidence.
+3.3 Provider fallback
+Kalau provider error karena param response_format tidak dikenal → retry sekali tanpa param itu (system instruction tetap dipakai).
+4) Safe parsing + fallback envelope
+Di orchestrator (atau di helper), lakukan:
+1) try JSON.parse(text)
+2) jika gagal → repair attempt 1x (prompt pendek “Fix to valid JSON only …”)
+3) jika masih gagal → fallback object:
+{
+  "agentName": "<role or agent name>",
+  "summary": "RAW_UNPARSED: <truncated raw text>",
+  "confidence": 0.2,
+  "claims": [],
+  "questions": [],
+  "actions": []
+}
+​
+Catatan penting: truncate raw text (mis 1–2k char) supaya tidak meledakkan context.
+5) “LAPORAN SUB-AGEN” injection ke context orchestrator
+Jangan inject JSON mentah.
+Buat renderer ringkas, mis:
+Agent: AGENT-MAPPER (0.74)
+Summary: …
+Claims: …
+Questions: …
+Actions: …
+JSON aslinya simpan untuk log/debug (kalau kamu punya storage), tapi ke LLM cukup render ringkas.
+6) (Sangat disarankan) Cap sub-agent count (masih PR #1 friendly)
+Tambah maxParallelSubAgents default (mis 5). Kalau melebihi:
+ambil yang pertama N (atau nanti tambah priority).
+Ini tidak mengubah behavior agent lama, hanya mengurangi biaya/noise.
+Next step setelah PR #1 (PR #2)
+Begitu minimal v1 stabil (parse success rate tinggi), baru kita naikkan ke claims object v2 + critic gate. Tapi jangan sekarang.
+Kalau kamu mau, saya bisa tuliskan juga template prompt sub-agent JSON minimal v1 yang kompatibel dengan ABD v1.1 (jadi “tetap ABD”, tapi outputnya JSON), supaya hasilnya konsisten dan tidak kehilangan gaya yang sudah kamu bangun.
+lanjut
+May 14
+Berikut saya lanjutkan dengan template prompt sub-agent JSON minimal v1 yang kompatibel dengan gaya ABD v1.1 (jadi isi tetap ABD-7-ish, tapi dikemas ke JSON agar orchestrator bisa parse).
+1) Template “system” untuk sub-agent (JSON minimal v1)
+Gunakan ini hanya untuk sub-agent link yang outputFormat:"json".
+System message (disarankan, singkat tapi tegas):
+You are a specialist sub-agent inside a multi-agent orchestrator.
+Output ONLY a valid JSON object (no markdown, no code fences, no extra text).
+Use double quotes. Always include all required keys.
+If unsure, use empty arrays and set low confidence (<= 0.4).
+​
+2) Template “developer/user” instruction untuk membentuk isi ABD v1.1 ke JSON
+Ini bisa kamu inject sebagai developer message atau user message tambahan sebelum pertanyaan user yang sebenarnya.
+Return JSON with this exact shape:
+{
+  "agentName": string,
+  "summary": string,
+  "confidence": number (0..1),
+  "claims": string[],
+  "questions": string[],
+  "actions": string[]
+}
+
+Content requirements (keep it aligned with ABD-7 style):
+- summary: 5–12 lines in plain text, compact. Include:
+  (1) Ringkasan
+  (2) Asumsi kunci (jika ada)
+  (3) Early warning (🔴🟠🟢) jika relevan
+  (4) Rekomendasi P0/P1/P2 singkat
+- claims: bullet-style sentences (as strings). Must be factual/operational. Avoid long paragraphs.
+- questions: only questions that block correctness or materially change the answer.
+- actions: concrete next steps the orchestrator/user can execute.
+
+Do NOT include citations/URLs unless explicitly provided in context.
+Do NOT invent regulations or numbers; if uncertain, add a question and lower confidence.
+​
+3) Contoh output yang “bagus” (minimal v1)
+{
+  "agentName": "SBU-SPECIALIST",
+  "summary": "Ringkasan: User meminta panduan SBU untuk badan usaha jasa konstruksi.\nAsumsi: Data kualifikasi/subklasifikasi belum diberikan.\nEarly warning: 🔴 Risiko salah jalur jika KBLI/subklasifikasi tidak cocok.\nRekomendasi: P0 klarifikasi profil BU; P1 susun checklist dokumen; P2 siapkan timeline dan draft surat.\nConfidence: sedang karena data belum lengkap.",
+  "confidence": 0.62,
+  "claims": [
+    "Langkah pertama adalah memetakan subklasifikasi dan ruang lingkup pekerjaan yang akan disertifikasi.",
+    "Checklist dokumen harus disusun berdasarkan profil badan usaha (legalitas, pengalaman, SDM, peralatan) dan persyaratan skema yang dituju.",
+    "Tanpa data subklasifikasi/KBLI, rekomendasi detail berisiko tidak tepat."
+  ],
+  "questions": [
+    "Badan usaha ini menargetkan kualifikasi apa (kecil/menengah/besar) dan subklasifikasi apa?",
+    "Apakah sudah ada data pengalaman proyek yang bisa dipakai sebagai bukti?"
+  ],
+  "actions": [
+    "Minta user mengisi profil BU (kualifikasi, subklasifikasi, KBLI, wilayah).",
+    "Bangun draft checklist dokumen per kategori (legal, SDM, pengalaman, peralatan).",
+    "Buat timeline kerja + daftar risiko dan mitigasi."
+  ]
+}
+​
+4) Prompt adaptor untuk “agent lama ABD v1.1” tanpa rewrite besar
+Kalau kamu takut sub-agent “kehilangan format ABD”, kamu bisa tambahkan 1 baris penuntun:
+Write the summary content in ABD-7 tone, but keep it inside the "summary" string field.
+​
+Itu biasanya cukup: mereka tetap menulis “Ringkasan/Asumsi/Early Warning/Rekomendasi/Confidence” tapi tidak keluar dari JSON.
+5) Implementasi paling aman: aktifkan bertahap (pilot)
+Saya sarankan urutan pilot:
+1) Pilih 1 orchestrator HUB (mis HUB Regulasi → SBU).
+2) Set 1 sub-agent saja outputFormat:"json" (mis AGENT-MAPPER atau REGULASI_SBU).
+3) Pastikan parsing+fallback stabil.
+4) Baru tambah 2–3 sub-agent lain.
+Dua pilihan kecil (opsional) yang meningkatkan stabilitas JSON_object di multi-provider
+Kalau kamu mau, kamu bisa tambahkan:
+“No newlines in JSON keys” (model kadang bikin key salah).
+Hard-require keys: agentName/summary/confidence/claims/questions/actions.
+Kalau kamu bilang “lanjut”, saya bisa tuliskan juga:
+template repair prompt (saat JSON parse gagal),
+dan aturan truncation yang aman untuk RAW_UNPARSED supaya tidak membengkak context orchestrator.
+lanjut
+May 14
+Berikut lanjutan yang kamu minta: template repair prompt (kalau JSON gagal parse), plus aturan truncation & sanitization yang aman supaya context orchestrator tidak bengkak dan tidak “nyampah” token.
+1) Repair prompt (saat JSON parse gagal)
+Tujuan repair: ubah output “hampir JSON” menjadi JSON object valid tanpa mengubah makna.
+Repair attempt #1 (paling efektif, paling pendek)
+Kirim ke model sebagai system + user (atau 1 user saja kalau pipeline kamu sederhana).
+System (tetap sama JSON mode):
+Output ONLY a valid JSON object. No markdown. No code fences.
+​
+User (repair instruction):
+Fix the following text into a valid JSON object with EXACT keys:
+agentName, summary, confidence, claims, questions, actions.
+
+Rules:
+- agentName, summary are strings
+- confidence is a number 0..1
+- claims/questions/actions are arrays of strings
+- If any field is missing, fill it with "" or [] and set confidence <= 0.4
+- Remove any extra keys.
+
+TEXT TO FIX:
+<<<
+{RAW_OUTPUT}
+>>>
+​
+Catatan implementasi:
+{RAW_OUTPUT} sebaiknya sudah di-truncate (lihat bagian truncation).
+Jangan “menambah” konteks lain. Repair harus deterministic.
+Repair attempt #2 (opsional, kalau #1 gagal)
+Lebih keras dan lebih “mechanical”:
+Return ONLY JSON. If you cannot comply, return this exact JSON:
+{"agentName":"UNKNOWN","summary":"","confidence":0.2,"claims":[],"questions":[],"actions":[]}
+
+Now fix this:
+<<<
+{RAW_OUTPUT}
+>>>
+​
+Biasanya ini menurunkan failure rate di provider yang agak “bandel”.
+2) Truncation policy (untuk RAW_UNPARSED dan untuk repair input)
+Kamu perlu truncation karena:
+output teks sub-agent bisa panjang,
+kalau gagal parse lalu kamu inject mentah ke orchestrator, token bisa meledak,
+repair call juga bisa jadi mahal.
+Rekomendasi angka (aman untuk produksi)
+MAX_RAW_CHARS_FOR_REPAIR = 6000 (sekitar 1–1.5k token tergantung bahasa)
+MAX_RAW_CHARS_FOR_FALLBACK_SUMMARY = 1500 (agar summary fallback tidak panjang)
+MAX_ITEMS_PER_ARRAY = 12 (claims/questions/actions dipotong kalau kebanyakan)
+Contoh implementasi truncation (pseudocode)
+function truncate(s: string, maxChars: number) {
+  if (!s) return s;
+  if (s.length <= maxChars) return s;
+  return s.slice(0, maxChars) + "…(truncated)";
+}
+​
+Tempat pemakaian truncation
+1) Sebelum repair attempt:
+rawForRepair = truncate(rawOutput, MAX_RAW_CHARS_FOR_REPAIR)
+2) Saat fallback envelope:
+summary = "RAW_UNPARSED: " + truncate(rawOutput, MAX_RAW_CHARS_FOR_FALLBACK_SUMMARY)
+3) Saat menyuntik “LAPORAN SUB-AGEN” ke context orchestrator:
+injek versi ringkas yang sudah kamu render dari parsed JSON (bukan raw output).
+3) Sanitization policy (mengurangi kegagalan parse)
+Kegagalan parse paling sering karena:
+code fences `json
+trailing commentary (“Berikut JSON-nya:”)
+karakter kontrol aneh
+Pre-parse cleanup ringan (safe)
+Sebelum JSON.parse, lakukan:
+1) trim whitespace
+2) kalau string dimulai dengan ` → strip code fences
+3) kalau ada prefix “Berikut …” → coba ambil substring dari “{” pertama sampai “}” terakhir
+Pseudocode:
+function extractJsonLike(text: string) {
+  let t = text.trim();
+
+  // strip fences
+  t = t.replace(/^```(?:json)?/i, "").replace(/```$/i, "").trim();
+
+  const first = t.indexOf("{");
+  const last = t.lastIndexOf("}");
+  if (first >= 0 && last > first) t = t.slice(first, last + 1);
+
+  return t.trim();
+}
+​
+Batasan penting: jangan terlalu “pintar” (mis. regex kompleks) karena bisa merusak konten valid.
+4) Validasi minimal (schema-less) untuk minimal v1
+Karena kamu pakai json_object (tanpa schema), tetap perlu “shape guard”:
+Setelah parse:
+pastikan keys ada semua
+pastikan tipe benar
+clamp confidence 0..1
+coerce string arrays
+Pseudocode:
+function normalizeReport(obj: any, agentNameFallback: string) {
+  const agentName = typeof obj.agentName === "string" ? obj.agentName : agentNameFallback;
+  const summary = typeof obj.summary === "string" ? obj.summary : "";
+  let confidence = typeof obj.confidence === "number" ? obj.confidence : 0.3;
+  confidence = Math.max(0, Math.min(1, confidence));
+
+  const toStrArray = (v: any) =>
+    Array.isArray(v) ? v.filter(x => typeof x === "string").slice(0, 12) : [];
+
+  return {
+    agentName,
+    summary,
+    confidence,
+    claims: toStrArray(obj.claims),
+    questions: toStrArray(obj.questions),
+    actions: toStrArray(obj.actions),
+  };
+}
+​
+Kalau setelah normalize summary kosong semua, set confidence rendah (mis 0.2).
+5) “Renderer ringkas” untuk injection ke orchestrator (hemat token)
+Agar orchestration stabil, injek format fixed:
+SUB-AGENT REPORT
+Agent: {agentName} | confidence: {confidence}
+Summary: {summary_1_3_lines}
+Claims:
+- ...
+Questions:
+- ...
+Actions:
+- ...
+​
+Tips:
+summary cukup ambil 3–6 baris pertama (split \n), bukan full.
+claims/questions/actions max 5 item untuk injection; sisanya tetap disimpan internal (kalau perlu).
+6) Bonus kecil yang sangat membantu: “parse success telemetry”
+Walau belum cost tracking, minimal simpan:
+parseOk: boolean
+repairUsed: boolean
+providerUsed: "openai"|"deepseek"|...
+durationMs
+outputChars
+Ini akan mempercepat keputusan kapan naik dari minimal v1 → claims object v2 → json_schema.
+Kalau kamu mau lanjut lagi, saya bisa tuliskan PR #2 blueprint (setelah PR #1 stabil) yang biasanya paling mengangkat kualitas:
+1) Selective fan-out (router memilih max N sub-agent, bukan selalu semua)
+2) Critic gate (pass/fail + next questions)
+3) Mulai transisi dari “state machine di prompt” ke programmatic plan object tanpa tool-calling dulu.
+lanjut
+May 14
+Berikut saya lanjutkan dengan PR #2 blueprint (setelah PR #1 minimal v1 stabil). Target PR #2: meningkatkan presisi + menurunkan biaya dengan selective fan-out dan menambahkan critic gate, tanpa harus masuk tool-calling dulu.
+PR #2 — Selective Fan-out + Critic Gate (tanpa tools)
+Tujuan PR #2
+1) Tidak lagi eksekusi semua agenticSubAgents setiap request.
+2) Orchestrator punya router kecil yang memilih max N sub-agent berdasarkan intent.
+3) Setelah hasil sub-agent terkumpul, jalankan Critic (LLM) untuk:
+mendeteksi missing info,
+konflik antar sub-agent,
+keputusan “deliver vs ask clarifying questions”.
+4) Semua tetap kompatibel dengan:
+widget publik (teks),
+agent standalone (teks),
+sub-agent internal (JSON minimal v1 untuk yang ditandai).
+1) Selective fan-out
+1.1 Tambah config di orchestrator agent
+Tambahkan pada config orchestrator (jsonb), mis:
+{
+  "agentic": {
+    "maxParallelSubAgents": 4,
+    "fanoutMode": "selective",
+    "routerModel": "gpt-4o-mini",
+    "routerTemperature": 0.0
+  }
+}
+​
+Default aman:
+maxParallelSubAgents = 3 atau 4
+fanoutMode = "wide" untuk backward compatibility jika belum diaktifkan.
+1.2 Router step (LLM kecil) memilih sub-agent
+Router menerima:
+user question + ringkasan context,
+daftar kandidat sub-agent (id, role, description, tags kalau ada).
+Output router harus JSON (pakai json_object):
+{
+  "selectedAgentIds": [1394, 1550, 2001],
+  "reason": "..."
+}
+​
+Prompt router yang stabil (disarankan)
+System:
+You are a router. Output ONLY valid JSON.
+​
+User:
+Choose up to {maxParallelSubAgents} agents that best answer the user.
+Prioritize correctness and evidence needs. Avoid redundancy.
+
+User question:
+{question}
+
+Candidate agents:
+- {agentId}: {role} — {description}
+- ...
+
+Return JSON:
+{"selectedAgentIds":[...],"reason":"..."}
+​
+1.3 Fallback rules (anti-router-bodoh)
+Jika router output invalid / kosong:
+fallback ke:
+1 “generalist” (atau agent pertama),
+1 retriever/regulasi specialist (jika tersedia).
+Jika router memilih > cap:
+trim berdasarkan urutan yang diberikan.
+2) Critic Gate (quality + clarification)
+2.1 Tambah 1 “Critic agent” internal (bisa virtual, tidak perlu tercatat sebagai agent publik)
+Critic bisa dipanggil lewat callAgentInternal() biasa.
+Input critic:
+Pertanyaan user
+Ringkasan context
+Render ringkas laporan sub-agent (hasil PR #1)
+Draft jawaban final orchestrator (opsional: critic bisa review sebelum deliver)
+Output critic JSON (json_object)
+Minimal v1 untuk critic (agar sederhana):
+{
+  "pass": true,
+  "confidence": 0.0,
+  "missingInfoQuestions": [],
+  "conflicts": [],
+  "mustFix": [],
+  "suggestedAnswerOutline": []
+}
+​
+Prompt critic yang stabil
+System:
+You are a strict evaluator. Output ONLY valid JSON.
+​
+User:
+Evaluate the aggregated sub-agent reports.
+Rules:
+- If critical info is missing, set pass=false and propose 1–5 questions.
+- If agents disagree, list conflicts and mark mustFix items.
+- If the answer would be speculation, fail it.
+
+Return JSON:
+{
+  "pass": boolean,
+  "confidence": number 0..1,
+  "missingInfoQuestions": string[],
+  "conflicts": string[],
+  "mustFix": string[],
+  "suggestedAnswerOutline": string[]
+}
+
+Data:
+USER_QUESTION:
+...
+
+SUB_AGENT_REPORTS (summarized):
+...
+
+DRAFT_ANSWER (optional):
+...
+​
+2.2 Orchestrator behavior berdasarkan critic
+Jika pass=true:
+deliver jawaban final (teks).
+Jika pass=false:
+jangan memaksa final answer panjang.
+deliver: pertanyaan klarifikasi + ringkasan apa yang sudah diketahui + “mengapa perlu data ini” (1–2 kalimat).
+Ini penting untuk “presisi”—lebih baik tanya daripada halusinasi.
+3) Upgrade “state machine” dari prompt-only → programmatic (mini)
+Masih tanpa tool-calling, tapi minimal kamu membuat “step controller” di kode:
+Pseudo:
+// 0) Router: select agents (optional if fanoutMode=wide)
+selected = await routeAgents(question, candidates)
+
+// 1) Dispatch selected sub-agents in parallel (some JSON, some text)
+reports = await dispatch(selected)
+
+// 2) Aggregate into a draft answer
+draft = await synthesize(question, reports)
+
+// 3) Critic gate
+crit = await criticReview(question, reports, draft)
+
+if (!crit.pass) return askClarifying(crit.missingInfoQuestions)
+return finalize(draft, crit.suggestedAnswerOutline)
+​
+Loop 1x saja dulu (no recursion) supaya biaya stabil.
+4) Perubahan data yang disarankan (opsional, tapi sangat membantu)
+Tambahkan “tags” pada link config agenticSubAgents (tanpa menyentuh agent prompt):
+{
+  "agentId": 1394,
+  "role": "AGENT-MAPPER",
+  "description": "...",
+  "outputFormat": "json",
+  "tags": ["mapping", "requirements", "intake"],
+  "priority": 10
+}
+​
+Router jadi jauh lebih akurat kalau ada tags dan priority.
+5) Test plan PR #2 (yang realistis)
+1) Regression: fanoutMode=wide → behavior sama seperti sekarang (hanya beda beberapa sub-agent sudah JSON internal).
+2) Selective: cap=3
+Router memilih 3 dari 10 agen → hanya 3 dieksekusi.
+3) Critic fail scenario:
+Pertanyaan user minim data → critic mengembalikan 3 pertanyaan → orchestrator menanyakan itu, tidak mengarang.
+4) Conflict scenario:
+2 sub-agent bertentangan → critic pass=false + mustFix → orchestrator minta klarifikasi / jalankan “resolver agent” (opsional, bisa PR #3).
+Rekomendasi urutan implementasi PR #2 (paling aman)
+1) Implement router + cap (tanpa critic dulu) → cek biaya turun dan jawaban tidak drop.
+2) Tambahkan critic gate (fail → ask questions) → presisi naik.
+3) Baru rapikan “suggestedAnswerOutline”.
+Kalau kamu setuju, keputusan berikutnya yang perlu kamu pilih hanya 1:
+Router step mau selalu jalan (default selective), atau hanya jalan bila agenticSubAgents.length > cap?
+Rekomendasi saya: jalan hanya bila > cap (lebih hemat dan risiko kecil).
+jalan hanya bila > cap
+May 14
+Setuju: router jalan hanya bila agenticSubAgents.length > cap. Itu pilihan paling aman (minim regresi) dan langsung menurunkan biaya saat daftar sub-agent besar.
+Berikut spesifikasi final PR #2 dengan keputusan itu (siap kamu implement):
+PR #2 (final) — Router hanya bila N > cap
+1) Config
+cap = maxParallelSubAgents (default 4, atau 3 sesuai preferensi).
+fanoutMode boleh tetap ada, tapi perilaku intinya:
+If N <= cap → dispatch semua (tanpa router)  
+If N > cap → jalankan router → dispatch hasil router (≤ cap)
+2) Algoritma dispatch (pseudocode)
+const candidates = agenticSubAgents; // N
+const cap = cfg.agentic.maxParallelSubAgents ?? 4;
+
+let selected = candidates;
+
+if (candidates.length > cap) {
+  const routedIds = await routeAgentsLLM({
+    question,
+    candidates,
+    cap,
+  }); // returns agentIds[]
+  selected = pickByIdsPreserveOrder(candidates, routedIds).slice(0, cap);
+
+  // hard fallback kalau router gagal / kosong
+  if (selected.length === 0) selected = candidates.slice(0, cap);
+}
+
+// dispatch selected in parallel
+const reports = await Promise.all(selected.map(link => dispatchSubAgent(link)));
+​
+Catatan penting:
+pickByIdsPreserveOrder menjaga urutan kandidat (menghindari perubahan behavior yang “aneh”).
+Fallback slice(0, cap) memastikan tidak ada hard-fail.
+3) Router contract (json_object)
+Router output:
+{ "selectedAgentIds": [1394, 1550, 2001], "reason": "..." }
+​
+Jika router mengembalikan >cap: trim.
+4) Interaksi dengan PR #1 (outputFormat json)
+Tidak berubah:
+outputFormat: "json" tetap hanya berlaku untuk sub-agent yang dipanggil.
+Router tidak perlu peduli outputFormat; itu urusan dispatch.
+5) Critic gate tetap sama
+Critic bisa kamu aktifkan setelah routing stabil. Routing dulu saja sudah memberi efek besar di biaya/noise.
+Edge cases yang perlu kamu handle
+1) Router pilih agentId yang tidak ada → ignore.
+2) Router pilih duplikat → dedup.
+3) Router gagal parse JSON → fallback candidates.slice(0, cap) (tanpa memblokir user).
+4) N besar sekali (mis 50+) → jangan kirim seluruh deskripsi panjang ke router:
+kirim ringkas: {agentId, role, 1-line description, tags}.
+Kalau kamu lanjut ke implementasi, urutan commit yang paling aman:
+1) Tambah config maxParallelSubAgents
+2) Tambah routeAgentsLLM() + fallback
+3) Integrasikan ke orchestrator dispatch
+Tidak perlu menyentuh agent prompt publik sama sekali.
+lanjut
+May 14
+Lanjut = saya turunkan detail implementasi yang biasanya paling kamu butuhkan saat mulai coding PR #2: router prompt yang stabil, cara “meringkas kandidat” supaya hemat token, fungsi util pick/dedup, dan test cases.
+1) Router prompt yang stabil (jalan hanya bila N > cap)
+System
+You are an agent router inside a multi-agent orchestrator.
+Output ONLY a valid JSON object. No markdown. No code fences.
+​
+User (template)
+Select up to {CAP} agents from the candidate list that best match the user request.
+
+Selection rules:
+- Prefer agents that directly address the domain and deliverable requested.
+- Avoid redundancy (do not pick multiple agents with the same role unless necessary).
+- If the question is ambiguous, include 1 agent focused on intake/clarification.
+- If compliance/regulation is involved, include 1 agent focused on rules/requirements if available.
+
+Return JSON exactly:
+{"selectedAgentIds":[...],"reason":"..."}
+
+USER_QUESTION:
+{QUESTION}
+
+CANDIDATE_AGENTS:
+{CANDIDATES_MINIFIED_JSON}
+​
+Kenapa saya sarankan format JSON kandidat: model lebih konsisten memilih ID kalau kandidat disajikan sebagai JSON array sederhana.
+2) Minify kandidat agar hemat token (sangat penting kalau N besar)
+Jangan kirim full prompt/knowledge sub-agent. Cukup metadata link config.
+Bentuk kandidat yang disarankan ke router
+[
+  { "agentId": 1394, "role": "AGENT-MAPPER", "desc": "Map requirements & missing info", "tags": ["intake","mapping"] },
+  { "agentId": 1550, "role": "SBU-SPECIALIST", "desc": "SBU requirements & checklist", "tags": ["sbu","regulasi"] }
+]
+​
+Prinsip:
+desc 1 baris (<= 120 char).
+tags opsional tapi sangat membantu.
+Jangan kirim outputFormat (router tidak perlu).
+Kalau kamu belum punya tags, tetap jalan, tapi sebaiknya PR #2.1 kamu tambah tags di link config (tidak ganggu 944 agent karena ini hanya link metadata).
+3) Implementasi utilitas yang kamu butuh (pseudocode TypeScript)
+3.1 Dedup + preserve order
+function uniquePreserveOrder<T>(arr: T[]): T[] {
+  const seen = new Set<T>();
+  const out: T[] = [];
+  for (const x of arr) {
+    if (!seen.has(x)) {
+      seen.add(x);
+      out.push(x);
+    }
+  }
+  return out;
+}
+​
+3.2 Pick candidates by IDs (preserve original order)
+Ini mencegah perubahan perilaku yang “terasa acak”.
+function pickByIdsPreserveOrder<T extends { agentId: number }>(
+  candidates: T[],
+  ids: number[]
+): T[] {
+  const idSet = new Set(ids);
+  return candidates.filter(c => idSet.has(c.agentId));
+}
+​
+3.3 Routing wrapper dengan fallback
+async function selectAgents({
+  question,
+  candidates,
+  cap,
+}: {
+  question: string;
+  candidates: SubAgentLink[];
+  cap: number;
+}): Promise<SubAgentLink[]> {
+
+  if (candidates.length <= cap) return candidates;
+
+  const routed = await routeAgentsLLM({ question, candidates, cap }); // returns number[]
+  const routedUnique = uniquePreserveOrder(routed).slice(0, cap);
+
+  let selected = pickByIdsPreserveOrder(candidates, routedUnique).slice(0, cap);
+
+  if (selected.length === 0) selected = candidates.slice(0, cap);
+  return selected;
+}
+​
+4) routeAgentsLLM(): parsing & sanitization
+Karena router output harus json_object, kamu bisa reuse parsing helper PR #1.
+Return value contract
+Return number[] agentIds (empty array allowed → fallback handles it).
+Robust parse strategy (ringkas)
+1) extract JSON-like substring
+2) parse
+3) validate selectedAgentIds array of numbers
+Jika gagal → return [].
+5) Test cases (yang benar-benar realistis)
+Case A — N <= cap (router tidak dipanggil)
+Setup: 3 agenticSubAgents, cap=4
+Expected:
+tidak ada call ke router
+dispatch ketiga agent
+Case B — N > cap (router dipanggil)
+Setup: 10 sub-agents, cap=4
+Expected:
+router dipanggil 1x
+dispatch maksimal 4 agent
+Case C — Router invalid JSON
+Router output: “Saya pilih agent 1,2,3”
+Expected:
+fallback ke first 4 candidates
+Case D — Router pilih ID tidak ada
+Router output: [9999, 1394]
+Expected:
+yang kepilih hanya 1394 (lalu kalau kurang dari cap, jangan auto-fill sisanya dulu pada PR #2; keep minimal untuk menjaga deterministik + biaya)
+kalau hasil jadi 0, fallback first cap
+Case E — Router pilih duplikat
+[1394, 1394, 1550]
+Expected:
+dedup → [1394,1550]
+6) Rekomendasi kecil yang sangat membantu kualitas routing (tanpa biaya besar)
+Tambahkan 1 field optional pada link config (tidak sentuh agent lama):
+tags: string[]
+priority: number (default 0)
+Lalu pada fallback “first cap”, sebaiknya sort by priority desc dulu (tetap stabil kalau priority sama).
+Pertanyaan terakhir (supaya PR #2 langsung nyambung dengan PR #1)
+Kamu ingin router memilih berdasarkan link-level metadata saja (role/desc/tags), atau juga kamu ingin menyertakan “recent chat intent summary” (1–2 kalimat) ke router?
+Rekomendasi saya: sertakan intent summary (sangat kecil tokennya, tapi meningkatkan akurasi routing). Jika kamu bilang “ya”, saya buatkan template intent-summary yang deterministic (tanpa LLM) atau LLM-mini.
+intent summary
+May 14
+Pakai intent summary itu keputusan yang tepat—biaya token kecil, tapi akurasi routing naik signifikan. Berikut spesifikasi yang “langsung bisa kamu tempel” untuk PR #2: bagaimana membangun intent summary, formatnya, dan cara memasukkannya ke router prompt.
+1) Definisi: intent summary (untuk router)
+Tujuannya bukan merangkum seluruh chat, tapi memberi router sinyal:
+user sedang mau apa,
+deliverable yang diminta,
+domain yang disebut,
+constraint penting,
+apa yang belum jelas.
+Format yang disarankan (1 blok teks pendek)
+INTENT:
+- Goal: ...
+- Domain: ...
+- Deliverable: ...
+- Constraints: ...
+- Known context: ...
+- Unknowns: ...
+​
+Panjang target: maks 400–800 karakter.
+2) Cara membuat intent summary (2 opsi)
+Opsi A (disarankan untuk PR #2): heuristic/deterministic (tanpa LLM)
+Ini paling aman, murah, dan tidak menambah latency.
+Input:
+user message terakhir + 1–2 message sebelumnya
+metadata halaman (jika ada)
+(opsional) nama HUB/Series/Core yang sedang aktif
+Heuristic sederhana:
+Goal: ambil 1 kalimat pertama yang mengandung kata kerja (buat, minta, butuh, jelaskan, audit, susun, rancang).
+Domain: match keyword dictionary (SBU, SKK, tender, perizinan, regulasi, IB, dll).
+Deliverable: match (checklist, template, timeline, draft surat, scorecard, ringkasan).
+Constraints: match (deadline, budget, bahasa ID/EN, konfidensial).
+Unknowns: jika ada tanda tanya atau field wajib domain belum ada (contoh SBU: subklasifikasi/kualifikasi/KBLI).
+Kelebihan: cepat dan stabil. Kekurangan: kurang “pintar” kalau bahasa user sangat bebas.
+Opsi B: LLM-mini intent summarizer (dipakai hanya saat N>cap juga)
+Kalau kamu mau lebih akurat untuk prompt yang kompleks, boleh pakai LLM kecil (router model yang sama, temperature 0).
+Aturan biaya: jalankan summarizer hanya ketika N>cap (sejalan dengan keputusan router hanya bila >cap).
+Output summarizer tetap teks, bukan JSON (lebih mudah).
+Prompt summarizer (ringkas):
+System:
+Summarize the user's intent for agent routing. Keep under 600 characters.
+No bullets with long sentences. No extra commentary.
+​
+User:
+User question:
+{QUESTION}
+
+Recent context (optional):
+{LAST_TURNS}
+
+Return format:
+Goal: ...
+Domain: ...
+Deliverable: ...
+Constraints: ...
+Unknowns: ...
+​
+3) Cara memasukkan intent summary ke router prompt
+Update router user prompt jadi:
+Select up to {CAP} agents from the candidate list that best match the user request.
+
+Return JSON exactly:
+{"selectedAgentIds":[...],"reason":"..."}
+
+INTENT_SUMMARY:
+{INTENT_SUMMARY}
+
+USER_QUESTION:
+{QUESTION}
+
+CANDIDATE_AGENTS:
+{CANDIDATES_MINIFIED_JSON}
+​
+Kenapa tetap kirim USER_QUESTION walau ada intent summary?
+Intent summary bisa salah/kurang lengkap.
+Router bisa cross-check.
+4) Pipeline PR #2 dengan intent summary (final)
+Dengan keputusan kamu (router hanya bila N>cap), saya sarankan flow ini:
+1) if N <= cap: dispatch semua, skip intent summary.
+2) if N > cap:
+buat intentSummary (opsi A atau B)
+jalankan router dengan intentSummary
+dispatch ≤ cap
+5) Rekomendasi pilihan untuk kamu (praktis)
+Mulai dari:
+Opsi A (deterministic) dulu untuk PR #2 (paling kecil risiko).
+Jika routing masih sering meleset untuk pertanyaan kompleks, baru tambah Opsi B sebagai enhancement.
+Kalau kamu mau saya lanjut lebih teknis, jawab 1 hal:
+Kamu mau intent summary Opsi A deterministic dulu, atau langsung Opsi B LLM-mini (tetap hanya saat N>cap)?
+A
+May 14
+lanjut
+May 14
+Oke, kita lanjut dengan intent summary versi A (deterministic/heuristic) yang bisa kamu implement tanpa LLM dan tetap efektif untuk routing. Saya tulis sebagai spesifikasi + pseudocode yang bisa langsung kamu tempel ke codebase TS/JS.
+Intent Summary (A) — Deterministic, tanpa LLM
+1) Input yang dipakai
+Minimal:
+userText: pesan user terbaru (string)
+recentTurns: 1–2 pesan terakhir (opsional, string gabungan)
+activeContext (opsional tapi bagus):
+seriesName, coreName, hubName, moduleName (kalau kamu punya dari UI route)
+agentName (nama orchestrator)
+2) Output format (maks 600–800 char)
+INTENT:
+- Goal: ...
+- Domain: ...
+- Deliverable: ...
+- Constraints: ...
+- Known context: ...
+- Unknowns: ...
+​
+3) Heuristic rules (ringkas tapi kuat)
+3.1 Normalisasi teks
+lowercase untuk matching
+simpan versi original untuk “Goal” (biar natural)
+const raw = userText.trim();
+const t = raw.toLowerCase();
+​
+3.2 Domain detection (keyword dictionary)
+Buat mapping yang bisa kamu tambah terus:
+const DOMAIN_KEYWORDS: Array<{ domain: string; keys: string[] }> = [
+  { domain: "SBU", keys: ["sbu", "sertifikat badan usaha"] },
+  { domain: "SKK", keys: ["skk", "sertifikasi kompetensi"] },
+  { domain: "Tender", keys: ["tender", "pengadaan", "lpse"] },
+  { domain: "Perizinan", keys: ["izin", "perizinan", "oss", "nib"] },
+  { domain: "Regulasi Jasa Konstruksi", keys: ["regulasi", "jasa konstruksi", "bujk"] },
+  { domain: "IB Admin", keys: ["ib", "managebac", "ibis", "predicted grades", "iaa", "psp"] },
+  // dst...
+];
+​
+Rule:
+domain = semua domain yang match, tapi batasi max 3 (yang paling sering muncul / paling spesifik).
+kalau tidak ada match: domain = activeContext.hubName/moduleName jika ada, else "General".
+3.3 Deliverable detection (noun/action list)
+const DELIVERABLE_KEYWORDS = [
+  { name: "Checklist", keys: ["checklist", "daftar", "persyaratan"] },
+  { name: "Timeline", keys: ["timeline", "jadwal", "roadmap", "target tanggal", "deadline"] },
+  { name: "Draft surat/template", keys: ["draft", "template", "surat", "format"] },
+  { name: "Ringkasan", keys: ["ringkas", "summary", "rangkuman"] },
+  { name: "Scorecard", keys: ["scorecard", "skor", "penilaian", "readiness"] },
+  { name: "Audit", keys: ["audit", "cek", "review", "compliance"] },
+];
+​
+Deliverable = semua match (max 2). Jika kosong:
+infer dari kata kerja:
+“buat/susun” → “Draft/Checklist”
+“jelaskan” → “Ringkasan”
+“cek/audit” → “Audit”
+3.4 Constraints extraction
+Cari pola:
+bahasa: bilingual, id/en, english, indonesia
+waktu: deadline, tanggal, “hari ini/besok/3 hari lagi”
+confidentiality: rahasia, konfidensial
+format: tabel, bullet, abd-7
+Implementasi simple: kumpulkan potongan string jika match keyword.
+3.5 Unknowns (blocking questions) — rule-based per domain
+Ini yang bikin router makin pintar tanpa LLM.
+Contoh untuk SBU:
+Jika domain mengandung SBU, tapi userText tidak mengandung kata kunci profil penting, tambahkan unknowns:
+kualifikasi (kecil/menengah/besar)
+subklasifikasi / bidang
+KBLI / jenis layanan
+lokasi / wilayah
+status legalitas BU
+Implementasi:
+const SBU_REQUIRED = [
+  { label: "kualifikasi", keys: ["kualifikasi", "kecil", "menengah", "besar"] },
+  { label: "subklasifikasi", keys: ["subklasifikasi", "klasifikasi", "bidang"] },
+  { label: "KBLI", keys: ["kbli"] },
+];
+
+function missingRequired(textLower: string, required: ...) => string[]
+​
+Unknowns juga bisa muncul dari tanda tanya user, tapi untuk versi deterministic cukup domain-required checklist.
+4) Pseudocode implementasi (TS)
+type IntentSummary = {
+  goal: string;
+  domains: string[];
+  deliverables: string[];
+  constraints: string[];
+  knownContext: string[];
+  unknowns: string[];
+  text: string; // final formatted
+};
+
+function buildIntentSummaryA(args: {
+  userText: string;
+  recentText?: string; // optional concatenation of last turns
+  activeContext?: { seriesName?: string; coreName?: string; hubName?: string; moduleName?: string };
+}): IntentSummary {
+  const raw = (args.userText ?? "").trim();
+  const t = raw.toLowerCase();
+
+  const domains = detectDomains(t, args.activeContext);
+  const deliverables = detectDeliverables(t);
+  const constraints = detectConstraints(t, raw);
+  const knownContext = [];
+  if (args.activeContext?.hubName) knownContext.push(`Hub=${args.activeContext.hubName}`);
+  if (args.activeContext?.moduleName) knownContext.push(`Module=${args.activeContext.moduleName}`);
+
+  const goal = extractGoal(raw); // simplest: first sentence trimmed, max 140 chars
+  const unknowns = detectUnknowns(t, domains);
+
+  const text =
+`INTENT:
+- Goal: ${goal || "User needs help"}
+- Domain: ${domains.length ? domains.join(", ") : "General"}
+- Deliverable: ${deliverables.length ? deliverables.join(", ") : "Answer"}
+- Constraints: ${constraints.length ? constraints.join("; ") : "-"}
+- Known context: ${knownContext.length ? knownContext.join("; ") : "-"}
+- Unknowns: ${unknowns.length ? unknowns.join("; ") : "-"}`;
+
+  return { goal, domains, deliverables, constraints, knownContext, unknowns, text };
+}
+​
+Helper: extractGoal (deterministic)
+Paling aman:
+ambil sampai tanda titik pertama / newline pertama
+clamp 160 char
+function extractGoal(raw: string) {
+  const s = raw.split(/\n|[.?!]/)[0].trim();
+  return s.length > 160 ? s.slice(0, 160) + "…" : s;
+}
+​
+5) Integrasi ke router step (PR #2)
+Karena router hanya jalan bila N > cap, maka:
+if (candidates.length > cap) {
+  const intent = buildIntentSummaryA({ userText, activeContext });
+  const routedIds = await routeAgentsLLM({ question: userText, intentSummary: intent.text, candidatesMinified, cap });
+  ...
+}
+​
+Router prompt tinggal tambahkan blok INTENT_SUMMARY.
+6) Test cepat untuk intent summary A
+Input: “Saya butuh checklist SBU untuk BUJK, deadline 2 minggu, bilingual ID/EN”
+Domain: SBU + Regulasi Jasa Konstruksi
+Deliverable: Checklist + Timeline (kalau “deadline” terdeteksi)
+Constraints: bilingual, deadline
+Unknowns: kualifikasi, subklasifikasi, KBLI (jika tidak disebut)
+Kalau kamu lanjut, langkah berikutnya yang paling berguna adalah: template minified candidate builder (supaya daftar kandidat yang dikirim ke router selalu konsisten dan hemat token), termasuk aturan pemotongan desc dan fallback kalau tags kosong.
+lanjut
+May 14
+Berikut lanjutan yang kamu minta: template “minified candidate builder” untuk daftar sub-agent yang dikirim ke router—supaya konsisten, hemat token, dan tidak bocor detail prompt/KB.
+Candidate Minifier (untuk Router PR #2)
+1) Tujuan minifier
+Router hanya butuh metadata untuk memilih agen, bukan prompt panjang. Minifier harus:
+stabil (format konsisten),
+ringkas (token hemat),
+cukup informatif (role + 1-line desc + tags + priority).
+2) Input
+Dari agenticSubAgents link config (jsonb) + optional join ke tabel agent untuk dapat nama/jenis jika perlu.
+Minimal link shape kamu saat ini:
+{ "agentId": 1394, "role": "AGENT-MAPPER", "description": "...", "outputFormat": "json" }
+​
+Kita tambah opsional:
+tags?: string[]
+priority?: number
+3) Output (yang dikirim ke router)
+Kirim JSON array ringkas, contoh:
+[
+  { "agentId": 1394, "role": "AGENT-MAPPER", "desc": "Map requirements & missing info", "tags": ["intake","mapping"], "priority": 10 },
+  { "agentId": 1550, "role": "SBU-SPECIALIST", "desc": "SBU requirements & checklist", "tags": ["sbu","regulasi"], "priority": 8 }
+]
+​
+Aturan ringkas
+Field yang dipakai router:
+agentId (wajib)
+role (wajib)
+desc (wajib, 1 baris)
+tags (opsional, max 6)
+priority (opsional)
+Jangan kirim:
+prompt/systemPrompt,
+knowledge base,
+tool config,
+outputFormat (router tidak perlu).
+4) Aturan pemotongan teks (token control)
+4.1 desc
+Sumber: link.description (paling aman) atau fallback dari agent name.
+Normalisasi: trim, ganti newline jadi spasi, collapse multiple spaces.
+Max length: 120 karakter (atau 160 kalau kamu mau lebih informatif).
+function oneLine(s: string) {
+  return (s ?? "").replace(/\s+/g, " ").trim();
+}
+function clamp(s: string, max: number) {
+  return s.length > max ? s.slice(0, max - 1) + "…" : s;
+}
+​
+4.2 tags
+Lowercase
+dedup
+max 6 tags
+tiap tag max 24 char (clamp)
+5) Pseudocode minifier (TS/JS)
+type SubAgentLink = {
+  agentId: number;
+  role: string;
+  description?: string;
+  tags?: string[];
+  priority?: number;
+  outputFormat?: "json" | "text"; // ignored here
+};
+
+type MinifiedCandidate = {
+  agentId: number;
+  role: string;
+  desc: string;
+  tags?: string[];
+  priority?: number;
+};
+
+function minifyCandidates(links: SubAgentLink[]): MinifiedCandidate[] {
+  return links.map(l => {
+    const descRaw = l.description ?? "";
+    const desc = clamp(oneLine(descRaw) || oneLine(l.role) || `Agent ${l.agentId}`, 120);
+
+    const tags = l.tags?.length
+      ? uniquePreserveOrder(l.tags.map(x => clamp(oneLine(x.toLowerCase()), 24)).filter(Boolean)).slice(0, 6)
+      : undefined;
+
+    const priority = typeof l.priority === "number" ? l.priority : undefined;
+
+    const out: MinifiedCandidate = { agentId: l.agentId, role: oneLine(l.role) || "SUBAGENT", desc };
+    if (tags?.length) out.tags = tags;
+    if (priority !== undefined) out.priority = priority;
+    return out;
+  });
+}
+​
+Catatan: uniquePreserveOrder sama seperti yang kita pakai di routing.
+6) Sorting kandidat sebelum router (opsional tapi bagus)
+Walau router memilih ID, mengurutkan kandidat membantu model “melihat” yang penting dulu.
+Rekomendasi:
+sort by priority desc, lalu stable fallback ke urutan asli.
+function sortByPriorityStable<T extends { priority?: number }>(arr: T[]): T[] {
+  return arr
+    .map((x, i) => ({ x, i }))
+    .sort((a, b) => (b.x.priority ?? 0) - (a.x.priority ?? 0) || a.i - b.i)
+    .map(o => o.x);
+}
+​
+7) Candidate payload builder final (dipakai router)
+Flow yang saya sarankan:
+1) candidatesSorted = sortByPriorityStable(agenticSubAgents)
+2) candidatesMin = minifyCandidates(candidatesSorted)
+3) Kirim JSON.stringify(candidatesMin) ke router prompt
+Ini membuat perilaku fallback (slice(0, cap)) otomatis memilih yang berpriority tinggi juga—sehingga walau router gagal, sistem tetap “masuk akal”.
+8) Checklist implementasi PR #2 (yang kamu bisa jadikan task list)
+
+Tambah tags dan priority opsional ke agenticSubAgents link schema (jsonb)
+
+Implement minifyCandidates() + sortByPriorityStable()
+
+Router dipanggil hanya bila N > cap
+
+Router prompt berisi INTENT_SUMMARY + CANDIDATE_AGENTS (minified JSON)
+
+Fallback: jika router gagal parse → candidatesSorted.slice(0, cap)
+Kalau kamu ingin lanjut satu langkah lagi (masih PR #2 scope), saya bisa tuliskan router parsing + validation (mengubah output router menjadi number[] yang aman: dedup, filter, trim, fallback) dengan pendekatan yang sama seperti parsing JSON report PR #1.
+lanjut
+May 14
+Berikut lanjutan yang kamu minta: router parsing + validation yang robust (mirip pola PR #1), supaya routing tidak pernah bikin orchestrator crash dan selalu balik ke fallback deterministik.
+Router Parsing + Validation (PR #2)
+1) Kontrak output router
+Router wajib mengembalikan JSON object:
+{ "selectedAgentIds": [1394, 1550], "reason": "..." }
+​
+Kita anggap:
+selectedAgentIds bisa missing/invalid → fallback
+reason opsional (untuk log/debug; tidak mempengaruhi selection)
+2) Sanitization sebelum parse
+Router kadang tetap mengeluarkan:
+code fences `json
+teks “Berikut JSON-nya”
+whitespace/garbage
+Gunakan extractor ringan (sama seperti PR #1) agar JSON.parse lebih sering berhasil.
+function extractJsonLike(text: string) {
+  let t = (text ?? "").trim();
+
+  // strip code fences
+  t = t.replace(/^```(?:json)?/i, "").replace(/```$/i, "").trim();
+
+  const first = t.indexOf("{");
+  const last = t.lastIndexOf("}");
+  if (first >= 0 && last > first) t = t.slice(first, last + 1);
+
+  return t.trim();
+}
+​
+3) Parse + normalize hasil router menjadi number[]
+Tujuan: hasil final selalu number[] valid, unik, <= cap.
+function normalizeSelectedAgentIds(obj: any, cap: number): number[] {
+  const raw = obj?.selectedAgentIds;
+
+  if (!Array.isArray(raw)) return [];
+
+  const ids = raw
+    .map((x: any) => {
+      // accept numbers or numeric strings
+      if (typeof x === "number" && Number.isFinite(x)) return Math.trunc(x);
+      if (typeof x === "string" && /^\d+$/.test(x.trim())) return parseInt(x.trim(), 10);
+      return null;
+    })
+    .filter((x: any): x is number => typeof x === "number" && x > 0);
+
+  // dedup preserve order
+  const out: number[] = [];
+  const seen = new Set<number>();
+  for (const id of ids) {
+    if (!seen.has(id)) {
+      seen.add(id);
+      out.push(id);
+    }
+    if (out.length >= cap) break;
+  }
+  return out;
+}
+​
+4) Filter terhadap kandidat yang benar-benar tersedia
+Kadang router memilih ID yang tidak ada. Filter:
+function filterToExisting(ids: number[], candidates: { agentId: number }[]) {
+  const allowed = new Set(candidates.map(c => c.agentId));
+  return ids.filter(id => allowed.has(id));
+}
+​
+5) Fungsi wrapper: routeAgentsLLM() yang “no-throw”
+Ini pola produksi yang aman: fungsi routing tidak boleh throw, karena routing itu optional (fallback selalu bisa).
+async function routeAgentsLLM(args: {
+  question: string;
+  intentSummary: string;
+  candidatesMinified: any[]; // output minifyCandidates()
+  cap: number;
+  callLLM: (payload: any) => Promise<string>; // callAgentInternal or provider wrapper
+}): Promise<{ ids: number[]; reason?: string; parseOk: boolean }> {
+
+  try {
+    const prompt = buildRouterPrompt(args); // system+user or whatever your stack uses
+    const rawText = await args.callLLM(prompt);
+
+    const jsonText = extractJsonLike(rawText);
+    const obj = JSON.parse(jsonText);
+
+    const ids0 = normalizeSelectedAgentIds(obj, args.cap);
+    const ids = filterToExisting(ids0, args.candidatesMinified); // NOTE: candidatesMinified must have agentId
+
+    const reason = typeof obj?.reason === "string" ? obj.reason : undefined;
+
+    return { ids, reason, parseOk: true };
+  } catch (e) {
+    return { ids: [], reason: undefined, parseOk: false };
+  }
+}
+​
+Catatan: filterToExisting sebaiknya pakai candidatesSorted (sumber asli), bukan minified, tapi dua-duanya punya agentId jadi aman.
+6) Integrasi dengan fallback selection (final)
+async function selectAgentsWithRouterFallback({
+  question,
+  intentSummary,
+  candidatesSorted,
+  candidatesMinified,
+  cap,
+}: {
+  question: string;
+  intentSummary: string;
+  candidatesSorted: SubAgentLink[];
+  candidatesMinified: MinifiedCandidate[];
+  cap: number;
+}): Promise<{ selected: SubAgentLink[]; routed: boolean; parseOk: boolean }> {
+
+  if (candidatesSorted.length <= cap) {
+    return { selected: candidatesSorted, routed: false, parseOk: true };
+  }
+
+  const route = await routeAgentsLLM({
+    question,
+    intentSummary,
+    candidatesMinified,
+    cap,
+    callLLM: (payload) => callAgentInternal(payload), // adapt your signature
+  });
+
+  let selected = pickByIdsPreserveOrder(candidatesSorted, route.ids).slice(0, cap);
+
+  if (selected.length === 0) {
+    selected = candidatesSorted.slice(0, cap);
+  }
+
+  return { selected, routed: true, parseOk: route.parseOk };
+}
+​
+7) Telemetry minimal untuk router (highly recommended)
+Simpan (log atau db) ini per request:
+routerInvoked: boolean
+routerParseOk: boolean
+routerSelectedCount: number
+fallbackUsed: boolean
+selectedAgentIdsFinal: number[]
+Ini akan membantu kamu melihat apakah heuristic intent summary + router cukup stabil.
+8) “Repair” untuk router (opsional)
+Karena router dipanggil hanya saat N>cap, biasanya cukup fallback saja. Tapi kalau kamu mau lebih akurat, kamu bisa 1x repair attempt seperti PR #1:
+jika parse gagal → panggil ulang router dengan “Return ONLY valid JSON…” dan sertakan raw output.
+Namun saya rekomendasikan skip repair untuk router di tahap awal:
+lebih hemat
+lebih deterministik
+fallback sudah cukup aman
+Kalau kamu ingin lanjut ke tahap berikutnya (PR #2.5 / PR #3), jalur yang paling “naik kelas” adalah menambahkan Critic Gate (pass/fail + missingInfoQuestions) yang juga json_object, lalu orchestrator punya perilaku jelas: deliver vs ask questions.
+lanjut
+May 14
+Berikut saya lanjutkan ke bagian berikutnya yang paling “naik kelas” setelah routing stabil: Critic Gate (json_object) + kebijakan deliver vs ask. Ini bisa kamu jadikan PR #3 (atau PR #2.5 kalau kamu mau tetap satu rangkaian).
+PR #3 — Critic Gate (pass/fail) + “Ask-when-missing” Policy
+Tujuan
+1) Setelah sub-agent reports terkumpul dan orchestrator membuat draft jawaban, jalankan Critic.
+2) Critic mengembalikan keputusan terstruktur: pass/fail, confidence, dan daftar pertanyaan klarifikasi/must-fix/conflicts.
+3) Jika fail → orchestrator tidak memaksakan jawaban; ia bertanya pertanyaan minimum yang memblokir presisi.
+4) Jika pass → deliver jawaban final yang lebih presisi (boleh memakai outline dari critic).
+1) Critic output format (minimal, json_object)
+Gunakan format yang sederhana dulu (tanpa nested object):
+{
+  "pass": true,
+  "confidence": 0.0,
+  "missingInfoQuestions": [],
+  "conflicts": [],
+  "mustFix": [],
+  "answerOutline": []
+}
+​
+Rules:
+pass: boolean
+confidence: 0..1
+semua list: array of string (boleh kosong)
+max panjang:
+missingInfoQuestions: 1–5
+mustFix: 0–5
+conflicts: 0–5
+answerOutline: 3–10
+2) Input yang diberikan ke Critic (hemat token, tapi cukup)
+Critic perlu 3 hal:
+1) USER_QUESTION
+2) SUB_AGENT_REPORTS_SUMMARY (yang sudah kamu render ringkas dari JSON minimal v1)
+3) DRAFT_ANSWER (jawaban synthesize orchestrator sebelum final)
+Optional (kalau kamu punya): INTENT_SUMMARY dari PR #2.
+3) Critic prompt template yang stabil
+System
+You are a strict quality gate for an AI orchestrator.
+Output ONLY valid JSON object. No markdown. No code fences.
+Be conservative: if critical information is missing, set pass=false and ask concise questions.
+Do not invent facts.
+​
+User
+Evaluate the draft answer against the user question and the sub-agent reports.
+
+Return JSON exactly with keys:
+pass, confidence, missingInfoQuestions, conflicts, mustFix, answerOutline
+
+Rules:
+- pass=false if the answer would require guessing critical facts or regulations.
+- missingInfoQuestions: ask only questions that materially change correctness.
+- conflicts: list contradictions between sub-agent reports or between report vs draft.
+- mustFix: concrete fixes required before delivering.
+- answerOutline: if pass=true, provide a short outline to improve structure and completeness.
+
+USER_QUESTION:
+{question}
+
+INTENT_SUMMARY (optional):
+{intentSummary}
+
+SUB_AGENT_REPORTS_SUMMARY:
+{reportsSummary}
+
+DRAFT_ANSWER:
+{draftAnswer}
+​
+4) Orchestrator behavior (policy)
+Set policy yang jelas supaya sistem konsisten:
+4.1 Jika pass=false
+Orchestrator output ke user bukan jawaban panjang. Format yang disarankan:
+1) 1–2 kalimat: apa yang bisa dipastikan dari info saat ini
+2) “Untuk memastikan presisi, saya perlu:” → daftar pertanyaan (1–5)
+3) (opsional) “Kalau kamu jawab, saya akan susun: checklist/timeline/draft …”
+Contoh (template):
+Saya bisa bantu, tapi untuk menghindari asumsi yang berisiko, saya perlu beberapa info kunci dulu:
+
+1) ...
+2) ...
+3) ...
+
+Setelah itu saya susun {deliverable}.
+​
+4.2 Jika pass=true
+Orchestrator boleh:
+memperbaiki draft answer mengikuti answerOutline
+atau langsung deliver draft tapi menambal mustFix dulu
+Rekomendasi: 1 kali “revise pass”:
+kalau mustFix tidak kosong → lakukan 1 LLM call untuk revisi (opsional, tergantung budget)
+kalau budget ketat → patch manual dengan rule-based.
+5) Implementasi parsing + fallback (mirip PR #1)
+Karena json_object, critic juga harus punya safe parsing:
+parse fail → fallback pass=true dengan confidence rendah? atau pass=false?
+Rekomendasi saya untuk safety: fallback ke pass=false (lebih aman), dengan pertanyaan umum 1–2 butir.
+Fallback object:
+{
+  "pass": false,
+  "confidence": 0.3,
+  "missingInfoQuestions": ["Bisa jelaskan konteks dan target yang diinginkan (profil, batasan, output)?"],
+  "conflicts": [],
+  "mustFix": ["Critic output invalid JSON; fallback to clarification"],
+  "answerOutline": []
+}
+​
+6) Budgeting kecil (agar critic tidak bikin biaya melonjak)
+Critic dipanggil hanya jika:
+agenticMode=true (orchestrator)
+dan (a) N sub-agent > 1 atau (b) domain risk tinggi (regulasi/legal)
+Model critic bisa lebih murah (router model yang sama).
+max_tokens critic kecil (mis 500–800).
+7) Test cases PR #3
+1) Missing info: pertanyaan SBU tanpa subklasifikasi → critic fail → 3 pertanyaan.
+2) Konflik: sub-agent A bilang syarat X wajib, B bilang tidak → critic fail → conflicts + mustFix.
+3) Clear: user memberi profil lengkap → critic pass → outline.
+4) Critic parse fail: output bukan JSON → fallback fail → ask 1 pertanyaan.
+Keputusan kecil sebelum kamu mulai PR #3
+Kamu mau critic gate ini:
+1) selalu aktif di orchestrator agentic mode, atau
+2) aktif hanya untuk domain tertentu (Regulasi/Hukum/Tender) dulu?
+Rekomendasi saya: (2) aktifkan dulu untuk domain risk tinggi (Regulasi/Hukum/Tender). Ini menekan biaya dan meminimalkan perubahan perilaku di use-case kreatif/brainstorming.
+2
+May 14
+Baik—kita pilih opsi (2) Critic gate aktif hanya untuk domain risk tinggi dulu (Regulasi/Hukum/Tender). Ini spesifikasi implementasi yang paling aman + jelas kapan critic dipanggil.
+PR #3 (final scope) — Critic Gate hanya untuk High-Risk Domains
+1) Definisikan “highRiskDomains”
+Buat 1 util deterministic (tanpa LLM):
+1.1 Berbasis konteks UI (paling akurat)
+Jika kamu punya hubName/moduleName dari route:
+HUB / Module mengandung kata:
+"Regulasi", "SBU", "SKK", "Perizinan", "Tender", "Pengadaan", "Hukum", "Legal"
+→ highRisk = true
+1.2 Berbasis keyword di userText (fallback)
+Jika konteks UI tidak ada, cek keyword di userText:
+regulasi, peraturan, pasal, uu, pp, perm, skk, sbu, tender, lpse, sanggah, kontrak, legal, hukum, perizinan, oss, nib, sanksi, audit compliance
+Prinsip: lebih baik “false positive” sedikit (critic dipanggil walau tidak perlu) daripada “false negative” di domain regulasi.
+2) Kapan critic dipanggil (policy)
+Critic dipanggil hanya jika semua syarat ini terpenuhi:
+1) agenticMode === true (hanya orchestrator)
+2) highRisk === true
+3) dan salah satu kondisi berikut:
+selectedSubAgents.length >= 2 (ada agregasi multi-agent), atau
+intentSummary.unknowns.length > 0 (detected missing required info), atau
+draftAnswer.length > X (opsional, mis 1200 chars) → indikasi jawaban berpotensi spekulatif
+Kalau tidak memenuhi → skip critic (hemat biaya + tidak ubah perilaku use-case non-risk).
+3) Model & budget critic
+Model: pakai model murah/cepat (router model pun cukup)
+temperature: 0
+max_tokens: 600–900
+Timeout: 15–20s (lebih pendek dari sub-agent)
+4) Critic output (json_object) + parse fallback
+Tetap pakai format minimal:
+{
+  "pass": true,
+  "confidence": 0.0,
+  "missingInfoQuestions": [],
+  "conflicts": [],
+  "mustFix": [],
+  "answerOutline": []
+}
+​
+Jika parse fail → fallback pass=false + 1 pertanyaan klarifikasi umum (safety-first).
+5) Perilaku output ke user (high-risk fail)
+Jika critic pass=false:
+Jangan kirim jawaban panjang.
+Kirim “blocking questions” (1–5).
+Tambahkan 1 kalimat “mengapa ini perlu” (agar user mau menjawab).
+Template:
+Untuk memastikan jawaban presisi (dan menghindari asumsi yang berisiko), saya perlu info ini dulu:
+1) ...
+2) ...
+3) ...
+
+Setelah itu saya bisa susun: checklist + timeline + draft dokumen yang relevan.
+​
+6) Integrasi mulus dengan PR #2 (router)
+Flow final orchestrator (high level):
+1) build intentSummaryA
+2) if N > cap → router → selected
+3) dispatch selected (sebagian JSON reports dari PR #1)
+4) synthesize draft answer
+5) if agenticMode && highRisk && (conditions) → critic gate
+6) deliver vs ask questions
+7) Konfigurasi yang bisa kamu expose (opsional)
+Supaya fleksibel per HUB/series:
+criticEnabled: boolean (default false)
+criticDomains: string[] (default ["Regulasi","Hukum","Tender"])
+criticMinAgents: number (default 2)
+Kamu bisa override untuk HUB tertentu.
+Kalau kamu lanjut, langkah berikutnya yang paling “production-grade” adalah menambahkan resolver step ketika conflicts.length > 0: bukan langsung tanya user, tapi panggil 1 sub-agent “CONFLICT-RESOLVER” untuk menyatukan atau menandai ketidakpastian (masih tanpa tool-calling).
+lanjut
+May 14
+Lanjut ke langkah berikutnya: Conflict Resolver step (dipanggil hanya jika Critic mendeteksi konflik), masih tanpa tool-calling, tetap kompatibel multi-provider, dan tetap pakai json_object.
+PR #3.1 (atau PR #4) — Conflict Resolver (High-Risk Domains)
+Tujuan
+Kalau Critic mengembalikan conflicts.length > 0, jangan langsung lempar balik ke user. Lebih baik:
+1) jalankan Resolver untuk mencoba menyatukan versi yang benar,
+2) tandai mana yang benar-benar butuh klarifikasi user vs mana yang bisa diselesaikan dengan “best-effort reasoning”,
+3) hasilkan output yang lebih rapi untuk final answer atau pertanyaan klarifikasi.
+Ini menaikkan “presisi” dan mengurangi UX buruk (“kok nanya lagi”).
+1) Kapan Resolver dipanggil (policy)
+Resolver dipanggil hanya jika semua terpenuhi:
+agenticMode=true
+highRisk=true
+critic.pass=false dan critic.conflicts.length >= 1
+Opsional:
+Batasi: maxResolverRuns = 1 (jangan looping).
+2) Input yang diberikan ke Resolver (hemat token)
+Berikan 3 blok:
+1) USER_QUESTION
+2) SUB_AGENT_REPORTS_SUMMARY (render ringkas dari PR #1)
+3) CRITIC_JSON (hasil critic, terutama conflicts + mustFix + missingInfoQuestions)
+Tidak perlu kirim draft answer panjang (kecuali kamu mau resolver juga memperbaiki draft).
+3) Output Resolver (json_object) — format minimal yang berguna
+Gunakan JSON yang “actionable” untuk orchestrator:
+{
+  "resolvedPosition": "",
+  "confidence": 0.0,
+  "conflictResolutionNotes": [],
+  "stillUnknownQuestions": [],
+  "safeAnswerBits": [],
+  "doNotSay": []
+}
+​
+Makna field:
+resolvedPosition: posisi final (kalimat ringkas) jika bisa diputuskan.
+conflictResolutionNotes: alasan kenapa memilih posisi itu (ringkas).
+stillUnknownQuestions: pertanyaan yang benar-benar butuh user (1–5).
+safeAnswerBits: bagian jawaban yang aman disampaikan sekarang.
+doNotSay: klaim yang berisiko/berpotensi salah → jangan disebut.
+4) Prompt Resolver yang stabil
+System
+You are a conflict resolver for a high-risk domain (regulation/legal/tender).
+Output ONLY valid JSON object. No markdown. No code fences.
+Be conservative. If you cannot resolve without guessing, propose questions and list "doNotSay".
+​
+User
+Resolve conflicts found by Critic using the sub-agent reports.
+
+Return JSON exactly with keys:
+resolvedPosition, confidence, conflictResolutionNotes, stillUnknownQuestions, safeAnswerBits, doNotSay
+
+Rules:
+- If conflicts are resolvable from the reports, set resolvedPosition and confidence >= 0.6.
+- If not resolvable, keep resolvedPosition empty, set low confidence, and ask minimal questions.
+- Provide safeAnswerBits that can be said without committing to disputed facts.
+- doNotSay must include risky claims.
+
+USER_QUESTION:
+{question}
+
+SUB_AGENT_REPORTS_SUMMARY:
+{reportsSummary}
+
+CRITIC_OUTPUT_JSON:
+{criticJsonText}
+​
+5) Orchestrator behavior setelah Resolver
+Case A — Resolver berhasil memutuskan
+Jika resolvedPosition tidak kosong dan confidence >= 0.6:
+Orchestrator deliver jawaban final dengan:
+“safeAnswerBits” + “resolvedPosition”
+tetap minta 0–2 pertanyaan tambahan jika ada
+Case B — Resolver tidak bisa memutuskan
+Jika resolvedPosition kosong:
+Orchestrator tanya user menggunakan stillUnknownQuestions
+Sertakan safeAnswerBits (biar user tetap merasa terbantu)
+Pastikan tidak menyebut item di doNotSay
+6) Parsing & fallback (sama pola)
+Karena json_object, parsing bisa gagal. Jika gagal:
+fallback: anggap resolver “tidak bisa memutuskan”
+keluarkan pertanyaan dari critic (jika ada), atau 1 pertanyaan umum domain.
+7) Manfaat praktis (kenapa ini worth it)
+Mengurangi “ping-pong” pertanyaan yang tidak perlu.
+Menangani konflik antar sub-agent secara sistematis.
+Memberi guardrail: “doNotSay” mencegah hallucination di regulasi/hukum/tender.
+8) Minimal test cases
+1) Konflik ringan: beda istilah tapi inti sama → resolver menghasilkan resolvedPosition.
+2) Konflik nyata: dua klaim bertentangan tentang syarat → resolver minta 2 pertanyaan + doNotSay.
+3) Resolver parse fail → fallback ke critic questions.
+Keputusan kecil sebelum implementasi
+Kamu mau Resolver ini:
+1) jadi agent internal khusus (virtual role, tidak tampil di UI), atau
+2) jadi sub-agent biasa yang bisa kamu pilih di agenticSubAgents (mis. role: CONFLICT-RESOLVER)?
+Rekomendasi saya: (1) internal khusus dulu (lebih mudah di-control, tidak mengotori konfigurasi 944 agent).
+inte4rnal khusus dulu
+May 14
+Setuju: Resolver dibuat internal khusus dulu. Itu pilihan paling rapi untuk PR awal karena:
+Tidak menambah kompleksitas konfigurasi agenticSubAgents (tidak “mengotori” 944 agent).
+Kamu bisa kontrol model/timeout/budget resolver secara terpusat.
+Lebih aman untuk domain high-risk (policy & prompt bisa dikunci).
+Berikut spesifikasi final yang bisa kamu jadikan PR #3.1 (atau digabung ke PR #3) dengan “internal resolver”.
+PR #3.1 — Internal Conflict Resolver (high-risk only)
+1) Tambah fungsi internal: runConflictResolver(...)
+Bentuknya helper yang memanggil callAgentInternal() langsung (seperti critic/router), bukan agent dari database.
+Input:
+question: string
+intentSummary: string (dari heuristic A)
+reportsSummary: string (ringkasan hasil sub-agent)
+critic: CriticResult (object hasil critic)
+Output (json_object, minimal v1):
+{
+  "resolvedPosition": "",
+  "confidence": 0.0,
+  "conflictResolutionNotes": [],
+  "stillUnknownQuestions": [],
+  "safeAnswerBits": [],
+  "doNotSay": []
+}
+​
+2) Policy pemanggilan resolver
+Resolver dipanggil hanya jika:
+agenticMode === true
+highRisk === true
+critic.pass === false
+critic.conflicts.length >= 1
+resolverRunsThisRequest < 1 (hard cap 1)
+Kalau tidak, skip.
+3) Prompt resolver (json_object, multi-provider friendly)
+System:
+You are a conflict resolver for high-risk domains (regulation/legal/tender).
+Output ONLY a valid JSON object. No markdown. No code fences.
+Be conservative. If you cannot resolve without guessing, propose minimal questions and list risky claims in doNotSay.
+​
+User:
+Resolve conflicts found by the Critic using the sub-agent reports.
+
+Return JSON with keys:
+resolvedPosition, confidence, conflictResolutionNotes, stillUnknownQuestions, safeAnswerBits, doNotSay
+
+USER_QUESTION:
+...
+
+INTENT_SUMMARY:
+...
+
+SUB_AGENT_REPORTS_SUMMARY:
+...
+
+CRITIC_OUTPUT_JSON:
+...
+​
+4) Orchestrator behavior setelah resolver
+Jika resolvedPosition terisi dan confidence >= 0.6:
+Deliver jawaban final (gunakan safeAnswerBits + resolvedPosition)
+(Opsional) tetap ajukan 0–2 pertanyaan jika ada stillUnknownQuestions
+Jika resolvedPosition kosong:
+Jangan tebak; tampilkan safeAnswerBits
+Lalu tanyakan stillUnknownQuestions (1–5)
+Pastikan tidak menyebut apa pun dari doNotSay
+5) Parsing & fallback
+Karena json_object bisa gagal:
+parse fail → fallback ke mode “ask”:
+gunakan critic.missingInfoQuestions bila ada
+jika kosong, ajukan 1 pertanyaan domain-umum
+jangan pernah crash request hanya karena resolver error.
+6) Budget resolver (supaya tidak mahal)
+temperature: 0
+max_tokens: 600–900
+timeout 15–20s
+model murah (boleh sama dengan router/critic model)
+Yang bisa kamu kerjakan setelah ini (optional, tapi enak untuk produksi)
+1) Tambahkan doNotSay enforcement di “final answer synthesizer” (simple string filter / instruction).
+2) Log telemetry: resolverInvoked, parseOk, confidence, stillUnknownQuestionsCount.
+Kalau kamu ingin lanjut, saya bisa susunkan juga flow chart end-to-end (PR #1 → PR #2 → PR #3 → PR #3.1) dalam bentuk pseudocode lengkap, sehingga kamu bisa memastikan tidak ada loop/biaya yang tak terkendali.
+lanjut
+May 14
+Berikut flow end-to-end (pseudocode + urutan langkah) dari PR #1 → PR #2 → PR #3 → PR #3.1, dengan semua policy yang sudah kamu putuskan:
+JSON hanya untuk sub-agent internal (link-level outputFormat)
+Router hanya jalan bila N > cap
+Intent summary = deterministic (A)
+Critic gate hanya untuk high-risk domain
+Conflict resolver = internal khusus, jalan hanya bila critic mendeteksi konflik
+0) Data structures (ringkas)
+SubAgentLink (dari agenticSubAgents jsonb)
+type SubAgentLink = {
+  agentId: number
+  role: string
+  description?: string
+  outputFormat?: "json" | "text" // default text
+  tags?: string[]
+  priority?: number
+}
+​
+SubAgentReport (minimal v1)
+type SubAgentReport = {
+  agentName: string
+  summary: string
+  confidence: number // 0..1
+  claims: string[]
+  questions: string[]
+  actions: string[]
+}
+​
+RouterResult
+type RouterResult = { ids: number[]; parseOk: boolean; reason?: string }
+​
+CriticResult (json_object)
+type CriticResult = {
+  pass: boolean
+  confidence: number
+  missingInfoQuestions: string[]
+  conflicts: string[]
+  mustFix: string[]
+  answerOutline: string[]
+}
+​
+ResolverResult (json_object)
+type ResolverResult = {
+  resolvedPosition: string
+  confidence: number
+  conflictResolutionNotes: string[]
+  stillUnknownQuestions: string[]
+  safeAnswerBits: string[]
+  doNotSay: string[]
+}
+​
+1) Flow utama orchestrator (end-to-end)
+async function runOrchestratorAgentic(request: {
+  userText: string
+  recentTurnsText?: string
+  activeContext?: { seriesName?: string; coreName?: string; hubName?: string; moduleName?: string }
+  agenticSubAgents: SubAgentLink[]
+  config: {
+    maxParallelSubAgents?: number
+    routerModel?: string
+    criticModel?: string
+    resolverModel?: string
+  }
+}) {
+  const cap = request.config.maxParallelSubAgents ?? 4
+
+  // (A) Intent summary (Deterministic, only needed if N > cap OR for high-risk checks)
+  const intent = buildIntentSummaryA({
+    userText: request.userText,
+    recentText: request.recentTurnsText,
+    activeContext: request.activeContext
+  })
+
+  // (B) Detect high-risk
+  const highRisk = isHighRiskDomain({
+    intentDomains: intent.domains,
+    userText: request.userText,
+    activeContext: request.activeContext
+  })
+
+  // (C) Candidate preparation (priority stable)
+  const candidatesSorted = sortByPriorityStable(request.agenticSubAgents)
+  const candidatesMin = minifyCandidates(candidatesSorted)
+
+  // (D) Select agents
+  let selectedLinks: SubAgentLink[]
+  let routerMeta = { invoked: false, parseOk: true }
+
+  if (candidatesSorted.length > cap) {
+    routerMeta.invoked = true
+
+    const route = await routeAgentsLLM_NoThrow({
+      question: request.userText,
+      intentSummary: intent.text,
+      candidatesMinified: candidatesMin,
+      cap
+    })
+
+    routerMeta.parseOk = route.parseOk
+
+    const picked = pickByIdsPreserveOrder(candidatesSorted, route.ids).slice(0, cap)
+    selectedLinks = picked.length ? picked : candidatesSorted.slice(0, cap)
+  } else {
+    selectedLinks = candidatesSorted // no router
+  }
+
+  // (E) Dispatch sub-agents in parallel
+  const reports: SubAgentReport[] = await dispatchSubAgentsParallel(selectedLinks, request)
+
+  // (F) Summarize reports for synthesis + critic (token efficient)
+  const reportsSummary = renderReportsSummary(reports)
+
+  // (G) Synthesize draft answer (text)
+  const draftAnswer = await synthesizeFinalAnswer({
+    question: request.userText,
+    intentSummary: intent.text,
+    reportsSummary
+  })
+
+  // (H) Critic gate (only high-risk + conditions)
+  const shouldCritic =
+    highRisk &&
+    (
+      selectedLinks.length >= 2 ||
+      intent.unknowns.length > 0 ||
+      draftAnswer.length > 1200
+    )
+
+  if (!shouldCritic) {
+    return finalizeToUser(draftAnswer)
+  }
+
+  const critic = await runCritic_NoThrow({
+    question: request.userText,
+    intentSummary: intent.text,
+    reportsSummary,
+    draftAnswer
+  })
+
+  if (critic.pass) {
+    // Optional: revise once using outline/mustFix (budget permitting)
+    const finalAnswer = await maybeReviseWithCritic({
+      draftAnswer,
+      answerOutline: critic.answerOutline,
+      mustFix: critic.mustFix
+    })
+    return finalizeToUser(finalAnswer)
+  }
+
+  // (I) If critic fail + conflicts => run internal resolver once
+  if (critic.conflicts?.length) {
+    const resolver = await runConflictResolver_NoThrow({
+      question: request.userText,
+      intentSummary: intent.text,
+      reportsSummary,
+      critic
+    })
+
+    // If resolver can resolve confidently -> deliver
+    if (resolver.resolvedPosition && resolver.confidence >= 0.6) {
+      const finalAnswer = buildResolvedAnswer({
+        safeAnswerBits: resolver.safeAnswerBits,
+        resolvedPosition: resolver.resolvedPosition,
+        stillUnknownQuestions: resolver.stillUnknownQuestions,
+        doNotSay: resolver.doNotSay
+      })
+      return finalizeToUser(finalAnswer)
+    }
+
+    // else ask questions (and include safe bits)
+    const ask = buildClarifyingResponse({
+      safeAnswerBits: resolver.safeAnswerBits,
+      questions: resolver.stillUnknownQuestions.length
+        ? resolver.stillUnknownQuestions
+        : critic.missingInfoQuestions
+    })
+    return finalizeToUser(ask)
+  }
+
+  // (J) Critic fail without conflicts => ask clarifying questions
+  const ask = buildClarifyingResponse({
+    safeAnswerBits: extractSafeBitsFromDraft(draftAnswer),
+    questions: critic.missingInfoQuestions
+  })
+  return finalizeToUser(ask)
+}
+​
+2) Dispatch sub-agents (PR #1 kompatibel)
+async function dispatchSubAgentsParallel(selected: SubAgentLink[], request: any): Promise<SubAgentReport[]> {
+  const promises = selected.map(async (link) => {
+    const wantsJson = link.outputFormat === "json"
+
+    const raw = await callAgentInternal({
+      model: /* link.model or request default */,
+      messages: buildSubAgentMessages({
+        role: link.role,
+        desc: link.description,
+        userText: request.userText,
+        jsonMode: wantsJson
+      }),
+      temperature: 0.2,
+      max_tokens: /* existing rules */,
+      response_format: wantsJson ? { type: "json_object" } : undefined
+    })
+
+    if (!wantsJson) {
+      // Text agent -> wrap as report (low confidence default)
+      return {
+        agentName: link.role,
+        summary: truncate(raw, 800),
+        confidence: 0.4,
+        claims: [],
+        questions: [],
+        actions: []
+      }
+    }
+
+    // JSON agent -> parse+repair+fallback envelope (PR #1)
+    return parseReportOrFallback(raw, link.role)
+  })
+
+  return Promise.all(promises)
+}
+​
+3) High-risk detector (deterministic)
+Contoh minimal:
+function isHighRiskDomain(args: { intentDomains: string[]; userText: string; activeContext?: any }) {
+  const t = (args.userText || "").toLowerCase()
+  const ctx = `${args.activeContext?.hubName || ""} ${args.activeContext?.moduleName || ""}`.toLowerCase()
+
+  const keys = ["regulasi","hukum","legal","tender","pengadaan","lpse","sbu","skk","perizinan","oss","nib","kontrak","pasal","sanksi"]
+  const hit = keys.some(k => t.includes(k) || ctx.includes(k))
+
+  // also treat intent domain labels as signal
+  const domainHit = args.intentDomains.some(d => ["SBU","SKK","Tender","Perizinan","Regulasi Jasa Konstruksi","Hukum"].includes(d))
+
+  return hit || domainHit
+}
+​
+4) “No tool-calling” tetap Level 4-ish?
+Dengan flow di atas, kamu sudah punya:
+selective fan-out,
+structured sub-agent reports,
+critic gate,
+resolver,
+ask-when-missing policy,
+deterministic fallback,
+dan state machine programatik (walau belum tool calls).
+Ini sudah memenuhi “Agentic Level 4” versi engineering untuk banyak use-case problem solving + mentoring + project accompaniment, terutama karena ada quality gate + conflict handling + stateful decision.
+5) Output deliver/ask templates (biar UX konsisten)
+buildClarifyingResponse()
+Untuk memastikan presisi (dan menghindari asumsi yang berisiko), saya perlu info ini dulu:
+1) ...
+2) ...
+3) ...
+
+Sambil menunggu jawaban, ini poin yang sudah aman:
+- ...
+​
+buildResolvedAnswer()
+Berikut posisi yang paling aman dan konsisten berdasarkan laporan agen:
+- ...
+
+Keputusan/posisi:
+{resolvedPosition}
+
+Hal yang masih perlu dikonfirmasi (jika ada):
+1) ...
+​
+Kalau kamu mau lanjut lagi, langkah paling relevan berikutnya adalah: bagaimana menyimpan artifacts ke “Otak Proyek” & “Deliverables” dari hasil report/critic/resolver (tanpa tool-calling pun bisa, karena kamu sudah punya Postgres structured). Ini akan membuat “pendampingan proyek” jadi benar-benar stateful dan bisa dilanjutkan antar sesi.
+lanjut
+May 14
+Lanjut ke bagian yang kamu sebut paling relevan: persisting artifacts ke “Otak Proyek” (project_brain_instances.values) dan “Deliverables” (tabel deliverables / deliverableBundle) dari hasil sub-agent/critic/resolver — tanpa tool-calling LLM pun tetap bisa karena kamu sudah punya storage layer Postgres.
+Di bawah ini saya berikan desain data minimal, kapan write-back dilakukan, dan pseudocode write-back yang cocok dengan flow orchestrator yang sudah kita susun.
+1) Prinsip desain write-back (agar tidak mengotori state)
+Agar “agentic pendampingan proyek” terasa Level 4, write-back harus:
+1) Idempotent: request yang sama tidak membuat duplikasi deliverables.
+2) Append + update: menyimpan jejak (history) tapi tetap punya “latest state”.
+3) Terstruktur: simpan ringkasan + arrays (decisions, risks, open questions, action items).
+4) Minimal dan aman: jangan menulis data sensitif mentah; simpan ringkasan.
+2) Struktur “Project Brain values” minimal (jsonb)
+Kamu sudah punya project_brain_templates (definisi field) dan project_brain_instances.values (nilai aktif). Saya sarankan tambahkan beberapa field universal (bisa ada di template default):
+{
+  "goal": "",
+  "domain": ["SBU", "Regulasi"],
+  "constraints": [],
+  "assumptions": [],
+  "openQuestions": [],
+  "decisions": [],
+  "risks": [],
+  "actionItems": [],
+  "latestSummary": "",
+  "lastRun": {
+    "at": "2026-05-14T23:45:00+07:00",
+    "selectedAgents": [1394, 1550],
+    "highRisk": true,
+    "routerInvoked": true,
+    "criticPass": false
+  }
+}
+​
+Catatan: kamu tidak perlu ubah schema besar—karena jsonb fleksibel. Yang penting konsisten dipakai orchestrator.
+3) Struktur deliverables minimal (tabel deliverables)
+Untuk membuat deliverables “nyata” dan bisa dipakai antar sesi, saya sarankan 3 tipe awal (super praktis untuk domain regulasi/tender):
+1) CLARIFYING_QUESTIONS
+2) CHECKLIST
+3) TIMELINE
+Contoh payload deliverables.content (jsonb)
+{
+  "type": "CLARIFYING_QUESTIONS",
+  "title": "Pertanyaan Klarifikasi SBU",
+  "items": ["Kualifikasi BU?", "Subklasifikasi?", "KBLI?"],
+  "source": {
+    "critic": true,
+    "resolver": false,
+    "agents": ["SBU-SPECIALIST", "AGENT-MAPPER"]
+  },
+  "status": "needs_input"
+}
+​
+Idempotency key (penting):
+dedupeKey = hash(chatbotId + type + normalizedGoal + dateBucket)
+atau minimal:
+per sessionId / conversationId kalau kamu punya.
+4) Kapan write-back dilakukan (policy)
+Menghindari “spam state”:
+4.1 Selalu tulis ke Project Brain
+Setelah orchestrator selesai (deliver atau ask), tulis:
+latestSummary
+openQuestions (kalau critic fail)
+actionItems (dari sub-agent actions)
+metadata lastRun
+4.2 Deliverables hanya saat ada output “usable”
+Jika critic pass=true: tulis deliverable nyata (checklist/timeline/draft)
+Jika critic pass=false: tulis deliverable bertipe CLARIFYING_QUESTIONS (status needs_input)
+5) Write-back mapping dari PR #1/#3 outputs
+Kamu sudah punya struktur dari:
+reports[]: SubAgentReport
+critic: CriticResult
+resolver: ResolverResult (opsional)
+5.1 Merging rules (deterministic, tanpa LLM)
+openQuestions:
+jika resolver punya stillUnknownQuestions → pakai itu
+else pakai critic.missingInfoQuestions
+else gabungkan semua report.questions
+actionItems:
+gabungkan semua report.actions (dedup)
+assumptions:
+bisa kosong dulu (atau ambil dari “summary” heuristik kalau mau nanti)
+risks:
+untuk tahap awal: kosong dulu, atau parse emoji  dari summary (optional)
+6) Pseudocode write-back (service layer)
+Saya tulis generik (kamu tinggal ganti ke DAO/repo kamu).
+async function writeBackBrainAndDeliverables(args: {
+  chatbotId: number
+  brainInstanceId: number
+  intent: IntentSummary
+  reports: SubAgentReport[]
+  highRisk: boolean
+  routerMeta: { invoked: boolean; parseOk: boolean }
+  critic?: CriticResult
+  resolver?: ResolverResult
+  finalUserResponseText: string
+}) {
+  const now = new Date().toISOString()
+
+  // 1) Build brain patch
+  const openQuestions =
+    args.resolver?.stillUnknownQuestions?.length ? args.resolver.stillUnknownQuestions :
+    args.critic?.missingInfoQuestions?.length ? args.critic.missingInfoQuestions :
+    uniquePreserveOrder(args.reports.flatMap(r => r.questions)).slice(0, 8)
+
+  const actionItems =
+    uniquePreserveOrder(args.reports.flatMap(r => r.actions)).slice(0, 12)
+
+  const brainPatch = {
+    goal: args.intent.goal,
+    domain: args.intent.domains,
+    constraints: args.intent.constraints,
+    openQuestions,
+    actionItems,
+    latestSummary: truncate(args.finalUserResponseText, 1200),
+    lastRun: {
+      at: now,
+      selectedAgents: args.reports.map(r => r.agentName),
+      highRisk: args.highRisk,
+      routerInvoked: args.routerMeta.invoked,
+      routerParseOk: args.routerMeta.parseOk,
+      criticPass: args.critic ? args.critic.pass : null,
+      criticConfidence: args.critic?.confidence ?? null
+    }
+  }
+
+  // 2) Update project_brain_instances.values (merge jsonb)
+  await projectBrainRepo.mergeValues(args.brainInstanceId, brainPatch)
+
+  // 3) Deliverables policy
+  if (args.critic && args.highRisk && args.critic.pass === false) {
+    // Save clarifying questions as deliverable
+    const items = openQuestions.slice(0, 5)
+    await deliverablesRepo.upsertByDedupeKey({
+      chatbotId: args.chatbotId,
+      type: "CLARIFYING_QUESTIONS",
+      title: `Pertanyaan Klarifikasi (${args.intent.domains.join(", ") || "General"})`,
+      content: { type: "CLARIFYING_QUESTIONS", title: "...", items, status: "needs_input" },
+      dedupeKey: buildDedupeKey(args.chatbotId, "CLARIFYING_QUESTIONS", args.intent.goal)
+    })
+  } else {
+    // Optionally save final answer as a deliverable "ANSWER_SUMMARY"
+    await deliverablesRepo.upsertByDedupeKey({
+      chatbotId: args.chatbotId,
+      type: "ANSWER_SUMMARY",
+      title: `Ringkasan Jawaban (${args.intent.domains.join(", ") || "General"})`,
+      content: { type: "ANSWER_SUMMARY", text: truncate(args.finalUserResponseText, 4000) },
+      dedupeKey: buildDedupeKey(args.chatbotId, "ANSWER_SUMMARY", args.intent.goal)
+    })
+  }
+}
+​
+Kunci teknis di sini: mergeValues() harus melakukan JSONB merge (bukan replace total), supaya field template lain tidak hilang.
+7) DedupeKey yang sederhana tapi efektif
+Karena kamu belum punya global budget/cost tracking, dedupe bisa sederhana:
+function buildDedupeKey(chatbotId: number, type: string, goal: string) {
+  return sha1(`${chatbotId}:${type}:${normalize(goal).slice(0,120)}`)
+}
+​
+Kalau kamu punya sessionId, lebih bagus:
+${chatbotId}:${sessionId}:${type}
+8) Roadmap kecil setelah write-back aktif
+Begitu write-back jalan, kamu bisa naikkan “pendampingan proyek” secara nyata dengan 2 tambahan kecil:
+1) Saat user menjawab pertanyaan klarifikasi, sistem otomatis:
+update project_brain_instances.values,
+set deliverable CLARIFYING_QUESTIONS.status = "resolved".
+2) Orchestrator membaca openQuestions dari brain dulu, lalu mengurangi pertanyaan berulang.
+Kalau kamu mau lanjut, saya bisa turunkan desain untuk Project Brain Template minimal khusus high-risk domain (Regulasi/SBU/Tender) berisi field-field yang paling sering dibutuhkan (kualifikasi, subklasifikasi, KBLI, wilayah, bukti pengalaman, status legalitas, deadline) + mapping dari “jawaban user” ke values (extractor deterministic).
+lanjut
+May 14
+Berikut lanjutan yang kamu minta: Project Brain Template minimal (high‑risk: Regulasi/SBU/Tender/Hukum) + extractor deterministic untuk mengisi project_brain_instances.values dari jawaban user (tanpa LLM).
+1) Template “High‑Risk Project Brain” (minimal tapi lengkap)
+Kamu bisa simpan ini sebagai project_brain_templates default untuk HUB Regulasi/SBU/Tender. Saya tulis dalam bentuk JSON “field definitions” (silakan sesuaikan format template field yang sudah kamu pakai).
+A. Meta & tujuan
+goal (text)
+domain (multi-select / array string) — default dari hub/module
+deliverableTargets (array) — contoh: ["CHECKLIST", "TIMELINE", "DRAFT_SURAT"]
+language (select) — ID, EN, BILINGUAL
+B. Profil entitas / badan usaha (SBU/SKK/Perizinan)
+entityName (text)
+entityType (select): PT, CV, Koperasi, Perorangan, Lainnya
+npwp (text, optional)
+nib (text, optional)
+ossStatus (select): Belum, Sudah, Tidak yakin
+domicileProvince (text)
+domicileCity (text)
+C. Klasifikasi & ruang lingkup (kunci presisi SBU/SKK)
+kbliList (array of string)
+targetQualification (select): Kecil, Menengah, Besar, Tidak yakin
+targetSubklassifikasi (array of string) — boleh kode/nama
+serviceScopeNotes (text) — deskripsi pekerjaan yang dikejar
+D. Bukti & kapabilitas (untuk checklist & gap)
+projectExperienceSummary (text)
+projectExperienceCount (number optional)
+keyPersonnelAvailable (select): Ada, Sebagian, Belum
+certsOwned (array string) — mis: SKK tertentu, ISO, dsb
+documentsAvailable (array string) — daftar dokumen yang sudah siap
+E. Constraint, timeline, dan risiko
+deadlineDate (date optional)
+budgetNotes (text optional)
+confidentiality (select): Normal, Konfidensial
+knownRisks (array string)
+openQuestions (array string) — diisi dari critic/resolver
+actionItems (array string)
+F. Output / deliverables state
+deliverables (object/array) — pointers ke tabel deliverables (id/url internal)
+latestSummary (text)
+lastRun (object) — metadata run orchestrator (seperti yang sudah kita desain)
+Ini sudah cukup untuk: SBU, tender, perizinan, legal—tanpa kebanyakan field.
+2) Mapping “jawaban user” → values (Extractor deterministic)
+Karena kamu tidak mau LLM di tahap awal, kita bikin extractor rule-based yang:
+mencari pola angka/kode,
+keyword-based slot filling,
+dan meminimalkan false positive.
+2.1. Normalisasi input
+Lowercase
+Replace multiple spaces
+Simpan raw untuk value asli
+2.2. Ekstraksi NIB/NPWP (pola angka)
+NIB di Indonesia biasanya numeric panjang (13/16). Kamu bisa deteksi “NIB” + digit.
+NPWP pola 15 digit (kadang dengan titik/dash) → normalisasi jadi digit saja.
+Rule contoh:
+Jika ada token nib lalu angka setelahnya 10–20 digit → set nib
+Jika ada npwp lalu 12–20 digit (setelah stripping non-digit) → set npwp
+2.3. Ekstraksi KBLI
+Deteksi pola kbli lalu 5 digit (KBLI umum 5 digit)
+Bisa multiple → push ke kbliList
+Regex sederhana:
+/\bkbli\b[^0-9]{0,10}(\d{5})/g
+juga cari standalone 5 digit hanya jika kalimat mengandung “kbli”.
+2.4. Ekstraksi kualifikasi target
+Keyword:
+kecil|menengah|besar
+Jika ada “kualifikasi” di dekatnya atau user menulis “target … kecil”.
+2.5. Ekstraksi deadline (deterministic)
+Kalau user menulis format tanggal YYYY-MM-DD atau DD/MM/YYYY → parse.
+Kalau “2 minggu lagi” deterministic itu sulit tanpa date math yang rapi; untuk v1 cukup:
+simpan ke budgetNotes/serviceScopeNotes sebagai teks
+atau set deadlineDate hanya jika format tanggal eksplisit.
+2.6. Ekstraksi lokasi
+Cari pola:
+“domisili”, “alamat”, “kota”, “provinsi”
+Karena sulit standar, untuk v1 simpan sebagai teks ke domicileCity/domicileProvince bila keyword jelas; kalau tidak, simpan ke serviceScopeNotes.
+3) “Clarifying Questions → Form-like intake”
+Supaya proses tanya-jawab makin cepat dan tidak berulang, gunakan pertanyaan critic/resolver untuk mengisi field template ini.
+Contoh bila critic tanya:
+“Kualifikasi BU?” → map ke targetQualification
+“Subklasifikasi?” → map ke targetSubklassifikasi
+“KBLI?” → map ke kbliList
+“Wilayah?” → map ke domicileProvince/city
+Kamu bisa implement “question → fieldKey” mapping table:
+const QUESTION_FIELD_MAP = [
+  { match: ["kualifikasi"], field: "targetQualification" },
+  { match: ["subklasifikasi", "klasifikasi", "bidang"], field: "targetSubklassifikasi" },
+  { match: ["kbli"], field: "kbliList" },
+  { match: ["wilayah", "domisili", "kota", "provinsi"], field: "domicileCity" }
+]
+​
+Saat user menjawab, extractor memprioritaskan field yang sedang “ditanya”.
+4) Update strategy ke project_brain_instances.values (merge aman)
+Jangan replace seluruh values.
+Merge hanya keys yang terisi (non-empty).
+Untuk array:
+append + dedup
+Untuk string:
+overwrite jika input “lebih spesifik” (misalnya sebelumnya kosong)
+5) Minimal UI/UX improvement (tanpa banyak coding)
+Saat critic fail dan menghasilkan missingInfoQuestions, tampilkan juga “slot yang akan diisi”, mis:
+1) Kualifikasi BU (Kecil/Menengah/Besar) → akan mengisi: targetQualification  
+2) KBLI → kbliList  
+3) Subklasifikasi → targetSubklassifikasi
+Ini membuat user merasa seperti mengisi form, bukan ditanyai AI berulang.
+6) Next step paling kuat setelah template+extractor aktif
+Begitu extractor mengisi values, orchestrator bisa:
+mengurangi pertanyaan (karena state sudah lengkap),
+menyusun deliverables yang benar-benar “siap pakai” (checklist/timeline/draft),
+dan menjalankan critic dengan confidence lebih tinggi.
+Kalau kamu lanjut, saya bisa tulis Blueprint deliverable generator deterministic untuk 2 output paling penting di high-risk domain:
+1) CHECKLIST (berdasarkan field availability + gap)
+2) TIMELINE (berdasarkan deadline + langkah standar)
+lanbjut
+12:09 AM
+Berikut saya lanjutkan sesuai janji: blueprint deliverable generator deterministic untuk 2 output paling penting di high‑risk domain, tanpa LLM:
+1) CHECKLIST (gap-based)
+2) TIMELINE (step template + deadline-aware)
+Tujuannya: begitu project_brain_instances.values sudah terisi oleh extractor + clarifying Q, kamu bisa menghasilkan deliverable yang konsisten, cepat, dan bisa di-update incremental.
+1) Deliverable: CHECKLIST (deterministic, gap-based)
+1.1 Struktur JSON deliverable CHECKLIST
+{
+  "type": "CHECKLIST",
+  "title": "Checklist Persiapan (SBU)",
+  "status": "in_progress",
+  "sections": [
+    {
+      "name": "Profil Badan Usaha",
+      "items": [
+        { "label": "Nama badan usaha", "status": "missing", "field": "entityName" },
+        { "label": "NIB", "status": "present", "field": "nib" }
+      ]
+    }
+  ],
+  "notes": [],
+  "generatedFrom": {
+    "brainVersion": "lastRun.at",
+    "domain": ["SBU"]
+  }
+}
+​
+1.2 Checklist rule engine (cara bangun checklist)
+Buat “master checklist template” per domain (SBU/Tender/Perizinan). Setiap item punya:
+label
+field (key di values) atau predicate() (fungsi)
+requiredIf (kondisional)
+severity (P0/P1/P2)
+Contoh item SBU minimal:
+Profil BU: entityName, entityType, domicileProvince/city, nib (jika OSS)
+Scope: targetQualification, targetSubklassifikasi, kbliList
+Bukti: projectExperienceSummary atau count > 0, keyPersonnelAvailable
+Dokumen: documentsAvailable minimal X
+Status item:
+present jika field ada dan tidak kosong
+missing jika kosong
+optional jika tidak required
+1.3 Output yang “langsung actionable”
+Tambahkan ringkasan otomatis (deterministic) di notes, mis:
+“P0 missing: targetSubklassifikasi, KBLI”
+“P1 missing: projectExperienceSummary”
+“Siap dieksekusi setelah input P0 lengkap”
+2) Deliverable: TIMELINE (deterministic, deadline-aware)
+2.1 Struktur JSON deliverable TIMELINE
+{
+  "type": "TIMELINE",
+  "title": "Timeline Persiapan (SBU)",
+  "status": "draft",
+  "milestones": [
+    {
+      "name": "P0 — Klarifikasi target & scope",
+      "days": 2,
+      "dependsOn": [],
+      "outputs": ["targetQualification", "targetSubklassifikasi", "kbliList"]
+    },
+    {
+      "name": "P1 — Pengumpulan dokumen",
+      "days": 7,
+      "dependsOn": ["P0 — Klarifikasi target & scope"],
+      "outputs": ["documentsAvailable"]
+    }
+  ],
+  "deadlineDate": "2026-06-01",
+  "riskFlags": []
+}
+​
+2.2 Cara menentukan timeline tanpa date-math rumit
+Pakai dua mode:
+Mode A (tanpa tanggal deadline eksplisit)  
+Timeline “durasi relatif” (days). UI bisa tampilkan “estimasi total 10–14 hari”.
+Mode B (deadlineDate ada)  
+Hitung jumlah hari tersisa:
+jika hari tersisa < estimasi → riskFlags += ["deadline_tight"]
+jika cukup → set target per milestone (opsional)
+Estimasi baseline (contoh SBU):
+P0 Klarifikasi: 1–2 hari
+P1 Dokumen: 5–10 hari
+P2 Review gap: 1–2 hari
+P3 Finalisasi berkas: 1–3 hari
+Semua deterministic.
+3) Generator functions (pseudocode)
+3.1 Checklist generator
+function generateChecklistSBU(values: any) {
+  const sections = [];
+
+  sections.push(sectionFromFields("Profil Badan Usaha", [
+    { label: "Nama badan usaha", field: "entityName", severity: "P0" },
+    { label: "Tipe badan usaha (PT/CV/..)", field: "entityType", severity: "P1" },
+    { label: "Domisili (Provinsi)", field: "domicileProvince", severity: "P1" },
+    { label: "Domisili (Kota)", field: "domicileCity", severity: "P2" },
+    { label: "NIB (jika ada)", field: "nib", severity: "P0" }
+  ], values));
+
+  sections.push(sectionFromFields("Scope & Target", [
+    { label: "Target kualifikasi", field: "targetQualification", severity: "P0" },
+    { label: "KBLI", field: "kbliList", severity: "P0" },
+    { label: "Target subklasifikasi", field: "targetSubklassifikasi", severity: "P0" }
+  ], values));
+
+  sections.push(sectionFromFields("Bukti Kapabilitas", [
+    { label: "Ringkasan pengalaman proyek", field: "projectExperienceSummary", severity: "P1" },
+    { label: "Ketersediaan personel kunci", field: "keyPersonnelAvailable", severity: "P1" }
+  ], values));
+
+  const notes = summarizeGaps(sections);
+  return { type: "CHECKLIST", title: "Checklist Persiapan (SBU)", status: notes.p0Missing ? "needs_input" : "in_progress", sections, notes: notes.lines };
+}
+​
+3.2 Timeline generator
+function generateTimelineSBU(values: any) {
+  const milestones = [
+    { name: "P0 — Klarifikasi target & scope", days: 2, dependsOn: [], outputs: ["targetQualification","kbliList","targetSubklassifikasi"] },
+    { name: "P1 — Pengumpulan dokumen", days: 7, dependsOn: ["P0 — Klarifikasi target & scope"], outputs: ["documentsAvailable"] },
+    { name: "P1 — Bukti pengalaman & SDM", days: 4, dependsOn: ["P0 — Klarifikasi target & scope"], outputs: ["projectExperienceSummary","keyPersonnelAvailable"] },
+    { name: "P2 — Review gap & finalisasi bundle", days: 2, dependsOn: ["P1 — Pengumpulan dokumen","P1 — Bukti pengalaman & SDM"], outputs: ["deliverableBundle"] }
+  ];
+
+  const deadlineDate = values.deadlineDate ?? null;
+  const riskFlags = computeDeadlineRisk(deadlineDate, milestones);
+
+  return { type: "TIMELINE", title: "Timeline Persiapan (SBU)", status: "draft", milestones, deadlineDate, riskFlags };
+}
+​
+4) Write-back deliverables (upsert + dedupe)
+Begitu generator menghasilkan JSON:
+deliverablesRepo.upsertByDedupeKey({ chatbotId, type:"CHECKLIST", ... })
+deliverablesRepo.upsertByDedupeKey({ chatbotId, type:"TIMELINE", ... })
+DedupeKey:
+${chatbotId}:SBU:CHECKLIST
+${chatbotId}:SBU:TIMELINE
+agar selalu “update yang sama” (bukan create baru).
+5) Kapan generator dipanggil?
+Setelah project_brain_instances.values update (hasil extractor / jawaban user)
+Atau setelah orchestrator selesai 1 run dan critic pass=true (atau minimal P0 lengkap)
+Rule praktis:
+Jika masih ada P0 missing di checklist → buat/refresh checklist saja, timeline tetap draft.
+Jika P0 lengkap → generate checklist + timeline.
+Kalau kamu lanjut lagi, saya bisa tuliskan:
+1) versi generator untuk Tender (LPSE/pengadaan) dan Perizinan (OSS/NIB), atau
+2) cara membuat “deliverableBundle” yang menggabungkan checklist+timeline+draft surat jadi 1 paket terstruktur.
+lanjut
+12:11 AM
+Berikut saya lanjutkan dengan opsi (2) yang paling “produk banget”: DeliverableBundle yang menggabungkan checklist + timeline + (opsional) draft surat/berkas menjadi satu paket terstruktur, plus aturan update/idempotency.
+DeliverableBundle — Paket Terstruktur (Checklist + Timeline + Drafts)
+1) Kenapa perlu DeliverableBundle
+Kalau deliverables kamu terpisah-pisah, orchestrator susah:
+menyatakan “paket siap kirim”,
+melacak progres,
+melakukan update incremental tanpa duplikasi.
+Bundle membuat output agentic terasa seperti “pendamping proyek”: ada paket pekerjaan, bukan sekadar jawaban chat.
+2) Struktur JSON deliverableBundle (minimal v1)
+Simpan di tabel yang sudah kamu punya (deliverableBundle atau kolom jsonb di agents/series sesuai yang kamu sebut). Format minimal:
+{
+  "bundleType": "SBU_PREP_PACKAGE",
+  "title": "Paket Persiapan SBU",
+  "domain": ["SBU", "Regulasi Jasa Konstruksi"],
+  "status": "in_progress",
+  "version": 1,
+  "generatedAt": "2026-05-15T00:12:00+07:00",
+  "items": [
+    {
+      "type": "CHECKLIST",
+      "deliverableId": 123,
+      "title": "Checklist Persiapan (SBU)",
+      "status": "needs_input"
+    },
+    {
+      "type": "TIMELINE",
+      "deliverableId": 124,
+      "title": "Timeline Persiapan (SBU)",
+      "status": "draft"
+    },
+    {
+      "type": "DRAFTS",
+      "deliverableId": 125,
+      "title": "Draft & Template Dokumen",
+      "status": "todo"
+    }
+  ],
+  "progress": {
+    "p0MissingCount": 3,
+    "p1MissingCount": 2,
+    "lastUpdateSource": "orchestrator"
+  },
+  "notes": [
+    "P0 masih kurang: targetQualification, kbliList, targetSubklassifikasi"
+  ]
+}
+​
+Catatan:
+deliverableId bisa null kalau kamu belum create item itu (bundle tetap valid).
+status bundle bisa diturunkan otomatis dari status item.
+3) Idempotency & update rules (penting untuk produksi)
+3.1 DedupeKey untuk bundle
+Jadikan bundle selalu “satu per chatbot per bundleType”:
+dedupeKey = ${chatbotId}:BUNDLE:SBU_PREP_PACKAGE
+Artinya: setiap run hanya update bundle yang sama, bukan create baru.
+3.2 Update strategy
+items[] di-update by type (CHECKLIST/TIMELINE/DRAFTS)
+progress dihitung ulang dari checklist gap summary
+notes ditimpa (atau append terbatas 3–5 baris)
+4) Generator deterministic untuk bundle (pseudocode)
+Asumsi kamu sudah bisa generate checklistJson dan timelineJson seperti sebelumnya.
+async function upsertSbuPrepBundle(args: {
+  chatbotId: number
+  values: any
+}) {
+  // 1) upsert checklist deliverable
+  const checklist = generateChecklistSBU(args.values)
+  const checklistRow = await deliverablesRepo.upsertByDedupeKey({
+    chatbotId: args.chatbotId,
+    type: "CHECKLIST",
+    title: checklist.title,
+    content: checklist,
+    dedupeKey: `${args.chatbotId}:SBU:CHECKLIST`
+  })
+
+  // 2) upsert timeline deliverable (optional gating)
+  let timelineRow = null
+  if (checklist.status !== "needs_input") {
+    const timeline = generateTimelineSBU(args.values)
+    timelineRow = await deliverablesRepo.upsertByDedupeKey({
+      chatbotId: args.chatbotId,
+      type: "TIMELINE",
+      title: timeline.title,
+      content: timeline,
+      dedupeKey: `${args.chatbotId}:SBU:TIMELINE`
+    })
+  }
+
+  // 3) draft pack placeholder (optional)
+  const draftsRow = await deliverablesRepo.upsertByDedupeKey({
+    chatbotId: args.chatbotId,
+    type: "DRAFTS",
+    title: "Draft & Template Dokumen",
+    content: { type: "DRAFTS", items: [], status: "todo" },
+    dedupeKey: `${args.chatbotId}:SBU:DRAFTS`
+  })
+
+  // 4) compute progress from checklist gaps
+  const progress = computeChecklistProgress(checklist)
+
+  // 5) upsert bundle
+  const bundle = {
+    bundleType: "SBU_PREP_PACKAGE",
+    title: "Paket Persiapan SBU",
+    domain: ["SBU", "Regulasi Jasa Konstruksi"],
+    status: progress.p0MissingCount > 0 ? "needs_input" : "in_progress",
+    version: 1,
+    generatedAt: new Date().toISOString(),
+    items: [
+      { type: "CHECKLIST", deliverableId: checklistRow.id, title: checklist.title, status: checklist.status },
+      { type: "TIMELINE", deliverableId: timelineRow?.id ?? null, title: "Timeline Persiapan (SBU)", status: timelineRow ? "draft" : "blocked" },
+      { type: "DRAFTS", deliverableId: draftsRow.id, title: "Draft & Template Dokumen", status: "todo" }
+    ],
+    progress,
+    notes: progress.notes
+  }
+
+  await bundleRepo.upsertByDedupeKey({
+    chatbotId: args.chatbotId,
+    bundleType: bundle.bundleType,
+    title: bundle.title,
+    content: bundle,
+    dedupeKey: `${args.chatbotId}:BUNDLE:${bundle.bundleType}`
+  })
+
+  return bundle
+}
+​
+5) computeChecklistProgress() (deterministic)
+Dari checklist.sections[].items[] yang punya severity dan status:
+p0MissingCount = missing severity P0
+p1MissingCount = missing severity P1
+notes = 1–3 baris ringkas
+function computeChecklistProgress(checklist: any) {
+  const all = checklist.sections.flatMap((s: any) => s.items || [])
+  const missingP0 = all.filter((i: any) => i.status === "missing" && i.severity === "P0")
+  const missingP1 = all.filter((i: any) => i.status === "missing" && i.severity === "P1")
+
+  const notes = []
+  if (missingP0.length) notes.push(`P0 missing: ${missingP0.map((x:any)=>x.field||x.label).slice(0,6).join(", ")}`)
+  if (missingP1.length) notes.push(`P1 missing: ${missingP1.map((x:any)=>x.field||x.label).slice(0,6).join(", ")}`)
+
+  return { p0MissingCount: missingP0.length, p1MissingCount: missingP1.length, lastUpdateSource: "orchestrator", notes }
+}
+​
+6) Cara bundle “mengunci” UX pendampingan
+Begitu bundle ada, UI bisa:
+menampilkan “Paket Persiapan SBU” dengan status (needs_input / in_progress / ready)
+klik masuk: lihat checklist + timeline + drafts
+ketika user melengkapi input, orchestrator refresh bundle (idempotent) → status berubah otomatis
+Ini membuat platform kamu terasa seperti agentic project companion, bukan hanya chat.
+7) Next step (pilih salah satu arah)
+Agar bundle makin berguna, langkah berikutnya biasanya salah satu:
+1) Tender bundle (LPSE): checklist dokumen penawaran + timeline sanggah + monitoring tender
+2) Perizinan bundle (OSS/NIB): checklist legal + timeline proses + draft pernyataan
+3) Draft generator deterministic sederhana (template surat dengan placeholder dari brain values)
+Kalau kamu ketik “lanjut” lagi, sebutkan kamu mau lanjut ke (1)/(2)/(3) supaya saya fokus dan tidak melebar.
+lanjut
+12:26 AM
+Thought
+Untuk “lanjut” berikutnya ada 3 jalur implementasi yang paling logis setelah DeliverableBundle SBU (karena masing-masing butuh rule-template berbeda). Karena kamu belum memilih, saya lanjutkan dengan yang paling universal dan cepat memberi efek lintas domain: (3) Draft generator deterministic (template surat/berkas dengan placeholder dari Project Brain values). Ini akan langsung membuat bundle terasa “siap pakai”, bukan hanya checklist+timeline.
+Draft Generator Deterministic (Template + Placeholder) — v1
+1) Konsep: Drafts sebagai kumpulan template terisi (tanpa LLM)
+Kamu simpan template teks yang berisi placeholder seperti entityName, lalu render dengan values dari project_brain_instances.values.
+1.1 Struktur deliverable DRAFTS (jsonb)
+{
+  "type": "DRAFTS",
+  "title": "Draft & Template Dokumen",
+  "status": "in_progress",
+  "documents": [
+    {
+      "docType": "SURAT_PERMOHONAN",
+      "title": "Draft Surat Permohonan (SBU)",
+      "format": "text",
+      "placeholdersMissing": ["entityName", "domicileCity"],
+      "content": "Kepada Yth...\n\nDengan hormat,\n...\n"
+    }
+  ]
+}
+​
+placeholdersMissing penting untuk gating: kalau P0 belum lengkap, draft tetap dibuat tapi status “needs_input”.
+2) Template engine minimal (aman & cepat)
+2.1 Placeholder rules
+Placeholder: key
+Jika value kosong → ganti dengan <<MISSING:key>> dan catat ke placeholdersMissing[].
+Pseudocode:
+function renderTemplate(template: string, values: Record<string, any>) {
+  const missing: string[] = []
+  const content = template.replace(/\s*([a-zA-Z0-9_.-]+)\s*/g, (_, key) => {
+    const v = values[key]
+    const ok = v !== null && v !== undefined && String(v).trim() !== ""
+    if (!ok) { missing.push(key); return `<<MISSING:${key}>>` }
+    return String(v).trim()
+  })
+  return { content, missing: uniquePreserveOrder(missing) }
+}
+​
+3) Template “Surat Permohonan” (contoh SBU) — deterministic
+Ini contoh template yang kamu bisa taruh di “library template” per domain.
+Kepada Yth.
+[Nama Instansi/LSBU]
+Di tempat
+
+Perihal: Permohonan Proses Sertifikasi Badan Usaha (SBU)
+
+Dengan hormat,
+
+Kami yang bertanda tangan di bawah ini:
+Nama Badan Usaha  : entityName
+Bentuk Badan Usaha: entityType
+NIB               : nib
+NPWP              : npwp
+Domisili          : domicileCity, domicileProvince
+
+Dengan ini mengajukan permohonan untuk proses Sertifikasi Badan Usaha (SBU) dengan target:
+Kualifikasi        : targetQualification
+KBLI               : kbliList
+Subklasifikasi     : targetSubklassifikasi
+
+Adapun dokumen pendukung telah/akan kami siapkan sesuai ketentuan yang berlaku.
+
+Demikian permohonan ini kami sampaikan. Atas perhatian dan kerja samanya kami ucapkan terima kasih.
+
+Hormat kami,
+
+entityName
+(____________________)
+Nama:
+Jabatan:
+Tanggal: todayDate
+​
+Catatan:
+kbliList dan targetSubklassifikasi idealnya di-render sebagai string join , .
+todayDate bisa kamu isi deterministic dari server date (Asia/Jakarta) tanpa LLM.
+Helper:
+function toCommaList(v:any) { return Array.isArray(v) ? v.filter(Boolean).join(", ") : String(v||"") }
+​
+4) Generator DRAFTS untuk Bundle SBU
+Pseudocode:
+function generateDraftsSBU(values: any) {
+  const normalized = {
+    ...values,
+    kbliList: toCommaList(values.kbliList),
+    targetSubklassifikasi: toCommaList(values.targetSubklassifikasi),
+    todayDate: formatDateLocal(new Date())
+  }
+
+  const docs = []
+
+  const t1 = TEMPLATE_SURAT_PERMOHONAN_SBU
+  const r1 = renderTemplate(t1, normalized)
+  docs.push({
+    docType: "SURAT_PERMOHONAN",
+    title: "Draft Surat Permohonan (SBU)",
+    format: "text",
+    placeholdersMissing: r1.missing,
+    content: r1.content
+  })
+
+  const anyMissing = docs.some(d => d.placeholdersMissing.length > 0)
+  return {
+    type: "DRAFTS",
+    title: "Draft & Template Dokumen",
+    status: anyMissing ? "needs_input" : "in_progress",
+    documents: docs
+  }
+}
+​
+Lalu upsert ke deliverables:
+dedupeKey = ${chatbotId}:SBU:DRAFTS
+Dan bundle item DRAFTS.status mengikuti output ini.
+5) Integrasi dengan Checklist (biar otomatis “nyambung”)
+Checklist engine sudah tahu field P0 yang missing. Draft generator juga punya placeholdersMissing.
+Aturan status bundle yang enak:
+Jika checklist P0 missing > 0 → bundle needs_input
+Jika draft placeholdersMissing > 0 → bundle tetap needs_input (karena draft belum siap kirim)
+6) Apa yang kamu dapat setelah ini
+Dengan 3 deliverables deterministic:
+Checklist (gap)
+Timeline (plan)
+Draft surat (output nyata)
+Kamu sudah punya “Agentic package” yang bisa berjalan bahkan saat LLM down/mahal, dan bisa dipakai lintas provider.
+Kalau kamu ingin saya lanjut setelah draft generator ini, ada 2 pilihan paling berguna:
+1) Tender bundle (LPSE) versi deterministic (checklist dokumen penawaran + timeline sanggah/clarification + draft surat penawaran).
+2) Perizinan bundle (OSS/NIB) versi deterministic (checklist legalitas + timeline proses + draft pernyataan).
+Kamu pilih yang mana: Tender atau Perizinan?
+lanjut
+12:44 AM
+Thought
+Saya lanjut dengan Tender bundle (LPSE/Pengadaan) versi deterministic dulu, karena biasanya paling “high-risk” dan paling butuh struktur (checklist + timeline + draft). Nanti struktur yang sama bisa kamu adapt ke Perizinan.
+Tender Bundle (LPSE) — Deterministic v1
+Output: 1 DeliverableBundle + 3 deliverables: CHECKLIST, TIMELINE, DRAFTS
+1) Project Brain fields minimal untuk Tender (tambahan ke template high-risk)
+Tambahkan field berikut (jsonb di values):
+A. Identitas tender
+tenderTitle (text)
+lpseUrl (text)
+instansiName (text)
+paketId (text/number)
+tenderMethod (select): Tender, Non-tender, E-purchasing, Tidak yakin
+B. Jadwal & tahap
+aanwijzingDate (date optional)
+bidSubmissionDeadline (date optional)
+evaluationStartDate (date optional)
+objectionDeadline (date optional)
+C. Dokumen & persyaratan
+kualifikasiRequirements (array string) — ringkasan syarat kualifikasi
+technicalRequirements (array string)
+administrativeRequirements (array string)
+bidBondRequired (select): Ya, Tidak, Tidak yakin
+D. Data internal penawaran
+companyProfileReady (select): Ya, Sebagian, Belum
+personnelReady (select): Ya, Sebagian, Belum
+equipmentReady (select): Ya, Sebagian, Belum
+pastProjectsReady (select): Ya, Sebagian, Belum
+pricingReady (select): Ya, Sebagian, Belum
+Field-field ini sengaja “boolean-ish” supaya deterministic checklist mudah dan tidak perlu parsing rumit.
+2) CHECKLIST Tender (gap-based)
+2.1 Struktur JSON deliverable
+{
+  "type": "CHECKLIST",
+  "title": "Checklist Persiapan Tender (LPSE)",
+  "status": "needs_input",
+  "sections": [
+    { "name": "Info Tender", "items": [ ... ] },
+    { "name": "Administrasi", "items": [ ... ] },
+    { "name": "Teknis", "items": [ ... ] },
+    { "name": "Komersial", "items": [ ... ] },
+    { "name": "Review & Submit", "items": [ ... ] }
+  ],
+  "notes": []
+}
+​
+2.2 Item checklist minimal (contoh)
+Info Tender (P0)
+tenderTitle (P0)
+instansiName (P0)
+lpseUrl atau paketId (P0)
+bidSubmissionDeadline (P0; kalau tidak ada → tetap bisa, tapi timeline risk tinggi)
+Administrasi (P1/P0 tergantung kebijakan)
+companyProfileReady (P1)
+administrativeRequirements (P1) — minimal ringkasan
+Teknis
+technicalRequirements (P1)
+personnelReady (P1)
+equipmentReady (P2)
+Komersial
+pricingReady (P0/P1; saya sarankan P0 kalau deadline dekat)
+bidBondRequired (P1)
+Review & Submit
+“Final compliance check” (predicate, always present tapi status = todo)
+“Upload & submit before deadline” (todo)
+Status item = present|missing|todo (todo = task, bukan field).
+3) TIMELINE Tender (deadline-aware)
+3.1 Milestone template (durasi relatif)
+P0: Klarifikasi paket + jadwal (0.5–1 hari)
+P1: Breakdown requirement (1 hari)
+P1: Administrasi (1–2 hari)
+P1: Teknis (2–5 hari)
+P1: Harga (1–3 hari)
+P2: Review compliance + final pack (0.5–1 hari)
+P0: Submit (sebelum deadline)
+3.2 Risk flags
+Jika bidSubmissionDeadline ada:
+hitung daysLeft
+hitung estimatedDaysTotal
+jika daysLeft < estimatedDaysTotal → riskFlags += ["deadline_tight"]
+jika daysLeft < 2 → riskFlags += ["deadline_critical"]
+Kalau deadline tidak ada → riskFlags += ["deadline_unknown"]
+4) DRAFTS Tender (template deterministic)
+Untuk Tender, draft yang paling berguna (tanpa LLM) biasanya:
+1) Surat Permohonan Klarifikasi / Pertanyaan Aanwijzing
+2) Surat Pernyataan (umum; template, isi sebagian dari values)
+3) Cover letter penawaran (jika praktik kamu memerlukan)
+4.1 Template: “Daftar Pertanyaan Aanwijzing”
+Berbasis technicalRequirements + administrativeRequirements yang masih ambigu.
+Deterministic approach:
+Jika requirements arrays kosong → placeholder pertanyaan umum (3–5)
+Jika ada → generate pertanyaan per item yang mengandung kata: “harus”, “wajib”, “minimal”, “sertifikat”, “pengalaman”, tapi datanya belum ready.
+Output doc:
+{
+  "docType": "AANWIJZING_QUESTIONS",
+  "title": "Daftar Pertanyaan Aanwijzing",
+  "format": "text",
+  "placeholdersMissing": ["technicalRequirements"],
+  "content": "1) Mohon konfirmasi ...\n2) ..."
+}
+​
+5) Bundle Tender (LPSE_TENDER_PACKAGE)
+Bundle type:
+bundleType: "LPSE_TENDER_PACKAGE"
+DedupeKey:
+${chatbotId}:BUNDLE:LPSE_TENDER_PACKAGE
+Items:
+CHECKLIST (id)
+TIMELINE (id)
+DRAFTS (id)
+Status bundle:
+needs_input jika P0 missing (mis tenderTitle/instansi/deadline kosong) atau draft banyak missing
+in_progress jika P0 lengkap
+ready kalau checklist semua present/todo dan timeline tidak critical (opsional rule)
+6) Extractor deterministic untuk Tender (quick win)
+Kalau user paste teks dari LPSE, kamu bisa ambil minimal:
+lpseUrl (regex URL)
+instansiName (heuristik: setelah kata “Instansi”/“K/L/PD”)
+bidSubmissionDeadline (tanggal eksplisit)
+tenderTitle (baris pertama yang panjangnya > 8 kata, atau setelah “Paket:”)
+Kalau tidak ketemu, masuk ke openQuestions.

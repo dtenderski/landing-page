@@ -1,0 +1,166 @@
+Siap—itu pas banget dengan Permen PUPR 7/2024: BUJK wajib **isi Laporan Kegiatan Usaha Tahunan (LKUT)** dan (untuk Menengah/Besar/Spesialis) **Kinerja Penyedia Jasa Tahunan**, serta ikut **PUB**. 
+Jadi chatbot kita perlu 3 modul besar (tetap murni di Gustafta):
+
+---
+
+# 🧩 Struktur Chatbot (Menu Utama)
+
+**1) Asesmen Level PJBU (Kontraktor/Konsultan)**
+**2) PUB – Pengembangan Usaha Berkelanjutan**
+**3) LKUT – Laporan Kegiatan Usaha Tahunan BUJK**
+**4) Cek Status & Riwayat (Internal)**
+**5) Hubungi Admin**
+
+---
+
+# 1) Modul PUB (Pembinaan) — Internal utama
+
+Permen menekankan BUJK dibina minimal **1x per tahun** .
+Jadi chatbot harus bisa:
+
+## A. “Daftar Kegiatan PUB”
+
+Flow:
+
+* Pilih jenis PUB: **Workshop / Coaching / Mentoring / Pelatihan**
+* Pilih tema (disesuaikan prioritas leveling):
+
+  * Schedule control
+  * QA/QC & SOP
+  * Cashflow & keuangan
+  * SMM/GCG
+  * Digital tools, dll
+* Pilih jadwal (batch)
+* Konfirmasi → kirim notifikasi admin (WA+Email)
+
+**Output internal:** status `PUB_status = Terdaftar` + `tema_pub` + `jadwal_pub` (disimpan di variabel & dikirim ke admin).
+
+## B. “Log PUB selesai”
+
+Flow singkat untuk admin/anggota:
+
+* Member ID
+* Kegiatan yang diikuti
+* Tanggal
+* Bukti (kalau Gustafta support upload/link)
+* Konfirmasi
+
+**Notifikasi admin:** “PUB selesai” (untuk rekap tahunan).
+
+---
+
+# 2) Modul LKUT (Laporan Kegiatan Usaha Tahunan BUJK)
+
+Di Permen, BUJK bertanggung jawab atas pengisian LKUT  dan PJBU/pemilik proyek menyatakan data benar & siap menanggung konsekuensi jika tidak benar .
+
+Karena kita murni Gustafta (tanpa database otomatis), pendekatan terbaik adalah:
+
+✅ chatbot menjadi **wizard pengumpulan data** → lalu **mengirim ringkasan ke admin** (WA+Email) sebagai “draft LKUT”.
+
+## A. LKUT – Identitas BUJK
+
+* Tahun laporan
+* Member ID
+* Nama BUJK
+* Kualifikasi (K1/K2/K3/M/B)
+* Jenis usaha: Kontraktor/Konsultan
+* NIB / NPWP (opsional sesuai kebutuhan Anda)
+
+## B. LKUT – Ringkasan Kegiatan Usaha (per tahun)
+
+Pilih format paling aman untuk chatbot:
+
+* Jumlah proyek tahun ini
+* Total nilai kontrak (range pilihan agar mudah)
+* Jenis proyek dominan (gedung/jalan/air/dll)
+* Jumlah tenaga kerja rata-rata
+* Keterangan tambahan
+
+## C. LKUT – Pernyataan Kebenaran Data
+
+Wajib ada langkah “checklist”:
+
+* “Saya menyatakan data yang saya isi benar.”
+* “Saya bersedia menerima konsekuensi jika data tidak benar.”
+
+Ini nyambung dengan pernyataan pada lampiran .
+
+## D. Output LKUT (yang dikirim ke admin)
+
+Kirim sebagai ringkasan:
+
+**WA LKUT Draft**
+
+```
+[LKUT BUJK - DRAFT]
+
+Tahun: {{tahun}}
+Member ID: {{member_id}}
+BUJK: {{nama_perusahaan}}
+Kualifikasi: {{kualifikasi}}
+Jenis usaha: {{jenis_usaha}}
+
+Ringkasan:
+- Jumlah proyek: {{jml_proyek}}
+- Total nilai kontrak: {{nilai_kontrak_range}}
+- Jenis dominan: {{jenis_proyek}}
+- Tenaga kerja rata-rata: {{tk_rata}}
+- Catatan: {{catatan}}
+
+Pernyataan kebenaran: YA
+Waktu submit: {{tanggal_submit}}
+```
+
+Email lebih panjang (opsional).
+
+---
+
+# 3) Modul “Kinerja Penyedia Jasa Tahunan” (opsional tapi kuat)
+
+Di Permen, pengisian kinerja tahunan ditujukan untuk BUJK **kualifikasi menengah, besar, dan spesialis** .
+
+Di chatbot, buat percabangan:
+
+**Jika kualifikasi = K1/K2/K3**
+
+* tampilkan: “Kinerja tahunan tidak wajib di modul ini (sesuai kategori), namun Anda bisa lanjut untuk evaluasi internal.”
+
+**Jika kualifikasi = M/B/Spesialis**
+
+* tampilkan wizard ringkas untuk kumpulkan indikator inti:
+
+  * keterlambatan / ketepatan waktu
+  * kesesuaian tenaga ahli
+  * mutu hasil pekerjaan / kualitas dokumen
+  * (untuk konsultan) ketepatan penyerahan dokumen
+
+Tidak usah hitung rumus kompleks di chatbot—cukup kumpulkan data & kirim ke admin untuk diolah.
+
+---
+
+# 4) Implementasi di Gustafta (murni) — Node plan
+
+Menu → pilih modul:
+
+* **Asesmen Level PJBU** (sudah ada)
+* **PUB** (daftar + log selesai)
+* **LKUT** (wizard + pernyataan + kirim ringkasan)
+* **Cek status** (tampilkan: “status PUB terdaftar”, “LKUT sudah dikirim” berdasarkan variabel sesi)
+
+> Karena tanpa database, “cek status” hanya bisa untuk sesi berjalan/kode referensi, kecuali Gustafta punya fitur “contact attribute / user profile” untuk menyimpan variabel permanen.
+
+---
+
+# Yang saya butuh untuk lanjut paling tepat (tanpa tanya berulang)
+
+Di Gustafta, apakah ada fitur:
+
+1. **simpan variabel permanen per user** (mis. contact attributes)?
+2. **upload file / link** (untuk bukti PUB atau dokumen LKUT)?
+
+Sambil itu, saya bisa langsung lanjut menuliskan **copy-paste flow teks** untuk:
+
+* PUB (daftar kegiatan + konfirmasi + notifikasi admin)
+* LKUT (wizard + pernyataan + notifikasi admin)
+
+Mau saya tulis dulu **Flow PUB** atau **Flow LKUT** yang lengkap?

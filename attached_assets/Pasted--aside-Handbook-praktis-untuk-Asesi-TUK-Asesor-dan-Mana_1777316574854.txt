@@ -1,0 +1,500 @@
+<aside>
+📘
+
+**Handbook praktis** untuk Asesi, TUK, Asesor, dan Manajemen LSP di sektor Jasa Konstruksi. Mengonsolidasikan ruang lingkup SKK Konstruksi, persyaratan dasar per jenjang KKNI, formulir asesmen lengkap, contoh skema (Teknik Jalan, K3 Konstruksi, SDA, Arsitektur, Elektrikal), template **FR.APL-01 & FR.APL-02** siap-isi, dan matriks PJ-BUJK per skala usaha.
+
+Acuan: **UU 2/2017 jo. UU 6/2023 → PP 22/2020 jo. PP 14/2021 → Permen PUPR 9/2020, 8/2022, 10/2021 → Permen PU 6/2025 → Permen PUPR 7/2024 → SK Dirjen Bina Konstruksi 144/KPTS/Dk/2022 & 37/KPTS/Dk/2025 → Pedoman BNSP 201/210/301/302/305 → SNI ISO/IEC 17024**.
+
+</aside>
+
+## 1. Pengantar
+
+**SKK Konstruksi** (Sertifikat Kompetensi Kerja Konstruksi) menggantikan SKA/SKT lama sejak **Permen PUPR 9/2020**. Diterbitkan oleh **LSP Konstruksi** yang dilisensi BNSP atas rekomendasi Menteri PU dan tercatat di **LPJK / SIKI**. Empat aktor inti — **Asesi, TUK, Asesor, Manajemen LSP** — bekerja dalam kerangka regulasi BNSP + PUPR.
+
+## 2. Empat Aktor & Bidang Kompetensinya
+
+| **Aktor** | **Fungsi Utama** | **Bidang Kompetensi Inti** |
+| --- | --- | --- |
+| Asesi | Subjek yang dinilai pada subklasifikasi/jabatan kerja sesuai SKKNI | Unit kompetensi sesuai jenjang KKNI dan portofolio proyek nyata |
+| TUK | Tempat & sarana uji kompetensi terverifikasi LSP | Tata kelola sarana, kerahasiaan MUK, verifikasi identitas, *audit trail* |
+| Asesor (ASKOM) | Menilai bukti & merekomendasikan K/BK | Met.000 BNSP + kompetensi teknis konstruksi sebanding/lebih tinggi + Kode Etik SK 1224/2020 |
+| Manajemen LSP | Tata kelola lembaga sesuai Pedoman BNSP & SNI ISO/IEC 17024 | Skema, mutu, ketidakberpihakan, banding, integrasi SIKI |
+
+## 3. Ruang Lingkup SKK Konstruksi
+
+### 3.1 Tiga Kualifikasi & Sembilan Jenjang KKNI
+
+| **Kualifikasi** | **Jenjang KKNI** | **Profil Tipikal** |
+| --- | --- | --- |
+| Operator | 1 – 3 | Tukang, helper, operator alat |
+| Teknisi/Analis | 4 – 6 | Pelaksana, Teknisi, Pengawas, Quality, K3 Muda |
+| Ahli | 7 – 9 | Ahli Muda (7), Ahli Madya (8), Ahli Utama (9) |
+
+### 3.2 Enam Klasifikasi Utama + Spesialis
+
+- **Arsitektur (ARS)** — Arsitektural, Desain Interior, Arsitektur Lansekap, Iluminasi.
+- **Sipil (SIP)** — Bangunan Gedung, Jalan, Jembatan, SDA, Geoteknik, Geodesi, Terowongan, Jalan Rel, Bendungan, Pantai/Reklamasi, Dermaga.
+- **Mekanikal (MEK)** — Plambing, Proteksi Kebakaran, Transportasi Dalam Gedung, HVAC, Alat Berat, Perpipaan.
+- **Tata Lingkungan (TTL)** — Air Minum, Air Limbah, Persampahan, Pengeboran Air Tanah.
+- **Manajemen Pelaksanaan (MPK)** — Manajemen Konstruksi, Manajemen Proyek, Estimasi Biaya, K3 Konstruksi, Mutu, Rantai Pasok.
+- **Elektrikal (ELE)** — Pembangkit, Distribusi, Otomasi, Telekomunikasi, Sinyal KA.
+- **Spesialis** — Konstruksi Khusus (KK001–KK010) & Instalasi (IN001–IN013).
+
+## 4. Persyaratan Dasar per Jenjang KKNI
+
+| **Jenjang** | **Kualifikasi** | **Pendidikan Minimal** | **Pengalaman Subklasifikasi Sama** |
+| --- | --- | --- | --- |
+| 1 | Operator | SD/SMP/sederajat | 0 thn |
+| 2 | Operator | SMP/SMK/sederajat | 0 thn |
+| 3 | Operator | SMK/SMA + pelatihan | 0–1 thn |
+| 4 | Teknisi/Analis | SMK Teknik / D1 | 2 thn (SMK) / 0 thn (D1) |
+| 5 | Teknisi/Analis | D2 / D3 | 4 thn (SMK) / 2 thn (D2) / 0 thn (D3) |
+| 6 | Teknisi/Analis | D3 / D4 / S1 | 4 thn (D3) / 0–2 thn (S1) |
+| 7 | Ahli Muda | S1 / D4 Teknik relevan | 0 thn (skema khusus); umumnya 2 thn |
+| 8 | Ahli Madya | S1 + 5 thn / S2 + 3 thn | Pengalaman sebagai Ahli Muda |
+| 9 | Ahli Utama | S1 + 12 thn / S2 + 8 thn / S3 + 5 thn | Track record Ahli Madya, proyek strategis |
+
+### Bukti Wajib Asesi
+
+- Identitas — KTP, NPWP, pas foto.
+- Pendidikan — ijazah + transkrip (legalisir/digital signed).
+- Pengalaman — SK penugasan, kontrak/SPK, BAST, surat referensi.
+- Pelatihan — sertifikat berbasis kompetensi (jika dipersyaratkan skema).
+- Portofolio teknis — gambar kerja, hitungan, foto, ITP, NCR, laporan.
+- Pernyataan — surat kebenaran data + kesediaan ikut uji.
+- NIK terverifikasi di SIKI.
+
+## 5. Contoh Detail Skema (Jenjang 7)
+
+### 5.1 Ahli Muda Teknik Jalan (SKKNI 060/2022)
+
+#### Kelompok Umum
+
+| **Kode UK** | **Judul** | F.421120.001.02 | Menerapkan SMK3-L |
+| --- | --- | --- | --- |
+| F.421120.002.02 | Menerapkan Komunikasi di Tempat Kerja | F.421120.003.01 | Melakukan Kerjasama dalam Tim |
+
+#### Kelompok Inti
+
+| **Kode UK** | **Judul** |
+| --- | --- |
+| F.421120.011.02 | Perhitungan Geometrik Jalan |
+| F.421120.013.02 | Pengendalian Mutu Pelaksanaan |
+| F.421120.015.01 | Membuat Laporan Hasil Pekerjaan |
+
+#### Kelompok Pilihan (min. 1)
+
+- F.421120.020.01 — Pelapisan Ulang (Overlay).
+- F.421120.021.01 — Rekonstruksi Perkerasan Lentur.
+- F.421120.022.01 — Evaluasi Kondisi Perkerasan.
+
+### 5.2 Ahli Muda K3 Konstruksi (SKKNI 162/2024)
+
+#### Kelompok Umum
+
+- M.711000.001.01 — Menerapkan Peraturan Perundangan SMKK.
+- M.711000.002.01 — Mengelola Komunikasi & Konsultasi K3.
+- M.711000.003.01 — Bekerja Sama dalam Tim Multidisiplin.
+
+#### Kelompok Inti
+
+| **Kode UK** | **Judul** |
+| --- | --- |
+| M.711000.011.02 | Menyusun RKK |
+| M.711000.013.02 | Pengendalian Operasional K3 |
+| M.711000.015.02 | Investigasi Insiden |
+| M.711000.017.01 | Laporan SMKK Periodik |
+
+#### Kelompok Pilihan (min. 1)
+
+- M.711000.020.01 — Bekerja di Ketinggian.
+- M.711000.021.01 — Galian Dalam / Confined Space.
+- M.711000.022.01 — Pekerjaan Pengangkatan (Lifting).
+- M.711000.023.01 — Pekerjaan Listrik.
+- M.711000.024.01 — Pekerjaan Bahan Berbahaya (B3).
+
+#### Aspek Kritis (sering jadi titik gugur)
+
+1. Tidak bisa membedakan SMKK (Permen PUPR 10/2021) vs SMK3 (PP 50/2012).
+2. HIRADC tanpa kuantifikasi *likelihood × severity* dan hierarki pengendalian.
+3. RKK tidak selaras format Lampiran Permen PUPR 10/2021.
+4. Investigasi insiden hanya naratif, tanpa akar masalah & rekomendasi sistemik.
+5. Kebingungan peran Petugas Keselamatan vs Ahli K3.
+
+## 6. Detail Klasifikasi Tambahan
+
+### 6.1 Sipil — Sumber Daya Air (SIP-SDA)
+
+#### Subklasifikasi & Jabatan Kerja
+
+| **Subklas** | **Jabatan Kerja** | **Jenjang Tipikal** |
+| --- | --- | --- |
+| Bendung & Bendungan | Ahli Muda/Madya/Utama Bendungan Besar | 7–9 |
+| Hidraulik | Ahli Muda Hidrolika Terapan | 7 |
+| Air Tanah & Hidrogeologi | Ahli Muda Hidrogeologi | 7 |
+
+#### Inti UK Tipikal Ahli Muda SDA
+
+- Analisis hidrologi DAS (curah hujan, debit banjir Q5/Q10/Q25/Q50/Q100).
+- Perencanaan jaringan irigasi & bangunan air.
+- Hidraulika saluran terbuka (Manning, Chezy, profil aliran).
+- Bangunan pelimpah & pintu air (gate operation curve).
+- O&P bendungan + sistem peringatan dini.
+- Lingkungan SDA: sedimentasi, sempadan, AMDAL.
+
+### 6.2 Arsitektur (ARS)
+
+#### Subklasifikasi
+
+- Arsitektural — Ahli Muda/Madya/Utama Arsitek.
+- Desain Interior — Ahli Muda/Madya Desain Interior.
+- Arsitektur Lansekap — Ahli Muda/Madya/Utama Arsitek Lansekap.
+- Iluminasi — Ahli Muda Iluminasi.
+
+#### Inti UK Tipikal Ahli Muda Arsitek
+
+- Programing & analisis tapak.
+- Konsep desain (massing, sirkulasi, zonasi).
+- Penerapan kode bangunan (SNI 1726, SNI 1727, Permen PUPR 14/2017 BG Hijau).
+- Dokumen DED (gambar pra-rancangan, pengembangan, kerja).
+- Koordinasi MEP/struktur.
+- Etika profesi (UU 6/2017 Arsitek, IAI Code of Ethics).
+
+#### Catatan Profesi
+
+Selain SKK, profesi Arsitek juga mensyaratkan **STRA (Surat Tanda Registrasi Arsitek)** dari Dewan Arsitek Indonesia (UU 6/2017) — dua kelembagaan terpisah.
+
+### 6.3 Elektrikal (ELE)
+
+#### Subklasifikasi & Jabatan Kerja
+
+| **Subklas** | **Jabatan Kerja** |
+| --- | --- |
+| Transmisi Tenaga Listrik | Ahli Muda/Madya Transmisi HV/EHV |
+| Otomasi Industri | Ahli Muda Otomasi & SCADA |
+| Sinyal & Telekomunikasi KA | Ahli Muda Sinyal KA |
+
+#### Inti UK Tipikal Ahli Muda Elektrikal
+
+- Membaca & menyusun SLD (Single Line Diagram).
+- Perhitungan beban, *short circuit*, koordinasi proteksi.
+- Pentanahan & bonding sesuai PUIL 2020 (SNI 0225).
+- Komisioning HV/MV/LV (uji isolasi, *megger*, *hi-pot*, *partial discharge*).
+- K3 listrik (LOTO, jarak aman, APD listrik).
+- Integrasi SCADA & sistem otomasi (IEC 61850).
+
+#### Sinergi dengan Sertifikasi Lain
+
+Untuk pekerjaan listrik, SKK ELE sering dipasangkan dengan **Sertifikat Kompetensi Tenaga Teknik Ketenagalistrikan (SKTTK)** dari Kementerian ESDM (Permen ESDM 5/2018) — wajib untuk operasi instalasi tenaga listrik.
+
+## 7. Formulir Asesmen Lengkap
+
+### 7.1 FR.APL — Pendaftaran
+
+- **FR.APL-01** — Permohonan Sertifikasi (identitas, skema, tujuan asesmen).
+- **FR.APL-02** — Asesmen Mandiri (self-assessment per KUK).
+
+### 7.2 FR.MAPA — Perencanaan & Validasi
+
+- **FR.MAPA-01** — Merencanakan Aktivitas & Proses Asesmen.
+- **FR.MAPA-02** — Peta Instrumen Asesmen (validasi Master Asesor).
+
+### 7.3 FR.AK — Asesmen Kompetensi
+
+| **Kode** | **Nama** | **Tujuan** |
+| --- | --- | --- |
+| FR.AK-02 | Rekaman Asesmen | Catatan pelaksanaan + keputusan per UK |
+| FR.AK-04 | Banding | Saluran resmi banding asesi |
+| FR.AK-06 | Review Proses | Validasi pasca-asesmen oleh LSP |
+
+### 7.4 FR.IA — Instrumen Bukti per Metode
+
+| **Kode** | **Nama** | **Cocok Untuk** | FR.IA.01 | Ceklis Observasi | Demonstrasi/praktik di TUK/lapangan |
+| --- | --- | --- | --- | --- | --- |
+| FR.IA.02 | Tugas Praktik Demonstrasi | Simulasi pekerjaan | FR.IA.03 | Pertanyaan Pendukung Observasi | Wawancara saat observasi |
+| FR.IA.04 | Penjelasan Singkat Proyek | Verifikasi portofolio | FR.IA.05 | Pertanyaan Studi Kasus | Studi kasus |
+| FR.IA.06 | Pertanyaan Wawancara | Wawancara mendalam | FR.IA.07 | Pilihan Ganda Tertulis | Tes tulis objektif |
+| FR.IA.08 | Esai Tertulis | Tes tulis uraian | FR.IA.09 | Pertanyaan Lisan | Tes lisan |
+| FR.IA.10 | Klarifikasi Bukti Pihak Ketiga | Verifikasi referensi/atasan | FR.IA.11 | Ceklis Verifikasi Portofolio | Daftar bukti dokumen |
+
+## 8. Template FR.APL-01 — Permohonan Sertifikasi (Siap-Isi)
+
+<aside>
+📝
+
+Isi tabel ini untuk pendaftaran asesmen ke LSP. Pastikan data identik dengan KTP & ijazah.
+
+</aside>
+
+### Bagian 1 — Data Pribadi Asesi
+
+| **Nama Lengkap (sesuai KTP)** | …………………………………… |
+| --- | --- |
+| **Jenis Kelamin** | L / P |
+| **Alamat Domisili** | …………………………………… |
+| **No. Telepon / HP / WA** | …………………………………… |
+| **NIK / KTP** | …………………………………… |
+| **Pendidikan Terakhir** | SMA / SMK / D1 / D2 / D3 / D4 / S1 / S2 / S3 |
+| **Lembaga / Sekolah / Universitas** | …………………………………… |
+| **Pekerjaan Saat Ini** | …………………………………… |
+| **Alamat Kantor** | …………………………………… |
+| **Kode Pos Kantor** | …………………………………… |
+
+### Bagian 2 — Data Sertifikasi yang Diajukan
+
+| **Skema Sertifikasi** | …………………………………… | **Klasifikasi** | ARS / SIP / MEK / TTL / MPK / ELE / Spesialis |
+| --- | --- | --- | --- |
+| **Subklasifikasi** | …………………………………… | **Jabatan Kerja** | …………………………………… |
+| **Jenjang KKNI** | 1 / 2 / 3 / 4 / 5 / 6 / 7 / 8 / 9 | **Tujuan Asesmen** | Sertifikasi Pertama / Resertifikasi / Perpanjangan / RPL / RCC |
+| **TUK Pilihan** | …………………………………… | **Tanggal Diajukan** | …………………………………… |
+
+### Bagian 3 — Daftar Bukti Persyaratan Dasar
+
+| **No.** | **Bukti** | **Ada / Tidak** | **Keterangan** |
+| --- | --- | --- | --- |
+| 2 | Fotokopi NPWP | Ada / Tidak |  |
+| 4 | Fotokopi ijazah pendidikan terakhir | Ada / Tidak |  |
+| 6 | Sertifikat pelatihan berbasis kompetensi | Ada / Tidak |  |
+| 8 | Surat referensi / pengalaman kerja | Ada / Tidak |  |
+| 10 | Surat pernyataan kebenaran data | Ada / Tidak |  |
+
+### Pernyataan Asesi
+
+> Saya menyatakan bahwa seluruh data dan dokumen yang saya sampaikan adalah benar, dan saya bersedia mengikuti seluruh tahapan asesmen kompetensi sesuai aturan LSP serta Pedoman BNSP yang berlaku.
+> 
+
+| Tanda Tangan Asesi | Tanggal | 
+
+(……………………………) | …………………………… |
+| --- | --- | --- | --- |
+
+### Verifikasi LSP
+
+| **Status Verifikasi** | Memenuhi / Tidak Memenuhi Persyaratan | **Catatan** | …………………………………… |
+| --- | --- | --- | --- |
+| **Petugas Verifikator** | …………………………………… | **Tanggal** | …………………………………… |
+
+## 9. Template FR.APL-02 — Asesmen Mandiri (Siap-Isi)
+
+<aside>
+✅
+
+Isi penilaian diri (K = Kompeten / BK = Belum Kompeten) untuk setiap **Kriteria Unjuk Kerja (KUK)** pada UK yang diujikan, lengkap dengan bukti yang dilampirkan. Asesor akan memvalidasi.
+
+</aside>
+
+### Identitas Singkat
+
+| **Nama Asesi** | …………………………………… | **Skema / Jabatan Kerja** | …………………………………… |
+| --- | --- | --- | --- |
+| **Jenjang** | …………………………………… | **Tanggal Pengisian** | …………………………………… |
+
+### Daftar Unit Kompetensi
+
+| **Kode UK** | **Judul UK** | **Kelompok** | …………………… | …………………………… | Umum / Inti / Pilihan |
+| --- | --- | --- | --- | --- | --- |
+| …………………… | …………………………… | Umum / Inti / Pilihan | …………………… | …………………………… | Umum / Inti / Pilihan |
+
+### Penilaian Mandiri per UK
+
+<aside>
+📋
+
+Duplikat tabel berikut untuk setiap UK. Isi seluruh KUK pada UK tersebut. Bukti yang relevan, bukan banyak — prinsip **VATM** (Valid, Authentic, Terkini, Memadai).
+
+</aside>
+
+**UK : ……………………………………**
+
+| **No.** | **Elemen / KUK** | **Penilaian Diri (K/BK)** | **Bukti yang Dilampirkan** | **Lokasi Bukti** | 1.1 | …………………………………… | K / BK | …………………… | Lampiran A-1 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1.2 | …………………………………… | K / BK | …………………… | Lampiran A-2 | 2.1 | …………………………………… | K / BK | …………………… | Lampiran B-1 |
+| 2.2 | …………………………………… | K / BK | …………………… | Lampiran B-2 | 3.1 | …………………………………… | K / BK | …………………… | Lampiran C-1 |
+
+### Rangkuman Bukti yang Dilampirkan
+
+| **No. Lampiran** | **Jenis Bukti** | **Nama Dokumen** | **Tahun** | A-1 | SK Penugasan | …………………………… | …… |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| A-2 | Foto Pekerjaan | …………………………… | …… | B-1 | Gambar Kerja / Hitungan | …………………………… | …… |
+| B-2 | Laporan Bulanan | …………………………… | …… | C-1 | Sertifikat Pelatihan | …………………………… | …… |
+
+### Pernyataan Asesi
+
+> Saya menyatakan bahwa seluruh penilaian mandiri di atas saya isi secara jujur dan dapat saya pertanggungjawabkan dengan bukti yang sudah dilampirkan.
+> 
+
+| Tanda Tangan Asesi | Tanggal | 
+
+(……………………………) | …………………………… |
+| --- | --- | --- | --- |
+
+### Verifikasi Asesor
+
+| **Hasil Verifikasi** | Lanjut ke Asesmen / Perlu Bukti Tambahan |
+| --- | --- |
+| **Catatan Asesor** | …………………………………… |
+| **Tanggal** | …………………………………… |
+
+## 10. Matriks PJ-BUJK per Skala Usaha
+
+<aside>
+🏗️
+
+Mengacu **PP 14/2021**, **Permen PUPR 8/2022**, **Permen PU 6/2025**, dan **SK Dirjen 37/KPTS/Dk/2025**. Skala BUJK ditentukan oleh penjualan tahunan, kemampuan keuangan, dan ketersediaan TKK.
+
+</aside>
+
+### 10.1 Skala BUJK
+
+| **Skala** | **Indikator Penjualan Tahunan (umumnya)** | **Karakter** | Kecil | ≤ Rp 2,5 M – Rp 15 M | UMKM Konstruksi |
+| --- | --- | --- | --- | --- | --- |
+| Menengah | Rp 15 M – Rp 50 M | BUJK Menengah | Besar | ≥ Rp 50 M (PMA/PMDN) | BUJK Besar |
+
+### 10.2 Definisi Posisi PJ-BUJK
+
+- **PJBU** — Penanggung Jawab Badan Usaha (puncak; mewakili usaha secara hukum).
+- **PJTBU** — Penanggung Jawab Teknis Badan Usaha (memimpin lini teknis lintas klasifikasi).
+- **PJKBU** — Penanggung Jawab Klasifikasi Badan Usaha (per klasifikasi yang dimiliki SBU).
+- **PJSKBU** — Penanggung Jawab Subklasifikasi Badan Usaha (per subklasifikasi).
+
+### 10.3 Matriks SKK Minimum per Posisi & Skala
+
+| **Posisi** | **BUJK Kecil** | **BUJK Menengah** | **BUJK Besar** |
+| --- | --- | --- | --- |
+| **PJTBU** | SKK Ahli Muda (Jenjang 7) | SKK Ahli Madya (Jenjang 8) | SKK Ahli Utama (Jenjang 9) |
+| **PJSKBU** | SKK Ahli Muda (Jenjang 7) per subklasifikasi | SKK Ahli Muda/Madya (7–8) | SKK Ahli Madya (Jenjang 8) |
+
+<aside>
+⚠️
+
+Satu orang dapat merangkap lebih dari satu posisi PJ pada **BUJK Kecil** sesuai aturan minimum. Untuk BUJK Menengah & Besar, perangkapan dibatasi — periksa lampiran SK Dirjen 37/KPTS/Dk/2025 untuk kombinasi yang diperbolehkan.
+
+</aside>
+
+### 10.4 Contoh Konfigurasi PJ — BUJK Kecil (1 Klasifikasi, 1 Subklasifikasi)
+
+| **Posisi** | **Nama** | **SKK yang Dimiliki** | **Catatan** | PJBU | …………… | Ahli Muda Manajemen Konstruksi (J7) | Boleh rangkap PJTBU |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| PJTBU | (rangkap) | (idem) | — | PJKBU SIP | …………… | Ahli Muda Teknik Bangunan Gedung (J7) | Boleh rangkap PJSKBU |
+| PJSKBU BG009 | (rangkap) | (idem) | — | Ahli K3 | …………… | Ahli Muda K3 Konstruksi (J7) | Wajib pada setiap proyek |
+
+### 10.5 Contoh Konfigurasi PJ — BUJK Menengah (2 Klasifikasi, 4 Subklasifikasi)
+
+| **Posisi** | **SKK Minimum** | PJBU | Ahli Madya MPK / Manajemen Konstruksi (J8) |
+| --- | --- | --- | --- |
+| PJTBU | Ahli Madya Teknik Sipil (J8) | PJKBU SIP | Ahli Madya Bangunan Gedung (J8) |
+| PJKBU MEK | Ahli Madya Plambing/HVAC (J8) | 4× PJSKBU | Ahli Muda/Madya per subklasifikasi (J7–J8) |
+| Ahli K3 Konstruksi | Ahli Madya K3 Konstruksi (J8) | Manager Mutu | Ahli Muda/Madya Manajemen Mutu (J7–J8) |
+
+## 11. Alur Lengkap (End-to-End)
+
+```mermaid
+flowchart TB
+	A["SKKNI + Skema LSP Konstruksi"] --> B["Asesi isi<br>FR.APL-01 + FR.APL-02"]
+	B --> C["LSP verifikasi<br>persyaratan dasar"]
+	C --> D["Asesor susun<br>FR.MAPA-01/02"]
+	D --> E["FR.AK-01<br>persetujuan asesi"]
+	E --> F["Pelaksanaan uji di TUK<br>(FR.IA.01..11)"]
+	F --> G["FR.AK-02<br>rekaman + keputusan UK"]
+	G --> H["FR.AK-03<br>umpan balik"]
+	H --> I{"Banding?"}
+	I -->|Ya| J["FR.AK-04 review"]
+	I -->|Tidak| K["FR.AK-05<br>laporan ke LSP"]
+	J --> K
+	K --> L["FR.AK-06<br>review internal LSP"]
+	L --> M["SKK terbit<br>tercatat di SIKI"]
+	M --> N["Dipakai sebagai<br>PJBU/PJTBU/PJKBU/PJSKBU"]
+	N --> O["LSBU asesmen SBU"]
+	O --> P["SBU terbit di SIKI"]
+	P --> Q["BUJK ikut tender<br>LPSE/INAPROC"]
+```
+
+## 12. Tips Praktis
+
+### Untuk Asesi
+
+- Isi FR.APL-02 realistis — jangan klaim K untuk semua KUK kalau bukti tipis. Asesor pasti akan menggali.
+- Susun portofolio dalam urutan KUK, bukan urutan kronologis proyek.
+- Pastikan NIK aktif & terverifikasi di SIKI sebelum daftar.
+- Untuk perpanjangan: kumpulkan **CPD/PKB ≥ 30 SKP** selama 5 tahun masa berlaku.
+
+### Untuk TUK
+
+- Simpan rekaman *event log* uji ≥ 3 tahun untuk antisipasi audit BNSP/LPJK.
+- Verifikasi sarana setiap kali skema baru diadakan.
+- Pisahkan ruang penyimpanan MUK dari ruang administrasi umum.
+
+### Untuk Asesor
+
+- Prinsip **bukti yang relevan, bukan banyak** — VATM > volume.
+- Gunakan *triangulasi* metode untuk UK kritis (mis. VP + Wcr + Stu).
+- Update RCC tahunan; pelihara kompetensi teknis di subklasifikasi yang dikuasai.
+
+### Untuk Manajemen LSP
+
+- Kaji ulang manajemen ≥ 1×/tahun + audit internal sebelum surveilans BNSP.
+- Validasi MUK setiap kali SKKNI direvisi.
+- Pelihara *register* asesor & TUK — pastikan lisensi tetap aktif.
+- Integrasi sistem informasi ke SIKI agar SKK langsung tercatat saat terbit.
+
+## 13. Sumber Regulasi & Referensi
+
+### Undang-Undang & Peraturan Pemerintah
+
+- UU No. 2 Tahun 2017 jo. UU No. 6 Tahun 2023 — Jasa Konstruksi.
+- PP No. 22 Tahun 2020 jo. PP No. 14 Tahun 2021 — Penyelenggaraan Jasa Konstruksi.
+- PP No. 10 Tahun 2018 — Kelembagaan BNSP.
+- PP No. 50 Tahun 2012 — SMK3.
+
+### Permen PUPR / PU
+
+- Permen PUPR No. 9 Tahun 2020 — Pembentukan LPJK.
+- Permen PUPR No. 8 Tahun 2022 — LSBU.
+- Permen PUPR No. 10 Tahun 2021 — Pedoman SMKK.
+- Permen PUPR No. 7 Tahun 2024 — Pengembangan Usaha Berkelanjutan.
+- Permen PU No. 6 Tahun 2025 — Standar Kegiatan Usaha & Pengawasan.
+- Kepmen PUPR No. 713/KPTS/M/2022 — Biaya Sertifikasi.
+
+### SK Dirjen Bina Konstruksi
+
+- SK Dirjen 144/KPTS/Dk/2022 — Daftar Jabatan Kerja Konstruksi.
+- SK Dirjen 37/KPTS/Dk/2025 — Standar Skema Sertifikasi BUJK.
+
+### Pedoman BNSP
+
+- Pedoman BNSP 201-2014 — Persyaratan Umum LSP.
+- Pedoman BNSP 210-2017 — Skema Sertifikasi.
+- Pedoman BNSP 301-2013 — Pelaksanaan Asesmen.
+- Pedoman BNSP 302/305 — Sertifikat & Uji.
+- SK Ketua BNSP No. 1224/BNSP/VII/2020 — Kode Etik ASKOM.
+
+### SKKNI Sektor Konstruksi (contoh)
+
+- SKKNI No. 333/2020 — Asesor Kompetensi (mencabut 185/2018).
+- SKKNI No. 060/2022 — Konstruksi Jalan.
+- SKKNI No. 162/2024 — K3 Konstruksi.
+- SKKNI No. 192/2021 — Manajemen Konstruksi.
+- SKKNI No. 196/2021 & 197/2021 — Mutu Konstruksi.
+- SKKNI No. 199/2021 — Manajemen Proyek.
+
+### Standar Internasional & Nasional
+
+- SNI ISO/IEC 17024 — LSP Person.
+- SNI ISO/IEC 17065 — LSBU.
+- SNI 0225 (PUIL 2020) — Persyaratan Umum Instalasi Listrik.
+- SNI 1726 — Tata Cara Perencanaan Ketahanan Gempa.
+- SNI 1727 — Beban Minimum Gedung.
+
+### Referensi Workspace Terkait
+
+- [Bab 3 — Lembaga Sertifikasi Profesi (LSP) Jasa Konstruksi](https://www.notion.so/Bab-3-Lembaga-Sertifikasi-Profesi-LSP-Jasa-Konstruksi-4f5a06103c304db7a4e70960a760b4b6?pvs=21)
+- [Bab 4 — ASKOM & RCC BNSP 2025](https://www.notion.so/Bab-4-ASKOM-RCC-BNSP-2025-55992d759b834a50b69e525d693ef246?pvs=21)
+- [Bab 17 — Asesor Badan Usaha (ABU) Jasa Konstruksi](https://www.notion.so/Bab-17-Asesor-Badan-Usaha-ABU-Jasa-Konstruksi-4a567001737e42f3a35c8eff5a97e0e1?pvs=21)
+- [Bab 19 — Asesor Kompetensi Jasa Konstruksi (ASKOM Konstruksi)](https://www.notion.so/Bab-19-Asesor-Kompetensi-Jasa-Konstruksi-ASKOM-Konstruksi-1f157ea704794309b1dbb11a299d6093?pvs=21)
+
+<aside>
+📌
+
+**Catatan revisi:** Dokumen ini disusun sebagai *living document*. Apabila ada perubahan SKKNI, Permen, atau SK Dirjen Bina Konstruksi yang berdampak pada skema, persyaratan, atau formulir — perbarui section terkait dan log perubahannya pada catatan ini.
+
+</aside>

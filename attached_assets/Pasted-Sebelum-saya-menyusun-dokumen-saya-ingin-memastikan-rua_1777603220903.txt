@@ -1,0 +1,87 @@
+Sebelum saya menyusun dokumen, saya ingin memastikan ruang lingkup yang Anda butuhkan. Workspace Anda sudah memiliki banyak materi terkait LSP SDMKI (Manual Mutu ISO 17024, SOP Akreditasi KAN, Knowledge Base LSP–TUK, dll), jadi saya ingin tahu fokusnya:
+Bentuk dokumen "Manajemen LSP berdasarkan Pedoman BNSP" yang diinginkan?
+KB LSP–TUK (Regulasi & Knowledge)​
+Di mana halaman baru sebaiknya dibuat (jika membuat halaman)?
+KB LSP–TUK (Regulasi & Knowledge)​
+Sudah saya buatkan playbook komprehensif di Playbook LSP–TUK (database KB LSP–TUK), mencakup kerangka regulasi BNSP (PBNSP 201, 202, 203, 206, 207, 208, 210, 211, 214, 301, 508), klasifikasi LSP, struktur tata kelola, lisensi, skema, TUK, asesmen, mutu, pelaporan, sistem informasi, KPI, manajemen risiko, hingga roadmap 90 hari + matriks pemetaan ke dokumen LSP SDMKI yang sudah Anda miliki.
+lanjut
+Apr 28
+Saya akan melanjutkan dengan mengisi register Regulasi LSP–TUK untuk seluruh PBNSP yang dirujuk playbook (sesuai Hari 1–15 di roadmap), sekaligus menautkannya ke playbook ini.
+Register PBNSP sudah terisi & tertaut ke playbook. Saya teruskan dengan menambahkan tabel Register PBNSP di playbook + memperbarui status playbook ke "Review", serta menambahkan checklist tindak lanjut agar siap dieksekusi tim.
+Updated page Manajemen LSP berdasarkan Pedoman BNSP — Playbook Tata Kelola & Operasional​
+Playbook sudah diperbarui (Status → Review) dan 11 entri PBNSP sudah masuk Register Regulasi LSP–TUK + tertaut dua arah ke playbook.
+Beberapa arah lanjutan yang bisa saya kerjakan berikutnya — pilih yang Anda perlukan:
+Lanjutan mana yang dikerjakan sekarang?
+Matriks klausul PBNSP 201 (ISO 17024) → SOP P-01..P-09 + identifikasi gap, Playbook turunan: Manajemen TUK (PBNSP 206 & 214), Playbook turunan: Pengembangan & Pemeliharaan Skema (PBNSP 210), Playbook turunan: Pelaksanaan Asesmen (PBNSP 301), Playbook turunan: Pelaporan & SI Sertifikasi (PBNSP 211 & 508), Kalender kepatuhan tahunan LSP (rapat, audit, surveilan, laporan BNSP)
+Thought
+Saya kerjakan keenam lanjutan secara paralel sebagai entri baru di Playbook LSP–TUK, masing-masing tertaut otomatis ke PBNSP yang relevan.
+Keenam dokumen sudah jadi dan masing-masing sudah tertaut ke PBNSP yang relevan di Register Regulasi.
+Ringkasan yang baru ditambahkan ke Playbook LSP–TUK:
+#
+Dokumen
+Proses
+Acuan
+1
+Matriks Klausul PBNSP 201 / ISO 17024 → SOP P-01…P-09
+Audit & Kepatuhan
+PBNSP 201
+2
+Playbook Manajemen TUK
+Operasional TUK
+PBNSP 206, 214
+3
+Playbook Pengembangan & Pemeliharaan Skema
+Sertifikasi (SKK)
+PBNSP 210, 201
+4
+Playbook Pelaksanaan Asesmen
+Sertifikasi (SKK)
+PBNSP 301, 201
+5
+Playbook Pelaporan ke BNSP & SI Sertifikasi
+Pelaporan & Pencatatan
+PBNSP 211, 508
+6
+Kalender Kepatuhan Tahunan LSP
+Audit & Kepatuhan
+PBNSP 201, 208, 211, 214
+Highlight matriks PBNSP 201:
+Compliant: 8 klausul • Partial: 12 klausul • Gap: 2 klausul (Outsourcing 6.3 & Banding independen 9.7) — keduanya sebaiknya menjadi prioritas CAPA pada roadmap Hari 16–60.
+Beberapa pilihan tindak lanjut yang bisa langsung saya kerjakan berikutnya:
+Register CAPA — buat database "Register Tindakan Korektif (CAPA) LSP–TUK" dengan baris awal dari 14 status Partial/Gap matriks.
+Register TUK & Asesor — dua database (status verifikasi, masa berlaku, PIC, dokumen pendukung).
+Database Kalender Kepatuhan — konversi tabel kuartalan jadi database date-based dengan reminder T-30/T-7/T-1.
+Form template — FR-TUK-01/02, Form COI, Form Witness, Form CAPA sebagai sub-page di KB.
+SK Tim Pusat & Komite — draft SK Direktur untuk Manajer Mutu, Manajer Sertifikasi, Komite Skema, Komite Sertifikasi, Komite Banding, Komite Ketidakberpihakan.
+Tinggal sebut yang Anda mau dikerjakan dulu.
+lanjut
+9:21 AM
+Thought
+Sebelum lanjut, saya butuh konfirmasi prioritas — ada 5 opsi tindak lanjut dari pesan sebelumnya. Pilih satu/beberapa atau pilih kerjakan semua.
+Lanjutan mana yang dikerjakan sekarang?
+Database Register CAPA (14 baris awal dari matriks), Database Register TUK + Register Asesor, Database Kalender Kepatuhan (date-based, dengan reminder), Form templates (FR-TUK-01/02, COI, Witness, CAPA), Kerjakan semuanya secara berurutan, Draft SK Tim Pusat & 4 Komite
+Thought
+Sebelum mulai membuat databases, saya perlu membaca spesifikasi dataSource, view, dan layout types.
+Mulai dengan membuat 4 database secara paralel.
+Thought
+Perlu mengganti "ID" → "userDefined:ID" (karena "id" bentrok dengan system column). Saya ulangi keempat database secara paralel.
+Database sudah jadi, lanjut isi 14 baris CAPA dari matriks + buat halaman Forms & Draft SK.
+Semua artefak Phase 3 sudah selesai. 4 database operasional dibuat dengan reminder otomatis (CAPA T-3 hari, TUK T-30 hari, Asesor T-60 hari, Kalender T-7 hari), Register CAPA terisi 14 baris awal dari matriks PBNSP 201 (2 Gap + 12 Partial), serta 2 hub dokumen (Forms & Draft SK) terpasang di bawah playbook utama.
+Ringkasan paket lengkap manajemen LSP berdasarkan Pedoman BNSP yang kini tersedia:
+Kategori
+Artefak
+Playbook utama
+Manajemen LSP berdasarkan Pedoman BNSP — Playbook Tata Kelola & Operasional​
+Register regulasi
+11 PBNSP + 3 acuan KAN/ISO
+Playbook turunan
+Matriks 201→SOP, TUK, Skema, Asesmen, Pelaporan/SI, Kalender Kepatuhan
+Database operasional
+Register CAPA LSP–TUK · Register TUK LSP–TUK · Register Asesor LSP SDMKI · Kalender Kepatuhan LSP–TUK​
+CAPA seed
+14 temuan awal (2 Gap prioritas: Outsourcing 6.3, Komite Banding 9.7)
+Form templates
+Forms LSP SDMKI — FR-TUK-01/02, COI, Witness, CAPA (FR-TUK-01/02, COI, Witness, CAPA)
+Draft SK
+Draft SK Direktur LSP SDMKI — Tim Pusat & 4 Komite (Tim Pusat + Komite Skema, Sertifikasi, Banding, Ketidakberpihakan)
+Catatan kecil: beberapa tabel di halaman Forms & Draft SK ter-flatten saat parsing (baris-baris bergabung). Isi tetap utuh; bisa dirapikan manual via UI atau minta saya perbaiki.

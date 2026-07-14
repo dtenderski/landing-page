@@ -1,0 +1,630 @@
+Lanjut. Saya buatkan **tahap implementasi chatbot Mekanikal berbasis SKK/SKKNI** agar bisa langsung dijadikan sistem. Data dasarnya berasal dari klasifikasi Mekanikal yang berisi jabatan kerja, jenjang KKNI, kualifikasi, standar kompetensi, dan link SKK/SKKNI. 
+
+# 21. Desain Knowledge Base Chatbot
+
+Knowledge base adalah pusat data yang akan dibaca chatbot.
+
+## Format data ideal
+
+```json
+{
+  "id": "MEK-001",
+  "klasifikasi": "Mekanikal",
+  "subklasifikasi": "Teknik Tata Udara dan Refrigasi",
+  "jabatan_kerja": "Ahli Perencanaan Sistem Tata Udara",
+  "jenjang_jabatan": "Ahli Muda Perencanaan Sistem Tata Udara",
+  "kualifikasi": "Ahli",
+  "jenjang_kkni": 7,
+  "standar_kompetensi": "SKKNI 131-2015",
+  "status_skk": "Tersedia",
+  "link_skk": "https://skkni-api.kemnaker.go.id/v1/public/documents/419f0d1b-f65b-447c-be03-8f226fac6a81/download",
+  "kata_kunci": [
+    "tata udara",
+    "refrigasi",
+    "hvac",
+    "ac",
+    "air conditioning",
+    "perencana tata udara"
+  ]
+}
+```
+
+## Field penting
+
+| Field                | Fungsi                                               |
+| -------------------- | ---------------------------------------------------- |
+| `id`                 | Kode unik data                                       |
+| `klasifikasi`        | Bidang utama, yaitu Mekanikal                        |
+| `subklasifikasi`     | Kelompok bidang, misalnya Plumbing, HVAC, Alat Berat |
+| `jabatan_kerja`      | Nama jabatan utama                                   |
+| `jenjang_jabatan`    | Level jabatan spesifik                               |
+| `kualifikasi`        | Operator, Teknisi/Analis, atau Ahli                  |
+| `jenjang_kkni`       | Level KKNI                                           |
+| `standar_kompetensi` | SKKNI, SKK Khusus, atau status penyusunan            |
+| `status_skk`         | Tersedia / Dalam Proses / Belum Ada                  |
+| `link_skk`           | Link dokumen SKK/SKKNI                               |
+| `kata_kunci`         | Sinonim pencarian user                               |
+
+# 22. Kategori status SKK
+
+Agar chatbot tidak salah menjawab, buat status SKK seperti ini:
+
+```text
+1. Tersedia
+2. Dalam proses penyusunan
+3. SKK Khusus
+4. Belum tersedia
+5. Skema LPJK / Akan disusun
+```
+
+Contoh penerapan:
+
+```json
+{
+  "jabatan_kerja": "Operator Mesin Bubut Logam",
+  "standar_kompetensi": "SKEMA LPJK/Akan disusun SKKNI/ SKK Khusus",
+  "status_skk": "Skema LPJK / Akan disusun",
+  "link_skk": "-"
+}
+```
+
+Jawaban chatbot:
+
+```text
+Jabatan Operator Mesin Bubut Logam tersedia dalam klasifikasi Mekanikal.
+
+Namun, standar kompetensinya tercatat sebagai:
+SKEMA LPJK / Akan disusun SKKNI / SKK Khusus.
+
+Artinya, dokumen SKKNI belum tersedia dalam data ini.
+```
+
+# 23. Pengelompokan bidang untuk menu chatbot
+
+Agar user mudah memilih, data Mekanikal bisa dikelompokkan seperti ini:
+
+## A. Tata Udara / HVAC
+
+Berisi jabatan seperti:
+
+```text
+- Ahli Perencanaan Sistem Tata Udara
+- Mekanik Heating, Ventilation, dan Air Condition atau HVAC
+```
+
+## B. Plumbing dan Pompa Mekanik
+
+```text
+- Ahli Teknik Plambing dan Pompa Mekanik
+- Pelaksana Teknik Plambing
+- Tukang Pasang Pipa
+- Pengawas Plambing
+- Tukang Plambing
+- Mandor Plambing
+```
+
+## C. Proteksi Kebakaran
+
+```text
+- Pengkaji Teknis Proteksi Kebakaran
+- Teknisi Fire Alarm
+```
+
+## D. Lift, Eskalator, dan Transportasi Gedung
+
+```text
+- Ahli Pesawat Lift dan Eskalator
+- Pelaksana Perawatan Instalasi Sistem Transportasi Vertikal
+- Ahli Teknik Transportasi dalam Gedung
+```
+
+## E. Mekanikal Bangunan Gedung
+
+```text
+- Ahli Pemeriksa Kelaikan Fungsi Mekanikal Bangunan Gedung
+- Ahli Bidang Keahlian Teknik Mekanikal
+- Ahli Teknik Mekanikal Freshgraduate
+- Manajer Pelaksana Lapangan Pekerjaan Mekanikal
+- Pengawas Pekerjaan Mekanikal Bangunan Gedung
+- Pelaksana Lapangan Pekerjaan M&E Bangunan Gedung Bertingkat Tinggi
+```
+
+## F. Pengelasan / Welder
+
+```text
+- Tukang Las/Welder/Gas dan Electric Welder
+- Juru Las Oxyacetylene
+- Tukang Las Konstruksi Plat dan Pipa
+- Tukang Las TIG Posisi Bawah Tangan
+- Tukang Las Listrik
+```
+
+## G. Alat Berat
+
+```text
+- Manajer Alat Berat
+- Operator Bulldozer
+- Operator Wheel Excavator
+- Operator Tandem Roller
+- Operator Wheel Loader
+- Operator Backhoe Loader
+- Operator Dump Truck
+- Mekanik Hidrolik Alat Berat
+```
+
+## H. Crane dan Lifting
+
+```text
+- Operator Crane Jembatan
+- Operator Crane Mobile
+- Operator Tower Crane
+- Operator Crawler Crane
+- Operator Rough Terrain Crane
+- Operator Truck Mounted Crane
+- Operator Forklift
+- Operator Slinging and Rigging
+```
+
+## I. Scaffolding
+
+```text
+- Pengawas Scaffolding
+- Teknisi Scaffolding
+- Operator Scaffolding
+```
+
+# 24. Rule rekomendasi otomatis
+
+Chatbot bisa memberi rekomendasi berdasarkan **jenis pekerjaan** dan **pengalaman user**.
+
+## A. Jika user pekerja lapangan pemula
+
+```text
+Kata kunci:
+pemula, baru kerja, helper, asisten, belum punya sertifikat
+
+Arahkan ke:
+- Operator Level 1
+- Operator Level 2
+- Tukang
+- Pelaksana dasar
+```
+
+## B. Jika user teknisi
+
+```text
+Kata kunci:
+teknisi, maintenance, perawatan, inspeksi, troubleshooting
+
+Arahkan ke:
+- Teknisi/Analis
+- KKNI Level 4 atau 5
+```
+
+## C. Jika user pengawas
+
+```text
+Kata kunci:
+pengawas, supervisor, mandor, koordinator lapangan
+
+Arahkan ke:
+- Pengawas
+- Mandor
+- Teknisi/Analis KKNI 4, 5, atau 6
+```
+
+## D. Jika user engineer / ahli
+
+```text
+Kata kunci:
+engineer, ahli, perencana, pemeriksa, pengkaji, konsultan
+
+Arahkan ke:
+- Ahli Muda KKNI 7
+- Ahli Madya KKNI 8
+- Ahli Utama KKNI 9
+```
+
+# 25. Template rekomendasi chatbot
+
+Gunakan format berikut:
+
+```text
+Berdasarkan informasi Anda, rekomendasi jabatan sertifikasi yang paling sesuai adalah:
+
+1. [Nama Jabatan]
+   - Subklasifikasi:
+   - Kualifikasi:
+   - Jenjang KKNI:
+   - Standar Kompetensi:
+   - Link SKK/SKKNI:
+
+Alasan:
+Jabatan ini sesuai karena Anda menyebut pengalaman di bidang [bidang user].
+
+Catatan:
+Jika pengalaman Anda masih dasar, pilih jenjang paling rendah terlebih dahulu. Jika sudah menjadi pengawas atau engineer, pilih jenjang lebih tinggi sesuai persyaratan sertifikasi.
+```
+
+# 26. Contoh percakapan rekomendasi
+
+## Contoh A — User plumbing
+
+**User:**
+
+```text
+Saya tukang pipa air gedung, cocok sertifikasi apa?
+```
+
+**Bot:**
+
+```text
+Berdasarkan pekerjaan Anda sebagai tukang pipa air gedung, rekomendasi jabatan yang sesuai adalah:
+
+1. Tukang Plambing
+   - Subklasifikasi: Plumbing dan Pompa Mekanik
+   - Kualifikasi: Operator
+   - Jenjang KKNI: Level 2 atau Level 3
+   - Standar Kompetensi: SKKNI 304-2016 dalam proses penyusunan SKKNI Tahun 2023
+   - Link SKK/SKKNI: Tersedia
+
+2. Tukang Pasang Pipa
+   - Subklasifikasi: Plumbing dan Pompa Mekanik
+   - Kualifikasi: Operator
+   - Jenjang KKNI: Level 2
+   - Standar Kompetensi: SKKNI 28-2023
+   - Link SKK/SKKNI: Tersedia
+
+Saran:
+Jika pekerjaan Anda lebih banyak pemasangan pipa, pilih Tukang Pasang Pipa.
+Jika pekerjaan Anda mencakup instalasi plumbing gedung secara umum, pilih Tukang Plambing.
+```
+
+## Contoh B — User alat berat
+
+**User:**
+
+```text
+Saya operator wheel loader
+```
+
+**Bot:**
+
+```text
+Data jabatan yang sesuai:
+
+Jabatan:
+Operator Wheel Loader
+
+Kualifikasi:
+Operator
+
+Jenjang KKNI:
+Level 2 dan Level 3
+
+Standar Kompetensi:
+SKK Khusus Kep Dirjen Pembinaan Pelatihan Vokasi dan Produktivitas Nomor 2/3262/LP.00.00/XI/2022 - Reg SKKK 33-2022
+
+Link SKK/SKKNI:
+Tersedia
+
+Saran:
+Jika Anda masih operator dasar, pilih Level 2.
+Jika sudah berpengalaman dan mampu bekerja lebih mandiri, pilih Level 3.
+```
+
+## Contoh C — User engineer mekanikal
+
+**User:**
+
+```text
+Saya mechanical engineer gedung
+```
+
+**Bot:**
+
+```text
+Berdasarkan bidang Anda sebagai mechanical engineer gedung, rekomendasi jabatan yang sesuai:
+
+1. Ahli Bidang Keahlian Teknik Mekanikal
+   - Jenjang: Ahli Muda, Ahli Madya, Ahli Utama
+   - Kualifikasi: Ahli
+   - Jenjang KKNI: Level 7, 8, dan 9
+   - Standar Kompetensi: SKKNI 391-2015
+
+2. Ahli Pemeriksa Kelaikan Fungsi Mekanikal Bangunan Gedung
+   - Jenjang: Ahli Madya dan Ahli
+   - Kualifikasi: Ahli
+   - Jenjang KKNI: Level 8 dan 9
+   - Standar Kompetensi: SKKNI 195-2013
+
+Saran:
+Jika fokus Anda desain/perencanaan/keahlian mekanikal, pilih Ahli Bidang Keahlian Teknik Mekanikal.
+Jika fokus Anda pemeriksaan kelaikan fungsi bangunan gedung, pilih Ahli Pemeriksa Kelaikan Fungsi Mekanikal Bangunan Gedung.
+```
+
+# 27. Flow chatbot berbasis pilihan menu
+
+## Menu awal
+
+```text
+Halo, saya MekaSKK Bot.
+
+Pilih layanan:
+
+1. Cari jabatan Mekanikal
+2. Cari SKK/SKKNI
+3. Cari berdasarkan KKNI
+4. Rekomendasi sertifikasi
+5. Lihat daftar bidang Mekanikal
+6. Bantuan
+```
+
+## Jika user pilih 1
+
+```text
+Silakan ketik nama jabatan atau bidang.
+
+Contoh:
+- Tukang las
+- HVAC
+- Operator crane
+- Plumbing
+- Fire alarm
+- Scaffolding
+```
+
+## Jika user pilih 2
+
+```text
+Silakan ketik nama SKK/SKKNI atau nama jabatan.
+
+Contoh:
+- SKKNI 135-2015
+- SKKNI 391-2015
+- SKKNI 27-2021
+- SKKNI 46-2022
+```
+
+## Jika user pilih 3
+
+```text
+Silakan pilih jenjang KKNI:
+
+1. Level 1
+2. Level 2
+3. Level 3
+4. Level 4
+5. Level 5
+6. Level 6
+7. Level 7
+8. Level 8
+9. Level 9
+```
+
+## Jika user pilih 4
+
+```text
+Ceritakan pekerjaan Anda saat ini.
+
+Contoh:
+- Saya operator crane mobile
+- Saya teknisi fire alarm
+- Saya tukang pipa gedung
+- Saya mekanik alat berat
+- Saya mechanical engineer
+```
+
+# 28. Rule pencarian sinonim
+
+Tambahkan sinonim agar chatbot lebih pintar.
+
+```json
+{
+  "hvac": ["hvac", "ac", "tata udara", "pendingin", "refrigasi", "air conditioning"],
+  "plumbing": ["plumbing", "plambing", "pipa air", "sanitasi", "pompa", "tukang pipa"],
+  "fire_alarm": ["fire alarm", "alarm kebakaran", "proteksi kebakaran", "pemadam", "sistem kebakaran"],
+  "lift": ["lift", "eskalator", "elevator", "transportasi vertikal"],
+  "welder": ["las", "welder", "juru las", "las listrik", "las tig", "oxyacetylene"],
+  "crane": ["crane", "tower crane", "mobile crane", "crawler crane", "truck mounted crane", "rough terrain crane"],
+  "alat_berat": ["alat berat", "bulldozer", "excavator", "wheel loader", "grader", "roller", "dump truck"],
+  "scaffolding": ["scaffolding", "perancah", "steiger"],
+  "forklift": ["forklift", "operator forklift", "angkat angkut", "lifting"]
+}
+```
+
+# 29. Format data untuk WhatsApp bot
+
+Jika dibuat untuk WhatsApp, jawabannya sebaiknya ringkas.
+
+```text
+*MekaSKK Bot*
+
+Jabatan:
+Operator Crane Mobile
+
+Kualifikasi:
+Operator
+
+Jenjang KKNI:
+Level 2 / Level 3
+
+Standar:
+SKKNI 135-2015
+
+Link:
+https://...
+
+Ketik:
+1. Lihat jabatan sejenis
+2. Cari bidang lain
+3. Rekomendasi sertifikasi
+```
+
+# 30. Format data untuk website chatbot
+
+Jika dibuat di website, tampilkan dalam bentuk kartu:
+
+```text
+[Jabatan Kerja]
+Operator Crane Mobile
+
+[Subklasifikasi]
+Teknik Lifting / Crane
+
+[Kualifikasi]
+Operator
+
+[Jenjang KKNI]
+Level 2 dan Level 3
+
+[Standar Kompetensi]
+SKKNI 135-2015
+
+[Link Dokumen]
+Download SKK/SKKNI
+```
+
+# 31. Pseudocode pencarian
+
+```javascript
+function jawabPertanyaan(userInput) {
+  const query = normalisasi(userInput);
+
+  const hasilJabatan = cariJabatan(query);
+  const hasilKKNI = cariKKNI(query);
+  const hasilSKK = cariStandarKompetensi(query);
+  const hasilSinonim = cariSinonim(query);
+
+  if (hasilJabatan.length === 1) {
+    return formatDetail(hasilJabatan[0]);
+  }
+
+  if (hasilJabatan.length > 1) {
+    return formatPilihan(hasilJabatan);
+  }
+
+  if (hasilKKNI.length > 0) {
+    return formatDaftarKKNI(hasilKKNI);
+  }
+
+  if (hasilSKK.length > 0) {
+    return formatDaftarSKK(hasilSKK);
+  }
+
+  if (hasilSinonim.length > 0) {
+    return formatPilihan(hasilSinonim);
+  }
+
+  return fallback();
+}
+```
+
+# 32. Rumus scoring pencarian
+
+Agar hasil pencarian lebih akurat, gunakan skor.
+
+```text
+Skor pencarian:
+
++50 jika cocok dengan jabatan_kerja
++40 jika cocok dengan jenjang_jabatan
++30 jika cocok dengan subklasifikasi
++25 jika cocok dengan kata_kunci
++20 jika cocok dengan standar_kompetensi
++10 jika cocok dengan kualifikasi
++5 jika cocok sebagian
+```
+
+Contoh:
+
+```text
+User: "operator crane"
+
+Hasil:
+- Operator Crane Mobile: skor tinggi
+- Operator Tower Crane: skor tinggi
+- Operator Crawler Crane: skor tinggi
+- Operator Forklift: skor rendah
+```
+
+# 33. Template fallback yang lebih pintar
+
+```text
+Saya belum menemukan data yang cocok secara langsung.
+
+Coba pilih salah satu bidang Mekanikal berikut:
+
+1. HVAC / Tata Udara
+2. Plumbing / Plambing
+3. Fire Alarm / Proteksi Kebakaran
+4. Lift / Eskalator
+5. Las / Welder
+6. Crane / Lifting
+7. Alat Berat
+8. Scaffolding
+9. Mekanikal Bangunan Gedung
+
+Atau ketik ulang nama jabatan Anda, misalnya:
+"operator mobile crane", "teknisi fire alarm", atau "tukang plambing".
+```
+
+# 34. Prompt final siap pakai
+
+Ini bisa langsung dipakai untuk Custom GPT, chatbot website, atau WhatsApp bot berbasis AI.
+
+```text
+Anda adalah MekaSKK Bot, asisten informasi jabatan kerja bidang Mekanikal berbasis SKK/SKKNI.
+
+Anda menjawab berdasarkan database klasifikasi Mekanikal yang diberikan.
+
+Database memuat:
+- Subklasifikasi
+- Jabatan kerja
+- Jenjang jabatan kerja
+- Kualifikasi
+- Jenjang KKNI
+- Standar kompetensi kerja
+- Link SKK/SKKNI
+
+Aturan utama:
+1. Jawab hanya berdasarkan data.
+2. Jangan mengarang nomor SKKNI, jenjang KKNI, atau link.
+3. Jika data tidak ditemukan, sampaikan bahwa data belum ditemukan.
+4. Jika link SKK tidak tersedia, tulis "Link belum tersedia".
+5. Jika standar masih dalam proses penyusunan, tulis sesuai data.
+6. Jika user menyebut istilah umum, tampilkan beberapa jabatan yang relevan.
+7. Jika user meminta rekomendasi, tanyakan atau gunakan informasi pekerjaan, pengalaman, dan bidangnya.
+8. Gunakan bahasa Indonesia yang sopan, jelas, dan praktis.
+9. Beri saran jenjang berdasarkan kualifikasi:
+   - Operator: KKNI 1 sampai 3
+   - Teknisi/Analis: KKNI 4 sampai 6
+   - Ahli: KKNI 7 sampai 9
+10. Jangan menjawab bidang di luar Mekanikal kecuali untuk menjelaskan bahwa data tidak tersedia.
+
+Format jawaban detail:
+Jabatan:
+Subklasifikasi:
+Jenjang Jabatan:
+Kualifikasi:
+Jenjang KKNI:
+Standar Kompetensi:
+Link SKK/SKKNI:
+Catatan:
+
+Jika ada banyak hasil:
+Tampilkan maksimal 5 hasil teratas, lalu minta user memilih salah satu.
+```
+
+# 35. Tahap lanjutan berikutnya
+
+Setelah ini, bagian yang perlu dibuat adalah:
+
+1. **Database JSON lengkap dari seluruh data Mekanikal**
+2. **Tabel Excel knowledge base**
+3. **Prototype chatbot website**
+4. **Script pencarian otomatis**
+5. **Prompt final untuk Custom GPT**
+6. **Flow WhatsApp bot**
+
+Bagian paling berguna untuk dilanjutkan sekarang adalah membuat **database JSON lengkap** dari data Mekanikal, lalu dipakai sebagai knowledge base chatbot.

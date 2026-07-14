@@ -1,0 +1,46 @@
+kok chatbot nya belum ada... letakan popup chatbot disebelah pojok kanan bawah, buat berkedip supaya kelihatan
+
+Chatbot popup sudah ditambahkan di pojok kanan bawah dengan animasi berkedip. Apakah sudah terlihat dan berfungsi dengan baik?
+
+saya sudah beri salam hallo tidak ada respon..
+kedip annya intensitas sedang saja.. tidak perlui sering. misalkan setiap 2-3 detik/second
+
+Animasi kedip sudah diubah menjadi lebih lambat (setiap 3 detik). Silakan coba kirim pesan lagi ke chatbot - seharusnya sudah berfungsi sekarang. Bagaimana hasilnya?
+
+masih gagal tidak bisa kirim pesan. tidak ada di antar muka pesan. dan chatbot juga tidak memberikan salam diawal nya
+
+Saya sudah memperbaiki: 1) Pesan salam dari chatbot sekarang muncul di awal, 2) Database untuk pengiriman pesan sudah diperbaiki. Silakan buka popup chatbot dan coba kirim pesan lagi. Apakah sudah berfungsi?
+
+masih belum bisa kirim pesan
+
+Saya sudah memperbaiki sistem pengiriman pesan. Silakan coba kirim pesan "hallo" lagi ke chatbot. Apakah sekarang sudah bisa mengirim dan chatbot merespons?
+
+belum bisa kirim pesan, muncul terus hilang
+
+Saya sudah menambahkan session ID yang diperlukan. Silakan coba kirim pesan lagi ke chatbot. Apakah sekarang pesannya berhasil terkirim dan mendapat respons?
+
+masih belum bisa.. kenapa ya
+
+kalau API dari tempat lain boleh ?
+
+Provider AI mana yang ingin Anda gunakan?
+
+DeepSeek
+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
+Silakan masukkan API key DeepSeek Anda. Anda bisa mendapatkannya di https://platform.deepseek.com/api_keys
+
+1 secret requested
+•
+DEEPSEEK_API_KEY
+Saya sudah mengkonfigurasi chatbot untuk menggunakan DeepSeek. Silakan coba kirim pesan lagi. Apakah sekarang chatbot sudah bisa merespons?
+
+masih belum bias juga
+
+Saya sudah me-restart aplikasi dengan API key DeepSeek yang baru. Silakan coba kirim pesan lagi ke chatbot. Apakah sekarang chatbot sudah bisa merespons?
+
+tanda ***###-- hapus agar chatbot lebih bersih
+
+Bagus, chatbot sudah berfungsi! Sekarang saya akan menghapus simbol-simbol formatting agar tampilan chat lebih bersih.
+
+Saya sudah menghapus simbol-simbol formatting (***###--) dari tampilan chat. Silakan coba kirim pesan baru dan lihat apakah tampilannya sudah lebih bersih?
+

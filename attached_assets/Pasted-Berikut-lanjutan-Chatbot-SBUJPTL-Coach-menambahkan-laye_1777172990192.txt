@@ -1,0 +1,770 @@
+Berikut lanjutan **Chatbot SBUJPTL Coach**, menambahkan layer baru dari file terbaru: **SKTTK sebagai prasyarat SBUJPTL/IUJPTL, status PJT/TT tidak merangkap, time frame SKTTK, masa berlaku, persyaratan pengajuan SKTTK, mata uji/okupasi, serta conflict handling karena ada perbedaan data level SKTTK antar sumber**. File terbaru menyebut SKTTK sebagai syarat untuk kontraktor kelistrikan, PJT dan TT tidak boleh merangkap pada bidang/subbidang yang sama di perusahaan lain, waktu pembuatan SKTTK sekitar 16 hari kerja dengan pembekalan, uji kompetensi, dan penerbitan sertifikat setelah lulus asesor, serta masa berlaku 3 tahun. 
+
+## 92. SKTTK process module
+
+```yaml id="skttk_process_module_01"
+module:
+  id: skttk_process_module
+  title: "Proses SKTTK Tenaga Teknik Ketenagalistrikan"
+  purpose: >
+    Menjelaskan proses awal penyiapan SKTTK sebagai pelengkap sebelum
+    pengajuan SBUJPTL dan IUJPTL.
+
+  bot_message: >
+    Sebelum mengajukan SBUJPTL, perusahaan perlu memastikan tenaga ahli
+    teknik listrik sudah memiliki SKTTK sesuai okupasi pekerjaan.
+
+    SKTTK digunakan untuk mendukung penetapan PJT dan TT, serta menjadi
+    bagian penting dalam proses SBUJPTL dan IUJPTL.
+
+    Saya bisa bantu cek:
+    1. Apakah perusahaan sudah punya PJT.
+    2. Apakah perusahaan sudah punya TT.
+    3. Apakah SKTTK masih berlaku.
+    4. Apakah level dan okupasi SKTTK sesuai bidang/subbidang.
+    5. Apakah PJT/TT merangkap di perusahaan lain.
+  quick_replies:
+    - "Cek PJT"
+    - "Cek TT"
+    - "Cek masa berlaku SKTTK"
+    - "Lihat syarat SKTTK"
+    - "Konsultasi SKTTK"
+```
+
+## 93. SKTTK timeline flow
+
+```yaml id="skttk_timeline_01"
+flow:
+  id: skttk_timeline_flow
+  title: "Estimasi Proses SKTTK"
+  bot_message: >
+    Berdasarkan informasi proses SKTTK, alur umum dapat digambarkan sebagai:
+
+    1. Pembekalan: sekitar 1 hari.
+    2. Uji kompetensi: sekitar 1 hari.
+    3. Sertifikat terbit setelah peserta dinyatakan lulus oleh asesor.
+    4. Estimasi penerbitan: sekitar 14 hari kerja setelah ujian dan lulus.
+    5. Masa berlaku SKTTK: 3 tahun sejak terbit.
+
+    Jadi, estimasi proses dapat sekitar 16 hari kerja, dengan catatan
+    kelengkapan dokumen, jadwal uji, dan hasil asesmen dapat memengaruhi proses.
+  quick_replies:
+    - "Lihat syarat SKTTK"
+    - "Cek okupasi SKTTK"
+    - "Cek PJT/TT"
+    - "Konsultasi admin"
+```
+
+## 94. SKTTK document requirements
+
+```yaml id="skttk_requirements_01"
+skttk_document_requirements:
+  title: "Persyaratan Pengajuan SKTTK"
+  items:
+    - id: pengalaman_pekerjaan
+      label: "Pengalaman pekerjaan badan usaha"
+      category: "pengalaman"
+
+    - id: surat_tugas
+      label: "Surat tugas melaksanakan pekerjaan"
+      category: "pengalaman"
+
+    - id: sop_pemeliharaan
+      label: "Standard Operating Procedure atau SOP"
+      category: "dokumen_teknis"
+      condition: "Untuk perusahaan yang bergerak di bidang pemeliharaan"
+
+    - id: instruksi_kerja_konstruksi
+      label: "Instruksi Kerja atau IK"
+      category: "dokumen_teknis"
+      condition: "Untuk perusahaan yang bergerak di bidang konstruksi"
+
+    - id: ktp_npwp_personel
+      label: "Fotokopi KTP dan NPWP"
+      category: "identitas"
+
+    - id: ijazah
+      label: "Fotokopi ijazah"
+      category: "pendidikan"
+
+    - id: cv
+      label: "Curriculum Vitae atau riwayat hidup"
+      category: "pengalaman"
+
+    - id: pas_foto
+      label: "Pas foto terbaru"
+      category: "identitas"
+
+    - id: formulir
+      label: "Formulir pengajuan"
+      category: "administrasi"
+
+flow:
+  id: skttk_document_check
+  title: "Cek Dokumen Pengajuan SKTTK"
+  bot_message: >
+    Saya akan bantu cek dokumen awal untuk pengajuan SKTTK.
+    Jawab Ada, Belum, atau Tidak Tahu untuk setiap dokumen.
+  next_node: skttk_document_questions
+```
+
+## 95. SKTTK occupation catalog
+
+```yaml id="skttk_occupation_catalog_01"
+skttk_occupation_catalog:
+  pembangkitan:
+    title: "Okupasi / Mata Uji Pembangkitan"
+    items:
+      - "Laik Operasi PLTA"
+      - "Laik Operasi PLTA Skala Kecil dan Menengah"
+      - "Laik Operasi PLTD Instalasi Permanen"
+      - "Laik Operasi PLTD Instalasi Portable"
+      - "Laik Operasi PLTMG"
+      - "Laik Operasi PLTG"
+      - "Laik Operasi PLTGU"
+      - "Laik Operasi PLTS"
+      - "Laik Operasi PLTP"
+      - "Laik Operasi PLTU"
+
+  transmisi:
+    title: "Okupasi / Mata Uji Transmisi"
+    items:
+      - "Laik Operasi SUTT"
+      - "Laik Operasi SUTET"
+      - "Laik Operasi SKTT"
+      - "Laik Operasi SKLT"
+      - "Laik Operasi Bay Line"
+      - "Laik Operasi Bay Bus Coupler"
+      - "Laik Operasi Bay Transformer"
+      - "Laik Operasi Bay Capacitor"
+      - "Laik Operasi Bay Reactor"
+
+  distribusi:
+    title: "Okupasi / Mata Uji Distribusi"
+    items:
+      - "Laik Operasi SUTM"
+      - "Laik Operasi SUTR"
+      - "Laik Operasi SKTM"
+      - "Laik Operasi SKLTM"
+      - "Laik Operasi SKTR"
+      - "Laik Operasi Gardu Distribusi Pasangan Luar"
+      - "Laik Operasi Gardu Distribusi Pasangan Dalam"
+      - "Laik Operasi Peralatan Hubung Bagi Tegangan Menengah"
+
+  instalasi_pemanfaatan:
+    title: "Okupasi / Mata Uji Instalasi Pemanfaatan"
+    items:
+      - "Laik Operasi Instalasi Pemanfaatan Tenaga Listrik Tegangan Tinggi"
+      - "Laik Operasi Instalasi Pemanfaatan Tenaga Listrik Tegangan Menengah"
+      - "Laik Operasi Instalasi Pemanfaatan Tenaga Listrik Tegangan Rendah"
+```
+
+## 96. Occupation lookup flow
+
+```yaml id="occupation_lookup_flow_01"
+flow:
+  id: skttk_occupation_lookup
+  title: "Cari Okupasi / Mata Uji SKTTK"
+  bot_message: >
+    Pilih bidang pekerjaan Anda agar saya dapat menampilkan pilihan okupasi
+    atau mata uji SKTTK yang paling mendekati.
+  quick_replies:
+    - "Pembangkitan"
+    - "Transmisi"
+    - "Distribusi"
+    - "Instalasi Pemanfaatan"
+
+node:
+  id: show_occupation_by_field
+  type: dynamic_lookup
+  lookup_source: skttk_occupation_catalog
+  response_template: >
+    Berikut contoh okupasi atau mata uji untuk bidang {{target_field}}:
+
+    {{occupation_list}}
+
+    Pilih okupasi yang paling sesuai dengan pekerjaan tenaga teknik Anda.
+    Setelah itu, saya bisa bantu cek apakah okupasi tersebut cocok untuk
+    PJT, TT, SBUJPTL, atau IUJPTL.
+  quick_replies:
+    - "Cek untuk PJT"
+    - "Cek untuk TT"
+    - "Cek syarat dokumen"
+    - "Konsultasi admin"
+```
+
+## 97. PJT/TT non-duplicate rule
+
+```yaml id="pjt_tt_duplicate_rule_01"
+rule:
+  id: pjt_tt_non_duplicate_rule
+  title: "Validasi PJT/TT Tidak Merangkap"
+  purpose: >
+    Memastikan chatbot mengingatkan bahwa PJT dan TT tidak boleh merangkap
+    jabatan pada bidang dan subbidang yang sama di perusahaan lain.
+
+  trigger_examples:
+    - "PJT saya dipakai perusahaan lain"
+    - "TT bisa dipakai dua perusahaan?"
+    - "Boleh pinjam tenaga ahli?"
+    - "PJT rangkap boleh?"
+    - "SKTTK bisa dipakai di perusahaan lain?"
+
+  bot_message: >
+    Untuk pengajuan SBUJPTL, PJT dan TT perlu dipastikan tidak merangkap
+    jabatan pada bidang dan subbidang yang sama di perusahaan lain.
+
+    Jika tenaga teknik sudah digunakan pada perusahaan lain, perlu dicek
+    kembali status penugasannya, bidang/subbidang, dan kesesuaiannya dengan
+    ketentuan yang berlaku.
+
+    Saya sarankan melakukan validasi sebelum pengajuan agar tidak terjadi
+    kendala saat verifikasi.
+  quick_replies:
+    - "Cek status PJT"
+    - "Cek status TT"
+    - "Konsultasi admin"
+```
+
+## 98. Updated SKTTK requirement conflict resolver
+
+Ada perbedaan angka level SKTTK pada bahan sebelumnya dan bahan terbaru. Bahan sebelumnya memisahkan kebutuhan **Pembangkitan/Transmisi/Distribusi** dengan level PJT 5 dan TT 3, sementara file terbaru mencantumkan level PJT 4 dan TT 2 untuk beberapa bidang. Karena chatbot harus aman untuk dipakai, tambahkan **source conflict handler** berikut:
+
+```yaml id="source_conflict_handler_01"
+source_conflict_handler:
+  id: skttk_level_conflict_handler
+  title: "Penanganan Perbedaan Data Level SKTTK"
+  purpose: >
+    Menangani perbedaan data level SKTTK dari beberapa sumber konten agar
+    chatbot tidak memberi keputusan final yang berisiko keliru.
+
+  rule:
+    when: "skttk_level_data_conflict_detected"
+    response: >
+      Saya menemukan bahwa kebutuhan level SKTTK dapat berbeda tergantung
+      sumber, bidang, subbidang, jenis usaha, dan ketentuan terbaru yang
+      digunakan.
+
+      Untuk keamanan, angka level SKTTK yang saya tampilkan harus dianggap
+      sebagai panduan awal. Validasi final perlu dilakukan terhadap okupasi
+      SKTTK, klasifikasi, subbidang, dan ketentuan lembaga terkait sebelum
+      pengajuan.
+
+  bot_behavior:
+    - "Tampilkan kebutuhan level sebagai estimasi awal."
+    - "Sebutkan bahwa perlu validasi final."
+    - "Jika user sedang akan tender atau pengajuan resmi, arahkan ke admin."
+    - "Jangan menyatakan level tertentu pasti benar untuk semua kasus."
+
+  quick_replies:
+    - "Konsultasi validasi SKTTK"
+    - "Cek okupasi SKTTK"
+    - "Cek subbidang"
+```
+
+## 99. Source-aware SKTTK matrix
+
+```yaml id="source_aware_skttk_matrix_01"
+skttk_requirement_matrix_source_aware:
+  version: "dual_source_safe_mode"
+  note: >
+    Gunakan mode ini jika terdapat perbedaan data level SKTTK antar sumber.
+    Bot menampilkan estimasi dan meminta validasi final.
+
+  matrix_option_a:
+    source_label: "Sumber A"
+    usage_note: "Digunakan sebagai baseline awal dari konfigurasi sebelumnya."
+    fields:
+      pembangkitan:
+        pjt_min_level: 5
+        tt_min_level: 3
+      transmisi:
+        pjt_min_level: 5
+        tt_min_level: 3
+      distribusi:
+        pjt_min_level: 5
+        tt_min_level: 3
+      instalasi_pemanfaatan:
+        pjt_min_level: 4
+        tt_min_level: 2
+
+  matrix_option_b:
+    source_label: "Sumber B"
+    usage_note: "Digunakan dari file terbaru, perlu validasi ulang untuk kasus resmi."
+    fields:
+      pembangkitan:
+        pjt_min_level: 4
+        tt_min_level: 2
+      transmisi:
+        pjt_min_level: 4
+        tt_min_level: 2
+      distribusi:
+        pjt_min_level: 4
+        tt_min_level: 2
+      instalasi_pemanfaatan:
+        pjt_min_level: 4
+        tt_min_level: 2
+
+  count_by_qualification:
+    kecil:
+      pjt_min_count: 1
+      tt_min_count: 1
+    menengah:
+      pjt_min_count: 1
+      tt_min_count: 2
+    besar:
+      pjt_min_count: 1
+      tt_min_count: 3
+```
+
+## 100. SKTTK validation response template
+
+```yaml id="skttk_validation_template_01"
+response_template:
+  id: skttk_validation_response
+  text: >
+    Untuk bidang {{target_field}} dan kualifikasi {{target_qualification}},
+    kebutuhan awal tenaga teknik adalah:
+
+    Penanggung Jawab Teknik:
+    - Minimal {{pjt_min_count}} orang
+    - Estimasi level minimal: {{pjt_min_level}}
+
+    Tenaga Teknik:
+    - Minimal {{tt_min_count}} orang
+    - Estimasi level minimal: {{tt_min_level}}
+
+    Catatan penting:
+    Level SKTTK perlu divalidasi lagi berdasarkan okupasi pekerjaan,
+    subbidang, jenis usaha, dan ketentuan lembaga terkait. PJT dan TT juga
+    perlu dipastikan tidak merangkap jabatan pada bidang/subbidang yang sama
+    di perusahaan lain.
+
+    Apakah Anda ingin saya bantu cek dokumen SKTTK atau okupasi yang sesuai?
+  quick_replies:
+    - "Cek dokumen SKTTK"
+    - "Cek okupasi"
+    - "Cek status rangkap"
+    - "Konsultasi admin"
+```
+
+## 101. SKTTK expiry checker
+
+```yaml id="skttk_expiry_checker_01"
+flow:
+  id: skttk_expiry_checker
+  title: "Cek Masa Berlaku SKTTK"
+  bot_message: >
+    SKTTK memiliki masa berlaku tertentu. Saya bisa bantu cek awal apakah
+    SKTTK Anda masih aman digunakan untuk persiapan pengajuan.
+
+    Kapan tanggal terbit SKTTK?
+  expected_input:
+    type: "date"
+    format: "YYYY-MM-DD"
+    save_to: technical.skttk_issue_date
+
+node:
+  id: calculate_skttk_expiry
+  type: date_calculation
+  logic:
+    expiry_date: "technical.skttk_issue_date + 3 years"
+    days_remaining: "expiry_date - today"
+
+  response_logic:
+    - condition: "days_remaining > 180"
+      bot_message: >
+        SKTTK Anda terlihat masih memiliki masa berlaku yang cukup.
+        Tetap pastikan okupasi, level, dan subbidang sesuai dengan pengajuan.
+      quick_replies:
+        - "Cek okupasi"
+        - "Cek dokumen SBUJPTL"
+
+    - condition: "days_remaining > 0 and days_remaining <= 180"
+      bot_message: >
+        SKTTK Anda masih berlaku, tetapi masa berlakunya mendekati akhir.
+        Sebaiknya segera validasi apakah masih dapat digunakan untuk proses
+        pengajuan atau perlu perpanjangan.
+      quick_replies:
+        - "Konsultasi perpanjangan"
+        - "Cek dokumen"
+
+    - condition: "days_remaining <= 0"
+      bot_message: >
+        SKTTK Anda terindikasi sudah melewati masa berlaku. Untuk pengajuan,
+        sebaiknya siapkan proses pembaruan atau konsultasikan jalur SKTTK
+        yang sesuai.
+      quick_replies:
+        - "Konsultasi SKTTK"
+        - "Lihat syarat SKTTK"
+```
+
+## 102. SKTTK readiness scoring
+
+```yaml id="skttk_readiness_scoring_01"
+skttk_readiness_scoring:
+  scale:
+    0: "Belum siap"
+    1: "Sebagian siap"
+    2: "Siap awal"
+    3: "Siap validasi"
+
+  scoring_items:
+    - id: has_pjt
+      question: "Perusahaan sudah memiliki PJT?"
+      score_if_yes: 1
+
+    - id: pjt_has_skttk
+      question: "PJT sudah memiliki SKTTK?"
+      score_if_yes: 1
+
+    - id: has_tt
+      question: "Perusahaan sudah memiliki TT?"
+      score_if_yes: 1
+
+    - id: tt_has_skttk
+      question: "TT sudah memiliki SKTTK?"
+      score_if_yes: 1
+
+    - id: skttk_occupation_match
+      question: "Okupasi SKTTK sesuai bidang/subbidang?"
+      score_if_yes: 1
+
+    - id: skttk_still_valid
+      question: "SKTTK masih berlaku?"
+      score_if_yes: 1
+
+    - id: not_duplicate_assignment
+      question: "PJT/TT tidak merangkap pada bidang/subbidang yang sama di perusahaan lain?"
+      score_if_yes: 1
+
+  result_logic:
+    - condition: "score <= 2"
+      status: "Belum Siap"
+      message: >
+        Kesiapan SKTTK masih rendah. Prioritaskan penyiapan PJT/TT,
+        pengurusan SKTTK, dan validasi okupasi.
+
+    - condition: "score > 2 and score <= 5"
+      status: "Sebagian Siap"
+      message: >
+        Beberapa komponen SKTTK sudah tersedia, tetapi masih perlu validasi
+        level, okupasi, masa berlaku, atau status rangkap.
+
+    - condition: "score > 5"
+      status: "Siap Validasi"
+      message: >
+        Kesiapan SKTTK terlihat baik untuk tahap awal. Lanjutkan validasi
+        dokumen dan kesesuaian dengan klasifikasi SBUJPTL.
+```
+
+## 103. SKTTK readiness result template
+
+```yaml id="skttk_readiness_result_01"
+response_template:
+  id: skttk_readiness_result
+  text: >
+    Hasil cek awal kesiapan SKTTK:
+
+    Skor:
+    {{score}} dari {{max_score}}
+
+    Status:
+    {{skttk_readiness_status}}
+
+    Catatan:
+    {{skttk_readiness_message}}
+
+    Poin yang perlu diperhatikan:
+    {{skttk_missing_points}}
+
+    Rekomendasi:
+    1. Pastikan PJT dan TT memiliki SKTTK sesuai okupasi.
+    2. Pastikan masa berlaku SKTTK masih aktif.
+    3. Pastikan PJT/TT tidak merangkap pada bidang/subbidang yang sama.
+    4. Cocokkan level SKTTK dengan bidang, subbidang, dan kualifikasi.
+    5. Lanjutkan cek dokumen SBUJPTL setelah SKTTK siap.
+
+    Hasil ini adalah panduan awal dan perlu diverifikasi sebelum pengajuan.
+  quick_replies:
+    - "Cek dokumen SBUJPTL"
+    - "Lihat syarat SKTTK"
+    - "Cek okupasi"
+    - "Konsultasi admin"
+```
+
+## 104. Updated main menu with SKTTK process
+
+```yaml id="updated_main_menu_03"
+main_menu:
+  bot_message: >
+    Pilih kebutuhan Anda terkait SBUJPTL:
+  options:
+    - label: "1. Apa itu SBUJPTL?"
+      next_node: explain_sbujptl
+
+    - label: "2. Pilih jenis usaha, bidang, dan subbidang"
+      next_node: end_to_end_sbujptl_wizard
+
+    - label: "3. Cek kualifikasi kecil/menengah/besar"
+      next_node: qualification_check_start
+
+    - label: "4. Cek PJT, TT, dan SKTTK"
+      next_node: skttk_process_module
+
+    - label: "5. Cek masa berlaku SKTTK"
+      next_node: skttk_expiry_checker
+
+    - label: "6. Lihat okupasi / mata uji SKTTK"
+      next_node: skttk_occupation_lookup
+
+    - label: "7. Cek dokumen SBUJPTL"
+      next_node: document_assessment_start
+
+    - label: "8. Alur SBUJPTL sampai IUJPTL"
+      next_node: sbujptl_to_iujptl_flow
+
+    - label: "9. Konsultasi admin"
+      next_node: lead_capture_start
+```
+
+## 105. Updated lead capture with SKTTK details
+
+```yaml id="lead_capture_skttk_01"
+flow:
+  id: lead_capture_skttk_details
+  title: "Form Konsultasi SBUJPTL dan SKTTK"
+  questions:
+    - id: q_contact_name
+      text: "Nama Anda siapa?"
+      save_to: contact.contact_name
+
+    - id: q_company_name
+      text: "Nama perusahaan Anda?"
+      save_to: company_profile.company_name
+
+    - id: q_phone
+      text: "Nomor WhatsApp yang bisa dihubungi?"
+      save_to: contact.phone_number
+
+    - id: q_target_service
+      text: "Kebutuhan utama Anda?"
+      quick_replies:
+        - "SKTTK saja"
+        - "SBUJPTL saja"
+        - "SBUJPTL + IUJPTL"
+        - "SKTTK + SBUJPTL"
+        - "Belum tahu"
+
+    - id: q_business_type
+      text: "Jenis usaha yang dituju?"
+      quick_replies:
+        - "Konsultansi"
+        - "Pembangunan/Pemasangan"
+        - "Pemeriksaan/Pengujian"
+        - "Pengoperasian"
+        - "Pemeliharaan"
+
+    - id: q_field
+      text: "Bidang pekerjaan?"
+      quick_replies:
+        - "Pembangkitan"
+        - "Transmisi"
+        - "Distribusi"
+        - "Instalasi Pemanfaatan"
+
+    - id: q_skttk_status
+      text: "Status SKTTK tenaga teknik saat ini?"
+      quick_replies:
+        - "Belum punya"
+        - "Sudah ada PJT"
+        - "Sudah ada TT"
+        - "Sudah ada PJT dan TT"
+        - "Tidak tahu"
+
+    - id: q_skttk_expiry
+      text: "Apakah SKTTK masih berlaku?"
+      quick_replies:
+        - "Masih berlaku"
+        - "Hampir habis"
+        - "Sudah habis"
+        - "Belum tahu"
+
+  completion_response:
+    text: >
+      Terima kasih. Data awal sudah tercatat.
+
+      Ringkasan:
+      - Nama: {{contact.contact_name}}
+      - Perusahaan: {{company_profile.company_name}}
+      - Kontak: {{contact.phone_number}}
+      - Kebutuhan: {{target_service}}
+      - Jenis usaha: {{target_classification}}
+      - Bidang: {{target_field}}
+      - Status SKTTK: {{skttk_status}}
+      - Masa berlaku SKTTK: {{skttk_expiry_status}}
+
+      Admin dapat menindaklanjuti untuk validasi SKTTK, SBUJPTL, dan IUJPTL.
+    quick_replies:
+      - "Lihat ringkasan"
+      - "Cek dokumen"
+      - "Selesai"
+```
+
+## 106. Developer addendum: SKTTK module
+
+```text id="developer_addendum_skttk_01"
+Tambahkan modul SKTTK ke SBUJPTL Coach.
+
+Modul harus mendukung:
+1. Penjelasan SKTTK sebagai prasyarat penting untuk PJT/TT, SBUJPTL, dan IUJPTL.
+2. Cek kesiapan PJT:
+   - Ada/tidak
+   - Memiliki SKTTK/tidak
+   - Level SKTTK
+   - Okupasi SKTTK
+   - Masa berlaku
+   - Status rangkap
+3. Cek kesiapan TT:
+   - Jumlah TT
+   - Level SKTTK
+   - Okupasi SKTTK
+   - Masa berlaku
+   - Status rangkap
+4. Estimasi proses SKTTK:
+   - Pembekalan 1 hari
+   - Uji kompetensi 1 hari
+   - Sertifikat terbit sekitar 14 hari kerja setelah lulus asesor
+   - Estimasi total sekitar 16 hari kerja
+   - Masa berlaku 3 tahun
+5. Persyaratan SKTTK:
+   - Pengalaman pekerjaan badan usaha
+   - Surat tugas melaksanakan pekerjaan
+   - SOP untuk pemeliharaan
+   - IK untuk konstruksi
+   - KTP dan NPWP
+   - Ijazah
+   - CV
+   - Pas foto
+   - Formulir
+6. Occupation lookup:
+   - Pembangkitan
+   - Transmisi
+   - Distribusi
+   - Instalasi Pemanfaatan
+7. Non-rangkap warning:
+   - PJT dan TT tidak boleh merangkap pada bidang/subbidang yang sama
+     di perusahaan lain.
+8. Conflict handler:
+   - Jika ada perbedaan data level SKTTK antar sumber, tampilkan sebagai
+     estimasi awal dan arahkan validasi admin.
+9. Guardrail:
+   - Jangan menyarankan pinjam nama tenaga ahli.
+   - Jangan menjamin SKTTK, SBUJPTL, atau IUJPTL pasti terbit.
+   - Selalu sebut bahwa hasil chatbot adalah panduan awal.
+```
+
+## 107. Contoh percakapan SKTTK
+
+```yaml id="sample_conversation_skttk_01"
+sample_conversation:
+  title: "User belum punya SKTTK"
+
+  conversation:
+    - user: "Saya mau urus SBUJPTL tapi belum punya SKTTK."
+    - bot: >
+        Baik. SKTTK adalah bagian penting untuk menyiapkan PJT dan TT
+        dalam pengurusan SBUJPTL.
+
+        Sebelum lanjut SBUJPTL, perusahaan perlu memetakan:
+        1. Bidang pekerjaan.
+        2. Subbidang pekerjaan.
+        3. Kebutuhan PJT dan TT.
+        4. Level dan okupasi SKTTK.
+        5. Dokumen pengajuan SKTTK.
+
+        Bidang pekerjaan Anda apa?
+        [Pembangkitan] [Transmisi] [Distribusi] [Instalasi Pemanfaatan]
+
+    - user: "Distribusi."
+    - bot: >
+        Untuk bidang Distribusi, okupasi yang mungkin terkait antara lain:
+        SUTM, SUTR, SKTM, SKTR, gardu distribusi pasangan luar, gardu distribusi
+        pasangan dalam, dan peralatan hubung bagi tegangan menengah.
+
+        Apakah pekerjaan Anda lebih dekat ke jaringan tegangan menengah
+        atau tegangan rendah?
+        [Tegangan Menengah] [Tegangan Rendah] [Belum tahu]
+
+    - user: "Tegangan menengah."
+    - bot: >
+        Baik. Subbidang sementara: Jaringan Distribusi Tegangan Menengah.
+        Langkah berikutnya adalah menentukan apakah SKTTK dibutuhkan untuk
+        PJT, TT, atau keduanya.
+
+        Apakah perusahaan sudah memiliki calon PJT atau TT?
+        [Calon PJT ada] [Calon TT ada] [Keduanya ada] [Belum ada]
+```
+
+## 108. Contoh percakapan status rangkap PJT/TT
+
+```yaml id="sample_conversation_rangkap_01"
+sample_conversation:
+  title: "User bertanya PJT rangkap"
+
+  conversation:
+    - user: "PJT saya masih dipakai perusahaan lain, bisa untuk SBU saya?"
+    - bot: >
+        Perlu hati-hati. Untuk pengajuan SBUJPTL, PJT dan TT perlu dipastikan
+        tidak merangkap jabatan pada bidang dan subbidang yang sama di
+        perusahaan lain.
+
+        Jika PJT tersebut masih terdaftar atau digunakan oleh perusahaan lain,
+        statusnya perlu divalidasi terlebih dahulu agar tidak menimbulkan
+        kendala saat verifikasi.
+
+        Saya sarankan konsultasi admin untuk mengecek status penugasan PJT.
+        [Konsultasi admin] [Cek syarat PJT] [Cari alternatif SKTTK]
+```
+
+## 109. Contoh percakapan masa berlaku SKTTK
+
+```yaml id="sample_conversation_expiry_01"
+sample_conversation:
+  title: "User tanya masa berlaku SKTTK"
+
+  conversation:
+    - user: "SKTTK saya terbit 2022, masih bisa dipakai?"
+    - bot: >
+        SKTTK umumnya memiliki masa berlaku 3 tahun sejak terbit.
+        Untuk memastikan, saya perlu tanggal terbit lengkap pada sertifikat.
+
+        Jika SKTTK terbit tahun 2022, ada kemungkinan masa berlakunya sudah
+        dekat habis atau telah habis, tergantung tanggal terbitnya.
+
+        Kapan tanggal terbit SKTTK Anda?
+```
+
+## 110. Final addendum prompt
+
+```text id="final_addendum_prompt_skttk"
+Add the SKTTK module to the SBUJPTL Coach chatbot.
+
+The chatbot must be able to:
+- Explain SKTTK as a requirement for PJT, TT, SBUJPTL, and IUJPTL.
+- Guide users to prepare SKTTK before SBUJPTL.
+- Ask whether the company already has PJT and TT.
+- Ask whether PJT and TT already have SKTTK.
+- Ask the SKTTK level, occupation, issue date, and expiry status.
+- Warn that PJT and TT must not hold duplicate assignments in the same field/subfield at another company.
+- Show SKTTK processing timeline:
+  1 day briefing, 1 day competency test, certificate issued around 14 working days after passing assessor evaluation, estimated total 16 working days.
+- Show SKTTK validity: 3 years from issue date.
+- Show SKTTK document requirements:
+  work experience, assignment letter, SOP for maintenance companies, work instruction for construction companies, KTP, NPWP, diploma, CV, recent photo, and form.
+- Provide occupation lookup for generation, transmission, distribution, and utilization installations.
+- If SKTTK level data conflicts between knowledge sources, present it as initial guidance and recommend admin validation.
+- Never guarantee SKTTK, SBUJPTL, or IUJPTL issuance.
+- Never suggest borrowing names or using personnel who are already assigned to another company in the same field/subfield.
+- Always state that chatbot output is an initial guide, not an official certification decision.
+```

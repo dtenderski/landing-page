@@ -1,0 +1,153 @@
+Siap. Dengan email **[aspekindopub@gmail.com](mailto:aspekindopub@gmail.com)** dan WA **+6282299417818**, kita bisa bikin **notifikasi hasil asesmen** langsung dari Gustafta (tetap “murni builder”, tanpa Apps Script).
+
+Di bawah ini saya kasih:
+
+1. **Format data yang dikirim** ke admin
+2. **Template pesan** (Email + WA)
+3. **Kapan notifikasi dikirim** (logika internal vs publik)
+4. **Node blueprint ringkas** untuk Gustafta
+
+---
+
+## 1) Data ringkas yang wajib masuk notifikasi admin
+
+Tambahkan input di awal flow (khusus mode internal “Anggota”):
+
+* `member_id` (Nomor anggota)
+* `nama_pjbu`
+* `nama_perusahaan`
+* `kualifikasi` (K1/K2/K3/M/B)
+* `wilayah` (opsional)
+
+Dari scoring:
+
+* `jenis_usaha`
+* `proyek`
+* `manajemen`
+* `total`
+* `level`
+* `prioritas` (3 poin, pakai rule-based)
+
+---
+
+## 2) Template Notifikasi WhatsApp (ke +6282299417818)
+
+**Judul & isi singkat, siap copy sebagai “Send Message” ke admin:**
+
+**WA Template:**
+
+```
+[ASESMEN PJBU - INTERNAL]
+
+Member ID: {{member_id}}
+PJBU: {{nama_pjbu}}
+Perusahaan: {{nama_perusahaan}}
+Kualifikasi BUJK: {{kualifikasi}}
+Jenis Usaha: {{jenis_usaha}}
+
+Skor Proyek: {{proyek}}
+Skor Manajemen: {{manajemen}}
+Skor Total: {{total}}
+Level: {{level}}
+
+Prioritas Pembinaan:
+1) {{prio1}}
+2) {{prio2}}
+3) {{prio3}}
+
+Waktu: {{tanggal_submit}}
+```
+
+> Kalau Gustafta punya “Send WA to number”, targetkan ke **+6282299417818**.
+
+---
+
+## 3) Template Notifikasi Email (ke [aspekindopub@gmail.com](mailto:aspekindopub@gmail.com))
+
+Kalau Gustafta punya node “Send Email”, gunakan:
+
+**Subject:**
+`[INTERNAL] Hasil Asesmen PJBU - {{member_id}} - {{level}}`
+
+**Body:**
+
+```
+INTERNAL - Hasil Asesmen PJBU (Pembinaan)
+
+Member ID: {{member_id}}
+Nama PJBU: {{nama_pjbu}}
+Perusahaan: {{nama_perusahaan}}
+Kualifikasi BUJK: {{kualifikasi}}
+Jenis Usaha: {{jenis_usaha}}
+Wilayah: {{wilayah}}
+
+Skor Proyek: {{proyek}}
+Skor Manajemen: {{manajemen}}
+Skor Total: {{total}}
+Level: {{level}}
+
+Prioritas Pembinaan:
+1) {{prio1}}
+2) {{prio2}}
+3) {{prio3}}
+
+Catatan:
+- Mohon dijadwalkan 1x pembinaan dalam tahun berjalan sesuai program asosiasi.
+Waktu submit: {{tanggal_submit}}
+```
+
+---
+
+## 4) Kapan notifikasi dikirim (biar tidak spam)
+
+Saya sarankan:
+
+### Mode Internal (Anggota Asosiasi)
+
+✅ **SELALU kirim** ke Email + WA admin setelah hasil keluar.
+
+### Mode Publik (Belum Anggota)
+
+Kirim ke admin **hanya kalau**:
+
+* `total >= 65` (lead bagus), ATAU
+* user klik “Saya ingin bergabung / minta dihubungi”
+
+Kalau tidak, cukup tampilkan hasil ke user tanpa notifikasi admin.
+
+---
+
+## 5) Prioritas Pembinaan (rule-based, cocok untuk Gustafta)
+
+Karena kita nggak pakai ranking otomatis, pakai trigger sederhana:
+
+### Kontraktor – contoh rules
+
+* Jika `K_waktu <= 10` → set `prio1="Schedule Control"`
+* Jika `K_mutu <= 7` → set `prio2="QA/QC & SOP Mutu"`
+* Jika `K_keuangan <= 10` → set `prio3="Cashflow & Laporan Keuangan"`
+  (atau aturan lain sesuai skor terendah)
+
+### Konsultan – contoh rules
+
+* Jika `S_waktu_doc <= 14` → “Manajemen Deliverable & Deadline”
+* Jika `S_kualitas_doc <= 10` → “Quality Review Dokumen”
+* Jika `S_tenaga <= 10` → “Pemenuhan & Manajemen Tenaga Ahli”
+
+---
+
+## 6) Node Blueprint (urutan node minimal yang Anda buat di Gustafta)
+
+**Node 1:** Menu awal (Anggota / Belum) → set `mode`
+**Node 2:** (Jika Anggota) input `member_id, nama_pjbu, perusahaan, kualifikasi`
+**Node 3:** Pilih jenis usaha (Kontraktor/Konsultan) → set `jenis_usaha`
+**Node 4–12:** Pertanyaan scoring → set skor + add ke `proyek/manajemen`
+**Node 13:** Hitung `total=proyek+manajemen`
+**Node 14:** Tentukan `level` (if else)
+**Node 15:** Set `prio1..3` (if else rules)
+**Node 16:** Output hasil ke user
+**Node 17:** (Internal always) Send WA to **+6282299417818** + Send Email to **[aspekindopub@gmail.com](mailto:aspekindopub@gmail.com)**
+
+---
+
+Kalau Anda kasih tahu **di Gustafta notifikasi itu node-nya namanya apa** (mis. “Send Email”, “Send WhatsApp”, “Notify Admin”, dll), saya bisa tulis versi yang lebih “klik-klik builder”: **tiap node saya tulis: tipe node + isi message + variable yang diset** (Kontraktor dulu, lalu Konsultan).

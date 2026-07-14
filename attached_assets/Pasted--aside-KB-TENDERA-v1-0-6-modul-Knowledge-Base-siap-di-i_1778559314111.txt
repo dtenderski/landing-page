@@ -1,0 +1,247 @@
+<aside>
+📚
+
+**KB TENDERA v1.0** — 6 modul Knowledge Base siap di-inject ke 10 agen MultiClaw. Setiap modul memuat: ringkasan, struktur data, key entries, dan mapping agen yang mengonsumsinya. Acuan: UU 2/2017 jo. UU 11/2020, PP 14/2021, Perpres 12/2021 jo. 16/2018, Perlem LKPP 12/2021, Permen PUPR 8/2023 & 8/2022, FIDIC 2017, SNI ISO 37001:2016.
+
+</aside>
+
+## 🗺️ Peta Modul KB → Agen Konsumen
+
+| Kode | Modul | Domain | Agen Konsumen Utama | Volume |
+| --- | --- | --- | --- | --- |
+| KB-REG | Regulasi & Standar | Hukum + teknis | ELIGIBILITY, KONTRAK, INTEGRITY, SANGGAH | ~150 entries |
+| KB-PROC | Prosedur Pengadaan | e-Procurement | SCOUT, ADMIN, SANGGAH | ~80 entries |
+| KB-DOC | Template Dokumen | Administratif + teknis | ADMIN, TEKNIS | 12 admin + 8 teknis |
+| KB-AHSP | Harga Satuan Pekerjaan | Estimasi biaya | HPS, TEKNIS | ~600 line-items |
+| KB-MARKET | Data Pasar & Historis | Intelligence | SCOUT, WINPROB | ~2.000 record |
+| KB-CASE | Case Library | Lesson learned | RISKSCAN, WINPROB, SANGGAH | ~50 kasus |
+
+---
+
+## 1️⃣ KB-REG — Regulasi & Standar
+
+**Tujuan:** ground truth hukum & teknis untuk semua agen yang menyentuh compliance.
+
+### Entries Wajib (Tier-1, 22 dokumen)
+
+<details><summary>🇮🇩 Regulasi Indonesia (14)</summary>
+
+- **REG-001** UU 2/2017 jo. UU 11/2020 — Jasa Konstruksi
+- **REG-002** PP 14/2021 — Penyelenggaraan Jasa Konstruksi
+- **REG-003** PP 5/2021 — Perizinan Berbasis Risiko (KBLI)
+- **REG-004** Perpres 16/2018 jo. Perpres 12/2021 — PBJ Pemerintah
+- **REG-005** Perlem LKPP 12/2021 — Pedoman Pelaksanaan PBJ Penyedia
+- **REG-006** Perlem LKPP 3/2023 — Standar Dokumen Pemilihan (SDP)
+- **REG-007** Permen PUPR 8/2023 — SMKK & PBJ Konstruksi
+- **REG-008** Permen PUPR 8/2022 — Klasifikasi & Subklasifikasi BUJK (~150 subklas)
+- **REG-009** Permen PUPR 1/2022 — SMKK turunan
+- **REG-010** PP 9/2022 — PPh Final Jasa Konstruksi
+- **REG-011** UU 18/1999 (legacy reference)
+- **REG-012** Perpres 17/2019 — Pengadaan Darurat
+- **REG-013** Perlem LKPP 6/2021 — Pelaku Pengadaan
+- **REG-014** SE Menteri PUPR 21/2021 — Tata Cara Penjaminan Mutu
+
+</details>
+
+<details><summary>🌐 Standar Internasional & SNI (8)</summary>
+
+- **REG-015** FIDIC Red Book 2017 — Construction
+- **REG-016** FIDIC Yellow Book 2017 — Plant & Design-Build
+- **REG-017** FIDIC Silver Book 2017 — EPC/Turnkey
+- **REG-018** SNI ISO 9001:2015 — QMS
+- **REG-019** SNI ISO 14001:2015 — EMS
+- **REG-020** SNI ISO 45001:2018 — OHSMS
+- **REG-021** SNI ISO 37001:2016 — SMAP (Anti-Suap)
+- **REG-022** SNI 03-xxxx — AHSP teknik sipil
+
+</details>
+
+### Sample Entry (REG-008 Permen PUPR 8/2022)
+
+```yaml
+reg_id: REG-008
+judul: Permen PUPR 8/2022 — Klasifikasi & Subklasifikasi BUJK
+klasifikasi:
+  - Bangunan Gedung (BG001-BG009)
+  - Bangunan Sipil (SI001-SI012)
+  - Instalasi Mekanikal Elektrikal (MK001-MK010)
+  - Spesialis (SP001-SP024)
+  - Konsultansi (RK001-RK006, RE001-RE006, AR001-AR003)
+kualifikasi:
+  K: kualifikasi kecil (modal ≤ 250jt, omzet ≤ 2,5M/thn)
+  M: kualifikasi menengah (modal ≤ 10M, omzet ≤ 50M/thn)
+  B: kualifikasi besar (modal > 10M, omzet > 50M/thn)
+konsumen: [AGENT-ELIGIBILITY, AGENT-SCOUT]
+```
+
+---
+
+## 2️⃣ KB-PROC — Prosedur Pengadaan
+
+**Tujuan:** SOP e-Procurement (LPSE/SPSE/INAPROC/SIKaP/SIRUP/e-Katalog) end-to-end.
+
+| Sub | Topik | Entries |
+| --- | --- | --- |
+| PROC-A | Metode Pemilihan (Tender, Seleksi, Penunjukan Langsung, Pengadaan Langsung, e-Katalog) | 5 |
+| PROC-B | Tahapan Tender Pascakualifikasi (Pengumuman → Pemenang) | 14 |
+| PROC-C | Tahapan Tender Prakualifikasi (Pra → Pemenang) | 16 |
+| PROC-D | Sanggah & Sanggah Banding | 8 |
+| PROC-E | e-Katalog v6 (Etalase, Penayangan, Mini-Kompetisi) | 12 |
+| PROC-F | SIKaP — Sistem Informasi Kinerja Penyedia | 6 |
+| PROC-G | Tender Itemized & E-Reverse Auction | 5 |
+| PROC-H | Pengadaan Darurat & Konsolidasi | 4 |
+
+### Sample Entry (PROC-B05 Penjelasan/Aanwijzing)
+
+```yaml
+proc_id: PROC-B05
+fase: Penjelasan Dokumen (Aanwijzing)
+posisi: hari ke-3 s.d. ke-5 setelah pengumuman
+platform: SPSE 4.6 (chat room + lampiran)
+keluaran:
+  - Berita Acara Penjelasan (BAP)
+  - Adendum SDP (jika ada perubahan)
+tips_bujk:
+  - Ajukan pertanyaan tertulis untuk klausul ambigu RKS
+  - Minta klarifikasi spesifikasi teknis non-standar
+  - Catat semua pertanyaan vendor lain (intelijen)
+risk:
+  - Tidak hadir = dianggap menyetujui seluruh SDP
+konsumen: [AGENT-ADMIN, AGENT-RISKSCAN, AGENT-SCOUT]
+```
+
+---
+
+## 3️⃣ KB-DOC — Template Dokumen Tender
+
+### 12 Dokumen Administratif (AGENT-ADMIN)
+
+| # | Dokumen | Format | Wajib? | Trigger |
+| --- | --- | --- | --- | --- |
+| D01 | Surat Penawaran | docx | ✅ semua | otomatis |
+| D02 | Surat Pakta Integritas | docx | ✅ semua | otomatis |
+| D03 | Surat Pernyataan Tunduk pada SDP | docx | ✅ semua | otomatis |
+| D04 | Surat Pernyataan Tidak Pailit / Tidak Dipidana | docx | ✅ semua | otomatis |
+| D05 | Surat Pernyataan Kesanggupan Personil Manajerial | docx | ✅ jika dipersyaratkan | conditional |
+| D06 | Daftar Pengalaman Sejenis (10 tahun) | xlsx | ✅ semua | otomatis |
+| D07 | Neraca Keuangan (audited) | pdf upload | ✅ K-M-B | upload |
+| D08 | Sisa Kemampuan Nyata (SKN) | docx | ✅ M-B | formula |
+| D09 | Sisa Kemampuan Paket (SKP) | docx | ✅ semua | formula |
+| D10 | Daftar Peralatan Utama | xlsx | ✅ semua | inventory |
+| D11 | Surat Dukungan Bank (jika dipersyaratkan) | scan | ⚠️ conditional | upload |
+| D12 | Jaminan Penawaran (1–3% HPS) | bank guarantee | ✅ tender > 10M | upload |
+
+### 8 Deliverable Teknis (AGENT-TEKNIS)
+
+| # | Dokumen | Halaman tipikal |
+| --- | --- | --- |
+| T01 | Metode Pelaksanaan | 15–30 |
+| T02 | Jadwal Pelaksanaan (Kurva-S & Barchart) | 2–4 |
+| T03 | Jadwal Penggunaan Material | 1–2 |
+| T04 | Jadwal Penggunaan Peralatan | 1–2 |
+| T05 | Jadwal Penggunaan Tenaga Kerja | 1–2 |
+| T06 | RKK (Rencana Keselamatan Konstruksi) | 20–40 |
+| T07 | Struktur Organisasi Proyek + CV Personil | 5–10 |
+| T08 | Manajemen Mutu (referensi ISO 9001) | 5–10 |
+
+---
+
+## 4️⃣ KB-AHSP — Analisis Harga Satuan Pekerjaan
+
+### Struktur
+
+```json
+{
+	"ahsp_id": "AHSP-BG-2.1.1",
+	"divisi": "Bangunan Gedung",
+	"pekerjaan": "Pasangan bata merah 1:4, tebal 1/2 bata",
+	"satuan": "m²",
+	"komponen": {
+		"bahan": [{"item": "bata merah", "koef": 70, "sat": "bh", "harga_ref": 1200}],
+		"upah": [{"item": "tukang batu", "koef": 0.25, "sat": "OH", "harga_ref": 150000}],
+		"alat": []
+	},
+	"overhead_profit": 0.15,
+	"harga_satuan_ref": 158400,
+	"region": "Jakarta",
+	"sumber": "Permen PUPR 1/2022 Lampiran",
+	"valid_until": "2025-12-31"
+}
+```
+
+### Divisi Coverage
+
+- Bangunan Gedung — 180 items
+- Bangunan Sipil (Jalan, Jembatan, Drainase) — 220 items
+- Mekanikal Elektrikal — 90 items
+- Lansekap & Site Development — 60 items
+- Pekerjaan Khusus (pile, bored, dewatering) — 50 items
+
+**Harga referensi regional:** Jabodetabek, Bandung, Surabaya, Medan, Makassar, Balikpapan. Faktor regional 0.85–1.25 dari Jakarta baseline.
+
+---
+
+## 5️⃣ KB-MARKET — Data Pasar & Historis Tender
+
+| Tabel | Field Utama | Jumlah Record |
+| --- | --- | --- |
+| `tender_historis` | tender_id, pokja, hps, pemenang, harga_kontrak, n_peserta, durasi_proses | ~1.500 |
+| `pemenang_profile` | nama_bujk, kualifikasi, SBU_aktif, n_menang_3thn, total_nilai_3thn | ~400 |
+| `pokja_behavior` | pokja_id, kementerian, avg_n_peserta, avg_diskon, kecenderungan_metode | ~80 |
+| `seasonality` | bulan, sektor, volume_tender, nilai_total | 12×8 |
+
+### Insight Pre-computed (di-cache untuk WINPROB)
+
+- **Diskon rata-rata pemenang:** Bangunan Gedung 88.5% HPS · Jalan 91.2% HPS · ME 86.0% HPS
+- **Jumlah peserta tipikal:** Kualifikasi K 5–12 peserta · M 3–7 · B 2–5
+- **Win rate by kualifikasi gap:** BUJK kualifikasi tepat 22% · over-qualified 18% · borderline 8%
+
+---
+
+## 6️⃣ KB-CASE — Case Library (Lesson Learned)
+
+| Kode | Kategori | Jumlah | Agen Konsumen |
+| --- | --- | --- | --- |
+| CASE-DQ | Diskualifikasi Administratif | 12 | ADMIN, RISKSCAN |
+| CASE-CL | Klausul Kontrak Berisiko | 10 | RISKSCAN, KONTRAK |
+| CASE-PR | Sanggah Berhasil | 8 | SANGGAH |
+| CASE-PS | Sanggah Ditolak | 6 | SANGGAH |
+| CASE-WIN | Strategi Bid Pemenang | 8 | WINPROB |
+| CASE-LOSS | Bid Gagal — Root Cause | 6 | WINPROB, RISKSCAN |
+
+### Sample Entry (CASE-DQ-003)
+
+```yaml
+case_id: CASE-DQ-003
+judul: "Penawar gugur karena Pakta Integritas tidak bermeterai"
+tahun: 2024
+pokja: Kementerian PUPR
+akar_masalah: dokumen D02 di-upload tanpa e-meterai
+dampak: gugur di evaluasi administrasi
+lesson: ADMIN harus validasi e-meterai PDF sebelum submit
+guardrail_agent: AGENT-ADMIN must call check_emeterai() before pack_submission()
+konsumen: [AGENT-ADMIN, AGENT-RISKSCAN]
+```
+
+---
+
+## 🔌 Cara Inject KB ke Agen
+
+<aside>
+🔌
+
+Per agen, di blok `## KNOWLEDGE BASE` system prompt, tambahkan: `Akses KB-REG, KB-PROC, KB-DOC via internal lookup. Saat tidak yakin, jawab dengan ABD-3 [ASUMSI: ...] + confidence < 70 dan rekomendasikan verifikasi.` KB di-host sebagai (a) RAG vectorstore, (b) structured database Notion, atau (c) static lookup di prompt. Untuk MVP TENDERA, **gunakan opsi (b)** — database Notion per modul dengan property `agen_konsumen`.
+
+</aside>
+
+## ✅ Checklist Build KB
+
+- [ ]  KB-REG: 22 entries Tier-1 (regulasi & standar)
+- [ ]  KB-PROC: 70 entries (semua sub PROC-A s.d. PROC-H)
+- [ ]  KB-DOC: 12 template admin + 8 deliverable teknis
+- [ ]  KB-AHSP: 600 line-items + tabel harga regional
+- [ ]  KB-MARKET: import 1.500 record tender historis dari LPSE scraping
+- [ ]  KB-CASE: tulis 50 kasus dengan format YAML standar
+- [ ]  Wiring: connect KB ke 10 agen via property `konsumen`
+
+Referensi arsitektur: [TENDERA Hub — AI Tender BUJK (Series Gustafta · OpenClaw + MultiClaw)](https://www.notion.so/TENDERA-Hub-AI-Tender-BUJK-Series-Gustafta-OpenClaw-MultiClaw-210dd107ef2841f3ae895b9921b66412?pvs=21)

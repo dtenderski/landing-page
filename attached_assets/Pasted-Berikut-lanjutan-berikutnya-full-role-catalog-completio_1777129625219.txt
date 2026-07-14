@@ -1,0 +1,684 @@
+Berikut lanjutan berikutnya: **full role catalog completion pack**, berisi **template seed data untuk seluruh jabatan, standard lookup lengkap, grouping logic, dan response map per subklasifikasi**. Data tetap mengacu pada katalog Manajemen Pelaksanaan yang Anda unggah. 
+
+---
+
+# 194. Full Catalog Grouping Structure
+
+```yaml id="full_catalog_grouping"
+full_catalog_grouping:
+  classification:
+    code: "E"
+    name: "Manajemen Pelaksanaan"
+
+  groups:
+    keselamatan_konstruksi:
+      label: "Keselamatan Konstruksi"
+      chatbot_area_slug: "k3"
+      assessment_id: "assessment_k3"
+      learning_path_id: "path_k3"
+      roles:
+        - "Ahli Keselamatan Konstruksi"
+        - "Ahli K3 Konstruksi"
+        - "Personil Keselamatan dan Kesehatan Kerja"
+        - "Petugas K3 Konstruksi"
+        - "Petugas Keselamatan Konstruksi"
+        - "Supervisor K3"
+
+    manajemen_konstruksi_proyek:
+      label: "Manajemen Konstruksi / Manajemen Proyek"
+      chatbot_area_slug: "project"
+      assessment_id: "assessment_project"
+      learning_path_id: "path_project_management"
+      roles:
+        - "Manajer Logistik Proyek"
+        - "Ahli Bidang Keahlian Manajemen Konstruksi"
+        - "Ahli Manajemen Proyek Konstruksi"
+        - "Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat"
+
+    pengendalian_mutu:
+      label: "Pengendalian Mutu Pekerjaan Konstruksi"
+      chatbot_area_slug: "quality"
+      assessment_id: "assessment_quality"
+      learning_path_id: "path_quality"
+      roles:
+        - "Quality Engineer"
+        - "Quality Assurance Engineer"
+        - "Ahli Sistem Manajemen Mutu Konstruksi"
+
+    hukum_kontrak:
+      label: "Hukum Kontrak Konstruksi"
+      chatbot_area_slug: "contract"
+      assessment_id: "assessment_contract"
+      learning_path_id: "path_contract"
+      roles:
+        - "Ahli Kontrak Kerja Konstruksi"
+
+    estimasi_biaya:
+      label: "Estimasi Biaya Konstruksi"
+      chatbot_area_slug: "cost_qs"
+      assessment_id: "assessment_cost_qs"
+      learning_path_id: "path_cost_qs"
+      roles:
+        - "Juru Hitung Kuantitas"
+        - "Estimator Biaya Jalan"
+        - "Quantity Surveyor"
+        - "Ahli Quantity Surveyor"
+```
+
+---
+
+# 195. Complete Standard Lookup Table
+
+```yaml id="complete_standard_lookup_table"
+standard_lookup_table:
+
+  "SKKNI 60-2022":
+    area: "Keselamatan Konstruksi"
+    roles:
+      - role: "Ahli Keselamatan Konstruksi"
+        levels:
+          - "Ahli Muda Keselamatan Konstruksi — KKNI 7"
+          - "Ahli Madya Keselamatan Konstruksi — KKNI 8"
+          - "Ahli Utama Keselamatan Konstruksi — KKNI 9"
+      - role: "Petugas Keselamatan Konstruksi"
+        levels:
+          - "Petugas Keselamatan Konstruksi — KKNI 3"
+
+  "SKKNI 350-2014":
+    area: "Keselamatan Konstruksi"
+    roles:
+      - role: "Ahli K3 Konstruksi"
+        levels:
+          - "Ahli Muda K3 Konstruksi — KKNI 7"
+          - "Ahli Madya K3 Konstruksi — KKNI 8"
+          - "Ahli Utama K3 Konstruksi — KKNI 9"
+      - role: "Supervisor K3"
+        levels:
+          - "Supervisor K3 — KKNI 5"
+          - "Supervisor K3 Utama — KKNI 6"
+
+  "SKKNI 038-2019":
+    area: "Keselamatan Konstruksi"
+    roles:
+      - role: "Personil Keselamatan dan Kesehatan Kerja"
+        levels:
+          - "Personil Keselamatan dan Kesehatan Kerja — KKNI 4"
+
+  "SKKNI 307-2013":
+    area: "Keselamatan Konstruksi"
+    roles:
+      - role: "Petugas Keselamatan dan Kesehatan Kerja (K3) Konstruksi"
+        levels:
+          - "Petugas Keselamatan dan Kesehatan Kerja (K3) Konstruksi — KKNI 3"
+
+  "SKKNI 386-2013":
+    area: "Manajemen Konstruksi / Manajemen Proyek"
+    roles:
+      - role: "Manajer Logistik Proyek"
+        levels:
+          - "Manajer Logistik Proyek — KKNI 7"
+
+  "SKKNI 390-2015":
+    area: "Manajemen Konstruksi / Manajemen Proyek"
+    roles:
+      - role: "Ahli Bidang Keahlian Manajemen Konstruksi"
+        levels:
+          - "Ahli Muda Bidang Keahlian Manajemen Konstruksi — KKNI 7"
+          - "Ahli Madya Bidang Keahlian Manajemen Konstruksi — KKNI 8"
+          - "Ahli Utama Bidang Keahlian Manajemen Konstruksi — KKNI 9"
+
+  "SKKK 035-2022":
+    area: "Manajemen Konstruksi / Manajemen Proyek"
+    roles:
+      - role: "Ahli Manajemen Proyek Konstruksi"
+        levels:
+          - "Ahli Muda Manajemen Proyek Konstruksi — KKNI 7"
+          - "Ahli Madya Manajemen Proyek Konstruksi — KKNI 8"
+          - "Ahli Utama Manajemen Proyek Konstruksi — KKNI 9"
+
+  "SKKNI 260-2018":
+    area: "Manajemen Konstruksi / Manajemen Proyek"
+    roles:
+      - role: "Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat"
+        levels:
+          - "Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat — KKNI 5"
+          - "Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat Utama — KKNI 6"
+
+  "SKKNI 333-2013":
+    area: "Pengendalian Mutu Pekerjaan Konstruksi"
+    roles:
+      - role: "Quality Engineer"
+        levels:
+          - "Quality Engineer Madya — KKNI 5"
+          - "Quality Engineer — KKNI 6"
+
+  "SKKNI 387-2013":
+    area: "Pengendalian Mutu Pekerjaan Konstruksi"
+    roles:
+      - role: "Quality Assurance Engineer"
+        levels:
+          - "Quality Assurance Engineer Madya — KKNI 5"
+          - "Quality Assurance Engineer — KKNI 6"
+
+  "SKKNI 145-2019":
+    area: "Pengendalian Mutu Pekerjaan Konstruksi"
+    roles:
+      - role: "Ahli Sistem Manajemen Mutu Konstruksi"
+        levels:
+          - "Ahli Muda Sistem Manajemen Mutu Konstruksi — KKNI 7"
+          - "Ahli Madya Sistem Manajemen Mutu Konstruksi — KKNI 8"
+          - "Ahli Sistem Manajemen Mutu Konstruksi — KKNI 9"
+
+  "SKKNI 88-2015":
+    area: "Hukum Kontrak Konstruksi"
+    roles:
+      - role: "Ahli Kontrak Kerja Konstruksi"
+        levels:
+          - "Ahli Madya Kontrak Kerja Konstruksi — KKNI 8"
+          - "Ahli Kontrak Kerja Konstruksi — KKNI 9"
+
+  "SKKK 038-2022":
+    area: "Estimasi Biaya Konstruksi"
+    roles:
+      - role: "Juru Hitung Kuantitas"
+        levels:
+          - "Juru Hitung Kuantitas Muda — KKNI 4"
+          - "Juru Hitung Kuantitas Madya — KKNI 5"
+          - "Juru Hitung Kuantitas Utama — KKNI 6"
+
+  "SKKNI 385-2013":
+    area: "Estimasi Biaya Konstruksi"
+    roles:
+      - role: "Estimator Biaya Jalan"
+        levels:
+          - "Estimator Biaya Jalan Madya — KKNI 5"
+          - "Estimator Biaya Jalan — KKNI 6"
+
+  "SKKNI 06-2011":
+    area: "Estimasi Biaya Konstruksi"
+    roles:
+      - role: "Quantity Surveyor"
+        levels:
+          - "Quantity Surveyor Madya — KKNI 5"
+          - "Quantity Surveyor Utama — KKNI 6"
+
+  "SKKNI 6-2011":
+    area: "Estimasi Biaya Konstruksi"
+    roles:
+      - role: "Ahli Quantity Surveyor"
+        levels:
+          - "Ahli Muda Quantity Surveyor — KKNI 7"
+          - "Ahli Madya Quantity Surveyor — KKNI 8"
+          - "Ahli Utama Quantity Surveyor — KKNI 9"
+```
+
+---
+
+# 196. Response Map by Standard Code
+
+```yaml id="response_map_by_standard"
+standard_response_templates:
+
+  exact_standard_found:
+    text: >
+      Standar {{standard_code}} berada pada subklasifikasi
+      {{area}} dalam klasifikasi Manajemen Pelaksanaan.
+
+      Jabatan yang menggunakan standar ini:
+      {{role_level_list}}
+
+      Anda ingin melihat detail salah satu jabatan atau mulai asesmen terkait?
+    quick_replies:
+      - "Lihat detail jabatan"
+      - "Mulai asesmen"
+      - "Checklist bukti"
+      - "Kembali ke menu"
+
+  standard_not_found:
+    text: >
+      Saya belum menemukan kode standar tersebut dalam katalog Manajemen
+      Pelaksanaan. Coba tulis dengan format seperti:
+      - SKKNI 350-2014
+      - SKKNI 333-2013
+      - SKKK 035-2022
+      - SKKNI 6-2011
+    quick_replies:
+      - "Lihat daftar standar"
+      - "Cari berdasarkan jabatan"
+      - "Cari berdasarkan KKNI"
+```
+
+---
+
+# 197. Full Role Seed Expansion Template
+
+```json id="full_role_seed_expansion_template"
+{
+  "role_record_template": {
+    "id": "role_{slug_jenjang_jabatan}_kkni_{kkni_level}",
+    "classification_code": "E",
+    "classification_name": "Manajemen Pelaksanaan",
+    "subklasifikasi": "{subklasifikasi}",
+    "jabatan_kerja": "{jabatan_kerja}",
+    "jenjang_jabatan_kerja": "{jenjang_jabatan_kerja}",
+    "kualifikasi": "{Operator | Teknisi/Analis | Ahli}",
+    "kkni_level": "{3-9}",
+    "standard_code": "{SKKNI/SKKK}",
+    "official_link": "{link_skk_kemnaker}",
+    "recommended_assessment": "{assessment_id}",
+    "recommended_learning_path": "{learning_path_id}",
+    "focus_summary": "{ringkasan fokus kompetensi praktis}",
+    "active_status": true
+  }
+}
+```
+
+---
+
+# 198. Recommended Focus Summary Generator
+
+```yaml id="focus_summary_generator"
+focus_summary_generator:
+  purpose: >
+    Menghasilkan ringkasan fokus kompetensi otomatis berdasarkan subklasifikasi
+    dan jabatan kerja.
+
+  rules:
+
+    if_area_k3:
+      base_summary: >
+        Fokus pada keselamatan konstruksi/K3, identifikasi bahaya,
+        pengendalian risiko, pemeriksaan kepatuhan, pelaporan kondisi tidak
+        aman, investigasi kejadian, dan pembinaan budaya keselamatan.
+
+    if_area_project:
+      base_summary: >
+        Fokus pada perencanaan pelaksanaan, koordinasi sumber daya,
+        pengendalian waktu, biaya, mutu, risiko, logistik, komunikasi,
+        dan pelaporan progres proyek.
+
+    if_area_quality:
+      base_summary: >
+        Fokus pada pengendalian mutu, inspeksi pekerjaan, verifikasi
+        spesifikasi, dokumentasi mutu, NCR, tindakan korektif, audit,
+        dan peningkatan sistem kualitas.
+
+    if_area_contract:
+      base_summary: >
+        Fokus pada pemahaman kontrak, variation order, klaim, adendum,
+        sengketa, pembuktian, hak dan kewajiban para pihak, serta risiko
+        kontraktual proyek.
+
+    if_area_cost_qs:
+      base_summary: >
+        Fokus pada pengukuran volume, BOQ, backup quantity, estimasi biaya,
+        analisis harga satuan, progress payment, deviasi volume/biaya,
+        dan evaluasi komersial proyek.
+
+  seniority_adjustment:
+    operator:
+      add: >
+        Penekanan pada pelaksanaan prosedur dasar dan pelaporan kepada atasan.
+
+    teknisi_analis:
+      add: >
+        Penekanan pada penerapan teknis, pemeriksaan, analisis awal, supervisi,
+        dan dokumentasi hasil pekerjaan.
+
+    ahli:
+      add: >
+        Penekanan pada analisis kompleks, evaluasi, pengambilan keputusan,
+        pengendalian sistem, dan pembinaan tim.
+```
+
+---
+
+# 199. Role Detail Rendering Rules by Kualifikasi
+
+```yaml id="role_render_by_kualifikasi"
+role_rendering_by_kualifikasi:
+
+  operator:
+    response_style:
+      - "Gunakan contoh lapangan yang sederhana."
+      - "Tekankan pelaksanaan prosedur."
+      - "Tawarkan modul dasar dan checklist sederhana."
+    next_actions:
+      - "Belajar dasar"
+      - "Asesmen singkat"
+      - "Checklist tugas lapangan"
+
+  teknisi_analis:
+    response_style:
+      - "Tekankan penerapan teknis, analisis, dan dokumentasi."
+      - "Berikan contoh laporan, checklist, atau verifikasi."
+      - "Tawarkan asesmen dan studi kasus menengah."
+    next_actions:
+      - "Mulai asesmen"
+      - "Latihan studi kasus"
+      - "Checklist bukti teknis"
+
+  ahli:
+    response_style:
+      - "Tekankan evaluasi, pengendalian, koordinasi, dan keputusan profesional."
+      - "Tawarkan simulasi wawancara dan studi kasus kompleks."
+      - "Sertakan bukti portofolio tingkat ahli."
+    next_actions:
+      - "Simulasi wawancara"
+      - "Studi kasus advanced"
+      - "Checklist portofolio ahli"
+```
+
+---
+
+# 200. Catalog Search Result Ranking
+
+```yaml id="catalog_search_ranking"
+catalog_search_ranking:
+  scoring:
+    exact_jenjang_match: 100
+    exact_jabatan_match: 95
+    standard_code_match: 95
+    role_alias_match: 85
+    subklasifikasi_match: 75
+    keyword_overlap_match: 60
+    fuzzy_match: 50
+
+  tie_breakers:
+    - "Prefer exact jenjang_jabatan_kerja over generic jabatan_kerja."
+    - "Prefer active_status true."
+    - "Prefer lower KKNI first when user asks basic/pemula."
+    - "Prefer higher KKNI first when user asks ahli/utama/advanced."
+    - "If multiple remain, ask disambiguation."
+
+  example:
+    user_input: "Ahli K3"
+    candidates:
+      - role: "Ahli K3 Konstruksi"
+        score: 95
+      - role: "Ahli Keselamatan Konstruksi"
+        score: 75
+      - role: "Supervisor K3"
+        score: 60
+    behavior: >
+      Ask clarification because multiple K3-related roles may be relevant,
+      but prioritize Ahli K3 Konstruksi as first option.
+```
+
+---
+
+# 201. “Show All Roles” Response Strategy
+
+```yaml id="show_all_roles_strategy"
+show_all_roles:
+  trigger_examples:
+    - "Tampilkan semua jabatan"
+    - "Daftar jabatan Manajemen Pelaksanaan"
+    - "Semua subklasifikasi apa saja?"
+    - "List jabatan SKK"
+
+  response_policy:
+    - "Do not show too much at once on mobile."
+    - "Group by subklasifikasi."
+    - "Show role names first, not every jenjang."
+    - "Offer to expand one area."
+
+  response_template: >
+    Berikut daftar utama jabatan dalam klasifikasi Manajemen Pelaksanaan:
+
+    1. Keselamatan Konstruksi:
+    {{k3_role_names}}
+
+    2. Manajemen Konstruksi / Manajemen Proyek:
+    {{project_role_names}}
+
+    3. Pengendalian Mutu Pekerjaan Konstruksi:
+    {{quality_role_names}}
+
+    4. Hukum Kontrak Konstruksi:
+    {{contract_role_names}}
+
+    5. Estimasi Biaya Konstruksi:
+    {{cost_qs_role_names}}
+
+    Pilih salah satu area agar saya tampilkan jenjang, KKNI, dan standarnya.
+```
+
+---
+
+# 202. Example “Show All Roles” Output
+
+```text id="example_show_all_roles_output"
+Bot:
+Berikut daftar utama jabatan dalam klasifikasi Manajemen Pelaksanaan:
+
+1. Keselamatan Konstruksi:
+- Ahli Keselamatan Konstruksi
+- Ahli K3 Konstruksi
+- Personil Keselamatan dan Kesehatan Kerja
+- Petugas K3 Konstruksi
+- Petugas Keselamatan Konstruksi
+- Supervisor K3
+
+2. Manajemen Konstruksi / Manajemen Proyek:
+- Manajer Logistik Proyek
+- Ahli Bidang Keahlian Manajemen Konstruksi
+- Ahli Manajemen Proyek Konstruksi
+- Fasilitator Teknis Infrastruktur Berbasis Masyarakat
+
+3. Pengendalian Mutu:
+- Quality Engineer
+- Quality Assurance Engineer
+- Ahli Sistem Manajemen Mutu Konstruksi
+
+4. Hukum Kontrak:
+- Ahli Kontrak Kerja Konstruksi
+
+5. Estimasi Biaya / QS:
+- Juru Hitung Kuantitas
+- Estimator Biaya Jalan
+- Quantity Surveyor
+- Ahli Quantity Surveyor
+
+Pilih area yang ingin Anda lihat lebih detail.
+```
+
+---
+
+# 203. “Expand Area” Response Template
+
+```yaml id="expand_area_response_template"
+expand_area_response:
+  template: >
+    Berikut detail jabatan pada area {{area_name}}:
+
+    {{role_level_details}}
+
+    Anda ingin:
+    - melihat detail salah satu jabatan,
+    - mulai asesmen area ini,
+    - melihat checklist bukti,
+    - atau kembali ke daftar area?
+
+  quick_replies:
+    - "Detail jabatan"
+    - "Mulai asesmen"
+    - "Checklist bukti"
+    - "Kembali ke daftar area"
+```
+
+---
+
+# 204. Expanded Area Example: Estimasi Biaya
+
+```text id="expanded_area_cost_qs_example"
+Bot:
+Berikut detail jabatan pada area Estimasi Biaya Konstruksi:
+
+1. Juru Hitung Kuantitas
+- Juru Hitung Kuantitas Muda — Teknisi/Analis — KKNI 4 — SKKK 038-2022
+- Juru Hitung Kuantitas Madya — Teknisi/Analis — KKNI 5 — SKKK 038-2022
+- Juru Hitung Kuantitas Utama — Teknisi/Analis — KKNI 6 — SKKK 038-2022
+
+2. Estimator Biaya Jalan
+- Estimator Biaya Jalan Madya — Teknisi/Analis — KKNI 5 — SKKNI 385-2013
+- Estimator Biaya Jalan — Teknisi/Analis — KKNI 6 — SKKNI 385-2013
+
+3. Quantity Surveyor
+- Quantity Surveyor Madya — Teknisi/Analis — KKNI 5 — SKKNI 06-2011
+- Quantity Surveyor Utama — Teknisi/Analis — KKNI 6 — SKKNI 06-2011
+
+4. Ahli Quantity Surveyor
+- Ahli Muda Quantity Surveyor — Ahli — KKNI 7 — SKKNI 6-2011
+- Ahli Madya Quantity Surveyor — Ahli — KKNI 8 — SKKNI 6-2011
+- Ahli Utama Quantity Surveyor — Ahli — KKNI 9 — SKKNI 6-2011
+
+Apa yang ingin Anda lakukan berikutnya?
+[ Detail jabatan ] [ Mulai asesmen QS ] [ Checklist bukti QS ] [ Kembali ]
+```
+
+---
+
+# 205. Role-Level Detail Template
+
+```yaml id="role_level_detail_template"
+role_level_detail:
+  purpose: >
+    Digunakan jika pengguna memilih jenjang spesifik, misalnya
+    “Ahli Muda Quantity Surveyor” bukan hanya “Ahli Quantity Surveyor”.
+
+  response_template: >
+    Berikut detail jenjang jabatan yang Anda pilih:
+
+    Jenjang jabatan:
+    {{jenjang_jabatan_kerja}}
+
+    Jabatan kerja:
+    {{jabatan_kerja}}
+
+    Subklasifikasi:
+    {{subklasifikasi}}
+
+    Kualifikasi:
+    {{kualifikasi}}
+
+    Jenjang KKNI:
+    {{kkni_level}}
+
+    Standar kompetensi kerja:
+    {{standard_code}}
+
+    Fokus persiapan:
+    {{focus_summary}}
+
+    Rekomendasi:
+    {{recommended_steps}}
+
+  recommended_steps_by_kkni:
+    kkni_3_4:
+      - "Pelajari dasar prosedur kerja."
+      - "Siapkan bukti pengalaman lapangan."
+      - "Latihan menjelaskan tugas harian."
+    kkni_5_6:
+      - "Perkuat bukti teknis dan analisis."
+      - "Siapkan laporan pemeriksaan atau evaluasi."
+      - "Latihan studi kasus menengah."
+    kkni_7_9:
+      - "Siapkan portofolio keputusan profesional."
+      - "Latihan wawancara berbasis STAR."
+      - "Latihan studi kasus kompleks."
+```
+
+---
+
+# 206. KKNI-Level Coaching Messages
+
+```yaml id="kkni_level_coaching"
+kkni_level_coaching:
+
+  kkni_3:
+    message: >
+      KKNI 3 dalam katalog ini berada pada tingkat operator. Fokus persiapan
+      adalah memahami prosedur kerja, melaksanakan instruksi dengan benar,
+      menggunakan alat dan APD sesuai aturan, serta melaporkan kondisi lapangan.
+
+  kkni_4:
+    message: >
+      KKNI 4 mulai masuk pada teknisi/analis awal. Fokus persiapan adalah
+      memahami prosedur teknis, melakukan pencatatan, pemeriksaan dasar,
+      dan menyampaikan laporan secara sistematis.
+
+  kkni_5:
+    message: >
+      KKNI 5 mencakup peran teknisi/analis yang lebih mandiri. Fokus persiapan
+      adalah penerapan teknis, pemeriksaan, analisis awal, supervisi terbatas,
+      dan dokumentasi bukti pekerjaan.
+
+  kkni_6:
+    message: >
+      KKNI 6 mencakup peran teknisi/analis utama. Fokus persiapan adalah
+      pengendalian teknis, evaluasi hasil kerja, verifikasi, koordinasi, dan
+      penyelesaian masalah teknis.
+
+  kkni_7:
+    message: >
+      KKNI 7 umumnya merupakan jenjang ahli muda atau ahli awal. Fokus
+      persiapan adalah analisis profesional, pengendalian pekerjaan,
+      pengambilan keputusan, dan bukti pengalaman yang lebih kompleks.
+
+  kkni_8:
+    message: >
+      KKNI 8 merupakan jenjang ahli madya. Fokus persiapan adalah evaluasi
+      kompleks, koordinasi lintas fungsi, analisis dampak, dan pembuktian
+      pengalaman memimpin atau mengendalikan pekerjaan.
+
+  kkni_9:
+    message: >
+      KKNI 9 merupakan jenjang ahli utama. Fokus persiapan adalah tanggung
+      jawab strategis, pengembangan sistem, evaluasi tingkat tinggi, pembinaan,
+      dan pengambilan keputusan pada masalah kompleks.
+```
+
+---
+
+# 207. Final Catalog Integrity Checklist
+
+```yaml id="catalog_integrity_checklist"
+catalog_integrity_checklist:
+  before_launch:
+    - "Pastikan semua jabatan dari file katalog sudah masuk database."
+    - "Pastikan setiap jenjang memiliki KKNI."
+    - "Pastikan semua standard_code konsisten formatnya."
+    - "Pastikan jabatan dengan standar sama tetap dapat dibedakan berdasarkan jenjang."
+    - "Pastikan SKKNI 06-2011 dan SKKNI 6-2011 ditangani sesuai data sumber."
+    - "Pastikan semua role memiliki recommended_assessment."
+    - "Pastikan setiap role memiliki focus_summary."
+    - "Pastikan official_link tersimpan untuk kebutuhan referensi."
+    - "Pastikan role yang ambigu memiliki disambiguation template."
+```
+
+---
+
+# 208. Final Build Continuation Note
+
+```text id="final_build_continuation_note"
+Dengan tambahan ini, implementasi chatbot sudah memiliki:
+
+1. Struktur pengelompokan katalog penuh.
+2. Standard lookup table lengkap.
+3. Template seed data untuk semua role.
+4. Strategy untuk menampilkan semua jabatan.
+5. Template detail per area dan per jenjang.
+6. Coaching message berdasarkan KKNI.
+7. Aturan ranking hasil pencarian.
+8. Checklist integritas katalog sebelum launch.
+
+Langkah berikutnya yang paling logis adalah membuat:
+- full `roles.seed.json` dari seluruh katalog,
+- mapping `official_link` per role,
+- template `learningModules.seed.json`,
+- template `assessments.seed.json`,
+- dan contoh file konfigurasi final yang bisa langsung ditempel ke chatbot builder.
+```
+
+---

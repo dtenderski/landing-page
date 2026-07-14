@@ -1,0 +1,75 @@
+Itu error dari **Vite + esbuild**:
+
+> **`[plugin:vite:esbuild] The service is no longer running`**
+> Artinya **proses “esbuild service” yang dipakai Vite buat transform/compile TS/JS tiba-tiba mati/crash**, jadi Vite gagal nge-compile file yang terakhir disentuh (di log kamu: `client/src/main.tsx`).
+
+Penyebab yang paling sering:
+
+1. **Ada error syntax / import / JSX di `main.tsx` (atau file yang diimport dari situ)** yang bikin esbuild crash.
+2. **Proses dev lama nyangkut** (port/proses tidak bersih) → esbuild/worker mati.
+3. **Dependency korup / mismatch versi** (vite/esbuild/react plugin) atau Node version nggak cocok.
+4. **Resource Replit kepenuhan** (RAM/CPU) → service mati.
+
+### Yang bisa kamu coba (urut dari paling cepat)
+
+1. **Stop & restart dev server benar-benar bersih**
+
+   * Di Replit: **Stop** dulu, lalu **Run** lagi.
+   * Kalau ada “port masih kepakai”, kill prosesnya (lihat langkah #2).
+
+2. **Kill proses node yang nyangkut**
+   Buka Shell di Replit, jalankan:
+
+   ```bash
+   ps aux | grep node
+   ```
+
+   lalu kill PID yang dev server lama (atau paling gampang):
+
+   ```bash
+   pkill -f vite
+   pkill -f node
+   ```
+
+3. **Hapus cache Vite + install ulang deps**
+
+   ```bash
+   rm -rf node_modules .vite
+   npm cache verify
+   npm install
+   npm run dev
+   ```
+
+   (Kadang cache di `node_modules/.vite` bikin crash berulang.)
+
+4. **Cek `client/src/main.tsx`**
+   Karena log nunjuk ke file itu, pastikan:
+
+   * tidak ada karakter aneh/typo
+   * import path benar
+   * JSX valid
+     Kalau kamu paste isi `main.tsx` ke sini, aku bisa cek bagian yang kemungkinan bikin esbuild jatuh.
+
+5. **Update esbuild/vite (kalau masih crash)**
+
+   ```bash
+   npm i -D vite@latest esbuild@latest
+   npm i
+   npm run dev
+   ```
+
+6. (Opsional) **Matikan overlay error** biar layar nggak ketutup (bukan solusi, cuma UI)
+   Di `vite.config.js/ts`:
+
+   ```js
+   export default {
+     server: { hmr: { overlay: false } }
+   }
+   ```
+
+Kalau kamu bisa kirim:
+
+* isi `client/src/main.tsx`
+* dan 20–30 baris log paling atas saat crash
+
+…aku bisa pinpoint penyebabnya (biasanya 1 baris typo/import yang memicu esbuild mati).

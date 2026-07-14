@@ -1,0 +1,79 @@
+Saya sudah coba buka link dashboard yang Anda kasih (`https://gustafta-builder-41-1.replit.app/dashboard`). Masalahnya: halaman dashboard itu **kemungkinan besar SPA (React/Next) + butuh login/session**, sehingga dari sisi “pembacaan halaman” yang bisa saya lakukan, kontennya **tidak kebaca (hasilnya kosong/0 lines)**. Jadi saya **belum bisa memastikan fitur-fiturnya hanya dari URL itu**.
+
+Tapi—kita tetap bisa “cek” dengan cara yang paling praktis dan **platform-agnostic**: kita verifikasi kemampuan inti yang dibutuhkan, tanpa menambah fitur spesifik tender.
+
+## Yang perlu kita pastikan di Gustafta Builder (cek di UI Anda)
+
+Untuk saran “Optional Advanced Insight Layer” (yang generik), builder cukup punya 4 kemampuan ini:
+
+1. **State/Variable**
+   Ada tempat menyimpan output langkah sebelumnya, misal:
+
+* `status`
+* `risk_level`
+* `score`
+* `summary_json`
+
+2. **Conditional branching / rules**
+   Bisa bikin aturan seperti:
+
+* jika `risk_level in ["Tinggi","Kritis"]` → tampilkan opsi lanjutan
+* jika `score >= 70` → jalur A, else jalur B
+
+3. **Button / quick reply / action** (opsional tapi ideal)
+   Ada elemen “klik untuk lanjut” seperti:
+
+* “Generate Advanced Summary”
+* “Lihat Analisis Detail”
+
+Kalau tidak ada tombol pun, masih bisa pakai trigger berbasis teks:
+user ketik “buat executive summary”.
+
+4. **Multi-step flow / subflow**
+   Bisa memanggil langkah lanjutan (subflow) yang mengambil data dari hasil langkah pertama.
+
+Kalau 4 hal ini ada, maka fitur yang saya sarankan **tetap relevan** dan **tetap generik**, karena di level platform namanya bukan “Executive Compliance Summary”, tapi:
+
+> **Optional Advanced Insight Layer** (label & isi bisa dikustom tiap chatbot)
+
+---
+
+## Cara cepat Anda “cek” sekarang (tanpa saya pegang akses)
+
+Di dashboard Gustafta, coba lihat apakah ada menu/komponen seperti ini (nama bisa beda):
+
+* **Flow Builder / Node editor**
+* **Conditions / If-Else / Rules**
+* **Variables / Memory / Context / State**
+* **Buttons / Quick Replies / Actions**
+* **Subflow / Go to flow / Trigger another flow**
+* **Tools / Function / Prompt step** (untuk generate ringkasan lanjutan)
+
+Kalau Anda kirim **1–2 screenshot** (mis. panel flow builder + daftar node yang tersedia), saya bisa langsung bilang:
+
+* ✅ mendukung (dan bagaimana implementasinya)
+* ⚠️ mendukung dengan workaround (mis. pakai keyword trigger)
+* ❌ belum mendukung (dan fitur generik minimal apa yang perlu ditambah)
+
+---
+
+## Kalau ternyata builder belum punya tombol/conditional, masih bisa jalan?
+
+Masih. Versi paling kompatibel (paling generik) adalah:
+
+* Output basic selalu keluar
+* Di akhir ada kalimat: “Ketik **RINGKASAN LANJUTAN** untuk analisis mendalam”
+* Lalu keyword itu memicu subflow “Advanced Insight”
+
+Ini **tidak menambah fitur khusus**; cuma memanfaatkan pattern percakapan umum.
+
+---
+
+### Paling cepat biar saya bisa “cek” secara pasti:
+
+Tolong kirim salah satu ini:
+
+1. Screenshot **dashboard bagian Flow Builder** yang menampilkan jenis node/step yang tersedia, **atau**
+2. Copy-paste daftar fitur/menu di sidebar dashboard.
+
+Dari situ saya bisa pastikan apakah saran “Optional Advanced Insight Layer” feasible di Gustafta **tanpa mengubah platform jadi khusus tender**.

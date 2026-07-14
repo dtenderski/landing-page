@@ -1,0 +1,463 @@
+<aside>
+🇮🇩
+
+**Modul:** Modul nasional Chatbot SMAP yang mengadopsi **Panduan Cegah Korupsi (PanCEK) Ver.2 — KPK & AKBU** sebagai kerangka **Sistem Manajemen Anti Penyuapan (SMAP) Nasional** berdasarkan **UU No. 31/1999 jo. UU No. 20/2001** tentang Pemberantasan Tindak Pidana Korupsi (UU Tipikor) dan **Perma No. 13/2016** tentang Tata Cara Penanganan Tindak Pidana Korporasi.
+
+**Referensi utama:** PanCEK Ver.2 (KPK 2025) · slide deck "Implementasi Panduan Cegah Korupsi dalam rangka Mewujudkan Dunia Usaha yang Berintegritas" (KPK × AKBU).
+
+**Selaras dengan:** [Chatbot SMAP — Sistem Manajemen Anti Penyuapan (SNI ISO 37001:2016)](https://www.notion.so/Chatbot-SMAP-Sistem-Manajemen-Anti-Penyuapan-SNI-ISO-37001-2016-b42b289727714aa38643bca419682b94?pvs=21) · [](https://www.notion.so/ec4bf89def7e40c5bb92d9f9d1602e97?pvs=21) · [](https://www.notion.so/57ce809991524a329edba82689127992?pvs=21).
+
+</aside>
+
+## 1. Mengapa SMAP Nasional ≠ ISO 37001 Saja
+
+SMAP yang berlaku di Indonesia memiliki **dua pilar normatif** yang harus dipatuhi bersamaan:
+
+| **Pilar** | **Sumber Hukum / Standar** | **Sifat** | **Sanksi** |
+| --- | --- | --- | --- |
+| **Pilar 1 — Standar Internasional** | SNI ISO 37001:2016 | Voluntary (sertifikasi) | Reputasi, blacklist PBJ |
+| **Pilar 2 — Hukum Pidana Nasional** | UU 31/1999 jo. UU 20/2001 (Tipikor) + Perma 13/2016 + PanCEK KPK | **Mandatory** | Pidana korporasi: denda, perampasan aset, pembekuan, pembubaran |
+
+<aside>
+⚖️
+
+**Implikasi penting:** Korporasi dapat menjadi **subjek hukum tindak pidana korupsi**. Sertifikat ISO 37001 bukan imunitas hukum. PanCEK adalah **panduan resmi KPK** yang dapat dijadikan **alat pembelaan korporasi (corporate defense)** untuk membuktikan adanya "sistem pencegahan yang memadai" sesuai Pasal 4 ayat (2) Perma 13/2016.
+
+</aside>
+
+---
+
+## 2. Dasar Hukum SMAP Nasional
+
+### 2.1 Hierarki Regulasi
+
+```mermaid
+flowchart TB
+	UUD[UUD 1945 Pasal 28D]
+	UU1[UU 31/1999 Pemberantasan Tipikor]
+	UU2[UU 20/2001 Perubahan UU Tipikor]
+	UU3[UU 30/2002 KPK]
+	UU4[UU 8/2010 TPPU]
+	Perma[Perma 13/2016 Pidana Korporasi]
+	PP[PP 43/2018 Tata Cara Peran Serta Masyarakat & Penghargaan]
+	Perpres[Perpres 54/2018 Stranas PK]
+	PerKPK[Perkom KPK 7/2018 LHKPN; Perkom KPK 2/2019 Gratifikasi]
+	PanCEK[PanCEK Ver.2 — KPK & AKBU]
+
+	UUD --> UU1
+	UU1 --> UU2
+	UU2 --> UU3
+	UU3 --> UU4
+	UU2 --> Perma
+	UU2 --> PP
+	UU2 --> Perpres
+	UU3 --> PerKPK
+	Perma --> PanCEK
+	PerKPK --> PanCEK
+	Perpres --> PanCEK
+```
+
+### 2.2 Pasal-Pasal Kunci UU Tipikor untuk Korporasi
+
+| **Pasal** | **Perbuatan** | **Ancaman Pidana** |
+| --- | --- | --- |
+| Pasal 2 ayat (1) | Memperkaya diri/orang lain/korporasi yang merugikan keuangan negara secara melawan hukum | Penjara 4–20 thn + denda Rp 200 jt – Rp 1 M |
+| Pasal 3 | Penyalahgunaan kewenangan yang merugikan keuangan negara | Penjara 1–20 thn + denda Rp 50 jt – Rp 1 M |
+| Pasal 5 | Memberi/menjanjikan sesuatu kepada PNS/penyelenggara negara | Penjara 1–5 thn + denda Rp 50 jt – Rp 250 jt |
+| Pasal 6 | Memberi/menjanjikan sesuatu kepada hakim/advokat | Penjara 3–15 thn + denda Rp 150 jt – Rp 750 jt |
+| Pasal 11 | Pegawai negeri menerima hadiah berkaitan dengan jabatan | Penjara 1–5 thn + denda Rp 50 jt – Rp 250 jt |
+| Pasal 12 huruf a–i | Suap aktif/pasif, gratifikasi, pemerasan, KKN | Penjara 4–20 thn / seumur hidup + denda Rp 200 jt – Rp 1 M |
+| Pasal 12B | **Gratifikasi** ≥ Rp 10 jt → presumsi suap (terbalik beban pembuktian) | Penjara 4–20 thn / seumur hidup + denda Rp 200 jt – Rp 1 M |
+| Pasal 12C | Wajib lapor gratifikasi ke KPK ≤ 30 hari kerja | Pengecualian Pasal 12B jika lapor |
+| Pasal 13 | Memberi hadiah kepada PN dengan mengingat kekuasaan | Penjara maks 3 thn + denda maks Rp 150 jt |
+| Pasal 20 | **Tindak pidana korporasi:** pengurus dan/atau korporasi dipidana | Pidana pokok korporasi: **denda + 1/3** dari maks pidana orang |
+
+### 2.3 Perma 13/2016 — Pintu Masuk Pertanggungjawaban Korporasi
+
+<aside>
+📌
+
+**Pasal 4 ayat (2) Perma 13/2016 — Penilaian Kesalahan Korporasi:**
+
+Hakim menilai 3 hal: (a) **manfaat** yang diperoleh korporasi; (b) **pembiaran** oleh korporasi; (c) **upaya pencegahan, pengamanan, dan pengawasan** untuk mencegah dampak yang lebih besar dan memastikan kepatuhan terhadap ketentuan hukum.
+
+**Inilah dasar normatif mengapa SMAP/PanCEK menjadi alat pembelaan hukum** — bukti komitmen anti-korupsi dapat meringankan/membebaskan korporasi dari pertanggungjawaban pidana.
+
+</aside>
+
+### 2.4 Sanksi Tindak Pidana Korporasi (Pasal 7 Perma 13/2016)
+
+| **Jenis** | **Bentuk** |
+| --- | --- |
+| Pidana Pokok | Denda (s/d Rp ratusan miliar) + perampasan aset hasil kejahatan |
+| Pidana Tambahan | Pencabutan izin usaha, penutupan sebagian/seluruh perusahaan, pembekuan kegiatan, pembubaran korporasi, perampasan aset, ganti rugi, pengumuman putusan, pengambilalihan oleh negara |
+| Konsekuensi Tambahan | Blacklist LKPP (pengadaan pemerintah), pencabutan SBU, status "red flag" perbankan, kerugian reputasi & saham |
+
+---
+
+## 3. Kerangka PanCEK Ver.2 — 5 Pilar
+
+PanCEK Ver.2 (KPK & AKBU) menetapkan **5 Pilar Pencegahan Korupsi** yang harus diadopsi setiap pelaku usaha. Modul ini memetakan kelima pilar ke kapabilitas chatbot.
+
+```mermaid
+flowchart TB
+	Core([🛡️ DUNIA USAHA<br>BERINTEGRITAS])
+	P1[**Pilar 1**<br>Komitmen Manajemen Puncak<br>& Kepemimpinan]
+	P2[**Pilar 2**<br>Penilaian Risiko Korupsi]
+	P3[**Pilar 3**<br>Tata Kelola & Kebijakan]
+	P4[**Pilar 4**<br>Komunikasi, Pelatihan & Budaya]
+	P5[**Pilar 5**<br>Monitoring, Evaluasi & Continuous Improvement]
+
+	Core --> P1
+	Core --> P2
+	Core --> P3
+	Core --> P4
+	Core --> P5
+```
+
+### 3.1 Pemetaan Pilar PanCEK ↔ Klausul ISO 37001 ↔ Agent Chatbot
+
+| **Pilar PanCEK** | **Klausul ISO 37001** | **Agent Chatbot** | **Output Wajib** |
+| --- | --- | --- | --- |
+| **P1** Komitmen Manajemen | 5.1, 5.2, 5.3, 9.3 | SMAP-ORCHESTRATOR + AGENT-POLICY | Memo komitmen, Kebijakan, SK FKAP, Tinjauan Manajemen |
+| **P2** Penilaian Risiko | 4.5, 6.1, 8.2, 8.3 | AGENT-RISK + AGENT-DUEDIL | Bribery Risk Assessment, Risk Register, Due Diligence |
+| **P3** Tata Kelola & Kebijakan | 5.2, 7.5, 8.1–8.10 | AGENT-POLICY + AGENT-CASE | Kebijakan, SOP DD/Hadiah/COI/WB, Klausul kontrak, Investigasi |
+| **P4** Komunikasi, Pelatihan & Budaya | 7.2, 7.3, 7.4 | AGENT-EDU + AGENT-WHISTLE | Training, kampanye, kanal WB, awareness |
+| **P5** Monitoring & Evaluasi | 9.1, 9.2, 10.1 | AGENT-AUDIT + AGENT-GAP | Audit Internal, KPI Dashboard, CAPA, Self-Assessment PanCEK |
+
+---
+
+## 4. PanCEK Self-Assessment — 5 Pilar × Kriteria
+
+PanCEK Ver.2 menyediakan **PanCEK Self-Assessment Tool**: kuesioner skor 0–4 per kriteria di setiap pilar, menghasilkan **Indeks Integritas Korporasi (IIK)** 0–100.
+
+### 4.1 Skala Maturitas
+
+| **Skor** | **Level** | **Deskripsi** |
+| --- | --- | --- |
+| 0 | **Initial / Absent** | Belum ada kebijakan/praktik tertulis |
+| 1 | **Basic** | Ada kebijakan tertulis, belum diimplementasi konsisten |
+| 2 | **Defined** | Diimplementasi di sebagian unit, belum lintas-organisasi |
+| 3 | **Managed** | Diimplementasi konsisten lintas-organisasi, ada monitoring |
+| 4 | **Optimized** | Continuous improvement, terintegrasi dengan strategi bisnis |
+
+### 4.2 Indeks Integritas Korporasi (IIK)
+
+```
+IIK = (∑ skor kriteria / total kriteria × 4) × 100
+```
+
+| **IIK Range** | **Status** | **Rekomendasi KPK** |
+| --- | --- | --- |
+| 0–25 | 🔴 **Kritis** | Mulai dari Pilar 1; risiko hukum sangat tinggi |
+| 26–50 | 🟠 **Awal** | Fokus Pilar 2 & 3; perkuat fondasi tata kelola |
+| 51–70 | 🟡 **Berkembang** | Tingkatkan Pilar 4 & 5; siap menuju ISO 37001 |
+| 71–85 | 🟢 **Mapan** | Pertahankan; pertimbangkan sertifikasi |
+| 86–100 | 🌟 **Unggul** | Best practice; jadi role model AKBU |
+
+### 4.3 Kriteria Self-Assessment per Pilar
+
+#### Pilar 1 — Komitmen Manajemen Puncak (10 kriteria)
+
+| **Kode** | **Kriteria** | **Bukti** |
+| --- | --- | --- |
+| P1.1 | Tone-from-the-top: pernyataan Direksi anti-korupsi terdokumentasi & dipublikasikan | Memo, video, website |
+| P1.2 | Direksi & Komisaris menandatangani Pakta Integritas tahunan | Pakta Integritas signed |
+| P1.3 | Kebijakan Anti-Korupsi/SMAP signed Direksi & dikomunikasikan | Dokumen kebijakan |
+| P1.4 | Compliance Officer / FKAP ditunjuk dengan SK independen | SK FKAP |
+| P1.5 | Anggaran independen untuk fungsi anti-korupsi | RAB tahunan |
+| P1.6 | FKAP melaporkan langsung ke Direksi/Komisaris | Bagan organisasi, JD |
+| P1.7 | Direksi mengikuti pelatihan anti-korupsi minimal 1x/tahun | Sertifikat, daftar hadir |
+| P1.8 | Tinjauan Manajemen membahas isu anti-korupsi minimal 1x/tahun | Notulen MR |
+| P1.9 | KPI Direksi mencakup integrity & compliance | Performance contract |
+| P1.10 | Tindak konsisten terhadap pelanggaran (zero-tolerance) | Disciplinary log |
+
+#### Pilar 2 — Penilaian Risiko Korupsi (8 kriteria)
+
+| **Kode** | **Kriteria** |
+| --- | --- |
+| P2.1 | Bribery Risk Assessment lintas proses bisnis dilakukan minimal 1x/tahun |
+| P2.2 | Risk Register terdokumentasi dengan likelihood, impact, kontrol, residual |
+| P2.3 | Due Diligence terhadap mitra/vendor dilakukan dengan tier risiko |
+| P2.4 | Due Diligence terhadap personel kunci & rekruitmen sensitif |
+| P2.5 | Risk Treatment Plan dengan PIC, due date, KPI |
+| P2.6 | Risk monitoring berkelanjutan (red flag indicators) |
+| P2.7 | Skenario "high-risk transaction" dipantau khusus (M&A, agen, fasilitasi) |
+| P2.8 | Risk dikomunikasikan ke Direksi & process owner |
+
+#### Pilar 3 — Tata Kelola & Kebijakan (12 kriteria)
+
+| **Kode** | **Kriteria** |
+| --- | --- |
+| P3.1 | Code of Conduct (CoC) signed seluruh personel |
+| P3.2 | SOP Hadiah & Hospitality dengan threshold material |
+| P3.3 | Register Hadiah aktif; pelaporan ke KPK ≤ 30 hari (Pasal 12C UU Tipikor) |
+| P3.4 | SOP Konflik Kepentingan + form disclosure tahunan |
+| P3.5 | SOP Donasi/CSR/Sponsorship dengan approval matrix |
+| P3.6 | SOP Fasilitasi/Facilitation Payment (zero tolerance) |
+| P3.7 | SOP Procurement dengan kontrol anti-suap |
+| P3.8 | Klausul Anti-Suap di template kontrak (vendor, KSO, agen, MoU) |
+| P3.9 | Komitmen Anti-Suap Mitra signed seluruh vendor utama |
+| P3.10 | SOP Investigasi Internal dengan due process |
+| P3.11 | SOP Pengendalian Dokumen & Rekaman |
+| P3.12 | LHKPN bagi pejabat yang setara wajib lapor (BUMN/BUMD) |
+
+#### Pilar 4 — Komunikasi, Pelatihan & Budaya (8 kriteria)
+
+| **Kode** | **Kriteria** |
+| --- | --- |
+| P4.1 | Training awareness untuk seluruh personel (≥ 95% coverage tahunan) |
+| P4.2 | Training mendalam untuk role berisiko tinggi (Pengadaan, Marketing, Legal) |
+| P4.3 | Onboarding integritas untuk personel baru |
+| P4.4 | Komunikasi anti-korupsi reguler (newsletter, town hall, poster) |
+| P4.5 | Kanal Whistleblowing ≥ 3 kanal (web, email, hotline) dengan anonim |
+| P4.6 | Kebijakan anti-retaliasi tegas dan dipublikasikan |
+| P4.7 | Budaya integritas diukur via survey tahunan (≥ 80% awareness score) |
+| P4.8 | Recognition program untuk perilaku integritas (positive reinforcement) |
+
+#### Pilar 5 — Monitoring, Evaluasi & Continuous Improvement (7 kriteria)
+
+| **Kode** | **Kriteria** |
+| --- | --- |
+| P5.1 | KPI integritas di-monitor bulanan (incident rate, training, DD coverage) |
+| P5.2 | Audit Internal SMAP ≥ 1x/tahun oleh auditor independen |
+| P5.3 | CAPA Log dengan closure rate ≥ 90% on-time |
+| P5.4 | Tinjauan Manajemen perdana & berkala dengan agenda PanCEK |
+| P5.5 | Self-Assessment PanCEK minimal tahunan; trend di-track |
+| P5.6 | Eksternal review/sertifikasi (ISO 37001, akreditasi PanCEK) |
+| P5.7 | Pelaporan transparan (Sustainability Report, Integrity Report) |
+
+**Total kriteria: 45 (P1=10, P2=8, P3=12, P4=8, P5=7)**
+
+---
+
+## 5. Modul Chatbot SMAP Nasional
+
+Modul ini menambahkan kapabilitas khusus PanCEK ke dalam [System Prompt OpenClaw — Chatbot SMAP (Multi-Agent)](https://www.notion.so/System-Prompt-OpenClaw-Chatbot-SMAP-Multi-Agent-64521b160b8d43b283e4091b1ad5dff6?pvs=21):
+
+### 5.1 Agent Tambahan: AGENT-PANCEK
+
+| **Atribut** | **Nilai** |
+| --- | --- |
+| Agent ID | AGENT-PANCEK |
+| Persona | Konsultan KPK/AKBU yang memandu BUJK menjalankan PanCEK Ver.2 sebagai pertahanan hukum & budaya integritas |
+| Fungsi Utama | (1) Self-Assessment PanCEK 5 Pilar (45 kriteria) → IIK; (2) Pemetaan PanCEK ↔ ISO 37001 ↔ UU Tipikor; (3) Roadmap perbaikan per pilar; (4) Generate "Corporate Defense Dossier" untuk Pasal 4(2) Perma 13/2016 |
+| Kategori | Compliance · Self-Assessment · Legal Defense |
+| Klausul ISO 37001 Terkait | 4.1, 5.1, 5.2, 6.1, 7.2, 8.2, 9.1, 9.2, 10.1 |
+| Intent Tag | self_assessment, pancek_score, pilar_evaluation, corporate_defense, uu_tipikor, perma_13, gratifikasi_report, lhkpn |
+
+### 5.2 Sample Dialog AGENT-PANCEK
+
+```
+👤 User    : Saya mau cek seberapa siap perusahaan saya hadapi UU Tipikor.
+🤖 Bot     : (AGENT-PANCEK aktif)
+             Saya akan jalankan PanCEK Self-Assessment Ver.2 — 45 kriteria 
+             di 5 Pilar. Estimasi 25–35 menit. Anda bisa pause kapan saja.
+             
+             Pendekatan:
+             [Quick Scan — 15 kriteria kunci, 10 menit]
+             [Full Assessment — 45 kriteria, hasil IIK lengkap]
+             [Resume — lanjutkan asesmen sebelumnya]
+
+👤 User    : Quick Scan
+🤖 Bot     : 📋 Pilar 1 — Komitmen Manajemen Puncak
+             P1.1: Apakah Direksi telah menerbitkan pernyataan tertulis 
+                  anti-korupsi yang dipublikasikan internal & eksternal?
+             [Belum (0)] [Tertulis tapi tidak publish (1)] 
+             [Publish internal (2)] [Publish + reguler (3)] 
+             [Embedded di strategi (4)]
+
+... [berlanjut 15 kriteria] ...
+
+🤖 Bot     : ✅ Quick Scan selesai.
+             
+             📊 Indeks Integritas Korporasi (IIK): 47/100 — 🟠 AWAL
+             
+             Skor per Pilar:
+             • P1 Komitmen        : 60/100 🟡
+             • P2 Penilaian Risiko: 25/100 🔴 ← prioritas
+             • P3 Tata Kelola     : 50/100 🟠
+             • P4 Komunikasi      : 55/100 🟡
+             • P5 Monitoring      : 35/100 🔴 ← prioritas
+             
+             Top-3 Gap Kritis:
+             1. P2.1 Bribery Risk Assessment formal belum dilakukan
+             2. P5.2 Audit Internal SMAP belum ada
+             3. P3.3 Register Hadiah belum aktif → risiko Pasal 12B UU Tipikor
+             
+             [Lihat Roadmap Perbaikan] [Generate Corporate Defense Dossier] 
+             [Bandingkan ISO 37001 Gap] [Full Assessment]
+```
+
+---
+
+## 6. Corporate Defense Dossier (CDD)
+
+Kapabilitas unik modul SMAP Nasional: men-generate **Corporate Defense Dossier** yang menjadi alat pembelaan korporasi sesuai **Pasal 4 ayat (2) Perma 13/2016**.
+
+### 6.1 Struktur Dossier
+
+| **Bagian** | **Isi** | **Sumber Data** |
+| --- | --- | --- |
+| I. Profil Korporasi | Identitas, struktur, lingkup, sertifikasi | Profil BUJK |
+| II. Komitmen Pencegahan | Kebijakan, SK FKAP, Tone-from-the-top | AGENT-POLICY outputs |
+| III. Sistem Pencegahan | SOP DD, Hadiah, COI, WB, Investigasi | Generator Document outputs |
+| IV. Sistem Pengamanan | Kontrol internal, segregasi tugas, dual control | Risk Register controls |
+| V. Sistem Pengawasan | Audit Internal, Tinjauan Manajemen, Whistleblowing | AGENT-AUDIT + AGENT-WHISTLE |
+| VI. Bukti Implementasi | Training records, register hadiah, DD reports, CAPA log | Database records |
+| VII. Bukti Tindakan Tegas | Disciplinary actions, terminasi mitra, eskalasi ke APH | Case Management |
+| VIII. PanCEK Self-Assessment Trend | IIK 3 tahun terakhir, perbaikan berkelanjutan | AGENT-PANCEK history |
+| IX. Sertifikasi & Pengakuan | ISO 37001, AKBU membership, awards | External documents |
+| X. Statement of Defense | Argumentasi hukum berbasis Pasal 4(2) Perma 13/2016 | AI-generated + Legal review |
+
+### 6.2 Contoh Argumentasi Hukum (Section X)
+
+<aside>
+⚖️
+
+**Statement of Corporate Defense:**
+
+Bahwa Korporasi `[nama PT]` telah melaksanakan **upaya pencegahan, pengamanan, dan pengawasan** secara sistematis dan terdokumentasi sebagaimana dimaksud dalam **Pasal 4 ayat (2) huruf c Perma No. 13 Tahun 2016**, dibuktikan dengan:
+
+(a) Sistem Manajemen Anti-Penyuapan tersertifikasi SNI ISO 37001:2016;
+
+(b) Implementasi PanCEK Ver.2 dengan IIK terakhir `[skor]`/100;
+
+(c) `[N]` orang personel telah mengikuti pelatihan anti-korupsi terdokumentasi;
+
+(d) `[N]` mitra menandatangani Komitmen Anti-Suap;
+
+(e) Kanal whistleblowing aktif dengan `[N]` laporan ditangani secara independen;
+
+(f) `[N]` tindakan disipliner internal dijatuhkan terhadap pelanggaran etika.
+
+Dengan demikian, Korporasi memohon kepada Yang Mulia Majelis Hakim untuk **mempertimbangkan upaya pencegahan tersebut** sebagai faktor yang meringankan/membebaskan pertanggungjawaban pidana korporasi.
+
+</aside>
+
+---
+
+## 7. Pelaporan Wajib ke KPK
+
+### 7.1 Pelaporan Gratifikasi (Pasal 12C UU Tipikor)
+
+| **Aspek** | **Ketentuan** |
+| --- | --- |
+| Wajib lapor | PNS / Penyelenggara Negara yang menerima gratifikasi |
+| Threshold presumsi suap | ≥ Rp 10 juta (Pasal 12B) — beban pembuktian terbalik |
+| Tenggat lapor | ≤ 30 hari kerja sejak diterima |
+| Saluran | GOL KPK ([gol.kpk.go.id](http://gol.kpk.go.id)), aplikasi GOL Mobile, surat resmi |
+| Konsekuensi | Lapor → tidak berlaku Pasal 12B; tidak lapor → presumsi suap |
+
+### 7.2 LHKPN (Laporan Harta Kekayaan Penyelenggara Negara)
+
+Wajib bagi: pejabat negara, BUMN/BUMD level tertentu, calon pejabat. **BUJK swasta tidak wajib LHKPN**, namun korporasi disarankan menyusun **"Internal Wealth Disclosure"** untuk Direksi/Komisaris sebagai praktik terbaik.
+
+### 7.3 Pelaporan TPPU (UU 8/2010)
+
+Korporasi wajib menjalankan **CDD/EDD** terhadap mitra dengan transaksi keuangan signifikan. Output AGENT-DUEDIL terintegrasi dengan kewajiban PPATK.
+
+---
+
+## 8. Sinergi PanCEK + ISO 37001
+
+```mermaid
+flowchart LR
+	Start([BUJK mulai SMAP]) --> Choice{Pilih jalur}
+	Choice -->|Cepat & legal-focused| PanCEK[PanCEK Ver.2<br>Self-Assessment]
+	Choice -->|Sertifikasi internasional| ISO[ISO 37001<br>Implementation]
+	Choice -->|Best practice| Both[Kombinasi PanCEK + ISO]
+	PanCEK --> CDD[Corporate Defense Dossier]
+	ISO --> Cert[Sertifikat ISO 37001]
+	Both --> CDD
+	Both --> Cert
+	CDD --> Defense[Pertahanan hukum<br>Perma 13/2016]
+	Cert --> Recognition[Pengakuan internasional<br>+ Tender PBJ]
+	Defense --> Outcome([🛡️ Korporasi<br>Berintegritas])
+	Recognition --> Outcome
+```
+
+### 8.1 Mengapa Kombinasi Lebih Kuat
+
+| **Kebutuhan** | **PanCEK Saja** | **ISO 37001 Saja** | **Kombinasi** |
+| --- | --- | --- | --- |
+| Pertahanan Pidana | ✅ Eksplisit | 🟡 Implisit | ✅✅ Optimal |
+| Pengakuan Internasional | 🟡 Lokal | ✅ Global | ✅✅ Lengkap |
+| Tender PBJ Pemerintah | 🟡 Insentif lokal | ✅ Persyaratan | ✅✅ Maksimal |
+| Tender Internasional | ❌ Tidak diakui | ✅ Diakui | ✅ |
+| Biaya & Effort | ✅ Rendah | 🔴 Tinggi | 🟡 Sedang |
+| Audit & Surveilans | 🟡 Self-assess | ✅ Eksternal | ✅✅ |
+
+<aside>
+💡
+
+**Rekomendasi:** Untuk BUJK Madya/Utama dengan portofolio tender PBJ aktif, kombinasi **PanCEK Ver.2 + ISO 37001:2016** adalah strategi paling tepat. PanCEK menjadi **tameng hukum nasional**, ISO 37001 menjadi **paspor pengakuan global**. Roadmap di [Roadmap Implementasi SMAP — 6 Bulan, RACI, & KPI Dashboard](https://www.notion.so/Roadmap-Implementasi-SMAP-6-Bulan-RACI-KPI-Dashboard-0f01e56b92de4ef6a63bb5af1f55f399?pvs=21) sudah dirancang untuk skenario kombinasi ini.
+
+</aside>
+
+---
+
+## 9. Implementasi: Quick Wins 30/60/90 Hari
+
+### 9.1 Fase 30 Hari — Komitmen & Self-Assessment
+
+- ✅ Direksi tandatangan **Pakta Integritas**
+- ✅ Jalankan **PanCEK Quick Scan** (15 kriteria) → dapatkan IIK awal
+- ✅ Tunjuk **PIC PanCEK** (sementara, sebelum FKAP formal)
+- ✅ Daftar **AKBU** (Antikorupsi Badan Usaha) sebagai network support
+- ✅ Aktifkan **email khusus** [integrity@perusahaan.id](mailto:integrity@perusahaan.id) sebagai kanal awal
+
+### 9.2 Fase 60 Hari — Tata Kelola Dasar
+
+- ✅ Generate & sign **Kebijakan Anti-Korupsi** (via Generator Document)
+- ✅ Terbitkan **SK FKAP** + JD
+- ✅ Aktifkan **Register Hadiah** (manual atau digital)
+- ✅ Distribusi **Code of Conduct** ke seluruh personel + tanda tangan
+- ✅ Workshop **Bribery Risk Assessment** ke proses bisnis utama
+
+### 9.3 Fase 90 Hari — Operasional & Komunikasi
+
+- ✅ Launch **Kanal Whistleblowing** ≥ 3 channel
+- ✅ Training **awareness** seluruh personel (online module + workshop)
+- ✅ Klausul anti-suap **disisipkan** di template kontrak
+- ✅ **Komitmen Mitra** roll-out ke vendor utama
+- ✅ **PanCEK Full Assessment** → IIK final + roadmap 12 bulan
+
+---
+
+## 10. Daftar Periksa Kepatuhan UU Tipikor untuk BUJK
+
+| **Aspek UU Tipikor** | **Pasal** | **Tindakan BUJK** | **Status** |
+| --- | --- | --- | --- |
+| Pencegahan suap aktif ke PNS | Pasal 5 | SOP Hadiah; Komitmen Mitra; training Marketing & Tender | ☐ |
+| Pencegahan suap ke hakim/MK | Pasal 6 | SOP Litigasi; zero tolerance fasilitasi peradilan | ☐ |
+| Pelaporan gratifikasi | Pasal 12B & 12C | Register Hadiah; SOP pelaporan ≤ 30 hari ke KPK | ☐ |
+| Pencegahan KKN (kolusi/nepotisme) | Pasal 12 huruf e–f | SOP COI + form disclosure; SOP Pengadaan | ☐ |
+| Pencegahan pemerasan/penipuan | Pasal 12 huruf e | SOP Pengaduan; kanal Whistleblowing | ☐ |
+| Pertanggungjawaban korporasi | Pasal 20 + Perma 13/2016 | Corporate Defense Dossier + ISO 37001 + PanCEK | ☐ |
+| TPPU | UU 8/2010 | CDD/EDD vendor; pelaporan ke PPATK jika triggered | ☐ |
+| Cooperate dengan APH | Pasal 11 ayat 1 KUHAP | SOP Penanganan Permintaan APH; Legal Counsel | ☐ |
+
+---
+
+## 11. Resource & Referensi Resmi
+
+- **PanCEK Ver.2** — KPK & AKBU (file referensi terlampir, 70 halaman)
+- **GOL KPK** — [gol.kpk.go.id](http://gol.kpk.go.id) (pelaporan gratifikasi online)
+- **AKBU** — Antikorupsi Badan Usaha (komunitas pelaku usaha berintegritas)
+- [**JAGA.id**](http://JAGA.id) — KPK transparency platform
+- **SiPP** — Sistem Pelaporan Pelanggaran KPK
+- **LHKPN** — [elhkpn.kpk.go.id](http://elhkpn.kpk.go.id) (untuk Penyelenggara Negara)
+- **Stranas PK** — Strategi Nasional Pencegahan Korupsi (Perpres 54/2018)
+- **Buku PUB KPK 2025** — Implementasi Panduan Cegah Korupsi (slide deck terlampir)
+
+---
+
+<aside>
+🇮🇩
+
+**Esensi SMAP Nasional:** SMAP bukan sekedar sertifikat di dinding atau dokumen di brankas. Ia adalah **sistem hidup** yang menjadikan integritas sebagai **DNA korporasi** — sebagaimana visi **PanCEK & AKBU**: "**Mewujudkan Dunia Usaha Indonesia yang Berintegritas**". Modul ini menyatukan kekuatan PanCEK Ver.2 (perspektif KPK) dengan rigor SNI ISO 37001:2016 (standar internasional) menjadi satu kerangka kerja yang terhubung langsung ke chatbot, sehingga setiap personel BUJK dapat **mengakses, memahami, dan mempraktekkan** anti-korupsi setiap hari.
+
+</aside>
+
+[Generator Jawaban PanCEK KPK — Simulasi Pengisian Kuesioner [JAGA.id](http://JAGA.id) + Daftar Dokumen Lampiran](https://www.notion.so/Generator-Jawaban-PanCEK-KPK-Simulasi-Pengisian-Kuesioner-JAGA-id-Daftar-Dokumen-Lampiran-b361108b2818420cbdfcd849fb9984c3?pvs=21)

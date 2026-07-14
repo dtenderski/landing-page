@@ -1,0 +1,187 @@
+<aside>
+🔗
+
+**Bridge Spec TENDERA → KONSTRA** — mendefinisikan kapan & bagaimana user di-handoff dari **TENDERA** (siklus pre-tender, bid prep, pemenang) ke **KONSTRA** (siklus eksekusi PMBOK setelah SPK/kontrak ditandatangani). Tujuan: zero gap & state continuity.
+
+</aside>
+
+## 🗺️ Peta Siklus Hidup Proyek BUJK
+
+```mermaid
+flowchart LR
+	A["Scouting Tender"] --> B["Bid Preparation"]
+	B --> C["Submit Penawaran"]
+	C --> D["Evaluasi & Pemenang"]
+	D --> E{"Hasil?"}
+	E -->|"Menang"| F["SPK / Kontrak"]
+	E -->|"Kalah"| G["Sanggah / Post-Mortem"]
+	G --> A
+	F --> H["Eksekusi Proyek"]
+	H --> I["Serah Terima"]
+	I --> J["Closing & Lesson Learned"]
+	subgraph TENDERA ["TENDERA (Pre-Tender to SPK)"]
+		A
+		B
+		C
+		D
+		E
+		G
+	end
+	subgraph KONSTRA ["KONSTRA (SPK to Closing)"]
+		F
+		H
+		I
+		J
+	end
+```
+
+## 🔄 Handoff Triggers
+
+| Trigger Event | From | To | Auto/Manual | Payload |
+| --- | --- | --- | --- | --- |
+| Pengumuman Pemenang = BUJK | TENDERA-ORCH | KONSTRA-ORCH | Auto-prompt user | tender_id, kontrak_value, scope, schedule, RKK draft |
+| SPK ditandatangani | TENDERA | KONSTRA | Manual confirm | full bid package + SPK PDF |
+| Addendum kontrak | KONSTRA | TENDERA (AGENT-KONTRAK) | Auto | klausul yang berubah |
+| Klaim EOT / variation order | KONSTRA | TENDERA (KONTRAK + RISKSCAN) | Auto | bukti + dasar klaim |
+| Project closeout | KONSTRA | TENDERA (KB-CASE update) | Auto | hasil + lesson learned |
+
+---
+
+## 📦 Handoff Payload Schema
+
+```json
+{
+	"handoff_id": "HND-2026-001",
+	"from": "TENDERA",
+	"to": "KONSTRA",
+	"event": "contract_signed",
+	"timestamp": "2026-06-01T09:00+07:00",
+	"bujk": {
+		"id": "BUJK-001",
+		"nama": "PT Karya Bersama"
+	},
+	"tender": {
+		"id": "TND-2026-K-001",
+		"paket": "Pembangunan Gedung Kantor 4 lt",
+		"pemilik": "Pemkot Depok",
+		"HPS": 24000000000,
+		"nilai_kontrak": 21360000000
+	},
+	"kontrak": {
+		"no_SPK": "600/SPK/PUPR/V/2026",
+		"tanggal": "2026-06-01",
+		"durasi_pelaksanaan_hari": 240,
+		"jenis": "FIDIC Red equivalent (Lump Sum)",
+		"masa_pemeliharaan_hari": 180
+	},
+	"bundle": {
+		"metode_pelaksanaan": "<path>",
+		"kurva_s": "<path>",
+		"RKK": "<path>",
+		"struktur_organisasi": "<path>",
+		"BoQ": "<path>",
+		"SSKK": "<path>"
+	},
+	"risk_flags": [
+		"Klausul 17.3 force majeure ambigu - KONTRAK monitor",
+		"Cash flow termin 25% - FINTAX monitor"
+	],
+	"konstra_init_state": {
+		"agen_aktif": ["AGENT-PROXIMA", "AGENT-KONTRAK", "AGENT-FINTAX", "AGENT-HSE", "AGENT-QUALITY"],
+		"sprint_first": "Mobilisasi 30 hari"
+	}
+}
+```
+
+---
+
+## 🎬 Skenario Handoff Konkret
+
+### Skenario A — Pemenang Diumumkan
+
+<details><summary>**TENDERA-ORCHESTRATOR (last turn):**</summary>
+
+<callout icon="🏆">**Selamat, PT Karya Bersama!** Anda **pemenang TND-2026-K-001** (Gedung Kantor 4 lt, Rp 21,36 M).
+
+**Next steps:**
+
+1. Tandatangan SPK target **1 Jun 2026**
+2. Mobilisasi peralatan & personil — 14 hari sebelum SPK
+3. **Handoff ke KONSTRA-ORCHESTRATOR** untuk eksekusi
+
+Mau saya inisiasi proyek di KONSTRA Hub dengan bundle dokumen Anda?</callout>
+
+[Tombol: 🏗️ Mulai Eksekusi di KONSTRA] [Tombol: 📥 Download Bundle Lengkap]
+
+</details>
+
+<details><summary>**KONSTRA-ORCHESTRATOR receives payload:**</summary>
+
+<callout icon="🏗️">**KONSTRA aktif untuk TND-2026-K-001.**
+
+State diwarisi dari TENDERA: bundle dokumen, risk flags, jadwal 240 hari. Saya jalankan 5 agen inisiasi paralel: **PROXIMA** + **KONTRAK** + **FINTAX** + **HSE** + **QUALITY**.
+
+**Sprint 1 Mobilisasi (30 hari pertama):**
+
+- ☐ SPK ditandatangani — 1 Jun 2026
+- ☐ Surat Penunjukan Personil Inti — 3 Jun
+- ☐ Pre-Construction Meeting — 5 Jun
+- ☐ Mobilisasi peralatan tahap 1 — 10 Jun
+- ☐ SPP termin DP (jika ada) — 15 Jun</callout>
+
+Referensi: [KONSTRA Hub — Manajemen Konstruksi (Series Gustafta)](https://www.notion.so/KONSTRA-Hub-Manajemen-Konstruksi-Series-Gustafta-474a809f580e4250b1474c0ef3511393?pvs=21)
+
+</details>
+
+### Skenario B — Klaim EOT di Tengah Proyek (KONSTRA → TENDERA)
+
+<details><summary>**KONSTRA PM melaporkan:**</summary>
+
+"Cuaca ekstrem 12 hari menyebabkan keterlambatan pengecoran. Mau ajukan klaim EOT 14 hari."
+
+</details>
+
+<details><summary>**KONSTRA-ORCH → TENDERA AGENT-KONTRAK (callAgentInternal):**</summary>
+
+**Request:** evaluasi dasar klaim EOT 14 hari, force majeure cuaca ekstrem, FIDIC Red-equivalent Lump Sum.
+
+**Response AGENT-KONTRAK (TENDERA):**
+
+- ✓ SSKK 17.3 (force majeure) **mengizinkan** EOT cuaca ekstrem terdokumentasi BMKG
+- ✓ Notifikasi max **28 hari** setelah event
+- ✓ Dukungan: log harian + data BMKG + foto site
+- ⚠️ EOT 14 hari ≠ tambahan biaya (kecuali additional cost terbukti)
+
+**Draft Surat Klaim EOT** terlampir. Ajukan ke konsultan pengawas → PPK.
+
+</details>
+
+---
+
+## 🧩 State Continuity Rules
+
+1. **BUJK Profile** — single source of truth. Update bidirectional.
+2. **Project History** — selesai di KONSTRA → push lesson ke **KB-CASE** TENDERA → enrich WINPROB tender berikutnya.
+3. **Personil** — saat ditugaskan ke proyek aktif KONSTRA, ELIGIBILITY TENDERA tahu personil "locked" → tidak boleh diklaim untuk tender baru jadwal overlap.
+4. **SBU/SKK Expiry** — kalender expiry di-share.
+5. **Cash Flow** — FINTAX push proyeksi → SCOUT filter tender yang nilai feasible.
+
+## 🔗 Cross-Reference Map
+
+| Agen TENDERA | Pair KONSTRA | Konteks |
+| --- | --- | --- |
+| AGENT-KONTRAK | [Sprint 3 — Prompt Patch AGENT-KONTRAK (Ready to Deploy)](https://www.notion.so/Sprint-3-Prompt-Patch-AGENT-KONTRAK-Ready-to-Deploy-b97e9a5288b54ef9a20863514452c68c?pvs=21) | Same domain, beda fase. TENDERA fokus klausul, KONSTRA fokus eksekusi & klaim |
+| AGENT-HPS | [Sprint 3 — Prompt Patch AGENT-FINTAX (Ready to Deploy)](https://www.notion.so/Sprint-3-Prompt-Patch-AGENT-FINTAX-Ready-to-Deploy-9e6f36d415a340e1b12c5e5b851cdf03?pvs=21) AGENT-FINTAX | TENDERA susun bid, KONSTRA jalankan cash flow plan |
+| AGENT-TEKNIS | [Sprint 3 — Prompt Patch AGENT-PROXIMA (Ready to Deploy)](https://www.notion.so/Sprint-3-Prompt-Patch-AGENT-PROXIMA-Ready-to-Deploy-ec484bb59f534d90b5e75a194a1d890a?pvs=21) AGENT-PROXIMA | Metode pelaksanaan → master schedule |
+| AGENT-RISKSCAN | PROXIMA + risk module | Risk register awal → live monitoring |
+| AGENT-INTEGRITY | (mirror) | SMAP end-to-end |
+| AGENT-WINPROB | (n/a) | Win-only domain |
+| AGENT-SANGGAH | (n/a) | Post-bid only |
+
+## ✅ Definition of Done
+
+- [ ]  Handoff payload schema diimplementasi di kedua orchestrator
+- [ ]  Tombol "Mulai Eksekusi di KONSTRA" muncul setelah verdict pemenang
+- [ ]  State sync BUJK profile bidirectional
+- [ ]  KB-CASE auto-enrich dari closing project KONSTRA
+- [ ]  Cross-reference link bidirectional [TENDERA Hub — AI Tender BUJK (Series Gustafta · OpenClaw + MultiClaw)](https://www.notion.so/TENDERA-Hub-AI-Tender-BUJK-Series-Gustafta-OpenClaw-MultiClaw-210dd107ef2841f3ae895b9921b66412?pvs=21) ↔ [KONSTRA Hub — Manajemen Konstruksi (Series Gustafta)](https://www.notion.so/KONSTRA-Hub-Manajemen-Konstruksi-Series-Gustafta-474a809f580e4250b1474c0ef3511393?pvs=21)

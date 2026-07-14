@@ -1,0 +1,199 @@
+Baik — kita fokus ke **PBJP LKPP Level 1** dan targetnya **keduanya: bank soal + portofolio bukti**. Di bawah ini saya susun paket konfigurasi yang siap Anda jadikan *Knowledge Base* di Gustafta (layering + outline) dan saya sertakan **contoh dokumen siap-tempel** yang spesifik PBJP.
+
+---
+
+## A) Struktur Notion yang paling rapi untuk di-*Import* ke Gustafta (per chatbot)
+
+Buat 1 folder utama:
+
+- `KB — PBJP LKPP L1 — Pelatih & Portofolio`
+
+Di dalamnya buat 3 subfolder (atau 3 halaman induk):
+
+- `01 — Foundational`
+- `02 — Operational`
+- `03 — Case Memory`
+
+**Aturan import ke Gustafta**
+
+- 1 chatbot PBJP = import **folder ini saja**.
+- Di Gustafta, layer:
+    - Foundational → untuk definisi, prinsip, kerangka aturan
+    - Operational → SOP belajar, SOP simulasi, template jawaban, rubrik, template portofolio
+    - Case Memory → contoh kasus, contoh jawaban, kesalahan umum, contoh portofolio
+
+---
+
+## B) Outline 45 dokumen (PBJP LKPP L1) — bank soal + portofolio
+
+Saya tulis sebagai “Nama dokumen — Layer”.
+
+### 01 — Foundational (14)
+
+1. Ruang lingkup PBJP Level 1: tujuan, kompetensi, dan batasan peran — Foundational  
+2. Istilah inti PBJP: kebutuhan, spesifikasi, HPS, penyedia, kontrak, adendum, sanggah, dsb. — Foundational  
+3. Prinsip pengadaan: efisien, efektif, transparan, bersaing, adil, akuntabel — Foundational  
+4. Etika pengadaan dan konflik kepentingan: contoh pelanggaran & konsekuensi — Foundational  
+5. Perencanaan pengadaan: output yang harus dihasilkan — Foundational  
+6. Pemilihan penyedia: gambaran alur end-to-end — Foundational  
+7. Kontrak: jenis umum, struktur dokumen kontrak, risiko interpretasi — Foundational  
+8. Pelaksanaan kontrak: pengendalian mutu, waktu, biaya, perubahan — Foundational  
+9. Serah terima & pembayaran: dokumen kunci dan titik kontrol — Foundational  
+10. Pengadaan langsung vs metode lain: kapan dipakai (aturan praktis) — Foundational  
+11. Dokumen pengadaan: checklist dokumen minimum per tahap — Foundational  
+12. Risiko umum PBJP: fraud triangle versi praktis + mitigasi — Foundational  
+13. Pola soal PBJP: definisi, prosedural, analitis, studi kasus — Foundational  
+14. Kerangka jawaban essay PBJP (format 5 paragraf ringkas) — Foundational  
+
+### 02 — Operational (23)
+
+1. SOP Persiapan Uji PBJP L1 (H-14, H-7, H-1) — Operational  
+2. SOP Diagnostik Awal (tryout 30 soal) + cara membaca hasil — Operational  
+3. SOP Latihan Harian 45 menit (konsep → soal → review) — Operational  
+4. SOP Simulasi 90 menit (aturan pengerjaan + manajemen waktu) — Operational  
+5. Template “Error Log” (mengelompokkan salah konsep vs salah teliti vs salah prosedur) — Operational  
+6. Template “Cheat Sheet PBJP” (1 halaman) — Operational  
+7. Rubrik penilaian essay PBJP (skor 0–4 per kriteria) — Operational  
+8. Rubrik studi kasus PBJP (identifikasi masalah → aturan → langkah → output dokumen) — Operational  
+9. Template jawaban studi kasus: “Situasi–Masalah–Aturan–Langkah–Dokumen–Risiko” — Operational  
+10. SOP menyusun HPS secara naratif (tanpa angka detail): sumber data & kewajaran — Operational  
+11. SOP menyusun spesifikasi/kerangka acuan: jelas, terukur, tidak diskriminatif — Operational  
+12. Checklist dokumen perencanaan pengadaan (siap audit) — Operational  
+13. Checklist dokumen pemilihan penyedia (siap audit) — Operational  
+14. Checklist dokumen kontrak (siap audit) — Operational  
+15. Checklist pelaksanaan & perubahan kontrak (siap audit) — Operational  
+16. SOP menulis BA evaluasi (template langkah dan bahasa yang aman) — Operational  
+17. SOP menanggapi sanggah (template struktur jawaban) — Operational  
+18. SOP final review H-1: area rawan & latihan cepat — Operational  
+
+**Bank soal (modular, tetap Operational agar bisa jadi latihan)**
+
+1. Bank Soal Modul A: Prinsip & Etika (50 + pembahasan) — Operational  
+2. Bank Soal Modul B: Perencanaan Pengadaan (50 + pembahasan) — Operational  
+3. Bank Soal Modul C: Pemilihan Penyedia (50 + pembahasan) — Operational  
+4. Bank Soal Modul D: Kontrak & Pelaksanaan (50 + pembahasan) — Operational  
+5. Paket Tryout 1 (30 soal campuran + pembahasan) — Operational  
+
+**Portofolio**
+
+1. SOP Portofolio PBJP L1: kumpulkan → label → mapping → narasi — Operational  
+2. Template Mapping Bukti → Kompetensi PBJP (tabel) — Operational  
+3. Template Narasi Bukti (STAR versi pengadaan) — Operational  
+4. Checklist kelengkapan portofolio (minimum viable portfolio) — Operational  
+5. SOP simulasi wawancara asesor (Q&A + cara menunjukkan bukti) — Operational  
+6. Template “Ringkasan Portofolio 1 halaman” — Operational  
+7. SOP perbaikan portofolio (temuan: kurang relevan/kurang terkini/kurang autentik) — Operational  
+8. SOP penyimpanan & versi dokumen (penamaan file, kontrol perubahan) — Operational  
+
+### 03 — Case Memory (8)
+
+1. Studi kasus: spesifikasi diskriminatif → perbaikan — Case Memory  
+2. Studi kasus: HPS tidak wajar → langkah koreksi — Case Memory  
+3. Studi kasus: evaluasi penyedia bermasalah → bagaimana menulis BA yang benar — Case Memory  
+4. Studi kasus: perubahan kontrak → dokumen & risiko — Case Memory  
+5. Contoh jawaban essay “baik” + anotasi — Case Memory  
+6. Contoh jawaban essay “kurang” + perbaikan — Case Memory  
+7. 15 kesalahan umum peserta PBJP L1 + tindakan korektif — Case Memory  
+8. Contoh portofolio lulus (struktur bukti + mapping) — Case Memory  
+
+---
+
+## C) Contoh dokumen siap-tempel (PBJP L1) untuk Gustafta
+
+### 1) SOP — Persiapan Uji Kompetensi PBJP LKPP Level 1 (Operational)
+
+**Syarat**
+
+- Menentukan target: PBJP LKPP Level 1 dan tanggal uji (jika sudah ada).
+- Memiliki daftar materi/modul dan bank soal.
+- Menyiapkan tempat menyimpan bukti/portofolio (folder drive/Notion).
+- Menyiapkan dokumen kerja yang pernah dikerjakan (atau simulasi dokumen) untuk portofolio.
+
+**Langkah-langkah**
+
+1. Diagnostik (hari 1): kerjakan tryout 30 soal campuran, catat topik lemah.
+2. Susun rencana H-14:
+    - Hari 1–5: prinsip, etika, dan perencanaan pengadaan + 20–30 soal/hari.
+    - Hari 6–10: pemilihan penyedia + 30–50 soal/hari + 1 studi kasus/hari.
+    - Hari 11–13: kontrak & pelaksanaan + 30–50 soal/hari + latihan essay.
+    - Hari 14: simulasi penuh + review error log.
+3. Bangun “error log”: kelompokkan salah karena konsep, prosedur, atau ketelitian.
+4. Bangun “cheat sheet” 1 halaman: prinsip, etika, urutan proses, dokumen kunci, jebakan umum.
+5. Portofolio paralel (mulai hari 2):
+    - kumpulkan bukti,
+    - label,
+    - mapping ke kompetensi,
+    - buat narasi singkat per bukti.
+6. Simulasi wawancara: latihan menjelaskan 3 bukti terbaik dengan struktur yang sama.
+
+**Biaya**
+
+- Umumnya terkait pendaftaran/pelatihan (jika ada). Biaya portofolio biasanya hanya untuk administrasi dan penyiapan dokumen.
+
+**Waktu proses**
+
+- 10–14 hari efektif untuk peningkatan skor + penguatan studi kasus.
+- Portofolio bisa 3–7 hari tergantung ketersediaan bukti.
+
+**Masalah umum**
+
+- Masalah: skor tinggi di hafalan tapi rendah di kasus.
+    - Solusi: pakai template analisis kasus “Masalah → Aturan → Langkah → Output dokumen → Risiko”.
+- Masalah: portofolio banyak file tapi tidak meyakinkan.
+    - Solusi: kurangi, pilih bukti yang paling relevan, lalu tambah narasi kontribusi dan konteks.
+- Masalah: sering salah karena teliti/waktu.
+    - Solusi: latihan simulasi timer + review pola kesalahan.
+
+---
+
+### 2) Template — Mapping Bukti Portofolio PBJP (Operational)
+
+**Syarat**
+
+- Minimal punya 5–12 bukti (dokumen, notulen, laporan, email resmi, screenshot sistem, dll.)
+
+**Langkah-langkah**
+
+1. Buat tabel mapping: Bukti → Tahap PBJP → Kompetensi → Peran → Ringkasan kontribusi → Tanggal → Validasi.
+2. Untuk setiap bukti, tulis narasi 5–7 kalimat: konteks, tugas, aksi, hasil, risiko yang dikendalikan.
+3. Tandai bukti “kuat” (autentik + relevan + terkini) dan “lemah” (kurang konteks, tidak jelas peran).
+
+**Biaya**
+
+- Tidak ada (kecuali biaya administrasi/cetak jika diperlukan).
+
+**Waktu proses**
+
+- 1–2 jam untuk membuat tabel awal.
+- 15–30 menit per bukti untuk narasi yang rapi.
+
+**Masalah umum**
+
+- Masalah: bukti tidak menunjukkan peran pribadi.
+    - Solusi: tambahkan bagian “Peran dan kontribusi” yang spesifik.
+- Masalah: bukti tidak terkini.
+    - Solusi: tambahkan bukti terbaru atau jelaskan relevansinya.
+
+---
+
+## D) Agar chatbot bisa “keduanya” tanpa bingung (mode percakapan)
+
+Di Gustafta, sebaiknya Anda set “Orchestrator” atau instruksi bot seperti ini (konsep):
+
+- Jika pengguna minta latihan/soal → masuk mode **Bank Soal**
+- Jika pengguna minta kesiapan/asesmen → mode **Diagnostik**
+- Jika pengguna minta bukti/portofolio → mode **Portofolio**
+- Jika input kurang → bot wajib tanya 3 hal: target tanggal, pengalaman, fokus modul lemah
+
+---
+
+## 1 pertanyaan terakhir (biar saya rapikan jadi versi final PBJP Anda)
+
+Untuk portofolio PBJP Level 1, bukti yang Anda punya lebih dominan yang mana?
+
+- **Perencanaan** (KAK/spesifikasi/HPS/dokumen rencana), atau
+- **Pemilihan** (BA evaluasi, undangan, klarifikasi), atau
+- **Kontrak & pelaksanaan** (kontrak, adendum, BA serah terima), atau
+- campuran
+
+Jawaban Anda akan menentukan saya prioritaskan *set dokumen portofolio* yang paling “kuat” dulu.

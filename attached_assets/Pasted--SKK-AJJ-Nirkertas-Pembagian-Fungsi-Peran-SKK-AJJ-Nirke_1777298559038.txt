@@ -1,0 +1,503 @@
+# SKK AJJ Nirkertas — Pembagian Fungsi & Peran
+
+**SKK AJJ Nirkertas** = Sertifikasi Keagenan Asuransi Jiwa berbasis nirkertas (paperless), yang diselenggarakan oleh **LSP di bawah AAJI / asosiasi perasuransian** mengacu pada Pedoman BNSP 201/301 dan ketentuan OJK. Empat aktor utama dalam ekosistem ini punya fungsi yang saling mengunci agar uji kompetensi tetap **valid, reliabel, adil, dan auditable** meski seluruh prosesnya online.
+
+## 1. Asesi (Peserta Uji)
+
+**Fungsi:** subjek yang dinilai kompetensinya untuk memperoleh sertifikat keagenan asuransi jiwa.
+
+**Peran utama:**
+
+- Mendaftar melalui sistem nirkertas (upload KTP, ijazah/SLTA sederajat, pas foto, surat rekomendasi dari Perusahaan Asuransi Jiwa anggota AAJI).
+- Mengisi **FR.APL-01 (Permohonan Sertifikasi)** dan **FR.APL-02 (Asesmen Mandiri)** secara digital.
+- Menyetujui *consent* perekaman (kamera, layar, mikrofon) untuk *online proctoring*.
+- Mengikuti uji tulis/lisan/praktik sesuai skema (mis. Keagenan Dasar, Unit Link, Syariah) di **TUK** atau secara *remote proctored*.
+- Menandatangani secara elektronik FR.AK-01 (persetujuan asesmen), FR.AK-02 (kerahasiaan), dan menerima umpan balik via FR.AK-03/05.
+- Berhak mengajukan **banding** bila tidak setuju dengan keputusan asesor.
+
+## 2. TUK (Tempat Uji Kompetensi)
+
+**Fungsi:** menyediakan tempat, sarana, dan sistem yang memenuhi syarat verifikasi LSP untuk pelaksanaan uji — pada model nirkertas, TUK bisa **TUK Sewaktu**, **TUK Tempat Kerja**, atau **TUK Mandiri/Online (Remote)**.
+
+**Peran utama:**
+
+- **Verifikasi identitas** asesi (face match KTP, *liveness check*).
+- Menyediakan **infrastruktur**: perangkat ujian, koneksi internet stabil, kamera 360°/web-cam, *secure browser*, ruang ujian sesuai standar pencahayaan & bebas gangguan.
+- Menjalankan **tata tertib ujian** dan mengisolasi asesi dari materi tidak sah.
+- **Mengelola log digital**: rekaman video, time-stamp, IP, *event log* selama uji.
+- Berkoordinasi dengan asesor untuk jadwal, akses sistem, dan eskalasi insiden teknis.
+- Menjamin **kerahasiaan** soal/MUK dan data asesi.
+- Pada model nirkertas: bertindak sebagai ***proctoring center*** atau memvalidasi *self-proctoring* asesi.
+
+## 3. Asesor Kompetensi
+
+**Fungsi:** profesional bersertifikat Met.000 (BNSP) yang **menilai bukti kompetensi** asesi terhadap unit kompetensi skema AAJI dan merekomendasikan keputusan **K (Kompeten) / BK (Belum Kompeten)**.
+
+**Peran utama:**
+
+- Merencanakan asesmen via **FR.MAPA-01 & FR.MAPA-02** (pemilihan metode, perangkat, konteks).
+- Menggunakan metode bukti: **TL (Tes Lisan), TT (Tes Tertulis), Ob (Observasi), VP (Verifikasi Portofolio), Wcr (Wawancara), Stu (Studi Kasus)**.
+- Menerapkan prinsip **VATM** — *Valid, Authentic, Terkini (Current), Memadai (Sufficient)*.
+- Menjaga **prinsip asesmen**: *valid, reliable, fair, flexible*.
+- Mengisi **FR.AK-04 (Banding)** bila ada sanggahan, dan **FR.AK-05 (Umpan Balik)** ke asesi.
+- Tunduk pada **Kode Etik Asesor (SK BNSP 1224/BNSP/VII/2020)**: integritas, objektivitas, kerahasiaan, ketidakberpihakan.
+- Pada nirkertas: tanda tangan elektronik pada perangkat asesmen, rekomendasi diunggah langsung ke sistem LSP.
+
+## 4. Manajemen LSP
+
+**Fungsi:** penanggung jawab kelembagaan — memastikan sistem sertifikasi memenuhi **Pedoman BNSP 201, 210, 301, 302, 305** serta **SNI ISO/IEC 17024**, sekaligus laik audit OJK untuk skema perasuransian.
+
+**Peran utama (per fungsi struktural):**
+
+| Fungsi | Peran |
+| --- | --- |
+| **Ketua LSP** | Penanggung jawab umum, perwakilan terhadap BNSP/OJK/asosiasi. |
+| **Bagian Sertifikasi** | Mengelola skema, MUK, jadwal, registrasi asesi, *issuance* sertifikat digital (e-sertifikat dengan QR/DSE). |
+| **Bagian Manajemen Mutu** | Menyusun & memelihara **Panduan Mutu**, audit internal, kaji ulang manajemen, *corrective action*. |
+| **Bagian Administrasi & Keuangan** | Pengelolaan biaya sertifikasi, kontrak TUK, kontrak asesor. |
+| **Komite Skema/Teknis** | Menetapkan & memutakhirkan skema sertifikasi keagenan AJJ (dasar, unit link, syariah, dll). |
+| **Komite Ketidakberpihakan** | Mengawasi independensi LSP dari kepentingan komersial perusahaan asuransi. |
+| **Bagian Banding & Keluhan** | Menangani banding asesi/perusahaan, menjamin *due process*. |
+
+**Tugas spesifik untuk model Nirkertas:**
+
+- Memvalidasi **sistem informasi sertifikasi** (keamanan data, *e-signature*, *audit trail*, *data retention* sesuai POJK).
+- Menjamin **interoperabilitas** dengan E-License AAJI/SI-AAJI agar sertifikat & status lisensi langsung terbit.
+- Memelihara **register asesor & TUK** (verifikasi kompetensi, lisensi aktif, RCC).
+- Menjalankan **surveilans** dan resertifikasi periodik.
+- Menjaga **kerahasiaan & perlindungan data pribadi** asesi (UU PDP).
+
+---
+
+## Alur Singkat (Nirkertas)
+
+```mermaid
+flowchart LR
+    A["Asesi<br>daftar online +<br>FR.APL-01/02"] --> B["Manajemen LSP<br>verifikasi berkas &<br>jadwalkan"]
+    B --> C["TUK<br>verifikasi ID +<br>proctoring"]
+    C --> D["Asesor<br>FR.MAPA + asesmen<br>(TL/TT/Ob/VP)"]
+    D --> E["Rekomendasi K/BK<br>(FR.AK-01..05)"]
+    E --> F["Manajemen LSP<br>keputusan & e-sertifikat"]
+    F --> G["AAJI E-License<br>aktif"]
+```
+
+## Prinsip Kunci yang Mengikat Keempatnya
+
+- **VATM** untuk bukti, **VRFF** untuk proses asesmen.
+- **Pemisahan fungsi**: yang melatih ≠ yang menguji ≠ yang memutuskan sertifikat.
+- **Audit trail elektronik** untuk setiap langkah (dari pendaftaran sampai penerbitan).
+- **Kode Etik & Ketidakberpihakan** wajib di semua peran.
+
+Kalau mau, ini bisa saya tuangkan ke halaman Notion (mis. sub-bab pada seri Sertifikasi & Asesor di workspace, sejajar dengan Bab 3/4/19 yang sudah ada untuk konstruksi) — tinggal bilang ya.
+
+# Bidang Kompetensi — LSP & SKK Jasa Konstruksi
+
+Khusus sektor **Jasa Konstruksi**, ekosistem sertifikasi **Sertifikat Kompetensi Kerja (SKK) Konstruksi** dilisensi BNSP + rekomendasi Menteri PU (cq. Ditjen Bina Konstruksi), tercatat di **LPJK / SIKI**. Empat aktor (Asesi, TUK, Asesor, Manajemen LSP) bergerak di dalam kerangka regulasi: **UU 2/2017 jo. UU 6/2023 (Cipta Kerja) → PP 22/2020 jo. PP 14/2021 → Permen PUPR 9/2020, 8/2022 → Permen PU 6/2025 → SKKNI/Konvensi DJBK → SK Dirjen 144/KPTS/Dk/2022 (Jabatan Kerja) → Pedoman BNSP 201/210/301/302/305 → SNI ISO/IEC 17024**.
+
+## 0. Ruang Lingkup SKK Konstruksi (yang Disertifikasi LSP)
+
+SKK Konstruksi menggantikan SKA/SKT lama sejak **Permen PUPR 9/2020**. Ada **3 kualifikasi** dengan **9 jenjang KKNI**:
+
+| --- | --- | --- |
+
+**6 Klasifikasi besar** (sesuai PP 14/2021 & SK Dirjen 144/KPTS/Dk/2022):
+
+1. **Arsitektur (ARS)** — perencana, perancang, interior, lanskap.
+1. **Sipil (SIP)** — jalan, jembatan, gedung, sumber daya air, geoteknik, jalan rel, terowongan, bendungan.
+1. **Mekanikal (MEK)** — alat berat, plambing, HVAC, transportasi dalam gedung.
+1. **Tata Lingkungan (TTL)** — air minum, sanitasi, persampahan, pengeboran air tanah.
+1. **Manajemen Pelaksanaan (MPK)** — manajemen konstruksi, manajemen proyek, K3 Konstruksi, estimasi biaya.
+1. **Elektrikal (ELE)** — tenaga listrik, transmisi, distribusi, otomasi, telekomunikasi konstruksi.
+
+Plus klasifikasi **Spesialis** (Konstruksi Khusus & Instalasi) seperti yang sudah ada di workspace (KK001–KK010, IN001–IN013).
+
+---
+
+## 1. Asesi — Calon Pemegang SKK Konstruksi
+
+**Fungsi:** tenaga kerja konstruksi yang mengajukan diri untuk dinilai pada satu atau lebih **subklasifikasi/jabatan kerja** sesuai SKKNI yang berlaku.
+
+**Bidang kompetensi yang diuji (contoh per jenjang):**
+
+| --- | --- | --- |
+
+**Peran Asesi:**
+
+- Memenuhi **persyaratan dasar**: ijazah + pengalaman kerja proyek (lampiran SK Dirjen 144/2022).
+- Mengisi **FR.APL-01** (permohonan) & **FR.APL-02** (asesmen mandiri) per **unit kompetensi** (UK) yang diujikan.
+- Menyiapkan **portofolio** (kontrak proyek, SK penugasan, gambar shop drawing, foto, NCR, ITP, dll) sebagai bukti.
+- Mengikuti uji di **TUK**: tes tulis, wawancara, observasi (lapangan/simulasi), studi kasus.
+- Berhak **banding** (FR.AK-04) dan menerima umpan balik (FR.AK-05).
+- Setelah K (Kompeten) → SKK terbit & **tercatat di SIKI** untuk dipakai sebagai PJBU/PJTBU/PJKBU/PJSKBU oleh BUJK.
+
+## 2. TUK Konstruksi (Tempat Uji Kompetensi)
+
+**Fungsi:** unit kerja yang **terverifikasi LSP Konstruksi** sebagai tempat pelaksanaan asesmen — wajib punya sarana prasarana sesuai **MUK (Materi Uji Kompetensi) Versi 2023** yang merujuk SKKNI 333/2020 dan SKKNI sektor (mis. SKKNI 196/2021, 60/2022).
+
+**Tipe TUK:**
+
+| --- | --- | --- |
+
+**Bidang kompetensi pengelola TUK:**
+
+- Verifikasi sarana sesuai jabatan kerja (mis. lab tanah untuk Geoteknik, alat ukur untuk Surveyor, simulator untuk Operator alat berat).
+- Tata kelola dokumen MUK (kerahasiaan, pengembalian, penghancuran).
+- *Proctoring* dan tata tertib uji (untuk SKK Konstruksi Daring berbasis sistem LSP).
+- Verifikasi identitas asesi sesuai data SIKI.
+- Pengarsipan rekaman & bukti uji.
+
+## 3. Asesor Kompetensi Konstruksi (ASKOM Konstruksi)
+
+**Fungsi:** profesional bersertifikat BNSP **Met.000** + **lisensi LSP** + **kompetensi teknis konstruksi** yang menilai bukti dan merekomendasikan keputusan K/BK.
+
+**Bidang kompetensi (sesuai Bab 19 di workspace****):**
+
+- **Metodologi asesmen** — SKKNI 333/2020 (mencabut 185/2018), 9 unit kompetensi inti asesor.
+- **Teknis sektor konstruksi** — minimal sebanding atau lebih tinggi dari jenjang KKNI yang diuji (mis. Asesor untuk Ahli Madya minimal Ahli Madya & berpengalaman).
+- **Etika & ketidakberpihakan** — SK Ketua BNSP No. 1224/BNSP/VII/2020.
+- **Perangkat asesmen** — FR.MAPA-01/02 (perencanaan & validasi), FR.AK-01…AK-05.
+- **RCC (Recognition of Current Competency) ASKOM** — pemeliharaan kompetensi:
+- **Master Asesor** — supervisi asesor baru, validasi MUK.
+
+**Prinsip yang diterapkan:**
+
+- Bukti **VATM**: *Valid, Authentic, Terkini, Memadai*.
+- Asesmen **VRFF**: *Valid, Reliable, Fair, Flexible*.
+- Pemisahan tegas antara peran melatih, menguji, dan memutuskan.
+
+## 4. Manajemen LSP Konstruksi
+
+**Fungsi:** pengelola lembaga sesuai **Pedoman BNSP 201-2014** (Persyaratan Umum LSP), **210-2017** (Skema), **301/302/305** (Asesmen, Sertifikat, Uji), serta **SNI ISO/IEC 17024**.
+
+**Struktur & bidang kompetensi (sesuai Bab 3 di workspace****):**
+
+| --- | --- |
+
+**Kewajiban kelembagaan khas LSP Konstruksi:**
+
+- Dibentuk oleh **asosiasi profesi terakreditasi** atau lembaga pendidikan/pelatihan yang memenuhi syarat (bukan langsung).
+- Mendapat **rekomendasi Menteri PU** sebelum lisensi BNSP.
+- **Tercatat di LPJK / SIJK** (dengan nomor lisensi, masa berlaku, ruang lingkup skema).
+- Patuh pada **standar biaya** (Kepmen PUPR 713/2022) dan **pelaporan periodik**.
+- Menjalankan **surveilans, perpanjangan, perubahan, dan pencabutan SKK** sesuai prosedur.
+
+---
+
+## Peta Hubungan (Konstruksi)
+
+```mermaid
+flowchart TB
+    A["Asesi<br>(Tenaga Kerja Konstruksi)"] -->|"FR.APL-01/02 + portofolio"| B["Manajemen LSP Konstruksi"]
+    B -->|"Verifikasi & jadwalkan"| C["TUK Konstruksi<br>(Sewaktu/Tempat Kerja/Mandiri)"]
+    B -->|"Penugasan + MUK"| D["Asesor Kompetensi<br>(ASKOM Konstruksi)"]
+    D -->|"FR.MAPA + VATM/VRFF"| C
+    C -->|"Pelaksanaan uji"| D
+    D -->|"Rekomendasi K/BK<br>FR.AK-01..05"| B
+    B -->|"SKK Konstruksi terbit"| E["SIKI / LPJK"]
+    E -->|"Sebagai PJBU/PJTBU/PJKBU/PJSKBU"| F["BUJK / SBU"]
+```
+
+## Ringkasan Bidang Kompetensi per Aktor
+
+| --- | --- |
+
+Konteks ini selaras dengan halaman [Bab 3 — Lembaga Sertifikasi Profesi (LSP) Jasa Konstruksi](https://www.notion.so/Bab-3-Lembaga-Sertifikasi-Profesi-LSP-Jasa-Konstruksi-4f5a06103c304db7a4e70960a760b4b6?pvs=21), [Bab 4 — ASKOM & RCC BNSP 2025](https://www.notion.so/Bab-4-ASKOM-RCC-BNSP-2025-55992d759b834a50b69e525d693ef246?pvs=21), dan [Bab 19 — Asesor Kompetensi Jasa Konstruksi (ASKOM Konstruksi)](https://www.notion.so/Bab-19-Asesor-Kompetensi-Jasa-Konstruksi-ASKOM-Konstruksi-1f157ea704794309b1dbb11a299d6093?pvs=21) yang sudah ada di workspace.
+
+Kalau ingin saya rinci lebih jauh — misalnya **daftar lengkap subklasifikasi & jabatan kerja per jenjang** atau **matriks unit kompetensi per skema** — tinggal sebutkan klasifikasi/jenjang yang difokuskan.
+
+Saya lanjutkan dengan **rincian subklasifikasi, jabatan kerja, dan unit kompetensi inti per klasifikasi SKK Konstruksi**, mengikuti SK Dirjen Bina Konstruksi 144/KPTS/Dk/2022 dan SKKNI terkait.
+
+---
+
+## A. Klasifikasi Arsitektur (ARS)
+
+| --- | --- |
+
+**UK inti:** memahami konteks tapak, menyusun konsep desain, menerapkan kode bangunan & tata ruang, koordinasi multidisiplin, dokumen DED, SNI bangunan gedung hijau, etika profesi arsitek (UU 6/2017).
+
+---
+
+## B. Klasifikasi Sipil (SIP)
+
+| --- | --- |
+
+**UK inti:** analisis struktur, mekanika tanah, hidrologi/hidrolika, desain perkerasan, pengendalian mutu beton/aspal/baja, K3 konstruksi, manajemen risiko teknis, audit teknis bangunan.
+
+---
+
+## C. Klasifikasi Mekanikal (MEK)
+
+| --- | --- |
+
+**UK inti:** desain & instalasi sistem mekanikal, *commissioning*, perawatan preventif, SNI peralatan, K3 mekanikal.
+
+---
+
+## D. Klasifikasi Tata Lingkungan (TTL)
+
+| --- | --- |
+
+**UK inti:** AMDAL/UKL-UPL, baku mutu lingkungan (PP 22/2021), desain SPAM/IPAL, pengelolaan B3, audit lingkungan konstruksi.
+
+---
+
+## E. Klasifikasi Manajemen Pelaksanaan (MPK)
+
+| --- | --- |
+
+**UK inti:** WBS & *baseline* proyek, EVM (*earned value*), pengendalian kontrak (FIDIC/Permen PUPR), HIRADC & SMKK (Permen PUPR 10/2021), *quality plan* & ITP, audit kepatuhan SMAP (ISO 37001).
+
+---
+
+## F. Klasifikasi Elektrikal (ELE)
+
+| --- | --- |
+
+**UK inti:** desain SLD, koordinasi proteksi, pentanahan & bonding (PUIL 2020), commissioning HV/MV/LV, K3 listrik, integrasi SCADA.
+
+---
+
+## G. Klasifikasi Spesialis — Konstruksi Khusus & Instalasi
+
+Sudah terpetakan di workspace (modul KK001–KK010, IN001–IN013). Contoh hubungan SKK ↔ subklas:
+
+| --- | --- |
+
+---
+
+## Matriks Singkat: SKK ↔ Peran di BUJK
+
+| --- | --- | --- |
+
+Aturan jenjang & kombinasi PJ ada di **SK Dirjen 37/KPTS/DK/2025** (Skema Sertifikasi BUJK) dan **Permen PUPR 8/2022** — yang juga berkaitan dengan **ABU (Asesor Badan Usaha)** di [Bab 17 — Asesor Badan Usaha (ABU) Jasa Konstruksi](https://www.notion.so/Bab-17-Asesor-Badan-Usaha-ABU-Jasa-Konstruksi-4a567001737e42f3a35c8eff5a97e0e1?pvs=21).
+
+---
+
+## Alur Akhir (Tenaga Kerja → BUJK)
+
+```mermaid
+flowchart LR
+    A["SKKNI + Skema LSP"] --> B["Asesi ikut uji"]
+    B --> C["TUK + Asesor"]
+    C --> D["LSP terbitkan SKK<br>(jenjang KKNI)"]
+    D --> E["Tercatat di SIKI"]
+    E --> F["BUJK pakai SKK<br>sebagai PJBU/PJTBU/<br>PJKBU/PJSKBU"]
+    F --> G["LSBU asesmen SBU"]
+    G --> H["SBU terbit di SIKI"]
+    H --> I["BUJK ikut tender<br>(LPSE/INAPROC)"]
+```
+
+---
+
+Kalau mau saya lanjutkan ke salah satu dari ini, tinggal sebut yang mana:
+
+1. **Detail unit kompetensi (UK)** untuk satu skema (mis. Ahli Muda Teknik Jalan jenjang 7).
+1. **Tabel persyaratan dasar** (ijazah + pengalaman) per jenjang KKNI.
+1. **Daftar formulir asesmen** lengkap dengan penjelasan tiap FR.APL/FR.MAPA/FR.AK.
+1. **Halaman Notion baru** yang merangkum semua di atas (Bab tambahan untuk seri Sertifikasi & Asesor di workspace).
+
+Saya lanjutkan dengan **(1) Unit Kompetensi**, **(2) Persyaratan Dasar per jenjang**, dan **(3) Formulir Asesmen lengkap** — tiga lapis yang biasa dipakai sebagai *handbook* asesi/asesor.
+
+---
+
+## 1. Detail Unit Kompetensi (UK) — Contoh: Ahli Muda Teknik Jalan (Jenjang 7)
+
+Skema mengacu **SKKNI 060/2022** (Konstruksi Jalan) dan **SK Dirjen Bina Konstruksi**. UK dibagi tiga kategori: **Umum (general)**, **Inti (functional)**, **Pilihan (specialized)**.
+
+### Kelompok Umum
+
+| --- | --- |
+
+### Kelompok Inti
+
+| --- | --- |
+
+### Kelompok Pilihan (minimal 1)
+
+| --- | --- |
+
+**Setiap UK** punya struktur baku:
+
+- **Elemen Kompetensi** (3–6 elemen)
+- **Kriteria Unjuk Kerja** (KUK)
+- **Batasan Variabel** (kontekstual: alat, bahan, regulasi)
+- **Panduan Penilaian** (bukti, metode, kondisi)
+- **Aspek Kritis**
+
+> Asesor mengisi **FR.MAPA-01** dengan memetakan: UK → metode (TT/TL/Ob/VP/Wcr/Stu) → instrumen → kondisi pengujian.
+> 
+
+---
+
+## 2. Persyaratan Dasar (Ijazah + Pengalaman) per Jenjang KKNI
+
+Mengacu **lampiran SK Dirjen Bina Konstruksi 144/KPTS/Dk/2022** (jabatan kerja konstruksi). Pola umum:
+
+| --- | --- | --- | --- |
+
+### Bukti yang harus disiapkan asesi
+
+| --- | --- |
+
+> Skema PUPR juga mensyaratkan **NIK terverifikasi di SIKI** dan **kartu anggota asosiasi** (untuk skema asosiasi tertentu).
+> 
+
+---
+
+## 3. Formulir Asesmen — FR.APL / FR.MAPA / FR.AK
+
+Mengikuti **Pedoman BNSP 301-2013** (Pelaksanaan Asesmen) dan template terbaru BNSP/LSP.
+
+### A. Formulir Pendaftaran (APL — Aplikasi)
+
+| --- | --- | --- | --- |
+
+### B. Formulir Perencanaan & Validasi Asesmen (MAPA)
+
+| --- | --- | --- | --- |
+
+### C. Formulir Asesmen Kompetensi (AK)
+
+| --- | --- | --- |
+
+### D. Instrumen Bukti (IA — sesuai metode)
+
+| --- | --- | --- |
+
+### E. Formulir TUK & Mutu
+
+| --- | --- |
+
+---
+
+## Alur Pemakaian Formulir
+
+```mermaid
+flowchart TD
+    A["Asesi isi<br>FR.APL-01 + FR.APL-02"] --> B["LSP verifikasi<br>kelengkapan"]
+    B --> C["Asesor susun<br>FR.MAPA-01/02"]
+    C --> D["FR.AK-01<br>Persetujuan asesi"]
+    D --> E["Pelaksanaan uji<br>dgn FR.IA.01..11"]
+    E --> F["FR.AK-02<br>Rekaman + keputusan"]
+    F --> G["FR.AK-03<br>Umpan balik"]
+    G --> H{"Asesi<br>banding?"}
+    H -->|Ya| I["FR.AK-04 → review"]
+    H -->|Tidak| J["FR.AK-05<br>Laporan ke LSP"]
+    I --> J
+    J --> K["FR.AK-06<br>Review internal LSP"]
+    K --> L["Sertifikat SKK terbit<br>+ catat di SIKI"]
+```
+
+---
+
+## Tips Praktis untuk Asesi & TUK
+
+- **Asesi:** lengkapi **FR.APL-02** secara realistis — jangan klaim K untuk semua KUK kalau tidak ada bukti, karena akan ketahuan saat verifikasi portofolio.
+- **TUK:** pastikan rekaman *event log* tersimpan ≥ 3 tahun untuk antisipasi audit BNSP/LPJK.
+- **Asesor:** prinsip **"bukti yang relevan, bukan bukti yang banyak"** — VATM > volume.
+- **Manajemen LSP:** lakukan **kaji ulang manajemen** minimal 1×/tahun + audit internal sebelum surveilans BNSP.
+
+---
+
+Berikutnya, jika ingin saya teruskan, opsinya:
+
+- **Halaman Notion baru** yang menggabungkan semua materi 3 turn terakhir (sebagai Bab tambahan / sub-page di seri *Regulasi Jasa Konstruksi Indonesia*).
+- **Template FR.APL-01 & FR.APL-02** siap-isi dalam bentuk halaman/database.
+- **Daftar lengkap subklasifikasi & jabatan kerja** untuk satu klasifikasi lain (mis. MPK – K3 Konstruksi atau SIP – Sumber Daya Air) dengan struktur yang sama seperti contoh Teknik Jalan di atas.
+
+Sebut saja yang mana — atau tiga-tiganya.
+
+Saya lanjutkan dengan **rincian skema Ahli Muda K3 Konstruksi (Jenjang 7)** — salah satu skema paling banyak diminta karena wajib di setiap proyek BUJK, sebagai padanan contoh Teknik Jalan sebelumnya. Skema mengacu **SKKNI 162/2024** (mencabut 165/2018) dan **Permen PUPR 10/2021** tentang Pedoman SMKK.
+
+---
+
+## Skema Ahli Muda K3 Konstruksi (Jenjang 7 KKNI)
+
+### Persyaratan Dasar
+
+| --- | --- | --- |
+
+**Bukti wajib:** SK penugasan sebagai Petugas/Ahli K3, Job Safety Analysis (JSA) yang pernah disusun, RKK (Rencana Keselamatan Konstruksi), laporan inspeksi K3, log incident/near-miss.
+
+---
+
+### Unit Kompetensi
+
+#### Kelompok Umum (3 UK)
+
+| --- | --- |
+
+#### Kelompok Inti (8 UK)
+
+| --- | --- |
+
+#### Kelompok Pilihan (minimal 1 UK)
+
+| --- | --- |
+
+---
+
+### Metode Asesmen yang Lazim Dipakai
+
+| --- | --- | --- |
+
+---
+
+### Aspek Kritis (sering jadi titik gugur asesi)
+
+1. **Tidak bisa membedakan SMKK vs SMK3** — SMKK (Permen PUPR 10/2021) khusus konstruksi; SMK3 (PP 50/2012) lintas industri. Asesor sering menanyakan ini.
+1. **HIRADC dangkal** — mengisi formulir tanpa kuantifikasi *likelihood × severity* dan tanpa hierarki pengendalian (eliminasi → substitusi → engineering → administratif → APD).
+1. **RKK tidak selaras dengan dokumen tender** — RKK harus mengikuti format Lampiran Permen PUPR 10/2021.
+1. **Investigasi insiden hanya naratif** — tanpa analisis akar masalah dan rekomendasi sistemik.
+1. **Tidak paham peran Petugas Keselamatan Konstruksi vs Ahli K3** — pembagian tanggung jawab di SMKK.
+
+---
+
+## Padanan Skema lain pada Klasifikasi MPK
+
+| --- | --- | --- |
+
+Pola UK-nya sama (Umum + Inti + Pilihan), hanya substansi inti yang berbeda mengikuti tugas pokoknya.
+
+---
+
+## Pemetaan SKK MPK ke Posisi PJ-BUJK
+
+| --- | --- | --- |
+
+Dengan kombinasi MPK + klasifikasi teknis (ARS/SIP/MEK/TTL/ELE), BUJK biasanya butuh **5–9 SKK** untuk memenuhi struktur PJ minimum yang dipersyaratkan **SK Dirjen 37/KPTS/Dk/2025**.
+
+---
+
+## Praktik Pengisian FR.APL-02 untuk Skema K3 (cuplikan)
+
+| --- | --- | --- |
+
+> Asesor biasanya **menggali bukti fisik** untuk setiap KUK yang asesi klaim K. Kalau ada kontradiksi antara FR.APL-02 dan portofolio, asesor wajib menulis di **FR.AK-02** dan dapat menurunkan keputusan menjadi BK pada UK terkait.
+> 
+
+---
+
+## Setelah SKK Terbit
+
+1. **Tercatat di SIKI** dengan nomor registrasi nasional.
+1. **Masa berlaku 5 tahun** + wajib **CPD/PKB** (Pengembangan Keprofesian Berkelanjutan) untuk perpanjangan.
+1. **Asesi terdaftar di asosiasi profesi** (mis. A2K4, HAKI, PII bidang K3) untuk menjaga status kompetensi.
+1. **Surveilans tahunan** oleh LSP — bisa berupa *desk review* atau revisit ke tempat kerja.
+1. **Resertifikasi setelah 5 thn** — uji ulang atau RPL (Recognition of Prior Learning) berbasis CPD ≥ 30 SKP.
+
+---
+
+## Apa yang Bisa Saya Lanjutkan Berikutnya
+
+<ask-survey>
+
+Saya sudah menyiapkan beberapa kandidat. Mana yang ingin diprioritaskan?
+
+</ask-survey>
+
+Saya akan buat satu halaman *handbook* lengkap di workspace yang menggabungkan keempat permintaan, parented di bawah seri *Regulasi Jasa Konstruksi Indonesia — Ringkasan Lengkap* yang sudah ada.
+
+Halaman *handbook* lengkap sudah terbentuk di workspace, parented di bawah seri **Regulasi Jasa Konstruksi Indonesia — Ringkasan Lengkap** sebagai pelengkap praktis Bab 3, 4, 17, 19. Mencakup: bidang kompetensi LSP & SKK, empat aktor, klasifikasi & subklasifikasi (ARS, SIP, MEK, TTL, MPK, ELE + Spesialis), persyaratan dasar per jenjang KKNI, contoh skema (Teknik Jalan, K3 Konstruksi, SDA, Arsitektur, Elektrikal), formulir asesmen lengkap (FR.APL/MAPA/AK/IA), template **FR.APL-01 & FR.APL-02 siap-isi**, matriks **PJBU/PJTBU/PJKBU/PJSKBU per skala BUJK**, alur end-to-end, tips praktis per peran, dan daftar regulasi.
+
+Beberapa tabel kompleks sempat ter-render dengan struktur baris yang menyatu — bila ingin saya rapikan ulang tabel-tabel di section 5, 7, 8, 9, dan 10 menjadi format yang lebih bersih, tinggal sebut.

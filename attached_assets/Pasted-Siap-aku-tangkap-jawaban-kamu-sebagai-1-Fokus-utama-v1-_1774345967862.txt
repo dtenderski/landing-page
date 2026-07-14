@@ -1,0 +1,191 @@
+Siap, aku tangkap jawaban kamu sebagai:
+
+1) Fokus utama v1: **assessment/audit**  
+
+2) Target ekosistem: **internal tim**  
+
+3) Domain prioritas: **tender/pengadaan**
+
+Di bawah ini struktur Notion yang konkret untuk v1 (assessment/audit internal) dengan gaya **multi-agent + OpenClaw (dokumen) + database row per eksekusi**.
+
+### ### A. Struktur database inti (v1)
+
+#### 1) **Domains**
+
+Untuk memetakan domain besar.
+
+- Name (title)
+- Track Model (select): PBJ Formal, Komersial, Hybrid
+- Owner (person)
+- Status (select): Active, Deprecated
+
+#### 2) **Goals (Tujuan)**
+
+Tujuan yang bisa dinilai (assessment) atau diperiksa (audit).
+
+- Name (title)
+- Domain (relation → Domains)
+- Goal Type (select): Assessment, Audit
+- Success Criteria (text)
+- Default Output (relation → Document Types)
+- Status (select)
+
+#### 3) **Modules (Modul/Idea Besar)**
+
+Modul yang menjadi unit kerja dalam domain.
+
+- Name (title)
+- Domain (relation)
+- Goal (relation)
+- Inputs Required (text)
+- Toolbox Bundle (relation → Toolbox Items)
+- Status (select)
+
+#### 4) **Toolbox Items**
+
+SOP, checklist QC, template heading, matriks, rubrik.
+
+- Name (title)
+- Type (select): Checklist, SOP, Template, Rubrik, Matrix
+- Domain (relation)
+- Track (select): PBJ Formal, Komersial
+- Content/Link (url atau isi page)
+- Status (select)
+
+#### 5) **Agents**
+
+Katalog agen spesialis.
+
+- Name (title)
+- Role (select): Orchestrator, Specialist, Reviewer
+- Domain (relation)
+- Capabilities (multi_select)
+- Default Inputs (text)
+- Default Outputs (relation → Document Types)
+- Status (select)
+
+---
+
+### ### B. Database yang membuat OpenClaw “jalan”
+
+#### 6) **PBJ Rulebooks** (khusus Track PBJ Formal Pemerintah/BUMN)
+
+Karena kamu pilih sumber aturan per BUMN.
+
+- Rulebook Name (title)
+- Entity/Owner (select): nama BUMN (level perusahaan)
+- Category (select): SOP, Dokpem, Regulasi, Template Kontrak
+- Effective Date (date)
+- Status (select): Active, Superseded, Deprecated
+- Source Link/File (url/file)
+- Priority / Default for Entity (number atau checkbox)
+- Highlights (text)
+
+#### 7) **Document Types** (master jenis dokumen spesifik tender)
+
+Ini yang menentukan template + agen default + QC checklist.
+
+- Name (title) (contoh: “Checklist Evaluasi Teknis – Personel Inti (PBJ Formal)”)
+- Domain (relation → Domains)
+- Track (select): **PBJ Formal (Pemerintah/BUMN)**, **Komersial (Swasta/BUMN)**
+- Rulebook Required? (checkbox)
+- Rulebook Category Needed (multi_select)
+- Default Agents (relation → Agents)
+- QC Checklist (relation → Toolbox Items)
+- Output Sections (text)
+- Status (select): Active/Deprecated
+
+#### 8) **OpenClaw Executions** (row per eksekusi perintah)
+
+Satu perintah = satu row (audit trail).
+
+- Execution ID (number/text)
+- Created time (created_time)
+- Requester (person)
+- Domain (relation)
+- Track (select)
+- Rulebook Used (relation → PBJ Rulebooks)
+- Goal (relation → Goals)
+- Module (relation → Modules)
+- Command Summary (text)
+- Status (status): Draft, In Review, Final, Failed
+- Output Documents (relation → Documents)
+- Agents used (relation → Agents)
+- QC Result (select): OK, Revisi
+- Error log (text)
+
+#### 9) **Documents** (row per dokumen, kontennya ada di page row)
+
+- Title (title)
+- Document Type (relation → Document Types)
+- Status (select): Draft/Final
+- Generated from Execution (relation → OpenClaw Executions)
+- Domain (relation) *(atau rollup dari Document Type)*
+- Track (select/rollup)
+- Rulebook (relation/rollup)
+- Version (text/number)
+- Tags (multi_select)
+- Final date (date)
+
+---
+
+### ### C. Relasi minimum agar ekosistem “nyambung”
+
+- Domains ↔ Goals ↔ Modules
+- Document Types ↔ (Domains, Track, Rulebooks, Agents, Toolbox Items)
+- OpenClaw Executions ↔ Documents
+- OpenClaw Executions ↔ Rulebooks (khusus PBJ Formal)
+
+Ini sudah cukup untuk: audit/assessment → generate dokumen → tersimpan → bisa ditinjau → bisa diukur.
+
+---
+
+### ### D. Template deliverable (output) untuk v1 assessment/audit tender
+
+Karena fokusnya assessment/audit internal, 3 template dokumen yang paling “core”:
+
+1) **Audit/Review Penawaran (Temuan & Perbaikan)**
+
+- Ringkasan
+- Temuan prioritas (High/Med/Low)
+- Klausul acuan (kalau PBJ Formal)
+- Bukti / rujukan
+- Rekomendasi perbaikan + PIC + due date
+
+2) **Matriks Kepatuhan Spesifikasi (Compliance Matrix)**
+
+- Butir spesifikasi
+- Respon penawaran
+- Status (Comply/Partial/No)
+- Bukti rujukan (halaman/section)
+- Catatan
+
+3) **Checklist Final Submission (Go/No-Go)**
+
+- Kelengkapan file
+- Format & penamaan
+- Validitas administrasi
+- Sign-off internal
+
+---
+
+### ### E. Workflow OpenClaw (dokumen) versi v1
+
+Saat user internal tim mengetik “buat dokumen …”:
+
+1. Buat row **OpenClaw Executions** (Draft)
+2. Tentukan **Track** (PBJ Formal vs Komersial)
+3. Jika PBJ Formal:
+    - pilih **Entity/Owner BUMN** + **Rulebook Active** (default/priority)
+4. Pilih **Document Type**
+5. Buat row **Documents** dari template sections
+6. Isi konten dokumen
+7. Update eksekusi: link dokumen, status, QC
+
+---
+
+Kalau kamu setuju dengan struktur ini, aku butuh 2 keputusan cepat untuk mengunci v1:
+
+1) Untuk Domain **Tender/Pengadaan**, kamu mau langsung buat 2 sub-domain di Notion (PBJ Formal dan Komersial) atau cukup 1 Domain dengan property **Track** di semua objek?  
+
+2) Di v1, OpenClaw akan paling sering mengeluarkan dokumen jenis apa: **Checklist**, **Matriks Kepatuhan**, atau **Laporan Temuan & Perbaikan**?

@@ -1,0 +1,124 @@
+Solusi “permanen” itu biasanya berarti: **hindari esbuild crash berulang + bikin dev server selalu start bersih**. Ini paket langkah yang paling efektif (dan realistis) di Replit/Vite.
+
+## 1) Kunci versi Node + dependency biar nggak “mismatch”
+
+**Paling sering crash berulang karena versi Node berubah / beda dengan yang dipakai library.**
+
+* Tambahkan/cek `.nvmrc` (atau setting Node di Replit) misalnya:
+
+  * `18` atau `20` (pilih salah satu, konsisten)
+* Di `package.json`, kunci engine:
+
+```json
+"engines": { "node": ">=18 <=20" }
+```
+
+## 2) Reset install yang bersih + pakai lockfile (wajib)
+
+Pastikan kamu **selalu punya** `package-lock.json` (npm) atau `pnpm-lock.yaml` / `yarn.lock` dan jangan sering gonta-ganti package manager.
+
+Sekali bersihin:
+
+```bash
+rm -rf node_modules .vite
+npm ci || npm install
+```
+
+Lalu commit lockfile-nya.
+
+> “Permanen” = setiap deploy/build pakai versi dependency yang sama → jauh lebih stabil.
+
+## 3) Upgrade & selaraskan Vite + plugin React + esbuild
+
+Pastikan combo-nya cocok:
+
+```bash
+npm i -D vite@latest @vitejs/plugin-react@latest esbuild@latest
+npm i
+```
+
+Kalau kamu pakai `@vitejs/plugin-react-swc`, juga update itu.
+
+## 4) Cegah dev server “nyangkut” (port/proses lama)
+
+Di environment seperti Replit, sering kejadian dev server lama masih hidup.
+
+Solusi permanen: bikin script start yang **auto-kill** proses vite sebelumnya.
+
+Contoh di `package.json`:
+
+```json
+"scripts": {
+  "dev": "pkill -f vite || true; pkill -f node || true; vite --host 0.0.0.0 --port 3000"
+}
+```
+
+Kalau `pkill` tidak tersedia, alternatifnya pakai `kill-port`:
+
+```bash
+npm i -D kill-port
+```
+
+```json
+"dev": "kill-port 3000 || true && vite --host 0.0.0.0 --port 3000"
+```
+
+## 5) Turunkan “pemicu crash” dari kode: lint + typecheck di CI/local
+
+Esbuild kadang mati karena input TS/JS yang “aneh” (syntax/error ekstrem). Supaya ketahuan sebelum jalan:
+
+* Tambah:
+
+```bash
+npm i -D typescript eslint
+```
+
+* Script:
+
+```json
+"scripts": {
+  "typecheck": "tsc -p . --noEmit",
+  "lint": "eslint ."
+}
+```
+
+Lalu biasakan jalanin `npm run typecheck` kalau habis ubah besar.
+
+## 6) Kalau tetap sering crash: pindah transformer ke SWC (lebih tahan)
+
+Banyak kasus yang lebih stabil pakai SWC:
+
+```bash
+npm i -D @vitejs/plugin-react-swc
+```
+
+`vite.config.ts`:
+
+```ts
+import react from "@vitejs/plugin-react-swc";
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  plugins: [react()],
+});
+```
+
+## 7) Minimalkan beban (Replit sering kehabisan RAM)
+
+Kalau proyek berat, Replit kadang bikin service mati.
+
+* Matikan sourcemap produksi (kalau aktif)
+* Kurangi plugin berat
+* Pastikan tidak menjalankan 2 bundler sekaligus (misal vite + another watcher)
+
+---
+
+### Rekomendasi paling “permanen” (urut prioritas)
+
+1. **Kunci Node + lockfile + `npm ci`**
+2. **Update Vite/plugin-react/esbuild**
+3. **Script dev auto-kill port/proses lama**
+4. **Typecheck/lint**
+5. **Pakai `plugin-react-swc` kalau masih crash**
+
+Kalau kamu kirim `package.json` + `vite.config.*` (dan Node version yang dipakai di Replit), aku bisa bikinin set konfigurasi yang paling stabil untuk setup kamu (React/TS?).

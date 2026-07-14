@@ -1,0 +1,292 @@
+Lanjut ke **tahap pemasangan langsung di dashboard chatbot builder**.
+
+Data SKK Sipil yang dipakai sebagai knowledge base berisi struktur: **subklasifikasi, jabatan kerja, jenjang jabatan kerja, kualifikasi, jenjang KKNI, standar kompetensi kerja, dan link SKK Kemnaker/SKK Khusus**. 
+
+## 1. Upload Knowledge Base
+
+Di dashboard, masuk ke bagian seperti:
+
+**Knowledge Base / Training Data / Documents / Data Source**
+
+Upload file ini:
+
+[skk_sipil_database.csv](sandbox:/mnt/data/skk_sipil_chatbot_package/skk_sipil_database.csv)
+
+Gunakan pengaturan:
+
+```json
+{
+  "knowledge_base_name": "Database SKK Bidang Sipil",
+  "file_type": "csv",
+  "search_mode": "strict",
+  "answer_from_knowledge_base_only": true,
+  "allow_external_answer": false,
+  "fallback_when_not_found": true
+}
+```
+
+## 2. Mapping Kolom Knowledge Base
+
+Pastikan kolom CSV dibaca seperti ini:
+
+| Kolom CSV                  | Fungsi di Chatbot                           |
+| -------------------------- | ------------------------------------------- |
+| `subklasifikasi`           | Bidang SKK, contoh: Gedung, Jalan, Jembatan |
+| `jabatan_kerja`            | Nama jabatan utama                          |
+| `jenjang_jabatan_kerja`    | Level jabatan detail                        |
+| `kualifikasi`              | Operator, Teknisi/Analis, Ahli              |
+| `jenjang_kkni`             | Level KKNI                                  |
+| `standar_kompetensi_kerja` | Nomor SKKNI/SKK Khusus                      |
+| `link_skk`                 | Link dokumen                                |
+| `status_dokumen`           | Status link/dokumen                         |
+| `kata_kunci`               | Bantuan pencarian chatbot                   |
+
+Prioritas pencarian:
+
+```text
+1. jabatan_kerja
+2. jenjang_jabatan_kerja
+3. subklasifikasi
+4. standar_kompetensi_kerja
+5. jenjang_kkni
+6. kata_kunci
+```
+
+## 3. Isi System Prompt
+
+Masuk ke bagian:
+
+**AI Instruction / System Prompt / Bot Personality**
+
+Tempel isi file ini:
+
+[system_prompt_skk_sipil.txt](sandbox:/mnt/data/skk_sipil_chatbot_package/system_prompt_skk_sipil.txt)
+
+Atau gunakan versi ringkas berikut:
+
+```text
+Anda adalah Asisten SKK Bidang Sipil.
+
+Tugas Anda adalah membantu pengguna mencari dan merekomendasikan Sertifikat Kompetensi Kerja bidang Sipil berdasarkan database SKK Sipil.
+
+Jawab hanya berdasarkan database. Jangan mengarang jabatan, nomor SKKNI, KKNI, atau link dokumen.
+
+Jika pengguna mencari jabatan, tampilkan semua jenjang yang tersedia.
+Jika pengguna meminta rekomendasi, tanyakan bidang, posisi, pengalaman, jenis proyek, dan target level.
+Jika link tidak tersedia, jelaskan bahwa dokumen belum tersedia pada database.
+Jangan menjamin kelulusan sertifikasi.
+
+Format jawaban:
+1. Ringkasan kebutuhan
+2. Rekomendasi atau hasil pencarian
+3. Detail SKK
+4. Alternatif
+5. Alasan kecocokan
+6. Catatan kehati-hatian
+```
+
+## 4. Isi Welcome Message
+
+Tempel ke bagian **Greeting / Welcome Message**:
+
+```text
+Halo, saya Asisten SKK Sipil.
+
+Saya bisa membantu Anda:
+
+1. Cari SKK berdasarkan jabatan kerja
+2. Cari SKK berdasarkan subklasifikasi
+3. Rekomendasi SKK sesuai pengalaman
+4. Cek jenjang KKNI
+5. Ambil link SKKNI/SKK Khusus
+6. Bandingkan dua jabatan SKK
+7. Daftar SKK Freshgraduate
+8. Daftar SKK Ahli, Teknisi/Analis, atau Operator
+
+Silakan ketik kebutuhan Anda.
+
+Contoh:
+“Saya pengalaman 6 tahun di proyek gedung sebagai pelaksana lapangan, cocok ambil SKK apa?”
+```
+
+## 5. Isi Fallback Message
+
+Tempel ke bagian **Fallback / Default Reply**:
+
+```text
+Maaf, saya belum menemukan data yang cocok di database SKK Sipil.
+
+Agar saya bisa bantu lebih tepat, mohon berikan salah satu informasi berikut:
+1. Nama jabatan kerja, contoh: Ahli Teknik Jalan
+2. Subklasifikasi, contoh: Gedung, Jalan, Jembatan, Geoteknik
+3. Posisi Anda saat ini, contoh: Pelaksana Lapangan
+4. Lama pengalaman kerja
+5. Target level: Operator, Teknisi/Analis, atau Ahli
+
+Saya tidak akan mengarang data SKK jika tidak tersedia di database.
+```
+
+## 6. Buat Flow Menu Utama
+
+Bila dashboard memiliki **Flow Builder**, buat node pertama:
+
+```json
+{
+  "node_id": "main_menu",
+  "trigger": ["menu", "mulai", "start", "halo", "hai"],
+  "message": "Halo, saya Asisten SKK Sipil.\n\nPilih menu:\n\n1. Cari SKK berdasarkan jabatan\n2. Cari SKK berdasarkan subklasifikasi\n3. Rekomendasi SKK sesuai pengalaman\n4. Cek jenjang KKNI\n5. Ambil link SKKNI/SKK Khusus\n6. Bandingkan dua jabatan SKK\n7. Daftar SKK Freshgraduate\n\nKetik angka menu atau langsung tulis kebutuhan Anda."
+}
+```
+
+Flow lengkap tersedia di:
+
+[flow_whatsapp_skk_sipil.json](sandbox:/mnt/data/skk_sipil_chatbot_package/flow_whatsapp_skk_sipil.json)
+
+## 7. Buat Flow Rekomendasi SKK
+
+Flow ini dipakai saat user bertanya:
+
+```text
+Saya cocok ambil SKK apa?
+Saya pengalaman 5 tahun di gedung.
+Saya fresh graduate teknik sipil.
+Saya pelaksana jalan.
+```
+
+Urutan pertanyaan bot:
+
+```text
+1. Bidang proyek utama Anda apa?
+2. Posisi Anda saat ini apa?
+3. Berapa tahun pengalaman kerja Anda?
+4. Jenis proyek yang paling sering Anda tangani apa?
+5. Target level Anda apa: Operator, Teknisi/Analis, atau Ahli?
+```
+
+Setelah itu bot menjalankan rekomendasi berdasarkan database.
+
+## 8. Aturan Rekomendasi
+
+Tambahkan ke **Rules / Instruction / Business Logic**:
+
+```text
+Aturan rekomendasi SKK:
+
+1. Fresh graduate atau pengalaman 0 tahun:
+   Prioritaskan jabatan yang mengandung “Freshgraduate”.
+
+2. Pengalaman 1–3 tahun:
+   Prioritaskan kualifikasi Operator, KKNI 1–3.
+
+3. Pengalaman 4–6 tahun:
+   Prioritaskan kualifikasi Teknisi/Analis, KKNI 4–6.
+
+4. Pengalaman 7–10 tahun:
+   Prioritaskan kualifikasi Ahli, KKNI 7–8.
+
+5. Pengalaman lebih dari 10 tahun:
+   Prioritaskan Ahli Madya atau Ahli Utama, KKNI 8–9.
+
+6. Selalu cocokkan bidang pengguna dengan subklasifikasi di database.
+7. Selalu cocokkan posisi pengguna dengan jabatan kerja.
+8. Berikan alternatif jika ada lebih dari satu SKK yang relevan.
+9. Jangan memberikan data di luar database.
+```
+
+## 9. Aktifkan Lead Capture
+
+Buat field:
+
+```json
+[
+  "nama",
+  "nomor_whatsapp",
+  "email",
+  "bidang_pekerjaan",
+  "posisi_saat_ini",
+  "pengalaman_tahun",
+  "target_level_skk",
+  "rekomendasi_skk",
+  "status_follow_up"
+]
+```
+
+Pesan setelah rekomendasi:
+
+```text
+Apakah Anda ingin menyimpan hasil rekomendasi ini untuk ditindaklanjuti admin?
+
+Silakan kirim:
+1. Nama
+2. Nomor WhatsApp
+3. Email, bila ada
+```
+
+## 10. Aktifkan Human Handoff
+
+Trigger ke admin:
+
+```text
+biaya sertifikasi
+jadwal asesmen
+daftar sertifikasi
+mau ikut sertifikasi
+persyaratan dokumen
+hubungi admin
+validasi ijazah
+validasi pengalaman
+```
+
+Pesan handoff:
+
+```text
+Untuk informasi biaya, jadwal asesmen, validasi dokumen, dan pendaftaran sertifikasi, saya sarankan Anda terhubung dengan admin/LSP terkait.
+
+Apakah Anda ingin diteruskan ke admin?
+```
+
+## 11. Test Chatbot
+
+Gunakan pertanyaan uji berikut:
+
+```text
+Cari Ahli Teknik Jalan
+```
+
+```text
+Tampilkan SKK bidang Gedung
+```
+
+```text
+Saya pengalaman 6 tahun di proyek gedung sebagai pelaksana lapangan
+```
+
+```text
+Saya fresh graduate teknik sipil, cocok ambil SKK apa?
+```
+
+```text
+KKNI Ahli Geoteknik berapa?
+```
+
+```text
+Link SKKNI Ahli Teknik Sumber Daya Air
+```
+
+```text
+Bandingkan Pelaksana Lapangan Gedung dan Pengawas Struktur Gedung
+```
+
+## 12. Paket File Final
+
+Gunakan paket ini untuk implementasi lengkap:
+
+[Paket Chatbot SKK Sipil ZIP](sandbox:/mnt/data/paket_chatbot_skk_sipil.zip)
+
+File konfigurasi utama:
+
+[chatbot_config_skk_sipil.json](sandbox:/mnt/data/skk_sipil_chatbot_package/chatbot_config_skk_sipil.json)
+
+[README_IMPLEMENTASI_SKK_SIPIL.md](sandbox:/mnt/data/skk_sipil_chatbot_package/README_IMPLEMENTASI_SKK_SIPIL.md)
+
+Tahap berikutnya setelah ini adalah **membuat versi landing page / widget chat** untuk dipasang di website atau WhatsApp gateway.

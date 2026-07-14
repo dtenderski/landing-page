@@ -1,0 +1,719 @@
+Lanjut. Berikut **bagian lanjutan konfigurasi chatbot Mekanikal** agar makin mirip pola chatbot Manajemen Pelaksanaan: ada **standard-code lookup, role-specific response, comparison flow, mock interview, scoring, testing checklist, dan mapping field dashboard**. Struktur ini mengikuti pola builder-style pada chatbot Manajemen Pelaksanaan, sedangkan basis datanya tetap dari katalog Mekanikal yang berisi subklasifikasi, jabatan kerja, jenjang, KKNI, SKK/SKKNI, dan link dokumen.  
+
+# 21. Standard Code Lookup Flow
+
+Gunakan ini agar user bisa mencari berdasarkan nomor SKKNI/SKKK.
+
+```yaml id="m8ez8v"
+flow:
+  id: lookup_standard_code
+  title: "Cari Jabatan Berdasarkan Standar Kompetensi"
+  purpose: >
+    Memungkinkan pengguna mencari jabatan Mekanikal berdasarkan kode SKKNI,
+    SKKK, atau keterangan standar kompetensi kerja.
+
+  bot_message: >
+    Masukkan kode standar kompetensi kerja yang ingin Anda cari.
+    Contoh:
+    - SKKNI 391-2015
+    - SKKNI 135-2015
+    - SKKNI 46-2022
+    - SKKNI 27-2021
+    - SKKNI 304-2009
+
+  expected_input:
+    type: text
+    entity: standard_code
+
+  next_node: show_roles_by_standard
+
+node:
+  id: show_roles_by_standard
+  type: dynamic_lookup
+  lookup_source: mekaskk_database_mekanikal
+  lookup_key: standar_kompetensi
+
+  exact_match_response: >
+    Berikut jabatan Mekanikal yang menggunakan standar {{standard_code}}:
+
+    {{matched_roles}}
+
+    Pilih salah satu jabatan untuk melihat detail, asesmen, atau checklist bukti.
+
+  fuzzy_match_response: >
+    Saya menemukan beberapa standar yang mirip dengan pencarian Anda:
+
+    {{similar_standards}}
+
+    Pilih standar yang paling sesuai.
+
+  no_match_response: >
+    Saya belum menemukan standar tersebut dalam database Mekanikal.
+    Coba gunakan kata kunci lain, misalnya:
+    - SKKNI 391-2015
+    - SKKNI 135-2015
+    - SKKNI 46-2022
+    - HVAC
+    - crane
+    - plumbing
+    - welder
+
+  quick_replies:
+    - "Lihat detail jabatan"
+    - "Cari standar lain"
+    - "Cari berdasarkan jabatan"
+    - "Menu utama"
+```
+
+# 22. Response Pack per Jabatan Populer
+
+## 22.1 Ahli Bidang Keahlian Teknik Mekanikal
+
+```yaml id="f27851"
+role_response:
+  role_name: "Ahli Bidang Keahlian Teknik Mekanikal"
+  response: >
+    Ahli Bidang Keahlian Teknik Mekanikal berada dalam klasifikasi Mekanikal,
+    subklasifikasi Teknik Mekanikal.
+
+    Jenjang yang tersedia:
+    - Ahli Muda Bidang Keahlian Teknik Mekanikal, KKNI 7
+    - Ahli Madya Bidang Keahlian Teknik Mekanikal, KKNI 8
+    - Ahli Utama Bidang Keahlian Teknik Mekanikal, KKNI 9
+
+    Kualifikasi:
+    Ahli
+
+    Standar Kompetensi:
+    SKKNI 391-2015
+
+    Fokus kompetensi:
+    Perencanaan, pemeriksaan, pengendalian, dan evaluasi pekerjaan teknik
+    mekanikal sesuai kebutuhan proyek atau bangunan gedung.
+
+  recommended_actions:
+    - "Mulai asesmen Mekanikal Gedung"
+    - "Checklist bukti Ahli Mekanikal"
+    - "Bandingkan dengan Ahli Pemeriksa Kelaikan Fungsi Mekanikal"
+    - "Lihat SKKNI 391-2015"
+```
+
+## 22.2 Operator Crane Mobile
+
+```yaml id="amj8gk"
+role_response:
+  role_name: "Operator Crane Mobile"
+  response: >
+    Operator Crane Mobile berada dalam jalur Crane dan Lifting.
+
+    Jenjang yang tersedia:
+    - Operator Crane Mobile, KKNI 2
+    - Operator Crane Mobile Level 3, KKNI 3
+
+    Kualifikasi:
+    Operator
+
+    Standar Kompetensi:
+    SKKNI 135-2015
+
+    Fokus kompetensi:
+    Pengoperasian crane mobile, pemeriksaan alat sebelum operasi,
+    pemahaman kapasitas angkat, komunikasi lifting, pengendalian area kerja,
+    dan keselamatan pengangkatan.
+
+  recommended_actions:
+    - "Mulai asesmen crane"
+    - "Checklist bukti operator crane"
+    - "Latihan studi kasus lifting"
+    - "Bandingkan dengan Tower Crane"
+```
+
+## 22.3 Tukang Plambing
+
+```yaml id="u9w8su"
+role_response:
+  role_name: "Tukang Plambing"
+  response: >
+    Tukang Plambing berada dalam subklasifikasi Plumbing dan Pompa Mekanik.
+
+    Jenjang yang tersedia:
+    - Tukang Plambing, KKNI 2
+    - Tukang Plambing Level 3, KKNI 3
+
+    Kualifikasi:
+    Operator
+
+    Standar Kompetensi:
+    SKKNI 304-2016, dengan keterangan dalam proses penyusunan SKKNI Tahun 2023
+    sesuai data sumber.
+
+    Fokus kompetensi:
+    Pemasangan, pemeriksaan, perbaikan, dan pengujian instalasi plambing
+    pada bangunan.
+
+  recommended_actions:
+    - "Mulai asesmen plumbing"
+    - "Checklist bukti plumbing"
+    - "Bandingkan dengan Tukang Pasang Pipa"
+    - "Latihan kasus kebocoran pipa"
+```
+
+## 22.4 Teknisi Fire Alarm
+
+```yaml id="jpfpeq"
+role_response:
+  role_name: "Teknisi Fire Alarm"
+  response: >
+    Teknisi Fire Alarm berada dalam subklasifikasi Proteksi Kebakaran.
+
+    Jenjang:
+    - Teknisi Fire Alarm, KKNI 4
+
+    Kualifikasi:
+    Teknisi/Analis
+
+    Standar Kompetensi:
+    SKKNI 304-2009
+
+    Fokus kompetensi:
+    Instalasi, pemeriksaan, pengujian, perawatan, dan penanganan gangguan
+    sistem fire alarm.
+
+  recommended_actions:
+    - "Mulai asesmen fire alarm"
+    - "Checklist bukti fire alarm"
+    - "Latihan studi kasus alarm tidak merespons"
+    - "Belajar modul proteksi kebakaran"
+```
+
+## 22.5 Mekanik HVAC
+
+```yaml id="h2yn05"
+role_response:
+  role_name: "Mekanik Heating, Ventilation, dan Air Condition (HVAC)"
+  response: >
+    Mekanik HVAC berada dalam subklasifikasi Teknik Tata Udara dan Refrigasi.
+
+    Jenjang:
+    - Mekanik Heating, Ventilation, dan Air Condition atau HVAC, KKNI 3
+
+    Kualifikasi:
+    Operator
+
+    Standar Kompetensi:
+    SKKNI 298-2009
+
+    Fokus kompetensi:
+    Pemeriksaan, perawatan, perbaikan, dan pengoperasian sistem HVAC,
+    termasuk sistem pendingin, ventilasi, dan tata udara.
+
+  recommended_actions:
+    - "Mulai asesmen HVAC"
+    - "Checklist bukti HVAC"
+    - "Latihan kasus AC tidak dingin"
+    - "Bandingkan dengan Ahli Perencanaan Sistem Tata Udara"
+```
+
+# 23. Comparison Flow
+
+```yaml id="y5vjli"
+flow:
+  id: compare_roles
+  title: "Bandingkan Dua Jabatan Mekanikal"
+  bot_message: >
+    Ketik dua jabatan yang ingin dibandingkan.
+    Contoh:
+    - Tukang Plambing vs Tukang Pasang Pipa
+    - Operator Crane Mobile vs Operator Tower Crane
+    - Ahli Teknik Mekanikal vs Ahli Pemeriksa Kelaikan Fungsi Mekanikal
+    - Quality Engineer tidak termasuk Mekanikal, tetapi Manajemen Pelaksanaan
+
+  entities:
+    - role_a
+    - role_b
+
+  next_node: show_role_comparison
+
+node:
+  id: show_role_comparison
+  type: comparison
+  response_structure:
+    - "Ringkasan perbedaan"
+    - "Subklasifikasi masing-masing"
+    - "Jenjang KKNI"
+    - "Kualifikasi"
+    - "Standar kompetensi kerja"
+    - "Fokus pekerjaan"
+    - "Cocok untuk pengalaman seperti apa"
+    - "Rekomendasi jalur belajar"
+
+  response_template: >
+    Berikut perbandingan antara {{role_a}} dan {{role_b}}:
+
+    1. Subklasifikasi:
+    - {{role_a}}: {{subklasifikasi_a}}
+    - {{role_b}}: {{subklasifikasi_b}}
+
+    2. Jenjang KKNI:
+    - {{role_a}}: {{kkni_a}}
+    - {{role_b}}: {{kkni_b}}
+
+    3. Kualifikasi:
+    - {{role_a}}: {{kualifikasi_a}}
+    - {{role_b}}: {{kualifikasi_b}}
+
+    4. Standar Kompetensi:
+    - {{role_a}}: {{standard_a}}
+    - {{role_b}}: {{standard_b}}
+
+    5. Fokus utama:
+    - {{role_a}}: {{focus_a}}
+    - {{role_b}}: {{focus_b}}
+
+    Rekomendasi:
+    {{recommendation}}
+
+  fallback_if_ambiguous: >
+    Saya menemukan lebih dari satu kemungkinan jabatan.
+    Pilih jabatan yang Anda maksud dari daftar berikut:
+
+    {{candidate_roles}}
+```
+
+# 24. Common Comparison Templates
+
+## 24.1 Tukang Plambing vs Tukang Pasang Pipa
+
+```yaml id="lobfj0"
+comparison_template:
+  comparison_id: tukang_plambing_vs_tukang_pasang_pipa
+  role_a: "Tukang Plambing"
+  role_b: "Tukang Pasang Pipa"
+  bot_message: >
+    Tukang Plambing dan Tukang Pasang Pipa sama-sama berkaitan dengan pekerjaan
+    pipa, tetapi fokusnya berbeda.
+
+    Tukang Plambing:
+    - Fokus pada pekerjaan plambing bangunan, instalasi air bersih, air kotor,
+      sanitasi, dan sistem terkait.
+    - Jenjang KKNI: 2-3
+    - Kualifikasi: Operator
+    - Standar: SKKNI 304-2016, dengan keterangan dalam proses penyusunan SKKNI 2023
+
+    Tukang Pasang Pipa:
+    - Fokus pada pemasangan pipa sesuai metode kerja dan spesifikasi.
+    - Jenjang KKNI: 2
+    - Kualifikasi: Operator
+    - Standar: SKKNI 28-2023
+
+    Jika pekerjaan Anda lebih umum pada sistem plumbing gedung, pilih Tukang Plambing.
+    Jika fokus utama Anda pemasangan pipa, pilih Tukang Pasang Pipa.
+
+  quick_replies:
+    - "Saya pilih Tukang Plambing"
+    - "Saya pilih Tukang Pasang Pipa"
+    - "Mulai asesmen plumbing"
+    - "Checklist bukti plumbing"
+```
+
+## 24.2 Operator Crane Mobile vs Operator Tower Crane
+
+```yaml id="h7k0f1"
+comparison_template:
+  comparison_id: crane_mobile_vs_tower_crane
+  role_a: "Operator Crane Mobile"
+  role_b: "Operator Tower Crane"
+  bot_message: >
+    Operator Crane Mobile dan Operator Tower Crane sama-sama berada pada jalur
+    crane/lifting, tetapi alat dan konteks kerjanya berbeda.
+
+    Operator Crane Mobile:
+    - Mengoperasikan crane bergerak/mobile.
+    - Umumnya digunakan pada pekerjaan pengangkatan yang berpindah lokasi.
+    - Jenjang KKNI: 2-3
+    - Standar: SKKNI 135-2015
+
+    Operator Tower Crane:
+    - Mengoperasikan tower crane, biasanya pada proyek gedung bertingkat.
+    - Fokus pada pengangkatan vertikal dan horizontal di area proyek tetap.
+    - Jenjang KKNI: 2-3
+    - Standar: SKK Khusus/SKKK sesuai data katalog.
+
+    Jika pengalaman Anda pada crane bergerak, pilih Operator Crane Mobile.
+    Jika pengalaman Anda pada tower crane proyek gedung, pilih Operator Tower Crane.
+
+  quick_replies:
+    - "Saya pilih Crane Mobile"
+    - "Saya pilih Tower Crane"
+    - "Mulai asesmen lifting"
+    - "Checklist bukti crane"
+```
+
+# 25. Mock Interview Simulator
+
+```yaml id="bwy6ew"
+flow:
+  id: mock_interview_start
+  title: "Simulasi Wawancara Asesmen Mekanikal"
+  purpose: >
+    Membantu pengguna berlatih menjawab pertanyaan asesor berdasarkan pengalaman kerja,
+    bukti portofolio, dan jabatan Mekanikal yang dituju.
+
+  bot_message: >
+    Kita akan melakukan simulasi wawancara asesmen.
+    Saya akan bertanya seperti asesor, lalu Anda menjawab berdasarkan pengalaman nyata.
+    Setelah itu, saya akan memberi umpan balik.
+
+    Pilih area simulasi:
+  options:
+    - "Simulasi HVAC"
+    - "Simulasi Plumbing"
+    - "Simulasi Fire Alarm"
+    - "Simulasi Lift/Eskalator"
+    - "Simulasi Mekanikal Gedung"
+    - "Simulasi Welder"
+    - "Simulasi Alat Berat"
+    - "Simulasi Crane/Lifting"
+    - "Simulasi Scaffolding"
+    - "Simulasi berdasarkan jabatan tertentu"
+
+  rules:
+    - "Ajukan satu pertanyaan per giliran."
+    - "Minta pengguna menjawab dengan contoh pengalaman nyata."
+    - "Berikan feedback menggunakan format STAR: Situation, Task, Action, Result."
+    - "Jangan menyatakan lulus/gagal secara resmi."
+```
+
+# 26. STAR Coaching Framework
+
+```yaml id="ki9yzb"
+coaching_framework:
+  id: star_method
+  name: "STAR Method"
+  usage: "Membantu pengguna menyusun jawaban wawancara asesmen."
+
+  components:
+    situation:
+      label: "Situation"
+      prompt: "Apa konteks pekerjaan, proyek, atau masalah yang terjadi?"
+      example: "Pada proyek gedung bertingkat, terjadi gangguan pada sistem fire alarm."
+
+    task:
+      label: "Task"
+      prompt: "Apa tanggung jawab Anda dalam situasi tersebut?"
+      example: "Saya bertanggung jawab memeriksa panel, detector, dan jalur instalasi."
+
+    action:
+      label: "Action"
+      prompt: "Apa tindakan yang Anda lakukan?"
+      example: "Saya melakukan pengecekan visual, pengujian fungsi, dan pencatatan temuan."
+
+    result:
+      label: "Result"
+      prompt: "Apa hasil dari tindakan Anda?"
+      example: "Sistem kembali berfungsi dan hasil pengujian dicatat dalam laporan."
+
+  bot_feedback_template: >
+    Jawaban Anda sudah memuat:
+    - Situation: {{has_situation}}
+    - Task: {{has_task}}
+    - Action: {{has_action}}
+    - Result: {{has_result}}
+
+    Saran perbaikan:
+    {{improvement_suggestions}}
+
+    Coba lengkapi jawaban dengan hasil yang lebih terukur, misalnya:
+    - pekerjaan selesai tanpa insiden
+    - hasil pengujian diterima
+    - kebocoran berhasil diperbaiki
+    - alat kembali beroperasi normal
+    - temuan inspeksi ditutup
+```
+
+# 27. Mock Interview Question Bank
+
+```yaml id="vo90uj"
+mock_interview_questions:
+  hvac:
+    - "Ceritakan pengalaman Anda menangani sistem HVAC yang tidak mencapai suhu desain."
+    - "Bagaimana Anda memeriksa unit AC sebelum dinyatakan siap digunakan?"
+    - "Apa tindakan Anda jika ditemukan tekanan refrigerant tidak normal?"
+
+  plumbing:
+    - "Ceritakan pengalaman Anda menangani kebocoran instalasi pipa."
+    - "Bagaimana Anda melakukan pengujian tekanan pada sistem plumbing?"
+    - "Apa yang Anda periksa sebelum instalasi pipa ditutup plafon atau dinding?"
+
+  fire_alarm:
+    - "Ceritakan pengalaman Anda melakukan pengujian sistem fire alarm."
+    - "Apa tindakan Anda jika detector tidak merespons saat pengujian?"
+    - "Bagaimana Anda mendokumentasikan hasil testing fire alarm?"
+
+  lift_escalator:
+    - "Ceritakan pengalaman Anda menangani gangguan lift atau eskalator."
+    - "Apa pemeriksaan awal sebelum lift dinyatakan aman digunakan?"
+    - "Bagaimana Anda menangani laporan lift berhenti mendadak?"
+
+  mechanical_building:
+    - "Ceritakan pengalaman Anda mengawasi pekerjaan mekanikal bangunan gedung."
+    - "Bagaimana Anda memastikan pekerjaan mekanikal sesuai gambar dan spesifikasi?"
+    - "Apa dokumen yang Anda siapkan untuk pemeriksaan kelaikan fungsi mekanikal?"
+
+  welding:
+    - "Ceritakan pengalaman Anda menangani cacat hasil las."
+    - "Apa yang Anda periksa sebelum memulai pekerjaan pengelasan?"
+    - "Bagaimana Anda memastikan hasil las sesuai persyaratan?"
+
+  heavy_equipment:
+    - "Ceritakan pengalaman Anda mengoperasikan atau memperbaiki alat berat."
+    - "Apa pemeriksaan harian yang perlu dilakukan sebelum alat berat digunakan?"
+    - "Apa tindakan Anda jika sistem hidrolik alat berat bermasalah?"
+
+  crane_lifting:
+    - "Ceritakan pengalaman Anda melakukan pekerjaan lifting."
+    - "Apa yang Anda periksa sebelum pengangkatan material?"
+    - "Apa tindakan Anda jika sling atau alat bantu angkat tidak layak?"
+
+  scaffolding:
+    - "Ceritakan pengalaman Anda memeriksa scaffolding sebelum digunakan."
+    - "Apa risiko utama pada pekerjaan scaffolding?"
+    - "Apa tindakan Anda jika scaffolding belum lengkap tetapi diminta segera digunakan?"
+```
+
+# 28. Feedback Engine
+
+```yaml id="vbbk7i"
+feedback_engine:
+  id: mekanikal_interview_feedback_engine
+  scoring_method: "expected_points_matching"
+
+  score_scale:
+    0: "Tidak menjawab atau tidak relevan"
+    1: "Jawaban sangat umum, belum menunjukkan pengalaman"
+    2: "Menjawab sebagian, tetapi bukti dan hasil belum jelas"
+    3: "Jawaban cukup lengkap dengan tindakan yang relevan"
+    4: "Jawaban kuat, sistematis, berbasis bukti, dan memiliki hasil terukur"
+
+  evaluation_dimensions:
+    - id: relevance
+      label: "Kesesuaian dengan pertanyaan"
+    - id: evidence
+      label: "Bukti pengalaman kerja"
+    - id: safety
+      label: "Keselamatan kerja"
+    - id: action
+      label: "Kejelasan tindakan"
+    - id: result
+      label: "Hasil atau dampak"
+    - id: terminology
+      label: "Penggunaan istilah teknis/SKK yang tepat"
+
+  feedback_template: >
+    Evaluasi jawaban Anda:
+
+    Skor sementara:
+    {{score}} dari 4
+
+    Yang sudah baik:
+    {{positive_points}}
+
+    Yang perlu diperkuat:
+    {{missing_points}}
+
+    Contoh perbaikan jawaban:
+    {{improved_answer}}
+
+    Tips:
+    Gunakan struktur STAR agar jawaban lebih mudah dinilai:
+    Situasi → Tugas → Tindakan → Hasil.
+
+    Catatan:
+    Evaluasi ini hanya latihan persiapan, bukan keputusan resmi sertifikasi SKK.
+```
+
+# 29. Glossary Mekanikal
+
+```yaml id="kc44si"
+glossary:
+  SKKNI: >
+    Standar Kompetensi Kerja Nasional Indonesia, yaitu rumusan kemampuan kerja
+    yang mencakup pengetahuan, keterampilan/keahlian, dan sikap kerja sesuai
+    tugas jabatan.
+
+  SKK: >
+    Dalam konteks ini mengacu pada kompetensi kerja dan jalur sertifikasi
+    tenaga kerja konstruksi sesuai jabatan.
+
+  KKNI: >
+    Kerangka Kualifikasi Nasional Indonesia, yaitu kerangka penjenjangan
+    kualifikasi kompetensi berdasarkan tingkat tanggung jawab, kompleksitas,
+    dan kemandirian kerja.
+
+  HVAC: >
+    Heating, Ventilation, and Air Conditioning. Bidang yang berkaitan dengan
+    pemanasan, ventilasi, pendinginan, tata udara, dan kenyamanan termal.
+
+  Plumbing: >
+    Sistem instalasi pipa, air bersih, air kotor, sanitasi, drainase, dan
+    perlengkapan terkait dalam bangunan.
+
+  Fire Alarm: >
+    Sistem deteksi dan peringatan kebakaran yang terdiri dari panel, detector,
+    manual call point, alarm bell, dan perangkat pendukung lain.
+
+  Lifting: >
+    Pekerjaan pengangkatan material menggunakan alat angkat seperti crane,
+    forklift, sling, shackle, dan perlengkapan rigging.
+
+  Rigging: >
+    Kegiatan menyiapkan, mengikat, dan mengamankan beban sebelum proses
+    pengangkatan.
+
+  Scaffolding: >
+    Struktur sementara atau perancah yang digunakan sebagai akses kerja di
+    ketinggian.
+
+  WPS: >
+    Welding Procedure Specification, yaitu prosedur tertulis untuk pekerjaan
+    pengelasan.
+
+  NCR: >
+    Non-Conformance Report, laporan ketidaksesuaian pekerjaan atau hasil kerja
+    terhadap spesifikasi.
+```
+
+# 30. Dashboard Field Mapping
+
+Gunakan mapping ini untuk mengisi dashboard builder.
+
+```yaml id="kq4oqy"
+dashboard_mapping:
+  chatbot_name:
+    value: "SKK Coach — Mekanikal"
+
+  chatbot_description:
+    value: >
+      Chatbot informasi, pembelajaran, asesmen mandiri, dan rekomendasi jalur
+      sertifikasi SKK/SKKNI untuk klasifikasi Mekanikal.
+
+  welcome_message:
+    source: "Section 18 - Welcome Message"
+
+  system_prompt:
+    source: "Section 17 - Final System Prompt"
+
+  knowledge_base:
+    files:
+      - "mekaskk_database_mekanikal.json"
+      - "README_mekaskk_bot.md"
+
+  quick_replies:
+    values:
+      - "Cari Jabatan"
+      - "Cari SKK/SKKNI"
+      - "Cari KKNI"
+      - "Rekomendasi Sertifikasi"
+      - "Belajar Kompetensi"
+      - "Asesmen Mandiri"
+      - "Latihan Studi Kasus"
+      - "Checklist Bukti"
+      - "Tanya Istilah"
+      - "Menu Utama"
+
+  fallback_message:
+    value: >
+      Maaf, saya belum menemukan data yang cocok dalam klasifikasi Mekanikal.
+      Coba gunakan kata kunci seperti HVAC, plumbing, tukang las, operator crane,
+      fire alarm, scaffolding, alat berat, lift, atau mekanikal bangunan gedung.
+
+  max_results:
+    value: 5
+
+  language:
+    value: "Indonesian / id-ID"
+
+  tone:
+    value: "Profesional, jelas, suportif, praktis"
+```
+
+# 31. Test Checklist
+
+Setelah konfigurasi dimasukkan ke dashboard, uji dengan pertanyaan berikut.
+
+```text id="oshny1"
+1. Halo
+2. Apa saja bidang Mekanikal?
+3. Saya teknisi fire alarm
+4. Cari SKKNI tukang las
+5. Jenjang KKNI operator crane
+6. Tampilkan jabatan Mekanikal KKNI level 7
+7. Saya mechanical engineer gedung, cocok sertifikasi apa?
+8. Apa beda Tukang Plambing dan Tukang Pasang Pipa?
+9. Apa standar untuk Operator Crane Mobile?
+10. Saya mau asesmen HVAC
+11. Beri saya studi kasus plumbing
+12. Checklist bukti untuk welder
+13. Apa itu rigging?
+14. SKKNI 391-2015 untuk jabatan apa?
+15. Saya mau latihan wawancara untuk Ahli Teknik Mekanikal
+```
+
+# 32. Expected Behavior
+
+```yaml id="i3gk7a"
+expected_behavior:
+  role_lookup:
+    input: "Saya teknisi fire alarm"
+    expected:
+      - menampilkan jabatan Teknisi Fire Alarm
+      - menampilkan kualifikasi Teknisi/Analis
+      - menampilkan KKNI 4
+      - menampilkan standar SKKNI 304-2009
+      - menawarkan asesmen, checklist, atau modul belajar
+
+  ambiguous_role:
+    input: "Saya mau crane"
+    expected:
+      - menampilkan beberapa pilihan crane
+      - meminta user memilih jenis crane
+      - tidak langsung memutuskan satu jabatan
+
+  kkni_lookup:
+    input: "KKNI level 7"
+    expected:
+      - menampilkan jabatan Mekanikal level 7
+      - mengelompokkan atau membatasi maksimal 5 hasil
+      - menawarkan detail jabatan
+
+  standard_lookup:
+    input: "SKKNI 391-2015"
+    expected:
+      - menampilkan jabatan terkait teknik mekanikal
+      - menampilkan jenjang KKNI yang sesuai
+      - menampilkan link jika tersedia
+
+  assessment:
+    input: "Mulai asesmen crane"
+    expected:
+      - memulai asesmen mandiri
+      - memakai skor 0 sampai 4
+      - memberi hasil sebagai rekomendasi belajar, bukan keputusan resmi
+
+  safety:
+    input: "Sling rusak tapi mau tetap lifting"
+    expected:
+      - menyarankan penghentian sementara
+      - meminta penggantian sling layak
+      - menekankan prosedur keselamatan
+```
+
+# 33. File yang perlu diunggah ke Knowledge Base
+
+Gunakan file berikut:
+
+[Database JSON MekaSKK Bot](sandbox:/mnt/data/mekaskk_database_mekanikal.json)
+
+[README MekaSKK Bot](sandbox:/mnt/data/README_mekaskk_bot.md)
+
+File database JSON menjadi sumber utama chatbot, sedangkan README bisa dipakai sebagai dokumentasi cara kerja dan konteks chatbot.

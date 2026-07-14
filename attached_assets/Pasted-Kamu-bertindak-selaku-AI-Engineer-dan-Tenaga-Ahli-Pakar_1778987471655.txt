@@ -1,0 +1,2641 @@
+Kamu bertindak selaku AI Engineer dan Tenaga Ahli /  Pakar bidang Akademik dan Kesiswaan, saya seorang counselor berencana membuat chatbot Guru Pembimbing/Pendamping Siswa bidang Bimbingan dan Konsultasi (BK) untuk keberhasilan Akademik Siswa di Sekolah dan Mengarahkan Pendidikan tingkat Lanjut ke Sekolah/Kampus dalam Negeri maupun Luar Negeri... Kamu bertugas membuat Chatbot Counselar Akademik secara multiclaw/openclaw yang menghubungkan agen-agen sehingga tugas-tugas counselor dapat dibantu dan dilaksanakan oleh agen-agen ini. kamu bisa bertanya balik apabila kurang paham.     Thought for a couple of seconds
+Baik. Saya akan bantu rancang Chatbot Counselor Akademik/BK multi-agent untuk membantu tugas konselor sekolah, dari pemantauan akademik, konsultasi siswa, rekomendasi jurusan, sampai perencanaan studi lanjut dalam/luar negeri.
+Konsep utamanya: 1 chatbot utama sebagai “Orchestrator” yang menghubungkan beberapa agen khusus.
+Rancangan Agen
+1. Agen Profil Siswa
+Mengelola data siswa: nilai, minat, bakat, kepribadian, riwayat konsultasi, prestasi, kendala belajar, kondisi keluarga, dan target pendidikan.
+
+2. Agen Monitoring Akademik
+Menganalisis nilai, absensi, keterlambatan tugas, tren penurunan/peningkatan prestasi, lalu memberi peringatan dini kepada konselor.
+
+3. Agen Konsultasi BK
+Membantu percakapan awal dengan siswa tentang masalah belajar, motivasi, manajemen waktu, adaptasi sekolah, relasi sosial, dan tekanan akademik.
+
+4. Agen Rekomendasi Jurusan/Karier
+Mencocokkan minat, bakat, nilai, kepribadian, dan peluang karier untuk memberi rekomendasi jurusan SMA/SMK, kuliah, atau jalur profesi.
+
+5. Agen Studi Lanjut Dalam Negeri
+Membantu informasi jalur masuk PTN/PTS, SNBP/SNBT/mandiri, politeknik, sekolah kedinasan, beasiswa, syarat nilai, portofolio, dan timeline pendaftaran.
+
+6. Agen Studi Lanjut Luar Negeri
+Membantu eksplorasi negara tujuan, kampus, jurusan, beasiswa, IELTS/TOEFL, dokumen, motivation letter, recommendation letter, visa, dan estimasi biaya.
+
+7. Agen Intervensi & Rencana Aksi
+Membuat program pendampingan personal: jadwal belajar, target nilai, rencana remedial, latihan ujian, konseling lanjutan, dan laporan perkembangan.
+
+8. Agen Komunikasi Orang Tua/Wali
+Membantu membuat ringkasan perkembangan siswa dan draft pesan/laporan kepada orang tua dengan bahasa yang empatik dan profesional.
+
+9. Agen Administrasi BK
+Membantu membuat catatan konseling, laporan bulanan, rekap kasus, surat rekomendasi, agenda konsultasi, dan dokumentasi tindak lanjut.
+
+Alur Kerja Chatbot
+Siswa/konselor bertanya → Orchestrator memahami kebutuhan → memilih agen yang sesuai → agen menganalisis data → hasil dikembalikan dalam bentuk rekomendasi, rencana aksi, atau laporan.
+Contoh:“Nilai matematika Andi turun dan dia bingung pilih jurusan kuliah.”
+Sistem akan memanggil:
+Agen Profil Siswa → Agen Monitoring Akademik → Agen Konsultasi BK → Agen Rekomendasi Jurusan → Agen Intervensi
+Hasilnya:
+
+rekomendasi penyebab kemungkinan, pertanyaan konseling lanjutan, opsi jurusan, strategi peningkatan nilai, dan jadwal pendampingan.
+Fitur Utama Chatbot
+• 
+Konsultasi akademik siswa
+
+• 
+Deteksi dini siswa berisiko
+
+• 
+Rekomendasi jurusan dan kampus
+
+• 
+Rekomendasi beasiswa
+
+• 
+Rencana belajar personal
+
+• 
+Laporan BK otomatis
+
+• 
+Dashboard perkembangan siswa
+
+• 
+Draft komunikasi ke orang tua
+
+• 
+Riwayat konseling terstruktur
+
+• 
+Escalation alert jika ada risiko serius
+
+Prinsip Penting
+Chatbot ini bukan pengganti konselor, tetapi asisten pendamping. Untuk kasus sensitif seperti kekerasan, depresi berat, self-harm, pelecehan, atau krisis keluarga, sistem harus otomatis memberi tanda “perlu ditangani konselor/manusia segera.”
+Pertanyaan Awal
+Agar saya bisa lanjut membuat desain lengkapnya, saya perlu tahu satu hal:
+Apakah chatbot ini ingin dibuat untuk SMP, SMA/SMK, atau semua jenjang sekolah?[ ] ya  baiknya semua sekolah apabila memang relevanThought for a couple of seconds
+Baik, kita rancang untuk multi-jenjang: SD, SMP, SMA, SMK, dan gap-year/alumni, dengan modul yang menyesuaikan usia siswa.
+Struktur terbaiknya:
+1. Chatbot Utama: Counselor Orchestrator
+Tugasnya memahami kebutuhan pengguna lalu memanggil agen yang sesuai.
+Contoh:
+• 
+SD → fokus kebiasaan belajar, emosi, adaptasi, minat awal
+
+• 
+SMP → eksplorasi minat, gaya belajar, persiapan SMA/SMK
+
+• 
+SMA → jurusan kuliah, kampus, beasiswa, karier
+
+• 
+SMK → kompetensi keahlian, magang, sertifikasi, kerja/kuliah
+
+• 
+Alumni/gap year → strategi daftar ulang, tes masuk, portofolio, beasiswa
+
+2. Pembagian Agen Multi-Jenjang
+Agen Profil & Riwayat Siswa
+Menyimpan data dasar, nilai, minat, bakat, catatan BK, prestasi, absensi, perilaku belajar, kondisi pendukung, dan target pendidikan.
+Agen Akademik
+Menganalisis nilai, mapel lemah/kuat, tren prestasi, risiko tinggal kelas, kebutuhan remedial, dan strategi belajar.
+Agen Psikopedagogik
+Membantu mengenali gaya belajar, motivasi, hambatan belajar, manajemen waktu, kecemasan akademik ringan, dan adaptasi sosial.
+Agen Minat-Bakat & Karier
+Mengarahkan pilihan:
+• 
+SMP ke SMA/SMK
+
+• 
+SMA ke jurusan kuliah
+
+• 
+SMK ke kerja/kuliah/wirausaha
+
+• 
+Alumni ke strategi masuk kampus atau karier
+
+Agen Studi Lanjut Dalam Negeri
+Membantu pilihan sekolah, kampus, jurusan, jalur masuk, sekolah kedinasan, politeknik, beasiswa, dan timeline.
+Agen Studi Lanjut Luar Negeri
+Membantu negara tujuan, kampus, jurusan, bahasa, beasiswa, dokumen, visa, biaya, dan kesiapan akademik.
+Agen Rencana Aksi Siswa
+Membuat jadwal belajar, target mingguan, rencana peningkatan nilai, checklist pendaftaran, dan tindak lanjut konseling.
+Agen Orang Tua/Wali
+Membuat laporan perkembangan dan saran pendampingan di rumah.
+Agen Administrasi BK
+Membantu catatan konseling, laporan kasus, rekap bulanan, surat rekomendasi, dan dokumentasi.
+3. Mode Berdasarkan Pengguna
+Chatbot sebaiknya punya beberapa mode:
+• Mode Siswa: bahasa sederhana, suportif, tidak menghakimi.
+
+• Mode Konselor/Guru BK: analisis lengkap, rekomendasi intervensi, catatan profesional.
+
+• Mode Orang Tua: ringkasan perkembangan dan saran praktis.
+
+• Mode Kepala Sekolah/Admin: laporan agregat, tanpa membuka detail sensitif siswa.
+
+4. Prinsip Keamanan
+Harus ada sistem deteksi risiko untuk kasus seperti:
+• 
+kekerasan
+
+• 
+bullying berat
+
+• 
+pelecehan
+
+• 
+self-harm
+
+• 
+depresi berat
+
+• 
+konflik keluarga serius
+
+• 
+ancaman keselamatan
+
+Jika terdeteksi, chatbot tidak boleh menangani sendiri. Harus muncul status:
+“Perlu eskalasi ke konselor manusia / pihak sekolah / orang tua / layanan profesional.”
+5. Arsitektur Singkat
+User → Chatbot Orchestrator → Agen Khusus → Knowledge Base Sekolah → Database Siswa → Output Rekomendasi
+Output bisa berupa:
+• 
+jawaban konsultasi
+
+• 
+rencana belajar
+
+• 
+rekomendasi jurusan
+
+• 
+rekomendasi sekolah/kampus
+
+• 
+laporan BK
+
+• 
+surat/draft komunikasi
+
+• 
+checklist pendaftaran
+
+Langkah berikutnya, saya bisa buatkan blueprint lengkap multi-agent chatbot BK berisi struktur agen, prompt tiap agen, alur kerja, database, dan contoh percakapan.[ ] lanjutThought for a couple of seconds
+Berikut Blueprint Chatbot Counselor Akademik/BK Multi-Agent untuk Semua Jenjang Sekolah.
+1. Nama Sistem
+EduCounsel AI
+Asisten Guru BK dan Pendamping Akademik Siswa
+2. Tujuan Utama
+Membantu konselor sekolah dalam:
+• 
+memahami profil dan kebutuhan siswa
+
+• 
+memantau keberhasilan akademik
+
+• 
+memberi rekomendasi belajar
+
+• 
+membantu pemilihan jurusan/sekolah/kampus
+
+• 
+mendampingi rencana studi dalam dan luar negeri
+
+• 
+membuat laporan BK dan komunikasi orang tua
+
+• 
+memberi peringatan dini untuk kasus akademik atau psikososial
+
+3. Struktur Multi-Agent
+A. Master Agent: Counselor Orchestrator
+Peran: pusat kendali.
+Tugas:
+• 
+memahami pertanyaan pengguna
+
+• 
+mengenali jenjang siswa
+
+• 
+memilih agen yang tepat
+
+• 
+menggabungkan hasil dari beberapa agen
+
+• 
+memastikan jawaban aman, empatik, dan sesuai konteks sekolah
+
+Contoh prompt:
+
+
+
+Anda adalah Counselor Orchestrator. Tugas Anda adalah memahami kebutuhan pengguna, menentukan agen yang paling relevan, menggabungkan analisis, dan menghasilkan rekomendasi yang aman, etis, dan praktis untuk konteks sekolah.
+4. Agen-Agen Inti
+1. Student Profile Agent
+Mengelola profil siswa.
+Data yang dibutuhkan:
+• 
+nama/inisial siswa
+
+• 
+jenjang dan kelas
+
+• 
+nilai akademik
+
+• 
+absensi
+
+• 
+minat dan bakat
+
+• 
+gaya belajar
+
+• 
+riwayat konseling
+
+• 
+prestasi
+
+• 
+kendala belajar
+
+• 
+dukungan keluarga
+
+• 
+target pendidikan
+
+Output:
+• 
+ringkasan profil siswa
+
+• 
+kekuatan utama
+
+• 
+area yang perlu dibantu
+
+• 
+rekomendasi agen lanjutan
+
+2. Academic Monitoring Agent
+Menganalisis perkembangan akademik.
+Tugas:
+• 
+membaca nilai siswa
+
+• 
+mendeteksi penurunan nilai
+
+• 
+melihat mata pelajaran kuat/lemah
+
+• 
+memberi status risiko akademik
+
+• 
+menyarankan strategi belajar
+
+Kategori risiko:
+• Hijau: stabil
+
+• Kuning: perlu perhatian
+
+• Merah: perlu intervensi segera
+
+3. Learning Strategy Agent
+Membuat strategi belajar personal.
+Output:
+• 
+jadwal belajar mingguan
+
+• 
+teknik belajar sesuai gaya belajar
+
+• 
+target nilai
+
+• 
+latihan/remedial
+
+• 
+strategi menghadapi ujian
+
+• 
+manajemen waktu
+
+4. Psychopedagogic Support Agent
+Membantu isu belajar dan motivasi.
+Fokus:
+• 
+motivasi rendah
+
+• 
+kecemasan akademik ringan
+
+• 
+sulit fokus
+
+• 
+prokrastinasi
+
+• 
+adaptasi sekolah
+
+• 
+relasi teman
+
+• 
+kebiasaan belajar
+
+Catatan penting: agen ini bukan psikolog klinis. Untuk kasus berat harus eskalasi.
+5. Interest, Talent & Career Agent
+Membantu eksplorasi minat, bakat, jurusan, dan karier.
+Untuk SD:
+• 
+eksplorasi minat awal
+
+• 
+kebiasaan belajar
+
+• 
+rasa percaya diri
+
+Untuk SMP:
+• 
+pilihan SMA/SMK/MA
+
+• 
+minat bidang studi
+
+• 
+bakat awal
+
+Untuk SMA:
+• 
+jurusan kuliah
+
+• 
+kampus
+
+• 
+karier masa depan
+
+Untuk SMK:
+• 
+dunia kerja
+
+• 
+sertifikasi
+
+• 
+magang
+
+• 
+kuliah lanjutan
+
+• 
+wirausaha
+
+6. Domestic Education Pathway Agent
+Mengarahkan studi lanjut dalam negeri.
+Tugas:
+• 
+rekomendasi SMA/SMK/MA
+
+• 
+rekomendasi PTN/PTS
+
+• 
+jalur SNBP/SNBT/mandiri
+
+• 
+politeknik
+
+• 
+sekolah kedinasan
+
+• 
+beasiswa
+
+• 
+timeline pendaftaran
+
+• 
+persiapan portofolio
+
+7. International Education Pathway Agent
+Mengarahkan studi lanjut luar negeri.
+Tugas:
+• 
+rekomendasi negara
+
+• 
+rekomendasi kampus
+
+• 
+persiapan IELTS/TOEFL
+
+• 
+dokumen aplikasi
+
+• 
+motivation letter
+
+• 
+recommendation letter
+
+• 
+visa pelajar
+
+• 
+beasiswa
+
+• 
+estimasi biaya
+
+• 
+cultural readiness
+
+8. Parent Communication Agent
+Membantu komunikasi dengan orang tua.
+Output:
+• 
+ringkasan perkembangan siswa
+
+• 
+draft pesan WhatsApp/email
+
+• 
+laporan konsultasi
+
+• 
+saran pendampingan di rumah
+
+• 
+undangan pertemuan orang tua
+
+9. BK Documentation Agent
+Membantu administrasi BK.
+Output:
+• 
+catatan konseling
+
+• 
+laporan kasus
+
+• 
+laporan bulanan
+
+• 
+rekap siswa berisiko
+
+• 
+surat rekomendasi
+
+• 
+berita acara konseling
+
+• 
+rencana tindak lanjut
+
+10. Safety & Escalation Agent
+Agen wajib untuk keamanan siswa.
+Mendeteksi:
+• 
+self-harm
+
+• 
+kekerasan
+
+• 
+bullying berat
+
+• 
+pelecehan
+
+• 
+depresi berat
+
+• 
+ancaman keselamatan
+
+• 
+kekerasan dalam keluarga
+
+• 
+eksploitasi anak
+
+Output:
+• 
+tingkat urgensi
+
+• 
+rekomendasi eskalasi
+
+• 
+pesan aman untuk siswa
+
+• 
+instruksi agar segera melibatkan konselor manusia
+
+5. Alur Kerja Sistem
+Kasus 1: Siswa nilai turun
+Input:
+
+
+
+Nilai matematika Rani turun dari 85 ke 62, dia sering tidak mengerjakan PR.
+Alur agen:
+
+
+
+Orchestrator→ Student Profile Agent→ Academic Monitoring Agent→ Learning Strategy Agent→ Parent Communication Agent→ BK Documentation Agent
+Output:
+• 
+status risiko: kuning/merah
+
+• 
+kemungkinan penyebab
+
+• 
+pertanyaan konseling lanjutan
+
+• 
+rencana belajar 4 minggu
+
+• 
+draft pesan ke orang tua
+
+• 
+catatan BK
+
+Kasus 2: Siswa bingung pilih jurusan kuliah
+Alur agen:
+
+
+
+Orchestrator→ Student Profile Agent→ Interest, Talent & Career Agent→ Domestic Education Pathway Agent→ Learning Strategy Agent
+Output:
+• 
+pilihan jurusan yang cocok
+
+• 
+alasan rekomendasi
+
+• 
+mata pelajaran pendukung
+
+• 
+kampus target
+
+• 
+strategi masuk
+
+• 
+timeline persiapan
+
+6. Format Database Minimal
+Tabel SiswaFieldContohstudent_idS001namaRanijenjangSMAkelasXIminatPsikologi, Bahasa Inggrisnilai_kuatBahasa Indonesia, Biologinilai_lemahMatematikatargetKuliah Psikologistatus_risikoKuning
+Tabel NilaiFieldContohstudent_idS001mapelMatematikanilai_sebelumnya85nilai_terbaru62trenTuruncatatanTidak mengerjakan PR
+Tabel KonselingFieldContohtanggal2026-05-17topikPenurunan akademikringkasanSiswa kesulitan fokustindak_lanjutJadwal belajar 4 mingguperlu_eskalasiTidak
+7. Output Standar Chatbot
+Setiap jawaban sebaiknya memiliki format:
+
+
+
+1. Ringkasan Masalah2. Analisis Awal3. Tingkat Risiko4. Rekomendasi Tindakan5. Rencana Tindak Lanjut6. Catatan untuk Konselor7. Draft Komunikasi jika diperlukan
+8. Contoh Prompt Master Orchestrator
+
+
+
+Anda adalah EduCounsel AI, asisten Guru BK dan Counselor Akademik.Tugas Anda:1. Membantu konselor memahami kondisi akademik dan perkembangan siswa.2. Menghubungkan kebutuhan pengguna dengan agen yang sesuai.3. Memberikan rekomendasi yang empatik, praktis, dan berbasis data.4. Menyesuaikan jawaban dengan jenjang SD, SMP, SMA, SMK, atau alumni.5. Tidak menggantikan konselor manusia.6. Melakukan eskalasi jika ada indikasi risiko keselamatan, kekerasan, self-harm, pelecehan, atau krisis psikologis berat.Selalu gunakan struktur:- Ringkasan- Analisis- Rekomendasi- Rencana Aksi- Catatan Konselor
+9. Tahap Pengembangan
+Tahap 1: MVP
+• 
+Chatbot konsultasi akademik
+
+• 
+profil siswa
+
+• 
+rekomendasi belajar
+
+• 
+catatan BK
+
+• 
+laporan sederhana
+
+Tahap 2: Multi-Agent
+• 
+agen akademik
+
+• 
+agen minat bakat
+
+• 
+agen studi lanjut
+
+• 
+agen orang tua
+
+• 
+agen dokumentasi
+
+Tahap 3: Integrasi Data
+• 
+nilai siswa
+
+• 
+absensi
+
+• 
+LMS/e-learning
+
+• 
+database sekolah
+
+• 
+dashboard konselor
+
+Tahap 4: Advanced
+• 
+prediksi risiko akademik
+
+• 
+rekomendasi kampus
+
+• 
+beasiswa
+
+• 
+studi luar negeri
+
+• 
+analitik per kelas/sekolah
+
+10. Rekomendasi Teknologi
+Untuk awal:
+• Frontend: Web app / WhatsApp bot / Telegram bot
+
+• Backend: Python FastAPI atau Node.js
+
+• Database: PostgreSQL
+
+• Vector Database: Qdrant / Pinecone / Chroma
+
+• LLM: OpenAI GPT model
+
+• Agent Framework: LangGraph, AutoGen, atau CrewAI
+
+• Dashboard: Streamlit / React / Metabase
+
+Saya sarankan mulai dari MVP berbasis web + database siswa + 5 agen utama dulu.[ ] lanjut
+Lanjut ke desain teknis implementasi MVP EduCounsel AI.
+1. MVP yang Disarankan
+Fokus awal cukup 5 agen:
+1. Orchestrator Agent
+2. Student Profile Agent
+3. Academic Monitoring Agent
+4. Learning Strategy Agent
+5. BK Documentation Agent
+Tambahan wajib:
+1. Safety & Escalation Agent
+2. Struktur Sistem
+
+
+
+User↓Frontend Chat↓Backend API↓Orchestrator Agent↓Agent Router↓Specialized Agents↓Database + Knowledge Base↓Final Response
+3. Struktur Folder Project
+
+
+
+educounsel-ai/├── app/│   ├── main.py│   ├── config.py│   ├── database.py│   ├── schemas.py│   ├── routers/│   │   ├── chat.py│   │   ├── students.py│   │   └── reports.py│   ├── agents/│   │   ├── orchestrator.py│   │   ├── student_profile.py│   │   ├── academic_monitoring.py│   │   ├── learning_strategy.py│   │   ├── bk_documentation.py│   │   └── safety_escalation.py│   ├── services/│   │   ├── llm_service.py│   │   ├── student_service.py│   │   └── report_service.py│   └── prompts/│       ├── orchestrator_prompt.txt│       ├── academic_prompt.txt│       ├── learning_strategy_prompt.txt│       └── safety_prompt.txt├── data/│   ├── sample_students.csv│   └── school_knowledge.md├── requirements.txt└── README.md
+4. Skema Database Minimum
+students
+
+
+
+CREATE TABLE students (    id SERIAL PRIMARY KEY,    student_code VARCHAR(50) UNIQUE,    name VARCHAR(100),    level VARCHAR(20),    grade VARCHAR(20),    class_name VARCHAR(20),    interests TEXT,    talents TEXT,    learning_style VARCHAR(50),    education_goal TEXT,    risk_status VARCHAR(20),    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+academic_records
+
+
+
+CREATE TABLE academic_records (    id SERIAL PRIMARY KEY,    student_id INT REFERENCES students(id),    subject VARCHAR(100),    previous_score FLOAT,    current_score FLOAT,    semester VARCHAR(20),    notes TEXT,    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+counseling_notes
+
+
+
+CREATE TABLE counseling_notes (    id SERIAL PRIMARY KEY,    student_id INT REFERENCES students(id),    topic VARCHAR(255),    summary TEXT,    recommendation TEXT,    follow_up_plan TEXT,    escalation_required BOOLEAN DEFAULT FALSE,    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+conversations
+
+
+
+CREATE TABLE conversations (    id SERIAL PRIMARY KEY,    student_id INT REFERENCES students(id),    user_role VARCHAR(30),    message TEXT,    response TEXT,    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+5. Kontrak Output Antar Agen
+Setiap agen sebaiknya mengembalikan JSON agar mudah digabung.
+Contoh output Academic Monitoring Agent:
+
+
+
+{  "agent": "academic_monitoring",  "risk_level": "kuning",  "findings": [    "Nilai Matematika turun dari 85 ke 62",    "Ada indikasi kesulitan konsistensi belajar"  ],  "possible_causes": [    "Kurang latihan",    "Tidak memahami konsep dasar",    "Manajemen waktu kurang baik"  ],  "recommendations": [    "Jadwalkan sesi remedial Matematika 2x seminggu",    "Gunakan latihan bertahap dari konsep dasar",    "Pantau PR selama 4 minggu"  ]}
+Contoh output Safety Agent:
+
+
+
+{  "agent": "safety_escalation",  "risk_detected": false,  "risk_type": null,  "urgency": "normal",  "action": "continue"}
+6. Prompt Orchestrator
+
+
+
+Anda adalah Orchestrator EduCounsel AI.Tugas:- Pahami pesan pengguna.- Identifikasi jenjang siswa: SD, SMP, SMA, SMK, alumni, atau tidak diketahui.- Identifikasi peran pengguna: siswa, konselor, orang tua, admin.- Tentukan agen yang perlu dipanggil.- Selalu panggil Safety & Escalation Agent jika ada indikasi krisis.- Gabungkan jawaban agen menjadi rekomendasi yang jelas, empatik, dan praktis.Daftar agen:1. student_profile2. academic_monitoring3. learning_strategy4. bk_documentation5. safety_escalation6. domestic_education_pathway7. international_education_pathway8. parent_communicationFormat jawaban akhir:1. Ringkasan2. Analisis3. Tingkat Risiko4. Rekomendasi5. Rencana Tindak Lanjut6. Catatan Konselor
+7. Prompt Safety & Escalation Agent
+
+
+
+Anda adalah Safety & Escalation Agent untuk chatbot BK sekolah.Tugas Anda mendeteksi risiko keselamatan siswa.Tandai eskalasi jika ada indikasi:- keinginan menyakiti diri- percobaan bunuh diri- kekerasan fisik- pelecehan seksual- bullying berat- ancaman keselamatan- depresi berat- eksploitasi anak- kekerasan dalam keluargaJika risiko tinggi:- jangan memberi terapi mendalam- sarankan segera menghubungi konselor manusia- jika darurat, sarankan menghubungi orang dewasa tepercaya atau layanan darurat setempat- buat ringkasan kasus untuk konselorOutput JSON:{  "risk_detected": true/false,  "risk_level": "normal/rendah/sedang/tinggi/darurat",  "risk_type": "...",  "recommended_action": "...",  "message_to_user": "..."}
+8. Prompt Academic Monitoring Agent
+
+
+
+Anda adalah Academic Monitoring Agent.Tugas:- Analisis nilai siswa.- Bandingkan nilai sebelumnya dan saat ini.- Deteksi tren naik/turun.- Tentukan risiko akademik.- Berikan rekomendasi intervensi belajar.Kategori:- Hijau: stabil atau meningkat.- Kuning: turun ringan/sedang.- Merah: turun tajam, banyak mapel lemah, atau risiko tidak naik kelas.Output:{  "risk_level": "...",  "academic_findings": [],  "possible_causes": [],  "recommendations": [],  "follow_up_metrics": []}
+9. Prompt Learning Strategy Agent
+
+
+
+Anda adalah Learning Strategy Agent.Tugas:- Membuat strategi belajar personal sesuai jenjang, mapel, gaya belajar, dan target.- Gunakan rekomendasi yang realistis untuk siswa sekolah.- Buat rencana mingguan.- Sertakan indikator keberhasilan.Output:{  "learning_plan": [],  "weekly_schedule": [],  "study_methods": [],  "success_indicators": []}
+10. Contoh API Endpoint
+
+
+
+POST /chat
+Request:
+
+
+
+{  "user_role": "counselor",  "student_id": "S001",  "message": "Nilai Matematika Rani turun dari 85 ke 62 dan sering tidak mengerjakan PR."}
+Response:
+
+
+
+{  "summary": "Rani mengalami penurunan nilai Matematika yang cukup signifikan.",  "risk_level": "kuning",  "agents_used": [    "student_profile",    "academic_monitoring",    "learning_strategy",    "bk_documentation"  ],  "recommendations": [    "Lakukan asesmen penyebab kesulitan belajar.",    "Buat jadwal latihan Matematika 3 kali seminggu.",    "Pantau pengerjaan PR selama 4 minggu."  ],  "follow_up_plan": [    "Minggu 1: identifikasi topik sulit.",    "Minggu 2: latihan soal dasar.",    "Minggu 3: evaluasi kuis kecil.",    "Minggu 4: konsultasi ulang."  ]}
+11. Pseudocode Agent Router
+
+
+
+def route_agents(message, student_profile):    agents = ["student_profile"]    crisis_keywords = ["bunuh diri", "menyakiti diri", "dipukul", "dilecehkan", "takut pulang"]    academic_keywords = ["nilai", "rapor", "ujian", "PR", "remedial"]    career_keywords = ["jurusan", "kampus", "kuliah", "karier", "SMK", "SMA"]    parent_keywords = ["orang tua", "wali", "laporan", "pesan"]    if any(keyword in message.lower() for keyword in crisis_keywords):        agents.append("safety_escalation")    if any(keyword in message.lower() for keyword in academic_keywords):        agents.append("academic_monitoring")        agents.append("learning_strategy")    if any(keyword in message.lower() for keyword in career_keywords):        agents.append("interest_talent_career")    if any(keyword in message.lower() for keyword in parent_keywords):        agents.append("parent_communication")    agents.append("bk_documentation")    return agents
+12. Rekomendasi MVP Pertama
+Bangun dulu fitur:
+
+
+
+1. Input profil siswa2. Chat konselor3. Analisis akademik sederhana4. Rencana belajar otomatis5. Catatan BK otomatis6. Safety escalation7. Export laporan PDF
+Setelah itu baru tambah:
+• 
+rekomendasi kampus
+
+• 
+beasiswa
+
+• 
+studi luar negeri
+
+• 
+dashboard sekolah
+
+• 
+integrasi WhatsApp
+
+• 
+integrasi nilai/absensi.
+apakah sama dengan openclaw yang adai di k
+3:39 AM
+Thought
+Secara konsep, iya—desain yang kita buat itu “sejalan” dengan OpenClaw/MultiClaw, kalau yang Anda maksud adalah pola:
+1 chatbot utama (Orchestrator)
+yang memanggil banyak agen spesialis
+dengan kontrak output terstruktur (mis. JSON)
+plus guardrail keselamatan (Safety/Escalation)
+dan bisa terhubung ke database/knowledge base.
+Itu inti “claw”: satu tangan utama yang “mencapit” beberapa “jari/alat” (agen) sesuai kebutuhan.
+Namun, bisa tidak 100% sama tergantung definisi OpenClaw yang “ada di K” (mungkin maksud Anda: di konsep OpenClaw yang Anda punya/di komunitas/di platform tertentu). Biasanya perbedaan ada di 4 hal ini:
+1) Cara Orchestrator memilih agen
+Rule-based router (pakai keyword/aturan) → sederhana, cepat untuk MVP.
+LLM-based planner (Orchestrator “merencanakan” langkah) → lebih fleksibel.
+Hybrid (aturan untuk kasus safety + LLM untuk sisanya) → umumnya paling aman untuk BK.
+2) Standar “kontrak” antar agen
+OpenClaw sering menekankan agen harus modular. Supaya benar-benar “OpenClaw-like”, Anda perlu menetapkan standar seperti:
+setiap agen mengembalikan: agent_name, confidence, risk_flags, recommendations[], next_questions[], data_needed[].
+3) Memori & data siswa
+MultiClaw yang matang biasanya membedakan:
+Memory percakapan (apa yang baru dibahas)
+Student record (data resmi: nilai, absensi, catatan BK)
+Policy/KB sekolah (aturan sekolah, SOP, alur eskalasi)
+Kalau semuanya masih tercampur di chat log, itu belum “rapi OpenClaw”.
+4) Safety layer sebagai “gate”, bukan sekadar agen tambahan
+Untuk konteks BK, praktik terbaik:
+Safety/Escalation selalu dipanggil dulu (atau minimal “pre-check”)
+lalu Orchestrator boleh lanjut ke agen lain jika aman.
+Ini biasanya pembeda penting antara multi-agent biasa vs multi-agent yang siap dipakai di lingkungan sekolah.
+Pertanyaan klarifikasi (biar saya bisa samakan persis dengan OpenClaw versi Anda)
+Yang Anda maksud “OpenClaw yang ada di K” itu OpenClaw versi mana?
+1) Framework/arsitektur internal yang Anda/komunitas Anda punya (punya dokumen)?
+2) Nama fitur di platform tertentu?
+3) Istilah umum untuk arsitektur multi-agent?
+Kalau Anda bisa kirim link/dokumen ringkas/outline OpenClaw versi Anda (atau jelaskan 5 poin aturannya), saya bisa “mapping” 1:1 dan menyesuaikan blueprint EduCounsel AI agar benar-benar identik dengan standar OpenClaw tersebut.
+maaf itu tadi diskusi chat saya di chatGPT.. sekarang Tugas kamu elaborasikan chat itu menjadi lebih canggih dan kuat versi kamu, sehingga dapat dihasilkan Chatbot Yang Solutif bagi Siswa dan Prospektif untuk meningkatkan prestasi belajar dan sukses dalam sekolah tingkat lanjutnya.
+3:41 AM
+Thought
+Berikut versi saya yang lebih canggih, kuat, dan siap-dioperasionalkan untuk Chatbot BK/Counselor Akademik multi-agent (MultiClaw/OpenClaw)—dengan fokus utama: solutif bagi siswa (ada langkah nyata yang bisa dilakukan) dan prospektif (naik kelas, masuk jenjang lanjut, beasiswa, dalam/luar negeri).
+Saya susun sebagai blueprint yang bisa langsung Anda jadikan dasar implementasi + SOP sekolah.
+1) Prinsip Desain: “Outcome-first Counseling”
+Agar chatbot tidak hanya “menghibur” tapi benar-benar meningkatkan prestasi, sistem harus selalu mengubah chat menjadi:
+Asesmen singkat (apa masalah inti + konteks)
+Diagnosis akademik awal (hipotesis penyebab, bukan vonis)
+Rencana aksi 7–28 hari (kecil tapi konsisten)
+Monitoring + akuntabilitas (cek progres, metrik)
+Eskalasi aman (kalau ada risiko)
+Dokumentasi BK otomatis (ringkas, rapi, siap audit)
+Output yang bagus bukan “jawaban panjang”, tapi paket keputusan + tindakan + metrik.
+2) Arsitektur MultiClaw yang Lebih Matang (3 Lapisan)
+Lapisan A — Experience (Mode Pengguna)
+Mode Siswa: bahasa suportif, sederhana, fokus kebiasaan & langkah harian.
+Mode Konselor/Guru BK: analisis + opsi intervensi + rencana tindak lanjut.
+Mode Orang Tua/Wali: ringkasan, saran pendampingan di rumah, komunikasi empatik.
+Mode Manajemen (Kepsek/Waka/Admin): agregat anonim (tanpa detail sensitif).
+Lapisan B — Orkestrasi (Otak Multi-Agent)
+Komponen inti:
+Intent & Stage Detector: mendeteksi kebutuhan (nilai turun, stres ujian, jurusan, beasiswa, dsb.) + tahap jenjang (SD/SMP/SMA/SMK/alumni).
+Safety Gate (wajib): pre-check risiko sebelum agen lain bekerja.
+Agent Planner/Router: memilih urutan agen (bisa hybrid: aturan + LLM).
+Response Composer: menggabungkan hasil agen menjadi “paket rencana”.
+Lapisan C — Data & Knowledge
+Student Record (data resmi sekolah): nilai, absensi, catatan BK, pelanggaran, prestasi.
+Learning Evidence Base: strategi belajar berbasis riset (retrieval/RAG).
+School Policy Base: SOP BK, alur eskalasi, aturan akademik, kalender ujian.
+Opportunity Base (opsional): daftar kampus, beasiswa, timeline, requirement.
+3) “Agen-Agen” Versi Lebih Canggih (Core + Advanced)
+Saya bagi jadi Core MVP dan Advanced supaya realistis.
+3.1 Core MVP (minimal tapi kuat)
+1) Safety & Escalation Agent (Gatekeeper)
+Selalu jalan dulu.
+Menghasilkan: risk_detected, risk_level, recommended_action, message_to_user, what_to_tell_counselor.
+2) Student Context Agent (Profil & Riwayat)
+Merangkum profil siswa + faktor risiko protektif.
+Menghasilkan: “kartu profil” + data yang kurang.
+3) Academic Analytics Agent
+Analisis tren nilai per mapel, pola absensi, indikator risiko tidak naik kelas.
+Menghasilkan: risk academic (Hijau/Kuning/Merah) + mapel prioritas + hipotesis penyebab.
+4) Intervention Designer Agent (Rencana Aksi)
+Mengubah hasil analisis menjadi rencana 2–4 minggu.
+Menghasilkan: jadwal, target, latihan, sistem kebiasaan, strategi ujian.
+5) BK Documentation Agent
+Mengubah sesi chat menjadi catatan BK formal (SOAP / DAP / format sekolah Anda).
+Menghasilkan: ringkasan + tindak lanjut + “next appointment plan”.
+3.2 Advanced Agents (membuat sistem “prospektif”)
+6) Study Skills & Habit Coach Agent
+Fokus micro-habit, anti-prokrastinasi, teknik belajar aktif, spaced repetition, retrieval practice.
+Output: routine harian 20–45 menit yang realistis.
+7) Assessment & Diagnostic Agent
+Membuat “tes mini” untuk memetakan akar masalah mapel (mis. matematika: aljabar dasar vs pemahaman soal cerita).
+Output: peta gap + rekomendasi materi/praktik.
+8) Motivation & Self-Regulation Agent
+Teknik goal-setting, implementation intention, coping plan menghadapi malas/cemas.
+Bukan terapi klinis; tetap di wilayah edukatif.
+9) Major/Career Fit Agent (Minat-Bakat & Karier)
+Bukan sekadar “rekomendasi jurusan”, tapi:
+bukti kecocokan (minat + kemampuan + nilai + gaya belajar)
+alternatif jalur (SMK→kerja→kuliah, D3→S1, dsb.)
+Output: 3 opsi jalur + alasan + prasyarat mapel/portofolio.
+10) Domestic Pathway Agent (Dalam Negeri)
+Timeline SNBP/SNBT/mandiri, kedinasan, politeknik, seleksi khusus.
+Output: timeline personal + checklist dokumen + strategi.
+11) International Pathway Agent (Luar Negeri)
+Negara/kampus + IELTS/TOEFL + visa + budget + scholarship readiness.
+Output: roadmap 6–18 bulan.
+12) Parent Communication Agent
+Draft WA/email yang rapi, empatik, tidak menyalahkan siswa.
+Ada versi “ringkas” dan “formal”.
+13) Teacher Collaboration Agent (opsional)
+Menyusun pesan kolaborasi ke wali kelas/guru mapel tanpa membuka detail sensitif.
+Output: permintaan dukungan guru (mis. remedial, monitoring PR).
+4) Kontrak Output Antar Agen (Biar benar-benar OpenClaw)
+Agar orkestrator mudah menggabungkan, semua agen mengembalikan format seragam:
+{
+  "agent": "academic_analytics",
+  "status": "ok",
+  "confidence": 0.72,
+  "risk_flags": ["academic_risk_yellow"],
+  "key_findings": ["Nilai Mat turun 85→62", "PR sering tidak dikerjakan"],
+  "hypotheses": ["Gap konsep dasar", "Tidak ada rutinitas latihan", "Kecemasan ujian"],
+  "recommendations": [
+    {"action": "Latihan 20 menit/hari", "priority": "high", "timeframe": "2w"}
+  ],
+  "questions_to_ask_next": ["Bagian Mat mana yang paling sulit?"],
+  "data_needed": ["nilai mapel lain 2 semester", "absensi 1 bulan"]
+}
+​
+Ini yang membuat sistem “canggih”: bukan jawaban bebas, tapi modul yang bisa disusun ulang.
+5) Alur Kerja yang Solutif (Playbook Kasus Nyata)
+Playbook A — Nilai turun + PR bermasalah (paling sering)
+Urutan agen:
+Safety Gate → Context → Academic Analytics → Diagnostic → Intervention Designer → (Parent Comm jika perlu) → Documentation
+Output minimum ke siswa:
+1 kebiasaan harian
+1 target mingguan
+1 cara mengecek progres
+Contoh “tindakan kecil tapi berdampak”:
+“20 menit latihan Mat setiap hari + 5 soal retrieval”
+“Checklist PR (3 langkah)”
+“Mini-quiz Jumat (10 menit)”
+Playbook B — Bingung jurusan & studi lanjut
+Safety Gate → Context → Career Fit → Domestic/International Pathway → Intervention (mapel pendukung) → Documentation
+Playbook C — Cemas ujian (ringan-sedang)
+Safety Gate → Context → Motivation/Self-Regulation → Study Skills Coach → Intervention → Documentation  
+Catatan: jika mengarah ke krisis → eskalasi.
+6) Mekanisme “Monitoring” agar Prestasi Naik (ini kunci)
+Chatbot yang bagus harus punya loop:
+1) Baseline: nilai terakhir, kebiasaan belajar, target.
+2) Rencana 2 minggu: langkah harian kecil.
+3) Check-in berkala: 3 pertanyaan cepat tiap 3–7 hari:
+“Berapa hari rutinitas dilakukan?”
+“Apa hambatan utama?”
+“Apa 1 penyesuaian minggu ini?”
+4) Metric sederhana:
+Consistency score (0–7 hari)
+Practice minutes
+Mini-quiz score
+PR completion rate
+Tanpa loop monitoring, chatbot hanya jadi “konsultan sekali lewat”.
+7) Guardrail Etik & Keamanan (Sekolah Wajib Punya)
+Selain Safety Agent, perlu kebijakan sistem:
+Tidak menyimpan detail sensitif di mode admin/agregat.
+Minimasi data: simpan yang perlu untuk BK, bukan semua chat mentah.
+Eskalasi bertingkat:
+Rendah: sarankan bicara ke wali kelas/BK.
+Sedang: jadwalkan sesi BK.
+Tinggi/Darurat: libatkan orang dewasa tepercaya + prosedur sekolah + layanan darurat setempat bila perlu.
+Anti-diagnosis klinis: tidak memberi label medis.
+8) Roadmap Implementasi (Realistis untuk Anda sebagai Counselor)
+Tahap 1 (2–4 minggu): MVP Solutif
+Mode Konselor + Mode Siswa
+5 agen core + safety gate
+Form input profil siswa
+Catatan BK otomatis (format sekolah Anda)
+Export laporan (PDF/Doc)
+Tahap 2 (1–2 bulan): Prestasi Booster
+Diagnostic mini-test per mapel
+Study Habit Coach + monitoring loop
+Dashboard risiko akademik (agregat)
+Tahap 3 (2–4 bulan): Prospektif Studi Lanjut
+Career fit engine + timeline SNBP/SNBT
+International roadmap (IELTS/TOEFL, dokumen, beasiswa)
+Parent/Teacher collaboration message builder
+9) Agar Saya Bisa “mengunci” versi final yang paling tepat
+Jawab 4 hal ini (cukup singkat), supaya desainnya benar-benar cocok kebutuhan sekolah Anda:
+1) Target awal Anda: SMP / SMA / SMK / semua, dan sekolahnya kira-kira negeri/swasta?
+2) Anda ingin chatbot dipakai oleh: siswa langsung, atau hanya guru BK yang pakai untuk bantu menyusun rencana?
+3) Data apa yang realistis tersedia di awal: nilai rapor, absensi, catatan BK, LMS, atau masih manual?
+4) Output administrasi BK yang Anda pakai: format catatan konseling model apa? (mis. SOAP/DAP atau format internal)
+Kalau Anda jawab itu, saya bisa buatkan versi “paket jadi” berupa:
+daftar agen final + prompt masing-masing (siap copy-paste),
+skema database minimal yang sesuai sekolah,
+SOP eskalasi,
+dan template output per kasus (nilai turun, jurusan, cemas ujian, dsb.).
+lanjut
+3:42 AM
+Thought
+Berikut saya lanjutkan menjadi paket “siap pakai”: (1) Prompt tiap agen (copy–paste), (2) SOP eskalasi, (3) template output kasus, (4) skema data minimal, dan (5) alur implementasi praktis untuk sekolah.
+A) Paket Prompt Multi-Agent (Copy–Paste)
+Catatan: Anda bisa pakai ini di framework apa pun (LangGraph/CrewAI/AutoGen/Custom). Kuncinya: setiap agen output JSON seragam agar Orchestrator bisa menggabungkan.
+A1) SYSTEM PROMPT — Orchestrator (Master)
+Nama: orchestrator
+Prompt:
+Anda adalah EduCounsel Orchestrator, asisten Guru BK/Counselor Akademik multi-jenjang (SD/SMP/SMA/SMK/Alumni).
+Tujuan utama: menghasilkan rekomendasi yang SOLUTIF (ada langkah konkret) dan PROSPEKTIF (mendorong prestasi dan kesiapan studi lanjut).
+
+Aturan kerja:
+1) Selalu lakukan pre-check keamanan dengan memanggil SafetyGate Agent untuk setiap percakapan (minimal 1x per sesi).
+2) Identifikasi:
+   - peran pengguna: siswa / konselor / orang tua / admin
+   - jenjang: SD/SMP/SMA/SMK/alumni/unknown
+   - tujuan: akademik harian / nilai turun / ujian / minat-bakat / studi lanjut / konflik sosial / lainnya
+3) Pilih agen yang relevan dan urutkan. Utamakan agen inti:
+   context_profile, academic_analytics, intervention_designer, documentation
+   Tambahkan agen advanced bila diperlukan.
+4) Gabungkan output agen menjadi jawaban akhir yang ringkas, jelas, dan bisa dieksekusi.
+5) Jangan mengklaim diagnosis klinis. Jika ada risiko keselamatan/pelecehan/kekerasan/self-harm → eskalasi.
+
+Format jawaban akhir WAJIB:
+1. Ringkasan
+2. Analisis Awal (hipotesis)
+3. Tingkat Risiko (akademik + keselamatan)
+4. Rekomendasi Utama (maks 5 butir, paling berdampak)
+5. Rencana 7–14 hari (tabel/daftar langkah harian)
+6. Pertanyaan Lanjutan (maks 5) untuk memperjelas
+7. Catatan untuk Konselor (jika mode konselor)
+8. Draft pesan ke orang tua/guru (hanya jika diminta atau relevan)
+
+Keluarkan juga metadata internal (tidak ditampilkan ke siswa) dalam JSON:
+{ "agents_used": [...], "next_checkin_days": 3|7, "data_needed": [...] }
+​
+A2) SYSTEM PROMPT — SafetyGate / Escalation Agent (Wajib)
+Nama: safety_gate
+Prompt:
+Anda adalah SafetyGate Agent untuk chatbot BK sekolah.
+Tugas: mendeteksi risiko keselamatan dan situasi wajib eskalasi.
+
+Deteksi kata/indikasi:
+- self-harm, bunuh diri, menyakiti diri, putus asa ekstrem
+- kekerasan fisik, ancaman, pemukulan
+- pelecehan seksual, grooming, eksploitasi
+- bullying berat / pemerasan
+- kekerasan dalam rumah tangga
+- siswa tidak aman pulang
+- penggunaan zat berat
+- depresi berat (indikasi fungsi harian terganggu parah)
+
+Jika terdeteksi:
+- Jangan melakukan terapi mendalam.
+- Berikan pesan aman, validasi singkat, dan arahkan ke orang dewasa tepercaya + prosedur sekolah.
+- Jika darurat, sarankan menghubungi layanan darurat setempat.
+
+Output JSON saja:
+{
+  "agent": "safety_gate",
+  "risk_detected": true/false,
+  "risk_level": "normal|rendah|sedang|tinggi|darurat",
+  "risk_type": "self_harm|abuse|sexual_abuse|violence|bullying|domestic_violence|substance|other|null",
+  "recommended_action": "continue|pause_and_escalate|immediate_emergency",
+  "message_to_user": "pesan aman untuk ditampilkan",
+  "what_to_tell_counselor": "ringkasan singkat untuk konselor",
+  "questions_to_clarify": ["..."]
+}
+​
+A3) Student Context / Profile Agent
+Nama: context_profile
+Prompt:
+Anda adalah Student Context Agent.
+Tugas: merangkum konteks siswa untuk keputusan BK akademik.
+
+Jika data kurang, minta minimal:
+- jenjang/kelas
+- mapel kuat/lemah
+- target (naik nilai, masuk sekolah/kampus, beasiswa)
+- kebiasaan belajar (jam, durasi, konsistensi)
+- dukungan rumah (ada waktu belajar, gadget, pendampingan)
+- riwayat masalah (jika ada) yang relevan, tanpa memaksa detail sensitif
+
+Output JSON:
+{
+  "agent": "context_profile",
+  "student_level": "SD|SMP|SMA|SMK|alumni|unknown",
+  "student_grade": "string|null",
+  "goals": ["..."],
+  "strengths": ["..."],
+  "constraints": ["..."],
+  "missing_data": ["..."],
+  "next_questions": ["..."]
+}
+​
+A4) Academic Analytics Agent
+Nama: academic_analytics
+Prompt:
+Anda adalah Academic Analytics Agent.
+Tugas: analisis tren nilai/absensi/tugas dan tentukan risiko akademik.
+
+Klasifikasi risiko akademik:
+- Hijau: stabil/naik atau turun kecil dan ada kontrol
+- Kuning: turun sedang / konsistensi tugas buruk / 1-2 mapel kritis
+- Merah: turun tajam / banyak mapel kritis / indikasi tidak naik kelas
+
+Output JSON:
+{
+  "agent": "academic_analytics",
+  "academic_risk": "hijau|kuning|merah",
+  "key_findings": ["..."],
+  "hypotheses": ["..."],
+  "priority_subjects": ["..."],
+  "recommendations": [
+    {"action":"...", "priority":"high|med|low", "timeframe":"7d|14d|30d"}
+  ],
+  "metrics_to_track": ["PR completion rate", "practice minutes", "quiz score"]
+}
+​
+A5) Diagnostic Mini-Test Agent (Advanced tapi sangat berdampak)
+Nama: diagnostic_assessment
+Prompt:
+Anda adalah Diagnostic Assessment Agent.
+Tugas: membuat asesmen mini (5-10 pertanyaan) untuk memetakan akar kesulitan belajar pada 1 mapel/topik.
+Pertanyaan harus sesuai jenjang, ringkas, bisa dikerjakan 10-15 menit.
+Setelah itu berikan interpretasi gap (jika user memberi jawaban), atau siapkan rubrik.
+
+Output JSON:
+{
+  "agent": "diagnostic_assessment",
+  "test_title": "...",
+  "questions": [
+    {"q":"...", "type":"multiple_choice|short_answer", "options":["A","B","C","D"] }
+  ],
+  "skills_mapped": ["konsep dasar", "pemahaman soal", "ketelitian", "strategi"],
+  "next_step_after_answers": ["..."]
+}
+​
+A6) Intervention Designer (Rencana Aksi 7–14 hari)
+Nama: intervention_designer
+Prompt:
+Anda adalah Intervention Designer Agent.
+Tugas: mengubah analisis menjadi rencana aksi realistis 7–14 hari.
+Gunakan prinsip:
+- kecil tapi konsisten (20–45 menit/hari)
+- retrieval practice + latihan bertahap
+- ada evaluasi mingguan
+- ada rencana "kalau gagal" (fallback plan)
+
+Output JSON:
+{
+  "agent": "intervention_designer",
+  "plan_duration_days": 14,
+  "daily_routines": [
+    {"day":"Senin", "duration_minutes":30, "steps":["...","..."], "focus":"..."}
+  ],
+  "weekly_checkpoints": [
+    {"day":7, "checkpoint":"mini quiz 10 menit", "success_criteria":"..."}
+  ],
+  "fallback_if_stuck": ["turunkan target", "minta bantuan guru", "ubah metode"]
+}
+​
+A7) Parent Communication Agent
+Nama: parent_communication
+Prompt:
+Anda adalah Parent Communication Agent.
+Tugas: buat draft komunikasi empatik, tidak menyalahkan siswa, fokus kolaborasi.
+Sediakan 2 versi: WA singkat dan surat/email formal.
+
+Output JSON:
+{
+  "agent": "parent_communication",
+  "wa_message": "...",
+  "formal_message": "...",
+  "tone": "empatik-profesional",
+  "do_not_say": ["label negatif", "membuka detail sensitif"]
+}
+​
+A8) BK Documentation Agent (Catatan Konseling)
+Nama: documentation
+Prompt:
+Anda adalah BK Documentation Agent.
+Tugas: menyusun catatan BK yang rapi dan ringkas.
+Gunakan format DAP (Data-Assessment-Plan) kecuali diminta lain.
+
+Output JSON:
+{
+  "agent": "documentation",
+  "format": "DAP",
+  "data": "fakta penting dari sesi",
+  "assessment": "analisis singkat & risiko",
+  "plan": "tindak lanjut & jadwal",
+  "follow_up_date": "YYYY-MM-DD|optional",
+  "tags": ["akademik", "nilai turun", "ujian", "studi lanjut"]
+}
+​
+B) SOP Eskalasi (Ringkas, Sekolah-Ready)
+Gunakan matriks berikut:
+1) Normal (tidak ada risiko keselamatan)
+lanjut intervensi akademik
+jadwalkan check-in 3–7 hari
+2) Sedang (indikasi bullying/konflik berat, tekanan tinggi, tetapi tidak darurat)
+sarankan pertemuan BK dalam 24–72 jam
+dokumentasikan + minta dukungan wali kelas/guru mapel seperlunya
+3) Tinggi (kekerasan/pelecehan/self-harm indikatif)
+chatbot berhenti memberi “solusi panjang”
+tampilkan pesan aman + anjurkan hubungi orang dewasa tepercaya
+instruksikan prosedur sekolah: BK → wali kelas/kepsek (sesuai kebijakan)
+dokumentasikan untuk konselor manusia
+4) Darurat (niat/encana self-harm aktif, ancaman keselamatan segera)
+instruksikan segera hubungi layanan darurat setempat + orang dewasa di sekitar
+eskalasi internal segera
+C) Template Output “Solutif” (yang ditampilkan ke pengguna)
+Ini format jawaban yang konsisten untuk semua kasus.
+Template Umum
+Ringkasan
+Analisis Awal
+Tingkat Risiko
+3–5 Rekomendasi Utama
+Rencana 7–14 hari (jadwal ringkas)
+Pertanyaan Lanjutan
+(Mode konselor) Catatan Konselor
+(Opsional) Draft pesan orang tua
+D) Skema Data Minimal (Agar Bisa Monitoring)
+Mulai minimal dulu—yang penting bisa loop monitoring.
+students
+student_id (kode), nama/inisial, jenjang, kelas, jurusan (jika SMA/SMK), target
+academic_records
+student_id, mapel, nilai_sebelum, nilai_sekarang, semester/periode
+habits_tracking (penting untuk prestasi naik)
+student_id, tanggal, menit_belajar, PR_selesai (ya/tidak), latihan_soal (jumlah)
+counseling_notes
+tanggal, student_id, topik, ringkasan, rencana, risk_flag, follow_up_date
+E) Contoh “Kasus Nilai Turun” (Output jadi)
+Jika input: “Nilai Matematika turun 85→62, PR sering tidak dikerjakan”
+Sistem akan menghasilkan:
+Risiko akademik: Kuning/Merah (tergantung mapel lain)
+Rencana 14 hari: 30 menit/hari + mini-quiz hari ke-7 & 14
+Metrik: PR completion rate + practice minutes + skor kuis
+(Ini nanti akan sangat bagus kalau Anda sudah memberi data jenjang/kelas dan mapel lain.)
+F) Agar versi “final” benar-benar presisi untuk sekolah Anda
+Sebelum saya turunkan paket “final prompts + playbook lengkap per jenjang”, saya perlu Anda jawab 4 poin yang tadi saya tanya (singkat saja). Karena tanpa itu, saya hanya bisa memberi template generik.
+1) Jenjang prioritas awal: SMP / SMA / SMK / semua?
+2) Pengguna utama chatbot: siswa langsung atau guru BK saja?
+3) Data yang tersedia: nilai rapor, absensi, catatan BK, LMS?
+4) Format catatan BK yang Anda pakai: DAP / SOAP / format internal?
+Kirim jawabannya (boleh 1–2 kalimat). Setelah itu saya akan:
+kunci daftar agen final (mana yang MVP, mana advanced),
+susun playbook per jenjang (SD beda bahasa, SMA beda orientasi),
+dan buat contoh percakapan lengkap (Mode Siswa + Mode Konselor) untuk 3 kasus utama: nilai turun, cemas ujian, dan studi lanjut.
+1. semua
+2. keduanya, tapi lebih prioritas siswa langsung .. terkait potensi monetisasi
+3. tidak tersedia data.. saya hanya pembuat aplikasi
+4. tidak paham.. silahkan kamu rekomendasikan
+3:46 AM
+Thought
+Mantap—dengan jawaban Anda, kita desain sistem yang bisa berjalan tanpa data sekolah (karena Anda pembuat aplikasi), tapi tetap solutif untuk siswa dan siap dimonetisasi. Saya juga akan rekomendasikan format dokumentasi BK yang paling aman & umum.
+1) Konsekuensi desain dari “tidak ada data”
+Kalau tidak ada akses nilai/absensi/LMS, maka “mesin” kita harus kuat di 3 hal:
+1) Asesmen berbasis percakapan (conversational intake)  
+Chatbot menggali data minimal dari siswa lewat tanya-jawab singkat (≤ 3 menit).
+2) Self-report + tracking kebiasaan (bukan “nilai”)  
+Yang kita optimalkan adalah konsistensi, karena itu bisa diukur tanpa akses data sekolah:
+menit belajar
+PR selesai/tidak
+latihan soal
+mood/energi
+fokus (1–5)
+target mingguan
+3) Rencana aksi + loop check-in  
+Value aplikasi (dan efek prestasi) muncul dari kebiasaan + evaluasi mingguan, bukan jawaban sekali.
+Ini justru bagus untuk monetisasi karena Anda bisa menjual program pendampingan (bukan cuma chatbot QA).
+2) Produk: 2 Mode, 1 Sistem (prioritas siswa)
+Mode Siswa (prioritas utama)
+Fitur yang “laku”:
+Study Coach harian (jadwal + pengingat + micro-task)
+Ujian Booster (rencana 14 hari menjelang ujian)
+Jurusan & studi lanjut roadmap (SMP→SMA/SMK, SMA/SMK→kampus/kerja)
+Anti-prokrastinasi (rencana “kalau malas”)
+Dashboard progres pribadi (streak, weekly score, target tercapai)
+Mode Konselor (B2B / upsell sekolah)
+Tanpa data sekolah pun masih berguna:
+catatan konseling otomatis (ringkasan + tindak lanjut)
+ringkasan profil siswa hasil intake
+rekomendasi intervensi & pertanyaan lanjutan
+template komunikasi orang tua
+3) Agen yang “pas” untuk kondisi Anda (tanpa data)
+Saya sederhanakan jadi 7 agen yang paling berdampak (tidak terlalu banyak, tapi kuat):
+1) Safety Gate Agent (wajib)
+2) Intake & Profil Cepat Agent (mengumpulkan data minimal)
+3) Goal & Plan Agent (menentukan target yang realistis)
+4) Study Habit Coach Agent (rutinitas + anti-prokrastinasi)
+5) Subject Helper Agent (ringan) (opsional, hati-hati agar tidak jadi “tukang jawab PR”)  
+6) Education Pathway Agent (dalam negeri + luar negeri, high level + checklist)
+7) Documentation Agent (untuk mode konselor)
+Kunci: tanpa data, agen “Academic Analytics” berbasis nilai rapor diganti menjadi Progress & Habit Analytics berbasis tracking.
+4) “Intake 3 Menit” (yang membuat sistem terasa canggih)
+Saat siswa pertama kali masuk, Orchestrator menjalankan intake singkat:
+Minimal 8 data point:
+1) Jenjang: SD/SMP/SMA/SMK/alumni  
+2) Kelas & jurusan (jika ada)  
+3) Tujuan utama (pilih 1): naik nilai / siap ujian / disiplin belajar / pilih jurusan / beasiswa / luar negeri  
+4) Mapel tersulit (pilih 1–2)  
+5) Waktu belajar tersedia per hari (15/30/45/60 menit)  
+6) Hambatan terbesar (pilih 1): malas, sulit fokus, gak paham konsep, kebanyakan tugas, gadget/game, cemas  
+7) Gaya belajar dominan (opsi sederhana)  
+8) Target waktu check-in (malam/siang)
+Output intake ini jadi “profil” awal dan langsung mempersonalisasi plan.
+5) Loop Pendampingan (ini mesin prestasinya)
+Tanpa data sekolah, sistem Anda harus punya ritme:
+Harian (1 menit): “Hari ini belajar berapa menit? PR selesai? fokus 1–5?”
+Mingguan (5 menit): refleksi + revisi rencana + mini-evaluasi
+14-hari sprint: rencana intensif untuk ujian / perbaikan mapel tertentu
+Metrix yang bisa dijual (dan ditunjukkan ke siswa/orang tua):
+Konsistensi (hari aktif per minggu)
+Total menit fokus
+PR completion rate
+“Confidence score” sebelum–sesudah
+Target mingguan tercapai/tidak
+6) Rekomendasi format catatan BK: pilih DAP (paling praktis)
+Anda tadi belum punya format; rekomendasi saya:
+Format DAP (Data – Assessment – Plan)
+D (Data): fakta yang siswa sampaikan (ringkas, objektif)
+A (Assessment): analisis awal + tingkat risiko (akademik & safety)
+P (Plan): rencana tindak lanjut, jadwal check-in, rujukan bila perlu
+Kenapa DAP cocok untuk aplikasi Anda:
+sederhana, mudah distandardisasi
+aman untuk dokumentasi
+mudah diekspor jadi laporan
+Alternatif:
+SOAP lebih “klinis” (lebih cocok layanan kesehatan), DAP lebih umum untuk pendampingan.
+7) Monetisasi (tanpa membuat siswa tergantung)
+Model yang paling selaras dengan fitur di atas:
+1) Freemium
+Gratis: intake + rencana 7 hari + check-in harian sederhana
+Premium: plan 14/28 hari, ujian booster, roadmap studi lanjut, laporan orang tua, analitik progres
+2) Program berjenjang
+Paket “Naik Nilai 28 Hari”
+Paket “Siap Ujian 14 Hari”
+Paket “Roadmap Kuliah/SMK & Beasiswa 90 Hari” (lebih mahal)
+3) B2B sekolah (nanti)
+dashboard agregat (tanpa data sensitif)
+template laporan BK
+akun konselor
+Catatan penting: untuk keamanan & etika, hindari monetisasi yang mendorong siswa curhat krisis ke bot. Krisis harus diarahkan ke manusia.
+8) Dua keputusan desain yang perlu Anda pilih (biar saya kunci spesifikasi final)
+Jawab singkat saja:
+1) Aplikasi Anda ingin fokus kanal mana dulu?
+A) WhatsApp/Telegram bot
+B) Mobile app
+C) Web app
+2) Untuk tracking harian, Anda mau gaya input yang mana?
+A) 3 pertanyaan cepat (menit belajar, PR, fokus)
+B) checklist kebiasaan (lebih gamified)
+C) kombinasi
+Setelah Anda jawab 2 poin ini, saya akan “kunci” deliverable berikutnya dalam satu paket:
+prompt final Orchestrator + 7 agen (versi produksi, bahasa Indonesia, multi-jenjang)
+flow percakapan: onboarding → harian → mingguan → sprint ujian
+skema database minimal untuk tracking (tanpa data sekolah)
+contoh percakapan lengkap untuk 3 skenario: nilai turun, cemas ujian, dan studi lanjut (dalam/luar negeri)
+ok.. apakah aplikasi chatbot ini bisa di tandemkan dengan chatbot lainnya misalkan
+3:49 AM
+Bisa—bahkan sangat direkomendasikan kalau tujuan Anda adalah membuat pengalaman “lebih pintar” tanpa membebani satu bot saja. Istilah teknisnya biasanya:
+Federated / Tandem Chatbots (beberapa bot yang saling melengkapi)
+Orchestrator + Specialist Bots (1 bot utama mengarahkan ke bot lain)
+Hub-and-Spoke (hub = EduCounsel, spoke = bot lain)
+Yang penting: cara “men-tandemkan”-nya harus jelas (alur, data, dan keamanan).
+1) 4 Pola Tandem yang paling umum
+Pola A — “Router” (paling simpel & aman)
+EduCounsel jadi front door. Kalau user butuh hal lain, EduCounsel:
+tetap memegang konteks (jenjang, tujuan, rencana belajar),
+lalu mengalihkan ke bot lain untuk fungsi spesifik.
+Contoh:
+EduCounsel mendeteksi user minta latihan matematika → “Saya alihkan ke Bot Latihan Matematika.”
+Setelah selesai, hasilnya balik ke EduCounsel untuk dimasukkan ke rencana 14 hari.
+Pola B — “Tool-call” (bot lain dianggap alat)
+Bot lain tidak “ngobrol panjang”, tapi memberi output terstruktur, misalnya:
+generator soal,
+penilai jawaban,
+pembuat rangkuman,
+pencari info kampus/beasiswa.
+Ini paling cocok untuk MultiClaw: bot lain = “agent/tool”.
+Pola C — “Handoff” (operan penuh percakapan)
+User benar-benar pindah ke bot lain (chat room lain / flow lain).
+Cocok jika bot lain punya UI sendiri, tapi risikonya: konteks rencana belajar bisa putus.
+Pola D — “Panel multi-bot” (beberapa bot aktif bersamaan)
+Mirip “tim” yang memberi jawaban paralel lalu Orchestrator merangkum.
+Kuat, tapi lebih kompleks dan lebih mahal (token/cost).
+2) Contoh tandem yang relevan (untuk aplikasi Anda)
+Beberapa contoh “bot lain” yang masuk akal untuk ditandemkan:
+1) Bot Tutor Mapel (Mat/IPA/Bahasa/English)  
+Fokus: latihan & penjelasan konsep.  
+EduCounsel tetap mengatur porsi supaya tidak jadi “tukang PR”.
+2) Bot Tryout/Ujian  
+Fokus: bank soal + pembahasan + skor + rekomendasi topik lemah.
+3) Bot Karier/Jurusan  
+Fokus: asesmen minat + mapping jalur jurusan + portofolio.
+4) Bot Studi Lanjut (PTN/PTS/luar negeri/beasiswa)  
+Fokus: checklist dan timeline aplikasi.
+5) Bot Kesehatan Mental Umum (wellbeing ringan)  
+Boleh untuk manajemen stres ringan, tapi harus tunduk pada Safety Gate (tidak menangani krisis).
+3) Aturan penting (supaya aman & tidak kacau)
+Kalau ditandemkan, saya sarankan 5 aturan:
+1) Satu Orchestrator tetap memegang keputusan final (EduCounsel).
+2) Safety Gate tetap nomor 1 sebelum handoff ke bot mana pun.
+3) Kontrak data antar-bot harus JSON ringkas (hasil, rekomendasi, next steps).
+4) Jangan kirim data sensitif ke bot lain kecuali perlu dan ada izin.
+5) Hasil bot lain harus kembali ke Plan (rencana 7–14 hari), bukan berhenti di jawaban.
+4) Saya perlu contoh “misalkan …” Anda
+Anda ingin men-tandemkan dengan chatbot seperti apa? Misalnya:
+chatbot tutor matematika,
+chatbot bahasa Inggris/IELTS,
+chatbot tryout SNBT,
+chatbot kesehatan mental, atau
+chatbot lain (sebutkan nama/fiturnya).
+Sebutkan 1–2 contoh bot yang Anda maksud, nanti saya buatkan arsitektur tandem + alur handoff + format data yang dipertukarkan yang paling cocok (dan aman) untuk kasus tersebut.
+ya saya setuju semua … prinsipnya chatbot tentang kesiswaan terhubung dengan akademik, non akademik (eskul)
+3:53 AM
+Setuju—kalau cakupannya kesiswaan terhubung akademik + non-akademik (eskul), maka desain “tandem chatbot” terbaik adalah: 1 Orchestrator Kesiswaan (front door) + beberapa domain-bot/agen spesialis (akademik, eskul, disiplin, prestasi, studi lanjut, dll). Ini membuat sistem terasa “sekolah banget”, bukan cuma “belajar doang”.
+Berikut rancangan versi kuatnya.
+1) Nama & Peran Sistem
+StudentHub Orchestrator (Kesiswaan Orchestrator)
+Satu chatbot utama yang melayani semua kebutuhan siswa:
+Akademik (nilai, ujian, belajar)
+Non-akademik (eskul, kepemimpinan, prestasi, event)
+Kesiswaan (tata tertib, disiplin, izin, komunikasi wali kelas/BK)
+Rencana masa depan (jurusan, kampus, beasiswa)
+Prinsip: siswa cukup chat ke satu pintu. Orchestrator yang “memanggil” bot/agen lain.
+2) “Tandem Bots” / Agen Domain (Hub-and-Spoke)
+A) Domain Akademik
+1) Study Coach Agent (kebiasaan belajar + anti-prokrastinasi)  
+2) Subject Tutor / Practice Bot (latihan mapel, bank soal, pembahasan)  
+3) Exam Sprint Agent (program 14 hari jelang ujian)
+B) Domain Non-Akademik (Eskul & Pengembangan Diri)
+4) Ekskul Matcher Agent  
+mencocokkan minat-bakat, waktu luang, tujuan (prestasi/teman/skill)
+rekomendasi eskul + “jalur progres” (pemula → pengurus → lomba)
+5) Achievement & Portfolio Agent  
+membangun portofolio: sertifikat, lomba, project, volunteer
+output: checklist portofolio per jenjang (SMP/SMA/SMK)
+C) Domain Kesiswaan (Rules & Wellbeing Sekolah)
+6) School Policy & SOP Agent (berbasis knowledge base sekolah)  
+tata tertib, izin, peraturan seragam, alur pelanggaran, alur perizinan, jadwal penting
+7) Student Case / BK Support Agent  
+konsultasi masalah sekolah (motivasi, adaptasi, konflik ringan)
+tetap “edukatif”, bukan klinis
+D) Domain Studi Lanjut
+8) Domestic Pathway Agent (SMA/SMK → PTN/PTS/kedinasan/politeknik)  
+9) International Pathway Agent (IELTS/TOEFL, dokumen, beasiswa, timeline)
+E) Wajib di atas semuanya
+10) Safety Gate Agent (Eskalasi)  
+Selalu memeriksa risiko keselamatan sebelum domain lain.
+3) Cara Menghubungkan Akademik ↔ Eskul (yang membuatnya “prospektif”)
+Kuncinya bukan cuma “rekomendasi eskul”, tapi menghubungkan eskul ke prestasi dan masa depan:
+Eskul → soft skills (leadership, teamwork) → portofolio → seleksi kampus/beasiswa
+Eskul → prestasi lomba/sertifikasi → poin nilai tambah (seleksi, beasiswa, jalur prestasi)
+Akademik → menentukan strategi eskul: jangan ganggu jam belajar, tapi jadi “penguat motivasi”
+Output Orchestrator sebaiknya selalu mengandung 2 jalur paralel:
+1) Jalur akademik (rutinitas belajar)
+2) Jalur non-akademik (eskul/portofolio) yang mendukung tujuan besar
+4) Alur Percakapan (User Experience) yang enak untuk siswa
+Onboarding 2–3 menit
+Jenjang + kelas
+Tujuan utama (naik nilai / siap ujian / cari eskul / mau lomba / studi lanjut)
+Waktu luang per hari & hari eskul
+Minat (pilihan cepat)
+Hambatan utama
+Harian (≤ 60 detik)
+belajar menit berapa?
+tugas selesai?
+energi/fokus 1–5
+“1 target kecil besok”
+Mingguan (5 menit)
+evaluasi target
+pilih 1 fokus minggu depan (akademik atau eskul)
+revisi jadwal
+5) Struktur Data Minimal (tanpa akses data sekolah pun bisa jalan)
+Agar akademik dan eskul nyambung, cukup simpan data siswa berbasis self-report:
+student_profile: jenjang, kelas, minat, tujuan
+study_tracking: menit belajar, tugas, fokus
+activity_tracking (eskul): latihan/kehadiran, skill yang dilatih, event/lomba
+portfolio_items: sertifikat, lomba, project, organisasi
+case_notes (opsional): ringkasan konseling (format DAP)
+6) “Kontrak” Antar Bot Agar Tandem Rapi (wajib)
+Setiap bot/agen mengembalikan JSON standar:
+key_findings
+recommendations[]
+next_questions[]
+plan_updates (apa yang harus masuk ke rencana mingguan siswa)
+risk_flags (jika ada)
+Orchestrator menyatukan menjadi 1 jawaban yang ringkas.
+7) Pertanyaan Kunci (supaya saya bisa susun versi final paling pas)
+Sebutkan daftar eskul yang ingin Anda dukung dulu (boleh 5–15 saja untuk tahap awal), misalnya:
+Pramuka, PMR, OSIS, Paskibra, Basket, Futsal, Voli, Badminton, Tari, Musik, Teater, KIR, Robotik, Coding, English Club, Debat, Desain, Fotografi, dsb.
+Kalau Anda kirim daftar itu, saya bisa buat:
+1) template rekomendasi eskul (rule + reasoning + jalur progres),
+2) playbook “eskul → portofolio → kampus/beasiswa” per jenjang,
+3) contoh percakapan end-to-end: siswa bingung pilih eskul + nilai turun (gabungan akademik & non-akademik).
+itu semua yang kamu cointohkan adalah eskul utama yang ada di kebanyakan sekolah sudah cukup untuk langkah awal
+3:56 AM
+Thought
+Baik—kalau daftar eskul umum itu sudah cukup untuk langkah awal, kita bisa “kunci” MVP Eskul + Akademik yang rapi dan siap di-scale.
+Di bawah ini saya susun paket implementasi awal: (1) katalog eskul standar, (2) intake/asesmen pemilihan eskul, (3) logika rekomendasi, (4) output template ke siswa, dan (5) cara menautkan eskul ↔ prestasi akademik ↔ portofolio.
+1) Katalog Eskul MVP (standar “kebanyakan sekolah”)
+Agar mudah di-maintain, kita kelompokkan menjadi 6 klaster:
+1) Kepemimpinan & Layanan
+OSIS, MPK, Pramuka, PMR
+2) PBB & Kedisiplinan
+Paskibra
+3) Olahraga
+Basket, Futsal, Voli, Badminton
+4) Seni & Budaya
+Tari, Musik/Band, Teater
+5) Sains & Riset
+KIR
+6) Teknologi & Komunikasi
+Robotik, Coding, English Club, Debat, Desain, Fotografi
+Ini sudah mencakup mayoritas kebutuhan: sosial, prestasi, skill, dan jalur studi lanjut.
+2) “Intake Pemilihan Eskul” (≤ 2 menit, untuk siswa)
+Siswa tidak perlu isi panjang. Cukup 8 pertanyaan cepat (pilihan):
+1) Tujuan utama ikut eskul:
+Prestasi lomba / Tambah teman / Skill masa depan / Leadership / Kesehatan-fisik
+2) Gaya aktivitas yang disukai:
+Aktif fisik / Kreatif panggung / Analitis-riset / Teknologi / Komunikasi publik / Sosial-relawan
+3) Nyaman tampil di depan orang?
+Ya / Kadang / Tidak
+4) Prefer kerja:
+Tim / Individu / Campuran
+5) Waktu luang per minggu:
+1 jam / 2–3 jam / 4–6 jam / 7+ jam
+6) Toleransi latihan rutin & disiplin:
+Tinggi / Sedang / Rendah
+7) Minat topik (pilih 2):
+Olahraga, Seni, Sains, Tech, Bahasa, Organisasi, Sosial, Media-kreatif
+8) Kondisi akademik saat ini:
+Stabil / Perlu naik / Sedang turun (agar bot menyeimbangkan jadwal)
+Output intake ini langsung jadi dasar rekomendasi.
+3) Logika Rekomendasi (simple tapi “terasa pintar”)
+A. Scoring per eskul
+Setiap eskul punya “profil” skor terhadap dimensi:
+Disiplin tinggi (Paskibra, Pramuka)
+Public speaking (Debat, OSIS, Teater)
+Kreatif visual (Desain, Fotografi)
+STEM (KIR, Robotik, Coding)
+Team sports (Basket, Futsal, Voli)
+Service/empati (PMR)
+B. Aturan pengaman (agar akademik tidak keteteran)
+Jika siswa mengaku nilai sedang turun, Orchestrator akan:
+tetap boleh rekomendasi eskul,
+tapi memberi batas aman: misalnya “maks 2–3 jam/minggu dulu + rencana belajar 20 menit/hari”.
+C. Output bukan 1 jawaban, tapi “Top 3 + jalur progres”
+Sistem memberi:
+Rekomendasi 1 (paling cocok)
+Alternatif 2
+Alternatif 3
+plus “jalur progres 3 level”: Pemula → Aktif → Prestasi/Pengurus
+4) Template Output ke Siswa (yang solutif)
+Format jawaban rekomendasi eskul (selalu konsisten):
+1) Ringkasan preferensi kamu (hasil intake)
+2) Top 3 eskul yang paling cocok
+3) Alasan kecocokan (3 poin singkat per eskul)
+4) Komitmen waktu & jadwal aman (per minggu)
+5) Jalur progres 8 minggu (agar tidak mandek)
+6) Kaitkan ke masa depan (portofolio/kampus/beasiswa/skill)
+7) Pertanyaan lanjutan (maks 3) untuk finalisasi
+Contoh jalur progres 8 minggu (template):
+Minggu 1–2: orientasi + hadir konsisten
+Minggu 3–4: ambil peran kecil (tugas tim/latihan skill)
+Minggu 5–6: mini-project / sparring / tampil internal
+Minggu 7–8: target event/lomba internal + evaluasi
+5) Cara Menghubungkan Eskul ↔ Portofolio ↔ Studi Lanjut (inti “prospektif”)
+Untuk tiap eskul, sistem otomatis menghasilkan “Portofolio Pack”:
+A) Bukti yang bisa dikumpulkan
+sertifikat
+foto/video kegiatan
+surat tugas/panitia
+karya/projek (desain, code, riset, tulisan)
+posisi/role (anggota inti/pengurus)
+B) Skill yang bisa diklaim (resume-ready)
+leadership, teamwork, time management, public speaking, problem solving, dll.
+C) Jalur lanjut yang relevan
+Debat/English Club → jurusan HI, Hukum, Komunikasi, beasiswa luar negeri
+KIR/Robotik/Coding → STEM, informatika, engineering
+OSIS/MPK → leadership, organisasi, jalur prestasi
+Olahraga → disiplin, event prestasi, beasiswa olahraga (tergantung konteks)
+Ini yang membuat chatbot Anda beda dari “sekadar daftar eskul”.
+6) Deliverable berikutnya (tanpa Anda perlu tambah data)
+Karena eskul awal sudah fix, langkah paling tepat berikutnya adalah saya tuliskan “Eskul Knowledge Cards”: 1 kartu per eskul berisi:
+deskripsi singkat
+cocok untuk siapa
+komitmen waktu
+jalur progres
+portofolio pack
+risiko/anti-pattern (mis. “terlalu menyita waktu kalau nilai turun”)
+rekomendasi jadwal aman
+Agar saya susun sesuai kebutuhan monetisasi Anda: aplikasi ini akan Anda rilis dengan bahasa yang lebih:
+1) sangat “anak sekolah” (santai, ringkas), atau
+2) semi-formal (lebih serius, untuk SMP/SMA), atau
+3) adaptif otomatis berdasarkan jenjang?
+Jawab pilih 1 (boleh singkat), nanti saya lanjutkan dengan paket “Eskul Knowledge Cards + prompt orchestrator eskul-akademik” versi produksi.
+1
+4:03 AM
+Siap—kita pakai gaya bahasa sangat “anak sekolah”: santai, ringkas, banyak aksi kecil, tidak menggurui.
+Di bawah ini saya berikan (A) Prompt Orchestrator versi siswa, lalu (B) “Eskul Knowledge Cards” MVP (kartu ringkas per eskul) yang bisa langsung Anda jadikan knowledge base.
+A) Prompt Orchestrator (Mode Siswa — Santai, Solutif)
+Anda bisa pakai sebagai system prompt chatbot utama.
+Kamu adalah StudentHub, teman ngobrol siswa buat urusan sekolah: belajar, ujian, eskul, prestasi, dan rencana lanjut.
+Gaya bicara: santai, ramah, ringkas, tidak menghakimi, tidak sok dewasa.
+
+Aturan main:
+1) Kalau ada tanda bahaya (self-harm, kekerasan, pelecehan, bullying berat, tidak aman di rumah), berhenti bahas detail dan arahkan ke bantuan orang dewasa tepercaya / guru BK sesuai SOP.
+2) Kalau user minta eskul: selalu kasih Top 3 rekomendasi + alasan singkat + “rencana 2 minggu biar nggak mandek”.
+3) Kalau nilai/semangat lagi turun: eskul boleh, tapi kasih batas aman (jam/minggu) + saran rutinitas belajar kecil.
+4) Jawaban wajib punya struktur:
+   - Ringkasnya
+   - Top rekomendasi (maks 3)
+   - Cocok karena apa
+   - Komitmen waktu + jadwal aman
+   - Challenge 7 hari (aksi kecil)
+   - 3 pertanyaan cepat (biar makin pas)
+5) Hindari jawaban kepanjangan. Lebih baik actionable.
+
+Kalau user belum kasih data, tanya cepat:
+- Kamu kelas berapa?
+- Suka yang aktif fisik / kreatif / riset / tech / ngomong depan orang?
+- Waktu luang per minggu berapa?
+​
+B) Eskul Knowledge Cards (MVP — gaya anak sekolah)
+Format tiap kartu: Cocok buat siapa → Ngapain aja → Komitmen → Level-up 2 minggu → Portofolio → Waspada
+1) OSIS
+Cocok buat: yang suka organisasi, pengen jadi “anak inti”, suka ngatur acara
+Ngapain aja: event sekolah, kepanitiaan, koordinasi, rapat
+Komitmen: 2–6 jam/minggu (lagi event bisa naik)
+Level-up 2 minggu: ikut 1 rapat + ambil 1 tugas kecil sampai kelar
+Portofolio: sertifikat panitia, jabatan, dokumentasi event
+Waspada: kalau nilai lagi turun, pilih peran yang “ringan tapi beres”
+2) MPK
+Cocok buat: yang suka aturan, diskusi, pengen belajar “ngurus kebijakan”
+Ngapain aja: aspirasi siswa, evaluasi program, rapat resmi
+Komitmen: 1–4 jam/minggu
+Level-up 2 minggu: bikin 1 usulan sederhana (mis. perbaikan kegiatan) + present singkat
+Portofolio: notulen, program kerja, sertifikat
+Waspada: jangan kebanyakan rapat sampai tugas sekolah keteteran
+3) Pramuka
+Cocok buat: yang mau disiplin, mental kuat, teamwork
+Ngapain aja: latihan rutin, survival ringan, PBB, kegiatan lapangan
+Komitmen: 2–4 jam/minggu
+Level-up 2 minggu: hadir konsisten + kuasai 2 skill dasar (simpul/PBB)
+Portofolio: tanda kecakapan, sertifikat kegiatan, pengalaman kepemimpinan
+Waspada: capek fisik—atur jam tidur
+4) PMR
+Cocok buat: yang peduli orang, pengen skill pertolongan pertama
+Ngapain aja: P3K, kegiatan sosial, edukasi kesehatan
+Komitmen: 1–3 jam/minggu
+Level-up 2 minggu: hafal alur P3K dasar + ikut 1 simulasi
+Portofolio: sertifikat pelatihan, kegiatan sosial
+Waspada: jangan jadi “overhelper” sampai lupa diri sendiri
+5) Paskibra
+Cocok buat: yang suka disiplin tinggi, rapi, kuat latihan rutin
+Ngapain aja: baris-berbaris, latihan fisik, upacara
+Komitmen: 3–7 jam/minggu (bisa lebih pas persiapan)
+Level-up 2 minggu: konsisten latihan + perbaiki 1 kebiasaan (postur/ketepatan)
+Portofolio: sertifikat, pengalaman event resmi
+Waspada: kalau akademik lagi merah, atur prioritas + belajar tetap jalan
+6) Basket
+Cocok buat: yang suka sport tim, stamina, kompetitif
+Komitmen: 2–6 jam/minggu
+Level-up 2 minggu: latihan dribble + passing + 1 target fisik kecil
+Portofolio: turnamen, posisi tim, sertifikat
+Waspada: cedera—pemanasan wajib
+7) Futsal
+Cocok buat: yang suka cepat, tim, strategi
+Komitmen: 2–6 jam/minggu
+Level-up 2 minggu: kontrol bola + finishing + ikut sparring 1x
+Portofolio: turnamen, medali/sertifikat
+Waspada: jangan latihan sampai begadang tugas
+8) Voli
+Cocok buat: yang suka sport tim, koordinasi, refleks
+Komitmen: 2–5 jam/minggu
+Level-up 2 minggu: servis + passing + stamina dasar
+Portofolio: turnamen, sertifikat
+Waspada: bahu/pergelangan—teknik penting
+9) Badminton
+Cocok buat: yang suka sport cepat, bisa solo atau ganda
+Komitmen: 2–5 jam/minggu
+Level-up 2 minggu: footwork + 2 pukulan andalan
+Portofolio: sparring, event/kejuaraan
+Waspada: konsistensi latihan itu kunci
+10) Tari
+Cocok buat: yang ekspresif, suka panggung, suka budaya
+Komitmen: 2–5 jam/minggu (menjelang tampil bisa naik)
+Level-up 2 minggu: kuasai 1 koreo pendek + latihan timing
+Portofolio: video penampilan, event sekolah
+Waspada: jangan minder—progres kelihatan dari rekaman
+11) Musik / Band
+Cocok buat: yang suka tampil, suka latihan skill alat musik/vokal
+Komitmen: 2–6 jam/minggu
+Level-up 2 minggu: latihan 1 lagu sampai rapi + rekam versi latihan
+Portofolio: rekaman audio/video, tampil event
+Waspada: latihan larut malam → ngantuk sekolah
+12) Teater
+Cocok buat: yang suka cerita, akting, public speaking (atau mau belajar)
+Komitmen: 2–6 jam/minggu
+Level-up 2 minggu: 1 latihan ekspresi + hafal 1 scene pendek
+Portofolio: pementasan, peran, naskah
+Waspada: latihan intens pas show—atur tugas sekolah dari awal
+13) KIR (Karya Ilmiah Remaja)
+Cocok buat: yang suka riset, suka mikir, suka bikin karya/skripsi mini
+Komitmen: 1–4 jam/minggu
+Level-up 2 minggu: pilih 1 topik + bikin outline + cari 3 sumber
+Portofolio: proposal, laporan riset, lomba karya ilmiah
+Waspada: jangan kebanyakan ide, fokus 1 dulu
+14) Robotik
+Cocok buat: yang suka ngoprek, logika, hardware/software
+Komitmen: 2–6 jam/minggu
+Level-up 2 minggu: bikin 1 proyek mini (sensor/motor sederhana)
+Portofolio: repo/proyek, demo, lomba
+Waspada: gampang “ketagihan”—atur jam biar PR aman
+15) Coding
+Cocok buat: yang suka problem solving, tech, bikin sesuatu dari nol
+Komitmen: 2–6 jam/minggu
+Level-up 2 minggu: bikin 1 project kecil (web sederhana / game mini / bot)
+Portofolio: GitHub/repo, demo link, sertifikat course
+Waspada: jangan cuma nonton tutorial—harus bikin proyek
+16) English Club
+Cocok buat: yang pengen pede ngomong Inggris, persiapan beasiswa/luar negeri
+Komitmen: 1–3 jam/minggu
+Level-up 2 minggu: 7 hari “1 menit speaking” + 30 kosakata tematik
+Portofolio: speech, lomba, rekaman
+Waspada: malu itu normal—yang penting konsisten
+17) Debat
+Cocok buat: yang suka argumen, cepat mikir, suka isu sosial
+Komitmen: 2–6 jam/minggu
+Level-up 2 minggu: latihan 2 mosi + 1 struktur argumen (claim-reason-evidence)
+Portofolio: lomba debat, sertifikat, posisi tim
+Waspada: debat bukan berantem—latih sopan & data
+18) Desain
+Cocok buat: yang visual, suka poster, branding, UI/UX dasar
+Komitmen: 2–5 jam/minggu
+Level-up 2 minggu: buat 3 karya (poster/event/IG sekolah)
+Portofolio: folder karya + brief + before-after
+Waspada: jangan perfeksionis—selesaikan dulu
+19) Fotografi
+Cocok buat: yang suka dokumentasi, cerita lewat gambar, event sekolah
+Komitmen: 1–4 jam/minggu (event-based)
+Level-up 2 minggu: 1 tema foto + 10 foto terbaik + edit ringan
+Portofolio: album/IG, dokumentasi event
+Waspada: izin foto orang & etika itu penting
+C) Output “Rekomendasi Eskul” versi anak sekolah (template jadi)
+Kalau siswa nanya “aku cocok eskul apa?”, bot jawab begini:
+1) Ringkasnya: “Kayaknya kamu tipe [aktif/kreatif/tech/komunikasi].”
+2) Top 3 eskul:
+1) …
+2) …
+3) …
+3) Cocok karena: (3 poin singkat)
+4) Komitmen waktu aman: “Mulai 2–3 jam/minggu dulu.”
+5) Challenge 7 hari: “Hadir 1 latihan + catat 1 hal yang kamu suka/ga suka.”
+6) 3 pertanyaan cepat: kelas berapa, waktu luang, mau prestasi atau fun dulu?
+D) 1 pertanyaan untuk mengunci MVP rilis pertama
+Di rilis awal, Anda mau rekomendasi eskulnya berbasis:
+1) Quiz cepat (8 pertanyaan) lalu keluar Top 3 (paling “produk”)
+atau
+2) Chat bebas (lebih natural tapi rawan ngambang)?
+Jawab “1” atau “2”.
+tambah eskul nya broadcasting, modelling
+4:05 AM
+Siap—kita tambahkan 2 eskul itu ke Eskul Knowledge Cards (MVP) dengan gaya bahasa anak sekolah.
+20) Broadcasting
+Cocok buat: yang suka ngomong, suka kamera/mic, suka bikin konten, pengen pede tampil
+Ngapain aja: jadi MC, podcast sekolah, liputan event, bikin video pendek, nulis naskah, editing dasar
+Komitmen: 2–5 jam/minggu (naik pas ada event)
+Level-up 2 minggu:  
+1) bikin 1 skrip 60 detik (news/announcement)  
+2) rekam 3 take sampai jelas  
+3) upload versi “internal” (ke tim eskul/mentor)
+Portofolio: video liputan, podcast episode, jadi MC event, showreel 30–60 detik
+Waspada: jangan kebanyakan “gaya” tapi lupa artikulasi; latihan suara & naskah itu kunci
+21) Modelling
+Cocok buat: yang suka fashion/pose, pengen percaya diri, tertarik runway/foto, branding personal
+Ngapain aja: latihan postur & jalan, pose, ekspresi, makeup/hair dasar (opsional), photoshoot, catwalk event sekolah
+Komitmen: 2–4 jam/minggu
+Level-up 2 minggu:  
+1) latihan postur 10 menit/hari  
+2) buat 10 pose basic (foto)  
+3) bikin 1 set foto sederhana (baju rapi + lighting bagus)
+Portofolio: comp card (foto standar), mini lookbook, catwalk/event, sebelum–sesudah (progress)
+Waspada (penting):  
+utamakan batas aman & consent (foto/video jangan disebar sembarang)  
+pilih kegiatan yang sehat dan tidak merendahkan diri/ body shaming  
+jaga waktu biar akademik tetap jalan
+Kalau Anda setuju, saya akan masukkan keduanya ke logika rekomendasi eskul dengan “tag”:
+Broadcasting → komunikasi + media + public speaking
+Modelling → confidence + performance + personal branding
+ya lanjut
+4:06 AM
+ya lanjut
+9:33 AM
+Oke, saya lanjutkan dengan 3 hal yang “mengunci” MVP Anda:
+1) Tag & skor rekomendasi eskul (termasuk Broadcasting + Modelling)  
+2) Quiz cepat 8 pertanyaan (versi produk) + cara menghitung Top 3  
+3) Template output final + “jalur progres 2 minggu” yang otomatis nyambung ke akademik
+1) Tag & Skor Eskul (agar Orchestrator bisa rekomendasi Top 3)
+Gunakan dimensi sederhana (0–3) supaya gampang diimplementasi.
+Dimensi (features):
+physical (fisik/olahraga)
+performance (panggung/tampil)
+public_speaking (ngomong depan orang)
+creative_visual (visual/konten/desain)
+stem_logic (logika/riset/tech)
+leadership_service (organisasi, layanan, disiplin)
+discipline (latihan rutin ketat)
+time_demand (1–3, makin tinggi makin nyita waktu)
+Tambahan 2 eskul baru
+Broadcasting (tag kuat)
+performance: 2  
+public_speaking: 3  
+creative_visual: 2 (konten, editing dasar)  
+leadership_service: 1 (panitia/liputan)  
+time_demand: 2  
+Modelling (tag kuat)
+performance: 3  
+public_speaking: 1 (opsional)  
+discipline: 2 (postur, latihan rutin)  
+creative_visual: 1 (photoshoot/lookbook)  
+time_demand: 2  
+catatan guardrail: “privasi & consent wajib”
+Aturan pengaman akademik
+Jika siswa memilih “nilai lagi turun” → penalti untuk eskul dengan time_demand = 3 dan discipline tinggi, lalu Orchestrator memberi “batas aman jam/minggu”.
+2) Quiz Cepat 8 Pertanyaan (versi MVP paling “produk”)
+Ini format yang paling mudah dipakai di WA/web/app karena tinggal pilih opsi.
+Q1 — Tujuan utama ikut eskul?
+A. Prestasi/lomba  
+B. Punya teman & seru-seruan  
+C. Skill buat masa depan  
+D. Leadership/organisasi  
+E. Biar lebih pede
+Q2 — Kamu lebih suka aktivitas yang mana?
+A. Banyak gerak (fisik)  
+B. Tampil/panggung/kamera  
+C. Ngoprek/tech/logika  
+D. Kreatif visual (desain/foto/video)  
+E. Sosial/relawan/ngurus orang
+Q3 — Nyaman ngomong di depan orang?
+A. Iya banget  
+B. Kadang-kadang  
+C. Belum, tapi pengen belajar  
+D. Nggak dulu
+Q4 — Kamu paling nyaman kerja…
+A. Tim rame  
+B. Tim kecil  
+C. Sendiri  
+D. Campuran
+Q5 — Waktu luang per minggu buat eskul?
+A. 1 jam  
+B. 2–3 jam  
+C. 4–6 jam  
+D. 7+ jam
+Q6 — Kamu tahan latihan disiplin rutin?
+A. Tahan banget  
+B. Lumayan  
+C. Kadang mager
+Q7 — Kamu tertarik yang mana? (pilih 2)
+A. Olahraga  
+B. Seni panggung  
+C. Sains/riset  
+D. Teknologi  
+E. Bahasa/komunikasi  
+F. Media kreatif (foto/video/desain)  
+G. Organisasi & event  
+H. Sosial & kesehatan
+Q8 — Kondisi belajar kamu sekarang?
+A. Stabil  
+B. Lagi naik pelan  
+C. Lagi turun/keteteran
+3) Cara Hitung Skor Top 3 (simple tapi terasa “AI”)
+Step 1: Mapping jawaban → dimensi
+Contoh mapping ringkas:
+Q2A → physical +3
+Q2B → performance +3
+Q2C → stem_logic +3
+Q2D → creative_visual +3
+Q2E → leadership_service +3
+Q3A → public_speaking +3, Q3C → public_speaking +2
+Q6A → discipline +3
+Step 2: Skor eskul = dot product
+Untuk tiap eskul, total skor = Σ (dimensi_user × dimensi_eskul)
+Step 3: Filter “batas aman akademik”
+Jika Q8C (nilai turun):
+penalti eskul time_demand=3 (mis. -2)
+dan Orchestrator wajib mengeluarkan “rencana belajar kecil” + batas jam eskul.
+Step 4: Output Top 3 + 1 wildcard
+Selain Top 3, tambahkan 1 “wildcard” yang masih relevan (biar user merasa punya opsi).
+4) Template Output Final (yang ditampilkan ke siswa)
+Setelah quiz, hasilnya selalu begini:
+1) Ringkasnya: tipe kamu (mis. “kamu cocok yang tampil + komunikasi”)  
+2) Top 3 eskul  
+3) Alasan singkat (3 poin/eskul)  
+4) Komitmen waktu aman (jam/minggu + saran jadwal)  
+5) Challenge 7 hari (aksi kecil)  
+6) Rencana 2 minggu (level-up)  
+7) Portofolio yang bisa kamu kumpulin (3 item)  
+8) 1 pertanyaan penentu (mis. “kamu lebih suka tampil live atau rekaman?”)
+Contoh “1 pertanyaan penentu” khusus eskul baru:
+Broadcasting: “Kamu lebih suka jadi MC/live atau rekaman/editing?”
+Modelling: “Kamu tertarik ke runway atau photoshoot?”
+5) Guardrail khusus “Modelling” (penting untuk produk siswa)
+Di jawaban Modelling, Orchestrator wajib menambahkan 2 kalimat standar:
+“Privasi kamu nomor 1—foto/video jangan disebar sembarang, pastikan consent.”
+“Kalau ada komentar body shaming, kamu berhak stop dan minta bantuan orang dewasa tepercaya/guru BK.”
+Ini menjaga aplikasi Anda aman dan kredibel.
+6) Pertanyaan pengunci (1 pilihan saja)
+Untuk MVP rilis pertama, Anda mau “hasil rekomendasi” ditampilkan sebagai:
+1) Top 3 + tombol ‘Ambil Rencana 2 Minggu’ (langsung jadi program)  
+atau  
+2) Top 3 + chat lanjutan dulu (lebih natural, tapi lebih panjang)
+Balas dengan angka 1 atau 2.
+1
+9:57 AM
+Sip, kita pilih opsi (1) Top 3 + tombol “Ambil Rencana 2 Minggu”. Ini paling “produk”, gampang dimonetisasi, dan bikin chatbot terasa benar-benar membimbing (bukan cuma ngobrol).
+Di bawah ini saya susun spesifikasi output final + format rencana 2 minggu yang bisa langsung Anda implementasikan.
+1) Flow MVP (ringkas)
+Siswa isi Quiz 8 pertanyaan
+Sistem tampilkan Top 3 Eskul + alasan singkat + komitmen waktu aman
+Muncul CTA: [Ambil Rencana 2 Minggu]
+Kalau klik, sistem generate Program 14 hari:
+jadwal eskul (latihan/skill)
+plus “batas aman akademik” (micro-belajar 15–25 menit/hari, kalau nilai turun)
+2) Output “Top 3 Eskul” (format tampilan ke siswa)
+Judul: “Rekomendasi Eskul Buat Kamu”
+Struktur:
+1) Ringkasnya
+“Kamu cocok ke jalur: [Komunikasi + tampil + kreatif]” (contoh)
+2) Top 3 Eskul
+Untuk tiap eskul:
+Nama eskul
+Cocok karena: (3 bullet)
+Coba dulu: (aksi 1 langkah yang gampang)
+Komitmen aman: “2–3 jam/minggu”
+3) CTA
+Tombol: Ambil Rencana 2 Minggu
+Subteks: “Biar kamu nggak bingung mulai dari mana.”
+4) Catatan aman (kondisional)
+Jika siswa memilih “nilai turun/keteteran”:  
+“Eskul tetap boleh, tapi kita set batas aman biar nilai nggak makin drop.”
+3) Format “Rencana 2 Minggu” (yang di-generate setelah tombol)
+Saya buat format yang stabil untuk semua eskul, tapi tetap personal.
+3.1 Header Rencana
+Eskul utama: X
+Target 2 minggu: Y (mis. “punya 1 video 60 detik” untuk Broadcasting)
+Komitmen waktu: 2–4 jam/minggu
+Level: Pemula / Menengah (awal pakai “Pemula” default)
+3.2 Jadwal 14 hari (template)
+Minggu 1 — Fondasi
+Hari 1: “setup + orientasi”
+Hari 2: latihan skill inti 20–30 menit
+Hari 3: tugas mini (kecil, jadi)
+Hari 4: latihan 20–30 menit
+Hari 5: mini-evaluasi (cek progress 5 menit)
+Hari 6: latihan/tampil kecil
+Hari 7: “checkpoint” (hasil kecil wajib jadi)
+Minggu 2 — Level-up
+Hari 8–13: naikkan sedikit standar + satu project mini
+Hari 14: final checkpoint + refleksi + next step 1 bulan
+3.3 “Batas Aman Akademik” (selalu ada, tapi ringan)
+Default: 15 menit/hari (retrieval practice / latihan soal singkat)
+Jika siswa pilih “nilai turun”: naik jadi 20–25 menit/hari + 1 checkpoint akhir minggu
+Output akademiknya jangan panjang, cukup:
+“Belajar 20 menit (timer)”
+“5 soal / 10 flashcard”
+“tulis 3 poin yang belum paham”
+4) Rencana 2 Minggu — contoh jadi untuk eskul baru
+A) Broadcasting — Program 14 Hari (Pemula)
+Target 2 minggu: punya 1 video/podcast 60 detik yang jelas & pede  
+Komitmen: 2–4 jam/minggu
+Minggu 1
+H1: pilih role kamu (MC / reporter / editor) + pilih tema 1 menit
+H2: tulis skrip 60 detik (3 bagian: pembuka–isi–penutup)
+H3: latihan ngomong 3 take (rekam suara aja)
+H4: perbaiki artikulasi (latihan 10 menit) + take ulang
+H5: rekam video 1 menit (simple, yang penting jelas)
+H6: edit ringan (cut, volume, teks 1 baris)
+H7 (Checkpoint): simpan “final v1” (belum perlu sempurna)
+Minggu 2
+H8: minta 1 feedback (teman/mentor) pakai 2 pertanyaan: “jelas nggak?” “bagian paling ngambang?”
+H9: revisi skrip 10% (lebih ringkas)
+H10: rekam ulang 1 take terbaik
+H11: editing v2 (lebih rapi)
+H12: bikin intro outro 3 detik (opsional)
+H13: finalisasi + judul + thumbnail sederhana
+H14 (Final): “showreel 60 detik” + refleksi 5 menit (apa yang paling meningkat?)
+Batas aman akademik (15–25 menit/hari): timer 20 menit + 5 latihan soal/flashcard.
+B) Modelling — Program 14 Hari (Pemula)
+Target 2 minggu: punya mini lookbook 6 foto + postur lebih rapi  
+Komitmen: 2–4 jam/minggu
+Minggu 1
+H1: cek postur (rekam jalan 10 detik) + pilih style rapi & sopan
+H2: latihan “jalan basic” 10 menit + 3 pose dasar
+H3: latihan ekspresi (netral, senyum tipis, confident)
+H4: latihan pose 10 menit (tangan, bahu, dagu)
+H5: photoshoot mini (3 foto) pakai HP + cahaya jendela
+H6: pilih 2 foto terbaik + edit ringan (brightness/contrast)
+H7 (Checkpoint): “mini set 2 foto” + catat 1 hal yang perlu diperbaiki
+Minggu 2
+H8: latihan jalan + putar balik (turn) 10 menit
+H9: tambah 3 pose baru (lebih natural)
+H10: photoshoot mini kedua (4 foto)
+H11: pilih 4 foto terbaik total (gabungan)
+H12: rapikan: background bersih + outfit rapi
+H13: final: pilih 6 foto (lookbook)
+H14 (Final): comp-card sederhana: 1 close-up + 1 full body + 1 gaya bebas
+Guardrail wajib (selalu tampil):
+Privasi kamu nomor 1—foto/video jangan disebar sembarang, pastikan consent.
+Kalau ada body shaming/komentar nggak aman, stop dan cari bantuan orang dewasa tepercaya/guru BK.
+Batas aman akademik (15–25 menit/hari): timer 15–20 menit + 1 tugas kecil (mis. rangkum 5 poin / 5 soal).
+5) Format “Data output” untuk backend (biar gampang)
+Saat user klik tombol, Orchestrator bisa mengembalikan JSON seperti ini:
+{
+  "type": "two_week_plan",
+  "primary_extracurricular": "Broadcasting",
+  "plan_duration_days": 14,
+  "weekly_time_hours": "2-4",
+  "goals": ["Video/podcast 60 detik versi final"],
+  "daily_tasks": [
+    {"day": 1, "task": "Pilih role + tema 1 menit", "minutes": 20},
+    {"day": 2, "task": "Tulis skrip 60 detik", "minutes": 25}
+  ],
+  "academic_safety_routine": {
+    "minutes_per_day": 20,
+    "default_task": "5 soal/flashcard + 3 poin yang belum paham"
+  },
+  "guardrails": ["privacy", "consent"]
+}
+​
+Kalau Anda mau, langkah berikutnya saya bisa tuliskan kartu rencana 2 minggu untuk semua eskul MVP (OSIS, Pramuka, PMR, Paskibra, olahraga, seni, KIR, robotik, coding, debat, english club, desain, fotografi, broadcasting, modelling) dengan format yang sama sehingga tinggal dipanggil berdasarkan “Top 1 pilihan siswa”.
+lanjut
+9:58 AM
+Berikut Rencana 2 Minggu (14 hari) siap pakai untuk semua eskul MVP Anda—formatnya konsisten, gaya bahasa anak sekolah, dan tiap plan sudah ada “batas aman akademik” biar eskul jalan tapi belajar tetap naik.
+Agar tidak kepanjangan, saya tulis tiap eskul dengan:
+Target 2 minggu
+Minggu 1 (Fondasi)
+Minggu 2 (Level-up)
+Checkpoint
+Batas aman akademik
+0) Batas Aman Akademik (Template Universal)
+Pakai ini di semua plan:
+Normal: 15 menit/hari → timer 15 + 5 soal/flashcard + catat 1 hal yang belum paham
+Kalau “nilai lagi turun/keteteran”: 20–25 menit/hari + Checkpoint Minggu: “mini-kuis 10 menit” (hari ke-7 & 14)
+1) OSIS — Plan 14 Hari
+Target 2 minggu: punya 1 kontribusi nyata (tugas panitia/ide program) yang selesai
+Minggu 1
+H1: pilih bidang minat (acara / humas / dokumentasi / kreatif)
+H2: ikut rapat / tanya 3 agenda OSIS minggu ini
+H3: ambil 1 tugas kecil yang jelas deadline-nya
+H4: kerjain 30–45 menit (draft/konsep/list kebutuhan)
+H5: update progres ke koordinator (1 pesan rapi)
+H6: beresin 70% tugas
+H7 (Checkpoint): tugas “versi 1” selesai & dikirim
+Minggu 2
+H8: minta feedback singkat
+H9: revisi + rapikan
+H10: bantu 1 hal tambahan kecil (bonus)
+H11: dokumentasi (foto/notes) sebagai portofolio
+H12: bikin ringkasan 5 baris “apa yang kamu kerjain”
+H13: finalisasi
+H14 (Final): simpan bukti (sertifikat/foto/role)
+Batas aman akademik: template universal
+2) MPK — Plan 14 Hari
+Target 2 minggu: bikin 1 usulan perbaikan sekolah (simple, realistis) + present singkat
+Minggu 1: pilih isu → kumpulin 5 input teman → tulis usulan 1 halaman  
+Minggu 2: rapikan argumen → present 2 menit → minta 1 keputusan tindak lanjut  
+Checkpoint: H7 draft jadi, H14 present/submit final  
+Batas aman akademik: universal
+3) Pramuka — Plan 14 Hari
+Target 2 minggu: kuasai 2 skill dasar + hadir konsisten
+Minggu 1
+H1: pilih 2 skill: (simpul) + (PBB dasar) / (tali-temali) + (kompas)
+H2–H6: latihan 10–15 menit/hari + 1 latihan resmi
+H7 (Checkpoint): bisa demo 2 skill ke teman/pembina (video 30 detik boleh)
+Minggu 2
+H8–H13: tambah 1 skill kecil + ikut 1 tugas regu
+H14 (Final): catat pencapaian + target 1 bulan (mis. jadi penanggung jawab regu)
+Batas aman akademik: universal
+4) PMR — Plan 14 Hari
+Target 2 minggu: kuasai alur P3K dasar + ikut 1 simulasi
+Minggu 1: belajar “ABC sederhana” (cek aman–napas–bantuan) + luka ringan + pingsan  
+Minggu 2: simulasi 1 skenario + buat kartu ringkas P3K (cheat sheet)  
+Checkpoint: H7 hafal alur 1 skenario, H14 simulasi tuntas  
+Batas aman akademik: universal
+5) Paskibra — Plan 14 Hari
+Target 2 minggu: postur & ketepatan gerak membaik (terukur)
+Minggu 1
+H1: rekam video jalan & sikap (baseline 10 detik)
+H2–H6: latihan 10 menit/hari (postur + langkah) + 1 latihan resmi
+H7 (Checkpoint): rekam ulang, bandingkan (lebih rapi?)
+Minggu 2
+H8–H13: tambah ketahanan (latihan ringan) + fokus 1 detail (tangan/tempo)
+H14 (Final): video progress + catat 2 hal yang naik
+Batas aman akademik: universal (wajib jaga tidur)
+6) Basket — Plan 14 Hari
+Target 2 minggu: punya 1 skill naik jelas (dribble/layup/defense)
+Minggu 1: pilih skill → latihan 15–20 menit/hari → sparring ringan  
+Minggu 2: tambah intensitas + rekam 1 video progress + target akurasi (mis. 10/20 masuk)  
+Checkpoint: H7 bisa demo skill, H14 progres terukur  
+Batas aman akademik: universal
+7) Futsal — Plan 14 Hari
+Target 2 minggu: kontrol bola + finishing membaik
+Minggu 1: latihan kontrol + passing 15 menit/hari + 1 sparring  
+Minggu 2: finishing + positioning dasar + 1 match practice  
+Checkpoint: H7 “control challenge”, H14 “finishing challenge”  
+Batas aman akademik: universal
+8) Voli — Plan 14 Hari
+Target 2 minggu: servis + passing lebih stabil
+Minggu 1: passing + posisi tangan 15 menit/hari + latihan tim  
+Minggu 2: servis target (mis. 10 bola masuk area) + komunikasi tim  
+Checkpoint: H7 servis 5 masuk, H14 servis 10 masuk  
+Batas aman akademik: universal
+9) Badminton — Plan 14 Hari
+Target 2 minggu: footwork + 2 pukulan andalan
+Minggu 1: footwork 10 menit/hari + clear/drop basic  
+Minggu 2: net play atau smash ringan + sparring 1x  
+Checkpoint: H7 footwork rapi, H14 sparring lebih tahan lama  
+Batas aman akademik: universal
+10) Tari — Plan 14 Hari
+Target 2 minggu: kuasai 1 koreo pendek (30–60 detik)
+Minggu 1: hafal gerak + timing (rekam latihan)  
+Minggu 2: ekspresi + kerapian + tampil internal (teman)  
+Checkpoint: H7 koreo hafal, H14 tampil rapi  
+Batas aman akademik: universal
+11) Musik/Band — Plan 14 Hari
+Target 2 minggu: 1 lagu dibawakan rapi (solo/tim)
+Minggu 1: pilih lagu + latihan bagian sulit + rekam audio v1  
+Minggu 2: latihan tempo + dinamika + rekam v2 (lebih rapi)  
+Checkpoint: H7 hafal struktur lagu, H14 rekaman final  
+Batas aman akademik: universal
+12) Teater — Plan 14 Hari
+Target 2 minggu: 1 scene pendek (1–2 menit) dimainkan meyakinkan
+Minggu 1: baca naskah + hafal 50% + latihan ekspresi  
+Minggu 2: blocking (gerak panggung) + latihan tanpa teks + tampil internal  
+Checkpoint: H7 hafal, H14 tampil  
+Batas aman akademik: universal
+13) KIR — Plan 14 Hari
+Target 2 minggu: 1 ide riset jadi mini-proposal 1–2 halaman
+Minggu 1
+H1: pilih topik (yang dekat dengan sekolah/rumah)
+H2: cari 3 sumber
+H3: rumuskan pertanyaan riset
+H4: metode sederhana (survey/observasi/eksperimen mini)
+H5: draft proposal
+H6: rapikan
+H7 (Checkpoint): proposal v1 jadi
+Minggu 2
+H8–H12: coba pengumpulan data mini (5–10 responden / 1 observasi)
+H13: tulis hasil awal 5–10 baris
+H14 (Final): proposal v2 + rencana 1 bulan
+Batas aman akademik: universal
+14) Robotik — Plan 14 Hari
+Target 2 minggu: 1 proyek mini yang jalan (demo sederhana)
+Minggu 1: pilih proyek (sensor LED / motor) + wiring + demo v1  
+Minggu 2: rapikan kode + casing sederhana + video demo 30 detik  
+Checkpoint: H7 demo nyala/gerak, H14 demo rapi  
+Batas aman akademik: universal
+15) Coding — Plan 14 Hari
+Target 2 minggu: 1 proyek mini bisa dipamerin (link/video)
+Minggu 1: pilih proyek (web sederhana/game mini/to-do) + bikin versi jalan v1  
+Minggu 2: tambah 1 fitur + rapikan UI + publish (atau rekam demo)  
+Checkpoint: H7 “jalan”, H14 “pantes dipamerin”  
+Batas aman akademik: universal (jangan kebablasan ngoding)
+16) English Club — Plan 14 Hari
+Target 2 minggu: speaking lebih pede (1 menit tanpa macet)
+Minggu 1: 7 hari “1 menit speaking” + 10 kata/hari tema sekolah  
+Minggu 2: roleplay (introduce, opinion, agreement) + rekam 2 video  
+Checkpoint: H7 1 menit lancar, H14 2 menit lebih pede  
+Batas aman akademik: universal
+17) Debat — Plan 14 Hari
+Target 2 minggu: bisa bikin argumen rapi (Claim–Reason–Evidence) + 1 latihan mosi
+Minggu 1: belajar struktur + bikin 1 argumen untuk 1 mosi  
+Minggu 2: latihan rebuttal + sparring mini 1 ronde  
+Checkpoint: H7 argumen jadi, H14 sparring mini  
+Batas aman akademik: universal
+18) Desain — Plan 14 Hari
+Target 2 minggu: 3 karya jadi (poster/feed/story)
+Minggu 1: pilih 1 tema sekolah + buat 2 desain (selesai, jangan perfeksionis)  
+Minggu 2: buat 1 desain terbaik + bikin “before–after” + simpan portofolio  
+Checkpoint: H7 2 desain jadi, H14 total 3 desain + portofolio  
+Batas aman akademik: universal
+19) Fotografi — Plan 14 Hari
+Target 2 minggu: album 10 foto tema + 5 foto terbaik diedit ringan
+Minggu 1: pilih tema (school life/sports/portrait) + ambil 30 foto  
+Minggu 2: kurasi 10 → edit 5 → bikin album rapi  
+Checkpoint: H7 punya 10 kandidat, H14 album final  
+Batas aman akademik: universal (ingat etika & izin foto)
+20) Broadcasting — Plan 14 Hari
+(versi yang sudah kita sepakati, saya ringkas)
+Target 2 minggu: 1 video/podcast 60 detik versi final  
+Minggu 1: skrip → latihan → rekam v1 → edit ringan → checkpoint v1  
+Minggu 2: feedback → rekam ulang v2 → edit rapi → showreel final  
+Batas aman akademik: universal
+21) Modelling — Plan 14 Hari
+Target 2 minggu: mini lookbook 6 foto + postur lebih rapi  
+Minggu 1: postur + pose dasar + photoshoot mini + checkpoint 2 foto  
+Minggu 2: pose baru + photoshoot kedua + comp-card sederhana  
+Guardrail: privasi + consent + anti-body shaming (wajib)  
+Batas aman akademik: universal
+Format “Tombol Ambil Rencana 2 Minggu” (output JSON standar)
+Kalau Anda butuh kontrak output yang konsisten, pakai ini untuk semua eskul:
+{
+  "type": "two_week_plan",
+  "primary_extracurricular": "KIR",
+  "plan_duration_days": 14,
+  "weekly_time_hours": "1-4",
+  "goal": "Mini-proposal 1–2 halaman",
+  "week_1_focus": ["Pilih topik", "Cari 3 sumber", "Draft proposal v1"],
+  "week_2_focus": ["Data mini", "Proposal v2", "Rencana 1 bulan"],
+  "checkpoints": [
+    {"day": 7, "result": "Draft v1 jadi"},
+    {"day": 14, "result": "Final + portofolio"}
+  ],
+  "academic_safety_routine": {
+    "minutes_per_day": 15,
+    "task": "5 soal/flashcard + 1 catatan bingung"
+  },
+  "guardrails": []
+}
+​
+Pertanyaan terakhir untuk mengunci implementasi
+Rencana 2 minggu ini mau Anda tampilkan sebagai:
+1) Daftar harian H1–H14 (paling jelas, paling “coach”)  
+atau
+2) Ringkasan Minggu 1 & Minggu 2 + checkpoint (lebih ringkas)?
+Balas 1 atau 2.
+1
+10:00 AM
+Sip—kita pakai tampilan Daftar Harian H1–H14 (paling jelas dan berasa “coach”).
+Di bawah ini saya kasih:
+1) Format output standar H1–H14 (bisa Anda pakai untuk semua eskul)  
+2) Daftar H1–H14 siap pakai untuk semua eskul MVP (termasuk Broadcasting & Modelling)  
+3) Blok “Batas Aman Akademik” harian yang otomatis ikut (normal vs nilai turun)
+1) Format output standar (untuk UI/app)
+Strukturnya begini (tinggal render list + checkbox):
+Rencana 2 Minggu — [Nama Eskul]
+Target 2 minggu: …
+Komitmen: … jam/minggu
+Mode akademik: Normal / Nilai turun
+H1–H14
+H1: …
+H2: …
+…
+H14: …
+Batas Aman Akademik (harian)
+(Normal) 15 menit/hari
+(Nilai turun) 20–25 menit/hari + mini-kuis di H7 & H14
+2) Rencana Harian H1–H14 per Eskul (MVP)
+OSIS (Target: 1 kontribusi nyata selesai)
+H1: Pilih bidang minat (acara/humas/dokum/kreatif)
+H2: Tanya jadwal + pilih 1 event/agenda terdekat
+H3: Ambil 1 tugas kecil yang jelas deadline-nya
+H4: Kerjain 30 menit (draft konsep/list kebutuhan)
+H5: Update progres ke koordinator (1 pesan rapi)
+H6: Beresin 70% tugas
+H7: Checkpoint: kirim “versi 1” tugas
+H8: Minta feedback 1 hal yang perlu diperbaiki
+H9: Revisi 20 menit
+H10: Finalisasi tugas
+H11: Dokumentasi (foto/notes) buat portofolio
+H12: Bantu 1 tugas kecil tambahan (opsional)
+H13: Rapikan ringkasan 5 baris “apa yang kamu kerjain”
+H14: Final: simpan bukti (sertifikat/foto/role)
+MPK (Target: 1 usulan perbaikan + submit/present)
+H1: Pilih 1 isu sekolah yang pengen dibenerin
+H2: Tanya 5 teman: “masalahnya apa + ide solusinya”
+H3: Tulis usulan 10 baris (masalah–solusi–manfaat)
+H4: Tambah 3 alasan + 1 data kecil (observasi sederhana)
+H5: Rapikan jadi 1 halaman
+H6: Latihan jelasin 1 menit
+H7: Checkpoint: usulan versi 1 siap
+H8: Minta 1 feedback (guru/pengurus)
+H9: Revisi
+H10: Siapkan versi present 2 menit (bullet)
+H11: Present/submit ke pembina/rapat
+H12: Catat respon & tindak lanjut
+H13: Follow-up 1 pesan
+H14: Final: simpan dokumen + rencana langkah berikutnya
+Pramuka (Target: kuasai 2 skill + konsisten hadir)
+H1: Pilih 2 skill (mis. simpul + PBB dasar)
+H2: Latihan skill 1 (10 menit)
+H3: Latihan skill 2 (10 menit)
+H4: Latihan ulang + rekam 15 detik
+H5: Hadir latihan resmi / latihan regu
+H6: Ulangi 10 menit (bagian yang masih salah)
+H7: Checkpoint: bisa demo 2 skill (rekam video 30 detik)
+H8: Pilih 1 skill bonus kecil
+H9: Latihan skill bonus 10 menit
+H10: Bantu 1 tugas regu (sekecil apa pun)
+H11: Latihan ulang 10 menit
+H12: Hadir latihan/briefing
+H13: Catat pencapaian + target 1 bulan
+H14: Final: update portofolio (video/foto/sertifikat)
+PMR (Target: alur P3K dasar + 1 simulasi)
+H1: Pelajari 1 alur P3K (luka ringan)
+H2: Pelajari 1 alur (pingsan/cedera ringan)
+H3: Buat “cheat sheet” 10 baris (langkah-langkah)
+H4: Latihan skenario 1 (ceritakan ulang langkahnya)
+H5: Latihan skenario 2
+H6: Ikut simulasi / latihan tim
+H7: Checkpoint: bisa jelasin 1 skenario tanpa lihat catatan
+H8: Tambah 1 topik (mis. mimisan/terkilir)
+H9: Revisi cheat sheet jadi lebih ringkas
+H10: Latihan simulasi dengan teman (roleplay)
+H11: Review “apa yang paling sering salah”
+H12: Ikut kegiatan/latihan (kalau ada)
+H13: Siapkan bukti portofolio (foto/catatan)
+H14: Final: 1 simulasi lengkap + portofolio update
+Paskibra (Target: postur & ketepatan membaik)
+H1: Rekam baseline 10 detik (jalan + sikap)
+H2: Latihan postur 10 menit
+H3: Latihan langkah 10 menit
+H4: Latihan tangan/ayunan 10 menit
+H5: Hadir latihan resmi
+H6: Latihan ulang 10 menit (bagian paling lemah)
+H7: Checkpoint: rekam ulang + bandingkan baseline
+H8: Pilih 1 detail fokus (tempo/ketepatan)
+H9: Latihan 10 menit
+H10: Latihan 10 menit + stretching
+H11: Hadir latihan
+H12: Rekam 10 detik (cek kerapian)
+H13: Catat 2 improvement + 1 target berikutnya
+H14: Final: video progress + portofolio
+Basket (Target: 1 skill naik jelas)
+H1: Pilih skill (dribble/layup/defense)
+H2: Latihan 15 menit
+H3: Latihan 15 menit
+H4: Latihan 15 menit + 10 tembakan
+H5: Latihan tim/sparring ringan
+H6: Latihan 15 menit (fokus kelemahan)
+H7: Checkpoint: rekam 20 detik skill (progress)
+H8: Tambah target angka (mis. 10/20 masuk)
+H9: Latihan 20 menit
+H10: Latihan 20 menit
+H11: Sparring 1x
+H12: Latihan 15 menit
+H13: Rekam progress kedua
+H14: Final: catat hasil + target 1 bulan
+Futsal (Target: kontrol + finishing membaik)
+H1: Pilih fokus (kontrol/finishing)
+H2: Latihan kontrol 15 menit
+H3: Latihan passing 15 menit
+H4: Latihan finishing 15 menit
+H5: Sparring ringan
+H6: Latihan ulang 15 menit
+H7: Checkpoint: “challenge” 10 kontrol sukses
+H8: Latihan 20 menit
+H9: Finishing target 10 tembakan
+H10: Latihan positioning dasar
+H11: Match practice
+H12: Latihan ulang 15 menit
+H13: Rekam 20 detik progress
+H14: Final: catat hasil + target 1 bulan
+Voli (Target: servis + passing stabil)
+H1: Pilih fokus (servis/passing)
+H2: Passing 15 menit
+H3: Servis 15 menit
+H4: Passing + posisi tangan 15 menit
+H5: Latihan tim
+H6: Servis target 10 bola
+H7: Checkpoint: servis masuk 5/10
+H8: Passing 15 menit
+H9: Servis 15 menit
+H10: Komunikasi tim (call sederhana)
+H11: Latihan tim
+H12: Servis target 10 bola
+H13: Rekam progress
+H14: Final: servis masuk 8–10/10 (atau progres dari baseline)
+Badminton (Target: footwork + 2 pukulan andalan)
+H1: Pilih 2 pukulan (clear/drop/net)
+H2: Footwork 10 menit
+H3: Pukulan 1 (15 menit)
+H4: Footwork + pukulan 2
+H5: Sparring ringan
+H6: Latihan ulang yang paling susah
+H7: Checkpoint: footwork 2 menit tanpa berhenti
+H8: Latihan 20 menit
+H9: Pukulan target (10 repetisi bagus)
+H10: Net play / placement
+H11: Sparring 1x
+H12: Latihan 15 menit
+H13: Rekam progress
+H14: Final: catat progress + target 1 bulan
+Tari (Target: koreo 30–60 detik rapi)
+H1: Pilih koreo & lagu
+H2: Hafal bagian 1
+H3: Hafal bagian 2
+H4: Sambung full 1x (rekam)
+H5: Rapikan timing
+H6: Latihan ekspresi
+H7: Checkpoint: koreo full 1x tanpa berhenti
+H8: Rapikan detail tangan/kaki
+H9: Latihan 2x full
+H10: Latihan stamina (full 3x)
+H11: Rekam video v2
+H12: Perbaiki 1 bagian yang masih berantakan
+H13: Latihan final
+H14: Final: tampil internal / kirim video final
+Musik/Band (Target: 1 lagu rapi)
+H1: Pilih 1 lagu + tentukan bagian tersulit
+H2: Latihan bagian A (15–20 menit)
+H3: Latihan bagian B
+H4: Latihan full pelan
+H5: Latihan tempo + metronom (kalau bisa)
+H6: Rekam audio v1
+H7: Checkpoint: lagu bisa dimainkan dari awal sampai akhir
+H8: Perbaiki 1 bagian paling lemah
+H9: Latihan dinamika/ekspresi
+H10: Latihan full 2x
+H11: Rekam audio/video v2
+H12: Review (catat 2 perbaikan)
+H13: Latihan final
+H14: Final: rekaman final + portofolio
+Teater (Target: 1 scene 1–2 menit)
+H1: Pilih scene + baca naskah
+H2: Hafal 30%
+H3: Hafal 60%
+H4: Latihan ekspresi (3 emosi)
+H5: Blocking sederhana (gerak panggung)
+H6: Run tanpa teks (sebisa mungkin)
+H7: Checkpoint: tampil internal (teman) 1x
+H8: Perbaiki artikulasi + tempo
+H9: Latihan run 2x
+H10: Tambah gesture & timing
+H11: Run final
+H12: Rekam video latihan
+H13: Perbaiki 1 bagian
+H14: Final: video/penampilan final + portofolio
+KIR (Target: mini-proposal 1–2 halaman)
+H1: Pilih topik (dekat sama sekolah/rumah)
+H2: Cari 3 sumber (link/judul)
+H3: Tulis pertanyaan riset (1 kalimat)
+H4: Tulis tujuan + manfaat (5 baris)
+H5: Tentukan metode sederhana (survey/observasi/eksperimen mini)
+H6: Draft proposal v1
+H7: Checkpoint: proposal v1 jadi
+H8: Minta 1 feedback
+H9: Revisi v2
+H10: Coba data mini (5–10 responden / 1 observasi)
+H11: Tulis hasil awal 5–10 baris
+H12: Rapikan format
+H13: Siapkan portofolio (pdf + catatan)
+H14: Final: proposal v3 + rencana 1 bulan
+Robotik (Target: proyek mini demo)
+H1: Pilih proyek (sensor LED / motor sederhana)
+H2: Siapkan komponen & wiring plan
+H3: Rakit v1
+H4: Uji coba (nyala/gerak)
+H5: Perbaiki error 1
+H6: Rapikan kabel + dokumentasi foto
+H7: Checkpoint: demo v1 jalan
+H8: Rapikan kode
+H9: Tambah fitur kecil (mis. indikator)
+H10: Uji coba lagi
+H11: Buat casing sederhana (opsional)
+H12: Rekam video demo 30 detik
+H13: Tulis penjelasan 5 baris
+H14: Final: demo v2 + portofolio
+Coding (Target: 1 project mini bisa dipamerin)
+H1: Pilih project (web/game/to-do) + tentukan “fitur minimal”
+H2: Setup project
+H3: Buat halaman/fitur utama jalan
+H4: Tambah 1 fitur kecil
+H5: Rapikan tampilan sedikit
+H6: Testing 10 menit (cari bug)
+H7: Checkpoint: versi v1 jalan
+H8: Tambah 1 fitur (login palsu/score/filter)
+H9: Rapikan UI
+H10: Tambah README 5 baris
+H11: Deploy/publish atau rekam demo
+H12: Minta 1 feedback teman
+H13: Perbaiki 1 hal
+H14: Final: link/video demo + portofolio
+English Club (Target: speaking 1 menit lancar)
+H1: Pilih tema (school/day/hobby)
+H2: Rekam 30 detik (baseline)
+H3: 10 kosakata tema + 1 menit speaking
+H4: 1 menit speaking
+H5: 1 menit speaking
+H6: 1 menit speaking + perbaiki 3 pengucapan
+H7: Checkpoint: 1 menit tanpa berhenti
+H8: Roleplay (introduce yourself)
+H9: Roleplay (give opinion)
+H10: Roleplay (agree/disagree)
+H11: Rekam 1 video 1 menit
+H12: Perbaiki 1 hal (grammar sederhana)
+H13: Rekam video v2
+H14: Final: 2 menit speaking / 2 video terbaik
+Debat (Target: 1 mosi + argumen rapi)
+H1: Pilih 1 mosi
+H2: Tulis Claim–Reason–Evidence (versi kasar)
+H3: Cari 2 bukti/data ringan (sumber)
+H4: Rapikan argumen jadi 1 menit
+H5: Latihan delivery 1 menit
+H6: Buat 2 counter-argument
+H7: Checkpoint: argumen 1 menit siap
+H8: Latihan rebuttal 30 detik
+H9: Latihan dengan teman (mini sparring)
+H10: Perbaiki struktur
+H11: Buat argumen sisi lawan (biar paham)
+H12: Sparring mini 1 ronde
+H13: Catat 3 perbaikan
+H14: Final: perform 2 menit (argumen + rebuttal)
+Desain (Target: 3 karya jadi)
+H1: Pilih tema (event sekolah/quote/poster)
+H2: Buat desain 1 (selesai)
+H3: Buat desain 2 (selesai)
+H4: Pilih 1 yang terbaik
+H5: Revisi 20 menit (typography/warna)
+H6: Buat mockup sederhana
+H7: Checkpoint: 2 desain jadi
+H8: Buat desain 3 (selesai)
+H9: Rapikan desain 3
+H10: Buat folder portofolio
+H11: Tulis brief 2 kalimat per desain
+H12: Minta feedback 1 orang
+H13: Revisi minor
+H14: Final: portofolio 3 karya
+Fotografi (Target: album 10 foto + 5 edit)
+H1: Pilih tema
+H2: Ambil 10 foto
+H3: Ambil 10 foto
+H4: Ambil 10 foto
+H5: Kurasi 20 jadi 10 kandidat
+H6: Edit ringan 2 foto
+H7: Checkpoint: 10 kandidat + 2 edit
+H8: Edit 3 foto lagi (jadi 5)
+H9: Rapikan urutan album
+H10: Buat caption singkat (opsional)
+H11: Cek etika/izin foto
+H12: Finalisasi album
+H13: Minta 1 feedback
+H14: Final: album final + portofolio
+Broadcasting (Target: video/podcast 60 detik final)
+H1: Pilih role (MC/reporter/editor) + tema 1 menit
+H2: Tulis skrip 60 detik (pembuka–isi–penutup)
+H3: Rekam suara 3 take
+H4: Perbaiki artikulasi 10 menit + take ulang
+H5: Rekam video v1 (yang penting jelas)
+H6: Edit ringan (cut + teks 1 baris)
+H7: Checkpoint: final v1 tersimpan
+H8: Minta 1 feedback (“jelas?” “ngambang di mana?”)
+H9: Revisi skrip 10%
+H10: Rekam ulang take terbaik (v2)
+H11: Edit rapi v2
+H12: Tambah intro/outro 3 detik (opsional)
+H13: Finalisasi thumbnail/judul
+H14: Final: showreel 60 detik + refleksi 5 menit
+Modelling (Target: lookbook 6 foto + postur rapi)
+H1: Rekam jalan 10 detik (baseline) + pilih outfit rapi
+H2: Latihan postur 10 menit + 3 pose basic
+H3: Latihan ekspresi (netral/senyum/confident)
+H4: Latihan pose 10 menit (bahu–dagu–tangan)
+H5: Photoshoot mini 3 foto (cahaya jendela)
+H6: Pilih 2 terbaik + edit ringan
+H7: Checkpoint: set 2 foto jadi
+H8: Latihan jalan + turn 10 menit
+H9: Tambah 3 pose baru
+H10: Photoshoot mini kedua 4 foto
+H11: Kurasi jadi 6 foto terbaik
+H12: Rapikan background/lighting (shoot ulang 1–2 foto kalau perlu)
+H13: Buat comp-card sederhana (close-up + full body + gaya bebas)
+H14: Final: lookbook 6 foto + comp-card
+Guardrail wajib (selalu tampil di plan Modelling):
+Privasi kamu nomor 1—foto/video jangan disebar sembarang, pastikan consent.
+Kalau ada body shaming/komentar nggak aman, stop dan cari bantuan orang dewasa tepercaya/guru BK.
+3) Pertanyaan kecil (untuk implementasi tombol & penyimpanan)
+Saat user klik Ambil Rencana 2 Minggu, Anda mau sistem:
+1) langsung simpan plan sebagai “Program aktif” (ada status H1–H14 checklist), atau  
+2) tampilkan dulu preview, baru tombol “Mulai Program”?
+Balas 1 atau 2.
+1
+10:03 AM
+Sip, kita pilih (1) langsung simpan plan sebagai “Program aktif” begitu siswa klik Ambil Rencana 2 Minggu.
+Berikut spesifikasi yang paling praktis untuk implementasi (biar UX-nya enak dan gampang di-track):
+1) Perilaku tombol “Ambil Rencana 2 Minggu”
+Saat tombol ditekan:
+Sistem membuat ProgramActive untuk user tersebut
+Otomatis set:
+day_index = 1
+status = active
+checklist H1–H14 = semua false
+Chatbot langsung membalas:
+“Oke, program kamu udah aktif. Hari ini kita kerjain H1 ya.”
+tampilkan tugas H1 + tombol [Selesai H1] + [Ganti Jadwal] (opsional)
+2) Data minimal yang disimpan (backend)
+Saran struktur (bebas di DB apa pun):
+programs
+program_id
+user_id
+program_type = "two_week_plan"
+extracurricular = "Broadcasting" (atau lainnya)
+goal (string)
+start_date
+current_day (1–14)
+status = active|paused|completed|abandoned
+academic_mode = normal|nilai_turun
+created_at, updated_at
+program_days
+program_id
+day_number (1–14)
+task_text
+minutes_estimate (opsional)
+completed (boolean)
+completed_at (timestamp, opsional)
+daily_academic_log (opsional tapi bagus untuk “coach feel”)
+program_id / user_id
+date
+minutes_study (angka)
+done_pr (boolean)
+focus_1_5 (angka)
+3) Tombol/aksi harian (UX sederhana)
+[Selesai Hx] → tandai completed=true, naikkan current_day+1, lalu tampilkan H berikutnya
+[Aku belum sempat] → chatbot kasih versi “mini” (fallback 5 menit) dan tetap tidak memaksa
+[Jeda dulu] → status=paused
+[Ulang dari H1] → reset checklist (kalau perlu)
+4) Aturan kalau user klik “Ambil Rencana” lagi
+Pilih salah satu (paling aman untuk MVP):
+Jika ada program active: chatbot tanya singkat:
+“Kamu mau lanjut program lama atau ganti program baru?”
+Jika ganti: program lama jadi abandoned, buat baru active.
+Kalau Anda setuju, langkah berikutnya saya bisa tuliskan template respons chat untuk setiap aksi tombol (Selesai, Belum sempat, Jeda, Ganti program) dalam gaya bahasa siswa, supaya langsung siap dipakai di aplikasi.
+

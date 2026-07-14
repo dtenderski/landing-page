@@ -1,0 +1,22 @@
+CREATE TABLE "partners" (
+"id" serial PRIMARY KEY NOT NULL,
+"slug" varchar(100) NOT NULL,
+"name" text NOT NULL,
+"host" text NOT NULL,
+"brand_name" text NOT NULL,
+"logo_url" text,
+"primary_color" varchar(32),
+"tagline" text,
+"default_agent_id" text,
+"cheap_model" varchar(64) DEFAULT 'gpt-4o-mini' NOT NULL,
+"seats_per_unit" integer DEFAULT 3 NOT NULL,
+"monthly_quota" integer DEFAULT 0 NOT NULL,
+"quota_month" varchar(7),
+"quota_used" integer DEFAULT 0 NOT NULL,
+"hide_platform_branding" boolean DEFAULT true NOT NULL,
+"active" boolean DEFAULT true NOT NULL,
+"created_at" timestamp DEFAULT now() NOT NULL,
+"updated_at" timestamp DEFAULT now() NOT NULL,
+CONSTRAINT "partners_slug_unique" UNIQUE("slug"),
+CONSTRAINT "partners_host_unique" UNIQUE("host")
+);

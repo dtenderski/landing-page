@@ -1,0 +1,223 @@
+## 1. Latar Belakang
+
+Dalam rangka meningkatkan efisiensi, jangkauan, dan kualitas pelaksanaan Sertifikasi Kompetensi, LSP SDMKI berinisiatif menerapkan metode **Nir Kertas (Paperless)** dan **Asesmen Jarak Jauh (Remote Assessment)**. Transformasi digital ini sejalan dengan:
+
+- Kebijakan **BNSP** terkait pemanfaatan teknologi dalam pelaksanaan sertifikasi profesi;
+- Peraturan Pemerintah tentang percepatan transformasi digital sektor konstruksi dan ketenagakerjaan;
+- Kebutuhan industri akan sertifikasi yang lebih cepat, terjangkau, dan dapat diakses dari seluruh wilayah Indonesia.
+
+---
+
+## 2. Tujuan
+
+1. Menerapkan sistem sertifikasi kompetensi berbasis digital tanpa penggunaan dokumen kertas (*paperless*).
+2. Menyelenggarakan asesmen jarak jauh menggunakan platform teknologi terintegrasi.
+3. Meningkatkan jangkauan sertifikasi ke seluruh wilayah Indonesia, termasuk daerah 3T (Tertinggal, Terdepan, Terluar).
+4. Menjamin keamanan, validitas, dan integritas proses sertifikasi secara digital.
+5. Efisiensi biaya operasional penyelenggaraan sertifikasi bagi LSP dan peserta.
+
+---
+
+## 3. Ruang Lingkup
+
+| **Aspek** | **Cakupan** |
+| --- | --- |
+| Skema Sertifikasi | Semua skema aktif LSP SDMKI (Teknik Konstruksi, Instalasi, Mekanikal, dll.) |
+| Jenis Asesmen | Uji Kompetensi Awal, Sertifikasi Ulang (Resertifikasi), RPL |
+| Target Peserta | Tenaga Kerja Konstruksi, Profesional Industri, Alumni Pelatihan |
+| Wilayah | Seluruh Indonesia (daring) + TUK mitra terakreditasi |
+| Platform | Aplikasi LMS/e-Assessment terintegrasi LSP SDMKI |
+
+---
+
+## 4. Landasan Hukum
+
+- UU No. 13 Tahun 2003 tentang Ketenagakerjaan
+- UU No. 2 Tahun 2017 tentang Jasa Konstruksi
+- PP No. 23 Tahun 2004 tentang BNSP
+- Peraturan BNSP No. 1 Tahun 2014 tentang Pedoman Penilaian Kesesuaian — Persyaratan LSP
+- Peraturan BNSP tentang Pedoman Pelaksanaan Asesmen Jarak Jauh
+- Permenaker No. 2 Tahun 2016 tentang Sistem Standardisasi Kompetensi Kerja Nasional
+- SE BNSP / Kebijakan BNSP terkait Sertifikasi Digital dan Paperless
+
+---
+
+## 5. Konsep Pelaksanaan
+
+### 5.1 Sistem Nir Kertas (Paperless)
+
+<aside>
+💡
+
+Seluruh proses administrasi, pengajuan, verifikasi dokumen, dan pelaporan dilakukan secara digital melalui platform terintegrasi LSP SDMKI.
+
+</aside>
+
+- **Pendaftaran Online:** Formulir APL-01 dan APL-02 diisi secara digital melalui portal.
+- **Unggah Dokumen Portofolio:** Peserta mengunggah bukti kompetensi, ijazah, pengalaman kerja, dan foto dalam format digital.
+- **Verifikasi Dokumen Digital:** Asesor melakukan verifikasi dokumen secara daring melalui dashboard asesor.
+- **Sertifikat Digital:** Penerbitan sertifikat kompetensi dalam format digital (QR Code + tanda tangan elektronik) yang dapat diverifikasi secara online.
+- **Arsip Digital:** Seluruh dokumen sertifikasi disimpan dalam repositori terenkripsi dengan standar keamanan data.
+
+### 5.2 Asesmen Jarak Jauh (*Remote Assessment*)
+
+- **Ujian Tertulis Online:** Menggunakan platform e-Assessment dengan soal acak, batas waktu, dan pengawasan daring (*online proctoring*).
+- **Wawancara Daring:** Sesi tanya jawab antara peserta dan asesor menggunakan video conference (Zoom/Google Meet/platform khusus).
+- **Observasi Praktik (jika diperlukan):** Peserta merekam video demonstrasi praktik di lokasi kerja atau TUK terdekat.
+- **Portofolio Review:** Asesor menelaah portofolio digital peserta melalui sistem manajemen dokumen.
+- **Keamanan & Integritas:** AI proctoring, deteksi plagiarisme, verifikasi identitas biometrik (KTP/wajah).
+
+---
+
+## 6. Alur Proses Sertifikasi
+
+```mermaid
+flowchart TD
+    A["Peserta Mendaftar Online\n(Portal LSP SDMKI)"] --> B["Pengisian APL-01 & APL-02\n(Digital Form)"]
+    B --> C["Unggah Dokumen Portofolio\n(PDF/JPG terenkripsi)"]
+    C --> D["Verifikasi Dokumen oleh Asesor\n(Dashboard Asesor Daring)"]
+    D --> E{"Dokumen Lengkap?"}
+    E -- Tidak --> F["Notifikasi Perbaikan\n(Email/WhatsApp)"]
+    F --> C
+    E -- Ya --> G["Penjadwalan Asesmen Jarak Jauh\n(Otomatis via Sistem)"]
+    G --> H["Pelaksanaan Asesmen\nUjian Online + Wawancara Video"]
+    H --> I["Pengambilan Keputusan Asesor\n(Platform Digital)"]
+    I --> J{"Kompeten?"}
+    J -- Ya --> K["Penerbitan Sertifikat Digital\n(QR Code + e-Sign)"]
+    J -- Tidak --> L["Rekomendasi Pelatihan\n& Banding (jika perlu)"]
+    K --> M["Registrasi ke BNSP\n(API Integrasi)"]
+```
+
+---
+
+## 7. Infrastruktur & Platform Teknologi
+
+### 7.1 Komponen Platform
+
+| **Modul** | **Fungsi** | **Teknologi** |
+| --- | --- | --- |
+| Portal Pendaftaran | Registrasi, pengisian APL, unggah dokumen | Web App (Next.js / ReactJS) |
+| e-Assessment Engine | Ujian online, soal acak, timer, hasil otomatis | LMS / Platform Assessment |
+| Online Proctoring | Pengawasan ujian jarak jauh, deteksi kecurangan | AI Proctoring Tools |
+| Dashboard Asesor | Review portofolio, penjadwalan, keputusan asesmen | Web Dashboard + Video Conference API |
+| Manajemen Sertifikat | Penerbitan, QR Code, e-Sign, verifikasi publik | PKI / Digital Signature Service |
+| Integrasi BNSP | Pelaporan dan registrasi sertifikat ke BNSP | REST API / Web Service BNSP |
+| Repositori Arsip | Penyimpanan dokumen digital terenkripsi | Cloud Storage (AWS S3 / GCS) |
+
+### 7.2 Persyaratan Teknis Peserta
+
+- Perangkat: PC/Laptop/Smartphone dengan kamera dan mikrofon.
+- Koneksi internet minimal **5 Mbps**.
+- Browser terkini (Chrome/Firefox/Edge).
+- Akun email aktif dan nomor WhatsApp terdaftar.
+
+---
+
+## 8. Peran dan Tanggung Jawab
+
+| **Pihak** | **Tanggung Jawab** |
+| --- | --- |
+| **LSP SDMKI** (Manajemen) | Kebijakan, pengawasan umum, pelaporan ke BNSP, akreditasi platform |
+| **Tim IT & Platform** | Pemeliharaan sistem, keamanan data, integrasi API BNSP |
+| **Asesor** | Verifikasi dokumen, pelaksanaan asesmen jarak jauh, keputusan kompetensi |
+| **Admin Sertifikasi** | Koordinasi jadwal, notifikasi peserta, penerbitan sertifikat digital |
+| **Peserta** | Melengkapi dokumen digital, mengikuti asesmen online, mematuhi tata tertib |
+| **TUK Mitra** (opsional) | Fasilitasi uji praktik lokal jika diperlukan untuk skema tertentu |
+
+---
+
+## 9. Jadwal Pelaksanaan
+
+| **No.** | **Kegiatan** | **Waktu** | **Penanggung Jawab** |
+| --- | --- | --- | --- |
+| 1 | Persiapan & finalisasi platform | Minggu 1–2 | Tim IT |
+| 2 | Sosialisasi & pelatihan asesor | Minggu 3 | Manajemen LSP |
+| 3 | Uji coba (*pilot testing*) | Minggu 4 | Tim IT + Asesor |
+| 4 | Pembukaan pendaftaran peserta | Minggu 5 | Admin Sertifikasi |
+| 5 | Pelaksanaan asesmen batch pertama | Minggu 6–8 | Asesor + Admin |
+| 6 | Penerbitan sertifikat digital | H+7 setelah asesmen | Admin + Tim IT |
+| 7 | Evaluasi & penyempurnaan sistem | Minggu 9–10 | Semua Tim |
+
+---
+
+## 10. Anggaran Estimasi
+
+| **Komponen** | **Keterangan** | **Estimasi Biaya (Rp)** |
+| --- | --- | --- |
+| Pengembangan/Lisensi Platform | e-Assessment, proctoring, e-sign | 50.000.000 – 150.000.000 |
+| Infrastruktur Cloud | Server, storage, bandwidth (per tahun) | 24.000.000 – 60.000.000 |
+| Pelatihan Asesor & Admin | Workshop penggunaan platform | 10.000.000 – 20.000.000 |
+| Sosialisasi & Publikasi | Materi digital, media sosial, webinar | 5.000.000 – 15.000.000 |
+| Operasional & Dukungan Teknis | Helpdesk, pemeliharaan rutin | 12.000.000 – 24.000.000 |
+| **Total Estimasi** |  | **101.000.000 – 269.000.000** |
+
+> *Catatan: Estimasi dapat disesuaikan berdasarkan skala implementasi, pilihan vendor, dan ketersediaan anggaran LSP.*
+> 
+
+---
+
+## 11. Manajemen Risiko
+
+| **Risiko** | **Dampak** | **Mitigasi** |
+| --- | --- | --- |
+| Gangguan koneksi internet peserta | Tinggi | Fitur lanjutkan sesi, toleransi teknis, jadwal cadangan |
+| Kecurangan dalam ujian online | Tinggi | AI proctoring, soal acak, batas waktu ketat, verifikasi identitas |
+| Keamanan data peserta | Tinggi | Enkripsi end-to-end, HTTPS, backup rutin, audit log |
+| Keterbatasan literasi digital peserta | Sedang | Tutorial video, helpdesk 24 jam, panduan lengkap digital |
+| Penolakan/keraguan validitas dari industri | Sedang | Koordinasi dengan BNSP, publikasi kebijakan resmi, QR code verifikasi |
+| Downtime platform saat asesmen | Sedang | SLA uptime 99,9%, failover otomatis, jadwal asesmen tersebar |
+
+---
+
+## 12. Indikator Keberhasilan (KPI)
+
+- ✅ **100%** dokumen sertifikasi diproses secara digital (nol kertas)
+- ✅ Minimal **80%** peserta menyelesaikan asesmen jarak jauh dengan lancar
+- ✅ Waktu penerbitan sertifikat ≤ **7 hari kerja** setelah asesmen
+- ✅ Tingkat kepuasan peserta ≥ **85%** (survei pasca-asesmen)
+- ✅ Tingkat keberhasilan teknis platform ≥ **99%** (uptime)
+- ✅ Laporan ke BNSP terkirim otomatis dalam **≤ 24 jam** pasca sertifikasi
+
+---
+
+## 13. Penutup
+
+Proposal ini merupakan langkah strategis LSP SDMKI dalam mewujudkan sistem sertifikasi kompetensi yang **modern, efisien, inklusif, dan terpercaya**. Dengan implementasi metode Nir Kertas dan Asesmen Jarak Jauh, LSP SDMKI berkontribusi pada percepatan sertifikasi tenaga kerja konstruksi Indonesia di era digital.
+
+Dukungan dari seluruh pemangku kepentingan — BNSP, industri, asesor, dan peserta — sangat diharapkan demi keberhasilan program ini.
+
+---
+
+**Dibuat oleh:**
+
+_________________________
+
+Manajemen LSP SDMKI
+
+Tanggal: ............................................
+
+**Disetujui oleh:**
+
+_________________________
+
+Direktur LSP SDMKI
+
+Tanggal: ............................................
+
+[Panduan Pelaksanaan Sertifikasi Kompetensi Nir Kertas & Asesmen Jarak Jauh — LSP SDMKI](https://www.notion.so/Panduan-Pelaksanaan-Sertifikasi-Kompetensi-Nir-Kertas-Asesmen-Jarak-Jauh-LSP-SDMKI-0892c28d74724fa198dc2984d5b22fbf?pvs=21)
+
+[Checklist Gap-Analysis SNI ISO/IEC 17024 — Persiapan Akreditasi KAN](https://www.notion.so/Checklist-Gap-Analysis-SNI-ISO-IEC-17024-Persiapan-Akreditasi-KAN-1615a00a444e4d94bba077d12ebda8ee?pvs=21)
+
+[SOP Onboarding LSP SDMKI menuju Akreditasi KAN](https://www.notion.so/SOP-Onboarding-LSP-SDMKI-menuju-Akreditasi-KAN-f60093da626d427b95dc8c1587df1148?pvs=21)
+
+[Kebijakan Ketidakberpihakan & Keamanan Informasi LSP SDMKI](https://www.notion.so/Kebijakan-Ketidakberpihakan-Keamanan-Informasi-LSP-SDMKI-7b38ae9d12ad41dbb418326e0f761416?pvs=21)
+
+[Manual Mutu LSP SDMKI (ISO/IEC 17024)](https://www.notion.so/Manual-Mutu-LSP-SDMKI-ISO-IEC-17024-82fee95ceb5442208b89d1b22c30b936?pvs=21)
+
+[SOP Operasional LSP SDMKI — P-01 s.d. P-09](https://www.notion.so/SOP-Operasional-LSP-SDMKI-P-01-s-d-P-09-d28bfe95eca54e1ab86582dfb2c41e04?pvs=21)
+
+[Kebijakan Mutu, Sasaran Mutu & Daftar Induk Dokumen LSP SDMKI](https://www.notion.so/Kebijakan-Mutu-Sasaran-Mutu-Daftar-Induk-Dokumen-LSP-SDMKI-fc04dd6b2d42404ab3885f8d67b7c085?pvs=21)
+
+[Matriks Kompetensi & Job Description Personel LSP SDMKI](https://www.notion.so/Matriks-Kompetensi-Job-Description-Personel-LSP-SDMKI-493ba28c46334d94abb732961e3b2290?pvs=21)
+
+[Template Dokumen Skema Sertifikasi LSP SDMKI](https://www.notion.so/Template-Dokumen-Skema-Sertifikasi-LSP-SDMKI-3a6efe978b1149d5b095ccaf157375d5?pvs=21)

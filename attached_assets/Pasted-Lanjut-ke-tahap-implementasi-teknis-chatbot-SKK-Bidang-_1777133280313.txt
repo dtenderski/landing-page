@@ -1,0 +1,543 @@
+Lanjut ke **tahap implementasi teknis chatbot SKK Bidang Sipil**: struktur database, logika pencarian, format API, dan template respons. Basis datanya tetap dari file SKK Sipil yang Anda unggah, yang memuat subklasifikasi, jabatan kerja, jenjang jabatan, kualifikasi, KKNI, standar kompetensi, dan link SKK. 
+
+# 1. Arsitektur Chatbot SKK Sipil
+
+```text
+USER
+↓
+WhatsApp / Web Chat / Telegram / GPT Interface
+↓
+Intent Detector
+↓
+Entity Extractor
+↓
+SKK Search Engine
+↓
+Recommendation Engine
+↓
+Response Generator
+↓
+USER
+```
+
+## Komponen Utama
+
+```text
+1. Intent Detector
+   Mendeteksi maksud pengguna:
+   - Cari SKK
+   - Rekomendasi SKK
+   - Cek KKNI
+   - Ambil link SKKNI
+   - Bandingkan jabatan
+   - Cari berdasarkan subklasifikasi
+
+2. Entity Extractor
+   Mengambil kata penting:
+   - Gedung
+   - Jalan
+   - Jembatan
+   - Geoteknik
+   - Ahli
+   - Pelaksana
+   - Pengawas
+   - Freshgraduate
+   - KKNI 7
+   - SKKNI 126-2021
+
+3. SKK Search Engine
+   Mencari data paling cocok di database.
+
+4. Recommendation Engine
+   Memberi rekomendasi berdasarkan:
+   - bidang
+   - pengalaman
+   - posisi
+   - jenis proyek
+   - target level
+
+5. Response Generator
+   Menjawab dengan format rapi dan mudah dipahami.
+```
+
+# 2. Struktur Database SQL
+
+Gunakan tabel utama berikut:
+
+```sql
+CREATE TABLE skk_sipil (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    klasifikasi TEXT DEFAULT 'Sipil',
+    subklasifikasi TEXT NOT NULL,
+    jabatan_kerja TEXT NOT NULL,
+    jenjang_jabatan TEXT NOT NULL,
+    kualifikasi TEXT NOT NULL,
+    jenjang_kkni INTEGER,
+    standar_kompetensi TEXT,
+    link_skk TEXT,
+    status_dokumen TEXT,
+    kata_kunci TEXT
+);
+```
+
+Contoh data:
+
+```sql
+INSERT INTO skk_sipil (
+    subklasifikasi,
+    jabatan_kerja,
+    jenjang_jabatan,
+    kualifikasi,
+    jenjang_kkni,
+    standar_kompetensi,
+    link_skk,
+    status_dokumen,
+    kata_kunci
+)
+VALUES (
+    'Jalan',
+    'Ahli Teknik Jalan',
+    'Ahli Muda Teknik Jalan',
+    'Ahli',
+    7,
+    'SKKNI 126-2021',
+    'https://skkni-api.kemnaker.go.id/v1/public/documents/49dac8bc-f2ac-4d15-8dc6-2394f96b99f3/download',
+    'available',
+    'jalan, ahli jalan, teknik jalan, perkerasan, infrastruktur jalan'
+);
+```
+
+# 3. Status Dokumen
+
+Gunakan status agar chatbot tahu apakah link bisa diberikan atau belum.
+
+```text
+available
+Link dokumen tersedia.
+
+not_available
+Link tidak tersedia atau tertulis "-".
+
+draft
+Masih RSKKNI / akan ditetapkan.
+
+lpjk_scheme
+Masih SKEMA LPJK / akan disusun SKKNI/SKK Khusus.
+
+skk_khusus
+Menggunakan SKK Khusus, bukan SKKNI umum.
+```
+
+Contoh respons bila link tidak tersedia:
+
+```text
+Untuk jabatan ini, dokumen SKKNI belum tersedia pada database.
+Status saat ini: SKEMA LPJK / Akan disusun SKKNI / SKK Khusus.
+Silakan cek kembali ke LPJK/LSP terkait untuk informasi terbaru.
+```
+
+# 4. Format Dataset CSV
+
+Dataset final bisa dibuat seperti ini:
+
+```csv
+id,klasifikasi,subklasifikasi,jabatan_kerja,jenjang_jabatan,kualifikasi,jenjang_kkni,standar_kompetensi,link_skk,status_dokumen,kata_kunci
+1,Sipil,Jalan,Ahli Teknik Jalan,Ahli Muda Teknik Jalan,Ahli,7,SKKNI 126-2021,https://skkni-api.kemnaker.go.id/v1/public/documents/49dac8bc-f2ac-4d15-8dc6-2394f96b99f3/download,available,"jalan, ahli jalan, teknik jalan, perkerasan"
+2,Sipil,Jalan,Ahli Teknik Jalan,Ahli Madya Teknik Jalan,Ahli,8,SKKNI 126-2021,https://skkni-api.kemnaker.go.id/v1/public/documents/49dac8bc-f2ac-4d15-8dc6-2394f96b99f3/download,available,"jalan, ahli jalan, teknik jalan, perkerasan"
+3,Sipil,Jalan,Ahli Teknik Jalan,Ahli Utama Teknik Jalan,Ahli,9,SKKNI 126-2021,https://skkni-api.kemnaker.go.id/v1/public/documents/49dac8bc-f2ac-4d15-8dc6-2394f96b99f3/download,available,"jalan, ahli jalan, teknik jalan, perkerasan"
+```
+
+# 5. Logika Pencarian Chatbot
+
+## A. Pencarian Berdasarkan Jabatan
+
+User:
+
+```text
+Cari Ahli Teknik Jalan
+```
+
+Query:
+
+```sql
+SELECT *
+FROM skk_sipil
+WHERE jabatan_kerja LIKE '%Ahli Teknik Jalan%'
+   OR jenjang_jabatan LIKE '%Ahli Teknik Jalan%'
+   OR kata_kunci LIKE '%ahli teknik jalan%';
+```
+
+Jawaban:
+
+```text
+Ditemukan SKK untuk Ahli Teknik Jalan:
+
+1. Ahli Muda Teknik Jalan
+   - Subklasifikasi: Jalan
+   - Kualifikasi: Ahli
+   - KKNI: 7
+   - Standar: SKKNI 126-2021
+
+2. Ahli Madya Teknik Jalan
+   - Subklasifikasi: Jalan
+   - Kualifikasi: Ahli
+   - KKNI: 8
+   - Standar: SKKNI 126-2021
+
+3. Ahli Utama Teknik Jalan
+   - Subklasifikasi: Jalan
+   - Kualifikasi: Ahli
+   - KKNI: 9
+   - Standar: SKKNI 126-2021
+```
+
+## B. Pencarian Berdasarkan Subklasifikasi
+
+User:
+
+```text
+Tampilkan SKK bidang Jembatan
+```
+
+Query:
+
+```sql
+SELECT *
+FROM skk_sipil
+WHERE subklasifikasi = 'Jembatan'
+ORDER BY jenjang_kkni ASC;
+```
+
+Jawaban singkat:
+
+```text
+Berikut daftar SKK subklasifikasi Jembatan:
+
+- Ahli Perencanaan Jembatan Rangka Baja
+- Ahli Rehabilitasi Jembatan
+- Ahli Penilai Kegagalan Bangunan Jalan Layang dan Jembatan
+- Ahli Teknik Jembatan
+- Teknisi Jembatan Rangka Baja
+- Pelaksana Pemeliharaan Jembatan
+- Pengawas Lapangan Pekerjaan Jembatan
+- Mandor Pemasangan Rangka Baja Jembatan
+```
+
+# 6. Logika Rekomendasi Berdasarkan Pengalaman
+
+## Aturan Dasar
+
+```text
+0 tahun / fresh graduate
+→ Freshgraduate atau Ahli Muda Freshgraduate jika tersedia.
+
+1–3 tahun
+→ Operator Level 1–3.
+
+4–6 tahun
+→ Teknisi/Analis KKNI 4–6.
+
+7–10 tahun
+→ Ahli Muda KKNI 7 atau Ahli Madya KKNI 8.
+
+>10 tahun
+→ Ahli Madya KKNI 8 atau Ahli Utama KKNI 9.
+```
+
+## Contoh Pseudocode
+
+```python
+def rekomendasi_level(pengalaman_tahun, target=None):
+    if pengalaman_tahun == 0:
+        return ["Freshgraduate", "Ahli Muda"]
+    
+    if pengalaman_tahun <= 3:
+        return ["Operator"]
+    
+    if pengalaman_tahun <= 6:
+        return ["Teknisi/Analis"]
+    
+    if pengalaman_tahun <= 10:
+        return ["Ahli Muda", "Ahli Madya"]
+    
+    return ["Ahli Madya", "Ahli Utama"]
+```
+
+# 7. Contoh Rekomendasi Otomatis
+
+User:
+
+```text
+Saya pengalaman 5 tahun di proyek jembatan sebagai pelaksana lapangan.
+```
+
+Chatbot:
+
+```text
+Berdasarkan profil Anda:
+
+Bidang utama:
+Jembatan
+
+Posisi:
+Pelaksana lapangan
+
+Pengalaman:
+5 tahun
+
+Target level yang cocok:
+Teknisi/Analis, sekitar KKNI 4–6.
+
+Rekomendasi utama:
+
+Pelaksana Pemeliharaan Jembatan
+- Subklasifikasi: Jembatan
+- Kualifikasi: Teknisi/Analis
+- Jenjang KKNI: 4–6
+- Standar: SKKNI 195-2015
+
+Alternatif:
+1. Teknisi Jembatan Rangka Baja
+   Cocok jika pengalaman Anda banyak pada struktur jembatan rangka baja.
+
+2. Pengawas Lapangan Pekerjaan Jembatan
+   Cocok jika tanggung jawab Anda sudah lebih banyak pada pengawasan pekerjaan.
+
+Catatan:
+Rekomendasi ini bersifat awal. Penetapan final tetap mengikuti asesmen LSP/LPJK dan bukti pengalaman kerja.
+```
+
+# 8. Endpoint API untuk Chatbot
+
+Untuk sistem berbasis web atau WhatsApp bot, siapkan endpoint berikut.
+
+## A. Search SKK
+
+```http
+GET /api/skk/search?q=ahli teknik jalan
+```
+
+Response:
+
+```json
+{
+  "query": "ahli teknik jalan",
+  "results": [
+    {
+      "subklasifikasi": "Jalan",
+      "jabatan_kerja": "Ahli Teknik Jalan",
+      "jenjang_jabatan": "Ahli Muda Teknik Jalan",
+      "kualifikasi": "Ahli",
+      "kkni": 7,
+      "standar": "SKKNI 126-2021",
+      "link": "https://skkni-api.kemnaker.go.id/..."
+    }
+  ]
+}
+```
+
+## B. Rekomendasi SKK
+
+```http
+POST /api/skk/recommend
+```
+
+Body:
+
+```json
+{
+  "bidang": "Gedung",
+  "posisi": "Pelaksana Lapangan",
+  "pengalaman_tahun": 6,
+  "jenis_proyek": "Gedung bertingkat",
+  "target_level": "Teknisi/Analis"
+}
+```
+
+Response:
+
+```json
+{
+  "rekomendasi_utama": {
+    "jabatan": "Pelaksana Lapangan Pekerjaan Gedung Madya",
+    "subklasifikasi": "Gedung",
+    "kualifikasi": "Teknisi/Analis",
+    "kkni": 5,
+    "standar": "SKKNI 193-2021"
+  },
+  "alternatif": [
+    "Pelaksana Lapangan Pekerjaan Gedung Muda",
+    "Pengawas Pekerjaan Struktur Bangunan Gedung"
+  ],
+  "catatan": "Rekomendasi awal. Keputusan final mengikuti asesmen LSP/LPJK."
+}
+```
+
+# 9. Template Prompt untuk Model AI + Database
+
+Gunakan prompt ini untuk sistem RAG/chatbot:
+
+```text
+Anda adalah Asisten SKK Bidang Sipil.
+
+Anda hanya boleh menjawab berdasarkan database SKK Sipil yang tersedia.
+
+Database berisi:
+- klasifikasi
+- subklasifikasi
+- jabatan kerja
+- jenjang jabatan kerja
+- kualifikasi
+- jenjang KKNI
+- standar kompetensi kerja
+- link SKK
+
+Tugas Anda:
+1. Mencari SKK berdasarkan jabatan, subklasifikasi, KKNI, atau standar kompetensi.
+2. Menampilkan semua jenjang bila satu jabatan memiliki beberapa level.
+3. Memberikan rekomendasi SKK berdasarkan profil pengguna.
+4. Menjelaskan alasan kecocokan secara praktis.
+5. Memberikan link dokumen jika tersedia.
+6. Menjelaskan status dokumen jika link tidak tersedia.
+7. Tidak mengarang data di luar database.
+8. Tidak menjamin kelulusan sertifikasi.
+
+Jika data pengguna belum lengkap, tanyakan maksimal 3 pertanyaan:
+- Bidang proyek utama?
+- Posisi saat ini?
+- Lama pengalaman kerja?
+```
+
+# 10. Format Jawaban Final Chatbot
+
+```text
+Hasil Rekomendasi SKK Sipil
+
+Profil:
+- Bidang:
+- Posisi:
+- Pengalaman:
+- Target level:
+
+Rekomendasi Utama:
+- Jabatan:
+- Subklasifikasi:
+- Jenjang:
+- Kualifikasi:
+- KKNI:
+- Standar:
+- Link:
+
+Alasan:
+[penjelasan kecocokan]
+
+Alternatif:
+1. [alternatif 1]
+2. [alternatif 2]
+
+Catatan:
+Rekomendasi ini bersifat awal. Persyaratan final mengikuti ketentuan LSP/LPJK dan proses asesmen yang berlaku.
+```
+
+# 11. Contoh Command WhatsApp
+
+```text
+/cari ahli teknik jalan
+/cari geoteknik
+/cari kkni 7
+/cari freshgraduate
+/subklasifikasi gedung
+/rekomendasi
+/link SKKNI 126-2021
+/bandingkan ahli teknik jalan vs manajer pelaksanaan jalan jembatan
+```
+
+# 12. Flow `/rekomendasi`
+
+```text
+Bot:
+Baik, saya bantu rekomendasikan SKK Sipil.
+
+Pertanyaan 1:
+Bidang proyek utama Anda apa?
+Contoh: Gedung, Jalan, Jembatan, Geoteknik, Irigasi, Drainase, Bendungan.
+
+User:
+Gedung
+
+Bot:
+Pertanyaan 2:
+Posisi Anda saat ini apa?
+Contoh: Tukang, Mandor, Pelaksana, Pengawas, Site Engineer, Manajer, Ahli.
+
+User:
+Pelaksana Lapangan
+
+Bot:
+Pertanyaan 3:
+Berapa tahun pengalaman Anda?
+
+User:
+6 tahun
+
+Bot:
+Hasil rekomendasi:
+Pelaksana Lapangan Pekerjaan Gedung Madya
+- Kualifikasi: Teknisi/Analis
+- KKNI: 5
+- Standar: SKKNI 193-2021
+
+Alternatif:
+Pengawas Pekerjaan Struktur Bangunan Gedung, bila fokus Anda lebih banyak pada pengawasan struktur.
+```
+
+# 13. Fitur Lanjutan: “Cek Kecocokan Proyek”
+
+Chatbot juga bisa dipakai perusahaan untuk mengecek personel proyek.
+
+User:
+
+```text
+Untuk proyek jalan nasional, personel apa saja yang sebaiknya punya SKK?
+```
+
+Chatbot:
+
+```text
+Untuk proyek jalan, SKK yang relevan dapat mencakup:
+
+1. Ahli Teknik Jalan
+   Untuk perencanaan, evaluasi teknis, dan pengambilan keputusan teknis.
+
+2. Manajer Pelaksanaan Pekerjaan Jalan/Jembatan
+   Untuk pengelolaan pelaksanaan proyek jalan/jembatan.
+
+3. Pelaksana Lapangan Pekerjaan Jalan
+   Untuk pelaksanaan teknis lapangan.
+
+4. Pengawas Lapangan Pekerjaan Jalan
+   Untuk pengendalian mutu, metode, dan kepatuhan pelaksanaan.
+
+5. Ahli Material Jalan
+   Untuk pengendalian material perkerasan dan mutu material.
+
+Catatan:
+Kebutuhan personel final harus mengikuti dokumen tender, kontrak, regulasi, dan ketentuan sertifikasi yang berlaku.
+```
+
+# 14. Tahap Berikutnya
+
+Tahap berikutnya adalah menyusun **paket final chatbot**:
+
+```text
+1. Database SKK Sipil bersih
+2. File JSON
+3. File CSV
+4. Prompt sistem chatbot
+5. Flow WhatsApp
+6. Template jawaban
+7. Contoh 50 pertanyaan pengguna
+8. Contoh 50 jawaban chatbot
+```
+
+Dengan struktur ini, chatbot SKK Sipil sudah siap masuk ke tahap MVP untuk **WhatsApp bot, web chat, atau custom GPT berbasis database SKK**.

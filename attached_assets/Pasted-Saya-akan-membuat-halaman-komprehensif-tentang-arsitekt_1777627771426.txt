@@ -1,0 +1,27 @@
+Saya akan membuat halaman komprehensif tentang arsitektur IT LSP berdasarkan standar LPJK dan BNSP, mencakup modul Paperless (Nir Kertas) dan AJJ, sejalan dengan ekosistem chatbot yang sudah Anda bangun.
+Created page IT LSP berdasarkan Standar LPJK & BNSP — Paperless (Nir Kertas) + AJJ​
+Halaman cetak biru IT LSP sudah dibuat sebagai dokumen top-level di workspace Anda, mengikuti pola "Sub-page siap-import ke Gustafta" yang konsisten dengan ekosistem chatbot konstruksi Anda.
+lanjut
+9:58 AM
+Thought
+Beberapa arah lanjutan masuk akal untuk dokumen IT LSP ini. Agar saya membangun ke arah yang Anda inginkan, mohon pilih:
+Lanjut ke arah mana untuk ekosistem IT LSP?
+SOP Digital operasional LSP (per modul M1–M14), Pack Formulir Digital (APL-01/02, MAPA, FR.IA, FR.AK, SKK), Bangun database Notion: Asesi, Asesor, Skema, SKK, Sesi AJJ, Spesifikasi API & data model (Sisfo BNSP, BLKK, SIKI-LPJK), Buat Chatbot "Manajer Sertifikasi LSP" (persona + KB + multi-agent)
+Thought
+Baik, saya akan mengeksekusi kelima paket. Saya mulai dengan membaca spesifikasi database/skema dan menyiapkan progress tracker, lalu membuat semua paket secara paralel.
+Baca dataSourceTypes/viewTypes/layoutTypes untuk database
+Buat sub-page: SOP Digital Operasional LSP (M1–M14)
+Buat sub-page: Pack Formulir Digital (APL/MAPA/FR.IA/FR.AK/SKK)
+Buat sub-page: Spesifikasi API & Data Model (Sisfo BNSP / BLKK / SIKI-LPJK)
+Buat sub-page: Chatbot Manajer Sertifikasi LSP (persona + KB + multi-agent)
+Bangun database Notion: Asesi, Asesor, Skema, SKK, Sesi AJJ
+Thought
+Saya membuat 4 sub-page (SOP Digital, Pack Formulir, Spesifikasi API, Chatbot Manajer Sertifikasi) dan satu database multi-data-source (Asesi/Asesor/Skema/SKK/Sesi AJJ) secara paralel.
+Kelima paket telah selesai dibuat — empat sub-page dan satu database multi-data-source dengan 5 entitas terhubung relasi.
+Ringkasan struktur ekosistem IT LSP yang sekarang lengkap di bawah IT LSP berdasarkan Standar LPJK & BNSP — Paperless (Nir Kertas) + AJJ:
+ SOP Digital M1–M14 — playbook operasional setiap modul.
+ Pack Formulir Digital — APL-01/02, MAPA, FR.IA-01..09, FR.AK-01..05, SKK PDF/A-3, FR.MAK-01.
+ Spesifikasi API & Data Model — kontrak adapter Sisfo BNSP, BLKK, SIKI-LPJK + outbox pattern + event bus.
+ Chatbot Manajer Sertifikasi LSP (MSL-A) — persona, KB 4-lapis, guardrails, tools, multi-agent (KPI/Putusan Review/Audit/Recon/COI/DPO).
+ LSP Operations DB — 5 data source (Skema, Asesor, Asesi, SKK, Sesi AJJ) terhubung relasi, dengan view Pipeline (board), Kalender AJJ, RCC Due, SKK Aktif, dan SKK Sinkron Belum Lengkap.
+Database siap untuk Anda isi dengan data nyata atau jadi sumber bagi autofill agent bila volume 

@@ -1,0 +1,245 @@
+<aside>
+🎯
+
+Dua mode paling kompleks didetailkan di sini: **(C.1) Gamification Engine** dan **(C.2) Adaptive Tryout**. Format operasional, siap diterjemahkan ke spesifikasi teknis.
+
+</aside>
+
+# C.1 — Gamification Engine
+
+## 1.1 Filosofi & Anti-Pattern
+
+- **Reward terikat mastery, bukan klik.** Setiap XP harus mencerminkan effort kognitif.
+- **Intrinsik > Ekstrinsik.** Gamifikasi adalah *garnish*, bukan *main course*.
+- **Anti dark pattern**: tanpa FOMO menyesatkan, tanpa pay-to-win, ada cap harian.
+- **Inklusif**: leaderboard *opt-in*, ada mode solo-progress untuk siswa yang tidak suka kompetisi.
+
+## 1.2 Tabel XP Resmi
+
+| Aksi | XP | Catatan |
+| --- | --- | --- |
+| Jawab soal benar (kesulitan mudah) | 5 | C1–C2 Bloom |
+| Jawab soal benar (kesulitan sedang) | 10 | C3–C4 Bloom |
+| Jawab soal benar (kesulitan sulit) | 20 | C5–C6 Bloom (HOTS) |
+| Jawab benar tanpa hint | +50% bonus | Berlapis dengan XP dasar |
+| Selesaikan sesi belajar ≥15 menit | 25 | Cap 4×/hari |
+| Streak harian (per hari) | 10 | Bonus +5 per 7 hari beruntun |
+| Kuasai 1 sub-topik (5 benar berturut) | 100 | Sekali per sub-topik |
+| Selesaikan tryout penuh | 150 |   • bonus akurasi |
+| Boss Battle menang | 300 |   • loot drop |
+| Teach-back berhasil (siswa ajari AI) | 75 | Validasi via kuis balik |
+| Lapor bug / saran fitur diterima | 50 | Manual review |
+| **Cap harian total** | **1.000 XP** | Mencegah grinding |
+
+## 1.3 Tabel Level (Lv 1–100)
+
+Kurva XP per level: `XP_next = 100 × Lv^1.5` (rounded).
+
+| Range Level | Judul | Kebutuhan XP kumulatif (approx) | Unlock |
+| --- | --- | --- | --- |
+| 1–10 | Pemula Bertanya | 0 – 3.000 | Quest harian, badge dasar |
+| 11–25 | Penjelajah Konsep | 3.000 – 17.000 | Story Mode, Pet customization |
+| 26–50 | Ahli Muda | 17.000 – 90.000 | Duel Mode, Guild, AR Math |
+| 51–75 | Master Cabang | 90.000 – 280.000 | Persona Tutor custom, debate mode |
+| 76–100 | Mentor Komunitas | 280.000 – 750.000 | Tutor-of-Tutor mode (review jawaban siswa lain) |
+
+## 1.4 Sistem Badge (50+ lencana)
+
+### Kategori
+
+| Kategori | Contoh badge | Trigger |
+| --- | --- | --- |
+| **Curiosity** | *Tanya 10x dalam 1 sesi*, *Tanya "kenapa" 50x* | Hitungan pertanyaan substantif |
+| **Mastery** | *Kuasai bab penuh*, *Sempurna 1 tryout*, *Tanpa hint 20 soal* | Performa |
+| **Consistency** | *Streak 7 / 30 / 100 hari* | Login + sesi ≥10 menit |
+| **Exploration** | *Coba 5 mapel*, *Selesaikan 1 mini-project* | Variasi |
+| **Social** | *Bantu 10 teman via Ask-the-Class*, *Guild Champion* | Kontribusi |
+| **Resilience** | *Bangkit dari 5 jawaban salah berturut*, *Comeback streak* | Tahan banting |
+| **Wellness** | *Istirahat tepat waktu 7x*, *Mood check 30 hari* | Kesehatan |
+
+### Skala kelangkaan
+
+- 🥉 **Common** (mudah, terdapat ratusan kali) — siswa rata-rata punya 10+.
+- 🥈 **Rare** (butuh effort terstruktur) — siswa serius punya 3–5.
+- 🥇 **Epic** (butuh konsistensi panjang) — < 10% siswa.
+- 💎 **Legendary** (achievement spesial event) — < 1%.
+
+## 1.5 Quest System
+
+### Daily Quest (3 slot, refresh tiap 24 jam)
+
+- *Mudah*: 1 sesi belajar, 5 menit. → 30 XP.
+- *Sedang*: Selesaikan 5 soal di topik lemahmu. → 75 XP.
+- *Sulit*: Selesaikan 1 soal HOTS dengan benar. → 150 XP + Loot Drop.
+
+### Weekly Quest (2 slot, refresh tiap Senin 00:00 WIB)
+
+- *Konsisten*: Login + belajar 5 dari 7 hari. → 300 XP + badge.
+- *Mastery*: Kuasai 1 sub-topik baru. → 500 XP + epic chance.
+
+### Seasonal / Event Quest
+
+- Menjelang UTBK, ANBK, ujian semester → quest tema khusus.
+- Bulan literasi nasional (September), bulan bahasa (Oktober) → quest mapel terkait.
+
+## 1.6 Boss Battle (Mekanik)
+
+```
+Trigger:    Akhir bab atau akhir minggu mastery.
+Format:     10–15 soal mix kesulitan, timer mode.
+HP Boss:    1000 HP.
+Damage:     soal mudah = 50, sedang = 100, sulit = 200 (×multiplier kecepatan).
+Miss:       jawaban salah = boss serang balik (-1 dari 3 nyawa siswa).
+Victory:    HP boss ≤ 0 sebelum nyawa habis → 300 XP + Loot Drop + badge bab.
+Defeat:     Tutor tawarkan "Remedial Quest" alih-alih retry langsung.
+```
+
+Loot pool: 2x XP token (24 jam), Hint Skip Token (3x), Streak Freeze, Cosmetic Pet item.
+
+## 1.7 Anti-Adiksi & Wellness Gate
+
+- **XP cap** 1.000/hari.
+- **Forced break**: setelah 45 menit menerus → pop-up "5 menit istirahat", XP ditahan jika diabaikan.
+- **Wellness check** tiap pagi: mood 1–5. Mood ≤ 2 → MentorAgent intervensi, beban quest dikurangi.
+- **Parental window**: ortu bisa set jam aktif (mis. blokir 22:00–05:00).
+- **No streak guilt**: jika streak putus, AI tidak mempermalukan; tawarkan *streak repair quest*.
+
+---
+
+# C.2 — Adaptive Tryout
+
+## 2.1 Tujuan
+
+Menyajikan **simulasi ujian realistis** yang menyesuaikan kemampuan siswa secara dinamis, sambil menghasilkan **diagnosis pasca-ujian** yang actionable.
+
+## 2.2 Mode Tryout
+
+| Mode | Karakter | Adaptasi |
+| --- | --- | --- |
+| **Practice Mode** | Soal acak, tanpa timer, hint tersedia | Tidak adaptif (untuk pemanasan) |
+| **Diagnostic Mode** | 15 soal, adaptif penuh (IRT 1-PL), tanpa hint | Adaptif setiap soal |
+| **Exam Simulation** | Mirip UTBK/CBT: timer, no-back, urutan acak | Adaptif per *section* (bukan per soal) |
+| **Boss Battle** | Akhir bab, mode kompetitif | Adaptif berbasis HP boss |
+| **Custom Tryout** | Siswa pilih topik & jumlah | Opsional adaptif |
+
+## 2.3 Algoritma Adaptif (IRT 1-PL / Model Rasch)
+
+### Notasi
+
+- θ (theta) = estimasi kemampuan siswa (logit).
+- b = tingkat kesulitan soal (logit).
+- P(benar | θ, b) = 1 / (1 + exp(-(θ - b))).
+
+### Loop
+
+```
+θ_0 = 0.0    # estimasi awal (rata-rata kelas)
+SE = 1.0     # standard error awal
+list_soal_terpakai = []
+
+FOR n = 1 .. 15:
+  soal_n = pilih soal dari Bank Soal dengan b ≈ θ_{n-1}
+            AND topik belum cukup terwakili
+            AND id ∉ list_soal_terpakai
+  tampilkan soal_n; rekam jawaban
+  update θ via Maximum Likelihood Estimation (Newton-Raphson 3 iterasi)
+  hitung SE baru
+  IF SE < 0.3 OR n == 15: STOP
+END FOR
+
+Mastery_per_topik = mean(θ pada soal-soal topik tsb), normalisasi ke 0–1
+```
+
+### Pemilihan soal (sederhana, tanpa exposure control kompleks)
+
+1. Filter Bank Soal: mapel & topik target, belum dilihat siswa 30 hari terakhir.
+2. Urutkan berdasarkan `|b - θ|` ascending.
+3. Ambil top-5, pilih acak (variasi anti-pola).
+
+## 2.4 Anti-Cheating & Integritas
+
+- **Tab-blur detection** (web): jika siswa pindah tab >5 detik selama mode exam → catat insiden.
+- **Soal di-shuffle** per siswa per tryout.
+- **Bank soal besar** (target ≥500 soal per mapel) untuk minim overlap.
+- **Time-per-question anomali** ditandai (terlalu cepat = tebak / contek).
+- **No copy-paste** di field jawaban esai (mode exam).
+
+## 2.5 Post-Mortem Analysis
+
+Setelah tryout selesai, **TryoutAgent** menghasilkan laporan terstruktur:
+
+### 2.5.1 Skor & Persentil
+
+- Skor mentah (jumlah benar / total).
+- Skor IRT (θ akhir + SE).
+- Estimasi persentil vs cohort kelas.
+- **Predicted Score** untuk ujian sebenarnya (mis. estimasi UTBK) + interval kepercayaan.
+
+### 2.5.2 Heatmap Topik
+
+```
+Mapel: Matematika SMA — Tryout UTBK Simulasi
+
+   Topik             | Akurasi | Mastery (θ) | Status
+   Aljabar           | 80%     | +0.8        | ✅ Kuat
+   Geometri          | 60%     | +0.1        | 🟡 Sedang
+   Trigonometri      | 30%     | -0.6        | 🔴 Lemah
+   Statistika        | 70%     | +0.4        | ✅ Kuat
+   Kalkulus          | 40%     | -0.3        | 🟡 Sedang
+```
+
+### 2.5.3 Time-per-Question
+
+- Rata-rata waktu/soal vs target (mis. 1.5 menit/soal UTBK).
+- Flag soal yang terlalu lama (>3× target) ATAU terlalu cepat (<0.3× target).
+
+### 2.5.4 Mistake Taxonomy
+
+Setiap jawaban salah dikategorikan:
+
+| Kategori | Indikator | Remediasi |
+| --- | --- | --- |
+| **Konseptual** | Salah konsep dasar | Kembali ke TheoryAgent untuk topik tsb |
+| **Prosedural** | Konsep ok, langkah salah | DrillAgent + worked examples |
+| **Ceroboh** | Konsep & prosedur ok, salah hitung/baca | Latihan ketelitian + checklist |
+| **Kehabisan waktu** | Tidak dijawab / dijawab terburu | Latihan time management |
+| **Tebak** | Pola jawaban acak | DiagnosticAgent ulang topik tsb |
+
+### 2.5.5 Rekomendasi Roadmap
+
+Output akhir berupa **3-step action plan**:
+
+```
+📌 Prioritas Minggu Depan:
+1. Trigonometri — 5 sesi TheoryAgent (lapis L3+L4) + 30 soal drill.
+2. Kalkulus dasar — 3 sesi pendalaman + 1 mini-tryout follow-up.
+3. Geometri — refresh 2 sesi + boss battle ringan.
+```
+
+## 2.6 Output Standar TryoutAgent (saat menyajikan hasil)
+
+```
+[NIAT TERDETEKSI]: laporan hasil tryout <judul>
+[ASUMSI]: -
+[CONFIDENCE]: 0.85 (berdasarkan 15 soal, SE=0.28)
+[JAWABAN INTI]:
+  - Skor: 11/15 (73%) | θ = +0.42 | Persentil ≈ 65
+  - Predicted UTBK Score: 620 ± 35
+  - Heatmap: [tabel di atas]
+  - Mistake taxonomy: [tabel di atas]
+[CEK PAHAM]: "Mana area yang menurutmu paling perlu diperbaiki?"
+[NEXT STEP]: 3-step action plan otomatis (lihat 2.5.5)
+[XP/REWARD]: 150 XP + badge "Tryout Survivor" (jika first complete)
+```
+
+---
+
+<aside>
+✅
+
+Paket A + B + C selesai. Setelah review, langkah berikutnya yang direkomendasikan:
+
+- Smoke test 10 skenario per agent (S1 acceptance criteria).
+- Isi Bank Soal awal: minimal 50 soal × 1 mapel pilot.
+- Tetapkan KPI baseline sebelum rilis MVP.
+</aside>

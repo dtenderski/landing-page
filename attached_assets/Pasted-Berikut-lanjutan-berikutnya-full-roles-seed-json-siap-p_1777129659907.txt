@@ -1,0 +1,660 @@
+Berikut lanjutan berikutnya: **full `roles.seed.json` siap pakai** untuk memasukkan seluruh katalog jabatan **Manajemen Pelaksanaan** ke database/chatbot builder. Data ini mengikuti tabel jabatan, jenjang, kualifikasi, KKNI, standar kompetensi, dan link SKK yang Anda unggah. 
+
+---
+
+# 209. Full `roles.seed.json` — Manajemen Pelaksanaan
+
+```json id="full_roles_seed_json"
+{
+  "classification": {
+    "code": "E",
+    "name": "Manajemen Pelaksanaan"
+  },
+  "roles": [
+    {
+      "id": "ahli_muda_keselamatan_konstruksi_kkni_7",
+      "subklasifikasi": "Keselamatan Konstruksi",
+      "jabatan_kerja": "Ahli Keselamatan Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Muda Keselamatan Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 7,
+      "standard_code": "SKKNI 60-2022",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/88f9fdba-5fa4-465d-b963-b59af5d642d7/download",
+      "recommended_assessment": "assessment_k3",
+      "recommended_learning_path": "path_ahli_k3",
+      "area_slug": "k3",
+      "focus_summary": "Fokus pada keselamatan konstruksi, identifikasi bahaya, pengendalian risiko, evaluasi keselamatan pekerjaan, dan pengambilan keputusan profesional pada tingkat ahli muda."
+    },
+    {
+      "id": "ahli_madya_keselamatan_konstruksi_kkni_8",
+      "subklasifikasi": "Keselamatan Konstruksi",
+      "jabatan_kerja": "Ahli Keselamatan Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Madya Keselamatan Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 8,
+      "standard_code": "SKKNI 60-2022",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/88f9fdba-5fa4-465d-b963-b59af5d642d7/download",
+      "recommended_assessment": "assessment_k3",
+      "recommended_learning_path": "path_ahli_k3",
+      "area_slug": "k3",
+      "focus_summary": "Fokus pada evaluasi sistem keselamatan konstruksi, koordinasi pengendalian risiko, pembinaan tim, dan penyelesaian masalah keselamatan yang kompleks."
+    },
+    {
+      "id": "ahli_utama_keselamatan_konstruksi_kkni_9",
+      "subklasifikasi": "Keselamatan Konstruksi",
+      "jabatan_kerja": "Ahli Keselamatan Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Utama Keselamatan Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 9,
+      "standard_code": "SKKNI 60-2022",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/88f9fdba-5fa4-465d-b963-b59af5d642d7/download",
+      "recommended_assessment": "assessment_k3",
+      "recommended_learning_path": "path_ahli_k3",
+      "area_slug": "k3",
+      "focus_summary": "Fokus pada pengembangan, evaluasi strategis, dan pembinaan sistem keselamatan konstruksi pada tingkat ahli utama."
+    },
+
+    {
+      "id": "ahli_muda_k3_konstruksi_kkni_7",
+      "subklasifikasi": "Keselamatan Konstruksi",
+      "jabatan_kerja": "Ahli K3 Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Muda K3 Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 7,
+      "standard_code": "SKKNI 350-2014",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/de9bf21b-f0ef-4cb9-bce5-7813da449476/download",
+      "recommended_assessment": "assessment_k3",
+      "recommended_learning_path": "path_ahli_k3",
+      "area_slug": "k3",
+      "focus_summary": "Fokus pada penerapan dan evaluasi K3 konstruksi, identifikasi bahaya, pengendalian risiko, inspeksi, dan pembinaan keselamatan kerja."
+    },
+    {
+      "id": "ahli_madya_k3_konstruksi_kkni_8",
+      "subklasifikasi": "Keselamatan Konstruksi",
+      "jabatan_kerja": "Ahli K3 Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Madya K3 Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 8,
+      "standard_code": "SKKNI 350-2014",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/de9bf21b-f0ef-4cb9-bce5-7813da449476/download",
+      "recommended_assessment": "assessment_k3",
+      "recommended_learning_path": "path_ahli_k3",
+      "area_slug": "k3",
+      "focus_summary": "Fokus pada pengendalian program K3 konstruksi, evaluasi kepatuhan, investigasi insiden, dan penguatan budaya keselamatan."
+    },
+    {
+      "id": "ahli_utama_k3_konstruksi_kkni_9",
+      "subklasifikasi": "Keselamatan Konstruksi",
+      "jabatan_kerja": "Ahli K3 Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Utama K3 Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 9,
+      "standard_code": "SKKNI 350-2014",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/de9bf21b-f0ef-4cb9-bce5-7813da449476/download",
+      "recommended_assessment": "assessment_k3",
+      "recommended_learning_path": "path_ahli_k3",
+      "area_slug": "k3",
+      "focus_summary": "Fokus pada pengembangan dan evaluasi strategis sistem K3 konstruksi, pembinaan ahli, dan pengambilan keputusan tingkat tinggi."
+    },
+
+    {
+      "id": "personil_k3_kkni_4",
+      "subklasifikasi": "Keselamatan Konstruksi",
+      "jabatan_kerja": "Personil Keselamatan dan Kesehatan Kerja",
+      "jenjang_jabatan_kerja": "Personil Keselamatan dan Kesehatan Kerja",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 4,
+      "standard_code": "SKKNI 038-2019",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/b079dc8b-5343-4dc0-8615-20fb163781f9/download",
+      "recommended_assessment": "assessment_k3",
+      "recommended_learning_path": "path_supervisor_k3",
+      "area_slug": "k3",
+      "focus_summary": "Fokus pada penerapan teknis K3, pencatatan, pemeriksaan lapangan, pelaporan kondisi tidak aman, dan dukungan pengendalian risiko."
+    },
+    {
+      "id": "petugas_k3_konstruksi_kkni_3",
+      "subklasifikasi": "Keselamatan Konstruksi",
+      "jabatan_kerja": "Petugas Keselamatan dan Kesehatan Kerja (K3) Konstruksi",
+      "jenjang_jabatan_kerja": "Petugas Keselamatan dan Kesehatan Kerja (K3) Konstruksi",
+      "kualifikasi": "Operator",
+      "kkni_level": 3,
+      "standard_code": "SKKNI 307-2013",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/1230bb07-0c70-48be-84b3-1e1ff98af6ff/download",
+      "recommended_assessment": "assessment_k3",
+      "recommended_learning_path": "path_petugas_k3",
+      "area_slug": "k3",
+      "focus_summary": "Fokus pada pelaksanaan dasar K3 di lapangan, pemantauan APD, pengenalan kondisi tidak aman, dan pelaporan temuan."
+    },
+    {
+      "id": "petugas_keselamatan_konstruksi_kkni_3",
+      "subklasifikasi": "Keselamatan Konstruksi",
+      "jabatan_kerja": "Petugas Keselamatan Konstruksi",
+      "jenjang_jabatan_kerja": "Petugas Keselamatan Konstruksi",
+      "kualifikasi": "Operator",
+      "kkni_level": 3,
+      "standard_code": "SKKNI 60-2022",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/88f9fdba-5fa4-465d-b963-b59af5d642d7/download",
+      "recommended_assessment": "assessment_k3",
+      "recommended_learning_path": "path_petugas_k3",
+      "area_slug": "k3",
+      "focus_summary": "Fokus pada pelaksanaan prosedur keselamatan konstruksi, pemeriksaan sederhana, pengendalian dasar risiko, dan pelaporan kondisi berbahaya."
+    },
+
+    {
+      "id": "supervisor_k3_kkni_5",
+      "subklasifikasi": "Keselamatan Konstruksi",
+      "jabatan_kerja": "Supervisor K3",
+      "jenjang_jabatan_kerja": "Supervisor K3",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 5,
+      "standard_code": "SKKNI 350-2014",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/de9bf21b-f0ef-4cb9-bce5-7813da449476/download",
+      "recommended_assessment": "assessment_k3",
+      "recommended_learning_path": "path_supervisor_k3",
+      "area_slug": "k3",
+      "focus_summary": "Fokus pada pengawasan penerapan K3, inspeksi, tindak lanjut temuan, koordinasi keselamatan, dan pembinaan pekerja."
+    },
+    {
+      "id": "supervisor_k3_utama_kkni_6",
+      "subklasifikasi": "Keselamatan Konstruksi",
+      "jabatan_kerja": "Supervisor K3",
+      "jenjang_jabatan_kerja": "Supervisor K3 Utama",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 6,
+      "standard_code": "SKKNI 350-2014",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/de9bf21b-f0ef-4cb9-bce5-7813da449476/download",
+      "recommended_assessment": "assessment_k3",
+      "recommended_learning_path": "path_supervisor_k3",
+      "area_slug": "k3",
+      "focus_summary": "Fokus pada pengendalian dan evaluasi K3 tingkat teknisi/analis utama, penutupan tindakan korektif, dan koordinasi lintas fungsi."
+    },
+
+    {
+      "id": "manajer_logistik_proyek_kkni_7",
+      "subklasifikasi": "Manajemen Konstruksi / Manajemen Proyek",
+      "jabatan_kerja": "Manajer Logistik Proyek",
+      "jenjang_jabatan_kerja": "Manajer Logistik Proyek",
+      "kualifikasi": "Ahli",
+      "kkni_level": 7,
+      "standard_code": "SKKNI 386-2013",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/10767d9c-c0e1-4956-8381-422938a3fb2b/download",
+      "recommended_assessment": "assessment_project",
+      "recommended_learning_path": "path_project_management",
+      "area_slug": "project",
+      "focus_summary": "Fokus pada perencanaan logistik proyek, pengendalian material dan alat, koordinasi pemasok, distribusi sumber daya, dan mitigasi keterlambatan logistik."
+    },
+
+    {
+      "id": "ahli_muda_manajemen_konstruksi_kkni_7",
+      "subklasifikasi": "Manajemen Konstruksi / Manajemen Proyek",
+      "jabatan_kerja": "Ahli Bidang Keahlian Manajemen Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Muda Bidang Keahlian Manajemen Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 7,
+      "standard_code": "SKKNI 390-2015",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/2c1416a6-2773-444f-91a2-d6aeb2fc089c/download",
+      "recommended_assessment": "assessment_project",
+      "recommended_learning_path": "path_project_management",
+      "area_slug": "project",
+      "focus_summary": "Fokus pada perencanaan pelaksanaan konstruksi, koordinasi pekerjaan, pengendalian waktu, biaya, mutu, risiko, dan pelaporan proyek."
+    },
+    {
+      "id": "ahli_madya_manajemen_konstruksi_kkni_8",
+      "subklasifikasi": "Manajemen Konstruksi / Manajemen Proyek",
+      "jabatan_kerja": "Ahli Bidang Keahlian Manajemen Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Madya Bidang Keahlian Manajemen Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 8,
+      "standard_code": "SKKNI 390-2015",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/2c1416a6-2773-444f-91a2-d6aeb2fc089c/download",
+      "recommended_assessment": "assessment_project",
+      "recommended_learning_path": "path_project_management",
+      "area_slug": "project",
+      "focus_summary": "Fokus pada evaluasi pelaksanaan konstruksi, pengendalian proyek kompleks, koordinasi lintas pihak, dan penyelesaian masalah proyek."
+    },
+    {
+      "id": "ahli_utama_manajemen_konstruksi_kkni_9",
+      "subklasifikasi": "Manajemen Konstruksi / Manajemen Proyek",
+      "jabatan_kerja": "Ahli Bidang Keahlian Manajemen Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Utama Bidang Keahlian Manajemen Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 9,
+      "standard_code": "SKKNI 390-2015",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/2c1416a6-2773-444f-91a2-d6aeb2fc089c/download",
+      "recommended_assessment": "assessment_project",
+      "recommended_learning_path": "path_project_management",
+      "area_slug": "project",
+      "focus_summary": "Fokus pada pengendalian strategis manajemen konstruksi, pengembangan sistem pelaksanaan, pembinaan ahli, dan pengambilan keputusan tingkat tinggi."
+    },
+
+    {
+      "id": "ahli_muda_manajemen_proyek_konstruksi_kkni_7",
+      "subklasifikasi": "Manajemen Konstruksi / Manajemen Proyek",
+      "jabatan_kerja": "Ahli Manajemen Proyek Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Muda Manajemen Proyek Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 7,
+      "standard_code": "SKKK 035-2022",
+      "official_link": "https://skkni.kemnaker.go.id/tentang-skkk-skki/dokumen?limit=20&page=1&title=Manajemen%20Proyek",
+      "recommended_assessment": "assessment_project",
+      "recommended_learning_path": "path_project_management",
+      "area_slug": "project",
+      "focus_summary": "Fokus pada perencanaan dan pengendalian proyek konstruksi, pengelolaan waktu, biaya, mutu, risiko, sumber daya, dan pelaporan progres."
+    },
+    {
+      "id": "ahli_madya_manajemen_proyek_konstruksi_kkni_8",
+      "subklasifikasi": "Manajemen Konstruksi / Manajemen Proyek",
+      "jabatan_kerja": "Ahli Manajemen Proyek Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Madya Manajemen Proyek Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 8,
+      "standard_code": "SKKK 035-2022",
+      "official_link": "https://skkni.kemnaker.go.id/tentang-skkk-skki/dokumen?limit=20&page=1&title=Manajemen%20Proyek",
+      "recommended_assessment": "assessment_project",
+      "recommended_learning_path": "path_project_management",
+      "area_slug": "project",
+      "focus_summary": "Fokus pada evaluasi proyek konstruksi kompleks, pengendalian risiko, koordinasi lintas fungsi, recovery plan, dan pengambilan keputusan profesional."
+    },
+    {
+      "id": "ahli_utama_manajemen_proyek_konstruksi_kkni_9",
+      "subklasifikasi": "Manajemen Konstruksi / Manajemen Proyek",
+      "jabatan_kerja": "Ahli Manajemen Proyek Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Utama Manajemen Proyek Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 9,
+      "standard_code": "SKKK 035-2022",
+      "official_link": "https://skkni.kemnaker.go.id/tentang-skkk-skki/dokumen?limit=20&page=1&title=Manajemen%20Proyek",
+      "recommended_assessment": "assessment_project",
+      "recommended_learning_path": "path_project_management",
+      "area_slug": "project",
+      "focus_summary": "Fokus pada manajemen proyek strategis, pengendalian sistem proyek, evaluasi tingkat tinggi, pembinaan tim, dan penyelesaian masalah kompleks."
+    },
+
+    {
+      "id": "fasilitator_teknis_infrastruktur_kkni_5",
+      "subklasifikasi": "Manajemen Konstruksi / Manajemen Proyek",
+      "jabatan_kerja": "Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat",
+      "jenjang_jabatan_kerja": "Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 5,
+      "standard_code": "SKKNI 260-2018",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/0376e503-2f8a-4f6f-af02-924cc016b71d/download",
+      "recommended_assessment": "assessment_project",
+      "recommended_learning_path": "path_project_management",
+      "area_slug": "project",
+      "focus_summary": "Fokus pada pendampingan teknis pembangunan infrastruktur berbasis masyarakat, koordinasi pelaksanaan, dokumentasi, dan pengendalian pekerjaan sederhana-menengah."
+    },
+    {
+      "id": "fasilitator_teknis_infrastruktur_utama_kkni_6",
+      "subklasifikasi": "Manajemen Konstruksi / Manajemen Proyek",
+      "jabatan_kerja": "Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat",
+      "jenjang_jabatan_kerja": "Fasilitator Teknis Dalam Pembangunan Infrastruktur Berbasis Masyarakat Utama",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 6,
+      "standard_code": "SKKNI 260-2018",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/0376e503-2f8a-4f6f-af02-924cc016b71d/download",
+      "recommended_assessment": "assessment_project",
+      "recommended_learning_path": "path_project_management",
+      "area_slug": "project",
+      "focus_summary": "Fokus pada pengendalian teknis, evaluasi pelaksanaan, pendampingan masyarakat, dan koordinasi infrastruktur berbasis komunitas."
+    },
+
+    {
+      "id": "quality_engineer_madya_kkni_5",
+      "subklasifikasi": "Pengendalian Mutu Pekerjaan Konstruksi",
+      "jabatan_kerja": "Quality Engineer",
+      "jenjang_jabatan_kerja": "Quality Engineer Madya",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 5,
+      "standard_code": "SKKNI 333-2013",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/de38d51f-9d5c-475c-adc3-df962fd2b8b5/download",
+      "recommended_assessment": "assessment_quality",
+      "recommended_learning_path": "path_quality",
+      "area_slug": "quality",
+      "focus_summary": "Fokus pada inspeksi mutu, verifikasi spesifikasi, dokumentasi pemeriksaan, pelaporan ketidaksesuaian, dan tindak lanjut mutu."
+    },
+    {
+      "id": "quality_engineer_kkni_6",
+      "subklasifikasi": "Pengendalian Mutu Pekerjaan Konstruksi",
+      "jabatan_kerja": "Quality Engineer",
+      "jenjang_jabatan_kerja": "Quality Engineer",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 6,
+      "standard_code": "SKKNI 333-2013",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/de38d51f-9d5c-475c-adc3-df962fd2b8b5/download",
+      "recommended_assessment": "assessment_quality",
+      "recommended_learning_path": "path_quality",
+      "area_slug": "quality",
+      "focus_summary": "Fokus pada pengendalian mutu teknis, evaluasi hasil inspeksi, NCR, tindakan korektif, dan verifikasi hasil perbaikan."
+    },
+
+    {
+      "id": "quality_assurance_engineer_madya_kkni_5",
+      "subklasifikasi": "Pengendalian Mutu Pekerjaan Konstruksi",
+      "jabatan_kerja": "Quality Assurance Engineer",
+      "jenjang_jabatan_kerja": "Quality Assurance Engineer Madya",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 5,
+      "standard_code": "SKKNI 387-2013",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/357c9c51-155d-472a-9b15-cc5d4fd5d702/download",
+      "recommended_assessment": "assessment_quality",
+      "recommended_learning_path": "path_quality",
+      "area_slug": "quality",
+      "focus_summary": "Fokus pada penjaminan mutu, penerapan prosedur mutu, dokumentasi sistem, pencegahan ketidaksesuaian, dan audit sederhana."
+    },
+    {
+      "id": "quality_assurance_engineer_kkni_6",
+      "subklasifikasi": "Pengendalian Mutu Pekerjaan Konstruksi",
+      "jabatan_kerja": "Quality Assurance Engineer",
+      "jenjang_jabatan_kerja": "Quality Assurance Engineer",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 6,
+      "standard_code": "SKKNI 387-2013",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/357c9c51-155d-472a-9b15-cc5d4fd5d702/download",
+      "recommended_assessment": "assessment_quality",
+      "recommended_learning_path": "path_quality",
+      "area_slug": "quality",
+      "focus_summary": "Fokus pada evaluasi sistem penjaminan mutu, audit mutu, pengendalian prosedur, dan pencegahan ketidaksesuaian."
+    },
+
+    {
+      "id": "ahli_muda_sistem_manajemen_mutu_konstruksi_kkni_7",
+      "subklasifikasi": "Pengendalian Mutu Pekerjaan Konstruksi",
+      "jabatan_kerja": "Ahli Sistem Manajemen Mutu Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Muda Sistem Manajemen Mutu Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 7,
+      "standard_code": "SKKNI 145-2019",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/97ba4c97-e296-4bd9-8125-6967ec3b88ec/download",
+      "recommended_assessment": "assessment_quality",
+      "recommended_learning_path": "path_quality",
+      "area_slug": "quality",
+      "focus_summary": "Fokus pada penerapan dan evaluasi sistem manajemen mutu konstruksi, audit, tindakan korektif, dan peningkatan berkelanjutan."
+    },
+    {
+      "id": "ahli_madya_sistem_manajemen_mutu_konstruksi_kkni_8",
+      "subklasifikasi": "Pengendalian Mutu Pekerjaan Konstruksi",
+      "jabatan_kerja": "Ahli Sistem Manajemen Mutu Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Madya Sistem Manajemen Mutu Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 8,
+      "standard_code": "SKKNI 145-2019",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/97ba4c97-e296-4bd9-8125-6967ec3b88ec/download",
+      "recommended_assessment": "assessment_quality",
+      "recommended_learning_path": "path_quality",
+      "area_slug": "quality",
+      "focus_summary": "Fokus pada evaluasi kompleks sistem mutu, audit lintas fungsi, pengendalian kinerja mutu, dan perbaikan proses."
+    },
+    {
+      "id": "ahli_sistem_manajemen_mutu_konstruksi_kkni_9",
+      "subklasifikasi": "Pengendalian Mutu Pekerjaan Konstruksi",
+      "jabatan_kerja": "Ahli Sistem Manajemen Mutu Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Sistem Manajemen Mutu Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 9,
+      "standard_code": "SKKNI 145-2019",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/97ba4c97-e296-4bd9-8125-6967ec3b88ec/download",
+      "recommended_assessment": "assessment_quality",
+      "recommended_learning_path": "path_quality",
+      "area_slug": "quality",
+      "focus_summary": "Fokus pada pengembangan, pengendalian strategis, dan pembinaan sistem manajemen mutu konstruksi tingkat ahli utama."
+    },
+
+    {
+      "id": "ahli_madya_kontrak_kerja_konstruksi_kkni_8",
+      "subklasifikasi": "Hukum Kontrak Konstruksi",
+      "jabatan_kerja": "Ahli Kontrak Kerja Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Madya Kontrak Kerja Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 8,
+      "standard_code": "SKKNI 88-2015",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/8d1ba9f8-c11d-47e7-bafe-93a29e5b3084/download",
+      "recommended_assessment": "assessment_contract",
+      "recommended_learning_path": "path_contract",
+      "area_slug": "contract",
+      "focus_summary": "Fokus pada analisis kontrak konstruksi, variation order, klaim, adendum, bukti kontraktual, dan penyelesaian perselisihan."
+    },
+    {
+      "id": "ahli_kontrak_kerja_konstruksi_kkni_9",
+      "subklasifikasi": "Hukum Kontrak Konstruksi",
+      "jabatan_kerja": "Ahli Kontrak Kerja Konstruksi",
+      "jenjang_jabatan_kerja": "Ahli Kontrak Kerja Konstruksi",
+      "kualifikasi": "Ahli",
+      "kkni_level": 9,
+      "standard_code": "SKKNI 88-2015",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/8d1ba9f8-c11d-47e7-bafe-93a29e5b3084/download",
+      "recommended_assessment": "assessment_contract",
+      "recommended_learning_path": "path_contract",
+      "area_slug": "contract",
+      "focus_summary": "Fokus pada evaluasi strategis kontrak, penyelesaian sengketa, klaim kompleks, pengembangan strategi kontraktual, dan pembinaan tim."
+    },
+
+    {
+      "id": "juru_hitung_kuantitas_muda_kkni_4",
+      "subklasifikasi": "Estimasi Biaya Konstruksi",
+      "jabatan_kerja": "Juru Hitung Kuantitas",
+      "jenjang_jabatan_kerja": "Juru Hitung Kuantitas Muda",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 4,
+      "standard_code": "SKKK 038-2022",
+      "official_link": "https://skkni.kemnaker.go.id/tentang-skkk-skki/dokumen?limit=20&page=1&title=juru%20hitung%20kuantitas",
+      "recommended_assessment": "assessment_cost_qs",
+      "recommended_learning_path": "path_cost_qs",
+      "area_slug": "cost_qs",
+      "focus_summary": "Fokus pada dasar perhitungan volume pekerjaan, pembacaan gambar sederhana, pencatatan kuantitas, dan penyusunan backup quantity dasar."
+    },
+    {
+      "id": "juru_hitung_kuantitas_madya_kkni_5",
+      "subklasifikasi": "Estimasi Biaya Konstruksi",
+      "jabatan_kerja": "Juru Hitung Kuantitas",
+      "jenjang_jabatan_kerja": "Juru Hitung Kuantitas Madya",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 5,
+      "standard_code": "SKKK 038-2022",
+      "official_link": "https://skkni.kemnaker.go.id/tentang-skkk-skki/dokumen?limit=20&page=1&title=juru%20hitung%20kuantitas",
+      "recommended_assessment": "assessment_cost_qs",
+      "recommended_learning_path": "path_cost_qs",
+      "area_slug": "cost_qs",
+      "focus_summary": "Fokus pada penghitungan kuantitas, verifikasi volume, backup quantity, dan dokumentasi hasil pengukuran pekerjaan."
+    },
+    {
+      "id": "juru_hitung_kuantitas_utama_kkni_6",
+      "subklasifikasi": "Estimasi Biaya Konstruksi",
+      "jabatan_kerja": "Juru Hitung Kuantitas",
+      "jenjang_jabatan_kerja": "Juru Hitung Kuantitas Utama",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 6,
+      "standard_code": "SKKK 038-2022",
+      "official_link": "https://skkni.kemnaker.go.id/tentang-skkk-skki/dokumen?limit=20&page=1&title=juru%20hitung%20kuantitas",
+      "recommended_assessment": "assessment_cost_qs",
+      "recommended_learning_path": "path_cost_qs",
+      "area_slug": "cost_qs",
+      "focus_summary": "Fokus pada evaluasi volume, pengendalian kuantitas, verifikasi hasil pengukuran, dan dukungan analisis biaya pekerjaan."
+    },
+
+    {
+      "id": "estimator_biaya_jalan_madya_kkni_5",
+      "subklasifikasi": "Estimasi Biaya Konstruksi",
+      "jabatan_kerja": "Estimator Biaya Jalan",
+      "jenjang_jabatan_kerja": "Estimator Biaya Jalan Madya",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 5,
+      "standard_code": "SKKNI 385-2013",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/f3f393bc-00d9-43d9-a6f5-17df2b92d4e9/download",
+      "recommended_assessment": "assessment_cost_qs",
+      "recommended_learning_path": "path_cost_qs",
+      "area_slug": "cost_qs",
+      "focus_summary": "Fokus pada penyusunan estimasi biaya pekerjaan jalan, pembacaan gambar, perhitungan volume, dan analisis harga satuan."
+    },
+    {
+      "id": "estimator_biaya_jalan_kkni_6",
+      "subklasifikasi": "Estimasi Biaya Konstruksi",
+      "jabatan_kerja": "Estimator Biaya Jalan",
+      "jenjang_jabatan_kerja": "Estimator Biaya Jalan",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 6,
+      "standard_code": "SKKNI 385-2013",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/f3f393bc-00d9-43d9-a6f5-17df2b92d4e9/download",
+      "recommended_assessment": "assessment_cost_qs",
+      "recommended_learning_path": "path_cost_qs",
+      "area_slug": "cost_qs",
+      "focus_summary": "Fokus pada evaluasi estimasi biaya jalan, analisis harga satuan, pengendalian biaya, dan verifikasi komponen biaya pekerjaan jalan."
+    },
+
+    {
+      "id": "quantity_surveyor_madya_kkni_5",
+      "subklasifikasi": "Estimasi Biaya Konstruksi",
+      "jabatan_kerja": "Quantity Surveyor",
+      "jenjang_jabatan_kerja": "Quantity Surveyor Madya",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 5,
+      "standard_code": "SKKNI 06-2011",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/5f16bf68-2cb3-42d8-b60b-4dc4ae3054c1/download",
+      "recommended_assessment": "assessment_cost_qs",
+      "recommended_learning_path": "path_cost_qs",
+      "area_slug": "cost_qs",
+      "focus_summary": "Fokus pada pengukuran kuantitas, backup quantity, verifikasi volume, evaluasi progress payment, dan administrasi biaya teknis."
+    },
+    {
+      "id": "quantity_surveyor_utama_kkni_6",
+      "subklasifikasi": "Estimasi Biaya Konstruksi",
+      "jabatan_kerja": "Quantity Surveyor",
+      "jenjang_jabatan_kerja": "Quantity Surveyor Utama",
+      "kualifikasi": "Teknisi/Analis",
+      "kkni_level": 6,
+      "standard_code": "SKKNI 06-2011",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/5f16bf68-2cb3-42d8-b60b-4dc4ae3054c1/download",
+      "recommended_assessment": "assessment_cost_qs",
+      "recommended_learning_path": "path_cost_qs",
+      "area_slug": "cost_qs",
+      "focus_summary": "Fokus pada pengendalian kuantitas, evaluasi progress payment, analisis deviasi volume, dan dukungan administrasi komersial proyek."
+    },
+
+    {
+      "id": "ahli_muda_quantity_surveyor_kkni_7",
+      "subklasifikasi": "Estimasi Biaya Konstruksi",
+      "jabatan_kerja": "Ahli Quantity Surveyor",
+      "jenjang_jabatan_kerja": "Ahli Muda Quantity Surveyor",
+      "kualifikasi": "Ahli",
+      "kkni_level": 7,
+      "standard_code": "SKKNI 6-2011",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/5f16bf68-2cb3-42d8-b60b-4dc4ae3054c1/download",
+      "recommended_assessment": "assessment_cost_qs",
+      "recommended_learning_path": "path_cost_qs",
+      "area_slug": "cost_qs",
+      "focus_summary": "Fokus pada analisis kuantitas dan biaya, pengendalian komersial awal, progress payment, deviasi volume, dan evaluasi klaim biaya."
+    },
+    {
+      "id": "ahli_madya_quantity_surveyor_kkni_8",
+      "subklasifikasi": "Estimasi Biaya Konstruksi",
+      "jabatan_kerja": "Ahli Quantity Surveyor",
+      "jenjang_jabatan_kerja": "Ahli Madya Quantity Surveyor",
+      "kualifikasi": "Ahli",
+      "kkni_level": 8,
+      "standard_code": "SKKNI 6-2011",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/5f16bf68-2cb3-42d8-b60b-4dc4ae3054c1/download",
+      "recommended_assessment": "assessment_cost_qs",
+      "recommended_learning_path": "path_cost_qs",
+      "area_slug": "cost_qs",
+      "focus_summary": "Fokus pada evaluasi biaya kompleks, analisis klaim kuantitas, pengendalian komersial proyek, dan koordinasi keputusan biaya."
+    },
+    {
+      "id": "ahli_utama_quantity_surveyor_kkni_9",
+      "subklasifikasi": "Estimasi Biaya Konstruksi",
+      "jabatan_kerja": "Ahli Quantity Surveyor",
+      "jenjang_jabatan_kerja": "Ahli Utama Quantity Surveyor",
+      "kualifikasi": "Ahli",
+      "kkni_level": 9,
+      "standard_code": "SKKNI 6-2011",
+      "official_link": "https://skkni-api.kemnaker.go.id/v1/public/documents/5f16bf68-2cb3-42d8-b60b-4dc4ae3054c1/download",
+      "recommended_assessment": "assessment_cost_qs",
+      "recommended_learning_path": "path_cost_qs",
+      "area_slug": "cost_qs",
+      "focus_summary": "Fokus pada pengambilan keputusan strategis biaya, evaluasi komersial tingkat tinggi, pembinaan QS, dan penyelesaian masalah klaim kompleks."
+    }
+  ]
+}
+```
+
+---
+
+# 210. Notes for Data Normalization
+
+```yaml id="data_normalization_notes"
+data_normalization_notes:
+  kualifikasi_inference:
+    - "Jika baris lanjutan dalam tabel tidak mengulang kualifikasi, gunakan kualifikasi dari jabatan/kelompok sebelumnya."
+    - "Contoh: Ahli Madya K3 Konstruksi dan Ahli Utama K3 Konstruksi tetap dikategorikan sebagai Ahli."
+
+  operator_inference:
+    - "Petugas Keselamatan Konstruksi dipetakan sebagai Operator karena berada pada KKNI 3 dan sejajar dengan petugas lapangan dasar."
+
+  standard_code_variants:
+    - "SKKNI 06-2011 dan SKKNI 6-2011 perlu dipertahankan sesuai data sumber."
+    - "Quantity Surveyor menggunakan SKKNI 06-2011."
+    - "Ahli Quantity Surveyor menggunakan SKKNI 6-2011."
+    - "Sistem pencarian sebaiknya tetap menganggap keduanya sebagai kandidat terkait jika pengguna mengetik 'SKKNI 6-2011'."
+
+  area_slug_mapping:
+    k3: "Keselamatan Konstruksi"
+    project: "Manajemen Konstruksi / Manajemen Proyek"
+    quality: "Pengendalian Mutu Pekerjaan Konstruksi"
+    contract: "Hukum Kontrak Konstruksi"
+    cost_qs: "Estimasi Biaya Konstruksi"
+```
+
+---
+
+# 211. Validation Query for Complete Catalog
+
+```sql id="validation_query_complete_catalog"
+-- Jumlah total record jenjang jabatan
+SELECT COUNT(*) AS total_role_levels
+FROM skk_roles
+WHERE classification_code = 'E';
+
+-- Jumlah per subklasifikasi
+SELECT
+  subklasifikasi,
+  COUNT(*) AS total_levels
+FROM skk_roles
+WHERE classification_code = 'E'
+GROUP BY subklasifikasi
+ORDER BY subklasifikasi;
+
+-- Cek apakah semua record punya assessment mapping
+SELECT *
+FROM skk_roles
+WHERE recommended_assessment IS NULL
+   OR recommended_assessment = '';
+
+-- Cek apakah semua KKNI berada dalam rentang 3-9
+SELECT *
+FROM skk_roles
+WHERE kkni_level < 3
+   OR kkni_level > 9;
+```
+
+---
+
+# 212. Expected Catalog Counts
+
+```yaml id="expected_catalog_counts"
+expected_catalog_counts:
+  total_role_levels: 35
+
+  by_subklasifikasi:
+    Keselamatan Konstruksi: 12
+    Manajemen Konstruksi / Manajemen Proyek: 9
+    Pengendalian Mutu Pekerjaan Konstruksi: 7
+    Hukum Kontrak Konstruksi: 2
+    Estimasi Biaya Konstruksi: 11
+
+  note: >
+    Total role-level record adalah 41 jika setiap jenjang dipecah menjadi
+    record individual sesuai struktur seed JSON di atas. Jika dihitung sebagai
+    jabatan kerja utama, jumlahnya 18. Jika dihitung sebagai nomor baris
+    jabatan dalam tabel sumber, jumlahnya mengikuti 18 entri utama.
+```
+
+---

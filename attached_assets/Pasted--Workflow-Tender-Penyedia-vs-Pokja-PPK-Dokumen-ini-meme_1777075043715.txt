@@ -1,0 +1,188 @@
+# Workflow Tender — Penyedia vs Pokja/PPK
+
+Dokumen ini memetakan **dua alur paralel** pada Document Generator Tender: sisi **Penyedia** (kontraktor/konsultan) dan sisi **Pokja/PPK** (pengelola pengadaan). Keduanya bertemu di satu titik: **submit via SPSE → evaluasi → penetapan pemenang → kontrak**.
+
+## 1. Ringkasan Dua Jalur
+
+| Aspek | Sisi Penyedia | Sisi Pokja / PPK |
+| --- | --- | --- |
+| Input utama | Dokumen pemilihan, KAK, HPS, LDP/LDK | Kebijakan, pagu, kebutuhan teknis |
+| Aktor | Direktur, PIC Tender, Tenaga Ahli, Keuangan | PPK, Pokja Pemilihan, PA/KPA |
+| Deadline kritis | Batas akhir upload penawaran SPSE | Jadwal yang diumumkan SPSE (tidak boleh molor) |
+
+## 2. Diagram End-to-End (Gabungan)
+
+```mermaid
+flowchart TB
+	subgraph P["Sisi Pokja/PPK"]
+		P1["Identifikasi kebutuhan + pagu"] --> P2["Draft KAK/TOR + HPS"]
+		P2 --> P3["Analisis risiko + RPP"]
+		P3 --> P4["Susun Dokumen Pemilihan (IKP+LDP+LDK+Kontrak)"]
+		P4 --> P5["Pengumuman di SPSE"]
+		P5 --> P6["Aanwijzing / penjelasan"]
+		P6 --> P7["Terima penawaran"]
+		P7 --> P8["BA Pembukaan"]
+		P8 --> P9["Evaluasi Adm → Teknis → Harga → Kualifikasi"]
+		P9 --> P10["Klarifikasi + Negosiasi"]
+		P10 --> P11["Usulan Pemenang"]
+		P11 --> P12["SPPBJ + SPMK + Tanda Tangan Kontrak"]
+	end
+
+	subgraph V["Sisi Penyedia"]
+		V1["Monitor pengumuman SPSE/LPSE"] --> V2["Go/No-Go Decision"]
+		V2 --> V3["Download dokumen pemilihan"]
+		V3 --> V4["Ekstrak requirement (Agent Tender)"]
+		V4 --> V5["Gap analysis dokumen company"]
+		V5 --> V6["Generate dokumen: Adm + Legal + Kualifikasi"]
+		V6 --> V7["Generate dokumen Teknis: Metode+RKK+TKDN"]
+		V7 --> V8["Hitung BoQ + Rekap Harga"]
+		V8 --> V9["Ambil Jaminan Penawaran (bila wajib)"]
+		V9 --> V10["Compliance Matrix + Pre-submit Review"]
+		V10 --> V11["Submit via SPSE sebelum deadline"]
+	end
+
+	P5 -.pengumuman.-> V1
+	P6 -.aanwijzing.-> V3
+	V11 -.file penawaran.-> P7
+	P12 -.SPPBJ+SPMK.-> V12["Jaminan Pelaksanaan"]
+	V12 --> V13["Kontrak + BA PHO/FHO + Addendum"]
+
+	style P fill:#fee2e2,stroke:#dc2626
+	style V fill:#dbeafe,stroke:#2563eb
+```
+
+## 3. SOP Sisi Pokja/PPK
+
+### Fase 1 — Persiapan Pengadaan (T-60 s/d T-15 hari)
+
+1. **Identifikasi kebutuhan** berbasis RKA-KL / DPA. Tetapkan pagu & prioritas.
+2. **Draft KAK/TOR** — lihat dokumen PRS-01 di katalog. Agent: Document Generator.
+3. **Susun RAB/HPS** (PRS-02) menggunakan AHSP SNI & survei harga pasar. Agent: Document Generator.
+4. **Analisis risiko + RPP** (PRS-03). Tentukan metode pemilihan: Tender, Tender Cepat, Penunjukan Langsung, Pengadaan Langsung. Agent: Compliance.
+5. **Reviu silang** oleh PPK → PA/KPA untuk penetapan.
+
+### Fase 2 — Penyusunan Dokumen Pemilihan (T-15 s/d T-0)
+
+1. **Bentuk dokumen** konsolidasi: Umum, Pengumuman, **IKP** (MDP-01), **LDP+LDK** (MDP-02), Bentuk Dokumen Penawaran, **Rancangan Kontrak SSUK+SSKH** (MDP-03), **Spesifikasi Teknis + Gambar** (MDP-04).
+2. **Tanamkan Perpres 46/2025** di IKP § preferensi PDN/TKDN dan LDK § kinerja penyedia (SIKaP wajib).
+3. **QA dokumen** — Agent Compliance menjalankan rule check (konsistensi nomor pasal, nilai HPS, jadwal).
+
+### Fase 3 — Pengumuman & Penawaran (T+0 s/d deadline SPSE)
+
+1. Upload dokumen pemilihan ke **SPSE/LPSE**.
+2. **Aanwijzing** — sesi tanya-jawab online. BA aanwijzing jadi addendum dokumen pemilihan.
+3. Terima penawaran hingga deadline. **Tidak ada toleransi keterlambatan**.
+
+### Fase 4 — Evaluasi (T+deadline s/d T+14 kerja)
+
+1. **BA Pembukaan Penawaran** (PSC-02).
+2. **Evaluasi Administrasi** → lolos/gagal.
+3. **Evaluasi Teknis** → skor/lolos ambang.
+4. **Evaluasi Harga** → sistem gugur / nilai.
+5. **Evaluasi Kualifikasi** → termasuk kinerja SIKaP.
+6. **Klarifikasi + Negosiasi** (bila perlu). Semua bertanda-tangan Pokja.
+
+### Fase 5 — Penetapan & Kontrak
+
+1. **Usulan Pemenang** → **SPPBJ** (PSC-01) diterbitkan Pokja.
+2. **Sanggah** (5 hari kerja) — tanggapi sanggah dalam 3 hari kerja.
+3. **SPMK** diterbitkan PPK.
+4. Penyedia serahkan **Jaminan Pelaksanaan** (5% kontrak).
+5. **Tanda tangan kontrak** — dokumen final SSUK+SSKH+Lampiran.
+
+## 4. SOP Sisi Penyedia
+
+### Fase 1 — Monitoring & Go/No-Go (T-14 s/d T-7)
+
+1. **Monitor SPSE/LPSE** — Agent Sales & Intake pull listing harian per kategori KBLI & lokasi.
+2. **Extract requirement** (Agent Tender) — baca dokumen pemilihan, ambil: KBLI, klasifikasi SBU, pengalaman min, omset min, lokasi, HPS, deadline.
+3. **Go/No-Go scoring** berdasarkan: kapasitas, fit SBU, pengalaman, ketersediaan modal, jarak lokasi. **Threshold: skor ≥ 70 = Go**.
+
+### Fase 2 — Persiapan Dokumen (T-7 s/d T-2)
+
+1. **Gap analysis** — cek `company.json` vs requirement. List dokumen yang expired / belum ada.
+2. **Generate pack Administrasi + Legal**: Pakta Integritas (ADM-01), NIB (ADM-02), NPWP+SPT (ADM-03), Akta+KTP (ADM-04), SBU (ADM-05), Domisili (ADM-06), Surat Pernyataan (ADM-07), BPJS (ADM-08).
+3. **Generate pack Kualifikasi**: Laporan Keuangan (KUL-01), Pengalaman (KUL-02), Personel+SKA (KUL-03), Peralatan (KUL-04), Kinerja SIKaP (KUL-05), FIKE (KUL-06).
+4. **Generate pack Teknis**: Metode Pelaksanaan (PWR-02), RKK (PWR-03), Dokumen PDN/TKDN (PWR-04). Untuk konsultansi: Proposal Teknis (PWR-06).
+5. **Hitung Harga**: BoQ+AHSP (PWR-05), Rekapitulasi Harga (PWR-08), Billing Rate INKINDO (PWR-09) untuk konsultansi.
+
+### Fase 3 — Jaminan & Finalisasi (T-2 s/d T-1)
+
+1. **Jaminan Penawaran** (PWR-07) — proses dari bank/asuransi terdaftar OJK.
+2. **Surat Penawaran** (PWR-01) — nilai final, masa berlaku, tanda tangan direktur + materai.
+3. **Compliance Matrix** (Agent Compliance) — pastikan tiap requirement ter-mapping ke dokumen.
+4. **Pre-submit Review** (Agent Document Review) — OCR cek konsistensi nama, NPWP, NIB, tanggal, tanda tangan.
+
+### Fase 4 — Submit (T-1 s/d deadline)
+
+1. Upload seluruh file via SPSE sesuai folder/split yang diminta.
+2. **Submit minimal H-4 jam sebelum deadline** untuk buffer gangguan koneksi.
+3. Simpan **bukti upload** + hash dokumen.
+
+### Fase 5 — Pasca-Evaluasi
+
+1. Monitor status evaluasi. Siapkan klarifikasi dalam 1 hari kerja bila diminta.
+2. Jika ditetapkan menang → **Jaminan Pelaksanaan** (5% kontrak) dalam 14 hari kerja.
+3. Tanda tangan kontrak → jalankan proyek → BA PHO (PSC-04) → FHO.
+
+## 5. RACI Matrix per Fase (Penyedia)
+
+| Aktivitas | Direktur | PIC Tender | Tenaga Ahli | Keuangan | Agent AI |
+| --- | --- | --- | --- | --- | --- |
+| Gap analysis | I | A | C | C | R |
+| Dokumen Teknis | I | A | R | - | R (draft) |
+| Jaminan Penawaran | A | C | - | R | I |
+| Submit SPSE | I | R/A | - | - | I |
+
+## 6. Red Flags yang Otomatis Ditandai Agent Compliance
+
+<aside>
+🚨
+
+**Administratif**
+
+- NPWP / NIB expired atau nama tidak konsisten dengan Akta
+- SBU kadaluarsa atau sub-klasifikasi tidak cocok dengan KBLI paket
+- Materai kurang / tidak ada pada dokumen yang mewajibkan
+- Masa berlaku penawaran < yang dipersyaratkan LDP
+</aside>
+
+<aside>
+🚨
+
+**Teknis**
+
+- Personel/SKA yang diusulkan sedang terikat paket lain pada jadwal sama
+- RKK tidak memuat identifikasi bahaya spesifik lokasi
+- TKDN < 25% padahal paket mewajibkan preferensi
+- Metode pelaksanaan tidak sinkron dengan Kurva S
+</aside>
+
+<aside>
+🚨
+
+**Harga**
+
+- Total penawaran > HPS (gugur otomatis)
+- Total penawaran < 80% HPS (triggered klarifikasi kewajaran)
+- BoQ volume tidak match dengan gambar/spektek
+- PPN / overhead / profit tidak konsisten antar lembar
+</aside>
+
+## 7. SLA Target (Agent Performance)
+
+| Task | Target | Agent |
+| --- | --- | --- |
+| Gap analysis company vs requirement | < 2 menit | Agent Compliance |
+| Generate pack Teknis (3 dok) | < 10 menit | Agent Document Generator |
+| Compliance Matrix final | < 3 menit | Agent Compliance |
+| **Total end-to-end (Penyedia)** | **< 30 menit** | Orkestrator |
+
+---
+
+<aside>
+📌
+
+Dokumen ini adalah **SOP hidup**. Update setiap ada perubahan regulasi (terutama MDP LKPP & Perpres), dan setiap kali Agent AI berhasil mendeteksi pola kegagalan baru yang perlu dijadikan rule.
+
+</aside>

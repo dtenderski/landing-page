@@ -1,0 +1,299 @@
+<aside>
+🔌
+
+**Kontrak integrasi** antara IT LSP dan tiga sistem nasional wajib: **Sisfo BNSP**, **BLKK Skill Card Verifier**, dan **SIKI-LPJK**. Mendefinisikan endpoint, payload kanonik, otentikasi, dan pola ketahanan. Sub-page dari [IT LSP berdasarkan Standar LPJK & BNSP — Paperless (Nir Kertas) + AJJ](https://www.notion.so/IT-LSP-berdasarkan-Standar-LPJK-BNSP-Paperless-Nir-Kertas-AJJ-e7524cfc14ba4ac6b21012c18e373c37?pvs=21).
+
+**Catatan:** *interface* riil mengikuti dokumentasi resmi BNSP, BLKK, dan PUPR/LPJK (SE LPJK 14 & 17/2021); spesifikasi di sini adalah *internal contract* yang dapat dipetakan ke API resmi melalui *adapter*.
+
+</aside>
+
+## 1. Prinsip Integrasi
+
+- **Adapter Pattern**: setiap sistem eksternal punya *adapter* dengan kontrak internal stabil; perubahan di sisi BNSP/LPJK hanya menyentuh adapter.
+- **Outbox + Inbox Pattern**: setiap *event domain* ditulis ke outbox lokal; pengirim membaca outbox; sukses → tandai *acked*; gagal → *retry exponential*.
+- **Idempotency Key**: setiap permintaan ke eksternal membawa `dedup-key = sha256(entity-type + entity-id + version)`.
+- **At-Least-Once Delivery**: konsumen wajib idempoten.
+- **Circuit Breaker**: 5 gagal beruntun → buka *breaker* 60 detik; *half-open* setelahnya.
+- **Observability**: setiap call diberi *trace-id* + *span-id*; metrik: latency p50/p95/p99, success rate, retry count.
+
+---
+
+## 2. Data Model Kanonik (LSP-internal)
+
+### 2.1 `Asesi`
+
+```json
+{
+	"id": "ASE-2026-LSP-000123",
+	"nik": "3201xxxxxxxx1234",
+	"nama": "Wuryanto K.",
+	"email": "asesi@example.id",
+	"hp": "+62812xxxxxxxx",
+	"tempatLahir": "Bandung",
+	"tanggalLahir": "1985-03-12",
+	"jenisKelamin": "L",
+	"alamat": { "jalan": "...", "kota": "Jakarta Selatan", "provinsi": "DKI Jakarta", "latLng": [-6.21, 106.83] },
+	"bujkPemberiKerjaNib": "1234567890",
+	"createdAt": "2026-05-01T09:00:00+07:00"
+}
+```
+
+### 2.2 `Asesor`
+
+```json
+{
+	"id": "ASK-LSP-000045",
+	"nomorMetASKOM": "MET.000.000123 2024",
+	"nama": "Asesor Contoh",
+	"skemaDilisensikan": ["SKM-BG001-9", "SKM-BG002-7"],
+	"masaBerlaku": "2028-04-30",
+	"statusLisensi": "AKTIF"
+}
+```
+
+### 2.3 `Skema`
+
+```json
+{
+	"id": "SKM-BG001-9",
+	"nama": "Manajer Konstruksi Gedung — KKNI 9",
+	"jenis": "KKNI",
+	"jenjang": 9,
+	"kbli": "41011",
+	"skkniRefs": ["SKKNI-XXX-2022"],
+	"versi": "1.2.0",
+	"status": "AKTIF"
+}
+```
+
+### 2.4 `SesiAsesmen`
+
+```json
+{
+	"id": "SES-2026-LSP-000456",
+	"asesiId": "ASE-2026-LSP-000123",
+	"asesorId": "ASK-LSP-000045",
+	"skemaId": "SKM-BG001-9",
+	"mode": "AJJ",
+	"mulai": "2026-05-15T09:00:00+07:00",
+	"selesai": "2026-05-15T12:30:00+07:00",
+	"witnessBnsp": "WIT-BNSP-007",
+	"hasil": "K",
+	"recordingUrl": "s3://lsp/sesi/SES-2026-LSP-000456.mkv",
+	"frIaHash": "sha256:abc...",
+	"frAkHash": "sha256:def..."
+}
+```
+
+### 2.5 `SKK`
+
+```json
+{
+	"id": "SKK/LSP/2026/000789",
+	"asesiId": "ASE-2026-LSP-000123",
+	"skemaId": "SKM-BG001-9",
+	"jenjang": 9,
+	"tanggalTerbit": "2026-05-16",
+	"masaBerlaku": "2031-05-15",
+	"status": "AKTIF",
+	"qrBlkkUrl": "https://blkk.bnsp.go.id/v/{token}",
+	"hashWatermark": "sha256:f00ba2...",
+	"fileUrl": "s3://lsp/skk/SKK-LSP-2026-000789.pdf",
+	"version": 1,
+	"sinkron": { "sisfoBnsp": "OK", "blkk": "OK", "siki": "PENDING" }
+}
+```
+
+---
+
+## 3. Sisfo BNSP — Kontrak Adapter
+
+### 3.1 Endpoint Internal
+
+| **Operasi** | **HTTP** | **Path** | **Tujuan** | Daftarkan SKK | POST | `/sisfo/skk` | Publish SKK baru |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Update Status SKK | PATCH | `/sisfo/skk/{id}` | Suspend / cabut / re-issue | Sinkron Asesor | PUT | `/sisfo/asesor/{id}` | Lisensi asesor + RCC |
+| Tarik Daftar Lisensi LSP | GET | `/sisfo/lsp/lisensi` | Verifikasi status lisensi LSP | Surveilans | POST | `/sisfo/surveilans` | Laporan tahunan |
+
+### 3.2 Payload `POST /sisfo/skk`
+
+```json
+{
+	"dedupKey": "sha256:...",
+	"skk": {
+		"nomorSkk": "SKK/LSP/2026/000789",
+		"asesi": { "nik": "3201xxxxxxxx1234", "nama": "..." },
+		"skema": { "kode": "SKM-BG001-9", "jenjang": 9, "kbli": "41011" },
+		"masaBerlaku": { "mulai": "2026-05-16", "akhir": "2031-05-15" },
+		"hashWatermark": "sha256:...",
+		"fileUrl": "https://lsp.example/skk/000789.pdf",
+		"signedBy": { "role": "MS", "name": "...", "tteSerial": "..." }
+	}
+}
+```
+
+### 3.3 Otentikasi
+
+- **OAuth2 Client Credentials** dengan *scope* `sisfo:write skk:write asesor:write`.
+- *mTLS* opsional bila tersedia di sisi BNSP.
+- *Signature* HMAC-SHA256 di header `X-LSP-Sign`.
+
+### 3.4 Error Handling
+
+- `409 DUPLICATE` → ignore (idempoten).
+- `4xx` lain → masuk ke *Dead Letter Queue* + tiket Helpdesk.
+- `5xx` → retry eksponensial 1m, 5m, 15m, 1h, 6h, 24h.
+
+---
+
+## 4. BLKK Skill Card Verifier
+
+### 4.1 Tujuan
+
+- Mempublish QR untuk verifikasi publik (tanpa login) di portal **BLKK BNSP**.
+- Memberikan *real-time status* SKK kepada pemberi kerja & publik.
+
+### 4.2 Endpoint Internal
+
+| **Operasi** | **HTTP** | **Path** | Publish SKK | POST | `/blkk/cards` |
+| --- | --- | --- | --- | --- | --- |
+| Update Status | PATCH | `/blkk/cards/{token}` | Verifikasi Publik | GET | `/blkk/v/{token}` (no-auth) |
+
+### 4.3 Payload `POST /blkk/cards`
+
+```json
+{
+	"dedupKey": "sha256:...",
+	"card": {
+		"nomorSkk": "SKK/LSP/2026/000789",
+		"namaTermasked": "Wuryanto K.",
+		"nikTermasked": "xxxx-xxxx-xxxx-1234",
+		"skema": "Manajer Konstruksi Gedung",
+		"jenjang": "KKNI 9",
+		"masaBerlaku": "2031-05-15",
+		"status": "AKTIF",
+		"lspNama": "LSP Konstruksi XYZ",
+		"lspLisensiBnsp": "BNSP-LSP-XXXX",
+		"hashWatermark": "sha256:..."
+	}
+}
+```
+
+### 4.4 Respons Verifikasi Publik
+
+```json
+{
+	"status": "AKTIF",
+	"nama": "Wuryanto K.",
+	"nikTermasked": "xxxx-xxxx-xxxx-1234",
+	"skema": "Manajer Konstruksi Gedung",
+	"jenjang": "KKNI 9",
+	"berlakuHingga": "2031-05-15",
+	"diterbitkanOleh": "LSP Konstruksi XYZ",
+	"lisensiBnsp": "BNSP-LSP-XXXX",
+	"hashWatermark": "sha256:f00ba2..."
+}
+```
+
+### 4.5 SLA
+
+- *Publish latency* p95 ≤ 60 detik.
+- *Verifier availability* ≥ 99,9%.
+
+---
+
+## 5. SIKI-LPJK
+
+### 5.1 Tujuan
+
+- Mensinkronkan data **TKK tersertifikasi** ke registry nasional **SIKI-LPJK** sehingga BUJK/PUPR dapat memverifikasi anggota tim proyek.
+- Mengikuti **SE LPJK No. 14 & 17/SE/LPJK/2021**.
+
+### 5.2 Endpoint Internal
+
+| **Operasi** | **HTTP** | **Path** |
+| --- | --- | --- |
+| Update Status TKK | PATCH | `/siki/tkk/{nik}` |
+| Daftar Subklasifikasi BUJK | GET | `/siki/bujk/{nib}/subklasifikasi` |
+
+### 5.3 Payload `POST /siki/tkk`
+
+```json
+{
+	"dedupKey": "sha256:...",
+	"tkk": {
+		"nik": "3201xxxxxxxx1234",
+		"nama": "...",
+		"jabatan": "PJSKBU",
+		"klasifikasi": "BG",
+		"subklasifikasi": "BG001",
+		"jenjang": 9,
+		"nomorSkk": "SKK/LSP/2026/000789",
+		"masaBerlaku": "2031-05-15",
+		"bujkNib": "1234567890"
+	}
+}
+```
+
+### 5.4 Catatan
+
+- *Lookup BUJK* dipakai pada **M2 (Registrasi Asesi)** untuk validasi pemberi kerja.
+- *Status TKK* di SIKI mengikuti status SKK (aktif/suspend/cabut/expired).
+- Rekonsiliasi mingguan: *diff report* dari SIKI dibandingkan dengan database lokal.
+
+---
+
+## 6. Skema Otentikasi & Otorisasi
+
+| **Sistem** | **Auth** | **Kredensial Disimpan** |
+| --- | --- | --- |
+| BLKK | OAuth2 CC + HMAC | KMS |
+| Dukcapil PSE | Sesuai PKS PSE Berbayar | KMS + access log audited |
+| Peruri e-Meterai | API Key + IP allowlist | KMS |
+
+---
+
+## 7. Pola Ketahanan & Rekonsiliasi
+
+### 7.1 Outbox
+
+```mermaid
+flowchart LR
+	DOM["Domain Event<br>SKK Issued"] --> OUT["Outbox Table"]
+	OUT --> POL["Poller / Worker"]
+	POL --> ADP["Adapter Sisfo / BLKK / SIKI"]
+	ADP -->|2xx| ACK["Mark Acked"]
+	ADP -->|5xx| RETRY["Retry Backoff"]
+	ADP -->|4xx| DLQ["Dead Letter Queue"]
+	DLQ --> TICKET["Tiket Helpdesk"]
+```
+
+### 7.2 Rekonsiliasi Mingguan
+
+- Setiap Senin 02:00 WIB: tarik *snapshot* SKK dari Sisfo BNSP & BLKK & SIKI.
+- Bandingkan dengan *snapshot* lokal; selisih → *reconcile job* + report ke Auditor.
+- Target: selisih = 0 dalam 7 hari.
+
+### 7.3 Versioning
+
+- API versi `v1`, `v2`, dst. di path: `/sisfo/v1/skk`.
+- Deprekasi: minimum 6 bulan window dengan dual-write.
+
+---
+
+## 8. Event Bus Internal (Domain Events)
+
+| **Event** | **Trigger** | **Subscriber** | `asesi.registered` | M2 selesai | M3, M13 (billing) |
+| --- | --- | --- | --- | --- | --- |
+| `dossier.completed` | M3 selesai | M5, MS | `sesi.completed` | M6 selesai | M7 |
+| `putusan.kompeten` | M7 | M8 (penerbitan) | `skk.issued` | M8 | Adapter Sisfo, BLKK, SIKI |
+| `skk.suspended` / `skk.revoked` | M9 / M11 | Adapter Sisfo, BLKK, SIKI | `skk.expiring.t30` | Cron T-30 | M10 (RCC reminder) |
+
+---
+
+<aside>
+⚠️
+
+**Penting:** Sebelum *go-live*, lakukan **UAT bersama BNSP & LPJK** untuk memvalidasi *interface* riil. Spesifikasi di atas dapat berbeda di sisi format detail; *adapter* harus diadaptasi sesuai dokumentasi resmi terbaru.
+
+</aside>

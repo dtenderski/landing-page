@@ -1,0 +1,288 @@
+Panduan Webhook Integration
+Terima notifikasi real-time dari Kirimi ke sistem Anda untuk status perangkat, pesan masuk, dan notifikasi sistem
+
+Overview
+Webhook integration memungkinkan Anda untuk menghubungkan platform Kirimi dengan sistem eksternal secara real-time. Dengan webhook, Anda dapat menerima notifikasi otomatis ketika ada event tertentu terjadi di WhatsApp Anda.
+
+Apa itu Webhook?
+Webhook adalah cara untuk aplikasi memberikan informasi real-time kepada aplikasi lain. Ketika event tertentu terjadi, webhook akan mengirim data HTTP POST ke URL yang Anda tentukan.
+
+Event yang Didukung:
+Pesan Masuk
+Notifikasi ketika ada pesan WhatsApp masuk
+
+Status Perangkat
+Update status koneksi perangkat WhatsApp
+
+Notifikasi Sistem
+Notifikasi penting dari sistem Kirimi
+
+Persyaratan
+• Akun Kirimi aktif (tersedia di semua paket)
+• URL endpoint yang dapat diakses secara publik
+• HTTPS (SSL certificate) wajib untuk keamanan
+1
+Step 1: Persiapan Endpoint
+1.1 Buat Endpoint URL
+Siapkan endpoint URL di server Anda yang akan menerima webhook dari Kirimi. Endpoint ini harus dapat menerima HTTP POST request.
+
+Contoh Endpoint Sederhana (PHP)
+Copy
+<?php
+// webhook-endpoint.php
+header('Content-Type: application/json');
+
+// Ambil data dari webhook
+$input = file_get_contents('php://input');
+$data = json_decode($input, true);
+
+// Proses data berdasarkan event type
+switch ($data['event']) {
+    case 'message.received':
+        // Pesan masuk baru
+        $from = $data['from'];
+        $message = $data['message'];
+        error_log("Pesan dari {$from}: {$message}");
+        break;
+        
+    case 'device.status':
+        // Status perangkat berubah
+        $status = $data['status']; // connected/disconnected
+        error_log("Status perangkat: {$status}");
+        break;
+        
+    case 'system.notification':
+        // Notifikasi sistem
+        $notification = $data['notification'];
+        error_log("Notifikasi: {$notification}");
+        break;
+}
+
+// Respon sukses
+http_response_code(200);
+echo json_encode(['status' => 'received']);
+?>
+1.2 Contoh Endpoint Node.js
+Contoh Endpoint Sederhana (Node.js)
+Copy
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+// Webhook endpoint
+app.post('/webhook/kirimi', (req, res) => {
+    const { event, from, message, status, notification } = req.body;
+    
+    switch (event) {
+        case 'message.received':
+            console.log(`Pesan dari ${from}: ${message}`);
+            break;
+            
+        case 'device.status':
+            console.log(`Status perangkat: ${status}`);
+            break;
+            
+        case 'system.notification':
+            console.log(`Notifikasi: ${notification}`);
+            break;
+    }
+    
+    res.json({ status: 'received' });
+});
+
+app.listen(3000, () => {
+    console.log('Webhook server running on port 3000');
+});
+Tips Penting
+• Pastikan endpoint menggunakan HTTPS
+• Endpoint harus merespon dengan HTTP 200 untuk konfirmasi
+• Simpan data webhook sesuai kebutuhan aplikasi Anda
+2
+Step 2: Konfigurasi Webhook di Dashboard
+2.1 Akses Menu Webhook
+1
+Login ke dashboard Kirimi dan pilih device WhatsApp yang akan dikonfigurasi
+
+2
+Buka halaman "Detail Device" → pilih device WhatsApp Anda
+
+3
+Scroll ke bagian "Webhook URL" dan masukkan URL endpoint Anda
+
+2.2 Isi Form Konfigurasi
+Webhook URL
+https://yourdomain.com/webhook/kirimi
+URL endpoint yang akan menerima webhook
+
+Status Webhook
+
+Aktifkan Webhook
+Centang untuk mengaktifkan pengiriman webhook
+
+Konfigurasi Berhasil
+Setelah menyimpan konfigurasi, webhook akan aktif dan mulai mengirim notifikasi ke endpoint Anda.
+
+3
+Step 3: Testing & Validasi
+3.1 Test Webhook Connection
+1
+Klik tombol "Test Webhook" di halaman konfigurasi
+
+2
+Sistem akan mengirim test payload ke endpoint Anda
+
+3
+Periksa log server Anda untuk memastikan request diterima
+
+3.2 Contoh Data Webhook
+Contoh Data Pesan Masuk
+Copy
+{
+  "event": "message.received",
+  "from": "6281234567890",
+  "message": "Halo, saya ingin bertanya",
+  "timestamp": "2024-01-15T10:30:00Z"
+}
+3.3 Test Webhook
+1
+Kirim pesan ke nomor WhatsApp yang terhubung
+
+2
+Periksa log server Anda untuk memastikan webhook diterima
+
+Monitoring Webhook
+Dashboard menyediakan log webhook yang menampilkan:
+
+• Status pengiriman (success/failed)
+• Response code dari endpoint Anda
+• Waktu pengiriman dan retry attempts
+• Payload yang dikirim
+4
+Step 4: Monitoring Webhook
+4.1 Melihat Status Webhook
+Buka menu Pengaturan > Webhook untuk melihat status
+
+Status "Aktif" menunjukkan webhook berjalan normal
+
+Periksa log untuk melihat riwayat pengiriman webhook
+
+4.2 Tips Monitoring
+Periksa Secara Berkala
+• Pastikan endpoint server selalu aktif
+
+• Periksa log error di server Anda
+
+• Monitor kapasitas server
+
+Backup Data
+• Simpan data webhook penting
+
+• Buat sistem backup otomatis
+
+• Test recovery secara berkala
+
+Troubleshooting
+Webhook tidak terkirim?
+• ✅ Pastikan webhook URL sudah dikonfigurasi
+• ✅ Cek koneksi internet server
+• ✅ Pastikan endpoint dapat diakses dari luar
+• ✅ Periksa firewall dan port
+Webhook timeout?
+• ✅ Optimasi proses di webhook handler
+• ✅ Gunakan queue untuk proses yang lama
+• ✅ Return response segera, proses asynchronous
+• ✅ Set timeout yang reasonable (< 5 detik)
+Webhook duplicate?
+• ✅ Implementasikan idempotency dengan msgId
+• ✅ Gunakan database untuk track processed messages
+• ✅ Set proper response status codes
+Debug Tools
+# Test webhook endpoint
+curl -X POST https://your-domain.com/webhook/message \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sessionId": "test-001",
+    "msgId": "test-msg-123",
+    "from": "628123456789",
+    "name": "Test User",
+    "message": "Test message",
+    "isFromGroup": false
+  }'
+
+# Monitor webhook logs
+tail -f /var/log/webhook.log
+
+# Check webhook response time
+time curl -X POST https://your-domain.com/webhook/message
+Best Practices
+Security & Performance
+Rate Limiting & Security
+Copy
+// Rate limiting
+const rateLimit = require('express-rate-limit');
+
+const webhookLimiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: 'Too many webhook requests'
+});
+
+app.use('/webhook', webhookLimiter);
+
+// Webhook monitoring
+const webhookStats = {
+  total: 0,
+  success: 0,
+  failed: 0,
+  lastError: null
+};
+
+app.post('/webhook/*', (req, res, next) => {
+  webhookStats.total++;
+  
+  const originalSend = res.send;
+  res.send = function(data) {
+    if (res.statusCode >= 200 && res.statusCode < 300) {
+      webhookStats.success++;
+    } else {
+      webhookStats.failed++;
+      webhookStats.lastError = {
+        timestamp: new Date().toISOString(),
+        statusCode: res.statusCode,
+        path: req.path,
+        error: data
+      };
+    }
+    originalSend.call(this, data);
+  };
+  
+  next();
+});
+✅ Do's
+• Respond dengan HTTP 200 untuk sukses
+• Implementasi idempotency dengan msgId
+• Gunakan HTTPS untuk keamanan
+• Log semua webhook untuk debugging
+• Set timeout reasonable (< 5 detik)
+❌ Don'ts
+• Jangan proses lama di webhook handler
+• Jangan abaikan error handling
+• Jangan hardcode credentials
+• Jangan skip validasi payload
+• Jangan lupa implement retry logic
+Pertanyaan Umum
+Apakah webhook tersedia untuk semua paket?
+Ya, webhook tersedia untuk semua paket Kirimi termasuk Basic, Pro, dan Enterprise.
+
+Bagaimana cara mengaktifkan webhook?
+Buka menu Pengaturan > Webhook, masukkan URL endpoint Anda, dan ubah status menjadi "Aktif".
+
+Apa saja data yang dikirim webhook?
+Webhook mengirim data pesan masuk, status perangkat, dan notifikasi sistem dalam format JSON.
+
+Apakah webhook aman digunakan?
+Ya, webhook aman karena menggunakan HTTPS untuk enkripsi data. Pastikan endpoint Anda juga menggunakan HTTPS.
+
+Bagaimana jika webhook tidak berfungsi?
+Periksa apakah URL endpoint benar, server aktif, dan menggunakan HTTPS. Lihat juga bagian Pemecahan Masalah di atas.

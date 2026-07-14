@@ -1,0 +1,40 @@
+Setelah semua proses di atas selesai (terutama 35/35 pass + capability inquiry terjawab), tahapan selanjutnya yang paling logis adalah ini—urutannya saya buat supaya keputusan besar (scale di Gustafta vs federasi n8n) diambil dengan data, bukan asumsi.
+A. “Freeze & Baseline” (wajib)
+1) Freeze Modul Tender v2.0 sebagai baseline
+Kunci versi: v2.0 (dan buat aturan penamaan patch: v2.0.1, v2.0.2, dst.)
+Simpan contoh output “golden” untuk T1–T7 per bot (buat pembanding kalau nanti regresi)
+2) Buat “Regression Gate”
+Setiap kali ada perubahan prompt: jalankan subset tes cepat (mis. T1, T3, T5, T6) sebelum full test.
+B. Tahap 2: Deploy 6 Bot Pilot (customization sheets) — langkah berikutnya
+3) Implementasi 6 bot pilot (yang sudah kamu tulis: SBU, SKK Sipil, Manajemen LSP, IMS-SMK3, ASKOM, Odoo ERP BUJK)
+Karena formatnya “customization sheet”, kamu tinggal substitusi 4 komponen (Identitas, 4 Persona, field tambahan, anti-pattern delta) tanpa ubah state machine dan handover.
+4) Uji 6 bot pilot dengan T1–T7 (jadi 42 test)
+Buat tracker tambahan (atau extend tracker yang sama) untuk 6×7.
+Target: minimal ≥90% pass sebelum replikasi lebih luas.
+C. Keputusan Arsitektur (ditentukan oleh jawaban Capability Inquiry)
+5) Decision point: Federasi internal vs eksternal
+Kalau Q1 (inter-bot API) + Q3 (webhook OUT) = ADA  
+→ kamu bisa bangun federasi (real-time) lebih bersih, n8n jadi orkestrator resmi.
+Kalau tidak ada (atau terbatas)  
+→ fokus ke desain “single-bot per hub” / “mega-bot hub” atau pindah platform untuk federasi.
+Output dari tahap ini harus berupa 1 dokumen keputusan:
+“Kita scale di Gustafta saja” atau
+“Kita bangun n8n fabric” (+ prasyarat teknis, biaya, timeline)
+D. Konsolidasi 60 → ~52 bot (setelah pilot tahap 2 stabil)
+6) Mulai pekerjaan dedupe & merger
+Merge klaster yang jelas duplikat (SBU variants, SMAP variants, personel duplikat).
+Hasil yang dicari: hierarki final (8 hub + sub-bot) dan daftar bot yang dipensiunkan.
+7) Standarisasi UX lintas 52 bot
+Satu “UX contract” yang sama: format output, handover rules, fallback mode, cara elicit data minimum, anti-halusinasi biaya, dll.
+E. Replikasi skala penuh & Operasionalisasi
+8) Replikasi massal ke sisa bot (mis. 13 SKK sub-bot + ~30 lainnya)
+Gunakan template yang sama agar tidak “liar” antar bot.
+9) Observability & Maintenance
+Dashboard metrik: pass-rate, fail categories, top user intents, prompt drift/regression.
+SOP perubahan: setiap update prompt harus ada test evidence.
+Ringkasnya: “Langkah 1 setelah selesai semua di atas”
+Kalau semua yang kamu tulis itu dianggap “selesai”, maka langkah berikutnya adalah menjalankan Tahap 2 (6 bot pilot) + membuat tracker uji untuk 6×7, sambil mengambil keputusan arsitektur berdasarkan jawaban capability inquiry (ini yang menentukan apakah n8n jadi wajib atau opsional).
+Jika kamu mau, jawab 2 hal ini saja, biar saya bisa kasih urutan yang paling tepat (tanpa asumsi):
+1) Hasil pilot Modul Tender sekarang targetnya 35/35 pass atau kamu toleransi partial?  
+2) Kamu berharap federasi real-time antar bot, atau cukup “hub bot” yang menyerap semuanya dalam satu respons?
+

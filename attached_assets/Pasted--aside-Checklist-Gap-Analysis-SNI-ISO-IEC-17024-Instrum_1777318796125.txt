@@ -1,0 +1,95 @@
+<aside>
+✅
+
+**Checklist Gap-Analysis SNI ISO/IEC 17024**
+
+Instrumen kerja Tim Mutu LSP SDMKI untuk memetakan kesiapan menuju akreditasi KAN. Setiap baris harus diisi: status (Sesuai / Sebagian / Belum), bukti dokumen, dan PIC.
+
+**Versi:** 1.0 | **Tanggal:** 28 April 2026
+
+</aside>
+
+## Cara Pakai
+
+- Tandai checkbox jika klausul **sudah** terpenuhi dengan bukti yang valid.
+- Untuk klausul yang masih **Sebagian**, catat tindakan korektif + tenggat di kolom Catatan.
+- Setiap klausul harus memiliki **referensi dokumen** (Manual Mutu, SOP, formulir, rekaman) sebelum pengajuan ke KAN.
+- Output akhir checklist: **Laporan Gap-Analysis** yang menjadi input pra-pengajuan KANMIS.
+
+## Klausul 4 — Persyaratan Umum
+
+- [ ]  **4.1 Hukum & kontrak** — Akta, SK BNSP, NPWP, kontrak pegawai/asesor.
+- [ ]  **4.2 Tanggung jawab keputusan sertifikasi** — Kebijakan tertulis bahwa keputusan sertifikasi sepenuhnya tanggung jawab LSP.
+- [ ]  **4.3 Manajemen ketidakberpihakan** — Kebijakan & analisis risiko COI; komite ketidakberpihakan.
+- [ ]  **4.4 Keuangan & kewajiban** — Laporan keuangan ≥ 2 tahun, asuransi/jaminan tanggung jawab.
+- [ ]  **4.5 Bahasa** — Dokumen sertifikasi dalam Bahasa Indonesia (dan/atau bahasa lain bila relevan).
+
+## Klausul 5 — Persyaratan Struktural
+
+- [ ]  **5.1 Struktur organisasi** — Bagan organisasi, uraian jabatan, garis wewenang.
+- [ ]  **5.2 Struktur LSP terkait pelatihan** — Bukti pemisahan fungsi sertifikasi vs pelatihan (firewall organisasional).
+
+## Klausul 6 — Sumber Daya
+
+- [ ]  **6.1 Persyaratan personel umum** — Kompetensi, kode etik, kerahasiaan, deklarasi COI per personel.
+- [ ]  **6.2 Personel yang terlibat asesmen** — Kriteria kualifikasi asesor, daftar asesor aktif, log pemantauan.
+- [ ]  **6.3 Sumber daya alih daya (subkontrak)** — Kontrak TUK, MoU mitra, evaluasi kinerja vendor.
+- [ ]  **6.4 Sumber daya lain** — Fasilitas, infrastruktur TI (untuk asesmen jarak jauh), keamanan data.
+
+## Klausul 7 — Rekaman & Informasi
+
+- [ ]  **7.1 Rekaman pemohon, peserta, & pemegang sertifikat** — Sistem rekaman terstruktur (digital + backup).
+- [ ]  **7.2 Informasi publik** — Web LSP memuat skema aktif, biaya, prosedur banding, daftar pemegang sertifikat.
+- [ ]  **7.3 Kerahasiaan** — Kebijakan kerahasiaan, perjanjian NDA personel & asesor.
+- [ ]  **7.4 Keamanan informasi** — Kebijakan keamanan informasi, enkripsi, akses terkontrol, log audit.
+
+## Klausul 8 — Skema Sertifikasi
+
+- [ ]  **8.1 Pengembangan & pemeliharaan skema** — Komite skema, prosedur pengembangan, validasi skema.
+- [ ]  **8.2 Konten skema** — Setiap skema memuat: ruang lingkup, prasyarat, kompetensi, metode asesmen, kriteria kelulusan, masa berlaku, surveilan, re-sertifikasi.
+- [ ]  **8.3 Validasi & evaluasi periodik** — Bukti review skema minimal tahunan.
+
+## Klausul 9 — Persyaratan Proses
+
+- [ ]  **9.1 Proses aplikasi** — Formulir APL-01 digital, persyaratan jelas, akses non-diskriminatif.
+- [ ]  **9.2 Proses asesmen** — Metode asesmen sesuai skema, ujian tertulis/praktik/wawancara/portofolio.
+- [ ]  **9.3 Keputusan sertifikasi** — Pemisahan asesor & pengambil keputusan, log keputusan.
+- [ ]  **9.4 Proses penangguhan, pencabutan, atau pengurangan ruang lingkup** — Kebijakan & prosedur tertulis.
+- [ ]  **9.5 Proses re-sertifikasi** — Periodik, dengan asesmen ulang sesuai skema.
+- [ ]  **9.6 Penggunaan sertifikat, logo, & marka** — Pedoman penggunaan, perjanjian dengan pemegang sertifikat.
+- [ ]  **9.7 Banding** — Prosedur banding independen, panel banding tanpa COI.
+- [ ]  **9.8 Keluhan** — Saluran keluhan, log penanganan, umpan balik publik.
+
+## Klausul 10 — Sistem Manajemen
+
+- [ ]  **10.1 Pilihan sistem manajemen** — Memilih opsi A (built-in) atau B (selaras ISO 9001).
+- [ ]  **10.2 Manual mutu** — Manual Mutu termutakhir, distribusi terkendali.
+- [ ]  **10.3 Pengendalian dokumen** — SOP pengendalian dokumen, daftar induk dokumen.
+- [ ]  **10.4 Pengendalian rekaman** — SOP rekaman, masa simpan minimal sesuai siklus sertifikasi + 2 tahun.
+- [ ]  **10.5 Tinjauan manajemen** — Notulen tinjauan manajemen ≥ 1× setahun.
+- [ ]  **10.6 Audit internal** — Jadwal & laporan audit internal ≥ 1× setahun.
+- [ ]  **10.7 Tindakan korektif** — Log temuan, root-cause analysis, verifikasi efektivitas.
+- [ ]  **10.8 Tindakan pencegahan** — Identifikasi risiko proaktif & rencana mitigasi.
+
+## Persyaratan Tambahan KAN K-09
+
+- [ ]  Kompetensi tambahan asesor (witness, observasi, jenis bukti).
+- [ ]  Kebijakan **witness assessment** untuk setiap skema yang diajukan.
+- [ ]  Kebijakan ketidakberpihakan diperluas (kepemilikan, hubungan komersial, afiliasi).
+- [ ]  Mekanisme pelaporan ke KAN saat ada perubahan signifikan (perubahan kepemilikan, ruang lingkup, top management).
+
+## Ringkasan Status (Auto-isi setelah review)
+
+| **Klausul** | **Total Item** | **Sesuai** | **Sebagian** | **Belum** | **% Kesiapan** | 4 | 5 |  |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 5 | 2 |  |  |  |  | 6 | 4 |  |  |  |  |
+| 7 | 4 |  |  |  |  | 8 | 3 |  |  |  |  |
+| 9 | 8 |  |  |  |  | 10 | 8 |  |  |  |  |
+| K-09 | 4 |  |  |  |  | **Total** | **38** |  |  |  |  |
+
+## Rekomendasi Tindak Lanjut
+
+1. Tetapkan **PIC per klausul** dan tenggat penutupan gap maksimal 60 hari kerja.
+2. Sinkronkan output checklist dengan **SOP Onboarding LSP SDMKI menuju Akreditasi KAN**.
+3. Lakukan **pre-assessment internal** sebelum mengajukan ke KANMIS.
+4. Simpan rekaman gap-analysis ke KB LSP–TUK sebagai baseline pra-akreditasi.

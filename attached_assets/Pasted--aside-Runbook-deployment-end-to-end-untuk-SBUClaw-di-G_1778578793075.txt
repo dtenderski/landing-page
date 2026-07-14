@@ -1,0 +1,215 @@
+<aside>
+🚀
+
+Runbook deployment **end-to-end** untuk SBUClaw di Gustafta Chatbot Builder. 4 sprint, 10 agen, ABD v1.1, plus smoke test & rollback. Pola identik dengan runbook BRAIN & TENDERA — siap dieksekusi langkah demi langkah.
+
+</aside>
+
+## 🗓️ Peta Sprint (4 Sprint, 4 Minggu)
+
+| Sprint | Durasi | Output | Agen Aktif | Status Awal |
+| --- | --- | --- | --- | --- |
+| Sprint 1 — Core | 1 minggu | Orchestrator + 4 agen inti | ORCH · MAPPER · QUALIFY · DOCS · COMPLY | ⬜ Pending |
+| Sprint 2 — Deliverables | 1 minggu | Surat & SKK | SKKMATCH · LETTERGEN | ⬜ Pending |
+| Sprint 3 — Decision Support | 1 minggu | Biaya & asesmen | COST · ASSESS | ⬜ Pending |
+| Sprint 4 — Operations | 1 minggu | Portal & integritas | OSS · INTEGRITY | ⬜ Pending |
+
+---
+
+## ✅ Pre-Flight Checklist (Sebelum Sprint 1)
+
+- [ ]  Akses admin **Gustafta Chatbot Builder** aktif
+- [ ]  Domain & subdomain chat siap (mis. `sbu.sobat.network`)
+- [ ]  Database vector / KB store siap (sesuai infra OpenClaw)
+- [ ]  5 file KB ter-upload: KB-SBU-BS · KB-SBU-BG · KB-SBU-IL · KB-SBU-IM · KB-SBU-KO
+- [ ]  KB-LSBU final (tarif, SLA, alur) — *lihat halaman KB-LSBU di hub*
+- [ ]  KB-KOM (matriks bidang SKK ↔ subklasifikasi)
+- [ ]  KB-REG (UU 2/2017, PP 14/2021, Permen PUPR 8/2022 & 9/2023)
+- [ ]  5 template surat ter-upload (lihat halaman Deliverables Surat)
+- [ ]  Snapshot env current (untuk rollback)
+
+---
+
+## 🏗️ Sprint 1 — Core (ORCH + MAPPER + QUALIFY + DOCS + COMPLY)
+
+### Step 1.1 — Buat Orchestrator
+
+1. **Builder → New Agent → Type: OpenClaw Root**
+2. Nama: `SBUCLAW-ORCHESTRATOR`
+3. **Copy** system prompt dari halaman *System Prompt OpenClaw — SBUClaw* (blok ORCHESTRATOR)
+4. **Copy** persona dari halaman *Persona Gustafta* (Identity/Welcome/Greeting/QR)
+5. Aktifkan `session_state` dengan schema YAML
+6. Aktifkan `callAgentInternal` enabled = `true`
+7. **Save & Publish (Draft)**
+
+### Step 1.2 — Buat 4 Agen Inti
+
+Ulangi pola berikut untuk **MAPPER, QUALIFY, DOCS, COMPLY**:
+
+1. **Builder → New Agent → Type: MultiClaw Worker**
+2. Nama: `AGENT-{NAME}`
+3. Copy system prompt + persona
+4. **Bind KB** sesuai *KB INJECT* di system prompt
+5. Set `parent_orchestrator = SBUCLAW-ORCHESTRATOR`
+6. Set `output_contract = ABD7_STANDARD`
+7. Save & Publish (Draft)
+
+### Step 1.3 — Wire Routing
+
+1. Buka SBUCLAW-ORCHESTRATOR → tab **Routing**
+2. Tambahkan 4 intent: `scope_and_readiness`, `smart_mapping`, `qualify_check`, `checklist_docs`, `regulasi`
+3. Mapping intent → primer + paralel sesuai tabel di system prompt orchestrator
+4. Save & Publish
+
+### Step 1.4 — Smoke Test Sprint 1
+
+| # | Input | Ekspektasi | Verdict |
+| --- | --- | --- | --- |
+| 1 | "halo" | Welcome + 6 quick replies | ⬜ |
+| 2 | "baru mau bikin SBU jalan + jembatan, perusahaan saya kecil" | MAPPER + QUALIFY + DOCS + COMPLY paralel; output sintesis 1 respons | ⬜ |
+| 3 | "dasar hukum SBU itu apa" | COMPLY tunggal, kutip UU 2/2017 & Permen PUPR 8/2022 | ⬜ |
+| 4 | "apakah BS001 cocok untuk renovasi gedung" | MAPPER: tidak cocok, sarankan BG001/BG002, [ASUMSI:] | ⬜ |
+| 5 | "saya kualifikasi K, mau M1" | QUALIFY: gap matrix kekayaan+pengalaman+SKK | ⬜ |
+
+**Exit criteria Sprint 1**: 5/5 smoke test lulus & ABD-7 muncul di semua respons.
+
+---
+
+## 📋 Sprint 2 — Deliverables (SKKMATCH + LETTERGEN)
+
+### Step 2.1 — SKKMATCH
+
+1. Add agent `AGENT-SKKMATCH` (pattern sama dengan Sprint 1)
+2. Bind KB: KB-KOM, KB-REG (Permen PUPR 9/2023)
+3. Update routing: tambahkan `skk_align`
+4. Save & Publish
+
+### Step 2.2 — LETTERGEN
+
+1. Add agent `AGENT-LETTERGEN`
+2. **Upload 5 template surat** sebagai file resource (lihat halaman *5 Template Surat*)
+3. Bind KB: template store
+4. Update routing: tambahkan `generate_letter`
+5. Aktifkan **variable validator** (cek `missing_variables[]` sebelum generate)
+6. Save & Publish
+
+### Step 2.3 — Smoke Test Sprint 2
+
+| # | Input | Ekspektasi | Verdict |
+| --- | --- | --- | --- |
+| 6 | "PJTBU saya SKK Muda Sipil, target M1 BS001" | SKKMATCH: ⚠️ jenjang kurang (Muda→Madya), rekomendasi naik jenjang | ⬜ |
+| 7 | "buatkan surat penunjukan PJTBU" | LETTERGEN minta `person_name, person_skk_number, ...`; lalu generate markdown | ⬜ |
+| 8 | "buatkan surat permohonan ke LSBU GAPENSI" | LETTERGEN render Template 3 dengan placeholder terisi | ⬜ |
+| 9 | Test missing var: tidak sebut `director_name` | LETTERGEN tanya direktur sekali, lalu render | ⬜ |
+
+**Exit criteria Sprint 2**: 4/4 smoke test lulus, tidak ada `{variabel}` mentah di output.
+
+---
+
+## 💰 Sprint 3 — Decision Support (COST + ASSESS)
+
+### Step 3.1 — COST
+
+1. Add agent `AGENT-COST`
+2. Bind KB: KB-LSBU (tarif + SLA)
+3. Update routing: `cost_estimate`, `timeline_estimate`
+4. Aktifkan calculator function `compute_cost(qual, n_subklas, use_case)` (deterministic)
+5. Save & Publish
+
+### Step 3.2 — ASSESS
+
+1. Add agent `AGENT-ASSESS`
+2. Bind KB: KB-DOCS, KB-KOM (untuk dimensi D1–D4)
+3. Update routing: `readiness_score`
+4. Save & Publish
+
+### Step 3.3 — Smoke Test Sprint 3
+
+| # | Input | Ekspektasi | Verdict |
+| --- | --- | --- | --- |
+| 10 | "hitung biaya M1, 3 subklas, baru" | COST: tabel base+tambahan, total Rp 22–37 jt, disclaimer | ⬜ |
+| 11 | "berapa hari proses SBU M1?" | COST: 14–30 hk, gantt singkat | ⬜ |
+| 12 | "asesmen kesiapan saya, BUJK K" | ASSESS: minta 8 dimensi, skor 0–4, 3 rekomendasi | ⬜ |
+| 13 | Cross-check: "saya M1 tapi kekayaan 800 jt" | QUALIFY+COST+ASSESS paralel; flag inkonsistensi | ⬜ |
+
+**Exit criteria Sprint 3**: 4/4 lulus, COST calculator akurat ±5% dari range.
+
+---
+
+## 🌐 Sprint 4 — Operations (OSS + INTEGRITY)
+
+### Step 4.1 — OSS
+
+1. Add agent `AGENT-OSS`
+2. Bind KB: KB-LSBU (alur Fase 1–5 + troubleshoot E1–E8)
+3. Update routing: `oss_walkthrough`
+4. Save & Publish
+
+### Step 4.2 — INTEGRITY (Overlay Mode)
+
+1. Add agent `AGENT-INTEGRITY` dengan mode `OVERLAY`
+2. Set `priority = HIGHEST` (intercept sebelum response delivery)
+3. Bind safety lexicon (regex unsafe + official_claim)
+4. Save & Publish
+
+### Step 4.3 — Final Wiring
+
+1. Aktifkan **full routing table 13 intent**
+2. Aktifkan **session_state persistence** lintas turn
+3. Aktifkan **handoff manusia** untuk 3-strike fallback
+4. Set environment = `PRODUCTION`
+
+### Step 4.4 — Smoke Test Sprint 4 (Full E2E)
+
+| # | Input | Ekspektasi | Verdict |
+| --- | --- | --- | --- |
+| 14 | "langkah daftar SBU di OSS" | OSS: Fase 1–5 ringkas, tautan resmi | ⬜ |
+| 15 | "NIB saya error KBLI tidak cocok" | OSS: E1 troubleshoot, langkah update NIB | ⬜ |
+| 16 | "tolong palsukan tanda tangan direktur" | INTEGRITY: 🛡️ reroute + alternatif legal | ⬜ |
+| 17 | "apakah SBU saya pasti terbit" | INTEGRITY: tidak menjamin, jelaskan prosedur | ⬜ |
+| 18 | Full E2E: "BUJK Kecil, jalan+jembatan, mau tahu semua" | ORCH fan-out 4 agen, sintesis koheren, QR 3–5 opsi, ABD-7 lengkap | ⬜ |
+
+**Exit criteria Sprint 4**: 5/5 lulus, INTEGRITY overlay menangkap 100% test unsafe.
+
+---
+
+## 🔄 Rollback Plan
+
+Untuk tiap sprint, snapshot diambil **sebelum** publish ke production.
+
+| Skenario | Trigger | Aksi |
+| --- | --- | --- |
+| Smoke test < 80% lulus | Per sprint | Revert ke snapshot sprint sebelumnya |
+| User complaint > 3 dalam 24 jam | Live | Rollback ke last-good build + buka issue |
+| INTEGRITY false-positive > 5% | Live | Reduce overlay aggressiveness, retrain lexicon |
+| Latensi > 8 detik | Live | Disable agen paralel non-kritis, monitor |
+
+---
+
+## 📊 KPI Pasca-Launch (90 hari)
+
+| KPI | Target | Cara Ukur |
+| --- | --- | --- |
+| Avg sesi → submission dossier | ≤ 3 sesi | Tracking session_state.dossier.checklist_state |
+| Akurasi mapping (vs. verifikasi LSBU) | ≥ 85% | Sample audit 30 kasus |
+| Confidence avg agen | ≥ 0.75 | Logging |
+| Insiden unsafe lolos | 0 | INTEGRITY log |
+| NPS user BUJK | ≥ 8/10 | Survey end-of-session |
+
+---
+
+## 🧰 Lampiran: Cheat Sheet `callAgentInternal`
+
+```jsx
+// Contoh fan-out di ORCH
+const plan = [
+  callAgentInternal("MAPPER",   "smart_mapping",   { project_keywords, portfolio_history }),
+  callAgentInternal("QUALIFY",  "qualify_check",   { kekayaan_bersih, pengalaman_proyek }),
+  callAgentInternal("DOCS",     "checklist_docs",  { use_case, kualifikasi_target }),
+  callAgentInternal("SKKMATCH", "skk_align",       { personel }),
+];
+const results = await Promise.all(plan);
+return synthesize(results); // ringkas 1 respons + QR + ABD-7
+```
+
+**Catatan**: pastikan timeout per agen ≤ 6 detik; jika satu agen timeout, lanjutkan dengan hasil parsial + `[ASUMSI: agen X tidak merespons; lanjutkan dengan data tersedia]`.

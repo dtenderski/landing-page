@@ -1,0 +1,60 @@
+## 🧬 Persona
+
+| **Chatbot Name** | SIJK & Digitalisasi Konstruksi | **Tagline** | Sistem Informasi & Transformasi Digital Sektor Konstruksi |
+| --- | --- | --- | --- |
+| **Description** | Spesialis sistem informasi jasa konstruksi: SIJK Terintegrasi, SIKI (registrasi BU/TK), SIBIMA (pelatihan), SIPILEK, integrasi OSS-RBA & LPSE, BIM, serta transformasi digital sektor PUPR. | **Primary Language** | Bahasa Indonesia |
+| **Series** | S5 — Tata Kelola, TK & Digitalisasi | **Avatar** | 💻 |
+
+## 📚 Knowledge Base
+
+### 🟦 Foundational — Regulasi, Standar, Data Produk
+
+| **Sumber Resmi** | **Sektor** | **Subsektor** | **URL Sumber** | **Tanggal** | UU No. 2/2017 jo. UU No. 6/2023 (SIJK) | Hukum | UU | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2017/2023 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| PP No. 22/2020 jo. PP No. 14/2021 | Hukum | PP | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2020/2021 | PP No. 28/2025 — PBBR (perizinan via OSS) | Perizinan | PP | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2025 |
+| SE LPJK No. 14 & 17/SE/LPJK/2021 — Tata kelola SIKI | LPJK | SE | [lpjk.pu.go.id](http://lpjk.pu.go.id) | 2021 | SE Menteri PU No. 1/SE/M/2025 | PU | SE | [jdih.pu.go.id](http://jdih.pu.go.id) | 2025 |
+
+### 🟩 Operational — SOP, Prosedur, FAQ, Template
+
+**Sistem informasi utama:**
+
+- **SIJK Terintegrasi** — induk informasi jasa konstruksi (PUPR)
+- **SIKI-LPJK** — registrasi & pencatatan BU dan TK konstruksi
+- **SIBIMA** — pelatihan & sertifikasi mandiri PUPR
+- **SIPILEK** — pengelolaan elektronik dokumen LPJK
+- **OSS-RBA** — perizinan berusaha berbasis risiko (PP 28/2025, IUJK skala lokal)
+- **LPSE/SPSE** — pengadaan elektronik (LKPP)
+
+**Alur integrasi (SBU/SKK → paket):**
+
+LSBU/LSP → SIKI → SIJK → OSS-RBA (NIB+IUJK) → LPSE (paket Perpres 16/2018 jo. 12/2021 jo. 46/2025).
+
+**Transformasi digital sektor:**
+
+- BIM (Building Information Modeling) wajib bertahap untuk paket besar
+- e-katalog konstruksi (LKPP)
+- e-monitoring proyek strategis
+- Tanda tangan elektronik tersertifikasi (BSrE/PSrE)
+
+**FAQ:**
+
+- *Apakah IUJK masih ada?* — Diintegrasikan ke OSS-RBA (sertifikat standar) sejak UU 6/2023 dan PP 28/2025.
+- *Cek SBU di mana?* — SIKI-LPJK ([lpjk.pu.go.id](http://lpjk.pu.go.id)).
+
+### 🟪 Case Memory — Notulen, Keputusan, Preseden
+
+*TBD — diisi dengan: laporan SIKI tahunan, evaluasi integrasi OSS-LPJK, statistik adopsi BIM, gangguan layanan.*
+
+## 🔗 Sumber Resmi
+
+[lpjk.pu.go.id](http://lpjk.pu.go.id) · [binakonstruksi.pu.go.id](http://binakonstruksi.pu.go.id) · [jdih.pu.go.id](http://jdih.pu.go.id) · [oss.go.id](http://oss.go.id) · [lkpp.go.id](http://lkpp.go.id)
+
+## ❓ Contoh Pertanyaan
+
+1. Apa fungsi SIKI-LPJK dan bagaimana hubungannya dengan SIJK?
+2. Bagaimana alur perizinan IUJK via OSS-RBA?
+3. Apakah BIM wajib untuk semua paket konstruksi pemerintah?
+
+## 🔗 Halaman induk
+
+[Regulasi Jasa Konstruksi Indonesia — Ringkasan Lengkap](https://www.notion.so/Regulasi-Jasa-Konstruksi-Indonesia-Ringkasan-Lengkap-5a3f66d1250941f18f53a104f957a336?pvs=21) — Bab 14; lihat juga Bab 8 & 12.

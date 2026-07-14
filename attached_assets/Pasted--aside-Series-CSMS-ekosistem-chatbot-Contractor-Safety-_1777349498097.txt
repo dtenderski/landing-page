@@ -1,0 +1,114 @@
+<aside>
+🧩
+
+**Series CSMS** — ekosistem chatbot Contractor Safety Management System dibangun di atas **Gustafta Chatbot Builder** dengan hierarki 4 level: **Series → Modul → Chatbot → Alat Bantu**.
+
+</aside>
+
+```
+L1 SERIES        🧩 CSMS — Contractor Safety Management System (halaman ini)
+  ├─ 🧠 Otak Proyek    → konteks bisnis & stakeholder
+  ├─ 📚 Knowledge Base → 7 tipe sumber pengetahuan
+  └─ 🎭 Persona       → 3 persona + greeting + 12 starters
+
+L2 MODUL         📋 Modul A — Tahap Administrasi (RA · PQ · HSE Plan)
+                 🚧 Modul B — Tahap Implementasi (PJA · WIP · Permit · SWA)
+                 🏁 Modul C — Tahap Evaluasi (KPI · Final Eval · Postmortem)
+
+L3 CHATBOT       🤖 CSMS Assistant (Orkestrator) — multi-agent OPTIA
+                  ├─ 13 sub-agent: AGENT-RA, AGENT-PQ, AGENT-HSE,
+                  │   AGENT-PJA, AGENT-WIP, AGENT-PERMIT, AGENT-SWA,
+                  │   AGENT-KPI, AGENT-FINAL, AGENT-DOCGEN,
+                  │   AGENT-SIMULATION, AGENT-CASE, AGENT-CONSULT
+                  └─ 3 persona: Konsultan HSE · Auditor CSMS · Pengawas Lapangan
+
+L4 ALAT BANTU    🧮 Kalkulator Risiko & PQ
+                 📝 Form 1–7 (RA · PQ · HSE Plan · PJA · WIP · KPI · Final)
+                 📁 Data Bank Kontraktor (database)
+                 🎓 Simulator Quiz K3L
+```
+
+## 🤖 Chatbot (L3)
+
+Gunakan @CSMS Assistant sebagai **Orkestrator** — hub routing yang otomatis mendispatch ke 13 sub-agent berdasarkan intent. Sebut `@CSMS Assistant` di halaman/komentar mana pun, atau buka langsung dari sidebar Agents.
+
+## 🧠 Otak Proyek, KB & Persona
+
+- [Otak Proyek CSMS](https://www.notion.so/Otak-Proyek-CSMS-f20671667a0547dfbe535c79f2a7a22c?pvs=21) — domain bisnis, stakeholder, KPI series, glosarium
+- [Knowledge Base CSMS — 7 Tipe Sumber](https://www.notion.so/Knowledge-Base-CSMS-7-Tipe-Sumber-83f5973f4dc544a4b045332d3a01bc15?pvs=21) — teks, file, URL, YouTube, Cloud Drive, video, audio
+- [Persona & Conversation Starters](https://www.notion.so/Persona-Conversation-Starters-b793c3382236474f9304c99dea708b18?pvs=21) — 3 persona + greeting + 12 tombol cepat
+
+## 📐 Modul (L2)
+
+1. [Modul A — Tahap Administrasi (RA · PQ · HSE Plan)](https://www.notion.so/Modul-A-Tahap-Administrasi-RA-PQ-HSE-Plan-8651423ee1ff4d00abf681780685bf91?pvs=21)
+2. [Modul B — Tahap Implementasi (PJA · WIP · Permit · SWA)](https://www.notion.so/Modul-B-Tahap-Implementasi-PJA-WIP-Permit-SWA-78dd2fede49c4fd495f1688e5a193007?pvs=21)
+3. [Modul C — Tahap Evaluasi (KPI · Final Eval · Postmortem)](https://www.notion.so/Modul-C-Tahap-Evaluasi-KPI-Final-Eval-Postmortem-e749cbec9ba94882b6211b8cfb44fb1e?pvs=21)
+
+## 🧩 Alat Bantu (L4)
+
+### Kalkulator, Database & Simulator
+
+- [Kalkulator Risiko & Skor PQ](https://www.notion.so/Kalkulator-Risiko-Skor-PQ-207fe0cc23854d8c978c1a87d69149a7?pvs=21)
+- [](https://www.notion.so/efce751940844463add38887420ebf93?pvs=21) — 3 view + form pendaftaran
+- [Simulator Quiz K3L — Bank Soal & Latihan](https://www.notion.so/Simulator-Quiz-K3L-Bank-Soal-Latihan-548484bf942141b5b45249e0da24e2a5?pvs=21)
+
+### Formulir CSMS (Form 1–7)
+
+1. [Form 1 — Risk Assessment Pekerjaan](https://www.notion.so/Form-1-Risk-Assessment-Pekerjaan-a18b33a2b8834188b76061613d47a6f1?pvs=21)
+2. [Form 2 — Prakualifikasi (PQ)](https://www.notion.so/Form-2-Prakualifikasi-PQ-6e49906b3c324b0dbb1858df72a19848?pvs=21)
+3. [Form 3 — HSE Plan (Seleksi Kontraktor)](https://www.notion.so/Form-3-HSE-Plan-Seleksi-Kontraktor-35de1d1455b949dcae1317bf1530c09b?pvs=21)
+4. [Form 4 — Pre-Job Activity (PJA)](https://www.notion.so/Form-4-Pre-Job-Activity-PJA-12ef1264783d4f42b09c608728707845?pvs=21)
+5. [Form 5 — Work in Progress (WIP)](https://www.notion.so/Form-5-Work-in-Progress-WIP-b5af1c3a51184ec5b851dfecbc28de52?pvs=21)
+6. [Form 6 — KPI K3L Kontraktor](https://www.notion.so/Form-6-KPI-K3L-Kontraktor-39eddd854f1444a4856c204bbd0a1f8e?pvs=21)
+7. [Form 7 — Final Evaluation](https://www.notion.so/Form-7-Final-Evaluation-fc0e67a08b414c6b9cac4a8074c64d7e?pvs=21)
+
+## 🔄 Alur Kerja Lengkap
+
+1. **Pekerjaan baru** → isi [Form 1 — Risk Assessment Pekerjaan](https://www.notion.so/Form-1-Risk-Assessment-Pekerjaan-a18b33a2b8834188b76061613d47a6f1?pvs=21) → dapat tingkat risiko.
+2. **Risiko Moderat ke atas** → lanjut [Modul A — Tahap Administrasi (RA · PQ · HSE Plan)](https://www.notion.so/Modul-A-Tahap-Administrasi-RA-PQ-HSE-Plan-8651423ee1ff4d00abf681780685bf91?pvs=21): PQ + HSE Plan.
+3. **Pemenang seleksi** → lanjut [Modul B — Tahap Implementasi (PJA · WIP · Permit · SWA)](https://www.notion.so/Modul-B-Tahap-Implementasi-PJA-WIP-Permit-SWA-78dd2fede49c4fd495f1688e5a193007?pvs=21): PJA, WIP, Permit harian.
+4. **Akhir kontrak** → lanjut [Modul C — Tahap Evaluasi (KPI · Final Eval · Postmortem)](https://www.notion.so/Modul-C-Tahap-Evaluasi-KPI-Final-Eval-Postmortem-e749cbec9ba94882b6211b8cfb44fb1e?pvs=21): KPI + Final Eval → update Data Bank.
+5. **Saat ragu kapan pun** → tanya @CSMS Assistant.
+
+## 📚 Acuan Regulasi
+
+- ISO 45001:2018 — elemen 4.4.6 Operational Control
+- PP 50/2012 — Sistem Manajemen Keselamatan dan Kesehatan Kerja (SMK3)
+- UU No. 1/1970 — Keselamatan Kerja
+- Permenaker 5/2018 — K3 Lingkungan Kerja
+- Permen ESDM 10/2021 — K3 Ketenagalistrikan
+- Pedoman CSMS PT PLN Indonesia Power
+
+[Data Bank Kontraktor](https://www.notion.so/efce751940844463add38887420ebf93?pvs=21)
+
+[Form 3 — HSE Plan (Seleksi Kontraktor)](https://www.notion.so/Form-3-HSE-Plan-Seleksi-Kontraktor-35de1d1455b949dcae1317bf1530c09b?pvs=21)
+
+[Form 4 — Pre-Job Activity (PJA)](https://www.notion.so/Form-4-Pre-Job-Activity-PJA-12ef1264783d4f42b09c608728707845?pvs=21)
+
+[Form 5 — Work in Progress (WIP)](https://www.notion.so/Form-5-Work-in-Progress-WIP-b5af1c3a51184ec5b851dfecbc28de52?pvs=21)
+
+[Form 1 — Risk Assessment Pekerjaan](https://www.notion.so/Form-1-Risk-Assessment-Pekerjaan-a18b33a2b8834188b76061613d47a6f1?pvs=21)
+
+[Form 7 — Final Evaluation](https://www.notion.so/Form-7-Final-Evaluation-fc0e67a08b414c6b9cac4a8074c64d7e?pvs=21)
+
+[Form 2 — Prakualifikasi (PQ)](https://www.notion.so/Form-2-Prakualifikasi-PQ-6e49906b3c324b0dbb1858df72a19848?pvs=21)
+
+[Kalkulator Risiko & Skor PQ](https://www.notion.so/Kalkulator-Risiko-Skor-PQ-207fe0cc23854d8c978c1a87d69149a7?pvs=21)
+
+[Form 6 — KPI K3L Kontraktor](https://www.notion.so/Form-6-KPI-K3L-Kontraktor-39eddd854f1444a4856c204bbd0a1f8e?pvs=21)
+
+[Otak Proyek CSMS](https://www.notion.so/Otak-Proyek-CSMS-f20671667a0547dfbe535c79f2a7a22c?pvs=21)
+
+[Persona & Conversation Starters](https://www.notion.so/Persona-Conversation-Starters-b793c3382236474f9304c99dea708b18?pvs=21)
+
+[Modul A — Tahap Administrasi (RA · PQ · HSE Plan)](https://www.notion.so/Modul-A-Tahap-Administrasi-RA-PQ-HSE-Plan-8651423ee1ff4d00abf681780685bf91?pvs=21)
+
+[Modul C — Tahap Evaluasi (KPI · Final Eval · Postmortem)](https://www.notion.so/Modul-C-Tahap-Evaluasi-KPI-Final-Eval-Postmortem-e749cbec9ba94882b6211b8cfb44fb1e?pvs=21)
+
+[Knowledge Base CSMS — 7 Tipe Sumber](https://www.notion.so/Knowledge-Base-CSMS-7-Tipe-Sumber-83f5973f4dc544a4b045332d3a01bc15?pvs=21)
+
+[Modul B — Tahap Implementasi (PJA · WIP · Permit · SWA)](https://www.notion.so/Modul-B-Tahap-Implementasi-PJA-WIP-Permit-SWA-78dd2fede49c4fd495f1688e5a193007?pvs=21)
+
+[Simulator Quiz K3L — Bank Soal & Latihan](https://www.notion.so/Simulator-Quiz-K3L-Bank-Soal-Latihan-548484bf942141b5b45249e0da24e2a5?pvs=21)
+
+[Mulai 5 Menit dengan CSMS Assistant](https://www.notion.so/Mulai-5-Menit-dengan-CSMS-Assistant-884900e0ad274486a8efb7221d01a541?pvs=21)

@@ -1,0 +1,358 @@
+Lanjut. Berikut **bagian 79–90** sebagai SOP implementasi agar konfigurasi chatbot Mekanikal bisa dipasang dan diuji di dashboard builder seperti pola Chatbot Manajemen Pelaksanaan. Struktur ini mengikuti model konfigurasi terlampir yang memakai chatbot identity, knowledge scope, intent, response template, flow, fallback, asesmen, scenario practice, dan session summary.  Data jabatan tetap mengacu pada katalog Mekanikal yang memuat subklasifikasi, jabatan kerja, jenjang, KKNI, standar kompetensi, dan link SKK/SKKNI. 
+
+# 79. SOP Pemasangan di Dashboard Builder
+
+```text id="v8isrg"
+SOP IMPLEMENTASI SKK COACH — MEKANIKAL
+
+1. Masuk ke dashboard builder.
+2. Buat chatbot baru.
+3. Isi nama chatbot:
+   SKK Coach — Mekanikal
+
+4. Isi deskripsi chatbot:
+   Chatbot SKK/SKKNI bidang Mekanikal untuk pencarian jabatan, KKNI, standar kompetensi,
+   rekomendasi sertifikasi, asesmen mandiri, studi kasus, simulasi wawancara, dan checklist bukti.
+
+5. Upload knowledge base:
+   - mekaskk_database_mekanikal.json
+   - README_mekaskk_bot.md
+
+6. Masukkan konfigurasi:
+   - Gunakan skk_coach_mekanikal_config.yaml, atau
+   - Gunakan skk_coach_mekanikal_config.json
+
+7. Tempel welcome message.
+8. Tambahkan quick replies.
+9. Aktifkan fallback bertingkat.
+10. Set maksimal hasil pencarian menjadi 5.
+11. Lakukan testing.
+12. Publikasikan chatbot.
+```
+
+# 80. Field Dashboard yang Diisi
+
+```yaml id="z8x772"
+dashboard_fields:
+  bot_name:
+    value: "SKK Coach — Mekanikal"
+
+  bot_description:
+    value: >
+      Chatbot SKK/SKKNI bidang Mekanikal untuk membantu pengguna mencari jabatan
+      kerja, jenjang KKNI, standar kompetensi, link SKK/SKKNI, rekomendasi
+      sertifikasi, asesmen mandiri, studi kasus, simulasi wawancara, dan checklist
+      bukti kompetensi.
+
+  language:
+    value: "Indonesian / id-ID"
+
+  tone:
+    value: "Profesional, jelas, suportif, praktis"
+
+  max_results:
+    value: 5
+
+  fallback_enabled:
+    value: true
+
+  knowledge_base_files:
+    - "mekaskk_database_mekanikal.json"
+    - "README_mekaskk_bot.md"
+
+  configuration_files:
+    - "skk_coach_mekanikal_config.yaml"
+    - "skk_coach_mekanikal_config.json"
+```
+
+# 81. Quick Replies Final
+
+```text id="qr6pji"
+Cari Jabatan
+Cari SKK/SKKNI
+Cari KKNI
+Rekomendasi Sertifikasi
+Belajar Kompetensi
+Asesmen Mandiri
+Latihan Studi Kasus
+Checklist Bukti
+Simulasi Wawancara
+Tanya Istilah
+Menu Utama
+```
+
+# 82. Welcome Message Final
+
+```text id="g9atdg"
+Halo, saya SKK Coach — Mekanikal.
+
+Saya bisa membantu Anda mencari informasi jabatan kerja Mekanikal berbasis SKK/SKKNI, termasuk:
+- Jabatan kerja
+- Jenjang KKNI
+- Kualifikasi
+- Standar kompetensi kerja
+- Link SKK/SKKNI
+- Rekomendasi sertifikasi
+- Asesmen mandiri
+- Latihan studi kasus
+- Simulasi wawancara
+- Checklist bukti kompetensi
+
+Silakan pilih kebutuhan Anda:
+1. Cari jabatan Mekanikal
+2. Cari SKK/SKKNI
+3. Cari berdasarkan KKNI
+4. Rekomendasi sertifikasi
+5. Belajar kompetensi
+6. Asesmen mandiri
+7. Latihan studi kasus
+8. Checklist bukti
+9. Simulasi wawancara
+10. Tanya istilah
+
+Contoh:
+- Saya teknisi fire alarm
+- Cari SKKNI tukang las
+- Jenjang KKNI operator crane
+- Saya operator alat berat
+- Checklist bukti welder
+```
+
+# 83. Prompt Final Super Ringkas
+
+Gunakan ini bila kolom prompt di builder sangat terbatas.
+
+```text id="ue1imu"
+Anda adalah SKK Coach — Mekanikal, chatbot profesional berbahasa Indonesia untuk membantu pengguna mencari jabatan kerja, SKK/SKKNI, jenjang KKNI, rekomendasi sertifikasi, asesmen mandiri, studi kasus, simulasi wawancara, dan checklist bukti kompetensi pada Klasifikasi Mekanikal.
+
+Jawab hanya berdasarkan database Mekanikal yang diberikan. Jangan mengarang jabatan, nomor SKKNI, KKNI, standar, atau link. Jika data tidak ditemukan, sampaikan dengan jelas. Jika link tidak tersedia, tulis "Link belum tersedia". Jika standar masih dalam proses penyusunan atau menggunakan SKK khusus, sampaikan sesuai data.
+
+Area Mekanikal meliputi HVAC/tata udara, plumbing, proteksi kebakaran/fire alarm, lift/eskalator, teknik mekanikal gedung, welder, alat berat, crane/lifting, dan scaffolding.
+
+Format jawaban detail:
+Jabatan:
+Subklasifikasi:
+Jenjang Jabatan:
+Kualifikasi:
+Jenjang KKNI:
+Standar Kompetensi:
+Link SKK/SKKNI:
+Catatan:
+Pilihan Lanjutan:
+
+Hasil asesmen mandiri hanya untuk pembelajaran dan persiapan, bukan keputusan resmi sertifikasi SKK. Untuk pekerjaan berisiko, selalu utamakan keselamatan kerja dan prosedur yang benar.
+```
+
+# 84. Test Script Manual
+
+Gunakan daftar ini untuk mengetes chatbot setelah dipasang.
+
+```text id="y11o7k"
+TEST 1 — Greeting
+Input:
+Halo
+
+Expected:
+Bot menampilkan menu utama dan pilihan layanan.
+
+TEST 2 — Role Lookup
+Input:
+Saya teknisi fire alarm
+
+Expected:
+Bot menampilkan Teknisi Fire Alarm, KKNI 4, kualifikasi Teknisi/Analis, dan SKKNI 304-2009.
+
+TEST 3 — Standard Lookup
+Input:
+SKKNI 391-2015 untuk jabatan apa?
+
+Expected:
+Bot menampilkan jabatan terkait Teknik Mekanikal.
+
+TEST 4 — KKNI Lookup
+Input:
+Tampilkan jabatan Mekanikal KKNI level 7
+
+Expected:
+Bot menampilkan maksimal 5 jabatan level 7 dan menawarkan detail lanjutan.
+
+TEST 5 — Recommendation
+Input:
+Saya mechanical engineer gedung, cocok sertifikasi apa?
+
+Expected:
+Bot merekomendasikan Ahli Bidang Keahlian Teknik Mekanikal atau Ahli Pemeriksa Kelaikan Fungsi Mekanikal Bangunan Gedung.
+
+TEST 6 — Ambiguous Query
+Input:
+Saya mau crane
+
+Expected:
+Bot menampilkan pilihan Operator Crane Mobile, Operator Tower Crane, Operator Truck Mounted Crane, dan jabatan crane/lifting terkait.
+
+TEST 7 — Safety
+Input:
+Sling rusak tapi mau tetap lifting
+
+Expected:
+Bot menyarankan penghentian sementara, penggantian sling, pemeriksaan alat bantu angkat, dan dokumentasi.
+
+TEST 8 — Checklist
+Input:
+Checklist bukti welder
+
+Expected:
+Bot menampilkan bukti pengalaman kerja, dokumen teknis, dokumen inspeksi, dan bukti hasil pekerjaan pengelasan.
+```
+
+# 85. Acceptance Criteria
+
+```yaml id="z6u34r"
+acceptance_criteria:
+  role_lookup:
+    - "Bot dapat menemukan jabatan dari nama jabatan langsung."
+    - "Bot dapat menemukan jabatan dari sinonim atau kata kunci."
+    - "Bot menampilkan KKNI, kualifikasi, standar, dan link jika tersedia."
+
+  standard_lookup:
+    - "Bot dapat mencari berdasarkan nomor SKKNI/SKKK."
+    - "Bot dapat mencari berdasarkan jabatan."
+    - "Bot tidak mengarang standar yang tidak ada."
+
+  kkni_lookup:
+    - "Bot dapat menampilkan jabatan berdasarkan level KKNI."
+    - "Bot membatasi hasil maksimal 5 jika terlalu banyak."
+
+  recommendation:
+    - "Bot dapat merekomendasikan jabatan berdasarkan pekerjaan user."
+    - "Bot meminta klarifikasi jika pekerjaan user ambigu."
+
+  assessment:
+    - "Bot memakai skala 0 sampai 4."
+    - "Bot memberi interpretasi Dasar, Menengah, atau Lanjutan."
+    - "Bot menyatakan hasil bukan keputusan resmi sertifikasi."
+
+  safety:
+    - "Bot tidak menyarankan pekerjaan berisiko dilanjutkan tanpa kontrol."
+    - "Bot mengutamakan prosedur keselamatan kerja."
+
+  fallback:
+    - "Bot memberikan saran kata kunci saat data tidak ditemukan."
+    - "Bot mengarahkan kembali ke menu utama setelah fallback berulang."
+```
+
+# 86. Struktur Folder Rekomendasi
+
+```text id="rtxz27"
+mekaskk_bot/
+├── knowledge_base/
+│   ├── mekaskk_database_mekanikal.json
+│   └── README_mekaskk_bot.md
+│
+├── config/
+│   ├── skk_coach_mekanikal_config.yaml
+│   └── skk_coach_mekanikal_config.json
+│
+├── docs/
+│   └── skk_coach_mekanikal_builder_guide.md
+│
+├── prototype/
+│   ├── mekaskk_bot_prototype.html
+│   └── mekaskk_bot_logic.js
+│
+└── testing/
+    └── test_prompts_mekanikal.txt
+```
+
+# 87. SOP Update Data Jabatan
+
+```text id="y3nkar"
+SOP UPDATE DATA JABATAN
+
+1. Buka file mekaskk_database_mekanikal.json.
+2. Cari jabatan yang ingin diperbarui.
+3. Update field yang diperlukan:
+   - subklasifikasi
+   - jabatan_kerja
+   - jenjang_jabatan
+   - kualifikasi
+   - jenjang_kkni
+   - standar_kompetensi
+   - status_skk
+   - link_skk
+   - kata_kunci
+
+4. Jangan menghapus data lama tanpa backup.
+5. Jangan mengubah nomor SKKNI jika belum ada sumber resmi.
+6. Tambahkan sinonim baru ke kata_kunci jika user sering memakai istilah tertentu.
+7. Upload ulang file JSON ke knowledge base.
+8. Jalankan test ulang:
+   - cari jabatan
+   - cari SKKNI
+   - cari KKNI
+   - rekomendasi sertifikasi
+```
+
+# 88. SOP Monitoring Setelah Launch
+
+```yaml id="m4j67h"
+post_launch_monitoring:
+  daily_check:
+    - "Cek pertanyaan yang gagal dijawab."
+    - "Cek keyword yang sering masuk."
+    - "Cek fallback rate."
+    - "Cek jabatan yang paling sering dicari."
+
+  weekly_check:
+    - "Tambahkan sinonim baru ke database."
+    - "Perbaiki respons yang terlalu panjang."
+    - "Tambahkan studi kasus dari pertanyaan user."
+    - "Review data link SKK/SKKNI."
+
+  monthly_check:
+    - "Audit seluruh knowledge base."
+    - "Update jika ada SKKNI/SKKK baru."
+    - "Review performa asesmen mandiri."
+    - "Tambahkan modul belajar baru."
+```
+
+# 89. File Paket Final
+
+Gunakan file berikut untuk pemasangan:
+
+[Konfigurasi YAML](sandbox:/mnt/data/skk_coach_mekanikal_config.yaml)
+
+[Konfigurasi JSON](sandbox:/mnt/data/skk_coach_mekanikal_config.json)
+
+[Panduan Builder](sandbox:/mnt/data/skk_coach_mekanikal_builder_guide.md)
+
+Knowledge base:
+
+[Database JSON MekaSKK Bot](sandbox:/mnt/data/mekaskk_database_mekanikal.json)
+
+[README MekaSKK Bot](sandbox:/mnt/data/README_mekaskk_bot.md)
+
+# 90. Checklist Go-Live
+
+```text id="q6qfjg"
+GO-LIVE CHECKLIST
+
+[ ] Bot name sudah diisi.
+[ ] Description sudah diisi.
+[ ] Welcome message sudah diisi.
+[ ] System prompt sudah ditempel.
+[ ] Knowledge base sudah di-upload.
+[ ] Quick replies sudah dibuat.
+[ ] Max results diset ke 5.
+[ ] Fallback aktif.
+[ ] Role lookup berhasil.
+[ ] SKKNI lookup berhasil.
+[ ] KKNI lookup berhasil.
+[ ] Rekomendasi sertifikasi berhasil.
+[ ] Asesmen mandiri berhasil.
+[ ] Checklist bukti berhasil.
+[ ] Studi kasus berhasil.
+[ ] Safety response berhasil.
+[ ] Bot tidak mengarang SKKNI/link.
+[ ] Bot siap dipublikasikan.
+```

@@ -1,0 +1,153 @@
+Pertanyaan Anda tepat sekali — ini menyangkut struktur produk, bukan sekadar nama modul.
+
+Jawaban singkatnya:
+
+> ✅ Ya — LSBU dan LSP sebaiknya menjadi bagian dari Series LSBU–SBU dan LSP–SKK.
+> ❌ Bukan dibuat sebagai series terpisah yang berdiri sendiri.
+
+Sekarang saya jelaskan secara arsitektural supaya tidak tumpang tindih.
+
+---
+
+# 🎯 1️⃣ Memahami Peran: LSBU dan LSP Itu Apa?
+
+## 🏢 LSBU
+
+Lembaga Sertifikasi Badan Usaha
+→ Mengeluarkan dan mengaudit SBU
+
+## 👨‍🏫 LSP
+
+Lembaga Sertifikasi Profesi
+→ Mengeluarkan dan menguji SKK
+
+Artinya:
+
+* LSBU bukan objek yang dinilai.
+* LSP bukan objek yang dinilai.
+* SBU & SKK-lah objeknya.
+* LSBU & LSP adalah aktor/regulator/pelaksana proses.
+
+---
+
+# 🎯 2️⃣ Maka Secara Struktur Produk
+
+## 🔵 Series LSBU–SBU
+
+Fokus utama:
+SBU (status, klasifikasi, perpanjangan, SMAP, PANCEK)
+
+Di dalamnya, Anda bisa punya sub-modul:
+
+* Peran LSBU
+* Proses pengajuan SBU
+* Proses audit LSBU
+* Perbedaan kebijakan LSBU
+* Mekanisme verifikasi
+
+Tapi LSBU tetap bagian dari konteks SBU.
+
+---
+
+## 🟢 Series LSP–SKK
+
+Fokus utama:
+SKK (level, subklasifikasi, validitas, upgrade, renewal)
+
+Di dalamnya, Anda bisa punya:
+
+* Proses uji kompetensi di LSP
+* Mekanisme RPL
+* Perbedaan jalur sertifikasi
+* Persiapan asesmen
+
+Tapi LSP tetap bagian dari konteks SKK.
+
+---
+
+# 🎯 3️⃣ Kenapa Tidak Dipisah Jadi Series Sendiri?
+
+Kalau Anda buat:
+
+* Series LSBU
+* Series LSP
+
+Sebagai entitas terpisah
+
+Akan muncul masalah:
+
+* User bingung: “Saya mau urus apa? LSBU atau SBU?”
+* Navigasi jadi berat
+* Duplikasi konten
+* Positioning kabur
+
+Karena user sebenarnya tidak peduli LSBU atau LSP.
+
+User peduli:
+
+> “SBU saya aktif atau tidak?”
+> “SKK saya bagaimana?”
+
+---
+
+# 🎯 4️⃣ Struktur Ideal yang Rapi
+
+Saya sarankan:
+
+```text
+Series Perizinan & Sertifikasi
+│
+├── LSBU – Sertifikasi Badan Usaha
+│    ├── Status & Validasi SBU
+│    ├── Perpanjangan SBU
+│    ├── SMAP & PANCEK
+│    └── Proses melalui LSBU
+│
+├── LSP – Sertifikasi Kompetensi Kerja
+│    ├── Status & Validasi SKK
+│    ├── Upgrade Level
+│    ├── Renewal SKK
+│    └── Proses melalui LSP
+│
+└── Perizinan Usaha
+```
+
+LSBU & LSP bukan series utama.
+Mereka menjadi sub-konteks operasional.
+
+---
+
+# 🎯 5️⃣ Kapan LSBU & LSP Layak Jadi Series Sendiri?
+
+Hanya jika Anda ingin:
+
+* Marketplace LSBU
+* Marketplace LSP
+* Perbandingan lembaga
+* Direktori resmi
+* Rating & review
+
+Itu sudah masuk ekosistem yang lebih luas.
+
+Bukan compliance engine.
+
+---
+
+# 🔥 Kesimpulan Strategis
+
+✔ LSBU = bagian dari Series SBU
+✔ LSP = bagian dari Series SKK
+✔ Jangan dijadikan series terpisah
+✔ Fokus tetap pada objek: SBU & SKK
+
+---
+
+Sekarang saya ingin memastikan arah Anda.
+
+Untuk Series LSBU–SBU yang akan kita bangun nanti, Anda ingin fokus:
+
+A) Compliance & Validasi Status
+B) Proses & Roadmap Pengurusan
+C) Keduanya (Validator + Process Advisor + Consulting Bridge)
+
+Karena ini akan menentukan kedalaman arsitektur SBU series.

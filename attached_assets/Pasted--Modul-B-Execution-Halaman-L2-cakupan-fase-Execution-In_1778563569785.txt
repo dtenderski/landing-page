@@ -1,0 +1,53 @@
+# 🚧 Modul B — Execution
+
+> Halaman L2 — cakupan fase Execution. **Inti operasional Brain Project**. Aktivitas harian/mingguan/bulanan saat pekerjaan fisik berjalan.
+> 
+
+## Cakupan Harian
+
+- **Toolbox Talk** pagi (BR-SAF)
+- **JSA + PTW** untuk pekerjaan kritis (BR-SAF)
+- **LHP** — isi di database [](https://www.notion.so/d84913f1c9b449a19a2241ff2dca523c?pvs=21)
+- **Inspeksi mutu** sesuai ITP (BR-MUT)
+- **Daily K3 walkthrough** (BR-SAF)
+- **Update progres** per item WBS
+
+## Cakupan Mingguan
+
+- **Look-ahead 3-mingguan** (BR-PROX)
+- **Weekly Progress Meeting** + risalah
+- **Update EVM** (CPI/SPI/EAC/VAC) (BR-EVM)
+- **Review NCR open** (BR-MUT)
+- **Audit kepatuhan K3 zona** (BR-SAF)
+
+## Cakupan Bulanan
+
+- **Laporan Bulanan** ke Owner/MK
+- **Termin pembayaran** (cashflow check) (BR-KON + BR-EVM)
+- **Audit SMKK / SMK3** ringkas (BR-SAF)
+- **Monitoring lingkungan** (debu PM10, kebisingan, B3) (BR-ENV)
+- **Trend NCR** + root-cause aggregate (BR-MUT)
+
+## Database yang Aktif
+
+- [](https://www.notion.so/d84913f1c9b449a19a2241ff2dca523c?pvs=21) — LHP harian
+- [](https://www.notion.so/79e1e2cfb0b34ed5bf427807c79548f8?pvs=21) — NCR / QC
+- [](https://www.notion.so/2fad9866bb3c4e00abb9bc6d503aa789?pvs=21) — K3 & Lingkungan
+- [](https://www.notion.so/86c424ad21b142d2a06d107577d3e5b1?pvs=21) — EVM weekly
+- [](https://www.notion.so/10d6c7606d074f248dcac861ad055288?pvs=21) — Risiko & Isu
+
+## Early Warning Execution
+
+| Indikator | Trigger |
+| --- | --- |
+| CPI < 0,85 selama 2 minggu | 🔴 → BR-EVM + BR-KON (klaim?) |
+| SPI < 0,85 / deviasi kurva-S > 10% | 🔴 → BR-PROX (crash/EOT) |
+| NCR mayor terbuka > 3 hari | 🔴 → BR-MUT |
+| Near miss > 5 / minggu | 🔴 → BR-SAF (investigasi) |
+| VO kumulatif > 10% | 🔴 → BR-KON |
+| Limbah B3 tak ter-manifest | 🔴 → BR-ENV |
+| Cuaca buruk > 3 hari berturut | 🟡 → evaluasi notif EOT 28-hari |
+
+## Deliverables Standar
+
+D-01 Review LHP · D-02 Look-ahead · D-06 Laporan EVM · D-12 NCR+CAPA · D-15 Investigasi insiden · D-20 Klaim EOT · D-21 Usulan VO

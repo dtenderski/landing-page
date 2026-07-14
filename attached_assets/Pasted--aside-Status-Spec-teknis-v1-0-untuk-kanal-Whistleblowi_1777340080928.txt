@@ -1,0 +1,341 @@
+<aside>
+🔐
+
+**Status:** Spec teknis v1.0 untuk **kanal Whistleblowing SMAP** [NAMA_BUJK].
+
+**Prinsip utama:** *Kerahasiaan absolut*, *integritas data*, *akuntabilitas FKAP*, *anti-retaliasi by design*.
+
+**Acuan:** ISO 37001:2016 klausul 8.9 & 8.10; UU PDP No. 27/2022; ISO 27001 best practice.
+
+</aside>
+
+## 1. Persyaratan Fungsional
+
+### 1.1 Multi-Channel Intake
+
+| **Channel** | **Mode Pelaporan** | **Audien Utama** | **Availability** | Web form (`wbs.[domain]`) | Anonim / Pseudonim / Teridentifikasi | Karyawan, mitra, masyarakat | 24/7 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Chatbot AGENT-WHISTLE (in-app) | Anonim / Pseudonim / Teridentifikasi | Karyawan | 24/7 | Email rahasia (`wbs@[domain]`) | Pseudonim / Teridentifikasi | Karyawan, mitra | 24/7 — diproses jam kerja |
+| Hotline (provider eksternal) | Anonim / Pseudonim | Semua, terutama low-tech | 24/7 | Kotak fisik (kantor pusat & proyek) | Anonim | Pekerja proyek | Diambil mingguan |
+
+### 1.2 Mode Pelaporan
+
+- **Anonim (Mode A):** tanpa identitas; pelapor menerima tracking code untuk follow-up satu arah.
+- **Pseudonim (Mode B):** alias + kontak terenkripsi; FKAP dapat membalas via mailbox terenkripsi.
+- **Teridentifikasi (Mode C):** nama & kontak terbuka HANYA ke FKAP terdaftar.
+
+### 1.3 Struktur Laporan (5W1H + Bukti)
+
+```
+Laporan ID         : WB-YYYYMMDD-XXXX (UUID v4 truncated)
+Mode               : A / B / C
+Tanggal Submit     : [ISO 8601]
+Kategori           : [Penyuapan / Gratifikasi / Fasilitasi / COI / Retaliasi / Lainnya]
+Deskripsi (APA)    : Free text
+Pihak Terlibat (SIAPA): Free text (peran lebih disarankan daripada nama)
+Waktu (KAPAN)      : Tanggal/periode
+Lokasi (DI MANA)   : Proyek/proses/lokasi fisik
+Sumber (BAGAIMANA) : Saksi langsung / dengar dari / dokumen / lainnya
+Bukti (Optional)   : Lampiran (PDF, foto, audio, video)
+Risiko Retaliasi   : Ya/Tidak — bila Ya, deskripsi
+Level Awal         : Low / Medium / High / Critical (auto-classified + FKAP review)
+```
+
+---
+
+## 2. Arsitektur Sistem
+
+```mermaid
+flowchart LR
+	WEB["🌐 Web Form"]
+	CB["🤖 Chatbot SMAP<br>AGENT-WHISTLE"]
+	MAIL["📧 Email Rahasia"]
+	HOT["☎️ Hotline 24/7"]
+	BOX["📦 Kotak Fisik"]
+
+	INTAKE{"🔄 Intake Service<br>(Validation + ID gen)"}
+	QUEUE[("📥 Encrypted Queue<br>AES-256-GCM")]
+	VAULT[("🔐 Evidence Vault<br>Object Storage + Encryption")]
+	CASEMGMT["🗂️ FKAP Case Management"]
+	SIEM["📊 Audit Log SIEM"]
+
+	FKAP["👥 FKAP Team"]
+	DIR["🏛️ Top Management / Komisaris"]
+	EXT["🚔 Aparat Penegak Hukum (bila perlu)"]
+
+	WEB --> INTAKE
+	CB --> INTAKE
+	MAIL --> INTAKE
+	HOT --> INTAKE
+	BOX -. manual entry .-> INTAKE
+	INTAKE --> QUEUE
+	INTAKE --> VAULT
+	QUEUE --> CASEMGMT
+	VAULT --> CASEMGMT
+	CASEMGMT --> FKAP
+	FKAP -- triase --> CASEMGMT
+	CASEMGMT -- eskalasi major --> DIR
+	DIR -- pelaporan tipidana --> EXT
+	INTAKE --> SIEM
+	CASEMGMT --> SIEM
+```
+
+---
+
+## 3. Data Model
+
+### 3.1 Entitas `Report`
+
+```
+Report {
+  id              : UUID v4 (public-facing tracking code)
+  internal_id     : UUID v4 (internal, never exposed)
+  mode            : enum ["anonymous", "pseudonymous", "identified"]
+  category        : enum ["bribery", "gratification", "facilitation", "coi", "retaliation", "other"]
+  description     : encrypted_text (envelope encryption: data key per report)
+  parties         : encrypted_text
+  occurred_at     : encrypted_text (free text — could be range)
+  location        : encrypted_text
+  source          : encrypted_text
+  retaliation_risk: boolean
+  retaliation_note: encrypted_text
+  evidence_ids    : Array<UUID>  // FK ke Evidence
+  reporter        : encrypted_blob | null  // hanya untuk Mode B/C
+  level           : enum ["low", "medium", "high", "critical"]
+  status          : enum ["new", "triaged", "investigating", "escalated", "closed", "unfounded"]
+  ack_at          : timestamp
+  triaged_at      : timestamp | null
+  closed_at       : timestamp | null
+  created_at      : timestamp
+  updated_at      : timestamp
+}
+```
+
+### 3.2 Entitas `Evidence`
+
+```
+Evidence {
+  id              : UUID v4
+  report_id       : UUID
+  filename        : encrypted_text
+  mime_type       : string
+  size_bytes      : integer
+  storage_url     : encrypted_text  // S3 / GCS path
+  checksum_sha256 : string
+  uploaded_at     : timestamp
+}
+```
+
+### 3.3 Entitas `CaseLog`
+
+```
+CaseLog {
+  id              : UUID v4
+  report_id       : UUID
+  actor_user_id   : UUID  // hanya FKAP / Admin
+  action          : enum ["acknowledge", "triage", "assign", "comment", "escalate",
+                          "request_info", "close", "reopen"]
+  notes           : encrypted_text
+  prev_status     : string
+  new_status      : string
+  timestamp       : timestamp
+}
+```
+
+### 3.4 Entitas `ReporterChannel` (Mode B/C)
+
+```
+ReporterChannel {
+  report_id       : UUID
+  alias           : string  // tampil ke FKAP
+  contact_blob    : encrypted_blob  // email/HP terenkripsi
+  pgp_pubkey      : string | null  // optional E2E encryption
+}
+```
+
+---
+
+## 4. Keamanan & Privasi
+
+### 4.1 Enkripsi
+
+- **At rest:** AES-256-GCM dengan envelope encryption (KMS-managed master key + per-report data key).
+- **In transit:** TLS 1.3 minimum; HSTS aktif; certificate pinning untuk hotline app.
+- **Evidence file:** server-side encryption (SSE-KMS) di object storage.
+- **PII pelapor (Mode B/C):** key terpisah, akses dibatasi hanya FKAP terdaftar via MFA.
+
+### 4.2 Akses Kontrol (RBAC)
+
+| **Role** | **Akses** |
+| --- | --- |
+| FKAP Officer | Read all, write CaseLog, request_info ke pelapor |
+| Top Management | Read summary (anonymized) + escalation cases |
+| External Auditor | Read-only audit log (anonymized) |
+
+### 4.3 Audit Log Imutabel
+
+- Setiap akses & aksi (read, decrypt, write, export) dicatat ke **append-only log** (WORM storage).
+- Log dikirim ke SIEM eksternal (Splunk/Datadog/ELK) dengan retention 7 tahun.
+- Tamper-evidence: hash chain harian dipublikasikan internal.
+
+### 4.4 Anti-Forensik untuk Mode A (Anonim)
+
+- TIDAK menyimpan IP address, User-Agent, timestamp resolusi tinggi yang bisa dipakai re-identifikasi.
+- Round timestamp ke jam terdekat untuk Mode A.
+- Nonaktifkan analytics & cookies pada `wbs.[domain]`.
+- Sediakan opsi akses via **Tor / VPN**.
+
+### 4.5 Retensi Data
+
+- **Laporan unfounded:** simpan 2 tahun → hapus permanen.
+- **Laporan founded (sanksi disipliner):** simpan 5 tahun.
+- **Laporan founded (tipidana):** simpan sesuai daluwarsa hukum + 2 tahun.
+- Hard delete dengan crypto-shredding (delete data key → ciphertext jadi tidak bisa di-decrypt).
+
+---
+
+## 5. Workflow Penanganan
+
+```mermaid
+stateDiagram-v2
+	[*] --> NEW : Submit
+	NEW --> TRIAGED : FKAP triase (≤3 hari)
+	TRIAGED --> INVESTIGATING : Tim investigasi ditunjuk
+	INVESTIGATING --> CLOSED : Selesai (founded / unfounded)
+	INVESTIGATING --> ESCALATED : Diteruskan Direksi/APH
+	ESCALATED --> CLOSED : Setelah penanganan eksternal
+	CLOSED --> [*]
+	NEW --> UNFOUNDED : Spam/duplikat
+	UNFOUNDED --> [*]
+```
+
+### 5.1 Triase Otomatis (Auto-Level Classification)
+
+Algoritma sederhana untuk pre-klasifikasi:
+
+```
+level = "low"
+if kategori in ["bribery", "facilitation"] then level = "medium"
+if retaliation_risk == true then level = max(level, "high")
+if pihak_terlibat mengandung kata kunci ["direksi", "komisaris", "pejabat publik"] then level = "high"
+if evidence_count > 0 AND kategori == "bribery" then level = "high"
+if level >= "high" AND nilai_indikasi > Rp 500jt then level = "critical"
+```
+
+FKAP dapat **override** level setelah review awal.
+
+### 5.2 SLA
+
+- ACK ke pelapor: ≤ 1 hari kerja
+- Triase: ≤ 3 hari kerja
+- Investigasi standar: ≤ 30 hari kalender
+- Investigasi kompleks: ≤ 90 hari kalender (perpanjangan tertulis)
+- Update ke pelapor: ≥ 1 update / 14 hari
+- Closure: ≤ 7 hari setelah investigasi selesai
+
+---
+
+## 6. Integrasi dengan AGENT-WHISTLE
+
+### 6.1 API Endpoint (Internal)
+
+```
+POST /api/v1/whistleblowing/intake
+Headers: Content-Type: application/json; X-Idempotency-Key
+Body:
+{
+  "mode": "anonymous" | "pseudonymous" | "identified",
+  "category": "bribery" | ...,
+  "description": string,
+  "parties": string,
+  "occurred_at": string,
+  "location": string,
+  "source": string,
+  "retaliation_risk": boolean,
+  "retaliation_note": string | null,
+  "reporter": { "alias": string, "contact": string, "pgp_pubkey": string | null } | null,
+  "evidence_uploads": Array<{ "upload_id": string, "filename": string }>
+}
+Response:
+{
+  "report_id": "WB-YYYYMMDD-XXXX",
+  "tracking_url": "https://wbs.[domain]/track/<tracking_code>",
+  "ack_message": "...",
+  "sla_response": "3 hari kerja"
+}
+```
+
+### 6.2 Pesan AGENT-WHISTLE ke Pelapor (Template)
+
+> 🔐 **Laporan Anda telah diterima.**
+> 
+
+> 
+> 
+
+> ID Tiket: **WB-20260428-A4F9**
+> 
+
+> Mode: **Anonim**
+> 
+
+> SLA respons awal: **3 hari kerja**
+> 
+
+> 
+> 
+
+> Anda dapat memantau status laporan ini menggunakan kode tracking di:
+> 
+
+> `wbs.[domain]/track/<kode>`
+> 
+
+> 
+> 
+
+> 🛡️ **Perlindungan Anda:** Kebijakan Anti-Retaliasi [NAMA_BUJK] dan Klausul 8.9 ISO 37001:2016 melindungi Anda dari segala bentuk pembalasan. Bila Anda mengalami atau mencurigai retaliasi, segera laporkan kembali melalui kanal ini.
+> 
+
+### 6.3 Pesan AGENT-WHISTLE ke FKAP (Notifikasi Internal)
+
+```
+[FKAP-NEW-REPORT]
+ID         : WB-20260428-A4F9
+Level Awal : HIGH
+Kategori   : Bribery
+Mode       : Anonymous
+Link Case  : https://fkap.[domain]/case/WB-20260428-A4F9
+SLA Triase : ≤ 1 Mei 2026 (3 hari kerja)
+```
+
+---
+
+## 7. Tata Kelola & Tinjauan
+
+| **Aktivitas** | **Frekuensi** | **PIC** |
+| --- | --- | --- |
+| Tinjauan akses RBAC | Kuartalan | FKAP Lead |
+| Drill simulasi laporan dummy | Semesteran | FKAP |
+| Laporan WBS ke RUPS / Komisaris | Tahunan | Direktur Utama |
+
+---
+
+## 8. KPI Kanal Whistleblowing
+
+- **Volume laporan / kuartal** — diharapkan tidak nol (sistem aktif)
+- **% laporan substantif** vs spam (target ≥ 60%)
+- **Mean Time to Acknowledge (MTTA)** — target ≤ 8 jam
+- **Mean Time to Triage (MTTT)** — target ≤ 2 hari kerja
+- **Mean Time to Closure (MTTC)** — target ≤ 30 hari (standar)
+- **% laporan founded** — indikator kualitas kanal (terlalu rendah = kanal tidak dipercaya; terlalu tinggi = sistem kontrol lain lemah)
+- **Retaliasi yang dilaporkan** — target = 0 (zero tolerance)
+
+---
+
+<aside>
+⚠️
+
+**Komitmen kerahasiaan:** Sistem WBS [NAMA_BUJK] dirancang dengan prinsip *security by design* dan *privacy by default*. **Tidak ada** personel — termasuk Direktur Utama — yang dapat mengakses identitas pelapor Mode A. Akses Mode B/C hanya diberikan ke **FKAP terdaftar** dengan MFA. Pelanggaran kerahasiaan = pelanggaran serius dengan sanksi terberat.
+
+</aside>

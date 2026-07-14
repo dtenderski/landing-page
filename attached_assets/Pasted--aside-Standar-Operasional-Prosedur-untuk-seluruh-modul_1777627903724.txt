@@ -1,0 +1,328 @@
+<aside>
+📋
+
+**Standar Operasional Prosedur** untuk seluruh modul fungsional IT LSP. Setiap SOP berisi: tujuan, pelaku, prasyarat, langkah, kontrol mutu, eksepsi, dan KPI. Berdampingan dengan [IT LSP berdasarkan Standar LPJK & BNSP — Paperless (Nir Kertas) + AJJ](https://www.notion.so/IT-LSP-berdasarkan-Standar-LPJK-BNSP-Paperless-Nir-Kertas-AJJ-e7524cfc14ba4ac6b21012c18e373c37?pvs=21).
+
+Versi: **v1.0 / 2026-05-01** · Bahasa: **Bahasa Indonesia**
+
+</aside>
+
+## Indeks Modul
+
+- **M1** — IAM & KYC
+- **M2** — Registrasi Asesi
+- **M3** — Dossier Digital
+- **M4** — Skema & MUK
+- **M5** — Penjadwalan Asesmen
+- **M6** — Engine Asesmen
+- **M7** — Putusan K/BK & Banding
+- **M8** — Penerbitan SKK
+- **M9** — Pemeliharaan & CPD
+- **M10** — Resertifikasi (RCC)
+- **M11** — Audit & Mutu
+- **M12** — Sinkronisasi Eksternal
+- **M13** — Keuangan & Billing
+- **M14** — Helpdesk & Banding
+
+---
+
+## SOP-M1 — IAM & KYC
+
+**Tujuan.** Memastikan setiap pengguna terverifikasi identitasnya sebelum dapat mengakses sistem LSP.
+
+**Pelaku.** Asesi, Asesor, MS, TUK, Auditor, IT LSP.
+
+**Prasyarat.** Kontrak Dukcapil PSE aktif; PSrE Berinduk terhubung; kebijakan password & MFA disetujui.
+
+### Langkah
+
+1. Pengguna baru mendaftar melalui portal/WA dengan email + nomor HP (OTP ganda).
+2. Sistem meminta unggah KTP-el + selfie + *active liveness challenge* (kedip + geleng).
+3. OCR mengekstrak NIK, nama, TTL; sistem mem-*hit* Dukcapil PSE untuk *match score*.
+4. Bila skor ≥ 0,90 → status **TERVERIFIKASI**. Skor 0,70–0,89 → eskalasi ke MS. < 0,70 → tolak otomatis.
+5. Sistem menerbitkan akun + role default (Asesi). Role lain ditetapkan oleh Admin LSP.
+6. MFA wajib diaktifkan pada login berikutnya untuk role MS, Asesor, Auditor, TUK.
+
+### Kontrol Mutu
+
+- *Match score* Dukcapil disimpan di audit log.
+- Foto KTP & selfie dienkripsi *field-level* dan tidak dapat diunduh oleh role non-DPO.
+- Logout otomatis 15 menit idle untuk role kritikal.
+
+### Eksepsi
+
+- KTP-el rusak/blur → opsi unggah ulang maks 3×, lalu eskalasi manual.
+- WNA / Kantor Perwakilan → jalur *override* dengan bukti KITAS + paspor.
+
+### KPI
+
+- *First-pass KYC success* ≥ 90%.
+- *Median* waktu KYC ≤ 2 menit.
+
+---
+
+## SOP-M2 — Registrasi Asesi
+
+**Tujuan.** Mengubah pengguna terverifikasi menjadi asesi yang siap masuk skema sertifikasi.
+
+**Pelaku.** Asesi, HR Korporat, MS.
+
+**Prasyarat.** M1 selesai; katalog skema aktif (M4); harga & kebijakan billing aktif (M13).
+
+### Langkah
+
+1. Asesi memilih **mode pendaftaran**: Perorangan atau Korporat (batch CSV/Excel/API).
+2. Sistem menampilkan rekomendasi skema berdasarkan KBLI BUJK (jika ada NIB) atau pilihan manual.
+3. Asesi mengisi profil pekerjaan: BUJK pemberi kerja, jabatan, masa kerja, lokasi proyek.
+4. Sistem membuat tiket pendaftaran + tagihan otomatis ke M13.
+5. Setelah pembayaran terkonfirmasi, status tiket → **AKTIF**, dossier digital dibuka (M3).
+
+### Kontrol Mutu
+
+- Lookup BUJK ke SIKI-LPJK wajib sebelum mengaitkan asesi ke pemberi kerja.
+- Mode batch korporat memerlukan kontrak induk + PIC HR yang memiliki MFA aktif.
+
+### KPI
+
+- *Drop-off rate* registrasi ≤ 10%.
+- *Lead time* registrasi → dossier aktif ≤ 1 hari kerja.
+
+---
+
+## SOP-M3 — Dossier Digital
+
+**Tujuan.** Menghimpun, memverifikasi, dan mengklasifikasi seluruh portofolio asesi tanpa kertas.
+
+**Pelaku.** Asesi, Asesor, MS.
+
+**Prasyarat.** Skema aktif; klasifikasi dokumen telah ditetapkan.
+
+### Langkah
+
+1. Asesi mengunggah dokumen ke kotak dossier per kategori: BAST, kontrak, surat pengalaman, ijazah, pelatihan.
+2. OCR + klasifikasi otomatis menentukan jenis dokumen + ekstrak metadata (tanggal, pihak, nilai kontrak).
+3. *VATM auto-check* menilai: Valid (jenis sesuai UK), Asli (deteksi tanda tangan/stempel), Terkini (tanggal dalam ambang), Memadai (jumlah cukup per UK).
+4. Asesi e-Sign **APL-01 & APL-02** dengan TTE Tersertifikasi setelah dossier mencapai kelengkapan ≥ 80%.
+5. Sistem menerbitkan *Dossier Pack PDF* (read-only) untuk diteruskan ke MS pra-asesmen.
+
+### Kontrol Mutu
+
+- Dokumen dengan skor VATM rendah ditandai merah; asesi diminta menambah bukti.
+- Hash SHA-256 setiap file dicantumkan di Dossier Pack untuk *integrity*.
+- *Right to erasure* hanya berlaku jika sertifikat belum diterbitkan.
+
+### KPI
+
+- *First-pass dossier completeness* ≥ 85%.
+- Asesor: ≤ 10% dossier perlu kembali ke asesi setelah review.
+
+---
+
+## SOP-M4 — Skema & MUK
+
+**Tujuan.** Memastikan setiap skema, MUK, dan bank soal terkurasi, ter-versi, dan tertelusur ke SKKNI/Pedoman BNSP.
+
+**Pelaku.** Komite Skema, MS, Manajer Mutu.
+
+**Prasyarat.** Skema disahkan BNSP (lihat [SOP Lisensi LSP oleh BNSP — Pengajuan Skema → Verifikasi → Full Assessment → Witness → Penetapan](https://www.notion.so/SOP-Lisensi-LSP-oleh-BNSP-Pengajuan-Skema-Verifikasi-Full-Assessment-Witness-Penetapan-325ba49675054c138066675009d1240d?pvs=21)).
+
+### Langkah
+
+1. Komite Skema membuat *draft* skema baru: jenis (KKNI/Okupasi/Klaster), KBLI, jenjang, daftar UK & KUK.
+2. Setiap UK ditautkan ke acuan SKKNI dan dipetakan ke FR.IA (TT, TL, Wcr, Stu, Ob, VP).
+3. MUK ditulis di *editor* dengan *blueprint* asesmen; bank soal diunggah dengan *answer key* terenkripsi.
+4. Review oleh tim mutu → uji simulasi 30 asesi → catat *reliability index*.
+5. Setelah disahkan, skema dipublish dengan **versi semver** (mis. v1.2.0). Versi lama tetap dapat diakses untuk asesi *in-flight*.
+
+### Kontrol Mutu
+
+- *Item Response Theory (IRT)* opsional untuk soal pilihan ganda — buang soal *flag* < 0,2 atau > 0,9.
+- Bank soal RAHASIA: hanya Komite Skema + MS yang dapat membaca; akses Asesor terbatas pada saat sesi.
+
+---
+
+## SOP-M5 — Penjadwalan Asesmen
+
+**Tujuan.** Menyepakati jadwal antara asesi, asesor, dan TUK/ruang AJJ tanpa konflik.
+
+**Pelaku.** MS, Asesor, Asesi.
+
+### Langkah
+
+1. Setelah dossier siap, MS membuka *slot* di kalender Asesor + TUK + ruang AJJ.
+2. Asesi memilih slot via portal; sistem mengunci slot 30 menit sambil menunggu konfirmasi.
+3. Notifikasi multi-kanal (email + WA + Notion Calendar) dikirim T-7, T-1, T-2 jam.
+4. Asesor dapat menolak/me-*reschedule* dengan alasan; *cool-off* 12 jam sebelum sesi.
+
+### KPI
+
+- *Reschedule rate* ≤ 8%.
+- *No-show rate* ≤ 5%.
+
+---
+
+## SOP-M6 — Engine Asesmen
+
+**Tujuan.** Menjalankan asesmen kompetensi (Tatap Muka & AJJ) dengan integritas penuh.
+
+**Pelaku.** Asesor, Asesi, Witness BNSP (untuk AJJ).
+
+**Prasyarat.** Pra-asesmen disetujui MS, FR digital tersedia.
+
+### Langkah Tatap Muka
+
+1. Asesor *check-in* di TUK; verifikasi identitas Asesi via QR.
+2. Asesor membuka FR.IA per UK di tablet; mencatat *direct evidence* dengan foto/geo-tag.
+3. *Snapshot* dibuat tiap akhir UK ke audit log.
+4. Setelah selesai, Asesor menyusun rekomendasi K/BK.
+
+### Langkah AJJ
+
+Lihat detail di [Chatbot AJJ (Asesmen Jarak Jauh) — Arsitektur Agentic AI, Multi-Agent & OpenClaw](https://www.notion.so/Chatbot-AJJ-Asesmen-Jarak-Jauh-Arsitektur-Agentic-AI-Multi-Agent-OpenClaw-c602a25afae94a23bf0f74338a316fb1?pvs=21). Ringkas: readiness check → identity guard → live proctoring → witness mode → evidence pack → FR.AK auto-generate.
+
+### Kontrol Mutu
+
+- Tidak boleh ada FR.IA dengan field kosong saat sesi ditutup.
+- Setiap perubahan FR.IA dalam 24 jam pasca-sesi memerlukan justifikasi tertulis + *re-sign*.
+
+---
+
+## SOP-M7 — Putusan K/BK & Banding
+
+**Tujuan.** Menerbitkan keputusan **Kompeten** atau **Belum Kompeten** secara akuntabel.
+
+**Pelaku.** Asesor (rekomendasi), MS (putusan), Komite Sertifikasi (banding).
+
+### Langkah
+
+1. Asesor mengirim FR.AK ke MS dengan rekomendasi K/BK + *evidence pack*.
+2. MS me-*review* dalam 3 hari kerja: setuju → terbitkan SKK (M8); ragu → minta klarifikasi; tidak setuju → kembalikan ke Asesor.
+3. Asesi yang **BK** menerima notifikasi + opsi *retake* atau **banding** dalam 14 hari kerja.
+4. Banding diputus oleh Komite Sertifikasi (3 anggota) dalam 30 hari kerja.
+
+### Kontrol Mutu
+
+- Putusan harus mengutip UK & KUK yang dipenuhi/tidak dipenuhi.
+- Konflik kepentingan (kekerabatan/atasan-bawahan) → reasignasi otomatis.
+
+---
+
+## SOP-M8 — Penerbitan SKK
+
+**Tujuan.** Menerbitkan Sertifikat Kompetensi Kerja digital tertanda tangan, ber-QR BLKK, terlindungi watermark hash.
+
+### Langkah
+
+1. Setelah putusan K, sistem men-*generate* SKK dari *template* (PDF/A-3) dengan: nomor SKK, nama, NIK termask, skema, jenjang, masa berlaku 5 tahun, nama LSP, nomor lisensi BNSP.
+2. Hash konten kanonik SHA-256 dihitung & ditanam sebagai watermark visual + XMP metadata.
+3. PSrE menandatangani SKK (LTV); Peruri menempel e-meterai.
+4. Sistem mem-*publish* QR ke endpoint BLKK + sinkron ke Sisfo BNSP & SIKI-LPJK.
+5. Tautan SKK dikirim ke asesi via email + WA; arsip masuk ke WORM storage.
+
+### Kontrol Mutu
+
+- Penerbitan ulang (revisi) hanya melalui jalur *re-issue* dengan nomor seri baru; SKK lama otomatis disuspend.
+
+### KPI
+
+- *Lead time* putusan K → SKK terbit ≤ 24 jam.
+- *Sinkron BLKK success* ≥ 99%.
+
+---
+
+## SOP-M9 — Pemeliharaan & CPD/PKB
+
+**Tujuan.** Memastikan kompetensi tetap relevan selama 5 tahun masa berlaku.
+
+### Langkah
+
+1. Sistem mengirim pengingat surveilans T-30 hari sebelum tahun ke-2 dan ke-4.
+2. Asesi mengunggah bukti CPD/PKB: pelatihan, seminar, jam kerja proyek (BAST).
+3. Sistem menghitung *credit point* otomatis berdasarkan rumus skema.
+4. Bila kredit < ambang, status SKK → **PERINGATAN**; bila gagal surveilans → **SUSPEND**.
+5. Cabut otomatis bila pelanggaran berat (sanksi BNSP/PUPR), sinkron ke BLKK & SIKI.
+
+---
+
+## SOP-M10 — Resertifikasi (RCC)
+
+**Tujuan.** Memperpanjang SKK setelah 5 tahun atau setelah suspend.
+
+### Langkah
+
+1. Asesi mengajukan permohonan RCC T-90 hari sebelum kedaluwarsa.
+2. Sistem memeriksa kelengkapan CPD + jam kerja minimum.
+3. Asesor melaksanakan asesmen ringan (pertanyaan + portofolio terbaru) atau full assessment bila ada perubahan skema.
+4. SKK baru diterbitkan dengan nomor seri lanjutan + masa berlaku 5 tahun.
+
+---
+
+## SOP-M11 — Audit & Mutu
+
+**Tujuan.** Menjaga LSP tetap *compliant* dengan SNI ISO/IEC 17024, Pedoman BNSP, dan ISO 27001.
+
+### Langkah
+
+1. Audit log WORM diperiksa harian oleh Auditor melalui dashboard kepatuhan.
+2. *Internal audit* terjadwal: bulanan (M1, M3, M6, M11), kuartalan (modul lain).
+3. *Non-conformance* → *Corrective Action Request (CAR)* dengan SLA 14/30/90 hari.
+4. Surveilans BNSP tahunan: paket bukti otomatis di-*generate* dari M11.
+
+---
+
+## SOP-M12 — Sinkronisasi Eksternal
+
+**Tujuan.** Memastikan data LSP konsisten dengan Sisfo BNSP, BLKK, SIKI-LPJK, SIJK, OSS.
+
+### Langkah
+
+1. Adapter berjalan dengan pola *outbox*: setiap *event* (SKK terbit, suspend, cabut) ditulis ke outbox sebelum dikirim.
+2. *Idempotent posting* dengan *dedup key* berbasis nomor SKK + versi.
+3. *Retry* eksponensial sampai 24 jam; gagal total → tiket Helpdesk + alert ke MS.
+4. Rekonsiliasi mingguan: bandingkan jumlah SKK lokal vs eksternal; selisih = 0.
+
+### KPI
+
+- *Sinkron success* ≥ 99% per kanal.
+- *Mean time to reconcile* ≤ 7 hari.
+
+---
+
+## SOP-M13 — Keuangan & Billing
+
+**Tujuan.** Mengelola tagihan asesi/korporat, integrasi *payment gateway*, kuitansi e-meterai.
+
+### Langkah
+
+1. Tarif per skema ditetapkan oleh Direksi LSP dan dipublish di portal.
+2. Tiket pendaftaran (M2) memicu *invoice* otomatis.
+3. Pembayaran melalui *payment gateway* (Midtrans/Doku) atau *virtual account* korporat.
+4. Kuitansi e-meterai diterbitkan otomatis pasca-pembayaran.
+5. Jurnal akuntansi terhubung ke ERP (Odoo) — lihat [Bab 20 — Odoo ERP untuk Digitalisasi Jasa Konstruksi](https://www.notion.so/Bab-20-Odoo-ERP-untuk-Digitalisasi-Jasa-Konstruksi-34cb059d929f4cb0850aaa97ffb5fadb?pvs=21).
+
+---
+
+## SOP-M14 — Helpdesk & Banding
+
+**Tujuan.** Menerima, mengklasifikasi, dan menindaklanjuti pertanyaan / keluhan / banding asesi.
+
+### Langkah
+
+1. Tiket masuk via portal/WA/email dengan kategori: pendaftaran, dossier, asesmen, sertifikat, banding, lainnya.
+2. Bot triase memberi jawaban *self-service* (KB) atau eskalasi ke CS.
+3. SLA: pertanyaan 24 jam, keluhan 3 hari kerja, banding sesuai SOP-M7.
+4. Eskalasi ke MS / DPO bila terkait privasi / data breach.
+
+### KPI
+
+- *First-response time* ≤ 1 jam (jam kerja).
+- *CSAT* ≥ 80%.
+
+---
+
+<aside>
+📌
+
+**Status:** Sub-page siap-import ke Gustafta. Setiap SOP berfungsi sebagai *playbook* operasional dan acuan untuk *traceability matrix* audit BNSP/LPJK.
+
+</aside>

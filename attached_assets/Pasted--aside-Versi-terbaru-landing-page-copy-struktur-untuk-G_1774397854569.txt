@@ -1,0 +1,263 @@
+<aside>
+⚡
+
+**Versi terbaru landing page (copy + struktur)** untuk Gustafta AI Chatbot Builder.
+
+- Cocok untuk website utama
+- Bisa langsung dipakai untuk desain / implementasi
+</aside>
+
+## Hero
+
+**Buat Chatbot AI Cerdas untuk Bisnis Anda — Tanpa Coding**
+
+Platform all-in-one untuk membangun, mengkonfigurasi, dan men-deploy chatbot AI yang memahami bisnis Anda. Jawab pertanyaan pelanggan, bantu tim internal, dan tangkap leads 24/7.
+
+- **Data terenkripsi**
+- **99,9% uptime**
+- **Support 24/7**
+- **Multi-sektor & multi-channel**
+
+**CTA utama:** Mulai Gratis Sekarang
+
+**CTA sekunder:** Lihat Fitur
+
+*Gratis untuk memulai. Tanpa kartu kredit. Setup ± 7 menit.*
+
+---
+
+## Social Proof (Angka Utama)
+
+### 30+ Sektor Usaha
+
+Dipakai untuk kebutuhan bisnis lintas industri.
+
+### 12 Mini Apps
+
+Tools siap pakai + AI-powered untuk analisis.
+
+### 6+ Channel
+
+Satu chatbot untuk banyak channel.
+
+### 24/7 Aktif
+
+AI selalu siap melayani kapan pun.
+
+---
+
+## Masalah yang Diselesaikan
+
+### Tantangan yang umum terjadi
+
+- Tim customer service kewalahan menjawab pertanyaan berulang
+- Informasi bisnis tersebar dan sulit diakses
+- Peluang hilang di luar jam operasional
+- Biaya operasional naik karena harus melayani multi-channel
+
+### Solusi dengan Gustafta
+
+- **FAQ otomatis 24/7** dengan respons instan
+- **Knowledge base terpusat** sebagai “otak” bisnis
+- **Lead capture otomatis** saat bisnis tutup
+- **Satu chatbot untuk banyak channel** dengan konteks yang konsisten
+
+---
+
+## Cara Kerja (7 Menit)
+
+1. **Buat Big Idea & Chatbot (± 3 menit)**
+    - Definisikan brand dan persona
+    - Isi Knowledge Base (dokumen/URL)
+    - Set tujuan dan gaya jawaban
+2. **Setup Fitur & Mini Apps (± 3 menit)**
+    - Aktifkan Mini Apps yang dibutuhkan
+    - Atur “Project Brain” untuk konteks
+    - Tambah integrasi channel
+3. **Deploy & Mulai Melayani (± 1 menit)**
+    - Hubungkan WhatsApp / web widget
+    - Bagikan link chatbot
+    - Mulai melayani pelanggan
+
+**CTA:** Coba Sekarang — Gratis
+
+---
+
+## Fitur Utama
+
+### Project Brain
+
+Pusat data & konteks bisnis dalam satu tempat. AI menjawab lebih akurat karena memahami konteks internal.
+
+### Mini Apps (12 Tools)
+
+Gabungan tools siap pakai untuk kebutuhan operasional, seperti:
+
+- Checklist
+- Kalkulator
+- Risk Assessment
+- Progress Tracker
+- Doc Generator
+- Custom Tool
+
+### Hierarki Terstruktur
+
+Kelola chatbot dengan struktur yang rapi:
+
+- **Series** (Topik)
+- **Big Idea** (Brand)
+- **Toolbox** (Kategori)
+- **Agent** (Chatbot)
+
+### Agentic AI
+
+Kemampuan percakapan yang lebih cerdas:
+
+- Mendengar aktif
+- Retensi konteks
+- Koreksi diri
+- Pemahaman mendalam terhadap bisnis
+
+### Knowledge Base
+
+Upload dan hubungkan sumber data:
+
+- PDF, PPT
+- Excel
+- Gambar, video
+- URL
+
+### Multi-Channel
+
+Satu chatbot, banyak channel:
+
+- WhatsApp
+- Telegram
+- Discord
+- Slack
+- Web Widget
+- REST API
+
+---
+
+## Use Case per Sektor
+
+Pilih sektor untuk melihat contoh penerapan:
+
+- **Konstruksi & Engineering:** laporan proyek, risk assessment, K3
+- **Kesehatan & Medis:** FAQ pasien, jadwal, panduan
+- **Pendidikan:** tutor AI, FAQ kampus, panduan belajar
+- **Keuangan & Perbankan:** analisis finansial, edukasi pajak
+- **Retail & E-Commerce:** rekomendasi produk, CS otomatis
+- **Hukum & Legal:** konsultasi awal, review dokumen
+- **Hospitality & Pariwisata:** concierge AI, reservasi
+- **Marketing & Sales:** lead gen, copywriting, analisis
+- **Customer Service:** helpdesk, eskalasi cerdas
+- **Properti & Real Estate:** info proyek, simulasi KPR
+- **Kreatif & Media:** ide konten, review desain
+- **Logistik & Supply Chain:** tracking, optimasi rute
+
+---
+
+## Perbandingan
+
+### Mengapa Gustafta lebih unggul
+
+| Fitur | Gustafta | Kompetitor |
+| --- | --- | --- |
+| Project Brain (data terpusat) | ✅ | ⚠️ Terbatas |
+| Mini Apps (12 tools) | ✅ | ⚠️ Sedikit |
+| Hierarki Series → Big Idea → Toolbox → Agent | ✅ | ❌ |
+| Multi-channel | 6+ channel | 1–2 channel |
+| Multi-model AI (GPT-4o, Claude, DeepSeek, dll.) | ✅ | ⚠️ Limited |
+| Widget & PWA customization | ✅ Lanjutan | Basic |
+| Analytics & laporan otomatis | ✅ | Basic |
+| Monetisasi & voucher system | ✅ | ⚠️ Tidak umum |
+
+---
+
+## Fitur Lanjutan
+
+### Project Snapshot AI
+
+Ringkasan otomatis: status, isu, risiko, dan keputusan terakhir dalam satu laporan.
+
+### Analytics Dashboard
+
+Pantau metrik penting: pesan, sesi, engagement, dan peak hours secara real-time.
+
+### Multi-Model AI
+
+Pilih model sesuai kebutuhan: GPT-4o, GPT-3.5, DeepSeek, Claude, atau model custom via API.
+
+### Widget Customization
+
+Kustomisasi penuh sesuai brand: warna, posisi, ukuran, logo, dan pesan sapaan.
+
+### Access Control & Keamanan
+
+Token per chatbot, mode publik/privat, kontrol domain, dan enkripsi data.
+
+### API & Webhook
+
+REST API dan webhook untuk integrasi dengan CRM/ERP/sistem internal.
+
+---
+
+## Testimoni
+
+> “Gustafta membantu kami membuat chatbot untuk 15 klien dari berbagai industri. Setup cepat dan fleksibel untuk setiap sektor.”
+> 
+
+**Rina Kusuma** — CEO, Digital Agency Jakarta
+
+> “Chatbot WhatsApp kami menjawab 80% pertanyaan pelanggan otomatis. Tim CS bisa fokus pada kasus yang benar-benar butuh sentuhan manusia.”
+> 
+
+**Ahmad Fadli** — Head of Digital, Retail Company
+
+> “Knowledge Base dan Mini Apps sangat powerful. Tutor AI kami sekarang bisa menjawab berdasarkan materi kuliah yang di-upload.”
+> 
+
+**Dewi Pratiwi** — Founder, EdTech Startup
+
+---
+
+## FAQ
+
+- **Apa itu Gustafta?**
+    
+    Gustafta adalah platform untuk membangun chatbot AI yang memahami konteks bisnis Anda, bisa di-deploy ke berbagai channel, dan mudah dikelola tanpa coding.
+    
+- **Apakah saya perlu keahlian coding?**
+    
+    Tidak. Anda bisa membuat, mengatur, dan deploy chatbot lewat dashboard, termasuk upload dokumen untuk Knowledge Base.
+    
+- **Channel apa saja yang didukung?**
+    
+    WhatsApp, Telegram, Discord, Slack, Web Widget, dan REST API.
+    
+- **Bagaimana dengan keamanan data?**
+    
+    Data terenkripsi, ada kontrol akses per chatbot, dan opsi kontrol domain untuk widget.
+    
+- **Bisa digunakan untuk sektor usaha apa saja?**
+    
+    Bisa. Gustafta dibuat fleksibel untuk 30+ sektor, dan Anda bisa menyesuaikan persona, knowledge base, dan mini apps sesuai kebutuhan.
+    
+
+---
+
+## Penutup (Final CTA)
+
+### Siap membangun chatbot AI untuk bisnis Anda?
+
+Gabung dengan bisnis dari berbagai sektor yang sudah menggunakan Gustafta.
+
+- Setup ± 7 menit
+- 30+ sektor usaha
+- Tanpa coding
+
+**CTA utama:** Mulai Gratis Sekarang
+
+**CTA sekunder:** Lihat Harga

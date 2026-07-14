@@ -1,0 +1,66 @@
+# 📝 Form & Template Library — Brain Project
+
+> Halaman L4 — katalog form & template siap-pakai. Untuk implementasi: setiap template di-create sebagai *database template page* di database operasional Brain Project (LHP / NCR / K3 / Risiko / EVM).
+> 
+
+## Cara Pakai
+
+1. Buka database operasional target (mis. [](https://www.notion.so/d84913f1c9b449a19a2241ff2dca523c?pvs=21)).
+2. Klik *New → dropdown template → pilih template* yang diinginkan.
+3. Atau mention `@Brain Project` → "Tolong susun [template name] untuk pekerjaan X".
+
+## Katalog Template
+
+### LHP Templates (parent: [](https://www.notion.so/d84913f1c9b449a19a2241ff2dca523c?pvs=21))
+
+- T-LHP-01 LHP Standar (cuaca, mandays, progres, kendala, foto)
+- T-LHP-02 LHP Pekerjaan Beton (mix design, volume, slump, sample)
+- T-LHP-03 LHP Pekerjaan Baja (welding, NDT, torsi)
+- T-LHP-04 LHP Cuaca Buruk (BA cuaca, jam stop, item terdampak)
+
+### NCR Templates (parent: [](https://www.notion.so/79e1e2cfb0b34ed5bf427807c79548f8?pvs=21))
+
+- T-NCR-01 NCR Mayor (struktur kritis)
+- T-NCR-02 NCR Minor (finishing/arsitektur)
+- T-NCR-03 RFI (Request for Information)
+- T-NCR-04 CAPA (Corrective & Preventive Action)
+
+### K3 Templates (parent: [](https://www.notion.so/2fad9866bb3c4e00abb9bc6d503aa789?pvs=21))
+
+- T-K3-01 JSA (Job Safety Analysis) generic
+- T-K3-02 JSA Pekerjaan Ketinggian
+- T-K3-03 JSA Pekerjaan Galian
+- T-K3-04 PTW Pekerjaan Panas
+- T-K3-05 PTW Ruang Terbatas
+- T-K3-06 Toolbox Talk script (15 min)
+- T-K3-07 Investigasi Insiden (5-Why + Bowtie + CAPA)
+- T-K3-08 Manifest Limbah B3
+- T-K3-09 Monitoring Debu/Kebisingan log
+
+### Risk Templates (parent: [](https://www.notion.so/10d6c7606d074f248dcac861ad055288?pvs=21))
+
+- T-RISK-01 Risk Entry (P×D matrix)
+- T-RISK-02 Issue Entry (existing issue, bukan future risk)
+- T-RISK-03 Bowtie Analysis (untuk risiko kritis)
+
+### EVM Templates (parent: [](https://www.notion.so/86c424ad21b142d2a06d107577d3e5b1?pvs=21))
+
+- T-EVM-01 Weekly EVM Report
+- T-EVM-02 Monthly EVM Report (untuk Owner)
+- T-EVM-03 Crash Schedule Scenario
+
+### Kontrak (parent: hub Brain Project)
+
+- T-KON-01 Surat Klaim EOT + TIA
+- T-KON-02 Usulan Variation Order
+- T-KON-03 Notifikasi 28-hari FIDIC
+- T-KON-04 BA MC-0 / MC-100 / PHO / FHO
+- T-KON-05 Surat RFI ke Konsultan Perencana
+
+## Roadmap Build
+
+- [ ]  Batch 1: 5 template prioritas (T-LHP-01, T-NCR-01, T-K3-01, T-RISK-01, T-KON-01)
+- [ ]  Batch 2: 10 template berikutnya
+- [ ]  Batch 3: sisanya + custom proyek-specific
+
+**Catatan**: Database template di Notion dibuat dengan `asTemplate: true` di parent data source. Brain Project agent bisa men-generate konten template berdasarkan input pengguna; user kemudian save sebagai template manual via UI atau minta agent membuatkan sebagai page entry baru.

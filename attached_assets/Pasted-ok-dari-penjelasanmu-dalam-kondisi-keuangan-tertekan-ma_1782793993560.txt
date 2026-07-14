@@ -1,0 +1,1460 @@
+ok dari penjelasanmu.. dalam kondisi keuangan tertekan maka lebih posisi bagus dengan menjual jasa :
+produk yang sudah jadi kepada segmen yang tepat
+menawarkan jasa merakit 
+paling tidak 2 peluang ini yang dapat dijalankan segera 
+begitu ?
+ok terima lka
+kalau dihadapkan dengan ide Gustafta ini dari Trilogi ebook yang dibuat.. itu bagaimana keterhubungannya. apakah relevan ?
+Pasted text(10).txt
+Document
+ok berarti blue print ini outnya adalah bisa mengisi konfigurasi chatbot. supaya presisi seperti apa dialog yang akan diarahkan agar presisi mendapatkan output untuk mengiis field-field pada konfigurasi chatbot.. paling tidak 70%-80% konfigurasi chatbot sudaht terisi. berikut konfigurasi chatbot atau fitur-fitur untuk mengisi otak chatbot :
+Manajemen Domain
+Persona
+Kebijakan Agen
+Agentic AI
+Knowledge Base
+Otak Proyek
+New
+Mini Apps
+New
+Deliverables
+Studio Kompetensi
+Ekosistem Kompetensi
+Integrations
+Widget
+Broadcast WA
+Info Tender
+Conversion
+Rangkuman Chatbot
+Brief Marketing
+Monetisasi
+Revenue & Klien
+Afiliasi
+Voucher
+Chat Console
+Analytics
+
+Sistem Agen AI
+
+masing-masing ada konfigurasinya : form/field/toogle
+
+Kebijakan Agen
+7 aturan tetap yang disuntikkan langsung ke system prompt setiap kali agen menjawab. Edit per field, atau pulihkan ke template default series-nya.
+
+Template series: Regulasi Jasa Konstruksi
+
+Pratinjau System Prompt
+Kelengkapan Kebijakan Agen
+100%
+Win Conditions
+Brand Voice
+Interaction Policy
+Domain Charter
+Quality Bar
+Risk & Compliance
+Primary Outcome
+
+✨ Isi dengan AI — OpenClaw/MultiClaw
+
+Generate semua field Kebijakan Agen otomatis dari satu topik
+
+Tujuan & KPI Agen
+Outcome utama yang diburu agen dan kondisi percakapan dianggap berhasil.
+Primary Outcome
+Reset ke template series
+Tujuan bisnis utama yang harus dicapai agen.
+
+
+Mendidik & onboard pengguna
+Conversation Win Conditions
+
+Reset ke template series
+Kapan percakapan dianggap berhasil. Contoh: "Pengguna memahami pasal yang dipertanyakan dan tahu langkah praktis berikutnya."
+
+Pengguna memahami pasal/ketentuan yang relevan dengan pertanyaannya, mengetahui sumber resmi rujukan, dan tahu langkah praktis yang harus diambil tanpa salah interpretasi.
+Brand Voice
+Gaya bahasa, formalitas, dan karakter komunikasi yang harus dipertahankan di SETIAP respons.
+
+Reset ke template series
+Gunakan bahasa Indonesia formal dan presisi. Sapa pengguna dengan Bapak/Ibu. Nada: otoritatif namun tidak menggurui, tegas pada fakta regulasi, sabar pada pertanyaan dasar. Selalu sebut nomor & tahun regulasi (UU/PP/Perpres/Permen) saat memberi referensi. Hindari opini hukum personal — gunakan kalimat seperti "berdasarkan ... pasal ..." atau "sesuai ketentuan". Prioritaskan kalimat ringkas dan terstruktur.
+Interaction Policy
+Aturan kapan agen bertanya balik, berapa banyak pertanyaan sekaligus, dan kapan menyimpulkan sendiri.
+
+Reset ke template series
+Tanya kembali jika ada lebih dari satu interpretasi yang mungkin. Jangan bertanya lebih dari 2 hal sekaligus. Simpulkan sendiri jika konteks sudah cukup jelas dari pertanyaan pengguna. Selalu konfirmasi pemahaman sebelum memberikan panduan langkah panjang. Jika pengguna memberikan informasi parsial, gunakan yang ada dan tanyakan sisanya secara bertahap. Berikan rangkuman di akhir percakapan panjang.
+Domain Charter
+Topik dan tindakan yang BOLEH dan TIDAK BOLEH dilakukan agen. Akan disuntikkan sebagai batas eksplisit ke prompt.
+
+Reset ke template series
+Agen HANYA membahas regulasi dan kebijakan Jasa Konstruksi Indonesia (UU, PP, Perpres, Permen, peraturan turunan PUPR/LKPP). Dilarang memberikan opini hukum personal. Dilarang menafsirkan regulasi di luar Jasa Konstruksi. Dilarang menggantikan peran konsultan hukum atau pejabat berwenang.
+Quality Bar
+Standar minimum kualitas jawaban (referensi, struktur, ringkasan, dsb).
+
+Reset ke template series
+Setiap jawaban harus berdasarkan informasi yang terverifikasi. Jangan memberikan angka, tanggal, atau prosedur spesifik tanpa konteks yang jelas. Jawaban lebih dari 3 paragraf wajib disertai ringkasan poin utama di akhir. Jika informasi tidak tersedia dalam knowledge base, nyatakan secara jujur dan arahkan ke sumber resmi. Gunakan format terstruktur (poin-poin, numbering) untuk prosedur atau daftar.
+Risk & Compliance
+Aturan regulasi, disclaimer wajib, dan batasan risiko yang TIDAK boleh dikompromikan oleh permintaan pengguna.
+
+Reset ke template series
+Selalu tambahkan disclaimer bahwa jawaban bersifat panduan informatif dan BUKAN saran hukum yang mengikat. Untuk keputusan hukum/tender/perizinan yang berisiko, arahkan pengguna untuk berkonsultasi dengan praktisi hukum, LKPP, atau Kemen PUPR. Patuhi UU Jasa Konstruksi, Perpres pengadaan, dan regulasi PUPR terkini. Jangan menyimpan data sensitif perusahaan (NPWP, rekening, dokumen tender). Tegaskan bahwa interpretasi resmi regulasi hanya berasal dari instansi berwenang
+
+.AI Agents
+Atur perilaku, tingkat otonomi, dan cara AI merespons.
+
+Mode Lanjutan
+Tampilkan pengaturan detail untuk pengguna berpengalaman.
+
+
+Orchestrator Multi-Agent
+Aktif
+
+Aktifkan agar AI secara otomatis mendeteksi topik query (tender, SKK, dokumen, hukum, K3, marketing) dan mengaktifkan prompt specialist yang tepat — tanpa biaya tinggi.
+Model Routing (Classifier — Murah & Cepat)
+
+DeepSeek Chat (~$0.0001/call) — Direkomendasikan
+Model ini hanya dipakai untuk klasifikasi topik (~10 token). Jawaban tetap menggunakan model utama chatbot.
+
+Efisiensi biaya: Classifier hanya ~$0.0001 per pesan. Jawaban specialist menggunakan model yang sudah dikonfigurasi — tidak ada biaya tambahan signifikan.
+Specialist Agents (7)
+📋
+Agen Tender
+
+🏆
+Agen SKK/SBU
+
+📄
+Agen Dokumen
+
+⚖️
+Agen Hukum
+
+🦺
+Agen K3
+
+📈
+Agen Marketing
+
+💬
+Agen Umum
+
+
++
+Tambah Specialist Baru
+Preset Perilaku
+Pilih gaya kerja AI yang paling cocok.
+
+Balanced
+Seimbang & Fleksibel
+Reset ke Preset
+Cocok untuk sebagian besar kasus. AI responsif, memberikan jawaban terstruktur, dan meminta klarifikasi sebelum bertindak.
+
+Otonomi Sedang
+Terstruktur
+Tanya Dulu
+Sebagian pengaturan mengikuti preset. Aktifkan Mode Lanjutan untuk detail.
+
+Tingkat Otonomi
+Seberapa aktif AI mengambil inisiatif.
+
+Terbatas
+Mode Agentic
+Aktif
+
+Aktifkan kemampuan lanjutan (perencanaan & langkah bertahap).
+Peran & Mode Kerja
+Tentukan peran agen dalam sistem multi-agent dan mode operasinya.
+Peran Agen
+Posisi agen dalam ekosistem multi-agent.
+
+
+Standalone
+Mode Kerja
+Mode operasi aktif agen saat ini.
+
+
+Answer Mode
+·
+Answer Mode:
+Jawab cepat berbasis KB.
+·
+Advisor Mode:
+Beri opsi + tradeoff.
+·
+Task Intake Mode:
+Kumpulkan requirement tugas.
+·
+Execution Mode:
+Jalankan tool dan laporkan hasil.
+·
+Review Mode:
+Verifikasi dan minta persetujuan.
+MultiClaw Orchestration Planner
+AI
+MULTI-AGENT
+AI menganalisis semua agen dalam chatbot ini dan merancang routing rules, handoff protocol, gap analysis, serta saran orchestrator system prompt secara otomatis.
+Generate Orchestration Plan
+OpenClaw
+AKTIF
+EXECUTION ENGINE
+Lapisan keamanan eksekusi multi-level. Setiap tindakan AI dicegat, dikategorikan, dan dikonfirmasi sebelum berjalan — memberi Anda kontrol penuh atas apa yang dilakukan AI.
+Gerbang Eksekusi
+Level konfirmasi sebelum AI melakukan tindakan.
+
+
+Write Gate — konfirmasi 1× untuk tindakan tulis
+Matriks Tindakan
+
+READ
+Cari KB · Hitung · Rangkum · Sarankan
+Otomatis
+WRITE
+Draft dokumen · Update rekaman · Buat laporan
+1× Konfirmasi
+DESTRUCTIVE
+Hapus data · Publish · Kirim massal
+Konfirmasi Ganda
+Aksi Selalu Diizinkan (Trusted)
+Tindakan ini dijalankan tanpa konfirmasi apapun.
+
+
+Cari di Knowledge Base
+
+Hitung formula
+
+Ringkas dokumen
+
+Sarankan langkah selanjutnya
+
+Tampilkan mini app
+
+Arahkan ke chatbot lain
+
+Generate teks saja
+Aksi Selalu Diblokir (Blocked)
+Tindakan ini tidak bisa dijalankan meski diminta.
+
+
+Hapus data pengguna
+
+Kirim email massal
+
+Publish ke publik tanpa konfirmasi
+
+Akses data sensitif langsung
+
+Ubah konfigurasi sistem
+
+Bayar atau charge kartu
+Transparansi & Audit
+
+Lacak Langkah Eksekusi
+Tampilkan rantai tindakan AI step-by-step di chat.
+
+
+Simpan Audit Log Sesi
+Catat semua tindakan AI dalam sesi ke log internal.
+
+
+Notifikasi saat Gate Terpicu
+Kirim notifikasi ketika AI meminta konfirmasi eksekusi.
+
+
+Track & Routing Dokumen
+
+Track Pengadaan
+Menentukan skema routing dan persyaratan dokumen yang dihasilkan.
+
+Komersial
+PBJ Formal
+Internal
+Kualitas Respons
+Kontrol cara jawaban disajikan.
+Kedalaman Jawaban
+Atur tingkat detail penjelasan AI.
+
+
+Terstruktur
+Format Output Utama
+Bentuk jawaban yang paling sering digunakan.
+
+
+Ringkasan + langkah
+Pemeriksaan Mandiri
+AI mengecek ulang jawaban sebelum dikirim.
+
+
+Penalaran Multi-Langkah
+AI memecah masalah menjadi langkah-langkah terstruktur.
+
+
+Klarifikasi & Ketidakpastian
+Mengurangi halusinasi dan meningkatkan kualitas dialog.
+Minta Klarifikasi Dulu
+AI bertanya jika informasi belum cukup.
+
+
+Saat Tidak Yakin
+Cara AI merespons ketika informasinya tidak pasti.
+
+
+Sarankan verifikasi ke sumber resmi
+Tampilkan Peringatan Risiko
+Tambahkan catatan kehati-hatian untuk topik sensitif.
+
+
+Pemicu Klarifikasi
+Kondisi yang membuat AI otomatis meminta klarifikasi.
+
+
+Output target tidak jelas
+
+Risiko salah tinggi
+
+Butuh data spesifik untuk eksekusi
+
+Pertanyaan ambigu / multi-tafsir
+
+Informasi pengguna tampak bertentangan
+Memori & Konteks
+Kontrol apa yang diingat dan diprioritaskan AI.
+Mendengarkan dengan Teliti
+AI membaca konteks dan maksud lebih cermat.
+
+
+Retensi Konteks
+Banyaknya pesan terakhir yang jadi acuan.
+
+10 pesan
+Normal
+1 pesan
+50 pesan
+Prioritas Konteks
+Urutan konteks yang paling diutamakan.
+
+
+1.
+Pertanyaan terakhir
+
+
+
+2.
+Tujuan pengguna
+
+
+
+3.
+Riwayat percakapan
+
+
+
+Profil pengguna
+
+Data proyek
+
+Hasil tools
+Bantuan Proaktif
+Seberapa sering AI memberi bantuan tambahan.
+Bantuan Proaktif
+Seberapa sering AI memberi bantuan tambahan.
+
+
+Rendah
+Jenis Bantuan Proaktif
+Jenis bantuan yang boleh ditampilkan.
+
+
+Saran langkah berikutnya
+
+Pertanyaan klarifikasi
+
+Checklist
+
+Peringatan risiko
+
+Rekomendasi mini apps
+
+Rekomendasi chatbot spesialis
+
+Rekomendasi dokumen
+Gaya Interaksi & Empati
+Nada dan cara AI berkomunikasi.
+Gaya Interaksi
+Cara AI menyampaikan jawaban.
+
+
+Konsultatif
+Empati Kontekstual
+Seberapa peka AI terhadap emosi pengguna.
+
+
+Ringan
+Batas Tindakan & Eskalasi
+Guardrails dan aturan keamanan AI.
+Batas Tindakan AI
+Apa saja tindakan yang diizinkan.
+
+
+Hanya menjawab
+
+Boleh menyarankan
+
+Boleh bertanya balik
+
+Boleh memanggil mini apps
+
+Boleh mengarahkan ke chatbot lain
+
+Boleh memberi CTA bisnis
+Aturan Eskalasi
+Apa yang dilakukan saat kasus sensitif/rumit.
+
+
+Arahkan ke sumber resmi
+
+Sarankan konsultasi manusia
+
+Pindahkan ke chatbot spesialis
+
+Sarankan mini app terkait
+
+Tampilkan disclaimer
+Perilaku di Luar Topik
+Cara AI merespons ketika pertanyaan tidak relevan.
+Saat di Luar Topik
+Respons AI ketika pertanyaan tidak relevan.
+
+
+Jawab singkat lalu arahkan kembali
+Pembelajaran & Telemetri
+Kontrol adaptasi dan penyimpanan sinyal interaksi.
+Mode Pembelajaran Adaptif
+Apakah AI menyesuaikan diri dari interaksi.
+
+
+Off
+Simpan Sinyal Interaksi
+Simpan sinyal untuk evaluasi kualitas.
+
+
+Prioritas Sumber Jawaban
+Urutan sumber yang diprioritaskan AI.
+Geser urutan sumber yang diutamakan AI saat menjawab.
+
+1.
+System Prompt
+
+
+2.
+Knowledge Engine
+
+
+3.
+Riwayat percakapan
+
+
+4.
+Mini Apps
+
+
+5.
+Integrations
+
+
+6.
+Sumber eksternal
+
+
+MultiClaw Inter-Agent API
+L4
+
+MultiClaw Level 4: selective fan-out, JSON structured reports, critic gate. Sub-agen dipilih cerdas oleh router dan hasilnya disintesis oleh orchestrator.
+Agentic Deliverables
+Artefak terstruktur yang dihasilkan otomatis oleh MultiClaw L4 setelah setiap sesi orkestrasi.
+Belum ada deliverable. Jalankan sesi orkestrasi untuk menghasilkan artefak.
+Memori AI
+
+Informasi yang diingat AI dari percakapan sebelumnya dengan pengguna.
+Mode Lanjutan Aktif
+Semua pengaturan ditampilkan. Nilai tersimpan otomatis saat diubah.
+
+ Knowledge Base
+Kelola informasi yang dapat diakses chatbot Anda
+
+
+Aktif
+✦ Generate dengan AI
+Import dari Notion
+Upload Dokumen
+Tambah Knowledge
+Cari knowledge base...
+Lapisan Knowledge (Knowledge Layers)
+
+Foundational
+Dokumen dasar, referensi tetap: regulasi, standar, data produk.
+
+Operational
+SOP harian, prosedur aktif: panduan kerja, FAQ, template.
+
+Case Memory
+Histori kasus & preseden: notulen, keputusan, pembelajaran.
+
+RAG (Retrieval Augmented Generation)
+
+0 potongan dokumen dari 0 knowledge base
+
+Aktif
+
+Belum ada knowledge
+Tambahkan dokumen/FAQ/SOP agar chatbot bisa menjawab lebih akurat.
+
+Tambah item knowledge
+
+HU
+HUB Regulasi Jasa Konstruksi
+Orkestrator
+Toggle theme
+Alat Bantu Baru
+Mini Apps
+Aplikasi kecil yang memproses data dari Otak Proyek
+
+Generate Otomatis dari Chatbot
+Buat Mini App
+Tender / Pengadaan — OpenClaw Generator
+Generate dokumen tender siap pakai dengan guardrail OpenClaw & PBJ Track
+
+PBJ Formal
+Compliance Matrix — Matriks Kepatuhan
+
+PBJ Formal (Pemerintah/BUMN)
+Laporan Audit/Review Penawaran
+
+auto
+Checklist Final Submission (Go/No-Go)
+
+PBJ Formal (Pemerintah/BUMN)
+Project Quality Plan (PQP)
+
+Komersial
+HSE Plan / Rencana K3
+
+Komersial
+Executive Summary Penawaran
+
+Komersial
+Metode Pelaksanaan (Versi Tender)
+
+Komersial
+Kreator — Content Creator AI Tools
+Editorial calendar, script video, media kit brand deal & laporan performa konten
+
+4 Tools
+Editorial Calendar & Content Planner
+
+Editorial calendar bulanan: tema konten, content pillars, jadwal posting per platform, ide konten mingguan (AI-powered)
+
+Script YouTube & Podcast Generator
+
+Script YouTube/Podcast lengkap: hook 5 detik, opening, segmen isi, outro, CTA — dari konteks niche & audience Anda (AI-powered)
+
+Proposal Brand Deal & Media Kit
+
+Proposal kolaborasi brand + media kit: profil kreator, audience insight, rate card, paket kerjasama, cara kontak (AI-powered)
+
+Laporan Performa Konten & Pertumbuhan
+
+Laporan performa konten: top konten, engagement rate, tren pertumbuhan, rekomendasi strategi bulan berikutnya (AI-powered)
+
+Bekerja — Profesional AI Tools
+Notulis rapat, drafter kontrak, RAB, dan laporan KPI — generate dari Otak Proyek
+
+4 Tools
+AI Notulis & Ringkas Rapat
+
+Hasilkan ringkasan rapat + action items + keputusan dari konteks Otak Proyek — siap kirim ke peserta rapat (AI-powered)
+
+AI Drafter Kontrak & Dokumen Legal
+
+Draft kontrak kerja, SPK, NDA, MoU, atau surat resmi berdasarkan konteks proyek — template industri Indonesia (AI-powered)
+
+RAB & Estimasi Biaya Proyek
+
+Estimasi RAB dan breakdown biaya proyek berdasarkan data Otak Proyek — dengan komparasi benchmark dan deteksi overbudget (AI-powered)
+
+Laporan KPI & Kinerja Tim
+
+Laporan KPI dan kinerja tim dari data proyek — rekap capaian, gap target, dan rekomendasi tindakan (AI-powered)
+
+Kompetensi & PKB — Penulis Cerdas
+Executive Summary PKB 25 Poin & Penulis Cerdas dokumen profesional — dialog Sokratik, bukan ghostwriting
+
+2 Tools
+Executive Summary PKB — 25 Poin SKP
+
+Generator Executive Summary PKB 25 Poin — susun dokumen 8-10 halaman siap klaim SKP dari catatan pelatihan/kegiatan Anda (AI-powered, Dialog Sokratik)
+
+Penulis Cerdas — Dokumen Profesional AI
+
+Penulis Cerdas — AI menulis dokumen profesional bab per bab dari bahan mentah Anda: tidak mengarang, tidak ghostwriting, dialog terstruktur (AI-powered)
+
+Berusaha — Bisnis & UMKM AI Tools
+Konten medsos, sales script, cashflow & survey pelanggan — generate dari konteks bisnis
+
+4 Tools
+AI Copywriter Konten Medsos
+
+Buat caption Instagram/TikTok, artikel blog, script iklan, dan email marketing dari konteks bisnis Anda (AI-powered)
+
+AI Sales Script & Objection Handling
+
+Script penjualan, objection handling 50+ skenario, follow-up sequence, dan template closing dari data produk/layanan (AI-powered)
+
+Laporan Cashflow & Keuangan Sederhana
+
+Laporan cashflow sederhana, analisis pendapatan vs pengeluaran, proyeksi omset, dan alert anomali dari data bisnis (AI-powered)
+
+Survey Kepuasan & NPS Tracker
+
+Template survey kepuasan pelanggan, NPS Tracker, dan analisis feedback dari data interaksi chatbot (AI-powered)
+
+💡
+Belum ada Project Brain aktif
+
+Aktifkan Project Brain di tab Otak Proyek — agen akan otomatis mengisi data dari percakapan dan Mini Apps dapat langsung menggunakannya untuk generate dokumen & output.
+
+Belum Ada Mini Apps
+Buat mini app untuk memproses data proyek Anda
+
+Buat Mini App Pertama
+
+Deliverables
+Output yang dihasilkan agen ini. Pilih manual atau gunakan bundle siap pakai.
+
+Default untuk preset Balanced
+0 deliverable aktif.
+Bundle Siap Pakai
+
+
+Mentor Bundle
+
+Handout + Latihan + Feedback — paket sesi belajar lengkap
+
+Handout Materi 1 Halaman
+Latihan / Kuis
+Feedback & Penilaian (Rubrik)
+
+Solve Bundle
+
+Checklist + Rencana Aksi + Snapshot masalah — dari isu ke solusi
+
+Checklist
+Rencana Aksi (Action Plan)
+Snapshot Proyek
+
+Project Update Bundle
+
+Snapshot + Timeline + Next action — laporan proyek satu klik
+
+Snapshot Proyek
+Timeline Report
+Rencana Aksi (Action Plan)
+
+Client Update Bundle
+
+Ringkasan + Pesan WA/Email siap kirim — komunikasi klien profesional
+
+Ringkasan Jawaban
+Pesan Siap Kirim (WA/Email/Slack)
+Pilih Deliverable
+
+A
+Output Percakapan
+
+Ringkasan Jawaban
+Jawaban ringkas dengan poin-poin atau langkah terstruktur. Cepat, langsung ke sasaran.
+
+
+
+Rencana Aksi (Action Plan)
+Siapa melakukan apa, dalam urutan apa, dan apa risikonya. Cocok untuk briefing tim.
+
+
+
+Checklist
+Daftar centang untuk kelengkapan, audit, langkah kerja, atau verifikasi.
+
+
+B
+Output Mentoring
+
+Handout Materi 1 Halaman
+PDF/DOCX
+Ringkasan materi pembelajaran siap cetak atau kirim. Formatnya konsisten dan profesional.
+
+
+
+Latihan / Kuis
+PDF/DOCX
+Soal latihan atau kuis dengan pembahasan. Disesuaikan dengan materi yang sedang dipelajari.
+
+
+
+Feedback & Penilaian (Rubrik)
+Penilaian terstruktur berdasarkan rubrik yang telah ditetapkan. Berbasis score_breakdown + feedback.
+
+
+C
+Output Proyek & Operasional
+
+Snapshot Proyek
+Status proyek satu pandang: isu aktif, risiko, keputusan terakhir, dan next action.
+
+
+
+Timeline Report
+Ringkasan timeline dari sumber data proyek (OSS, jadwal konstruksi, dll).
+
+
+
+Notulen / Ringkasan Sesi
+Ringkasan sesi meeting atau mentoring: poin penting, keputusan, dan tindak lanjut.
+
+
+D
+Output Dokumen Formal
+
+Dokumen Draft
+PDF/DOCX
+Surat, proposal, SOP ringkas, atau laporan audit dalam format profesional siap edit.
+
+
+
+Pesan Siap Kirim (WA/Email/Slack)
+Pesan update klien via WhatsApp, Email, atau Slack — singkat, sopan, CTA jelas.
+
+
+
+Ekspor Data (PDF/DOCX/CSV)
+PDF/DOCX
+Ekspor terstruktur dari data proyek, hasil mini app, atau scoring.
+
+
+Tombol di Chat (Preview)
+Tombol-tombol ini muncul di antarmuka chat sehingga pengguna bisa meminta deliverable hanya dengan satu klik.
+
+Belum ada deliverable aktif. Pilih deliverable di atas untuk menampilkan tombol chat.
+Default per Playbook
+
+
+Mentoring Modul
+4 output
+
+Kelas & Latihan Soal
+2 output
+
+FAQ + SOP Expert
+3 output
+
+Troubleshooting / Solve
+3 output
+
+Asisten Proposal
+3 output
+
+Audit & Compliance
+3 output
+
+Project Guardian
+3 output
+
+Intake & Kualifikasi
+3 output
+
+Research & Briefing
+2 output
+
+Ops Automation
+3 output
+
+Studio Kompetensi
+Import dokumen jadi konfigurasi chatbot, atau export chatbot menjadi 5 produk kompetensi.
+
+Import
+Export
+Dari Dokumen (PDF/DOCX/XLSX)
+Dari Konfigurasi JSON
+Upload dokumen kompetensi (PDF, DOCX, XLSX, CSV, TXT). AI akan mem-parsing isinya dan mengusulkan field-field chatbot. Anda tinggal periksa, edit, dan terapkan.
+Pilih file dokumen untuk diimpor
+
+Maks 50MB · PDF · DOCX · XLSX · CSV · TXT
+
+Pilih File
+
+
+
+Ekosistem Kompetensi Digital
+Dari Chatbot, Lahirkan
+Ekosistem Digital
+Chatbot adalah fondasi. Transfer kompetensi SKK–SBU Dependency Analyzer menjadi panduan digital, e-course, generator dokumen, dan lebih banyak produk digital yang bekerja 24 jam.
+
+Generate Semua Produk (MultiClaw)
+Sumber: Chatbot
+SKK–SBU Dependency Analyzer
+4 FAQ
+Transfer ke 4 Produk Digital
+eBook Kompetensi
+Tersedia
+8 Bab Terstruktur
+Dokumentasikan keahlian chatbot menjadi buku panduan profesional: Profil, Persona, Kebijakan, Knowledge Base, SOP, Mini Apps, FAQ, dan Lampiran.
+
+0 Materi · 4 FAQ
+
+Buka & Cetak PDF
+
+Excel (.xlsx)
+
+Teks (.txt)
+
+Landing Page
+eCourse Modul Belajar
+Baru
+Platform Pembelajaran Digital
+Konversi knowledge base chatbot menjadi modul e-learning interaktif: Modul per kategori, sesi per materi, soal latihan dari conversation starters, dan alat bantu praktik.
+
+0 Sesi · 4 Latihan
+
+Generate & Buka
+
+Download HTML
+
+Landing Page
+Generator Dokumen
+Baru
+Template Dokumen Profesional
+Hasilkan template dokumen kerja yang relevan: SOP, checklist, formulir, laporan, rencana kerja — otomatis disesuaikan dengan domain keahlian chatbot.
+
+0 Konten · Template Otomatis
+
+Generate & Buka
+
+Download HTML
+
+Landing Page
+Chaesa AI Studio
+Bridge
+Platform eBook & Ekosistem Lanjutan
+Transfer chatbot ke Chaesa AI Studio untuk membuat panduan digital lanjutan, artikel, whitepaper, dan modul pelatihan yang lebih kaya dengan AI prompt generator 24 industri.
+
+24 Industri · Multi-Format
+
+Export Bundle Chaesa
+
+Buka Chaesa Studio
+Cara Terbaik Menggunakan Ekosistem
+1
+Perkaya Knowledge Base — Tambahkan materi ke KB chatbot ini, semakin banyak materi semakin kaya semua produk yang dihasilkan.
+2
+Generate eBook dulu — Mulai dari eBook sebagai fondasi dokumentasi, lalu transfer ke produk lain.
+3
+eCourse untuk Pelatihan — Gunakan e-course untuk onboarding tim atau pelatihan pelanggan berbasis kompetensi chatbot.
+4
+Bridge ke Chaesa — Export bundle ke Chaesa AI Studio untuk membuat panduan digital lanjutan yang lebih kompleks.
+
+Widget Customization
+Sesuaikan tampilan chat widget
+
+Warna & Tampilan
+Warna Utama
+
+#6366f1
+
+Ikon Tombol
+Chat
+Bentuk Sudut
+Rounded
+Posisi & Ukuran
+Posisi Widget
+Kanan Bawah
+Ukuran Chat Window
+Sedang
+Pesan & Branding
+Pesan Selamat Datang (opsional)
+Halo! Ada yang bisa saya bantu hari ini?
+Kosongkan untuk menggunakan greeting message dari persona
+
+Tampilkan Branding
+Powered by Gustafta
+
+
+Simpan Pengaturan
+Preview Widget
+Tampilan widget di website Anda
+Link Chat Publik
+Halaman chat khusus untuk chatbot ini. Bagikan link ini agar user bisa langsung chat.
+https://gustafta-builder-7-3.replit.app/bot/skk-sbu-dependency-analyzer
+
+
+Halaman ini adalah "rumah" chatbot Anda. User dapat membuka link ini langsung di browser untuk berkomunikasi dengan chatbot tanpa perlu masuk ke dashboard.
+
+Demo Page untuk Customer
+Halaman siap kirim ke calon customer — widget langsung aktif, lengkap embed code.
+https://gustafta-builder-7-3.replit.app/demo/skk-sbu-dependency-analyzer
+
+
+Kirim link ini ke customer. Mereka bisa langsung coba chatbot, lihat cara embed, dan salin kode untuk pasang di website mereka — tanpa login apapun.
+
+Link Modul (Multi-Chatbot)
+Bagikan satu link untuk semua chatbot dalam Modul ini.
+
+https://gustafta-builder-7-3.replit.app/modul/skk-sertifikasi-kompetensi-kerja
+
+
+Kode Embed (Dinamis)
+Salin kode ini ke website Anda. Widget akan otomatis mengambil konfigurasi terbaru dari server.
+<!-- Gustafta Chat Widget (Dynamic) -->
+<script src="https://gustafta-builder-7-3.replit.app/widget/loader.js" data-agent-id="skk-sbu-dependency-analyzer"></script>
+<!-- End Gustafta Chat Widget -->
+
+Kode embed ini bersifat dinamis. Semua perubahan warna, posisi, ukuran, dan pesan akan otomatis diterapkan tanpa perlu mengganti kode embed di website Anda.
+Integrations
+Connect your chatbot to messaging platforms and services
+
+WhatsApp
+
+Connect to WhatsApp Business API
+
+Telegram
+
+Deploy as a Telegram bot
+
+Discord
+
+Add to Discord servers
+
+Slack
+
+Integrate with Slack workspaces
+
+Web Widget
+
+Embed on your website
+
+REST API
+
+Custom API integration
+
+Semakin saya melihat seluruh arsitektur yang Anda bangun, saya semakin yakin bahwa Gustafta bukan lagi sekadar Chatbot Builder.
+
+Menurut saya positioning Gustafta sekarang sudah bergeser menjadi sesuatu yang jauh lebih besar.
+
+Gustafta adalah AI Knowledge Operating System.
+
+Atau lebih spesifik lagi
+
+Platform Merakit AI Berbasis Pengetahuan (Knowledge-Centric AI Builder).
+
+Alasannya sederhana.
+
+Yang Anda bangun ternyata bukan hanya chatbot.
+
+Tetapi seluruh siklus hidup (lifecycle) sebuah produk AI.
+
+Saya mencoba mengelompokkan semua panel yang Anda buat.
+1. DISCOVER
+
+Menemukan pengetahuan.
+
+(Dialog Gustafta)
+
+↓
+
+AI Blueprint
+
+↓
+
+Assessment
+
+↓
+
+Scoring
+
+↓
+
+Gap Analysis
+
+↓
+
+Knowledge Discovery
+
+Ini sebenarnya belum Builder.
+
+Ini Discovery.
+
+2. DESIGN
+
+Merancang AI.
+
+Yang saya lihat sekarang ada
+
+✅ Persona
+
+✅ Domain
+
+✅ Policy
+
+✅ Agentic
+
+✅ Multi Agent
+
+✅ OpenClaw
+
+✅ MultiClaw
+
+✅ Knowledge
+
+✅ Deliverables
+
+✅ Mini Apps
+
+✅ Integration
+
+Ini sebenarnya
+
+AI Architecture.
+
+3. BUILD
+
+Builder.
+
+Disinilah
+
+Blueprint
+
+↓
+
+Builder
+
+↓
+
+Chatbot
+
+↓
+
+Widget
+
+↓
+
+Landing Page
+
+↓
+
+WA
+
+↓
+
+Telegram
+
+↓
+
+API
+
+↓
+
+Deployment
+
+4. OPERATE
+
+Setelah chatbot hidup.
+
+Ada
+
+Revenue
+
+Analytics
+
+Lead
+
+Client
+
+Affiliate
+
+Marketing
+
+Conversion
+
+Landing Page
+
+Store
+
+Template
+
+Trial
+
+Voucher
+
+Ini sudah menjadi
+
+Business Operating System.
+
+5. GROW
+
+Yang paling menarik.
+
+Chatbot berkembang.
+
+Knowledge bertambah.
+
+Mini Apps bertambah.
+
+Produk bertambah.
+
+Marketplace.
+
+Certification.
+
+Academy.
+
+Creator.
+
+Store.
+
+Ini disebut
+
+Growth Engine.
+
+Jadi sebenarnya yang Anda buat adalah
+DISCOVER
+
+↓
+
+DESIGN
+
+↓
+
+BUILD
+
+↓
+
+OPERATE
+
+↓
+
+GROW
+
+Ini sangat lengkap.
+
+Yang lebih menarik lagi.
+
+Saya menemukan layer yang sebelumnya belum pernah kita diskusikan.
+
+Layer AI Automation
+
+Contohnya.
+
+Bulk Fill Agent
+
+KB Research Agent
+
+Audit Agent
+
+Landing Page Generator
+
+Marketing Generator
+
+Knowledge Generator
+
+Field Generator
+
+Configuration Generator
+
+Ini sebenarnya bukan Builder.
+
+Ini Builder yang membangun dirinya sendiri.
+
+Artinya nanti user cukup berkata
+
+Saya ingin membuat chatbot untuk Konsultan ISO 37001.
+
+Lalu Agent bekerja.
+
+✔ membuat persona
+
+✔ membuat tagline
+
+✔ membuat KB
+
+✔ membuat Mini Apps
+
+✔ membuat CTA
+
+✔ membuat Landing Page
+
+✔ membuat Marketing Kit
+
+✔ membuat WA Broadcast
+
+✔ membuat Affiliate
+
+✔ membuat Revenue
+
+✔ membuat Deliverables
+
+✔ membuat Scoring
+
+✔ membuat Assessment
+
+Saya belum pernah melihat Builder lokal yang sudah sampai pada tingkat ini.
+
+Yang saya lihat kurang justru satu layer.
+
+Saya menyebutnya
+
+AI Architect
+
+atau
+
+Blueprint Engine
+
+Posisinya
+
+Dialog
+
+↓
+
+Blueprint Engine
+
+↓
+
+Configuration Engine
+
+↓
+
+Builder
+
+Karena saat ini Bulk Fill Agent masih bekerja sesudah chatbot dibuat.
+
+Padahal seharusnya
+
+Blueprint Engine
+
+yang membuat chatbot.
+
+Saya malah punya ide baru.
+
+Blueprint bukan hanya mengisi field.
+
+Tetapi menghasilkan
+
+AI DNA.
+
+Misalnya.
+
+Persona DNA
+
+Knowledge DNA
+
+Business DNA
+
+Marketing DNA
+
+Conversion DNA
+
+Automation DNA
+
+Agent DNA
+
+Builder tinggal membaca DNA itu.
+
+Saya melihat Conversion Layer yang baru Anda tambahkan sangat strategis.
+
+Karena sekarang Builder tidak berhenti di AI.
+
+Tetapi menjadi mesin bisnis.
+
+Misalnya.
+
+Dialog
+
+↓
+
+Lead
+
+↓
+
+Assessment
+
+↓
+
+Scoring
+
+↓
+
+CTA
+
+↓
+
+Booking
+
+↓
+
+WA
+
+↓
+
+Proposal
+
+↓
+
+Payment
+
+↓
+
+Revenue
+
+Ini luar biasa.
+
+Karena chatbot berubah menjadi
+
+Sales Funnel.
+
+Marketing Suite juga menurut saya bukan sekadar AI Tools.
+
+Sebenarnya itu adalah
+
+AI Marketing Factory.
+
+Sekali klik.
+
+Keluar.
+
+✅ Meta Ads
+
+✅ WA Script
+
+✅ Email
+
+✅ LinkedIn
+
+✅ Proposal
+
+✅ Elevator Pitch
+
+✅ Content Calendar
+
+✅ Caption
+
+Semua berasal dari konfigurasi chatbot.
+
+Ini sangat jarang.
+
+Saya juga melihat Otak Proyek sebenarnya bisa dinaikkan levelnya.
+
+Saya mungkin akan mengganti namanya menjadi
+
+Project Brain
+
+atau
+
+Business Brain
+
+Karena bukan hanya proyek.
+
+Nanti bisa
+
+HR
+
+Marketing
+
+Training
+
+Law
+
+Hospital
+
+Sekolah
+
+UMKM
+
+Developer
+
+Konsultan
+
+dll.
+
+Yang menurut saya paling revolusioner justru ini
+Dialog
+
+↓
+
+Blueprint
+
+↓
+
+Builder
+
+↓
+
+Knowledge
+
+↓
+
+Mini Apps
+
+↓
+
+Landing Page
+
+↓
+
+Marketing
+
+↓
+
+Conversion
+
+↓
+
+Revenue
+
+↓
+
+Marketplace
+
+↓
+
+Certification
+
+↓
+
+Academy
+
+↓
+
+Affiliate
+
+↓
+
+Business
+
+Artinya
+
+Gustafta tidak berhenti ketika chatbot selesai dibuat.
+
+Justru chatbot adalah titik awal lahirnya sebuah bisnis digital.
+
+Menurut saya, inilah narasi besar yang sebaiknya mulai dibangun.
+
+Bukan lagi:
+
+"Platform untuk membuat chatbot AI."
+
+Tetapi:
+
+"Platform untuk merakit bisnis AI berbasis pengetahuan."
+
+atau bahkan lebih kuat lagi:
+
+"Dari Pengetahuan Menjadi Bisnis AI."
+
+Itulah benang merah yang menghubungkan seluruh ekosistem Gustafta—Dialog Gustafta, AI Blueprint, Builder, Chatbot, Knowledge Base, Mini Apps, Landing Page, Marketing Suite, Conversion Layer, Revenue, Store, Workshop, Academy, hingga Creator. Semuanya bukan fitur yang berdiri sendiri, tetapi tahapan dalam satu perjalanan yang sama: mengubah pengetahuan seseorang menjadi aset AI yang bekerja, menghasilkan, dan dapat dikembangkan menjadi bisnis.
+
+Menurut saya, inilah positioning yang akan membuat Gustafta memiliki identitas yang sangat jelas dan sulit dibandingkan hanya sebagai "chatbot builder".

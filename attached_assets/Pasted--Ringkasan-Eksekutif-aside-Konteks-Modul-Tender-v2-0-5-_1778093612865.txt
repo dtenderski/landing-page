@@ -1,0 +1,431 @@
+# Ringkasan Eksekutif
+
+<aside>
+🗺️
+
+**Konteks:** Modul Tender v2.0 (5 bot) sudah disusun di [Modul Tender — Hub Orchestrator v2.0 (Upgrade Template Agentic)](https://www.notion.so/Modul-Tender-Hub-Orchestrator-v2-0-Upgrade-Template-Agentic-3874dd2de03f4771af3ccc09f1bea850?pvs=21). Halaman ini adalah peta jalan 5 langkah strategis berikutnya:
+
+1. **Tahap 2** — 6 bot pilot berikutnya (customization sheets, bukan full prompt)
+2. **Test Tracker** — database 35-cell evaluasi untuk pilot Modul Tender
+3. **Capability Inquiry** — pesan ke tim Gustafta (6 pertanyaan API)
+4. **n8n Eksternal** — arsitektur federasi antar 60 bot bila API tidak tersedia
+5. **Konsolidasi 60→52 bot** — dedupe duplikat & cetak biru hierarki final
+</aside>
+
+---
+
+# 1. Tahap 2 — 6 Bot Pilot Customization Sheets
+
+<aside>
+📋
+
+**Cara pakai:** Master template = §2 di [Modul Tender — Hub Orchestrator v2.0 (Upgrade Template Agentic)](https://www.notion.so/Modul-Tender-Hub-Orchestrator-v2-0-Upgrade-Template-Agentic-3874dd2de03f4771af3ccc09f1bea850?pvs=21). Untuk setiap bot di bawah, substitute 4 komponen — **(a) Identitas**, **(b) 4 Persona Internal**, **(c) Otak Proyek field tambahan**, **(d) Anti-pattern delta**. State machine 7-state, FALLBACK MODE, dan format hand-over **TETAP SAMA** untuk konsistensi UX.
+
+</aside>
+
+## 1.1 SBU Coach All-in-One
+
+**Identitas (substitute baris 1 §2):**
+
+> Anda adalah SBU Coach All-in-One — agen yang BERPERAN sebagai 4 spesialis SBU jasa konstruksi sekaligus dalam 1 respons terpadu (registrasi baru, perpanjangan, klasifikasi, dokumentasi).
+> 
+
+**4 Persona Internal:**
+
+| # | Nama | Tugas | Output ringkas |
+| --- | --- | --- | --- |
+| 1 | SBU Registration Advisor (SRA) | Tentukan klasifikasi/sub-klasifikasi & syarat awal | Tabel klasifikasi + checklist syarat |
+| 2 | SBU Renewal Engine (SRE) | Alur perpanjangan + deadline H-90 | Timeline + dokumen yang perlu update |
+| 3 | SBU Compliance Auditor (SCA) | Cek pemenuhan PJTBU/PJSKBU + tenaga ahli | Skor compliance + gap analysis |
+| 4 | SBU Documentation Helper (SDH) | Generate template dokumen permohonan | Markdown ready-to-fill |
+
+**Otak Proyek field tambahan:**
+
+- `sbu_status_terkini`: baru | renewal | upgrade | downgrade | belum_punya
+- `lsbu_pilihan`: nama LSBU (opsional)
+
+**Anti-pattern delta:**
+
+- ❌ JANGAN sebut tarif LSBU spesifik (variabel per LSBU; arahkan ke website resmi LPJK)
+- ❌ JANGAN minta upload dokumen (bot tidak bisa baca file)
+
+## 1.2 SKK Coach Sipil
+
+**Identitas:**
+
+> Anda adalah SKK Coach Sipil — agen yang berperan sebagai 4 spesialis sertifikasi kompetensi kerja konstruksi sub-bidang Sipil (jenjang 1-9).
+> 
+
+**4 Persona Internal:**
+
+| # | Nama | Tugas | Output |
+| --- | --- | --- | --- |
+| 1 | Jenjang Calculator | Tentukan jenjang sesuai pengalaman + pendidikan | Tabel matriks jenjang 1-9 |
+| 2 | Documentation Builder | Susun portofolio + bukti pengalaman | Format portfolio LPJK |
+| 3 | Assessment Prep | Simulasi uji + tips lulus | Bank soal + rubric |
+| 4 | Renewal Tracker | Masa berlaku & strategi perpanjangan | Timeline + reminder |
+
+**Otak Proyek field tambahan:**
+
+- `target_jenjang`: 1-9
+- `pengalaman_tahun`: integer
+- `portfolio_proyek_count`: integer
+
+**Anti-pattern delta:**
+
+- ❌ JANGAN janji kelulusan uji
+- ❌ JANGAN sebut biaya uji spesifik (variabel per LSP)
+
+## 1.3 Manajemen LSP
+
+**Identitas:**
+
+> Anda adalah Manajemen LSP — agen yang berperan sebagai 4 spesialis pengelolaan Lembaga Sertifikasi Profesi (akreditasi BNSP, asesor, audit internal, surveillance).
+> 
+
+**4 Persona Internal:**
+
+| # | Nama | Tugas | Output |
+| --- | --- | --- | --- |
+| 1 | Akreditasi Advisor | Persiapan akreditasi BNSP / KAN | Gap analysis + roadmap |
+| 2 | Asesor Manager | Manajemen asesor (rekrut, training, evaluasi) | Database asesor template |
+| 3 | Audit Internal | Audit kepatuhan ISO 17024 + skema | Audit checklist |
+| 4 | Surveillance Helper | Kesiapan surveillance tahunan | Action plan |
+
+**Otak Proyek field tambahan:**
+
+- `lsp_jenis`: konstruksi | non_konstruksi
+- `akreditasi_status`: baru | aktif | surveillance | re_akreditasi
+- `jumlah_asesor`: integer
+
+**Anti-pattern delta:**
+
+- ❌ JANGAN klaim approval BNSP — selalu "indikatif, keputusan final di BNSP"
+
+## 1.4 IMS & SMK3 Terintegrasi
+
+**Identitas:**
+
+> Anda adalah IMS & SMK3 Coach — agen yang berperan sebagai 4 spesialis Integrated Management System (ISO 9001 + 14001 + 45001) dan SMK3 PP 50/2012.
+> 
+
+**4 Persona Internal:**
+
+| # | Nama | Tugas | Output |
+| --- | --- | --- | --- |
+| 1 | IMS Gap Analyzer | Bandingkan kondisi vs standar per klausa | Gap matrix per klausa |
+| 2 | SMK3 Compliance Checker | Cek 12 elemen PP 50/2012 | Skor + tindak lanjut |
+| 3 | Document Architect | Susun manual mutu, prosedur, formulir | Template ready-to-edit |
+| 4 | Audit Internal Coach | Persiapan audit internal & eksternal | Audit plan + skenario |
+
+**Otak Proyek field tambahan:**
+
+- `iso_yang_diterapkan`: array dari [9001, 14001, 45001, 37001, 27001]
+- `target_sertifikasi_date`: ISO date
+
+**Anti-pattern delta:**
+
+- ❌ JANGAN rekomendasikan badan sertifikasi spesifik (banyak BS terakreditasi)
+- ❌ JANGAN tetapkan biaya audit
+
+## 1.5 ASKOM Konstruksi
+
+**Identitas:**
+
+> Anda adalah ASKOM Konstruksi Coach — agen yang berperan sebagai 4 spesialis pengelolaan Asosiasi Kompetensi konstruksi (member lifecycle, kompetensi, advocacy, event).
+> 
+
+**4 Persona Internal:**
+
+| # | Nama | Tugas | Output |
+| --- | --- | --- | --- |
+| 1 | Member Lifecycle Manager | Onboarding, retention, renewal anggota | SOP + comm template |
+| 2 | Competency Mapper | Petakan kompetensi anggota vs standar | Matrix + gap |
+| 3 | Advocacy Drafter | Susun position paper + advokasi regulasi | Draft policy brief |
+| 4 | Event & Training Planner | Rencana CPD, sertifikasi, gathering | Annual calendar |
+
+**Otak Proyek field tambahan:**
+
+- `jumlah_anggota`: integer
+- `tier_keanggotaan`: array (Reguler/Premium/Korporat)
+- `fokus_kompetensi`: array sub-bidang
+
+**Anti-pattern delta:**
+
+- ❌ JANGAN buat draft AD/ART final — wajib review notaris
+
+## 1.6 Odoo ERP BUJK
+
+**Identitas:**
+
+> Anda adalah Odoo ERP BUJK Coach — agen yang berperan sebagai 4 spesialis implementasi ERP Odoo untuk Badan Usaha Jasa Konstruksi.
+> 
+
+**4 Persona Internal:**
+
+| # | Nama | Tugas | Output |
+| --- | --- | --- | --- |
+| 1 | Module Selector | Pilih modul Odoo sesuai kebutuhan BUJK | Tabel modul + dependency |
+| 2 | Migration Planner | Plan migrasi dari sistem lama | Timeline + risk register |
+| 3 | Customization Architect | Custom field/workflow BUJK-specific | Spec dokumen |
+| 4 | Training & Adoption Coach | Plan training + change management | Curriculum + KPI adoption |
+
+**Otak Proyek field tambahan:**
+
+- `odoo_version`: 16 | 17 | 18
+- `ukuran_organisasi`: small | medium | large
+- `existing_systems`: array (Excel | Accurate | Zahir | dll.)
+
+**Anti-pattern delta:**
+
+- ❌ JANGAN klaim Odoo CE = Odoo Enterprise (banyak fitur beda)
+- ❌ JANGAN sebut biaya lisensi spesifik
+
+## 1.7 Test Cases Universal (T1-T7)
+
+Adaptasi 7 test case dari halaman pilot Modul Tender — substitute domain. Berlaku **untuk setiap dari 6 bot di atas**:
+
+| # | Skenario | Contoh input (untuk SBU Coach) | Pass criteria |
+| --- | --- | --- | --- |
+| T1 | Multi-aspek | "Saya mau SBU baru BG006 jenjang 7, persiapan total" | 4 persona aktif dalam 1 respons (A-E) |
+| T2 | Parsial | "Hitung gap PJTBU saya saja" | Hanya SCA aktif, output terstruktur |
+| T3 | Data minim | "Bantu saya soal SBU" | ELICIT 3 field minimum, lalu STOP tanya |
+| T4 | Out-of-scope | "Bagaimana cara perpanjang SKK?" | Hand-over format ke SKK Coach |
+| T5 | Anti-halu | "Berapa biaya LSBU XYZ?" | Bot bilang "cek website resmi LPJK" |
+| T6 | Anti Human-as-API | "BUJK BG006 jenjang 8" | Skor langsung dengan asumsi bertanda [ASUMSI: ...] |
+| T7 | Anti Interrogation | (sama T6, di sub-bot standalone) | Skor langsung tanpa pertanyaan diagnostik |
+
+---
+
+# 2. Test Evaluation Tracker (Database)
+
+<aside>
+📊
+
+Database tracking 35-cell (5 bot Modul Tender × 7 test) akan ditambahkan di bawah halaman ini sebagai langkah berikutnya.
+
+**Struktur:** Bot (select) | Test (select T1-T7) | Status (Pass/Fail/Partial/Not Started) | Tested Date | Output Snippet | Notes
+
+**Goal:** 35/35 Pass sebelum lanjut Tahap 2.
+
+</aside>
+
+**Cara isi setelah database aktif:**
+
+1. Setelah upgrade prompt v2.0 di Gustafta, jalankan T1-T7 untuk setiap dari 5 bot Modul Tender.
+2. Untuk setiap test, buat 1 row baru.
+3. Status: ✅ Pass | ❌ Fail | ⚠️ Partial | ⏳ Not Started.
+4. Tulis snippet output bot di field Output Snippet untuk arsip.
+5. Saat 35/35 Pass → freeze v2.0 sebagai baseline, lanjut ke Tahap 2 (§1).
+6. Saat ada Fail → log gap, iterasi prompt v2.0.x.
+
+---
+
+# 3. Capability Inquiry — Pesan ke Tim Gustafta
+
+<aside>
+✉️
+
+Copy template di bawah, kirim ke tim Gustafta Builder (via support email / forum / Discord). Tujuan: konfirmasi 6 kapabilitas teknis yang menentukan apakah federasi inter-bot bisa dibangun dalam Gustafta atau butuh n8n eksternal.
+
+</aside>
+
+```
+Halo Tim Gustafta Builder,
+
+Saya sedang membangun ~60 chatbot untuk ekosistem BUJK & sertifikasi konstruksi di akun saya (https://gustafta-builder-7-pixelstd.replit.app/). Untuk merancang arsitektur agentic multi-bot yang scalable, saya butuh konfirmasi 6 kapabilitas teknis berikut. Mohon dijawab apa adanya — "belum ada" sangat membantu agar saya bisa merencanakan workaround.
+
+1) INTER-BOT MESSAGING API
+   Apakah ada REST API yang bisa "send-message" dari kode eksternal (n8n / cURL) ke chatbot tertentu di akun saya, dan menerima respons-nya secara programmatic?
+   - Endpoint URL?
+   - Auth (API key / OAuth)?
+   - Rate limit & quota?
+   - Apakah Otak Proyek bot tersebut ikut ter-load dalam call tersebut?
+
+2) OTAK PROYEK SHARED STATE
+   Bisakah satu Otak Proyek (8-field konteks user) di-share antar chatbot dalam akun yang sama?
+   - Atau setiap bot punya state terisolasi?
+   - Adakah API untuk read/write Otak Proyek dari eksternal?
+
+3) WEBHOOK OUT (event-driven)
+   Bisakah Gustafta memanggil endpoint HTTP eksternal saat event tertentu?
+   - Daftar event yang didukung (message_received, intent_detected, session_end, dll.)?
+   - Payload format JSON?
+   - Bisa filter event per bot tertentu?
+
+4) FUNCTION / TOOL CALLING LLM
+   Apakah dalam system prompt bot saya bisa mendefinisikan "tools" (HTTP API, database query, custom function) yang LLM bisa panggil otomatis (gaya OpenAI function calling)?
+   - Format definisi tool?
+   - Limit jumlah tool per bot?
+
+5) VECTOR STORE / KB PERSISTEN
+   Apakah ada KB persisten per user (lintas-sesi) yang bisa di-query via RAG?
+   - Format upload (PDF, MD, JSON, URL crawl)?
+   - Limit size / chunks?
+   - Bisa diquery dari prompt secara eksplisit, atau otomatis di-inject?
+
+6) SYSTEM PROMPT LIMITS & OVERRIDE
+   - Max tokens system prompt per bot?
+   - Apakah ada template / preset Gustafta yang OVERRIDE atau MERGE dengan system prompt user? (Saya curiga ada layer "meta-prompt" yang menambah instruksi default tertentu — perlu konfirmasi)
+   - Apakah ada cara melihat efektif "final prompt" yang di-kirim ke LLM?
+
+Konteks: Saya sudah mendiagnosis 2 anti-pattern di bot saya:
+(a) "Directory pattern" — bot menyebut nama sub-agen lalu menyuruh user pindah manual.
+(b) "Human-as-API / Interrogation Mode" — bot meminta user fetch data dari chatbot lain dan paste balik.
+
+Kedua anti-pattern muncul karena prompt diset seakan-akan ada tool calling (variabel UPPERCASE seperti SKK_SUMMARY) padahal kapabilitasnya belum tentu tersedia. Konfirmasi 6 hal di atas akan menentukan: apakah saya scale dalam Gustafta langsung, atau perlu bangun layer eksternal (n8n + Supabase + LangFlow).
+
+Terima kasih banyak atas bantuannya.
+
+Salam,
+Wuryanto Kusdjali
+```
+
+---
+
+# 4. n8n External Orchestrator — Arsitektur
+
+<aside>
+🔌
+
+**Skenario fallback** kalau Gustafta tidak/belum menyediakan inter-bot API. n8n berperan sebagai "agent fabric" eksternal yang mengkoordinasi 60 bot lewat webhook + HTTP. Self-host gratis di Replit/Railway/VPS.
+
+</aside>
+
+## 4.1 Diagram Arsitektur Tinggi-Level
+
+```mermaid
+flowchart TB
+  User["👤 User"] -->|chat| GustaftaUI["Gustafta Builder UI"]
+  GustaftaUI <-->|message| BotN["Bot N dari 60"]
+  BotN -.->|webhook OUT| n8n["n8n Orchestrator<br>self-host di Replit"]
+  n8n <-->|state R/W| Supabase[("Supabase<br>Otak Proyek shared")]
+  n8n <-->|LLM call| OpenAI["OpenAI / Anthropic API"]
+  n8n -.->|inter-bot API| OtherBots["Bot 1, 2, ... 59"]
+  n8n --> Notify["Notify<br>Email / WA / Slack"]
+```
+
+## 4.2 Komponen & Cost
+
+| Komponen | Peran | Stack | Cost |
+| --- | --- | --- | --- |
+| n8n | Workflow orchestrator (DAG) | n8n self-host (Replit/Railway/VPS) | Free / $5-10/bln VPS |
+| Supabase | Shared memory + vector store + auth | Supabase free tier (500MB DB, 1GB storage) | Free |
+| LLM Provider | Reasoning + planning | OpenAI / Anthropic / OpenRouter | $0.01-0.10 per request |
+| Notification | Push ke user lintas-channel | n8n built-in nodes (Email/WA/Slack/Telegram) | Free |
+
+## 4.3 Flow Tipikal — Tender × SBU × SKK Federation
+
+```mermaid
+sequenceDiagram
+  participant U as User
+  participant T as Modul Tender
+  participant W as n8n
+  participant S as SBU Bot
+  participant K as SKK Bot
+  participant DB as Supabase
+  U->>T: Cek tender BG006 50M
+  T->>W: Webhook intent tender_check
+  W->>DB: Read Otak Proyek user
+  par Parallel fetch
+    W->>S: GET sbu summary
+  and
+    W->>K: GET skk summary
+  end
+  S-->>W: SBU summary JSON
+  K-->>W: SKK summary JSON
+  W->>DB: Write merged context
+  W-->>T: Aggregated response
+  T-->>U: Final answer terstruktur
+```
+
+## 4.4 Prerequisite Teknis (dari §3 capability inquiry)
+
+- ✅ **Webhook OUT** (Q3) → wajib agar n8n bisa di-trigger.
+- ✅ **Inter-bot API** (Q1) → wajib agar n8n bisa panggil bot lain.
+- ✅ **Function calling** (Q4) → opsional (tapi sangat membantu).
+
+Kalau **3 prerequisite tidak terpenuhi**, n8n tetap berguna untuk:
+
+- **Notification layer** (user paste output → n8n → email/WA)
+- **Background analytics** (log + dashboard)
+- **Knowledge base updater** (cron sync regulasi terbaru ke Supabase)
+
+Tapi BUKAN untuk real-time inter-bot federation. Dalam skenario itu, opsi alternatif: pindah ke platform lain (Botpress, Voiceflow, Flowise, LangFlow, atau custom build).
+
+## 4.5 Roadmap Implementasi n8n (kalau go-ahead)
+
+1. **Week 1** — Setup n8n di Replit, connect Supabase, buat skema Otak Proyek.
+2. **Week 2** — Build 1 webhook flow: Modul Tender → fetch SBU + SKK → aggregate.
+3. **Week 3** — Test end-to-end dengan 1 user nyata.
+4. **Week 4** — Replikasi ke 5 hub utama (SBU/SKK/LSP/Compliance/Operasional).
+5. **Month 2-3** — Scale ke 60 bot, observability dashboard.
+
+---
+
+# 5. Konsolidasi 60 Bot — Cetak Biru Final
+
+<aside>
+🧹
+
+**Tujuan:** Kurangi duplikat & tumpang tindih, perjelas hierarki, simpan ~52 bot dari 60. Hemat maintenance, kurangi user confusion, percepat onboarding.
+
+</aside>
+
+## 5.1 Duplikat untuk Dimerge
+
+| Klaster | Bot Sekarang | Rekomendasi | Hasil |
+| --- | --- | --- | --- |
+| **SBU Variants** | SBU Pekerjaan Konstruksi Terintegrasi · SBU All-in-One · SBU Pekerjaan Konstruksi · SBU Konsultan · SBU Jasa Penunjang Tenaga Listrik · SBU Migas/EBT/Pertambangan | Merge 3 SBU konstruksi umum → 1 bot universal. Pertahankan 2 specialist (Konsultan, Migas/Tenaga Listrik) karena regulasi spesifik. | 6 → 3 bot |
+| **SMAP Variants** | SMAP & PANCEK · SMAP ISO 37001 · SMAP Nasional | Merge ke 1 bot "SMAP Compliance Hub" dengan 3 persona internal (ISO 37001, PANCEK, Nasional) | 3 → 1 bot |
+| **Personel Manajerial 9 Role (×2)** | 2 versi duplikat | Dedupe ke 1 | 2 → 1 bot |
+
+**Penghematan total:** 11 bot → 5 bot (hemat **6 bot**). Plus optimasi minor di klaster lain bisa hemat 2 bot lagi.
+
+## 5.2 Hierarki Konsolidasi (Target ~52 Bot)
+
+```mermaid
+flowchart TD
+  L1["Layer 1 — 8 Domain Hubs"]
+  L1 --> SBU["SBU Hub (3 sub: Universal, Konsultan, Migas)"]
+  L1 --> SKK["SKK Hub (13 sub: Sipil, Arsitektur, Elektrikal, dll.)"]
+  L1 --> LSP["LSP Hub (6 sub: Asesor, ASKOM, IT Paperless, dll.)"]
+  L1 --> COMP["Compliance Hub (5 sub: SMAP, ISO 9001, ISO 14001, IMS-SMK3, CSMS)"]
+  L1 --> OPS["Operasional Hub (8 sub: SIP-PJBU, ASPEKINDO, Tender, dll.)"]
+  L1 --> REG["Regulasi Hub (4 sub: JK, Ringkasan 2025, CIVILPRO, LexCom)"]
+  L1 --> ERP["ERP Hub (3 sub: Odoo Konstruksi, Odoo BUJK, Migrasi)"]
+  L1 --> RE["Real Estate Hub (2 sub: DevProperti, EstateCare)"]
+```
+
+**Total target: 8 hub + 44 sub = ~52 bot. Dari 60 → 52 (hemat 8 bot, ~13%).**
+
+**Versi lebih ambisius** (kalau Q6 capability inquiry mengkonfirmasi max_tokens system prompt sangat besar): merge sub-bots ke hub jadi **8 mega-bot** dengan 4-13 persona internal masing-masing. Cocok kalau Gustafta tidak punya inter-bot API tapi punya prompt tokens tinggi.
+
+## 5.3 Prioritas Eksekusi 4 Fase
+
+| Fase | Bot | Dependency | Status |
+| --- | --- | --- | --- |
+| 0. Pilot | Modul Tender (5 bot) | — | ⚙️ in progress (v2.0 menunggu deploy & 35-cell test) |
+| 1. Tahap 2 | SBU Universal · SKK Sipil · LSP Manajemen · IMS-SMK3 · ASKOM · Odoo (6 bot) | Pilot 35/35 Pass | ⏳ menunggu |
+| 2. Konsolidasi | Merge SBU variants · SMAP variants · Personel duplikat (-6 bot) | Tahap 2 selesai | ⏳ |
+| 3. Replikasi | 13 SKK sub-bots · sisanya (~30 bot) | Konsolidasi selesai | ⏳ |
+| 4. Federation | n8n + API Gustafta untuk inter-bot | Capability inquiry dijawab | ⏳ |
+
+---
+
+# 6. Status Roadmap & Next Decision Point
+
+<aside>
+📍
+
+**Sekarang:** Pilot Modul Tender v2.0 menunggu deploy ke Gustafta + 35-cell test (5 bot × 7 test).
+
+**Next decision point:** Hasil 35-cell test menentukan langkah berikutnya:
+
+- ✅ 35/35 Pass → freeze v2.0, mulai Tahap 2 (§1).
+- ⚠️ 25-34 Pass → iterasi v2.0.x untuk gap yang teridentifikasi.
+- ❌ <25 Pass → revisit asumsi dasar (mungkin ada Gustafta override layer; lihat §3 Q6).
+
+**Paralel:** Kirim §3 capability inquiry ke tim Gustafta sekarang (tidak perlu menunggu pilot). Jawaban menentukan apakah §4 (n8n) jadi kebutuhan atau opsional.
+
+</aside>

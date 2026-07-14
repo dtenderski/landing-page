@@ -1,0 +1,74 @@
+> Halaman L4 — prosedur deploy step-by-step ke Gustafta Builder + verifikasi pasca-deploy. Mengikuti pola Master Deployment Runbook KONSTRA.
+> 
+
+**Versi**: 1.0 · **Sasaran**: 7 agen (1 Orchestrator + 6 Spesialis) · **ABD**: v1.1
+
+---
+
+## Pre-Flight Checklist
+
+- [ ]  **L1 induk dokumen** siap (Otak Proyek, KB, Persona, System Prompt, Deliveries)
+- [ ]  **7 Prompt Patch** Ready-to-Deploy tersedia
+- [ ]  **KB 7-tipe** ter-export (PDF/MD)
+- [ ]  **Avatar 200×200 PNG** per agen (7 file)
+- [ ]  **Akses Gustafta Builder** aktif
+- [ ]  **Test Scenarios** Sprint 1 siap (6 skenario)
+
+## Urutan Deploy (per agen)
+
+### Step 1 — Buat Chatbot Baru di Gustafta
+
+1. New Chatbot → pilih template "OpenClaw Multi-Agent"
+2. Isi field **Identity** dari halaman 🎭 Persona
+
+### Step 2 — Isi Welcome Experience
+
+1. Greeting Message (dari Persona)
+2. 8 Conversation Starters (dari Persona)
+3. Opening Line (dari Persona)
+
+### Step 3 — Inject System Prompt
+
+1. Buka *Prompt Patch* agen target
+2. Salin per blok ke field System Prompt
+3. Pastikan urutan: IDENTITAS → KOMPETENSI → KB → SITASI → INPUT → OUTPUT → CROSS-CALL
+
+### Step 4 — Upload Knowledge Base
+
+1. Upload 7 file KB (REG, STANTEK, KONTRAK, MUTU, RKK, ENV, FIN)
+2. Sesuaikan KB mount per agen (lihat matriks KB × Agent)
+
+### Step 5 — Smoke Test ABD v1.1
+
+1. Jalankan 6 skenario di *Sprint 1 Test Scenarios*
+2. Lulus = score ≥ 80% per skenario
+3. Bila gagal: hotfix prompt patch → redeploy
+
+### Step 6 — Aktifkan Routing (Orchestrator only)
+
+1. Buka BRAIN-ORCHESTRATOR
+2. Tambahkan 6 sub-agent ke registry
+3. Test routing rules dengan input multi-domain
+
+### Step 7 — Go Live
+
+1. Publish ke production
+2. Notify pengguna (Site Engineer, PM, K3 Officer)
+3. Aktifkan logging untuk monitoring 14 hari pertama
+
+## Roll-Back Procedure
+
+Bila ada bug kritis pasca-deploy:
+
+1. **Versi N-1** — kembalikan System Prompt ke versi sebelumnya
+2. **Disable agen** — toggle off di Gustafta
+3. **Patch** — perbaiki prompt patch → redeploy
+4. **Komunikasi** — announce downtime ke pengguna
+
+## Monitoring 14-Hari Pertama
+
+- [ ]  Audit % jawaban yang punya ≥1 sitasi (target 100%)
+- [ ]  Audit % jawaban dalam format ABD-7 (target 100%)
+- [ ]  Audit % cross-call yang tepat (target ≥90%)
+- [ ]  Audit confidence score distribution (mean ≥ 70%)
+- [ ]  User satisfaction survey (target ≥ 4/5)

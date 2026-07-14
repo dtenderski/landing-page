@@ -1,0 +1,970 @@
+Berikut lanjutan **Chatbot SBUJPTL Coach**, fokus pada modul lanjutan untuk **SKTTK + SBUJPTL + IUJPTL** agar chatbot bukan hanya menjawab informasi, tetapi juga bisa menjadi **assistant konsultasi, pre-screening dokumen, lead qualifier, dan workflow handoff ke admin/konsultan**. Modul ini melanjutkan bahan terbaru tentang SKTTK, PJT/TT, waktu proses SKTTK, masa berlaku, persyaratan SKTTK, dan jenis usaha jasa penunjang tenaga listrik. 
+
+## 111. SKTTK pre-screening wizard
+
+```yaml id="skttk_prescreening_wizard_01"
+flow:
+  id: skttk_prescreening_wizard
+  title: "Wizard Pra-Cek SKTTK"
+  purpose: >
+    Menilai kesiapan awal tenaga teknik sebelum perusahaan mengajukan
+    SBUJPTL atau IUJPTL.
+
+  opening_message: >
+    Saya akan bantu cek kesiapan awal SKTTK untuk PJT dan TT.
+    Jawab beberapa pertanyaan berikut agar saya dapat memberikan rekomendasi
+    awal.
+
+    Hasil ini bukan keputusan resmi, tetapi dapat membantu Anda mengetahui
+    apa saja yang perlu disiapkan sebelum pengajuan.
+
+  questions:
+    - id: q_has_candidate_pjt
+      text: "Apakah perusahaan sudah memiliki calon Penanggung Jawab Teknik atau PJT?"
+      quick_replies:
+        - "Sudah"
+        - "Belum"
+        - "Sedang mencari"
+        - "Tidak tahu"
+      save_to: technical.has_candidate_pjt
+
+    - id: q_pjt_has_skttk
+      text: "Apakah calon PJT sudah memiliki SKTTK?"
+      quick_replies:
+        - "Sudah"
+        - "Belum"
+        - "Tidak tahu"
+      save_to: technical.pjt_has_skttk
+
+    - id: q_pjt_level
+      text: "Jika sudah, berapa level SKTTK calon PJT?"
+      quick_replies:
+        - "Level 2"
+        - "Level 3"
+        - "Level 4"
+        - "Level 5"
+        - "Level 6"
+        - "Tidak tahu"
+      save_to: technical.pjt_level
+
+    - id: q_has_candidate_tt
+      text: "Apakah perusahaan sudah memiliki calon Tenaga Teknik atau TT?"
+      quick_replies:
+        - "Sudah"
+        - "Belum"
+        - "Sebagian"
+        - "Tidak tahu"
+      save_to: technical.has_candidate_tt
+
+    - id: q_tt_count
+      text: "Berapa jumlah TT yang tersedia?"
+      expected_input:
+        type: "number"
+      save_to: technical.tt_count
+
+    - id: q_tt_level
+      text: "Level SKTTK TT yang tersedia paling rendah level berapa?"
+      quick_replies:
+        - "Level 2"
+        - "Level 3"
+        - "Level 4"
+        - "Level 5"
+        - "Level 6"
+        - "Tidak tahu"
+      save_to: technical.tt_min_level_available
+
+    - id: q_skttk_occupation
+      text: "Apakah okupasi SKTTK sudah sesuai bidang/subbidang pekerjaan?"
+      quick_replies:
+        - "Sudah sesuai"
+        - "Belum sesuai"
+        - "Belum dicek"
+        - "Tidak tahu"
+      save_to: technical.skttk_occupation_match
+
+    - id: q_duplicate_assignment
+      text: "Apakah PJT/TT tersebut sedang digunakan di perusahaan lain pada bidang/subbidang yang sama?"
+      quick_replies:
+        - "Tidak"
+        - "Ya"
+        - "Tidak tahu"
+      save_to: technical.duplicate_assignment_status
+
+  completion_node: skttk_prescreening_result
+```
+
+## 112. SKTTK pre-screening result logic
+
+```yaml id="skttk_prescreening_result_logic_01"
+result_logic:
+  id: skttk_prescreening_result_logic
+
+  statuses:
+    ready_for_validation:
+      condition: >
+        technical.has_candidate_pjt == 'Sudah'
+        and technical.pjt_has_skttk == 'Sudah'
+        and technical.has_candidate_tt in ['Sudah','Sebagian']
+        and technical.tt_count >= required_tt_count
+        and technical.skttk_occupation_match == 'Sudah sesuai'
+        and technical.duplicate_assignment_status == 'Tidak'
+      label: "Siap Validasi"
+      message: >
+        Kesiapan SKTTK terlihat baik untuk tahap awal. Langkah berikutnya
+        adalah validasi dokumen PJT/TT, level SKTTK, okupasi, masa berlaku,
+        dan kesesuaian subbidang sebelum pengajuan SBUJPTL.
+
+    partial_ready:
+      condition: >
+        technical.has_candidate_pjt == 'Sudah'
+        and technical.pjt_has_skttk == 'Sudah'
+        and technical.has_candidate_tt in ['Sebagian','Sudah']
+      label: "Sebagian Siap"
+      message: >
+        Perusahaan sudah memiliki sebagian komponen SKTTK, tetapi masih perlu
+        validasi jumlah TT, level SKTTK, okupasi, masa berlaku, atau status
+        rangkap.
+
+    not_ready:
+      condition: >
+        technical.has_candidate_pjt in ['Belum','Sedang mencari']
+        or technical.pjt_has_skttk == 'Belum'
+        or technical.has_candidate_tt == 'Belum'
+      label: "Belum Siap"
+      message: >
+        Kesiapan SKTTK masih perlu dilengkapi. Sebaiknya perusahaan mulai
+        dari penyiapan calon PJT, TT, dokumen personel, dan pemilihan okupasi
+        SKTTK yang sesuai.
+
+    risk_duplicate:
+      condition: "technical.duplicate_assignment_status == 'Ya'"
+      label: "Berisiko"
+      message: >
+        Terdapat risiko karena PJT/TT terindikasi sedang digunakan di
+        perusahaan lain pada bidang/subbidang yang sama. Status ini perlu
+        divalidasi sebelum pengajuan agar tidak menjadi kendala verifikasi.
+
+response_template:
+  id: skttk_prescreening_result
+  text: >
+    Hasil pra-cek SKTTK:
+
+    Status:
+    {{status_label}}
+
+    Ringkasan:
+    {{status_message}}
+
+    Data yang terbaca:
+    - Calon PJT: {{technical.has_candidate_pjt}}
+    - SKTTK PJT: {{technical.pjt_has_skttk}}
+    - Level PJT: {{technical.pjt_level}}
+    - Calon TT: {{technical.has_candidate_tt}}
+    - Jumlah TT: {{technical.tt_count}}
+    - Level TT tersedia: {{technical.tt_min_level_available}}
+    - Kesesuaian okupasi: {{technical.skttk_occupation_match}}
+    - Status rangkap: {{technical.duplicate_assignment_status}}
+
+    Rekomendasi:
+    {{recommended_actions}}
+
+    Catatan:
+    Hasil ini adalah panduan awal. Validasi final tetap perlu dilakukan
+    terhadap dokumen SKTTK, okupasi, subbidang, dan ketentuan lembaga terkait.
+  quick_replies:
+    - "Cek dokumen SKTTK"
+    - "Cek kebutuhan SBUJPTL"
+    - "Konsultasi admin"
+    - "Ulangi cek"
+```
+
+## 113. SKTTK document checklist flow
+
+```yaml id="skttk_document_checklist_flow_01"
+flow:
+  id: skttk_document_checklist_flow
+  title: "Checklist Dokumen SKTTK"
+  bot_message: >
+    Untuk pengajuan SKTTK, beberapa dokumen awal yang biasanya perlu
+    disiapkan meliputi dokumen pengalaman, surat tugas, SOP atau Instruksi
+    Kerja, identitas, ijazah, CV, pas foto, dan formulir.
+
+    Saya akan bantu cek satu per satu.
+  questions:
+    - id: skttk_doc_pengalaman
+      text: "Apakah pengalaman pekerjaan badan usaha sudah tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: skttk_documents.work_experience
+
+    - id: skttk_doc_surat_tugas
+      text: "Apakah surat tugas melaksanakan pekerjaan sudah tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: skttk_documents.assignment_letter
+
+    - id: skttk_doc_sop
+      text: "Jika perusahaan bergerak di bidang pemeliharaan, apakah SOP sudah tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak berlaku", "Tidak tahu"]
+      save_to: skttk_documents.sop
+
+    - id: skttk_doc_ik
+      text: "Jika perusahaan bergerak di bidang konstruksi/pemasangan, apakah Instruksi Kerja atau IK sudah tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak berlaku", "Tidak tahu"]
+      save_to: skttk_documents.work_instruction
+
+    - id: skttk_doc_ktp_npwp
+      text: "Apakah KTP dan NPWP personel sudah tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: skttk_documents.ktp_npwp
+
+    - id: skttk_doc_ijazah
+      text: "Apakah ijazah personel sudah tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: skttk_documents.diploma
+
+    - id: skttk_doc_cv
+      text: "Apakah CV atau riwayat hidup personel sudah tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: skttk_documents.cv
+
+    - id: skttk_doc_photo
+      text: "Apakah pas foto terbaru sudah tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: skttk_documents.photo
+
+    - id: skttk_doc_form
+      text: "Apakah formulir pengajuan sudah tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: skttk_documents.application_form
+
+  completion_response:
+    text: >
+      Berikut hasil checklist dokumen SKTTK:
+
+      Dokumen yang sudah tersedia:
+      {{available_skttk_documents}}
+
+      Dokumen yang belum tersedia:
+      {{missing_skttk_documents}}
+
+      Rekomendasi:
+      Lengkapi dokumen yang belum tersedia sebelum masuk ke proses pembekalan,
+      uji kompetensi, dan penerbitan SKTTK.
+
+      Catatan:
+      Persyaratan final dapat berbeda sesuai okupasi, lembaga uji, dan
+      ketentuan yang berlaku.
+    quick_replies:
+      - "Konsultasi SKTTK"
+      - "Cek SBUJPTL"
+      - "Lihat okupasi"
+      - "Ulangi checklist"
+```
+
+## 114. SBUJPTL + SKTTK combined readiness score
+
+```yaml id="combined_readiness_score_01"
+combined_readiness_score:
+  id: sbujptl_skttk_combined_score
+  purpose: >
+    Menggabungkan kesiapan badan usaha, dokumen SBUJPTL, dan SKTTK agar
+    admin/konsultan dapat melihat prioritas tindak lanjut.
+
+  scoring_components:
+    company_legality:
+      max_score: 20
+      items:
+        - id: akta_sk
+          score: 5
+        - id: nib
+          score: 5
+        - id: npwp_company
+          score: 5
+        - id: data_pengurus
+          score: 5
+
+    technical_personnel:
+      max_score: 30
+      items:
+        - id: has_pjt
+          score: 5
+        - id: pjt_has_skttk
+          score: 5
+        - id: pjt_level_match
+          score: 5
+        - id: has_tt_count
+          score: 5
+        - id: tt_level_match
+          score: 5
+        - id: no_duplicate_assignment
+          score: 5
+
+    classification_fit:
+      max_score: 20
+      items:
+        - id: business_type_selected
+          score: 5
+        - id: field_selected
+          score: 5
+        - id: subfield_selected
+          score: 5
+        - id: qualification_selected
+          score: 5
+
+    supporting_documents:
+      max_score: 20
+      items:
+        - id: financial_report
+          score: 5
+        - id: company_profile
+          score: 5
+        - id: organization_structure
+          score: 5
+        - id: work_experience_or_supporting_docs
+          score: 5
+
+    process_goal:
+      max_score: 10
+      items:
+        - id: user_goal_clear
+          score: 5
+        - id: tender_or_iujptl_need_identified
+          score: 5
+
+  total_score: 100
+
+  score_interpretation:
+    - range: "0-39"
+      label: "Belum Siap"
+      message: >
+        Banyak komponen dasar belum lengkap. Prioritas utama adalah legalitas
+        badan usaha, PJT/TT, SKTTK, dan pemilihan klasifikasi.
+
+    - range: "40-69"
+      label: "Perlu Pelengkapan"
+      message: >
+        Sebagian komponen sudah tersedia, tetapi masih perlu melengkapi
+        dokumen teknis, SKTTK, atau dokumen pendukung.
+
+    - range: "70-89"
+      label: "Siap Review"
+      message: >
+        Data terlihat cukup siap untuk tahap review awal oleh admin/konsultan.
+
+    - range: "90-100"
+      label: "Siap Validasi Lanjutan"
+      message: >
+        Data terlihat sangat siap untuk validasi lanjutan, dengan catatan
+        tetap perlu pengecekan resmi dokumen dan kesesuaian ketentuan.
+```
+
+## 115. Combined readiness result template
+
+```yaml id="combined_readiness_template_01"
+response_template:
+  id: combined_readiness_result
+  text: >
+    Berikut hasil cek kesiapan awal SBUJPTL dan SKTTK:
+
+    Skor total:
+    {{total_score}} / 100
+
+    Status:
+    {{readiness_label}}
+
+    Ringkasan:
+    {{readiness_message}}
+
+    Rincian:
+    - Legalitas badan usaha: {{company_legality_score}} / 20
+    - PJT, TT, dan SKTTK: {{technical_personnel_score}} / 30
+    - Kesesuaian klasifikasi: {{classification_fit_score}} / 20
+    - Dokumen pendukung: {{supporting_documents_score}} / 20
+    - Tujuan proses: {{process_goal_score}} / 10
+
+    Prioritas yang perlu diperbaiki:
+    {{priority_gaps}}
+
+    Rekomendasi langkah berikutnya:
+    1. {{next_step_1}}
+    2. {{next_step_2}}
+    3. {{next_step_3}}
+
+    Catatan:
+    Skor ini adalah alat bantu internal untuk memetakan kesiapan awal,
+    bukan hasil resmi sertifikasi.
+  quick_replies:
+    - "Konsultasi admin"
+    - "Unduh ringkasan"
+    - "Cek dokumen kurang"
+    - "Cek SKTTK"
+    - "Ulangi wizard"
+```
+
+## 116. Admin lead scoring rules
+
+```yaml id="admin_lead_scoring_01"
+admin_lead_scoring:
+  id: sbujptl_lead_scoring
+  purpose: >
+    Menentukan prioritas follow-up admin berdasarkan kesiapan, kebutuhan,
+    dan urgensi pengguna.
+
+  scoring:
+    urgency:
+      tender_less_than_7_days: 30
+      tender_7_to_14_days: 25
+      tender_15_to_30_days: 15
+      no_deadline: 5
+
+    service_need:
+      skttk_sbu_iujptl_bundle: 30
+      sbu_iujptl: 25
+      sbu_only: 20
+      skttk_only: 15
+      information_only: 5
+
+    readiness:
+      ready_review: 20
+      partial_ready: 15
+      not_ready: 5
+
+    contact_quality:
+      phone_available: 10
+      email_available: 5
+      company_name_available: 5
+
+  priority:
+    hot:
+      condition: "score >= 75"
+      label: "Hot Lead"
+      action: "Hubungi segera"
+
+    warm:
+      condition: "score >= 45 and score < 75"
+      label: "Warm Lead"
+      action: "Follow-up normal"
+
+    cold:
+      condition: "score < 45"
+      label: "Cold Lead"
+      action: "Masukkan nurturing list"
+
+response_to_admin:
+  template: >
+    Prioritas lead: {{lead_priority}}
+    Skor: {{lead_score}}
+
+    Alasan:
+    {{lead_priority_reason}}
+
+    Rekomendasi tindakan:
+    {{admin_next_action}}
+```
+
+## 117. Admin dashboard: SKTTK panel
+
+```yaml id="admin_skttk_panel_01"
+admin_dashboard:
+  page:
+    id: skttk_panel
+    title: "SKTTK Readiness Panel"
+    purpose: >
+      Membantu admin melihat status PJT, TT, SKTTK, okupasi, masa berlaku,
+      dan risiko rangkap dari setiap lead.
+
+    widgets:
+      - id: skttk_status_summary
+        type: "metric_cards"
+        cards:
+          - label: "Lead belum punya SKTTK"
+            metric: "count_leads_skttk_missing"
+          - label: "Lead SKTTK sebagian"
+            metric: "count_leads_skttk_partial"
+          - label: "Lead siap validasi SKTTK"
+            metric: "count_leads_skttk_ready"
+          - label: "Risiko rangkap PJT/TT"
+            metric: "count_duplicate_assignment_risk"
+
+      - id: skttk_expiry_alert
+        type: "alert_table"
+        columns:
+          - "Nama Perusahaan"
+          - "Nama Kontak"
+          - "Tanggal Terbit SKTTK"
+          - "Estimasi Masa Berlaku"
+          - "Status"
+          - "Aksi"
+
+      - id: occupation_distribution
+        type: "bar_chart"
+        title: "Okupasi SKTTK Paling Banyak Diminta"
+
+      - id: field_distribution
+        type: "pie_chart"
+        title: "Bidang Pekerjaan SKTTK"
+
+      - id: duplicate_risk_queue
+        type: "review_queue"
+        title: "Antrian Validasi Status Rangkap PJT/TT"
+```
+
+## 118. Admin dashboard: SBUJPTL pipeline
+
+```yaml id="admin_pipeline_01"
+pipeline:
+  id: sbujptl_consultation_pipeline
+  title: "Pipeline Pengurusan SBUJPTL"
+
+  stages:
+    - id: new_lead
+      label: "Lead Baru"
+      description: "Data masuk dari chatbot."
+
+    - id: contacted
+      label: "Sudah Dihubungi"
+      description: "Admin sudah menghubungi pengguna."
+
+    - id: document_requested
+      label: "Dokumen Diminta"
+      description: "Admin meminta dokumen awal."
+
+    - id: document_received
+      label: "Dokumen Diterima"
+      description: "Pengguna sudah mengirim dokumen."
+
+    - id: skttk_review
+      label: "Review SKTTK"
+      description: "PJT/TT/SKTTK sedang dicek."
+
+    - id: classification_review
+      label: "Review Klasifikasi"
+      description: "Jenis usaha, bidang, subbidang, dan kualifikasi sedang divalidasi."
+
+    - id: ready_submission
+      label: "Siap Pengajuan"
+      description: "Dokumen terlihat siap untuk proses pengajuan."
+
+    - id: submitted
+      label: "Diajukan"
+      description: "Pengajuan sedang berjalan."
+
+    - id: revision
+      label: "Revisi"
+      description: "Ada perbaikan atau tambahan dokumen."
+
+    - id: completed
+      label: "Selesai"
+      description: "Proses selesai atau layanan telah ditutup."
+
+  allowed_transitions:
+    new_lead:
+      - "contacted"
+      - "closed"
+
+    contacted:
+      - "document_requested"
+      - "closed"
+
+    document_requested:
+      - "document_received"
+      - "contacted"
+
+    document_received:
+      - "skttk_review"
+      - "classification_review"
+
+    skttk_review:
+      - "classification_review"
+      - "document_requested"
+
+    classification_review:
+      - "ready_submission"
+      - "document_requested"
+
+    ready_submission:
+      - "submitted"
+
+    submitted:
+      - "revision"
+      - "completed"
+
+    revision:
+      - "document_requested"
+      - "submitted"
+```
+
+## 119. Database schema addendum for SKTTK
+
+```sql id="database_skttk_addendum_01"
+CREATE TABLE skttk_profiles (
+  id VARCHAR(64) PRIMARY KEY,
+  lead_id VARCHAR(64),
+  person_role VARCHAR(20), -- PJT or TT
+  person_name VARCHAR(150),
+  has_skttk BOOLEAN,
+  skttk_level INTEGER,
+  skttk_occupation TEXT,
+  skttk_issue_date DATE,
+  skttk_expiry_date DATE,
+  field VARCHAR(100),
+  subfield VARCHAR(150),
+  duplicate_assignment_status VARCHAR(50),
+  validation_status VARCHAR(50) DEFAULT 'pending',
+  notes TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE skttk_document_checks (
+  id VARCHAR(64) PRIMARY KEY,
+  lead_id VARCHAR(64),
+  work_experience_status VARCHAR(20),
+  assignment_letter_status VARCHAR(20),
+  sop_status VARCHAR(20),
+  work_instruction_status VARCHAR(20),
+  ktp_npwp_status VARCHAR(20),
+  diploma_status VARCHAR(20),
+  cv_status VARCHAR(20),
+  photo_status VARCHAR(20),
+  application_form_status VARCHAR(20),
+  missing_documents JSONB,
+  readiness_status VARCHAR(50),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE sbujptl_readiness_scores (
+  id VARCHAR(64) PRIMARY KEY,
+  lead_id VARCHAR(64),
+  total_score INTEGER,
+  company_legality_score INTEGER,
+  technical_personnel_score INTEGER,
+  classification_fit_score INTEGER,
+  supporting_documents_score INTEGER,
+  process_goal_score INTEGER,
+  readiness_label VARCHAR(100),
+  priority_gaps JSONB,
+  recommended_next_steps JSONB,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE lead_pipeline_status (
+  id VARCHAR(64) PRIMARY KEY,
+  lead_id VARCHAR(64),
+  current_stage VARCHAR(100),
+  assigned_consultant VARCHAR(150),
+  last_followup_at TIMESTAMP,
+  next_followup_at TIMESTAMP,
+  notes TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+## 120. API addendum for SKTTK
+
+```yaml id="api_skttk_addendum_01"
+api_endpoints:
+  - method: "POST"
+    path: "/api/skttk/prescreening/start"
+    purpose: "Memulai wizard pra-cek SKTTK."
+    request_body:
+      session_id: "string"
+      lead_id: "string | null"
+      target_field: "string | null"
+      target_subfield: "string | null"
+    response_body:
+      prescreening_id: "string"
+      first_question: "object"
+
+  - method: "POST"
+    path: "/api/skttk/prescreening/answer"
+    purpose: "Menyimpan jawaban pra-cek SKTTK."
+    request_body:
+      prescreening_id: "string"
+      question_id: "string"
+      answer: "string"
+    response_body:
+      completed: "boolean"
+      next_question: "object | null"
+      result: "object | null"
+
+  - method: "POST"
+    path: "/api/skttk/expiry/check"
+    purpose: "Menghitung estimasi masa berlaku SKTTK."
+    request_body:
+      issue_date: "YYYY-MM-DD"
+    response_body:
+      issue_date: "YYYY-MM-DD"
+      expiry_date: "YYYY-MM-DD"
+      days_remaining: "number"
+      status: "active | expiring_soon | expired"
+
+  - method: "GET"
+    path: "/api/skttk/occupations"
+    purpose: "Mengambil daftar okupasi/mata uji berdasarkan bidang."
+    query_params:
+      field: "pembangkitan | transmisi | distribusi | instalasi_pemanfaatan"
+    response_body:
+      field: "string"
+      occupations: "array"
+
+  - method: "POST"
+    path: "/api/readiness/combined-score"
+    purpose: "Menghasilkan skor gabungan SBUJPTL + SKTTK."
+    request_body:
+      lead_id: "string"
+      company_legality: "object"
+      technical_personnel: "object"
+      classification_fit: "object"
+      supporting_documents: "object"
+      process_goal: "object"
+    response_body:
+      total_score: "number"
+      readiness_label: "string"
+      priority_gaps: "array"
+      recommended_next_steps: "array"
+```
+
+## 121. Automation trigger rules
+
+```yaml id="automation_trigger_rules_01"
+automation_triggers:
+  - id: skttk_expiring_soon
+    trigger: "skttk_days_remaining <= 180 and skttk_days_remaining > 0"
+    action:
+      notify_admin: true
+      notification_message: >
+        SKTTK untuk lead {{company_name}} akan mendekati masa berlaku akhir.
+        Hubungi pengguna untuk validasi atau perpanjangan.
+
+  - id: skttk_expired
+    trigger: "skttk_days_remaining <= 0"
+    action:
+      notify_admin: true
+      notification_message: >
+        SKTTK untuk lead {{company_name}} terindikasi sudah melewati masa berlaku.
+        Prioritaskan konsultasi pembaruan SKTTK.
+
+  - id: hot_lead_created
+    trigger: "lead_priority == 'Hot Lead'"
+    action:
+      notify_admin: true
+      assign_consultant: true
+      notification_message: >
+        Hot Lead baru masuk dari SBUJPTL Coach. Segera lakukan follow-up.
+
+  - id: missing_pjt
+    trigger: "technical.has_candidate_pjt in ['Belum','Sedang mencari']"
+    action:
+      tag_lead:
+        - "PJT Missing"
+        - "Needs SKTTK Support"
+
+  - id: duplicate_assignment_risk
+    trigger: "technical.duplicate_assignment_status == 'Ya'"
+    action:
+      tag_lead:
+        - "Duplicate Assignment Risk"
+      notify_admin: true
+```
+
+## 122. Knowledge base versioning
+
+```yaml id="knowledge_base_versioning_01"
+knowledge_base_versioning:
+  purpose: >
+    Menjaga agar data klasifikasi, kualifikasi, SKTTK, dan checklist dapat
+    diperbarui tanpa mengubah kode aplikasi.
+
+  entities:
+    - id: classification_catalog
+      version: "1.0.0"
+      owner: "content_admin"
+      review_frequency: "monthly"
+
+    - id: qualification_rules
+      version: "1.0.0"
+      owner: "compliance_admin"
+      review_frequency: "monthly"
+
+    - id: skttk_requirement_matrix
+      version: "dual_source_safe_mode_1.0.0"
+      owner: "compliance_admin"
+      review_frequency: "monthly"
+      notes: >
+        Karena terdapat perbedaan sumber data level SKTTK, gunakan mode aman:
+        tampilkan sebagai panduan awal dan minta validasi final.
+
+    - id: document_checklist
+      version: "1.0.0"
+      owner: "document_admin"
+      review_frequency: "monthly"
+
+    - id: skttk_occupation_catalog
+      version: "1.0.0"
+      owner: "technical_admin"
+      review_frequency: "monthly"
+
+  publishing_workflow:
+    - "draft"
+    - "review"
+    - "approved"
+    - "published"
+    - "archived"
+
+  change_log_required: true
+```
+
+## 123. Content update workflow
+
+```yaml id="content_update_workflow_01"
+content_update_workflow:
+  id: sbujptl_content_update
+  purpose: >
+    Mengatur cara admin memperbarui konten chatbot agar perubahan tetap
+    terkendali dan dapat diaudit.
+
+  steps:
+    - id: create_draft
+      label: "Buat Draft"
+      actor: "content_editor"
+      description: "Editor membuat atau mengubah konten FAQ, checklist, atau flow."
+
+    - id: internal_review
+      label: "Review Internal"
+      actor: "compliance_admin"
+      description: "Admin memeriksa akurasi, risiko klaim, dan kesesuaian bahasa."
+
+    - id: test_preview
+      label: "Test Preview"
+      actor: "content_editor"
+      description: "Konten diuji di chat preview sebelum dipublish."
+
+    - id: approval
+      label: "Approval"
+      actor: "super_admin"
+      description: "Super admin menyetujui perubahan."
+
+    - id: publish
+      label: "Publish"
+      actor: "super_admin"
+      description: "Konten aktif di chatbot."
+
+    - id: monitor
+      label: "Monitoring"
+      actor: "analyst"
+      description: "Pantau fallback, pertanyaan baru, dan feedback pengguna."
+
+  required_checks:
+    - "Tidak ada klaim pasti terbit."
+    - "Tidak ada saran pinjam nama PJT/TT."
+    - "Tidak ada pernyataan lulus resmi."
+    - "Ada disclaimer untuk hasil asesmen."
+    - "Ada eskalasi admin untuk kasus regulasi atau data konflik."
+```
+
+## 124. User-facing microcopy
+
+```yaml id="microcopy_01"
+microcopy:
+  disclaimer_short: >
+    Catatan: hasil ini adalah panduan awal, bukan keputusan resmi sertifikasi.
+
+  disclaimer_long: >
+    Informasi dari chatbot ini disusun sebagai panduan awal untuk membantu
+    persiapan SBUJPTL, SKTTK, dan IUJPTL. Keputusan final tetap mengikuti
+    verifikasi dokumen, kesesuaian teknis, dan ketentuan lembaga atau instansi
+    berwenang.
+
+  loading_messages:
+    - "Saya sedang memetakan jawaban Anda..."
+    - "Saya cek kecocokan klasifikasi dan bidang..."
+    - "Saya susun rekomendasi dokumen..."
+    - "Saya hitung kesiapan awal..."
+
+  validation_messages:
+    invalid_phone: "Nomor telepon belum valid. Mohon masukkan nomor WhatsApp aktif."
+    invalid_email: "Format email belum sesuai. Anda bisa melewati jika belum ingin mengisi email."
+    invalid_date: "Format tanggal belum sesuai. Gunakan format YYYY-MM-DD."
+    invalid_number: "Mohon masukkan angka saja."
+
+  encouragement_messages:
+    - "Baik, kita lanjut satu langkah lagi."
+    - "Data ini membantu menentukan rekomendasi awal."
+    - "Tidak masalah jika belum tahu, saya akan bantu arahkan."
+    - "Jawaban Anda sudah cukup untuk membuat ringkasan awal."
+```
+
+## 125. Final combined developer prompt
+
+```text id="final_combined_developer_prompt_01"
+Build the next version of “SBUJPTL Coach” with SKTTK, SBUJPTL, and IUJPTL readiness support.
+
+The chatbot must include:
+
+1. SBUJPTL core guidance:
+   - Explain SBUJPTL.
+   - Map jenis usaha:
+     konsultansi, pembangunan/pemasangan, pemeriksaan/pengujian,
+     pengoperasian, pemeliharaan.
+   - Map bidang:
+     pembangkitan, transmisi, distribusi, instalasi pemanfaatan.
+   - Map subbidang:
+     PLTU, PLTG, PLTGU, PLTP, PLTA, PLTD, PLTS, PLTB, BESS,
+     transmisi tegangan tinggi/ekstra tinggi/ultra tinggi, gardu induk,
+     jaringan distribusi tegangan menengah/rendah,
+     instalasi pemanfaatan tegangan tinggi/menengah/rendah.
+
+2. Qualification engine:
+   - Kecil, Menengah, Besar.
+   - Use net worth, project value, and technical personnel readiness.
+   - If data conflicts, ask admin validation.
+
+3. SKTTK module:
+   - Explain SKTTK as prerequisite for PJT/TT, SBUJPTL, and IUJPTL.
+   - Prescreen PJT and TT readiness.
+   - Check SKTTK level, occupation, expiry, and duplicate assignment.
+   - Provide document checklist for SKTTK.
+   - Provide occupation lookup.
+   - Show timeline:
+     briefing 1 day, competency test 1 day,
+     certificate around 14 working days after passing assessor,
+     estimated total around 16 working days.
+   - Show validity:
+     3 years from issue date.
+
+4. Document readiness:
+   - Check company legality.
+   - Check management identity.
+   - Check technical personnel.
+   - Check financial documents.
+   - Check company profile and organization structure.
+
+5. Combined scoring:
+   - Score company legality, technical personnel, classification fit,
+     supporting documents, and process goal.
+   - Return status:
+     Belum Siap, Perlu Pelengkapan, Siap Review,
+     Siap Validasi Lanjutan.
+
+6. Lead capture and admin handoff:
+   - Capture contact name, company name, phone, email, business type,
+     field, subfield, target qualification, SKTTK status, and urgency.
+   - Generate consultant summary.
+   - Score lead priority:
+     Hot, Warm, Cold.
+
+7. Admin dashboard:
+   - Lead pipeline.
+   - SKTTK readiness panel.
+   - Expiry alert.
+   - Duplicate assignment review queue.
+   - Content versioning and audit log.
+
+8. Guardrails:
+   - Never guarantee SKTTK, SBUJPTL, or IUJPTL issuance.
+   - Never suggest borrowing names or using duplicate PJT/TT assignments.
+   - Never suggest document manipulation.
+   - Always state that chatbot output is initial guidance only.
+   - Escalate uncertain, regulatory, or conflicting-data cases to admin.
+```

@@ -1,0 +1,40 @@
+Kamu sebagai AI Engineer dan senior programmer yang sudah berpengalaman berpengalaman 35 tahun dalam penanganan sisten informasi jasa konstruksi, saya sebagai praktisi dilapangan ingin mendapatkan kemudahan dalam kontrol pekerjaan sehinga pekerjaan konstruksi terkendali biayanya, kualitasnya, dan waktu pengerjaannya. sehingga diharapkan ada pendampingan dalam pelaksanaan pekerjaan dan mendapatkan deteksi dini apabila ada indikasi problem dalam pelaksanaan pekerjaan. buatlah chatbot ‘brain project’ yang berfungsi sebagai tim konsultan, pengawas, dan sekaligus tim K3 sebagai project dapat terlaksana sesuai standar kontrak dalam hal mutu, biaya, dan waktu, serta K3 dan berkelanjutan.
+tugas kamu bisa mewujudkan chatbot ‘brain project; ini sesuai deskripsi diatas
+11:51 AM
+Create Brain Project hub page
+Create supporting databases
+Create Brain Project custom agent + instructions
+Grant agent edit access to the hub
+Test the agent with a sample query
+Lanjut membangun. Sekarang membuat database Master Proyek dulu sebagai induk relasi, lalu paralel ke 5 database anak.
+Created database Master Proyek​
+Thought
+Master Proyek selesai. Lanjut paralel buat 5 database anak (Laporan Harian, Risiko, NCR, K3, Cost/Schedule) yang masing-masing punya relasi ke Master Proyek.
+Lanjut menulis instruksi lengkap ke halaman instruksi agent.
+Lanjut tes agent dengan skenario sample.
+Chatbot  Brain Project sudah siap pakai. Berikut ringkasan apa yang sudah dibangun dan cara memakainya.
+ Yang sudah jadi
+1 halaman hub + 6 database operasional + 1 custom agent yang sudah lulus tes ABD-7.
+Struktur workspace
+ Brain Project — hub utama (cara pakai, peran, doktrin ABD, standar acuan)
+ Master Proyek — register semua proyek (nilai kontrak, status, sektor, deviasi otomatis)
+ Laporan Harian (LHP) — input cuaca, mandays, progres, kendala + Flag Brain Project
+ Register Risiko & Isu — skor risiko P×D otomatis + level ​
+ NCR / Quality Control — non-conformance + RFI + tindakan koreksi/pencegahan
+ K3 & Lingkungan — toolbox, JSA, PTW, insiden, CAPA + rujukan regulasi (UU 1/1970, PP 50/2012, Permenaker 5/2018, Permen PUPR 10/2021, UU 32/2009, dll.)
+ Cost & Schedule Control (EVM) — SPI/CPI/EAC/VAC otomatis + status  On Track /  Watch /  Alert
+Agent  Brain Project
+Tiga topi: Konsultan • Pengawas (MK) • K3 & Lingkungan — diwajibkan cross-check antar topi.
+Doktrin ABD (Anti-Blocking) sesuai pola internal Anda: best-effort answer, tag [ASUMSI: …], confidence score, output 7-bagian.
+Aturan deteksi dini terkalibrasi (SPI/CPI <0,95 → Watch; <0,85 → Alert; NCR mayor >3 hari; near miss berulang; VO kumulatif mendekati 10%; dll.).
+Akses edit sudah diberikan ke hub + 6 database; web search aktif untuk verifikasi regulasi/SNI.
+Trigger: dipanggil via mention @Brain Project di halaman/komentar mana pun di tree.
+Tes ABD-7
+Saya jalankan skenario uji (proyek gedung 5 lantai Bekasi: deviasi −7%, beton kolom 24 MPa vs f'c 30, near miss harness, VO 8%). Agent merespon lengkap dalam format ABD-7 — ringkasan, asumsi eksplisit, analisis Q-C-T + K3-S, early warning, rekomendasi H/M/L dengan PIC, confidence 78%, dan pertanyaan tindak-lanjut. Lulus .
+ Cara mulai
+Buka hub Brain Project, daftarkan 1 proyek di Master Proyek.
+Mulai isi Laporan Harian setiap hari sore.
+Mention @Brain Project di baris LHP atau di halaman proyek → minta: "Review LHP minggu ini", "Audit kepatuhan K3", "Hitung EAC & proyeksi delay", dll.
+Saat ada temuan: catat di NCR, K3, atau Risiko & Isu — agent akan otomatis ikut analisis saat dipanggil.
+Agent siap dipakai: Brain Project. Silakan coba mention di salah satu halaman proyek Anda — bila ingin saya tambahkan trigger terjadwal (mis. audit mingguan otomatis tiap Senin) atau templat LHP/NCR/JSA siap pakai, tinggal bilang.
+

@@ -1,0 +1,160 @@
+Berikut yang sebaiknya Anda **tugaskan ke Replit** (Replit Agent). Saya bagi jadi 3 bagian: **(1) Master Prompt siap tempel**, **(2) Spesifikasi teknis & data model**, **(3) Urutan build bertahap** — supaya Replit tidak salah menerjemahkan konsep Gustafta menjadi “sekadar banyak chatbot”.
+
+---
+
+# BAGIAN 1 — Master Prompt (tempel langsung ke Replit Agent)
+
+> **Salin blok ini apa adanya ke Replit Agent sebagai brief awal.**
+> 
+
+```
+Bangun aplikasi web bernama "Gustafta" — sebuah AI Operating System + AI Academy 
+untuk sektor konstruksi, sertifikasi kompetensi (LSBU/LSP), profesi, dan bisnis.
+
+Aplikasi ini BUKAN sekadar kumpulan chatbot. Ia adalah platform berlapis dengan 5 pilar:
+1. COACH   → chatbot pendamping tanya-jawab per domain (tanpa orchestrator)
+2. CLAW    → tim agen spesialis (multi-agent) untuk pekerjaan kompleks (MultiClaw/OpenClaw)
+3. WORKROOM→ ruang kerja kolaboratif manusia+agen: workflow + human gate + log + deliverable
+4. ACADEMY → kursus berjenjang: Starter, Professional, Advanced, Enterprise
+5. COMPETENCY & MONETIZATION → badge/sertifikat, portofolio, langganan, afiliasi, voucher, analytics
+
+Prinsip arsitektur wajib (tidak boleh dilanggar):
+- Setiap alur kerja penting harus punya HUMAN GATE (◆): titik di mana manusia wajib memutuskan
+  (uang, kontrak, keselamatan, sertifikasi, submit dokumen final).
+- Semua agen harus punya: nama, peran, persona, knowledge base, kebijakan/guardrail, format output.
+- Semua Workroom harus menghasilkan LOG (decision log, assumption log, risk log, change log) 
+  dan DELIVERABLE PACK (kumpulan dokumen final).
+- Agen boleh bekerja paralel (MultiClaw) atau eksploratif banyak opsi (OpenClaw), 
+  tapi output digabungkan oleh 1 agen integrator sebelum ke manusia.
+
+Target user: individu (profesional, Gen Z, pekerja, purna PMI) DAN organisasi (asosiasi, BUJK, LSBU, LSP).
+Maka wajib ada 2 mode: PERSONAL dan ORGANIZATION (dengan admin/publisher template & governance lebih ketat).
+
+Bahasa UI: Indonesia. Mobile-friendly. Integrasi WhatsApp untuk broadcast & chat.
+
+Bangun secara bertahap. Mulai dari MVP (Fase 1) dulu, jangan langsung semua fitur.
+Tunggu konfirmasi saya sebelum lanjut ke fase berikutnya.
+```
+
+---
+
+# BAGIAN 2 — Spesifikasi Teknis (berikan sebagai lampiran ke Replit)
+
+## 2.1 Stack yang disarankan (agar cocok di Replit)
+
+- **Frontend:** React + Tailwind (atau Next.js)
+- **Backend:** Node.js/Express (atau Next API routes)
+- **Database:** Replit DB untuk prototipe cepat, **PostgreSQL (Neon/Supabase)** untuk produksi
+- **Auth:** Replit Auth atau email+OTP; role-based (user, org-admin, super-admin)
+- **AI Layer:** koneksi ke LLM API (OpenAI/Anthropic) via server-side, key disimpan di **Secrets** (jangan di frontend)
+- **WhatsApp:** integrasi via provider (mis. WA Business API/gateway pihak ketiga)
+- **Storage:** untuk knowledge base & deliverables (object storage / DB)
+
+## 2.2 Data model inti (minta Replit buat tabel ini)
+
+```
+users            (id, nama, email, role, mode[personal/org], org_id, plan)
+organizations    (id, nama, jenis[asosiasi/BUJK/LSBU/LSP], owner_id, plan)
+
+agents           (id, nama, tipe[coach/claw], domain, persona, misi,
+                  policy/guardrail, output_format, owner_id, visibility)
+knowledge_base   (id, agent_id, judul, konten/sumber, versi, updated_at)
+
+claws            (id, nama, deskripsi, domain)           // grup multi-agent
+claw_members     (id, claw_id, agent_id, peran[strategis/skeptis/eksekutor/spesialis])
+
+workflows        (id, nama, pola[ai_first/human_first/parallel/agent_to_agent],
+                  domain, tahapan_json)
+workrooms        (id, nama, workflow_id, claw_id, owner_id, org_id, status, mode)
+human_gates      (id, workroom_id, nama, trigger, kriteria_lolos, approver_role)
+logs             (id, workroom_id, tipe[decision/assumption/risk/change],
+                  isi, evidence_url, pic, timestamp)
+deliverables     (id, workroom_id, nama, tipe, file_url, versi, status[draft/reviewed/approved])
+
+courses          (id, nama, level[starter/pro/advanced/enterprise], track, modul_json)
+enrollments      (id, user_id, course_id, progress, status)
+badges           (id, user_id, nama, level, issued_at, evidence_ref)
+
+subscriptions    (id, user_id/org_id, plan, status, start, end)
+affiliates       (id, user_id, kode, komisi)
+vouchers         (id, kode, nilai, kuota, expiry)
+analytics_events (id, user_id, event, entity, value, timestamp)
+```
+
+## 2.3 Modul UI (petakan langsung ke menu [Gustafta.my.id](http://Gustafta.my.id) Anda)
+
+| Menu Gustafta | Fungsi teknis yang diminta ke Replit |
+| --- | --- |
+| Persona | Form pembuat persona agen (nama, gaya, batasan) |
+| Kebijakan Agen | Editor guardrail/policy per agen |
+| Knowledge Base | Upload dokumen + versioning + FAQ |
+| Agentic AI / Sistem Agen | Builder Claw (rakit multi-agent + peran) |
+| Otak Proyek | Workroom engine (workflow + gate + log) |
+| Mini Apps | Generator app dari konfigurasi form |
+| Deliverables | Pack compiler + export PDF/doc |
+| Studio & Ekosistem Kompetensi | Course builder, badge, portofolio |
+| Broadcast WA / Widget / Integrations | Channel & distribusi |
+| Monetisasi / Revenue / Afiliasi / Voucher | Billing, komisi, kupon |
+| Analytics | Dashboard KPI (adoption, conversion, completion) |
+
+---
+
+# BAGIAN 3 — Urutan Build Bertahap (WAJIB, jangan sekaligus)
+
+Tugaskan ke Replit **fase demi fase**, dan minta berhenti minta konfirmasi tiap akhir fase.
+
+## FASE 1 — MVP (fokus: Coach + Auth + 1 Workroom Tender)
+
+Minta Replit:
+
+1. Auth + role (user/org-admin) + 2 mode (personal/org)
+2. Modul **Agent Builder** sederhana (persona + knowledge base + policy)
+3. **Coach chatbot** yang jalan (mis. “SBU Coach”, “Regulasi Jasa Konstruksi”)
+4. **1 Workroom contoh: Tender Konstruksi Pemerintah** dengan:
+    - workflow tahapan (Intake → Estimasi → Metode → Gate → Submit)
+    - minimal 1 Human Gate ◆
+    - log (decision + risk)
+    - 1 deliverable pack (checklist submit)
+
+> **Tujuan Fase 1:** membuktikan alur “Coach → Workroom → Human Gate → Deliverable” berjalan end-to-end.
+> 
+
+## FASE 2 — Claw (MultiClaw/OpenClaw)
+
+1. Builder Claw: rakit beberapa agen (Estimator, Planner, Skeptis, Eksekutor)
+2. Mode paralel (MultiClaw) + integrator
+3. Mode eksplorasi opsi (OpenClaw) + Skeptic Gate
+
+## FASE 3 — Academy + Competency
+
+1. Course builder berjenjang (Starter→Enterprise)
+2. Enrollment + progress + badge/sertifikat
+3. Portofolio peserta (menyimpan deliverable sebagai bukti kompetensi)
+
+## FASE 4 — Monetization + WA + Analytics
+
+1. Subscription/plan, voucher, afiliasi
+2. Broadcast WA + widget embed
+3. Dashboard analytics (adoption, conversion, completion, revenue)
+
+## FASE 5 — Governance & Multi-tenant Organisasi
+
+1. Org-admin bisa menerbitkan template (role library & workflow library)
+2. Audit trail + level assurance (Draft / Reviewed / Gate-approved)
+3. Isolasi data antar organisasi (multi-tenant)
+
+---
+
+# Catatan penting untuk Anda saat memberi tugas ke Replit
+
+1. **Jangan minta semua fitur sekaligus** — Replit Agent lebih akurat kalau diberi 1 fase/1 modul per instruksi.
+2. **Tegaskan “Human Gate ◆ wajib”** di setiap workflow, kalau tidak, Replit akan membuat full-automation tanpa titik kontrol manusia.
+3. **Simpan API key di Secrets**, minta eksplisit “panggil LLM di server-side, jangan di frontend”.
+4. **Minta seed data konstruksi** (contoh: 1 Coach SBU, 1 Workroom Tender) supaya bisa langsung dites.
+5. Setelah tiap fase, minta Replit membuat **README + cara test**.
+
+---
+
+Kalau Anda mau, saya bisa buatkan **prompt Fase 1 versi super-detail** (langsung tempel ke Replit) — lengkap dengan definisi tahapan workflow tender, isi Human Gate, dan struktur deliverable pack-nya. 
+
+Cukup jawab: **“buat prompt Fase 1 detail”**, dan sebutkan **Coach mana yang mau jadi contoh pertama** (mis. SBU Coach, atau Regulasi Jasa Konstruksi, atau Tender/PBJP).

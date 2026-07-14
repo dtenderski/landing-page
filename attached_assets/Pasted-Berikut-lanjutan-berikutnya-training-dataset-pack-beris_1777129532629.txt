@@ -1,0 +1,607 @@
+Berikut lanjutan berikutnya: **training dataset pack**, berisi **intent utterance library, negative examples, response evaluation rubric, conversation QA matrix, dan final implementation guardrails** untuk chatbot SKK **Manajemen Pelaksanaan**. Seluruh struktur tetap memakai katalog jabatan, KKNI, kualifikasi, dan standar kompetensi dari file yang Anda unggah. 
+
+---
+
+# 147. Intent Utterance Training Dataset
+
+```yaml id="intent_utterance_dataset"
+intent_utterance_dataset:
+
+  lookup_role:
+    description: "Pengguna mencari detail jabatan kerja tertentu."
+    utterances:
+      - "Jelaskan Quality Engineer"
+      - "Quality Engineer itu apa?"
+      - "Saya mau ambil Ahli K3 Konstruksi"
+      - "Detail Ahli Quantity Surveyor"
+      - "Apa jenjang untuk Supervisor K3?"
+      - "Saya ingin tahu jabatan Ahli Kontrak Kerja Konstruksi"
+      - "Petugas Keselamatan Konstruksi level berapa?"
+      - "Apa standar untuk Manajer Logistik Proyek?"
+
+  lookup_kkni:
+    description: "Pengguna mencari jabatan berdasarkan jenjang KKNI."
+    utterances:
+      - "KKNI 7 ada jabatan apa saja?"
+      - "Level 5 di Manajemen Pelaksanaan apa saja?"
+      - "Saya cari jabatan KKNI 8"
+      - "Tampilkan semua jabatan level 6"
+      - "Apa saja jabatan ahli muda?"
+      - "Ada apa saja di KKNI 3?"
+      - "Jabatan teknisi analis level 5 apa saja?"
+
+  lookup_standard:
+    description: "Pengguna mencari jabatan berdasarkan kode SKKNI/SKKK."
+    utterances:
+      - "SKKNI 350-2014 untuk jabatan apa?"
+      - "SKKNI 333-2013 itu standar untuk apa?"
+      - "SKKK 035-2022 jabatan apa?"
+      - "Standar SKKNI 88-2015 untuk siapa?"
+      - "SKKNI 6-2011 digunakan di jabatan apa?"
+      - "Cari jabatan dengan standar SKKNI 60-2022"
+
+  compare_roles:
+    description: "Pengguna ingin membandingkan dua atau lebih jabatan."
+    utterances:
+      - "Apa beda Quality Engineer dan QA Engineer?"
+      - "Beda Ahli K3 dan Ahli Keselamatan Konstruksi apa?"
+      - "Quantity Surveyor dan Ahli Quantity Surveyor bedanya apa?"
+      - "Manajemen Konstruksi dan Manajemen Proyek beda?"
+      - "Petugas K3 dan Supervisor K3 beda apa?"
+      - "Juru Hitung Kuantitas beda dengan QS?"
+
+  start_assessment:
+    description: "Pengguna ingin melakukan asesmen mandiri."
+    utterances:
+      - "Mulai asesmen"
+      - "Cek kemampuan saya"
+      - "Saya mau tes kesiapan"
+      - "Asesmen mandiri K3"
+      - "Tes untuk Quality Engineer"
+      - "Saya mau cek kesiapan Ahli QS"
+      - "Mulai asesmen Manajemen Proyek"
+
+  start_learning:
+    description: "Pengguna ingin belajar materi kompetensi."
+    utterances:
+      - "Saya mau belajar"
+      - "Belajar K3"
+      - "Ajari saya tentang kontrak konstruksi"
+      - "Materi Quality Engineer"
+      - "Belajar quantity surveying"
+      - "Jelaskan dasar manajemen proyek konstruksi"
+      - "Saya ingin memahami NCR"
+
+  start_scenario:
+    description: "Pengguna ingin latihan studi kasus."
+    utterances:
+      - "Beri saya studi kasus"
+      - "Latihan kasus K3"
+      - "Kasus keterlambatan proyek"
+      - "Latihan NCR"
+      - "Kasus variation order"
+      - "Kasus selisih volume"
+      - "Saya mau latihan situasi proyek"
+
+  generate_checklist:
+    description: "Pengguna ingin checklist bukti kompetensi."
+    utterances:
+      - "Bukti apa yang harus saya siapkan?"
+      - "Checklist untuk sertifikasi Quality Engineer"
+      - "Dokumen untuk Ahli Quantity Surveyor"
+      - "Portofolio untuk K3 apa saja?"
+      - "Checklist bukti Manajemen Proyek"
+      - "Dokumen pendukung asesmen kontrak"
+
+  start_mock_interview:
+    description: "Pengguna ingin latihan wawancara asesor."
+    utterances:
+      - "Latihan wawancara"
+      - "Tanya saya seperti asesor"
+      - "Simulasi asesor untuk Ahli K3"
+      - "Latihan jawab pertanyaan sertifikasi"
+      - "Mock interview Quality Engineer"
+      - "Wawancara untuk Ahli Quantity Surveyor"
+
+  glossary_lookup:
+    description: "Pengguna bertanya arti istilah."
+    utterances:
+      - "Apa itu SKKNI?"
+      - "Apa arti KKNI?"
+      - "Apa itu NCR?"
+      - "Apa itu backup quantity?"
+      - "Apa maksud variation order?"
+      - "Apa itu progress payment?"
+      - "Apa itu HIRADC?"
+```
+
+---
+
+# 148. Negative Training Examples
+
+```yaml id="negative_training_examples"
+negative_training_examples:
+  purpose: >
+    Membantu model membedakan input yang mirip tetapi berbeda maksud, sehingga
+    tidak salah melakukan lookup atau memulai flow.
+
+  examples:
+
+    - user_input: "Saya mau kerja di proyek"
+      should_not_detect_as: "lookup_role"
+      correct_behavior: >
+        Tanyakan area pekerjaan yang diminati: K3, manajemen proyek, mutu,
+        kontrak, atau biaya/QS.
+
+    - user_input: "Level saya masih pemula"
+      should_not_detect_as: "lookup_kkni"
+      correct_behavior: >
+        Jelaskan bahwa “pemula” bukan jenjang KKNI. Tawarkan pemetaan
+        pengalaman atau asesmen dasar.
+
+    - user_input: "Quality bagus itu bagaimana?"
+      should_not_detect_as: "lookup_role"
+      correct_behavior: >
+        Deteksi sebagai pertanyaan pembelajaran tentang mutu, bukan langsung
+        lookup Quality Engineer.
+
+    - user_input: "Saya punya masalah kontrak"
+      should_not_detect_as: "lookup_role"
+      correct_behavior: >
+        Tanyakan apakah pengguna ingin belajar kontrak, studi kasus, atau
+        checklist dokumen klaim.
+
+    - user_input: "Bisa bantu hitung volume?"
+      should_not_detect_as: "lookup_role"
+      correct_behavior: >
+        Jelaskan chatbot ini fokus pada pembelajaran kompetensi dan prinsip
+        QS; jika ingin, bantu dengan kerangka perhitungan umum.
+
+    - user_input: "Saya sudah pasti lulus kan?"
+      should_not_detect_as: "assessment_result"
+      correct_behavior: >
+        Jelaskan bahwa chatbot tidak dapat menentukan kelulusan resmi dan
+        hanya memberi persiapan belajar.
+```
+
+---
+
+# 149. Intent Confidence Routing Table
+
+```yaml id="intent_confidence_routing"
+intent_confidence_routing:
+
+  exact_role_detected:
+    confidence: "0.90 - 1.00"
+    action: "Show role detail directly"
+    example: "Quality Engineer"
+
+  role_area_detected_only:
+    confidence: "0.65 - 0.85"
+    action: "Show disambiguation options"
+    example: "Saya mau K3"
+
+  vague_goal_detected:
+    confidence: "0.45 - 0.65"
+    action: "Ask goal clarification"
+    example: "Saya mau mulai"
+
+  unknown_input:
+    confidence: "< 0.45"
+    action: "Fallback to main menu"
+    example: "yang kemarin itu"
+
+  unsafe_request_detected:
+    confidence: "any"
+    action: "Use safety refusal and procedural redirect"
+    example: "lanjut kerja tanpa APD"
+
+  official_certification_claim_request:
+    confidence: "any"
+    action: "Clarify non-official role and offer preparation support"
+    example: "Apakah saya pasti lulus?"
+```
+
+---
+
+# 150. Response Quality Rubric
+
+```yaml id="response_quality_rubric"
+response_quality_rubric:
+  purpose: >
+    Rubrik untuk mengevaluasi kualitas jawaban chatbot sebelum production.
+
+  dimensions:
+
+    catalog_accuracy:
+      score_1: "Data jabatan, KKNI, atau standar salah."
+      score_2: "Sebagian data benar tetapi ada detail hilang."
+      score_3: "Data utama benar, namun kurang lengkap."
+      score_4: "Data lengkap dan sesuai katalog."
+      score_5: "Data lengkap, terstruktur, dan mudah diverifikasi."
+
+    clarity:
+      score_1: "Jawaban membingungkan."
+      score_2: "Jawaban terlalu panjang atau tidak fokus."
+      score_3: "Cukup jelas tetapi perlu struktur lebih baik."
+      score_4: "Jelas dan profesional."
+      score_5: "Sangat jelas, ringkas, dan mudah diikuti."
+
+    practical_relevance:
+      score_1: "Tidak terkait praktik kerja."
+      score_2: "Terlalu teoritis."
+      score_3: "Ada contoh tetapi terbatas."
+      score_4: "Memberikan contoh praktik proyek."
+      score_5: "Memberikan contoh, dokumen, dan langkah nyata."
+
+    safety_and_compliance:
+      score_1: "Memberi saran berbahaya atau melanggar prosedur."
+      score_2: "Tidak cukup menekankan keselamatan/prosedur."
+      score_3: "Aman tetapi disclaimer kurang jelas."
+      score_4: "Aman dan sesuai prosedur."
+      score_5: "Aman, jelas, dan memberi eskalasi yang tepat."
+
+    next_step_guidance:
+      score_1: "Tidak ada arahan lanjutan."
+      score_2: "Arahan terlalu umum."
+      score_3: "Ada arahan tetapi tidak spesifik."
+      score_4: "Memberikan opsi lanjutan yang relevan."
+      score_5: "Memberikan jalur lanjut yang sangat sesuai dengan konteks pengguna."
+```
+
+---
+
+# 151. Conversation QA Matrix
+
+```yaml id="conversation_qa_matrix"
+conversation_qa_matrix:
+
+  qa_case_001:
+    user_input: "Saya mau ambil QS"
+    expected_intent: "lookup_role_or_area"
+    expected_behavior:
+      - "Tampilkan beberapa jalur QS/biaya."
+      - "Jangan langsung memilih Ahli Quantity Surveyor."
+      - "Tanyakan tingkat tanggung jawab pengguna."
+    expected_options:
+      - "Juru Hitung Kuantitas"
+      - "Estimator Biaya Jalan"
+      - "Quantity Surveyor"
+      - "Ahli Quantity Surveyor"
+
+  qa_case_002:
+    user_input: "SKKNI 88-2015"
+    expected_intent: "lookup_standard"
+    expected_behavior:
+      - "Tampilkan Ahli Kontrak Kerja Konstruksi."
+      - "Tampilkan KKNI 8 dan 9."
+      - "Tawarkan modul kontrak atau studi kasus variation order."
+
+  qa_case_003:
+    user_input: "Level 3 ada apa?"
+    expected_intent: "lookup_kkni"
+    expected_behavior:
+      - "Tampilkan Petugas K3 Konstruksi."
+      - "Tampilkan Petugas Keselamatan Konstruksi."
+      - "Jelaskan bahwa level ini berada pada kualifikasi operator."
+
+  qa_case_004:
+    user_input: "Saya mau latihan untuk Ahli Manajemen Proyek Konstruksi"
+    expected_intent: "start_mock_interview_or_scenario"
+    expected_behavior:
+      - "Konfirmasi target role."
+      - "Tawarkan latihan studi kasus atau mock interview."
+      - "Gunakan area Manajemen Konstruksi/Manajemen Proyek."
+
+  qa_case_005:
+    user_input: "Bisa terbitkan sertifikat saya?"
+    expected_intent: "official_certification_request"
+    expected_behavior:
+      - "Jelaskan chatbot tidak menerbitkan sertifikat."
+      - "Tawarkan persiapan asesmen dan checklist bukti."
+```
+
+---
+
+# 152. Full Role Recommendation Script
+
+```yaml id="full_role_recommendation_script"
+role_recommendation_script:
+  opening:
+    bot: >
+      Saya akan bantu memetakan jalur jabatan yang paling dekat dengan
+      pengalaman Anda. Jawab beberapa pertanyaan singkat.
+
+  question_1:
+    text: "Pekerjaan Anda paling sering berkaitan dengan apa?"
+    options:
+      - "Keselamatan kerja/K3"
+      - "Koordinasi proyek/jadwal/progres"
+      - "Mutu/QA/QC"
+      - "Kontrak/klaim/perubahan pekerjaan"
+      - "Volume/BOQ/biaya/QS"
+
+  branch_k3:
+    question_2: "Tanggung jawab Anda lebih dekat ke mana?"
+    options:
+      - "Membantu penerapan K3 di lapangan"
+      - "Melakukan inspeksi dan pelaporan K3"
+      - "Mengawasi tim dan tindak lanjut temuan"
+      - "Mengevaluasi sistem K3 dan membina tim"
+    recommendation_logic:
+      - answer: "Membantu penerapan K3 di lapangan"
+        recommendation: "Petugas K3 Konstruksi atau Petugas Keselamatan Konstruksi, KKNI 3"
+      - answer: "Melakukan inspeksi dan pelaporan K3"
+        recommendation: "Personil K3, KKNI 4"
+      - answer: "Mengawasi tim dan tindak lanjut temuan"
+        recommendation: "Supervisor K3, KKNI 5–6"
+      - answer: "Mengevaluasi sistem K3 dan membina tim"
+        recommendation: "Ahli K3 Konstruksi atau Ahli Keselamatan Konstruksi, KKNI 7–9"
+
+  branch_project:
+    question_2: "Fokus Anda paling dekat dengan apa?"
+    options:
+      - "Logistik material dan alat"
+      - "Koordinasi pelaksanaan proyek"
+      - "Manajemen proyek secara menyeluruh"
+      - "Pendampingan teknis infrastruktur masyarakat"
+    recommendation_logic:
+      - answer: "Logistik material dan alat"
+        recommendation: "Manajer Logistik Proyek, KKNI 7"
+      - answer: "Koordinasi pelaksanaan proyek"
+        recommendation: "Ahli Bidang Keahlian Manajemen Konstruksi, KKNI 7–9"
+      - answer: "Manajemen proyek secara menyeluruh"
+        recommendation: "Ahli Manajemen Proyek Konstruksi, KKNI 7–9"
+      - answer: "Pendampingan teknis infrastruktur masyarakat"
+        recommendation: "Fasilitator Teknis Infrastruktur Berbasis Masyarakat, KKNI 5–6"
+
+  branch_quality:
+    question_2: "Aktivitas Anda lebih sering yang mana?"
+    options:
+      - "Inspeksi hasil pekerjaan"
+      - "Pengujian dan verifikasi spesifikasi"
+      - "Audit, prosedur, dan sistem mutu"
+      - "Evaluasi sistem manajemen mutu"
+    recommendation_logic:
+      - answer: "Inspeksi hasil pekerjaan"
+        recommendation: "Quality Engineer, KKNI 5–6"
+      - answer: "Pengujian dan verifikasi spesifikasi"
+        recommendation: "Quality Engineer, KKNI 5–6"
+      - answer: "Audit, prosedur, dan sistem mutu"
+        recommendation: "Quality Assurance Engineer, KKNI 5–6"
+      - answer: "Evaluasi sistem manajemen mutu"
+        recommendation: "Ahli Sistem Manajemen Mutu Konstruksi, KKNI 7–9"
+
+  branch_contract:
+    recommendation: >
+      Jika fokus Anda kontrak, klaim, variation order, dan sengketa, jalur
+      yang relevan adalah Ahli Kontrak Kerja Konstruksi, KKNI 8–9.
+
+  branch_cost_qs:
+    question_2: "Aktivitas Anda paling sering yang mana?"
+    options:
+      - "Menghitung volume pekerjaan"
+      - "Menyusun estimasi biaya jalan"
+      - "Memeriksa progress payment"
+      - "Memimpin analisis biaya/klaim"
+    recommendation_logic:
+      - answer: "Menghitung volume pekerjaan"
+        recommendation: "Juru Hitung Kuantitas, KKNI 4–6"
+      - answer: "Menyusun estimasi biaya jalan"
+        recommendation: "Estimator Biaya Jalan, KKNI 5–6"
+      - answer: "Memeriksa progress payment"
+        recommendation: "Quantity Surveyor, KKNI 5–6"
+      - answer: "Memimpin analisis biaya/klaim"
+        recommendation: "Ahli Quantity Surveyor, KKNI 7–9"
+
+  closing_template:
+    bot: >
+      Berdasarkan jawaban Anda, jalur yang paling relevan adalah
+      {{recommended_role}}.
+
+      Langkah berikutnya:
+      1. Lihat detail jabatan dan standar.
+      2. Mulai asesmen mandiri.
+      3. Siapkan checklist bukti kompetensi.
+      4. Latihan wawancara atau studi kasus.
+```
+
+---
+
+# 153. Final Guardrail Response Library
+
+```yaml id="final_guardrail_response_library"
+guardrail_responses:
+
+  certification_pass_fail:
+    trigger: "User asks whether they will pass or are officially competent."
+    response: >
+      Saya belum dapat menyatakan Anda lulus, gagal, atau resmi kompeten.
+      Keputusan resmi hanya dapat diberikan melalui proses asesmen oleh pihak
+      yang berwenang. Namun, saya bisa membantu Anda melakukan asesmen mandiri,
+      melihat area yang perlu diperkuat, dan menyiapkan bukti kompetensi.
+
+  unsafe_k3:
+    trigger: "User asks how to continue unsafe work."
+    response: >
+      Saya tidak dapat menyarankan pekerjaan berisiko dilanjutkan tanpa
+      pengendalian keselamatan. Tindakan yang lebih tepat adalah menghentikan
+      atau menunda pekerjaan berisiko, memastikan APD dan metode kerja aman,
+      mencatat temuan, serta melibatkan penanggung jawab K3.
+
+  quality_nonconformance:
+    trigger: "User asks whether to accept nonconforming work."
+    response: >
+      Saya tidak menyarankan menerima pekerjaan yang tidak sesuai spesifikasi
+      tanpa evaluasi teknis. Buat laporan ketidaksesuaian, tahan penerimaan
+      pekerjaan bila perlu, lakukan analisis penyebab, tetapkan tindakan
+      korektif, dan verifikasi hasil perbaikan.
+
+  undocumented_contract_change:
+    trigger: "User asks how to process extra work without written instruction."
+    response: >
+      Saya tidak menyarankan pekerjaan tambahan dilakukan tanpa dasar dokumen
+      yang jelas. Langkah yang lebih tepat adalah meminta instruksi tertulis,
+      memeriksa prosedur perubahan pekerjaan, menganalisis dampak waktu dan
+      biaya, serta menyimpan bukti komunikasi.
+
+  confidential_project_data:
+    trigger: "User shares or wants to share confidential project information."
+    response: >
+      Untuk keamanan, hindari membagikan informasi rahasia proyek seperti nilai
+      kontrak sensitif, data pribadi, atau dokumen yang tidak boleh dibuka.
+      Anda dapat menjelaskan kasus secara umum, misalnya jenis masalah, peran
+      Anda, dokumen yang digunakan, dan hasil tindak lanjut.
+```
+
+---
+
+# 154. Final “Ready for Build” Specification
+
+```yaml id="ready_for_build_specification"
+ready_for_build_specification:
+  bot_name: "SKK Coach — Manajemen Pelaksanaan"
+  language: "Bahasa Indonesia"
+  primary_function: >
+    Membantu pengguna memahami, memilih, mempelajari, dan mempersiapkan jalur
+    kompetensi kerja dalam klasifikasi Manajemen Pelaksanaan.
+
+  core_data_source:
+    name: "Katalog SKK Manajemen Pelaksanaan"
+    contains:
+      - "Subklasifikasi"
+      - "Jabatan Kerja"
+      - "Jenjang Jabatan Kerja"
+      - "Kualifikasi"
+      - "Jenjang KKNI"
+      - "Standar Kompetensi Kerja"
+      - "Link SKK Kemnaker"
+
+  must_have_flows:
+    - "Onboarding"
+    - "Main menu"
+    - "Role lookup"
+    - "KKNI lookup"
+    - "Standard lookup"
+    - "Role recommendation"
+    - "Learning modules"
+    - "Self-assessment"
+    - "Evidence checklist"
+    - "Fallback and disambiguation"
+    - "Safety guardrails"
+
+  should_have_flows:
+    - "Scenario practice"
+    - "Mock interview"
+    - "Session summary"
+    - "Progress tracking"
+    - "Glossary and FAQ"
+
+  implementation_priority:
+    priority_1:
+      - "Import role catalog"
+      - "Build main menu"
+      - "Build role/KKNI/standard lookup"
+      - "Build disambiguation"
+      - "Build assessment menu"
+    priority_2:
+      - "Add learning modules"
+      - "Add evidence checklist"
+      - "Add scenario practice"
+    priority_3:
+      - "Add mock interview"
+      - "Add analytics"
+      - "Add admin CMS"
+```
+
+---
+
+# 155. Final Example Master Conversation
+
+```text id="final_master_conversation"
+User:
+Halo, saya mau persiapan SKK Manajemen Pelaksanaan.
+
+Bot:
+Halo. Saya bisa membantu Anda memilih jalur jabatan, memahami KKNI dan standar,
+belajar kompetensi, melakukan asesmen mandiri, menyiapkan checklist bukti, dan
+latihan wawancara.
+
+Apa yang ingin Anda lakukan terlebih dahulu?
+
+[ Pilih jalur jabatan ] [ Cari berdasarkan KKNI ] [ Belajar kompetensi ] [ Asesmen mandiri ] [ Checklist bukti ]
+
+User:
+Saya pengalaman di mutu.
+
+Bot:
+Baik. Dalam Manajemen Pelaksanaan, jalur Pengendalian Mutu Pekerjaan
+Konstruksi memiliki beberapa pilihan:
+
+1. Quality Engineer, KKNI 5–6
+2. Quality Assurance Engineer, KKNI 5–6
+3. Ahli Sistem Manajemen Mutu Konstruksi, KKNI 7–9
+
+Aktivitas Anda lebih sering yang mana?
+
+[ Inspeksi hasil pekerjaan ] [ Audit/prosedur mutu ] [ Evaluasi sistem mutu ] [ Belum yakin ]
+
+User:
+Inspeksi hasil pekerjaan.
+
+Bot:
+Berdasarkan jawaban Anda, jalur yang paling relevan adalah Quality Engineer.
+
+Detail jabatan:
+- Subklasifikasi: Pengendalian Mutu Pekerjaan Konstruksi
+- Jenjang: Quality Engineer Madya dan Quality Engineer
+- KKNI: 5–6
+- Kualifikasi: Teknisi/Analis
+- Standar: SKKNI 333-2013
+
+Fokus kompetensi:
+Inspeksi mutu, verifikasi kesesuaian terhadap spesifikasi, dokumentasi hasil
+pemeriksaan, NCR, dan tindakan korektif.
+
+Langkah berikutnya:
+[ Mulai asesmen mutu ] [ Checklist bukti mutu ] [ Belajar modul NCR ] [ Latihan wawancara ]
+
+User:
+Mulai asesmen mutu.
+
+Bot:
+Baik. Asesmen ini membantu menilai kesiapan awal Anda. Hasilnya bukan keputusan
+resmi sertifikasi SKK.
+
+Pertanyaan 1 dari 10:
+Saya mampu membaca spesifikasi teknis pekerjaan.
+
+Pilih skor:
+[ 0 Belum memahami ] [ 1 Paham teori ] [ 2 Pernah menerapkan dengan arahan ] [ 3 Mampu mandiri ] [ 4 Mampu mengevaluasi/membimbing ]
+```
+
+---
+
+# 156. Closing Build Note
+
+```text id="closing_build_note"
+Dokumen desain chatbot ini sudah dapat digunakan sebagai dasar implementasi
+untuk chatbot builder, custom web app, WhatsApp bot, atau sistem chatbot
+berbasis API.
+
+Agar implementasi paling cepat, gunakan urutan berikut:
+
+1. Masukkan katalog jabatan ke database.
+2. Buat main menu dan lookup jabatan.
+3. Tambahkan lookup KKNI dan standar.
+4. Tambahkan role recommendation flow.
+5. Tambahkan asesmen mandiri.
+6. Tambahkan checklist bukti.
+7. Tambahkan learning module, studi kasus, dan mock interview.
+8. Tambahkan admin CMS, analytics, dan audit log.
+
+Dengan struktur ini, chatbot akan mampu berfungsi sebagai pendamping belajar
+dan persiapan SKK Manajemen Pelaksanaan secara terarah, interaktif, dan aman.
+```
+
+---

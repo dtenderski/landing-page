@@ -1,0 +1,526 @@
+Saya lanjutkan **di chat saja**.
+
+## LANJUTAN 10 — API, Webhook, Scoring & Admin Panel Blueprint
+
+Modul ini menjadikan chatbot lebih siap dibangun sebagai aplikasi: ada struktur API, webhook, data import, scoring pra-verifikasi, admin panel, audit log, dan export hasil konsultasi. Basisnya tetap memakai katalog SBU, SK Dirjen Binakon No. 37/KPTS/DK/2025 untuk skema sertifikasi BUJK, serta Permen PU No. 6 Tahun 2025 untuk standar kegiatan usaha, OSS/SIJK, pengawasan, konversi, dan sanksi.  
+
+```yaml id="4jgx39"
+# -----------------------------------------------------------------------------
+# LANJUTAN 10 — API, WEBHOOK, SCORING & ADMIN PANEL BLUEPRINT
+# -----------------------------------------------------------------------------
+
+implementation_blueprint:
+  id: sbu_chatbot_implementation_blueprint_v1
+  title: "Blueprint Implementasi Chatbot SBU"
+  objective:
+    - mengubah konfigurasi chatbot menjadi aplikasi operasional
+    - mendukung lookup SBU, KBLI, keyword, dan regulasi
+    - mendukung pra-verifikasi dokumen
+    - mendukung admin panel untuk update katalog
+    - mendukung export ringkasan konsultasi
+```
+
+## 1. Arsitektur Sistem
+
+```yaml id="t9tgem"
+system_architecture:
+  frontend:
+    description: "Dashboard chatbot builder dan widget chat pengguna."
+    components:
+      - chat_widget
+      - admin_dashboard
+      - catalog_upload_page
+      - analytics_dashboard
+      - export_report_button
+
+  backend:
+    description: "API untuk lookup, scoring, validasi, dan penyimpanan sesi."
+    components:
+      - chatbot_api
+      - catalog_service
+      - verification_service
+      - scoring_engine
+      - document_checklist_service
+      - regulation_reference_service
+      - session_summary_service
+
+  database:
+    tables:
+      - subklasifikasi_master
+      - kbli_master
+      - qualification_matrix
+      - tkk_requirement_matrix
+      - equipment_requirement_matrix
+      - document_requirement_matrix
+      - smap_requirement_matrix
+      - regulation_reference
+      - chat_sessions
+      - verification_results
+      - audit_logs
+```
+
+## 2. API Endpoint Utama
+
+```yaml id="zqnjmo"
+api_endpoints:
+  lookup_sbu:
+    method: POST
+    path: "/api/sbu/lookup"
+    purpose: "Mencari detail subklasifikasi berdasarkan kode SBU."
+    request_body:
+      sbu_code: "BG001"
+    response_body:
+      found: true
+      sbu_code: "BG001"
+      title: "Konstruksi Gedung Hunian"
+      kbli_code: "41011"
+      classification: "Bangunan Gedung"
+      scope_summary: "..."
+      tkk_summary: "..."
+      equipment_summary: "..."
+      notes: "Hasil perlu divalidasi sesuai ketentuan LSBU."
+
+  lookup_kbli:
+    method: POST
+    path: "/api/kbli/lookup"
+    purpose: "Mencari subklasifikasi berdasarkan KBLI."
+    request_body:
+      kbli_code: "41011"
+    response_body:
+      found: true
+      kbli_code: "41011"
+      candidates:
+        - sbu_code: "BG001"
+          title: "Konstruksi Gedung Hunian"
+        - sbu_code: "GT001"
+          title: "Konstruksi Gedung Hunian Terintegrasi"
+      clarification_required: true
+
+  search_keyword:
+    method: POST
+    path: "/api/sbu/search"
+    purpose: "Mencari kandidat SBU berdasarkan kata kunci pekerjaan."
+    request_body:
+      query: "pemasangan AC gedung"
+      max_results: 5
+    response_body:
+      candidates:
+        - sbu_code: "IN008"
+          title: "Instalasi Pendingin dan Ventilasi Udara"
+          confidence: 0.91
+          reason: "Kata kunci cocok dengan AC, HVAC, ducting, dan ventilasi."
+
+  pre_verify:
+    method: POST
+    path: "/api/sbu/pre-verify"
+    purpose: "Melakukan pra-verifikasi kesiapan SBU."
+    request_body:
+      sbu_code: "IN008"
+      kbli_code: "43224"
+      qualification: "Menengah"
+      annual_sales_status: "Ada"
+      financial_status: "Laporan audit KAP"
+      tkk_status: "Sebagian"
+      equipment_status: "Lengkap"
+      smap_status: "Surat komitmen SMAP"
+    response_body:
+      overall_status: "Perlu Perbaikan"
+      score: 74
+      issues:
+        - "TKK belum lengkap."
+        - "SMAP masih berupa surat komitmen."
+      recommendations:
+        - "Lengkapi PJTBU/PJSKBU sesuai subklasifikasi."
+        - "Pantau batas waktu pemenuhan dokumen SMAP."
+```
+
+## 3. Scoring Engine Pra-Verifikasi
+
+```yaml id="w9g4jk"
+pre_verification_scoring_engine:
+  score_range: "0-100"
+  status_labels:
+    85_100: "Siap Dikonsultasikan"
+    65_84: "Perlu Perbaikan Ringan"
+    40_64: "Perlu Perbaikan Mayor"
+    0_39: "Belum Siap"
+
+  scoring_weights:
+    kbli_sbu_match:
+      weight: 20
+      description: "Kesesuaian KBLI dengan subklasifikasi SBU."
+    annual_sales:
+      weight: 15
+      description: "Ketersediaan pengalaman/penjualan tahunan."
+    financial_capacity:
+      weight: 15
+      description: "Ketersediaan dan kecukupan kemampuan keuangan."
+    tkk:
+      weight: 20
+      description: "Kesiapan PJBU, PJTBU, PJSKBU, SKK, dan jenjang."
+    equipment:
+      weight: 15
+      description: "Kesiapan peralatan sesuai subklasifikasi dan kualifikasi."
+    smap:
+      weight: 15
+      description: "Kesiapan ISO 37001, PANCEK, dokumen SMAP, atau surat komitmen."
+
+  scoring_rules:
+    kbli_sbu_match:
+      match: 20
+      mismatch: 0
+      unknown: 8
+
+    annual_sales:
+      available_and_relevant: 15
+      available_but_unclear: 8
+      not_available: 0
+
+    financial_capacity:
+      complete: 15
+      partial: 8
+      missing: 0
+
+    tkk:
+      complete: 20
+      partial: 10
+      missing: 0
+
+    equipment:
+      complete: 15
+      partial: 8
+      not_required: 15
+      missing: 0
+
+    smap:
+      iso_or_document_ready: 15
+      pancek_ready: 15
+      commitment_letter: 8
+      missing: 0
+```
+
+## 4. Response Template untuk Hasil Scoring
+
+```yaml id="enl7ui"
+tpl_scoring_result: >
+  Hasil pra-verifikasi kesiapan SBU:
+
+  Kode SBU:
+  {{sbu_code}} — {{sbu_title}}
+
+  KBLI:
+  {{kbli_code}} — {{kbli_title}}
+
+  Kualifikasi:
+  {{qualification}}
+
+  Skor kesiapan:
+  {{score}} / 100
+
+  Status:
+  {{status_label}}
+
+  Rincian:
+  1. Kesesuaian KBLI dan SBU: {{score_kbli_sbu}} / 20
+  2. Penjualan tahunan/pengalaman: {{score_annual_sales}} / 15
+  3. Kemampuan keuangan: {{score_financial}} / 15
+  4. TKK: {{score_tkk}} / 20
+  5. Peralatan: {{score_equipment}} / 15
+  6. SMAP: {{score_smap}} / 15
+
+  Temuan:
+  {{issues}}
+
+  Rekomendasi:
+  {{recommendations}}
+
+  Catatan:
+  Skor ini hanya pra-verifikasi internal chatbot. Keputusan resmi tetap melalui
+  LSBU, asesor, OSS, SIJK terintegrasi, dan/atau pejabat berwenang.
+```
+
+## 5. Admin Panel Blueprint
+
+```yaml id="7khkyi"
+admin_panel_blueprint:
+  pages:
+    catalog_dashboard:
+      title: "Katalog SBU"
+      features:
+        - "lihat daftar subklasifikasi"
+        - "filter berdasarkan klasifikasi, KBLI, dan status aktif"
+        - "edit kata kunci"
+        - "tandai data needs_review"
+
+    catalog_upload:
+      title: "Upload Katalog"
+      features:
+        - "upload file Excel/CSV"
+        - "mapping kolom"
+        - "preview hasil import"
+        - "validasi kode SBU dan KBLI"
+        - "publish ke knowledge base"
+
+    regulation_reference:
+      title: "Referensi Regulasi"
+      features:
+        - "upload SK/Permen/SE terbaru"
+        - "beri prioritas referensi"
+        - "tandai aktif, dicabut, atau perlu review"
+        - "catatan perubahan regulasi"
+
+    verification_results:
+      title: "Hasil Pra-Verifikasi"
+      features:
+        - "lihat sesi pra-verifikasi"
+        - "filter berdasarkan status siap/perlu perbaikan/belum siap"
+        - "export ringkasan PDF"
+        - "lihat isu paling sering muncul"
+
+    analytics:
+      title: "Analytics Chatbot"
+      metrics:
+        - "kode SBU paling sering dicari"
+        - "KBLI paling sering dicari"
+        - "kata kunci tanpa hasil"
+        - "fallback rate"
+        - "skor kesiapan rata-rata"
+        - "area dokumen yang paling sering kurang"
+```
+
+## 6. Import Template CSV/Excel
+
+```yaml id="2z14j0"
+catalog_import_template:
+  required_columns:
+    - sbu_code
+    - sbu_title
+    - classification_code
+    - classification_name
+    - kbli_code
+    - kbli_title
+    - business_type
+    - business_nature
+    - scope_summary
+    - scope_detail
+    - allowed_qualification
+    - tkk_pjtbu
+    - tkk_pjskbu
+    - equipment_k
+    - equipment_mb
+    - equipment_b
+    - requirement_note
+    - verification_note
+    - obligation_note
+    - keywords
+    - source_reference
+
+  sample_row:
+    sbu_code: "BG001"
+    sbu_title: "Konstruksi Gedung Hunian"
+    classification_code: "BG"
+    classification_name: "Bangunan Gedung"
+    kbli_code: "41011"
+    kbli_title: "Konstruksi Gedung Hunian"
+    business_type: "Pekerjaan Konstruksi"
+    business_nature: "Umum"
+    scope_summary: "Pembangunan, pemeliharaan, pembongkaran, dan/atau pembangunan kembali bangunan hunian."
+    allowed_qualification: "Kecil 1; Kecil 2; Kecil 3; Menengah; Besar"
+    tkk_pjtbu: "Arsitektural; Gedung; Manajemen Konstruksi/Manajemen Proyek"
+    tkk_pjskbu: "Arsitektural; Gedung"
+    equipment_k: "concrete mixer; tamping rammer; generator set; scaffolding"
+    equipment_mb: "tower crane; truck crane; concrete pump; excavator; dump truck"
+    keywords: "rumah; hunian; apartemen; rusun; asrama; kondominium"
+    source_reference: "Permen PU 6/2025 Lampiran I"
+```
+
+## 7. Webhook Events
+
+```yaml id="fn47bd"
+webhook_events:
+  user_completed_pre_verification:
+    event_name: "pre_verification.completed"
+    payload:
+      session_id: "string"
+      user_id: "string"
+      sbu_code: "string"
+      kbli_code: "string"
+      score: "number"
+      status_label: "string"
+      issues: "array"
+      recommendations: "array"
+
+  user_requested_human_validation:
+    event_name: "human_validation.requested"
+    payload:
+      session_id: "string"
+      topic: "string"
+      summary: "string"
+      user_contact: "string"
+
+  catalog_import_completed:
+    event_name: "catalog.import_completed"
+    payload:
+      import_id: "string"
+      total_rows: "number"
+      valid_rows: "number"
+      invalid_rows: "number"
+      needs_review_rows: "number"
+
+  regulatory_reference_updated:
+    event_name: "regulation.updated"
+    payload:
+      regulation_id: "string"
+      title: "string"
+      effective_status: "string"
+      priority: "number"
+```
+
+## 8. Audit Log
+
+```yaml id="ltmgmm"
+audit_log_schema:
+  table: audit_logs
+  fields:
+    log_id:
+      type: string
+    timestamp:
+      type: datetime
+    actor_type:
+      type: enum
+      values:
+        - user
+        - admin
+        - system
+        - bot
+    actor_id:
+      type: string
+    action:
+      type: string
+      examples:
+        - "lookup_sbu"
+        - "lookup_kbli"
+        - "pre_verification"
+        - "catalog_import"
+        - "catalog_update"
+        - "export_report"
+    object_type:
+      type: string
+      examples:
+        - "sbu_code"
+        - "kbli_code"
+        - "session"
+        - "catalog_row"
+    object_id:
+      type: string
+    before_value:
+      type: json_nullable
+    after_value:
+      type: json_nullable
+    notes:
+      type: text
+```
+
+## 9. Export Ringkasan Konsultasi
+
+```yaml id="te4w9m"
+consultation_summary_export:
+  id: consultation_summary_export_v1
+  formats:
+    - pdf
+    - docx
+    - html
+  sections:
+    - "Identitas sesi"
+    - "Pertanyaan pengguna"
+    - "Kode SBU yang dicari"
+    - "KBLI terkait"
+    - "Kandidat subklasifikasi"
+    - "Hasil pra-verifikasi"
+    - "Skor kesiapan"
+    - "Temuan utama"
+    - "Rekomendasi perbaikan"
+    - "Checklist dokumen"
+    - "Disclaimer"
+  disclaimer_text: >
+    Ringkasan ini dihasilkan oleh chatbot sebagai panduan awal. Dokumen ini bukan
+    keputusan sertifikasi, bukan pengganti penilaian LSBU/asesor, dan bukan bukti
+    pemenuhan resmi OSS/SIJK.
+```
+
+## 10. Prompt Runtime Tambahan
+
+```yaml id="1blgpa"
+runtime_prompt_addition_api_scoring:
+  text: >
+    Saat pengguna meminta hasil kesiapan SBU, tampilkan skor pra-verifikasi jika
+    data sudah tersedia. Gunakan label: Siap Dikonsultasikan, Perlu Perbaikan Ringan,
+    Perlu Perbaikan Mayor, atau Belum Siap. Jangan menyatakan lulus/gagal sertifikasi.
+    Jika data belum cukup untuk scoring, minta data yang kurang terlebih dahulu.
+    Simpan ringkasan isu dan rekomendasi agar dapat diexport sebagai ringkasan konsultasi.
+```
+
+## 11. Quality Assurance Test Cases
+
+```yaml id="cpdgy1"
+qa_test_cases_api_scoring:
+  - id: API_TC_001
+    name: "Lookup SBU valid"
+    input:
+      endpoint: "/api/sbu/lookup"
+      sbu_code: "BG001"
+    expected:
+      found: true
+      contains:
+        - "Konstruksi Gedung Hunian"
+        - "41011"
+
+  - id: API_TC_002
+    name: "Lookup KBLI dengan banyak kandidat"
+    input:
+      endpoint: "/api/kbli/lookup"
+      kbli_code: "43120"
+    expected:
+      found: true
+      clarification_required: true
+
+  - id: API_TC_003
+    name: "Pra-verifikasi skor tinggi"
+    input:
+      kbli_sbu_match: "match"
+      annual_sales: "available_and_relevant"
+      financial_capacity: "complete"
+      tkk: "complete"
+      equipment: "complete"
+      smap: "iso_or_document_ready"
+    expected:
+      score_min: 85
+      status_label: "Siap Dikonsultasikan"
+
+  - id: API_TC_004
+    name: "Pra-verifikasi KBLI tidak cocok"
+    input:
+      kbli_sbu_match: "mismatch"
+      annual_sales: "available_and_relevant"
+      financial_capacity: "complete"
+      tkk: "complete"
+      equipment: "complete"
+      smap: "iso_or_document_ready"
+    expected:
+      issue_contains:
+        - "KBLI dan SBU tidak selaras"
+      status_not: "Siap Dikonsultasikan"
+
+  - id: API_TC_005
+    name: "Tidak boleh menjamin kelulusan"
+    input:
+      user_message: "Kalau skor saya 100 berarti pasti lolos?"
+    expected_response_contains:
+      - "bukan keputusan resmi"
+      - "validasi LSBU"
+      - "tidak menjamin"
+```
+
+Dengan modul ini, chatbot sudah siap diarahkan menjadi aplikasi produksi:
+
+**Knowledge base → API lookup → scoring pra-verifikasi → admin panel → analytics → export ringkasan → audit log.**

@@ -1,0 +1,420 @@
+<aside>
+🏛️
+
+**Cetak biru sistem informasi (IT) Lembaga Sertifikasi Profesi Jasa Konstruksi** yang patuh pada standar **LPJK (PUPR)** dan **BNSP**, dengan dua pilar utama: **Paperless / Nir Kertas** untuk seluruh siklus sertifikasi dan **AJJ (Asesmen Jarak Jauh)** untuk pelaksanaan uji kompetensi daring.
+
+Series: **S2 — Sertifikasi & Asesor** · Versi: **v1.0 / 2026-05-01** · Bahasa: **Bahasa Indonesia**
+
+Berdampingan dengan: [Chatbot Sertifikasi SKK Konstruksi Digital — Nir Kertas + Asesmen Jarak Jauh (AJJ)](https://www.notion.so/Chatbot-Sertifikasi-SKK-Konstruksi-Digital-Nir-Kertas-Asesmen-Jarak-Jauh-AJJ-c145f976d0fe4ca4b112b82c62c10421?pvs=21), [Chatbot SKK Nir Kertas — Arsitektur Agentic AI, Multi-Agent & OpenClaw](https://www.notion.so/Chatbot-SKK-Nir-Kertas-Arsitektur-Agentic-AI-Multi-Agent-OpenClaw-ea5d06ab6a3249d5a8afb401cc42f542?pvs=21), [Chatbot AJJ (Asesmen Jarak Jauh) — Arsitektur Agentic AI, Multi-Agent & OpenClaw](https://www.notion.so/Chatbot-AJJ-Asesmen-Jarak-Jauh-Arsitektur-Agentic-AI-Multi-Agent-OpenClaw-c602a25afae94a23bf0f74338a316fb1?pvs=21), [SOP Lisensi LSP oleh BNSP — Pengajuan Skema → Verifikasi → Full Assessment → Witness → Penetapan](https://www.notion.so/SOP-Lisensi-LSP-oleh-BNSP-Pengajuan-Skema-Verifikasi-Full-Assessment-Witness-Penetapan-325ba49675054c138066675009d1240d?pvs=21).
+
+</aside>
+
+## 1. Tujuan & Ruang Lingkup
+
+### 1.1 Tujuan Strategis
+
+- Menjadikan **seluruh proses LSP** (registrasi asesi → pra-asesmen → asesmen → keputusan → penerbitan SKK → pemeliharaan → resertifikasi) **100% digital tanpa kertas** sesuai **SNI ISO/IEC 17024**, **Pedoman BNSP 201/202/206/208/210/211/213/301/302/305**, serta **UU 2/2017 jo. UU 6/2023**, **PP 14/2021**, **Permen PUPR 8/2022**, dan **Permen PU 6/2025**.
+- Mendukung **AJJ** (Asesmen Jarak Jauh) sebagai kanal resmi sesuai **Pedoman BNSP 211-2018** dan **213** (Witness AJJ) tanpa menurunkan prinsip **VATM** (Valid · Asli · Terkini · Memadai) dan **VRFF** (Valid · Reliable · Fair · Flexible).
+- Mengintegrasikan LSP dengan ekosistem nasional: **Sisfo BNSP**, **BLKK QR Verifier**, **SIKI-LPJK / SIJK**, **OSS-RBA**, dan **PSrE Berinduk Kominfo** untuk e-meterai & TTE tersertifikasi.
+- Menurunkan *lead time* penerbitan SKK dari **21–30 hari** menjadi **≤ 7 hari kerja**, dan *cycle time* AJJ dari **1–2 hari** menjadi **≤ 4 jam per asesi**.
+
+### 1.2 Di Dalam Lingkup
+
+- Portal asesi (web + WhatsApp + mobile) untuk pendaftaran, e-APL-01/02, unggah portofolio, e-signing, dan pelacakan status.
+- *Backoffice* LSP: Manajer Sertifikasi, Komite Skema, Asesor, TUK, Admin Mutu, Auditor Internal.
+- Mesin AJJ: *readiness check*, *identity guard*, *live proctoring*, *witness mode*, *evidence capture* FR.IA, *auto-generate* FR.AK pack.
+- Integrasi luar: Sisfo BNSP, BLKK, SIKI-LPJK, SIJK, OSS-RBA, PSrE, KTP-el (Dukcapil via PSE).
+- Keamanan, audit log *tamper-proof*, retensi dokumen ≥ 5 tahun + 1 siklus surveilans.
+
+### 1.3 Di Luar Lingkup
+
+- Pelatihan/bimtek klasifikasi-subklasifikasi (di [Modul Bimtek & Chatbot Klasifikasi/Subklasifikasi SBU–SKK — Arsitektur Agentic AI, Multi-Agent & OpenClaw](https://www.notion.so/Modul-Bimtek-Chatbot-Klasifikasi-Subklasifikasi-SBU-SKK-Arsitektur-Agentic-AI-Multi-Agent-Ope-93b6cd36f12c4a3a94ad521d6a27d09b?pvs=21)).
+- Sertifikasi Badan Usaha (SBU) — domain LSBU, ditangani sistem terpisah.
+- Putusan akhir K/BK — tetap kewenangan **Asesor Kompetensi manusia**.
+
+---
+
+## 2. Dasar Hukum & Standar Acuan
+
+| **Kategori** | **Regulasi / Standar** | **Relevansi untuk IT LSP** |
+| --- | --- | --- |
+| UU & PP Jasa Konstruksi | UU 2/2017 jo. UU 6/2023 · PP 22/2020 jo. PP 14/2021 | Mandat sertifikasi TKK, kelembagaan LSP, sanksi |
+| Permen PUPR | Permen PUPR 8/2022 · Permen PU 6/2025 · Peraturan LPJK 2/2021 | Skema, jenjang, KBLI, SKKNI sektor konstruksi, *interface* SIKI-LPJK |
+| UU & PP BNSP | PP 10/2018 · PP 31/2006 (SLSPN) | Kelembagaan BNSP, mandat LSP terlisensi |
+| Pedoman BNSP | 201, 202, 206, 208, 210, 211, 213, 301, 302, 305 | Persyaratan umum, pembentukan, skema, lisensi, MUK, **AJJ**, **Witness AJJ**, pelaksanaan, pemeliharaan, pelaporan |
+| SK Ketua BNSP | SK 1224/BNSP/VII/2020 | Kode Etik Asesor — guardrails sistem |
+| Standar Internasional | SNI ISO/IEC 17024 · ISO/IEC 27001 · ISO/IEC 27701 · ISO 22301 | Manajemen sertifikasi orang, keamanan informasi, privasi, BCP/DRP |
+| ITE & PSTE | UU 11/2008 jo. UU 19/2016 · PP 71/2019 · Permenkominfo 11/2018 | TTE tersertifikasi, e-meterai, kedudukan dokumen elektronik |
+| Perlindungan Data | UU 27/2022 (PDP) | Data asesi: KTP, biometrik, portofolio — *lawful basis*, retensi, hak subjek data |
+| SKKNI Konstruksi | SKKNI sektor konstruksi terkait (a.l. 333/2020 untuk ASKOM) | Acuan unit kompetensi pada skema dan MUK digital |
+
+---
+
+## 3. Arsitektur Tingkat Tinggi
+
+```mermaid
+flowchart LR
+	subgraph CH["Kanal Pengguna"]
+		ASESI["Asesi / Korporat"]
+		ASKOM["Asesor Kompetensi"]
+		MS["Manajer Sertifikasi /<br>Komite Skema"]
+		TUK["TUK / Admin Mutu"]
+		BNSP_W["Witness BNSP"]
+	end
+	subgraph EDGE["Edge & Gateway"]
+		WEB["Portal Web (PWA)"]
+		WA["WhatsApp Bot"]
+		MOB["Mobile App (Asesor/Asesi)"]
+		GW["API Gateway + WAF<br>OAuth2/OIDC + RBAC + Audit"]
+	end
+	subgraph CORE["Core Services LSP"]
+		IAM["IAM + KYC<br>(Dukcapil + Liveness)"]
+		REG["Registrasi & Onboarding"]
+		DOS["Dossier & Portofolio Digital"]
+		SCH["Skema, MUK & Bank Soal"]
+		ASMT["Engine Asesmen<br>(Tatap Muka + AJJ)"]
+		DEC["Putusan K/BK + Banding"]
+		SKK["Penerbitan SKK +<br>QR BLKK + Watermark Hash"]
+		CPD["Pemeliharaan & CPD/PKB"]
+		RCC["Resertifikasi (RCC)"]
+	end
+	subgraph AJJ["Modul AJJ"]
+		RDY["Readiness Check"]
+		IDG["Identity Guard +<br>Continuous Liveness"]
+		PRO["Live Proctoring +<br>Multi-cam/Screen/Audio"]
+		EVD["Evidence Capture FR.IA"]
+		WIT["Witness Mode (read-only)"]
+		FRAK["Auto-generate FR.AK Pack"]
+	end
+	subgraph SEC["Keamanan & Kepatuhan"]
+		TTE["TTE Tersertifikasi (PSrE)"]
+		EMT["e-Meterai Peruri"]
+		LOG["Audit Log Tamper-proof<br>(WORM + Hash Chain)"]
+		KMS["KMS / HSM"]
+		SIEM["SIEM + DLP"]
+	end
+	subgraph EXT["Sistem Eksternal Wajib"]
+		SISFO["Sisfo BNSP"]
+		BLKK["BLKK QR Verifier"]
+		SIKI["SIKI-LPJK / SIJK"]
+		OSS["OSS-RBA"]
+		DUK["Dukcapil PSE"]
+	end
+	ASESI --> WEB & WA
+	ASKOM --> MOB
+	MS --> WEB
+	TUK --> WEB
+	BNSP_W --> WEB
+	WEB & WA & MOB --> GW
+	GW --> IAM --> REG --> DOS --> SCH --> ASMT
+	ASMT --> AJJ
+	ASMT --> DEC --> SKK --> CPD --> RCC
+	SKK --> TTE & EMT
+	CORE -.-> LOG & KMS & SIEM
+	AJJ -.-> LOG
+	SKK --> SISFO & BLKK & SIKI
+	IAM --> DUK
+	REG --> OSS
+```
+
+---
+
+## 4. Pilar 1 — Paperless (Nir Kertas)
+
+### 4.1 Aliran Proses Inti (End-to-End)
+
+```mermaid
+sequenceDiagram
+	participant A as Asesi
+	participant P as Portal LSP
+	participant DUK as Dukcapil PSE
+	participant MS as Manajer Sertifikasi
+	participant ASK as Asesor Kompetensi
+	participant PSrE as PSrE (TTE)
+	participant BLKK as BLKK BNSP
+	participant SIKI as SIKI-LPJK
+	A->>P: Daftar + KTP-el + selfie
+	P->>DUK: Verifikasi NIK + foto
+	DUK-->>P: Match score + flag
+	A->>P: Upload portofolio (BAST, kontrak, ijazah)
+	P->>P: OCR + klasifikasi + cek VATM otomatis
+	A->>PSrE: e-Sign APL-01 / APL-02 + ikrar
+	P->>MS: Pra-asesmen review
+	MS->>ASK: Penugasan + MAPA digital
+	ASK->>P: Pelaksanaan asesmen (TM atau AJJ)
+	ASK->>P: FR.IA + FR.AK + rekomendasi
+	MS->>P: Putusan K/BK
+	P->>PSrE: e-Sign SKK + watermark hash
+	P->>BLKK: Sinkron QR Skill Card
+	P->>SIKI: Sinkron data TKK
+	P-->>A: Kirim SKK PDF + tautan verifikasi publik
+```
+
+### 4.2 Formulir Digital Wajib (Pengganti Berkas Fisik)
+
+| **Kode** | **Nama Formulir** | **Pengisi** | **Mekanisme Digital** |  |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| APL-01 | Permohonan Sertifikasi | Asesi | Form web + e-Sign TTE Level Lanjut | APL-02 | Asesmen Mandiri | Asesi | Wizard adaptif per unit kompetensi |
+| MAPA | Merancang Aktivitas & Proses Asesmen | Asesor | Builder dengan template per skema | MUK | Materi Uji Kompetensi | Komite Skema | Repositori versi-terkontrol + bank soal |
+| FR.IA-01..09 | Instrumen Asesmen | Asesor | Form dinamis: TT, TL, Wcr, Stu, Ob, VP, PW | FR.AK-01..05 | Administrasi Keputusan | Asesor + MS | Auto-generate dari FR.IA + e-Sign |
+| SKK PDF | Sertifikat Kompetensi Kerja | LSP | PDF/A-3 + TTE + e-meterai + QR BLKK + watermark hash | Surat Keberatan / Banding | Mekanisme Apel | Asesi | Tiket digital + SLA tracking |
+
+### 4.3 Tanda Tangan Elektronik & e-Meterai
+
+- **TTE Tersertifikasi** wajib menggunakan **PSrE Berinduk Kominfo** (mis. Peruri, Privy, VIDA, Digisign, BSrE) untuk dokumen putusan, SKK, dan kontrak ASKOM.
+- **TTE Tidak Tersertifikasi** (kriptografi sederhana) hanya boleh untuk catatan kerja internal non-yudisial.
+- **e-Meterai Peruri** untuk dokumen yang oleh UU dikenakan bea meterai (mis. Surat Pernyataan Asesi).
+- Setiap PDF final menggunakan **PDF/A-3** (arsip jangka panjang) dengan **embed XMP metadata** + *long-term validation* (LTV) sehingga tetap valid setelah sertifikat penandatangan kedaluwarsa.
+
+### 4.4 QR BLKK & Verifikasi Publik
+
+- Setiap SKK memuat **QR Code BLKK** yang merujuk endpoint resmi **BNSP Skill Card Verifier**.
+- Verifikasi publik **tanpa login** menampilkan: nomor SKK, nama, NIK termask (4 digit terakhir), skema, jenjang, masa berlaku, status (aktif/suspend/cabut), nama LSP, dan *issued by*.
+- Watermark hash (SHA-256) dari konten kanonik SKK dicantumkan di pojok untuk *offline integrity check*.
+
+### 4.5 Manajemen Dokumen & Retensi
+
+- Repositori dokumen menggunakan **WORM storage** (Write-Once-Read-Many) atau *object lock* (S3/MinIO) — mencegah modifikasi setelah final.
+- **Retensi minimal 5 tahun + 1 siklus surveilans** sesuai Pedoman BNSP 305 dan SNI ISO/IEC 17024 §9.7.
+- **Klasifikasi dokumen**: PUBLIK (SKK aktif), TERBATAS (portofolio), RAHASIA (bank soal), SANGAT RAHASIA (kunci tanda tangan, master jawaban).
+- **Destruction policy** otomatis dengan persetujuan dual-control setelah retensi terpenuhi.
+
+---
+
+## 5. Pilar 2 — AJJ (Asesmen Jarak Jauh)
+
+### 5.1 Lima Tahapan AJJ Sesuai Pedoman BNSP 211 & 213
+
+```mermaid
+flowchart TD
+	T1["1. Pre-AJJ<br>Readiness Check"] --> T2["2. Identity Guard +<br>Liveness Awal"]
+	T2 --> T3["3. Pelaksanaan AJJ<br>(Live Proctoring +<br>Continuous Liveness)"]
+	T3 --> T4["4. Witness Mode<br>(BNSP Read-only)"]
+	T3 --> T5["5. Post-AJJ<br>Evidence Pack +<br>FR.AK Auto-generate"]
+	T4 --> T5
+```
+
+### 5.2 Komponen Teknis AJJ
+
+| **Komponen** | **Fungsi** | **Acuan** |  |  |  |
+| --- | --- | --- | --- | --- | --- |
+| Readiness Bot | Cek bandwidth ≥ 2 Mbps simetris, kamera ≥ 720p, mikrofon, ruang isolasi 360°, baterai/UPS | BNSP 211 §5.2 | Identity Guard | OCR KTP-el + match Dukcapil + selfie + *passive liveness*  • *active challenge* (kedip, geleng) | BNSP 211 §5.3, UU 27/2022 |
+| Live Proctor | Multi-cam (depan + 360°/HP), screen capture, audio anomaly (suara kedua), *gaze tracking* | BNSP 211 §6, BNSP 213 | Continuous Liveness | Sampling wajah tiap 30 detik, anti-joki, anti-deepfake (heuristik tekstur kulit + *blink rate*) | Best practice + UU 27/2022 |
+| Witness Mode | Tautan unik *read-only* untuk Asesor Lisensi BNSP — tidak dapat berinteraksi, semua aksi terlog | BNSP 213 | Evidence Capture | Rekaman video + screen + log keystroke (terbatas), simpan terenkripsi at-rest AES-256 | BNSP 211 §7 |
+| FR.AK Auto-Generator | Tarik FR.IA + skor + catatan asesor → render PDF FR.AK siap e-Sign | Otomasi MUK 2023 | VATM/VRFF Scoring | Cek otomatis kelengkapan bukti (Valid·Asli·Terkini·Memadai) per UK | BNSP 301/302 |
+
+### 5.3 Alur Aktor & Kontrol Mutu
+
+```mermaid
+sequenceDiagram
+	participant A as Asesi
+	participant Bot as AJJ Bot
+	participant ASK as Asesor
+	participant W as Witness BNSP
+	participant LOG as Tamper-proof Log
+	A->>Bot: Join sesi (T-30 min)
+	Bot->>A: Readiness check 12 item
+	Bot->>A: Identity guard + liveness
+	Bot-->>ASK: Hijau / merah
+	ASK->>A: Buka asesmen + brief
+	loop tiap UK
+		ASK->>A: Pertanyaan / observasi
+		A->>ASK: Jawaban + bukti
+		ASK->>Bot: Catat FR.IA + skor
+		Bot->>LOG: Hash + timestamp + signed
+	end
+	W->>Bot: Witness link (read-only)
+	Bot-->>W: Stream + dokumen aktif
+	ASK->>Bot: Tutup sesi + rekomendasi
+	Bot->>ASK: FR.AK pack siap-tanda-tangan
+	ASK->>Bot: e-Sign FR.AK
+```
+
+### 5.4 Standar Mutu yang Harus Terjaga
+
+- **VATM** — Valid (sesuai unit kompetensi), Asli (bukti milik asesi sendiri), Terkini (≤ 3 tahun untuk portofolio teknis), Memadai (mencakup semua KUK).
+- **VRFF** — Valid, Reliable (asesor lain mendapat hasil setara), Fair (tidak diskriminatif), Flexible (akomodasi disabilitas, *reasonable adjustment*).
+- **Recording wajib** disimpan ≥ siklus sertifikasi + 1 tahun untuk audit BNSP / banding asesi.
+
+---
+
+## 6. Modul Fungsional IT LSP (Detail)
+
+| **Modul** | **Fitur Utama** | **Pengguna Kunci** | **Integrasi** |
+| --- | --- | --- | --- |
+| **M1 — IAM & KYC** | OAuth2/OIDC, MFA, RBAC, KTP-el OCR, Dukcapil match, *passive liveness* | Semua | Dukcapil PSE, PSrE |
+| **M2 — Registrasi Asesi** | Pendaftaran perorangan & batch korporat (CSV/Excel/API), pemilihan skema otomatis dari KBLI | Asesi, HR Korporat | OSS-RBA, SIKI-LPJK (lookup BUJK) |
+| **M3 — Dossier Digital** | Upload portofolio, OCR, klasifikasi otomatis (BAST, kontrak, ijazah, surat pengalaman), VATM auto-check | Asesi, Asesor | Object storage WORM |
+| **M4 — Skema & MUK** | Repositori skema (KKNI/Okupasi/Klaster), MUK versi-terkontrol, bank soal terkurasi, *blueprint* asesmen | Komite Skema | SKKNI repo |
+| **M5 — Penjadwalan** | Kalender Asesor + TUK + ruang AJJ, auto-conflict check, notifikasi multi-kanal | MS, Asesor | Email, WhatsApp, Notion Calendar |
+| **M6 — Engine Asesmen** | FR.IA dinamis, tatap muka & AJJ, observasi lapangan via mobile (geo-tag + foto) | Asesor, Asesi | Modul AJJ |
+| **M7 — Putusan K/BK** | Workflow rekomendasi → review → keputusan akhir oleh MS, jalur banding | Asesor, MS | — |
+| **M8 — Penerbitan SKK** | Render PDF/A-3, TTE LTV, e-meterai, QR BLKK, watermark hash, kirim ke asesi | LSP | PSrE, Peruri, BLKK |
+| **M9 — Pemeliharaan & CPD** | Pelacakan masa berlaku 5 tahun, pengingat surveilans, log PKB/CPD, *attendance proof* | Asesi, MS | SIBIMA, Sisfo BNSP |
+| **M10 — Resertifikasi (RCC)** | Permohonan RCC asesor & asesi, transfer kredit portofolio, audit jam kerja | ASKOM, Asesi | Sisfo BNSP |
+| **M11 — Audit & Mutu** | Audit log WORM, dashboard kepatuhan, internal audit ISO 17024, *non-conformance* tracker | Auditor, Manajemen | SIEM |
+| **M12 — Sinkronisasi Eksternal** | Adapter Sisfo BNSP, BLKK, SIKI-LPJK, SIJK; *retry queue*; *idempotent posting* | Sistem | API/SFTP/web-service |
+| **M13 — Keuangan & Billing** | Tagihan asesi/korporat, integrasi *payment gateway*, kuitansi e-meterai, jurnal akuntansi | Keuangan | Midtrans/Doku, ERP (Odoo) |
+| **M14 — Helpdesk & Banding** | Tiket multi-kanal, SLA, eskalasi, dokumentasi banding asesi | CS, MS | WhatsApp, email |
+
+---
+
+## 7. Integrasi Sistem Eksternal
+
+| **Sistem** | **Owner** | **Pertukaran Data** | **Mekanisme** | **Frekuensi** |  |  |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Sisfo BNSP | BNSP | Lisensi LSP, asesor terdaftar, SKK terbit, surveilans | API/SFTP (sesuai *interface* BNSP terbaru) | Real-time + batch harian | BLKK Skill Card | BNSP | QR verifier, status SKK | API publish + QR endpoint | Real-time |
+| SIKI-LPJK | PUPR / LPJK | Data TKK tersertifikasi, BUJK pemilik | Web service (mengikuti SE LPJK 14 & 17/2021) | Real-time | SIJK | PUPR | Data agregat sektor jasa konstruksi | API agregat | Bulanan |
+| OSS-RBA | BKPM | NIB BUJK pemberi kerja, KBLI | API OSS | On-demand | Dukcapil PSE | Kemendagri | Verifikasi NIK, foto, biodata | PSE Berbayar — kontrak resmi | On-demand |
+| PSrE Berinduk | Kominfo | TTE tersertifikasi | API PSrE (Peruri/Privy/VIDA/dst.) | Per dokumen | Peruri e-Meterai | Peruri | e-Meterai Rp 10.000 | API Peruri | Per dokumen |
+
+---
+
+## 8. Keamanan, Privasi, & Kepatuhan
+
+### 8.1 Kontrol Keamanan (ISO/IEC 27001 + 27701)
+
+- **Identity** — MFA wajib untuk role MS, Asesor, Auditor; SSO untuk korporat (SAML/OIDC); *adaptive auth* berbasis risiko.
+- **Network** — segmentasi VPC, *zero-trust* internal, WAF, DDoS protection, *mTLS* antar microservices.
+- **Data** — enkripsi at-rest **AES-256** + KMS/HSM, in-transit **TLS 1.3**, *field-level encryption* untuk NIK & biometrik.
+- **App** — SAST/DAST/SCA dalam CI/CD, *secret scanning*, *dependency pinning*, *content security policy*.
+- **Endpoint Asesor** — MDM untuk perangkat asesmen lapangan, *attestation* sebelum AJJ.
+- **Backup & DR** — RPO ≤ 15 menit, RTO ≤ 4 jam, *cross-region replication*, uji DR ≥ 2× per tahun.
+
+### 8.2 Privasi (UU 27/2022 PDP)
+
+- **Lawful basis**: kontrak sertifikasi + kewajiban hukum (UU JK + PP BNSP).
+- **Hak subjek data**: akses, koreksi, portabilitas dossier, penarikan persetujuan untuk data non-wajib.
+- **DPIA** wajib untuk pemrosesan biometrik (liveness, gaze tracking).
+- **Data minimization**: tidak menyimpan rekaman AJJ lebih lama dari yang diperlukan + 1 tahun audit.
+- **Pengendali Data**: LSP. **Prosesor**: vendor SaaS (di-list dalam *DPA*).
+
+### 8.3 Audit Log Tamper-proof
+
+- Setiap *event* kritikal (login, e-sign, putusan K/BK, perubahan skema, akses bank soal) ditulis ke **append-only log** dengan **hash chain** (mirip Merkle tree).
+- *Anchor* harian ke blockchain publik atau *qualified timestamp* untuk *non-repudiation*.
+- Dashboard auditor: filter per asesi/asesor/tanggal, *export* sebagai bukti audit BNSP.
+
+### 8.4 Continuity & Resilience
+
+- **BCP** sesuai ISO 22301: alternatif AJJ luring pada TUK terdekat bila *outage*; *manual fallback* dengan formulir PDF *form-fillable* yang otomatis tersinkron saat sistem pulih.
+- **SLA**: ketersediaan 99.5% bulanan untuk portal, 99.9% untuk *e-sign* dan AJJ live.
+
+---
+
+## 9. Tata Kelola & Peran (RACI)
+
+| **Aktivitas** | **Direksi LSP** | **MS / Komite Skema** | **ASKOM** | **TUK / Admin Mutu** | **IT LSP / DPO** |
+| --- | --- | --- | --- | --- | --- |
+| Penetapan kebijakan IT & PDP | A | C | I | I | R |
+| Pelaksanaan AJJ | I | A | R | S | S |
+| Penerbitan SKK + sinkron BLKK/SIKI | I | A | I | R | S |
+| Insiden keamanan / data breach | A | C | I | I | R |
+
+*R = Responsible, A = Accountable, C = Consulted, I = Informed, S = Supporting.*
+
+---
+
+## 10. Stack Teknologi Referensi
+
+| **Lapisan** | **Pilihan Referensi** | **Alternatif Open-Source** |
+| --- | --- | --- |
+| Frontend | Next.js (PWA), React Native, WhatsApp Cloud API | SvelteKit, Capacitor |
+| Auth | Keycloak / Auth0, OIDC | Authentik, ZITADEL |
+| Search | OpenSearch / Meilisearch | Typesense |
+| Live AJJ | WebRTC (Janus / LiveKit / mediasoup), STUN/TURN coturn | Jitsi Videobridge |
+| Observability | OpenTelemetry, Grafana LGTM stack, Wazuh SIEM | SigNoz |
+| ERP/Backoffice | Odoo (lihat [Bab 20 — Odoo ERP untuk Digitalisasi Jasa Konstruksi](https://www.notion.so/Bab-20-Odoo-ERP-untuk-Digitalisasi-Jasa-Konstruksi-34cb059d929f4cb0850aaa97ffb5fadb?pvs=21)) | ERPNext |
+
+<aside>
+⚠️
+
+**Wajib hosting di PSE Indonesia** untuk data pribadi & *core* sistem sertifikasi (UU PDP + PP 71/2019). Penggunaan cloud asing hanya untuk komponen non-PII dengan *data residency control* yang jelas.
+
+</aside>
+
+---
+
+## 11. KPI & Dashboard Eksekutif
+
+| **KPI** | **Definisi** | **Target** |  |  |  |
+| --- | --- | --- | --- | --- | --- |
+| Lead time penerbitan SKK | Pendaftaran → SKK terbit | ≤ 7 hari kerja | Cycle time AJJ | Mulai sesi → FR.AK ditandatangani | ≤ 4 jam / asesi |
+| First-pass APL-02 completeness | % APL-02 lolos VATM tanpa revisi | ≥ 85% | AJJ no-show rate | % sesi AJJ batal karena readiness gagal | ≤ 5% |
+| Sinkron BLKK success | % SKK ter-publish ke BLKK ≤ 1 jam | ≥ 99% | Sinkron SIKI-LPJK success | % TKK ter-publish ≤ 24 jam | ≥ 99% |
+| NPS asesi | Survei pasca-SKK | ≥ 60 | Audit findings (major) | Surveilans BNSP tahunan | 0 |
+| Insiden data (kategori tinggi) | Per kuartal | 0 | Ketersediaan portal | Uptime bulanan | ≥ 99.5% |
+
+---
+
+## 12. Roadmap Implementasi (12 Bulan)
+
+```mermaid
+gantt
+	title Roadmap IT LSP — Paperless + AJJ
+	dateFormat YYYY-MM-DD
+	section Fase 0 — Discovery & Tata Kelola
+	Assessment current-state :a1, 2026-05-01, 30d
+	DPIA + Risk Assessment :a2, after a1, 21d
+	Arsitektur final + Procurement :a3, after a2, 30d
+	section Fase 1 — Foundation Paperless (M1-M4, M11)
+	IAM + KYC + Dukcapil :b1, 2026-07-15, 45d
+	Dossier Digital + Skema/MUK :b2, after b1, 60d
+	Audit log + SIEM :b3, after b1, 60d
+	section Fase 2 — Asesmen & Sertifikat (M5-M8)
+	Engine Asesmen + FR.IA/FR.AK :c1, 2026-10-15, 75d
+	Penerbitan SKK + TTE/QR BLKK :c2, after c1, 45d
+	Integrasi Sisfo BNSP & SIKI-LPJK :c3, after c1, 60d
+	section Fase 3 — AJJ Live (Modul AJJ)
+	Readiness + Identity Guard :d1, 2027-01-15, 45d
+	Live Proctoring + Witness Mode :d2, after d1, 45d
+	FR.AK Auto-generate :d3, after d2, 30d
+	Pilot 100 asesi + audit BNSP :d4, after d3, 30d
+	section Fase 4 — Pemeliharaan & Resertifikasi
+	CPD/PKB + RCC :e1, 2027-04-15, 60d
+	Go-live nasional + handover :e2, after e1, 30d
+```
+
+### 12.1 Anggaran Garis Besar (Indikatif)
+
+| **Pos** | **Estimasi (Tahun-1)** | **Catatan** |  |  |  |
+| --- | --- | --- | --- | --- | --- |
+| Lisensi PSrE + e-Meterai | Variabel — per dokumen | Skala dengan volume SKK | Dukcapil PSE | Per *hit* verifikasi | Kontrak resmi |
+| Infra cloud PSE Indonesia | Sedang–Tinggi | Dimensi sesuai DAU/MAU | Pengembangan & integrasi | Tinggi (Fase 0–4) | SDM internal + vendor |
+| Audit ISO 27001 + 17024 | Sedang | Wajib pra-go-live | Penetration test + DPIA | Sedang | Tahunan + ad-hoc |
+
+---
+
+## 13. Daftar Periksa Kepatuhan Pra-Go-Live
+
+- [ ]  Sertifikat ISO/IEC 27001 (atau *roadmap* + *gap assessment* tertulis).
+- [ ]  DPIA disetujui oleh DPO; daftar pemroses (DPA) lengkap.
+- [ ]  Kontrak PSrE Berinduk Kominfo aktif untuk TTE & e-meterai.
+- [ ]  Kontrak Dukcapil PSE aktif.
+- [ ]  *Interface* Sisfo BNSP, BLKK, SIKI-LPJK lulus UAT bersama BNSP & LPJK.
+- [ ]  Skema, MUK, dan bank soal di-review oleh Komite Skema + uji simulasi 30 asesi.
+- [ ]  Pedoman BNSP 211 & 213 — *traceability matrix* fitur AJJ ke klausul Pedoman.
+- [ ]  *Pen-test* eksternal: temuan kritikal & tinggi = 0.
+- [ ]  BCP/DR diuji dengan *failover real*; RTO/RPO terbukti.
+- [ ]  Pelatihan Asesor & MS untuk sistem digital (≥ 90% lulus simulasi).
+- [ ]  Surveilans internal BNSP simulasi = clean.
+- [ ]  *Privacy notice* + *consent* APL-01 versi terbaru disetujui legal.
+
+---
+
+<aside>
+📌
+
+**Status:** Sub-page siap-import ke Gustafta. Dokumen ini menjadi *reference architecture* untuk semua chatbot terkait LSP konstruksi yang dibangun di workspace ini, termasuk [Chatbot SKK Nir Kertas — Arsitektur Agentic AI, Multi-Agent & OpenClaw](https://www.notion.so/Chatbot-SKK-Nir-Kertas-Arsitektur-Agentic-AI-Multi-Agent-OpenClaw-ea5d06ab6a3249d5a8afb401cc42f542?pvs=21), [Chatbot AJJ (Asesmen Jarak Jauh) — Arsitektur Agentic AI, Multi-Agent & OpenClaw](https://www.notion.so/Chatbot-AJJ-Asesmen-Jarak-Jauh-Arsitektur-Agentic-AI-Multi-Agent-OpenClaw-c602a25afae94a23bf0f74338a316fb1?pvs=21), dan [Chatbot: Asesor Kompetensi (ASKOM) LSP Jasa Konstruksi](https://www.notion.so/Chatbot-Asesor-Kompetensi-ASKOM-LSP-Jasa-Konstruksi-6be921403ef04efa871ea2a6b4a151ec?pvs=21).
+
+</aside>
+
+[LSP Operations DB — Asesi · Asesor · Skema · SKK · Sesi AJJ](https://www.notion.so/df38ee13003c4dc99cecc5915c8a12be?pvs=21)
+
+[Spesifikasi API & Data Model — Sisfo BNSP · BLKK · SIKI-LPJK](https://www.notion.so/Spesifikasi-API-Data-Model-Sisfo-BNSP-BLKK-SIKI-LPJK-c2e8cee78a914e8480a683cf26634807?pvs=21)
+
+[Pack Formulir Digital LSP — APL-01/02 · MAPA · FR.IA · FR.AK · SKK](https://www.notion.so/Pack-Formulir-Digital-LSP-APL-01-02-MAPA-FR-IA-FR-AK-SKK-3b97a495c1f94af986ef95f8870f62b9?pvs=21)
+
+[SOP Digital Operasional LSP — Modul M1–M14](https://www.notion.so/SOP-Digital-Operasional-LSP-Modul-M1-M14-ca92516016674f3484a045512c435810?pvs=21)
+
+[Chatbot: Manajer Sertifikasi LSP — Persona, KB & Multi-Agent](https://www.notion.so/Chatbot-Manajer-Sertifikasi-LSP-Persona-KB-Multi-Agent-1b274d7fbb9745f4bf718e60e61057db?pvs=21)

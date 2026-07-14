@@ -1,0 +1,124 @@
+<aside>
+🎯
+
+**Template Dokumen Skema Sertifikasi**
+
+Format baku setiap skema sertifikasi LSP SDMKI sesuai ISO 17024 klausul 8 + Pedoman BNSP 210. Salin per jabatan kerja, ganti `[…]` dengan data riil, lalu sahkan oleh Komite Skema.
+
+**No. Dokumen:** SK-LSP-SDMKI-[KODE-SKEMA] | **Versi:** 1.0 | **Tanggal Berlaku:** […]
+
+</aside>
+
+## Lembar Pengesahan
+
+| **Aktivitas** | **Nama** | **Jabatan** | **Tanda Tangan** | **Tanggal** | Disusun | […] | Komite Skema |  | […] |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Diverifikasi | […] | Manajer Mutu |  | […] | Disahkan | […] | Direktur LSP |  | […] |
+
+## 1. Latar Belakang
+
+[Narasi singkat: kebutuhan industri, perubahan SKKNI, regulasi, atau permintaan pemangku kepentingan yang mendasari penerbitan/peninjauan skema ini.]
+
+## 2. Ruang Lingkup Skema
+
+- **Nama Skema:** […]
+- **Kode Skema:** SK-LSP-SDMKI-[…]
+- **Jenis Skema:** [ ] KKNI [ ] Okupasi [ ] Klaster
+- **Jenjang KKNI / Jabatan Kerja:** […]
+- **Sektor / Subsektor:** […]
+- **Acuan SKKNI:** No. […] Tahun […]
+- **Acuan Lain:** [Standar Internasional / Regulasi terkait]
+
+## 3. Tujuan & Sasaran
+
+- Memastikan calon pemegang sertifikat memiliki kompetensi sesuai standar.
+- Memberikan pengakuan formal yang dapat diterima industri & pemerintah.
+- Mendukung mobilitas tenaga kerja domestik dan regional.
+
+## 4. Persyaratan Dasar Pemohon
+
+| **Kategori** | **Persyaratan** | Pendidikan | […] |
+| --- | --- | --- | --- |
+| Pelatihan | […] | Pengalaman Kerja | […] |
+| Sertifikat Pendukung | […] | Kondisi Khusus (mis. K3) | […] |
+
+## 5. Hak Pemohon dan Kewajiban Pemegang Sertifikat
+
+### 5.1 Hak Pemohon
+
+- Mendapatkan informasi lengkap tentang skema, biaya, prosedur, dan jadwal.
+- Diperlakukan adil tanpa diskriminasi.
+- Mengajukan banding atas keputusan.
+- Mendapatkan kerahasiaan data pribadi.
+
+### 5.2 Kewajiban Pemegang Sertifikat
+
+- Mempertahankan kompetensi melalui CPD.
+- Menggunakan sertifikat & logo sesuai SOP P-06.
+- Melaporkan perubahan signifikan (perubahan pekerjaan, sanksi profesi).
+- Memenuhi kode etik profesi.
+
+## 6. Biaya Sertifikasi
+
+| **Komponen** | **Tarif (Rp)** | **Catatan** | Pendaftaran | […] | Tidak dikembalikan bila ditolak |
+| --- | --- | --- | --- | --- | --- |
+| Asesmen | […] | Termasuk honor asesor | Penerbitan Sertifikat | […] | Termasuk distribusi digital |
+| Re-sertifikasi | […] | Diskon CPD lengkap | Banding | Gratis | Sesuai ISO 17024 9.7 |
+
+## 7. Unit Kompetensi
+
+| **No.** | **Kode Unit** | **Judul Unit** | **Jenis (Inti/Pilihan)** | 1 | […] | […] | Inti |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 2 | […] | […] | Inti | 3 | […] | […] | Pilihan |
+
+## 8. Metode Asesmen
+
+| **Unit** | **Tertulis** | **Observasi Praktik** | **Wawancara** | **Portofolio** | [Kode Unit 1] | ✅ | ✅ | ✅ | — |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Kode Unit 2] | ✅ | ✅ | — | ✅ | [Kode Unit 3] | — | ✅ | ✅ | ✅ |
+
+### 8.1 Aturan Pelaksanaan
+
+- Tatap muka di TUK terverifikasi atau jarak jauh dengan online proctoring.
+- Durasi asesmen: […] menit.
+- Bahasa: Bahasa Indonesia.
+- Bukti yang dikumpulkan: hasil tertulis, lembar observasi, transkrip wawancara, file portofolio.
+
+## 9. Kriteria Kelulusan
+
+- **Kompeten** — memenuhi seluruh kriteria unjuk kerja (KUK) pada seluruh unit kompetensi inti.
+- **Belum Kompeten** — ada KUK yang belum terpenuhi; asesi berhak mengulang sesuai SOP P-02.
+- **Re-asesmen** — maksimal 2× dalam 6 bulan; setelah itu perlu pelatihan ulang.
+
+## 10. Masa Berlaku & Pemeliharaan
+
+- **Masa berlaku sertifikat:** 3 tahun.
+- **Surveilan:** kuesioner CPD tahunan.
+- **Pemeliharaan:** bukti pengalaman kerja relevan + minimum […] jam CPD per tahun.
+- **Pelanggaran:** mengikuti SOP P-04.
+
+## 11. Re-sertifikasi
+
+- Diajukan minimal 3 bulan sebelum kedaluwarsa.
+- Asesmen ringkas bila CPD lengkap; asesmen penuh bila CPD tidak terpenuhi atau skema berubah signifikan.
+
+## 12. Asesor & TUK yang Berwenang
+
+- **Asesor:** memiliki ruang lingkup yang sesuai dan witness internal valid (SOP P-09).
+- **TUK:** terverifikasi sarana, prasarana, dan SDM. Daftar TUK aktif: lihat KB LSP–TUK.
+
+## 13. Validitas & Tinjauan Skema
+
+- Skema ditinjau minimal 1× per 3 tahun atau saat:
+    - SKKNI direvisi.
+    - Regulasi terkait berubah.
+    - Ditemukan keluhan/temuan signifikan.
+
+## 14. Lampiran
+
+- Lampiran 1: Daftar Unit Kompetensi & KUK detail.
+- Lampiran 2: Bank Soal Tertulis.
+- Lampiran 3: Lembar Observasi Praktik.
+- Lampiran 4: Daftar Pertanyaan Wawancara.
+- Lampiran 5: Format Portofolio Asesi.
+- Lampiran 6: MAK, MMA, MMR.

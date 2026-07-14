@@ -1,0 +1,1669 @@
+# Chatbot SBU Kompetensi — Migas, Energi Baru dan Terbarukan, dan Pertambangan
+
+## 0. Catatan Implementasi
+
+Dokumen ini adalah rancangan konfigurasi berbasis teks untuk chatbot **SBU Kompetensi — Migas, Energi Baru dan Terbarukan, dan Pertambangan**. Struktur mengikuti pola builder-style dari konfigurasi terlampir: identitas bot, knowledge scope, katalog area kompetensi, intents, sample utterances, response templates, quick replies, conversation nodes, asesmen mandiri, studi kasus, checklist bukti, glossary, fallback, dan guardrails.
+
+Catatan penting:
+
+* Chatbot ini tidak menerbitkan sertifikat resmi.
+* Chatbot ini tidak menyatakan pengguna atau badan usaha pasti memenuhi/tidak memenuhi persyaratan resmi.
+* Semua asesmen bersifat **asesmen mandiri awal** untuk pembelajaran, pemetaan kesiapan, dan persiapan dokumen.
+* Untuk implementasi resmi, admin perlu memasukkan katalog jabatan, subbidang, skema, SKKNI/SKKK/SKEMA LSP, regulasi, KBLI, atau persyaratan SBU yang berlaku dari sumber resmi.
+
+---
+
+# 1. Bot Identity
+
+```yaml
+bot:
+  id: sbu_kompetensi_energy_mining_bot_v1
+  name: "SBU Kompetensi — Migas, EBT, dan Pertambangan"
+  language: "id-ID"
+  tone: "professional, supportive, clear, compliance-aware, assessment-oriented"
+  audience:
+    - pelaku usaha sektor migas
+    - pelaku usaha energi baru dan terbarukan
+    - pelaku usaha pertambangan
+    - tenaga kerja teknis dan supervisor
+    - calon peserta sertifikasi kompetensi
+    - asesor, instruktur, HR, dan admin pelatihan
+    - konsultan perizinan, kepatuhan, dan pengembangan SDM
+  purpose:
+    - membantu pengguna memahami ruang lingkup kompetensi pada sektor migas, EBT, dan pertambangan
+    - memetakan jalur kompetensi berdasarkan sektor, fungsi kerja, dan tingkat tanggung jawab
+    - membantu pengguna melakukan asesmen mandiri awal
+    - memberikan modul pembelajaran singkat per sektor dan fungsi kerja
+    - menyediakan latihan studi kasus berbasis operasional lapangan
+    - membantu menyiapkan checklist bukti kompetensi atau bukti kesiapan badan usaha
+    - mengarahkan pengguna ke rencana belajar, rencana sertifikasi, atau verifikasi dokumen
+  non_goals:
+    - tidak menerbitkan SBU atau sertifikat kompetensi resmi
+    - tidak menggantikan asesor, LSP, regulator, auditor, atau lembaga sertifikasi
+    - tidak menjadi sumber hukum tunggal untuk regulasi terbaru
+    - tidak memberikan keputusan final kelulusan, kelayakan izin, atau kelaikan operasi
+```
+
+---
+
+# 2. Dashboard / Builder Structure
+
+```yaml
+dashboard_structure:
+  app_name: "SBU Kompetensi Builder"
+  navigation:
+    - label: "Dashboard"
+      module: dashboard_overview
+    - label: "Bot Flows"
+      module: flow_builder
+    - label: "Intents"
+      module: intent_manager
+    - label: "Knowledge Base"
+      module: knowledge_base
+    - label: "Sector Catalog"
+      module: sector_catalog
+    - label: "Assessments"
+      module: assessment_builder
+    - label: "Scenarios"
+      module: scenario_library
+    - label: "Evidence Checklist"
+      module: evidence_checklist_builder
+    - label: "Glossary & FAQ"
+      module: glossary_faq
+    - label: "Fallback & Guardrails"
+      module: safety_fallback
+    - label: "Analytics"
+      module: analytics_dashboard
+    - label: "Settings"
+      module: bot_settings
+  primary_dashboard_cards:
+    - title: "Total Sektor"
+      value_source: count(sector_catalog.sectors)
+    - title: "Total Area Kompetensi"
+      value_source: count(competency_areas)
+    - title: "Total Jabatan / Skema"
+      value_source: count(role_catalog)
+    - title: "Assessment Completion Rate"
+      value_source: analytics.assessment_completion_rate
+    - title: "Fallback Rate"
+      value_source: analytics.fallback_rate
+    - title: "Top Requested Sector"
+      value_source: analytics.top_sector
+  admin_actions:
+    - "Tambah sektor / subbidang"
+    - "Import katalog kompetensi"
+    - "Review konten pembelajaran"
+    - "Preview percakapan"
+    - "Export konfigurasi"
+    - "Publish bot version"
+```
+
+---
+
+# 3. Knowledge Scope
+
+```yaml
+knowledge_scope:
+  name: "SBU Kompetensi Migas, EBT, dan Pertambangan"
+  description: >
+    Chatbot mencakup pemetaan kompetensi, pembelajaran, asesmen mandiri,
+    studi kasus, dan checklist bukti untuk tiga rumpun besar: minyak dan gas
+    bumi, energi baru dan terbarukan, serta pertambangan. Setiap sektor
+    dikelola melalui katalog dinamis agar admin dapat memperbarui subbidang,
+    jabatan, skema, standar, atau regulasi resmi tanpa mengubah alur utama bot.
+  core_sectors:
+    - id: migas
+      title: "Minyak dan Gas Bumi"
+    - id: ebt
+      title: "Energi Baru dan Terbarukan"
+    - id: pertambangan
+      title: "Pertambangan"
+  shared_competency_themes:
+    - "Keselamatan, kesehatan kerja, dan lindungan lingkungan"
+    - "Operasi dan pemeliharaan fasilitas"
+    - "Pengendalian mutu dan inspeksi teknis"
+    - "Manajemen risiko operasional"
+    - "Kepatuhan dokumen, izin, dan pelaporan"
+    - "Kompetensi teknis sesuai fungsi kerja"
+    - "Kesiapan bukti pengalaman dan portofolio"
+```
+
+---
+
+# 4. Sector Catalog Layer
+
+## 4.1 Catalog Model
+
+```yaml
+sector_catalog:
+  data_source_policy:
+    primary_source: "admin_verified_catalog"
+    allowed_reference_types:
+      - "SKKNI"
+      - "SKKK/SKKI"
+      - "Skema Sertifikasi LSP"
+      - "Persyaratan SBU / subbidang usaha"
+      - "KBLI atau klasifikasi usaha jika dipakai"
+      - "Regulasi teknis resmi"
+      - "Dokumen internal perusahaan yang disetujui"
+    update_policy:
+      - "Admin memasukkan data resmi ke catalog database."
+      - "SME melakukan review sebelum konten dipublikasikan."
+      - "Bot tidak mengarang kode standar atau nomor regulasi."
+  fields:
+    - sector_id
+    - sector_name
+    - sub_sector_id
+    - sub_sector_name
+    - competency_area_id
+    - competency_area_name
+    - role_or_scope_name
+    - qualification_level
+    - responsibility_level
+    - standard_code
+    - certification_scheme
+    - official_reference_link
+    - required_evidence
+    - learning_path
+    - assessment_id
+    - active_status
+```
+
+## 4.2 Initial Sector Map
+
+```yaml
+sectors:
+  - id: migas
+    name: "Minyak dan Gas Bumi"
+    description: >
+      Mencakup kompetensi pada kegiatan eksplorasi, pemboran, produksi,
+      pengolahan, penyimpanan, distribusi, inspeksi, K3 migas, dan
+      pemeliharaan fasilitas migas.
+    competency_clusters:
+      - id: migas_k3
+        title: "K3 dan Keselamatan Operasi Migas"
+        topics:
+          - identifikasi bahaya dan risiko migas
+          - permit to work
+          - gas test dan confined space awareness
+          - emergency response
+          - isolasi energi dan lockout-tagout
+          - pengendalian pekerjaan panas
+      - id: migas_operasi_hulu
+        title: "Operasi Hulu Migas"
+        topics:
+          - pemboran dan kerja ulang
+          - produksi sumur
+          - fasilitas produksi
+          - flowline dan gathering system
+          - pengukuran produksi
+      - id: migas_operasi_hilir
+        title: "Operasi Hilir Migas"
+        topics:
+          - pengolahan migas
+          - penyimpanan dan terminal
+          - distribusi dan niaga teknis
+          - pengendalian mutu produk
+      - id: migas_pemeliharaan_inspeksi
+        title: "Pemeliharaan dan Inspeksi Fasilitas Migas"
+        topics:
+          - preventive maintenance
+          - rotating equipment
+          - static equipment
+          - pipeline inspection
+          - instrumentasi dan kontrol
+
+  - id: ebt
+    name: "Energi Baru dan Terbarukan"
+    description: >
+      Mencakup kompetensi teknis dan manajerial pada sistem pembangkit,
+      instalasi, operasi, pemeliharaan, keselamatan, dan evaluasi kinerja
+      energi terbarukan.
+    competency_clusters:
+      - id: ebt_plts
+        title: "Pembangkit Listrik Tenaga Surya"
+        topics:
+          - survei lokasi dan desain dasar sistem PV
+          - instalasi modul, inverter, proteksi, dan grounding
+          - commissioning dan pengujian
+          - operasi dan pemeliharaan PLTS
+          - keselamatan kerja kelistrikan
+      - id: ebt_bioenergi
+        title: "Bioenergi"
+        topics:
+          - biomassa, biogas, dan biofuel
+          - pengolahan bahan baku
+          - operasi digester atau sistem konversi energi
+          - kontrol mutu dan keselamatan proses
+      - id: ebt_panas_bumi
+        title: "Panas Bumi"
+        topics:
+          - eksplorasi dan pengembangan panas bumi
+          - operasi sumur dan fasilitas uap
+          - pembangkitan listrik panas bumi
+          - K3, lingkungan, dan mitigasi risiko
+      - id: ebt_mikrohidro_angin_storage
+        title: "Mikrohidro, Angin, dan Penyimpanan Energi"
+        topics:
+          - survei potensi energi
+          - instalasi dan operasi pembangkit skala kecil
+          - sistem baterai dan penyimpanan energi
+          - monitoring performa dan pemeliharaan
+
+  - id: pertambangan
+    name: "Pertambangan"
+    description: >
+      Mencakup kompetensi pada eksplorasi, operasi tambang, pengolahan,
+      pengangkutan, alat berat, keselamatan pertambangan, lingkungan,
+      reklamasi, dan pelaporan teknis.
+    competency_clusters:
+      - id: tambang_k3_lingkungan
+        title: "K3 Pertambangan dan Lingkungan"
+        topics:
+          - identifikasi bahaya tambang
+          - pengendalian risiko operasi tambang
+          - pengelolaan lingkungan dan reklamasi
+          - investigasi insiden dan tindakan korektif
+      - id: tambang_operasi
+        title: "Operasi Pertambangan"
+        topics:
+          - perencanaan kerja tambang
+          - pembongkaran, pemuatan, pengangkutan
+          - pengawasan produksi
+          - dispatch dan pengendalian alat
+      - id: tambang_geologi_survey
+        title: "Geologi, Eksplorasi, dan Survey Tambang"
+        topics:
+          - sampling dan logging
+          - pemetaan geologi
+          - survey tambang
+          - estimasi sumber daya dan cadangan awal
+      - id: tambang_pengolahan
+        title: "Pengolahan Mineral dan Batubara"
+        topics:
+          - crushing, screening, washing, atau beneficiation
+          - quality control produk tambang
+          - pengendalian proses pengolahan
+          - handling dan stockpile management
+```
+
+---
+
+# 5. Global User Variables
+
+```yaml
+user_variables:
+  profile:
+    user_name: null
+    organization_name: null
+    user_type: null
+    current_role: null
+    company_type: null
+    sector_interest: null
+    sub_sector_interest: null
+    target_role_or_scope: null
+    target_standard_or_scheme: null
+    experience_years: null
+    learning_goal: null
+  session:
+    current_flow: null
+    current_node: null
+    current_module: null
+    current_question_index: 0
+    fallback_count: 0
+    last_user_intent: null
+    selected_sector: null
+    selected_cluster: null
+    selected_assessment: null
+  scoring:
+    score_total: 0
+    score_safety: 0
+    score_technical: 0
+    score_operation: 0
+    score_compliance: 0
+    score_documentation: 0
+    score_management: 0
+  assessment:
+    readiness_level: null
+    strong_topics: []
+    weak_topics: []
+    recommended_path: []
+```
+
+---
+
+# 6. Entry Points
+
+```yaml
+entry_points:
+  first_session_start:
+    trigger: "new_session"
+    bot_message: >
+      Halo, saya SBU Kompetensi Assistant untuk sektor Migas, Energi Baru dan
+      Terbarukan, dan Pertambangan. Saya dapat membantu Anda memahami ruang
+      lingkup kompetensi, memilih jalur, melakukan asesmen mandiri, belajar
+      topik teknis, menyiapkan checklist bukti, atau berlatih studi kasus.
+      Apa tujuan Anda hari ini?
+    quick_replies:
+      - "Pahami ruang lingkup sektor"
+      - "Cari jalur kompetensi"
+      - "Mulai asesmen mandiri"
+      - "Belajar topik kompetensi"
+      - "Checklist bukti"
+      - "Latihan studi kasus"
+      - "Tanya istilah"
+
+  returning_user:
+    trigger: "known_user_return"
+    bot_message: >
+      Selamat datang kembali. Terakhir Anda berada di {{last_module}}.
+      Apakah Anda ingin melanjutkan, mengulang, atau memilih sektor lain?
+    quick_replies:
+      - "Lanjutkan modul terakhir"
+      - "Pilih sektor lain"
+      - "Mulai asesmen baru"
+      - "Lihat ringkasan progres"
+```
+
+---
+
+# 7. Main Menu Flow
+
+```yaml
+flow:
+  id: main_menu
+  title: "Menu Utama"
+  bot_message: >
+    Pilih kebutuhan Anda dalam SBU Kompetensi Migas, EBT, dan Pertambangan:
+  options:
+    - id: menu_sector_scope
+      label: "1. Lihat ruang lingkup sektor"
+      next_node: sector_scope_menu
+    - id: menu_role_path
+      label: "2. Cari jalur kompetensi"
+      next_node: select_sector_path
+    - id: menu_catalog_lookup
+      label: "3. Cari katalog jabatan/skema/standar"
+      next_node: catalog_lookup_menu
+    - id: menu_learning
+      label: "4. Belajar kompetensi inti"
+      next_node: learning_sector_menu
+    - id: menu_assessment
+      label: "5. Asesmen mandiri"
+      next_node: assessment_sector_menu
+    - id: menu_scenario
+      label: "6. Latihan studi kasus"
+      next_node: scenario_sector_menu
+    - id: menu_evidence
+      label: "7. Checklist bukti"
+      next_node: evidence_checklist_menu
+    - id: menu_glossary
+      label: "8. Tanya istilah"
+      next_node: glossary_entry
+```
+
+---
+
+# 8. Core Intents
+
+```yaml
+intents:
+  - id: greet
+    description: "User starts or greets the chatbot."
+    sample_user_inputs:
+      - "Halo"
+      - "Mulai"
+      - "Saya mau belajar kompetensi migas"
+      - "Bisa bantu SBU pertambangan?"
+      - "Saya mau cek kesiapan usaha"
+    entities: []
+    response_template: greeting_main
+    next_node: main_menu
+
+  - id: explain_scope
+    description: "User asks about sector scope."
+    sample_user_inputs:
+      - "Apa saja ruang lingkup kompetensi migas?"
+      - "EBT mencakup apa saja?"
+      - "Pertambangan kompetensinya apa?"
+      - "SBU kompetensi ini mencakup bidang apa?"
+    entities:
+      - sector_name
+    response_template: explain_scope_response
+    next_node: sector_scope_followup
+
+  - id: find_competency_path
+    description: "User wants to identify a suitable path."
+    sample_user_inputs:
+      - "Saya cocok ambil kompetensi apa?"
+      - "Saya perusahaan jasa tambang, jalurnya apa?"
+      - "Saya pengalaman PLTS, cocoknya modul apa?"
+      - "Saya teknisi produksi migas, pilih jalur apa?"
+    entities:
+      - sector_name
+      - role_name
+      - experience_years
+      - responsibility_level
+    response_template: competency_path_intro
+    next_node: collect_profile_for_path
+
+  - id: lookup_catalog
+    description: "User asks for role, standard, scheme, or sub-sector lookup."
+    sample_user_inputs:
+      - "Cari standar untuk operator PLTS"
+      - "Skema sertifikasi migas apa saja?"
+      - "Jabatan pertambangan untuk pengawas produksi apa?"
+      - "Cari subbidang EBT"
+    entities:
+      - role_name
+      - standard_code
+      - sector_name
+      - sub_sector_name
+    response_template: catalog_lookup_response
+    next_node: catalog_lookup_result
+
+  - id: start_assessment
+    description: "User wants self-assessment."
+    sample_user_inputs:
+      - "Mulai asesmen"
+      - "Cek kesiapan saya"
+      - "Tes kemampuan migas"
+      - "Asesmen PLTS"
+      - "Cek kompetensi pertambangan"
+    entities:
+      - sector_name
+      - competency_area
+    response_template: assessment_intro
+    next_node: assessment_questions
+
+  - id: start_scenario
+    description: "User wants practical scenario practice."
+    sample_user_inputs:
+      - "Latihan studi kasus"
+      - "Beri saya kasus migas"
+      - "Latihan kasus PLTS"
+      - "Studi kasus tambang"
+    entities:
+      - sector_name
+      - scenario_type
+    response_template: scenario_intro
+    next_node: scenario_menu
+
+  - id: generate_evidence_checklist
+    description: "User wants evidence or portfolio checklist."
+    sample_user_inputs:
+      - "Dokumen apa yang harus disiapkan?"
+      - "Checklist bukti kompetensi migas"
+      - "Bukti untuk SBU pertambangan apa saja?"
+      - "Portofolio untuk PLTS apa?"
+    entities:
+      - sector_name
+      - target_role_or_scope
+    response_template: evidence_checklist_response
+    next_node: evidence_checklist_result
+
+  - id: glossary_lookup
+    description: "User asks for definitions."
+    sample_user_inputs:
+      - "Apa itu SKKNI?"
+      - "Apa itu permit to work?"
+      - "Apa itu commissioning?"
+      - "Apa itu reklamasi tambang?"
+      - "Apa itu energy storage?"
+    entities:
+      - glossary_term
+    response_template: glossary_dynamic_response
+```
+
+---
+
+# 9. Sector Selection Flow
+
+```yaml
+flow:
+  id: select_sector_path
+  title: "Pilih Sektor"
+  bot_message: >
+    Pilih sektor yang paling sesuai dengan kebutuhan Anda.
+  options:
+    - label: "Minyak dan Gas Bumi"
+      next_node: path_migas
+    - label: "Energi Baru dan Terbarukan"
+      next_node: path_ebt
+    - label: "Pertambangan"
+      next_node: path_pertambangan
+    - label: "Saya belum tahu"
+      next_node: sector_discovery_questions
+
+node:
+  id: sector_discovery_questions
+  type: guided_questionnaire
+  bot_message: >
+    Saya akan bantu memetakan sektor dan jalur yang paling relevan. Jawab
+    beberapa pertanyaan singkat berikut.
+  questions:
+    - id: q_main_activity
+      text: "Aktivitas utama Anda paling dekat dengan apa?"
+      quick_replies:
+        - "Operasi migas, pemboran, produksi, atau fasilitas migas"
+        - "PLTS, bioenergi, panas bumi, mikrohidro, angin, atau baterai"
+        - "Operasi tambang, geologi, pengolahan mineral/batubara, atau alat berat"
+        - "K3, lingkungan, atau kepatuhan"
+        - "Belum yakin"
+      save_to: profile.sector_interest
+    - id: q_responsibility_level
+      text: "Tingkat tanggung jawab Anda saat ini lebih dekat ke mana?"
+      quick_replies:
+        - "Pelaksana/operator"
+        - "Teknisi/analis"
+        - "Supervisor/pengawas"
+        - "Ahli/spesialis"
+        - "Manajer/penanggung jawab"
+      save_to: profile.responsibility_level
+    - id: q_goal
+      text: "Tujuan utama Anda?"
+      quick_replies:
+        - "Belajar dasar"
+        - "Memilih jalur kompetensi"
+        - "Persiapan sertifikasi"
+        - "Menyiapkan dokumen SBU"
+        - "Evaluasi kompetensi tim"
+      save_to: profile.learning_goal
+  routing_logic:
+    - if_answer_contains: "migas"
+      next_node: path_migas
+    - if_answer_contains: "PLTS|bioenergi|panas bumi|mikrohidro|angin|baterai"
+      next_node: path_ebt
+    - if_answer_contains: "tambang|geologi|mineral|batubara|alat berat"
+      next_node: path_pertambangan
+    - default: path_general_safety_compliance
+```
+
+---
+
+# 10. Sector Path Responses
+
+## 10.1 Migas
+
+```yaml
+node:
+  id: path_migas
+  title: "Jalur Kompetensi Migas"
+  bot_message: >
+    Jalur Migas cocok untuk pengguna yang bekerja pada operasi hulu, hilir,
+    fasilitas produksi, terminal, inspeksi, pemeliharaan, K3 migas, atau
+    pengendalian mutu produk. Pilih area yang paling dekat dengan pengalaman
+    atau kebutuhan usaha Anda.
+  quick_replies:
+    - "K3 dan keselamatan operasi migas"
+    - "Pemboran dan produksi"
+    - "Pengolahan, terminal, dan distribusi"
+    - "Pemeliharaan dan inspeksi fasilitas"
+    - "Checklist bukti migas"
+    - "Asesmen migas"
+```
+
+## 10.2 EBT
+
+```yaml
+node:
+  id: path_ebt
+  title: "Jalur Kompetensi Energi Baru dan Terbarukan"
+  bot_message: >
+    Jalur EBT cocok untuk pengguna yang bekerja pada desain, instalasi,
+    operasi, pemeliharaan, commissioning, monitoring performa, atau pengelolaan
+    keselamatan sistem energi terbarukan.
+  quick_replies:
+    - "PLTS"
+    - "Bioenergi"
+    - "Panas bumi"
+    - "Mikrohidro / angin / storage"
+    - "Checklist bukti EBT"
+    - "Asesmen EBT"
+```
+
+## 10.3 Pertambangan
+
+```yaml
+node:
+  id: path_pertambangan
+  title: "Jalur Kompetensi Pertambangan"
+  bot_message: >
+    Jalur Pertambangan cocok untuk pengguna yang bekerja pada eksplorasi,
+    survey, operasi tambang, pengangkutan, pengolahan, K3 pertambangan,
+    lingkungan, reklamasi, atau pengendalian mutu produk tambang.
+  quick_replies:
+    - "K3 dan lingkungan tambang"
+    - "Operasi tambang"
+    - "Geologi, eksplorasi, dan survey"
+    - "Pengolahan mineral/batubara"
+    - "Checklist bukti pertambangan"
+    - "Asesmen pertambangan"
+```
+
+---
+
+# 11. Learning Module Flow
+
+```yaml
+flow:
+  id: learning_sector_menu
+  title: "Pilih Modul Pembelajaran"
+  bot_message: >
+    Pilih sektor pembelajaran. Setiap modul berisi ringkasan konsep, checklist
+    kompetensi, contoh lapangan, pertanyaan pemahaman, dan langkah berikutnya.
+  options:
+    - label: "Migas"
+      next_node: learning_migas_menu
+    - label: "Energi Baru dan Terbarukan"
+      next_node: learning_ebt_menu
+    - label: "Pertambangan"
+      next_node: learning_pertambangan_menu
+    - label: "K3 dan kepatuhan lintas sektor"
+      next_node: learning_cross_sector_safety
+```
+
+## 11.1 Learning Module — K3 Migas
+
+```yaml
+learning_module:
+  id: module_migas_k3
+  title: "K3 dan Keselamatan Operasi Migas"
+  target_sector: "migas"
+  estimated_time: "10-15 menit"
+  difficulty: "basic-intermediate"
+  bot_message: >
+    Keselamatan operasi migas berfokus pada pengendalian pekerjaan berisiko
+    tinggi, seperti pekerjaan panas, confined space, gas berbahaya, tekanan
+    tinggi, bahan mudah terbakar, dan isolasi energi. Kompetensi utama adalah
+    mengenali bahaya, menilai risiko, menerapkan permit to work, mengendalikan
+    pekerjaan, dan merespons keadaan darurat.
+  learning_points:
+    - "Identifikasi bahaya dilakukan sebelum pekerjaan dimulai."
+    - "Permit to work membantu memastikan pekerjaan berisiko memiliki kontrol yang sesuai."
+    - "Gas test, isolasi energi, dan kesiapan emergency response harus dipastikan sesuai risiko kerja."
+    - "Pelanggaran prosedur keselamatan harus dihentikan dan ditindaklanjuti."
+  check_understanding:
+    question: >
+      Tim akan melakukan pekerjaan panas di area yang berpotensi mengandung gas
+      mudah terbakar. Tindakan awal yang paling tepat adalah?
+    options:
+      A: "Langsung bekerja karena pekerjaan singkat"
+      B: "Memastikan permit, gas test, isolasi area, APD, dan fire watch sesuai prosedur"
+      C: "Menunggu sampai akhir shift"
+      D: "Mengurangi jumlah pekerja saja"
+    correct_answer: "B"
+    feedback_correct: >
+      Benar. Pekerjaan panas di area berisiko harus dikendalikan melalui izin kerja,
+      pengujian atmosfer, isolasi, APD, pengawasan, dan kesiapan tanggap darurat.
+    feedback_incorrect: >
+      Jawaban yang lebih tepat adalah B. Pekerjaan panas tanpa kontrol dapat memicu
+      kebakaran, ledakan, atau paparan gas berbahaya.
+```
+
+## 11.2 Learning Module — PLTS
+
+```yaml
+learning_module:
+  id: module_ebt_plts
+  title: "Dasar Kompetensi PLTS"
+  target_sector: "ebt"
+  estimated_time: "10-15 menit"
+  difficulty: "basic"
+  bot_message: >
+    Kompetensi PLTS mencakup survei lokasi, pemahaman komponen sistem,
+    instalasi modul dan inverter, proteksi listrik, grounding, commissioning,
+    monitoring performa, dan pemeliharaan berkala.
+  learning_points:
+    - "Survei lokasi membantu menentukan potensi radiasi, shading, orientasi, dan struktur pemasangan."
+    - "Instalasi harus memperhatikan keselamatan kelistrikan, proteksi, dan grounding."
+    - "Commissioning memastikan sistem bekerja sesuai desain dan parameter keselamatan."
+    - "Pemeliharaan mencakup inspeksi visual, pembersihan, monitoring output, dan pengecekan koneksi."
+  check_understanding:
+    question: >
+      Setelah instalasi PLTS selesai, apa tujuan utama commissioning?
+    options:
+      A: "Membuat sistem terlihat rapi saja"
+      B: "Memastikan sistem aman, sesuai desain, dan menghasilkan output yang dapat diverifikasi"
+      C: "Mengganti semua komponen"
+      D: "Menghapus kebutuhan pemeliharaan"
+    correct_answer: "B"
+```
+
+## 11.3 Learning Module — Operasi Pertambangan
+
+```yaml
+learning_module:
+  id: module_tambang_operasi
+  title: "Dasar Pengendalian Operasi Tambang"
+  target_sector: "pertambangan"
+  estimated_time: "10-15 menit"
+  difficulty: "basic-intermediate"
+  bot_message: >
+    Pengendalian operasi tambang mencakup perencanaan produksi, pengawasan
+    aktivitas pembongkaran, pemuatan, pengangkutan, pengelolaan alat berat,
+    pengendalian risiko keselamatan, dan pelaporan produksi.
+  learning_points:
+    - "Rencana kerja tambang harus selaras dengan target produksi dan kondisi lapangan."
+    - "Keselamatan jalan tambang, interaksi alat berat, dan kondisi geoteknik harus dipantau."
+    - "Produktivitas alat dipengaruhi oleh ketersediaan, cycle time, jarak angkut, dan hambatan operasional."
+    - "Setiap deviasi produksi perlu dianalisis penyebab dan rencana korektifnya."
+  check_understanding:
+    question: >
+      Produksi harian turun karena antrean dump truck di loading point. Langkah
+      pengendalian yang paling tepat adalah?
+    options:
+      A: "Menambah jam kerja tanpa analisis"
+      B: "Menganalisis cycle time, ketersediaan alat, rute angkut, dan koordinasi loading-hauling"
+      C: "Mengabaikan data produksi"
+      D: "Mengurangi inspeksi keselamatan"
+    correct_answer: "B"
+```
+
+---
+
+# 12. Self-Assessment Flow
+
+```yaml
+flow:
+  id: assessment_sector_menu
+  title: "Asesmen Mandiri SBU Kompetensi"
+  bot_message: >
+    Asesmen ini membantu melihat kesiapan awal Anda. Hasilnya bukan keputusan
+    resmi sertifikasi atau kelayakan SBU. Jawab berdasarkan pengalaman dan
+    bukti nyata yang Anda miliki.
+  options:
+    - "Asesmen Migas"
+    - "Asesmen EBT"
+    - "Asesmen Pertambangan"
+    - "Asesmen K3 dan kepatuhan lintas sektor"
+
+assessment_scoring:
+  scale:
+    0: "Belum memahami"
+    1: "Paham konsep dasar"
+    2: "Pernah menerapkan dengan arahan"
+    3: "Mampu menerapkan mandiri"
+    4: "Mampu mengevaluasi dan membimbing orang lain"
+  result_logic:
+    - condition: "average_score < 1.5"
+      readiness_level: "Dasar"
+      message: >
+        Anda berada pada tahap dasar. Mulailah dari pemahaman istilah, konsep
+        keselamatan, alur kerja, dan dokumen utama.
+    - condition: "average_score >= 1.5 and average_score < 3"
+      readiness_level: "Menengah"
+      message: >
+        Anda sudah memiliki pemahaman awal. Fokus berikutnya adalah penerapan
+        praktis, dokumentasi, dan studi kasus.
+    - condition: "average_score >= 3"
+      readiness_level: "Lanjutan"
+      message: >
+        Anda menunjukkan kesiapan yang baik. Fokuskan pada evaluasi, pembuktian
+        portofolio, pembimbingan tim, dan simulasi wawancara.
+```
+
+## 12.1 Assessment — Migas
+
+```yaml
+assessment:
+  id: assessment_migas
+  title: "Asesmen Mandiri Migas"
+  questions:
+    - id: migas_q1
+      dimension: safety
+      text: "Seberapa mampu Anda mengidentifikasi bahaya utama pada pekerjaan migas?"
+    - id: migas_q2
+      dimension: safety
+      text: "Seberapa mampu Anda menerapkan permit to work untuk pekerjaan berisiko?"
+    - id: migas_q3
+      dimension: technical
+      text: "Seberapa memahami Anda alur operasi hulu atau hilir migas sesuai area kerja Anda?"
+    - id: migas_q4
+      dimension: operation
+      text: "Seberapa mampu Anda membaca parameter operasi dan mengenali kondisi abnormal?"
+    - id: migas_q5
+      dimension: documentation
+      text: "Seberapa mampu Anda menyiapkan logsheet, laporan inspeksi, atau dokumen pekerjaan?"
+    - id: migas_q6
+      dimension: emergency
+      text: "Seberapa mampu Anda menjelaskan tindakan awal saat terjadi kebocoran, paparan gas, atau keadaan darurat?"
+```
+
+## 12.2 Assessment — EBT
+
+```yaml
+assessment:
+  id: assessment_ebt
+  title: "Asesmen Mandiri Energi Baru dan Terbarukan"
+  questions:
+    - id: ebt_q1
+      dimension: technical
+      text: "Seberapa mampu Anda menjelaskan komponen utama sistem EBT yang Anda tangani?"
+    - id: ebt_q2
+      dimension: safety
+      text: "Seberapa mampu Anda menerapkan keselamatan kerja kelistrikan atau proses energi?"
+    - id: ebt_q3
+      dimension: installation
+      text: "Seberapa mampu Anda melakukan atau memeriksa instalasi sesuai desain dan prosedur?"
+    - id: ebt_q4
+      dimension: commissioning
+      text: "Seberapa mampu Anda melakukan commissioning atau verifikasi performa awal?"
+    - id: ebt_q5
+      dimension: maintenance
+      text: "Seberapa mampu Anda menjalankan inspeksi dan pemeliharaan berkala?"
+    - id: ebt_q6
+      dimension: documentation
+      text: "Seberapa mampu Anda menyiapkan laporan hasil pekerjaan, checklist, dan data performa?"
+```
+
+## 12.3 Assessment — Pertambangan
+
+```yaml
+assessment:
+  id: assessment_pertambangan
+  title: "Asesmen Mandiri Pertambangan"
+  questions:
+    - id: tambang_q1
+      dimension: safety
+      text: "Seberapa mampu Anda mengidentifikasi risiko keselamatan pada operasi tambang?"
+    - id: tambang_q2
+      dimension: operation
+      text: "Seberapa mampu Anda memahami alur kerja pembongkaran, pemuatan, dan pengangkutan?"
+    - id: tambang_q3
+      dimension: technical
+      text: "Seberapa mampu Anda membaca data produksi, ritase, cycle time, atau parameter operasi?"
+    - id: tambang_q4
+      dimension: environment
+      text: "Seberapa mampu Anda menjelaskan kewajiban pengelolaan lingkungan dan reklamasi dasar?"
+    - id: tambang_q5
+      dimension: quality
+      text: "Seberapa mampu Anda memahami pengendalian mutu mineral/batubara sesuai area kerja?"
+    - id: tambang_q6
+      dimension: documentation
+      text: "Seberapa mampu Anda menyiapkan laporan produksi, inspeksi, atau dokumen pengendalian?"
+```
+
+---
+
+# 13. Scenario Practice Flow
+
+```yaml
+flow:
+  id: scenario_sector_menu
+  title: "Latihan Studi Kasus"
+  bot_message: >
+    Pilih skenario praktik. Saya akan memberi situasi, lalu meminta Anda
+    mengidentifikasi masalah, menentukan tindakan, menyebutkan dokumen yang
+    diperlukan, dan menyusun rencana tindak lanjut.
+  options:
+    - "Migas: pekerjaan panas di area berisiko gas"
+    - "EBT: output PLTS turun setelah commissioning"
+    - "Pertambangan: near miss antara alat berat dan kendaraan ringan"
+    - "Pertambangan: deviasi produksi tambang"
+    - "Lintas sektor: dokumen bukti kompetensi tidak lengkap"
+```
+
+## Scenario 1 — Migas
+
+```yaml
+scenario:
+  id: scenario_migas_hot_work
+  title: "Pekerjaan Panas di Area Berisiko Gas"
+  situation: >
+    Tim pemeliharaan akan melakukan pekerjaan pengelasan pada area fasilitas
+    migas. Area tersebut dekat dengan jalur pipa proses. Hasil gas test belum
+    didokumentasikan dan permit to work belum ditandatangani lengkap.
+  user_task:
+    - "Identifikasi risiko utama."
+    - "Tentukan tindakan segera."
+    - "Tentukan dokumen yang harus diperiksa."
+    - "Usulkan tindakan pencegahan."
+  ideal_answer_points:
+    - "Tidak memulai pekerjaan sampai permit lengkap."
+    - "Melakukan gas test dan memastikan hasil aman."
+    - "Memastikan isolasi energi dan area kerja."
+    - "Menyiapkan fire watch, APD, dan peralatan pemadam."
+    - "Mendokumentasikan izin kerja dan briefing keselamatan."
+  feedback_template: >
+    Jawaban Anda sudah mencakup {{matched_points}} dari {{total_points}} poin
+    utama. Poin yang perlu ditambahkan: {{missing_points}}.
+```
+
+## Scenario 2 — EBT PLTS
+
+```yaml
+scenario:
+  id: scenario_ebt_plts_low_output
+  title: "Output PLTS Turun Setelah Commissioning"
+  situation: >
+    Setelah commissioning, output PLTS lebih rendah dari estimasi. Beberapa
+    string menunjukkan arus lebih rendah, dan ada potensi shading pada sebagian
+    modul. Pengguna meminta sistem segera dinyatakan selesai.
+  user_task:
+    - "Identifikasi kemungkinan penyebab."
+    - "Tentukan langkah pemeriksaan."
+    - "Tentukan dokumen atau data yang perlu disiapkan."
+    - "Berikan rekomendasi keputusan sementara."
+  ideal_answer_points:
+    - "Memeriksa shading, koneksi, string current, inverter log, dan orientasi modul."
+    - "Membandingkan hasil aktual dengan desain dan kondisi cuaca."
+    - "Mendokumentasikan hasil pengujian commissioning."
+    - "Tidak menyatakan selesai sebelum deviasi dianalisis."
+    - "Menyusun tindakan korektif dan verifikasi ulang."
+```
+
+## Scenario 3 — Pertambangan
+
+```yaml
+scenario:
+  id: scenario_tambang_near_miss_alat_berat
+  title: "Near Miss antara Alat Berat dan Kendaraan Ringan"
+  situation: >
+    Di jalan tambang, kendaraan ringan hampir bertabrakan dengan dump truck.
+    Tidak ada korban, tetapi rambu jalan kurang jelas dan komunikasi radio
+    tidak konsisten.
+  user_task:
+    - "Identifikasi masalah keselamatan utama."
+    - "Tentukan tindakan segera."
+    - "Tentukan dokumen atau laporan yang dibuat."
+    - "Usulkan tindakan pencegahan."
+  ideal_answer_points:
+    - "Mengamankan area dan menghentikan sementara aktivitas berisiko."
+    - "Mencatat near miss dan melakukan investigasi penyebab."
+    - "Memperbaiki rambu, traffic management, dan komunikasi radio."
+    - "Melakukan briefing ulang kepada operator dan pengemudi."
+    - "Memonitor efektivitas tindakan korektif."
+```
+
+---
+
+# 14. Evidence Checklist Generator
+
+```yaml
+flow:
+  id: evidence_checklist_menu
+  title: "Generator Checklist Bukti Kompetensi"
+  bot_message: >
+    Pilih sektor atau ketik jalur kompetensi yang ingin disiapkan buktinya.
+    Saya akan mengelompokkan bukti menjadi pengalaman kerja, dokumen teknis,
+    dokumen pengendalian, komunikasi, dan hasil pekerjaan.
+  options:
+    - "Checklist Migas"
+    - "Checklist EBT"
+    - "Checklist Pertambangan"
+    - "Checklist K3 lintas sektor"
+    - "Saya ingin ketik jabatan/subbidang"
+```
+
+## 14.1 Checklist — Migas
+
+```yaml
+evidence_checklist:
+  id: evidence_migas
+  title: "Checklist Bukti Kompetensi Migas"
+  experience_evidence:
+    - "Surat tugas atau riwayat pekerjaan pada fasilitas/proyek migas"
+    - "Uraian peran dan tanggung jawab dalam operasi, inspeksi, pemeliharaan, atau K3"
+  technical_documents:
+    - "Prosedur kerja atau work instruction"
+    - "Permit to work atau dokumen izin kerja"
+    - "Logsheet operasi atau maintenance record"
+    - "Checklist inspeksi peralatan/fasilitas"
+  control_documents:
+    - "JSA/HIRADC atau analisis risiko pekerjaan"
+    - "Laporan temuan dan tindakan korektif"
+    - "Dokumen isolasi energi atau gas test jika relevan"
+  communication_documents:
+    - "Toolbox meeting atau safety briefing"
+    - "Notulen koordinasi pekerjaan"
+  result_documents:
+    - "Bukti pekerjaan selesai dan diverifikasi"
+    - "Rekaman performa, hasil inspeksi, atau penutupan temuan"
+```
+
+## 14.2 Checklist — EBT
+
+```yaml
+evidence_checklist:
+  id: evidence_ebt
+  title: "Checklist Bukti Kompetensi Energi Baru dan Terbarukan"
+  experience_evidence:
+    - "Riwayat proyek EBT atau instalasi sistem energi"
+    - "Surat tugas sebagai teknisi, supervisor, engineer, atau penanggung jawab"
+  technical_documents:
+    - "Gambar desain atau single line diagram"
+    - "Checklist instalasi"
+    - "Dokumen commissioning"
+    - "Manual operasi dan pemeliharaan"
+  control_documents:
+    - "Checklist keselamatan kelistrikan/proses"
+    - "Data monitoring performa"
+    - "Laporan troubleshooting atau corrective action"
+  communication_documents:
+    - "Berita acara serah terima pekerjaan"
+    - "Notulen koordinasi dengan owner/vendor/kontraktor"
+  result_documents:
+    - "Hasil pengujian performa"
+    - "Bukti sistem beroperasi sesuai parameter"
+```
+
+## 14.3 Checklist — Pertambangan
+
+```yaml
+evidence_checklist:
+  id: evidence_pertambangan
+  title: "Checklist Bukti Kompetensi Pertambangan"
+  experience_evidence:
+    - "Riwayat pekerjaan pada kegiatan eksplorasi, operasi, pengolahan, atau K3 tambang"
+    - "Surat tugas atau job assignment"
+  technical_documents:
+    - "Rencana kerja harian/mingguan"
+    - "Laporan produksi, ritase, cycle time, atau penggunaan alat"
+    - "Peta kerja, data survey, atau data quality product jika relevan"
+  control_documents:
+    - "JSA/HIRADC atau dokumen identifikasi bahaya"
+    - "Laporan inspeksi jalan tambang, alat, atau area kerja"
+    - "Laporan insiden/near miss dan tindakan korektif"
+  communication_documents:
+    - "Safety talk, P5M, atau briefing operasional"
+    - "Notulen koordinasi produksi atau engineering"
+  result_documents:
+    - "Capaian produksi atau hasil pengendalian deviasi"
+    - "Bukti penutupan temuan K3/lingkungan"
+```
+
+---
+
+# 15. Glossary
+
+```yaml
+glossary:
+  SBU: >
+    Dalam chatbot ini, SBU digunakan sebagai konteks pemetaan kompetensi usaha
+    atau kesiapan badan usaha. Definisi resmi dan persyaratan wajib mengikuti
+    regulasi atau lembaga penerbit yang berlaku.
+  SKKNI: >
+    Standar Kompetensi Kerja Nasional Indonesia, yaitu rumusan kemampuan kerja
+    yang mencakup pengetahuan, keterampilan, dan sikap kerja sesuai tugas jabatan.
+  SKKK: >
+    Standar Kompetensi Kerja Khusus yang digunakan untuk kebutuhan sektor atau
+    organisasi tertentu sesuai ketentuan yang berlaku.
+  LSP: >
+    Lembaga Sertifikasi Profesi yang menyelenggarakan sertifikasi kompetensi
+    sesuai ruang lingkup dan lisensinya.
+  Permit to Work: >
+    Sistem izin kerja untuk memastikan pekerjaan berisiko tinggi dilakukan
+    setelah bahaya, kontrol, personel, dan persetujuan diverifikasi.
+  Commissioning: >
+    Proses pemeriksaan dan pengujian awal untuk memastikan sistem atau fasilitas
+    siap beroperasi sesuai desain, keselamatan, dan parameter kinerja.
+  HIRADC: >
+    Hazard Identification, Risk Assessment, and Determining Control; metode
+    identifikasi bahaya, penilaian risiko, dan penentuan pengendalian.
+  P5M: >
+    Pembicaraan lima menit sebelum kerja, umum dipakai di pertambangan untuk
+    menyampaikan keselamatan, rencana kerja, dan risiko harian.
+  Reklamasi: >
+    Kegiatan pemulihan dan penataan lahan bekas tambang sesuai rencana dan
+    ketentuan lingkungan yang berlaku.
+  Energy Storage: >
+    Sistem penyimpanan energi, misalnya baterai, yang membantu menyimpan dan
+    menyalurkan energi sesuai kebutuhan operasi.
+```
+
+---
+
+# 16. Response Templates
+
+```yaml
+response_templates:
+  short_explanation:
+    structure:
+      - "Definisi singkat"
+      - "Mengapa penting"
+      - "Contoh penerapan"
+      - "Pertanyaan lanjutan"
+    example: >
+      Commissioning adalah proses pemeriksaan dan pengujian awal untuk memastikan
+      sistem siap beroperasi sesuai desain dan persyaratan keselamatan. Ini penting
+      karena sistem yang belum diverifikasi dapat menimbulkan risiko kinerja dan
+      keselamatan. Apakah Anda ingin contoh checklist commissioning?
+
+  assessment_feedback:
+    structure:
+      - "Ringkasan skor"
+      - "Area kuat"
+      - "Area perlu ditingkatkan"
+      - "Rekomendasi modul"
+      - "Langkah berikutnya"
+    example: >
+      Hasil asesmen mandiri Anda menunjukkan kesiapan menengah. Area kuat:
+      dokumentasi dan pemahaman operasi. Area yang perlu diperkuat: keselamatan
+      kerja dan troubleshooting. Saya sarankan Anda mempelajari modul K3 sektor
+      terkait, lalu mengerjakan studi kasus.
+
+  scenario_feedback:
+    structure:
+      - "Apresiasi jawaban"
+      - "Poin yang sudah tepat"
+      - "Poin yang belum muncul"
+      - "Jawaban ideal"
+      - "Pertanyaan refleksi"
+    example: >
+      Jawaban Anda sudah tepat karena menyebutkan perlunya menghentikan pekerjaan
+      sementara. Poin yang perlu ditambahkan adalah pemeriksaan dokumen izin kerja,
+      pengendalian area, dan dokumentasi tindakan korektif.
+
+  catalog_lookup:
+    structure:
+      - "Hasil pencarian"
+      - "Sektor/subsektor"
+      - "Jabatan/skema/standar jika tersedia"
+      - "Fokus kompetensi"
+      - "Pilihan lanjut"
+```
+
+---
+
+# 17. Fallback Handling
+
+```yaml
+fallback:
+  confidence_threshold: 0.65
+  first_fallback:
+    condition: "intent_confidence < 0.65 and fallback_count == 0"
+    bot_message: >
+      Maaf, saya belum menangkap maksud Anda dengan jelas. Apakah pertanyaan
+      Anda berkaitan dengan salah satu topik berikut?
+    quick_replies:
+      - "Migas"
+      - "Energi Baru dan Terbarukan"
+      - "Pertambangan"
+      - "Asesmen mandiri"
+      - "Checklist bukti"
+      - "Sertifikasi/standar"
+  second_fallback:
+    condition: "intent_confidence < 0.65 and fallback_count == 1"
+    bot_message: >
+      Saya masih belum yakin. Coba tuliskan pertanyaan dengan format:
+      “Saya ingin tahu tentang [sektor/topik] untuk [tujuan]”.
+      Contoh: “Saya ingin tahu tentang PLTS untuk persiapan checklist bukti.”
+    quick_replies:
+      - "Kembali ke menu utama"
+      - "Lihat daftar sektor"
+      - "Mulai asesmen umum"
+  escalation_fallback:
+    condition: "fallback_count >= 2"
+    bot_message: >
+      Saya akan arahkan Anda ke menu utama agar lebih mudah. Pilih topik yang
+      paling mendekati kebutuhan Anda.
+    next_node: main_menu
+
+role_or_sector_ambiguity:
+  examples:
+    - user_input: "Saya mau migas"
+      bot_response: >
+        Jalur migas memiliki beberapa area. Yang Anda maksud lebih dekat ke mana:
+        K3 migas, pemboran/produksi, pengolahan/terminal, atau pemeliharaan/inspeksi?
+    - user_input: "Saya mau EBT"
+      bot_response: >
+        Jalur EBT mencakup PLTS, bioenergi, panas bumi, mikrohidro/angin/storage.
+        Pilih area yang paling sesuai dengan pengalaman Anda.
+    - user_input: "Saya mau tambang"
+      bot_response: >
+        Jalur pertambangan mencakup K3 lingkungan, operasi tambang, geologi/survey,
+        dan pengolahan mineral/batubara. Area mana yang ingin Anda mulai?
+```
+
+---
+
+# 18. Guardrails and Response Rules
+
+```yaml
+guardrails:
+  accuracy:
+    - "Jangan menyatakan pengguna atau badan usaha resmi memenuhi persyaratan SBU."
+    - "Jangan menyatakan pengguna lulus atau gagal sertifikasi resmi."
+    - "Gunakan frasa 'asesmen mandiri awal' untuk hasil evaluasi chatbot."
+    - "Jika pengguna meminta dasar hukum terbaru, arahkan verifikasi ke sumber resmi."
+    - "Jangan mengarang kode SKKNI, SKKK, nomor skema, atau nomor regulasi."
+    - "Jika katalog belum tersedia, tampilkan placeholder dan minta admin mengisi data resmi."
+  safety:
+    - "Untuk pekerjaan berisiko tinggi, sarankan penghentian sementara sampai kontrol keselamatan terpenuhi."
+    - "Jangan menyarankan bypass prosedur permit to work, isolasi energi, commissioning, atau inspeksi."
+    - "Untuk insiden K3, sarankan pengamanan area, pelaporan, investigasi, dan tindakan korektif."
+    - "Untuk sengketa, klaim, atau kepatuhan resmi, sarankan konsultasi dengan pihak berwenang/ahli terkait."
+  tone:
+    - "Gunakan bahasa Indonesia formal, sederhana, dan membimbing."
+    - "Berikan contoh praktis dari lapangan."
+    - "Ajukan satu pertanyaan lanjutan pada satu waktu."
+    - "Gunakan checklist dan langkah ringkas."
+  privacy:
+    - "Jangan meminta data pribadi sensitif yang tidak diperlukan."
+    - "Jangan menyimpan dokumen rahasia tanpa persetujuan dan kontrol akses."
+```
+
+---
+
+# 19. API-Ready Function Definitions
+
+```yaml
+functions:
+  - name: "lookup_catalog"
+    description: "Cari jalur kompetensi, jabatan, skema, atau standar berdasarkan query pengguna."
+    input_schema:
+      type: object
+      properties:
+        query:
+          type: string
+        sector_id:
+          type: string
+          enum: ["migas", "ebt", "pertambangan"]
+        catalog_type:
+          type: string
+          enum: ["role", "standard", "scheme", "sub_sector", "all"]
+      required:
+        - query
+    output_schema:
+      type: object
+      properties:
+        matches:
+          type: array
+          items:
+            type: object
+            properties:
+              sector_id: { type: string }
+              sector_name: { type: string }
+              sub_sector_name: { type: string }
+              role_or_scope_name: { type: string }
+              standard_code: { type: string }
+              certification_scheme: { type: string }
+              official_reference_link: { type: string }
+
+  - name: "start_assessment"
+    description: "Mulai asesmen mandiri berdasarkan sektor atau area kompetensi."
+    input_schema:
+      type: object
+      properties:
+        sector_id:
+          type: string
+          enum: ["migas", "ebt", "pertambangan", "cross_sector"]
+        competency_area_id:
+          type: string
+      required:
+        - sector_id
+
+  - name: "generate_evidence_checklist"
+    description: "Buat checklist bukti kompetensi berdasarkan sektor, area, atau target role."
+    input_schema:
+      type: object
+      properties:
+        sector_id:
+          type: string
+        target_role_or_scope:
+          type: string
+        goal:
+          type: string
+          enum: ["sertifikasi", "SBU", "audit_internal", "pelatihan", "asesmen"]
+      required: []
+
+  - name: "render_learning_module"
+    description: "Tampilkan modul pembelajaran singkat."
+    input_schema:
+      type: object
+      properties:
+        module_id:
+          type: string
+      required:
+        - module_id
+```
+
+---
+
+# 20. Conversation State Machine
+
+```yaml
+state_machine:
+  initial_state: onboarding
+  states:
+    onboarding:
+      on:
+        user_selects_scope: sector_scope_menu
+        user_selects_path: select_sector_path
+        user_selects_assessment: assessment_sector_menu
+        user_selects_learning: learning_sector_menu
+        user_selects_evidence: evidence_checklist_menu
+    sector_scope_menu:
+      on:
+        sector_selected: sector_scope_detail
+        user_unsure: sector_discovery_questions
+    select_sector_path:
+      on:
+        sector_selected: sector_path_detail
+        user_unsure: sector_discovery_questions
+    catalog_lookup_menu:
+      on:
+        query_submitted: catalog_lookup_result
+        multiple_matches: catalog_disambiguation
+        no_match: fallback
+    learning_sector_menu:
+      on:
+        module_selected: learning_module
+        quiz_complete: learning_recommendation
+    assessment_sector_menu:
+      on:
+        assessment_selected: assessment_questions
+        assessment_complete: assessment_result
+    scenario_sector_menu:
+      on:
+        scenario_selected: scenario_prompt
+        user_submits_answer: scenario_feedback
+    evidence_checklist_menu:
+      on:
+        checklist_generated: evidence_checklist_result
+        user_requests_detail: evidence_detail
+    glossary_entry:
+      on:
+        term_found: glossary_response
+        term_not_found: fallback
+    fallback:
+      on:
+        user_selects_topic: corresponding_state
+        repeated_failure: main_menu
+```
+
+---
+
+# 21. Example Conversations
+
+## 21.1 Pemula — Memilih Sektor
+
+```text
+User:
+Saya ingin tahu kompetensi untuk energi terbarukan.
+
+Bot:
+Baik. Untuk Energi Baru dan Terbarukan, area awal yang bisa dipilih antara lain:
+1. PLTS
+2. Bioenergi
+3. Panas bumi
+4. Mikrohidro, angin, atau penyimpanan energi
+5. K3 dan commissioning sistem EBT
+
+Area mana yang paling sesuai dengan kebutuhan Anda?
+[ PLTS ] [ Bioenergi ] [ Panas bumi ] [ Mikrohidro/Angin/Storage ] [ Saya belum tahu ]
+```
+
+## 21.2 Asesmen — Pertambangan
+
+```text
+User:
+Mulai asesmen pertambangan.
+
+Bot:
+Baik. Asesmen ini membantu menilai kesiapan awal Anda pada sektor pertambangan.
+Hasilnya bukan keputusan resmi sertifikasi atau kelayakan SBU.
+
+Pilih skor 0–4:
+0 Belum memahami
+1 Paham konsep dasar
+2 Pernah menerapkan dengan arahan
+3 Mampu menerapkan mandiri
+4 Mampu mengevaluasi dan membimbing orang lain
+
+Pertanyaan 1 dari 6:
+Seberapa mampu Anda mengidentifikasi risiko keselamatan pada operasi tambang?
+[ 0 ] [ 1 ] [ 2 ] [ 3 ] [ 4 ]
+```
+
+## 21.3 Studi Kasus — Migas
+
+```text
+User:
+Latihan kasus migas.
+
+Bot:
+Skenario: Tim pemeliharaan akan melakukan pengelasan pada area fasilitas migas.
+Area dekat dengan jalur pipa proses. Gas test belum terdokumentasi dan permit to
+work belum lengkap.
+
+Tugas Anda:
+1. Identifikasi risiko utama.
+2. Tentukan tindakan segera.
+3. Sebutkan dokumen yang harus diperiksa.
+4. Usulkan tindakan pencegahan.
+
+Apa tindakan pertama yang harus dilakukan?
+```
+
+## 21.4 Checklist — EBT PLTS
+
+```text
+User:
+Checklist bukti untuk PLTS.
+
+Bot:
+Berikut checklist bukti awal untuk kompetensi PLTS:
+
+1. Bukti pengalaman:
+- Riwayat proyek PLTS
+- Surat tugas sebagai teknisi, supervisor, atau engineer
+
+2. Dokumen teknis:
+- Single line diagram
+- Checklist instalasi
+- Data commissioning
+- Manual operasi dan pemeliharaan
+
+3. Dokumen pengendalian:
+- Checklist keselamatan kelistrikan
+- Data monitoring performa
+- Laporan troubleshooting
+
+Apakah Anda ingin checklist ini dibuat lebih detail untuk teknisi, supervisor, atau penanggung jawab proyek?
+[ Teknisi ] [ Supervisor ] [ Penanggung jawab proyek ]
+```
+
+---
+
+# 22. Analytics Events
+
+```yaml
+analytics_events:
+  - event_name: session_started
+    properties: [user_type, channel]
+  - event_name: sector_selected
+    properties: [sector_id]
+  - event_name: catalog_lookup_submitted
+    properties: [query, sector_id, match_count]
+  - event_name: learning_module_started
+    properties: [module_id, sector_id]
+  - event_name: learning_quiz_answered
+    properties: [module_id, correct]
+  - event_name: assessment_started
+    properties: [assessment_id, sector_id]
+  - event_name: assessment_completed
+    properties: [assessment_id, average_score, readiness_level]
+  - event_name: scenario_started
+    properties: [scenario_id, sector_id]
+  - event_name: evidence_checklist_generated
+    properties: [sector_id, target_role_or_scope]
+  - event_name: fallback_triggered
+    properties: [user_input, fallback_count]
+```
+
+---
+
+# 23. Admin CMS Specification
+
+```yaml
+admin_cms:
+  roles:
+    super_admin:
+      permissions:
+        - manage_users
+        - publish_content
+        - edit_catalog
+        - approve_assessment
+        - view_analytics
+    sme_reviewer:
+      permissions:
+        - review_content
+        - approve_learning_modules
+        - approve_scenarios
+    content_editor:
+      permissions:
+        - draft_content
+        - edit_glossary
+        - edit_faq
+    viewer:
+      permissions:
+        - view_dashboard
+        - preview_bot
+  content_workflow:
+    draft: "Editor membuat atau mengubah konten."
+    review: "SME memeriksa akurasi teknis."
+    approved: "Konten siap dipublikasikan."
+    published: "Konten aktif pada chatbot."
+    archived: "Konten tidak aktif tetapi tetap tersimpan."
+  required_review_for:
+    - "katalog standar/skema resmi"
+    - "pertanyaan asesmen"
+    - "studi kasus keselamatan"
+    - "jawaban terkait regulasi"
+```
+
+---
+
+# 24. Implementation-Ready JSON Skeleton
+
+```json
+{
+  "bot_id": "sbu_kompetensi_energy_mining_bot",
+  "version": "1.0.0",
+  "language": "id-ID",
+  "name": "SBU Kompetensi — Migas, EBT, dan Pertambangan",
+  "description": "Chatbot pembelajaran, pemetaan kompetensi, asesmen mandiri, dan checklist bukti untuk sektor migas, energi baru dan terbarukan, dan pertambangan.",
+  "modules": [
+    "onboarding",
+    "sector_catalog",
+    "catalog_lookup",
+    "learning_modules",
+    "self_assessment",
+    "scenario_practice",
+    "evidence_checklist",
+    "glossary",
+    "fallback",
+    "admin_cms",
+    "analytics"
+  ],
+  "global_rules": {
+    "do_not_claim_official_certification": true,
+    "do_not_claim_official_sbu_eligibility": true,
+    "self_assessment_is_learning_guidance_only": true,
+    "language_style": "professional_supportive_indonesian",
+    "ask_one_question_at_a_time": true,
+    "official_catalog_required_for_regulatory_answers": true
+  },
+  "primary_menu": [
+    { "label": "Lihat Ruang Lingkup", "target_flow": "sector_scope_menu" },
+    { "label": "Cari Jalur Kompetensi", "target_flow": "select_sector_path" },
+    { "label": "Cari Katalog", "target_flow": "catalog_lookup_menu" },
+    { "label": "Belajar Kompetensi", "target_flow": "learning_sector_menu" },
+    { "label": "Asesmen Mandiri", "target_flow": "assessment_sector_menu" },
+    { "label": "Studi Kasus", "target_flow": "scenario_sector_menu" },
+    { "label": "Checklist Bukti", "target_flow": "evidence_checklist_menu" }
+  ]
+}
+```
+
+---
+
+# 25. Final Builder Prompt
+
+Gunakan prompt berikut di AI app builder atau chatbot builder:
+
+```text
+Build a professional Indonesian-language chatbot named “SBU Kompetensi — Migas, EBT, dan Pertambangan”.
+
+The chatbot helps users understand, learn, self-assess, and prepare competency evidence for three sectors:
+1. Minyak dan Gas Bumi
+2. Energi Baru dan Terbarukan
+3. Pertambangan
+
+The chatbot must use a node-based builder architecture with:
+- greeting flow
+- main menu
+- sector selection
+- competency path discovery
+- catalog lookup
+- intents and sample utterances
+- response templates
+- quick replies
+- conversation branches
+- scoring logic
+- fallback handling
+- scenario-based practice
+- evidence checklist generator
+- glossary and FAQ
+- admin CMS content structure
+- analytics events
+
+The tone must be professional, clear, supportive, and suitable for business owners, technical workers, supervisors, engineers, assessors, trainers, and HR/admin teams.
+
+The chatbot must not:
+- issue official SBU or competency certificates
+- claim users pass/fail official certification
+- invent standard numbers, scheme numbers, or regulations
+- bypass safety, inspection, commissioning, permit-to-work, or legal procedures
+
+For each competency module, include:
+- short explanation
+- key learning points
+- practical field example
+- one check-understanding question
+- feedback for correct and incorrect answers
+- suggested next steps
+
+For each scenario, include:
+- situation
+- user task
+- guided prompts
+- ideal answer points
+- feedback template
+
+Return the chatbot configuration as YAML-like and JSON-like structured text ready for implementation.
+```
+
+---
+
+# 26. Launch Checklist
+
+```yaml
+launch_checklist:
+  content_ready:
+    - "Sektor Migas, EBT, dan Pertambangan sudah tersedia."
+    - "Subsektor dan area kompetensi sudah dipetakan."
+    - "Katalog jabatan/skema/standar resmi sudah dimasukkan oleh admin jika tersedia."
+    - "Learning path per sektor sudah tersedia."
+    - "Asesmen mandiri per sektor sudah tersedia."
+    - "Studi kasus dasar sudah tersedia."
+    - "Checklist bukti kompetensi sudah tersedia."
+    - "Glossary dan FAQ sudah tersedia."
+  technical_ready:
+    - "Intent schema sudah dibuat."
+    - "Entity schema sudah dibuat."
+    - "Fallback flow sudah dibuat."
+    - "State machine sudah dibuat."
+    - "Analytics events sudah didefinisikan."
+    - "Admin CMS structure sudah didefinisikan."
+  review_required:
+    - "Validasi katalog terhadap sumber resmi."
+    - "Review SME Migas."
+    - "Review SME EBT."
+    - "Review SME Pertambangan."
+    - "Uji fallback untuk input ambigu."
+    - "Uji disclaimer agar bot tidak menyatakan kelulusan atau kelayakan resmi."
+    - "Uji safety guardrails untuk kasus berisiko tinggi."
+```

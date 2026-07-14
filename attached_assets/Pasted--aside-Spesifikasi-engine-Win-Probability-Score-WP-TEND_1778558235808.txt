@@ -1,0 +1,240 @@
+<aside>
+📐
+
+Spesifikasi engine **Win Probability Score (WP)** TENDERA — rumus terukur 7 dimensi, kalibrasi sub-skor, perhitungan Confidence, dan mekanisme Action Levers "what-if". Dipakai oleh **AGENT-WINPROB** dan dapat diimplementasikan sebagai REST endpoint terpisah (Mini-App L4).
+
+</aside>
+
+## 1. Formula Inti
+
+$$
+WP = \sum_{i=1}^{7} w_i \cdot s_i \quad,\quad s_i \in [0,100],\quad \sum w_i = 1
+$$
+
+$$
+Confidence = \frac{\sum_{i=1}^{7} w_i \cdot c_i}{\sum w_i} \quad,\quad c_i \in [0,100]
+$$
+
+- $w_i$ = bobot dimensi ke-$i$ (tetap, lihat §2)
+- $s_i$ = sub-skor 0–100 (kalibrasi per dimensi, lihat §3)
+- $c_i$ = confidence sub-skor (kualitas data input, lihat §4)
+
+## 2. Bobot Default 7 Dimensi
+
+| Kode | Dimensi | Bobot Default | Bobot Min | Bobot Max | Sumber Sinyal |
+| --- | --- | --- | --- | --- | --- |
+| D1 | Eligibility Fit | 0.20 | 0.15 | 0.30 | AGENT-ELIGIBILITY |
+| D2 | Technical Fit | 0.20 | 0.10 | 0.30 | AGENT-TEKNIS + RKS bobot teknis |
+| D3 | Price Competitiveness | 0.20 | 0.15 | 0.40 | AGENT-HPS + KB-MARKET historis |
+| D4 | Track Record | 0.15 | 0.05 | 0.25 | Profil BUJK + KB-MARKET |
+| D5 | Risk Exposure | 0.10 | 0.05 | 0.20 | AGENT-RISKSCAN + AGENT-KONTRAK |
+| D6 | Admin Completeness | 0.10 | 0.05 | 0.15 | AGENT-ADMIN |
+| D7 | Integrity & Compliance | 0.05 | 0.05 | 0.10 | AGENT-INTEGRITY (gating) |
+
+<aside>
+⚙️
+
+**Bobot adaptif**: orchestrator boleh menggeser bobot dalam rentang Min–Max berdasarkan **metode evaluasi paket**: sistem nilai → tambah D2; harga terendah → tambah D3; tender terbatas → tambah D4; pekerjaan kompleks → tambah D5.
+
+</aside>
+
+## 3. Kalibrasi Sub-Skor (0–100)
+
+### D1 — Eligibility Fit
+
+$$
+s_1 = 100 \cdot \frac{\text{checklist lulus}}{\text{checklist total}} \quad,\quad \text{checklist} = 8 \text{ item (lihat AGENT-ELIGIBILITY)}
+$$
+
+Gate: jika **SBU mandatory tidak match** → $s_1 = 0$, WP capped at 30.
+
+### D2 — Technical Fit
+
+$$
+s_2 = 100 \cdot \sum_{j} b_j \cdot q_j
+$$
+
+- $b_j$ = bobot teknis dari RKS (Σ = 1), contoh: metode 0.30, schedule 0.20, personel 0.20, peralatan 0.15, RKK 0.10, lainnya 0.05
+- $q_j$ = kualitas penyusunan AGENT-TEKNIS skala 0–1 (heuristik: kelengkapan + kesesuaian)
+
+### D3 — Price Competitiveness
+
+Dihitung relatif ke **estimasi harga pemenang** $\hat{P}$ dari KB-MARKET (median pemenang historis paket sejenis, biasanya **88–92% HPS**).
+
+$$
+s_3 = \begin{cases}
+100 - 5 \cdot \frac{|P_{bid} - \hat{P}|}{0.01 \cdot HPS} & \text{jika } P_{bid} \geq 0.80 \cdot HPS \\
+40 & \text{jika } P_{bid} < 0.80 \cdot HPS \text{ (risk klarifikasi harga timpang)}
+\end{cases}
+$$
+
+Gate: jika $P_{bid} > HPS$ → $s_3 = 0$ (gugur otomatis).
+
+### D4 — Track Record
+
+$$
+s_4 = 40 \cdot N_{\text{sejenis 5y}} + 30 \cdot R_{\text{size}} + 30 \cdot R_{\text{perf}}
+$$
+
+- $N_{\text{sejenis 5y}}$ = min(1, jumlah_proyek_sejenis_5_tahun / 3)
+- $R_{\text{size}}$ = min(1, max_nilai_kontrak_5y / nilai_paket_target)
+- $R_{\text{perf}}$ = rata-rata skor performance (PPK rating, no Black Mark) skala 0–1
+
+### D5 — Risk Exposure (inverse)
+
+$$
+s_5 = 100 - \left(8 \cdot N_{\text{merah}} + 3 \cdot N_{\text{kuning}}\right)
+$$
+
+Dibatasi $s_5 in [0,100]$. $N_{\text{merah}}, N_{\text{kuning}}$ dari AGENT-RISKSCAN + AGENT-KONTRAK.
+
+### D6 — Admin Completeness
+
+$$
+s_6 = 100 \cdot \frac{\text{dokumen valid \& ter-tandatangan}}{12 \text{ (dokumen standar)}}
+$$
+
+Gate: jika **Pakta Integritas atau Surat Penawaran missing** → $s_6 leq 50$.
+
+### D7 — Integrity & Compliance
+
+$$
+s_7 = \begin{cases}
+100 & \text{tidak ada flag merah dari AGENT-INTEGRITY} \\
+50 & \text{flag kuning (perlu mitigasi)} \\
+0 & \text{flag merah (potensi pidana/blacklist) — WP override = 0}
+\end{cases}
+$$
+
+Gate paling keras: $s_7 = 0$ → **seluruh WP = 0**, hard-stop oleh orchestrator.
+
+## 4. Confidence per Sub-Skor
+
+$c_i$ dihitung dari **kelengkapan data input** yang diperlukan agen sumber:
+
+$$
+c_i = 100 \cdot \frac{\text{field terisi (bobot)}}{\text{field total (bobot)}}
+$$
+
+Contoh untuk D3 (Price):
+
+| Field | Bobot |
+| --- | --- |
+| HPS owner | 0.30 |
+| BoQ detail (≥80% item) | 0.30 |
+| AHSP regional ter-update | 0.20 |
+| Data pemenang historis 12 bln | 0.15 |
+| Intel kompetitor | 0.05 |
+
+Jika hanya HPS + BoQ ringkas diketahui → $c_3 approx 45$.
+
+**Reporting rule:**
+
+- Confidence ≥ 80 → WP dilaporkan as-is.
+- 60 ≤ Conf < 80 → WP dilaporkan dengan **interval ±5**.
+- Conf < 60 → WP dilaporkan dengan **interval ±10** dan **rekomendasi data tambahan** (ABD-5, **setelah** angka).
+
+## 5. Action Levers — Mekanisme "What-If"
+
+Untuk tiap lever kandidat, agent menghitung **ΔWP** dengan re-running formula dengan sub-skor yang diperbarui.
+
+```tsx
+function simulateLever(currentState, lever) {
+  const newState = applyLever(currentState, lever) // patch sub-skor terkait
+  const newWP = computeWP(newState.subscores, weights)
+  return {
+    lever: lever.name,
+    deltaWP: newWP - currentState.WP,
+    effortDays: lever.effortDays,
+    cost: lever.cost,
+    feasible: lever.effortDays <= currentState.deadlineDays,
+  }
+}
+
+const topLevers = candidateLevers
+  .map(l => simulateLever(state, l))
+  .filter(r => r.feasible)
+  .sort((a, b) => b.deltaWP / Math.max(1, a.effortDays) - a.deltaWP / Math.max(1, b.effortDays))
+  .slice(0, 3)
+```
+
+### Daftar Lever Kanonik
+
+| Kode | Lever | Sub-skor terdampak | ΔWP tipikal | Effort |
+| --- | --- | --- | --- | --- |
+| L01 | Rekrut/MoU SKK Ahli yang kurang | D1, D2 | +4 – +8 | 3–14 hari |
+| L02 | KSO/JV dengan BUJK senior | D1, D4 | +6 – +12 | 7–21 hari |
+| L03 | Adjust bid price ke sweet-spot 88–92% HPS | D3 | +5 – +10 | ≤1 hari |
+| L04 | Sanggah/negosiasi turunkan retensi/denda | D5 | +3 – +6 | 3–7 hari |
+| L05 | Tambah 2 referensi pengalaman sejenis | D4 | +3 – +5 | 1–3 hari |
+| L06 | Upgrade metode pelaksanaan (BIM, prefabrikasi) | D2 | +4 – +7 | 3–10 hari |
+| L07 | Lengkapi 12 dokumen admin (close gap) | D6 | +2 – +5 | 1–3 hari |
+| L08 | Mitigasi flag integrity | D7 | +5 – +50 | 1–7 hari |
+| L09 | Tambah dukungan bank/KMK | D1, D6 | +2 – +4 | 3–7 hari |
+| L10 | Refine BoQ (item dominan) | D3, D2 | +3 – +7 | 1–3 hari |
+
+## 6. Kategori Output & Recommendation
+
+```
+🟢 WP ≥ 80   STRONG BID    → submit, monitor sanggahan kompetitor
+🟡 60 ≤ WP < 80   CONDITIONAL    → eksekusi Top-3 levers dulu, re-score, submit
+🟠 40 ≤ WP < 60   LONG-SHOT      → pertimbangkan KSO (L02) atau abstain
+🔴 WP < 40   NO-BID         → alokasikan resource ke paket lain (panggil SCOUT)
+```
+
+## 7. Contoh Perhitungan Lengkap
+
+**Input:** BUJK M1 BG009, paket Rp 18 M Bekasi, durasi 270 hari.
+
+| Dim | Bobot | Sub-skor | Confidence | Kontribusi WP |
+| --- | --- | --- | --- | --- |
+| D1 | 0.20 | 82 | 85 | 16.4 |
+| D2 | 0.20 | 70 | 65 | 14.0 |
+| D3 | 0.20 | 60 | 70 | 12.0 |
+| D4 | 0.15 | 65 | 80 | 9.75 |
+| D5 | 0.10 | 55 | 75 | 5.5 |
+| D6 | 0.10 | 80 | 90 | 8.0 |
+| D7 | 0.05 | 100 | 95 | 5.0 |
+| **TOTAL** | **1.00** | — | **Conf 78** | **WP 70.65 ≈ 71** |
+
+**Kategori:** 🟡 CONDITIONAL · Conf 78 → laporkan WP 71 ±5.
+
+**Top-3 Levers (after what-if):**
+
+1. **L03** Adjust bid ke Rp 16,2 M → ΔWP +8 (1 hari) → WP 79
+2. **L01** Rekrut SKK Ahli Madya MK → ΔWP +6 (10 hari) → WP 77
+3. **L04** Sanggah retensi 10% → 5% → ΔWP +5 (5 hari) → WP 76
+
+**Kombinasi L03+L01+L04 (paralel):** WP proyeksi **≈ 84 (STRONG BID)** dengan total effort 10 hari.
+
+## 8. JSON Schema Output (untuk API/Mini-App)
+
+```json
+{
+  "version": "1.0",
+  "paket": { "nama": "...", "hps": 18000000000, "durasi": 270 },
+  "bujk": { "nama": "PT ...", "kualifikasi": "M1", "sbu": ["BG009"] },
+  "weights": { "d1":0.20, "d2":0.20, "d3":0.20, "d4":0.15, "d5":0.10, "d6":0.10, "d7":0.05 },
+  "subscores": { "d1":82, "d2":70, "d3":60, "d4":65, "d5":55, "d6":80, "d7":100 },
+  "confidence_per_dim": { "d1":85, "d2":65, "d3":70, "d4":80, "d5":75, "d6":90, "d7":95 },
+  "WP": 71,
+  "Confidence": 78,
+  "category": "CONDITIONAL",
+  "interval": [66, 76],
+  "assumptions": [ "..." ],
+  "action_levers": [
+    { "code":"L03", "name":"Adjust bid ke 90% HPS", "deltaWP":8, "effortDays":1 },
+    { "code":"L01", "name":"Rekrut SKK Ahli Madya MK", "deltaWP":6, "effortDays":10 },
+    { "code":"L04", "name":"Sanggah retensi 10%→5%", "deltaWP":5, "effortDays":5 }
+  ],
+  "projected_WP_after_levers": 84,
+  "sources": ["AGENT-ELIGIBILITY","AGENT-RISKSCAN","AGENT-HPS","AGENT-TEKNIS","AGENT-ADMIN","AGENT-INTEGRITY"]
+}
+```
+
+## 9. Kalibrasi & Backtesting (Roadmap)
+
+- Kumpulkan 100+ paket selesai dari KB-MARKET dengan outcome (menang/kalah).
+- Cocokkan WP yang diprediksi vs realisasi → hitung **Brier Score** & **AUC**.
+- Adjust bobot $w_i$ dengan logistic regression / gradient boosting.
+- Update tiap kuartal — versioning di header output (`version: 1.x`).

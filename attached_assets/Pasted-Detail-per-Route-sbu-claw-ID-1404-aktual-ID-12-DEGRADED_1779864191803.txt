@@ -1,0 +1,618 @@
+Detail per Route
+/sbu-claw
+ID 1404
+→ aktual ID 12
+DEGRADED
+via name
+buka
+Nama di DB: SBU Hub(Navigator Klasifikasi & Kepatuhan SBU)
+
+ℹ️ Resolved via name (ID asli 12, beda dari expected 1404 — replit.md perlu update)
+
+/smap-claw
+ID 272
+OK
+via id
+buka
+Nama di DB: SMAP-ORCHESTRATOR — Hub Multi-Agent Anti Penyuapan(Routing intent SMAP — 1 Hub + 8 Spesialis OpenClaw)
+
+/pancek-claw
+ID 281
+OK
+via id
+buka
+Nama di DB: PANCEK-ORCHESTRATOR — Hub Multi-Agent SMAP Nasional & PanCEK(Routing intent PanCEK — 1 Hub + 5 Spesialis untuk Corporate Integrity)
+
+/iso-claw-9001
+ID 140
+OK
+via id
+buka
+Nama di DB: HUB ISO 9001 Jasa Konstruksi(Navigator ISO 9001 Jasa Konstruksi)
+
+/iso-claw-14001
+ID 131
+OK
+via id
+buka
+Nama di DB: HUB ISO 14001 Jasa Konstruksi(Navigator ISO 14001 Jasa Konstruksi)
+
+/smk3-claw
+ID 307
+OK
+via id
+buka
+Nama di DB: HUB IMS & SMK3 Terintegrasi(Sistem Manajemen BUJK — IMS · SMK3 · CSMS · Pancek · KCI)
+
+/lkut-claw
+ID 302
+OK
+via id
+buka
+Nama di DB: LKUT Hub(Kompetensi Laporan Keuangan BUJK)
+
+/pjbu-claw
+ID 1008
+→ aktual ID 95
+DEGRADED
+via name
+buka
+Nama di DB: HUB SIP-PJBU(Indeks Kematangan Manajemen Usaha Konstruksi)
+
+ℹ️ Resolved via name (ID asli 95, beda dari expected 1008 — replit.md perlu update)
+
+/keuangan-claw
+ID 298
+→ aktual ID 623
+DEGRADED
+via name
+buka
+Nama di DB: Spesialis Analisis Keuangan & Rasio BUJK(Analisis Rasio Keuangan & KD BUJK)
+
+ℹ️ Resolved via name (ID asli 623, beda dari expected 298 — replit.md perlu update)
+
+/csms-claw
+ID 69
+OK
+via id
+buka
+Nama di DB: CSMS-ASSISTANT-ORCHESTRATOR (CSIA) — Hub Multi-Agent CSMS Indonesia(Routing 13 intent CSMS — 1 Orkestrator + 13 Spesialis OPTIA)
+
+/safira-claw
+ID 501
+OK
+via id
+buka
+Nama di DB: HUB SKK Coach K3 Konstruksi
+
+/tendera-claw
+ID 663
+OK
+via id
+buka
+Nama di DB: TENDERA-ORCHESTRATOR(AI Tender Multi-Agent BUJK — OpenClaw + MultiClaw)
+
+/konstra-tender-claw
+ID 652
+OK
+via id
+buka
+Nama di DB: KONSTRA-TENDER-ORCHESTRATOR(AI Multi-Agent Monitoring & Strategi Tender Konstruksi)
+
+/bg-claw
+ID 1033
+→ aktual ID 453
+DEGRADED
+via name
+buka
+Nama di DB: Katalog Jabatan Teknik Mekanikal Bangunan Gedung
+
+ℹ️ Resolved via name (ID asli 453, beda dari expected 1033 — replit.md perlu update)
+
+/bs-claw
+ID 1043
+MISMATCH
+buka
+Nama di DB: MPBG-QUIZ-CASE — Latihan Soal & Studi Kasus SKKNI 115-2015(Latihan & kasus berbasis SKKNI 115-2015)
+
+⚠️ ID 1043 ditempati "MPBG-QUIZ-CASE — Latihan Soal & Studi Kasus SKKNI 115-2015" — orchestrator yang benar tidak ada di slug/keyword manapun
+
+Keyword diharapkan: BSClaw / Bangunan Sipil
+
+/im-claw
+ID 1054
+→ aktual ID 471
+DEGRADED
+via name
+buka
+Nama di DB: Katalog Jabatan Instalasi Listrik Bangunan + Rekomendasi
+
+ℹ️ Resolved via name (ID asli 471, beda dari expected 1054 — replit.md perlu update)
+
+/ko-claw
+ID 1064
+→ aktual ID 300
+DEGRADED
+via name
+buka
+Nama di DB: Spesialis Legalitas Dasar BUJK(Audit & Pengelolaan Legalitas Dasar BUJK)
+
+ℹ️ Resolved via name (ID asli 300, beda dari expected 1064 — replit.md perlu update)
+
+/kk-claw
+ID 1073
+MISMATCH
+buka
+Nama di DB: K3K-DOC-REG — Generator Dokumen + Regulasi & Standar K3K(Draft dokumen + hierarki regulasi K3K)
+
+⚠️ ID 1073 ditempati "K3K-DOC-REG — Generator Dokumen + Regulasi & Standar K3K" — orchestrator yang benar tidak ada di slug/keyword manapun
+
+Keyword diharapkan: KKClaw / Konsultansi
+
+/migas-claw
+ID 564
+OK
+via id
+buka
+Nama di DB: HUB SBU Kompetensi Migas EBT Tambang v1
+
+/dev-properti-claw
+ID 575
+OK
+via id
+buka
+Nama di DB: HUB DevProperti Pro v1
+
+/estate-care-claw
+ID 586
+OK
+via id
+buka
+Nama di DB: HUB EstateCare Pro v1
+
+/skema-claw
+ID 1448
+→ aktual ID 38
+DEGRADED
+via name
+buka
+Nama di DB: Skema Mapping Tool(Mapping Skema Kompetensi Konstruksi)
+
+ℹ️ Resolved via name (ID asli 38, beda dari expected 1448 — replit.md perlu update)
+
+/panduan-sbu
+ID 1458
+→ aktual ID 12
+DEGRADED
+via name
+buka
+Nama di DB: SBU Hub(Navigator Klasifikasi & Kepatuhan SBU)
+
+ℹ️ Resolved via name (ID asli 12, beda dari expected 1458 — replit.md perlu update)
+
+/abu-claw
+ID 1459
+OK
+via id
+buka
+Nama di DB: Hub Konsultan ABU & LSBU(Panduan teknis ABU, audit SBU, manajemen LSBU — 8 agen spesialis, berbasis Permen PU 6/2025 & LPJK)
+
+/panduan-askom
+ID 1460
+OK
+via id
+buka
+Nama di DB: PanduanASKOM(Tanya apa saja tentang ASKOM, SKK, dan uji kompetensi — jawaban langsung, bahasa sederhana)
+
+/manprojak-claw
+ID 1383
+→ aktual ID 155
+DEGRADED
+via name
+buka
+Nama di DB: Hub Manajemen Pelaksanaan(Persiapan Uji Kompetensi Klasifikasi Bidang Manajemen Pelaksanaan)
+
+ℹ️ Resolved via name (ID asli 155, beda dari expected 1383 — replit.md perlu update)
+
+/arsitektur-claw
+ID 1391
+→ aktual ID 151
+DEGRADED
+via name
+buka
+Nama di DB: Hub Arsitektur(Persiapan Uji Kompetensi Klasifikasi Bidang Arsitektur)
+
+ℹ️ Resolved via name (ID asli 151, beda dari expected 1391 — replit.md perlu update)
+
+/surveipemetaan-claw
+ID 1399
+→ aktual ID 520
+DEGRADED
+via name
+buka
+Nama di DB: Katalog & Asesmen Geodesi & Survei Konstruksi
+
+ℹ️ Resolved via name (ID asli 520, beda dari expected 1399 — replit.md perlu update)
+
+/geoteknik-claw
+ID 1879
+→ aktual ID 466
+DEGRADED
+via name
+buka
+Nama di DB: Katalog Jabatan Air Minum, Lingkungan & Geoteknik/Geodesi
+
+ℹ️ Resolved via name (ID asli 466, beda dari expected 1879 — replit.md perlu update)
+
+/jalanjembatan-claw
+ID 1887
+→ aktual ID 462
+DEGRADED
+via name
+buka
+Nama di DB: Katalog Jabatan Jalan, Jembatan & Transportasi + Rekomendasi
+
+ℹ️ Resolved via name (ID asli 462, beda dari expected 1887 — replit.md perlu update)
+
+/tatalingkungan-claw
+ID 1895
+→ aktual ID 158
+DEGRADED
+via name
+buka
+Nama di DB: Hub Tata Lingkungan(Persiapan Uji Kompetensi Klasifikasi Bidang Tata Lingkungan)
+
+ℹ️ Resolved via name (ID asli 158, beda dari expected 1895 — replit.md perlu update)
+
+/elektrikal-claw
+ID 1903
+→ aktual ID 470
+DEGRADED
+via name
+buka
+Nama di DB: HUB SKK Coach Elektrikal
+
+ℹ️ Resolved via name (ID asli 470, beda dari expected 1903 — replit.md perlu update)
+
+/mep-claw
+ID 1831
+→ aktual ID 699
+DEGRADED
+via name
+buka
+Nama di DB: MEP-HVAC(Spesialis Tata Udara & HVAC — AC · Chiller · AHU · VRF · Ducting)
+
+ℹ️ Resolved via name (ID asli 699, beda dari expected 1831 — replit.md perlu update)
+
+/sipil-claw
+ID 1823
+→ aktual ID 698
+DEGRADED
+via name
+buka
+Nama di DB: SipilClaw — AI Konsultan Teknik Sipil(7 Spesialis: STRUCT · GEOTEK · JALAN · JEMBATAN · SDA · MATERIAL · METODE)
+
+ℹ️ Resolved via name (ID asli 698, beda dari expected 1823 — replit.md perlu update)
+
+/lingkungan-claw
+ID 1847
+→ aktual ID 134
+DEGRADED
+via name
+buka
+Nama di DB: Aspek & Dampak Lingkungan Analyzer(Analisis Aspek & Dampak Lingkungan Konstruksi)
+
+ℹ️ Resolved via name (ID asli 134, beda dari expected 1847 — replit.md perlu update)
+
+/qs-claw
+ID 1911
+→ aktual ID 446
+DEGRADED
+via name
+buka
+Nama di DB: Katalog Jabatan & Panduan Kompetensi Estimasi Biaya/QS
+
+ℹ️ Resolved via name (ID asli 446, beda dari expected 1911 — replit.md perlu update)
+
+/pengawas-claw
+ID 1919
+→ aktual ID 787
+DEGRADED
+via name
+buka
+Nama di DB: PW-LAPANGAN — Spesialis Pengawas Lapangan Konstruksi(Pengawas lapangan & koordinasi harian)
+
+ℹ️ Resolved via name (ID asli 787, beda dari expected 1919 — replit.md perlu update)
+
+/kontrak-claw
+ID 1927
+→ aktual ID 255
+DEGRADED
+via name
+buka
+Nama di DB: Proposal, Kontrak & Komersial Konsultan LSP(Proposal 12-bagian + kontrak 18-klausul + milestone billing)
+
+ℹ️ Resolved via name (ID asli 255, beda dari expected 1927 — replit.md perlu update)
+
+/k3man-claw
+ID 1935
+→ aktual ID 316
+DEGRADED
+via name
+buka
+Nama di DB: Spesialis Statistik K3 Migas(TRIR · LTIFR · SR — Statistik K3 untuk CSMS Pre-Qual)
+
+ℹ️ Resolved via name (ID asli 316, beda dari expected 1935 — replit.md perlu update)
+
+/konstra-claw
+ID 1281
+→ aktual ID 652
+DEGRADED
+via name
+buka
+Nama di DB: KONSTRA-TENDER-ORCHESTRATOR(AI Multi-Agent Monitoring & Strategi Tender Konstruksi)
+
+ℹ️ Resolved via name (ID asli 652, beda dari expected 1281 — replit.md perlu update)
+
+/brain-claw
+ID 806
+→ aktual ID 664
+DEGRADED
+via name
+buka
+Nama di DB: BRAIN-PROXIMA(Manajer Proyek Lapangan — LHP · Look-Ahead · Koordinasi Sub-Kon)
+
+ℹ️ Resolved via name (ID asli 664, beda dari expected 806 — replit.md perlu update)
+
+/educounsel-claw
+ID 899
+→ aktual ID 682
+DEGRADED
+via slug
+buka
+Nama di DB: EDUCOUNSEL-ORCHESTRATOR(AI Konseling Akademik SMA — 11 Spesialis: Safety · Profil · Akademik · Diagnostik · Intervensi · Habit · Pathway DN/LN · Ortu · Dok · Eskul)
+
+ℹ️ Resolved via slug (ID asli 682, beda dari expected 899 — replit.md perlu update)
+
+/ibtu-claw
+ID 1953
+→ aktual ID 818
+DEGRADED
+via slug
+buka
+Nama di DB: IBTUClaw — IB Testing Unit AI(7 Spesialis: REGISTRAR · SENTINEL · IAA · PENGAWAS · EXAM · COMMS · AUDIT)
+
+ℹ️ Resolved via slug (ID asli 818, beda dari expected 1953 — replit.md perlu update)
+
+/etlo-academy-claw
+ID 964
+→ aktual ID 829
+DEGRADED
+via slug
+buka
+Nama di DB: ETLOAcademyClaw — AI Program ETLO: Kurikulum, Audit Energi & Sertifikasi EBT(10 spesialis ETLO paralel — kurikulum · audit · PLTS · sertifikasi · pilot · mentoring · NZE)
+
+ℹ️ Resolved via slug (ID asli 829, beda dari expected 964 — replit.md perlu update)
+
+/etlo-bizdev-claw
+ID 975
+→ aktual ID 840
+DEGRADED
+via slug
+buka
+Nama di DB: ETLOBizDevClaw — AI Strategi Bisnis & Pengembangan Program ETLO(10 spesialis BizDev paralel — B2G · ESG · grant · paket · ROI · kolaborasi · dana hijau · scale-up)
+
+ℹ️ Resolved via slug (ID asli 840, beda dari expected 975 — replit.md perlu update)
+
+/bim-claw
+ID 1031
+→ aktual ID 849
+DEGRADED
+via slug
+buka
+Nama di DB: BIMClaw — AI Konsultan BIM & Konstruksi Digital Indonesia(8 Spesialis: Standard · Modeling · Clash · 4D · 5D · MEP · Infra · Kolaborasi)
+
+ℹ️ Resolved via slug (ID asli 849, beda dari expected 1031 — replit.md perlu update)
+
+/desain-claw
+ID 1040
+→ aktual ID 858
+DEGRADED
+via slug
+buka
+Nama di DB: DesainClaw — AI Konsultan Desain Arsitektur & Rekayasa Indonesia(8 Spesialis: Arsitektur · Struktur · MEP · Interior · Lansekap · Urban · Regulasi · Dokumen)
+
+ℹ️ Resolved via slug (ID asli 858, beda dari expected 1040 — replit.md perlu update)
+
+/siteops-claw
+ID 1049
+→ aktual ID 867
+DEGRADED
+via slug
+buka
+Nama di DB: SiteOpsClaw — AI Konsultan Operasional Lapangan Konstruksi(8 Spesialis: Mobilisasi · Schedule · Produksi · Logistik · Safety · Mutu · Klaim · Closeout)
+
+ℹ️ Resolved via slug (ID asli 867, beda dari expected 1049 — replit.md perlu update)
+
+/ketenagalistrikan-claw
+ID 994
+→ aktual ID 876
+DEGRADED
+via slug
+buka
+Nama di DB: KetenagalistrikanClaw — AI Konsultan Sistem Ketenagalistrikan Indonesia(8 Spesialis: IUPTL · Instalasi · Distribusi · Transmisi · PLTS · K3 · Tarif · Regulasi)
+
+ℹ️ Resolved via slug (ID asli 876, beda dari expected 994 — replit.md perlu update)
+
+/energi-claw
+ID 1003
+→ aktual ID 885
+DEGRADED
+via slug
+buka
+Nama di DB: EnergiClaw — AI Konsultan Energi & EBT Indonesia(8 Spesialis: Kebijakan · PLTS · PLTB · PLTM · Bioenergi · Konservasi · Audit · Perizinan)
+
+ℹ️ Resolved via slug (ID asli 885, beda dari expected 1003 — replit.md perlu update)
+
+/pertambangan-claw
+ID 1012
+→ aktual ID 894
+DEGRADED
+via slug
+buka
+Nama di DB: PertambanganClaw — AI Konsultan Pertambangan Indonesia(8 Spesialis: IUP · Eksplorasi · Tambang · Pengolahan · K3 · Lingkungan · CSR · Regulasi)
+
+ℹ️ Resolved via slug (ID asli 894, beda dari expected 1012 — replit.md perlu update)
+
+/digital-marketing-claw
+ID 1159
+→ aktual ID 974
+DEGRADED
+via slug
+buka
+Nama di DB: DigitalMarketingClaw — AI Konsultan Pemasaran Digital Indonesia(8 Spesialis: SEO · SEM · Social Media · Content · Email · Analytics · Influencer · Growth)
+
+ℹ️ Resolved via slug (ID asli 974, beda dari expected 1159 — replit.md perlu update)
+
+/crm-sales-claw
+ID 1168
+→ aktual ID 983
+DEGRADED
+via slug
+buka
+Nama di DB: CRMSalesClaw — AI Konsultan CRM & Strategi Penjualan Indonesia(8 Spesialis: Pipeline · Prospecting · Closing · Retensi · Tools · Reporting · Omnichannel · Strategi)
+
+ℹ️ Resolved via slug (ID asli 983, beda dari expected 1168 — replit.md perlu update)
+
+/brand-content-claw
+ID 1177
+→ aktual ID 992
+DEGRADED
+via slug
+buka
+Nama di DB: BrandContentClaw — AI Konsultan Brand & Konten Indonesia(8 Spesialis: Brand Strategy · Copywriting · Visual · Storytelling · Video · PR · UGC · Brand Audit)
+
+ℹ️ Resolved via slug (ID asli 992, beda dari expected 1177 — replit.md perlu update)
+
+/ecommerce-claw
+ID 1186
+→ aktual ID 1001
+DEGRADED
+via slug
+buka
+Nama di DB: EcommerceClaw — AI Konsultan E-Commerce Indonesia(8 Spesialis: Marketplace · Listing · Ads · Operasional · Logistik · Keuangan · Customer Service · Ekspansi)
+
+ℹ️ Resolved via slug (ID asli 1001, beda dari expected 1186 — replit.md perlu update)
+
+/rekrutmen-claw
+ID 1195
+→ aktual ID 1010
+DEGRADED
+via slug
+buka
+Nama di DB: RekrutmenClaw — AI Konsultan Rekrutmen & Talent Acquisition Indonesia(8 Spesialis: Strategi · Sourcing · Seleksi · Interview · Onboarding · EVP · Kontrak · ATS)
+
+ℹ️ Resolved via slug (ID asli 1010, beda dari expected 1195 — replit.md perlu update)
+
+/ld-kompetensi-claw
+ID 1204
+→ aktual ID 1019
+DEGRADED
+via slug
+buka
+Nama di DB: LDKompetensiClaw — AI Konsultan Learning & Development Indonesia(8 Spesialis: TNA · Kurikulum · Fasilitasi · E-Learning · Evaluasi · Kompetensi · Coaching · Sertifikasi)
+
+ℹ️ Resolved via slug (ID asli 1019, beda dari expected 1204 — replit.md perlu update)
+
+/penilaian-kinerja-claw
+ID 1213
+MISSING
+buka
+Agent tidak ada di database
+
+⚠️ Orchestrator tidak ditemukan via slug, ID, maupun name keyword
+
+Keyword diharapkan: Penilaian Kinerja / PK
+
+Slug yang dicoba: penilaian-kinerja-claw-orchestrator
+
+/ebt-solar-claw
+ID 1068
+→ aktual ID 903
+DEGRADED
+via slug
+buka
+Nama di DB: EBTSolarClaw — AI Konsultan PLTS & Energi Surya Indonesia(8 Spesialis: Sizing · PPA · Perizinan · EPC · Grid · O&M · BESS · Agrivoltaic)
+
+ℹ️ Resolved via slug (ID asli 903, beda dari expected 1068 — replit.md perlu update)
+
+/geologi-claw
+ID 1077
+→ aktual ID 912
+DEGRADED
+via slug
+buka
+Nama di DB: GeologiClaw — AI Konsultan Geologi & Eksplorasi Mineral Indonesia(8 Spesialis: Regional · Eksplorasi · Geofisika · Pemboran · Sumber Daya · Alterasi · Geoteknik · Hidrogeologi)
+
+ℹ️ Resolved via slug (ID asli 912, beda dari expected 1077 — replit.md perlu update)
+
+/offshore-safety-claw
+ID 1086
+→ aktual ID 921
+DEGRADED
+via slug
+buka
+Nama di DB: OffshoreSafetyClaw — AI Konsultan K3 & Operasi Migas Offshore Indonesia(8 Spesialis: SMK3 · Operasi · Drilling · Marine · Process Safety · Lingkungan · Integrity · Regulasi)
+
+ℹ️ Resolved via slug (ID asli 921, beda dari expected 1086 — replit.md perlu update)
+
+/transisi-energi-claw
+ID 1105
+→ aktual ID 930
+DEGRADED
+via slug
+buka
+Nama di DB: TransisiEnergiClaw — AI Konsultan Transisi Energi & Dekarbonisasi Indonesia(8 Spesialis: Kebijakan · Hidrogen · Geothermal · Angin · Storage · Karbon · Pensiun PLTU · Smart Grid)
+
+ℹ️ Resolved via slug (ID asli 930, beda dari expected 1105 — replit.md perlu update)
+
+/tutor-teknik-claw
+ID 1114
+→ aktual ID 939
+DEGRADED
+via slug
+buka
+Nama di DB: TutorTeknikClaw — AI Tutor Teknik Komprehensif untuk Mahasiswa Indonesia(8 Spesialis: Sipil · Mesin · Elektro · Kimia · Informatika · Matematika · Fisika · Praktikum)
+
+ℹ️ Resolved via slug (ID asli 939, beda dari expected 1114 — replit.md perlu update)
+
+/riset-skripsi-claw
+ID 1122
+→ aktual ID 947
+DEGRADED
+via slug
+buka
+Nama di DB: RisetSkripsiClaw — AI Konsultan Riset & Skripsi untuk Mahasiswa Indonesia(7 Spesialis: Topik · Litrev · Metodologi · Analisis Data · Penulisan · Sidang · Publikasi)
+
+ℹ️ Resolved via slug (ID asli 947, beda dari expected 1122 — replit.md perlu update)
+
+/nspk-navigator-claw
+ID 1131
+→ aktual ID 956
+DEGRADED
+via slug
+buka
+Nama di DB: NSPKNavigatorClaw — AI Panduan NSPK & Standar Teknis Indonesia(8 Spesialis: Konstruksi · Energi · Lingkungan · K3 · Tata Ruang · Digital/OSS · Tambang · Industri/Pangan)
+
+ℹ️ Resolved via slug (ID asli 956, beda dari expected 1131 — replit.md perlu update)
+
+/korporasi-claw
+ID 1140
+→ aktual ID 965
+DEGRADED
+via slug
+buka
+Nama di DB: KorporasiClaw — AI Konsultan Korporasi & Bisnis Indonesia(8 Spesialis: Pendirian · Perizinan · Pajak · Saham/GCG · Kontrak · HR · Keuangan/IPO · M&A)
+
+ℹ️ Resolved via slug (ID asli 965, beda dari expected 1140 — replit.md perlu update)
+

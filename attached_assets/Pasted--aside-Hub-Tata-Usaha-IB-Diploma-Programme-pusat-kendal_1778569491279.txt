@@ -1,0 +1,132 @@
+<aside>
+📌
+
+**Hub Tata Usaha IB Diploma Programme** — pusat kendali untuk seluruh siklus administrasi: registrasi kandidat, tracking IA/EE/TOK, predicted grades, IAA, logistik ujian, komunikasi, biaya, dan kepatuhan PSP.
+
+Sesi ujian aktif: **November 2026**. Sistem eksternal terintegrasi: **ManageBac**.
+
+</aside>
+
+## 🚦 Quick status
+
+<aside>
+📅
+
+**Sesi ujian aktif**
+
+November 2026
+
+</aside>
+
+<aside>
+👥
+
+**Skala**
+
+> 100 kandidat DP
+> 
+</aside>
+
+<aside>
+🔗
+
+**Stack TU**
+
+Notion + ManageBac + IBIS
+
+</aside>
+
+## 🗂️ Knowledge Base
+
+- [KB — IB Standards & Procedures](https://www.notion.so/KB-IB-Standards-Procedures-20551701d8b64dd3b4ef389f83c5ab09?pvs=21) — Handbook of Procedures, PSP framework, Exam Conduct SOP, IAA, Glossary
+
+## 🗄️ Operational Databases
+
+### 👤 Kandidat & Akademik
+
+- [](https://www.notion.so/a6819490749847ae845bcb0b0748b20f?pvs=21) — master data kandidat DP (>100 siswa)
+- [](https://www.notion.so/0a70d4d1d3bd462f96754c9484b30c35?pvs=21) — subject + level (HL/SL) per kandidat
+- [](https://www.notion.so/d5fb027659c14902a3a24d478255c694?pvs=21) — IA, EE, TOK, CAS, Oral, Practical
+- [](https://www.notion.so/9fad12f9e56e4296abe7061435201da2?pvs=21) — submission form guru → IBIS
+
+### 🗓️ Operasional
+
+- [](https://www.notion.so/08638939dc8b4276a02ce0c5df540403?pvs=21) — master calendar P0/P1/P2/P3
+- [](https://www.notion.so/8fa11fd2a5fe434b8a6bfea7d205e098?pvs=21) — Inclusive Assessment Arrangements
+- [](https://www.notion.so/477c466a6c734c59954b2a3153de0505?pvs=21) — malpractice, missed deadline, health, dll.
+- [](https://www.notion.so/0e9bae6793a04d648847e10e8492634c?pvs=21) — surat & log komunikasi bilingual
+
+### 💰 Keuangan & Kepatuhan
+
+- [](https://www.notion.so/f12935473a164e098138664a886483b6?pvs=21) — IBO fees, annual, EUR, remark
+- [](https://www.notion.so/c6acaa12b7db4c698ff2e1911a0f23e8?pvs=21) — PSP self-study, 6 kebijakan wajib
+
+## 🤖 Agents (akan dibuat di Sprint berikutnya)
+
+- **Registrar Bot** — bantu input kandidat ke IBIS, validasi kombinasi mata pelajaran DP
+- **Deadline Sentinel** — broadcast deadline IA/EE/TOK ke guru & siswa
+- **IAA Advisor** — drafting Inclusive Assessment Arrangements
+- **Predicted Grade Compiler** — kumpulkan & validasi predicted grades dari guru
+- **Exam Logistics** — generate seating plan, briefing invigilator
+- **Comms Drafter** — draf surat orang tua bilingual (ID/EN)
+- **Compliance Auditor** — cek Programme Standards & Practices self-study
+- **Coordinator** — orchestrator multi-agent
+
+## 🗓️ Siklus Tahunan DP
+
+<aside>
+📍
+
+Timeline indikatif untuk sesi **Mei** atau **November**. Untuk sesi **November 2026**, geser anchor ke siklus 18 bulan sebelum exam date.
+
+</aside>
+
+| Periode | Kegiatan TU Utama | Output ke IBIS / ManageBac |
+| --- | --- | --- |
+| T-18 bulan | Pendaftaran kandidat DP, subject selection | Candidate Registration |
+| T-12 bulan | IAA submission (deadline 15 Nov / 15 Mei) | Inclusive Assessment Form |
+| T-9 bulan | IA/EE/TOK timeline rilis ke guru & siswa | ManageBac deadlines |
+| T-6 bulan | Upload coursework batch awal | E-Coursework / IB Docs |
+| T-3 bulan | Predicted Grades submission | IBIS PG screen |
+| T-2 bulan | Exam logistics: seating, invigilator briefing | Internal seating plan |
+| T-0 | Ujian eksternal | — |
+| T+2 bulan | Results release, EUR / Remark window | IBIS Results |
+
+## 📋 SOP & Policy (6 dokumen wajib PSP)
+
+- [ ]  Assessment Policy
+- [ ]  Academic Integrity Policy
+- [ ]  Language Policy
+- [ ]  Access & Inclusion Policy
+- [ ]  Admissions Policy
+- [ ]  Child Protection / Safeguarding Policy
+
+---
+
+*Dibuat oleh sistem otomasi TU — versi skeleton S1.*
+
+[DB-01 Candidates](https://www.notion.so/a6819490749847ae845bcb0b0748b20f?pvs=21)
+
+[KB — IB Standards & Procedures](https://www.notion.so/KB-IB-Standards-Procedures-20551701d8b64dd3b4ef389f83c5ab09?pvs=21)
+
+[DB-03 Assessment Components](https://www.notion.so/d5fb027659c14902a3a24d478255c694?pvs=21)
+
+[DB-05 IAA Cases](https://www.notion.so/8fa11fd2a5fe434b8a6bfea7d205e098?pvs=21)
+
+[DB-04 Deadlines & Calendar](https://www.notion.so/08638939dc8b4276a02ce0c5df540403?pvs=21)
+
+[DB-06 Incidents](https://www.notion.so/477c466a6c734c59954b2a3153de0505?pvs=21)
+
+[DB-07 Predicted Grades](https://www.notion.so/9fad12f9e56e4296abe7061435201da2?pvs=21)
+
+[DB-02 Subjects & Levels](https://www.notion.so/0a70d4d1d3bd462f96754c9484b30c35?pvs=21)
+
+[DB-08 Communications](https://www.notion.so/0e9bae6793a04d648847e10e8492634c?pvs=21)
+
+[DB-09 Fees & Invoices](https://www.notion.so/f12935473a164e098138664a886483b6?pvs=21)
+
+[DB-10 Policy & Compliance](https://www.notion.so/c6acaa12b7db4c698ff2e1911a0f23e8?pvs=21)
+
+[Weekly Brief — 2026-05-12](https://www.notion.so/Weekly-Brief-2026-05-12-4d2c8f81857145009721c7939a2b6f6b?pvs=21)
+
+[Registration Audit — 2026-05-12](https://www.notion.so/Registration-Audit-2026-05-12-d1ecd91db10242cd86523c61c5af375d?pvs=21)

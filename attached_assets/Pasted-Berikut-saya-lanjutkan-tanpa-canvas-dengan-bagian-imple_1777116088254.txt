@@ -1,0 +1,836 @@
+Berikut saya lanjutkan **tanpa canvas** dengan bagian implementasi final agar tambahan persyaratan SBU Konsultan bisa langsung masuk ke builder. Lampiran terbaru menjadi sumber untuk dokumen permohonan, batas 3 klasifikasi/6 subklasifikasi, syarat K1/M1, dan ketentuan tenaga ahli tetap. 
+
+---
+
+# LANJUTAN — SBU Konsultan Requirement Engine Final
+
+```yaml
+# -----------------------------------------------------------------------------
+# LANJUTAN — SBU KONSULTAN REQUIREMENT ENGINE FINAL
+# -----------------------------------------------------------------------------
+
+sbu_konsultan_requirement_engine_final:
+  id: sbu_konsultan_requirement_engine_final_v1
+  name: "Requirement Engine SBU Konsultan"
+  purpose:
+    - menggabungkan katalog sub bidang SBU Konsultan dengan persyaratan permohonan
+    - mengecek dokumen perusahaan
+    - mengecek dokumen tenaga ahli
+    - mengecek batas permohonan baru
+    - mengecek kesesuaian kualifikasi K1 dan M1
+    - mengecek larangan rangkap jabatan direktur/wakil direktur
+    - mengecek larangan tenaga ahli menjadi penanggung jawab di perusahaan lain
+    - memberi status kesiapan awal sebelum pengajuan
+```
+
+---
+
+## 1. Data Schema Baru
+
+```yaml
+consultant_requirement_data_schema:
+  company_profile:
+    fields:
+      company_name:
+        type: string
+      business_entity_type:
+        type: string
+        examples:
+          - PT
+          - CV
+          - Firma
+          - Koperasi
+      nib:
+        type: string
+      npwp_company:
+        type: string
+      company_email:
+        type: string
+      company_phone:
+        type: string
+      domicile_or_nib_available:
+        type: boolean
+
+  application_request:
+    fields:
+      application_type:
+        type: enum
+        values:
+          - permohonan_baru
+          - perubahan
+          - perpanjangan
+          - konversi
+      requested_classifications:
+        type: array
+        example:
+          - AR
+          - RK
+      requested_subclassifications:
+        type: array
+        example:
+          - AR001
+          - RK003
+          - AT003
+      total_classifications:
+        type: number
+      total_subclassifications:
+        type: number
+      target_qualification:
+        type: enum
+        values:
+          - K1
+          - M1_tanpa_pengalaman
+          - Menengah
+          - Besar
+          - Belum_tahu
+
+  company_documents_status:
+    fields:
+      application_form:
+        type: enum
+        values: [ada, belum, tidak_tahu]
+      deed_establishment:
+        type: enum
+        values: [ada, belum, tidak_tahu]
+      deed_amendment:
+        type: enum
+        values: [ada, tidak_ada_perubahan, belum, tidak_tahu]
+      ministry_approval:
+        type: enum
+        values: [ada, belum, tidak_tahu]
+      company_npwp:
+        type: enum
+        values: [ada, belum, tidak_tahu]
+      domicile_or_nib:
+        type: enum
+        values: [ada, belum, tidak_tahu]
+      management_ektp_npwp:
+        type: enum
+        values: [lengkap, sebagian, belum]
+      director_cv:
+        type: enum
+        values: [ada, belum, tidak_tahu]
+      pjbu_photo_jpeg:
+        type: enum
+        values: [ada, belum, tidak_tahu]
+      active_email_phone:
+        type: enum
+        values: [ada, belum, tidak_tahu]
+
+  management_compliance:
+    fields:
+      director_same_position_other_company:
+        type: enum
+        values:
+          - tidak
+          - ya
+          - tidak_tahu
+      vice_director_same_position_other_company:
+        type: enum
+        values:
+          - tidak
+          - ya
+          - tidak_tahu
+      exception_role:
+        type: enum
+        values:
+          - komisaris
+          - komanditer
+          - tidak_ada
+          - tidak_tahu
+
+  expert_profile:
+    fields:
+      expert_name:
+        type: string
+      expert_ektp:
+        type: enum
+        values: [ada, belum, tidak_tahu]
+      expert_npwp:
+        type: enum
+        values: [ada, belum, tidak_tahu]
+      expert_diploma:
+        type: enum
+        values: [ada, belum, tidak_tahu]
+      expert_certificate:
+        type: enum
+        values: [SKA_aktif, SKK_aktif, tidak_aktif, belum_ada, tidak_tahu]
+      expert_level:
+        type: enum
+        values:
+          - Ahli_Muda
+          - Ahli_Madya
+          - Ahli_Utama
+          - Belum_ada
+          - Tidak_tahu
+      expert_field:
+        type: string
+      expert_cv_experience:
+        type: enum
+        values: [ada, belum, tidak_tahu]
+      expert_responsible_other_company:
+        type: enum
+        values:
+          - tidak
+          - ya
+          - tidak_tahu
+```
+
+---
+
+## 2. Node Lengkap untuk Cek Persyaratan
+
+```yaml
+node_consultant_requirement_main:
+  type: message_with_buttons
+  title: "Cek Persyaratan SBU Konsultan"
+  message: >
+    Saya akan membantu mengecek persyaratan awal SBU Jasa Konsultansi Konstruksi.
+    Pilih area yang ingin dicek.
+  buttons:
+    - label: "Cek Dokumen Perusahaan"
+      target_node: node_company_document_check
+
+    - label: "Cek Pengurus/Direktur"
+      target_node: node_management_compliance_check
+
+    - label: "Cek Batas Permohonan"
+      target_node: node_consultant_application_limit_check
+
+    - label: "Cek Tenaga Ahli"
+      target_node: node_expert_requirement_check
+
+    - label: "Cek Semua Persyaratan"
+      target_node: node_consultant_full_requirement_check
+
+    - label: "Menu Utama"
+      target_node: node_main_menu_konsultan
+```
+
+---
+
+## 3. Flow Dokumen Perusahaan
+
+```yaml
+node_company_document_check:
+  type: guided_form
+  title: "Cek Dokumen Perusahaan"
+  questions:
+    - id: q_application_form
+      text: "Apakah formulir permohonan SBU Jasa Konsultansi Konstruksi sudah diisi?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: company_documents_status.application_form
+
+    - id: q_deed_establishment
+      text: "Apakah akta pendirian tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: company_documents_status.deed_establishment
+
+    - id: q_deed_amendment
+      text: "Apakah ada akta perubahan?"
+      quick_replies: ["Ada", "Tidak ada perubahan", "Belum", "Tidak tahu"]
+      save_to: company_documents_status.deed_amendment
+
+    - id: q_ministry_approval
+      text: "Apakah SK Kementerian Hukum dan HAM tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: company_documents_status.ministry_approval
+
+    - id: q_company_npwp
+      text: "Apakah NPWP perusahaan tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: company_documents_status.company_npwp
+
+    - id: q_domicile_nib
+      text: "Apakah domisili perusahaan atau NIB tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: company_documents_status.domicile_or_nib
+
+    - id: q_management_identity
+      text: "Apakah E-KTP dan NPWP pengurus pada akta terakhir tersedia?"
+      quick_replies: ["Lengkap", "Sebagian", "Belum"]
+      save_to: company_documents_status.management_ektp_npwp
+
+    - id: q_director_cv
+      text: "Apakah riwayat hidup direktur dan wakil direktur tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: company_documents_status.director_cv
+
+    - id: q_pjbu_photo
+      text: "Apakah foto PJBU/Direktur format JPEG tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: company_documents_status.pjbu_photo_jpeg
+
+    - id: q_email_phone
+      text: "Apakah email dan nomor telepon perusahaan aktif tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: company_documents_status.active_email_phone
+
+  completion_node: node_company_document_result
+```
+
+```yaml
+node_company_document_result:
+  type: dynamic_response
+  title: "Hasil Cek Dokumen Perusahaan"
+  response_template: >
+    Hasil cek dokumen perusahaan:
+
+    1. Formulir permohonan: {{company_documents_status.application_form}}
+    2. Akta pendirian: {{company_documents_status.deed_establishment}}
+    3. Akta perubahan: {{company_documents_status.deed_amendment}}
+    4. SK Kemenkumham: {{company_documents_status.ministry_approval}}
+    5. NPWP perusahaan: {{company_documents_status.company_npwp}}
+    6. Domisili/NIB: {{company_documents_status.domicile_or_nib}}
+    7. E-KTP & NPWP pengurus: {{company_documents_status.management_ektp_npwp}}
+    8. CV direktur/wakil direktur: {{company_documents_status.director_cv}}
+    9. Foto PJBU/Direktur JPEG: {{company_documents_status.pjbu_photo_jpeg}}
+    10. Email dan telepon aktif: {{company_documents_status.active_email_phone}}
+
+    Status awal:
+    {{company_document_status}}
+
+    Rekomendasi:
+    {{company_document_recommendation}}
+
+    Catatan:
+    Dokumen ini adalah checklist awal. Validasi final tetap mengikuti LSBU/OSS/SIJK.
+```
+
+---
+
+## 4. Logic Dokumen Perusahaan
+
+```yaml
+company_document_logic:
+  complete:
+    condition:
+      - "application_form == Ada"
+      - "deed_establishment == Ada"
+      - "ministry_approval == Ada"
+      - "company_npwp == Ada"
+      - "domicile_or_nib == Ada"
+      - "management_ektp_npwp == Lengkap"
+      - "director_cv == Ada"
+      - "pjbu_photo_jpeg == Ada"
+      - "active_email_phone == Ada"
+    status: "Memenuhi secara awal"
+    recommendation: >
+      Dokumen perusahaan tampak lengkap secara awal. Lanjutkan cek pengurus,
+      batas permohonan, tenaga ahli, dan sub bidang yang diajukan.
+
+  partial:
+    condition:
+      - "ada jawaban Sebagian atau Tidak tahu"
+    status: "Perlu klarifikasi"
+    recommendation: >
+      Ada dokumen yang belum pasti. Lengkapi atau pastikan status dokumen sebelum
+      pengajuan agar tidak terkendala saat verifikasi.
+
+  missing:
+    condition:
+      - "ada dokumen wajib bernilai Belum"
+    status: "Perlu perbaikan"
+    recommendation: >
+      Dokumen wajib belum lengkap. Lengkapi formulir, akta, SK Kemenkumham, NPWP,
+      NIB/domisili, data pengurus, CV direktur, foto PJBU, email, dan telepon aktif.
+```
+
+---
+
+## 5. Flow Cek Pengurus/Direktur
+
+```yaml
+node_management_compliance_check:
+  type: guided_form
+  title: "Cek Kepatuhan Pengurus"
+  questions:
+    - id: q_director_same_position
+      text: "Apakah direktur menjadi pengurus dengan jabatan yang sama di perusahaan lain?"
+      quick_replies: ["Tidak", "Ya", "Tidak tahu"]
+      save_to: management_compliance.director_same_position_other_company
+
+    - id: q_vice_director_same_position
+      text: "Apakah wakil direktur menjadi pengurus dengan jabatan yang sama di perusahaan lain?"
+      quick_replies: ["Tidak", "Ya", "Tidak tahu"]
+      save_to: management_compliance.vice_director_same_position_other_company
+
+    - id: q_exception_role
+      text: "Jika ada rangkap jabatan, apakah posisinya komisaris atau komanditer?"
+      quick_replies: ["Komisaris", "Komanditer", "Tidak ada", "Tidak tahu"]
+      save_to: management_compliance.exception_role
+
+  completion_node: node_management_compliance_result
+```
+
+```yaml
+node_management_compliance_result:
+  type: dynamic_response
+  title: "Hasil Cek Kepatuhan Pengurus"
+  response_template: >
+    Hasil cek kepatuhan pengurus:
+
+    Direktur rangkap jabatan sama:
+    {{management_compliance.director_same_position_other_company}}
+
+    Wakil direktur rangkap jabatan sama:
+    {{management_compliance.vice_director_same_position_other_company}}
+
+    Pengecualian posisi:
+    {{management_compliance.exception_role}}
+
+    Status awal:
+    {{management_compliance_status}}
+
+    Rekomendasi:
+    {{management_compliance_recommendation}}
+
+    Catatan:
+    Direktur dan wakil direktur tidak menjadi pengurus dengan jabatan yang sama
+    pada perusahaan lain, kecuali sebagai komisaris atau komanditer.
+```
+
+---
+
+## 6. Logic Kepatuhan Pengurus
+
+```yaml
+management_compliance_logic:
+  compliant:
+    condition:
+      - "director_same_position_other_company == Tidak"
+      - "vice_director_same_position_other_company == Tidak"
+    status: "Memenuhi secara awal"
+    recommendation: >
+      Tidak terdeteksi rangkap jabatan pengurus dengan jabatan yang sama.
+
+  allowed_exception:
+    condition:
+      - "director_same_position_other_company == Ya or vice_director_same_position_other_company == Ya"
+      - "exception_role in ['Komisaris', 'Komanditer']"
+    status: "Perlu validasi"
+    recommendation: >
+      Rangkap jabatan berada pada posisi pengecualian. Tetap siapkan bukti dan
+      validasikan ke LSBU/admin karena keputusan final mengikuti skema yang berlaku.
+
+  risky:
+    condition:
+      - "director_same_position_other_company == Ya or vice_director_same_position_other_company == Ya"
+      - "exception_role not in ['Komisaris', 'Komanditer']"
+    status: "Berisiko terkendala"
+    recommendation: >
+      Rangkap jabatan pengurus dengan jabatan yang sama berisiko menghambat proses.
+      Perbaiki struktur pengurus atau konsultasikan sebelum pengajuan.
+```
+
+---
+
+## 7. Flow Lengkap Tenaga Ahli
+
+```yaml
+node_expert_requirement_check:
+  type: guided_form
+  title: "Cek Persyaratan Tenaga Ahli"
+  questions:
+    - id: q_target_code
+      text: "Masukkan kode sub bidang yang diajukan, contoh AR001, RK003, IT006, AT003."
+      save_to: expert_profile.target_code
+
+    - id: q_target_qualification
+      text: "Kualifikasi yang diajukan?"
+      quick_replies:
+        - "K1"
+        - "M1 tanpa pengalaman"
+        - "Menengah/Besar"
+        - "Belum tahu"
+      save_to: expert_profile.target_qualification
+
+    - id: q_expert_ektp
+      text: "Apakah E-KTP tenaga ahli tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: expert_profile.expert_ektp
+
+    - id: q_expert_npwp
+      text: "Apakah NPWP tenaga ahli tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: expert_profile.expert_npwp
+
+    - id: q_expert_diploma
+      text: "Apakah ijazah tenaga ahli tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: expert_profile.expert_diploma
+
+    - id: q_expert_certificate
+      text: "Apakah SKA/SKK tenaga ahli masih berlaku?"
+      quick_replies:
+        - "SKA aktif"
+        - "SKK aktif"
+        - "Tidak aktif"
+        - "Belum ada"
+        - "Tidak tahu"
+      save_to: expert_profile.expert_certificate
+
+    - id: q_expert_level
+      text: "Jenjang tenaga ahli yang tersedia?"
+      quick_replies:
+        - "Ahli Muda"
+        - "Ahli Madya"
+        - "Ahli Utama"
+        - "Belum ada"
+        - "Tidak tahu"
+      save_to: expert_profile.expert_level
+
+    - id: q_expert_field
+      text: "Bidang keahlian tenaga ahli, contoh Arsitektur, Sipil, Mekanikal, Elektrikal, Tata Lingkungan."
+      save_to: expert_profile.expert_field
+
+    - id: q_expert_cv
+      text: "Apakah CV/pengalaman tenaga ahli tersedia?"
+      quick_replies: ["Ada", "Belum", "Tidak tahu"]
+      save_to: expert_profile.expert_cv_experience
+
+    - id: q_expert_other_company
+      text: "Apakah tenaga ahli menjadi penanggung jawab teknik/klasifikasi di perusahaan lain?"
+      quick_replies: ["Tidak", "Ya", "Tidak tahu"]
+      save_to: expert_profile.expert_responsible_other_company
+
+  completion_node: node_expert_requirement_result
+```
+
+```yaml
+node_expert_requirement_result:
+  type: dynamic_response
+  title: "Hasil Cek Tenaga Ahli"
+  response_template: >
+    Hasil cek tenaga ahli:
+
+    Sub bidang:
+    {{expert_profile.target_code}}
+
+    Kualifikasi:
+    {{expert_profile.target_qualification}}
+
+    Dokumen tenaga ahli:
+    - E-KTP: {{expert_profile.expert_ektp}}
+    - NPWP: {{expert_profile.expert_npwp}}
+    - Ijazah: {{expert_profile.expert_diploma}}
+    - SKA/SKK: {{expert_profile.expert_certificate}}
+    - CV/Pengalaman: {{expert_profile.expert_cv_experience}}
+
+    Jenjang:
+    {{expert_profile.expert_level}}
+
+    Bidang keahlian tersedia:
+    {{expert_profile.expert_field}}
+
+    Bidang keahlian yang disarankan untuk sub bidang ini:
+    {{required_expertise_list}}
+
+    Status tanggung jawab di perusahaan lain:
+    {{expert_profile.expert_responsible_other_company}}
+
+    Status awal:
+    {{expert_requirement_status}}
+
+    Rekomendasi:
+    {{expert_requirement_recommendation}}
+
+    Catatan:
+    Untuk K1, tenaga ahli minimal Ahli Muda per klasifikasi.
+    Untuk M1 tanpa pengalaman, tenaga ahli minimal Ahli Madya per 2 subklasifikasi.
+    Tenaga ahli tidak menjadi penanggung jawab teknik/klasifikasi di perusahaan lain.
+```
+
+---
+
+## 8. Logic Tenaga Ahli Lengkap
+
+```yaml
+expert_requirement_logic:
+  document_complete:
+    condition:
+      - "expert_ektp == Ada"
+      - "expert_npwp == Ada"
+      - "expert_diploma == Ada"
+      - "expert_certificate in ['SKA aktif', 'SKK aktif']"
+      - "expert_cv_experience == Ada"
+    result: "Dokumen tenaga ahli lengkap"
+
+  document_incomplete:
+    condition:
+      - "expert_ektp == Belum or expert_npwp == Belum or expert_diploma == Belum"
+      - "or expert_certificate in ['Tidak aktif', 'Belum ada']"
+      - "or expert_cv_experience == Belum"
+    result: "Dokumen tenaga ahli belum lengkap"
+
+  qualification_K1_valid:
+    condition:
+      - "target_qualification == K1"
+      - "expert_level in ['Ahli Muda', 'Ahli Madya', 'Ahli Utama']"
+    result: "Jenjang memenuhi awal untuk K1"
+
+  qualification_M1_valid:
+    condition:
+      - "target_qualification == M1 tanpa pengalaman"
+      - "expert_level in ['Ahli Madya', 'Ahli Utama']"
+    result: "Jenjang memenuhi awal untuk M1 tanpa pengalaman"
+
+  qualification_level_invalid:
+    condition:
+      - "target_qualification == K1 and expert_level not in ['Ahli Muda', 'Ahli Madya', 'Ahli Utama']"
+      - "or target_qualification == M1 tanpa pengalaman and expert_level not in ['Ahli Madya', 'Ahli Utama']"
+    result: "Jenjang belum memenuhi"
+
+  field_match:
+    condition:
+      - "expert_field matches required_expertise_list"
+    result: "Bidang keahlian sesuai awal"
+
+  field_not_match:
+    condition:
+      - "expert_field does not match required_expertise_list"
+    result: "Bidang keahlian belum sesuai"
+
+  no_double_responsibility:
+    condition:
+      - "expert_responsible_other_company == Tidak"
+    result: "Tidak terdeteksi rangkap tanggung jawab"
+
+  double_responsibility:
+    condition:
+      - "expert_responsible_other_company == Ya"
+    result: "Berisiko terkendala karena tenaga ahli menjadi penanggung jawab di perusahaan lain"
+```
+
+---
+
+## 9. Flow Cek Semua Persyaratan
+
+```yaml
+node_consultant_full_requirement_check:
+  type: sequential_flow
+  title: "Cek Semua Persyaratan SBU Konsultan"
+  sequence:
+    - node_company_document_check
+    - node_management_compliance_check
+    - node_consultant_application_limit_check
+    - node_expert_requirement_check
+  completion_node: node_consultant_full_requirement_result
+
+node_consultant_full_requirement_result:
+  type: dynamic_response
+  title: "Rekap Cek Persyaratan SBU Konsultan"
+  response_template: >
+    Rekap cek persyaratan SBU Konsultan:
+
+    1. Dokumen perusahaan:
+    {{company_document_status}}
+
+    2. Kepatuhan pengurus:
+    {{management_compliance_status}}
+
+    3. Batas permohonan:
+    {{application_limit_status}}
+
+    4. Tenaga ahli:
+    {{expert_requirement_status}}
+
+    Kesimpulan awal:
+    {{overall_consultant_requirement_status}}
+
+    Prioritas perbaikan:
+    {{priority_corrections}}
+
+    Rekomendasi:
+    {{overall_consultant_requirement_recommendation}}
+
+    Catatan:
+    Rekap ini hanya pra-verifikasi. Keputusan resmi tetap mengikuti LSBU, asesor,
+    OSS, SIJK, dan ketentuan yang berlaku.
+```
+
+---
+
+## 10. Final Status Resolver
+
+```yaml
+consultant_requirement_status_resolver:
+  siap_dikonsultasikan:
+    condition:
+      - "company_document_status == Memenuhi secara awal"
+      - "management_compliance_status in ['Memenuhi secara awal', 'Perlu validasi']"
+      - "application_limit_status == Sesuai batas awal"
+      - "expert_requirement_status == Memenuhi secara awal"
+    status: "Siap Dikonsultasikan"
+    recommendation: >
+      Data awal cukup siap untuk dibawa ke LSBU atau konsultan perizinan.
+      Tetap lakukan validasi akhir terhadap dokumen asli dan sistem OSS/SIJK.
+
+  perlu_perbaikan_ringan:
+    condition:
+      - "ada status Perlu klarifikasi"
+      - "tidak ada status Berisiko terkendala"
+      - "tidak ada status Tidak siap"
+    status: "Perlu Perbaikan Ringan"
+    recommendation: >
+      Lengkapi data yang belum pasti, terutama dokumen pengurus, SKA/SKK,
+      atau bukti pengalaman tenaga ahli.
+
+  perlu_perbaikan_mayor:
+    condition:
+      - "ada status Perlu perbaikan"
+      - "atau application_limit_status == Melebihi batas"
+    status: "Perlu Perbaikan Mayor"
+    recommendation: >
+      Perbaiki dokumen wajib, sesuaikan jumlah klasifikasi/subklasifikasi,
+      dan pastikan tenaga ahli memenuhi bidang serta jenjang yang diminta.
+
+  belum_siap:
+    condition:
+      - "ada status Berisiko terkendala"
+      - "atau expert_responsible_other_company == Ya"
+      - "atau director_same_position_other_company == Ya tanpa pengecualian"
+    status: "Belum Siap"
+    recommendation: >
+      Jangan lanjutkan pengajuan sebelum masalah utama diselesaikan, terutama
+      rangkap jabatan pengurus, rangkap tanggung jawab tenaga ahli, atau ketidaksesuaian SKA/SKK.
+```
+
+---
+
+## 11. Tambahan Test Case
+
+```yaml
+consultant_requirement_test_cases:
+  - id: REQ_TC_001
+    name: "Dokumen perusahaan lengkap"
+    input:
+      application_form: "Ada"
+      deed_establishment: "Ada"
+      ministry_approval: "Ada"
+      company_npwp: "Ada"
+      domicile_or_nib: "Ada"
+      management_ektp_npwp: "Lengkap"
+      director_cv: "Ada"
+      pjbu_photo_jpeg: "Ada"
+      active_email_phone: "Ada"
+    expected_status: "Memenuhi secara awal"
+
+  - id: REQ_TC_002
+    name: "Permohonan baru melebihi batas"
+    input:
+      application_type: "Permohonan baru"
+      total_classifications: 4
+      total_subclassifications: 7
+    expected_status: "Melebihi batas"
+    expected_response_contains:
+      - "maksimal 3 klasifikasi"
+      - "6 subklasifikasi"
+
+  - id: REQ_TC_003
+    name: "K1 dengan Ahli Muda"
+    input:
+      target_qualification: "K1"
+      expert_level: "Ahli Muda"
+      expert_certificate: "SKA aktif"
+      expert_responsible_other_company: "Tidak"
+    expected_status: "Memenuhi secara awal"
+
+  - id: REQ_TC_004
+    name: "M1 tanpa pengalaman dengan Ahli Muda"
+    input:
+      target_qualification: "M1 tanpa pengalaman"
+      expert_level: "Ahli Muda"
+    expected_status: "Tidak siap"
+    expected_response_contains:
+      - "minimal Ahli Madya"
+
+  - id: REQ_TC_005
+    name: "Tenaga ahli rangkap penanggung jawab"
+    input:
+      expert_responsible_other_company: "Ya"
+    expected_status: "Berisiko terkendala"
+    expected_response_contains:
+      - "tidak boleh menjadi penanggung jawab teknik"
+      - "perusahaan lain"
+
+  - id: REQ_TC_006
+    name: "Direktur rangkap jabatan sama"
+    input:
+      director_same_position_other_company: "Ya"
+      exception_role: "Tidak ada"
+    expected_status: "Berisiko terkendala"
+    expected_response_contains:
+      - "jabatan yang sama"
+      - "komisaris atau komanditer"
+```
+
+---
+
+## 12. Final Runtime Prompt Tambahan
+
+```yaml
+final_runtime_prompt_requirement_addition:
+  text: >
+    Untuk SBU Konsultan, selain lookup sub bidang dan KBLI, chatbot harus dapat
+    memeriksa persyaratan permohonan. Saat pengguna menanyakan persyaratan,
+    tampilkan dokumen perusahaan, dokumen tenaga ahli, syarat kualifikasi K1/M1,
+    batas maksimal permohonan baru 3 klasifikasi dan 6 subklasifikasi, serta
+    catatan rangkap jabatan.
+
+    Untuk dokumen perusahaan, cek formulir, akta pendirian/perubahan, SK Kemenkumham,
+    NPWP perusahaan, domisili/NIB, E-KTP dan NPWP pengurus, CV direktur/wakil direktur,
+    foto PJBU/Direktur JPEG, email aktif, dan nomor telepon perusahaan.
+
+    Untuk tenaga ahli, cek E-KTP, NPWP, ijazah, SKA/SKK aktif, CV/pengalaman,
+    jenjang ahli, bidang keahlian, dan status apakah menjadi penanggung jawab teknik
+    atau klasifikasi di perusahaan lain.
+
+    Untuk K1, syarat awal tenaga ahli minimal Ahli Muda per klasifikasi.
+    Untuk M1 tanpa pengalaman, syarat awal tenaga ahli minimal Ahli Madya per 2 subklasifikasi.
+
+    Jangan menyatakan pasti lulus atau pasti ditolak. Gunakan status:
+    Memenuhi secara awal, Perlu klarifikasi, Perlu perbaikan, Berisiko terkendala,
+    Siap Dikonsultasikan, Perlu Perbaikan Ringan, Perlu Perbaikan Mayor, atau Belum Siap.
+```
+
+---
+
+## 13. Final Builder Prompt Update
+
+```text
+Tambahkan modul “Persyaratan Permohonan SBU Konsultan” ke chatbot SBU Konsultan.
+
+Modul ini harus dapat:
+1. Menampilkan checklist dokumen perusahaan.
+2. Menampilkan checklist dokumen tenaga ahli.
+3. Mengecek batas permohonan baru maksimal 3 klasifikasi dan 6 subklasifikasi.
+4. Mengecek syarat K1: SKA/SKK minimal Ahli Muda per klasifikasi.
+5. Mengecek syarat M1 tanpa pengalaman: SKA/SKK minimal Ahli Madya per 2 subklasifikasi.
+6. Mengecek apakah direktur/wakil direktur rangkap jabatan yang sama di perusahaan lain.
+7. Mengecek apakah tenaga ahli menjadi penanggung jawab teknik/klasifikasi di perusahaan lain.
+8. Mencocokkan bidang tenaga ahli dengan sub bidang yang diajukan.
+9. Menghasilkan status awal dan rekomendasi perbaikan.
+10. Memberi catatan bahwa hasil hanya pra-verifikasi dan keputusan resmi tetap melalui LSBU/OSS/SIJK.
+
+Gunakan status:
+- Memenuhi secara awal
+- Perlu klarifikasi
+- Perlu perbaikan
+- Berisiko terkendala
+- Siap Dikonsultasikan
+- Perlu Perbaikan Ringan
+- Perlu Perbaikan Mayor
+- Belum Siap
+
+Tambahkan menu baru:
+- Persyaratan Permohonan
+- Checklist Dokumen Perusahaan
+- Checklist Tenaga Ahli
+- Cek Batas 3 Klasifikasi / 6 Subklasifikasi
+- Cek Syarat K1 / M1
+- Cek Tenaga Ahli Tetap
+- Cek Semua Persyaratan
+```
+
+Dengan lanjutan ini, modul SBU Konsultan sudah punya **requirement engine lengkap**: checklist dokumen perusahaan, pengurus, batas pengajuan, tenaga ahli, K1/M1, serta status kesiapan awal.

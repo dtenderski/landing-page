@@ -1,0 +1,55 @@
+Lanjut — saya buatkan **paket lanjutan implementasi** untuk Chatbot SKK Bidang Sipil agar semakin mirip struktur **Chatbot Manajemen Pelaksanaan**: flow nodes, intent-response map, API contract, admin fields, lead/handoff schema, sample conversations, dan test cases. Referensi Manajemen Pelaksanaan memakai pola lengkap seperti flow menu, guided questionnaire, dynamic lookup, assessment, scenario practice, evidence checklist, fallback, dan guardrails. 
+
+## Download paket lanjutan
+
+[Paket Lanjutan Flow & Testing SKK Sipil](sandbox:/mnt/data/paket_lanjutan_flow_testing_skk_sipil.zip)
+
+## Isi paket
+
+1. [flow_nodes_skk_sipil.yaml](sandbox:/mnt/data/skk_sipil_flow_testing_package/flow_nodes_skk_sipil.yaml)
+   Flow node detail: onboarding, role lookup, KKNI lookup, rekomendasi, learning, assessment, scenario, fallback.
+
+2. [intent_response_map_skk_sipil.json](sandbox:/mnt/data/skk_sipil_flow_testing_package/intent_response_map_skk_sipil.json)
+   Mapping intent, contoh input user, entity, dan template respons.
+
+3. [api_contract_skk_sipil.json](sandbox:/mnt/data/skk_sipil_flow_testing_package/api_contract_skk_sipil.json)
+   Kontrak API untuk `/chat`, `/roles/search`, `/roles/kkni/{level}`, dan `/recommend`.
+
+4. [admin_dashboard_fields_skk_sipil.json](sandbox:/mnt/data/skk_sipil_flow_testing_package/admin_dashboard_fields_skk_sipil.json)
+   Field admin/lead capture: nama, WhatsApp, bidang, pengalaman, target jabatan, rekomendasi SKK, status follow-up.
+
+5. [lead_handoff_schema_skk_sipil.sql](sandbox:/mnt/data/skk_sipil_flow_testing_package/lead_handoff_schema_skk_sipil.sql)
+   Schema SQL untuk lead, session, assessment result, dan handoff.
+
+6. [sample_conversations_skk_sipil.md](sandbox:/mnt/data/skk_sipil_flow_testing_package/sample_conversations_skk_sipil.md)
+   Contoh percakapan: lookup jabatan, rekomendasi, fresh graduate, ambiguitas K3, studi kasus, checklist bukti.
+
+7. [test_cases_skk_sipil.csv](sandbox:/mnt/data/skk_sipil_flow_testing_package/test_cases_skk_sipil.csv)
+   Test case untuk uji chatbot sebelum deploy.
+
+8. [import_steps_gustafta_skk_sipil.md](sandbox:/mnt/data/skk_sipil_flow_testing_package/import_steps_gustafta_skk_sipil.md)
+   Langkah import ke chatbot builder.
+
+9. [deployment_checklist_skk_sipil.md](sandbox:/mnt/data/skk_sipil_flow_testing_package/deployment_checklist_skk_sipil.md)
+   Checklist pre-launch dan post-launch.
+
+## Struktur lanjutan yang ditambahkan
+
+```text id="umm7pl"
+1. Onboarding flow
+2. Role catalog lookup
+3. KKNI lookup
+4. Standard/link lookup
+5. Recommendation flow
+6. Learning and assessment flow
+7. Scenario practice flow
+8. Evidence checklist
+9. Mock interview
+10. Fallback handling
+11. Lead capture
+12. Human handoff
+13. API contract
+14. Testing matrix
+```
+
+Database SKK Sipil tetap memakai data yang Anda unggah sebelumnya: subklasifikasi, jabatan kerja, jenjang jabatan kerja, kualifikasi, KKNI, standar kompetensi, dan link SKK. 

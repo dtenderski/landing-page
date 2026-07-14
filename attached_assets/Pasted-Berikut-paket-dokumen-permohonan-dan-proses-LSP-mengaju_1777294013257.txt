@@ -1,0 +1,505 @@
+Berikut **paket dokumen permohonan dan proses LSP mengajukan persetujuan SKK AJJ Nirkertas**. Saya pisahkan menjadi dua jalur karena dalam SE BNSP, **sertifikasi kompetensi jarak jauh/AJJ** dan **penggunaan nirkertas/paperless** memiliki persyaratan permohonan yang saling terkait, tetapi daftar lampirannya berbeda. BNSP menampilkan Surat Edaran “Ketentuan Pelaksanaan Sertifikasi Jarak Jauh dan Penggunaan Nirkertas dalam Pelaksanaan Sertifikasi Kompetensi” pada halaman download resminya. ([BNSP][1])
+
+---
+
+# 1. Istilah Kerja
+
+```yaml id="24zklp"
+istilah:
+  SKK: "Sertifikasi Kompetensi Kerja / Sertifikat Kompetensi Kerja sesuai konteks."
+  AJJ: "Asesmen Jarak Jauh atau sertifikasi kompetensi jarak jauh."
+  Nirkertas: "Paperless, yaitu penggunaan dokumen, formulir, rekaman, dan laporan digital dalam proses sertifikasi."
+  LSP: "Lembaga Sertifikasi Profesi yang mengajukan persetujuan kepada BNSP."
+```
+
+Catatan penting: LSP **tidak boleh melaksanakan sertifikasi kompetensi jarak jauh dan menggunakan nirkertas/paperless sebelum mendapat persetujuan dari BNSP**. Jika permohonan tidak disetujui, LSP dapat mengajukan kembali setelah 6 bulan. 
+
+---
+
+# 2. Dokumen Permohonan AJJ / Sertifikasi Kompetensi Jarak Jauh
+
+## A. Surat Permohonan Utama
+
+LSP menyiapkan **surat permohonan persetujuan pelaksanaan sertifikasi kompetensi jarak jauh** yang ditujukan kepada BNSP. Permohonan dikirim melalui email **[admin@bnsp.go.id](mailto:admin@bnsp.go.id)** dengan perihal surat permohonan persetujuan sertifikasi jarak jauh. Lampiran klausul B.1.a–k dibuat dalam format PDF, sedangkan rekaman uji coba pada klausul B.1.l dikemas dalam Google Drive dan dikirim bersama email permohonan. 
+
+## B. Lampiran Dokumen AJJ
+
+```yaml id="dokumen_permohonan_ajj"
+dokumen_permohonan_ajj:
+  surat_permohonan:
+    - "Surat permohonan persetujuan pelaksanaan sertifikasi kompetensi jarak jauh kepada BNSP"
+
+  sop_wajib:
+    - "SOP Melayani Pelaksanaan Kegiatan Sertifikasi Kompetensi Jarak Jauh"
+    - "SOP Melaksanakan Asesmen Jarak Jauh"
+    - "SOP Verifikasi TUK Jarak Jauh"
+    - "SOP Banding Jarak Jauh"
+
+  penetapan_personil_dan_sistem:
+    - "SK penetapan personil pengelola sistem sertifikasi jarak jauh"
+    - "SK penetapan pemeliharaan sistem sertifikasi jarak jauh"
+
+  sarana_prasarana:
+    - "Daftar sarana dan prasarana kantor"
+    - "Bukti internet berlangganan di kantor LSP"
+
+  sistem_aplikasi:
+    - "Penjelasan sistem aplikasi yang digunakan untuk pelaksanaan sertifikasi jarak jauh, termasuk server"
+    - "Penjelasan aplikasi sertifikasi kompetensi jarak jauh"
+    - "Penjelasan aplikasi verifikasi TUK jarak jauh"
+    - "Penjelasan aplikasi banding"
+    - "Penjelasan manajemen akun dan hak akses"
+
+  pernyataan_dan_keamanan:
+    - "Surat pernyataan tidak menggunakan software dan aplikasi ilegal"
+    - "Surat pernyataan menjamin kerahasiaan dan keamanan rekaman sertifikasi kompetensi"
+    - "Surat pernyataan menyimpan rekaman sertifikasi kompetensi minimal satu periode masa berlaku sertifikat kompetensi"
+    - "Surat pernyataan ditandatangani oleh Ketua Dewan Pengarah dan Ketua/Direktur LSP"
+
+  sosialisasi_internal:
+    - "Surat pernyataan bahwa LSP telah melakukan sosialisasi sistem sertifikasi jarak jauh di internal LSP"
+    - "Mencantumkan tanggal sosialisasi"
+    - "Melampirkan foto kegiatan"
+    - "Ditandatangani Ketua/Direktur LSP"
+
+  rekaman_uji_coba:
+    - "Rekaman uji coba pelaksanaan sertifikasi jarak jauh untuk satu skema sertifikasi"
+    - "Termasuk rekaman verifikasi TUK jarak jauh"
+    - "Jika mengajukan lebih dari satu skema, minimal mengirimkan 2 rekaman uji coba"
+    - "Format rekaman: video dan PDF"
+```
+
+Dalam pengajuan pertama sertifikasi jarak jauh, jumlah skema maksimal adalah **5 skema sertifikasi**. 
+
+---
+
+# 3. Persyaratan Sistem/Aplikasi AJJ
+
+Berdasarkan SE BNSP, aplikasi sertifikasi kompetensi jarak jauh minimal mencakup: permohonan sertifikasi, asesmen mandiri, persetujuan asesmen, instrumen asesmen sesuai rencana asesmen, ceklis meninjau instrumen asesmen, rekaman asesmen, umpan balik, laporan asesmen, peninjauan proses asesmen, dan banding. SE tersebut juga menyebut aplikasi verifikasi TUK harus dikembangkan mengacu pada SOP Verifikasi TUK Jarak Jauh. 
+
+```yaml id="minimal_fitur_aplikasi_ajj"
+minimal_fitur_aplikasi_ajj:
+  aplikasi_sertifikasi_kompetensi_jarak_jauh:
+    - "Permohonan sertifikasi"
+    - "Asesmen mandiri"
+    - "Persetujuan asesmen"
+    - "Instrumen asesmen sesuai rencana asesmen"
+    - "Ceklis meninjau instrumen asesmen"
+    - "Rekaman asesmen"
+    - "Umpan balik"
+    - "Laporan asesmen"
+    - "Meninjau proses asesmen"
+    - "Banding"
+
+  aplikasi_tuk:
+    - "Data TUK yang digunakan dalam pelaksanaan sertifikasi kompetensi jarak jauh"
+    - "SPT verifikasi TUK"
+    - "Rekaman verifikasi TUK"
+    - "SK penetapan TUK"
+
+  aplikasi_manajemen_akun:
+    - "Pengaturan hak akses sesuai kewenangan yang ditetapkan LSP"
+
+  aplikasi_manajemen_administrasi:
+    - "SPT asesor kompetensi"
+    - "SPT verifikasi TUK"
+    - "Rekaman verifikasi TUK"
+    - "SK penetapan TUK"
+    - "SK Komite Teknis"
+    - "SK hasil keputusan sertifikasi kompetensi"
+
+  aplikasi_informasi_eksekutif:
+    - "Laporan/rekapitulasi periodik pemohon sertifikasi"
+    - "Hasil sertifikasi tatap muka"
+    - "Hasil sertifikasi jarak jauh"
+
+  aplikasi_database_pemegang_sertifikat:
+    - "Database pemegang sertifikat kompetensi yang masih berlaku"
+```
+
+---
+
+# 4. Proses Pengajuan AJJ oleh LSP
+
+```yaml id="proses_pengajuan_ajj_lsp"
+proses_pengajuan_ajj_lsp:
+  tahap_1_persiapan_internal:
+    penanggung_jawab: "Manajemen LSP"
+    kegiatan:
+      - "Menetapkan kebijakan pelaksanaan sertifikasi kompetensi jarak jauh"
+      - "Menyusun dan mengesahkan SOP AJJ"
+      - "Menetapkan personil pengelola sistem"
+      - "Menetapkan pemelihara sistem"
+      - "Menyiapkan aplikasi, server, akun, dan hak akses"
+      - "Menyiapkan daftar sarana-prasarana dan bukti internet"
+      - "Melakukan sosialisasi internal"
+      - "Melakukan uji coba sertifikasi jarak jauh dan verifikasi TUK jarak jauh"
+
+  tahap_2_penyusunan_dokumen_permohonan:
+    penanggung_jawab: "Manajemen LSP / Admin LSP"
+    kegiatan:
+      - "Menyusun surat permohonan"
+      - "Mengumpulkan SOP wajib"
+      - "Mengumpulkan SK personil dan SK pemeliharaan sistem"
+      - "Mengumpulkan bukti sarana-prasarana dan internet"
+      - "Membuat penjelasan sistem aplikasi termasuk server"
+      - "Menyusun surat pernyataan keamanan dan legalitas software"
+      - "Menyiapkan bukti sosialisasi internal"
+      - "Menyiapkan rekaman uji coba dalam video dan PDF"
+
+  tahap_3_pengiriman_permohonan:
+    penanggung_jawab: "Ketua/Direktur LSP atau pejabat yang ditugaskan"
+    kegiatan:
+      - "Mengirim surat permohonan ke BNSP"
+      - "Melampirkan dokumen PDF"
+      - "Menyertakan tautan Google Drive untuk rekaman uji coba"
+      - "Memastikan subjek email sesuai permohonan persetujuan sertifikasi jarak jauh"
+
+  tahap_4_asesmen_lapangan_dan_penyaksian_uji_coba:
+    penanggung_jawab: "BNSP bersama LSP"
+    kegiatan:
+      - "BNSP melakukan asesmen lapangan"
+      - "BNSP menyaksikan uji coba pelaksanaan sertifikasi jarak jauh"
+      - "LSP menyiapkan asesor, TUK, admin, asesi simulasi, sistem, dan rekaman"
+
+  tahap_5_perbaikan_jika_ada_lks:
+    penanggung_jawab: "Manajemen LSP"
+    kegiatan:
+      - "Menindaklanjuti LKS atau ketidaksesuaian jika ditemukan"
+      - "Mengirim bukti tindakan perbaikan"
+      - "Memastikan dokumen dan sistem sesuai persyaratan"
+
+  tahap_6_keputusan_bnsp:
+    penanggung_jawab: "BNSP"
+    kegiatan:
+      - "BNSP menerbitkan keputusan atas permohonan"
+      - "Jika disetujui, LSP dapat melaksanakan sertifikasi kompetensi jarak jauh sesuai ruang lingkup yang disetujui"
+      - "Jika tidak disetujui, LSP dapat mengajukan kembali setelah jangka waktu yang ditentukan"
+```
+
+BNSP melakukan asesmen lapangan dan menyaksikan uji coba pelaksanaan sertifikasi jarak jauh kepada LSP maksimal **30 hari kerja** sejak permohonan diterima. BNSP kemudian menerbitkan keputusan atas permohonan pelaksanaan sertifikasi jarak jauh **20 hari kerja** sejak batas waktu perbaikan LKS asesmen lapangan. 
+
+---
+
+# 5. Dokumen Permohonan Penggunaan Nirkertas / Paperless
+
+Untuk nirkertas, persyaratan lebih ringkas tetapi tetap harus membuktikan bahwa aplikasi sertifikasi mampu mendukung proses digital. SE BNSP menyebut aplikasi penggunaan nirkertas minimal mencakup permohonan sertifikasi, asesmen mandiri, persetujuan asesmen, instrumen asesmen, ceklis meninjau instrumen asesmen, rekaman asesmen, umpan balik, laporan asesmen, dan peninjauan proses asesmen. 
+
+```yaml id="dokumen_permohonan_nirkertas"
+dokumen_permohonan_nirkertas:
+  surat_permohonan:
+    - "Surat permohonan persetujuan penggunaan Nirkertas / Paperless dalam pelaksanaan sertifikasi kompetensi"
+
+  lampiran_wajib:
+    - "SOP Melayani Kegiatan Sertifikasi Kompetensi yang relevan dengan penggunaan Nirkertas / Paperless"
+    - "Rekaman uji coba aplikasi penggunaan Nirkertas / Paperless dalam pelaksanaan sertifikasi kompetensi untuk satu skema sertifikasi dalam format video"
+    - "Rekaman dokumen keluaran hasil uji coba aplikasi penggunaan Nirkertas / Paperless dalam pelaksanaan sertifikasi kompetensi untuk satu skema sertifikasi dalam format PDF"
+
+  fitur_minimal_aplikasi:
+    - "Permohonan sertifikasi"
+    - "Asesmen mandiri"
+    - "Persetujuan asesmen"
+    - "Instrumen asesmen sesuai rencana asesmen"
+    - "Ceklis meninjau instrumen asesmen"
+    - "Rekaman asesmen"
+    - "Umpan balik"
+    - "Laporan asesmen"
+    - "Meninjau proses asesmen"
+```
+
+Permohonan penggunaan nirkertas juga dikirim melalui email **[admin@bnsp.go.id](mailto:admin@bnsp.go.id)** dengan perihal surat permohonan persetujuan penggunaan nirkertas/paperless dalam pelaksanaan sertifikasi kompetensi, dengan melampirkan dokumen sesuai klausul D.II.1. 
+
+---
+
+# 6. Proses Pengajuan Nirkertas oleh LSP
+
+```yaml id="proses_pengajuan_nirkertas_lsp"
+proses_pengajuan_nirkertas_lsp:
+  tahap_1_persiapan_sop_dan_aplikasi:
+    kegiatan:
+      - "Menyesuaikan SOP pelayanan sertifikasi kompetensi agar relevan dengan nirkertas"
+      - "Memastikan aplikasi mendukung seluruh tahapan sertifikasi digital"
+      - "Menyiapkan akun admin, asesor, asesi, komite teknis, dan pihak terkait"
+      - "Menyiapkan mekanisme penyimpanan rekaman dan dokumen digital"
+
+  tahap_2_uji_coba_aplikasi:
+    kegiatan:
+      - "Melakukan simulasi satu skema sertifikasi"
+      - "Merekam proses penggunaan aplikasi dalam format video"
+      - "Menghasilkan dokumen keluaran digital dalam format PDF"
+      - "Memastikan dokumen keluaran dapat ditelusuri dan dibuka kembali"
+
+  tahap_3_penyusunan_permohonan:
+    kegiatan:
+      - "Menyusun surat permohonan penggunaan nirkertas"
+      - "Melampirkan SOP relevan"
+      - "Melampirkan rekaman uji coba aplikasi"
+      - "Melampirkan rekaman dokumen keluaran hasil uji coba"
+
+  tahap_4_pengiriman_ke_bnsp:
+    kegiatan:
+      - "Mengirim surat dan lampiran kepada BNSP"
+      - "Memastikan perihal email sesuai permohonan penggunaan nirkertas"
+      - "Menyimpan bukti pengiriman"
+
+  tahap_5_verifikasi_bnsp:
+    kegiatan:
+      - "BNSP melakukan verifikasi permohonan"
+      - "LSP menindaklanjuti perbaikan jika diminta"
+
+  tahap_6_keputusan_bnsp:
+    kegiatan:
+      - "BNSP menerbitkan keputusan atas permohonan penggunaan nirkertas"
+      - "Jika disetujui, LSP dapat menggunakan nirkertas sesuai ketentuan"
+```
+
+BNSP melakukan verifikasi permohonan penggunaan nirkertas maksimal **30 hari kerja** sejak permohonan diterima, dan menerbitkan keputusan atas permohonan penggunaan nirkertas **15 hari kerja** sejak batas waktu perbaikan verifikasi permohonan. 
+
+---
+
+# 7. Paket Gabungan: Jika LSP Mengajukan AJJ + Nirkertas Sekaligus
+
+```yaml id="paket_gabungan_ajj_nirkertas"
+paket_permohonan_gabungan:
+  nama_paket: "Permohonan Persetujuan Pelaksanaan Sertifikasi Kompetensi Jarak Jauh dan Penggunaan Nirkertas"
+  isi_paket:
+    folder_01_surat_permohonan:
+      - "Surat permohonan persetujuan AJJ"
+      - "Surat permohonan persetujuan penggunaan Nirkertas"
+      - "Daftar skema yang diajukan"
+      - "Daftar metode asesmen jarak jauh yang digunakan"
+
+    folder_02_sop:
+      - "SOP Melayani Pelaksanaan Kegiatan Sertifikasi Kompetensi Jarak Jauh"
+      - "SOP Melaksanakan Asesmen Jarak Jauh"
+      - "SOP Verifikasi TUK Jarak Jauh"
+      - "SOP Banding Jarak Jauh"
+      - "SOP Pelayanan Sertifikasi Kompetensi berbasis Nirkertas"
+
+    folder_03_sk_dan_personil:
+      - "SK personil pengelola sistem sertifikasi jarak jauh"
+      - "SK pemeliharaan sistem sertifikasi jarak jauh"
+      - "Daftar admin sistem"
+      - "Daftar asesor kompetensi"
+      - "Daftar komite teknis"
+      - "Daftar TUK yang digunakan"
+
+    folder_04_sistem_aplikasi:
+      - "Penjelasan sistem aplikasi"
+      - "Penjelasan server"
+      - "Skema manajemen akun dan hak akses"
+      - "Alur aplikasi permohonan sertifikasi"
+      - "Alur asesmen mandiri"
+      - "Alur persetujuan asesmen"
+      - "Alur instrumen asesmen"
+      - "Alur rekaman asesmen"
+      - "Alur laporan asesmen"
+      - "Alur banding"
+
+    folder_05_sarana_prasarana:
+      - "Daftar sarana-prasarana kantor"
+      - "Bukti internet berlangganan"
+      - "Dokumentasi ruang kerja/admin"
+      - "Dokumentasi perangkat pendukung"
+
+    folder_06_pernyataan:
+      - "Pernyataan tidak menggunakan software/aplikasi ilegal"
+      - "Pernyataan menjaga kerahasiaan dan keamanan rekaman"
+      - "Pernyataan penyimpanan rekaman minimal satu periode masa berlaku sertifikat"
+      - "Pernyataan sosialisasi internal sistem AJJ"
+
+    folder_07_uji_coba:
+      - "Video uji coba sertifikasi jarak jauh"
+      - "Video verifikasi TUK jarak jauh"
+      - "Video uji coba aplikasi nirkertas"
+      - "PDF output hasil uji coba nirkertas"
+      - "Catatan evaluasi uji coba"
+      - "Daftar perbaikan setelah uji coba"
+
+    folder_08_bukti_sosialisasi:
+      - "Undangan sosialisasi internal"
+      - "Daftar hadir"
+      - "Foto kegiatan"
+      - "Materi sosialisasi"
+      - "Berita acara sosialisasi"
+
+    folder_09_laporan_dan_monitoring:
+      - "Rencana audit internal"
+      - "Template laporan pelaksanaan sertifikasi jarak jauh"
+      - "Template rekapitulasi asesi"
+      - "Template laporan tindakan perbaikan"
+```
+
+---
+
+# 8. Checklist Validasi Sebelum Dikirim
+
+```yaml id="checklist_validasi_pengajuan"
+checklist_validasi_pengajuan:
+  legal_administratif:
+    - "[ ] Surat permohonan sudah ditandatangani pejabat berwenang LSP"
+    - "[ ] Perihal surat jelas: AJJ, Nirkertas, atau keduanya"
+    - "[ ] Skema yang diajukan tercantum jelas"
+    - "[ ] Jumlah skema pengajuan pertama AJJ tidak melebihi batas ketentuan"
+    - "[ ] Seluruh lampiran diberi nomor dan nama file rapi"
+
+  sop:
+    - "[ ] SOP pelayanan sertifikasi jarak jauh tersedia"
+    - "[ ] SOP asesmen jarak jauh tersedia"
+    - "[ ] SOP verifikasi TUK jarak jauh tersedia"
+    - "[ ] SOP banding jarak jauh tersedia"
+    - "[ ] SOP nirkertas/paperless tersedia atau terintegrasi dalam SOP pelayanan sertifikasi"
+
+  sistem:
+    - "[ ] Aplikasi mendukung permohonan sertifikasi"
+    - "[ ] Aplikasi mendukung asesmen mandiri"
+    - "[ ] Aplikasi mendukung persetujuan asesmen"
+    - "[ ] Aplikasi mendukung instrumen asesmen"
+    - "[ ] Aplikasi mendukung rekaman asesmen"
+    - "[ ] Aplikasi mendukung laporan asesmen"
+    - "[ ] Aplikasi mendukung umpan balik"
+    - "[ ] Aplikasi mendukung banding"
+    - "[ ] Hak akses pengguna sudah diatur"
+
+  bukti_uji_coba:
+    - "[ ] Video uji coba AJJ tersedia"
+    - "[ ] Video verifikasi TUK jarak jauh tersedia"
+    - "[ ] Video uji coba nirkertas tersedia"
+    - "[ ] PDF keluaran hasil uji coba nirkertas tersedia"
+    - "[ ] Rekaman dapat diakses melalui tautan yang dibagikan"
+
+  keamanan_data:
+    - "[ ] Ada pernyataan tidak menggunakan software ilegal"
+    - "[ ] Ada pernyataan keamanan dan kerahasiaan rekaman"
+    - "[ ] Ada kebijakan penyimpanan rekaman"
+    - "[ ] Ada backup dan kontrol akses"
+
+  pengiriman:
+    - "[ ] Semua lampiran PDF sudah final"
+    - "[ ] Folder Google Drive dapat diakses oleh BNSP"
+    - "[ ] Email dikirim ke alamat yang ditentukan"
+    - "[ ] Bukti pengiriman email disimpan"
+```
+
+---
+
+# 9. Template Surat Permohonan
+
+```text id="template_surat_permohonan"
+[KOP SURAT LSP]
+
+Nomor      : [Nomor Surat]
+Lampiran   : [Jumlah Lampiran]
+Perihal    : Permohonan Persetujuan Pelaksanaan Sertifikasi Kompetensi Jarak Jauh
+             dan Penggunaan Nirkertas (Paperless)
+
+Kepada Yth.
+Ketua Badan Nasional Sertifikasi Profesi
+di Jakarta
+
+Dengan hormat,
+
+Dalam rangka meningkatkan layanan sertifikasi kompetensi dan mendukung
+pelaksanaan sertifikasi kompetensi secara jarak jauh serta penggunaan
+nirkertas (paperless), bersama ini kami mengajukan permohonan persetujuan
+Pelaksanaan Sertifikasi Kompetensi Jarak Jauh dan/atau Penggunaan Nirkertas
+(Paperless) pada Lembaga Sertifikasi Profesi [Nama LSP].
+
+Adapun skema sertifikasi yang kami ajukan adalah sebagai berikut:
+1. [Nama Skema 1]
+2. [Nama Skema 2]
+3. [Nama Skema 3]
+
+Sebagai bahan pertimbangan, kami lampirkan dokumen:
+1. SOP pelayanan sertifikasi kompetensi jarak jauh.
+2. SOP pelaksanaan asesmen jarak jauh.
+3. SOP verifikasi TUK jarak jauh.
+4. SOP banding jarak jauh.
+5. SK penetapan personil pengelola sistem.
+6. SK penetapan pemeliharaan sistem.
+7. Daftar sarana dan prasarana kantor.
+8. Bukti internet berlangganan.
+9. Penjelasan sistem aplikasi dan server.
+10. Surat pernyataan penggunaan software legal, keamanan, dan kerahasiaan rekaman.
+11. Bukti sosialisasi internal sistem.
+12. Rekaman uji coba pelaksanaan sertifikasi jarak jauh.
+13. Rekaman uji coba penggunaan nirkertas dan dokumen keluaran hasil uji coba.
+14. Dokumen pendukung lain yang relevan.
+
+Demikian permohonan ini kami sampaikan. Atas perhatian dan kerja sama BNSP,
+kami ucapkan terima kasih.
+
+[Tempat, Tanggal]
+
+Ketua/Direktur LSP [Nama LSP]
+
+[Tanda tangan dan stempel]
+
+[Nama Lengkap]
+[Jabatan]
+```
+
+---
+
+# 10. Modul Chatbot Siap Pakai
+
+```yaml id="chatbot_module_permohonan_lsp_ajj_nirkertas"
+module:
+  id: lsp_application_ajj_nirkertas
+  title: "Dokumen Permohonan dan Proses LSP Mengajukan AJJ Nirkertas"
+  purpose: >
+    Membantu LSP memahami dokumen, tahapan, checklist, dan alur pengajuan
+    persetujuan pelaksanaan sertifikasi kompetensi jarak jauh dan penggunaan
+    nirkertas/paperless kepada BNSP.
+
+intents:
+  - id: ask_application_documents_ajj
+    sample_user_inputs:
+      - "Dokumen pengajuan AJJ apa saja?"
+      - "LSP harus melampirkan apa untuk sertifikasi jarak jauh?"
+      - "Apa syarat permohonan SKK AJJ?"
+    response_template: dokumen_permohonan_ajj
+    next_node: checklist_validasi_pengajuan
+
+  - id: ask_application_documents_paperless
+    sample_user_inputs:
+      - "Dokumen pengajuan nirkertas apa saja?"
+      - "Syarat paperless LSP apa?"
+      - "Apa lampiran permohonan nirkertas?"
+    response_template: dokumen_permohonan_nirkertas
+    next_node: checklist_validasi_pengajuan
+
+  - id: ask_application_process
+    sample_user_inputs:
+      - "Bagaimana proses LSP mengajukan AJJ nirkertas?"
+      - "Alur pengajuan ke BNSP bagaimana?"
+      - "Langkah mengajukan sertifikasi jarak jauh apa?"
+    response_template: proses_pengajuan_ajj_lsp
+    next_node: template_surat_permohonan
+
+  - id: ask_combined_package
+    sample_user_inputs:
+      - "Buatkan paket pengajuan AJJ dan nirkertas"
+      - "Folder dokumen permohonan digabung bagaimana?"
+      - "Susunan dokumen pengajuan ke BNSP"
+    response_template: paket_gabungan_ajj_nirkertas
+    next_node: checklist_validasi_pengajuan
+
+response_rules:
+  - "Selalu ingatkan bahwa LSP tidak boleh melaksanakan AJJ/Nirkertas sebelum mendapat persetujuan BNSP."
+  - "Jika pengguna meminta format dokumen, berikan template surat dan struktur folder."
+  - "Jika pengguna bertanya legalitas terbaru, arahkan untuk memeriksa SE dan ketentuan BNSP terbaru."
+  - "Jangan menyatakan permohonan pasti disetujui."
+```
+
+---
+
+# 11. Ringkasan Cepat
+
+**Dokumen inti AJJ**: surat permohonan, 4 SOP wajib, SK pengelola sistem, SK pemeliharaan sistem, daftar sarana-prasarana, bukti internet, penjelasan aplikasi/server, surat pernyataan legalitas software dan keamanan rekaman, bukti sosialisasi internal, serta rekaman uji coba AJJ dan verifikasi TUK. 
+
+**Dokumen inti Nirkertas**: surat permohonan, SOP pelayanan sertifikasi yang relevan dengan nirkertas, rekaman uji coba aplikasi nirkertas dalam format video, dan rekaman dokumen keluaran hasil uji coba dalam format PDF. 
+
+**Proses inti**: LSP menyiapkan sistem dan dokumen → mengirim permohonan ke BNSP → BNSP melakukan asesmen/verifikasi → LSP memperbaiki temuan bila ada → BNSP menerbitkan keputusan → LSP baru dapat melaksanakan AJJ/Nirkertas sesuai persetujuan.
+
+[1]: https://bnsp.go.id/download?hal=2&id=10&utm_source=chatgpt.com "Halaman Download - BNSP"

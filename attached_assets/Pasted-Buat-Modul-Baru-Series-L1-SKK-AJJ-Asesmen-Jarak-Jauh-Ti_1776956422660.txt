@@ -1,0 +1,199 @@
+Buat Modul Baru
+Series (L1)
+SKK AJJ – Asesmen-Jarak-Jauh
+Tipe Modul
+
+Problem - Masalah yang akan diatasi
+
+Idea - Ide untuk mencapai sesuatu
+
+Inspiration - Inspirasi untuk inovasi
+
+Mentoring - Edukasi dan pendampingan
+Nama Modul *
+Contoh: Kepatuhan & Compliance
+Deskripsi *
+Jelaskan secara detail tentang problem/idea/inspirasi Anda...
+Tujuan
+Tujuan 1
+Tambah Tujuan
+Target Audiens
+Contoh: UMKM di Indonesia
+Hasil yang Diharapkan
+Jelaskan hasil yang ingin dicapai...
+Monetisasi Modul
+Atur harga bundle untuk akses semua chatbot dalam Modul ini. HUB/Orkestrator tetap gratis.
+
+Harga Bulanan (IDR)
+0
+Aktifkan Trial
+
+Durasi Trial (hari)
+7
+Wajib Registrasi
+
+Batal
+Buat Modul
+untuk chatbot SKK AJJ apakah dibutuhkan orchestrator ?
+ya SKK AJJ ini perlu dikuasai pengetahuannya oleh Tim TUK, Manajemen LSP, Asesror, Asesi... kalau seperti ini dibutuhkan orchestratora tidak ?  
+jadi chatbot spesialisnya seperti apa ?
+Buat Modul Baru
+Series (L1)
+SKK AJJ – Asesmen-Jarak-Jauh
+Tipe Modul
+
+Problem - Masalah yang akan diatasi
+
+Idea - Ide untuk mencapai sesuatu
+
+Inspiration - Inspirasi untuk inovasi
+
+Mentoring - Edukasi dan pendampingan
+Nama Modul *
+Contoh: Kepatuhan & Compliance
+Deskripsi *
+Jelaskan secara detail tentang problem/idea/inspirasi Anda...
+Tujuan
+Tujuan 1
+Tambah Tujuan
+Target Audiens
+Contoh: UMKM di Indonesia
+Hasil yang Diharapkan
+Jelaskan hasil yang ingin dicapai...
+Monetisasi Modul
+Atur harga bundle untuk akses semua chatbot dalam Modul ini. HUB/Orkestrator tetap gratis.
+
+Harga Bulanan (IDR)
+0
+Aktifkan Trial
+
+Durasi Trial (hari)
+7
+Wajib Registrasi
+
+Batal
+Buat Modul
+Buat Orkestrator Modul
+Apa itu Orkestrator Modul?
+Orkestrator Modul mengoordinasikan chatbot-chatbot spesialis di dalam satu Modul. Ia menjadi pintu masuk utama dan mengarahkan pengguna ke chatbot yang tepat berdasarkan kebutuhan.
+
+Nama Orkestrator *
+Contoh: Orkestrator Modul
+Deskripsi
+Jelaskan peran orkestrator modul ini...
+Batal
+Buat Orkestrator
+ok
+Buat Chatbot Baru
+Apa itu Chatbot?
+Chatbot adalah unit utuh yang menangani satu area operasional di bawah suatu Modul. Setiap Chatbot memiliki Alat Bantu (modul spesifik) di dalamnya.
+
+Contoh: Dari Modul "Kepatuhan & Compliance", Anda bisa membuat Chatbot untuk "SBU & Klasifikasi", "SKK & Tenaga Ahli", atau "Perijinan Usaha".
+
+Dari Modul:
+mentoring
+SKK AJJ – Asesmen Jarak Jauh
+Modul SKK AJJ – Asesmen Jarak Jauh dirancang untuk membantu individu, lembaga pendidikan, pelatih, asesor, dan penyelenggara program dalam memahami serta menerapkan proses asesmen jarak jauh secara efektif, terstruktur, dan akuntabel. Modul ini membahas konsep dasar asesmen jarak jauh, tantangan implementasi, standar pelaksanaan, strategi validasi hasil asesmen, serta pendampingan praktik penggunaan metode dan instrumen asesmen digital. Fokus utama modul ini adalah menjawab kebutuhan akan sistem asesmen yang tetap kredibel meskipun dilakukan tanpa tatap muka langsung. Banyak pelaksana asesmen menghadapi kendala seperti keterbatasan pengawasan, validitas bukti, kesiapan peserta, pemilihan platform, hingga dokumentasi hasil. Karena itu, modul ini hadir sebagai panduan praktis sekaligus sarana edukasi untuk meningkatkan kualitas perencanaan, pelaksanaan, dan evaluasi asesmen jarak jauh. Melalui pendekatan mentoring, peserta tidak hanya memperoleh pemahaman teori, tetapi juga arahan implementatif, contoh alur kerja, best practice, serta dukungan dalam menyesuaikan asesmen dengan konteks lembaga atau program masing-masing. Modul ini cocok digunakan sebagai fondasi awal bagi pihak yang ingin membangun atau memperbaiki sistem asesmen digital yang profesional, efisien, dan berorientasi pada mutu.
+
+Nama Chatbot *
+Contoh: SBU & Klasifikasi
+Deskripsi
+Jelaskan tentang chatbot ini...
+Tujuan Chatbot
+Tujuan utama dari chatbot ini...
+Kapabilitas
+Kapabilitas 1
+Tambah Kapabilitas
+Batasan
+Batasan 1
+Tambah Batasan
+Batal
+Buat Chatbot
+Pasted text.txt
+Document
+buatlah Persona chatbot SKK AJJ-Tim TUK 
+
+* Bagaimana alur verifikasi peserta dalam AJJ?
+
+Knowledge Base
+Kelola informasi yang dapat diakses chatbot Anda
+
+
+Aktif
+✦ Generate dengan AI
+Import dari Notion
+Tambah Knowledge
+Cari knowledge base...
+Lapisan Knowledge (Knowledge Layers)
+
+Foundational
+Dokumen dasar, referensi tetap: regulasi, standar, data produk.
+
+Operational
+SOP harian, prosedur aktif: panduan kerja, FAQ, template.
+
+Case Memory
+Histori kasus & preseden: notulen, keputusan, pembelajaran.
+
+RAG (Retrieval Augmented Generation)
+
+0 potongan dokumen dari 0 knowledge base
+
+Aktif
+
+Belum ada knowledge
+Tambahkan dokumen/FAQ/SOP agar chatbot bisa menjawab lebih akurat.
+
+Tambah item knowledge
+Tambah Knowledge
+Tambahkan sumber informasi baru agar chatbot dapat menjawab lebih akurat.
+
+Nama
+Contoh: FAQ NIB, Syarat OSS, Alur Pendaftaran
+Tipe Sumber
+📝 Teks / Copy-Paste
+Lapisan Knowledge
+Operational — SOP harian & prosedur aktif
+Tentukan di lapisan mana dokumen ini berada dalam hierarki knowledge agen.
+
+Konten Teks
+Tempel informasi, SOP, FAQ, atau panduan di sini...
+Gunakan judul bagian: "Syarat", "Langkah-langkah", "Biaya", "Waktu proses", "Masalah umum".
+
+Deskripsi (Opsional)
+Deskripsi singkat tentang knowledge ini
+Batal
+Tambah Knowledge
+lanjut ke 2
+Lanjut KB 3
+KB 4 yang paling pas adalah Dokumentasi Pelaksanaan dan Pencatatan Insiden AJJ.
+KB 5: Koordinasi Tim TUK dengan Asesor dalam Pelaksanaan AJJ.
+KB 6: Alur Persiapan AJJ dari H-7 sampai Hari H.
+KB 7: Tugas dan Tanggung Jawab Tim TUK dalam AJJ.
+KB 8: Batas Peran Tim TUK vs Asesor dalam AJJ agar chatbot makin tegas membedakan domainnya.
+RAG (Retrieval Augmented Generation)
+
+14 potongan dokumen dari 8 knowledge base
+
+Aktif
+
+Preset Cepat
+
+Hemat
+Seimbang
+Akurat
+— atau atur manual di bawah
+Ukuran Chunk (token)
+800
+Semakin besar = konteks lebih lengkap, tapi risiko meleset naik.
+
+Overlap (token)
+200
+Semakin besar = transisi antar potongan lebih mulus, biaya pemrosesan naik.
+
+Hasil Pencarian (Top-K)
+5
+Jumlah potongan yang disisipkan saat menjawab. Terlalu besar bisa membuat jawaban melebar.
+
+Simpan Pengaturan
+Reset Default

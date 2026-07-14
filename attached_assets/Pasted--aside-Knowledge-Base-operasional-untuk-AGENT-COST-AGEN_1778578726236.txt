@@ -1,0 +1,148 @@
+<aside>
+🏦
+
+Knowledge Base operasional untuk **AGENT-COST**, **AGENT-OSS**, dan **AGENT-DOCS**. Berisi direktori LSBU resmi, matriks tarif & SLA indikatif, alur lengkap OSS-RBA + portal LPJK, plus troubleshoot. 
+
+**[ASUMSI: Tarif & SLA bersifat indikatif per Q2 2026; verifikasi tarif final langsung ke LSBU pilihan sebelum pembayaran.]**
+
+</aside>
+
+## 🏦 Direktori LSBU Terdaftar (Ringkas)
+
+LSBU = Lembaga Sertifikasi Badan Usaha yang lisensinya dikeluarkan LPJK. Berikut LSBU besar yang umumnya melayani lintas-bidang konstruksi.
+
+| LSBU | Lingkup Bidang | Coverage Wilayah | Catatan |
+| --- | --- | --- | --- |
+| LSBU GAPENSI | BS · BG · IL · IM · KO | Nasional | Asosiasi kontraktor umum, populer untuk K & M |
+| LSBU GAPEKNAS | BS · BG · IL · IM · KO | Nasional | Lintas-skala, kuat di wilayah timur |
+| LSBU AKLINDO | IL (instalasi mekanikal-elektrikal) | Nasional | Fokus kuat di IL |
+| LSBU INKINDO | KO (konsultansi konstruksi terintegrasi) | Nasional | Untuk BUJKK terintegrasi |
+| LSBU ASPEKINDO | BS · BG · IL · IM · KO | Nasional | Asosiasi pelaksana, ramah K–M |
+| LSBU AKSI / lainnya | Spesialis subbidang | Nasional/Regional | Cek directory LPJK terbaru |
+
+**[ASUMSI: Daftar resmi terkini selalu cek di [lpjk.pu.go.id/lsbu-list](http://lpjk.pu.go.id/lsbu-list). Status akreditasi dapat berubah.]**
+
+---
+
+## 💵 Matriks Tarif Indikatif (Rupiah, per Q2 2026)
+
+### Tarif Base (subklasifikasi pertama)
+
+| Kualifikasi | Min | Max | Tarif Konsultan Eksternal (opsional) |
+| --- | --- | --- | --- |
+| K | 5.000.000 | 9.000.000 | 2–4 jt |
+| M1 | 9.000.000 | 15.000.000 | 3–6 jt |
+| M2 | 15.000.000 | 25.000.000 | 5–10 jt |
+| B1 | 25.000.000 | 45.000.000 | 8–15 jt |
+| B2 | 45.000.000 | 70.000.000 | 12–25 jt |
+| Asing | Negosiasi | Negosiasi | 25+ jt |
+
+### Tarif Subklasifikasi Tambahan
+
+Per subklas tambahan = **60–80% tarif base**. Contoh: K dengan 3 subklas (BS001, BS002, BS003) → base 7 jt + 2 × (60–80% × 7 jt) = **Rp 15,4 – 18,2 jt**.
+
+### Biaya Admin & Penunjang
+
+| Item | Estimasi |
+| --- | --- |
+| Biaya admin LSBU | Rp 250 rb – 1 jt |
+| Audit laporan keuangan (M2+) | Rp 5 – 15 jt |
+| Pelatihan SMK3 / SMM ringan | Rp 3 – 8 jt |
+| Pengurusan SKK baru (per orang) | Rp 1,5 – 4 jt (LSP) |
+| Notaris (akta perubahan) | Rp 2 – 7 jt |
+
+---
+
+## ⏱️ SLA / Timeline Indikatif
+
+Dihitung **sejak dossier lengkap submitted di portal LPJK**.
+
+| Kualifikasi | Verifikasi LSBU | Sidang/Asesmen | Penerbitan | Total |
+| --- | --- | --- | --- | --- |
+| K | 5–10 hk | 2–5 hk | 3–5 hk | **10–20 hk** |
+| M1 | 7–14 hk | 5–10 hk | 2–6 hk | **14–30 hk** |
+| M2 | 7–14 hk | 5–10 hk | 2–6 hk | **14–30 hk** |
+| B1 | 10–20 hk | 7–15 hk | 4–10 hk | **21–45 hk** |
+| B2 | 10–20 hk | 7–15 hk | 4–10 hk | **21–45 hk** |
+| Asing | 14–30 hk | 10–20 hk | 6–10 hk | **30–60 hk** |
+
+*hk = hari kerja.*  **[ASUMSI: SLA dapat molor jika ada perbaikan dokumen; +5–10 hk per round revisi.]**
+
+---
+
+## 🌐 Alur OSS-RBA → Portal LPJK (End-to-End)
+
+### Fase 1 — Pre-flight di OSS-RBA ([oss.go.id](http://oss.go.id))
+
+1. Login akun BUJK (NIK Direktur) → menu **Perizinan Berusaha**.
+2. Pastikan **NIB sudah terbit** dengan **KBLI konstruksi**:
+    - 41xxx (konstruksi gedung)
+    - 42xxx (konstruksi sipil)
+    - 43xxx (konstruksi khusus / instalasi)
+3. Skala usaha (mikro/kecil/menengah/besar) konsisten dengan kualifikasi SBU target.
+4. Tingkat risiko KBLI = menengah-tinggi / tinggi → **memerlukan Sertifikat Standar**.
+5. Update data perubahan (akta, alamat, modal) bila ada — *sinkronisasi NIB wajib sebelum lanjut*.
+
+### Fase 2 — Migrasi & Akun di Portal LPJK ([lpjk.pu.go.id](http://lpjk.pu.go.id))
+
+1. Login portal LPJK dengan akun BUJK (sinkron NIB).
+2. **Verifikasi data BUJK**: nama, NIB, alamat, direktur, NPWP.
+3. Tambahkan **personel kunci**: PJBU (Penanggung Jawab Badan Usaha), PJTBU (Teknis), PJKBU (Klasifikasi), PJSKBU (Subklasifikasi) — masing-masing dengan nomor SKK aktif.
+4. *Validasi 1 PJTBU per BUJK* dan *1 PJSKBU per subklasifikasi*.
+
+### Fase 3 — Permohonan SBU
+
+1. Menu **Permohonan SBU** → pilih jenis: baru / tambah subklas / perpanjangan / naik kualifikasi / mutasi LSBU.
+2. Pilih **LSBU** dari dropdown (sesuai lingkup bidang).
+3. Pilih **klasifikasi (bidang)** → **subklasifikasi** → **kualifikasi**.
+4. Upload dokumen sesuai checklist (kategori A–F dari AGENT-DOCS).
+5. **Submit** → status berubah menjadi *Menunggu Verifikasi LSBU*.
+
+### Fase 4 — Verifikasi LSBU, Pembayaran & Asesmen
+
+1. LSBU melakukan **verifikasi formil & substantif** (max 15 hk per Permen PUPR 8/2022).
+2. **Surat Tarif** terbit → bayar via VA LSBU.
+3. **Sidang/Asesmen** (untuk M+ wajib; K kadang cukup desk evaluation).
+4. Hasil: ✅ Lulus → SBU diterbitkan di portal LPJK | ⚠️ Perbaikan → revisi (max 2 round).
+
+### Fase 5 — Penerbitan & Penggunaan
+
+1. SBU digital terbit di portal LPJK → unduh PDF berstempel digital LSBU + LPJK.
+2. SBU otomatis tersinkron ke **profil BUJK di OSS-RBA** untuk digunakan di tender (SPSE/LPSE).
+3. Cek di **Sertifikat Standar OSS** — pastikan status "Terverifikasi".
+
+---
+
+## 🔧 Troubleshoot 8 Error Tersering
+
+| Kode | Gejala | Penyebab Umum | Solusi |
+| --- | --- | --- | --- |
+| E1 | "KBLI tidak cocok subklasifikasi" | NIB belum punya KBLI 41/42/43xxx target | Update NIB di OSS dulu → tunggu sinkron 1–3 hk |
+| E2 | "NIB belum tersinkron LPJK" | Migrasi belum jalan | Klik menu *Sinkronisasi NIB* di LPJK; tunggu 24 jam |
+| E3 | "Personel sudah terikat BUJK lain" | SKK PJTBU dipakai di BUJK lain | Surat pengunduran diri + lepas tautan di portal lama |
+| E4 | "Dokumen tertolak verifikasi" | Format/ukuran/ttd salah | PDF ≤2 MB per file, ttd basah scan jelas, lengkap |
+| E5 | "Tarif beda dari estimasi" | Tarif resmi LSBU update | Cek Surat Tarif resmi → laporkan ke COST untuk recalc |
+| E6 | "Kualifikasi tidak dapat dipilih" | Kekayaan/pengalaman tidak memenuhi | Cek Permen PUPR 8/2022 lamp. → upgrade gradual |
+| E7 | "SBU lama belum dihapus" | Migrasi data lama belum bersih | Eskalasi ke admin LSBU lama untuk un-link |
+| E8 | "Akses portal LPJK ditolak" | Akun belum aktif / password expired | Reset via email Direktur terdaftar |
+
+---
+
+## 🔗 Sumber Resmi (Tautan)
+
+- OSS-RBA: https://oss.go.id
+- Portal LPJK: https://lpjk.pu.go.id
+- Cek status SBU publik: https://lpjk.pu.go.id/cek-sbu
+- Daftar LSBU & Lisensi: https://lpjk.pu.go.id/lsbu
+- Daftar LSP & SKK: https://lpjk.pu.go.id/lsp
+
+**[ASUMSI: URL & struktur menu portal dapat berubah. Verifikasi terakhir Q2 2026. Saat ditemukan perbedaan, gunakan label menu utama sebagai panduan, bukan path URL.]**
+
+---
+
+## 📌 Catatan Inject ke Agen
+
+- **AGENT-COST** → inject seluruh tabel tarif + biaya admin + SLA.
+- **AGENT-OSS** → inject Fase 1–5 + troubleshoot E1–E8.
+- **AGENT-DOCS** → inject ringkasan format dokumen (PDF ≤2 MB, ttd basah, kelengkapan stempel).
+- **AGENT-COMPLY** → referensi Permen PUPR 8/2022 untuk dasar SLA & jenjang verifikasi.

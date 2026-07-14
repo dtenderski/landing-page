@@ -1,0 +1,268 @@
+Berikut versi hierarki dan konfigurasi yang lebih “powerful” untuk Gustafta Chatbot Builder dengan pendekatan **Atentif Agentic AI** berbasis **multi-agent** (Agen Orchestrator + Agen Spesialis) dan **OpenClaw** untuk eksekusi tugas.
+
+## 1) Hierarki yang disempurnakan (Domain → Tujuan → Big Idea → Toolbox → Agen)
+
+Struktur kamu sudah kuat. Yang perlu ditambah supaya makin tajam adalah: *kontrak output*, *aturan rute kerja*, dan *memori/knowledge governance*.
+
+### A. Domain (Ruang lingkup & batasan)
+
+**Fungsi utama:** menentukan “dunia” chatbot, aturan, risiko, dan metrik kualitas.
+
+Tambahkan properti:
+
+- **Domain Charter**: apa yang boleh dan tidak boleh dilakukan.
+- **Stakeholder & Audience**: siapa pengguna utama (pelanggan, staf internal, vendor).
+- **Quality Bar**: standar jawaban (misal: harus menyebut sumber internal/KB, harus menawarkan langkah lanjut).
+- **Risk & Compliance**: data sensitif, legal disclaimer, kebijakan perusahaan.
+- **Definition of Done (DoD) Domain**: kapan percakapan dianggap selesai.
+
+Output yang diharapkan:
+
+- “Konstitusi” domain (aturan main) yang dipakai semua agent.
+
+### B. Tujuan (Goal / Objective)
+
+**Fungsi utama:** memaksa chatbot selalu punya “arah”.
+
+Tambahkan properti:
+
+- **Primary outcome**: misal “menyelesaikan tiket”, “menghasilkan dokumen”, “menutup penjualan”, “mendidik pengguna”.
+- **KPI**: resolution rate, CSAT, waktu respon, conversion, dsb.
+- **Conversation win conditions**: kondisi sukses per sesi.
+- **Fallback objective**: jika goal utama tidak tercapai, apa yang dilakukan (kumpulkan data, eskalasi, buat ringkasan, dsb).
+
+### C. Big Idea (Persona + positioning + worldview)
+
+**Fungsi utama:** membuat chatbot konsisten dan “berkarakter” tanpa mengorbankan akurasi.
+
+Tambahkan properti:
+
+- **Brand voice spec**: gaya bahasa, tingkat formal, format jawaban.
+- **Reasoning policy**: bagaimana menjelaskan (ringkas, langkah demi langkah, tanya klarifikasi).
+- **Truthfulness policy**: wajib mengakui ketidakpastian, tidak mengarang, minta data bila kurang.
+- **Interaction policy**: kapan bertanya, kapan menyimpulkan, kapan mengeksekusi.
+
+### D. Toolbox (Kapabilitas & mini apps)
+
+**Fungsi utama:** daftar alat yang bisa dipakai agent, termasuk OpenClaw.
+
+Susun toolbox jadi 3 lapis:
+
+1) **Sensemaking tools** (memahami)
+
+- Klarifikasi kebutuhan, ekstraksi entitas, ringkasan, analisis risiko, klasifikasi intent.
+
+2) **Planning tools** (merancang)
+
+- Membuat rencana, breakdown tugas, estimasi, decision matrix, prioritisasi.
+
+3) **Execution tools (OpenClaw)** (melakukan)
+
+- Generator dokumen, kalkulator, checklist, integrasi channel, API call, workflow runner, dsb.
+
+Tambahkan properti:
+
+- **Tool contract**: input yang dibutuhkan, output format, batasan, error handling.
+- **Cost/latency policy**: kapan pakai tool berat vs ringan.
+- **Safety gates**: tindakan tertentu wajib konfirmasi pengguna (misal kirim pesan ke channel, publish, delete).
+
+### E. Agen (Multi-agent: Orchestrator + Specialist)
+
+**Fungsi utama:** menghasilkan perilaku agentic yang stabil dan bisa diskalakan.
+
+Tambahkan layer kecil di atas “Agen”:
+
+- **Agen Orchestrator** (selalu ada, satu “otak pengatur”)
+- **Agen Spesialis** (dipanggil sesuai kebutuhan)
+- **Agen Executor / OpenClaw Runner** (boleh jadi peran terpisah atau bagian Orchestrator)
+
+Dengan begitu, rute kerja jadi jelas: *Orchestrator memutuskan; Specialist menganalisis; OpenClaw mengeksekusi.*
+
+---
+
+## 2) Arsitektur Atentif Agentic AI (cara kerja yang konsisten)
+
+Atentif = agent “mendengar” dengan disiplin, bukan langsung menjawab.
+
+### Loop kerja standar (berlaku untuk semua domain)
+
+1) **Intake & Attention**
+
+- Tangkap intent, constraint, konteks pengguna, dan target output.
+- Deteksi “missing info”.
+
+2) **Plan**
+
+- Buat rencana pendek.
+- Tentukan agent spesialis mana yang dipanggil.
+
+3) **Act**
+
+- Jalankan tool / OpenClaw jika perlu.
+
+4) **Verify**
+
+- Cek konsistensi, cek risiko, cek apakah semua permintaan terpenuhi.
+
+5) **Respond**
+
+- Jawaban final + pilihan langkah lanjut (opsional).
+
+6) **Memory update (opsional)**
+
+- Simpan hanya hal yang aman dan berguna (bukan data sensitif).
+
+---
+
+## 3) Persona (template yang bisa kamu pakai)
+
+Berikut persona baseline yang “kuat” untuk builder semacam Gustafta:
+
+### Persona inti: “Atentif Orchestrator”
+
+**Nama (contoh):** Gustafta Orchestrator  
+
+**Sifat:** tenang, fokus hasil, responsif, tidak menggurui  
+
+**Gaya komunikasi:**
+
+- Ringkas dulu, detail menyusul jika diminta.
+- Selalu menawarkan langkah berikutnya.
+- Kalau info kurang: tanya 1–3 pertanyaan paling penting (bukan banyak pertanyaan).
+
+**Prinsip:**
+
+- Tidak mengarang.
+- Kalau perlu eksekusi: jelaskan apa yang akan dilakukan, lalu lakukan via tool.
+- Mengutamakan keselamatan data: tidak minta data sensitif tanpa alasan.
+
+**Format jawaban default:**
+
+- **Jawaban inti**
+- **Langkah yang bisa dilakukan**
+- **Data yang dibutuhkan (jika ada)**
+- **Opsi lanjutan**
+
+---
+
+## 4) Knowledge (cara mengatur pengetahuan agar chatbot “berisi”)
+
+Supaya powerfull, knowledge jangan cuma “upload dokumen”, tapi punya tata kelola.
+
+### 4.1 Lapisan knowledge
+
+1) **Foundational knowledge (tetap)**
+
+- definisi, SOP, kebijakan, style guide, FAQ resmi.
+
+2) **Operational knowledge (berubah)**
+
+- harga, katalog, promo, jadwal, status proyek.
+
+3) **Case memory (berbasis percakapan)**
+
+- ringkasan kasus, keputusan, next steps (tanpa data sensitif).
+
+### 4.2 “Knowledge contracts”
+
+- Setiap jawaban penting harus bisa menunjuk: “ini berdasarkan KB / kebijakan / data operasional”.
+- Kalau tidak ada sumber: jawab sebagai *saran umum* dan tandai ketidakpastian.
+
+### 4.3 Indexing & chunking yang disarankan
+
+- Pecah dokumen berdasarkan topik (bukan per file).
+- Simpan metadata: domain, versi, tanggal berlaku, owner.
+
+---
+
+## 5) Multi-agent roster (contoh Agen Spesialis)
+
+Kamu bisa buat library agen spesialis reusable lintas domain:
+
+- **Agen Clarifier**: menggali requirement secara cepat.
+- **Agen Knowledge Curator**: menyusun KB, mendeteksi duplikasi, menyarankan struktur.
+- **Agen SOP/Compliance**: memeriksa kebijakan, disclaimer, risiko.
+- **Agen Copywriter**: tone, bahasa, CTA, dan microcopy.
+- **Agen Data Analyst**: analisis angka, ringkasan metrik, dashboard insight.
+- **Agen UX Conversation Designer**: flow percakapan, fallback, error prompts.
+- **Agen Executor (OpenClaw)**: menjalankan mini apps / workflow dan mengembalikan hasil.
+
+**Aturan penting:** spesialis tidak langsung “mengeksekusi” hal berisiko; spesialis hanya memberi rekomendasi ke Orchestrator.
+
+---
+
+## 6) OpenClaw untuk eksekusi (konsep konfigurasi)
+
+Agar OpenClaw efektif, perlakukan seperti “mesin kerja” dengan standar:
+
+### 6.1 Kategori eksekusi
+
+- **Dokumentasi**: proposal, SOP, kontrak, RAB ringkas, laporan, notulen.
+- **Operasional**: checklist, risk assessment, progress tracker.
+- **Integrasi**: kirim ke channel, webhook, API call, update database internal.
+
+### 6.2 Gate eksekusi
+
+- **Read-only**: boleh jalan tanpa konfirmasi (ambil data, rangkum).
+- **Write**: butuh konfirmasi (buat dokumen, update sistem).
+- **Destructive**: konfirmasi ganda (hapus, publish, kirim massal).
+
+---
+
+## 7) Konfigurasi perilaku (yang membuat chatbot benar-benar “agentic”)
+
+Ini bagian “inti kekuatan” agar chatbot bisa: menjawab, menyarankan, menerima tugas, dialog interaktif, dan melaksanakan tugas.
+
+### 7.1 Mode kerja (state machine sederhana)
+
+- **Answer Mode**: jawab cepat berbasis KB.
+- **Advisor Mode**: beri opsi + tradeoff.
+- **Task Intake Mode**: kumpulkan requirement tugas.
+- **Execution Mode**: jalankan OpenClaw + laporkan hasil.
+- **Review Mode**: verifikasi, minta persetujuan, finalisasi.
+
+### 7.2 Aturan klarifikasi (supaya tidak bertele-tele)
+
+Tanya hanya bila:
+
+- output target tidak jelas,
+- ada risiko salah tinggi,
+- butuh data spesifik untuk eksekusi.
+
+Kalau pertanyaan terlalu banyak, gunakan:
+
+- 1 pertanyaan “paling menentukan”
+- lalu berikan 2–3 asumsi default yang bisa dipilih pengguna.
+
+### 7.3 Self-check (anti halu)
+
+Sebelum final:
+
+- Apakah semua permintaan user terjawab?
+- Apakah ada klaim tanpa sumber/KB?
+- Apakah ada langkah eksekusi tanpa izin?
+
+---
+
+## 8) Agar hierarki “Domain–Tujuan–Big Idea–Toolbox–Agen” makin kuat: tambahkan 2 komponen opsional
+
+Kalau kamu mau makin matang, tambahkan:
+
+1) **Playbook (di antara Tujuan dan Big Idea)**
+
+- kumpulan skenario: FAQ, komplain, closing, eskalasi, refund, dsb.
+
+2) **Policy Layer (di antara Domain dan Toolbox)**
+
+- aturan akses data, permission, keamanan, dan gaya jawaban lintas agen.
+
+---
+
+Kalau kamu setuju, aku bisa bantu buatkan 1 contoh implementasi yang konkret untuk 1 domain pilihan kamu (misalnya: *Konstruksi & Engineering* atau *Retail & E-Commerce*) dalam format:
+
+- Domain Charter
+- Tujuan + KPI
+- Big Idea (persona + voice)
+- Daftar Agen Orchestrator & Spesialis beserta job description
+- Toolbox + kontrak input/output
+- Flow percakapan inti (happy path + fallback)

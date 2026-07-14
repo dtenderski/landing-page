@@ -1,0 +1,479 @@
+Berikut uraian **peran Asesor Kompetensi pada saat proses AJJ Nirkertas**. Saya buat dalam format operasional LSP: **sebelum asesmen, saat asesmen berlangsung, setelah asesmen, dokumen yang dihasilkan, batas kewenangan, risiko, dan checklist**.
+
+Acuan konteksnya: BNSP memiliki SE tentang **Sertifikasi Kompetensi Jarak Jauh dan Penggunaan Nirkertas**; aplikasi AJJ/Nirkertas minimal memuat permohonan sertifikasi, asesmen mandiri, persetujuan asesmen, instrumen asesmen, rekaman asesmen, umpan balik, laporan asesmen, peninjauan proses asesmen, serta banding. ([NAS Online][1]) Dalam desain chatbot yang Anda lampirkan, prinsip yang sama juga dipakai: proses harus berbasis bukti kompetensi, tidak boleh mengklaim keputusan resmi secara otomatis, dan tetap menempatkan keputusan sertifikasi pada proses/lembaga berwenang. 
+
+---
+
+# 1. Peran Utama Asesor Kompetensi
+
+**Asesor Kompetensi** adalah pihak yang melaksanakan asesmen kompetensi terhadap asesi sesuai skema, standar, metode asesmen, perangkat asesmen, dan SOP LSP.
+
+Dalam **AJJ Nirkertas**, peran asesor bukan hanya “menguji” asesi, tetapi juga memastikan bahwa proses digital tetap:
+
+1. valid,
+2. adil,
+3. autentik,
+4. cukup bukti,
+5. terdokumentasi,
+6. terekam,
+7. dapat ditelusuri,
+8. sesuai SOP LSP.
+
+```yaml id="peran_utama_asesor_ajj_nirkertas"
+asesor_kompetensi:
+  peran_utama:
+    - melaksanakan asesmen kompetensi secara jarak jauh
+    - memverifikasi identitas asesi
+    - memverifikasi lingkungan asesmen
+    - menjelaskan tata tertib AJJ
+    - menggunakan instrumen asesmen digital
+    - mengumpulkan dan menilai bukti kompetensi
+    - menjaga objektivitas dan integritas asesmen
+    - mencatat kendala teknis
+    - menyusun laporan asesmen digital
+    - memberikan rekomendasi hasil asesmen kepada LSP
+```
+
+---
+
+# 2. Peran Asesor Sebelum AJJ Berlangsung
+
+Pada tahap pra-asesmen, asesor memastikan proses sudah siap dari sisi skema, asesi, perangkat asesmen, bukti awal, dan kesepakatan asesmen.
+
+## Tugas Asesor Sebelum Asesmen
+
+| Area                      | Tugas Asesor                                                             | Output                                    |
+| ------------------------- | ------------------------------------------------------------------------ | ----------------------------------------- |
+| Review data asesi         | Meninjau data pendaftaran, dokumen persyaratan, dan skema yang dipilih   | Catatan review awal                       |
+| Review asesmen mandiri    | Memeriksa asesmen mandiri asesi                                          | Catatan kecukupan bukti awal              |
+| Review bukti kompetensi   | Menilai apakah portofolio/bukti awal relevan dan cukup untuk dilanjutkan | Daftar bukti yang perlu diklarifikasi     |
+| Persiapan rencana asesmen | Menjelaskan metode, jadwal, media, dan aturan asesmen                    | Rencana/persetujuan asesmen               |
+| Persiapan instrumen       | Memastikan MUK/instrumen asesmen digital tersedia dan sesuai skema       | Instrumen siap digunakan                  |
+| Persiapan teknis AJJ      | Memastikan platform, link, jadwal, dan mekanisme rekaman siap            | Checklist teknis pra-AJJ                  |
+| Persiapan integritas      | Menyiapkan mekanisme verifikasi identitas dan lingkungan                 | Checklist verifikasi identitas/lingkungan |
+
+```yaml id="tugas_asesor_sebelum_ajj"
+sebelum_asesmen:
+  asesor_kompetensi:
+    - meninjau data asesi dan skema sertifikasi
+    - meninjau asesmen mandiri digital
+    - meninjau bukti kompetensi awal
+    - memastikan instrumen asesmen digital tersedia
+    - menjelaskan rencana asesmen kepada asesi
+    - memastikan persetujuan asesmen digital sudah dilakukan
+    - memastikan link/platform asesmen siap
+    - memastikan mekanisme rekaman asesmen siap
+    - menyiapkan cara verifikasi identitas dan lingkungan asesmen
+```
+
+---
+
+# 3. Peran Asesor Saat AJJ Berlangsung
+
+Pada saat asesmen berlangsung, asesor menjadi pengendali utama proses asesmen. Asesor harus memastikan bahwa yang hadir benar asesi yang bersangkutan, proses berjalan sesuai SOP, bukti kompetensi dikumpulkan dengan benar, dan setiap kejadian penting terdokumentasi.
+
+## Urutan Peran Asesor Saat Sesi AJJ
+
+### 1. Membuka sesi asesmen
+
+Asesor membuka sesi dengan menyampaikan:
+
+* nama skema,
+* tujuan asesmen,
+* metode asesmen,
+* tata tertib,
+* aturan kamera/mikrofon,
+* aturan integritas,
+* mekanisme jika terjadi kendala teknis.
+
+### 2. Memverifikasi identitas asesi
+
+Asesor memastikan peserta yang hadir adalah asesi yang benar.
+
+Contoh tindakan:
+
+* meminta asesi menunjukkan identitas resmi,
+* mencocokkan nama dengan data pendaftaran,
+* memastikan wajah asesi terlihat jelas,
+* mencatat jika identitas tidak terbaca atau kamera bermasalah.
+
+### 3. Memverifikasi lingkungan asesmen
+
+Asesor memastikan tempat asesmen mendukung integritas proses.
+
+Contoh tindakan:
+
+* meminta asesi menunjukkan area sekitar bila diperlukan sesuai SOP,
+* memastikan tidak ada pihak lain yang membantu,
+* memastikan perangkat tambahan tidak digunakan secara tidak sah,
+* menjelaskan larangan membuka bantuan yang tidak diizinkan.
+
+### 4. Menjelaskan instruksi asesmen
+
+Asesor menjelaskan:
+
+* cara menjawab,
+* cara menunjukkan bukti,
+* cara mengunggah atau membuka dokumen,
+* durasi asesmen,
+* tata cara jika koneksi terputus.
+
+### 5. Melaksanakan asesmen
+
+Asesor menggunakan metode sesuai skema, misalnya:
+
+* wawancara,
+* uji lisan,
+* uji tulis digital,
+* observasi video,
+* simulasi praktik,
+* review portofolio,
+* klarifikasi bukti kerja.
+
+### 6. Mengisi instrumen asesmen digital
+
+Asesor mengisi instrumen secara objektif berdasarkan bukti, bukan berdasarkan asumsi.
+
+Yang dicatat:
+
+* bukti yang ditunjukkan,
+* jawaban asesi,
+* hasil observasi,
+* catatan klarifikasi,
+* kecukupan bukti,
+* catatan kendala.
+
+### 7. Menjaga integritas asesmen
+
+Jika ada indikasi bantuan tidak sah, kamera mati tanpa alasan, identitas tidak jelas, atau lingkungan tidak terkendali, asesor harus mengikuti SOP LSP: memberi peringatan, menunda, menghentikan sementara, atau mencatat kejadian.
+
+### 8. Menutup sesi asesmen
+
+Asesor menutup sesi dengan:
+
+* menyampaikan bahwa hasil final mengikuti mekanisme LSP,
+* menjelaskan tindak lanjut,
+* memberi informasi pengisian umpan balik,
+* memastikan rekaman dan dokumen tersimpan.
+
+```yaml id="tugas_asesor_saat_ajj"
+saat_asesmen:
+  asesor_kompetensi:
+    pembukaan:
+      - membuka sesi AJJ
+      - menjelaskan tujuan dan metode asesmen
+      - menjelaskan tata tertib AJJ
+      - menjelaskan mekanisme kendala teknis
+
+    verifikasi:
+      - memverifikasi identitas asesi
+      - memverifikasi lingkungan asesmen
+      - memastikan kamera, mikrofon, dan koneksi memadai
+      - mencatat hasil verifikasi
+
+    pelaksanaan:
+      - menggunakan instrumen asesmen digital
+      - melakukan wawancara, observasi, uji, atau review portofolio
+      - mengumpulkan bukti kompetensi
+      - menilai kecukupan bukti
+      - mencatat jawaban dan bukti asesi
+
+    pengendalian_integritas:
+      - memantau potensi bantuan tidak sah
+      - menindaklanjuti gangguan teknis sesuai SOP
+      - mencatat kejadian penting
+      - menunda atau menghentikan asesmen jika validitas proses terganggu
+
+    penutupan:
+      - menyampaikan proses tindak lanjut
+      - memastikan rekaman asesmen tersimpan
+      - mengarahkan asesi mengisi umpan balik
+```
+
+---
+
+# 4. Peran Asesor Setelah AJJ
+
+Setelah asesmen selesai, asesor menyelesaikan laporan dan rekomendasi. Pada tahap ini, asesor tidak boleh sekadar menyatakan “lulus” atau “tidak lulus” tanpa dasar. Asesor harus memastikan rekomendasi dapat ditelusuri ke bukti asesmen.
+
+## Tugas Asesor Setelah Asesmen
+
+| Area                | Tugas Asesor                                            | Output                   |
+| ------------------- | ------------------------------------------------------- | ------------------------ |
+| Evaluasi bukti      | Meninjau kembali bukti, jawaban, observasi, dan rekaman | Ringkasan bukti          |
+| Pengisian instrumen | Melengkapi instrumen asesmen digital                    | Instrumen asesmen terisi |
+| Rekomendasi         | Memberikan rekomendasi berdasarkan bukti                | Rekomendasi asesor       |
+| Laporan             | Menyusun laporan asesmen                                | Laporan asesmen digital  |
+| Umpan balik         | Memberikan umpan balik pembelajaran/proses kepada asesi | Catatan umpan balik      |
+| Kendala             | Melaporkan kendala teknis atau pelanggaran integritas   | Laporan kendala          |
+| Arsip               | Memastikan dokumen asesmen tersimpan di sistem          | Arsip digital            |
+
+```yaml id="tugas_asesor_setelah_ajj"
+setelah_asesmen:
+  asesor_kompetensi:
+    - meninjau bukti asesmen
+    - melengkapi instrumen asesmen digital
+    - memastikan rekaman asesmen tersedia
+    - membuat laporan asesmen
+    - memberikan rekomendasi hasil asesmen
+    - mencatat kendala teknis atau pelanggaran jika ada
+    - memberikan umpan balik kepada asesi
+    - menyerahkan laporan kepada LSP untuk proses keputusan sertifikasi
+```
+
+---
+
+# 5. Dokumen yang Dihasilkan atau Diisi oleh Asesor
+
+```yaml id="dokumen_asesor_ajj_nirkertas"
+dokumen_asesor:
+  sebelum_asesmen:
+    - catatan review asesmen mandiri
+    - catatan review bukti kompetensi
+    - persetujuan asesmen digital
+    - checklist kesiapan asesmen
+    - surat tugas asesor dari LSP
+
+  saat_asesmen:
+    - checklist verifikasi identitas
+    - checklist verifikasi lingkungan asesmen
+    - instrumen asesmen digital terisi
+    - catatan observasi atau wawancara
+    - catatan kendala teknis
+    - rekaman asesmen
+
+  setelah_asesmen:
+    - laporan asesmen digital
+    - rekomendasi asesor
+    - catatan umpan balik
+    - laporan insiden atau pelanggaran jika ada
+```
+
+---
+
+# 6. Batas Kewenangan Asesor Kompetensi
+
+Ini bagian penting agar tidak terjadi salah peran.
+
+Asesor **berwenang**:
+
+* melaksanakan asesmen,
+* menilai bukti,
+* mengisi instrumen,
+* memberi umpan balik,
+* membuat rekomendasi hasil asesmen,
+* mencatat kendala,
+* melaporkan proses kepada LSP.
+
+Asesor **tidak berwenang**:
+
+* menerbitkan sertifikat sendiri,
+* menjanjikan asesi pasti kompeten/lulus,
+* mengubah keputusan sertifikasi di luar prosedur,
+* mengabaikan pelanggaran integritas,
+* melanjutkan asesmen jika identitas/lingkungan tidak dapat diverifikasi dan SOP mengharuskan penghentian,
+* membuka akses instrumen atau rekaman kepada pihak yang tidak berwenang.
+
+```yaml id="batas_kewenangan_asesor"
+batas_kewenangan_asesor:
+  boleh:
+    - melaksanakan asesmen
+    - memverifikasi identitas dan lingkungan asesmen
+    - menilai bukti kompetensi
+    - mengisi instrumen asesmen
+    - memberikan rekomendasi hasil asesmen
+    - memberikan umpan balik
+    - mencatat dan melaporkan kendala
+
+  tidak_boleh:
+    - menerbitkan sertifikat
+    - menyatakan keputusan final di luar mekanisme LSP
+    - menjamin asesi pasti kompeten
+    - mengabaikan konflik kepentingan
+    - mengabaikan indikasi kecurangan
+    - memberikan akses dokumen/rekaman kepada pihak tidak berwenang
+```
+
+---
+
+# 7. Risiko yang Harus Dikendalikan Asesor
+
+```yaml id="risiko_asesor_ajj"
+risiko_asesor_ajj:
+  - risiko: "Identitas asesi tidak valid"
+    pengendalian:
+      - verifikasi identitas di awal sesi
+      - mencocokkan data dengan sistem
+      - mencatat hasil verifikasi
+
+  - risiko: "Asesi dibantu pihak lain"
+    pengendalian:
+      - verifikasi lingkungan asesmen
+      - aturan kamera aktif
+      - pernyataan integritas
+      - catatan pelanggaran jika ada
+
+  - risiko: "Bukti kompetensi tidak cukup"
+    pengendalian:
+      - klarifikasi bukti
+      - wawancara berbasis bukti
+      - meminta bukti tambahan sesuai SOP
+
+  - risiko: "Rekaman asesmen gagal"
+    pengendalian:
+      - memastikan fitur rekaman aktif
+      - mencatat kendala
+      - melaporkan ke admin/pengelola sistem
+      - mengikuti SOP jika bukti rekaman tidak lengkap
+
+  - risiko: "Rekomendasi tidak berbasis bukti"
+    pengendalian:
+      - menghubungkan rekomendasi dengan instrumen, jawaban, observasi, dan bukti
+      - mencatat alasan rekomendasi
+      - memastikan laporan asesmen lengkap
+```
+
+---
+
+# 8. Checklist Praktis Asesor Kompetensi
+
+## Checklist Pra-Asesmen
+
+```yaml id="checklist_pra_asesmen_asesor"
+checklist_pra_asesmen:
+  - "[ ] Surat tugas asesor diterima"
+  - "[ ] Skema dan jadwal asesmen dipahami"
+  - "[ ] Data asesi tersedia"
+  - "[ ] Asesmen mandiri sudah ditinjau"
+  - "[ ] Bukti kompetensi awal sudah ditinjau"
+  - "[ ] Instrumen asesmen digital tersedia"
+  - "[ ] Link/platform AJJ tersedia"
+  - "[ ] Mekanisme rekaman dipastikan"
+  - "[ ] Rencana asesmen sudah disetujui"
+```
+
+## Checklist Saat Asesmen
+
+```yaml id="checklist_saat_asesmen_asesor"
+checklist_saat_asesmen:
+  - "[ ] Membuka sesi asesmen"
+  - "[ ] Menjelaskan tata tertib AJJ"
+  - "[ ] Memverifikasi identitas asesi"
+  - "[ ] Memverifikasi lingkungan asesmen"
+  - "[ ] Memastikan kamera dan mikrofon berjalan"
+  - "[ ] Memastikan rekaman aktif"
+  - "[ ] Menggunakan instrumen asesmen digital"
+  - "[ ] Mengumpulkan bukti kompetensi"
+  - "[ ] Mencatat jawaban dan observasi"
+  - "[ ] Mencatat kendala teknis jika ada"
+  - "[ ] Menutup sesi sesuai prosedur"
+```
+
+## Checklist Pasca-Asesmen
+
+```yaml id="checklist_pasca_asesmen_asesor"
+checklist_pasca_asesmen:
+  - "[ ] Instrumen asesmen lengkap"
+  - "[ ] Bukti asesmen tercatat"
+  - "[ ] Rekaman asesmen tersedia"
+  - "[ ] Laporan asesmen disusun"
+  - "[ ] Rekomendasi asesor berbasis bukti"
+  - "[ ] Kendala teknis dilaporkan"
+  - "[ ] Umpan balik diberikan"
+  - "[ ] Dokumen diserahkan ke LSP melalui sistem"
+```
+
+---
+
+# 9. Alur Kerja Asesor Kompetensi
+
+```text id="alur_kerja_asesor_ajj"
+[Terima Surat Tugas]
+        ↓
+[Review Data Asesi dan Asesmen Mandiri]
+        ↓
+[Review Bukti Kompetensi Awal]
+        ↓
+[Pastikan Instrumen Digital Siap]
+        ↓
+[Sepakati Rencana/Persetujuan Asesmen]
+        ↓
+[Buka Sesi AJJ]
+        ↓
+[Verifikasi Identitas Asesi]
+        ↓
+[Verifikasi Lingkungan Asesmen]
+        ↓
+[Laksanakan Asesmen dengan Instrumen Digital]
+        ↓
+[Catat Bukti, Jawaban, Observasi, dan Kendala]
+        ↓
+[Tutup Sesi AJJ]
+        ↓
+[Lengkapi Laporan Asesmen]
+        ↓
+[Beri Rekomendasi kepada LSP]
+        ↓
+[LSP Memproses Keputusan Sertifikasi]
+```
+
+---
+
+# 10. Modul Chatbot Siap Pakai
+
+```yaml id="chatbot_module_peran_asesor_ajj"
+module:
+  id: peran_asesor_kompetensi_ajj_nirkertas
+  title: "Peran Asesor Kompetensi dalam Proses AJJ Nirkertas"
+  purpose: >
+    Menjelaskan tugas, tanggung jawab, batas kewenangan, dokumen, risiko,
+    dan checklist Asesor Kompetensi pada proses Asesmen Jarak Jauh berbasis
+    nirkertas.
+
+intents:
+  - id: ask_asesor_role_ajj
+    sample_user_inputs:
+      - "Apa peran asesor kompetensi dalam AJJ Nirkertas?"
+      - "Tugas asesor saat asesmen jarak jauh apa?"
+      - "Asesor harus melakukan apa saat AJJ?"
+      - "Dokumen apa yang diisi asesor dalam AJJ?"
+    response_template: response_asesor_role_ajj
+    next_node: asesor_role_menu
+
+flow:
+  id: asesor_role_menu
+  title: "Menu Peran Asesor Kompetensi"
+  bot_message: >
+    Pilih bagian peran Asesor Kompetensi yang ingin Anda lihat.
+  quick_replies:
+    - "Sebelum asesmen"
+    - "Saat asesmen"
+    - "Setelah asesmen"
+    - "Dokumen asesor"
+    - "Batas kewenangan"
+    - "Checklist asesor"
+    - "Risiko yang dikendalikan"
+
+response_template:
+  id: response_asesor_role_ajj
+  text: >
+    Dalam AJJ Nirkertas, Asesor Kompetensi berperan melaksanakan asesmen
+    jarak jauh secara objektif, memverifikasi identitas dan lingkungan asesi,
+    menggunakan instrumen asesmen digital, mengumpulkan bukti kompetensi,
+    menjaga integritas proses, mencatat kendala, menyusun laporan asesmen,
+    dan memberikan rekomendasi kepada LSP. Asesor tidak menerbitkan sertifikat
+    dan tidak menetapkan keputusan final di luar mekanisme LSP.
+  quick_replies:
+    - "Checklist pra-asesmen"
+    - "Checklist saat asesmen"
+    - "Checklist pasca-asesmen"
+    - "Batas kewenangan"
+```
+
+---
+
+## Ringkasan Inti
+
+Dalam proses **AJJ Nirkertas**, **Asesor Kompetensi adalah pengendali proses asesmen**: memverifikasi asesi, memastikan lingkungan asesmen layak, menjalankan instrumen digital, mengumpulkan bukti, menjaga integritas, mencatat kendala, dan menyusun laporan. Namun, **asesor hanya memberikan rekomendasi berbasis bukti**, sedangkan keputusan sertifikasi resmi tetap diproses oleh mekanisme LSP.
+
+[1]: https://nasonline.id/wp-content/uploads/2024/12/SE-SJJ-Paperless-Final-17.05.23.pdf?utm_source=chatgpt.com "TENTANG - nasonline.id"

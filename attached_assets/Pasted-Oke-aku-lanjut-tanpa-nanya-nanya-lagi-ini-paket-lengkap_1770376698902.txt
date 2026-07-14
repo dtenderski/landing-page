@@ -1,0 +1,290 @@
+Oke, aku lanjut **tanpa nanya-nanya lagi**: ini paket lengkap yang bisa kamu pakai untuk **menghidupkan mini apps + mengarahkan user**.
+
+Aku bagi jadi:
+
+1. **Prompt final per Mini App (siap copy)**
+2. **UX Flow (user klik apa → bot ngapain)**
+3. **Simulasi 1 proyek end-to-end** (biar kebayang real)
+
+---
+
+## 1) Prompt Final per Mini App (siap copy)
+
+> Format: **Tujuan → Input → Output → Aturan**
+
+### A. Checklist Penanganan Isu
+
+**Tujuan:** memastikan isu ditangani sistematis sampai layak ditutup.
+**Input:** issue_type, issue_location, issue_status, decision_risk_level, checklist items.
+**Output:** daftar item belum selesai + rekomendasi langkah berikutnya.
+
+**Prompt:**
+
+* Tampilkan item checklist yang belum dicentang.
+* Jika `decision_risk_level=High`, wajib minta “verifikasi/approval/monitoring plan”.
+* Jangan izinkan “Closed” jika checklist belum 100%.
+
+---
+
+### B. Penilaian Risiko
+
+**Tujuan:** mengubah isu/keputusan jadi prioritas yang jelas.
+**Input:** issue_type, issue_location, constraints (time/cost/site_access), environmental_factors.
+**Output:** risk_category, likelihood (1–5), impact (1–5), level (Low/Medium/High), mitigasi ringkas.
+
+**Prompt:**
+
+* Tentukan **kategori risiko** (Safety/Quality/Structural/Cost/Schedule/Environment).
+* Beri likelihood & impact (1–5) + alasan 1 kalimat.
+* Hasilkan mitigasi 3 poin paling praktis.
+
+---
+
+### C. Decision Summary
+
+**Tujuan:** dokumentasi keputusan yang bisa diaudit.
+**Input:** decision_summary, decision_reason, decision_date, risk_level, impact_area.
+**Output:** ringkasan 5W1H mini (What/Why/When/Where/Who/How).
+
+**Prompt:**
+
+* Tulis keputusan dalam format:
+
+  * What (apa yang diputuskan)
+  * Why (alasan)
+  * Impact (Cost/Time/Quality/Safety)
+  * Risk (Low/Med/High)
+  * Next actions (2–3 poin)
+* Jika “alasan” kosong, minta data pendukung yang paling penting.
+
+---
+
+### D. Issue Log
+
+**Tujuan:** daftar isu aktif + histori.
+**Input:** issue_type, issue_location, issue_status, issue_since, risk_level, last_updated.
+**Output:** top 5 isu paling kritis + “apa yang menghambat penutupan”.
+
+**Prompt:**
+
+* Urutkan isu berdasarkan: High risk > lama open > dampak schedule/cost.
+* Untuk tiap isu tampilkan:
+
+  * Status, sejak kapan, risiko, next step 1 baris.
+* Jika isu Open > 14 hari: minta “decision atau escalation”.
+
+---
+
+### E. Action Tracker
+
+**Tujuan:** akuntabilitas “who does what by when”.
+**Input:** action_item, assigned_to, due_date, status, related_issue.
+**Output:** overdue list + rekomendasi reprioritization.
+
+**Prompt:**
+
+* Tampilkan action overdue.
+* Sarankan 3 tindakan:
+
+  1. re-assign PIC
+  2. pecah task besar
+  3. tambah bukti/cek lapangan
+* Jangan tutup isu jika ada action “Blocked/Overdue”.
+
+---
+
+### F. Pelacak Progres
+
+**Tujuan:** melihat planned vs actual dan deviasi.
+**Input:** planned_progress, actual_progress, note.
+**Output:** status (Ahead/On track/Delay) + 3 penyebab + 3 countermeasure.
+
+**Prompt:**
+
+* Jika actual < planned: label “Delay”, minta akar masalah.
+* Sarankan countermeasure: resource, metode, sequencing.
+
+---
+
+### G. Project Snapshot
+
+**Tujuan:** ringkasan 1 layar untuk meeting.
+**Input:** semua ringkasan (issues, risk, progress, last_updated).
+**Output:** 7 bullet eksekutif.
+
+**Prompt:**
+
+* Tampilkan:
+
+  * Stage, progres, isu open, high-risk count, keputusan terbaru, risiko lingkungan utama, last update.
+* Tutup dengan: “3 prioritas minggu ini”.
+
+---
+
+### H. Risk Radar
+
+**Tujuan:** peta risiko kategori & tren.
+**Input:** risk_category, risk_level, trend, last_reviewed.
+**Output:** 3 kategori paling bahaya + rekomendasi mitigasi.
+
+**Prompt:**
+
+* Jika trend Increasing: sarankan tindakan segera.
+* Jika High + Increasing: minta meeting khusus/approval.
+
+---
+
+### I. Generator Dokumen
+
+**Tujuan:** bikin laporan otomatis dari data.
+**Input:** jenis dokumen, periode, sumber (Project Brain + mini apps).
+**Output:** outline dokumen + poin-poin isi.
+
+**Prompt:**
+
+* Buat struktur dokumen: Executive summary, Issues, Decisions, Risks, Progress, Next plan.
+* Jangan mengarang data; jika kosong, tulis “Data belum tersedia”.
+
+---
+
+### J. Change Log
+
+**Tujuan:** jejak perubahan desain/metode/scope.
+**Input:** change_type, description, reason, impact, approval_status.
+**Output:** ringkasan perubahan + risiko + kebutuhan approval.
+
+**Prompt:**
+
+* Wajib ada: reason + impact.
+* Jika impact Multi: sarankan risk assessment ulang.
+
+---
+
+## 2) UX Flow (user klik apa → bot ngapain)
+
+### Flow “Ada Isu Baru”
+
+1. User input ke **Project Brain** (issue_* minimal)
+2. Bot langsung arahkan:
+
+   * **Penilaian Risiko** (wajib)
+   * **Checklist Penanganan Isu**
+3. Bot membuat “Next Actions”:
+
+   * buka **Action Tracker** → isi PIC & due date
+
+**Rule otomatis:**
+
+* status awal selalu **Open**
+* boleh jadi **Monitoring** kalau checklist ≥ 50% dan ada action plan
+* boleh jadi **Closed** kalau checklist 100% + action done
+
+---
+
+### Flow “Meeting / Weekly Update”
+
+1. Bot tampilkan **Project Snapshot**
+2. Bot tampilkan **Risk Radar**
+3. Kalau user bilang “buat laporan” → **Generator Dokumen**
+
+---
+
+### Flow “Mau Menutup Isu”
+
+1. Bot cek **Checklist** + **Action Tracker**
+2. Kalau belum memenuhi syarat → bot tolak halus + kasih langkah sisa
+3. Kalau sudah → bot set rekomendasi “Closed” + minta verifikasi akhir
+
+---
+
+## 3) Simulasi End-to-End 1 Proyek (contoh)
+
+### Step 0 — Project Brain diisi
+
+* project_name: Pembangunan Jembatan Kali Brantas
+* project_type: Jembatan
+* stage: Execution
+* structural_system: Beton bertulang
+* issue_type: Quality
+* issue_location: Pier P2 – area kepala kolom
+* issue_status: Open
+* issue_since: 2026-02-02
+* environmental_factors: dekat sungai, rawan banjir
+
+---
+
+### Step 1 — Bot: “Lakukan Penilaian Risiko”
+
+**Risk App**
+
+* category: Quality/Structural (pilih dominan: Structural)
+* likelihood: 3 (sedang)
+* impact: 4 (besar)
+* level: High
+* mitigasi:
+
+  1. core drill / NDT tambahan
+  2. verifikasi desain & as-built
+  3. stop pour area terkait sampai clear
+
+---
+
+### Step 2 — Bot: “Lengkapi Checklist Penanganan Isu”
+
+Checklist belum selesai:
+
+* data pendukung (uji/NDT) belum ada
+* alternatif solusi belum dibuat
+* keputusan belum diambil
+
+---
+
+### Step 3 — Bot: “Buat Action Tracker”
+
+Action:
+
+* NDT + mapping retak — PIC QA/QC — due 2026-02-05
+* Review desain & shopdrawing — PIC Eng — due 2026-02-06
+* Rencana perbaikan — PIC Site — due 2026-02-07
+
+---
+
+### Step 4 — Keputusan dibuat
+
+**Decision Summary**
+
+* What: Injeksi epoxy + jacketing lokal pada kepala kolom P2
+* Why: retak melebihi threshold visual dan perlu restore kapasitas
+* Impact: Time + Quality
+* Risk: Medium (setelah mitigasi)
+* Next actions: metode kerja, inspeksi pasca perbaikan
+
+---
+
+### Step 5 — Status naik ke Monitoring
+
+Syarat terpenuhi:
+
+* checklist ≥ 50% ✅
+* action ada ✅
+
+---
+
+### Step 6 — Setelah verifikasi selesai
+
+Checklist 100% ✅
+Action done ✅
+Bot rekomendasikan: **Closed** + catat “lesson learned” singkat (optional).
+
+---
+
+## Kalau kamu mau “langsung implement”
+
+Aku bisa susunkan **paket default Mini Apps** untuk proyek sipil dengan:
+
+* nama final
+* deskripsi final
+* item checklist final
+* opsi dropdown final (risk/status/type)
+
+Cukup pakai ini sebagai “template starter” dan tinggal duplikasi per proyek.

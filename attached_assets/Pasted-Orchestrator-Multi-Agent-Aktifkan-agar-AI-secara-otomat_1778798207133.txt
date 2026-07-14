@@ -1,0 +1,120 @@
+Orchestrator Multi-Agent
+
+Aktifkan agar AI secara otomatis mendeteksi topik query (tender, SKK, dokumen, hukum, K3, marketing) dan mengaktifkan prompt specialist yang tepat — tanpa biaya tinggi.
+Preset Perilaku
+Pilih gaya kerja AI yang paling cocok.
+
+Balanced
+Seimbang & Fleksibel
+Reset ke Preset
+Cocok untuk sebagian besar kasus. AI responsif, memberikan jawaban terstruktur, dan meminta klarifikasi sebelum bertindak.
+
+Otonomi Sedang
+Terstruktur
+Tanya Dulu
+Sebagian pengaturan mengikuti preset. Aktifkan Mode Lanjutan untuk detail.
+
+Tingkat Otonomi
+Seberapa aktif AI mengambil inisiatif.
+
+Terbatas
+Mode Agentic
+
+Aktifkan kemampuan lanjutan (perencanaan & langkah bertahap).
+Fitur lanjutan akan dibatasi.
+
+Peran & Mode Kerja
+Tentukan peran agen dalam sistem multi-agent dan mode operasinya.
+Peran Agen
+Posisi agen dalam ekosistem multi-agent.
+
+
+Standalone
+Mode Agentic OFF — hanya "Answer Mode" tersedia.
+
+
+·
+Answer Mode:
+Jawab cepat berbasis KB.
+·
+Advisor Mode:
+Beri opsi + tradeoff.
+·
+Task Intake Mode:
+Kumpulkan requirement tugas.
+·
+Execution Mode:
+Jalankan tool dan laporkan hasil.
+·
+Review Mode:
+Verifikasi dan minta persetujuan.
+MultiClaw Orchestration Planner
+AI
+MULTI-AGENT
+AI menganalisis semua agen dalam chatbot ini dan merancang routing rules, handoff protocol, gap analysis, serta saran orchestrator system prompt secara otomatis.
+Generate Orchestration Plan
+OpenClaw
+NONAKTIF
+EXECUTION ENGINE
+Lapisan keamanan eksekusi multi-level. Setiap tindakan AI dicegat, dikategorikan, dan dikonfirmasi sebelum berjalan — memberi Anda kontrol penuh atas apa yang dilakukan AI.
+Aktifkan Mode Agentic untuk mengaktifkan OpenClaw.
+
+Gerbang Eksekusi
+Level konfirmasi sebelum AI melakukan tindakan.
+
+
+Write Gate — konfirmasi 1× untuk tindakan tulis
+Matriks Tindakan
+
+READ
+Cari KB · Hitung · Rangkum · Sarankan
+Otomatis
+WRITE
+Draft dokumen · Update rekaman · Buat laporan
+1× Konfirmasi
+DESTRUCTIVE
+Hapus data · Publish · Kirim massal
+Konfirmasi Ganda
+Pengaturan Lanjutan — Ringkasan
+Ubah
+Aktifkan Mode Lanjutan di pojok kanan atas untuk mengubah nilai ini secara detail.
+Kualitas Respons
+
+Kedalaman Jawaban
+Terstruktur
+Format Output Utama
+Ringkasan + langkah
+Pemeriksaan Mandiri
+Aktif
+Klarifikasi & Risiko
+
+Minta Klarifikasi Dulu
+Ya
+Tampilkan Peringatan Risiko
+Aktif
+Saat Tidak Yakin
+Sarankan verifikasi ke s…
+Memori & Interaksi
+
+Retensi Konteks
+10 pesan
+Bantuan Proaktif
+Rendah
+Gaya Interaksi
+Konsultatif
+Empati Kontekstual
+Ringan
+Pembelajaran Adaptif
+
+Mode Pembelajaran
+Off
+Simpan Sinyal Interaksi
+Tidak
+Inter-Agent API
+
+Konfigurasikan sub-agen yang dipanggil secara paralel setiap kali chatbot ini menerima pesan. Hasilnya digabung menjadi satu respons oleh orchestrator.
+Memori AI
+
+Informasi yang diingat AI dari percakapan sebelumnya dengan pengguna.
+Tampilkan Mode Lanjutan untuk lebih banyak opsi
+Aktifkan Mode Lanjutan di atas untuk mengatur prioritas konteks, batas tindakan, eskalasi, pembelajaran, dan prioritas sumber.

@@ -1,0 +1,760 @@
+Saya lanjutkan **di chat saja**.
+
+## LANJUTAN 7 — Verification & Assessor Form Engine
+
+Modul ini membuat chatbot bisa berperan sebagai **asisten pra-verifikasi**: bukan hanya menanyakan dokumen, tetapi juga mengelompokkan dokumen sesuai item penilaian LSBU/asesor. Dalam SK Dirjen Binakon No. 37/KPTS/DK/2025, penilaian kesesuaian mencakup verifikasi-validasi, penilaian kemampuan badan usaha, dan rekomendasi; hasilnya dipetakan ke format penjualan tahunan, keuangan, TKK, peralatan, dan SMAP. 
+
+```yaml
+# -----------------------------------------------------------------------------
+# LANJUTAN 7 — VERIFICATION & ASSESSOR FORM ENGINE
+# -----------------------------------------------------------------------------
+
+verification_assessor_engine:
+  id: verification_assessor_engine_v1
+  title: "Mesin Pra-Verifikasi dan Form Asesor SBU"
+  purpose:
+    - membantu pengguna mengelompokkan dokumen sesuai item penilaian SBU
+    - membantu admin/LSBU internal membuat ringkasan pra-verifikasi
+    - membantu mendeteksi data yang kosong, tidak selaras, atau perlu klarifikasi
+    - menghasilkan status awal: Memenuhi, Perlu Perbaikan, Perlu Klarifikasi, atau Tidak Siap
+  limitation: >
+    Mesin ini tidak menggantikan penilaian asesor LSBU. Hasilnya hanya untuk
+    pra-verifikasi dan persiapan data sebelum proses formal.
+```
+
+## 1. Item Penilaian Utama
+
+```yaml
+verification_items:
+  annual_sales:
+    id: annual_sales
+    title: "Penjualan Tahunan / Pengalaman"
+    related_forms:
+      - "FPT-01 Verifikasi dan Validasi Dokumen Penjualan Tahunan"
+      - "FTP-02 Hasil Evaluasi/Penilaian Penjualan Tahunan"
+    data_needed:
+      - "kontrak kerja konstruksi"
+      - "nilai kontrak"
+      - "lingkup pekerjaan utama"
+      - "porsi pekerjaan jika KSO/subpenyedia"
+      - "subklasifikasi yang diklaim"
+      - "data SIMPAN atau bukti pengalaman"
+    validation_focus:
+      - "kesesuaian pengalaman dengan subklasifikasi"
+      - "status kontrak sah"
+      - "periode pengalaman"
+      - "major item pekerjaan"
+      - "apakah pengalaman sudah pernah digunakan untuk subklasifikasi lain"
+
+  financial_capacity:
+    id: financial_capacity
+    title: "Kemampuan Keuangan"
+    related_forms:
+      - "FKK-01 Verifikasi dan Validasi Dokumen Kemampuan Keuangan"
+      - "FKK-02/FKK-03 Hasil Evaluasi Kemampuan Keuangan"
+    data_needed:
+      - "neraca keuangan"
+      - "nilai ekuitas"
+      - "laporan audit KAP jika dipersyaratkan"
+      - "mata uang dan konversi bila ada nilai asing"
+      - "jumlah subklasifikasi yang dimohonkan"
+    validation_focus:
+      - "ketersediaan neraca"
+      - "kesesuaian ekuitas dengan kualifikasi"
+      - "kebutuhan audit untuk menengah/besar"
+      - "konsistensi total ekuitas dengan seluruh subklasifikasi"
+
+  workforce_tkk:
+    id: workforce_tkk
+    title: "Ketersediaan Tenaga Kerja Konstruksi"
+    related_forms:
+      - "FTKK-01 Verifikasi dan Validasi Dokumen Ketersediaan TKK"
+      - "FTKK-02 Hasil Evaluasi Ketersediaan Tenaga Kerja"
+    data_needed:
+      - "PJBU"
+      - "PJTBU"
+      - "PJSKBU"
+      - "SKK tenaga kerja"
+      - "jenjang KKNI/SKK"
+      - "status tenaga tetap"
+      - "subklasifikasi TKK yang sesuai"
+    validation_focus:
+      - "kelengkapan PJBU, PJTBU, PJSKBU"
+      - "kesesuaian SKK dengan subklasifikasi"
+      - "kesesuaian jenjang dengan kualifikasi"
+      - "rangkap jabatan"
+      - "status tenaga tetap"
+
+  equipment:
+    id: equipment
+    title: "Kemampuan Penyediaan Peralatan"
+    related_forms:
+      - "FALT-01 Verifikasi dan Validasi Dokumen Ketersediaan Peralatan"
+      - "FALT-02 Hasil Evaluasi Penyediaan Peralatan"
+    data_needed:
+      - "daftar peralatan utama"
+      - "jumlah alat"
+      - "status milik/sewa"
+      - "nomor registrasi peralatan"
+      - "dokumen bukti milik/sewa"
+      - "kesesuaian alat dengan subklasifikasi dan kualifikasi"
+    validation_focus:
+      - "jenis alat sesuai ketentuan"
+      - "jumlah alat cukup"
+      - "status kepemilikan/sewa jelas"
+      - "nomor registrasi tersedia bila dipersyaratkan"
+      - "dokumen sewa dapat diklarifikasi"
+
+  smap:
+    id: smap
+    title: "Sistem Manajemen Anti Penyuapan"
+    related_forms:
+      - "FSMAP-01 ISO 37001:2016"
+      - "FSMAP-02 PANCEK KPK"
+      - "FSMAP-03 Dokumen Penerapan SMAP"
+      - "FSMAP-04 Surat Pernyataan Komitmen SMAP"
+      - "FSMAP-05 Hasil Evaluasi dan Rekomendasi SMAP"
+    data_needed:
+      - "sertifikat ISO 37001:2016 jika ada"
+      - "dokumen penerapan SMAP"
+      - "lembar konfirmasi PANCEK"
+      - "surat pernyataan komitmen SMAP"
+      - "masa komitmen pemenuhan"
+    validation_focus:
+      - "jenis bukti SMAP"
+      - "keabsahan sertifikat/dokumen"
+      - "kelengkapan dokumen perencanaan dan rekaman pelaksanaan"
+      - "batas waktu komitmen"
+```
+
+## 2. Flow Pra-Verifikasi Dokumen
+
+```yaml
+node_document_verification_start:
+  type: message_with_buttons
+  title: "Pra-Verifikasi Dokumen SBU"
+  message: >
+    Pilih area dokumen yang ingin dicek. Saya akan membantu mengelompokkan
+    dokumen dan memberi status awal: Memenuhi, Perlu Perbaikan, Perlu Klarifikasi,
+    atau Tidak Siap.
+  buttons:
+    - label: "Penjualan Tahunan"
+      target_node: node_verify_annual_sales
+    - label: "Kemampuan Keuangan"
+      target_node: node_verify_financial
+    - label: "TKK"
+      target_node: node_verify_tkk
+    - label: "Peralatan"
+      target_node: node_verify_equipment
+    - label: "SMAP"
+      target_node: node_verify_smap
+    - label: "Cek Semua"
+      target_node: node_verify_all_start
+```
+
+## 3. Flow Penjualan Tahunan / Pengalaman
+
+Ketentuan pengalaman perlu berhati-hati karena SK Dirjen menyebut pengalaman kontrak dapat digunakan untuk lebih dari satu subklasifikasi jika sesuai pekerjaan utama, tetapi pengalaman yang sudah digunakan pada subklasifikasi tertentu tidak digunakan kembali untuk permohonan subklasifikasi berbeda dalam konteks penilaian yang sama. 
+
+```yaml
+node_verify_annual_sales:
+  type: guided_form
+  title: "Verifikasi Awal Penjualan Tahunan"
+  questions:
+    - id: q_contract_available
+      text: "Apakah kontrak kerja konstruksi tersedia?"
+      quick_replies: ["Ada", "Tidak ada", "Sebagian"]
+      save_to: verification.annual_sales.contract_available
+
+    - id: q_contract_value
+      text: "Berapa nilai kontrak atau total pengalaman yang akan digunakan?"
+      expected_type: text
+      save_to: verification.annual_sales.contract_value
+
+    - id: q_contract_scope
+      text: "Apa lingkup pekerjaan utama dalam kontrak?"
+      expected_type: text
+      save_to: verification.annual_sales.contract_scope
+
+    - id: q_major_item
+      text: "Apakah pekerjaan utama/major item sesuai dengan subklasifikasi yang diajukan?"
+      quick_replies: ["Sesuai", "Tidak sesuai", "Belum yakin"]
+      save_to: verification.annual_sales.major_item_match
+
+    - id: q_used_before
+      text: "Apakah pengalaman ini sudah pernah digunakan untuk subklasifikasi lain?"
+      quick_replies: ["Belum", "Sudah", "Belum tahu"]
+      save_to: verification.annual_sales.used_before
+
+  completion_node: node_verify_annual_sales_result
+
+node_verify_annual_sales_result:
+  type: dynamic_response
+  title: "Hasil Pra-Verifikasi Penjualan Tahunan"
+  response_template: tpl_annual_sales_verification_result
+```
+
+```yaml
+tpl_annual_sales_verification_result: >
+  Hasil pra-verifikasi penjualan tahunan:
+
+  Kontrak tersedia:
+  {{verification.annual_sales.contract_available}}
+
+  Nilai kontrak/pengalaman:
+  {{verification.annual_sales.contract_value}}
+
+  Lingkup pekerjaan utama:
+  {{verification.annual_sales.contract_scope}}
+
+  Kesesuaian major item:
+  {{verification.annual_sales.major_item_match}}
+
+  Riwayat penggunaan pengalaman:
+  {{verification.annual_sales.used_before}}
+
+  Status awal:
+  {{annual_sales_status}}
+
+  Catatan:
+  Pengalaman harus selaras dengan subklasifikasi yang diajukan dan perlu
+  diverifikasi melalui dokumen pendukung serta sistem pengalaman yang berlaku.
+
+  Rekomendasi:
+  {{annual_sales_recommendation}}
+```
+
+## 4. Flow Kemampuan Keuangan
+
+```yaml
+node_verify_financial:
+  type: guided_form
+  title: "Verifikasi Awal Kemampuan Keuangan"
+  questions:
+    - id: q_financial_doc_type
+      text: "Dokumen keuangan yang tersedia?"
+      quick_replies:
+        - "Neraca internal"
+        - "Laporan audit KAP"
+        - "Belum ada"
+        - "Belum tahu"
+      save_to: verification.financial.doc_type
+
+    - id: q_equity_value
+      text: "Masukkan nilai ekuitas/kemampuan keuangan."
+      expected_type: text
+      save_to: verification.financial.equity_value
+
+    - id: q_currency
+      text: "Apakah nilai dalam Rupiah?"
+      quick_replies: ["Rupiah", "Mata uang asing", "Belum tahu"]
+      save_to: verification.financial.currency
+
+    - id: q_target_qualification
+      text: "Kualifikasi yang diajukan?"
+      quick_replies: ["Kecil 1", "Kecil 2", "Kecil 3", "Menengah", "Besar", "Spesialis", "Belum tahu"]
+      save_to: verification.financial.target_qualification
+
+  completion_node: node_verify_financial_result
+
+node_verify_financial_result:
+  type: dynamic_response
+  title: "Hasil Pra-Verifikasi Keuangan"
+  response_template: tpl_financial_verification_result
+```
+
+```yaml
+tpl_financial_verification_result: >
+  Hasil pra-verifikasi kemampuan keuangan:
+
+  Dokumen:
+  {{verification.financial.doc_type}}
+
+  Nilai ekuitas:
+  {{verification.financial.equity_value}}
+
+  Mata uang:
+  {{verification.financial.currency}}
+
+  Kualifikasi target:
+  {{verification.financial.target_qualification}}
+
+  Status awal:
+  {{financial_status}}
+
+  Catatan:
+  Untuk kualifikasi tertentu, laporan audit KAP dapat diperlukan. Jika nilai
+  menggunakan mata uang asing, perlu konversi sesuai ketentuan saat pengajuan.
+
+  Rekomendasi:
+  {{financial_recommendation}}
+```
+
+## 5. Flow TKK
+
+```yaml
+node_verify_tkk:
+  type: guided_form
+  title: "Verifikasi Awal TKK"
+  questions:
+    - id: q_pjbu
+      text: "Apakah PJBU sudah ditetapkan?"
+      quick_replies: ["Sudah", "Belum", "Belum tahu"]
+      save_to: verification.tkk.pjbu
+
+    - id: q_pjtbu
+      text: "Apakah PJTBU sudah tersedia dan memiliki SKK?"
+      quick_replies: ["Sudah sesuai", "Ada tapi belum yakin sesuai", "Belum ada"]
+      save_to: verification.tkk.pjtbu
+
+    - id: q_pjskbu
+      text: "Apakah PJSKBU tersedia untuk subklasifikasi yang diajukan?"
+      quick_replies: ["Sudah", "Sebagian", "Belum"]
+      save_to: verification.tkk.pjskbu
+
+    - id: q_tkk_subclassification
+      text: "Apakah SKK tenaga kerja sesuai dengan subklasifikasi TKK yang dipersyaratkan?"
+      quick_replies: ["Sesuai", "Tidak sesuai", "Belum yakin"]
+      save_to: verification.tkk.subclassification_match
+
+    - id: q_tkk_level
+      text: "Apakah jenjang SKK sesuai kualifikasi yang dituju?"
+      quick_replies: ["Sesuai", "Tidak sesuai", "Belum yakin"]
+      save_to: verification.tkk.level_match
+
+  completion_node: node_verify_tkk_result
+
+node_verify_tkk_result:
+  type: dynamic_response
+  title: "Hasil Pra-Verifikasi TKK"
+  response_template: tpl_tkk_verification_result
+```
+
+```yaml
+tpl_tkk_verification_result: >
+  Hasil pra-verifikasi TKK:
+
+  PJBU:
+  {{verification.tkk.pjbu}}
+
+  PJTBU:
+  {{verification.tkk.pjtbu}}
+
+  PJSKBU:
+  {{verification.tkk.pjskbu}}
+
+  Kesesuaian subklasifikasi TKK:
+  {{verification.tkk.subclassification_match}}
+
+  Kesesuaian jenjang:
+  {{verification.tkk.level_match}}
+
+  Status awal:
+  {{tkk_status}}
+
+  Rekomendasi:
+  {{tkk_recommendation}}
+
+  Catatan:
+  Pastikan status tenaga tetap, SKK, jenjang, dan kemungkinan rangkap jabatan
+  sesuai dengan ketentuan skema sertifikasi.
+```
+
+## 6. Flow Peralatan
+
+```yaml
+node_verify_equipment:
+  type: guided_form
+  title: "Verifikasi Awal Peralatan"
+  questions:
+    - id: q_equipment_required
+      text: "Apakah subklasifikasi yang diajukan mempersyaratkan peralatan?"
+      quick_replies: ["Ya", "Tidak", "Belum tahu"]
+      save_to: verification.equipment.required
+
+    - id: q_equipment_list
+      text: "Apakah daftar peralatan utama tersedia?"
+      quick_replies: ["Lengkap", "Sebagian", "Belum ada"]
+      save_to: verification.equipment.list_status
+
+    - id: q_equipment_ownership
+      text: "Status penguasaan peralatan?"
+      quick_replies: ["Milik sendiri", "Sewa", "Milik dan sewa", "Belum jelas"]
+      save_to: verification.equipment.ownership
+
+    - id: q_equipment_registration
+      text: "Apakah nomor registrasi peralatan tersedia?"
+      quick_replies: ["Ada", "Sebagian", "Belum ada", "Tidak tahu"]
+      save_to: verification.equipment.registration
+
+    - id: q_equipment_match
+      text: "Apakah jenis alat sesuai subklasifikasi dan kualifikasi?"
+      quick_replies: ["Sesuai", "Sebagian", "Belum yakin", "Tidak sesuai"]
+      save_to: verification.equipment.match
+
+  completion_node: node_verify_equipment_result
+
+node_verify_equipment_result:
+  type: dynamic_response
+  title: "Hasil Pra-Verifikasi Peralatan"
+  response_template: tpl_equipment_verification_result
+```
+
+```yaml
+tpl_equipment_verification_result: >
+  Hasil pra-verifikasi peralatan:
+
+  Kewajiban peralatan:
+  {{verification.equipment.required}}
+
+  Daftar peralatan:
+  {{verification.equipment.list_status}}
+
+  Status penguasaan:
+  {{verification.equipment.ownership}}
+
+  Nomor registrasi:
+  {{verification.equipment.registration}}
+
+  Kesesuaian alat:
+  {{verification.equipment.match}}
+
+  Status awal:
+  {{equipment_status}}
+
+  Rekomendasi:
+  {{equipment_recommendation}}
+
+  Catatan:
+  Untuk peralatan sewa, siapkan perjanjian sewa dan pastikan data dapat
+  diklarifikasi oleh pemilik peralatan melalui mekanisme yang berlaku.
+```
+
+## 7. Flow SMAP
+
+SMAP dapat dipenuhi melalui sertifikat penerapan SMAP, dokumen penerapan SMAP, atau surat pernyataan komitmen; dokumen penerapan dapat berupa dokumen yang disahkan pimpinan tertinggi BUJK atau lembar konfirmasi PANCEK KPK. 
+
+```yaml
+node_verify_smap:
+  type: guided_form
+  title: "Verifikasi Awal SMAP"
+  questions:
+    - id: q_smap_type
+      text: "Jenis bukti SMAP yang tersedia?"
+      quick_replies:
+        - "ISO 37001:2016"
+        - "PANCEK KPK"
+        - "Dokumen penerapan SMAP"
+        - "Surat komitmen SMAP"
+        - "Belum ada"
+      save_to: verification.smap.type
+
+    - id: q_smap_validity
+      text: "Apakah dokumen masih berlaku dan dapat dibuktikan?"
+      quick_replies: ["Ya", "Tidak", "Belum tahu"]
+      save_to: verification.smap.validity
+
+    - id: q_smap_signed
+      text: "Apakah dokumen/komitmen ditandatangani pimpinan tertinggi BUJK?"
+      quick_replies: ["Ya", "Tidak", "Belum tahu"]
+      save_to: verification.smap.signed
+
+    - id: q_smap_implementation
+      text: "Apakah ada rekaman pelaksanaan SMAP?"
+      quick_replies: ["Ada", "Sebagian", "Belum ada"]
+      save_to: verification.smap.implementation_record
+
+  completion_node: node_verify_smap_result
+
+node_verify_smap_result:
+  type: dynamic_response
+  title: "Hasil Pra-Verifikasi SMAP"
+  response_template: tpl_smap_verification_result
+```
+
+```yaml
+tpl_smap_verification_result: >
+  Hasil pra-verifikasi SMAP:
+
+  Jenis bukti:
+  {{verification.smap.type}}
+
+  Status berlaku/terbukti:
+  {{verification.smap.validity}}
+
+  Ditandatangani pimpinan tertinggi:
+  {{verification.smap.signed}}
+
+  Rekaman pelaksanaan:
+  {{verification.smap.implementation_record}}
+
+  Status awal:
+  {{smap_status}}
+
+  Rekomendasi:
+  {{smap_recommendation}}
+
+  Catatan:
+  Jika hanya menggunakan surat komitmen, pastikan batas waktu pemenuhan
+  dokumen SMAP dipantau sesuai ketentuan.
+```
+
+## 8. Decision Engine
+
+```yaml
+verification_decision_engine:
+  status_labels:
+    memenuhi:
+      label: "Memenuhi secara awal"
+      meaning: "Data utama tersedia dan tampak selaras untuk dikonsultasikan."
+    perlu_perbaikan:
+      label: "Perlu perbaikan"
+      meaning: "Ada data yang belum lengkap atau belum sesuai."
+    perlu_klarifikasi:
+      label: "Perlu klarifikasi"
+      meaning: "Data tersedia tetapi perlu penjelasan/validasi tambahan."
+    tidak_siap:
+      label: "Tidak siap"
+      meaning: "Dokumen utama tidak tersedia atau tidak selaras."
+
+  rules:
+    annual_sales:
+      memenuhi:
+        if:
+          - "contract_available == Ada"
+          - "major_item_match == Sesuai"
+          - "used_before == Belum"
+      perlu_klarifikasi:
+        if:
+          - "major_item_match == Belum yakin"
+          - "used_before == Belum tahu"
+      perlu_perbaikan:
+        if:
+          - "contract_available == Sebagian"
+      tidak_siap:
+        if:
+          - "contract_available == Tidak ada"
+          - "major_item_match == Tidak sesuai"
+
+    financial:
+      memenuhi:
+        if:
+          - "doc_type in ['Neraca internal', 'Laporan audit KAP']"
+          - "equity_value is not empty"
+      perlu_klarifikasi:
+        if:
+          - "currency == Mata uang asing"
+          - "target_qualification == Belum tahu"
+      perlu_perbaikan:
+        if:
+          - "doc_type == Belum tahu"
+      tidak_siap:
+        if:
+          - "doc_type == Belum ada"
+
+    tkk:
+      memenuhi:
+        if:
+          - "pjbu == Sudah"
+          - "pjtbu == Sudah sesuai"
+          - "pjskbu == Sudah"
+          - "subclassification_match == Sesuai"
+          - "level_match == Sesuai"
+      perlu_klarifikasi:
+        if:
+          - "pjtbu == Ada tapi belum yakin sesuai"
+          - "subclassification_match == Belum yakin"
+          - "level_match == Belum yakin"
+      perlu_perbaikan:
+        if:
+          - "pjskbu == Sebagian"
+      tidak_siap:
+        if:
+          - "pjbu == Belum"
+          - "pjtbu == Belum ada"
+          - "pjskbu == Belum"
+
+    equipment:
+      memenuhi:
+        if:
+          - "required == Tidak"
+          - "or list_status == Lengkap and match == Sesuai"
+      perlu_klarifikasi:
+        if:
+          - "required == Belum tahu"
+          - "match == Belum yakin"
+          - "registration == Tidak tahu"
+      perlu_perbaikan:
+        if:
+          - "list_status == Sebagian"
+          - "registration == Sebagian"
+      tidak_siap:
+        if:
+          - "required == Ya"
+          - "list_status == Belum ada"
+
+    smap:
+      memenuhi:
+        if:
+          - "type in ['ISO 37001:2016', 'PANCEK KPK', 'Dokumen penerapan SMAP']"
+          - "validity == Ya"
+      perlu_klarifikasi:
+        if:
+          - "validity == Belum tahu"
+          - "implementation_record == Sebagian"
+      perlu_perbaikan:
+        if:
+          - "type == Surat komitmen SMAP"
+      tidak_siap:
+        if:
+          - "type == Belum ada"
+```
+
+## 9. Rekap Semua Area
+
+```yaml
+node_verify_all_start:
+  type: sequential_flow
+  title: "Pra-Verifikasi Semua Area"
+  sequence:
+    - node_verify_annual_sales
+    - node_verify_financial
+    - node_verify_tkk
+    - node_verify_equipment
+    - node_verify_smap
+  completion_node: node_verify_all_result
+
+node_verify_all_result:
+  type: dynamic_response
+  title: "Rekap Pra-Verifikasi SBU"
+  response_template: tpl_verify_all_result
+
+tpl_verify_all_result: >
+  Rekap pra-verifikasi SBU:
+
+  1. Penjualan tahunan/pengalaman:
+  {{annual_sales_status}}
+
+  2. Kemampuan keuangan:
+  {{financial_status}}
+
+  3. TKK:
+  {{tkk_status}}
+
+  4. Peralatan:
+  {{equipment_status}}
+
+  5. SMAP:
+  {{smap_status}}
+
+  Kesimpulan awal:
+  {{overall_verification_status}}
+
+  Prioritas perbaikan:
+  {{priority_corrections}}
+
+  Rekomendasi:
+  {{overall_recommendation}}
+
+  Catatan:
+  Rekap ini hanya pra-verifikasi. Hasil formal tetap mengikuti proses LSBU,
+  asesor, OSS, SIJK terintegrasi, serta ketentuan peraturan yang berlaku.
+```
+
+## 10. Integrasi Sistem: OSS, SIKI, SIMPAN, SIMPK
+
+SK Dirjen menyebut sistem pendukung sertifikasi meliputi OSS, Sistem Perizinan Berusaha PU, dan SIJK Terintegrasi yang mengelola SIKI, SIMPAN, SIMPK, serta laporan tahunan BUJK. 
+
+```yaml
+system_integration_layer:
+  systems:
+    oss:
+      name: "OSS"
+      role: "pengajuan NIB, Sertifikat Standar, dan pemenuhan perizinan berusaha"
+      chatbot_use:
+        - "cek KBLI yang diajukan"
+        - "cek kesesuaian KBLI dengan SBU"
+        - "mengingatkan status belum terverifikasi"
+
+    perizinan_pu:
+      name: "Sistem Perizinan Berusaha PU"
+      role: "portal perizinan kementerian untuk proses tertentu"
+      chatbot_use:
+        - "menjelaskan jalur permohonan standar pelaksanaan kegiatan usaha"
+        - "menjelaskan status pemenuhan standar"
+
+    sijk:
+      name: "SIJK Terintegrasi"
+      role: "basis data jasa konstruksi terintegrasi"
+      chatbot_use:
+        - "menjelaskan bahwa data SBU, pengalaman, alat, dan laporan perlu selaras"
+
+    siki:
+      name: "SIKI"
+      role: "data konstruksi Indonesia"
+      chatbot_use:
+        - "mengingatkan pengguna agar data badan usaha konsisten"
+
+    simpan:
+      name: "SIMPAN"
+      role: "sistem informasi pengalaman penyedia jasa"
+      chatbot_use:
+        - "mengingatkan pengalaman/kontrak harus tercatat atau dapat ditelusuri"
+
+    simpk:
+      name: "SIMPK"
+      role: "sistem informasi material dan peralatan konstruksi"
+      chatbot_use:
+        - "mengingatkan pencatatan dan klarifikasi peralatan konstruksi"
+
+    laporan_tahunan_bujk:
+      name: "Laporan Tahunan BUJK"
+      role: "data kewajiban pelaporan kegiatan usaha"
+      chatbot_use:
+        - "mengingatkan kewajiban laporan dalam konteks kepatuhan"
+```
+
+## 11. Template Jawaban Jika Dokumen Tidak Siap
+
+```yaml
+not_ready_response_templates:
+  annual_sales_not_ready: >
+    Data pengalaman/penjualan tahunan belum siap karena kontrak atau major item
+    belum dapat dibuktikan. Siapkan kontrak kerja konstruksi, lingkup pekerjaan,
+    nilai pekerjaan, dan bukti kesesuaian dengan subklasifikasi.
+
+  financial_not_ready: >
+    Data kemampuan keuangan belum siap. Siapkan neraca atau laporan keuangan.
+    Untuk kualifikasi tertentu, laporan audit KAP dapat diperlukan.
+
+  tkk_not_ready: >
+    Data TKK belum siap. Pastikan PJBU, PJTBU, dan PJSKBU tersedia, berstatus
+    sesuai ketentuan, memiliki SKK yang relevan, dan memenuhi jenjang yang dibutuhkan.
+
+  equipment_not_ready: >
+    Data peralatan belum siap. Siapkan daftar alat utama, bukti kepemilikan atau
+    sewa, nomor registrasi bila dipersyaratkan, dan pastikan alat sesuai dengan
+    subklasifikasi serta kualifikasi.
+
+  smap_not_ready: >
+    Data SMAP belum siap. Siapkan salah satu bentuk pemenuhan: ISO 37001:2016,
+    PANCEK KPK, dokumen penerapan SMAP, atau surat komitmen sesuai ketentuan.
+```
+
+## 12. Prompt Tambahan untuk Bot
+
+```yaml
+runtime_prompt_addition_verification:
+  text: >
+    Saat pengguna meminta pengecekan dokumen SBU, gunakan lima area penilaian:
+    penjualan tahunan, kemampuan keuangan, TKK, peralatan, dan SMAP. Berikan status
+    awal dengan label “Memenuhi secara awal”, “Perlu Perbaikan”, “Perlu Klarifikasi”,
+    atau “Tidak Siap”. Jangan menyatakan lulus/gagal sertifikasi. Jika data belum
+    lengkap, sebutkan dokumen yang perlu dilengkapi. Jika ada risiko ketidaksesuaian
+    KBLI, subklasifikasi, pengalaman, TKK, peralatan, atau SMAP, beri peringatan
+    secara jelas dan arahkan pengguna untuk validasi ke LSBU/OSS/SIJK.
+```
+
+Bagian ini membuat chatbot punya **mesin pra-verifikasi seperti checklist asesor**, sehingga alurnya menjadi:
+
+**Cari SBU → Cek KBLI → Cek Kualifikasi → Cek Dokumen → Pra-Verifikasi 5 area → Rekomendasi Perbaikan → Ringkasan Pengajuan.**

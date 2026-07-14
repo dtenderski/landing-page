@@ -1,0 +1,1457 @@
+Baik. Berikut saya buatkan **paket konfigurasi chatbot SBU Konsultan** dengan pola yang sama seperti chatbot SBU Klasifikasi/Subklasifikasi sebelumnya: ada **bot identity, katalog sub bidang, intent, flow, node builder, lookup KBLI, pencarian kata kunci, rekomendasi sub bidang, checklist, pra-verifikasi, guardrail, scoring, dan final runtime prompt**. Struktur ini mengikuti kerangka konfigurasi sebelumnya yang sudah memuat katalog, intent, flow, response template, guardrail, node builder, dan layer compliance. 
+
+---
+
+# Chatbot Configuration — SBU Konsultan
+
+```yaml
+# -----------------------------------------------------------------------------
+# CHATBOT CONFIGURATION — SBU KONSULTAN
+# -----------------------------------------------------------------------------
+
+bot:
+  id: sbu_konsultan_coach_v1
+  name: "SBU Konsultan Coach"
+  locale: "id-ID"
+  tone: "profesional, jelas, ramah, konsultatif, berbasis katalog sub bidang"
+  audience:
+    - badan usaha jasa konsultansi konstruksi
+    - konsultan perizinan SBU
+    - calon pemohon SBU Konsultan
+    - admin LSBU
+    - asesor/verifikator internal
+    - tim tender/procurement
+    - konsultan arsitektur, rekayasa, perencanaan wilayah, pengujian, dan analisis teknis
+
+  purpose:
+    - membantu pengguna memahami sub bidang SBU Konsultan
+    - membantu mencari sub bidang berdasarkan kode subklasifikasi
+    - membantu mencari sub bidang berdasarkan KBLI
+    - membantu mencari sub bidang berdasarkan jenis jasa konsultansi
+    - membantu memilih sub bidang yang sesuai dengan layanan usaha
+    - membantu membandingkan sub bidang konsultansi
+    - menyediakan checklist awal dokumen SBU Konsultan
+    - menyediakan pra-verifikasi kesiapan awal SBU Konsultan
+
+  non_goals:
+    - tidak menerbitkan SBU
+    - tidak menentukan kelulusan sertifikasi
+    - tidak menggantikan LSBU, asesor, OSS, SIJK, atau pejabat berwenang
+    - tidak memvalidasi keaslian dokumen
+    - tidak membantu manipulasi KBLI, pengalaman, tenaga ahli, peralatan, laboratorium, atau SMAP
+```
+
+---
+
+## 1. Knowledge Source
+
+```yaml
+knowledge_source:
+  id: sbu_konsultan_sub_bidang_catalog
+  source_type: "user_provided_catalog"
+  source_name: "Daftar Sub Bidang SBU Konsultan"
+  primary_fields:
+    - kbli
+    - sub_klasifikasi
+    - judul
+    - ruang_lingkup_umum
+    - kategori
+    - keywords
+  usage:
+    - lookup kode sub bidang
+    - lookup KBLI
+    - keyword matching
+    - recommendation flow
+    - comparison flow
+    - checklist dokumen
+    - pra-verifikasi SBU Konsultan
+```
+
+---
+
+## 2. Kelompok Ruang Lingkup SBU Konsultan
+
+```yaml
+consultant_scope_groups:
+  AR:
+    name: "Ruang Lingkup Umum Arsitektur"
+    description: >
+      Kelompok jasa konsultansi arsitektur untuk bangunan gedung hunian,
+      non hunian, jasa arsitektural lainnya, dan desain interior.
+
+  RK:
+    name: "Ruang Lingkup Umum Rekayasa"
+    description: >
+      Kelompok jasa rekayasa konstruksi untuk bangunan gedung, sumber daya air,
+      transportasi, mekanikal dalam bangunan, dan jasa rekayasa lainnya.
+
+  RT:
+    name: "Ruang Lingkup Umum Rekayasa Terpadu"
+    description: >
+      Kelompok jasa rekayasa terpadu untuk studi investasi infrastruktur,
+      konstruksi pembangkit/transmisi/gardu/distribusi tenaga listrik,
+      serta proses industrial, produksi, dan fasilitas produksi.
+
+  AL:
+    name: "Ruang Lingkup Umum Arsitektur Lanskap dan Perencanaan Wilayah"
+    description: >
+      Kelompok jasa pengembangan pemanfaatan ruang, wilayah, perkotaan,
+      lingkungan bangunan, dan lanskap.
+
+  IT:
+    name: "Ruang Lingkup Spesialis Konsultasi Ilmiah dan Teknis"
+    description: >
+      Kelompok jasa konsultansi ilmiah dan teknis untuk geologi, geofisika,
+      bawah tanah, permukaan tanah, peta, prasarana umum, sistem kendali lalu lintas,
+      hidrolika, hidrologi, dan oceanography.
+
+  AT:
+    name: "Ruang Lingkup Spesialis Pengujian dan Analisis Teknis"
+    description: >
+      Kelompok jasa pengujian dan analisis teknis untuk geologi, geofisika,
+      geokimia, komposisi, kemurnian, hasil pekerjaan konstruksi, laboratorium,
+      parameter fisikal, akustik, vibrator, dan commissioning proses industrial.
+```
+
+---
+
+## 3. Katalog Sub Bidang SBU Konsultan
+
+```yaml
+sub_bidang_konsultan_catalog:
+  # ---------------------------------------------------------------------------
+  # AR — Ruang Lingkup Umum Arsitektur
+  # ---------------------------------------------------------------------------
+  - code: "AR001"
+    group: "AR"
+    kbli: "71101"
+    title: "Jasa Arsitektural Bangunan Gedung Hunian & Non Hunian"
+    keywords:
+      - "arsitektur"
+      - "gedung hunian"
+      - "gedung non hunian"
+      - "desain gedung"
+      - "perencanaan arsitektur"
+      - "rumah"
+      - "kantor"
+      - "hotel"
+      - "sekolah"
+      - "rumah sakit"
+
+  - code: "AR002"
+    group: "AR"
+    kbli: "71101"
+    title: "Jasa Arsitektural Lainnya"
+    keywords:
+      - "arsitektural lainnya"
+      - "konsultansi arsitektur"
+      - "kajian arsitektur"
+      - "desain arsitektur umum"
+      - "perencanaan arsitektur lainnya"
+
+  - code: "AR003"
+    group: "AR"
+    kbli: "74120"
+    title: "Jasa Desain Interior pada Bangunan Gedung & Bangunan Sipil"
+    keywords:
+      - "desain interior"
+      - "interior gedung"
+      - "interior bangunan sipil"
+      - "fit out"
+      - "ruang dalam"
+      - "furnitur"
+      - "layout interior"
+
+  # ---------------------------------------------------------------------------
+  # RK — Ruang Lingkup Umum Rekayasa
+  # ---------------------------------------------------------------------------
+  - code: "RK001"
+    group: "RK"
+    kbli: "71102"
+    title: "Jasa Rekayasa Konstruksi Bangunan Gedung Hunian & Non Hunian"
+    keywords:
+      - "rekayasa gedung"
+      - "struktur gedung"
+      - "perencanaan teknik gedung"
+      - "gedung hunian"
+      - "gedung non hunian"
+      - "engineering gedung"
+
+  - code: "RK002"
+    group: "RK"
+    kbli: "71102"
+    title: "Jasa Rekayasa Pekerjaan Teknik Sipil Sumber Daya Air"
+    keywords:
+      - "sumber daya air"
+      - "bendungan"
+      - "irigasi"
+      - "drainase"
+      - "sungai"
+      - "waduk"
+      - "hidrologi"
+      - "rekayasa air"
+
+  - code: "RK003"
+    group: "RK"
+    kbli: "71102"
+    title: "Jasa Rekayasa Pekerjaan Teknik Sipil Transportasi"
+    keywords:
+      - "transportasi"
+      - "jalan"
+      - "jembatan"
+      - "terminal"
+      - "pelabuhan"
+      - "bandara"
+      - "rel kereta"
+      - "lalu lintas"
+      - "rekayasa transportasi"
+
+  - code: "RK004"
+    group: "RK"
+    kbli: "71102"
+    title: "Jasa Rekayasa Pekerjaan Mekanikal dalam Bangunan"
+    keywords:
+      - "mekanikal bangunan"
+      - "MEP"
+      - "HVAC"
+      - "AC"
+      - "lift"
+      - "eskalator"
+      - "plambing"
+      - "mekanikal gedung"
+
+  - code: "RK005"
+    group: "RK"
+    kbli: "71102"
+    title: "Jasa Rekayasa Lainnya"
+    keywords:
+      - "rekayasa lainnya"
+      - "engineering lainnya"
+      - "jasa teknik lainnya"
+      - "rekayasa teknis umum"
+
+  # ---------------------------------------------------------------------------
+  # RT — Ruang Lingkup Umum Rekayasa Terpadu
+  # ---------------------------------------------------------------------------
+  - code: "RT001"
+    group: "RT"
+    kbli: "70209"
+    title: "Jasa Pelayanan Studi Investasi Infrastruktur"
+    keywords:
+      - "studi investasi"
+      - "investasi infrastruktur"
+      - "feasibility study"
+      - "studi kelayakan"
+      - "kajian investasi"
+      - "infrastruktur"
+
+  - code: "RT002"
+    group: "RT"
+    kbli: "71102"
+    title: "Jasa Rekayasa Konstruksi Pembangkit, Jaringan Transmisi, Gardu Induk dan Distribusi Tenaga Listrik"
+    keywords:
+      - "pembangkit listrik"
+      - "transmisi"
+      - "gardu induk"
+      - "distribusi listrik"
+      - "tenaga listrik"
+      - "rekayasa listrik"
+      - "PLTU"
+      - "PLTG"
+      - "PLTA"
+      - "PLTS"
+
+  - code: "RT003"
+    group: "RT"
+    kbli: "71102"
+    title: "Jasa Rekayasa Konstruksi Proses Industrial, Produksi & Fasilitas Produksi"
+    keywords:
+      - "proses industrial"
+      - "fasilitas produksi"
+      - "pabrik"
+      - "industri"
+      - "manufacturing"
+      - "proses produksi"
+      - "rekayasa industri"
+
+  # ---------------------------------------------------------------------------
+  # AL — Arsitektur Lanskap dan Perencanaan Wilayah
+  # ---------------------------------------------------------------------------
+  - code: "AL001"
+    group: "AL"
+    kbli: "71101"
+    title: "Jasa Pengembangan Pemanfaatan Ruang"
+    keywords:
+      - "pemanfaatan ruang"
+      - "tata ruang"
+      - "ruang wilayah"
+      - "perencanaan ruang"
+      - "zoning"
+      - "rencana pemanfaatan ruang"
+
+  - code: "AL002"
+    group: "AL"
+    kbli: "71101"
+    title: "Jasa Pengembangan Wilayah"
+    keywords:
+      - "pengembangan wilayah"
+      - "perencanaan wilayah"
+      - "regional planning"
+      - "wilayah"
+      - "kawasan"
+      - "pengembangan kawasan"
+
+  - code: "AL003"
+    group: "AL"
+    kbli: "71101"
+    title: "Jasa Pengembangan Perkotaan"
+    keywords:
+      - "pengembangan perkotaan"
+      - "perencanaan kota"
+      - "urban planning"
+      - "kawasan perkotaan"
+      - "masterplan kota"
+      - "perkotaan"
+
+  - code: "AL004"
+    group: "AL"
+    kbli: "71101"
+    title: "Jasa Pengembangan Lingkungan Bangunan & Lanskap"
+    keywords:
+      - "lanskap"
+      - "landscape"
+      - "lingkungan bangunan"
+      - "taman"
+      - "ruang terbuka"
+      - "site plan"
+      - "pengembangan lingkungan"
+
+  # ---------------------------------------------------------------------------
+  # IT — Spesialis Konsultasi Ilmiah dan Teknis
+  # ---------------------------------------------------------------------------
+  - code: "IT001"
+    group: "IT"
+    kbli: "71102"
+    title: "Jasa Pembuatan Prospektus Geologi & Geofisika"
+    keywords:
+      - "prospektus geologi"
+      - "prospektus geofisika"
+      - "geologi"
+      - "geofisika"
+      - "kajian geologi"
+      - "potensi bawah permukaan"
+
+  - code: "IT002"
+    group: "IT"
+    kbli: "71102"
+    title: "Jasa Konsultansi Ilmiah & Teknis Bawah Tanah"
+    keywords:
+      - "bawah tanah"
+      - "underground"
+      - "terowongan"
+      - "geoteknik bawah tanah"
+      - "subsurface"
+      - "konsultansi bawah tanah"
+
+  - code: "IT003"
+    group: "IT"
+    kbli: "71102"
+    title: "Jasa Konsultansi Ilmiah & Teknis Permukaan Tanah & Pembuatan Peta"
+    keywords:
+      - "permukaan tanah"
+      - "pemetaan"
+      - "peta"
+      - "topografi"
+      - "survey tanah"
+      - "geospasial"
+      - "mapping"
+
+  - code: "IT004"
+    group: "IT"
+    kbli: "71102"
+    title: "Jasa Konsultansi Ilmiah & Teknis Prasarana & Sarana Umum"
+    keywords:
+      - "prasarana umum"
+      - "sarana umum"
+      - "fasilitas umum"
+      - "infrastruktur umum"
+      - "utilitas umum"
+      - "konsultansi prasarana"
+
+  - code: "IT005"
+    group: "IT"
+    kbli: "71102"
+    title: "Jasa Konsultansi Ilmiah & Teknis Konstruksi Sistem Kendali Lalu Lintas"
+    keywords:
+      - "sistem kendali lalu lintas"
+      - "traffic control"
+      - "lalu lintas"
+      - "ATCS"
+      - "ITS"
+      - "traffic management"
+      - "kendali lalu lintas"
+
+  - code: "IT007"
+    group: "IT"
+    kbli: "71102"
+    title: "Jasa Konsultansi Ilmiah & Teknis Hidrolika, Hidrologi & Oceanography"
+    keywords:
+      - "hidrolika"
+      - "hidrologi"
+      - "oceanography"
+      - "oseanografi"
+      - "air"
+      - "laut"
+      - "gelombang"
+      - "pasang surut"
+      - "arus"
+
+  # ---------------------------------------------------------------------------
+  # AT — Spesialis Pengujian dan Analisis Teknis
+  # ---------------------------------------------------------------------------
+  - code: "AT001"
+    group: "AT"
+    kbli: "71102"
+    title: "Jasa Pengujian & Analisis Teknis Geologi, Geofisika & Geokimia"
+    keywords:
+      - "pengujian geologi"
+      - "analisis geofisika"
+      - "geokimia"
+      - "uji tanah"
+      - "uji batuan"
+      - "laboratorium geologi"
+
+  - code: "AT002"
+    group: "AT"
+    kbli: "71102"
+    title: "Jasa Pengujian & Analisis Teknis Komposisi & Tingkat Kemurnian"
+    keywords:
+      - "komposisi"
+      - "kemurnian"
+      - "analisis material"
+      - "uji komposisi"
+      - "uji kemurnian"
+      - "laboratorium material"
+
+  - code: "AT003"
+    group: "AT"
+    kbli: "71102"
+    title: "Jasa Pengujian Hasil Pekerjaan Konstruksi & Fasilitas Laboratorium"
+    keywords:
+      - "pengujian konstruksi"
+      - "uji beton"
+      - "uji aspal"
+      - "uji material konstruksi"
+      - "laboratorium konstruksi"
+      - "quality control konstruksi"
+
+  - code: "AT004"
+    group: "AT"
+    kbli: "71202"
+    title: "Jasa Pengujian & Analisis Teknis Parameter Fisikal"
+    keywords:
+      - "parameter fisikal"
+      - "uji fisik"
+      - "analisis fisikal"
+      - "pengujian fisik"
+      - "laboratorium fisika"
+
+  - code: "AT005"
+    group: "AT"
+    kbli: "71102"
+    title: "Jasa Pengujian & Analisis Teknis Hidrolika, Hidrologi & Oceanography"
+    keywords:
+      - "pengujian hidrolika"
+      - "analisis hidrologi"
+      - "oceanography"
+      - "oseanografi"
+      - "uji air"
+      - "uji arus"
+      - "uji gelombang"
+
+  - code: "AT006"
+    group: "AT"
+    kbli: "71202"
+    title: "Jasa Pengujian & Analisis Akustik & Vibrator Gedung Hunian & Non Hunian"
+    keywords:
+      - "akustik"
+      - "vibrasi"
+      - "vibrator gedung"
+      - "uji kebisingan"
+      - "uji getaran"
+      - "gedung hunian"
+      - "gedung non hunian"
+
+  - code: "AT007"
+    group: "AT"
+    kbli: "71202"
+    title: "Jasa Commissioning Proses Industrial"
+    keywords:
+      - "commissioning"
+      - "proses industrial"
+      - "uji fungsi"
+      - "startup"
+      - "testing commissioning"
+      - "fasilitas produksi"
+      - "pabrik"
+```
+
+---
+
+## 4. Main Menu SBU Konsultan
+
+```yaml
+main_menu:
+  id: node_main_menu_konsultan
+  type: message_with_buttons
+  title: "Menu Utama SBU Konsultan"
+  message: >
+    Silakan pilih kebutuhan Anda. Saya dapat membantu mencari sub bidang SBU Konsultan
+    berdasarkan kode subklasifikasi, KBLI, jenis layanan konsultansi, atau ruang lingkup pekerjaan.
+  buttons:
+    - label: "Cari Kode Sub Bidang"
+      target_node: node_ask_consultant_code
+
+    - label: "Cari Berdasarkan KBLI"
+      target_node: node_ask_consultant_kbli
+
+    - label: "Cari Berdasarkan Jenis Jasa"
+      target_node: node_ask_consultant_keyword
+
+    - label: "Bantu Pilih Sub Bidang"
+      target_node: node_consultant_recommendation_intro
+
+    - label: "Lihat Semua Ruang Lingkup"
+      target_node: node_show_consultant_groups
+
+    - label: "Bandingkan Sub Bidang"
+      target_node: node_compare_consultant_intro
+
+    - label: "Checklist Dokumen SBU Konsultan"
+      target_node: node_consultant_checklist_intro
+
+    - label: "Pra-Verifikasi Kesiapan"
+      target_node: node_consultant_pre_verification_start
+
+    - label: "Tanya Istilah"
+      target_node: node_consultant_glossary
+```
+
+---
+
+## 5. Intent SBU Konsultan
+
+```yaml
+intents:
+  greet:
+    description: "Pengguna menyapa atau memulai sesi."
+    examples:
+      - "Halo"
+      - "Saya mau cari SBU Konsultan"
+      - "Bantu pilih sub bidang konsultan"
+    next_node: node_main_menu_konsultan
+
+  lookup_consultant_code:
+    description: "Pengguna mencari berdasarkan kode sub bidang."
+    examples:
+      - "AR001"
+      - "Jelaskan RK003"
+      - "Detail AT007"
+      - "Apa itu IT005?"
+    entities:
+      - consultant_code
+    next_node: node_lookup_consultant_code_result
+
+  lookup_consultant_kbli:
+    description: "Pengguna mencari sub bidang berdasarkan KBLI."
+    examples:
+      - "KBLI 71101"
+      - "KBLI 71102 masuk sub bidang apa?"
+      - "71202 untuk SBU konsultan apa?"
+    entities:
+      - kbli_code
+    next_node: node_lookup_consultant_kbli_result
+
+  consultant_keyword_search:
+    description: "Pengguna mencari berdasarkan jenis layanan konsultansi."
+    examples:
+      - "jasa desain interior"
+      - "konsultan jalan dan transportasi"
+      - "konsultan hidrologi"
+      - "pengujian beton"
+      - "studi kelayakan infrastruktur"
+      - "commissioning pabrik"
+    entities:
+      - service_keyword
+    next_node: node_consultant_keyword_result
+
+  consultant_recommendation:
+    description: "Pengguna meminta bantuan memilih sub bidang."
+    examples:
+      - "Saya cocok ambil SBU Konsultan apa?"
+      - "Bantu pilih sub bidang"
+      - "Usaha saya konsultan perencanaan kota"
+    next_node: node_consultant_recommendation_intro
+
+  compare_consultant_subfield:
+    description: "Pengguna membandingkan dua sub bidang."
+    examples:
+      - "AR001 vs RK001"
+      - "RK002 beda dengan IT007?"
+      - "AT003 atau AT004?"
+    next_node: node_compare_consultant_intro
+
+  consultant_checklist:
+    description: "Pengguna meminta checklist dokumen SBU Konsultan."
+    examples:
+      - "Dokumen SBU Konsultan apa saja?"
+      - "Checklist AR001"
+      - "Persiapan SBU Konsultan"
+    next_node: node_consultant_checklist_intro
+```
+
+---
+
+## 6. Lookup Flow
+
+```yaml
+node_ask_consultant_code:
+  type: input
+  title: "Cari Kode Sub Bidang"
+  message: >
+    Ketik kode sub bidang SBU Konsultan, contoh: AR001, RK003, RT001, AL004, IT007, atau AT003.
+  expected_input:
+    entity: consultant_code
+    validation_rule: "prefix AR/RK/RT/AL/IT/AT plus tiga angka"
+    transform: "uppercase_trim"
+    invalid_message: >
+      Format kode belum sesuai. Gunakan contoh seperti AR001, RK003, RT001, AL004, IT007, atau AT003.
+  save_to: session.consultant_code
+  next_node: node_lookup_consultant_code_result
+
+node_lookup_consultant_code_result:
+  type: dynamic_lookup
+  title: "Hasil Pencarian Sub Bidang"
+  data_source: sub_bidang_konsultan_catalog
+  lookup_key: code
+  lookup_value: session.consultant_code
+  on_found:
+    response_template: tpl_consultant_code_detail
+    buttons:
+      - label: "Checklist Dokumen"
+        target_node: node_consultant_checklist_for_selected
+      - label: "Bandingkan"
+        target_node: node_compare_consultant_intro
+      - label: "Pra-Verifikasi"
+        target_node: node_consultant_pre_verification_start
+      - label: "Cari Kode Lain"
+        target_node: node_ask_consultant_code
+      - label: "Menu Utama"
+        target_node: node_main_menu_konsultan
+  on_not_found:
+    message: >
+      Kode sub bidang belum ditemukan. Coba gunakan kode seperti AR001, RK001,
+      RT001, AL001, IT001, atau AT001.
+    buttons:
+      - label: "Cari Berdasarkan Jenis Jasa"
+        target_node: node_ask_consultant_keyword
+      - label: "Lihat Semua Ruang Lingkup"
+        target_node: node_show_consultant_groups
+      - label: "Menu Utama"
+        target_node: node_main_menu_konsultan
+```
+
+---
+
+## 7. Lookup KBLI
+
+```yaml
+node_ask_consultant_kbli:
+  type: input
+  title: "Cari Berdasarkan KBLI"
+  message: >
+    Ketik kode KBLI, contoh: 71101, 71102, 74120, 70209, atau 71202.
+  expected_input:
+    entity: kbli_code
+    validation_rule: "lima digit angka"
+    transform: "trim"
+    invalid_message: "Kode KBLI biasanya terdiri dari 5 digit angka. Contoh: 71101 atau 71102."
+  save_to: session.consultant_kbli
+  next_node: node_lookup_consultant_kbli_result
+
+node_lookup_consultant_kbli_result:
+  type: dynamic_lookup_multiple
+  title: "Hasil Pencarian KBLI SBU Konsultan"
+  data_source: sub_bidang_konsultan_catalog
+  lookup_key: kbli
+  lookup_value: session.consultant_kbli
+  allow_multiple: true
+  on_found:
+    response_template: tpl_consultant_kbli_result
+    buttons:
+      - label: "Bantu Klarifikasi"
+        target_node: node_consultant_recommendation_intro
+      - label: "Cari KBLI Lain"
+        target_node: node_ask_consultant_kbli
+      - label: "Menu Utama"
+        target_node: node_main_menu_konsultan
+  on_not_found:
+    message: >
+      Saya belum menemukan KBLI tersebut dalam katalog SBU Konsultan yang tersedia.
+      Coba cek kembali kode KBLI atau cari berdasarkan jenis jasa.
+    buttons:
+      - label: "Cari Jenis Jasa"
+        target_node: node_ask_consultant_keyword
+      - label: "Menu Utama"
+        target_node: node_main_menu_konsultan
+```
+
+---
+
+## 8. Response Template
+
+```yaml
+response_templates:
+  tpl_consultant_code_detail: >
+    {{code}} — {{title}}
+
+    Ruang lingkup:
+    {{group_name}}
+
+    KBLI:
+    {{kbli}}
+
+    Ringkasan:
+    Sub bidang ini digunakan untuk layanan konsultansi terkait {{scope_summary}}.
+
+    Contoh layanan yang mungkin termasuk:
+    {{example_services}}
+
+    Hal yang perlu dicek:
+    1. Apakah KBLI pada OSS/legalitas sesuai.
+    2. Apakah pengalaman jasa konsultansi sesuai dengan sub bidang.
+    3. Apakah tenaga ahli/SKK sesuai kebutuhan sub bidang.
+    4. Apakah dokumen teknis, laporan, atau portofolio mendukung.
+    5. Apakah persyaratan LSBU terbaru sudah dipenuhi.
+
+    Catatan:
+    Informasi ini adalah pemetaan awal, bukan keputusan resmi sertifikasi.
+
+  tpl_consultant_kbli_result: >
+    Untuk KBLI {{kbli}}, saya menemukan kandidat sub bidang berikut:
+    {{matched_consultant_subfields}}
+
+    Catatan:
+    Satu KBLI dapat digunakan oleh beberapa sub bidang. Pilihan akhir harus dilihat
+    dari ruang lingkup layanan konsultansi, pengalaman, tenaga ahli, dan dokumen pendukung.
+
+  tpl_consultant_keyword_result: >
+    Berdasarkan kata kunci “{{session.service_keyword}}”, kandidat sub bidang yang paling relevan adalah:
+    {{ranked_candidates}}
+
+    Rekomendasi:
+    Pilih sub bidang yang paling sesuai dengan objek jasa konsultansi, bukan hanya kemiripan kata.
+
+  tpl_consultant_recommendation_result: >
+    Rekomendasi awal:
+    {{recommended_code}} — {{recommended_title}}
+
+    KBLI:
+    {{recommended_kbli}}
+
+    Ruang lingkup:
+    {{recommended_group}}
+
+    Alasan:
+    {{recommendation_reason}}
+
+    Catatan:
+    Rekomendasi ini perlu divalidasi terhadap KBLI, pengalaman pekerjaan konsultansi,
+    tenaga ahli, dan ketentuan LSBU.
+
+  tpl_consultant_checklist: >
+    Checklist awal SBU Konsultan untuk {{code}} — {{title}}:
+
+    1. Legalitas badan usaha dan NIB.
+    2. KBLI yang sesuai: {{kbli}}.
+    3. Pengalaman jasa konsultansi sesuai sub bidang.
+    4. Kontrak/SPK, BAST, laporan akhir, atau dokumen hasil pekerjaan.
+    5. Portofolio pekerjaan konsultansi.
+    6. Tenaga ahli/SKK sesuai bidang layanan.
+    7. Dokumen keuangan bila dipersyaratkan.
+    8. Dokumen SMAP atau komitmen SMAP bila dipersyaratkan.
+    9. Surat pernyataan tanggung jawab mutlak.
+    10. Validasi akhir ke LSBU/OSS/SIJK.
+```
+
+---
+
+## 9. Keyword Routing Rules
+
+```yaml
+keyword_routing_rules:
+  architecture:
+    rumah|hunian|gedung|kantor|hotel|sekolah|rumah_sakit|arsitektur|desain_gedung: "AR001"
+    arsitektural_lainnya|kajian_arsitektur|arsitektur_umum: "AR002"
+    interior|desain_interior|fit_out|ruang_dalam|furnitur: "AR003"
+
+  engineering:
+    rekayasa_gedung|struktur_gedung|engineering_gedung|teknik_gedung: "RK001"
+    sumber_daya_air|bendungan|irigasi|drainase|sungai|waduk|hidrologi: "RK002"
+    transportasi|jalan|jembatan|rel|terminal|pelabuhan|bandara|lalu_lintas: "RK003"
+    mekanikal|MEP|HVAC|AC|lift|eskalator|plambing: "RK004"
+    rekayasa_lainnya|engineering_lainnya|jasa_teknik_lainnya: "RK005"
+
+  integrated_engineering:
+    studi_investasi|studi_kelayakan|feasibility_study|investasi_infrastruktur: "RT001"
+    pembangkit|transmisi|gardu_induk|distribusi_listrik|tenaga_listrik: "RT002"
+    proses_industrial|fasilitas_produksi|pabrik|produksi|manufacturing: "RT003"
+
+  landscape_and_planning:
+    pemanfaatan_ruang|tata_ruang|zoning|perencanaan_ruang: "AL001"
+    pengembangan_wilayah|perencanaan_wilayah|regional_planning|kawasan: "AL002"
+    perkotaan|perencanaan_kota|urban_planning|masterplan_kota: "AL003"
+    lanskap|landscape|taman|ruang_terbuka|site_plan|lingkungan_bangunan: "AL004"
+
+  scientific_technical:
+    prospektus_geologi|prospektus_geofisika|geologi|geofisika: "IT001"
+    bawah_tanah|underground|subsurface|terowongan|geoteknik_bawah_tanah: "IT002"
+    peta|pemetaan|topografi|permukaan_tanah|survey_tanah|geospasial: "IT003"
+    prasarana_umum|sarana_umum|fasilitas_umum|utilitas_umum: "IT004"
+    kendali_lalu_lintas|traffic_control|ATCS|ITS|traffic_management: "IT005"
+    hidrolika|hidrologi|oceanography|oseanografi|arus|gelombang|pasang_surut: "IT007"
+
+  testing_analysis:
+    uji_geologi|analisis_geofisika|geokimia|uji_tanah|uji_batuan: "AT001"
+    komposisi|kemurnian|uji_material|analisis_material: "AT002"
+    uji_konstruksi|uji_beton|uji_aspal|laboratorium_konstruksi|quality_control: "AT003"
+    parameter_fisikal|uji_fisik|analisis_fisikal: "AT004"
+    uji_hidrolika|analisis_hidrologi|uji_oceanography: "AT005"
+    akustik|vibrasi|uji_kebisingan|uji_getaran|vibrator_gedung: "AT006"
+    commissioning|testing_commissioning|uji_fungsi|startup|proses_industrial: "AT007"
+```
+
+---
+
+## 10. Recommendation Flow
+
+```yaml
+node_consultant_recommendation_intro:
+  type: message_with_buttons
+  title: "Bantu Pilih Sub Bidang SBU Konsultan"
+  message: >
+    Saya akan membantu memetakan sub bidang SBU Konsultan. Pilih jenis layanan utama badan usaha Anda.
+  buttons:
+    - label: "Arsitektur"
+      target_node: node_recommend_architecture
+
+    - label: "Rekayasa"
+      target_node: node_recommend_engineering
+
+    - label: "Rekayasa Terpadu"
+      target_node: node_recommend_integrated_engineering
+
+    - label: "Lanskap / Wilayah / Perkotaan"
+      target_node: node_recommend_landscape_planning
+
+    - label: "Konsultasi Ilmiah & Teknis"
+      target_node: node_recommend_scientific_technical
+
+    - label: "Pengujian & Analisis Teknis"
+      target_node: node_recommend_testing_analysis
+```
+
+```yaml
+node_recommend_architecture:
+  type: message_with_buttons
+  title: "Klarifikasi Arsitektur"
+  message: "Layanan arsitektur yang paling sesuai apa?"
+  buttons:
+    - label: "Arsitektur Gedung Hunian/Non Hunian"
+      set: { session.recommended_code: "AR001" }
+      target_node: node_consultant_recommendation_result
+    - label: "Arsitektural Lainnya"
+      set: { session.recommended_code: "AR002" }
+      target_node: node_consultant_recommendation_result
+    - label: "Desain Interior"
+      set: { session.recommended_code: "AR003" }
+      target_node: node_consultant_recommendation_result
+
+node_recommend_engineering:
+  type: message_with_buttons
+  title: "Klarifikasi Rekayasa"
+  message: "Layanan rekayasa yang paling sesuai apa?"
+  buttons:
+    - label: "Rekayasa Bangunan Gedung"
+      set: { session.recommended_code: "RK001" }
+      target_node: node_consultant_recommendation_result
+    - label: "Sumber Daya Air"
+      set: { session.recommended_code: "RK002" }
+      target_node: node_consultant_recommendation_result
+    - label: "Transportasi"
+      set: { session.recommended_code: "RK003" }
+      target_node: node_consultant_recommendation_result
+    - label: "Mekanikal dalam Bangunan"
+      set: { session.recommended_code: "RK004" }
+      target_node: node_consultant_recommendation_result
+    - label: "Rekayasa Lainnya"
+      set: { session.recommended_code: "RK005" }
+      target_node: node_consultant_recommendation_result
+
+node_recommend_integrated_engineering:
+  type: message_with_buttons
+  title: "Klarifikasi Rekayasa Terpadu"
+  message: "Layanan rekayasa terpadu yang paling sesuai apa?"
+  buttons:
+    - label: "Studi Investasi Infrastruktur"
+      set: { session.recommended_code: "RT001" }
+      target_node: node_consultant_recommendation_result
+    - label: "Pembangkit/Transmisi/Gardu/Distribusi Listrik"
+      set: { session.recommended_code: "RT002" }
+      target_node: node_consultant_recommendation_result
+    - label: "Proses Industrial/Fasilitas Produksi"
+      set: { session.recommended_code: "RT003" }
+      target_node: node_consultant_recommendation_result
+
+node_recommend_landscape_planning:
+  type: message_with_buttons
+  title: "Klarifikasi Lanskap dan Perencanaan Wilayah"
+  message: "Layanan perencanaan yang paling sesuai apa?"
+  buttons:
+    - label: "Pemanfaatan Ruang"
+      set: { session.recommended_code: "AL001" }
+      target_node: node_consultant_recommendation_result
+    - label: "Pengembangan Wilayah"
+      set: { session.recommended_code: "AL002" }
+      target_node: node_consultant_recommendation_result
+    - label: "Pengembangan Perkotaan"
+      set: { session.recommended_code: "AL003" }
+      target_node: node_consultant_recommendation_result
+    - label: "Lingkungan Bangunan & Lanskap"
+      set: { session.recommended_code: "AL004" }
+      target_node: node_consultant_recommendation_result
+
+node_recommend_scientific_technical:
+  type: message_with_buttons
+  title: "Klarifikasi Konsultasi Ilmiah dan Teknis"
+  message: "Jenis konsultansi ilmiah/teknis yang paling sesuai apa?"
+  buttons:
+    - label: "Prospektus Geologi & Geofisika"
+      set: { session.recommended_code: "IT001" }
+      target_node: node_consultant_recommendation_result
+    - label: "Bawah Tanah"
+      set: { session.recommended_code: "IT002" }
+      target_node: node_consultant_recommendation_result
+    - label: "Permukaan Tanah & Peta"
+      set: { session.recommended_code: "IT003" }
+      target_node: node_consultant_recommendation_result
+    - label: "Prasarana & Sarana Umum"
+      set: { session.recommended_code: "IT004" }
+      target_node: node_consultant_recommendation_result
+    - label: "Sistem Kendali Lalu Lintas"
+      set: { session.recommended_code: "IT005" }
+      target_node: node_consultant_recommendation_result
+    - label: "Hidrolika/Hidrologi/Oceanography"
+      set: { session.recommended_code: "IT007" }
+      target_node: node_consultant_recommendation_result
+
+node_recommend_testing_analysis:
+  type: message_with_buttons
+  title: "Klarifikasi Pengujian dan Analisis Teknis"
+  message: "Jenis pengujian/analisis yang paling sesuai apa?"
+  buttons:
+    - label: "Geologi/Geofisika/Geokimia"
+      set: { session.recommended_code: "AT001" }
+      target_node: node_consultant_recommendation_result
+    - label: "Komposisi & Kemurnian"
+      set: { session.recommended_code: "AT002" }
+      target_node: node_consultant_recommendation_result
+    - label: "Hasil Pekerjaan Konstruksi/Laboratorium"
+      set: { session.recommended_code: "AT003" }
+      target_node: node_consultant_recommendation_result
+    - label: "Parameter Fisikal"
+      set: { session.recommended_code: "AT004" }
+      target_node: node_consultant_recommendation_result
+    - label: "Hidrolika/Hidrologi/Oceanography"
+      set: { session.recommended_code: "AT005" }
+      target_node: node_consultant_recommendation_result
+    - label: "Akustik & Vibrasi Gedung"
+      set: { session.recommended_code: "AT006" }
+      target_node: node_consultant_recommendation_result
+    - label: "Commissioning Proses Industrial"
+      set: { session.recommended_code: "AT007" }
+      target_node: node_consultant_recommendation_result
+```
+
+---
+
+## 11. Ambiguity Rules
+
+```yaml
+ambiguity_resolution_rules:
+  same_kbli_71101:
+    kbli: "71101"
+    candidates:
+      - "AR001"
+      - "AR002"
+      - "AL001"
+      - "AL002"
+      - "AL003"
+      - "AL004"
+    clarification_question: >
+      Apakah layanan Anda lebih dominan arsitektur bangunan, arsitektural lainnya,
+      pemanfaatan ruang, pengembangan wilayah, pengembangan perkotaan, atau lanskap?
+
+  same_kbli_71102:
+    kbli: "71102"
+    candidates:
+      - "RK001"
+      - "RK002"
+      - "RK003"
+      - "RK004"
+      - "RK005"
+      - "RT002"
+      - "RT003"
+      - "IT001"
+      - "IT002"
+      - "IT003"
+      - "IT004"
+      - "IT005"
+      - "IT007"
+      - "AT001"
+      - "AT002"
+      - "AT003"
+      - "AT005"
+    clarification_question: >
+      KBLI 71102 mencakup banyak sub bidang. Apakah layanan Anda berupa rekayasa gedung,
+      sumber daya air, transportasi, mekanikal, tenaga listrik, proses industrial,
+      konsultasi ilmiah/teknis, atau pengujian teknis?
+
+  same_kbli_71202:
+    kbli: "71202"
+    candidates:
+      - "AT004"
+      - "AT006"
+      - "AT007"
+    clarification_question: >
+      Apakah layanan Anda berupa pengujian parameter fisikal, pengujian akustik/vibrasi gedung,
+      atau commissioning proses industrial?
+
+  architecture_vs_engineering:
+    rule: >
+      Jika fokusnya desain bentuk, fungsi, tata ruang, fasad, dan konsep bangunan, arahkan ke AR.
+      Jika fokusnya perhitungan teknis, struktur, sistem, atau rekayasa teknis, arahkan ke RK.
+
+  planning_vs_architecture:
+    rule: >
+      Jika fokusnya kawasan, kota, wilayah, tata ruang, atau lanskap, arahkan ke AL.
+      Jika fokusnya desain bangunan, arahkan ke AR.
+
+  engineering_vs_testing:
+    rule: >
+      Jika fokusnya merancang atau merekayasa solusi teknis, arahkan ke RK/RT/IT.
+      Jika fokusnya menguji, menganalisis, commissioning, atau laboratorium, arahkan ke AT.
+```
+
+---
+
+## 12. Comparison Templates
+
+```yaml
+comparison_templates:
+  AR001_vs_RK001:
+    bot_message: >
+      AR001 berfokus pada jasa arsitektural bangunan gedung hunian dan non hunian,
+      seperti konsep arsitektur, tata ruang, dan desain bangunan. RK001 berfokus
+      pada jasa rekayasa konstruksi bangunan gedung, seperti aspek teknis/engineering
+      gedung. Jika layanan Anda dominan desain arsitektur, pilih AR001. Jika dominan
+      perencanaan teknis/rekayasa gedung, pilih RK001.
+
+  RK002_vs_IT007:
+    bot_message: >
+      RK002 berfokus pada jasa rekayasa pekerjaan teknik sipil sumber daya air.
+      IT007 berfokus pada konsultansi ilmiah dan teknis hidrolika, hidrologi, dan
+      oceanography. Jika layanan berupa desain/rekayasa infrastruktur SDA, kandidatnya RK002.
+      Jika layanan berupa kajian ilmiah/teknis hidrologi, hidrolika, atau oceanography,
+      kandidatnya IT007.
+
+  IT003_vs_AT001:
+    bot_message: >
+      IT003 berfokus pada konsultansi ilmiah dan teknis permukaan tanah serta pembuatan peta.
+      AT001 berfokus pada pengujian dan analisis teknis geologi, geofisika, dan geokimia.
+      Jika layanan berupa pemetaan/konsultansi permukaan tanah, pilih IT003.
+      Jika layanan berupa pengujian atau analisis laboratorium/teknis geologi-geofisika-geokimia,
+      pilih AT001.
+
+  AT003_vs_AT004:
+    bot_message: >
+      AT003 digunakan untuk pengujian hasil pekerjaan konstruksi dan fasilitas laboratorium,
+      misalnya uji beton, uji aspal, atau uji material konstruksi. AT004 digunakan untuk
+      pengujian dan analisis teknis parameter fisikal. Jika objeknya hasil pekerjaan konstruksi,
+      kandidatnya AT003. Jika objeknya parameter fisikal umum, kandidatnya AT004.
+
+  RT001_vs_AL002:
+    bot_message: >
+      RT001 berfokus pada studi investasi infrastruktur, seperti studi kelayakan atau kajian
+      investasi proyek infrastruktur. AL002 berfokus pada pengembangan wilayah. Jika layanan
+      Anda berupa studi investasi/kelayakan infrastruktur, pilih RT001. Jika layanan Anda berupa
+      perencanaan atau pengembangan wilayah, pilih AL002.
+```
+
+---
+
+## 13. Checklist Dokumen SBU Konsultan
+
+```yaml
+consultant_document_checklist:
+  general:
+    title: "Checklist Umum SBU Konsultan"
+    items:
+      - "Legalitas badan usaha dan NIB."
+      - "KBLI pada OSS sesuai sub bidang."
+      - "Kode sub bidang SBU Konsultan yang diajukan."
+      - "Kualifikasi yang dituju."
+      - "Pengalaman pekerjaan jasa konsultansi sesuai sub bidang."
+      - "Kontrak/SPK pekerjaan konsultansi."
+      - "BAST atau bukti serah terima pekerjaan."
+      - "Laporan akhir, dokumen desain, dokumen studi, hasil pengujian, atau output teknis sesuai jenis layanan."
+      - "Portofolio pekerjaan."
+      - "Tenaga ahli/SKK sesuai sub bidang."
+      - "Dokumen kemampuan keuangan bila dipersyaratkan."
+      - "Dokumen SMAP atau komitmen SMAP bila dipersyaratkan."
+      - "Surat pernyataan tanggung jawab mutlak."
+      - "Validasi akhir ke LSBU/OSS/SIJK."
+
+  by_group:
+    AR:
+      additional_items:
+        - "Contoh hasil desain arsitektur."
+        - "Gambar pra-rencana, DED, konsep desain, atau dokumen arsitektur."
+        - "Portofolio gedung hunian/non hunian atau desain interior."
+
+    RK:
+      additional_items:
+        - "Dokumen perencanaan teknis/engineering."
+        - "Perhitungan teknis, DED, laporan rekayasa, atau dokumen desain teknis."
+        - "Tenaga ahli teknik sesuai bidang: gedung, SDA, transportasi, mekanikal, atau rekayasa lainnya."
+
+    RT:
+      additional_items:
+        - "Laporan studi investasi, studi kelayakan, atau kajian proyek."
+        - "Dokumen rekayasa terpadu untuk energi/industri."
+        - "Output teknis terkait pembangkit, transmisi, gardu, distribusi, atau fasilitas produksi."
+
+    AL:
+      additional_items:
+        - "Dokumen perencanaan tata ruang, wilayah, kota, kawasan, atau lanskap."
+        - "Masterplan, site plan, rencana pemanfaatan ruang, atau desain lanskap."
+        - "Tenaga ahli perencanaan wilayah/kota/lanskap sesuai kebutuhan."
+
+    IT:
+      additional_items:
+        - "Laporan kajian ilmiah/teknis."
+        - "Dokumen peta, prospektus geologi/geofisika, hidrologi, atau sistem kendali lalu lintas."
+        - "Metodologi kajian dan output teknis."
+
+    AT:
+      additional_items:
+        - "Laporan hasil pengujian dan analisis teknis."
+        - "Data laboratorium atau fasilitas pengujian bila digunakan."
+        - "Metode pengujian, hasil analisis, sertifikat alat/lab bila relevan."
+```
+
+---
+
+## 14. Pra-Verifikasi SBU Konsultan
+
+```yaml
+consultant_pre_verification_module:
+  id: consultant_pre_verification_v1
+  title: "Pra-Verifikasi Kesiapan SBU Konsultan"
+  scoring_components:
+    kbli_subfield_match:
+      weight: 20
+      description: "Kesesuaian KBLI dengan sub bidang SBU Konsultan."
+    consulting_experience:
+      weight: 20
+      description: "Ketersediaan pengalaman jasa konsultansi sesuai sub bidang."
+    technical_output:
+      weight: 15
+      description: "Ketersediaan output pekerjaan seperti laporan, desain, studi, peta, hasil uji, atau dokumen teknis."
+    expert_team:
+      weight: 20
+      description: "Kesiapan tenaga ahli/SKK sesuai sub bidang."
+    financial_capacity:
+      weight: 10
+      description: "Ketersediaan dokumen keuangan bila dipersyaratkan."
+    smap:
+      weight: 10
+      description: "Ketersediaan dokumen SMAP/komitmen."
+    consistency:
+      weight: 5
+      description: "Konsistensi data OSS, SBU, pengalaman, dan dokumen pendukung."
+
+  status_labels:
+    85_100: "Siap Dikonsultasikan"
+    65_84: "Perlu Perbaikan Ringan"
+    40_64: "Perlu Perbaikan Mayor"
+    0_39: "Belum Siap"
+
+  result_template: >
+    Hasil pra-verifikasi SBU Konsultan:
+
+    Sub bidang:
+    {{code}} — {{title}}
+
+    KBLI:
+    {{kbli}}
+
+    Skor:
+    {{score}} / 100
+
+    Status:
+    {{status_label}}
+
+    Rincian:
+    1. Kesesuaian KBLI dan sub bidang: {{score_kbli}} / 20
+    2. Pengalaman jasa konsultansi: {{score_experience}} / 20
+    3. Output teknis pekerjaan: {{score_output}} / 15
+    4. Tenaga ahli/SKK: {{score_expert}} / 20
+    5. Keuangan: {{score_finance}} / 10
+    6. SMAP: {{score_smap}} / 10
+    7. Konsistensi data: {{score_consistency}} / 5
+
+    Temuan:
+    {{issues}}
+
+    Rekomendasi:
+    {{recommendations}}
+
+    Catatan:
+    Ini hanya pra-verifikasi awal. Keputusan resmi tetap melalui LSBU/asesor/OSS/SIJK.
+```
+
+---
+
+## 15. Guardrail SBU Konsultan
+
+```yaml
+consultant_guardrails:
+  approval:
+    rule: "Jangan menyatakan SBU Konsultan pasti disetujui atau ditolak."
+    response: >
+      Saya tidak dapat memastikan kelulusan atau persetujuan SBU. Saya hanya dapat
+      membantu pemetaan awal dan pra-verifikasi. Keputusan resmi tetap dilakukan
+      oleh LSBU/asesor dan sistem terkait.
+
+  fabrication:
+    rule: "Jangan membuat kode sub bidang, KBLI, atau judul yang tidak ada dalam katalog."
+    response: >
+      Saya belum menemukan data tersebut dalam katalog SBU Konsultan yang tersedia.
+      Silakan cek kembali kode atau gunakan pencarian berdasarkan jenis jasa.
+
+  manipulation:
+    rule: "Jangan membantu manipulasi pengalaman, tenaga ahli, output teknis, atau dokumen."
+    response: >
+      Saya tidak dapat membantu manipulasi data atau dokumen. Langkah yang benar adalah
+      menyesuaikan KBLI, pengalaman, tenaga ahli, output pekerjaan, dan dokumen pendukung
+      dengan kondisi sebenarnya.
+
+  ambiguity:
+    rule: "Jika KBLI memiliki banyak sub bidang, jangan langsung memutuskan satu kode."
+    response: >
+      KBLI ini memiliki beberapa kandidat sub bidang. Saya perlu mengetahui jenis layanan
+      utama Anda agar dapat memberi rekomendasi yang lebih tepat.
+
+  data_missing:
+    rule: "Jika data tidak cukup untuk pra-verifikasi, minta data tambahan."
+    response: >
+      Data belum cukup untuk pra-verifikasi. Mohon lengkapi informasi sub bidang, KBLI,
+      pengalaman, output teknis, tenaga ahli, dan dokumen pendukung.
+```
+
+---
+
+## 16. Test Cases
+
+```yaml
+test_cases:
+  - id: TC_KONS_001
+    user_input: "Jelaskan AR001"
+    expected_intent: lookup_consultant_code
+    expected_response_contains:
+      - "Jasa Arsitektural Bangunan Gedung Hunian & Non Hunian"
+      - "KBLI 71101"
+
+  - id: TC_KONS_002
+    user_input: "KBLI 71102 masuk sub bidang apa?"
+    expected_intent: lookup_consultant_kbli
+    expected_response_contains:
+      - "RK001"
+      - "RK002"
+      - "RK003"
+      - "RK004"
+      - "RK005"
+      - "RT002"
+      - "RT003"
+      - "IT001"
+      - "AT001"
+
+  - id: TC_KONS_003
+    user_input: "Saya konsultan desain interior"
+    expected_intent: consultant_keyword_search
+    expected_top_candidate: "AR003"
+    expected_response_contains:
+      - "Jasa Desain Interior"
+      - "KBLI 74120"
+
+  - id: TC_KONS_004
+    user_input: "Konsultan jalan dan transportasi"
+    expected_intent: consultant_keyword_search
+    expected_top_candidate: "RK003"
+    expected_response_contains:
+      - "Teknik Sipil Transportasi"
+      - "KBLI 71102"
+
+  - id: TC_KONS_005
+    user_input: "Pengujian beton dan aspal"
+    expected_intent: consultant_keyword_search
+    expected_top_candidate: "AT003"
+    expected_response_contains:
+      - "Pengujian Hasil Pekerjaan Konstruksi"
+      - "Fasilitas Laboratorium"
+
+  - id: TC_KONS_006
+    user_input: "Studi kelayakan investasi infrastruktur"
+    expected_intent: consultant_keyword_search
+    expected_top_candidate: "RT001"
+    expected_response_contains:
+      - "Studi Investasi Infrastruktur"
+      - "KBLI 70209"
+
+  - id: TC_KONS_007
+    user_input: "Apa beda RK002 dan IT007?"
+    expected_intent: compare_consultant_subfield
+    expected_response_contains:
+      - "sumber daya air"
+      - "hidrolika"
+      - "hidrologi"
+      - "oceanography"
+
+  - id: TC_KONS_008
+    user_input: "Bisa lolos kalau tenaga ahli belum sesuai?"
+    expected_intent: safety_guardrail
+    expected_response_contains:
+      - "tidak dapat memastikan kelulusan"
+      - "tenaga ahli harus sesuai"
+      - "validasi LSBU"
+```
+
+---
+
+## 17. Final Runtime Prompt SBU Konsultan
+
+```yaml
+runtime_system_prompt:
+  text: >
+    Anda adalah “SBU Konsultan Coach”, chatbot profesional berbahasa Indonesia
+    untuk membantu pengguna mencari, memahami, dan memetakan sub bidang SBU Konsultan.
+
+    Gunakan katalog sub bidang berikut sebagai sumber utama:
+    AR001, AR002, AR003, RK001, RK002, RK003, RK004, RK005, RT001, RT002, RT003,
+    AL001, AL002, AL003, AL004, IT001, IT002, IT003, IT004, IT005, IT007,
+    AT001, AT002, AT003, AT004, AT005, AT006, dan AT007.
+
+    Tugas utama:
+    1. Mencari sub bidang berdasarkan kode.
+    2. Mencari sub bidang berdasarkan KBLI.
+    3. Mencari kandidat berdasarkan jenis jasa konsultansi.
+    4. Membantu memilih sub bidang melalui pertanyaan bertahap.
+    5. Menjelaskan ruang lingkup AR, RK, RT, AL, IT, dan AT.
+    6. Membandingkan dua sub bidang.
+    7. Membuat checklist dokumen SBU Konsultan.
+    8. Melakukan pra-verifikasi kesiapan berdasarkan KBLI, pengalaman, output teknis,
+       tenaga ahli/SKK, keuangan, SMAP, dan konsistensi data.
+    9. Membuat ringkasan konsultasi.
+
+    Aturan:
+    - Jawab dalam bahasa Indonesia formal, jelas, dan praktis.
+    - Jika pengguna memberi kode, lakukan lookup langsung.
+    - Jika pengguna memberi KBLI, tampilkan semua kandidat.
+    - Jika pengguna memberi jenis jasa, tampilkan 1-5 kandidat paling relevan.
+    - Jika KBLI memiliki banyak kandidat, ajukan pertanyaan klarifikasi.
+    - Jangan mengarang kode, KBLI, atau judul sub bidang.
+    - Jangan menjamin SBU pasti disetujui atau ditolak.
+    - Jangan membantu manipulasi pengalaman, tenaga ahli, output teknis, atau dokumen.
+    - Selalu jelaskan bahwa hasil chatbot adalah pemetaan/pra-verifikasi awal
+      dan keputusan resmi tetap melalui LSBU, asesor, OSS, SIJK, dan/atau pejabat berwenang.
+```
+
+---
+
+## 18. Final Builder Prompt — Siap Tempel
+
+```text
+Buat chatbot profesional berbahasa Indonesia bernama “SBU Konsultan Coach”.
+
+Chatbot harus membantu pengguna mencari, memahami, dan memetakan sub bidang SBU Konsultan berdasarkan katalog sub bidang berikut:
+
+AR001 Jasa Arsitektural Bangunan Gedung Hunian & Non Hunian — KBLI 71101
+AR002 Jasa Arsitektural Lainnya — KBLI 71101
+AR003 Jasa Desain Interior pada Bangunan Gedung & Bangunan Sipil — KBLI 74120
+RK001 Jasa Rekayasa Konstruksi Bangunan Gedung Hunian & Non Hunian — KBLI 71102
+RK002 Jasa Rekayasa Pekerjaan Teknik Sipil Sumber Daya Air — KBLI 71102
+RK003 Jasa Rekayasa Pekerjaan Teknik Sipil Transportasi — KBLI 71102
+RK004 Jasa Rekayasa Pekerjaan Mekanikal dalam Bangunan — KBLI 71102
+RK005 Jasa Rekayasa Lainnya — KBLI 71102
+RT001 Jasa Pelayanan Studi Investasi Infrastruktur — KBLI 70209
+RT002 Jasa Rekayasa Konstruksi Pembangkit, Jaringan Transmisi, Gardu Induk dan Distribusi Tenaga Listrik — KBLI 71102
+RT003 Jasa Rekayasa Konstruksi Proses Industrial, Produksi & Fasilitas Produksi — KBLI 71102
+AL001 Jasa Pengembangan Pemanfaatan Ruang — KBLI 71101
+AL002 Jasa Pengembangan Wilayah — KBLI 71101
+AL003 Jasa Pengembangan Perkotaan — KBLI 71101
+AL004 Jasa Pengembangan Lingkungan Bangunan & Lanskap — KBLI 71101
+IT001 Jasa Pembuatan Prospektus Geologi & Geofisika — KBLI 71102
+IT002 Jasa Konsultansi Ilmiah & Teknis Bawah Tanah — KBLI 71102
+IT003 Jasa Konsultansi Ilmiah & Teknis Permukaan Tanah & Pembuatan Peta — KBLI 71102
+IT004 Jasa Konsultansi Ilmiah & Teknis Prasarana & Sarana Umum — KBLI 71102
+IT005 Jasa Konsultansi Ilmiah & Teknis Konstruksi Sistem Kendali Lalu Lintas — KBLI 71102
+IT007 Jasa Konsultansi Ilmiah & Teknis Hidrolika, Hidrologi & Oceanography — KBLI 71102
+AT001 Jasa Pengujian & Analisis Teknis Geologi, Geofisika & Geokimia — KBLI 71102
+AT002 Jasa Pengujian & Analisis Teknis Komposisi & Tingkat Kemurnian — KBLI 71102
+AT003 Jasa Pengujian Hasil Pekerjaan Konstruksi & Fasilitas Laboratorium — KBLI 71102
+AT004 Jasa Pengujian & Analisis Teknis Parameter Fisikal — KBLI 71202
+AT005 Jasa Pengujian & Analisis Teknis Hidrolika, Hidrologi & Oceanography — KBLI 71102
+AT006 Jasa Pengujian & Analisis Akustik & Vibrator Gedung Hunian & Non Hunian — KBLI 71202
+AT007 Jasa Commissioning Proses Industrial — KBLI 71202
+
+Chatbot wajib memiliki:
+1. Bot identity
+2. Knowledge source
+3. Data source schema
+4. Main menu
+5. Intent dan entities
+6. Lookup kode sub bidang
+7. Lookup KBLI
+8. Keyword search
+9. Recommendation flow
+10. Comparison flow
+11. Checklist dokumen
+12. Pra-verifikasi kesiapan SBU Konsultan
+13. Scoring engine 0-100
+14. Guardrail
+15. Fallback
+16. Test cases
+17. Runtime system prompt
+
+Aturan penting:
+- Jangan mengarang kode sub bidang, KBLI, atau judul.
+- Jika KBLI memiliki banyak kandidat, tampilkan semua kandidat dan minta klarifikasi.
+- Jangan menjamin SBU disetujui.
+- Jangan membantu manipulasi pengalaman, tenaga ahli, output teknis, atau dokumen.
+- Selalu beri catatan bahwa jawaban adalah pemetaan/pra-verifikasi awal dan keputusan resmi tetap melalui LSBU/OSS/SIJK.
+```
+
+---
+
+Konfigurasi ini sudah menjadi **paket lengkap SBU Konsultan** yang paralel dengan paket SBU Klasifikasi/Subklasifikasi sebelumnya: lookup, KBLI, keyword, rekomendasi, checklist, pra-verifikasi, scoring, guardrail, dan prompt final siap ditempel ke builder.

@@ -1,0 +1,77 @@
+## 🧬 Persona
+
+| **Chatbot Name** | Kontrak Konstruksi | **Tagline** | Anatomi, Klausul Wajib & Sengketa Kontrak Konstruksi |
+| --- | --- | --- | --- |
+| **Description** | Spesialis kontrak kerja konstruksi: anatomi minimal (Pasal UU JK), bentuk kontrak (lump sum, harga satuan, gabungan, terima jadi/EPC, putar kunci), klausul wajib (jaminan, asuransi, K3, kegagalan bangunan), serta penyelesaian sengketa (musyawarah, mediasi, arbitrase BANI, pengadilan). | **Primary Language** | Bahasa Indonesia |
+| **Series** | S1 — Regulasi & Hukum | **Avatar** | 📝 |
+
+## 📚 Knowledge Base
+
+### 🟦 Foundational — Regulasi, Standar, Data Produk
+
+| **Sumber Resmi** | **Sektor** | **Subsektor** | **URL Sumber** | **Tanggal** |
+| --- | --- | --- | --- | --- |
+| PP No. 22/2020 jo. PP No. 14/2021 | Hukum | PP | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2020/2021 |
+| Perpres No. 16/2018 jo. 12/2021 jo. 46/2025 (kontrak PBJ) | Pengadaan | Perpres | [lkpp.go.id](http://lkpp.go.id) | 2018-2025 |
+| PERMA No. 13/2016 — Pidana Korporasi | Hukum | PERMA | [mahkamahagung.go.id](http://mahkamahagung.go.id) | 2016 |
+
+### 🟩 Operational — SOP, Prosedur, FAQ, Template
+
+**Anatomi minimal kontrak konstruksi (UU 2/2017 Pasal 47):**
+
+1. Para pihak
+2. Rumusan pekerjaan
+3. Masa pertanggungan/kegagalan bangunan
+4. Hak & kewajiban setara
+5. Penggunaan tenaga kerja konstruksi
+6. Cara pembayaran
+7. Wanprestasi
+8. Penyelesaian perselisihan
+9. Pemutusan kontrak
+10. Force majeure
+11. Kegagalan bangunan & perlindungan pekerja
+12. Aspek lingkungan
+13. Jaminan atas risiko
+14. Pilihan hukum
+
+**Bentuk kontrak:**
+
+- Lump sum (harga pasti)
+- Harga satuan (unit price)
+- Gabungan lump sum & harga satuan
+- Terima jadi (turnkey)
+- Putar kunci
+- Persentase (jasa konsultansi)
+- EPC (Engineering, Procurement, Construction)
+
+**Jaminan & asuransi wajib:**
+
+- Jaminan penawaran, pelaksanaan, uang muka, pemeliharaan
+- Asuransi CAR/EAR, profesional indemnity, asuransi tenaga kerja
+
+**Penyelesaian sengketa (UU JK + UU 30/1999):**
+
+Musyawarah → mediasi → konsiliasi → dewan sengketa (DAB/DRB) → arbitrase (BANI) atau pengadilan negeri.
+
+**FAQ:**
+
+- *Wajib pakai dewan sengketa?* — Direkomendasikan untuk kontrak besar/long-term sesuai UU JK.
+- *Default forum sengketa?* — Sesuai pilihan klausul; jika tidak diatur, peradilan umum.
+
+### 🟪 Case Memory — Notulen, Keputusan, Preseden
+
+*TBD — diisi dengan: putusan BANI sengketa konstruksi, putusan PN/PT/MA terkait wanprestasi, addendum kontrak proyek, evaluasi klausul kegagalan bangunan.*
+
+## 🔗 Sumber Resmi
+
+[peraturan.bpk.go.id](http://peraturan.bpk.go.id) · [jdih.pu.go.id](http://jdih.pu.go.id) · [lkpp.go.id](http://lkpp.go.id) · [mahkamahagung.go.id](http://mahkamahagung.go.id)
+
+## ❓ Contoh Pertanyaan
+
+1. Sebutkan klausul wajib kontrak konstruksi menurut UU JK.
+2. Apa beda lump sum dan harga satuan?
+3. Bagaimana mekanisme penyelesaian sengketa via dewan sengketa?
+
+## 🔗 Halaman induk
+
+[Regulasi Jasa Konstruksi Indonesia — Ringkasan Lengkap](https://www.notion.so/Regulasi-Jasa-Konstruksi-Indonesia-Ringkasan-Lengkap-5a3f66d1250941f18f53a104f957a336?pvs=21) — Bab 13; lihat juga Bab 5.

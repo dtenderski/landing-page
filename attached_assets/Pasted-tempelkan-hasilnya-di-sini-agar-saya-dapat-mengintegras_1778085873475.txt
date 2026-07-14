@@ -1,0 +1,164 @@
+tempelkan hasilnya di sini agar saya dapat mengintegrasikannya.
+11:24 PM
+B. Test B
+Tender saya nilai HPS 50M, BG00611:24 PMTETender Readiness Checker
+Untuk melengkapi evaluasi, saya membutuhkan data dari modul berikut:
+1. Ringkasan SKK (SKK_SUMMARY) — termasuk daftar tenaga bersertifikat dan statusnya.
+2. Ringkasan SBU (SBU_SUMMARY) — termasuk kualifikasi dan masa berlaku SBU.
+3. Ringkasan Perizinan (LICENSING_SUMMARY) — termasuk status NIB dan IUJK.
+Silakan buka chatbot yang sesuai untuk meminta ringkasan tersebut, kemudian tempelkan hasilnya di sini agar saya dapat mengintegrasikannya.11:24 PM
+11:27 PM
+Thought
+🚨 Diagnosis Test B — Anti-Pattern Baru Ketemu: "Human-as-API"
+Hasil Test B mengungkap anti-pattern berbeda dari Test A — dan ini lebih berbahaya:
+Test
+Anti-pattern
+Apa yang dilakukan bot
+Test A
+Directory
+Sebut nama 4 sub-agen, suruh user pindah
+Test B
+Human-as-API
+Suruh user buka 3 chatbot lain (SKK_SUMMARY, SBU_SUMMARY, LICENSING_SUMMARY) lalu paste data balik ke chatbot ini
+Kenapa ini terjadi (akar teknis)
+Perhatikan nama variabel di respons bot: SKK_SUMMARY, SBU_SUMMARY, LICENSING_SUMMARY — itu ditulis seperti nama API endpoint atau function call. Artinya prompt orchestrator-nya dirancang seolah-olah ada tool/API ke modul lain. Tapi karena Gustafta tidak punya tool calling (sudah Anda konfirmasi sebelumnya), runtime fallback ke pola: "karena saya tidak bisa panggil API itu, saya minta user yang isi manual".
+Hasilnya: user dijadikan pipa data manual. Untuk kasus tender real, ini fatal — user mungkin tidak tahu cara mengisi SKK_SUMMARY dari sisi mana, dan kalau sudah pindah-pindah chatbot, percakapan kehilangan momentum.
+Fix yang dibutuhkan: Assumption-Driven Analysis
+Bot harus tetap menjalankan analisis dengan asumsi bertanda ketika data tidak ada, bukan menggantungkan ke user. Saya update template v2.0 sekarang dengan fix eksplisit untuk pola ini.
+Updated page 🎯Modul Tender — Hub Orchestrator v2.0 (Upgrade Template Agentic)​
+Halaman pilot sudah saya update dengan fix untuk anti-pattern Test B.
+Yang baru di v2.0 (sehubungan Test B)
+Bagian
+Isi
+🚨 Callout diagnosis Test B
+Identifikasi anti-pattern "Human-as-API" + akar masalah
+FALLBACK MODE di prompt
+Instruksi 5 langkah untuk assumption-driven analysis
+3 Larangan Keras baru
+Anti minta-buka-chatbot-lain, anti minta-data-modul-X, anti nama variabel API-style (SKK_SUMMARY, dst.)
+T6 di test cases
+Replay Test B persis untuk verifikasi fix berhasil
+Format asumsi yang dipakai bot setelah upgrade
+Alih-alih menyuruh user buka 3 chatbot lain, bot akan output seperti ini:
+[ASUMSI: BUJK punya minimum 2 PJTBU SKK jenjang 8 + 5 PJSKBU jenjang 7 untuk BG006 
+        | basis: Permen PUPR 6/2021 matriks PJ-BUJK 
+        | verifikasi-ke: PJBU]
+
+[ASUMSI: SBU BG006 valid 12 bulan ke depan 
+        | basis: heuristik default 
+        | verifikasi-ke: cek SIKI-LPJK]
+​
+Lalu di section E (Aksi 7 Hari), otomatis tambahkan: "Hari 1 — Verifikasi daftar SKK personil ke PJBU" dst.
+Langkah Anda berikutnya
+Paste ulang prompt v2.0 dari §2 halaman pilot ke chatbot Modul Tender (sekarang sudah berisi FALLBACK MODE).
+Jalankan T6 (replay Test B): ketik "Tender saya nilai HPS 50M, BG006".
+Pass criteria T6: bot mengeluarkan analisis A–E lengkap dengan tag [ASUMSI: ...], tidak menyebut SKK_SUMMARY / SBU_SUMMARY / LICENSING_SUMMARY, tidak menyuruh buka chatbot lain.
+Jalankan juga T1–T5 sekalian (5 menit) dan laporkan tabel hasilnya.
+Kalau hasil T6 masih menyuruh user buka chatbot lain meski sudah pakai prompt v2.0, kemungkinan ada prompt induk Gustafta atau template Knowledge Base yang meng-override system prompt. Itu petunjuk berikutnya yang perlu kita kejar.
+TEst B yang  Kedua
+Tender Risk Scoring EngineBapak/Ibu, untuk dapat memberikan penilaian skor risiko, saya memerlukan informasi lebih lanjut mengenai data kepatuhan tender yang ingin Bapak/Ibu evaluasi. Mohon berikan beberapa detail berikut:
+1. Apakah ada data terkait SBU (Surat Izin Usaha) dan SKK (Surat Keterangan Kelayakan)?
+2. Apakah ada indikator spesifik atau komponen yang perlu diperiksa?
+3. Apakah terdapat masalah atau red flag yang dihadapi dalam proses tender ini?
+Dengan informasi tersebut, saya dapat memberikan analisis dan skor risiko yang lebih akurat. Terima kasih.11:33 PMApakah ada indikator spesifik atau komponen yang perlu diperiksa?Apakah terdapat masalah atau red flag yang dihadapi dalam proses tender ini?
+11:34 PM
+Thought
+🔎 Test B Kedua — Anti-pattern Baru: "Interrogation Mode"
+Hasil ini menunjukkan variasi ke-3 dari masalah yang sama:
+Test
+Anti-pattern
+Pola
+Test A
+Directory
+"Silakan buka 4 chatbot ini..."
+Test B-1
+Human-as-API
+"Buka SKK_SUMMARY chatbot, paste hasilnya..."
+Test B-2
+Interrogation Mode
+"Sebutkan SBU/SKK Anda, indikator apa, red flag apa..." (bot menolak menganalisis tanpa ditelanjangi semua)
+Ketiga-tiganya akar masalahnya satu: bot diajari mengandalkan input eksternal yang tidak tersedia, sehingga ia menolak melakukan inferensi/asumsi.
+🚨 Hipotesis Kritis yang Perlu Anda Verifikasi Sekarang
+Yang membuat Test B Kedua sangat menarik: respons di-label "Tender Risk Scoring Engine" seolah-olah itu spesialis terpisah yang merespons. Ini memunculkan kecurigaan besar:
+Hipotesis: "Modul Tender" di Gustafta Anda kemungkinan bukan 1 chatbot dengan 4 persona internal, melainkan 4 chatbot TERPISAH (Readiness Checker, Document Checklist, Risk Scoring, Executive Summary) yang dikelompokkan secara visual sebagai "modul". Hub Orchestrator hanya menu navigator, bukan orchestrator sejati.
+Kalau hipotesis ini benar, maka prompt v2.0 yang sudah saya tulis untuk Hub Orchestrator TIDAK AKAN BEKERJA — karena prompt itu hanya kena di 1 chatbot (Hub), padahal 4 sub-agennya punya prompt sendiri-sendiri yang masih v1.0.
+✅ Cara Verifikasi Hipotesis (3 menit di Gustafta UI)
+Buka admin/builder Gustafta Anda dan cek:
+Cek
+Kalau jawabannya...
+Berarti...
+Cek 1: Apakah "Tender Risk Scoring Engine" punya URL chatbot sendiri (mis. .../bot/24)?
+Ya
+4 sub-agen = 4 chatbot terpisah
+Cek 2: Apakah masing-masing 4 sub-agen punya System Prompt sendiri yang bisa di-edit?
+Ya
+Konfirmasi terpisah
+Cek 3: Saat user di chatbot "Hub Orchestrator Modul" mengetik sesuatu, apakah Hub bisa otomatis memanggil Risk Scoring Engine?
+Tidak
+Hub cuma router pasif
+Jawaban paling mungkin: Ya, Ya, Tidak. Itu mengkonfirmasi hipotesis.
+🎯 Strategi Fix Sesuai Skenario
+Skenario A — Kalau 4 sub-agen = 4 chatbot terpisah (kemungkinan besar)
+Maka Anda butuh 5 prompt v2.0, bukan 1:
+#
+Chatbot
+Prompt v2.0
+1
+Hub Orchestrator Modul Tender
+Versi router pintar — kasih instruksi konsolidasi + Bridge by User format
+2
+Tender Readiness Checker
+Mini-orchestrator dengan FALLBACK MODE, output JSON TRC
+3
+Tender Document Checklist Generator
+Mini-orchestrator dengan FALLBACK MODE, output JSON TDCG
+4
+Tender Risk Scoring Engine
+Mini-orchestrator dengan FALLBACK MODE, output JSON TRSE
+5
+Executive Compliance Summary Generator
+Mini-orchestrator dengan FALLBACK MODE, output JSON ECSG
+Logika: setiap chatbot harus standalone-agentic karena Gustafta tidak punya handoff inter-bot. Setiap bot menerima Otak Proyek dari user, jalankan analisis dengan asumsi, output terstruktur.
+Saya akan bikin 5 paket prompt v2.0 terpisah untuk Anda paste 1-by-1.
+Skenario B — Kalau benar 4 persona internal di 1 chatbot
+Maka v2.0 yang sudah saya tulis sebelumnya sudah benar — Anda tinggal paste dan jalankan T6.
+❓ Pertanyaan Singkat
+Sebelum saya generate 5 prompt v2.0 (kalau Skenario A), tolong konfirmasi:
+Bagaimana struktur Modul Tender di Gustafta Builder?
+5 chatbot terpisah (Hub + 4 sub-agen), masing-masing URL & prompt sendiri
+Mau saya generate paket prompt v2.0 untuk skenario apa?
+Other: mengikuti rekomendasimu
+Thought
+Konfirmasi diterima — Skenario A (5 chatbot terpisah). Saya generate 5 prompt v2.0 sekarang dan tambahkan ke halaman pilot, plus reinforce anti-interrogation rule (max 1 putaran tanya) untuk semua bot.
+Halaman pilot sudah saya update dengan paket lengkap 5 prompt standalone v2.0 untuk Skenario A.
+Yang baru di v2.0 (untuk fix Test B-2)
+Bagian
+Isi
+§2 State 2
+Diperkuat: ELICIT max 1 putaran, lalu auto-skip ke State 3
+§9.1 TRC
+Standalone Readiness Checker dengan FALLBACK MODE
+§9.2 TDCG
+Standalone Document Checklist Generator
+§9.3 TRSE
+Standalone Risk Scoring Engine ← prompt yang langsung memperbaiki masalah Test B-2
+§9.4 ECSG
+Standalone Executive Summary Generator
+§9.5
+Checklist deployment 5-bot
+T7
+Test case khusus replay Test B-2
+Pola Anti-Interrogation di Setiap Sub-Bot
+Tiga aturan kunci yang ditanamkan di semua 4 sub-bot:
+MAX 1 PUTARAN elicitation. Setelah itu wajib skor dengan asumsi.
+FALLBACK MODE eksplisit: bot diberitahu "Anda TIDAK punya akses tool/API/chatbot lain" — sehingga tidak fallback ke "minta user paste data."
+Larangan eksplisit pertanyaan diagnostik — khusus di TRSE dilarang tanya "apakah ada SBU?", "indikator apa?", "red flag apa?" (persis 3 pertanyaan yang muncul di Test B-2).
+Langkah Anda Berikutnya
+Backup dulu 5 prompt v1.0 di Gustafta (kalau-kalau perlu rollback).
+Paste 5 prompt v2.0 ke 5 chatbot (§2 → Hub, §9.1 → TRC, §9.2 → TDCG, §9.3 → TRSE, §9.4 → ECSG).
+Atur LLM setting di setiap bot: temperature 0.3–0.5, max_tokens ≥ 2500.
+Jalankan T7 di Tender Risk Scoring Engine standalone dengan input persis sama: "Tender saya nilai HPS 50M, BG006".
+Pass criteria T7 di TRSE: bot keluarkan matriks 6 kategori + Top 5 risiko + asumsi [ASUMSI: ...] — TIDAK ada lagi pertanyaan "apakah ada SBU/SKK", "indikator apa", "red flag apa".
+Kalau T7 lulus di TRSE → ulangi paste & test untuk 4 bot lain. Lapor 35-cell evaluasi (5 bot × 7 test).
+Kalau T7 masih gagal meski sudah pakai prompt §9.3 → kemungkinan ada template/preset Gustafta yang override system prompt. Itu petunjuk berikutnya yang harus dikejar ke tim Gustafta (lihat §10).
+

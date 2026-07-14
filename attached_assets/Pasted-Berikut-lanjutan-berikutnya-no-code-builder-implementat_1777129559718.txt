@@ -1,0 +1,832 @@
+Berikut lanjutan berikutnya: **no-code builder implementation pack**, berisi **struktur node siap impor, flow builder map, WhatsApp/website conversation adaptation, function-calling tools, dan final compressed configuration** untuk chatbot SKK **Manajemen Pelaksanaan**. Data jabatan, KKNI, kualifikasi, standar, dan subklasifikasi tetap bersumber dari katalog yang Anda unggah. 
+
+---
+
+# 157. No-Code Builder Flow Map
+
+```yaml id="no_code_builder_flow_map"
+no_code_builder_flow_map:
+  bot_name: "SKK Coach — Manajemen Pelaksanaan"
+  builder_style: "node-based chatbot builder"
+
+  global_entry_node:
+    node_id: "start"
+    type: "message"
+    message: >
+      Halo, saya SKK Coach untuk Manajemen Pelaksanaan.
+      Saya dapat membantu Anda memilih jalur jabatan, memahami KKNI,
+      mencari standar SKKNI/SKKK, belajar kompetensi, melakukan asesmen
+      mandiri, menyiapkan checklist bukti, dan latihan wawancara.
+    buttons:
+      - label: "Pilih Jalur Jabatan"
+        target: "node_role_path_menu"
+      - label: "Cari Berdasarkan KKNI"
+        target: "node_kkni_lookup"
+      - label: "Cari Standar SKKNI/SKKK"
+        target: "node_standard_lookup"
+      - label: "Belajar Kompetensi"
+        target: "node_learning_menu"
+      - label: "Asesmen Mandiri"
+        target: "node_assessment_menu"
+      - label: "Checklist Bukti"
+        target: "node_evidence_menu"
+
+  primary_nodes:
+    - node_id: "node_role_path_menu"
+      purpose: "Menampilkan subklasifikasi dan memulai pemetaan jabatan."
+    - node_id: "node_kkni_lookup"
+      purpose: "Mengambil input KKNI dan menampilkan jabatan."
+    - node_id: "node_standard_lookup"
+      purpose: "Mengambil kode SKKNI/SKKK dan menampilkan jabatan terkait."
+    - node_id: "node_learning_menu"
+      purpose: "Menampilkan modul pembelajaran."
+    - node_id: "node_assessment_menu"
+      purpose: "Memilih asesmen mandiri."
+    - node_id: "node_scenario_menu"
+      purpose: "Memilih latihan studi kasus."
+    - node_id: "node_mock_interview_menu"
+      purpose: "Memilih simulasi wawancara."
+    - node_id: "node_evidence_menu"
+      purpose: "Membuat checklist bukti kompetensi."
+    - node_id: "node_fallback"
+      purpose: "Menangani input tidak dikenali."
+```
+
+---
+
+# 158. Builder Node: Role Path Menu
+
+```yaml id="builder_role_path_menu"
+node:
+  id: "node_role_path_menu"
+  type: "menu"
+  title: "Pilih Jalur Jabatan"
+  message: >
+    Pilih subklasifikasi Manajemen Pelaksanaan yang paling sesuai dengan
+    pengalaman atau tujuan Anda.
+  options:
+    - label: "Keselamatan Konstruksi / K3"
+      target: "node_area_k3"
+    - label: "Manajemen Konstruksi / Proyek"
+      target: "node_area_project"
+    - label: "Pengendalian Mutu"
+      target: "node_area_quality"
+    - label: "Hukum Kontrak"
+      target: "node_area_contract"
+    - label: "Estimasi Biaya / QS"
+      target: "node_area_cost_qs"
+    - label: "Saya Belum Tahu"
+      target: "node_role_discovery_q1"
+```
+
+---
+
+# 159. Builder Node: Area K3
+
+```yaml id="builder_node_area_k3"
+node:
+  id: "node_area_k3"
+  type: "message_with_buttons"
+  title: "Keselamatan Konstruksi / K3"
+  message: >
+    Jalur Keselamatan Konstruksi/K3 cocok untuk pengguna yang bekerja dengan
+    APD, inspeksi keselamatan, identifikasi bahaya, pengendalian risiko,
+    near miss, investigasi insiden, dan pembinaan keselamatan.
+
+    Pilihan jabatan dalam area ini meliputi:
+    - Petugas K3 Konstruksi, KKNI 3
+    - Petugas Keselamatan Konstruksi, KKNI 3
+    - Personil K3, KKNI 4
+    - Supervisor K3, KKNI 5–6
+    - Ahli K3 Konstruksi, KKNI 7–9
+    - Ahli Keselamatan Konstruksi, KKNI 7–9
+  buttons:
+    - label: "Petugas K3 / Keselamatan"
+      target: "node_role_petugas_k3"
+    - label: "Personil K3"
+      target: "node_role_personil_k3"
+    - label: "Supervisor K3"
+      target: "node_role_supervisor_k3"
+    - label: "Ahli K3 / Keselamatan"
+      target: "node_role_ahli_k3"
+    - label: "Asesmen K3"
+      target: "node_assessment_k3_start"
+```
+
+---
+
+# 160. Builder Node: Area Manajemen Proyek
+
+```yaml id="builder_node_area_project"
+node:
+  id: "node_area_project"
+  type: "message_with_buttons"
+  title: "Manajemen Konstruksi / Manajemen Proyek"
+  message: >
+    Jalur ini cocok untuk pengguna yang menangani perencanaan pelaksanaan,
+    koordinasi sumber daya, jadwal, progres, logistik, risiko, biaya, mutu,
+    dan pelaporan proyek.
+
+    Pilihan jabatan:
+    - Manajer Logistik Proyek, KKNI 7
+    - Ahli Bidang Keahlian Manajemen Konstruksi, KKNI 7–9
+    - Ahli Manajemen Proyek Konstruksi, KKNI 7–9
+    - Fasilitator Teknis Infrastruktur Berbasis Masyarakat, KKNI 5–6
+  buttons:
+    - label: "Manajer Logistik"
+      target: "node_role_logistik"
+    - label: "Ahli Manajemen Konstruksi"
+      target: "node_role_ahli_mk"
+    - label: "Ahli Manajemen Proyek"
+      target: "node_role_ahli_pm"
+    - label: "Fasilitator Teknis"
+      target: "node_role_fasilitator"
+    - label: "Asesmen Proyek"
+      target: "node_assessment_project_start"
+```
+
+---
+
+# 161. Builder Node: Area Mutu
+
+```yaml id="builder_node_area_quality"
+node:
+  id: "node_area_quality"
+  type: "message_with_buttons"
+  title: "Pengendalian Mutu Pekerjaan Konstruksi"
+  message: >
+    Jalur Pengendalian Mutu cocok untuk pengguna yang menangani inspeksi,
+    pengujian, spesifikasi teknis, ITP, NCR, audit mutu, tindakan korektif,
+    dan sistem manajemen mutu.
+
+    Pilihan jabatan:
+    - Quality Engineer, KKNI 5–6
+    - Quality Assurance Engineer, KKNI 5–6
+    - Ahli Sistem Manajemen Mutu Konstruksi, KKNI 7–9
+  buttons:
+    - label: "Quality Engineer"
+      target: "node_role_quality_engineer"
+    - label: "Quality Assurance Engineer"
+      target: "node_role_qa_engineer"
+    - label: "Ahli Sistem Manajemen Mutu"
+      target: "node_role_ahli_smm"
+    - label: "Asesmen Mutu"
+      target: "node_assessment_quality_start"
+```
+
+---
+
+# 162. Builder Node: Area Kontrak
+
+```yaml id="builder_node_area_contract"
+node:
+  id: "node_area_contract"
+  type: "message_with_buttons"
+  title: "Hukum Kontrak Konstruksi"
+  message: >
+    Jalur Hukum Kontrak Konstruksi cocok untuk pengguna yang menangani
+    dokumen kontrak, variation order, klaim, adendum, sengketa, hak dan
+    kewajiban para pihak, serta analisis risiko kontraktual.
+
+    Pilihan jabatan:
+    - Ahli Madya Kontrak Kerja Konstruksi, KKNI 8
+    - Ahli Kontrak Kerja Konstruksi, KKNI 9
+
+    Standar kompetensi kerja:
+    - SKKNI 88-2015
+  buttons:
+    - label: "Detail Ahli Kontrak"
+      target: "node_role_ahli_kontrak"
+    - label: "Belajar Kontrak"
+      target: "node_learning_contract"
+    - label: "Asesmen Kontrak"
+      target: "node_assessment_contract_start"
+    - label: "Studi Kasus VO"
+      target: "node_scenario_variation_order"
+```
+
+---
+
+# 163. Builder Node: Area Estimasi Biaya / QS
+
+```yaml id="builder_node_area_cost_qs"
+node:
+  id: "node_area_cost_qs"
+  type: "message_with_buttons"
+  title: "Estimasi Biaya Konstruksi / Quantity Surveying"
+  message: >
+    Jalur Estimasi Biaya dan QS cocok untuk pengguna yang menangani volume,
+    BOQ, backup quantity, estimasi biaya, analisis harga satuan, progress
+    payment, dan klaim biaya.
+
+    Pilihan jabatan:
+    - Juru Hitung Kuantitas, KKNI 4–6
+    - Estimator Biaya Jalan, KKNI 5–6
+    - Quantity Surveyor, KKNI 5–6
+    - Ahli Quantity Surveyor, KKNI 7–9
+  buttons:
+    - label: "Juru Hitung Kuantitas"
+      target: "node_role_juru_hitung"
+    - label: "Estimator Biaya Jalan"
+      target: "node_role_estimator_jalan"
+    - label: "Quantity Surveyor"
+      target: "node_role_qs"
+    - label: "Ahli Quantity Surveyor"
+      target: "node_role_ahli_qs"
+    - label: "Asesmen Biaya/QS"
+      target: "node_assessment_cost_qs_start"
+```
+
+---
+
+# 164. Role Detail Node Template
+
+```yaml id="role_detail_node_template"
+role_detail_node_template:
+  id_pattern: "node_role_{{role_slug}}"
+  type: "role_detail"
+  message_template: >
+    {{role_name}} berada dalam subklasifikasi {{subklasifikasi}} pada
+    klasifikasi Manajemen Pelaksanaan.
+
+    Jenjang tersedia:
+    {{jenjang_list}}
+
+    Kualifikasi:
+    {{kualifikasi}}
+
+    Standar kompetensi kerja:
+    {{standard_code}}
+
+    Fokus kompetensi:
+    {{focus_summary}}
+
+    Apa yang ingin Anda lakukan berikutnya?
+  buttons:
+    - label: "Mulai Asesmen"
+      target: "node_assessment_{{area_slug}}_start"
+    - label: "Checklist Bukti"
+      target: "node_evidence_{{area_slug}}"
+    - label: "Belajar Kompetensi"
+      target: "node_learning_{{area_slug}}"
+    - label: "Latihan Wawancara"
+      target: "node_mock_{{area_slug}}"
+    - label: "Kembali ke Menu"
+      target: "start"
+```
+
+---
+
+# 165. Role Detail Node Example: Quality Engineer
+
+```yaml id="node_role_quality_engineer"
+node:
+  id: "node_role_quality_engineer"
+  type: "role_detail"
+  message: >
+    Quality Engineer berada dalam subklasifikasi Pengendalian Mutu Pekerjaan
+    Konstruksi.
+
+    Jenjang tersedia:
+    1. Quality Engineer Madya — Teknisi/Analis — KKNI 5 — SKKNI 333-2013
+    2. Quality Engineer — Teknisi/Analis — KKNI 6 — SKKNI 333-2013
+
+    Fokus kompetensi:
+    Pengendalian mutu teknis, inspeksi hasil pekerjaan, verifikasi spesifikasi,
+    dokumentasi hasil pemeriksaan, NCR, dan tindakan korektif.
+
+    Apa yang ingin Anda lakukan berikutnya?
+  buttons:
+    - label: "Mulai Asesmen Mutu"
+      target: "node_assessment_quality_start"
+    - label: "Checklist Bukti Mutu"
+      target: "node_evidence_quality"
+    - label: "Belajar NCR"
+      target: "node_learning_ncr"
+    - label: "Bandingkan dengan QA"
+      target: "node_compare_qe_qa"
+    - label: "Latihan Wawancara"
+      target: "node_mock_quality"
+```
+
+---
+
+# 166. Role Detail Node Example: Ahli Quantity Surveyor
+
+```yaml id="node_role_ahli_quantity_surveyor"
+node:
+  id: "node_role_ahli_qs"
+  type: "role_detail"
+  message: >
+    Ahli Quantity Surveyor berada dalam subklasifikasi Estimasi Biaya
+    Konstruksi.
+
+    Jenjang tersedia:
+    1. Ahli Muda Quantity Surveyor — Ahli — KKNI 7 — SKKNI 6-2011
+    2. Ahli Madya Quantity Surveyor — Ahli — KKNI 8 — SKKNI 6-2011
+    3. Ahli Utama Quantity Surveyor — Ahli — KKNI 9 — SKKNI 6-2011
+
+    Fokus kompetensi:
+    Pengukuran kuantitas, estimasi biaya, pengendalian biaya, progress payment,
+    analisis deviasi volume dan biaya, serta evaluasi komersial proyek.
+
+    Apa yang ingin Anda lakukan berikutnya?
+  buttons:
+    - label: "Mulai Asesmen QS"
+      target: "node_assessment_cost_qs_start"
+    - label: "Checklist Bukti QS"
+      target: "node_evidence_cost_qs"
+    - label: "Belajar Backup Quantity"
+      target: "node_learning_backup_quantity"
+    - label: "Latihan Wawancara QS"
+      target: "node_mock_cost_qs"
+```
+
+---
+
+# 167. No-Code Assessment Node Pattern
+
+```yaml id="no_code_assessment_node_pattern"
+assessment_node_pattern:
+  flow_id: "assessment_{{area_slug}}"
+  node_sequence:
+    - start_node: "node_assessment_{{area_slug}}_start"
+    - question_nodes:
+        - "node_assessment_{{area_slug}}_q1"
+        - "node_assessment_{{area_slug}}_q2"
+        - "node_assessment_{{area_slug}}_q3"
+        - "node_assessment_{{area_slug}}_q4"
+        - "node_assessment_{{area_slug}}_q5"
+    - result_node: "node_assessment_{{area_slug}}_result"
+
+  scoring:
+    score_variable: "{{area_slug}}_score_total"
+    answer_values:
+      "0 - Belum memahami": 0
+      "1 - Paham teori": 1
+      "2 - Pernah menerapkan dengan arahan": 2
+      "3 - Mampu mandiri": 3
+      "4 - Mampu mengevaluasi/membimbing": 4
+
+  result_logic:
+    - condition: "average_score < 1.5"
+      result: "Dasar"
+    - condition: "average_score >= 1.5 and average_score < 3"
+      result: "Menengah"
+    - condition: "average_score >= 3"
+      result: "Lanjutan"
+```
+
+---
+
+# 168. Short Assessment Version for MVP
+
+```yaml id="mvp_short_assessment"
+mvp_short_assessments:
+
+  k3:
+    intro: >
+      Asesmen singkat ini membantu menilai kesiapan awal Anda di bidang
+      K3/Keselamatan Konstruksi.
+    questions:
+      - "Saya mampu mengidentifikasi bahaya sebelum pekerjaan dimulai."
+      - "Saya mampu menentukan pengendalian risiko di lapangan."
+      - "Saya mampu memeriksa kepatuhan APD dan prosedur kerja aman."
+      - "Saya mampu melaporkan near miss atau kondisi tidak aman."
+      - "Saya mampu menindaklanjuti tindakan korektif K3."
+
+  project:
+    intro: >
+      Asesmen singkat ini membantu menilai kesiapan awal Anda di bidang
+      Manajemen Konstruksi/Proyek.
+    questions:
+      - "Saya mampu membaca atau menyusun rencana pelaksanaan proyek."
+      - "Saya mampu memantau progres terhadap jadwal."
+      - "Saya mampu menganalisis penyebab keterlambatan."
+      - "Saya mampu mengoordinasikan sumber daya proyek."
+      - "Saya mampu menyusun laporan progres berbasis data."
+
+  quality:
+    intro: >
+      Asesmen singkat ini membantu menilai kesiapan awal Anda di bidang
+      Pengendalian Mutu.
+    questions:
+      - "Saya mampu membaca spesifikasi teknis pekerjaan."
+      - "Saya mampu melakukan inspeksi hasil pekerjaan."
+      - "Saya mampu mengenali ketidaksesuaian mutu."
+      - "Saya mampu membuat atau menindaklanjuti NCR."
+      - "Saya mampu memverifikasi hasil tindakan korektif."
+
+  contract:
+    intro: >
+      Asesmen singkat ini membantu menilai kesiapan awal Anda di bidang
+      Hukum Kontrak Konstruksi.
+    questions:
+      - "Saya mampu membaca klausul penting dalam kontrak."
+      - "Saya mampu mengenali perubahan pekerjaan."
+      - "Saya mampu menyusun kronologi kejadian proyek."
+      - "Saya mampu mengumpulkan bukti pendukung klaim."
+      - "Saya mampu menganalisis dampak waktu dan biaya."
+
+  cost_qs:
+    intro: >
+      Asesmen singkat ini membantu menilai kesiapan awal Anda di bidang
+      Estimasi Biaya/QS.
+    questions:
+      - "Saya mampu membaca gambar untuk menghitung volume."
+      - "Saya mampu menyusun backup quantity."
+      - "Saya mampu memahami BOQ dan item pekerjaan."
+      - "Saya mampu mengevaluasi progress payment."
+      - "Saya mampu menganalisis deviasi volume atau biaya."
+```
+
+---
+
+# 169. WhatsApp Bot Adaptation
+
+```yaml id="whatsapp_bot_adaptation"
+whatsapp_adaptation:
+  constraints:
+    - "Gunakan pesan pendek."
+    - "Gunakan nomor pilihan."
+    - "Hindari tabel panjang."
+    - "Gunakan maksimal 5 pilihan per pesan."
+    - "Untuk daftar panjang, pecah menjadi beberapa pesan."
+
+  greeting_message: >
+    Halo, saya SKK Coach — Manajemen Pelaksanaan.
+    Pilih menu:
+    1. Pilih jalur jabatan
+    2. Cari KKNI
+    3. Cari SKKNI/SKKK
+    4. Asesmen mandiri
+    5. Checklist bukti
+
+    Balas dengan angka menu.
+
+  example_kkni_response: >
+    KKNI 7 dalam Manajemen Pelaksanaan mencakup beberapa jabatan:
+
+    K3:
+    - Ahli Muda Keselamatan Konstruksi
+    - Ahli Muda K3 Konstruksi
+
+    Manajemen Proyek:
+    - Manajer Logistik Proyek
+    - Ahli Muda Manajemen Konstruksi
+    - Ahli Muda Manajemen Proyek Konstruksi
+
+    Mutu:
+    - Ahli Muda Sistem Manajemen Mutu
+
+    QS:
+    - Ahli Muda Quantity Surveyor
+
+    Balas:
+    1. Detail jabatan
+    2. Mulai asesmen
+    3. Kembali ke menu
+
+  fallback_message: >
+    Maaf, saya belum memahami pesan Anda.
+    Silakan pilih:
+    1. K3/Keselamatan
+    2. Manajemen Proyek
+    3. Mutu
+    4. Kontrak
+    5. Biaya/QS
+```
+
+---
+
+# 170. Website Chat Widget Adaptation
+
+```yaml id="website_chat_widget_adaptation"
+website_chat_widget:
+  layout:
+    header:
+      title: "SKK Coach"
+      subtitle: "Manajemen Pelaksanaan"
+
+    welcome_screen:
+      hero_text: >
+        Temukan jalur SKK, pahami KKNI, belajar kompetensi, dan siapkan
+        asesmen mandiri Anda.
+      primary_cta: "Mulai"
+      secondary_cta: "Cari Jabatan"
+
+    persistent_menu:
+      - "Menu Utama"
+      - "Cari Jabatan"
+      - "Cari KKNI"
+      - "Asesmen"
+      - "Checklist"
+
+  behavior:
+    - "Tampilkan role card untuk hasil lookup."
+    - "Tampilkan progress bar untuk asesmen."
+    - "Tampilkan chips untuk quick replies."
+    - "Sediakan tombol kembali pada setiap node panjang."
+    - "Sediakan tombol salin ringkasan hasil asesmen."
+
+  role_card_design:
+    fields:
+      - "Jabatan"
+      - "Subklasifikasi"
+      - "KKNI"
+      - "Kualifikasi"
+      - "Standar"
+    actions:
+      - "Belajar"
+      - "Asesmen"
+      - "Checklist"
+```
+
+---
+
+# 171. Function Calling Tool Specs
+
+```yaml id="function_calling_specs"
+function_tools:
+
+  - name: "lookup_role"
+    description: "Cari detail jabatan kerja berdasarkan nama jabatan atau kata kunci."
+    input_schema:
+      type: object
+      properties:
+        query:
+          type: string
+          description: "Nama jabatan atau kata kunci, misalnya Quality Engineer."
+      required:
+        - query
+    output_schema:
+      type: object
+      properties:
+        matches:
+          type: array
+          items:
+            type: object
+            properties:
+              role_id: { type: string }
+              subklasifikasi: { type: string }
+              jabatan_kerja: { type: string }
+              jenjang_jabatan_kerja: { type: string }
+              kualifikasi: { type: string }
+              kkni_level: { type: integer }
+              standard_code: { type: string }
+
+  - name: "lookup_kkni"
+    description: "Cari jabatan kerja berdasarkan jenjang KKNI."
+    input_schema:
+      type: object
+      properties:
+        kkni_level:
+          type: integer
+          enum: [3, 4, 5, 6, 7, 8, 9]
+      required:
+        - kkni_level
+
+  - name: "lookup_standard"
+    description: "Cari jabatan kerja berdasarkan kode SKKNI atau SKKK."
+    input_schema:
+      type: object
+      properties:
+        standard_code:
+          type: string
+          description: "Contoh: SKKNI 333-2013 atau SKKK 035-2022."
+      required:
+        - standard_code
+
+  - name: "start_assessment"
+    description: "Mulai asesmen mandiri berdasarkan area kompetensi."
+    input_schema:
+      type: object
+      properties:
+        area:
+          type: string
+          enum:
+            - "k3"
+            - "project"
+            - "quality"
+            - "contract"
+            - "cost_qs"
+      required:
+        - area
+
+  - name: "generate_evidence_checklist"
+    description: "Buat checklist bukti kompetensi berdasarkan jabatan atau area."
+    input_schema:
+      type: object
+      properties:
+        target_role:
+          type: string
+        area:
+          type: string
+      required: []
+```
+
+---
+
+# 172. Function Calling Response Policy
+
+```yaml id="function_calling_response_policy"
+function_response_policy:
+  lookup_role:
+    if_zero_matches:
+      response: >
+        Saya belum menemukan jabatan tersebut. Coba gunakan kata kunci umum
+        seperti K3, Quality Engineer, Manajemen Proyek, Kontrak, atau QS.
+    if_one_match:
+      response: "Render role detail template."
+    if_multiple_matches:
+      response: "Render disambiguation list."
+
+  lookup_kkni:
+    response: >
+      Kelompokkan hasil berdasarkan subklasifikasi. Jangan tampilkan seluruh
+      official link kecuali pengguna meminta.
+
+  lookup_standard:
+    response: >
+      Tampilkan semua jabatan yang memakai standar tersebut, urutkan berdasarkan
+      KKNI dari rendah ke tinggi.
+
+  start_assessment:
+    response: >
+      Tampilkan intro asesmen, disclaimer, pertanyaan pertama, dan skala 0–4.
+
+  generate_evidence_checklist:
+    response: >
+      Kelompokkan bukti menjadi: pengalaman kerja, dokumen teknis, dokumen
+      pengendalian, komunikasi, dan hasil pekerjaan.
+```
+
+---
+
+# 173. Final Compressed Configuration for Builder
+
+```yaml id="final_compressed_builder_config"
+bot_config:
+  name: "SKK Coach — Manajemen Pelaksanaan"
+  locale: "id-ID"
+  tone: "professional, supportive, practical"
+  scope:
+    - "Keselamatan Konstruksi / K3"
+    - "Manajemen Konstruksi / Manajemen Proyek"
+    - "Pengendalian Mutu"
+    - "Hukum Kontrak"
+    - "Estimasi Biaya / QS"
+
+  main_menu:
+    - label: "Pilih Jalur Jabatan"
+      node: "role_path_menu"
+    - label: "Cari KKNI"
+      node: "kkni_lookup"
+    - label: "Cari SKKNI/SKKK"
+      node: "standard_lookup"
+    - label: "Belajar"
+      node: "learning_menu"
+    - label: "Asesmen"
+      node: "assessment_menu"
+    - label: "Checklist Bukti"
+      node: "evidence_menu"
+
+  intents:
+    - "lookup_role"
+    - "lookup_kkni"
+    - "lookup_standard"
+    - "compare_roles"
+    - "start_learning"
+    - "start_assessment"
+    - "start_scenario"
+    - "start_mock_interview"
+    - "generate_checklist"
+    - "glossary_lookup"
+    - "fallback"
+
+  global_rules:
+    - "Do not claim official certification."
+    - "Do not say user passes or fails officially."
+    - "Use catalog data for role, KKNI, and standard answers."
+    - "Ask clarification for ambiguous role names."
+    - "Refuse unsafe K3, quality, or contract-bypass advice."
+    - "Always offer next step."
+
+  fallback:
+    first: "Tawarkan pilihan topik utama."
+    second: "Minta pengguna menulis pertanyaan dengan format sederhana."
+    third: "Kembalikan ke menu utama."
+```
+
+---
+
+# 174. Minimal MVP Build Specification
+
+```yaml id="minimal_mvp_build_spec"
+minimal_mvp:
+  objective: >
+    Membuat versi pertama chatbot yang sudah berguna untuk pengguna yang ingin
+    mencari jabatan, memahami KKNI, dan memulai asesmen dasar.
+
+  must_build_first:
+    - component: "Main Menu"
+      reason: "Pintu masuk semua fitur."
+
+    - component: "Role Lookup"
+      reason: "Fitur paling penting untuk pengguna yang sudah tahu target jabatan."
+
+    - component: "Area Disambiguation"
+      reason: "Banyak pengguna hanya mengetik K3, QS, mutu, atau kontrak."
+
+    - component: "KKNI Lookup"
+      reason: "Membantu pengguna memahami pilihan berdasarkan level."
+
+    - component: "Standard Lookup"
+      reason: "Membantu pengguna mencari jabatan berdasarkan SKKNI/SKKK."
+
+    - component: "Short Assessment"
+      reason: "Memberi nilai tambah belajar dan persiapan."
+
+    - component: "Evidence Checklist"
+      reason: "Sangat relevan untuk persiapan sertifikasi."
+
+    - component: "Fallback"
+      reason: "Menjaga percakapan tetap terarah."
+
+  postpone_until_v2:
+    - "Advanced scenario scoring"
+    - "Mock interview scoring otomatis"
+    - "Admin analytics dashboard"
+    - "Long-term progress memory"
+    - "Multi-classification support"
+```
+
+---
+
+# 175. Final MVP Conversation Script
+
+```text id="final_mvp_conversation_script"
+Bot:
+Halo, saya SKK Coach — Manajemen Pelaksanaan.
+Saya bisa membantu Anda mencari jabatan SKK, memahami KKNI, mencari standar
+SKKNI/SKKK, melakukan asesmen mandiri, dan menyiapkan checklist bukti.
+
+Pilih menu:
+[ Pilih Jalur Jabatan ] [ Cari KKNI ] [ Cari SKKNI/SKKK ] [ Asesmen Mandiri ] [ Checklist Bukti ]
+
+User:
+Pilih Jalur Jabatan
+
+Bot:
+Pilih subklasifikasi:
+[ K3/Keselamatan ] [ Manajemen Proyek ] [ Mutu ] [ Kontrak ] [ Biaya/QS ] [ Belum Tahu ]
+
+User:
+Biaya/QS
+
+Bot:
+Jalur Estimasi Biaya/QS cocok untuk pengguna yang menangani volume, BOQ,
+backup quantity, estimasi biaya, progress payment, dan klaim biaya.
+
+Pilih jabatan:
+[ Juru Hitung Kuantitas ] [ Estimator Biaya Jalan ] [ Quantity Surveyor ] [ Ahli Quantity Surveyor ]
+
+User:
+Ahli Quantity Surveyor
+
+Bot:
+Ahli Quantity Surveyor berada dalam subklasifikasi Estimasi Biaya Konstruksi.
+
+Jenjang tersedia:
+1. Ahli Muda Quantity Surveyor — Ahli — KKNI 7 — SKKNI 6-2011
+2. Ahli Madya Quantity Surveyor — Ahli — KKNI 8 — SKKNI 6-2011
+3. Ahli Utama Quantity Surveyor — Ahli — KKNI 9 — SKKNI 6-2011
+
+Fokus kompetensi:
+Pengukuran kuantitas, estimasi biaya, pengendalian biaya, progress payment,
+analisis deviasi volume dan biaya, serta evaluasi komersial proyek.
+
+Langkah berikutnya:
+[ Mulai Asesmen QS ] [ Checklist Bukti QS ] [ Belajar Backup Quantity ] [ Kembali ]
+```
+
+---
+
+# 176. Final Notes for Handoff to Builder Team
+
+```text id="handoff_to_builder_team"
+Catatan untuk tim builder:
+
+1. Gunakan katalog jabatan sebagai database utama.
+2. Jangan simpan data jabatan hanya di prompt; simpan dalam tabel agar mudah diperbarui.
+3. Buat node statis untuk menu utama dan subklasifikasi.
+4. Gunakan lookup dinamis untuk nama jabatan, KKNI, dan standar.
+5. Untuk input singkat seperti “K3”, “QS”, “mutu”, tampilkan pilihan, jangan menebak satu jabatan.
+6. Untuk asesmen MVP, gunakan 5 pertanyaan per area terlebih dahulu.
+7. Untuk hasil asesmen, gunakan kategori Dasar, Menengah, dan Lanjutan.
+8. Selalu tampilkan disclaimer bahwa hasil asesmen bukan keputusan resmi sertifikasi.
+9. Tambahkan fallback tiga tingkat.
+10. Uji minimal 20 contoh percakapan sebelum soft launch.
+```
+
+---

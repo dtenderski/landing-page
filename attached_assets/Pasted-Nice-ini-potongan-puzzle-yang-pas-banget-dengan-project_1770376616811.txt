@@ -1,0 +1,154 @@
+Nice, ini **potongan puzzle yang pas banget** dengan *project brain* yang kemarin kita bahas 🧠🧩
+Mini App = **alat eksekusi**, sedangkan Project Brain = **ingatan & konteks**. Kombinasi yang cakep.
+
+Aku fokus ke **Checklist** dulu ya, karena itu paling “grounded” dan sering kepakai di lapangan.
+
+---
+
+## 🧠 Cara Memandang Mini App (Penting)
+
+Anggap begini:
+
+* **Project Brain (Template)** → *menjawab “KENAPA & APA”*
+* **Mini App (Checklist)** → *menjawab “SUDAH / BELUM”*
+
+Jadi checklist **jangan terlalu pintar**, tapi harus:
+
+* spesifik
+* bisa dicentang
+* terasa “lapangan”
+
+---
+
+## ✅ Checklist – Rekomendasi Paling Masuk Akal
+
+### 1. Checklist berbasis *Tahap Proyek*
+
+Ini paling natural buat user.
+
+**Nama**
+
+> Checklist Tahap Proyek
+
+**Item Checklist (contoh)**
+
+* ⬜ Gambar kerja disetujui
+* ⬜ Metode kerja disetujui
+* ⬜ Shop drawing struktur final
+* ⬜ Material utama tersedia
+* ⬜ Tenaga kerja inti ready
+* ⬜ HSE plan disetujui
+* ⬜ Izin kerja lengkap
+
+👉 Cocok di-link ke `project_stage`
+
+---
+
+### 2. Checklist Isu & Keputusan (powerful 🔥)
+
+Checklist yang **terkait langsung ke field issue & decision**.
+
+**Nama**
+
+> Checklist Penanganan Isu
+
+**Item**
+
+* ⬜ Isu teridentifikasi jelas
+* ⬜ Lokasi/elemen terkonfirmasi
+* ⬜ Analisa teknis dilakukan
+* ⬜ Alternatif solusi dibandingkan
+* ⬜ Risiko dinilai
+* ⬜ Keputusan diambil
+* ⬜ Tindak lanjut dijalankan
+* ⬜ Isu ditutup
+
+👉 Ini bikin chatbot bisa *reasoning*:
+
+> “Isu ini belum bisa ditutup karena checklist belum lengkap.”
+
+---
+
+### 3. Checklist Inspeksi Beton (nyambung ke slump & fc’)
+
+Ini contoh **checklist tematik**.
+
+**Nama**
+
+> Checklist Inspeksi Beton
+
+**Item**
+
+* ⬜ Mutu beton sesuai spesifikasi
+* ⬜ Slump test sesuai toleransi
+* ⬜ Sampel kubus/silinder diambil
+* ⬜ Waktu pengecoran sesuai metode
+* ⬜ Curing dilakukan
+* ⬜ Hasil uji 7 hari OK
+* ⬜ Hasil uji 28 hari OK
+
+👉 Sinkron dengan:
+
+* `slump`
+* `concrete_strength`
+* `inspection_notes`
+
+---
+
+## ⚠️ Saran UX Kecil tapi Penting
+
+### 1. Jangan terlalu panjang
+
+Checklist ideal:
+
+* **5–12 item**
+* Lebih dari itu → user males centang
+
+---
+
+### 2. Gunakan kata kerja aktif
+
+❌ “Dokumen gambar”
+✅ “Gambar kerja disetujui”
+
+Checklist = aksi, bukan data.
+
+---
+
+### 3. Checklist ≠ laporan
+
+Jangan masukkan:
+
+* alasan
+* narasi panjang
+
+Itu tugas **Project Brain**.
+
+---
+
+## 🔗 Kombinasi Ideal (Best Practice)
+
+Kalau dirangkai:
+
+* 🧠 **Template Project Brain**
+  → menyimpan konteks, isu, keputusan
+
+* ✅ **Mini App: Checklist**
+  → memastikan eksekusi berjalan
+
+* 🤖 **Chatbot**
+  → menjawab:
+
+  > “Checklist apa yang belum selesai untuk isu risiko tinggi?”
+
+Ini sudah level **AI Project Assistant**, bukan sekadar chatbot.
+
+---
+
+Kalau kamu mau, next aku bisa bantu:
+
+1. 📋 **Daftar checklist default (langsung siap input)**
+2. 🔄 **Mapping checklist ↔ field template**
+3. 🧠 **Logic: checklist → status isu otomatis**
+
+Tinggal pilih mau lanjut ke yang mana.

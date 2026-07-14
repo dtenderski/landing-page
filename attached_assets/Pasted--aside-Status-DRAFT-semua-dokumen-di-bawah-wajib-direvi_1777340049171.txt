@@ -1,0 +1,285 @@
+<aside>
+📜
+
+**Status:** DRAFT — semua dokumen di bawah wajib direview oleh **Legal Counsel** dan **FKAP** sebelum disahkan oleh **Top Management**.
+
+**Placeholder:** `[NAMA_BUJK]`, `[ALAMAT]`, `[KUALIFIKASI]`, `[DIRUT]`, `[FKAP]`, `[TANGGAL]`, `[NO_DOK]`. Substitusi dilakukan otomatis oleh **AGENT-POLICY** saat generate.
+
+</aside>
+
+## 1. Kebijakan Anti-Penyuapan
+
+```
+Nomor Dokumen   : POL-SMAP-001 / [NO_DOK]
+Versi           : 1.0
+Tanggal Berlaku : [TANGGAL]
+Disahkan oleh   : [DIRUT], Direktur Utama [NAMA_BUJK]
+```
+
+### KEBIJAKAN ANTI-PENYUAPAN [NAMA_BUJK]
+
+**[NAMA_BUJK]** berkomitmen menjalankan kegiatan usaha jasa konstruksi dengan **integritas, transparansi, dan kepatuhan penuh** terhadap hukum dan peraturan anti-penyuapan, termasuk **UU Tipikor**, **Permen PUPR 8/2022**, dan standar **SNI ISO 37001:2016**.
+
+**Sebagai wujud komitmen tersebut, [NAMA_BUJK] menetapkan:**
+
+1. **Larangan Mutlak.** Setiap personel, mitra, dan pihak yang bertindak atas nama [NAMA_BUJK] **DILARANG** menawarkan, menjanjikan, memberi, menerima, atau meminta **penyuapan dalam bentuk apapun**, baik langsung maupun melalui pihak ketiga, kepada/dari pejabat publik maupun pihak swasta.
+2. **Pelarangan Pembayaran Fasilitasi.** [NAMA_BUJK] **TIDAK MENOLERIR** pembayaran fasilitasi (facilitation payment) untuk mempercepat layanan rutin, sekecil apapun nilainya.
+3. **Kepatuhan Hukum.** Seluruh kegiatan wajib mematuhi UU 31/1999 jo. UU 20/2001 (Tipikor), Permen PUPR 8/2022, dan peraturan terkait yang berlaku.
+4. **Fungsi Kepatuhan Anti-Penyuapan (FKAP).** [NAMA_BUJK] menetapkan FKAP sebagai unit independen yang bertanggung jawab langsung kepada Direktur Utama, dengan kewenangan dan sumber daya yang memadai.
+5. **Jalur Pelaporan.** Tersedia kanal pelaporan dugaan penyuapan secara **rahasia, anonim, dan terlindungi**. Identitas pelapor dijamin kerahasiaannya.
+6. **Larangan Retaliasi.** [NAMA_BUJK] **MELARANG** segala bentuk pembalasan terhadap pelapor itikad baik. Pelanggaran terhadap larangan ini akan ditindak tegas.
+7. **Konsekuensi Pelanggaran.** Pelanggaran kebijakan ini akan dikenai sanksi disipliner hingga pemutusan hubungan kerja/kontrak, dan diteruskan ke aparat penegak hukum bila merupakan tindak pidana.
+8. **Peningkatan Berkelanjutan.** [NAMA_BUJK] berkomitmen meninjau dan meningkatkan SMAP secara berkala minimal setahun sekali.
+
+Kebijakan ini berlaku untuk **seluruh personel, mitra bisnis, KSO partner, subkontraktor, vendor, agen, dan konsultan** [NAMA_BUJK] di seluruh wilayah operasi.
+
+```
+[ALAMAT], [TANGGAL]
+[DIRUT]
+Direktur Utama [NAMA_BUJK]
+```
+
+---
+
+## 2. Surat Keputusan Pembentukan FKAP
+
+```
+Nomor Dokumen   : SK-FKAP-001 / [NO_DOK]
+Disahkan oleh   : [DIRUT]
+Tanggal         : [TANGGAL]
+```
+
+### SURAT KEPUTUSAN DIREKTUR UTAMA [NAMA_BUJK]
+
+**Nomor:** [NO_DOK]
+
+**TENTANG: Pembentukan Fungsi Kepatuhan Anti-Penyuapan (FKAP) [NAMA_BUJK]**
+
+**Menimbang:**
+
+1. Bahwa [NAMA_BUJK] berkomitmen menerapkan SMAP berdasarkan **SNI ISO 37001:2016** dan **Permen PUPR 8/2022**;
+2. Bahwa diperlukan unit independen untuk mengawal pelaksanaan SMAP secara efektif;
+3. Bahwa unit tersebut harus memiliki kewenangan, kompetensi, sumber daya, dan independensi yang memadai sesuai klausul 5.3.2 ISO 37001:2016.
+
+**Mengingat:**
+
+1. Kebijakan Anti-Penyuapan [NAMA_BUJK] No. POL-SMAP-001;
+2. SNI ISO 37001:2016, klausul 5.3;
+3. Permen PUPR 8/2022.
+
+**Memutuskan:**
+
+**KESATU:** Membentuk **Fungsi Kepatuhan Anti-Penyuapan (FKAP)** [NAMA_BUJK] dengan susunan personil sebagaimana tercantum dalam Lampiran SK ini.
+
+**KEDUA:** Tugas pokok FKAP adalah:
+
+a. Mengawasi penerapan kebijakan SMAP & ISO 37001:2016;
+
+b. Melakukan penilaian risiko penyuapan & memelihara Bribery Risk Register;
+
+c. Melaksanakan due diligence terhadap mitra & personel berisiko;
+
+d. Mengelola kanal pelaporan whistleblowing & investigasi awal;
+
+e. Memberikan saran kepada Top Management terkait keputusan beretika tinggi;
+
+f. Melaporkan kinerja SMAP kepada Direktur Utama minimal triwulanan.
+
+**KETIGA:** Wewenang FKAP meliputi:
+
+a. Akses langsung kepada Direktur Utama dan Komisaris/Dewan Pengarah;
+
+b. Akses ke seluruh dokumen, sistem, dan personel [NAMA_BUJK] yang relevan;
+
+c. Anggaran independen untuk pelaksanaan tugas FKAP;
+
+d. Wewenang merekomendasikan eskalasi laporan ke aparat penegak hukum.
+
+**KEEMPAT:** FKAP dilarang dirangkap oleh personel pada fungsi yang dapat menimbulkan konflik kepentingan, antara lain: PJTBU, Manajer Pengadaan, Manajer Marketing/Tender.
+
+**KELIMA:** SK ini berlaku sejak tanggal ditetapkan dan akan ditinjau minimal setahun sekali.
+
+```
+Ditetapkan di [ALAMAT]
+Pada tanggal [TANGGAL]
+[DIRUT]
+Direktur Utama [NAMA_BUJK]
+```
+
+---
+
+## 3. SOP Hadiah & Hospitality
+
+```
+Nomor Dokumen : SOP-SMAP-007
+Versi         : 1.0
+Referensi     : ISO 37001:2016 klausul 8.7
+```
+
+### Tujuan
+
+Mengatur penerimaan dan pemberian hadiah, jamuan, donasi, dan sponsorship oleh personel [NAMA_BUJK] agar tidak menjadi sarana penyuapan terselubung.
+
+### Ruang Lingkup
+
+Seluruh personel & mitra [NAMA_BUJK].
+
+### Definisi
+
+- **Hadiah** — pemberian benda/uang/voucher/keuntungan ekonomis lainnya.
+- **Hospitality** — jamuan makan, perjalanan, akomodasi, hiburan.
+- **Donasi/Sponsorship** — kontribusi finansial/in-kind kepada pihak ketiga (CSR, kegiatan sosial, sponsorship event).
+
+### Batas Wajar
+
+| **Kategori** | **Batas Personel** | **Tindakan** |
+| --- | --- | --- |
+| Jamuan kerja wajar | ≤ Rp 1.000.000 per kejadian | Boleh — catat di Register |
+| Pemberian uang tunai dalam bentuk apapun | — | **SELALU TOLAK** tanpa kecuali |
+| Pemberian dari/kepada pejabat publik | — | **Eskalasi FKAP** — wajib lapor KPK dalam 30 hari kerja bila menerima |
+
+### Prosedur
+
+1. Personel mengisi **Form Penerimaan/Pemberian Hadiah** dalam 3 hari kerja.
+2. Atasan langsung memberi rekomendasi.
+3. FKAP memutuskan: *Diterima atas nama perusahaan* / *Dikembalikan* / *Disumbangkan* / *Eskalasi KPK*.
+4. Hasil dicatat di **Register Hadiah & Hospitality** (di-review FKAP per kuartal).
+
+---
+
+## 4. SOP Konflik Kepentingan (COI)
+
+```
+Nomor Dokumen : SOP-SMAP-008
+Referensi     : ISO 37001:2016 klausul 7.2.2, 8.3, 8.4
+```
+
+### Kewajiban Disclosure
+
+Semua personel wajib mengisi **Form Deklarasi COI** secara tahunan dan **ad-hoc** bila terjadi situasi baru.
+
+### Indikator COI yang Wajib Dilaporkan
+
+- Hubungan keluarga inti dengan vendor/subkontraktor/klien aktif
+- Kepemilikan saham/usaha pada vendor/subkontraktor/pesaing
+- Pekerjaan sampingan pada pihak yang berhubungan bisnis dengan [NAMA_BUJK]
+- Hubungan personal (asmara, persahabatan dekat) dengan pejabat klien/regulator
+- Penerimaan posisi/pelatihan dibiayai oleh vendor/klien
+
+### Penanganan COI yang Diungkap
+
+- **Tingkat 1 — Disclosure Saja:** Cukup pencatatan, tidak ada perubahan tugas.
+- **Tingkat 2 — Recusal:** Personel keluar dari proses pengambilan keputusan tertentu.
+- **Tingkat 3 — Reassignment:** Pemindahan tugas/proyek.
+- **Tingkat 4 — Termination:** COI sangat berat dan tidak bisa dimitigasi.
+
+FKAP memutuskan tingkat penanganan dengan persetujuan Direksi.
+
+---
+
+## 5. SOP Whistleblowing
+
+```
+Nomor Dokumen : SOP-SMAP-009
+Referensi     : ISO 37001:2016 klausul 8.9, 8.10
+```
+
+### Kanal Pelaporan
+
+- **Online form rahasia:** `wbs.[NAMA_BUJK].co.id` (terenkripsi end-to-end)
+- **Email rahasia:** `wbs@[NAMA_BUJK].co.id` (hanya FKAP yang akses)
+- **Hotline 24/7:** [NOMOR] (dijawab oleh penyedia eksternal independen)
+- **Kotak fisik:** di kantor pusat & site office utama
+
+### Mode Pelaporan
+
+- **Anonim** — tanpa identitas
+- **Pseudonim** — alias + kontak terenkripsi
+- **Teridentifikasi** — nama & kontak (terbuka hanya ke FKAP)
+
+### SLA Penanganan
+
+| **Tahap** | **SLA** |
+| --- | --- |
+| Triase awal & penentuan tim investigasi | ≤ 3 hari kerja |
+| Investigasi (kasus kompleks) | ≤ 90 hari kalender (perpanjangan tertulis) |
+| Closure & komunikasi hasil | ≤ 7 hari setelah investigasi selesai |
+
+### Perlindungan Pelapor
+
+- Identitas pelapor **tidak boleh diungkap** kecuali atas perintah pengadilan.
+- Larangan retaliasi (PHK, demosi, mutasi tidak wajar, intimidasi).
+- Sanksi terhadap retaliasi: hingga PHK pelaku retaliasi.
+
+---
+
+## 6. SOP Due Diligence Mitra
+
+```
+Nomor Dokumen : SOP-SMAP-010
+Referensi     : ISO 37001:2016 klausul 8.2
+```
+
+### Trigger Due Diligence
+
+- Onboarding mitra baru (vendor, subkontraktor, KSO, agen, konsultan)
+- Pembaruan kontrak
+- Review tahunan untuk RISIKO TINGGI; bi-annual SEDANG; ad-hoc RENDAH
+- Trigger event: laporan whistleblowing, perubahan kepemilikan mitra, sanksi regulator
+
+### Skoring 7 Faktor (lihat AGENT-DUEDIL system prompt)
+
+- F1 Negara/CPI · F2 Sektor · F3 PEP · F4 Jenis hubungan · F5 Nilai transaksi · F6 Litigasi · F7 SMAP mitra
+
+### Tindakan per Tingkat Risiko
+
+- **RENDAH (7–14):** Form mandiri + KYC dasar (SIUP, NIB, NPWP, akta).
+- **SEDANG (15–25):** + verifikasi 3rd party (sanction list check), klausul anti-suap kontrak.
+- **TINGGI (26–35):** + background check, monitoring rutin, persetujuan FKAP, eskalasi Direksi bila lanjut.
+
+---
+
+## 7. Form Komitmen Anti-Suap Mitra Bisnis
+
+```
+Nomor Dokumen : FORM-SMAP-006
+Referensi     : ISO 37001:2016 klausul 8.6
+```
+
+### KOMITMEN ANTI-PENYUAPAN MITRA BISNIS [NAMA_BUJK]
+
+Yang bertanda tangan di bawah ini:
+
+```
+Nama       : ___________________
+Jabatan    : ___________________
+Mewakili   : ___________________ (Mitra/Vendor/Subkontraktor/KSO Partner)
+NPWP/NIB   : ___________________
+Alamat     : ___________________
+```
+
+Dengan ini menyatakan bahwa kami:
+
+1. **Telah membaca, memahami, dan akan mematuhi** Kebijakan Anti-Penyuapan [NAMA_BUJK].
+2. **TIDAK AKAN** menawarkan, menjanjikan, memberi, menerima, atau meminta penyuapan dalam bentuk apapun atas nama atau dalam hubungan dengan [NAMA_BUJK].
+3. **TIDAK AKAN** melakukan pembayaran fasilitasi (facilitation payment) terkait pekerjaan untuk [NAMA_BUJK].
+4. **AKAN** segera melaporkan kepada FKAP [NAMA_BUJK] bila mengetahui atau mencurigai adanya dugaan penyuapan.
+5. **MEMBERIKAN** [NAMA_BUJK] **hak audit** atas pembukuan dan dokumen yang relevan dengan kontrak.
+6. **MENGAKUI** bahwa pelanggaran komitmen ini dapat mengakibatkan **terminasi kontrak** dan tindakan hukum sesuai ketentuan yang berlaku.
+7. **AKAN** memberlakukan kewajiban setara kepada subkontraktor / pihak ketiga yang kami libatkan untuk pekerjaan [NAMA_BUJK].
+
+```
+[ALAMAT], [TANGGAL]
+Materai
+[Nama Tanda Tangan]
+[Jabatan]
+```
+
+---
+
+<aside>
+⚖️
+
+**REVIEW WAJIB:** Sebelum digunakan, paket dokumen ini wajib direview oleh **Legal Counsel** untuk memastikan keselarasan dengan: (a) Anggaran Dasar [NAMA_BUJK], (b) UU Tipikor terbaru, (c) Permen PUPR 8/2022 terbaru, (d) ketentuan perpajakan & ketenagakerjaan yang berlaku. Hubungi FKAP untuk versi yang sudah final.
+
+</aside>

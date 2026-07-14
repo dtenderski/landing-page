@@ -1,0 +1,203 @@
+<aside>
+📗
+
+**Buku II — KOLABORASI · Bab 5**
+
+Manajer yang tidak berubah hari ini akan menemukan dirinya, dalam 24 bulan, memimpin tim yang lebih kecil dengan beban yang lebih berat — dan agen-agen yang menanyai keputusannya tanpa rasa hormat. Bab ini tentang bentuk baru kepemimpinan menengah di era agen.
+
+</aside>
+
+## 1. Hook — Adi dan dilema seorang Engineering Manager
+
+Adi, 38 tahun, *engineering manager* di sebuah *startup* SaaS B2B di Jakarta. Tim langsungnya: 11 *software engineer* manusia. Tim tidak-langsungnya, sejak Januari 2026: **23 agen** yang dirakit dan dipelihara timnya sendiri — dari agen *code reviewer*, agen *test generator*, agen *changelog writer*, sampai agen *on-call buddy* yang membantu engineer piket malam.
+
+Di *one-on-one* dengan VP Engineering bulan lalu, Adi mengakui sesuatu yang ia tidak sanggup tulis di laporan:
+
+> *"Aku merasa bukan lagi manajer. Aku juga bukan engineer. Aku tidak tahu lagi apa yang harus aku review, apa yang harus aku tanyakan, kapan aku harus masuk dan kapan aku harus mundur. Tim engineer-ku sekarang setiap hari bekerja dengan 4–6 agen sekaligus, dan mereka tahu kekuatan dan kelemahan agen-agen itu lebih baik daripada aku. Aku bukan lagi atasan teknis mereka. Tapi aku juga belum tahu apa peran baruku."*
+> 
+
+VP itu tidak menjawab dengan saran. Ia diam beberapa detik, lalu berkata: *"Adi, kamu sedang mengalami hal yang akan dialami semua manajer level menengah di industri kita tiga tahun ke depan. Dan kamu beruntung karena kamu mau mengakuinya. Banyak manajer lain hari ini sedang berpura-pura tahu, dan itu lebih berbahaya."*
+
+Mereka berdua diam lagi. Adi pulang malam itu, menulis di buku catatannya:
+
+> *Aku memimpin 11 manusia yang memimpin 23 agen. Apa peran aku?*
+> 
+
+Bab ini adalah jawaban atas pertanyaan Adi — dan pertanyaan jutaan manajer lain yang sedang menghadapinya, sebagian besar dalam diam.
+
+## 2. Data Membuka Tabir — Manajer menengah, lapisan paling rentan
+
+- **76% organisasi sudah memakai AI di 2025**, tetapi sebagian besar laporan adopsi datang dari **eksekutif (kebijakan) dan kontributor individu (pemakaian)**. Lapisan tengah — manajer first-line dan middle — adalah lapisan yang **paling tidak siap secara peran**.[[1]](https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/the-organization-blog/how-ai-is-and-isnt-changing-the-future-of-work)
+- Penelitian organisasi 2024–2025 menunjukkan bahwa di perusahaan dengan adopsi AI tinggi, **rentang kontrol manajer (jumlah orang yang ia pimpin) cenderung naik** — sering kali dari 6–8 ke 12–16, karena tugas administratif berpindah ke agen. Tetapi **bobot kognitif manajer juga naik**, karena ia sekarang harus mengawasi orang dan sistem agen.[[2]](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai)
+- *Gen AI paradox* yang berulang kali kita sebut paling parah dirasakan di lapisan menengah: ekspektasi naik ("kalian punya AI sekarang"), kapasitas peran belum di-*rewire*, hasilnya: **burnout manajer menengah meningkat tajam 2024–2026** di pasar dengan adopsi AI cepat.[[3]](https://www.mckinsey.com/capabilities/strategy-and-corporate-finance/our-insights/where-ai-will-create-value-and-where-it-wont)
+
+[ASUMSI: angka kenaikan *burnout* manajer menengah belum dipublikasikan dalam satu studi tunggal; gambaran ini disusun dari pola laporan kualitatif dan diskusi forum eksekutif Asia Tenggara 2025–2026.]
+
+> Lapisan manajer menengah adalah lapisan yang paling banyak ditugaskan untuk "melakukan transformasi", tetapi paling sedikit didukung untuk **menjadi seseorang yang berbeda** dalam transformasi itu.
+> 
+
+Dan ironinya: kalau lapisan menengah tidak bertransformasi, transformasi seluruh organisasi macet di sana.
+
+## 3. Anatomi Masalah — Lima peran manajer yang lama, dan apa yang terjadi pada masing-masing
+
+Mari uraikan apa yang sebenarnya dilakukan seorang manajer menengah — dan apa yang terjadi pada setiap peran itu di era agen.
+
+| **Peran Lama** | **Isinya** | **Apa yang terjadi di era agen** |
+| --- | --- | --- |
+| **1. Distributor tugas** | Mengatur siapa kerjakan apa, kapan, dengan prioritas apa. | **Sebagian besar dipindah ke agen.** *Workload routing* otomatis akan menggantikan rapat pembagian tugas. |
+| **2. Penyaring informasi** | Mengumpulkan info dari bawah, meringkas ke atas; dan sebaliknya. | **Sebagian besar dipindah ke agen *Pre-Meeting Sync*  • *Decision Brief*.** Manajer bukan lagi *bottleneck* informasi. |
+| **3. Reviewer teknis** | Memeriksa kualitas kerja anak buah. | **Berkurang signifikan**, karena tim sekarang punya agen reviewer sendiri. Manajer hanya masuk di review kritis/strategis. |
+| **4. Mentor karier** | Membimbing pertumbuhan profesional individu. | **Naik nilainya secara dramatis.** Karena banyak peran teknis di-*reset*, anak buah butuh manusia yang membantu mereka **memahami peran baru** mereka. |
+| **5. Penjaga kultur** | Menjaga *tone*, etika, kohesi tim. | **Naik nilainya secara dramatis.** Justru ketika banyak proses diotomasi, kultur menjadi pembeda utama yang membuat orang betah dan inisiatif tumbuh. |
+
+Perhatikan polanya: **peran 1–3 menyusut, peran 4–5 tumbuh**.
+
+Dan inilah masalah yang dirasakan Adi — dan jutaan manajer lain. Mereka **diangkat ke peran manajer karena mahir di peran 1–3**. Dan sekarang peran 1–3 itu menyusut, sementara peran 4–5 — yang seringkali bukan kekuatan mereka — yang tumbuh.
+
+Ini bukan kegagalan pribadi manajer. Ini **ketidaksinkronan struktural** antara dasar pemilihan manajer di masa lalu dan kebutuhan manajer di masa depan.
+
+### Tiga peran *baru* yang muncul
+
+Sementara peran lama menyusut, **tiga peran baru** muncul yang tidak ada bukunya:
+
+- **6. Arsitek agen tim** — manajer yang merancang **agen mana yang ada di tim**, dengan **peran apa**, dengan **batas kewenangan apa**. Tanpa ini, tim akan ditenggelamkan agen tanpa arsitektur.
+- **7. Penjaga akuntabilitas hibrida** — manajer yang memastikan **siapa bertanggung jawab atas keputusan yang dibantu agen**, terutama ketika keputusan itu salah. Akuntabilitas yang tidak jelas akan membuat tim berhenti percaya pada apa pun.
+- **8. Penerjemah strategi ke arsitektur** — manajer yang menerjemahkan *visi* perusahaan menjadi **gambar tim hybrid** yang konkret: berapa manusia, berapa agen, dengan workflow apa. Persis seperti yang Maya lakukan di Bab 3, tapi pada level orang-orang yang ia pimpin.
+
+Kalau Anda menjumlahkan peran 4, 5, 6, 7, dan 8 — itulah **bentuk baru manajer menengah** di era agen. Itulah yang dicari Adi tanpa pernah punya kosakatanya.
+
+## 4. Studi Kasus — Adi membangun kontrak peran barunya
+
+Dalam 90 hari setelah percakapan dengan VP Engineering, Adi menjalani transformasi peran yang ia dokumentasikan sebagai *"Kontrak Peran Baru Manajer Hybrid"*. Ini adalah dokumen 2 halaman yang ia kirim ke seluruh 11 *engineer* di timnya.
+
+[ASUMSI: dokumen "Kontrak Peran Baru" adalah praktik yang umum berkembang di startup teknologi 2025–2026 yang memprioritaskan transparansi peran; bentuk dan istilahnya bervariasi antar organisasi.]
+
+### Isi kontrak (versi ringkas yang dibagikan ke tim)
+
+> **Apa yang TIDAK lagi saya kerjakan (mulai 1 Maret 2026):**
+> 
+
+> 1. Memberikan tugas harian. Itu otomatis dari *agen Workload Router*.
+> 
+
+> 2. Meringkas progress tim ke atas. Itu otomatis dari *agen Pre-Meeting Sync*.
+> 
+
+> 3. Memeriksa setiap *pull request*. Hanya PR berisiko tinggi atau strategis.
+> 
+
+> 4. Menjawab pertanyaan teknis level menengah. Tanyakan dulu ke *agen Domain Expert*. Kalau masih ragu, baru ke saya.
+> 
+
+> 
+> 
+
+> **Apa yang sekarang saya kerjakan (mulai 1 Maret 2026):**
+> 
+
+> 1. Satu *one-on-one* 30 menit per minggu per orang, fokus **karier kalian**, bukan tugas mingguan.
+> 
+
+> 2. Merancang *agen baru* untuk tim, sebelum kebutuhan jadi krisis.
+> 
+
+> 3. Mengambil tanggung jawab penuh atas keputusan yang melibatkan agen — baik benar maupun salah.
+> 
+
+> 4. Menjaga kultur tim: kapan kita tertawa, kapan kita istirahat, kapan kita berduka kalau ada yang sulit.
+> 
+
+> 5. Menerjemahkan strategi perusahaan ke **gambar tim hybrid 6 bulan ke depan**.
+> 
+
+> 
+> 
+
+> **Apa yang saya akan terus belajar:**
+> 
+
+> Saya tidak akan berpura-pura tahu peran ini. Saya akan minta umpan balik kalian setiap 60 hari, dan saya akan mengubah kontrak ini kalau ternyata salah.
+> 
+
+### Hasil setelah 6 bulan
+
+- **Retensi tim**: 11/11 *engineer* masih ada. Di pasar yang turnover-nya tinggi, ini sangat tidak biasa.
+- **Inisiatif agen baru** yang dirakit tim Adi: dari 23 menjadi 41. Tim yang sebelumnya hanya memakai agen sekarang **memproduksi agen**.
+- **Waktu Adi di rapat administratif** turun 60%. Waktu Adi di *one-on-one* karier naik 3×.
+- **Eskalasi kasus etis/strategis** yang sampai ke Adi naik 2× — bukan karena tim banyak masalah, tetapi karena tim **mulai sadar** apa yang harus dieskalasi ke manusia dan apa yang tidak.
+- **Promosi**: dua *senior engineer* di tim Adi diangkat menjadi *staff engineer* tahun itu, sebagian besar berkat dokumentasi pertumbuhan yang ia jaga di *one-on-one*. Setahun sebelumnya, promosi serupa hanya satu di seluruh perusahaan.
+
+<aside>
+📖
+
+**Pelajaran dari kasus Adi**
+
+1. **Transformasi peran manajer perlu eksplisit dan tertulis.** Tidak cukup "saya akan mencoba lebih banyak coaching". Buat kontrak peran baru, bagikan ke tim, undang umpan balik.
+2. **Menyusutkan peran lama harus dilakukan terlebih dahulu.** Kalau Anda tidak melepas peran 1–3, peran 4–5 tidak akan punya ruang untuk tumbuh.
+3. **Tanggung jawab atas agen jatuh ke manusia yang menugaskannya.** Adi mengambil tanggung jawab penuh atas keputusan yang melibatkan agen — ini adalah hal yang **menjaga timnya berani memakai agen**, karena mereka tahu tidak akan ditinggalkan kalau agen salah.
+4. **Penjaga kultur adalah peran kepemimpinan inti, bukan tambahan.** Manajer yang tidak punya intuisi soal kultur tim hari ini akan menjadi manajer yang tidak punya tim besok.
+5. **Mengakui ketidaktahuan adalah kekuatan, bukan kelemahan.** Adi memimpin perubahan dengan kalimat *"saya tidak akan berpura-pura tahu"*, dan itu justru yang membuat tim mempercayainya.
+</aside>
+
+## 5. Jalan Baru MultiClaw — Manajer sebagai konduktor tim hybrid
+
+Kalau di Buku I kita memperkenalkan ide **manusia sebagai konduktor** untuk pekerjaan pengetahuan individu, di Bab ini kita perluas ke level tim: **manajer sebagai konduktor tim hybrid**.
+
+Konduktor orkestra tidak memainkan instrumen di panggung. Ia tidak meniup terompet lebih baik daripada peniup terompet. Tetapi tanpa konduktor, 60 orang dengan instrumen berbeda akan menghasilkan suara yang **mengerikan, bukan musik**.
+
+Manajer hybrid menjalankan tiga fungsi konduktor:
+
+- **Memilih komposisi** — berapa manusia, berapa agen, peran apa untuk masing-masing.
+- **Mengatur tempo** — kapan tim cepat, kapan tim berhenti dan merefleksi, kapan tim merayakan.
+- **Menjaga jiwa pertunjukan** — memastikan bahwa apa pun teknologinya, yang dihasilkan tim Anda terasa **manusiawi** dan bertanggung jawab.
+
+Ketiga fungsi ini tidak bisa didelegasikan ke agen. Ini adalah pekerjaan paling manusiawi dari semua pekerjaan manajemen.
+
+## 6. Latihan Reflektif
+
+<aside>
+📝
+
+**Latihan 5.1 — Tulis kontrak peran baru Anda**
+
+Kalau Anda seorang manajer atau pemimpin tim:
+
+1. **Daftar peran lama** yang Anda kerjakan minggu lalu. Tandai yang sebagian besar masuk peran 1–3 (yang akan menyusut).
+2. **Daftar peran baru** yang Anda **belum cukup kerjakan**, tetapi seharusnya: mentor karier, penjaga kultur, arsitek agen tim, penjaga akuntabilitas, penerjemah strategi.
+3. Tulis **dokumen satu halaman** dengan struktur Adi: "Apa yang TIDAK lagi saya kerjakan", "Apa yang sekarang saya kerjakan", "Apa yang saya akan terus belajar".
+4. **Bagikan ke tim Anda** dan minta umpan balik dalam 14 hari. Komitmen untuk mengubah dokumen ini setiap 60 hari.
+
+Latihan ini akan terasa tidak nyaman. Ketidaknyamanan itu adalah tanda bahwa Anda sedang menjadi manajer yang berbeda — dan itulah pekerjaan Anda sekarang.
+
+</aside>
+
+## 7. Sketsa 2030 — Manajer langka, manajer mahal
+
+**Mei 2030.** Adi, sekarang 42 tahun, *VP of Engineering* di *startup* yang sama (yang sekarang sudah Seri D). Ia memimpin **6 manajer hybrid** yang masing-masing memimpin **8–12 engineer** + **30–60 agen**.
+
+Di pasar tenaga kerja Jakarta tahun 2030, ada peran yang gajinya **3× lipat** *senior engineer* biasa: peran yang disebut *Hybrid Engineering Manager*. Lowongannya kosong di mana-mana. Universitas mulai membuka jurusan baru yang khusus melatih manajer hybrid, dengan kurikulum yang separuhnya psikologi organisasi dan separuhnya arsitektur agen.
+
+Adi sering diundang menjadi pembicara di program-program itu. Pertanyaan paling sering dari mahasiswa MBA Engineering: *"Pak, bagaimana cara menjadi manajer hybrid yang baik?"*.
+
+Jawaban Adi tidak berubah selama empat tahun:
+
+> *Tiga hal. Satu: punya kontrak peran yang tertulis, dan ubah setiap 60 hari. Dua: ambil tanggung jawab penuh atas semua agen yang kamu pasang di timmu — jangan menyalahkan agen kalau salah. Tiga: lindungi waktu tatap muka tanpa agen untuk timmu. Yang pertama membuat kamu jujur. Yang kedua membuat kamu dipercaya. Yang ketiga membuat tim kamu tetap manusiawi.*
+> 
+
+Dan kalau ada satu hal lagi yang ia tambahkan, biasanya saat sesi tanya jawab sudah selesai, di lorong, kepada satu-dua mahasiswa yang bertanya:
+
+> *Dan jangan pernah berpura-pura tahu. Tim yang baik dipimpin manajer yang berani bilang "saya tidak tahu" — dan langsung memulai cara mencari tahu bersama.*
+> 
+
+Kalimat itu, yang ia tulis di buku catatan pribadinya empat tahun sebelumnya, sekarang tertempel di papan tulis besar di kantor pusatnya. Untuk dirinya sendiri, terutama, di hari-hari ketika ia kembali merasa tidak tahu.
+
+[ASUMSI: skenario 2030 ini menggambarkan satu lintasan yang plausible; sangat bergantung pada bagaimana pasar tenaga kerja menanggapi perubahan struktur manajemen menengah.]
+
+---
+
+<aside>
+➡️
+
+**Lanjut ke:** Bab 6 — *Asisten Domain Pribadi: Bagaimana Profesional Merakit Tim Agennya Sendiri*.
+
+</aside>

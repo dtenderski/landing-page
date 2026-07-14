@@ -1,0 +1,142 @@
+Pilihan yang sangat tepat. 👌
+
+Kalau **PCI = kombinasi KPI + refleksi profesional**, maka CIVILPRO benar-benar menjadi:
+
+> 🎓 Mentor Profesional
+> 🧠 Evaluator Kompetensi
+> 📊 Performance Intelligence Assistant
+
+Bukan sekadar kalkulator KPI.
+
+Dan ini **100% sesuai dengan Gustafta Chatbot Builder**, karena tetap berbasis dialog terstruktur + YAML modular.
+
+---
+
+# 🧠 CIVILPRO – PCI Hybrid Model
+
+(KPI + Reflective Assessment)
+
+Struktur tetap 5 blok Gustafta, tapi kita tambahkan refleksi.
+
+---
+
+# 🔷 1️⃣ DATA KPI → Menghasilkan FPI
+
+Ini objektif.
+Tidak ada opini.
+
+Output contoh:
+
+```yaml
+FACILITY_PERFORMANCE_INDEX:
+  skor: 68
+  level: "Terukur"
+  tren: "Menurun"
+```
+
+---
+
+# 🔷 2️⃣ REFLECTIVE BLOCK
+
+CIVILPRO bertanya:
+
+* Apa keputusan utama Anda dalam 3 bulan terakhir?
+* Apa penyebab PM turun?
+* Tindakan apa yang sudah dilakukan?
+* Bagaimana kontrol terhadap vendor?
+* Apa rencana 30 hari ke depan?
+
+User menjawab naratif.
+
+---
+
+# 🔷 3️⃣ ANALISIS REFLEKTIF (Qualitative Scoring)
+
+CIVILPRO menilai berdasarkan indikator KKNI 7:
+
+| Indikator           | Dinilai dari           |
+| ------------------- | ---------------------- |
+| Analytical Thinking | Kemampuan membaca tren |
+| Decision Making     | Ketegasan tindakan     |
+| Risk Awareness      | Kesadaran risiko       |
+| Control System      | Mekanisme pengendalian |
+| Strategic Planning  | Rencana ke depan       |
+
+Output:
+
+```yaml
+REFLECTIVE_EVALUATION:
+  analytical_thinking: 75
+  decision_making: 70
+  risk_awareness: 80
+  control_system: 65
+  strategic_planning: 72
+```
+
+---
+
+# 🔷 4️⃣ PCI Final Calculation
+
+Bobot bisa dibuat:
+
+* 60% Refleksi Profesional
+* 40% KPI Aktual
+
+Output:
+
+```yaml
+PROFESSIONAL_COMPETENCY_INDEX:
+  skor_total: 74
+  level: "Kompeten"
+  kategori:
+    - "Kuat dalam analisis risiko"
+    - "Perlu penguatan konsistensi kontrol operasional"
+```
+
+---
+
+# 🔥 Yang Membuatnya Sangat Kuat
+
+Sekarang CIVILPRO bisa mengatakan:
+
+> “Meskipun FPI menunjukkan penurunan, refleksi dan rencana tindakan Anda menunjukkan kapasitas manajerial yang memadai.”
+
+Itu realistis.
+
+Karena dalam dunia nyata:
+Gedung bisa bermasalah,
+tapi manajernya tetap kompeten jika mampu mengendalikan dan memperbaiki.
+
+Ini sangat penting untuk uji kompetensi.
+
+---
+
+# 🎓 Otomatis Bisa Jadi Bukti Uji
+
+CIVILPRO akan menghasilkan:
+
+```yaml
+PORTOFOLIO_NARASI:
+  - "Melakukan analisis tren 3 bulan dan mengidentifikasi penurunan PM sebagai faktor utama kenaikan downtime."
+  - "Menetapkan rencana pemulihan PM menjadi ≥95% dalam 30 hari."
+  - "Melakukan evaluasi SLA vendor berbasis data downtime."
+```
+
+Ini siap jadi bahan asesmen.
+
+---
+
+# 🧠 Sekarang Kita Masuk Tahap Penting
+
+Karena sistem sudah sangat matang,
+kita perlu putuskan satu hal strategis:
+
+Apakah PCI:
+
+A) Ditampilkan sebagai skor numerik eksplisit (misal 74/100)
+atau
+B) Ditampilkan sebagai level saja (Kompeten, Mapan, Strategis) tanpa angka?
+
+Secara psikologis dan positioning ini sangat berbeda.
+
+Menurut Anda?

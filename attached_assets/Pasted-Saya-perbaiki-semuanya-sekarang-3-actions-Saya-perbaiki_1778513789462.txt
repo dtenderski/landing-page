@@ -1,0 +1,68 @@
+Saya perbaiki semuanya sekarang:
+
+
+3 actions
+Saya perbaiki ketiga masalah sekaligus — fix pixel loading, tambah Open Graph tags, dan tambah event tracking:
+
+
+2 actions
+Sekarang saya update index.html dengan Open Graph tags yang proper, dan tambah tracking event di landing page:
+
+
+2 actions
+Sekarang saya tambah tracking event di CTA-CTA penting di landing page:
+
+
+2 actions
+Saya baca area yang perlu diupdate untuk tracking:
+
+
+5 actions
+Saya update import tracking dan tambah handler functions, lalu pasang ke semua CTA penting:
+
+
+2 actions
+Sekarang tambah handler functions untuk WA dan checkout tracking:
+
+
+2 actions
+Sekarang saya pasang handler ke CTA-CTA utama — WA button di kontraktor section, packs, dan onboarding:
+
+
+2 actions
+Saya lanjutkan pasang tracking ke tombol Onboarding (promo banner) dan WA footer:
+
+
+3 actions
+Saya pasang tracking ke semua CTA tersisa sekaligus:
+
+
+12 actions
+Semua perubahan sudah berjalan (HMR x7 tanpa error). Sekarang saya jawab pertanyaan Anda secara langsung:
+
+Soal Scalev — kenapa pakai itu?
+
+Scalev itu essentially adalah "pembungkus" di atas Midtrans. Jadi Anda tidak perlu integrasi Midtrans langsung — Scalev sudah termasuk semua metode pembayaran Indonesia (QRIS, GoPay, OVO, DANA, ShopeePay, transfer bank, kartu kredit) dalam satu webhook. Keuntungannya: satu integrasi untuk semua payment method, tidak perlu manage banyak credential. Asumsi Anda betul — ini pilihan yang efisien untuk pasar Indonesia.
+
+Soal Meta Ads — apa yang saya perbaiki hari ini:
+
+Ada 3 masalah kritis yang membuat Meta Ads tidak bisa membaca aplikasi ini dengan benar, dan semuanya sudah diperbaiki:
+
+Masalah #1 — Pixel script tidak pernah dimuat (paling kritis)
+Kode fbq('init', ...) ada, tapi script Facebook-nya tidak pernah di-load ke browser. Artinya window.fbq selalu undefined dan semua tracking diam-diam gagal total. Sekarang sudah diperbaiki — pixel script di-inject secara otomatis ke browser begitu pixel ID tersedia.
+
+Masalah #2 — Open Graph tags tidak ada
+Ketika Meta Ads crawler scan URL Gustafta untuk membuat preview iklan (gambar, judul, deskripsi di Facebook/Instagram), tidak ada tag yang bisa dibaca. Sekarang sudah ditambahkan lengkap: og:title, og:description, og:image, og:url, plus Twitter Card, structured data JSON-LD, dan meta keywords.
+
+Masalah #3 — Tidak ada event tracking di CTA penting
+Sekarang setiap aksi penting di landing page tercatat ke Meta Ads:
+
+Klik tombol WA → Contact + WhatsApp_Click
+Klik Beli Sekarang / Pilih Paket → InitiateCheckout
+Klik Tender LPSE → Lead + Tender_CTA_Click
+Klik Mulai Sekarang → Lead
+Yang masih perlu Anda lakukan:
+
+Satu langkah manual yang harus Anda tambahkan sendiri — set environment variable VITE_META_PIXEL_ID dengan ID pixel Facebook Anda. Tanpa ini, pixel tetap tidak akan jalan meski sudah diperbaiki. ID pixel bisa ditemukan di Meta Business Manager → Events Manager → Data Sources → pilih pixel → Settings.
+
+Selain itu, untuk membuat gambar preview iklan yang optimal, sebaiknya siapkan file og-image.png berukuran 1200×630 px dan letakkan di folder public/ — gambar ini yang akan muncul saat iklan Anda tayang di Facebook/Instagram.

@@ -1,0 +1,205 @@
+Berikut **daftar “Deliverable Types” final** + **default deliverables per Mode/Playbook**. Ini akan jadi “kontrak output” yang membuat Gustafta terasa seperti *sistem kerja*, bukan sekadar chat.
+
+## 1) Deliverable Types (final)
+
+Saya sarankan batasi dulu ke **12 tipe** (cukup kaya, tapi tidak membingungkan). Semua tipe ini bisa dihasilkan dari kombinasi: Knowledge Pack/Teaching Pack + Otak Proyek + Mini Apps + Document Generator.
+
+### A. Output percakapan (ringkas, cepat)
+
+1) **Ringkasan Jawaban**  
+
+Format: ringkasan + langkah, atau poin-poin.
+
+2) **Rencana Aksi (Action Plan)**  
+
+Siapa melakukan apa, urutan, dan risiko.
+
+3) **Checklist**  
+
+Untuk kelengkapan, audit, atau langkah kerja.
+
+### B. Output mentoring (pembelajaran)
+
+4) **Handout Materi 1 Halaman** (PDF/DOCX)  
+
+5) **Latihan / Kuis** (+ pembahasan)  
+
+6) **Feedback & Penilaian (Rubrik)**  
+
+Berbasis `score_breakdown_json` + `feedback_summary`.
+
+### C. Output proyek/operasional
+
+7) **Snapshot Proyek** (status, isu, risiko, next action)  
+
+8) **Timeline Report** (mengikuti timeline source, mis. OSS, lalu diringkas)  
+
+9) **Notulen / Ringkasan Sesi** (meeting/mentoring)
+
+### D. Output dokumen formal (bernilai bisnis)
+
+10) **Dokumen Draft** (surat, proposal, SOP ringkas) (PDF/DOCX)  
+
+11) **Pesan Siap Kirim** (WA/Email/Slack)  
+
+12) **Ekspor Data** (PDF/DOCX/CSV) dari struktur proyek atau hasil mini app
+
+> Catatan implementasi: tipe 1–3 bisa tanpa Document Generator. Tipe 4–12 idealnya lewat Document Generator agar konsisten + bisa ekspor.
+> 
+
+---
+
+## 2) Default deliverables per **Mode**
+
+Mode adalah pilihan paling atas saat membuat chatbot. Ini default yang “pas” dan tidak berlebihan.
+
+### Mentor Mode
+
+Default (3):
+
+- Handout Materi 1 Halaman
+- Latihan/Kuis
+- Feedback & Penilaian (Rubrik)
+
+Opsional:
+
+- Ringkasan Sesi
+- Rencana belajar 7 hari (varian dari Action Plan)
+
+### Expert Mode
+
+Default (3):
+
+- Ringkasan Jawaban
+- Checklist (jika prosedural)
+- Dokumen Draft ringkas (opsional, mis. SOP 1 halaman)
+
+### Solve Mode
+
+Default (3):
+
+- Rencana Aksi (langkah demi langkah)
+- Checklist troubleshooting
+- Snapshot masalah (akar masalah, opsi, risiko)
+
+Opsional:
+
+- Ekspor data perhitungan (PDF/DOCX)
+
+### Project Guardian Mode
+
+Default (3):
+
+- Snapshot Proyek
+- Timeline Report
+- Action Plan (next action 1–3)
+
+Opsional:
+
+- Notulen ringkas
+- Dokumen laporan mingguan (PDF/DOCX)
+
+---
+
+## 3) Default deliverables per **Playbook** (10 playbook)
+
+Ini yang akan auto-tercentang saat user memilih playbook.
+
+1) **Mentoring Modul (Coach Mode)**
+
+- Handout 1 Halaman
+- Latihan/Kuis
+- Feedback Rubrik
+- Ringkasan Sesi
+
+2) **Kelas & Latihan Soal (Quiz + Feedback)**
+
+- Latihan/Kuis
+- Pembahasan
+- Feedback Rubrik
+- (opsional) Ekspor hasil nilai (PDF)
+
+3) **FAQ + SOP Expert**
+
+- Ringkasan Jawaban
+- Checklist (jika ada langkah)
+- Dokumen Draft ringkas (SOP mini) *(opsional)*
+
+4) **Troubleshooting / Solve**
+
+- Action Plan (langkah)
+- Checklist investigasi
+- Snapshot masalah (akar masalah + risiko)
+
+5) **Asisten Proposal / Penawaran**
+
+- Dokumen Draft (Proposal/penawaran) (PDF/DOCX)
+- Pesan siap kirim (email/WA follow-up)
+- Checklist data yang perlu dilengkapi
+
+6) **Audit & Compliance**
+
+- Checklist audit
+- Gap analysis ringkas (Action Plan + risiko)
+- Dokumen Draft (laporan audit 1 halaman) *(opsional)*
+
+7) **Project Guardian**
+
+- Snapshot Proyek
+- Timeline Report
+- Laporan mingguan (PDF/DOCX) *(opsional)*
+
+8) **Intake & Kualifikasi**
+
+- Checklist intake (data minimal)
+- Ringkasan kebutuhan
+- Rekomendasi rute (handoff ke spesialis / next step)
+
+9) **Research & Briefing**
+
+- Brief 1 halaman (PDF/DOCX)
+- Ringkasan + poin penting
+- Daftar pertanyaan lanjutan (untuk validasi)
+
+10) **Ops Automation (Advanced)**
+
+- Log eksekusi + ringkasan hasil
+- Snapshot Proyek (setelah tindakan)
+- Dokumen hasil (mis. status report) *(opsional)*
+
+---
+
+## 4) “Output Contract” per deliverable (supaya konsisten)
+
+Agar sistem selalu rapi, saya sarankan tiap deliverable punya kontrak minimal:
+
+- **Tujuan**
+- **Input wajib** (field proyek / knowledge / teaching pack)
+- **Format output** (poin, langkah, checklist, PDF/DOCX)
+- **Batasan** (mis. tidak mengarang data, minta klarifikasi)
+- **Trigger** (manual / setelah mini app / setelah action OpenClaw)
+
+Ini bikin builder Anda terasa “platform”, bukan kumpulan fitur.
+
+---
+
+## 5) Saran unik: “Deliverable Bundle”
+
+Ini bisa jadi pembeda besar: user tidak memilih 1 output, tapi memilih **bundle**.
+
+Contoh bundle siap pakai:
+
+- **Mentor Bundle:** Handout + Latihan + Feedback
+- **Solve Bundle:** Checklist + Action Plan + Risk notes
+- **Project Update Bundle:** Snapshot + Timeline + Next action
+- **Client Update Bundle:** Ringkasan + pesan WA/email siap kirim
+
+Bundle membuat pengalaman “1 klik = selesai”.
+
+---
+
+Kalau Anda setuju, langkah berikutnya yang paling penting adalah saya susun **struktur menu “Deliverables”** di produk:
+
+- bagaimana deliverable disimpan (deliverable_links)
+- cara memilih bundle vs single deliverable
+- dan bagaimana deliverables muncul di widget/chat (mis. tombol “Buat Laporan” / “Buat Handout”).

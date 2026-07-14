@@ -1,0 +1,127 @@
+sekarang kita akan membuat chatbot berdasarkan Toolbox.. artinya 1 toolbox menghasilkan 1 chatbot.. 1 chatbot terdiri dari beberapa agen
+kita mulai dari membuat Chatbot SKK
+untuk chatbot SKK bidang SIpil dibuat per jabatan kerja.. secara umum di kelompokan kedalam kelompok jabatan Kerja bidang Sipil terdiri dari Gedung, Jalan, Jembatan, Bendung dan Bendungan, Material,  Irigasi dan Rawa, Bangunan Persampahan, Geodesi, Sungai dan Pantai, Bangunan Air Limbah, Bangunan Air Minum, Jalan Rel, Geodesi, Air Tanah dan  Air Baku, Bangunan Menara, Pembaongkaran Bangunan, Bangunan Pelabuhan,  Bangunan Lepas Pantai, Grouting. Sebelum kita mulai.. coba dikelompokan lagi kelompok jabatan kerja tersebut menjadi 5 kelompok jabatan kerja saja 
+ok lanjut
+1. semua.., 2. tenaga ahli, terampil, asesor. perusahaan tidak perlu 
+berarti nantinya ada chatbot orchestrator sebagai payung dari chatbot spesialis ?
+mungkin kita fokus ke per bidang saja.. sementara kita bidang Sipil.. lain kesempatan kita buat yang lainnya
+saya ada engine pembuat chatbot seperti terlampir.. bagaiman bisa mengakomodasi untuk chatbot SKK... apa yang harus disesuaikan ?
+berarti tidak ada yang perlu dirubah ya.. cuma untuk isi persona atau kontek dengan menambahkan sesuai dengan jabatan kerja atau kelompok jabatan kerja yang sudah kita buat tadi
+ok kita mulai.. 
+buat chatbot orchestrator : isilah form dibawah ini
+Detail Orchestrator
+Konfigurasi chatbot orchestrator Anda
+
+Engineering > Civil Engineer
+Name *
+My Assistant
+Tagline
+Your helpful AI companion
+Description
+buatlah :
+Welcome Experience 
+First impression when users start a conversation
+Greeting Message
+Hello! Welcome to our service. How can I help you today?
+This message is shown when users first open the chat
+
+Conversation Starters
+Quick prompts users can click to start a conversation (max 5)
+
+Konteks Proyek
+Pertanyaan yang ditanyakan chatbot di awal percakapan untuk memahami konteks pengguna. Jawaban akan digunakan chatbot untuk menyesuaikan responnya.
+Tambah Pertanyaan Konteks
+
+Contoh: Jenis proyek apa yang Anda kelola?
+Tipe:
+
+Pilihan
+
+Wajib
+Pilihan dipisah koma: Gedung, Jalan, Irigasi, Jembatan
+Pisahkan setiap pilihan dengan tanda koma
+
+Tambah Pertanyaan
+Belum ada pertanyaan konteks. Tambahkan pertanyaan agar chatbot memahami kebutuhan pengguna di awal percakapan.
+tidakk ada form jawaban.. dimana meletakan jawaban ?
+seperti itu isiannya ?
+ok sudah saya tamnbahkan jabatan kerja ada 175 jabatan kerja bidang Sipil
+atau dikurangi cukup klasifikasinya saja .. tidak jabatan kerjanya, misalkan Gedung, Jawaln, Jembatan .. mana yang tepat 
+ok 
+ok saya sudah drop jabatan kerja, sekarang isi berikut dibawah :
+Personality & Behavior
+How your chatbot interacts with users
+Communication Philosophy
+Describe the communication style and values your chatbot should embody...
+System Prompt
+You are a helpful assistant.
+The system prompt defines the core behavior and context for your cha
+Off-Topic Handling
+Bagaimana chatbot merespons pertanyaan di luar topik
+Strategi Respons
+Arahkan dengan Sopan
+Menentukan bagaimana chatbot menangani pertanyaan di luar cakupan yang ditentukan
+
+Respons Kustom (Opsional)
+Contoh: Maaf, saya hanya bisa membantu dengan pertanyaan seputar produk kami. Silakan hubungi customer service untuk pertanyaan lainnya.
+Tulis respons kustom yang akan diberikan chatbot ketika menerima pertanyaan di luar topik. Kosongkan untuk menggunakan respons otomatis berdasarkan strategi di atas.
+Attentive Agentic AI
+Konfigurasikan kemampuan AI untuk chatbot yang lebih cerdas dan responsif
+
+Mode Agentic
+Mengaktifkan semua kemampuan Agentic AI tingkat lanjut
+
+Attentive Listening
+AI memperhatikan konteks percakapan dengan lebih teliti
+
+
+Bantuan Proaktif
+AI memberikan saran dan bantuan tanpa diminta
+
+
+Pembelajaran Adaptif
+AI belajar dari interaksi untuk meningkatkan respons
+
+
+Kecerdasan Emosional
+AI mendeteksi dan merespons emosi pengguna dengan empati
+
+
+Penalaran Multi-Langkah
+AI memecah masalah kompleks menjadi langkah-langkah terstruktur
+
+
+Koreksi Mandiri
+AI mendeteksi dan memperbaiki kesalahannya sendiri
+
+
+Retensi Konteks
+Jumlah pesan sebelumnya yang diingat AI dalam percakapan
+10 pesan
+Normal
+1 pesan
+Knowledge Base 
+Tambah Knowledge Base 
+Tambahkan informasi baru untuk referensi chatbot
+
+Nama
+FAQ Produk, Info Perusahaan, dll.
+Tipe
+Text Content
+Content
+Masukkan konten knowledge...
+Deskripsi (Opsional)
+Deskripsi singkat tentang knowledge ini
+Batal
+
+Transportasi
+
+elaborasikan lagi KB kalau masih ada  yang perlu ditambahkan
+simulasi asesor digital
+saya masih belum mengisi butir 1 dan 3. gimana cara amengisinya
+maksudnya Materi Uii Kompetensi ?
+ada MUK bidang Sipil sebanyak 55 Jabker dari 175 Jabker
+saya dapatnya MUK dalam bentuk file dari google drive
+ada banyak file .. yang dibutuhkan yang mana
+word dan pdf
+jadi kesimpulannya cukup IA04 dan IA05 ?

@@ -1,0 +1,503 @@
+Berikut **lanjutan modul Ketentuan KAN untuk AJJ Nirkertas**, fokus pada **format prosedur internal, bukti objektif, simulasi audit KAN, dan integrasi ke sistem chatbot**.
+
+Saya cek ulang sumber publik: KAN berada di bawah BSN sebagai lembaga akreditasi nasional, sedangkan BNSP menyediakan SE terkait **Sertifikasi Jarak Jauh dan Penggunaan Nirkertas** di halaman download resminya. Untuk sisi KAN, rujukan yang tampak publik dan relevan adalah kerangka akreditasi LPK seperti **KAN U-01** dan **KAN U-03**, serta kategori akreditasi **Lembaga Sertifikasi Person** pada portal KAN/BSN. ([Akreditasi BSN][1]) Untuk teknis AJJ/Nirkertas LSP BNSP, rujukan spesifiknya tetap SE BNSP tentang sertifikasi jarak jauh dan nirkertas. ([BNSP][2])
+
+---
+
+# 14. Prosedur Internal LSP agar AJJ Nirkertas Selaras KAN
+
+```yaml id="prosedur_internal_kan_ajj"
+prosedur_internal_lsp:
+  id: prosedur_integrasi_kan_ajj_nirkertas
+  tujuan: >
+    Memastikan pelaksanaan AJJ Nirkertas tetap memenuhi prinsip sertifikasi
+    person: imparsialitas, validitas asesmen, kompetensi personil, rekaman,
+    keamanan informasi, keputusan berbasis bukti, keluhan/banding, audit
+    internal, dan kaji ulang manajemen.
+
+  prosedur_yang_disarankan:
+    - id: p01_pengendalian_ruang_lingkup_ajj
+      nama: "Prosedur Pengendalian Ruang Lingkup AJJ Nirkertas"
+      fungsi: >
+        Memastikan AJJ hanya dijalankan pada skema yang disetujui/diotorisasi.
+      output:
+        - daftar skema AJJ aktif
+        - matriks skema vs metode asesmen
+        - persetujuan ruang lingkup
+
+    - id: p02_pengendalian_imparsialitas_digital
+      nama: "Prosedur Pengendalian Imparsialitas pada Sertifikasi Digital"
+      fungsi: >
+        Mengendalikan konflik kepentingan dalam proses AJJ, termasuk akses
+        sistem, hubungan asesor-asesi, dan pemisahan rekomendasi dengan
+        keputusan sertifikasi.
+      output:
+        - risk register imparsialitas
+        - deklarasi konflik kepentingan
+        - matriks hak akses
+        - notulen tinjauan imparsialitas
+
+    - id: p03_validasi_metode_ajj
+      nama: "Prosedur Validasi Metode Asesmen Jarak Jauh"
+      fungsi: >
+        Memastikan metode AJJ mampu membuktikan kompetensi sesuai skema.
+      output:
+        - matriks unit kompetensi vs metode AJJ
+        - hasil validasi instrumen digital
+        - checklist kelayakan asesmen jarak jauh
+        - catatan review asesor
+
+    - id: p04_pengendalian_rekaman_digital
+      nama: "Prosedur Pengendalian Rekaman Digital"
+      fungsi: >
+        Mengatur penyimpanan, akses, backup, retensi, dan pemusnahan rekaman.
+      output:
+        - register rekaman
+        - log akses rekaman
+        - bukti backup
+        - checklist validasi rekaman
+
+    - id: p05_keputusan_sertifikasi_digital
+      nama: "Prosedur Keputusan Sertifikasi Berbasis Bukti Digital"
+      fungsi: >
+        Menjamin keputusan sertifikasi dibuat berdasarkan laporan asesor,
+        bukti asesmen, rekaman, dan kewenangan pengambil keputusan.
+      output:
+        - laporan asesmen
+        - rekomendasi asesor
+        - form keputusan sertifikasi
+        - log persetujuan keputusan
+
+    - id: p06_keluhan_banding_digital
+      nama: "Prosedur Keluhan dan Banding Digital"
+      fungsi: >
+        Menjamin asesi dapat mengajukan keluhan/banding dan LSP
+        menindaklanjutinya secara terdokumentasi.
+      output:
+        - form banding
+        - register banding
+        - hasil telaah banding
+        - notifikasi hasil banding
+```
+
+---
+
+# 15. Matriks Bukti Objektif untuk Audit KAN/BNSP
+
+```yaml id="matriks_bukti_objektif_kan_bnsp"
+matriks_bukti_objektif:
+  area_1_imparsialitas:
+    pertanyaan_audit:
+      - "Bagaimana LSP memastikan AJJ tidak dipengaruhi konflik kepentingan?"
+      - "Apakah asesor memiliki akses ke keputusan final?"
+      - "Bagaimana risiko pelatihan dan sertifikasi dikendalikan?"
+    bukti_objektif:
+      - kebijakan imparsialitas
+      - risk register imparsialitas
+      - deklarasi konflik kepentingan asesor
+      - matriks hak akses
+      - log aktivitas sistem
+
+  area_2_validitas_asesmen:
+    pertanyaan_audit:
+      - "Bagaimana metode AJJ divalidasi untuk skema ini?"
+      - "Bagaimana kompetensi praktik dibuktikan secara jarak jauh?"
+      - "Bagaimana instrumen digital ditinjau?"
+    bukti_objektif:
+      - skema sertifikasi
+      - rencana asesmen
+      - matriks metode asesmen vs unit kompetensi
+      - instrumen asesmen digital
+      - ceklis review instrumen
+      - rekaman asesmen
+
+  area_3_identitas_dan_integritas_asesi:
+    pertanyaan_audit:
+      - "Bagaimana identitas asesi diverifikasi?"
+      - "Bagaimana memastikan tidak ada bantuan tidak sah?"
+      - "Apa tindakan jika kamera mati atau lingkungan tidak terkendali?"
+    bukti_objektif:
+      - rekaman verifikasi identitas
+      - checklist verifikasi lingkungan
+      - pernyataan integritas asesi
+      - catatan kendala teknis
+      - SOP penanganan pelanggaran
+
+  area_4_keputusan_sertifikasi:
+    pertanyaan_audit:
+      - "Siapa yang memberi rekomendasi?"
+      - "Siapa yang mengambil keputusan sertifikasi?"
+      - "Bagaimana keputusan ditelusuri ke bukti asesmen?"
+    bukti_objektif:
+      - laporan asesmen
+      - rekomendasi asesor
+      - rekaman asesmen
+      - form keputusan sertifikasi
+      - SK/hasil keputusan
+      - log persetujuan keputusan
+
+  area_5_rekaman_dan_audit_trail:
+    pertanyaan_audit:
+      - "Di mana rekaman disimpan?"
+      - "Siapa yang dapat mengakses rekaman?"
+      - "Bagaimana perubahan data ditelusuri?"
+    bukti_objektif:
+      - register rekaman
+      - log akses
+      - audit trail
+      - backup record
+      - kebijakan retensi data
+
+  area_6_keluhan_dan_banding:
+    pertanyaan_audit:
+      - "Bagaimana asesi mengajukan banding?"
+      - "Bagaimana banding diproses secara digital?"
+      - "Bagaimana hasil banding dikomunikasikan?"
+    bukti_objektif:
+      - SOP banding
+      - form banding digital
+      - register banding
+      - hasil telaah banding
+      - bukti komunikasi kepada asesi
+```
+
+---
+
+# 16. Peta Dokumen KAN–BNSP–LSP
+
+```yaml id="peta_dokumen_kan_bnsp_lsp"
+peta_dokumen:
+  kan_iso_17024_perspective:
+    fokus:
+      - legalitas
+      - imparsialitas
+      - kompetensi personil
+      - validitas skema dan metode
+      - rekaman
+      - keputusan sertifikasi
+      - keluhan dan banding
+      - audit internal
+      - kaji ulang manajemen
+    dokumen_lsp:
+      - manual mutu
+      - prosedur sertifikasi person
+      - prosedur imparsialitas
+      - prosedur kompetensi personil
+      - prosedur keputusan sertifikasi
+      - prosedur keluhan dan banding
+      - prosedur pengendalian rekaman
+      - prosedur audit internal
+      - prosedur kaji ulang manajemen
+
+  bnsp_ajj_nirkertas_perspective:
+    fokus:
+      - persetujuan AJJ
+      - persetujuan nirkertas
+      - SOP AJJ
+      - SOP verifikasi TUK jarak jauh
+      - SOP banding jarak jauh
+      - aplikasi sertifikasi jarak jauh
+      - rekaman asesmen
+      - laporan 6 bulanan
+    dokumen_lsp:
+      - surat permohonan AJJ
+      - surat permohonan nirkertas
+      - SOP pelayanan sertifikasi jarak jauh
+      - SOP asesmen jarak jauh
+      - SOP verifikasi TUK jarak jauh
+      - SOP banding jarak jauh
+      - rekaman uji coba AJJ
+      - output PDF nirkertas
+      - laporan pelaksanaan AJJ
+      - laporan audit internal
+
+  integrasi_lsp:
+    prinsip: >
+      Dokumen BNSP digunakan sebagai pemenuhan teknis operasional AJJ/Nirkertas,
+      sedangkan dokumen KAN/ISO digunakan untuk membuktikan sistem sertifikasi
+      person tetap terkendali, adil, valid, aman, dan dapat diaudit.
+```
+
+KAN/BSN menyediakan kategori permohonan akreditasi **Lembaga Sertifikasi Person** pada portal akreditasi, sehingga untuk organisasi yang berurusan dengan akreditasi KAN, aspek sertifikasi person tetap harus dipertahankan dalam sistem manajemen. ([Akreditasi BSN][3])
+
+---
+
+# 17. Skenario Audit KAN untuk LSP yang Menjalankan AJJ Nirkertas
+
+```yaml id="skenario_audit_kan_ajj"
+skenario_audit_kan:
+  skenario_1_sampling_asesi:
+    auditor_request: "Tunjukkan satu sampel asesi yang mengikuti AJJ."
+    lsp_menunjukkan:
+      - permohonan digital
+      - asesmen mandiri
+      - persetujuan asesmen
+      - bukti kompetensi
+      - rekaman asesmen
+      - instrumen terisi
+      - laporan asesor
+      - keputusan sertifikasi
+      - umpan balik
+    risiko_jika_tidak_lengkap:
+      - keputusan tidak dapat ditelusuri
+      - rekaman tidak cukup
+      - bukti asesmen tidak memadai
+
+  skenario_2_sampling_asesor:
+    auditor_request: "Tunjukkan kompetensi asesor dan proses asesmen yang dilakukan."
+    lsp_menunjukkan:
+      - CV asesor
+      - bukti kompetensi asesor
+      - surat tugas
+      - deklarasi konflik kepentingan
+      - catatan review bukti
+      - laporan asesmen
+      - evaluasi kinerja asesor
+    risiko_jika_tidak_lengkap:
+      - kompetensi asesor tidak terbukti
+      - imparsialitas tidak terkendali
+
+  skenario_3_sampling_sistem:
+    auditor_request: "Tunjukkan hak akses dan audit trail."
+    lsp_menunjukkan:
+      - akun admin
+      - akun asesor
+      - akun asesi
+      - akun komite keputusan
+      - matriks hak akses
+      - log aktivitas
+      - log perubahan data
+    risiko_jika_tidak_lengkap:
+      - manipulasi data tidak dapat dicegah
+      - pemisahan fungsi tidak terbukti
+
+  skenario_4_sampling_banding:
+    auditor_request: "Tunjukkan proses banding digital."
+    lsp_menunjukkan:
+      - SOP banding
+      - form banding
+      - register banding
+      - hasil telaah
+      - komunikasi hasil kepada asesi
+    risiko_jika_tidak_lengkap:
+      - hak asesi tidak terpenuhi
+      - proses sertifikasi tidak adil
+```
+
+---
+
+# 18. Format Evaluasi Kelayakan Metode AJJ
+
+```yaml id="format_evaluasi_kelayakan_metode_ajj"
+evaluasi_kelayakan_metode_ajj:
+  identitas:
+    skema: "[Nama Skema]"
+    unit_kompetensi: "[Kode/Nama Unit]"
+    metode_asesmen: "[Wawancara / Portofolio / Observasi Video / Simulasi / Uji Praktik]"
+    tanggal_evaluasi: "[Tanggal]"
+    evaluator: "[Nama/Jabatan]"
+
+  pertanyaan_evaluasi:
+    - pertanyaan: "Apakah kompetensi dapat dibuktikan secara jarak jauh?"
+      jawaban: "Ya/Tidak/Dengan Catatan"
+      bukti: "[Bukti]"
+    - pertanyaan: "Apakah bukti yang dikumpulkan cukup untuk membuat keputusan?"
+      jawaban: "Ya/Tidak/Dengan Catatan"
+      bukti: "[Bukti]"
+    - pertanyaan: "Apakah risiko bantuan tidak sah dapat dikendalikan?"
+      jawaban: "Ya/Tidak/Dengan Catatan"
+      bukti: "[Bukti]"
+    - pertanyaan: "Apakah instrumen digital sudah ditinjau?"
+      jawaban: "Ya/Tidak"
+      bukti: "[Checklist review instrumen]"
+    - pertanyaan: "Apakah rekaman asesmen dapat mendukung keterlacakan?"
+      jawaban: "Ya/Tidak"
+      bukti: "[Link rekaman/contoh output]"
+
+  keputusan_kelayakan:
+    status:
+      - "Layak untuk AJJ"
+      - "Layak dengan pengendalian tambahan"
+      - "Tidak layak untuk AJJ"
+    pengendalian_tambahan:
+      - "[Contoh: wajib rekaman multi-angle]"
+      - "[Contoh: wajib portofolio tambahan]"
+      - "[Contoh: wajib verifikasi lingkungan sebelum uji praktik]"
+```
+
+---
+
+# 19. Format Risk Register Imparsialitas AJJ
+
+```yaml id="risk_register_imparsialitas_ajj"
+risk_register_imparsialitas_ajj:
+  fields:
+    - nomor_risiko
+    - sumber_risiko
+    - uraian_risiko
+    - dampak
+    - kemungkinan
+    - level_risiko
+    - pengendalian
+    - pemilik_risiko
+    - bukti_pengendalian
+    - status
+
+  contoh:
+    - nomor_risiko: "IMP-AJJ-001"
+      sumber_risiko: "Asesor pernah melatih asesi"
+      uraian_risiko: "Asesor tidak independen dalam menilai asesi."
+      dampak: "Tinggi"
+      kemungkinan: "Sedang"
+      level_risiko: "Tinggi"
+      pengendalian:
+        - "Deklarasi konflik kepentingan sebelum penugasan"
+        - "Penugasan asesor alternatif jika konflik terbukti"
+      pemilik_risiko: "Manajemen LSP"
+      bukti_pengendalian:
+        - "Form deklarasi konflik"
+        - "Surat tugas asesor"
+      status: "Terkendali"
+
+    - nomor_risiko: "IMP-AJJ-002"
+      sumber_risiko: "Admin dapat mengubah hasil asesmen"
+      uraian_risiko: "Data hasil asesmen dapat dimodifikasi tanpa otorisasi."
+      dampak: "Tinggi"
+      kemungkinan: "Rendah-Sedang"
+      level_risiko: "Tinggi"
+      pengendalian:
+        - "Role-based access control"
+        - "Audit trail perubahan data"
+        - "Review log bulanan"
+      pemilik_risiko: "Pengelola Sistem"
+      bukti_pengendalian:
+        - "Matriks hak akses"
+        - "Log aktivitas"
+      status: "Terkendali"
+```
+
+---
+
+# 20. Format Evaluasi Kinerja Asesor dalam AJJ
+
+```yaml id="evaluasi_kinerja_asesor_ajj"
+evaluasi_kinerja_asesor_ajj:
+  identitas:
+    nama_asesor: "[Nama]"
+    skema: "[Skema]"
+    periode: "[Periode]"
+    evaluator: "[Koordinator Asesor / Manajemen Mutu]"
+
+  aspek_evaluasi:
+    pemahaman_sop_ajj:
+      indikator:
+        - "Menjelaskan tata tertib AJJ kepada asesi"
+        - "Melakukan verifikasi identitas"
+        - "Melakukan verifikasi lingkungan asesmen"
+      skor: "1-4"
+
+    penggunaan_instrumen_digital:
+      indikator:
+        - "Mengisi instrumen asesmen secara lengkap"
+        - "Mencatat bukti asesmen"
+        - "Menghubungkan rekomendasi dengan bukti"
+      skor: "1-4"
+
+    pengendalian_integritas:
+      indikator:
+        - "Mendeteksi potensi bantuan tidak sah"
+        - "Mencatat kendala teknis"
+        - "Mengikuti SOP jika asesmen terganggu"
+      skor: "1-4"
+
+    kualitas_laporan:
+      indikator:
+        - "Laporan lengkap"
+        - "Rekomendasi jelas"
+        - "Catatan asesmen berbasis bukti"
+      skor: "1-4"
+
+  hasil:
+    skor_total: "[Skor]"
+    status:
+      - "Memenuhi"
+      - "Memenuhi dengan catatan"
+      - "Perlu pembinaan"
+    tindak_lanjut:
+      - pelatihan ulang SOP AJJ
+      - mentoring asesor
+      - witness internal
+      - review laporan asesmen
+```
+
+---
+
+# 21. Modul Chatbot Tambahan
+
+```yaml id="chatbot_module_kan_operasional_2"
+module:
+  id: kan_ajj_operasional_bukti_risiko
+  title: "KAN AJJ Nirkertas — Bukti, Risiko, dan Audit Operasional"
+  purpose: >
+    Membantu LSP menyiapkan bukti operasional agar pelaksanaan AJJ Nirkertas
+    tetap selaras dengan prinsip KAN/SNI ISO/IEC 17024 dan ketentuan teknis
+    BNSP.
+
+intents:
+  - id: ask_objective_evidence_kan
+    sample_user_inputs:
+      - "Bukti objektif audit KAN untuk AJJ apa?"
+      - "Dokumen yang harus ditunjukkan ke KAN apa saja?"
+      - "Apa bukti bahwa AJJ valid?"
+    response_template: response_objective_evidence_kan
+    next_node: matriks_bukti_objektif_kan_bnsp
+
+  - id: ask_method_validation_ajj
+    sample_user_inputs:
+      - "Bagaimana validasi metode AJJ?"
+      - "Unit kompetensi layak diuji jarak jauh bagaimana?"
+      - "Format evaluasi kelayakan metode AJJ"
+    response_template: response_method_validation_ajj
+    next_node: format_evaluasi_kelayakan_metode_ajj
+
+  - id: ask_impartiality_risk_ajj
+    sample_user_inputs:
+      - "Risiko imparsialitas AJJ apa saja?"
+      - "Bagaimana mengendalikan konflik kepentingan AJJ?"
+      - "Risk register imparsialitas AJJ"
+    response_template: response_impartiality_risk_ajj
+    next_node: risk_register_imparsialitas_ajj
+
+  - id: ask_assessor_performance_ajj
+    sample_user_inputs:
+      - "Evaluasi kinerja asesor AJJ bagaimana?"
+      - "Asesor AJJ dinilai dari apa?"
+      - "Format evaluasi asesor jarak jauh"
+    response_template: response_assessor_performance_ajj
+    next_node: evaluasi_kinerja_asesor_ajj
+
+response_template:
+  id: response_objective_evidence_kan
+  text: >
+    Bukti objektif audit KAN untuk AJJ Nirkertas harus menunjukkan bahwa
+    sertifikasi tetap valid, imparsial, berbasis bukti, dan dapat ditelusuri.
+    Bukti utamanya meliputi skema, rencana asesmen, instrumen digital,
+    rekaman asesmen, laporan asesor, keputusan sertifikasi, matriks hak akses,
+    audit trail, deklarasi konflik kepentingan, register banding, audit
+    internal, CAPA, dan kaji ulang manajemen.
+  quick_replies:
+    - "Validasi metode AJJ"
+    - "Risk register imparsialitas"
+    - "Evaluasi asesor AJJ"
+    - "Checklist audit internal"
+```
+
+---
+
+## Ringkasan Lanjutan
+
+Tahap lanjutan untuk menyesuaikan AJJ Nirkertas dengan perspektif KAN adalah membuat **bukti objektif yang bisa diaudit**. Empat bukti paling penting adalah: **evaluasi kelayakan metode AJJ**, **risk register imparsialitas**, **evaluasi kinerja asesor dalam AJJ**, dan **audit trail sistem**. Dengan empat hal ini, LSP dapat menunjukkan bahwa proses digital bukan sekadar “online”, tetapi tetap valid, adil, aman, dan dapat ditelusuri.
+
+[1]: https://akreditasi.bsn.go.id/?utm_source=chatgpt.com "Komite Akreditasi Nasional"
+[2]: https://bnsp.go.id/download?hal=2&id=10&utm_source=chatgpt.com "Halaman Download - BNSP"
+[3]: https://akreditasi.bsn.go.id/home/akreditasi_registrasi?utm_source=chatgpt.com "Komite Akreditasi Nasional"

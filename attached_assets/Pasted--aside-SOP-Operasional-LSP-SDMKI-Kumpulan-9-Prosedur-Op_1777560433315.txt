@@ -1,0 +1,230 @@
+<aside>
+📑
+
+**SOP Operasional LSP SDMKI**
+
+Kumpulan 9 Prosedur Operasional Standar yang dirujuk oleh Manual Mutu (Bab 9) dan Daftar Tilik KANMIS (Lampiran E SOP-LSP-KAN-001).
+
+**No. Dokumen:** SOP-LSP-OPS-001 | **Versi:** 1.0 | **Tanggal Berlaku:** 28 April 2026
+
+</aside>
+
+## Daftar SOP
+
+| **Kode** | **Judul** | **Klausul ISO 17024** | P-01 | Aplikasi & Pendaftaran | 9.1 |
+| --- | --- | --- | --- | --- | --- |
+| P-02 | Pelaksanaan Asesmen | 9.2 | P-03 | Keputusan Sertifikasi | 9.3 |
+| P-04 | Penangguhan / Pencabutan / Pengurangan Lingkup | 9.4 | P-05 | Re-sertifikasi | 9.5 |
+| P-06 | Penggunaan Logo & Marka | 9.6 | P-07 | Banding | 9.7 |
+| P-08 | Keluhan | 9.8 | P-09 | Pengelolaan Asesor & TUK | 6.2 & 6.4 |
+
+---
+
+## P-01 — Aplikasi & Pendaftaran
+
+**Tujuan:** Memastikan aplikasi calon asesi diproses secara lengkap, transparan, dan adil.
+
+**Acuan:** ISO 17024 9.1; KAN K-09.
+
+**Alur:**
+
+1. **Penerimaan aplikasi** — melalui formulir APL-01 daring/luring.
+2. **Verifikasi prasyarat skema** oleh Sekretariat (pendidikan, pengalaman, pelatihan).
+3. **Cek kelengkapan dokumen pendukung** (KTP, ijazah, surat pengalaman, portofolio).
+4. **Konfirmasi kontrak sertifikasi** — calon asesi menandatangani perjanjian (hak, kewajiban, biaya, kerahasiaan).
+5. **Penerbitan tanda terima** dengan nomor registrasi unik.
+6. **Penolakan beralasan** bila tidak memenuhi prasyarat — dikomunikasikan tertulis dengan hak banding.
+
+**Output:** Berkas aplikasi lengkap, kontrak, registrasi.
+
+**Indikator:** ≥ 95% aplikasi diproses ≤ 5 hari kerja; 0 keluhan administrasi tervalidasi.
+
+---
+
+## P-02 — Pelaksanaan Asesmen
+
+**Tujuan:** Menjamin asesmen valid, andal, autentik, dan adil (VRAF).
+
+**Acuan:** ISO 17024 9.2.
+
+**Alur:**
+
+1. **Penjadwalan** oleh Manajer Sertifikasi (asesor, asesi, TUK).
+2. **Penugasan asesor** dengan cek COI (Lampiran B SOP-LSP-KAN-001).
+3. **Briefing pra-asesmen** kepada asesi: kerahasiaan, etika, banding.
+4. **Pelaksanaan**: kombinasi metode sesuai skema (tertulis, observasi praktik, wawancara, portofolio).
+5. **Asesmen jarak jauh**: verifikasi identitas + biometrik, online proctoring, rekaman tersimpan.
+6. **Dokumentasi**: form MAK, MMA, MMR, lembar kerja.
+7. **Pengamanan bukti**: bukti dikemas digital/fisik, di-hash bila digital, disimpan terkunci.
+
+**Output:** Berkas asesmen lengkap + rekomendasi asesor.
+
+**Indikator:** Tingkat keluhan terkait asesmen < 2%; closure ≤ 5 hari kerja per asesi.
+
+---
+
+## P-03 — Keputusan Sertifikasi
+
+**Tujuan:** Memastikan keputusan sertifikasi diambil oleh personel berbeda dari asesor, berdasar bukti yang cukup.
+
+**Acuan:** ISO 17024 9.3.
+
+**Alur:**
+
+1. **Penerimaan rekomendasi asesor** oleh Sekretariat.
+2. **Tinjauan kelengkapan & kecukupan bukti** oleh Manajer Sertifikasi.
+3. **Keputusan oleh Pengambil Keputusan** (bukan asesor yang sama).
+4. **Penerbitan sertifikat** dengan nomor unik, ruang lingkup, masa berlaku, simbol KAN (bila terakreditasi).
+5. **Komunikasi hasil** ke asesi (lulus/tidak lulus) dengan hak banding.
+6. **Pencatatan** di registry pemegang sertifikat.
+
+**Output:** Sertifikat resmi + entry registry.
+
+**Indikator:** 100% keputusan oleh personel berbeda dari asesor; 0 banding berhasil karena cacat prosedur.
+
+---
+
+## P-04 — Penangguhan / Pencabutan / Pengurangan Lingkup
+
+**Tujuan:** Mengatur tindakan terhadap pemegang sertifikat yang melanggar atau gagal memenuhi syarat pemeliharaan.
+
+**Acuan:** ISO 17024 9.4.
+
+**Dasar Tindakan:**
+
+- Penyalahgunaan sertifikat/logo.
+- Pelanggaran kode etik.
+- Tidak memenuhi pemeliharaan kompetensi.
+- Permintaan sukarela pemegang sertifikat.
+- Bukti baru yang membatalkan keputusan.
+
+**Alur:**
+
+1. **Notifikasi tertulis** kepada pemegang sertifikat.
+2. **Pemberian kesempatan klarifikasi** ≤ 14 hari kerja.
+3. **Keputusan oleh Pengambil Keputusan** dengan tinjauan komite.
+4. **Eksekusi**: penangguhan (sementara), pencabutan (final), atau pengurangan ruang lingkup.
+5. **Update registry & komunikasi publik** (jika perlu).
+6. **Hak banding** sesuai SOP P-07.
+
+**Output:** Surat keputusan + update registry.
+
+**Indikator:** 100% tindakan disertai bukti & klarifikasi; 0 gugatan hukum berhasil.
+
+---
+
+## P-05 — Re-sertifikasi
+
+**Tujuan:** Memperbarui status kompetensi sebelum masa berlaku habis.
+
+**Acuan:** ISO 17024 9.5.
+
+**Alur:**
+
+1. **Notifikasi 6 bulan sebelum kedaluwarsa**.
+2. **Pengajuan re-sertifikasi** — form khusus + bukti pemeliharaan kompetensi (CPD, pengalaman kerja, sertifikat lanjutan).
+3. **Asesmen re-sertifikasi**: ringkas (CPD diterima) atau penuh (skema berubah signifikan).
+4. **Keputusan & penerbitan sertifikat baru** mengikuti P-03.
+
+**Output:** Sertifikat baru.
+
+**Indikator:** ≥ 80% pemegang sertifikat melakukan re-sertifikasi tepat waktu.
+
+---
+
+## P-06 — Penggunaan Logo & Marka
+
+**Tujuan:** Mengatur penggunaan logo LSP SDMKI dan simbol KAN.
+
+**Acuan:** ISO 17024 9.6; KAN U-03 Rev.2.
+
+**Aturan Pokok:**
+
+- Pemegang sertifikat hanya boleh menggunakan logo pada konteks pekerjaan dalam ruang lingkup sertifikasi.
+- Simbol KAN tidak boleh digunakan pada produk atau dokumen yang menyiratkan akreditasi produk.
+- Komposisi, warna, dan rasio logo mengikuti panduan brand.
+
+**Sanksi:**
+
+- Teguran tertulis → penangguhan → pencabutan sertifikat.
+
+**Indikator:** 0 pelanggaran logo terverifikasi tanpa tindak lanjut.
+
+---
+
+## P-07 — Banding
+
+**Tujuan:** Menjamin pemohon, asesi, atau pemegang sertifikat memiliki saluran banding independen.
+
+**Acuan:** ISO 17024 9.7.
+
+**Alur:**
+
+1. **Pengajuan banding** maksimal 14 hari kerja sejak keputusan diterima.
+2. **Registrasi** oleh Sekretariat — nomor banding unik.
+3. **Pembentukan Panel Banding** (3 orang independen, tidak terlibat keputusan awal).
+4. **Tinjauan & investigasi** — maksimal 30 hari kerja.
+5. **Keputusan banding** — mengikat; komunikasi tertulis ke pemohon.
+6. **Tindakan korektif** bila banding diterima.
+
+**Output:** Keputusan banding terdokumentasi.
+
+**Indikator:** 100% banding selesai ≤ 30 hari kerja.
+
+---
+
+## P-08 — Keluhan
+
+**Tujuan:** Menerima dan menindaklanjuti keluhan dari pihak manapun.
+
+**Acuan:** ISO 17024 9.8.
+
+**Alur:**
+
+1. **Penerimaan keluhan** via email, formulir web, atau surat.
+2. **Registrasi** — nomor keluhan unik + tanggal terima.
+3. **Klasifikasi** — administratif, teknis, etika, atau pelanggaran.
+4. **Investigasi** oleh tim independen dari pihak yang dikeluhkan.
+5. **Komunikasi progres** kepada pengeluh setiap 14 hari kerja.
+6. **Keputusan & tindakan korektif**.
+7. **Closing** dengan komunikasi tertulis.
+
+**Output:** Berkas keluhan + bukti penyelesaian.
+
+**Indikator:** 100% keluhan diterima → diregistrasi ≤ 2 hari kerja; closure ≤ 60 hari kerja.
+
+---
+
+## P-09 — Pengelolaan Asesor & TUK
+
+**Tujuan:** Memastikan asesor & TUK kompeten, terkalibrasi, dan terjaga ketidakberpihakannya.
+
+**Acuan:** ISO 17024 6.2 & 6.4.
+
+### 9.1 Asesor
+
+1. **Rekrutmen** — sertifikat asesor BNSP aktif, pengalaman teknis, lulus wawancara.
+2. **Penetapan ruang lingkup asesor** sesuai skema.
+3. **Pelatihan internal** — ISO 17024, kode etik, sistem TI.
+4. **Pemantauan kinerja** — witness internal 1× per 2 tahun, review feedback asesi, audit dokumen asesmen.
+5. **Tindakan**: peringatan → re-pelatihan → pencabutan ruang lingkup.
+
+### 9.2 TUK
+
+1. **Pendaftaran TUK** — verifikasi sarana, prasarana, SDM.
+2. **MoU & komitmen mutu**.
+3. **Audit pra-verifikasi & berkala** minimal 1× per tahun.
+4. **Klasifikasi**: TUK Tempat Kerja, TUK Sewaktu, TUK Mandiri.
+5. **Tindakan**: peringatan → suspend → pemutusan MoU.
+
+**Output:** Database asesor & TUK yang terkurasi.
+
+**Indikator:** 100% asesor punya witness internal valid; 100% TUK lulus audit tahunan.
+
+---
+
+## Distribusi & Pengendalian
+
+- Versi master disimpan di **KB LSP–TUK** (kategori: Lisensi LSP / Operasional TUK).
+- Salinan terkendali didistribusikan kepada Manajer Mutu, Manajer Sertifikasi, Manajer IT, Komite Skema, Komite Ketidakberpihakan.
+- Salinan tidak terkendali (informasi publik) tersedia di portal resmi LSP SDMKI.

@@ -1,0 +1,68 @@
+<aside>
+⚠️
+
+**Sub-page siap-import ke Gustafta.** Struktur: Persona → Knowledge Base 3 lapisan → Sumber Resmi.
+
+</aside>
+
+## 🧬 Persona
+
+| **Chatbot Name** | Sanksi Jasa Konstruksi | **Tagline** | Sanksi Administratif & Pidana — UU JK, PP 22/2020, Tipikor |
+| --- | --- | --- | --- |
+| **Description** | Spesialis ranah sanksi: administratif (peringatan, denda, pembekuan/pencabutan SBU/SKK/IUJK, blacklist) dan pidana (UU JK, UU Tipikor 31/1999 jo. 20/2001, KUHP). Memahami matriks pelanggaran, prosedur penjatuhan, dan upaya keberatan. | **Primary Language** | Bahasa Indonesia |
+| **Series** | S1 — Regulasi & Hukum | **Avatar** | ⚠️ |
+
+## 📚 Knowledge Base
+
+### 🟦 Foundational — Regulasi, Standar, Data Produk
+
+| **Sumber Resmi** | **Sektor** | **Subsektor** | **URL Sumber** | **Tanggal** | UU No. 2/2017 jo. UU No. 6/2023 (Bab Sanksi) | Hukum | UU | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2017/2023 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| PP No. 22/2020 jo. PP No. 14/2021 (sanksi administratif) | Hukum | PP | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2020/2021 | UU No. 31/1999 jo. UU No. 20/2001 — Pemberantasan Tipikor | Hukum | UU | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 1999/2001 |
+| Perpres No. 16/2018 jo. 12/2021 jo. 46/2025 (daftar hitam) | Pengadaan | Perpres | [lkpp.go.id](http://lkpp.go.id) | 2018-2025 | Perlem LKPP No. 12/2021 jo. 4/2024 (sanksi penyedia) | Pengadaan | Perlem | [lkpp.go.id](http://lkpp.go.id) | 2021/2024 |
+
+### 🟩 Operational — SOP, Prosedur, FAQ, Template
+
+**Jenis sanksi administratif (PP 22/2020 jo. 14/2021):**
+
+1. Peringatan tertulis
+2. Denda administratif
+3. Penghentian sementara kegiatan
+4. Pembekuan SBU/SKK/IUJK/sertifikat standar
+5. Pencabutan SBU/SKK/IUJK/sertifikat standar
+6. Pencantuman dalam Daftar Hitam (LKPP)
+
+**Sanksi pidana (UU JK + UU Tipikor):**
+
+- Kegagalan bangunan akibat kelalaian → pidana sesuai UU JK
+- Penyimpangan pengadaan/markup → UU Tipikor 31/1999 jo. 20/2001
+- Pemalsuan dokumen SBU/SKK → KUHP + UU JK
+
+**Subjek sanksi:** BUJK, tenaga kerja konstruksi, LSBU/LSP, asosiasi, pengguna jasa, pejabat pembina.
+
+**Prosedur penjatuhan administratif:**
+
+Temuan pengawasan → klarifikasi → penetapan sanksi oleh Menteri/gubernur/bupati-walikota → keberatan administratif → PTUN.
+
+**FAQ:**
+
+- *Apakah blacklist otomatis pidana?* — Tidak; blacklist = administratif. Pidana butuh proses peradilan.
+- *Berapa lama daftar hitam berlaku?* — Umumnya 2 tahun (Perlem LKPP 12/2021 jo. 4/2024).
+
+### 🟪 Case Memory — Notulen, Keputusan, Preseden
+
+*TBD — diisi dengan: keputusan blacklist BUJK, putusan PTUN keberatan sanksi, putusan Tipikor proyek konstruksi, SE Menteri terkait sanksi.*
+
+## 🔗 Sumber Resmi
+
+[peraturan.bpk.go.id](http://peraturan.bpk.go.id) · [lkpp.go.id](http://lkpp.go.id) · [binakonstruksi.pu.go.id](http://binakonstruksi.pu.go.id) · [kpk.go.id](http://kpk.go.id) · [mahkamahagung.go.id](http://mahkamahagung.go.id)
+
+## ❓ Contoh Pertanyaan
+
+1. Apa saja jenis sanksi administratif menurut PP 22/2020?
+2. Kapan pelanggaran konstruksi masuk ranah Tipikor?
+3. Berapa lama masa berlaku daftar hitam LKPP?
+
+## 🔗 Halaman induk
+
+[Regulasi Jasa Konstruksi Indonesia — Ringkasan Lengkap](https://www.notion.so/Regulasi-Jasa-Konstruksi-Indonesia-Ringkasan-Lengkap-5a3f66d1250941f18f53a104f957a336?pvs=21) — Bab 11.

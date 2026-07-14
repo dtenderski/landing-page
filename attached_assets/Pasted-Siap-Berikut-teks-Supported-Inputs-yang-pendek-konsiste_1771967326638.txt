@@ -1,0 +1,108 @@
+Siap. Berikut **teks “Supported Inputs”** yang pendek, konsisten, dan bisa Anda tempel di tiap chatbot (di greeting atau di bagian awal respons) supaya user paham summary mana yang bisa dipakai—tanpa UI baru.
+
+Saya buat dalam 2 versi:
+
+* **Versi Global (untuk semua bot)**
+* **Versi Spesifik per bot** (lebih jelas, tetap ringkas)
+
+---
+
+# 1) VERSI GLOBAL (BISA DIPAKAI DI SEMUA CHATBOT)
+
+Tempel di greeting semua bot:
+
+**Input yang didukung (opsional):**
+Anda bisa paste ringkasan standar berikut untuk analisis yang lebih cepat dan konsisten:
+
+* `LICENSING_SUMMARY v1`
+* `SBU_SUMMARY v1`
+* `SKK_SUMMARY v1`
+* `TENDER_REQ_SUMMARY v1`
+
+Jika belum ada, Anda tetap bisa mengetik data secara bebas—saya akan menandai bagian yang *BUTUH_VERIFIKASI*.
+
+---
+
+# 2) VERSI PER CHATBOT (REKOMENDASI)
+
+## A) Perizinan Usaha — Legal Compliance & Roadmap Advisor
+
+**Input yang didukung:**
+
+* `LICENSING_SUMMARY v1` (disarankan)
+* Data bebas: NIB, KBLI, IUJK, Akta/perubahan, NPWP, serta info konsistensi nama/alamat/pengurus.
+
+---
+
+## B) SBU Advisor
+
+**Input yang didukung:**
+
+* `SBU_SUMMARY v1` (disarankan)
+* `LICENSING_SUMMARY v1` (untuk cek sinkronisasi data & KBLI)
+* Data bebas: nomor SBU, kualifikasi, subklasifikasi, status/masa berlaku.
+
+---
+
+## C) SKK Advisor
+
+**Input yang didukung:**
+
+* `SKK_SUMMARY v1` (disarankan)
+* `SBU_SUMMARY v1` (jika ingin mapping kebutuhan tenaga vs subklasifikasi)
+* Data bebas: nama tenaga, level, subklasifikasi, status, masa berlaku.
+
+---
+
+## D) TRC — Tender Readiness Checker
+
+**Input yang didukung:**
+
+* `TENDER_REQ_SUMMARY v1` (wajib untuk evaluasi yang presisi)
+* `LICENSING_SUMMARY v1`
+* `SBU_SUMMARY v1`
+* `SKK_SUMMARY v1`
+
+Jika salah satu belum ada, Anda tetap bisa lanjut—hasil akan menandai *BUTUH_VERIFIKASI*.
+
+---
+
+## E) ECSG — Executive Compliance Summary Generator
+
+**Input yang didukung:**
+
+* `INPUT_PACKET` dari TRC (disarankan)
+  atau
+* kombinasi: `TENDER_REQ_SUMMARY v1` + `LICENSING_SUMMARY v1` + `SBU_SUMMARY v1` + `SKK_SUMMARY v1`
+
+---
+
+# 3) “COMPATIBILITY HEADER” (OPSIONAL, BIAR MAKIN RAPI)
+
+Kalau Anda ingin semua bot punya header konsisten yang gampang dipindai, pakai ini:
+
+```
+SUPPORTED_INPUTS:
+- LICENSING_SUMMARY v1
+- SBU_SUMMARY v1
+- SKK_SUMMARY v1
+- TENDER_REQ_SUMMARY v1
+NOTE: Input bebas tetap diterima. Field yang tidak tersedia akan ditandai BUTUH_VERIFIKASI.
+```
+
+---
+
+# 4) NEXT STEP Integrasi (setelah ini)
+
+Kalau “Supported Inputs” sudah ditempel, langkah integrasi berikutnya yang paling berguna (tanpa fundamental change) adalah:
+
+✅ **“Summary Generator Mode”** di tiap bot:
+Jika user belum punya summary v1, bot bisa menawarkan:
+
+> “Mau saya ubah data Anda menjadi `*_SUMMARY v1` agar bisa dipakai di bot lain?”
+
+Ini tetap generik dan tidak butuh platform state—karena outputnya teks.
+
+---
+
+Mau saya lanjutkan dengan template **“Summary Generator Mode”** yang bisa dipakai ulang oleh semua bot (konsep generik + contoh untuk Perizinan/SKK/SBU)?

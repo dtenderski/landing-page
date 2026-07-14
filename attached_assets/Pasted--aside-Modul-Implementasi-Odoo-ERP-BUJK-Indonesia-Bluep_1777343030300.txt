@@ -1,0 +1,919 @@
+<aside>
+🧩
+
+**Modul Implementasi Odoo ERP — BUJK Indonesia**
+
+Blueprint, modul inti, roadmap, RACI, dan integrasi ekosistem digital konstruksi (SIJK, SIKI, OSS-RBA, SMKK, BIM).
+
+Disusun oleh: Wuryanto Kusdjali · Workspace: SB NET's Space · Series: S5 — Tata Kelola, TK & Digitalisasi.
+
+</aside>
+
+## 1. Konteks & Tujuan
+
+Digitalisasi BUJK (Badan Usaha Jasa Konstruksi) tidak cukup hanya migrasi dokumen ke cloud. Dibutuhkan **single source of truth** yang menyatukan: proyek (WBS/BoQ/progres fisik) ↔ keuangan (PSAK 73, e-Faktur, retensi) ↔ SDM (SKK/SBU, SMKK) ↔ rantai pasok (subkontraktor, material, alat) ↔ kepatuhan regulasi (SIJK Terintegrasi, SIKI, OSS-RBA, BIM).
+
+**Odoo** dipilih sebagai kandidat ERP karena:
+
+- **Open-source (Community)** + Enterprise — total cost of ownership rendah untuk BUJK Kecil/Menengah.
+- **Modular** — bisa start dari Accounting + Project, lalu bertahap ke Manufacturing/MRP, Quality, HR.
+- **Studio + OWL framework** — kustomisasi cepat untuk form BoQ, MC (Monthly Certificate), sertifikat tenaga kerja, lampiran SBU.
+- **API XML-RPC / JSON-RPC** — integrasi dua arah ke SIJK, SIKI, OSS-RBA, e-Faktur DJP, BIM (IFC viewer), GIS.
+
+**Tujuan halaman ini:** memberikan blueprint implementasi end-to-end yang **siap pakai** sebagai dokumen tender konsultan ERP, atau roadmap internal IT BUJK.
+
+---
+
+## 2. Blueprint Arsitektur (High-Level)
+
+```mermaid
+flowchart LR
+	A["BUJK<br>(Pengguna Akhir)"] --> B["Odoo Core<br>(Project · Finance · HR · SCM)"]
+	B --> C{"Integration Layer<br>(REST/RPC + n8n)"}
+	C --> D1["OSS-RBA<br>(NIB, Sertifikat Standar)"]
+	C --> D2["SIJK Terintegrasi<br>(PUPR)"]
+	C --> D3["SIKI<br>(SBU, SKK, PB-UMKU)"]
+	C --> D4["e-Faktur & e-Bupot<br>(DJP)"]
+	C --> D5["BIM Server<br>(IFC, BCF)"]
+	C --> D6["SMKK Dashboard<br>(HSE Reporting)"]
+	B --> E["Data Lake / BI<br>(Metabase / PowerBI)"]
+	E --> F["Direksi & PJ-BUJK<br>(KPI, Cashflow, RAP vs RAB)"]
+```
+
+**Layer:**
+
+1. **Data Layer** — PostgreSQL (Odoo native), object storage (S3/MinIO) untuk lampiran besar (DED, IFC, foto progres).
+2. **Application Layer** — Odoo modul standar + kustom (`bujk_project`, `bujk_skk`, `bujk_compliance`).
+3. **Integration Layer** — n8n / Odoo connector untuk webhook & scheduled sync ke regulator.
+4. **Presentation Layer** — Web Odoo, Mobile (Odoo Mobile + custom PWA untuk mandor lapangan), Dashboard BI.
+
+---
+
+## 3. Modul Inti Odoo untuk BUJK
+
+| **Domain** | **Modul Odoo Inti** | **Fungsi Spesifik Konstruksi** | **Kustomisasi Wajib** |
+| --- | --- | --- | --- |
+| Proyek | `project`, `project_forecast`, `mrp`, `quality` | WBS, BoQ, MC bulanan, kurva-S, retensi 5%, addendum | Modul `bujk_boq` (item AHSP), `bujk_mc` (Berita Acara) |
+| Keuangan | `account`, `account_accountant`, `account_reports` | PSAK 71/72/73, retensi piutang, uang muka, e-Faktur, PPh 4(2) final 1,75% | Lokalisasi `l10n_id`  • `l10n_id_efaktur`  • custom retensi |
+| SDM & K3 | `hr`, `hr_payroll`, `hr_skills`, `fleet` | SKK Jenjang 1–9, SBU, SMKK, masa berlaku, ID-card lapangan | Modul `bujk_skk` (linked LSP/LSBU), `bujk_smkk` (incident log) |
+| Rantai Pasok | `purchase`, `stock`, `purchase_requisition`, `mrp_subcontracting` | Subkontraktor (back-to-back), material take-off, gudang proyek, sewa alat | Modul `bujk_subcon` (SLA, retensi sub), `bujk_equipment_rental` |
+| Kepatuhan | `documents`, `sign`, `survey`, `quality_control` | Repository SBU/SKK/SMKK, e-sign kontrak, audit trail | Modul `bujk_compliance` (sync SIKI/SIJK/OSS) |
+| Eksekutif | `spreadsheet_dashboard`, `web_studio` | Dashboard PJBU/PJTBU, RAP vs RAB realtime, cashflow proyek | Connector ke Metabase / PowerBI (read-only replica) |
+
+---
+
+## 4. Rincian Fitur per Cakupan
+
+### 4.1 Project & Manufacturing — WBS · BoQ · Progres Fisik
+
+- **WBS hierarkis**: `Project → Sub-project → Task → Sub-task` mengikuti struktur BoQ pemerintah (Pekerjaan Persiapan → Struktur → Arsitektur → MEP → Finishing).
+- **BoQ engine** (custom `bujk_boq`):
+    - Master item dari **AHSP (Analisa Harga Satuan Pekerjaan)** Permen PUPR.
+    - Auto-generate Bill of Materials (BoM) untuk simulasi MRP.
+    - Versi RAB (penawaran) ↔ RAP (rencana pelaksanaan) ↔ Realisasi.
+- **Progres fisik & MC bulanan**:
+    - Input bobot pekerjaan per item BoQ (tertimbang).
+    - Berita Acara Kemajuan Pekerjaan (BAKP) auto-generated dari progres.
+    - Kurva-S otomatis (rencana vs aktual) — chart Odoo dashboard.
+- **Manufacturing/MRP** untuk pra-fabrikasi: `precast`, `rebar bending`, `panel akustik` (penyetaraan BK-04).
+- **Quality** untuk **Inspection Test Plan (ITP)**, checklist mutu beton, slump test, hasil lab.
+
+### 4.2 Accounting · Invoicing · Cashflow — PSAK & e-Faktur
+
+- **Lokalisasi Indonesia (`l10n_id`)** — Chart of Account standar PSAK + tambahan akun:
+    - `1-13xxx` Piutang Retensi, `2-23xxx` Utang Retensi Subkon, `1-14xxx` Tagihan Bruto kepada Pengguna Jasa (PSAK 72).
+- **e-Faktur** (`l10n_id_efaktur`) — generate XML e-Faktur Pajak Keluaran/Masukan, sinkron NSFP DJP.
+- **PPh Final 1,75% / 2,65% / 3,5% / 6%** sesuai PP 9/2022 — auto-witholding berdasarkan kualifikasi BUJK pengguna jasa.
+- **e-Bupot** PPh 23/4(2) Unifikasi — generate XML siap upload DJP.
+- **Cashflow Proyek**:
+    - Forecast termin masuk (sesuai jadwal MC) vs outflow (subkon, gaji, material).
+    - Alert *cash-gap* untuk PJBU.
+- **Retensi**:
+    - Auto-hold 5% setiap MC, release di FHO/PHO sesuai kontrak.
+    - Bank garansi pengganti retensi tracked di `account.bank.guarantee` (custom).
+- **PSAK 73 (Sewa)** — sewa alat berat ≥ 12 bulan dicatat sebagai right-of-use asset.
+
+### 4.3 HR/Payroll — SKK · SBU Tracking Tenaga Kerja
+
+- Modul `bujk_skk`:
+    - Field per karyawan: `Nama Sertifikat`, `Subklasifikasi`, `Jenjang KKNI (1–9)`, `LSP Penerbit`, `Nomor SKK`, `Masa Berlaku`, `Lampiran PDF`.
+    - **Auto-alert** 90/60/30 hari sebelum expired → notifikasi PJTBU & karyawan.
+    - Tautan ke `Bab 12 — Tenaga Kerja Konstruksi (TKK)` untuk SKKNI referensi.
+- **PJ-BUJK Matrix** (PJBU, PJTBU, PJKBU, PJSKBU) — auto-validasi *minimum requirement* per kualifikasi BUJK (K/M/B).
+- **SBU Badan Usaha** — repository per subklasifikasi, masa berlaku, hasil sync SIKI.
+- **Payroll**:
+    - Komponen: gaji pokok, tunjangan jabatan, tunjangan lapangan, lembur (UU 13/2003 jo. UU 6/2023 Cipta Kerja), BPJS Kes/TK, JHT, JP, JKK, JKM.
+    - Slip gaji digital + sign elektronik.
+- **HSE/SMKK** (`bujk_smkk`):
+    - Incident reporting (near-miss, first-aid, LTI, fatality).
+    - Inspeksi K3 mingguan, toolbox meeting, JSA (Job Safety Analysis).
+    - Statistik IR/SR per proyek → Dashboard PJBU.
+
+### 4.4 Purchase · Inventory · Subcontractor — Rantai Pasok Konstruksi
+
+- **Vendor Bidding** (`purchase_requisition`): RFQ multi-vendor, kunci penawaran sebelum tanggal, e-eval otomatis (price + technical scoring).
+- **Subkontraktor Back-to-back**:
+    - Kontrak induk → SPK Subkon dengan retensi & termin selaras.
+    - Sertifikat SBU/SKK subkon wajib diunggah sebelum SPK aktif.
+    - Modul `mrp_subcontracting` adaptasi untuk lump-sum & unit-price.
+- **Inventory per Proyek**:
+    - Setiap proyek = 1 *warehouse* atau *location* terpisah.
+    - Material take-off dari BoM → reservasi otomatis.
+    - **Stock-on-site** vs **stock-on-cost** (PSAK 16) — pemisahan akuntansi.
+- **Sewa Alat Berat** (`bujk_equipment_rental`):
+    - Kontrak harian/jam, fuel log, breakdown maintenance.
+    - Telematics integration (opsional) untuk excavator/dozer.
+
+### 4.5 Kepatuhan — SIJK · SIKI · OSS-RBA · SMKK · BIM
+
+- **SIJK Terintegrasi** (PUPR) — REST sync untuk:
+    - Pelaporan proyek aktif (nilai kontrak, lokasi, durasi).
+    - Update progres fisik triwulanan.
+- **SIKI** — bidirectional sync SBU/SKK + status PB-UMKU.
+- **OSS-RBA** — read-only ambil status NIB, Sertifikat Standar, KBLI aktif.
+- **e-Faktur DJP** — sudah dijelaskan di 4.2.
+- **SMKK Dashboard** — export laporan bulanan SMKK ke format Permen PUPR 10/2021.
+- **BIM Integration**:
+    - Upload IFC ke `documents`, viewer via [BIMserver](https://bimserver.org) atau [Speckle](https://speckle.systems).
+    - BCF (BIM Collaboration Format) → auto-create Odoo Task untuk *clash detection*.
+    - Quantity Take-Off (QTO) dari IFC → auto-populate BoQ.
+
+---
+
+## 5. Roadmap Implementasi (12 Bulan)
+
+```mermaid
+gantt
+	title Roadmap Odoo ERP BUJK — 12 Bulan
+	dateFormat YYYY-MM-DD
+	axisFormat %b %y
+
+	section Fase 0 · Persiapan
+	Assessment & Gap Analysis		:a1, 2026-05-01, 30d
+	Pemilihan Edisi (Community/Enterprise)	:a2, after a1, 14d
+	Procurement Hosting & Lisensi		:a3, after a2, 14d
+
+	section Fase 1 · Foundation
+	Instalasi Core + l10n_id		:b1, 2026-07-01, 30d
+	Setup CoA, Pajak, e-Faktur		:b2, after b1, 30d
+	Import Master (Vendor, Karyawan, Item AHSP):b3, after b1, 45d
+
+	section Fase 2 · Project & SCM
+	Modul Project + bujk_boq		:c1, 2026-09-01, 60d
+	Purchase + Subcon + Inventory		:c2, after c1, 45d
+	Pilot 1 Proyek				:c3, after c2, 30d
+
+	section Fase 3 · HR & Compliance
+	HR Payroll + bujk_skk			:d1, 2026-12-01, 45d
+	Integrasi SIKI/SIJK/OSS			:d2, after d1, 60d
+	SMKK + BIM Connector			:d3, after d1, 75d
+
+	section Fase 4 · Go-Live & Optimisasi
+	Go-Live Multi-Proyek			:e1, 2027-04-01, 30d
+	Dashboard BI + Training			:e2, after e1, 30d
+	Hypercare & Optimisasi			:e3, after e2, 60d
+```
+
+### Fase 0 — Persiapan (Bulan 1–2)
+
+- Assessment proses bisnis as-is (ProSCI/BPMN).
+- Gap analysis vs. Odoo standar; daftar kustomisasi.
+- Pemilihan edisi: **Community** (self-host) untuk K/M, **Enterprise** untuk BUJK Besar (≥ Rp 50 M/proyek atau ≥ 5 proyek paralel).
+- Anggaran indikatif (Indonesia, 2026):
+
+| **Item** | **BUJK Kecil** | **BUJK Menengah** | **BUJK Besar** |
+| --- | --- | --- | --- |
+| Hosting (cloud IDN) | Rp 1,5–3 jt/bln | Rp 5–10 jt/bln | Rp 20–50 jt/bln (HA) |
+| Kustomisasi modul `bujk_*` | Rp 50–100 jt | Rp 150–400 jt | Rp 500 jt–1,5 M |
+| **Total Tahun 1 (estimasi)** | **Rp 175–300 jt** | **Rp 550 jt–1,2 M** | **Rp 2–5,5 M** |
+
+### Fase 1 — Foundation (Bulan 3–4)
+
+- Setup multi-company (jika ada anak usaha), multi-currency (proyek pendanaan asing).
+- Konfigurasi pajak: PPN 11%, PPh Final konstruksi, PPh 23, e-Bupot.
+- Import master AHSP (≥ 5.000 item) dari Permen PUPR terbaru.
+
+### Fase 2 — Project & Supply Chain (Bulan 5–7)
+
+- Implementasi modul `bujk_boq`, `bujk_mc`.
+- Pilot di **1 proyek aktif** dengan parallel run 1 bulan.
+- Onboarding subkontraktor utama (top 10 by value).
+
+### Fase 3 — HR & Compliance (Bulan 8–10)
+
+- Migrasi data karyawan + sertifikat SKK.
+- Build connector SIKI/SIJK (sandbox dulu, baru produksi).
+- Pasang BIM viewer + uji coba IFC export QTO.
+
+### Fase 4 — Go-Live & Optimisasi (Bulan 11–12)
+
+- Cutover multi-proyek (big-bang per cluster atau phased).
+- Dashboard eksekutif (RAP vs RAB, Cashflow, KPI HSE).
+- Hypercare 60 hari + serah terima ke IT internal.
+
+---
+
+## 6. RACI Matrix (Implementasi)
+
+**Legenda:** R = Responsible · A = Accountable · C = Consulted · I = Informed
+
+| **Aktivitas** | **Direksi / PJBU** | **Steering Committee** | **PM Implementasi** | **IT Internal** | **Konsultan Odoo** | **Key User per Divisi** | **End User Lapangan** |  |  |  |  |  |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Visi & Bisnis Case | A | R | C | I | C | I | I | Pemilihan Edisi & Hosting | A | C | R | C | C | I | I |
+| Gap Analysis & Blueprint | I | A | R | C | R | C | I | Konfigurasi Modul Standar | I | I | A | C | R | C | I |
+| Kustomisasi `bujk_*` | I | C | A | C | R | C | I | Migrasi Data Master | I | I | A | R | C | R | I |
+| Integrasi SIKI/SIJK/OSS | I | C | A | R | R | C | I | UAT & Sign-off | A | C | R | C | C | R | C |
+| Training | I | I | A | C | R | R | R | Go-Live Cutover | A | C | R | R | R | C | I |
+| Hypercare | I | I | A | R | R | C | C | Operasional Day-2 | I | I | I | A/R | C | R | R |
+
+---
+
+## 7. Manajemen Risiko & Mitigasi
+
+| **Risiko** | **Likelihood** | **Impact** | **Mitigasi** |
+| --- | --- | --- | --- |
+| Kustomisasi membengkak (scope creep) | Tinggi | Tinggi | Frozen scope per fase, change request board, time-box sprint |
+| Kualitas data master AHSP/karyawan buruk | Tinggi | Sedang | Data cleansing sprint sebelum import, validator script |
+| Vendor lock-in konsultan | Sedang | Sedang | Source code escrow, dokumentasi, IT internal di-up-skill |
+
+---
+
+## 8. KPI Sukses (Pasca Go-Live)
+
+- **Operasional**
+    - Closing bulanan ≤ 5 hari kerja (dari ≥ 15 hari pre-ERP).
+    - MC bulanan terbit ≤ 3 hari setelah cut-off lapangan.
+    - 100 % SBU/SKK karyawan ter-track masa berlaku.
+- **Finansial**
+    - Akurasi RAP vs Realisasi ± 3 % per item BoQ utama.
+    - DSO (Days Sales Outstanding) turun ≥ 20 %.
+    - Cash conversion cycle proyek visible real-time.
+- **Kepatuhan**
+    - 0 keterlambatan pelaporan SIJK triwulanan.
+    - 100 % e-Faktur tanpa rejected DJP.
+    - Insiden K3 *under-reporting* turun (LTIFR transparan).
+- **Strategis**
+    - Cycle time tender → kontrak turun ≥ 25 %.
+    - Margin proyek meningkat ≥ 2 ppt karena kontrol biaya lebih ketat.
+
+---
+
+## 9. Tautan Lintas-Bab
+
+- [Bab 14 — SIJK & Digitalisasi Jasa Konstruksi](https://www.notion.so/Bab-14-SIJK-Digitalisasi-Jasa-Konstruksi-0eec6217c3624847a19da3e8da305c99?pvs=21) — ekosistem regulator yang harus diintegrasikan.
+- [Bab 12 — Tenaga Kerja Konstruksi (TKK)](https://www.notion.so/Bab-12-Tenaga-Kerja-Konstruksi-TKK-fcd1f04bded740d081a677a70fd9a140?pvs=21) — referensi SKK Jenjang 1–9 untuk modul `bujk_skk`.
+- [Bab 13 — Kontrak Kerja Konstruksi](https://www.notion.so/Bab-13-Kontrak-Kerja-Konstruksi-c1048a2b371043888722fb59f02757aa?pvs=21) — klausul retensi, termin, addendum yang harus dipetakan ke skema akuntansi.
+- [Bab 6 — Keselamatan Konstruksi & Berkelanjutan](https://www.notion.so/Bab-6-Keselamatan-Konstruksi-Berkelanjutan-87abcf9f523c4931b6ea5a1459869efe?pvs=21) — fondasi modul `bujk_smkk`.
+- [Kurikulum Pelatihan Manager Rantai Pasok Konstruksi BUJK](https://www.notion.so/Kurikulum-Pelatihan-Manager-Rantai-Pasok-Konstruksi-BUJK-09ee2246dd3a4edd9d8b02e194208348?pvs=21) — kompetensi end-user modul Purchase/Subcon.
+- [Kurikulum Pelatihan Administrasi Kontrak Konstruksi BUJK](https://www.notion.so/Kurikulum-Pelatihan-Administrasi-Kontrak-Konstruksi-BUJK-fa6c2869acd54e26b42e1108a12be8bf?pvs=21) — kompetensi end-user modul Project/Finance.
+
+---
+
+## 10. Sumber Resmi & Referensi
+
+| **Sumber** | **Relevansi** | **URL** |
+| --- | --- | --- |
+| PP 22/2020 jo. PP 14/2021 | Pelaksanaan UU JK | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) |
+| PP 9/2022 — PPh Final Konstruksi | Tarif withholding | [pajak.go.id](http://pajak.go.id) |
+| Permen PUPR 10/2021 — SMKK | Format laporan K3 | [jdih.pu.go.id](http://jdih.pu.go.id) |
+| Odoo Documentation 17/18 | Modul standar & API | [odoo.com/documentation](http://odoo.com/documentation) |
+| buildingSMART IFC/BCF | Standar pertukaran BIM | [buildingsmart.org](http://buildingsmart.org) |
+
+---
+
+## 11. Proses Bisnis End-to-End (Mapping ke Modul Odoo)
+
+Siklus hidup proyek konstruksi BUJK dipetakan ke modul Odoo agar setiap *handoff* antar fase punya owner dokumen, jejak audit, dan integrasi finansial otomatis.
+
+```mermaid
+flowchart TB
+	subgraph PRE["FASE A · Pre-Tender"]
+		A1["Lead dari LPSE/SPSE/swasta"]
+		A2["Go/No-Go Analysis"]
+		A3["Approval Direksi"]
+	end
+	subgraph TND["FASE B · Tender & Penawaran"]
+		B1["Estimasi BoQ + AHSP"]
+		B2["RAB + Margin Tendering"]
+		B3["Submit + Klarifikasi"]
+	end
+	subgraph CON["FASE C · Kontrak"]
+		C1["SPPBJ → Kontrak"]
+		C2["Bank Garansi"]
+		C3["Konversi RAB → RAP"]
+	end
+	subgraph EXE["FASE D · Pelaksanaan"]
+		D1["Mobilisasi & SMKK Plan"]
+		D2["PR/PO/Subcon SPK"]
+		D3["Eksekusi + Daily Report"]
+		D4["MC Bulanan + BAKP"]
+		D5["Tagihan Termin + e-Faktur"]
+	end
+	subgraph CLS["FASE E · Penutup"]
+		E1["PHO"]
+		E2["Masa Pemeliharaan"]
+		E3["FHO + Release Retensi"]
+		E4["Lessons Learned"]
+	end
+	PRE --> TND --> CON --> EXE --> CLS
+```
+
+| **Fase** | **Aktivitas Kunci** | **Modul Odoo** | **Output / Dokumen** | A · Pre-Tender | Scoring peluang, kapasitas finansial, kapasitas SBU/SKK | `crm` (Lead → Opportunity), `bujk_compliance` (cek SBU aktif) | Go/No-Go Memo, Tender Approval Form |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| B · Tender | Quantity take-off, AHSP lookup, escalation factor, profit margin | `bujk_boq` (RAB), `sale` (Quotation), `documents` (Penawaran PDF) | RAB, Surat Penawaran, Lampiran Teknis | C · Kontrak | Konversi penawaran → kontrak, bank garansi, alokasi sumber daya | `sale` (Sales Order = Kontrak), `account.bank.guarantee` (custom), `bujk_boq` (versi RAP) | Kontrak ber-meterai, Jaminan Pelaksanaan, RAP |
+| D · Pelaksanaan | PR→PO→GR, SPK Subkon, daily/weekly report, MC, e-Faktur | `project`, `purchase`, `mrp_subcontracting`, `bujk_mc`, `account.move`, `l10n_id_efaktur` | Daily Report, BAKP, Invoice Termin, Faktur Pajak | E · Penutup | BAST PHO, defect liability, FHO, retensi release, project closeout | `bujk_mc` (PHO/FHO state), `account` (release retensi), `quality` (defect log) | BAST PHO, BAST FHO, Release Retensi, Closeout Report |
+
+---
+
+## 12. Spesifikasi Teknis Modul Kustom `bujk_*`
+
+### 12.1 `bujk_boq` — Engine BoQ & AHSP
+
+**Tujuan:** mengubah Odoo Project menjadi sistem BoQ konstruksi yang sadar AHSP, bobot tertimbang, dan versi RAB↔RAP↔Realisasi.
+
+**Model utama:**
+
+```python
+class BujkBoqLine(models.Model):
+	_name = 'bujk.boq.line'
+	_description = 'BoQ Line — AHSP-based, hierarchical WBS'
+	_parent_store = True
+	_order = 'wbs_code'
+
+	project_id      = fields.Many2one('project.project', required=True, ondelete='cascade')
+	parent_id       = fields.Many2one('bujk.boq.line', 'Parent WBS', index=True)
+	parent_path     = fields.Char(index=True)
+	wbs_code        = fields.Char('Kode WBS', required=True)        # cth: 1.2.3
+	name            = fields.Char('Uraian Pekerjaan', required=True)
+	ahsp_id         = fields.Many2one('bujk.ahsp', 'Item AHSP')     # master Permen PUPR
+	uom_id          = fields.Many2one('uom.uom', 'Satuan')
+	quantity        = fields.Float('Volume')
+	unit_price_rab  = fields.Monetary('HSP RAB')
+	unit_price_rap  = fields.Monetary('HSP RAP')
+	weight_pct      = fields.Float('Bobot %', compute='_compute_weight', store=True)
+	progress_pct    = fields.Float('Progres Fisik %')
+	bom_id          = fields.Many2one('mrp.bom', 'BoM Auto', readonly=True)
+	state           = fields.Selection([
+		('draft','Draft'),('rab','RAB'),('rap','RAP'),
+		('exec','Pelaksanaan'),('done','Selesai')
+	], default='draft', tracking=True)
+```
+
+**View Tree (gambaran):** kolom `WBS · Uraian · Sat · Vol · HSP RAB · HSP RAP · Bobot % · Progres %` dengan grouping `parent_id`.
+
+**Otomasi:**
+
+- `@api.constrains('progress_pct')` — pastikan progres anak ≤ progres induk.
+- `cron_compute_weight_daily` — recompute bobot harian (jika kontrak berubah/addendum).
+- `action_generate_bom` — auto-create `mrp.bom` dari komponen AHSP (upah, bahan, alat).
+
+### 12.2 `bujk_mc` — Monthly Certificate (Berita Acara Termin)
+
+**Model:** `bujk.mc.document`
+
+Field penting: `period_start`, `period_end`, `progress_total`, `progress_period`, `retention_amount`, `nett_amount`, `state` (`draft → submitted → verified → approved → invoiced`).
+
+- Auto-generate dari snapshot `bujk.boq.line.progress_pct` pada tanggal cut-off.
+- Sign elektronik via `sign` (Konsultan Pengawas → Direksi Lapangan PPK → PJBU).
+- State `approved` memicu otomatis pembuatan `account.move` (Invoice Termin) dengan PPN 11 % + PPh Final terpotong.
+
+### 12.3 `bujk_skk` — Sertifikat Tenaga Kerja Konstruksi
+
+**Model:** `bujk.skk.cert`
+
+```python
+employee_id      = Many2one('hr.employee')
+subklasifikasi   = Many2one('bujk.subklas')      # link ke master KBLI/SBU
+jenjang_kkni     = Selection([(str(i),f'Jenjang {i}') for i in range(1,10)])
+lsp_id           = Many2one('bujk.lsp')
+nomor_skk        = Char(required=True)
+bnsp_blkk_link   = Char('URL Verifikasi BNSP/PUPR')
+tanggal_terbit   = Date(required=True)
+masa_berlaku     = Date(required=True)
+file_pdf         = Binary(attachment=True)
+state            = Selection([('active','Aktif'),('expiring','Akan Habis'),('expired','Kadaluarsa')], compute='_compute_state', store=True)
+```
+
+**Cron `cron_skk_alert`** (harian 06:00 WIB):
+
+- Hitung hari ke-expired untuk setiap SKK aktif.
+- 90/60/30 hari → email + Odoo discuss notification ke karyawan, atasan, PJTBU.
+- 0 hari → state `expired`, blokir penugasan ke proyek baru via `project.assignment` constraint.
+
+### 12.4 `bujk_subcon` — Subkontraktor Back-to-Back
+
+- Field tambahan di `purchase.order`: `is_subcon`, `parent_contract_id` (kontrak induk), `retention_pct`, `termin_schedule_ids`.
+- Pre-validation: subkon wajib punya `bujk.skk.cert` & `bujk.sbu.cert` aktif sebelum SPK ditandatangani.
+- Auto-mirror termin: termin subkon ditahan **D+7** dari penerimaan termin induk (mitigasi cash gap).
+
+### 12.5 `bujk_compliance` — Connector Regulator
+
+Membungkus 3 connector: SIJK, SIKI, OSS-RBA — lihat detail Bab 13.
+
+### 12.6 `bujk_smkk` — SMKK (Sistem Manajemen Keselamatan Konstruksi)
+
+Model: `bujk.smkk.incident`, `bujk.smkk.inspection`, `bujk.smkk.toolbox`. Otomatis menghitung **IR** (Incident Rate) dan **SR** (Severity Rate) per proyek dan total perusahaan, sesuai Permen PUPR 10/2021.
+
+---
+
+## 13. Detail Integrasi Regulator (API & Payload)
+
+> ⚠️ Endpoint resmi sewaktu-waktu berubah. Selalu rujuk dokumentasi terbaru di [oss.go.id/api](http://oss.go.id/api), [siki.pu.go.id](http://siki.pu.go.id), [sijk.pu.go.id](http://sijk.pu.go.id), dan [pajak.go.id](http://pajak.go.id). Pola di bawah adalah **arsitektur referensi**, bukan kontrak resmi.
+> 
+
+### 13.1 OSS-RBA (BKPM)
+
+- **Auth:** OAuth2 client-credentials, token TTL 60 menit.
+- **Endpoint kunci:** `GET /nib/{nib}`, `GET /nib/{nib}/sertifikat-standar`, `GET /nib/{nib}/kbli`.
+- **Pola sync:** scheduled cron harian → cache di `bujk.oss.cache` → invalidate jika perubahan terdeteksi → emit Odoo activity ke compliance officer.
+
+### 13.2 SIKI (PUPR Bina Konstruksi)
+
+- **Lingkup:** SBU Badan Usaha, SKK Tenaga Kerja, status PB-UMKU.
+- **Pola:** webhook dari SIKI saat status SBU/SKK berubah → hit endpoint Odoo `/bujk/compliance/webhook` → update `bujk.skk.cert` / `bujk.sbu.cert`.
+- **Fallback:** polling 6 jam jika webhook gagal.
+
+### 13.3 SIJK Terintegrasi (PUPR)
+
+- **Lingkup:** pelaporan proyek aktif, progres triwulanan, nilai kontrak.
+- **Payload contoh** (`POST /sijk/v1/proyek/laporan`):
+
+```json
+{
+	"npwp_bujk": "01.234.567.8-901.000",
+	"nomor_kontrak": "KU.03.01-PPK/2026/001",
+	"nilai_kontrak": 12500000000,
+	"lokasi": { "provinsi": "DKI Jakarta", "kabkota": "Jakarta Selatan" },
+	"tanggal_mulai": "2026-03-01",
+	"tanggal_selesai": "2027-02-28",
+	"progres_fisik_pct": 27.4,
+	"progres_keuangan_pct": 25.1,
+	"periode": "2026-Q2"
+}
+```
+
+### 13.4 e-Faktur & e-Bupot Unifikasi (DJP)
+
+- **Bukan REST publik** — DJP menggunakan aplikasi desktop / Coretax. Strategi: Odoo generate **CSV/XML import** sesuai skema DJP, lalu upload via Coretax / e-Bupot Unifikasi.
+- Modul `l10n_id_efaktur` sudah menyediakan exporter; perlu kustomisasi ringan untuk PPh Final konstruksi 1,75 % / 2,65 % / 3,5 % / 6 %.
+
+### 13.5 BIM (IFC / BCF)
+
+- **IFC viewer:** Speckle / BIMserver / IFC.js embed di form `project.project`.
+- **BCF webhook:** server BIM kirim issue → `POST /bujk/bim/issue` → Odoo create `project.task` dengan tag `clash`, severity, dan link ke koordinat IFC.
+- **QTO export:** plugin Revit/ArchiCAD export quantities → JSON → import ke `bujk.boq.line` (state `draft → rab`).
+
+---
+
+## 14. Keamanan, RBAC & Audit
+
+### 14.1 Hierarki Akses
+
+| **Group** | **Cakupan Akses** | **Contoh User** |
+| --- | --- | --- |
+| `bujk.group_pjt` | R/W Proyek + HR SKK + sign MC | PJTBU, PJKBU |
+| `bujk.group_finance` | R/W modul Accounting + Invoice + Pajak | Akuntan, Kasir |
+| `bujk.group_field` | Mobile-only: input progres, foto, daily report | Mandor, Pelaksana |
+| `bujk.group_audit` | Read-only semua + akses log mail tracking | Internal Audit, Komisaris |
+
+### 14.2 Record Rules Kritikal
+
+- **Project Manager** hanya melihat `project.project` di mana `user_id == self.env.user` atau `member_ids in self.env.user`.
+- **SKK Cert** karyawan hanya bisa dilihat owner-nya + HR + atasan langsung.
+- **Multi-company:** anak usaha (mis. divisi konsultansi vs kontraktor) terisolasi by `company_id`.
+
+### 14.3 Audit & Compliance
+
+- Aktifkan `mail.thread` di semua model kustom → field perubahan tercatat di chatter.
+- `audittrail` (OCA) untuk perubahan masterdata sensitif (vendor bank, BoQ, Payroll).
+- Backup PostgreSQL **harian (full) + WAL streaming** ke object storage off-region.
+- Retention policy: 10 tahun (sesuai UU Dokumen Perusahaan & UU Perpajakan).
+
+### 14.4 Compliance UU PDP
+
+- Data karyawan (NIK, NPWP, BPJS, foto KTP) dienkripsi at-rest, akses by-need.
+- Persetujuan tertulis karyawan untuk pemrosesan data + retensi pasca-resign 5 tahun.
+
+---
+
+## 15. Topologi Deployment & Sizing
+
+### 15.1 Pola Deployment
+
+```mermaid
+flowchart LR
+	U["Users<br>(Web · Mobile · Mandor PWA)"] --> CDN["CDN/Reverse Proxy<br>(Cloudflare / Nginx)"]
+	CDN --> LB["Load Balancer"]
+	LB --> O1["Odoo App #1"]
+	LB --> O2["Odoo App #2"]
+	O1 --> Q["Redis<br>(session, queue)"]
+	O2 --> Q
+	O1 --> DB["PostgreSQL<br>Primary"]
+	O2 --> DB
+	DB -->|streaming| DBR["PostgreSQL<br>Replica (DR)"]
+	O1 --> S3["Object Storage<br>(MinIO / S3 IDN)"]
+	O2 --> S3
+	DB --> BI["BI Replica<br>(Metabase)"]
+```
+
+### 15.2 Sizing Indikatif
+
+| **Profil** | **User Aktif** | **Proyek Paralel** | **App Server** | **DB** | **Storage** | BUJK Kecil (K1–K2) | 10–25 | 1–3 | 1× (4 vCPU, 8 GB) | 1× (4 vCPU, 16 GB, 200 GB SSD) | 500 GB S3 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| BUJK Menengah (M1–M2) | 25–80 | 3–10 | 2× (8 vCPU, 16 GB) | 1× (8 vCPU, 32 GB, 500 GB SSD) + replica | 2 TB S3 | BUJK Besar (B1–B2) | 80–300+ | 10–50+ | 3–6× (16 vCPU, 32 GB) + autoscale | HA cluster (16 vCPU, 64 GB) + 2 replica | 10+ TB S3, lifecycle ke cold |
+
+### 15.3 Pilihan Hosting (Indonesia)
+
+- **Self-host on-premise** — kontrol penuh, cocok BUJK Besar BUMN/proyek strategis.
+- **Cloud lokal** (Biznet Gio, Lintasarta, IDCloudHost, Telkomsigma) — patuh PP 71/2019 tentang penyelenggaraan sistem & transaksi elektronik.
+- [**Odoo.sh**](http://Odoo.sh) (Enterprise) — managed, tapi data center di luar negeri → cek kembali kewajiban data residency untuk proyek pemerintah.
+
+---
+
+## 16. Strategi Migrasi Data & Cutover
+
+### 16.1 Sumber Data Lazim BUJK
+
+- Excel/Google Sheets (BoQ, RAB, jadwal proyek).
+- Software akuntansi lama (Accurate, Zahir, MYOB).
+- HRIS lama / spreadsheet karyawan.
+- File server / Google Drive (kontrak, dokumen SBU/SKK).
+
+### 16.2 Tahapan ETL
+
+1. **Extract** — script Python (`pandas`) baca Excel/CSV/DB lama.
+2. **Transform** — mapping kolom, validasi (NPWP 15 digit, NIK 16 digit, tanggal), enrichment (lookup AHSP code, mapping COA lama → COA baru).
+3. **Load** — Odoo API (`xmlrpc`/`jsonrpc`) atau langsung ke staging tabel + `INSERT` SQL terkontrol.
+4. **Reconcile** — laporan jumlah row vs sum nilai vs trial balance lama.
+
+### 16.3 Pola Cutover
+
+| **Pola** | **Pro** | **Kontra** | **Rekomendasi** |
+| --- | --- | --- | --- |
+| Phased per modul | Risiko terkontrol | Integrasi sementara rumit | BUJK Menengah |
+| Parallel Run 1 bulan | Validasi paling kuat | Beban kerja ganda untuk staf | Wajib untuk modul Finance |
+
+---
+
+## 17. Change Management & Pelatihan
+
+### 17.1 Kerangka ADKAR
+
+- **Awareness** — town-hall direksi, kenapa ERP penting (efisiensi, kepatuhan, daya saing tender).
+- **Desire** — KPI individu di-link ke pemakaian sistem; insentif champion.
+- **Knowledge** — pelatihan berjenjang (lihat 17.2).
+- **Ability** — sandbox + UAT 4 minggu.
+- **Reinforcement** — *office hours* mingguan post-go-live, dashboard adoption.
+
+### 17.2 Kurikulum Pelatihan (per Role)
+
+| **Role** | **Durasi** | **Modul Wajib** | **Sertifikasi Internal** |
+| --- | --- | --- | --- |
+| PJTBU / PJKBU | 2 hari | Project, MC, SKK Tracking | Sertifikat Internal Lvl-2 |
+| Akuntan | 5 hari | Accounting, Invoice, Pajak, Cashflow, Reconciliation | Sertifikat Internal Lvl-3 |
+| HR/Payroll | 3 hari | HR, Payroll, SKK Cert, BPJS | Sertifikat Internal Lvl-2 |
+| Mandor / Pelaksana | ½ hari | PWA Mobile: input progres, foto, daily report | Sertifikat Internal Lvl-1 |
+
+### 17.3 Materi Pendukung
+
+- SOP berformat Notion (workspace ini) → dirujuk dari dalam Odoo via tombol *Help*.
+- Video tutorial 3–5 menit per fitur (Loom / YouTube unlisted).
+- Dummy environment yang di-reset mingguan untuk eksperimen aman.
+
+---
+
+## 18. Perbandingan Odoo vs Alternatif ERP Konstruksi
+
+| **Kriteria** | **Odoo (Comm/Ent)** | **HashMicro** | **SAP B1** | **MS D365 Business Central** | **Acumatica Construction** |
+| --- | --- | --- | --- | --- | --- |
+| Open-source | ✅ (Comm) | ❌ | ❌ | ❌ | ❌ |
+| Modul konstruksi native | ⚠️ kustom `bujk_*` | ✅ paket konstruksi | ⚠️ via add-on | ⚠️ via ISV | ✅ Construction Edition |
+| Customizability | ★★★★★ | ★★★ | ★★ | ★★★ | ★★★ |
+| Lock-in vendor | Rendah | Tinggi | Tinggi | Sedang | Sedang |
+
+**Rekomendasi cepat:**
+
+- **BUJK K1–M1** dengan IT internal terbatas → **HashMicro** atau **Odoo Community + konsultan lokal**.
+- **BUJK M2–B1** ingin fleksibilitas + cost-effective → **Odoo Enterprise + kustom `bujk_*`** ✅ (rekomendasi default halaman ini).
+- **BUJK B2 / BUMN Karya** dengan portofolio multi-segmen → **SAP B1 / Acumatica** untuk audit-readiness internasional.
+
+---
+
+## 19. Studi Kasus Hipotetis — “PT Sinar Bangun Nusantara” (BUJK M2)
+
+**Profil:** kontraktor gedung & sipil ringan, omzet Rp 80 M/tahun, 3 proyek paralel (gedung perkantoran 4 lantai, rehab jalan kabupaten, irigasi tersier), 45 karyawan tetap + 120 harian.
+
+### 19.1 Pain-Point Sebelum ERP
+
+- BoQ & RAB di Excel terpisah per PM → versi simpang siur.
+- MC butuh 2 minggu karena rekap manual progres dari WhatsApp grup.
+- 7 SKK staf expired tanpa terdeteksi → didiskualifikasi 1 tender.
+- Cashflow proyek baru ketahuan defisit setelah laporan triwulanan.
+- e-Faktur sering rejected DJP karena salah NSFP.
+
+### 19.2 Konfigurasi Odoo yang Diterapkan
+
+- Edisi: **Enterprise**, 30 user, hosting Biznet Gio Jakarta.
+- Modul aktif: Project, BoQ (`bujk_boq`), MC (`bujk_mc`), Purchase, Subcon (`bujk_subcon`), Inventory, Accounting + `l10n_id_efaktur`, HR + `bujk_skk`, SMKK (`bujk_smkk`), Documents, Sign.
+- Integrasi: SIKI (webhook), SIJK (cron triwulanan), e-Faktur (export XML), Speckle (1 proyek gedung sebagai pilot BIM).
+
+### 19.3 Hasil 6 Bulan Pasca Go-Live
+
+| **KPI** | **Sebelum** | **Sesudah** |
+| --- | --- | --- |
+| Lead time MC | 14 hari | 3 hari |
+| SKK expired tak terdeteksi | 7 kasus/tahun | 0 |
+| Margin proyek (rata-rata) | 6,8 % | 9,1 % |
+
+### 19.4 Pelajaran
+
+- **Quick win paling besar** datang dari `bujk_skk` & `bujk_mc` — ROI < 6 bulan.
+- **Kustomisasi paling sulit** adalah retensi & PSAK 72 (tagihan bruto) — butuh akuntan senior dampingi developer.
+- **Adopsi mandor lapangan** baru naik di bulan ke-3 setelah PWA disederhanakan jadi 4 tombol besar.
+
+---
+
+## 20. Glosarium & Lampiran
+
+| **Istilah** | **Arti** |
+| --- | --- |
+| BAKP | Berita Acara Kemajuan Pekerjaan |
+| BUJK | Badan Usaha Jasa Konstruksi |
+| MC | Monthly Certificate (sertifikasi termin bulanan) |
+| OCA | Odoo Community Association |
+| RAB / RAP | Rencana Anggaran Biaya / Pelaksanaan |
+| SBU / SKK | Sertifikat Badan Usaha / Sertifikat Kompetensi Kerja |
+| SMKK | Sistem Manajemen Keselamatan Konstruksi |
+| WBS | Work Breakdown Structure |
+
+### Lampiran A — Daftar Modul OCA Pendukung yang Disarankan
+
+- `account_financial_report` — laporan keuangan PSAK-friendly.
+- `mis_builder` — financial KPI dashboard.
+- `web_responsive` — UI mobile-friendly untuk lapangan.
+- `auditlog` — jejak audit lengkap.
+- `partner_firstname` — pemisahan nama (untuk e-Bupot).
+- `report_xlsx` — export laporan Excel native.
+- `project_timeline` — Gantt chart proyek.
+- `hr_employee_calendar_planning` — penugasan karyawan ke proyek.
+
+### Lampiran B — Checklist Go-Live (Day-0)
+
+- [ ]  Backup database final (D-1) tersimpan di 2 lokasi.
+- [ ]  Cron job semua **disable** lalu re-enable pasca-import.
+- [ ]  Saldo awal akuntansi sudah di-post & di-reconcile.
+- [ ]  Semua user sudah ganti password awal & 2FA aktif.
+- [ ]  e-Faktur NSFP cadangan ≥ 50.
+- [ ]  Smoke test 10 skenario kritikal lulus.
+- [ ]  Hotline support 24/7 standby selama 14 hari.
+- [ ]  Komunikasi resmi ke vendor utama tentang format PO baru.
+
+---
+
+## 21. Konteks Strategis — Industry 4.0, VUCA→BANI & Urgensi ERP untuk BUJK
+
+### 21.1 Era Industri 4.0
+
+Revolusi industri keempat menggeser kompetensi inti BUJK dari sekadar mengerjakan fisik konstruksi menjadi mengelola **data dan proses terintegrasi**. Empat tahapan revolusi industri (Mekanik 1784 → Produksi Massal 1870 → Otomasi & Robotisasi 1969 → Industrie 4.0 / IoT) berakhir pada *connected machines* yang menuntut sistem informasi terpusat.
+
+**Sembilan teknologi pilar Industry 4.0** (BCG):
+
+1. Big Data & Analytics — dashboard RAP/RAB, prediksi cashflow.
+2. Autonomous Robots — otomasi pabrikasi precast, drone survei.
+3. Simulation — 4D BIM (jadwal) & 5D BIM (biaya).
+4. Horizontal & Vertical System Integration — ERP ↔ BIM ↔ GIS ↔ regulator.
+5. Industrial IoT — sensor crane, dump truck, beton ready-mix.
+6. Cybersecurity — perlindungan data tender & desain.
+7. Cloud — deployment Odoo on-cloud (lihat Bagian 24).
+8. Additive Manufacturing — 3D printing komponen non-struktural.
+9. Augmented Reality — inspeksi lapangan AR, walk-through proyek.
+
+Odoo ERP berperan sebagai **tulang punggung integrasi horizontal–vertikal** (pilar #4) yang menyatukan delapan pilar lain dalam satu platform.
+
+### 21.2 Pergeseran Lensa Manajerial — VUCA → BANI
+
+| **Lensa Lama (VUCA, 1980an)** | **Pengertian** | **Lensa Baru (BANI, 2020+)** | **Pengertian** | **Respons ERP/Digital** |
+| --- | --- | --- | --- | --- |
+| **U**ncertain | Tidak pasti | **A**nxious | Cemas; kelelahan keputusan | Mindful UX, dashboard ringkas, alert proaktif |
+| **A**mbiguous | Ambigu | **I**ncomprehensible | Sulit dipahami sepenuhnya | Transparansi: audit trail, BI, mail tracking |
+
+Kerangka turunan lain yang relevan: **RUPT** (Rapid · Unpredictable · Paradoxical · Tangled) dan **TUNA** (Turbulent · Uncertain · Novel · Ambiguous). Implikasinya untuk BUJK: ERP bukan sekadar tool efisiensi, tetapi **sistem ketahanan organisasi** menghadapi guncangan harga material, perubahan regulasi, dan disrupsi rantai pasok.
+
+### 21.3 Migrasi dari Sistem Manual ke ERP Terintegrasi
+
+Kondisi *as-is* khas BUJK: Sales ↔ Inventory ↔ Finance ↔ Production Planning ↔ Shop Floor ↔ HR berjalan paralel dengan **silo Excel + WhatsApp** — menghasilkan *spaghetti integration*, redundansi data, dan *single point of failure* di staf admin.
+
+Kondisi *to-be* dengan Odoo: satu *central database* yang menghubungkan Purchase ↔ Inventory ↔ Production — Accounting — HR — CRM — BI — Customer Portal, dengan *front-to-back-end* integration (POS ↔ eCommerce ↔ Sales ↔ Backend).
+
+---
+
+## 22. Critical Success Factors & Pelajaran dari Implementasi ERP Global
+
+### 22.1 23 CSF dari Tinjauan Literatur
+
+| **Peringkat** | **Critical Success Factor** | **Frekuensi (literatur)** | 1 | Top Management Commitment & Support | 14 |
+| --- | --- | --- | --- | --- | --- |
+| 2 | Business Process Reengineering | 14 | 3 | Use of Project Management to Manage Implementation | 13 |
+| 4 | Change Management Culture & Program | 13 | 5 | Clear Goals, Focus & Scope (Business Plan & Vision) | 11 |
+| 6 | Selecting the Right Team (Competence) | 10 | 7 | Avoidance of Customization | 10 |
+| 8 | Project Champion | 9 | 9 | User Training & Education | 9 |
+| 10 | Effective Communication | 9 | 11 | Use of ERP Consultants | 8 |
+| 12 | Vendor Package Selection | 6 | 13–23 | User participation, Technical/business knowledge, Integration of system, Mgmt expectation, Legacy systems, Software dev/test, Vendor partnership, Vendor tools, Monitoring & evaluation, Mgmt structure, Interdept cooperation | 2–5 |
+
+### 22.2 Studi Kegagalan Internasional (Pelajaran Mahal)
+
+| **Organisasi** | **Industri** | **Skala** | **Akar Kegagalan** | Hershey Foods Corp. | Confectionery | SAP USD 110 jt | Integrasi dua sistem tidak diuji adekuat sebelum cutover |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Whirlpool | Home Appliances | SAP | Pengiriman ke distributor terlambat; mengabaikan peringatan konsultan saat go-live | FoxMeyer Drugs | Distribusi Farmasi | SAP R/3 USD 500 jt | *Excess shipment*, manajemen risiko & change mgmt buruk, BPR & training kurang, scope tidak jelas |
+| UNSW (Australia) | Pendidikan Tinggi | PeopleSoft | Cost overrun — staf ditarik dari posisi normal | SMU (USA) | Pendidikan Tinggi | PeopleSoft | Over budget AUD 20 jt (total 40 jt) — biaya tak teranggarkan |
+
+### 22.3 Studi Sukses (Pola yang Berulang)
+
+| **Organisasi** | **Industri** | **Kunci Sukses** | Earth Grains (USA) | Bakery | Strategi jelas sejak awal, tiap dept punya analyst pelapor ke manajemen, sistem kompensasi disesuaikan pasca-implementasi |
+| --- | --- | --- | --- | --- | --- |
+| Monsanto | Chemical & Life Sciences | Redesign struktur manajemen, redesign proses bisnis, investasi *re-skilling* via training & ekspertise eksternal | U.S. Mint | Coin Production | Mulai dari kebutuhan bisnis, koordinasi end-to-end, training memadai, konsultan eksternal, keterlibatan senior management; ekspektasi *painful but worth it* |
+
+**Pelajaran kunci untuk BUJK Indonesia:**
+
+- **CSF #1–4 (komitmen direksi, BPR, project mgmt, change mgmt)** — menyumbang ≥ 60 % keberhasilan; jangan dianggap remeh.
+- **CSF #7 (Avoidance of Customization)** — selaraskan dengan strategi `bujk_*` minim: kustomisasi hanya jika regulasi/proses Indonesia tidak bisa diakomodasi modul standar.
+- **Kegagalan global** umumnya bukan karena teknologi melainkan karena *people* & *process*.
+- *Plesetan akronim Indonesia* (“SAP = Sit down And Pray”, “Oracle = Ora kelar-kelar”, “Select Another Package”) menggambarkan frustrasi nyata akibat implementasi yang tidak siap — hindari dengan disiplin CSF.
+
+### 22.4 Body of Knowledge ERP
+
+Implementor ERP sukses biasanya menggabungkan **3 disiplin**:
+
+1. **Business Process** — Manajemen, Industrial Engineering, Sistem Informasi (proses bisnis as-is/to-be).
+2. **Technical** — Teknik Informatika (Python/PostgreSQL/REST untuk Odoo).
+3. **Accounting** — Akuntansi & Perpajakan (PSAK, e-Faktur, PPh Final).
+
+Tim implementasi BUJK idealnya punya **trio**: PM proses bisnis, developer teknis, dan akuntan-perpajakan — didukung *project champion* dari direksi.
+
+---
+
+## 23. Tiga Proses Bisnis Inti ERP — Pemetaan ke Konstruksi
+
+Literatur ERP mengenali tiga *primary business processes* yang menjadi dasar arsitektur modul. Untuk BUJK, ketiganya berputar mengelilingi proyek konstruksi.
+
+```mermaid
+flowchart LR
+	subgraph P2P["Procure-to-Pay (P2P)"]
+		P1[Request for Quotation] --> P2[Purchase Order]
+		P2 --> P3[Material Receipt]
+		P3 --> P4[Supplier Invoice]
+		P4 --> P5[Payment]
+	end
+	subgraph PTP["Plan-to-Produce (Plan2Pro)"]
+		Q1[Sales Forecast / Kontrak] --> Q2[Planning - MRP/BoQ]
+		Q2 --> Q3[Production Order / SPK]
+		Q3 --> Q4[Production Execution]
+		Q4 --> Q5[Inventory / WIP]
+	end
+	subgraph O2C["Order-to-Cash (O2C)"]
+		R1[Sales Quotation] --> R2[Sales Order / Kontrak]
+		R2 --> R3[Shipment / MC]
+		R3 --> R4[Customer Invoice / Termin]
+		R4 --> R5[Payment / Termin Diterima]
+	end
+	P3 --> Q5
+	Q5 --> R3
+	P5 --> GL[General Ledger]
+	R5 --> GL
+	Q5 --> GL
+```
+
+| **Proses Inti** | **Aktor** | **Modul Odoo** | **Adaptasi BUJK** | Procure-to-Pay | Procurement, Vendor, Finance | `purchase`, `stock`, `account`, `mrp_subcontracting` | SPK Subkon back-to-back, retensi 5 % subkon, AHSP-aware PR |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Plan-to-Produce | PPIC/Engineering, Site, QC | `mrp`, `quality`, `project`, `bujk_boq` | BoQ → BoM auto-generate, MC bulanan = output “produksi”, kurva-S | Order-to-Cash | Marketing/Tender, PPK/Owner, Finance | `crm`, `sale`, `account`, `l10n_id_efaktur`, `bujk_mc` | Kontrak konstruksi sebagai SO; termin = invoice progressive (PSAK 72) |
+
+**Integrasi vertikal:** ketiga proses berkonvergensi ke **General Ledger** — sehingga setiap transaksi fisik (PO, GR, MC, invoice) otomatis menjadi jurnal akuntansi tanpa input ulang.
+
+---
+
+## 24. Model Layanan Cloud (NIST Framework) untuk Deployment Odoo
+
+### 24.1 NIST Cloud Definition Framework
+
+```mermaid
+flowchart TB
+	subgraph DEPLOY["Deployment Models"]
+		D1[Private Cloud]
+		D2[Community Cloud]
+		D3[Public Cloud]
+		D4[Hybrid Cloud]
+	end
+	subgraph SERVICE["Service Models"]
+		S1["SaaS<br>Software as a Service"]
+		S2["PaaS<br>Platform as a Service"]
+		S3["IaaS<br>Infrastructure as a Service"]
+	end
+	subgraph ESSENT["Essential Characteristics"]
+		E1[On-Demand Self-Service]
+		E2[Broad Network Access]
+		E3[Resource Pooling]
+		E4[Rapid Elasticity]
+		E5[Measured Service]
+	end
+	DEPLOY --> SERVICE --> ESSENT
+```
+
+### 24.2 Evolusi Layanan Cloud (“Who Manages What”)
+
+| **Era** | **Model** | **Yang Dikelola Vendor** | **Yang Dikelola BUJK** | Pre-2000 | Traditional IT (on-premise) | — | Semua (server→aplikasi) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 2000–2005 | IaaS | Networking, Storage, OS, Virtualisasi, Servers | Database → Aplikasi | 2004–2009 | PaaS |   • Middleware, Runtime, Platforms | Aplikasi & data bisnis |
+| 2008–2013 | SaaS |   • Aplikasi, BPM | Konfigurasi & data bisnis | 2014+ | BaaS (Business as a Service) |   • Business Services, Monitoring | Hanya proses bisnis inti |
+
+### 24.3 Pemetaan Pilihan Odoo
+
+- **Odoo Online (SaaS)** — cepat go-live, cocok BUJK Kecil, namun terbatas kustomisasi.
+- [**Odoo.sh](http://Odoo.sh) (PaaS Managed)** — keseimbangan kustomisasi & kemudahan; cocok BUJK Menengah.
+- **Odoo Self-host on Cloud Lokal (IaaS)** — kontrol penuh + data residency Indonesia (PP 71/2019); **rekomendasi default** untuk BUJK Menengah–Besar yang menggarap proyek pemerintah.
+- **Odoo on-premise (Traditional)** — proyek strategis BUMN Karya / proyek rahasia.
+
+Industri masih menempatkan *Cloud computing/virtualization* sebagai **investasi teknologi tertinggi** (Aberdeen 2011: 39 % responden Hi-Growth) — tren ini menguat satu dekade berikutnya seiring matangnya cloud lokal Indonesia.
+
+---
+
+## 25. Lanskap Odoo — Skala Global, Klien Indonesia & Pilihan Mitra Implementasi
+
+### 25.1 Profil Odoo (per 2022, sumber: Odoo SA)
+
+| **Indikator** | **Angka** | Tahun didirikan | 2005 (Fabien Pinckaers, Belgia) |
+| --- | --- | --- | --- |
+| Pengguna aktif | 7 juta+ | Bahasa didukung | 32 (termasuk Bahasa Indonesia) |
+| Instalasi per hari | 1.000+ | Pertumbuhan user (4 tahun) | 1.459 % |
+| Kantor global | 15 (HQ Grand-Rosière; Brussels, Luxembourg, San Francisco, NY, Buffalo, Mexico City, Dubai, Hong Kong, Gujarat, Antwerp) | Pertumbuhan karyawan YoY | 60 % |
+| Pertumbuhan billing global 2021 | 70 % | Mitra resmi | 3.000+ |
+
+**Misi Odoo:** *“To help companies grow. We want to unleash companies’ potential by empowering users with tools they love.”* — Fabien Pinckaers, CEO & Founder.
+
+### 25.2 Ekosistem Aplikasi (“One Need One App”)
+
+Odoo menyediakan modul end-to-end yang relevan untuk BUJK:
+
+- **Sales Apps:** CRM, Sales, Subscription, POS
+- **Finance Apps:** Invoicing, Accounting, Expense, Consolidation
+- **Operation Apps:** Inventory, Timesheet, Project, Purchase, Helpdesk, Field Service, Rental
+- **Manufacturing Apps:** MRP, PLM, Maintenance, Quality
+- **Human Resource Apps:** Planning, Employees, Recruitment, Referral, Appraisal, Leaves
+- **Marketing Apps:** Social Marketing, SMS, Automation, EDM, Events, Survey
+- **Website Apps:** Website Builder, eShop, Blog, Forum, Livechat, Booking, eLearning
+- **Productivity:** eSign, Documents, IoT, Approval
+- **Customization Tools:** Studio, [Odoo.sh](http://Odoo.sh), 3rd-party connectors (OCA, dll)
+
+### 25.3 Posisi Kompetitif
+
+Odoo memposisikan diri di **kuadran tinggi pada dua sumbu** (Product Scope × Flexibility) — sesuatu yang belum dicapai vendor lain:
+
+- **Large ERP** (SAP, Oracle, Sage, Microsoft) — product scope tinggi tapi *flexibility* rendah, on-premise, proprietary.
+- **Vertical SaaS** (Salesforce, Plex, Zoho, Workday) — fleksibel tapi *scope* sempit (CRM/HRM saja).
+- **Odoo** — scope luas + fleksibilitas tinggi + open-source.
+
+### 25.4 Klien Odoo Skala Global (sample)
+
+*Large enterprises:* Shell, Hyundai, Toshiba TEC, Danone, Jack in the Box, Jamba Juice, foodpanda, Optoma, McKinsey & Company, WWF, IBM, Atos, Allianz, Volkswagen, Mizuno, AEON, Auchan, Lazada, Toyota Material Handling, Hyundai Heavy Industries, La Poste, Sodexo, Engie.
+
+*Sektor publik & non-profit:* Governo de Portugal, NYC Department of Investigation, NZ Film Commission, Croix-Rouge, Médecins Sans Frontières, Université catholique de Louvain.
+
+### 25.5 Klien Odoo di Indonesia (publikly disclosed / referensi mitra)
+
+- **Peruri** — Perum Percetakan Uang Republik Indonesia.
+- **Puninar MSE** — logistik & supply chain.
+- **Dana Pensiun Kompas Gramedia (DPKG)**.
+- **HKR Realtindo** — properti.
+- **Sinergiland Tuban** — properti / pengembang kawasan.
+- **AURO**, **Easymart**, **Scarlett Entertainment**, **Sekolah Alam Citra Insani**.
+
+Keberadaan klien properti, percetakan keamanan, dan logistik membuktikan Odoo mampu menangani regulasi & kompleksitas Indonesia — termasuk sektor yang berdekatan dengan jasa konstruksi.
+
+### 25.6 Pilihan Mitra Implementasi di Indonesia
+
+| **Mitra** | **Status** | **Kekuatan** | **Catatan untuk BUJK** | **PT Ctech ERP Indonesia** | Odoo International Partner (sejak 2024) | Pendiri akademisi Doctor ERP (Dr. Ir. Agung Terminanto, MBA, IPM, CEA, CEL); pengalaman trainer Odoo untuk Politeknik Negeri Padang (2024), MBA ITB, FEB UGM, SBM ITB, Vokasi UNS, FEB UPancasila; Mitra MSIB Kampus Merdeka Batch 3, 4, 5 (89 PT) | Cocok jika BUJK ingin pendekatan akademis-praktis + transfer knowledge ke tim internal |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| HashMicro | Vendor ERP lokal | Paket konstruksi siap-pakai | Bukan partner Odoo — platform proprietary | Vauxoo | Odoo Gold Partner internasional | Proyek kompleks, lokalisasi multi-negara | Tarif premium |
+| Port Cities Indonesia | Odoo Gold Partner | Banyak proyek manufaktur & retail Asia Tenggara | Cek pengalaman vertikal konstruksi | SerpentCS, OdooCert, dll | Odoo Ready/Silver Partner | Bervariasi | Butuh penilaian portfolio per partner |
+
+**Profil Singkat PT Ctech ERP Indonesia** (sumber: materi presentasi 19 November 2025):
+
+- Berdiri 2022 oleh **Dr. Ir. Agung Terminanto, MBA, IPM, CEA, CEL** — doctor ilmu ERP Odoo, dosen di Universitas Pancasila & UI.
+- Visi: menjadi konsultan & pendidikan ERP terkemuka di Indonesia.
+- Unit kerja **Ctech ERP Academy** — menyiapkan SDM Odoo untuk pasar nasional & internasional.
+- Kantor: AD Premier Office Park, 9th Fl, Jl. TB Simatupang No. 5, Jakarta 12550 · +62 21 2270 8071 · [marketing@ctech-erp.com](mailto:marketing@ctech-erp.com) · [www.ctech-erp.my.id](http://www.ctech-erp.my.id).
+- Kerja sama akademik: Universitas Pancasila (MoA dengan FEB), UNS, U Trunojoyo, U Bakri, UM Yogyakarta, UAKI, STIE MARS, STT Nurul Fikri, dan 89 PT MSIB Kampus Merdeka.
+
+Untuk BUJK Indonesia yang mengutamakan **Bahasa Indonesia + transfer knowledge + kedekatan akademik**, partner lokal seperti Ctech ERP Indonesia adalah opsi pelengkap (atau pengganti) konsultan internasional pada Fase 0–2 roadmap di Bagian 5.
+
+---
+
+<aside>
+📌
+
+**Next Steps Disarankan**
+
+1. Workshop *as-is process mapping* dengan PJ-BUJK & PIC tiap divisi (½ hari).
+2. Susun dokumen **Request for Proposal (RFP)** ke 3 konsultan Odoo bersertifikat (Indonesia: Vauxoo, Hashmicro, dll).
+3. Sandbox Odoo (Community 18) untuk POC modul `bujk_boq` di 1 proyek pilot — gratis, 30 hari.
+4. Selaraskan jadwal go-live dengan siklus tender pemerintah (hindari Q4) agar resource lapangan tersedia.
+</aside>

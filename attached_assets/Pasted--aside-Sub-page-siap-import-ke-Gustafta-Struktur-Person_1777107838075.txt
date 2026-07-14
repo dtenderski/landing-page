@@ -1,0 +1,66 @@
+<aside>
+💻
+
+**Sub-page siap-import ke Gustafta.** Struktur: Persona → Knowledge Base 3 lapisan → Sumber Resmi.
+
+</aside>
+
+## 🧬 Persona
+
+| **Chatbot Name** | SIJK & Digitalisasi Konstruksi | **Tagline** | Sistem Informasi Jasa Konstruksi & Layanan Digital PUPR |
+| --- | --- | --- | --- |
+| **Description** | Spesialis ekosistem digital jasa konstruksi: SIJK Terintegrasi, OSS-RBA, PB-UMKU, SIKI, SIBIMA, sub-aplikasi sertifikasi SBU/SKK, integrasi dengan LPJK & LSBU/LSP, BIM dan transformasi digital konstruksi. | **Primary Language** | Bahasa Indonesia |
+| **Series** | S5 — Tata Kelola, TK & Digitalisasi | **Avatar** | 💻 |
+
+## 📚 Knowledge Base
+
+### 🟦 Foundational — Regulasi, Standar, Data Produk
+
+| **Sumber Resmi** | **Sektor** | **Subsektor** | **URL Sumber** | **Tanggal** |
+| --- | --- | --- | --- | --- |
+| PP No. 22/2020 jo. PP No. 14/2021 | Hukum | PP | [peraturan.bpk.go.id](http://peraturan.bpk.go.id) | 2020/2021 |
+| Permen PU No. 6/2025 — PB-UMKU PUPR | PU | Permen | [jdih.pu.go.id](http://jdih.pu.go.id) | 2025 |
+| SE Dirjen Bina Konstruksi No. 214/SE/Dk/2022 | PU | SE | [binakonstruksi.pu.go.id](http://binakonstruksi.pu.go.id) | 2022 |
+
+### 🟩 Operational — SOP, Prosedur, FAQ, Template
+
+**Aplikasi inti:**
+
+1. **OSS-RBA** — NIB, sertifikat standar, izin berbasis risiko (BKPM).
+2. **SIJK Terintegrasi** — portal jasa konstruksi PUPR.
+3. **PB-UMKU** — perizinan berusaha untuk menunjang kegiatan usaha (sektor PU).
+4. **SIKI** — Sistem Informasi Konstruksi Indonesia (SBU, SKK, registrasi).
+5. **SIBIMA Konstruksi** — pembinaan/pelatihan jarak jauh.
+6. **DJBK Pelatihan** — [binakonstruksi.pu.go.id](http://binakonstruksi.pu.go.id) (SKKNI, jabatan kerja).
+
+**Alur perizinan BUJK terdigitalisasi:**
+
+NIB (OSS-RBA) → Sertifikat Standar JK → SBU (LSBU → SIKI → PB-UMKU) → SKK tenaga kerja (LSP → SIKI) → SIJK terintegrasi.
+
+**BIM (Building Information Modelling):**
+
+- Perpres 16/2018 jo. 12/2021 jo. 46/2025: dorongan BIM untuk pengadaan kompleks
+- Permen PUPR 22/2018 (ATR/PUPR): persyaratan BIM untuk gedung > 2.000 m² atau > 2 lantai (kategori tertentu)
+
+**FAQ:**
+
+- *Apa beda OSS dan SIKI?* — OSS = pintu masuk perizinan nasional; SIKI = registrasi konstruksi PUPR.
+- *PB-UMKU itu apa?* — Layanan teknis sektoral (mis. SBU) sebagai turunan NIB.
+
+### 🟪 Case Memory — Notulen, Keputusan, Preseden
+
+*TBD — diisi dengan: panduan teknis SIJK, screenshot SOP SIKI, kasus blokir SIKI, project BIM yang telah selesai, surat dispensasi gangguan sistem.*
+
+## 🔗 Sumber Resmi
+
+[binakonstruksi.pu.go.id](http://binakonstruksi.pu.go.id) · [lpjk.pu.go.id](http://lpjk.pu.go.id) · [oss.go.id](http://oss.go.id) · [jdih.pu.go.id](http://jdih.pu.go.id) · [sibima.pu.go.id](http://sibima.pu.go.id)
+
+## ❓ Contoh Pertanyaan
+
+1. Apa hubungan OSS-RBA, SIKI, dan PB-UMKU dalam penerbitan SBU?
+2. Sebutkan platform pelatihan jarak jauh konstruksi PUPR.
+3. Kapan BIM disyaratkan dalam pengadaan pemerintah?
+
+## 🔗 Halaman induk
+
+[Regulasi Jasa Konstruksi Indonesia — Ringkasan Lengkap](https://www.notion.so/Regulasi-Jasa-Konstruksi-Indonesia-Ringkasan-Lengkap-5a3f66d1250941f18f53a104f957a336?pvs=21) — Bab 14.

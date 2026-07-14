@@ -1,0 +1,1423 @@
+Below is a **text-only chatbot design/configuration outline** for an SKK-focused chatbot in the competency area **Manajemen Pelaksanaan**. It uses a builder-style architecture: bot identity, knowledge scope, intents, sample inputs, response templates, conversation nodes, branching paths, assessment logic, practical scenarios, and fallback handling.
+
+The content is based on SKK/SKKNI concepts, where SKKNI refers to work competency standards covering knowledge, skills/expertise, and work attitudes relevant to job duties and position requirements. ([Kemnaker SKKNI][1]) For Manajemen Pelaksanaan in construction, the official DJBK listing includes areas such as Keselamatan Konstruksi/K3, Manajemen Konstruksi/Proyek, Mutu, Kontrak, Estimasi Biaya, and Quantity Surveyor roles with related KKNI levels and SKK references. ([Direktorat Jenderal Bina Konstruksi][2])
+
+---
+
+# Chatbot Configuration Outline
+
+## Bot Name: **SKK Coach — Manajemen Pelaksanaan**
+
+```yaml
+bot:
+  id: skk_coach_manajemen_pelaksanaan_v1
+  name: "SKK Coach — Manajemen Pelaksanaan"
+  language: "id-ID"
+  tone: "professional, supportive, clear, assessment-oriented"
+  audience:
+    - calon peserta sertifikasi SKK
+    - tenaga kerja konstruksi
+    - mahasiswa atau peserta pelatihan vokasi
+    - asesor, instruktur, atau HR konstruksi
+    - profesional yang ingin memetakan kompetensi kerja
+  purpose:
+    - membantu pengguna memahami area kompetensi SKK Manajemen Pelaksanaan
+    - memandu pengguna memilih jalur jabatan kerja dan jenjang KKNI
+    - menyediakan pembelajaran singkat per topik kompetensi
+    - melakukan asesmen mandiri awal
+    - memberikan latihan studi kasus berbasis proyek konstruksi
+    - mengarahkan pengguna ke rencana belajar berikutnya
+  non_goals:
+    - tidak menerbitkan sertifikat resmi
+    - tidak menggantikan asesor kompetensi
+    - tidak memberikan keputusan kelulusan resmi
+    - tidak menjadi sumber hukum tunggal untuk regulasi terbaru
+```
+
+---
+
+# 1. Knowledge Scope
+
+```yaml
+knowledge_scope:
+  competency_area: "SKK Manajemen Pelaksanaan"
+  reference_theme:
+    description: >
+      Manajemen Pelaksanaan mencakup kompetensi yang berhubungan dengan
+      pengelolaan pelaksanaan pekerjaan konstruksi, keselamatan, mutu,
+      biaya, kontrak, logistik, koordinasi proyek, serta pengendalian
+      pelaksanaan di lapangan.
+
+  main_competency_clusters:
+    - id: cluster_k3_keselamatan
+      title: "Keselamatan Konstruksi dan K3"
+      topics:
+        - identifikasi bahaya dan pengendalian risiko
+        - penerapan prosedur K3 di lokasi kerja
+        - rencana keselamatan konstruksi
+        - inspeksi, pelaporan, dan tindakan korektif
+        - budaya kerja aman
+      related_roles:
+        - Ahli Keselamatan Konstruksi
+        - Ahli K3 Konstruksi
+        - Petugas K3 Konstruksi
+        - Petugas Keselamatan Konstruksi
+        - Supervisor K3
+        - Personil K3
+
+    - id: cluster_manajemen_proyek
+      title: "Manajemen Konstruksi dan Manajemen Proyek"
+      topics:
+        - perencanaan pelaksanaan proyek
+        - koordinasi sumber daya
+        - pengendalian waktu, biaya, mutu, dan risiko
+        - pengelolaan logistik proyek
+        - pelaporan progres
+        - pengambilan keputusan lapangan
+      related_roles:
+        - Manajer Logistik Proyek
+        - Ahli Manajemen Konstruksi
+        - Ahli Manajemen Proyek Konstruksi
+        - Fasilitator Teknis Infrastruktur Berbasis Masyarakat
+
+    - id: cluster_mutu
+      title: "Pengendalian Mutu dan Sistem Manajemen Mutu"
+      topics:
+        - quality planning
+        - quality assurance
+        - quality control
+        - inspeksi pekerjaan
+        - dokumentasi mutu
+        - tindakan korektif dan pencegahan
+      related_roles:
+        - Quality Engineer
+        - Quality Assurance Engineer
+        - Ahli Sistem Manajemen Mutu Konstruksi
+
+    - id: cluster_kontrak
+      title: "Hukum Kontrak Konstruksi"
+      topics:
+        - pemahaman dokumen kontrak
+        - hak dan kewajiban para pihak
+        - perubahan pekerjaan
+        - klaim, sengketa, dan adendum
+        - kepatuhan kontraktual dalam pelaksanaan
+      related_roles:
+        - Ahli Kontrak Kerja Konstruksi
+
+    - id: cluster_biaya_qs
+      title: "Estimasi Biaya Konstruksi dan Quantity Surveying"
+      topics:
+        - pengukuran kuantitas pekerjaan
+        - penyusunan estimasi biaya
+        - analisis harga satuan
+        - pengendalian biaya
+        - verifikasi volume pekerjaan
+        - evaluasi pembayaran progres
+      related_roles:
+        - Juru Hitung Kuantitas
+        - Estimator Biaya Jalan
+        - Quantity Surveyor
+        - Ahli Quantity Surveyor
+```
+
+---
+
+# 2. Conversation Entry Points
+
+```yaml
+entry_points:
+  greeting:
+    trigger: "first_session_start"
+    bot_message: >
+      Halo, saya SKK Coach untuk bidang Manajemen Pelaksanaan.
+      Saya dapat membantu Anda memahami kompetensi, memilih jalur jabatan,
+      belajar topik inti, melakukan asesmen mandiri, atau berlatih studi kasus.
+      Apa tujuan Anda hari ini?
+
+    quick_replies:
+      - "Pahami ruang lingkup Manajemen Pelaksanaan"
+      - "Cari jabatan kerja yang sesuai"
+      - "Mulai asesmen mandiri"
+      - "Belajar topik kompetensi"
+      - "Latihan studi kasus"
+      - "Tanya istilah SKK/SKKNI"
+
+  returning_user:
+    trigger: "known_user_return"
+    bot_message: >
+      Selamat datang kembali. Terakhir Anda berada di modul {{last_module}}.
+      Apakah Anda ingin melanjutkan, mengulang, atau memilih topik lain?
+
+    quick_replies:
+      - "Lanjutkan modul terakhir"
+      - "Pilih topik lain"
+      - "Mulai asesmen baru"
+      - "Lihat ringkasan progres"
+```
+
+---
+
+# 3. Global User Variables
+
+```yaml
+user_variables:
+  profile:
+    user_name: null
+    user_role: null
+    experience_years: null
+    education_background: null
+    target_role: null
+    target_kkni_level: null
+    learning_goal: null
+
+  session:
+    current_flow: null
+    current_module: null
+    current_question_index: 0
+    score_total: 0
+    score_k3: 0
+    score_project_management: 0
+    score_quality: 0
+    score_contract: 0
+    score_cost_qs: 0
+    confidence_level: null
+    last_user_intent: null
+    fallback_count: 0
+
+  assessment:
+    readiness_level: null
+    recommended_path: null
+    weak_topics: []
+    strong_topics: []
+```
+
+---
+
+# 4. Core Intents
+
+## 4.1 Greeting Intent
+
+```yaml
+intent:
+  id: greet
+  description: "User starts or greets the chatbot."
+  sample_user_inputs:
+    - "Halo"
+    - "Selamat pagi"
+    - "Saya mau belajar SKK Manajemen Pelaksanaan"
+    - "Bisa bantu saya tentang SKK?"
+    - "Mulai"
+  entities: []
+  response_template: greeting_main
+  next_node: main_menu
+```
+
+```yaml
+response_template:
+  id: greeting_main
+  text: >
+    Halo. Saya siap membantu Anda mempelajari SKK Manajemen Pelaksanaan.
+    Anda bisa memilih: memahami ruang lingkup, mencari jabatan kerja,
+    belajar topik kompetensi, asesmen mandiri, atau latihan studi kasus.
+  quick_replies:
+    - "Ruang lingkup"
+    - "Jabatan kerja"
+    - "Belajar"
+    - "Asesmen mandiri"
+    - "Studi kasus"
+```
+
+---
+
+## 4.2 Scope Explanation Intent
+
+```yaml
+intent:
+  id: explain_scope
+  description: "User asks what Manajemen Pelaksanaan covers."
+  sample_user_inputs:
+    - "Apa itu Manajemen Pelaksanaan?"
+    - "Ruang lingkup SKK Manajemen Pelaksanaan apa saja?"
+    - "Topik apa yang harus saya kuasai?"
+    - "Kompetensi Manajemen Pelaksanaan mencakup apa?"
+  response_template: explain_scope_response
+  next_node: scope_followup
+```
+
+```yaml
+response_template:
+  id: explain_scope_response
+  text: >
+    Manajemen Pelaksanaan mencakup kompetensi untuk mengelola pelaksanaan
+    pekerjaan konstruksi secara aman, terkendali, bermutu, sesuai kontrak,
+    efisien biaya, dan terdokumentasi. Area utamanya meliputi:
+    
+    1. Keselamatan Konstruksi dan K3
+    2. Manajemen Konstruksi dan Manajemen Proyek
+    3. Pengendalian Mutu dan Sistem Manajemen Mutu
+    4. Hukum Kontrak Konstruksi
+    5. Estimasi Biaya dan Quantity Surveying
+    
+    Anda ingin mempelajari area mana terlebih dahulu?
+  quick_replies:
+    - "K3/Keselamatan"
+    - "Manajemen Proyek"
+    - "Mutu"
+    - "Kontrak"
+    - "Biaya/QS"
+    - "Saya belum tahu"
+```
+
+---
+
+## 4.3 Role Mapping Intent
+
+```yaml
+intent:
+  id: find_role_path
+  description: "User wants to identify a suitable job role or competency path."
+  sample_user_inputs:
+    - "Saya cocok ambil jabatan apa?"
+    - "Saya mau sertifikasi Manajemen Proyek Konstruksi"
+    - "Apa bedanya Quality Engineer dan QA Engineer?"
+    - "Saya pengalaman 5 tahun di proyek, cocok level berapa?"
+    - "Jenjang KKNI untuk Ahli K3 Konstruksi apa?"
+  entities:
+    - role_name
+    - experience_years
+    - education_level
+    - target_kkni_level
+  response_template: role_mapping_intro
+  next_node: collect_role_profile
+```
+
+```yaml
+node:
+  id: collect_role_profile
+  type: "guided_form"
+  bot_message: >
+    Untuk membantu memetakan jalur yang sesuai, jawab beberapa pertanyaan singkat.
+  questions:
+    - id: q_role_experience
+      text: "Berapa tahun pengalaman Anda di bidang konstruksi atau proyek?"
+      expected_type: number
+      save_to: profile.experience_years
+
+    - id: q_current_area
+      text: "Area kerja Anda paling dekat dengan yang mana?"
+      quick_replies:
+        - "K3/Keselamatan"
+        - "Manajemen Proyek"
+        - "Mutu"
+        - "Kontrak"
+        - "Estimasi Biaya/QS"
+        - "Logistik Proyek"
+        - "Belum tahu"
+      save_to: profile.user_role_area
+
+    - id: q_target
+      text: "Tujuan utama Anda?"
+      quick_replies:
+        - "Belajar dasar"
+        - "Persiapan asesmen"
+        - "Naik jenjang"
+        - "Memilih jabatan SKK"
+        - "Evaluasi kompetensi tim"
+      save_to: profile.learning_goal
+
+  completion_response: role_recommendation
+```
+
+```yaml
+response_template:
+  id: role_recommendation
+  logic:
+    - condition: "profile.user_role_area == 'K3/Keselamatan'"
+      text: >
+        Berdasarkan jawaban Anda, jalur yang relevan adalah Keselamatan
+        Konstruksi/K3. Jika Anda fokus pada pelaksanaan prosedur di lapangan,
+        pelajari peran Petugas K3 atau Supervisor K3. Jika Anda menargetkan
+        tanggung jawab perencanaan, evaluasi sistem, dan pengendalian strategis,
+        pelajari jalur Ahli K3 atau Ahli Keselamatan Konstruksi.
+      quick_replies:
+        - "Belajar K3"
+        - "Mulai asesmen K3"
+        - "Lihat studi kasus K3"
+
+    - condition: "profile.user_role_area == 'Manajemen Proyek'"
+      text: >
+        Jalur Anda relevan dengan Manajemen Konstruksi atau Manajemen Proyek
+        Konstruksi. Fokus pembelajaran mencakup perencanaan pelaksanaan,
+        koordinasi sumber daya, pengendalian waktu-biaya-mutu, risiko, dan
+        pelaporan proyek.
+      quick_replies:
+        - "Belajar Manajemen Proyek"
+        - "Asesmen Manajemen Proyek"
+        - "Studi kasus keterlambatan proyek"
+
+    - condition: "profile.user_role_area == 'Mutu'"
+      text: >
+        Jalur yang relevan adalah Quality Engineer, Quality Assurance Engineer,
+        atau Ahli Sistem Manajemen Mutu Konstruksi. Fokusnya adalah inspeksi,
+        pengendalian mutu, dokumentasi, audit mutu, dan tindakan korektif.
+      quick_replies:
+        - "Belajar Mutu"
+        - "Asesmen Mutu"
+        - "Studi kasus NCR"
+
+    - condition: "default"
+      text: >
+        Karena Anda belum memilih area spesifik, saya sarankan mulai dari
+        ringkasan Manajemen Pelaksanaan, lalu lanjut ke asesmen mandiri umum
+        untuk melihat area terkuat dan area yang perlu diperkuat.
+      quick_replies:
+        - "Ringkasan umum"
+        - "Asesmen mandiri umum"
+```
+
+---
+
+# 5. Main Conversation Flow
+
+```yaml
+flow:
+  id: main_menu
+  title: "Menu Utama"
+  bot_message: >
+    Pilih salah satu menu berikut:
+  options:
+    - id: menu_scope
+      label: "1. Pahami ruang lingkup"
+      next_node: scope_overview
+
+    - id: menu_role
+      label: "2. Cari jalur jabatan kerja"
+      next_node: collect_role_profile
+
+    - id: menu_learning
+      label: "3. Belajar topik kompetensi"
+      next_node: learning_menu
+
+    - id: menu_assessment
+      label: "4. Asesmen mandiri"
+      next_node: assessment_start
+
+    - id: menu_scenario
+      label: "5. Latihan studi kasus"
+      next_node: scenario_menu
+
+    - id: menu_glossary
+      label: "6. Tanya istilah"
+      next_node: glossary_entry
+```
+
+---
+
+# 6. Learning Module Flow
+
+```yaml
+flow:
+  id: learning_menu
+  title: "Pilih Modul Pembelajaran"
+  bot_message: >
+    Silakan pilih modul. Setiap modul berisi ringkasan konsep, checklist
+    kompetensi, pertanyaan refleksi, dan latihan singkat.
+  options:
+    - label: "Modul 1 — Keselamatan Konstruksi dan K3"
+      next_node: module_k3_intro
+    - label: "Modul 2 — Manajemen Proyek/Konstruksi"
+      next_node: module_project_intro
+    - label: "Modul 3 — Mutu Konstruksi"
+      next_node: module_quality_intro
+    - label: "Modul 4 — Kontrak Konstruksi"
+      next_node: module_contract_intro
+    - label: "Modul 5 — Estimasi Biaya dan QS"
+      next_node: module_cost_intro
+```
+
+---
+
+## 6.1 Module: Keselamatan Konstruksi dan K3
+
+```yaml
+node:
+  id: module_k3_intro
+  type: "lesson"
+  title: "Keselamatan Konstruksi dan K3"
+  bot_message: >
+    Dalam Manajemen Pelaksanaan, keselamatan bukan hanya kepatuhan dokumen,
+    tetapi bagian dari pengendalian pekerjaan. Kompetensi inti meliputi:
+    mengenali bahaya, menilai risiko, menetapkan pengendalian, memantau
+    pelaksanaan, dan melakukan tindakan korektif.
+  learning_points:
+    - "Identifikasi bahaya harus dilakukan sebelum pekerjaan dimulai."
+    - "Risiko perlu dikendalikan dengan prosedur, alat pelindung, pengawasan, dan komunikasi."
+    - "Insiden, near miss, dan kondisi tidak aman harus dicatat dan ditindaklanjuti."
+    - "Supervisor dan petugas K3 harus mampu menghubungkan rencana keselamatan dengan praktik lapangan."
+  check_understanding:
+    question: >
+      Jika pekerja mulai bekerja di ketinggian tanpa pemeriksaan alat pelindung jatuh,
+      tindakan paling tepat adalah?
+    options:
+      A: "Membiarkan pekerjaan berjalan karena target waktu mendesak"
+      B: "Menghentikan pekerjaan sementara, memeriksa kesiapan APD dan prosedur kerja"
+      C: "Melaporkan setelah pekerjaan selesai"
+      D: "Memindahkan pekerja ke area lain tanpa dokumentasi"
+    correct_answer: "B"
+    feedback_correct: >
+      Benar. Pengendalian risiko harus dilakukan sebelum pekerjaan berbahaya dilanjutkan.
+    feedback_incorrect: >
+      Jawaban yang lebih tepat adalah B. Dalam prinsip K3, pekerjaan berisiko tinggi
+      harus dihentikan sementara sampai kontrol keselamatan terpenuhi.
+  next_options:
+    - "Latihan soal K3"
+    - "Studi kasus K3"
+    - "Pilih modul lain"
+```
+
+---
+
+## 6.2 Module: Manajemen Proyek/Konstruksi
+
+```yaml
+node:
+  id: module_project_intro
+  type: "lesson"
+  title: "Manajemen Konstruksi dan Manajemen Proyek"
+  bot_message: >
+    Kompetensi manajemen proyek berfokus pada kemampuan merencanakan,
+    mengoordinasikan, mengendalikan, dan mengevaluasi pelaksanaan proyek.
+    Elemen pentingnya mencakup waktu, biaya, mutu, sumber daya, risiko,
+    logistik, komunikasi, dan pelaporan.
+  learning_points:
+    - "Rencana pelaksanaan harus menghubungkan lingkup, jadwal, sumber daya, metode kerja, dan risiko."
+    - "Pengendalian proyek dilakukan melalui pemantauan progres aktual terhadap rencana."
+    - "Perubahan jadwal, keterlambatan material, dan deviasi mutu harus dianalisis dampaknya."
+    - "Manajer proyek perlu mengomunikasikan masalah, opsi keputusan, dan rekomendasi tindakan."
+  check_understanding:
+    question: >
+      Progres pekerjaan tertinggal 12% dari rencana karena material utama terlambat.
+      Apa langkah manajemen yang paling tepat?
+    options:
+      A: "Menunggu material datang tanpa perubahan rencana"
+      B: "Menyusun analisis dampak, opsi percepatan, dan revisi rencana kerja"
+      C: "Mengurangi mutu pekerjaan agar cepat selesai"
+      D: "Menyalahkan pemasok tanpa dokumentasi"
+    correct_answer: "B"
+    feedback_correct: >
+      Tepat. Pengendalian proyek membutuhkan analisis penyebab, dampak, dan rencana tindakan.
+    feedback_incorrect: >
+      Jawaban terbaik adalah B. Keterlambatan harus dikelola dengan data, rencana korektif,
+      dan komunikasi kepada pihak terkait.
+```
+
+---
+
+## 6.3 Module: Mutu Konstruksi
+
+```yaml
+node:
+  id: module_quality_intro
+  type: "lesson"
+  title: "Pengendalian Mutu dan Sistem Manajemen Mutu"
+  bot_message: >
+    Mutu konstruksi mencakup pemastian bahwa pekerjaan memenuhi spesifikasi,
+    standar, metode kerja, dan persyaratan kontrak. Kompetensi ini melibatkan
+    inspeksi, pengujian, dokumentasi, audit, NCR, dan tindakan korektif.
+  learning_points:
+    - "Quality Assurance berfokus pada sistem dan pencegahan."
+    - "Quality Control berfokus pada pemeriksaan hasil pekerjaan."
+    - "Ketidaksesuaian harus dicatat, dianalisis penyebabnya, dan ditindaklanjuti."
+    - "Dokumentasi mutu penting sebagai bukti kesesuaian pekerjaan."
+  check_understanding:
+    question: >
+      Saat inspeksi ditemukan mutu beton tidak memenuhi spesifikasi. Apa tindakan awal yang tepat?
+    options:
+      A: "Menerima pekerjaan karena sudah dicor"
+      B: "Membuat laporan ketidaksesuaian dan menahan penerimaan pekerjaan sampai ada evaluasi"
+      C: "Menghapus data pengujian"
+      D: "Melanjutkan pekerjaan berikutnya tanpa komunikasi"
+    correct_answer: "B"
+```
+
+---
+
+## 6.4 Module: Kontrak Konstruksi
+
+```yaml
+node:
+  id: module_contract_intro
+  type: "lesson"
+  title: "Hukum Kontrak Konstruksi"
+  bot_message: >
+    Dalam pelaksanaan proyek, kontrak menjadi dasar hak, kewajiban, lingkup,
+    waktu, biaya, mutu, pembayaran, perubahan pekerjaan, klaim, dan penyelesaian
+    perselisihan. Kompetensi kontrak membantu pelaksana proyek mengambil
+    tindakan yang sesuai dokumen dan prosedur.
+  learning_points:
+    - "Setiap perubahan pekerjaan harus memiliki dasar instruksi dan dokumentasi."
+    - "Klaim perlu didukung bukti waktu, biaya, korespondensi, dan kronologi."
+    - "Risiko kontraktual muncul ketika pekerjaan dilakukan tanpa persetujuan yang sah."
+    - "Pemahaman kontrak membantu mencegah sengketa."
+  check_understanding:
+    question: >
+      Pemilik proyek meminta tambahan pekerjaan secara lisan. Apa respons paling tepat?
+    options:
+      A: "Langsung kerjakan tanpa catatan"
+      B: "Meminta instruksi tertulis atau prosedur perubahan sesuai kontrak"
+      C: "Menolak semua perubahan"
+      D: "Mengubah tagihan tanpa pemberitahuan"
+    correct_answer: "B"
+```
+
+---
+
+## 6.5 Module: Estimasi Biaya dan Quantity Surveying
+
+```yaml
+node:
+  id: module_cost_intro
+  type: "lesson"
+  title: "Estimasi Biaya dan Quantity Surveying"
+  bot_message: >
+    Kompetensi biaya dan QS berfokus pada pengukuran volume, estimasi biaya,
+    analisis harga satuan, evaluasi pembayaran, dan pengendalian biaya proyek.
+    Dalam pelaksanaan, data volume dan biaya harus akurat, terdokumentasi,
+    dan dapat diverifikasi.
+  learning_points:
+    - "Volume pekerjaan harus dihitung berdasarkan gambar, spesifikasi, dan kondisi lapangan."
+    - "Estimasi biaya memerlukan analisis material, tenaga kerja, alat, overhead, dan risiko."
+    - "Pembayaran progres harus sesuai volume terpasang dan bukti pekerjaan."
+    - "Deviasi biaya perlu dianalisis agar proyek tetap terkendali."
+  check_understanding:
+    question: >
+      Volume pekerjaan aktual berbeda dari BOQ. Apa langkah yang tepat?
+    options:
+      A: "Menggunakan angka BOQ tanpa verifikasi"
+      B: "Melakukan pengukuran ulang, dokumentasi, dan klarifikasi sesuai prosedur kontrak"
+      C: "Mengubah volume sepihak"
+      D: "Mengabaikan perbedaan"
+    correct_answer: "B"
+```
+
+---
+
+# 7. Self-Assessment Flow
+
+```yaml
+flow:
+  id: assessment_start
+  title: "Asesmen Mandiri Manajemen Pelaksanaan"
+  bot_message: >
+    Asesmen ini membantu Anda melihat kesiapan awal. Hasilnya bukan keputusan
+    resmi sertifikasi, tetapi rekomendasi belajar. Jawab dengan jujur sesuai
+    pengalaman Anda.
+  options:
+    - "Mulai asesmen umum"
+    - "Asesmen K3"
+    - "Asesmen Manajemen Proyek"
+    - "Asesmen Mutu"
+    - "Asesmen Kontrak"
+    - "Asesmen Biaya/QS"
+```
+
+```yaml
+assessment:
+  id: general_readiness_assessment
+  scoring:
+    scale:
+      0: "Belum memahami"
+      1: "Paham konsep dasar"
+      2: "Pernah menerapkan dengan arahan"
+      3: "Mampu menerapkan mandiri"
+      4: "Mampu mengevaluasi dan membimbing orang lain"
+
+  questions:
+    - id: assess_k3_01
+      cluster: "K3"
+      text: "Seberapa mampu Anda mengidentifikasi bahaya dan risiko sebelum pekerjaan dimulai?"
+      score_target: score_k3
+
+    - id: assess_k3_02
+      cluster: "K3"
+      text: "Seberapa mampu Anda menentukan tindakan pengendalian risiko di lapangan?"
+      score_target: score_k3
+
+    - id: assess_pm_01
+      cluster: "Manajemen Proyek"
+      text: "Seberapa mampu Anda menyusun atau membaca rencana pelaksanaan proyek?"
+      score_target: score_project_management
+
+    - id: assess_pm_02
+      cluster: "Manajemen Proyek"
+      text: "Seberapa mampu Anda menganalisis keterlambatan dan menyusun rencana korektif?"
+      score_target: score_project_management
+
+    - id: assess_quality_01
+      cluster: "Mutu"
+      text: "Seberapa mampu Anda memeriksa kesesuaian hasil pekerjaan terhadap spesifikasi?"
+      score_target: score_quality
+
+    - id: assess_quality_02
+      cluster: "Mutu"
+      text: "Seberapa mampu Anda menangani laporan ketidaksesuaian atau NCR?"
+      score_target: score_quality
+
+    - id: assess_contract_01
+      cluster: "Kontrak"
+      text: "Seberapa mampu Anda membaca klausul kontrak terkait perubahan pekerjaan?"
+      score_target: score_contract
+
+    - id: assess_contract_02
+      cluster: "Kontrak"
+      text: "Seberapa mampu Anda menyiapkan bukti pendukung klaim proyek?"
+      score_target: score_contract
+
+    - id: assess_cost_01
+      cluster: "Biaya/QS"
+      text: "Seberapa mampu Anda menghitung volume pekerjaan berdasarkan gambar dan kondisi lapangan?"
+      score_target: score_cost_qs
+
+    - id: assess_cost_02
+      cluster: "Biaya/QS"
+      text: "Seberapa mampu Anda mengevaluasi pembayaran progres berdasarkan volume terpasang?"
+      score_target: score_cost_qs
+
+  result_logic:
+    - condition: "average_score < 1.5"
+      readiness_level: "Dasar"
+      bot_message: >
+        Anda berada pada tahap dasar. Mulailah dari ringkasan konsep,
+        istilah penting, dan contoh kasus sederhana.
+      recommended_path:
+        - "Ruang lingkup Manajemen Pelaksanaan"
+        - "Modul K3 dasar"
+        - "Modul Manajemen Proyek dasar"
+
+    - condition: "average_score >= 1.5 and average_score < 3"
+      readiness_level: "Menengah"
+      bot_message: >
+        Anda sudah memiliki pemahaman awal. Fokus berikutnya adalah memperkuat
+        penerapan praktis, dokumentasi, dan analisis kasus.
+      recommended_path:
+        - "Latihan studi kasus"
+        - "Asesmen per cluster"
+        - "Checklist bukti kompetensi"
+
+    - condition: "average_score >= 3"
+      readiness_level: "Lanjutan"
+      bot_message: >
+        Anda menunjukkan kesiapan yang baik. Fokuskan pembelajaran pada
+        evaluasi, pengambilan keputusan, pembimbingan tim, dan simulasi asesmen.
+      recommended_path:
+        - "Studi kasus kompleks"
+        - "Simulasi wawancara asesmen"
+        - "Review portofolio bukti kerja"
+```
+
+---
+
+# 8. Scenario Practice Flow
+
+```yaml
+flow:
+  id: scenario_menu
+  title: "Latihan Studi Kasus"
+  bot_message: >
+    Pilih skenario praktik. Saya akan memberi situasi proyek, lalu meminta Anda
+    memilih tindakan, menjelaskan alasan, dan menyusun rencana tindak lanjut.
+  options:
+    - "Kecelakaan hampir terjadi di area kerja"
+    - "Proyek terlambat karena material"
+    - "Mutu pekerjaan tidak sesuai spesifikasi"
+    - "Perubahan pekerjaan tanpa instruksi tertulis"
+    - "Selisih volume dan biaya progres"
+```
+
+---
+
+## Scenario 1: K3/Keselamatan
+
+```yaml
+scenario:
+  id: scenario_near_miss_k3
+  title: "Near Miss di Area Kerja"
+  situation: >
+    Pada proyek gedung bertingkat, seorang pekerja hampir tertimpa material
+    yang jatuh dari lantai atas. Tidak ada korban, tetapi area kerja tidak
+    dipasang pembatas dan sebagian pekerja tidak menggunakan APD lengkap.
+  user_task:
+    - "Identifikasi masalah utama."
+    - "Tentukan tindakan segera."
+    - "Tentukan dokumen atau laporan yang perlu dibuat."
+    - "Usulkan tindakan pencegahan agar tidak terulang."
+  bot_guidance:
+    step_1_prompt: "Apa masalah keselamatan paling kritis dalam kasus ini?"
+    step_2_prompt: "Apa tindakan pertama yang harus dilakukan di lapangan?"
+    step_3_prompt: "Dokumentasi apa yang perlu disiapkan?"
+    step_4_prompt: "Apa rekomendasi pencegahan jangka pendek dan jangka panjang?"
+  ideal_answer_points:
+    - "Hentikan sementara aktivitas di area berisiko."
+    - "Amankan area dengan pembatas dan rambu."
+    - "Pastikan penggunaan APD dan inspeksi metode kerja."
+    - "Catat near miss dan lakukan investigasi penyebab."
+    - "Lakukan toolbox meeting dan tindakan korektif."
+  feedback_template: >
+    Jawaban Anda sudah mencakup {{matched_points}} dari {{total_points}} poin utama.
+    Poin yang perlu ditambahkan: {{missing_points}}.
+```
+
+---
+
+## Scenario 2: Manajemen Proyek
+
+```yaml
+scenario:
+  id: scenario_delay_material
+  title: "Keterlambatan Material Utama"
+  situation: >
+    Pekerjaan struktur tertunda karena material utama terlambat 10 hari.
+    Jadwal proyek mulai bergeser dan beberapa tenaga kerja menjadi idle.
+  user_task:
+    - "Analisis penyebab dan dampak."
+    - "Susun opsi mitigasi."
+    - "Tentukan komunikasi kepada pemilik proyek dan tim."
+    - "Tentukan pembaruan rencana kerja."
+  ideal_answer_points:
+    - "Membandingkan jadwal rencana dan aktual."
+    - "Mengidentifikasi pekerjaan terdampak dan jalur kritis."
+    - "Mengevaluasi opsi resekuensing pekerjaan."
+    - "Menyusun rencana percepatan jika layak."
+    - "Mendokumentasikan keterlambatan dan rencana korektif."
+```
+
+---
+
+## Scenario 3: Mutu
+
+```yaml
+scenario:
+  id: scenario_ncr_quality
+  title: "Ketidaksesuaian Mutu Pekerjaan"
+  situation: >
+    Hasil uji menunjukkan pekerjaan beton tidak memenuhi spesifikasi yang
+    disyaratkan. Pekerjaan lanjutan sudah dijadwalkan dimulai besok.
+  user_task:
+    - "Tentukan tindakan awal."
+    - "Jelaskan risiko jika pekerjaan diterima tanpa evaluasi."
+    - "Susun langkah korektif."
+  ideal_answer_points:
+    - "Menahan penerimaan pekerjaan sampai evaluasi selesai."
+    - "Membuat laporan ketidaksesuaian."
+    - "Melakukan analisis penyebab."
+    - "Melibatkan pihak teknis terkait."
+    - "Menentukan perbaikan, pembongkaran, pengujian ulang, atau persetujuan teknis sesuai prosedur."
+```
+
+---
+
+## Scenario 4: Kontrak
+
+```yaml
+scenario:
+  id: scenario_verbal_variation
+  title: "Perubahan Pekerjaan Secara Lisan"
+  situation: >
+    Pemilik proyek meminta tambahan pekerjaan secara lisan di lapangan.
+    Tim pelaksana ingin segera mengerjakan karena dianggap sederhana.
+  user_task:
+    - "Identifikasi risiko kontraktual."
+    - "Tentukan respons yang tepat."
+    - "Jelaskan dokumen yang diperlukan."
+  ideal_answer_points:
+    - "Tidak mengerjakan perubahan tanpa dasar instruksi yang sah."
+    - "Meminta instruksi tertulis atau mengikuti prosedur variation order."
+    - "Mencatat dampak waktu, biaya, mutu, dan risiko."
+    - "Mengarsipkan komunikasi dan persetujuan."
+```
+
+---
+
+## Scenario 5: Biaya/QS
+
+```yaml
+scenario:
+  id: scenario_volume_difference
+  title: "Selisih Volume Pekerjaan"
+  situation: >
+    Volume aktual di lapangan lebih besar dari BOQ. Kontraktor mengajukan
+    pembayaran tambahan, tetapi dokumen pengukuran belum lengkap.
+  user_task:
+    - "Tentukan langkah verifikasi."
+    - "Jelaskan dokumen pendukung."
+    - "Berikan rekomendasi keputusan sementara."
+  ideal_answer_points:
+    - "Melakukan pengukuran ulang bersama pihak terkait."
+    - "Membandingkan gambar, spesifikasi, BOQ, dan kondisi aktual."
+    - "Menyiapkan berita acara pengukuran."
+    - "Memeriksa dasar kontraktual perubahan volume."
+    - "Menunda persetujuan pembayaran tambahan sampai bukti lengkap."
+```
+
+---
+
+# 9. Certification Guidance Intent
+
+```yaml
+intent:
+  id: certification_guidance
+  description: "User asks about certification preparation."
+  sample_user_inputs:
+    - "Bagaimana cara mempersiapkan asesmen SKK?"
+    - "Apa yang harus saya siapkan untuk uji kompetensi?"
+    - "Dokumen portofolio apa yang perlu disiapkan?"
+    - "Saya mau sertifikasi Ahli Manajemen Proyek"
+  response_template: certification_preparation_response
+  next_node: certification_checklist
+```
+
+```yaml
+response_template:
+  id: certification_preparation_response
+  text: >
+    Untuk persiapan asesmen SKK, Anda dapat menyiapkan tiga hal:
+    
+    1. Pemahaman standar kompetensi sesuai jabatan yang dituju.
+    2. Bukti pengalaman kerja, seperti laporan proyek, dokumentasi pekerjaan,
+       surat tugas, metode kerja, laporan inspeksi, atau dokumen pengendalian.
+    3. Latihan menjelaskan pengalaman Anda dengan struktur: situasi, tugas,
+       tindakan, hasil, dan pembelajaran.
+    
+    Saya bisa bantu membuat checklist bukti kompetensi sesuai area Anda.
+  quick_replies:
+    - "Checklist K3"
+    - "Checklist Manajemen Proyek"
+    - "Checklist Mutu"
+    - "Checklist Kontrak"
+    - "Checklist Biaya/QS"
+```
+
+---
+
+# 10. Evidence Checklist Templates
+
+```yaml
+checklist:
+  id: evidence_k3
+  title: "Checklist Bukti Kompetensi K3/Keselamatan"
+  items:
+    - "Rencana keselamatan atau prosedur K3"
+    - "Dokumentasi identifikasi bahaya dan penilaian risiko"
+    - "Laporan inspeksi lapangan"
+    - "Laporan near miss atau insiden"
+    - "Bukti toolbox meeting"
+    - "Tindakan korektif dan tindak lanjut"
+
+checklist:
+  id: evidence_project_management
+  title: "Checklist Bukti Kompetensi Manajemen Proyek"
+  items:
+    - "Rencana kerja proyek"
+    - "Jadwal pelaksanaan"
+    - "Laporan progres"
+    - "Analisis keterlambatan"
+    - "Rencana mitigasi risiko"
+    - "Notulen koordinasi proyek"
+    - "Dokumentasi pengendalian sumber daya"
+
+checklist:
+  id: evidence_quality
+  title: "Checklist Bukti Kompetensi Mutu"
+  items:
+    - "Inspection and Test Plan"
+    - "Laporan inspeksi mutu"
+    - "Hasil pengujian material atau pekerjaan"
+    - "NCR atau laporan ketidaksesuaian"
+    - "Tindakan korektif"
+    - "Dokumen audit mutu"
+
+checklist:
+  id: evidence_contract
+  title: "Checklist Bukti Kompetensi Kontrak"
+  items:
+    - "Ringkasan klausul kontrak terkait pelaksanaan"
+    - "Dokumen instruksi perubahan"
+    - "Korespondensi klaim"
+    - "Kronologi kejadian proyek"
+    - "Analisis dampak waktu dan biaya"
+    - "Berita acara atau adendum"
+
+checklist:
+  id: evidence_cost_qs
+  title: "Checklist Bukti Kompetensi Estimasi Biaya/QS"
+  items:
+    - "Perhitungan volume pekerjaan"
+    - "Analisis harga satuan"
+    - "Backup quantity"
+    - "Berita acara pengukuran"
+    - "Evaluasi progress payment"
+    - "Laporan deviasi biaya"
+```
+
+---
+
+# 11. Glossary Intent
+
+```yaml
+intent:
+  id: glossary_lookup
+  description: "User asks for SKK or construction management terms."
+  sample_user_inputs:
+    - "Apa itu SKKNI?"
+    - "Apa beda QA dan QC?"
+    - "Apa itu NCR?"
+    - "Apa itu KKNI level 7?"
+    - "Apa arti quantity surveyor?"
+    - "Apa itu variation order?"
+  entities:
+    - glossary_term
+  response_template: glossary_dynamic_response
+```
+
+```yaml
+glossary:
+  SKKNI: >
+    Standar Kompetensi Kerja Nasional Indonesia, yaitu rumusan kemampuan kerja
+    yang mencakup pengetahuan, keterampilan/keahlian, dan sikap kerja sesuai
+    tugas jabatan.
+
+  SKK: >
+    Sertifikat Kompetensi Kerja atau standar kompetensi kerja, tergantung
+    konteks penggunaan. Dalam percakapan ini, SKK mengacu pada kompetensi kerja
+    bidang konstruksi dan jalur sertifikasinya.
+
+  KKNI: >
+    Kerangka Kualifikasi Nasional Indonesia, yaitu kerangka penjenjangan
+    kualifikasi kompetensi. Dalam SKK konstruksi, jenjang sering dikaitkan
+    dengan tingkat tanggung jawab, kompleksitas pekerjaan, dan otonomi kerja.
+
+  QA: >
+    Quality Assurance. Fokus pada sistem, prosedur, pencegahan, dan jaminan
+    agar proses menghasilkan mutu sesuai persyaratan.
+
+  QC: >
+    Quality Control. Fokus pada pemeriksaan, pengujian, dan verifikasi hasil
+    pekerjaan agar sesuai spesifikasi.
+
+  NCR: >
+    Non-Conformance Report, yaitu laporan ketidaksesuaian ketika pekerjaan,
+    material, atau proses tidak memenuhi persyaratan.
+
+  Variation Order: >
+    Instruksi atau persetujuan perubahan pekerjaan yang berdampak pada lingkup,
+    biaya, waktu, metode, atau ketentuan kontrak.
+
+  Quantity Surveyor: >
+    Peran yang berfokus pada pengukuran kuantitas, estimasi biaya, pengendalian
+    biaya, evaluasi progres, dan administrasi komersial proyek.
+```
+
+---
+
+# 12. Fallback Handling
+
+```yaml
+fallback:
+  confidence_threshold: 0.65
+
+  first_fallback:
+    condition: "intent_confidence < 0.65 and fallback_count == 0"
+    bot_message: >
+      Maaf, saya belum menangkap maksud Anda dengan jelas.
+      Apakah pertanyaan Anda berkaitan dengan salah satu topik berikut?
+    quick_replies:
+      - "K3/Keselamatan"
+      - "Manajemen Proyek"
+      - "Mutu"
+      - "Kontrak"
+      - "Biaya/QS"
+      - "Sertifikasi SKK"
+
+  second_fallback:
+    condition: "intent_confidence < 0.65 and fallback_count == 1"
+    bot_message: >
+      Saya masih belum yakin. Coba tuliskan pertanyaan dengan format:
+      “Saya ingin tahu tentang [topik] untuk [tujuan]”.
+      Contoh: “Saya ingin tahu tentang Quality Engineer untuk persiapan asesmen.”
+    quick_replies:
+      - "Kembali ke menu utama"
+      - "Lihat daftar topik"
+      - "Mulai asesmen umum"
+
+  escalation_fallback:
+    condition: "fallback_count >= 2"
+    bot_message: >
+      Saya akan arahkan Anda ke menu utama agar lebih mudah. Pilih topik yang
+      paling mendekati kebutuhan Anda.
+    next_node: main_menu
+```
+
+---
+
+# 13. Guardrails and Response Rules
+
+```yaml
+guardrails:
+  accuracy:
+    - "Jangan menyatakan pengguna lulus atau tidak lulus sertifikasi resmi."
+    - "Gunakan frasa 'asesmen mandiri awal' untuk hasil evaluasi chatbot."
+    - "Jika pengguna meminta dasar hukum terbaru, sarankan verifikasi ke sumber resmi."
+    - "Jangan mengarang nomor SKKNI jika tidak tersedia dalam basis pengetahuan."
+    - "Pisahkan saran belajar dari keputusan sertifikasi resmi."
+
+  user_safety:
+    - "Untuk kasus K3 berisiko tinggi, selalu sarankan penghentian sementara pekerjaan berbahaya sampai pengendalian terpenuhi."
+    - "Jangan menyarankan bypass prosedur keselamatan, mutu, atau kontrak."
+    - "Untuk konflik kontrak atau klaim besar, sarankan konsultasi dengan pihak berwenang/ahli kontrak."
+
+  tone:
+    - "Gunakan bahasa Indonesia formal, sederhana, dan membimbing."
+    - "Berikan contoh praktis dari proyek konstruksi."
+    - "Ajukan satu pertanyaan lanjutan pada satu waktu."
+    - "Gunakan checklist dan langkah-langkah ringkas."
+```
+
+---
+
+# 14. User Interaction Paths
+
+```yaml
+interaction_paths:
+  path_1_beginner_learning:
+    user_goal: "Belajar dari dasar"
+    flow:
+      - greet
+      - main_menu
+      - scope_overview
+      - learning_menu
+      - selected_module_intro
+      - check_understanding
+      - module_summary
+      - recommended_next_module
+
+  path_2_role_selection:
+    user_goal: "Menentukan jabatan kerja"
+    flow:
+      - greet
+      - collect_role_profile
+      - role_recommendation
+      - related_competency_overview
+      - evidence_checklist
+      - assessment_suggestion
+
+  path_3_self_assessment:
+    user_goal: "Mengukur kesiapan"
+    flow:
+      - greet
+      - assessment_start
+      - assessment_questions
+      - score_calculation
+      - readiness_result
+      - weak_topic_recommendation
+      - learning_plan
+
+  path_4_practical_scenario:
+    user_goal: "Latihan kasus"
+    flow:
+      - greet
+      - scenario_menu
+      - scenario_situation
+      - user_response
+      - guided_feedback
+      - model_answer
+      - reflection_question
+      - next_scenario_or_module
+
+  path_5_certification_preparation:
+    user_goal: "Persiapan sertifikasi"
+    flow:
+      - greet
+      - certification_guidance
+      - select_target_area
+      - evidence_checklist
+      - mock_interview_questions
+      - readiness_assessment
+```
+
+---
+
+# 15. Mock Interview Question Bank
+
+```yaml
+mock_interview:
+  k3:
+    - "Ceritakan pengalaman Anda mengidentifikasi bahaya di proyek."
+    - "Bagaimana Anda menentukan prioritas pengendalian risiko?"
+    - "Apa tindakan Anda jika pekerja menolak menggunakan APD?"
+    - "Bagaimana Anda menindaklanjuti laporan near miss?"
+
+  project_management:
+    - "Bagaimana Anda menyusun rencana pelaksanaan proyek?"
+    - "Apa indikator yang Anda gunakan untuk memantau progres?"
+    - "Bagaimana Anda menangani keterlambatan pekerjaan?"
+    - "Bagaimana Anda mengoordinasikan tenaga kerja, material, dan alat?"
+
+  quality:
+    - "Bagaimana Anda memastikan pekerjaan sesuai spesifikasi?"
+    - "Apa pengalaman Anda menangani NCR?"
+    - "Apa perbedaan QA dan QC dalam pekerjaan Anda?"
+    - "Bagaimana Anda melakukan tindakan korektif mutu?"
+
+  contract:
+    - "Bagaimana Anda membaca risiko dalam dokumen kontrak?"
+    - "Apa yang Anda lakukan saat ada perubahan pekerjaan?"
+    - "Bagaimana Anda menyiapkan bukti klaim?"
+    - "Bagaimana Anda mencegah sengketa kontrak?"
+
+  cost_qs:
+    - "Bagaimana Anda menghitung volume pekerjaan?"
+    - "Apa langkah Anda jika volume aktual berbeda dari BOQ?"
+    - "Bagaimana Anda mengevaluasi progress payment?"
+    - "Bagaimana Anda mengendalikan deviasi biaya?"
+```
+
+---
+
+# 16. Response Templates
+
+```yaml
+response_templates:
+  short_explanation:
+    structure:
+      - "Definisi singkat"
+      - "Mengapa penting"
+      - "Contoh penerapan"
+      - "Pertanyaan lanjutan"
+    example: >
+      Quality Control adalah proses pemeriksaan hasil pekerjaan agar sesuai
+      spesifikasi. Ini penting karena mutu yang tidak sesuai dapat menimbulkan
+      biaya perbaikan, keterlambatan, dan risiko kontrak. Contohnya adalah
+      inspeksi dimensi, uji material, dan pemeriksaan hasil pekerjaan sebelum
+      diserahterimakan. Apakah Anda ingin contoh formulir QC?
+
+  assessment_feedback:
+    structure:
+      - "Ringkasan skor"
+      - "Area kuat"
+      - "Area perlu ditingkatkan"
+      - "Rekomendasi modul"
+      - "Langkah berikutnya"
+    example: >
+      Hasil asesmen mandiri Anda menunjukkan kesiapan menengah.
+      Area kuat: Manajemen Proyek dan Mutu.
+      Area yang perlu diperkuat: Kontrak dan Biaya/QS.
+      Saya sarankan Anda mempelajari Modul Kontrak terlebih dahulu, lalu
+      mengerjakan studi kasus perubahan pekerjaan.
+
+  scenario_feedback:
+    structure:
+      - "Apresiasi jawaban"
+      - "Poin yang sudah tepat"
+      - "Poin yang belum muncul"
+      - "Jawaban ideal"
+      - "Pertanyaan refleksi"
+    example: >
+      Jawaban Anda sudah tepat karena menyebutkan perlunya dokumentasi dan
+      koordinasi. Poin yang perlu ditambahkan adalah analisis dampak terhadap
+      waktu, biaya, dan mutu. Dalam kasus perubahan pekerjaan, tindakan ideal
+      adalah meminta instruksi tertulis, memeriksa prosedur kontrak, dan
+      mencatat dampaknya sebelum pekerjaan dilaksanakan.
+```
+
+---
+
+# 17. Completion and Summary Flow
+
+```yaml
+flow:
+  id: session_summary
+  trigger: "user_requests_summary or session_end"
+  bot_message: >
+    Berikut ringkasan sesi Anda:
+    
+    Topik yang dibahas: {{topics_covered}}
+    Area kuat: {{strong_topics}}
+    Area perlu ditingkatkan: {{weak_topics}}
+    Rekomendasi berikutnya: {{recommended_path}}
+    
+    Apakah Anda ingin menyimpan ringkasan belajar atau melanjutkan ke modul lain?
+  quick_replies:
+    - "Lanjutkan belajar"
+    - "Mulai asesmen baru"
+    - "Latihan studi kasus"
+    - "Selesai"
+```
+
+---
+
+# 18. Example Conversation
+
+```text
+User:
+Halo, saya ingin belajar SKK Manajemen Pelaksanaan.
+
+Bot:
+Halo. Saya siap membantu Anda mempelajari SKK Manajemen Pelaksanaan.
+Anda bisa memilih: memahami ruang lingkup, mencari jabatan kerja,
+belajar topik kompetensi, asesmen mandiri, atau latihan studi kasus.
+
+Pilihan:
+[ Ruang lingkup ] [ Jabatan kerja ] [ Belajar ] [ Asesmen mandiri ] [ Studi kasus ]
+
+User:
+Ruang lingkup.
+
+Bot:
+Manajemen Pelaksanaan mencakup kompetensi untuk mengelola pelaksanaan
+pekerjaan konstruksi secara aman, terkendali, bermutu, sesuai kontrak,
+efisien biaya, dan terdokumentasi.
+
+Area utamanya:
+1. Keselamatan Konstruksi dan K3
+2. Manajemen Konstruksi dan Manajemen Proyek
+3. Pengendalian Mutu dan Sistem Manajemen Mutu
+4. Hukum Kontrak Konstruksi
+5. Estimasi Biaya dan Quantity Surveying
+
+Anda ingin mempelajari area mana terlebih dahulu?
+
+User:
+Manajemen Proyek.
+
+Bot:
+Baik. Dalam Manajemen Proyek Konstruksi, kompetensi utama mencakup
+perencanaan pelaksanaan, koordinasi sumber daya, pengendalian waktu-biaya-mutu,
+manajemen risiko, logistik, komunikasi, dan pelaporan progres.
+
+Pertanyaan singkat:
+Progres pekerjaan tertinggal 12% dari rencana karena material utama terlambat.
+Apa langkah manajemen yang paling tepat?
+
+A. Menunggu material datang tanpa perubahan rencana
+B. Menyusun analisis dampak, opsi percepatan, dan revisi rencana kerja
+C. Mengurangi mutu pekerjaan agar cepat selesai
+D. Menyalahkan pemasok tanpa dokumentasi
+
+User:
+B.
+
+Bot:
+Tepat. Pengendalian proyek membutuhkan analisis penyebab, dampak,
+dan rencana tindakan. Setelah itu, hasil analisis perlu dikomunikasikan
+kepada pihak terkait dan didokumentasikan dalam laporan proyek.
+
+Apakah Anda ingin lanjut ke latihan studi kasus keterlambatan proyek?
+```
+
+---
+
+# 19. Implementation Notes
+
+```yaml
+implementation_notes:
+  nlp:
+    intent_matching:
+      - keyword matching for early prototype
+      - semantic intent classifier for production
+      - entity extraction for role, KKNI level, topic, and user goal
+
+  data_storage:
+    store:
+      - current module
+      - assessment scores
+      - recommended learning path
+      - user target role
+    privacy_note:
+      - do not store sensitive personal data unless necessary and consented
+
+  analytics:
+    track:
+      - most selected modules
+      - most failed assessment questions
+      - fallback frequency
+      - popular target roles
+      - scenario completion rate
+
+  future_extensions:
+    - upload portfolio evidence and receive checklist feedback
+    - generate personalized learning plan
+    - mock interview simulator
+    - downloadable session summary
+    - admin panel for updating SKK references
+```
+
+---
+
+# 20. Final Builder Prompt Version
+
+Use this prompt if you want to generate the chatbot in an AI app builder:
+
+```text
+Build a professional Indonesian-language chatbot named “SKK Coach — Manajemen Pelaksanaan”.
+
+The chatbot helps users understand, learn, self-assess, and practice competencies related to SKK Manajemen Pelaksanaan in construction. It should support the following user goals:
+
+1. Understand the scope of Manajemen Pelaksanaan.
+2. Identify relevant job-role pathways and KKNI levels.
+3. Learn key competency areas:
+   - Keselamatan Konstruksi and K3
+   - Manajemen Konstruksi and Manajemen Proyek
+   - Pengendalian Mutu and Sistem Manajemen Mutu
+   - Hukum Kontrak Konstruksi
+   - Estimasi Biaya and Quantity Surveying
+4. Complete guided self-assessment.
+5. Practice realistic construction project scenarios.
+6. Prepare evidence checklists for certification readiness.
+
+Use a chatbot-builder style architecture with:
+- greeting flow
+- main menu
+- intents
+- sample user utterances
+- response templates
+- quick replies
+- conversation branches
+- scoring logic
+- fallback handling
+- scenario-based practice
+- session summary
+
+The tone must be professional, clear, supportive, and suitable for learners, workers, assessors, and construction professionals. The chatbot must not claim to issue official certification or determine official pass/fail status. It may provide learning recommendations and self-assessment feedback only.
+
+Create structured flows for:
+- onboarding
+- scope explanation
+- role mapping
+- learning modules
+- self-assessment
+- scenario practice
+- glossary lookup
+- certification preparation checklist
+- fallback and clarification
+
+For each competency module, include:
+- short explanation
+- key learning points
+- practical example
+- one check-understanding question
+- feedback for correct and incorrect answers
+- suggested next steps
+
+For scenarios, include:
+- situation
+- user task
+- guided prompts
+- ideal answer points
+- feedback template
+
+Return the chatbot configuration as text with YAML-like sections.
+```
+
+[1]: https://skkni.kemnaker.go.id/?utm_source=chatgpt.com "SKKNI : Kementrian Ketenagakerjaan RI"
+[2]: https://binakonstruksi.pu.go.id/dokumen-skkni/ "Daftar Jabatan Kerja, Jenjang, Kualifikasi, dan Acuan Standar Kompetensi Bidang Konstruksi – Direktorat Jenderal Bina Konstruksi"

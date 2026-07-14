@@ -1,0 +1,40 @@
+## 🎯 Blueprint Strategi & Visi 2-Sided Marketplace
+
+KaryaHub didorong oleh **2 ekspektasi inti**:
+
+1. **Aksesibilitas Massal** — Owner perorangan & UKM bisa cari kontraktor/suplier ber-SBU dengan mudah, dalam < 30 menit, tanpa harus paham jargon teknis.
+2. **Peluang Alternatif UKM** — Kontraktor UKM dapat 1–3 lead organik per bulan **di luar tender pemerintah**, supaya cashflow tidak bergantung pada LPSE yang sporadis.
+
+Lima pilar strategis menjabarkan ini lengkap: **(P1) Aksesibilitas Massal** · **(P2) Lead Engine UKM** · **(P3) Kepercayaan & Verifikasi** · **(P4) Ekosistem & Edukasi** · **(P5) Operasional & Monetisasi**.
+
+📖 Lihat blueprint lengkap (fitur, roadmap MVP→V1→V2, KPI, risk & monetisasi multi-stream) di [Blueprint Strategi KaryaHub](https://www.notion.so/Blueprint-Strategi-KaryaHub-Aksesibilitas-Massal-Peluang-UKM-399dfe4dcbb247afadab284cac95880f?pvs=21).
+
+## 🗄️ Database Pendukung Tambahan
+
+Untuk fulfill ekspektasi di atas, KaryaHub dilengkapi 2 database operasional baru:
+
+- [Kategori Awam — Pintu Masuk Bahasa Sehari-hari](https://www.notion.so/aa10e7ae811340e29f6c0a7082f30e56?pvs=21) — mapping frase awam ("renov dapur", "bocor atap", "bangun rumah") ke parameter teknis (SBU, kategori proyek, mencari, skala). 8 kategori awam sudah di-seed. Dipakai Concierge & form posting kebutuhan.
+- [Tier Verifikasi & Trust Score — Rubric Vendor](https://www.notion.so/d1937e4397494bb3aafde28ee5b0397a?pvs=21) — 4 tier (Bronze → Silver → Gold → Platinum) dengan syarat, biaya, kuota lead, dan bobot Trust Score. Dipakai UKM Coach untuk pandu naik kelas + Trust Guard (V1) untuk audit.
+
+## 🤝 Trio Agent KaryaHub
+
+KaryaHub sekarang punya **2 agent aktif** dengan rencana **2 agent tambahan** di V1:
+
+| Agent | Status | Fokus | Audiens |
+| --- | --- | --- | --- |
+| [KaryaHub Matchmaker](https://www.notion.so/agent/5a6e9d8f4f7842cfab65a886bee46901) | ✅ Aktif | Skoring SBU+Lokasi+Kualifikasi, tulis ke Matches DB | Owner & internal |
+| [KaryaHub UKM Coach](https://www.notion.so/agent/861c876c43c441499235432e6c3ebd99) | ✅ Aktif | Optimasi profil, pricing, naik kelas, diversifikasi cashflow | Kontraktor & Suplier UKM |
+| KaryaHub Concierge | 🔜 V1 | Onboarding bahasa awam, extract intent dari WA chat | Owner perorangan |
+| KaryaHub Trust Guard | 🔜 V1 | Audit verifikasi tier, deteksi review fraud | Internal |
+
+Ketiga agent berkomunikasi via `callAgentInternal` pattern (OpenClaw + MultiClaw) saat V1 selesai.
+
+## ⚡ Quick Start untuk UKM
+
+Kalau kamu **kontraktor UKM** yang baru kenal KaryaHub, urutan idealnya:
+
+1. Mention [@KaryaHub UKM Coach](https://www.notion.so/agent/861c876c43c441499235432e6c3ebd99) — minta review profil & action plan.
+2. Daftar di form "Daftar BUJK" / "Daftar Suplier" — mulai dari tier **Bronze gratis**.
+3. Tetap mention [@KaryaHub Matchmaker](https://www.notion.so/agent/5a6e9d8f4f7842cfab65a886bee46901) dengan profil kamu untuk lihat Project Postings yang cocok.
+4. Kumpulkan 3–5 testimoni dari proyek lama → upgrade ke **Silver** (Rp 99 rb/bulan).
+5. Setelah 5+ proyek tuntas di KaryaHub dengan rating bagus → upgrade **Gold** → mulai konsorsium / lompat ke [TENDERA Hub](https://www.notion.so/TENDERA-Hub-AI-Tender-BUJK-Series-Gustafta-OpenClaw-MultiClaw-210dd107ef2841f3ae895b9921b66412?pvs=21) untuk tender.

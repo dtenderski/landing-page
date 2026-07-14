@@ -1,0 +1,87 @@
+<aside>
+🎓
+
+**Alat Bantu (L4)** untuk simulasi uji kompetensi K3L — AK3 Umum, SMK3, Auditor CSMS. AGENT-SIMULATION akan memilih soal dari bank ini, mengoreksi jawaban, dan memberi pembahasan.
+
+</aside>
+
+## 📚 Cakupan Materi
+
+- ISO 45001:2018 — elemen 4.4.6 Operational Control
+- PP No. 50/2012 — kriteria audit SMK3 (12 elemen, 166 kriteria)
+- UU No. 1/1970 + Permenaker turunannya
+- Permen ESDM No. 10/2021 — K3 Ketenagalistrikan
+- Siklus 6 langkah CSMS
+- Permit to Work + JSA
+
+## 🧪 Contoh Soal (Pilihan Ganda)
+
+### Soal 1
+
+Pada matriks risiko 5×5, sebuah pekerjaan dinilai aspek Manusia = 5 (Ekstrem) dan aspek Aset = 2 (Rendah). Tingkat risiko keseluruhan adalah:
+
+- A. Rendah
+- B. Moderat
+- C. Tinggi
+- D. **Ekstrem** ✅
+
+*Pembahasan:* Aturan agregasi — bila salah satu aspek bernilai Ekstrem, nilai keseluruhan otomatis Ekstrem (KB-RA-01).
+
+### Soal 2
+
+Kontraktor mendapat skor PQ 56% untuk pekerjaan risiko Tinggi. Tindakan yang benar:
+
+- A. Diskualifikasi
+- B. **Lulus dokumen, lanjut verifikasi lapangan** ✅
+- C. Lulus langsung undang HSE Plan
+- D. Negosiasi skor
+
+*Pembahasan:* Passing risiko Tinggi 51–75%; di atas 75% wajib verifikasi lapangan, namun banyak panduan menyarankan verifikasi tetap dilakukan untuk Tinggi (KB-PQ-02).
+
+### Soal 3
+
+Fire watch pada Hotwork Permit wajib hadir hingga:
+
+- A. Pekerjaan welding selesai
+- B. **Minimal 30 menit setelah pekerjaan panas terakhir** ✅
+- C. 5 menit setelah selesai
+- D. Tidak diperlukan jika pakai APAR
+
+*Pembahasan:* Standar industri — fire watch tetap berjaga ≥30 menit pascawelding untuk memastikan tidak ada bara tersembunyi.
+
+### Soal 4
+
+Dalam pekerjaan confined space, gas test wajib dilakukan untuk parameter berikut, KECUALI:
+
+- A. Oksigen (O₂)
+- B. LEL (Lower Explosive Limit)
+- C. H₂S
+- D. **Tekanan udara barometrik** ✅
+
+*Pembahasan:* O₂, LEL, H₂S, dan CO adalah 4 parameter standar gas test confined space (KB-WIP-02).
+
+### Soal 5
+
+Bobot KPI dalam Skor Final Evaluation adalah:
+
+- A. 20%
+- B. **35%** ✅
+- C. 45%
+- D. 50%
+
+*Pembahasan:* Skor Final = (KPI×35%) + (PJA×20%) + (WIP×45%) (KB-FINAL-01).
+
+## 🎯 Mode Simulasi
+
+- **Mode Cepat** — 5 soal acak, langsung skor.
+- **Mode AK3 Umum** — 30 soal, mix lagging/leading & regulasi.
+- **Mode Auditor CSMS** — 50 soal + skenario kasus, output peta kompetensi.
+- **Mode Skenario Lapangan** — soal naratif (mis. "pekerja ditemukan tanpa harness di ketinggian 5 m, apa tindakan Anda?").
+
+## 🤖 Cara Pakai
+
+Buka @CSMS Assistant dan ketik:
+
+- *"Beri saya 5 soal AK3 Umum."*
+- *"Simulasi audit CSMS — mulai."*
+- *"Skenario: pekerja welding tanpa fire watch — apa tindakan?"*

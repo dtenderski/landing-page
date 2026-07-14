@@ -1,0 +1,169 @@
+<aside>
+🛡️
+
+**Kebijakan Ketidakberpihakan & Keamanan Informasi LSP SDMKI**
+
+Dua kebijakan inti yang melindungi kredibilitas LSP SDMKI: ketidakberpihakan (klausul 4.3 ISO 17024 + KAN K-09) dan keamanan informasi (klausul 7.4 ISO 17024).
+
+**No. Dokumen:** KK-LSP-001 (Ketidakberpihakan) & KK-IS-001 (Keamanan Informasi) | **Versi:** 1.0 | **Tanggal Berlaku:** 28 April 2026
+
+</aside>
+
+# BAGIAN A — Kebijakan Ketidakberpihakan
+
+## A.1 Pernyataan Direktur
+
+Direktur LSP SDMKI dengan ini menyatakan komitmen tertinggi terhadap **ketidakberpihakan** dalam seluruh proses sertifikasi. Tidak ada kepentingan komersial, finansial, organisasional, atau personal yang akan mengompromikan objektivitas, keadilan, dan kerahasiaan keputusan sertifikasi LSP SDMKI.
+
+## A.2 Tujuan
+
+- Menjamin keputusan sertifikasi bebas dari pengaruh konflik kepentingan.
+- Memberikan kepercayaan kepada KAN, BNSP, asesi, pemberi kerja, dan masyarakat.
+- Memenuhi klausul 4.3 ISO 17024 dan KAN K-09.
+
+## A.3 Ruang Lingkup
+
+Berlaku untuk seluruh personel tetap, asesor, anggota komite, subkontraktor, dan pemilik/manajemen LSP SDMKI.
+
+## A.4 Prinsip
+
+1. **Kemandirian struktural** — LSP SDMKI tidak dimiliki/dikendalikan oleh entitas yang asesi-nya disertifikasi.
+2. **Pemisahan fungsi** — Pelatih ≠ Asesor ≠ Pengambil Keputusan untuk asesi yang sama.
+3. **Transparansi** — Daftar pemegang saham, struktur organisasi, dan hubungan komersial dipublikasikan.
+4. **Akuntabilitas** — Komite Ketidakberpihakan independen mengawasi dan melaporkan ke Direktur dan KAN.
+5. **Pencegahan COI** — Deklarasi COI tahunan + ad-hoc.
+
+## A.5 Identifikasi & Analisis Risiko Ketidakberpihakan
+
+Komite Ketidakberpihakan melakukan analisis risiko minimal 2× per tahun terhadap:
+
+- Hubungan kepemilikan dengan organisasi asesi.
+- Hubungan komersial (penjualan jasa pelatihan ke asesi).
+- Aktivitas konsultansi yang tumpang tindih dengan sertifikasi.
+- Hubungan keluarga/personal antara asesor dan asesi.
+- Insentif finansial yang terkait kuantitas keputusan lulus.
+
+**Output:** Risk Register Ketidakberpihakan + rencana mitigasi.
+
+## A.6 Tindakan Mitigasi
+
+| **Risiko** | **Mitigasi** |
+| --- | --- |
+| COI keluarga | Asesor wajib menolak penugasan; reassignment otomatis |
+| Insentif keuangan asesor berdasar jumlah lulus | Skema honor flat per asesi tanpa bonus berbasis hasil |
+
+## A.7 Komite Ketidakberpihakan
+
+- **Anggota:** minimal 3 orang — unsur pengguna jasa, pemohon, pakar bidang, tidak boleh dari manajemen LSP.
+- **Tugas:** review kebijakan, evaluasi risiko, audit COI, melapor ke Direktur dan KAN bila ada konflik signifikan yang tidak ditangani.
+- **Wewenang:** menghentikan proses sertifikasi yang melanggar prinsip ketidakberpihakan.
+- **Frekuensi rapat:** minimal 2× per tahun + insidental.
+
+## A.8 Sanksi
+
+- Teguran tertulis → suspensi peran → terminasi kontrak/keanggotaan → pelaporan ke otoritas.
+
+---
+
+# BAGIAN B — Kebijakan Keamanan Informasi
+
+## B.1 Pernyataan Direktur
+
+LSP SDMKI berkomitmen melindungi **kerahasiaan, integritas, dan ketersediaan** seluruh informasi yang dikelola, termasuk data pribadi asesi, dokumen mutu, dan rekaman keputusan sertifikasi.
+
+## B.2 Tujuan
+
+- Memenuhi klausul 7 ISO 17024.
+- Mendukung pelaksanaan asesmen jarak jauh yang aman.
+- Mematuhi UU PDP No. 27/2022 dan regulasi terkait.
+
+## B.3 Ruang Lingkup
+
+Seluruh informasi dalam bentuk apapun (digital, kertas, lisan), seluruh perangkat, jaringan, aplikasi, dan personel yang mengaksesnya.
+
+## B.4 Klasifikasi Informasi
+
+| **Kelas** | **Contoh** | **Penanganan** |
+| --- | --- | --- |
+| **Internal** | SOP, materi pelatihan internal | Hanya untuk personel LSP |
+| **Sangat Rahasia** | Master soal, kunci kriptografi, kredensial KAN/BNSP | Akses 2 orang; vault terenkripsi |
+
+## B.5 Kontrol Akses
+
+- **Identitas & autentikasi:** akun unik per personel; MFA wajib untuk sistem internal.
+- **Otorisasi:** prinsip *least privilege* dan *need-to-know*.
+- **Manajemen siklus akun:** onboarding/offboarding ≤ 1 hari kerja.
+- **Sesi:** auto-logout ≤ 15 menit idle.
+
+## B.6 Keamanan Data
+
+- **Enkripsi at-rest:** AES-256 untuk database & file rahasia.
+- **Enkripsi in-transit:** TLS 1.2+ untuk semua komunikasi.
+- **Backup:** harian, terenkripsi, off-site, retensi minimal 12 bulan + uji restore triwulanan.
+- **Disposal:** secure delete untuk media digital; shredding untuk fisik.
+
+## B.7 Asesmen Jarak Jauh
+
+- Verifikasi identitas asesi: KTP + biometrik wajah (matching score ≥ ambang).
+- Online proctoring: rekaman audio-video, deteksi anomali.
+- Soal disampaikan terenkripsi; tidak dapat di-download/screenshot.
+- Rekaman ujian disimpan minimal 12 bulan, akses terbatas.
+
+## B.8 Manajemen Insiden
+
+1. **Deteksi** — monitoring log, laporan personel.
+2. **Pelaporan** — ke Manajer IT ≤ 1 jam sejak diketahui.
+3. **Containment** — isolasi sistem/akun.
+4. **Eradication & recovery**.
+5. **Pelaporan eksternal** — ke KAN dan otoritas data pribadi sesuai UU PDP bila terjadi pelanggaran data.
+6. **Lessons learned** — update kebijakan & pelatihan.
+
+## B.9 Subkontraktor & Pihak Ketiga
+
+- Wajib menandatangani **Perjanjian Kerahasiaan** dan **Data Processing Agreement**.
+- Audit pra-engagement + tahunan.
+- Daftar subkontraktor dipublikasikan ke KAN saat asesmen.
+
+## B.10 Pelatihan & Kesadaran
+
+- Onboarding wajib mencakup keamanan informasi.
+- Refreshment tahunan untuk seluruh personel.
+- Simulasi phishing minimal 1× per tahun.
+
+## B.11 Pemantauan & Audit
+
+- Log keamanan disimpan ≥ 12 bulan, di-review minimal mingguan.
+- Audit keamanan informasi: internal tahunan, eksternal sesuai kebutuhan.
+- Vulnerability scan triwulanan; penetration test tahunan untuk platform asesmen.
+
+## B.12 Sanksi
+
+- Teguran tertulis → suspensi akses → terminasi → tindakan hukum bila merugikan asesi/lembaga.
+
+---
+
+## Pengesahan Bersama
+
+**Disusun — Manajer Mutu**
+
+---
+
+Nama: […]
+
+Tanggal: […]
+
+**Disusun — Manajer IT**
+
+---
+
+Nama: […]
+
+Tanggal: […]
+
+**Disahkan — Direktur LSP**
+
+---
+
+Nama: […]
+
+Tanggal: […]

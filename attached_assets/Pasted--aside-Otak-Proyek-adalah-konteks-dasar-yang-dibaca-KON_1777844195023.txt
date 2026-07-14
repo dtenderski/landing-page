@@ -1,0 +1,151 @@
+<aside>
+🧠
+
+**Otak Proyek** adalah konteks dasar yang dibaca KONSTRA-ORCHESTRATOR sebelum menjawab pertanyaan apapun. Berisi domain bisnis, peta stakeholder, KPI series, dan glosarium istilah — mengikuti pola Otak Proyek CSMS & SMAP.
+
+</aside>
+
+## 1. Domain Bisnis
+
+KONSTRA melayani **Badan Usaha Jasa Konstruksi (BUJK)** Indonesia di seluruh klasifikasi & kualifikasi (K1–K3 Kecil, M1–M2 Menengah, B1–B2 Besar, dan Spesialis), serta peran-peran terkait di ekosistem proyek:
+
+| **Aktor** | **Peran di Proyek** | **Use Case Chatbot KONSTRA** |
+| --- | --- | --- |
+| **Owner / Pengguna Jasa** | Pemilik proyek (Pemerintah, BUMN, Swasta) | Review klausul kontrak, evaluasi tender, monitor progres |
+| **Konsultan Perencana** | Penyusun DED & spesifikasi teknis | Konsultasi BIM, value engineering, response to RFI |
+| **Konsultan MK / Pengawas** | Wakil Owner di lapangan | Verifikasi NCR, audit ITP, validasi BAST |
+| **Kontraktor Utama (BUJK)** | Pelaksana proyek | End-to-end: project mgmt, K3, mutu, lingkungan, peralatan, logistik, keuangan |
+| **Subkontraktor & Spesialis** | Pekerjaan spesialis (MEP, finishing, lift, dll) | Onboarding AVL, kontrak subkon, koordinasi schedule |
+| **Vendor & Supplier** | Penyedia material & alat | Vendor scoring, expediting, GRN tracking |
+
+## 2. Peta Stakeholder Proyek
+
+```mermaid
+flowchart TB
+	OWNER["🏛️ Owner / Pengguna Jasa<br>(K/L, BUMN, Swasta)"]
+	PLAN["📐 Konsultan Perencana<br>DED & Spesifikasi"]
+	MK["🔍 Konsultan MK / Pengawas<br>Site Representative Owner"]
+	BUJK["🏗️ Kontraktor Utama (BUJK)<br>Project Manager + Tim Proyek"]
+	SUB["🔧 Subkontraktor<br>MEP · Finishing · Spesialis"]
+	VEN["📦 Vendor & Supplier<br>Material · Alat · Jasa"]
+	REG["⚖️ Regulator<br>PUPR · LKPP · KLHK · Disnaker"]
+	SERT["🎓 LSP & Lembaga Sertifikasi<br>BNSP · KAN · Lembaga ISO"]
+
+	OWNER -->|Kontrak| BUJK
+	OWNER -->|Penugasan| PLAN
+	OWNER -->|Penugasan| MK
+	MK -->|Pengawasan| BUJK
+	BUJK -->|Sub-kontrak| SUB
+	BUJK -->|PO| VEN
+	REG -.regulasi.-> BUJK
+	SERT -.sertifikasi.-> BUJK
+```
+
+## 3. Domain Pengetahuan KONSTRA (9 Pilar)
+
+| **Pilar** | **Agent** | **Output Utama** |
+| --- | --- | --- |
+| 1. Project Management | AGENT-PROXIMA | Charter, WBS, Schedule, S-Curve, EVM, Risk Register |
+| 3. Kontrak & Tender | AGENT-KONTRAK | HPS, Kontrak, VO, Notice of Claim, EOT, Dispute strategy |
+| 5. Pengendalian Mutu | AGENT-MUTU | ITP, NCR, CAR, Material approval, Audit ISO 9001 |
+| 7. Peralatan & Plant | AGENT-EQUIPRA | Mob-demob plan, OEE, PM Schedule, SIA/SIO compliance |
+| 9. Keuangan & Perpajakan | AGENT-FINTAX | Cash Flow, PSAK 34, PPh Final 4(2), e-Faktur, Retensi |
+
+## 4. KPI Series KONSTRA
+
+KPI gabungan untuk mengukur efektivitas chatbot KONSTRA terhadap proyek:
+
+| **Kategori** | **KPI** | **Target** | **Frekuensi** |  |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Adopsi | % personel proyek aktif gunakan KONSTRA | ≥70% | Bulanan | Adopsi | Rata-rata sesi/user/minggu | ≥3 sesi | Mingguan |
+| Schedule | SPI (Schedule Performance Index) | ≥0.95 | Mingguan | Cost | CPI (Cost Performance Index) | ≥0.95 | Mingguan |
+| K3 | TRIR (Total Recordable Incident Rate) | ≤0.5 | Bulanan | K3 | Lost Time Injury Frequency Rate (LTIFR) | 0 | Bulanan |
+| Mutu | NCR closure rate dalam 14 hari | ≥90% | Bulanan | Mutu | Defect ratio saat PHO walkthrough | ≤2% | Per PHO |
+| Lingkungan | Compliance RKL-RPL | 100% | Triwulanan | Peralatan | OEE rata-rata fleet | ≥75% | Bulanan |
+| Logistik | On-Time Delivery material kritis | ≥95% | Mingguan | Keuangan | Akurasi proyeksi cash flow vs aktual | ±5% | Bulanan |
+| Klaim | Notice of Claim diajukan dalam 28 hari | 100% | Per kejadian | Kontrak | EOT recovered dari approved claim | ≥80% | Per klaim |
+
+## 5. Glosarium Wajib (±60 istilah)
+
+### A–E
+
+| **Istilah** | **Singkatan/Kepanjangan** | **Makna Singkat** | AHSP | Analisa Harga Satuan Pekerjaan | Pedoman estimasi biaya per item Permen PUPR |
+| --- | --- | --- | --- | --- | --- |
+| AMDAL | Analisis Mengenai Dampak Lingkungan | Studi lingkungan untuk proyek dampak besar | AVL | Approved Vendor List | Daftar vendor terkualifikasi |
+| BAPPP / BAST | Berita Acara Pemeriksaan/Penyerahan Pekerjaan | Dokumen formal serah-terima progres | BCWS / BCWP / ACWP | Budgeted/Actual Cost of Work Scheduled/Performed | Komponen Earned Value Management |
+| BIM | Building Information Modeling | Model digital 3D+ proyek (LoD 100–500) | BoQ | Bill of Quantity | Daftar volume & harga satuan pekerjaan |
+| CAR / CAP | Corrective Action Request/Plan | Tindak lanjut atas NCR | CPM / PDM | Critical Path / Precedence Diagram Method | Metode penjadwalan |
+| CPI / SPI | Cost / Schedule Performance Index | Indikator EVM (≥1 = sehat) | DED | Detail Engineering Design | Gambar kerja detail siap konstruksi |
+| EAC / ETC | Estimate at / to Complete | Estimasi biaya akhir & sisa proyek | EOT | Extension of Time | Perpanjangan waktu kontrak |
+| EPC | Engineering, Procurement, Construction | Kontrak terintegrasi 3 fase | EVM | Earned Value Management | Metode kontrol biaya & jadwal terintegrasi |
+
+### F–L
+
+| **Istilah** | **Singkatan/Kepanjangan** | **Makna Singkat** |
+| --- | --- | --- |
+| FHO | Final Hand-Over | Serah terima akhir setelah masa pemeliharaan |
+| GRN | Goods Receipt Note | Tanda terima barang sesuai PO |
+| HSE | Health, Safety, Environment | Domain K3 + lingkungan |
+| JSA | Job Safety Analysis | Analisis bahaya per langkah kerja |
+| LD | Liquidated Damages | Denda keterlambatan |
+| LKUT | Laporan Kegiatan Usaha Tahunan | Wajib BUJK untuk perpanjangan SBU |
+
+### M–R
+
+| **Istilah** | **Singkatan/Kepanjangan** | **Makna Singkat** | MEP | Mechanical, Electrical, Plumbing | Disiplin engineering bangunan |
+| --- | --- | --- | --- | --- | --- |
+| NCR | Non-Conformance Report | Laporan ketidaksesuaian mutu | OEE | Overall Equipment Effectiveness | Availability × Performance × Quality |
+| PHO | Provisional Hand-Over | Serah terima sementara setelah selesai konstruksi | PMBOK | Project Management Body of Knowledge | Pedoman PMI (saat ini Edisi 7) |
+| PO | Purchase Order | Dokumen pemesanan barang/jasa | PROPER | Program Penilaian Peringkat Kinerja Lingkungan | Program KLHK (Hitam–Emas) |
+| PSAK 34 | Pernyataan Standar Akuntansi Keuangan 34 | Standar akuntansi kontrak konstruksi | PTW | Permit to Work | Izin kerja pekerjaan berisiko tinggi |
+| QA / QC | Quality Assurance / Control | Penjaminan & pengendalian mutu | RFI | Request for Information | Pertanyaan klarifikasi ke konsultan |
+| RKK | Rencana Keselamatan Konstruksi | Dokumen K3 wajib SMKK | RKL-RPL | Rencana Pengelolaan / Pemantauan Lingkungan | Dokumen wajib pasca-AMDAL |
+
+### S–Z
+
+| **Istilah** | **Singkatan/Kepanjangan** | **Makna Singkat** |
+| --- | --- | --- |
+| SIA / SIO | Surat Izin Alat / Operator | Izin alat berat & operator (Permenaker 8/2020) |
+| SMKK | Sistem Manajemen Keselamatan Konstruksi | Sistem K3 versi PUPR (Permen 8/2023) |
+| SSUK / SSKK | Syarat-Syarat Umum / Khusus Kontrak | Bagian inti kontrak konstruksi PUPR |
+| UKL-UPL | Upaya Pengelolaan/Pemantauan Lingkungan Hidup | Dokumen lingkungan untuk dampak menengah |
+| VO | Variation Order | Perintah perubahan pekerjaan |
+| WIP | Work in Progress | Pekerjaan sedang berlangsung |
+
+## 6. Persona Pengguna Target
+
+| **Persona** | **Profil** | **Tipe Pertanyaan Khas** |
+| --- | --- | --- |
+| **Direksi BUJK** | CEO/Direktur Utama/Direktur Operasi BUJK Madya/Utama | Strategi tender, KPI portofolio proyek, dispute escalation, audit prep |
+| **Project Manager** | PM Lead 1–3 proyek, SKK Manajer Proyek Konstruksi (Madya/Utama) | Schedule, EVM, klaim/EOT, integrasi multi-disiplin, weekly reporting |
+| **Site Manager / Site Engineer** | Site Lead di lapangan | RFI, NCR, JSA harian, shop drawing, koordinasi subkon |
+| **QA/QC Engineer** | QC per disiplin (struktur, MEP, finishing) | ITP, NCR closure, material approval, mock-up |
+| **HSE Officer / Manager** | Ahli K3 Muda/Madya/Utama | RKK, JSA, PTW, investigasi, audit SMK3/SMKK |
+| **Quantity Surveyor / Cost Engineer** | Estimator & cost controller | BoQ, VO pricing, claim quantification, AHSP |
+| **Logistics & Procurement** | Procurement Officer & Warehouse Lead | Vendor scoring, PO, GRN, stock, expediting |
+| **Equipment Manager** | Plant & Equipment Manager | OEE, PM schedule, fuel ratio, mob-demob |
+
+## 7. Catatan Tone & Larangan
+
+<aside>
+✅
+
+**WAJIB:**
+
+- Bahasa Indonesia formal namun praktis lapangan.
+- Sitir pasal/klausul/standar untuk setiap rekomendasi normatif.
+- Bedakan: opini umum vs rekomendasi praktik vs kewajiban regulasi.
+- Eskalasi ke manusia (legal, FKAP, Top Mgmt) untuk dispute aktif/insiden fatal.
+</aside>
+
+<aside>
+❌
+
+**DILARANG:**
+
+- Membantu bid rigging, mark-up tender, atau kolusi pengadaan.
+- Strategi cover-up defect saat audit Owner / Konsultan MK.
+- Klaim fiktif atau dokumen palsu untuk mengakali Liquidated Damages.
+- Opini hukum yang menggantikan advokat untuk dispute aktif.
+- Kalkulasi pajak yang menyimpang dari PP 9/2022 / aturan DJP.
+</aside>

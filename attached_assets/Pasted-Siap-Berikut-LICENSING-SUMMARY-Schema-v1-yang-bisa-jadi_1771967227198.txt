@@ -1,0 +1,174 @@
+Siap. Berikut **LICENSING_SUMMARY Schema v1** yang bisa jadi “bahasa bersama” untuk semua chatbot di seri Jasa Konstruksi (Perizinan Usaha, TRC, ECSG, bahkan SBU/SKK kalau perlu). Ini dibuat supaya **copy–paste antar bot** tetap rapi tanpa perlu fitur state di platform.
+
+---
+
+# LICENSING_SUMMARY v1 (Schema Resmi)
+
+## 1) Aturan Umum
+
+* Format harus konsisten, mudah diparse manusia & LLM
+* Semua field boleh diisi `UNKNOWN` kalau user belum punya datanya
+* Gunakan nilai status yang disepakati agar stabil
+
+**Nilai status standar:**
+
+* `VALID`
+* `INVALID`
+* `EXPIRED`
+* `PENDING`
+* `NOT_REQUIRED`
+* `UNKNOWN`
+
+**Tanggal** (kalau ada): format `YYYY-MM-DD`
+
+---
+
+## 2) Format Output (Template)
+
+Ini template yang Anda bisa jadikan output bot “Perizinan Usaha” dan jadi input standar untuk TRC/ECSG:
+
+```
+LICENSING_SUMMARY v1
+ENTITY:
+- legal_name: {text | UNKNOWN}
+- business_form: {PT | CV | Koperasi | Firma | Perorangan | UNKNOWN}
+- npwp: {text | UNKNOWN}
+- address: {text | UNKNOWN}
+- pic_name: {text | UNKNOWN}
+- pic_role: {text | UNKNOWN}
+- pic_contact: {text | UNKNOWN}
+
+NIB:
+- status: {VALID | INVALID | PENDING | UNKNOWN}
+- nib_number: {text | UNKNOWN}
+- issue_date: {YYYY-MM-DD | UNKNOWN}
+- last_update: {YYYY-MM-DD | UNKNOWN}
+
+KBLI:
+- construction_kbli_present: {YES | NO | UNKNOWN}
+- construction_kbli_list: {comma-separated | UNKNOWN}
+- active_in_oss: {YES | NO | UNKNOWN}
+- notes: {text | NONE}
+
+IUJK:
+- required_context: {Tender | Operasional | Keduanya | UNKNOWN}
+- status: {VALID | INVALID | EXPIRED | PENDING | NOT_REQUIRED | UNKNOWN}
+- iujk_number: {text | UNKNOWN}
+- valid_until: {YYYY-MM-DD | UNKNOWN}
+- issuer: {text | UNKNOWN}
+- notes: {text | NONE}
+
+DEED_AND_CHANGES (Akta & Perubahan):
+- latest_deed_date: {YYYY-MM-DD | UNKNOWN}
+- latest_change_date: {YYYY-MM-DD | UNKNOWN}
+- changes_synced_to_oss: {YES | NO | UNKNOWN}
+- notes: {text | NONE}
+
+TAX_BASIC:
+- vat_pkp_status: {YES | NO | UNKNOWN}
+- sppkp_available: {YES | NO | UNKNOWN}
+- notes: {text | NONE}
+
+COMPLIANCE_FLAGS:
+- blacklist_flag: {YES | NO | UNKNOWN}
+- sanctions_flag: {YES | NO | UNKNOWN}
+- litigation_flag: {YES | NO | UNKNOWN}
+- notes: {text | NONE}
+
+DATA_CONSISTENCY_CHECK:
+- name_match_oss_vs_deed: {MATCH | MISMATCH | UNKNOWN}
+- address_match_oss_vs_deed: {MATCH | MISMATCH | UNKNOWN}
+- directors_match_oss_vs_deed: {MATCH | MISMATCH | UNKNOWN}
+- notes: {text | NONE}
+
+OVERALL:
+- legal_status: {Valid | Bersyarat | Tidak Valid | UNKNOWN}
+- legal_risk_level: {Rendah | Sedang | Tinggi | Kritis | UNKNOWN}
+- primary_legal_gap: {NIB | KBLI | IUJK | Akta | NPWP | Sinkronisasi Data | Kombinasi | UNKNOWN}
+- top_legal_risks: {bulleted short list | NONE}
+- roadmap_priority_1: {text | NONE}
+- roadmap_priority_2: {text | NONE}
+- roadmap_priority_3: {text | NONE}
+```
+
+---
+
+# 3) Kenapa Schema Ini “Aman” untuk Builder Generik?
+
+Karena ini **hanya protokol teks**. Tidak butuh:
+
+* variable platform
+* branching platform
+* tombol platform
+
+Tapi tetap memberi efek:
+
+* interoperable antar chatbot
+* konsisten untuk parsing prompt
+* mudah di-copy-paste user
+
+---
+
+# 4) Cara Pakai di Seri Chatbot (Praktis)
+
+## A) Di chatbot Perizinan Usaha
+
+Output utama boleh tetap “Legal Status Protocol” yang Anda pakai.
+Tapi di akhir, bot wajib menambahkan blok:
+
+> `LICENSING_SUMMARY v1` (template di atas)
+
+Jadi user tinggal copy itu ke TRC/ECSG.
+
+## B) Di TRC (Tender Readiness Checker)
+
+TRC menerima LICENSING_SUMMARY v1 sebagai input legalitas, lalu hanya perlu baca bagian:
+
+* NIB
+* KBLI
+* IUJK
+* DATA_CONSISTENCY_CHECK
+* OVERALL
+
+## C) Di ECSG
+
+ECSG ambil bagian OVERALL + top risks + roadmap.
+
+---
+
+# 5) Mini Rule (Stabilitas Penilaian)
+
+Agar konsisten antar bot:
+
+* Jika `NIB.status = INVALID` → `legal_risk_level >= Tinggi`
+* Jika `construction_kbli_present = NO` atau `active_in_oss = NO` → `legal_risk_level >= Tinggi`
+* Jika `IUJK.status = EXPIRED/INVALID` dan `required_context != UNKNOWN/NOT_REQUIRED` → `legal_risk_level = Kritis` (opsional jika fatal)
+* Jika `DATA_CONSISTENCY_CHECK` ada `MISMATCH` → minimal `Sedang`, bisa `Tinggi` jika mismatch pada **name/directors**
+
+---
+
+# 6) Tambahan kecil yang sangat berguna (opsional)
+
+Tambahkan satu blok pendek untuk user yang tidak punya data:
+
+```
+LICENSING_MIN_INPUT:
+- legal_name:
+- nib_number:
+- kbli_list:
+- iujk_status:
+- deed_latest_date:
+- npwp:
+```
+
+Ini mempercepat pengisian.
+
+---
+
+Kalau Anda setuju, langkah berikutnya paling cepat adalah:
+✅ saya buatkan **“Greeting + Input Hint”** untuk chatbot Perizinan Usaha yang mendorong user memberi data dalam format ini, tanpa terasa ribet.
+
+Mau gaya greeting-nya lebih:
+A) formal (enterprise)
+B) semi-formal (praktis)
+C) santai (untuk kontraktor kecil)?

@@ -1,0 +1,61 @@
+<aside>
+🧠
+
+**Otak Proyek** adalah pusat konteks bisnis yang dibaca oleh seluruh chatbot dan alat bantu di Series CSMS. Update halaman ini ketika ada perubahan stakeholder, regulasi, atau target K3L.
+
+</aside>
+
+## 🎯 Domain & Tujuan
+
+- **Domain bisnis:** Pengelolaan kontraktor (Contractor Management) di sektor pembangkit/ketenagalistrikan, migas, konstruksi, manufaktur, dan industri proses.
+- **Tujuan utama:** Zero fatality · zero major incident · kepatuhan ISO 45001 + PP 50/2012 · efisiensi siklus audit kontraktor.
+- **Lingkup:** seluruh siklus 6 langkah CSMS — Risk Assessment → Pre-Qualification → Selection (HSE Plan) → Pre-Job Activity → Work in Progress → Final Evaluation.
+
+## 👥 Stakeholder
+
+| Peran | Kebutuhan utama |
+| --- | --- |
+| HSE Officer / AK3 Umum | Audit PQ, evaluasi HSE Plan, pengawasan WIP, investigasi insiden |
+| Project Manager / User | Tetapkan tingkat risiko, pilih kontraktor, sahkan PJA, tutup kontrak |
+| Procurement / Pengadaan | Verifikasi dokumen kontraktor, kontrak award, sanksi |
+| Auditor CSMS | Skoring 16 elemen PQ, verifikasi lapangan, final evaluation |
+| Kontraktor | Persiapan dokumen PQ, HSE Plan, JSA, KPI K3L |
+| Direksi / GM | Persetujuan high-risk, eskalasi insiden, kebijakan K3 |
+
+## 🧭 Acuan Regulasi (Highlight)
+
+- **ISO 45001:2018** — elemen 4.4.6 *Operational Control* (CSMS sebagai jembatan OHSMS Perusahaan ↔ OHSMS Kontraktor).
+- **PP No. 50/2012** — SMK3, sertifikat wajib untuk PQ tinggi/sangat tinggi.
+- **UU No. 1/1970** — Keselamatan Kerja.
+- **Permenaker No. 5/2018** — K3 Lingkungan Kerja.
+- **Permen ESDM No. 10/2021** — K3 Ketenagalistrikan.
+- **Pedoman CSMS PT PLN Indonesia Power** — acuan operasional.
+
+## 📊 KPI Series CSMS
+
+| Indikator | Target |
+| --- | --- |
+| Skor Final ≥ 70 (lulus) | 100% kontraktor aktif |
+| Penerapan PQ tepat tingkat risiko | 100% pekerjaan moderat ke atas |
+| Closure action temuan WIP | ≥ 70% dalam periode |
+| Insiden fatality / property damage permanen | 0 |
+
+## 🚧 Pain Points yang Dipecahkan Chatbot
+
+1. Penentuan tingkat risiko subjektif → **AGENT-RA + Kalkulator**.
+2. Audit PQ memakan waktu lama → **AGENT-PQ + Form 2**.
+3. Permit khusus terlewat → **AGENT-PERMIT + KB-WIP-02**.
+4. Keputusan SWA ragu-ragu → **AGENT-SWA + KB-WIP-03**.
+5. Skoring Final Eval inkonsisten → **AGENT-FINAL + Form 7**.
+
+## 🗂️ Glosarium Inti
+
+- **CSMS** — Contractor Safety Management System.
+- **PQ** — Pre-Qualification (Prakualifikasi).
+- **PJA** — Pre-Job Activity.
+- **WIP** — Work in Progress.
+- **SWA** — Stop Work Authority.
+- **JSA** — Job Safety Analysis.
+- **LOTO** — Lock Out Tag Out.
+- **PPR** — Petugas Proteksi Radiasi.
+- **APD** — Alat Pelindung Diri.

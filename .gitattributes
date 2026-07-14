@@ -1,0 +1,2 @@
+attached_assets/generated_videos/gustafta-promo-combined.mp4 filter=lfs diff=lfs merge=lfs -text
+attached_assets/generated_videos/gustafta_promo_24s.mp4 filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,364 @@
+Berikut **ketentuan KAN yang relevan** untuk **Sertifikasi AJJ Nirkertas**.
+
+Catatan penting: saya tidak menemukan dokumen KAN yang secara khusus bernama **“ketentuan AJJ Nirkertas”**. Untuk LSP, ketentuan spesifik **AJJ/Nirkertas** berasal dari **BNSP SE.007/BNSP/V/2023**, sedangkan dari sisi **KAN** kerangka yang dipakai adalah **akreditasi Lembaga Sertifikasi Person** berdasarkan **SNI ISO/IEC 17024**, **KAN U-01**, dan **KAN K-09**. KAN adalah lembaga akreditasi, sedangkan BNSP adalah lembaga yang mengatur dan memberi persetujuan operasional sertifikasi kompetensi jarak jauh/nirkertas untuk LSP BNSP. KAN sendiri menyatakan sebagai lembaga yang bertanggung jawab atas akreditasi di Indonesia, dan BSN/KAN mengoperasikan skema akreditasi Lembaga Sertifikasi Person yang mengacu pada SNI ISO/IEC 17024. ([akreditasi.bsn.go.id][1])
+
+---
+
+## 1. Posisi KAN terhadap AJJ Nirkertas
+
+```yaml
+posisi_kan:
+  fungsi_kan: "Akreditasi Lembaga Penilaian Kesesuaian, termasuk Lembaga Sertifikasi Person."
+  acuan_utama_lsp_person:
+    - "SNI ISO/IEC 17024:2012"
+    - "KAN U-01 Syarat dan Aturan Akreditasi LPK"
+    - "KAN K-09 Persyaratan Khusus Akreditasi Lembaga Sertifikasi Person"
+  hubungan_dengan_ajj_nirkertas:
+    - "KAN tidak berfokus pada izin operasional AJJ/Nirkertas BNSP."
+    - "KAN menilai apakah proses sertifikasi person tetap memenuhi persyaratan akreditasi."
+    - "Jika sertifikasi dilakukan secara jarak jauh/nirkertas, LSP harus membuktikan bahwa metode digital tetap menjaga validitas, keamanan, ketidakberpihakan, kompetensi, rekaman, dan keterlacakan proses."
+```
+
+Untuk operasional AJJ/Nirkertas BNSP, rujukan spesifiknya tetap **SE.007/BNSP/V/2023**, yang memuat SOP wajib, sumber daya personil, sarana-prasarana, sistem informasi, aplikasi sertifikasi jarak jauh, verifikasi TUK, rekaman asesmen, umpan balik, laporan asesmen, banding, serta ketentuan nirkertas/paperless. 
+
+---
+
+# 2. Ketentuan KAN yang Harus Diterapkan pada AJJ Nirkertas
+
+## A. Legalitas dan Organisasi
+
+Dari perspektif KAN, LSP harus memiliki legalitas dan struktur organisasi yang jelas. Jika LSP berada dalam organisasi induk yang juga melakukan kegiatan lain seperti pelatihan, konsultansi, atau bisnis lain, hubungan tersebut harus dinyatakan jelas dan dikendalikan agar tidak menimbulkan konflik kepentingan. Salinan KAN K-09 yang tersedia publik menyebut LSP yang diakreditasi KAN harus memenuhi SNI ISO/IEC 17024, persyaratan IAF yang relevan, dan kriteria akreditasi KAN; dokumen tersebut juga menyebut persyaratan legalitas, organisasi, serta konflik kepentingan. ([pdfcoffee.com][2])
+
+```yaml
+legalitas_dan_organisasi:
+  ketentuan:
+    - LSP memiliki badan hukum atau berada dalam entitas legal yang jelas.
+    - Struktur organisasi LSP terdokumentasi.
+    - Hubungan dengan unit pelatihan/konsultansi/organisasi induk harus jelas.
+    - Potensi konflik kepentingan harus diidentifikasi dan dikendalikan.
+  implikasi_ajj_nirkertas:
+    - sistem digital tidak boleh dikelola oleh pihak yang menimbulkan konflik kepentingan tanpa pengendalian
+    - admin, asesor, komite keputusan, dan pengelola sistem harus memiliki kewenangan yang dipisahkan
+    - role akses aplikasi harus mendukung pemisahan fungsi
+```
+
+---
+
+## B. Ketidakberpihakan dan Independensi
+
+Dalam sertifikasi person, keputusan sertifikasi harus bebas dari tekanan komersial, pelatihan, relasi pribadi, atau kepentingan lain. Dalam AJJ Nirkertas, risiko ketidakberpihakan bertambah karena proses dilakukan melalui sistem digital.
+
+```yaml
+ketidakberpihakan:
+  ketentuan:
+    - LSP harus mengidentifikasi risiko ketidakberpihakan.
+    - LSP harus mengevaluasi dan menangani risiko tersebut secara terdokumentasi.
+    - Asesor tidak boleh mengambil keputusan sertifikasi final jika sistem LSP memisahkan rekomendasi dan keputusan.
+  implikasi_ajj_nirkertas:
+    - asesor hanya memberi rekomendasi hasil asesmen
+    - keputusan sertifikasi dilakukan oleh mekanisme LSP/komite yang berwenang
+    - sistem harus membedakan akses asesor dan pengambil keputusan
+    - jejak perubahan data harus dapat ditelusuri
+```
+
+---
+
+## C. Kompetensi Personil
+
+KAN menilai apakah LSP memiliki personil yang kompeten untuk mengoperasikan skema sertifikasi. Salinan KAN K-09 yang tersedia publik menyebut LSP harus memiliki personel yang cukup dan kompeten, serta sumber daya yang diperlukan untuk melaksanakan kegiatan sertifikasi sesuai ruang lingkup akreditasi. ([pdfcoffee.com][2])
+
+```yaml
+kompetensi_personil:
+  ketentuan_kan:
+    - personil LSP kompeten sesuai perannya
+    - asesor kompetensi memenuhi persyaratan skema
+    - personil pengambil keputusan memahami skema dan proses sertifikasi
+    - personil pendukung memahami prosedur sertifikasi
+  implikasi_ajj_nirkertas:
+    admin_lsp:
+      - memahami alur sistem digital
+      - mampu memverifikasi dokumen digital
+      - mampu menarik laporan dan rekaman
+    asesor:
+      - memahami SOP AJJ
+      - mampu memverifikasi identitas dan lingkungan asesmen jarak jauh
+      - mampu menggunakan instrumen asesmen digital
+    pengelola_sistem:
+      - mampu menjaga akses, backup, rekaman, dan audit trail
+    komite_keputusan:
+      - memahami perbedaan rekomendasi asesor dan keputusan sertifikasi
+```
+
+---
+
+## D. Skema Sertifikasi dan Metode Uji
+
+KAN mensyaratkan LSP mengoperasikan skema sertifikasi person yang jelas dan terdokumentasi. Dalam konteks AJJ, metode asesmen jarak jauh harus tetap mampu membuktikan kompetensi sebagaimana metode tatap muka.
+
+```yaml
+skema_dan_metode_uji:
+  ketentuan:
+    - skema sertifikasi harus terdokumentasi
+    - metode uji harus sesuai dengan kompetensi yang diukur
+    - persyaratan kompetensi, bukti, dan proses keputusan harus jelas
+  implikasi_ajj_nirkertas:
+    - tidak semua unit kompetensi otomatis cocok diuji jarak jauh
+    - LSP harus membuktikan metode AJJ tetap valid untuk skema tersebut
+    - jika ada praktik/observasi, harus ada mekanisme pembuktian yang memadai
+    - instrumen asesmen digital harus tervalidasi
+```
+
+---
+
+## E. Rekaman Proses Sertifikasi
+
+KAN K-09 pada salinan publik mensyaratkan rekaman pelaksanaan kegiatan sertifikasi person minimal satu proses sertifikasi, mulai dari permohonan, pelaksanaan ujian, sampai penetapan keputusan, sebagai bagian dari permohonan akreditasi. ([pdfcoffee.com][2])
+
+```yaml
+rekaman_proses:
+  ketentuan_kan:
+    - rekaman proses sertifikasi harus lengkap
+    - rekaman harus dapat ditelusuri
+    - rekaman harus mendukung keputusan sertifikasi
+  implikasi_ajj_nirkertas:
+    dokumen_minimal:
+      - permohonan sertifikasi digital
+      - asesmen mandiri digital
+      - persetujuan asesmen
+      - instrumen asesmen terisi
+      - bukti kompetensi
+      - rekaman asesmen
+      - laporan asesmen
+      - rekomendasi asesor
+      - keputusan sertifikasi
+      - umpan balik
+      - banding jika ada
+```
+
+---
+
+## F. Witness oleh KAN
+
+Dalam salinan KAN K-09 yang tersedia publik, witness disebut sebagai alat untuk memastikan kompetensi LSP dalam pelaksanaan ujian, proses penilaian, dan pengambilan keputusan, serta memverifikasi bahwa LSP menerapkan prosedurnya secara memuaskan sesuai skema sertifikasi. Witness juga disebut disyaratkan pada akreditasi awal, reakreditasi/siklus, dan perluasan ruang lingkup. ([pdfcoffee.com][2])
+
+```yaml
+witness_kan:
+  fokus_witness:
+    - pelaksanaan ujian/uji kompetensi
+    - penerapan prosedur LSP
+    - kompetensi asesor/personil
+    - proses penilaian
+    - proses pengambilan keputusan
+  implikasi_ajj_nirkertas:
+    - KAN dapat meminta bukti bahwa ujian jarak jauh berjalan valid
+    - LSP harus siap menunjukkan rekaman asesmen AJJ
+    - LSP harus menunjukkan instrumen digital dan laporan asesmen
+    - LSP harus membuktikan keputusan sertifikasi berdasarkan bukti asesmen
+```
+
+---
+
+## G. Surveilans dan Siklus Akreditasi
+
+KAN memiliki mekanisme surveilans, reakreditasi, dan witness dalam siklus akreditasi. Situs KAN menampilkan sistem daftar LPK dan histori proses, termasuk status proses seperti “survailan”, yang menunjukkan surveilans merupakan bagian dari siklus akreditasi KAN. ([akreditasi.bsn.go.id][3])
+
+```yaml
+surveilans_kan:
+  ketentuan_umum:
+    - LSP yang terakreditasi harus mempertahankan pemenuhan persyaratan akreditasi
+    - KAN dapat melakukan surveilans sesuai siklus akreditasi
+    - KAN dapat memeriksa dokumen, rekaman, penerapan sistem, dan witness
+  implikasi_ajj_nirkertas:
+    - pelaksanaan AJJ harus konsisten dengan skema yang diakreditasi/disetujui
+    - rekaman digital harus siap disampling
+    - laporan asesmen dan keputusan sertifikasi harus dapat ditelusuri
+    - perubahan metode dari tatap muka ke jarak jauh harus dikendalikan
+```
+
+---
+
+# 3. Matriks Ketentuan KAN vs BNSP untuk AJJ Nirkertas
+
+| Area                | Ketentuan KAN                                          | Ketentuan BNSP AJJ/Nirkertas                                       | Implikasi untuk LSP                                          |
+| ------------------- | ------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------ |
+| Legalitas LSP       | LSP harus memiliki legalitas dan organisasi yang jelas | LSP harus berlisensi BNSP dan mengajukan persetujuan AJJ/Nirkertas | Siapkan legalitas, lisensi, struktur organisasi, SK personil |
+| Standar acuan       | SNI ISO/IEC 17024, KAN U-01, KAN K-09                  | SE.007/BNSP/V/2023                                                 | Sistem AJJ harus tetap memenuhi prinsip sertifikasi person   |
+| Ketidakberpihakan   | Risiko impartiality harus dikendalikan                 | Peran asesi, asesor, admin, TUK, LSP harus jelas                   | Pisahkan hak akses dan kewenangan keputusan                  |
+| Kompetensi personil | Personil harus kompeten sesuai perannya                | Pengelola sistem, asesor, admin, TUK harus siap                    | Siapkan CV, SK, bukti pelatihan, evaluasi kompetensi         |
+| Skema sertifikasi   | Skema harus terdokumentasi dan dapat diuji             | Skema AJJ harus diajukan/disetujui                                 | Jangan menjalankan AJJ di luar skema yang disetujui          |
+| Rekaman             | Rekaman proses sertifikasi harus lengkap               | Rekaman asesmen dan verifikasi TUK wajib dikelola                  | Simpan video, log, instrumen, laporan, keputusan             |
+| Witness             | KAN dapat witness proses uji/sertifikasi               | BNSP witness uji coba AJJ saat permohonan                          | Siapkan skenario demo dan sampel end-to-end                  |
+| Surveilans          | KAN melakukan surveilans akreditasi                    | BNSP meminta audit internal dan laporan berkala                    | Buat dashboard, audit trail, dan pelaporan 6 bulanan         |
+
+---
+
+# 4. Dokumen KAN yang Perlu Dihubungkan dengan AJJ Nirkertas
+
+```yaml
+dokumen_kan_relevan:
+  standar:
+    - "SNI ISO/IEC 17024:2012 - Penilaian kesesuaian, persyaratan umum lembaga sertifikasi person"
+  aturan_kan:
+    - "KAN U-01 - Syarat dan Aturan Akreditasi LPK"
+    - "KAN K-09 - Persyaratan Khusus Akreditasi Lembaga Sertifikasi Person"
+    - "KAN U-03 - Penggunaan Simbol Akreditasi KAN, bila LSP terakreditasi KAN"
+  dokumen_lsp_yang_harus_terhubung:
+    - manual mutu
+    - prosedur sertifikasi
+    - prosedur ketidakberpihakan
+    - prosedur kompetensi personil
+    - prosedur ujian/asesmen
+    - prosedur keputusan sertifikasi
+    - prosedur keluhan dan banding
+    - prosedur pengendalian rekaman
+    - prosedur keamanan informasi
+    - prosedur audit internal
+    - kaji ulang manajemen
+```
+
+---
+
+# 5. Checklist Implementasi AJJ Nirkertas agar Selaras dengan KAN
+
+```yaml
+checklist_keselarasan_kan_ajj_nirkertas:
+  legalitas_dan_ruang_lingkup:
+    - "[ ] Legalitas LSP tersedia"
+    - "[ ] Ruang lingkup skema terdokumentasi"
+    - "[ ] Skema AJJ yang dijalankan sesuai persetujuan"
+    - "[ ] Hubungan dengan unit pelatihan/konsultansi dikendalikan"
+
+  ketidakberpihakan:
+    - "[ ] Risiko ketidakberpihakan AJJ diidentifikasi"
+    - "[ ] Konflik kepentingan asesor diperiksa"
+    - "[ ] Hak akses asesor dan pengambil keputusan dipisahkan"
+    - "[ ] Keputusan sertifikasi tidak dibuat oleh pihak yang tidak berwenang"
+
+  kompetensi_personil:
+    - "[ ] Admin AJJ kompeten menggunakan sistem"
+    - "[ ] Asesor memahami SOP AJJ"
+    - "[ ] Pengelola sistem memahami keamanan data, backup, dan rekaman"
+    - "[ ] Komite keputusan memahami proses sertifikasi person"
+    - "[ ] Bukti kompetensi personil tersedia"
+
+  metode_asesmen:
+    - "[ ] Metode AJJ sesuai dengan kompetensi yang diuji"
+    - "[ ] Instrumen digital tervalidasi"
+    - "[ ] Identitas asesi diverifikasi"
+    - "[ ] Lingkungan asesmen diverifikasi"
+    - "[ ] Risiko bantuan tidak sah dikendalikan"
+
+  rekaman_dan_keterlacakan:
+    - "[ ] Permohonan sertifikasi tersimpan"
+    - "[ ] Asesmen mandiri tersimpan"
+    - "[ ] Persetujuan asesmen tersimpan"
+    - "[ ] Rekaman asesmen tersimpan"
+    - "[ ] Instrumen asesmen terisi tersimpan"
+    - "[ ] Laporan asesmen tersimpan"
+    - "[ ] Keputusan sertifikasi tersimpan"
+    - "[ ] Audit trail tersedia"
+
+  keamanan_data:
+    - "[ ] Role-based access control diterapkan"
+    - "[ ] Backup rekaman tersedia"
+    - "[ ] Data asesi dilindungi"
+    - "[ ] Rekaman tidak dapat diakses pihak tidak berwenang"
+    - "[ ] Perubahan data terekam dalam log"
+
+  audit_internal_dan_kaji_ulang:
+    - "[ ] Audit internal mencakup AJJ/Nirkertas"
+    - "[ ] Temuan audit memiliki CAPA"
+    - "[ ] Kaji ulang manajemen membahas kinerja AJJ/Nirkertas"
+    - "[ ] Tindakan perbaikan diverifikasi efektivitasnya"
+```
+
+---
+
+# 6. Modul Chatbot Siap Tempel
+
+```yaml
+module:
+  id: ketentuan_kan_ajj_nirkertas
+  title: "Ketentuan KAN tentang Sertifikasi AJJ Nirkertas"
+  purpose: >
+    Menjelaskan hubungan ketentuan KAN dengan pelaksanaan Sertifikasi AJJ
+    Nirkertas, terutama untuk LSP yang menerapkan sistem sertifikasi person
+    berbasis SNI ISO/IEC 17024 dan/atau terakreditasi KAN.
+
+intents:
+  - id: ask_kan_rules_overview
+    sample_user_inputs:
+      - "Apa ketentuan KAN tentang AJJ Nirkertas?"
+      - "KAN mengatur sertifikasi jarak jauh bagaimana?"
+      - "Bagaimana AJJ Nirkertas agar sesuai KAN?"
+      - "Apa hubungan KAN dan BNSP dalam AJJ Nirkertas?"
+    response_template: response_kan_rules_overview
+    next_node: kan_rules_menu
+
+  - id: ask_kan_documents
+    sample_user_inputs:
+      - "Dokumen KAN apa yang relevan untuk AJJ?"
+      - "KAN U-01 dan KAN K-09 hubungannya apa?"
+      - "ISO 17024 untuk AJJ Nirkertas bagaimana?"
+    response_template: response_kan_documents
+    next_node: dokumen_kan_relevan
+
+  - id: ask_kan_witness
+    sample_user_inputs:
+      - "Witness KAN untuk AJJ bagaimana?"
+      - "Apa yang dicek KAN saat witness?"
+      - "Sampling KAN untuk asesmen jarak jauh apa?"
+    response_template: response_kan_witness
+    next_node: witness_kan
+
+  - id: ask_kan_surveillance
+    sample_user_inputs:
+      - "Surveilans KAN untuk AJJ Nirkertas apa?"
+      - "Apa yang diperiksa KAN saat surveilans?"
+      - "Bagaimana persiapan surveilans KAN?"
+    response_template: response_kan_surveillance
+    next_node: surveilans_kan
+
+flow:
+  id: kan_rules_menu
+  title: "Menu Ketentuan KAN untuk AJJ Nirkertas"
+  bot_message: >
+    Ketentuan KAN untuk AJJ Nirkertas tidak berdiri sebagai izin operasional
+    khusus AJJ, tetapi melekat pada pemenuhan akreditasi Lembaga Sertifikasi
+    Person berdasarkan SNI ISO/IEC 17024, KAN U-01, dan KAN K-09.
+    Pilih topik yang ingin dilihat.
+  quick_replies:
+    - "Posisi KAN vs BNSP"
+    - "Dokumen KAN relevan"
+    - "Checklist keselarasan KAN"
+    - "Witness KAN"
+    - "Surveilans KAN"
+    - "Risiko ketidakberpihakan"
+    - "Rekaman dan audit trail"
+
+response_template:
+  id: response_kan_rules_overview
+  text: >
+    Secara praktis, KAN tidak memberikan ketentuan khusus bernama AJJ
+    Nirkertas seperti BNSP SE.007. Dari sisi KAN, AJJ Nirkertas harus tetap
+    memenuhi prinsip sertifikasi person: legalitas, ketidakberpihakan,
+    kompetensi personil, skema yang valid, metode uji yang sah, keamanan data,
+    rekaman yang dapat ditelusuri, keluhan/banding, audit internal, dan kaji
+    ulang manajemen. Untuk operasional AJJ/Nirkertas LSP BNSP, gunakan SE.007
+    BNSP sebagai acuan teknis tambahan.
+  quick_replies:
+    - "Checklist KAN"
+    - "Dokumen yang disiapkan"
+    - "Witness KAN"
+    - "Surveilans KAN"
+```
+
+---
+
+## Ringkasan Praktis
+
+Untuk **AJJ Nirkertas**, **KAN tidak menggantikan ketentuan BNSP SE.007**. KAN melihat apakah LSP tetap memenuhi persyaratan **SNI ISO/IEC 17024** dan aturan akreditasi LSP person: legalitas, imparsialitas, kompetensi personil, validitas metode asesmen, rekaman, keamanan data, keluhan/banding, audit internal, kaji ulang manajemen, witness, dan surveilans. Jadi, kalau LSP ingin AJJ Nirkertas “aman” dari sisi KAN, pastikan seluruh proses digital dapat membuktikan hal yang sama kuatnya dengan proses tatap muka: **siapa yang diuji, bagaimana diuji, bukti apa yang dinilai, siapa yang menilai, siapa yang memutuskan, rekamannya apa, dan bagaimana datanya dilindungi.**
+
+[1]: https://akreditasi.bsn.go.id/?utm_source=chatgpt.com "Komite Akreditasi Nasional"
+[2]: https://pdfcoffee.com/kan-k-09-persyaratan-khusus-lembaga-sertifikasi-personal-pdf-free.html "KAN K-09 Persyaratan Khusus Lembaga Sertifikasi Personal - PDFCOFFEE.COM"
+[3]: https://akreditasi.bsn.go.id/admin/lpk/proses/10454?utm_source=chatgpt.com "Komite Akreditasi Nasional - MIS"

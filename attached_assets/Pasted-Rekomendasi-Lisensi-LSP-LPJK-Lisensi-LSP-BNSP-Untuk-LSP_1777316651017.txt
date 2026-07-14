@@ -1,0 +1,163 @@
+Rekomendasi Lisensi LSP (LPJK) & Lisensi LSP (BNSP)
+Untuk LSP bidang Jasa Konstruksi, ada dua tahap perizinan yang berurutan: Rekomendasi dari LPJK (kementerian sektor) → Lisensi dari BNSP (otoritas sertifikasi nasional). Tanpa rekomendasi LPJK, BNSP tidak akan menerbitkan lisensi untuk LSP konstruksi.⁠
+⁠⁠
+⁠​
+1. Rekomendasi Lisensi LSP dari LPJK
+Diatur dalam SE Ketua LPJK No. 20/SE/LPJK/2021, diubah dengan SE No. 05/SE/LPJK/2022, dan disempurnakan dengan SE No. 02/SE/LPJK/2023 tentang Pedoman Pemberian Rekomendasi Lisensi LSP, Pencatatan LSP Terlisensi, serta Daftar Penyesuaian Standar Kompetensi Kerja dan Jabatan Kerja Konstruksi.⁠
+⁠⁠
+⁠​
+a. Kriteria Pemohon
+LSP yang dapat mengajukan rekomendasi adalah LSP yang dibentuk oleh:
+Asosiasi Profesi Terakreditasi (oleh Menteri PU melalui LPJK), atau
+Lembaga Pendidikan Teregistrasi di LPJK.⁠
+⁠​
+b. Persyaratan Rekomendasi Lisensi LSP Baru
+SK Menteri PU tentang penetapan akreditasi asosiasi profesi (atau registrasi lembaga pendidikan) yang masih berlaku.
+Skema sertifikasi untuk setiap jabatan kerja bidang jasa konstruksi yang diajukan.
+Ketersediaan asesor (ASKOM) sesuai subklasifikasi.
+Sarana, prasarana, dan TUK sesuai skema sertifikasi.
+Ruang lingkup lisensi yang diajukan.⁠
+⁠​
+c. Persyaratan Perpanjangan
+Dokumen pendukung yang sudah tercatat di lisensijakon.pu.go.id masih berlaku.
+Laporan tindak lanjut hasil pemantauan & evaluasi (Monev) kinerja LSP oleh LPJK tahun terakhir.
+Rekapitulasi penyelenggaraan sertifikasi 3 tahun terakhir.
+SK Lisensi & Sertifikat Lisensi yang akan habis paling lambat 90 hari kalender sebelum jatuh tempo.⁠
+⁠​
+d. Ruang Lingkup SE LPJK
+Kriteria pemohon
+Persyaratan permohonan
+Pemberian rekomendasi lisensi LSP
+Pencatatan LSP terlisensi
+Daftar penyesuaian SKK & jabatan kerja konstruksi⁠
+⁠​
+2. Lisensi LSP oleh BNSP
+BNSP adalah badan independen yang bertanggung jawab langsung kepada Presiden, sebagai otoritas sertifikasi personil.⁠
+⁠​
+a. Dasar Pedoman BNSP
+Pedoman BNSP 201-2014 — Persyaratan Umum LSP
+Pedoman BNSP 202-2014 — Pembentukan LSP
+Pedoman BNSP 210-2017 — Skema Sertifikasi
+Pedoman BNSP 301/302/305 — Pelaksanaan Asesmen, Sertifikat, & Uji
+Mengacu SNI ISO/IEC 17024 (LSP Person)⁠
+⁠⁠
+⁠​
+b. Kategori LSP yang Dilisensi BNSP
+LSP P1 — Pihak Kesatu (SMK, Politeknik/Vokasi, Universitas, LPK/LKP, Industri, Kementerian/Lembaga, SLB)
+LSP P2 — Pihak Kedua (BLK, Industri, Instansi Teknis)
+LSP P3 — Pihak Ketiga (Asosiasi Industri/Profesi, termasuk LSP P3 Asosiasi Industri/Konstruksi)⁠
+⁠​
+c. Persyaratan Umum Pengajuan Lisensi
+Badan hukum / SK pendirian dari pembentuk yang sah (asosiasi terakreditasi, lembaga pendidikan, instansi).
+Struktur organisasi & personil inti (Ketua LSP, Manajemen Mutu, Sertifikasi).
+Skema sertifikasi disusun mengacu SKKNI/standar khusus/internasional, divalidasi.
+Asesor kompetensi bersertifikat BNSP (Met.000) sesuai skema.
+TUK (Sewaktu / Tempat Kerja / Mandiri) terverifikasi.
+Sistem mutu lengkap (panduan mutu, prosedur, instruksi kerja, formulir) sesuai Pedoman BNSP 201.
+Dokumen finansial & rencana keberlanjutan operasional.
+Untuk LSP konstruksi: wajib melampirkan Surat Rekomendasi Menteri PU c.q. LPJK sebagai prasyarat.⁠
+⁠⁠
+⁠​
+d. Tahapan
+Permohonan online ke BNSP.
+Pra-asesmen (kaji kelengkapan dokumen — rata-rata ≥ 29 dokumen).
+Witness/full assessment oleh Asesor Lisensi BNSP di lokasi LSP & TUK.
+Tindak lanjut temuan (corrective action).
+Rapat Pleno BNSP → Keputusan Lisensi (KEP-…/BNSP/…/Tahun).
+Penyerahan SK Lisensi & Sertifikat Lisensi (masa berlaku 5 tahun, dengan surveilans tahunan).⁠
+⁠⁠
+⁠​
+Rata-rata pemrosesan lisensi BNSP 1,5–2 tahun, tergantung kesiapan dokumen dan kelengkapan asesor/TUK.⁠
+⁠​
+3. Alur Lengkap (LSP Konstruksi)
+flowchart LR
+	A["Asosiasi Profesi Terakreditasi<br>/ Lembaga Pendidikan Teregistrasi"] --> B["Pembentukan LSP<br>(Pedoman BNSP 202)"]
+	B --> C["Permohonan Rekomendasi<br>ke LPJK<br>(SE 02/SE/LPJK/2023)"]
+	C --> D["Verifikasi Skema, Asesor,<br>TUK, Ruang Lingkup"]
+	D --> E["Surat Rekomendasi<br>Menteri PU c.q. LPJK"]
+	E --> F["Permohonan Lisensi ke BNSP<br>+ Surat Rekomendasi"]
+	F --> G["Asesmen Lisensi BNSP<br>(Pedoman 201/210)"]
+	G --> H["SK Lisensi BNSP<br>(berlaku 5 tahun)"]
+	H --> I["Pencatatan LSP Terlisensi<br>di LPJK / SIKI"]
+	I --> J["LSP operasional:<br>uji kompetensi → SKK Konstruksi"]
+	J --> K["Surveilans BNSP +<br>Monev LPJK tahunan"]
+	K -->|90 hari sebelum habis| L["Perpanjangan rekomendasi<br>& lisensi"]
+Asosiasi Profesi Terakreditasi
+/ Lembaga Pendidikan Teregistrasi
+
+Pembentukan LSP
+(Pedoman BNSP 202)
+
+Permohonan Rekomendasi
+ke LPJK
+(SE 02/SE/LPJK/2023)
+
+Verifikasi Skema, Asesor,
+TUK, Ruang Lingkup
+
+Surat Rekomendasi
+Menteri PU c.q. LPJK
+
+Permohonan Lisensi ke BNSP
++ Surat Rekomendasi
+
+Asesmen Lisensi BNSP
+(Pedoman 201/210)
+
+SK Lisensi BNSP
+(berlaku 5 tahun)
+
+Pencatatan LSP Terlisensi
+di LPJK / SIKI
+
+LSP operasional:
+uji kompetensi → SKK Konstruksi
+
+Surveilans BNSP +
+Monev LPJK tahunan
+
+Perpanjangan rekomendasi
+& lisensi
+
+90 hari sebelum habis
+
+​
+4. Ringkasan Pembagian Peran
+Aspek
+LPJK (sektor PU)
+BNSP (nasional)
+Dasar hukum
+UU 2/2017 jo. UU 6/2023, PP 22/2020 jo. PP 14/2021, Permen PUPR 9/2020
+UU 13/2003, PP 10/2018, PP 23/2004
+Output
+Surat Rekomendasi Lisensi LSP
+SK Lisensi LSP (KEP-…/BNSP)
+Sifat
+Wajib khusus untuk LSP bidang jasa konstruksi
+Wajib untuk semua LSP (semua sektor)
+Pencatatan
+LPJK / SIJK / SIKI
+bnsp.go.id/lsp
+Pengawasan
+Monev kinerja LSP konstruksi tahunan
+Surveilans tahunan + audit lisensi
+Sanksi
+Pencabutan rekomendasi → BNSP cabut lisensi
+Pembekuan/pencabutan lisensi
+⁠
+⁠⁠
+⁠⁠
+⁠⁠
+⁠​
+5. Catatan Penting
+LSP konstruksi tidak bisa lisensi langsung BNSP tanpa rekomendasi Menteri PU c.q. LPJK — ini pembeda utama dari LSP sektor lain.⁠
+⁠​
+Akreditasi KAN (SNI ISO/IEC 17024) bersifat opsional/tambahan; lisensi BNSP sudah cukup untuk operasi.⁠
+⁠​
+Biaya sertifikasi yang diselenggarakan LSP konstruksi mengikuti Kepmen PUPR No. 713/KPTS/M/2022.⁠
+⁠⁠
+⁠​
+Permohonan rekomendasi LPJK dilakukan via aplikasi lisensijakon.pu.go.id atau portal perizinan.pu.go.id/portal/services/llsp.⁠
+⁠⁠
+⁠​
+Di workspace Anda, materi ini sudah terangkum cukup lengkap di Bab 3 — Lembaga Sertifikasi Profesi (LSP) Jasa Konstruksi dan dirujuk pada Handbook SKK Konstruksi — Bidang Kompetensi, Aktor, Skema, Formulir & Matriks PJ-BUJK, serta Bab 19 — Asesor Kompetensi Jasa Konstruksi (ASKOM Konstruksi) untuk sisi asesornya.
