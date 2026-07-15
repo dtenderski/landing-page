@@ -552,69 +552,45 @@ export default function Landing() {
       <SharedHeader />
 
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-violet-700 py-20 md:py-28 px-4">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.08),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(139,92,246,0.3),transparent_60%)]" />
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-800 to-slate-900 py-20 md:py-28 px-4">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.07),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(56,189,248,0.15),transparent_60%)]" />
 
         <div className="max-w-4xl mx-auto relative text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 text-white text-xs font-semibold mb-6 backdrop-blur-sm">
             <Wrench className="h-3.5 w-3.5" />
-            Platform Penyelesaian Masalah
+            Dibangun oleh Praktisi Konstruksi
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight" data-testid="text-hero-title">
-            Punya Masalah yang Berulang Setiap Hari?
+            Solusi Digital untuk
             <br />
-            <span className="text-yellow-300">Dari Masalah, Menjadi Hasil Nyata.</span>
+            <span className="text-yellow-300">SBU, SKK, dan Tender Konstruksi</span>
           </h1>
 
-          <p className="text-base md:text-lg text-blue-100 mb-2 font-semibold tracking-wide">
-            Dialog · Blueprint · Kolaborasi · Workroom · Hasil
-          </p>
-
           <p className="text-sm md:text-base text-blue-200 mb-8 leading-relaxed max-w-2xl mx-auto">
-            Pekerjaan yang menumpuk, pertanyaan yang berulang, SOP yang tak sempat dibaca — semua itu masalah nyata. Gustafta bukan cuma menjawab lalu selesai: kami mengubah pengetahuan, pengalaman, dan SOP Anda menjadi{" "}
-            <strong className="text-white">Cetak Biru AI (Blueprint)</strong>, lalu mengawal Anda mengerjakannya di{" "}
-            <strong className="text-white">Workroom</strong> — sendiri atau bersama satu tim AI — sampai dokumen, proposal, atau produk benar-benar selesai. Tanpa harus bisa coding.
+            Tanya jawab instan 24/7, bedah dokumen, pendampingan proyek, dan panduan konstruksi — semua dalam satu platform.
+            Dibangun oleh praktisi konstruksi untuk praktisi konstruksi.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-4">
-            <Link href="/persona">
-              <Button size="lg" className="w-full sm:w-auto bg-white text-blue-700 hover:bg-blue-50 font-bold gap-2 px-6 h-12" data-testid="button-hero-starterkit">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
+            <Button asChild size="lg" className="w-full sm:w-auto bg-white text-blue-700 hover:bg-blue-50 font-bold gap-2 px-6 h-12" data-testid="button-hero-klinik">
+              <Link href="/klinik-konsultasi">
+                <Stethoscope className="w-4 h-4" />
+                Mulai Tanya Sekarang
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto border-white/40 text-white hover:bg-white/10 gap-2 px-6 h-12" data-testid="button-hero-packs">
+              <Link href="/packs">
                 <BookOpen className="w-4 h-4" />
-                Mulai dengan Starter Kit
-              </Button>
-            </Link>
-            <Button
-              size="lg"
-              variant="outline"
-              className="w-full sm:w-auto border-white/40 text-white hover:bg-white/10 gap-2 px-6 h-12"
-              onClick={() => {
-                const el = document.getElementById("trilogi");
-                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-              }}
-              data-testid="button-hero-dialog"
-            >
-              <Bot className="w-4 h-4" />
-              Tanya Gustafta Dulu
+                Lihat Paket Bedah Kasus
+              </Link>
             </Button>
           </div>
 
-          <div className="mb-8">
-            <Link href="/organization-builder">
-              <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-yellow-300 hover:text-yellow-200 cursor-pointer" data-testid="link-hero-rakit-tim">
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-yellow-300/20 text-[10px] font-bold uppercase tracking-wider">Baru</span>
-                Rakit satu tim AI — bukan cuma satu chatbot
-                <ArrowRight className="w-3.5 h-3.5" />
-              </span>
-            </Link>
-          </div>
-
           <div className="flex flex-wrap gap-4 text-xs text-blue-200 justify-center mb-10">
-            {["No-Code · Tanpa Coding", "30+ Sektor Industri", "1350+ Template Siap Pakai"].map((s) => (
-              <span key={s} className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-green-400" />{s}
-              </span>
+            {["✅ Respon instan", "✅ Berdasarkan regulasi terbaru", "✅ Dipercaya praktisi konstruksi"].map((s) => (
+              <span key={s}>{s}</span>
             ))}
           </div>
 
@@ -631,6 +607,96 @@ export default function Landing() {
               className="w-full aspect-video"
               data-testid="video-hero-explainer"
             />
+          </div>
+        </div>
+      </section>
+
+      {/* ── LAYANAN KAMI ── */}
+      <section className="py-16 px-4 bg-white dark:bg-background" id="layanan">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2">Produk & Layanan</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3">
+              Layanan yang Siap Anda Gunakan Hari Ini
+            </h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
+              Gustafta sudah aktif melayani — bukan platform kosong. Pilih layanan sesuai kebutuhan Anda sekarang.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-5 mb-4">
+            {[
+              {
+                emoji: "🏥",
+                label: "Klinik Konsultasi Konstruksi",
+                accent: "border-teal-200 dark:border-teal-800 bg-teal-50 dark:bg-teal-950/20",
+                badge: "text-teal-700 bg-teal-100 dark:text-teal-300 dark:bg-teal-900/40",
+                badgeLabel: "Paling Populer",
+                desc: "Tanya jawab instan seputar SBU, SKK, LSBU/ABU, dan Tender. AI kami dilatih dengan regulasi konstruksi terbaru — jawaban terstruktur dalam hitungan detik, atau eskalasi ke ahli jika kasus Anda kompleks.",
+                price: "Gratis untuk pertanyaan dasar · Premium mulai Rp 99.000/bln",
+                cta: "Buka Klinik",
+                href: "/klinik-konsultasi",
+              },
+              {
+                emoji: "🔬",
+                label: "Bedah Dokumen (Tiket Konsultasi)",
+                accent: "border-violet-200 dark:border-violet-800 bg-violet-50 dark:bg-violet-950/20",
+                badge: "text-violet-700 bg-violet-100 dark:text-violet-300 dark:bg-violet-900/40",
+                badgeLabel: "Analisis Mendalam",
+                desc: "Upload dokumen SBU/SKK/Tender Anda, dapatkan analisis risiko dan rekomendasi perbaikan. Cocok untuk memastikan dokumen sudah benar sebelum diajukan — analisis terstruktur masuk dalam 1×24 jam.",
+                price: "Mulai Rp 149.000/kasus",
+                cta: "Ajukan Bedah Kasus",
+                href: "/packs",
+              },
+              {
+                emoji: "🤝",
+                label: "Pendampingan Proyek",
+                accent: "border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/20",
+                badge: "text-amber-700 bg-amber-100 dark:text-amber-300 dark:bg-amber-900/40",
+                badgeLabel: "Lanjutan Bedah Dokumen",
+                desc: "Setelah dokumen dibedah, kami dampingi Anda hingga proyek selesai atau tender menang. Termasuk revisi dokumen, konsultasi lanjutan via WhatsApp, dan pendampingan saat negosiasi atau klarifikasi teknis.",
+                price: "Paket mulai Rp 499.000 – Rp 2.500.000",
+                cta: "Konsultasi Paket",
+                href: "https://wa.me/6281287941900",
+                external: true,
+              },
+              {
+                emoji: "🤖",
+                label: "Chatbot Premium SBU/SKK",
+                accent: "border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/20",
+                badge: "text-blue-700 bg-blue-100 dark:text-blue-300 dark:bg-blue-900/40",
+                badgeLabel: "Akses Tanpa Batas",
+                desc: "Akses tanpa batas ke asisten virtual khusus SBU dan SKK. Tanya sebanyak yang Anda mau, 24/7, tanpa iklan. Cocok untuk kontraktor yang sedang mengurus banyak proyek sekaligus.",
+                price: "Rp 99.000/bulan",
+                cta: "Aktifkan Premium",
+                href: "/store",
+              },
+            ].map((l) => (
+              <div key={l.label} className={`rounded-2xl border p-6 flex flex-col gap-4 ${l.accent}`}>
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">{l.emoji}</span>
+                    <h3 className="text-base font-bold text-gray-900 dark:text-white leading-tight">{l.label}</h3>
+                  </div>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap shrink-0 ${l.badge}`}>{l.badgeLabel}</span>
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed flex-1">{l.desc}</p>
+                <div className="space-y-3">
+                  <p className="text-xs font-semibold text-gray-700 dark:text-gray-300">💰 {l.price}</p>
+                  {l.external ? (
+                    <a href={l.href} target="_blank" rel="noopener noreferrer">
+                      <Button size="sm" className="w-full gap-1" data-testid={`btn-layanan-${l.label.toLowerCase().replace(/\s/g, "-")}`}>
+                        {l.cta} <ArrowRight className="w-3 h-3" />
+                      </Button>
+                    </a>
+                  ) : (
+                    <Button asChild size="sm" className="w-full gap-1" data-testid={`btn-layanan-${l.label.toLowerCase().replace(/\s/g, "-")}`}>
+                      <Link href={l.href}>{l.cta} <ArrowRight className="w-3 h-3" /></Link>
+                    </Button>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -1403,8 +1469,103 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ── CREATOR PERSONAS ── */}
+      {/* ── MENGAPA GUSTAFTA ── */}
+      <section className="py-16 px-4 bg-gray-50 dark:bg-muted/20">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2">Keunggulan</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3">
+              Dibangun oleh Praktisi, untuk Praktisi
+            </h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
+              Kenapa harus pilih Gustafta, bukan konsultan konvensional atau platform lain?
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              { icon: "⚡", title: "Cepat & Instan", desc: "Tidak perlu menunggu jadwal konsultan. AI kami menjawab dalam hitungan detik, 24/7 tanpa hari libur." },
+              { icon: "📋", title: "Berdasarkan Regulasi Terbaru", desc: "Knowledge base kami terus diperbarui mengikuti perubahan regulasi konstruksi (UU Cipta Kerja, PP Jasa Konstruksi, SIKaP LPJK)." },
+              { icon: "💰", title: "Terjangkau", desc: "Mulai dari Rp 99.000/bulan atau Rp 149.000 per kasus. Jauh lebih murah daripada menyewa konsultan penuh." },
+              { icon: "🔍", title: "Terstruktur & Transparan", desc: "Setiap jawaban dilengkapi referensi regulasi. Tidak ada jawaban 'kira-kira' — semuanya berbasis dokumen resmi." },
+              { icon: "🤝", title: "Pendampingan Hingga Tuntas", desc: "Tidak hanya bedah dokumen — kami dampingi Anda hingga proyek selesai atau tender menang." },
+              { icon: "🏗️", title: "Spesialis Konstruksi", desc: "Fokus pada industri konstruksi Indonesia. Bukan AI generik — pengetahuan mendalam di SBU, SKK, SMAP, dan Tender." },
+            ].map((p) => (
+              <div key={p.title} className="rounded-2xl border bg-white dark:bg-card p-5 flex flex-col gap-3">
+                <span className="text-2xl">{p.icon}</span>
+                <h3 className="text-sm font-bold text-gray-900 dark:text-white">{p.title}</h3>
+                <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── UNTUK LEMBAGA & PROFESIONAL ── */}
       <section className="py-16 px-4 bg-white dark:bg-background">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2">Peluang Kemitraan</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3">
+              Anda Lembaga atau Profesional Konstruksi?
+            </h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+              Bangun Layanan Digital dengan Branding Anda Sendiri. Gustafta menyediakan platform <em>no-code</em> untuk
+              merakit chatbot, mini apps, dan pusat pengetahuan dengan <strong>logo, nama, dan identitas organisasi Anda sendiri</strong>.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <div className="rounded-2xl border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/20 p-7">
+              <div className="text-3xl mb-3">🏛️</div>
+              <h3 className="text-base font-bold text-gray-900 dark:text-white mb-4">Untuk Lembaga<br/><span className="text-sm font-normal text-gray-500">(Asosiasi, LSP, Biro Jasa)</span></h3>
+              <ul className="space-y-2.5 mb-6">
+                {[
+                  "Branding penuh — logo, nama, warna organisasi Anda",
+                  "Manajemen tim multi-user untuk seluruh staf",
+                  "Knowledge base skala besar untuk ratusan anggota",
+                  "Klinik Konsultasi ber-branding organisasi Anda sendiri",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-sm text-gray-700 dark:text-gray-300">
+                    <Check className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />{item}
+                  </li>
+                ))}
+              </ul>
+              <Button asChild variant="outline" className="w-full gap-2 border-blue-400 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/40">
+                <Link href="/packs">Pelajari Lebih Lanjut <ArrowRight className="w-3.5 h-3.5" /></Link>
+              </Button>
+            </div>
+
+            <div className="rounded-2xl border border-violet-200 dark:border-violet-800 bg-violet-50 dark:bg-violet-950/20 p-7">
+              <div className="text-3xl mb-3">💼</div>
+              <h3 className="text-base font-bold text-gray-900 dark:text-white mb-4">Untuk Profesional<br/><span className="text-sm font-normal text-gray-500">(Konsultan, Fasilitator, Asesor)</span></h3>
+              <ul className="space-y-2.5 mb-6">
+                {[
+                  "Template siap pakai — tinggal isi form konfigurasi",
+                  "Monetisasi keahlian Anda langsung ke klien",
+                  "Revenue sharing 80/20 di Template Marketplace",
+                  "Bangun personal brand digital tanpa tim IT",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-sm text-gray-700 dark:text-gray-300">
+                    <Check className="w-4 h-4 text-violet-500 shrink-0 mt-0.5" />{item}
+                  </li>
+                ))}
+              </ul>
+              <Button asChild variant="outline" className="w-full gap-2 border-violet-400 text-violet-700 dark:text-violet-300 hover:bg-violet-100 dark:hover:bg-violet-900/40">
+                <Link href={builderUrl}>Jadi Creator <ArrowRight className="w-3.5 h-3.5" /></Link>
+              </Button>
+            </div>
+          </div>
+
+          <p className="text-center text-xs text-gray-400 dark:text-gray-500 max-w-xl mx-auto italic">
+            Tidak harus jadi Creator hari ini. Gunakan layanan Gustafta terlebih dahulu, dan ketika Anda siap,
+            kami siap mendampingi Anda membangun layanan digital dengan branding Anda sendiri.
+          </p>
+        </div>
+      </section>
+
+      {/* ── CREATOR PERSONAS ── */}
+      <section className="py-16 px-4 bg-gray-50 dark:bg-muted/20">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
             <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2">Untuk Siapa</p>
@@ -1457,30 +1618,57 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ── CTA FINAL ── */}
-      <section className="py-20 px-4 bg-gradient-to-br from-blue-600 to-violet-700 text-center">
-        <div className="max-w-2xl mx-auto">
-          <p className="text-blue-200 text-sm font-semibold uppercase tracking-widest mb-4">GUSTAFTA — Platform Penyelesaian Masalah</p>
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
-            Ubah Masalah Anda Menjadi<br />
-            <span className="text-yellow-300">Hasil Nyata.</span>
-          </h2>
-          <p className="text-blue-200 text-sm mb-8">
-            Dialog · Blueprint · Kolaborasi · Workroom · Hasil
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/persona">
-              <Button size="lg" className="bg-white text-blue-700 hover:bg-blue-50 font-bold gap-2 px-8 h-12" data-testid="btn-cta-final-starter">
-                <BookOpen className="h-5 w-5" />
-                Mulai dengan Starter Kit
+      {/* ── CTA FINAL (2 KOLOM) ── */}
+      <section className="py-20 px-4 bg-gradient-to-br from-blue-700 via-blue-800 to-slate-900">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-10">
+            <p className="text-blue-300 text-xs font-bold uppercase tracking-widest mb-3">Mulai Sekarang</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+              Pilih Jalur yang Sesuai<br />
+              <span className="text-yellow-300">dengan Kebutuhan Anda</span>
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Kolom kiri — End-User */}
+            <div className="rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 p-8 flex flex-col gap-4">
+              <div className="text-3xl">🏗️</div>
+              <h3 className="text-lg font-bold text-white">Saya Butuh Solusi Konstruksi</h3>
+              <p className="text-sm text-blue-200 leading-relaxed">
+                Tanya jawab SBU/SKK/Tender, bedah dokumen, pendampingan proyek, atau akses chatbot premium — semua tersedia sekarang.
+              </p>
+              <ul className="space-y-2 text-xs text-blue-200">
+                {["Klinik Konsultasi (gratis & premium)", "Bedah Dokumen Rp 149.000/kasus", "Pendampingan Proyek mulai Rp 499.000", "Chatbot Premium Rp 99.000/bln"].map((i) => (
+                  <li key={i} className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-green-400 shrink-0" />{i}</li>
+                ))}
+              </ul>
+              <Button asChild size="lg" className="mt-auto bg-white text-blue-700 hover:bg-blue-50 font-bold gap-2" data-testid="btn-cta-final-klinik">
+                <Link href="/klinik-konsultasi">
+                  <Stethoscope className="h-4 w-4" />
+                  Mulai Sekarang
+                </Link>
               </Button>
-            </Link>
-            <Link href={builderUrl}>
-              <Button size="lg" variant="outline" className="border-white/40 text-white hover:bg-white/10 gap-2 px-8 h-12" data-testid="btn-cta-final-builder">
-                <Wrench className="h-5 w-5" />
-                Mulai Merakit AI Sekarang
+            </div>
+
+            {/* Kolom kanan — Creator */}
+            <div className="rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 p-8 flex flex-col gap-4">
+              <div className="text-3xl">🏛️</div>
+              <h3 className="text-lg font-bold text-white">Saya Ingin Bangun Layanan Digital dengan Branding Saya</h3>
+              <p className="text-sm text-blue-200 leading-relaxed">
+                Untuk lembaga atau profesional yang ingin merakit platform digital dengan identitas organisasi sendiri — tanpa coding.
+              </p>
+              <ul className="space-y-2 text-xs text-blue-200">
+                {["Branding penuh (logo, nama, warna Anda)", "Knowledge base skala besar", "Revenue sharing 80/20 di Marketplace", "Tidak perlu tim IT"].map((i) => (
+                  <li key={i} className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-yellow-400 shrink-0" />{i}</li>
+                ))}
+              </ul>
+              <Button asChild size="lg" variant="outline" className="mt-auto border-white/40 text-white hover:bg-white/10 font-bold gap-2" data-testid="btn-cta-final-creator">
+                <Link href={builderUrl}>
+                  <Wrench className="h-4 w-4" />
+                  Pelajari Kemitraan
+                </Link>
               </Button>
-            </Link>
+            </div>
           </div>
         </div>
       </section>
