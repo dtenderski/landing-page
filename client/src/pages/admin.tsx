@@ -505,22 +505,28 @@ export default function AdminPage() {
   const approveTrialMutation = useMutation({
     mutationFn: ({ id, durationDays, plan }: { id: number; durationDays: number; plan: string }) =>
       apiRequest("POST", `/api/admin/trial-requests/${id}/approve`, { durationDays, plan }),
-    onSuccess: async (data: any) => {
-      const result = await data.json();
+    onSuccess: (data: any) => {
+      // apiRequest already parses JSON — use data directly (not data.json())
       queryClient.invalidateQueries({ queryKey: ["/api/admin/trial-requests"] });
       queryClient.invalidateQueries({ queryKey: ["/api/admin/stats"] });
       queryClient.invalidateQueries({ queryKey: ["/api/admin/subscriptions"] });
       setApproveDialog({ open: false, request: null });
       toast({
-        title: result.instantActivated
-          ? `Aktif! Plan ${result.plan} ${result.durationDays} hari`
-          : `Voucher dibuat: ${result.voucherCode}`,
-        description: result.instantActivated
-          ? `User langsung dapat akses. Voucher cadangan: ${result.voucherCode}`
+        title: data?.instantActivated
+          ? `✅ Aktif! Plan ${data.plan} ${data.durationDays} hari`
+          : `✅ Voucher dibuat: ${data?.voucherCode}`,
+        description: data?.instantActivated
+          ? `User langsung dapat akses. Voucher cadangan: ${data.voucherCode}`
           : "User belum daftar — kirim kode voucher via WA/Email agar bisa redeem.",
       });
     },
-    onError: () => toast({ title: "Gagal menyetujui trial.", variant: "destructive" }),
+    onError: (err: any) => toast({
+      title: "Gagal menyetujui trial.",
+      description: err?.message?.includes("sudah diproses")
+        ? "Permintaan ini sudah diproses sebelumnya."
+        : (err?.message || "Terjadi kesalahan server."),
+      variant: "destructive",
+    }),
   });
 
   const rejectTrialMutation = useMutation({
