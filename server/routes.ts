@@ -20257,16 +20257,30 @@ Format output JSON HARUS:
                 });
                 parsed = JSON.parse(resp.choices[0]?.message?.content ?? "{}");
               } catch {
-                // Fallback DeepSeek
-                const ds = new OpenAI({ apiKey: process.env.DEEPSEEK_API_KEY, baseURL: "https://api.deepseek.com" });
-                const resp2 = await ds.chat.completions.create({
-                  model: "deepseek-chat",
-                  messages: [{ role: "user", content: prompt }],
-                  temperature: 0.5,
-                  max_tokens: 2500,
-                  response_format: { type: "json_object" },
-                });
-                parsed = JSON.parse(resp2.choices[0]?.message?.content ?? "{}");
+                try {
+                  // Fallback 1: DeepSeek
+                  const ds = new OpenAI({ apiKey: process.env.DEEPSEEK_API_KEY, baseURL: "https://api.deepseek.com" });
+                  const resp2 = await ds.chat.completions.create({
+                    model: "deepseek-chat",
+                    messages: [{ role: "user", content: prompt }],
+                    temperature: 0.5,
+                    max_tokens: 2500,
+                    response_format: { type: "json_object" },
+                  });
+                  parsed = JSON.parse(resp2.choices[0]?.message?.content ?? "{}");
+                } catch {
+                  // Fallback 2: OpenRouter (selalu aktif)
+                  const or2 = new OpenAI({ apiKey: process.env.OPENROUTER_API_KEY, baseURL: OPENROUTER_BASE_URL });
+                  const resp3 = await or2.chat.completions.create({
+                    model: OPENROUTER_MODEL,
+                    messages: [{ role: "user", content: prompt }],
+                    temperature: 0.5,
+                    max_tokens: 2500,
+                  });
+                  const raw3 = resp3.choices[0]?.message?.content ?? "{}";
+                  const jsonMatch3 = raw3.match(/\{[\s\S]*\}/);
+                  parsed = JSON.parse(jsonMatch3 ? jsonMatch3[0] : raw3);
+                }
               }
 
               let kbCount = 0;
@@ -20770,14 +20784,28 @@ Format: { "foundational": { "name": "...", "content": "...", "description": "...
                 });
                 parsed = JSON.parse(resp.choices[0]?.message?.content ?? "{}");
               } catch {
-                const ds = new OpenAI({ apiKey: process.env.DEEPSEEK_API_KEY, baseURL: "https://api.deepseek.com" });
-                const resp2 = await ds.chat.completions.create({
-                  model: "deepseek-chat",
-                  messages: [{ role: "user", content: prompt }],
-                  temperature: 0.5, max_tokens: 2500,
-                  response_format: { type: "json_object" },
-                });
-                parsed = JSON.parse(resp2.choices[0]?.message?.content ?? "{}");
+                try {
+                  // Fallback 1: DeepSeek
+                  const ds = new OpenAI({ apiKey: process.env.DEEPSEEK_API_KEY, baseURL: "https://api.deepseek.com" });
+                  const resp2 = await ds.chat.completions.create({
+                    model: "deepseek-chat",
+                    messages: [{ role: "user", content: prompt }],
+                    temperature: 0.5, max_tokens: 2500,
+                    response_format: { type: "json_object" },
+                  });
+                  parsed = JSON.parse(resp2.choices[0]?.message?.content ?? "{}");
+                } catch {
+                  // Fallback 2: OpenRouter (selalu aktif)
+                  const or2 = new OpenAI({ apiKey: process.env.OPENROUTER_API_KEY, baseURL: OPENROUTER_BASE_URL });
+                  const resp3 = await or2.chat.completions.create({
+                    model: OPENROUTER_MODEL,
+                    messages: [{ role: "user", content: prompt }],
+                    temperature: 0.5, max_tokens: 2500,
+                  });
+                  const raw3 = resp3.choices[0]?.message?.content ?? "{}";
+                  const jsonMatch3 = raw3.match(/\{[\s\S]*\}/);
+                  parsed = JSON.parse(jsonMatch3 ? jsonMatch3[0] : raw3);
+                }
               }
 
               let kbCount = 0;
