@@ -20269,17 +20269,31 @@ Format output JSON HARUS:
                   });
                   parsed = JSON.parse(resp2.choices[0]?.message?.content ?? "{}");
                 } catch {
-                  // Fallback 2: OpenRouter (selalu aktif)
-                  const or2 = new OpenAI({ apiKey: process.env.OPENROUTER_API_KEY, baseURL: OPENROUTER_BASE_URL });
-                  const resp3 = await or2.chat.completions.create({
-                    model: OPENROUTER_MODEL,
-                    messages: [{ role: "user", content: prompt }],
-                    temperature: 0.5,
-                    max_tokens: 2500,
-                  });
-                  const raw3 = resp3.choices[0]?.message?.content ?? "{}";
-                  const jsonMatch3 = raw3.match(/\{[\s\S]*\}/);
-                  parsed = JSON.parse(jsonMatch3 ? jsonMatch3[0] : raw3);
+                  try {
+                    // Fallback 2: Nvidia
+                    const nv = new OpenAI({ apiKey: process.env.NVIDIA_API_KEY, baseURL: NVIDIA_BASE_URL });
+                    const resp3 = await nv.chat.completions.create({
+                      model: NVIDIA_MODEL,
+                      messages: [{ role: "user", content: prompt }],
+                      temperature: 0.5,
+                      max_tokens: 2500,
+                    });
+                    const raw3 = resp3.choices[0]?.message?.content ?? "{}";
+                    const jsonMatch3 = raw3.match(/\{[\s\S]*\}/);
+                    parsed = JSON.parse(jsonMatch3 ? jsonMatch3[0] : raw3);
+                  } catch {
+                    // Fallback 3: OpenRouter
+                    const or2 = new OpenAI({ apiKey: process.env.OPENROUTER_API_KEY, baseURL: OPENROUTER_BASE_URL });
+                    const resp4 = await or2.chat.completions.create({
+                      model: OPENROUTER_MODEL,
+                      messages: [{ role: "user", content: prompt }],
+                      temperature: 0.5,
+                      max_tokens: 2500,
+                    });
+                    const raw4 = resp4.choices[0]?.message?.content ?? "{}";
+                    const jsonMatch4 = raw4.match(/\{[\s\S]*\}/);
+                    parsed = JSON.parse(jsonMatch4 ? jsonMatch4[0] : raw4);
+                  }
                 }
               }
 
@@ -20795,16 +20809,29 @@ Format: { "foundational": { "name": "...", "content": "...", "description": "...
                   });
                   parsed = JSON.parse(resp2.choices[0]?.message?.content ?? "{}");
                 } catch {
-                  // Fallback 2: OpenRouter (selalu aktif)
-                  const or2 = new OpenAI({ apiKey: process.env.OPENROUTER_API_KEY, baseURL: OPENROUTER_BASE_URL });
-                  const resp3 = await or2.chat.completions.create({
-                    model: OPENROUTER_MODEL,
-                    messages: [{ role: "user", content: prompt }],
-                    temperature: 0.5, max_tokens: 2500,
-                  });
-                  const raw3 = resp3.choices[0]?.message?.content ?? "{}";
-                  const jsonMatch3 = raw3.match(/\{[\s\S]*\}/);
-                  parsed = JSON.parse(jsonMatch3 ? jsonMatch3[0] : raw3);
+                  try {
+                    // Fallback 2: Nvidia
+                    const nv = new OpenAI({ apiKey: process.env.NVIDIA_API_KEY, baseURL: NVIDIA_BASE_URL });
+                    const resp3 = await nv.chat.completions.create({
+                      model: NVIDIA_MODEL,
+                      messages: [{ role: "user", content: prompt }],
+                      temperature: 0.5, max_tokens: 2500,
+                    });
+                    const raw3 = resp3.choices[0]?.message?.content ?? "{}";
+                    const jsonMatch3 = raw3.match(/\{[\s\S]*\}/);
+                    parsed = JSON.parse(jsonMatch3 ? jsonMatch3[0] : raw3);
+                  } catch {
+                    // Fallback 3: OpenRouter
+                    const or2 = new OpenAI({ apiKey: process.env.OPENROUTER_API_KEY, baseURL: OPENROUTER_BASE_URL });
+                    const resp4 = await or2.chat.completions.create({
+                      model: OPENROUTER_MODEL,
+                      messages: [{ role: "user", content: prompt }],
+                      temperature: 0.5, max_tokens: 2500,
+                    });
+                    const raw4 = resp4.choices[0]?.message?.content ?? "{}";
+                    const jsonMatch4 = raw4.match(/\{[\s\S]*\}/);
+                    parsed = JSON.parse(jsonMatch4 ? jsonMatch4[0] : raw4);
+                  }
                 }
               }
 
