@@ -290,7 +290,10 @@ export function SharedHeader({ transparent }: SharedHeaderProps) {
               ) : (
                 <>
                   <img src="/logo-gustafta.png" alt="Gustafta" className="h-[67px] w-[67px] object-contain" />
-                  <span className="text-[40px] font-black tracking-tight leading-none bg-gradient-to-r from-cyan-400 via-blue-500 to-blue-900 bg-clip-text text-transparent">GUSTAFTA</span>
+                  <div className="flex flex-col leading-none">
+                    <span className="text-[40px] font-black tracking-tight leading-none bg-gradient-to-r from-cyan-400 via-blue-500 to-blue-900 bg-clip-text text-transparent">GUSTAFTA</span>
+                    <span className="text-[11px] font-semibold tracking-widest text-muted-foreground uppercase mt-0.5">Solusi Cerdas Kontraktor Indonesia</span>
+                  </div>
                 </>
               )}
             </div>
