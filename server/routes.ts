@@ -3701,6 +3701,93 @@ Jawab berdasarkan isi dokumen. Jika tidak ada di dokumen, katakan dengan jelas. 
     }
   });
 
+  // ── Regulatory Impact Note ─────────────────────────────────────────────────
+  app.post("/api/bedah-dokumen/:id/regulasi-note", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = getSessionUserId(req);
+      const { sql: sqlBD } = await import("drizzle-orm");
+      const [doc] = (await db.execute(sqlBD`
+        SELECT * FROM document_analyses WHERE id = ${parseInt(req.params.id)} AND user_id = ${userId}
+      `)).rows as any[];
+      if (!doc) return res.status(404).json({ error: "Dokumen tidak ditemukan" });
+      if (doc.status !== "done") return res.status(400).json({ error: "Dokumen belum selesai dianalisis" });
+
+      const textCtx = (doc.extracted_text || "").substring(0, 8000);
+      const docTypeMap: Record<string, string> = {
+        tender: "Dokumen Tender / Pengadaan",
+        skk_sbu: "SKK / SBU / Sertifikasi Konstruksi",
+        kontrak: "Kontrak Konstruksi",
+        lainnya: "Dokumen Konstruksi Umum",
+      };
+      const docTypeLabel = docTypeMap[doc.doc_type] || "Dokumen Konstruksi";
+      const today = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+
+      const prompt = `Kamu adalah analis regulasi konstruksi Indonesia yang sangat ahli dan selalu update.
+
+Tugas: Buat "Regulatory Impact Note" untuk dokumen berikut. Ini adalah catatan profesional yang akan dikirim konsultan kepada klien untuk membuktikan mereka selalu up-to-date dengan regulasi terkini.
+
+JENIS DOKUMEN: ${docTypeLabel}
+NAMA FILE: ${doc.original_name}
+TANGGAL ANALISIS: ${today}
+
+ISI DOKUMEN (ringkasan):
+${textCtx}${textCtx.length >= 8000 ? "\n[... dokumen dipotong ...]" : ""}
+
+Buat Regulatory Impact Note dalam format JSON berikut (isi semua field, BAHASA INDONESIA, profesional):
+{
+  "status_regulasi": "🟢 Sesuai Regulasi Terkini" | "🟡 Perlu Perhatian — Ada Update Regulasi" | "🔴 Risiko Tinggi — Tidak Sesuai Regulasi Terbaru",
+  "ringkasan_satu_kalimat": "satu kalimat ringkas status kepatuhan regulasi dokumen ini",
+  "regulasi_berlaku": [
+    { "nama": "nama regulasi/peraturan", "nomor": "nomor PP/Perpres/Permen dll", "relevansi": "kenapa ini relevan dengan dokumen ini" }
+  ],
+  "perubahan_kritis": [
+    { "aspek": "aspek yang berubah", "perubahan": "apa yang berubah", "dampak_ke_dokumen": "dampak spesifik ke dokumen ini", "urgensi": "tinggi" | "sedang" | "rendah" }
+  ],
+  "risiko_ketidakpatuhan": ["risiko 1 jika tidak diikuti", "risiko 2", ...],
+  "rekomendasi_tindak_lanjut": ["langkah konkret 1", "langkah 2", ...],
+  "catatan_konsultan": "satu paragraf yang bisa langsung dipakai konsultan saat forward ke klien — bunyikan seperti konsultan yang berbicara kepada kliennya"
+}
+
+Batas: regulasi_berlaku maksimal 4 item, perubahan_kritis maksimal 3 item, risiko maksimal 3 item, rekomendasi maksimal 4 item.
+Kembalikan HANYA JSON, tanpa markdown, tanpa penjelasan tambahan.`;
+
+      let rawJson = "";
+      try {
+        const r = await openai.chat.completions.create({
+          model: SMART_MODEL,
+          messages: [{ role: "user", content: prompt }],
+          temperature: 0.2, max_tokens: 2000,
+        });
+        rawJson = r.choices[0]?.message?.content || "";
+      } catch {
+        try {
+          const or = new OpenAI({ apiKey: process.env.OPENROUTER_API_KEY, baseURL: OPENROUTER_BASE_URL });
+          const r = await or.chat.completions.create({ model: OPENROUTER_MODEL, messages: [{ role: "user", content: prompt }], temperature: 0.2, max_tokens: 2000 });
+          rawJson = r.choices[0]?.message?.content || "";
+        } catch {
+          const ds = new OpenAI({ apiKey: process.env.DEEPSEEK_API_KEY, baseURL: "https://api.deepseek.com" });
+          const r = await ds.chat.completions.create({ model: "deepseek-chat", messages: [{ role: "user", content: prompt }], temperature: 0.2, max_tokens: 2000 });
+          rawJson = r.choices[0]?.message?.content || "";
+        }
+      }
+
+      // Strip markdown fences if any
+      rawJson = rawJson.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/```\s*$/i, "").trim();
+      const note = JSON.parse(rawJson);
+      note.generated_at = today;
+
+      await db.execute(sqlBD`
+        UPDATE document_analyses SET regulasi_note = ${JSON.stringify(note)}::jsonb, updated_at = NOW()
+        WHERE id = ${parseInt(req.params.id)} AND user_id = ${userId}
+      `);
+
+      res.json(note);
+    } catch (err: any) {
+      console.error("[regulasi-note]", err?.message);
+      res.status(500).json({ error: "Gagal membuat Regulatory Impact Note: " + (err?.message || "error") });
+    }
+  });
+
   // ==================== Tender Document Catalog Routes (Perpres 46/2025) ====================
   // Katalog ini publik (data referensi), filterable. Mutasi (POST/DELETE) butuh auth.
 

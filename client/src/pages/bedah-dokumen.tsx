@@ -15,7 +15,19 @@ import {
   AlertTriangle, Clock, CheckCircle2, XCircle, ChevronRight,
   Send, Loader2, FileSearch, Lock, Sparkles, RotateCcw,
   ListChecks, BookOpen, ShieldAlert, Lightbulb, Download, Package,
+  Scale, Copy, RefreshCw, TrendingUp,
 } from "lucide-react";
+
+interface RegulasiNote {
+  status_regulasi: string;
+  ringkasan_satu_kalimat: string;
+  regulasi_berlaku: { nama: string; nomor: string; relevansi: string }[];
+  perubahan_kritis: { aspek: string; perubahan: string; dampak_ke_dokumen: string; urgensi: "tinggi" | "sedang" | "rendah" }[];
+  risiko_ketidakpatuhan: string[];
+  rekomendasi_tindak_lanjut: string[];
+  catatan_konsultan: string;
+  generated_at: string;
+}
 
 interface DocAnalysis {
   id: number;
@@ -25,6 +37,7 @@ interface DocAnalysis {
   summary: string | null;
   checklist: ChecklistCategory[] | null;
   chat_history: ChatMessage[] | null;
+  regulasi_note: RegulasiNote | null;
   file_size: number;
   error_msg: string | null;
   created_at: string;
@@ -264,6 +277,201 @@ function KTKExportModal({ doc, onClose }: { doc: DocAnalysis; onClose: () => voi
         </Button>
       </DialogFooter>
     </DialogContent>
+  );
+}
+
+// ── Regulatory Impact Note Component ─────────────────────────────────────────
+function DocRegulasiNote({ doc, isPremium }: { doc: DocAnalysis; isPremium: boolean }) {
+  const [generating, setGenerating] = useState(false);
+  const [note, setNote] = useState<RegulasiNote | null>(doc.regulasi_note ?? null);
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+
+  const generate = async () => {
+    if (!isPremium) {
+      toast({ title: "Fitur Premium", description: "Regulatory Impact Note tersedia di paket Starter ke atas.", variant: "destructive" });
+      return;
+    }
+    setGenerating(true);
+    try {
+      const r = await fetch(`/api/bedah-dokumen/${doc.id}/regulasi-note`, { method: "POST", credentials: "include" });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error || "Gagal generate");
+      setNote(data);
+      queryClient.invalidateQueries({ queryKey: ["/api/bedah-dokumen", doc.id] });
+      toast({ title: "Regulatory Impact Note siap!" });
+    } catch (err: any) {
+      toast({ title: "Gagal", description: err.message, variant: "destructive" });
+    } finally {
+      setGenerating(false);
+    }
+  };
+
+  const copyToClipboard = () => {
+    if (!note) return;
+    const text = `📋 REGULATORY IMPACT NOTE
+${note.status_regulasi}
+📄 Dokumen: ${doc.original_name}
+📅 Tanggal: ${note.generated_at}
+
+${note.ringkasan_satu_kalimat}
+
+⚖️ REGULASI BERLAKU:
+${note.regulasi_berlaku.map(r => `• ${r.nama} (${r.nomor}) — ${r.relevansi}`).join("\n")}
+
+⚠️ PERUBAHAN KRITIS:
+${note.perubahan_kritis.map(p => `• ${p.aspek}: ${p.perubahan}\n  Dampak: ${p.dampak_ke_dokumen}`).join("\n")}
+
+✅ REKOMENDASI:
+${note.rekomendasi_tindak_lanjut.map((r, i) => `${i + 1}. ${r}`).join("\n")}
+
+💬 CATATAN KONSULTAN:
+${note.catatan_konsultan}
+
+—
+Dibuat oleh Gustafta AI | gustafta.my.id`;
+    navigator.clipboard.writeText(text);
+    toast({ title: "Disalin!", description: "Siap di-paste ke WhatsApp klien." });
+  };
+
+  if (!isPremium) {
+    return (
+      <div className="flex flex-col items-center justify-center py-16 text-center gap-4">
+        <div className="w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center">
+          <Scale className="h-8 w-8 text-blue-500" />
+        </div>
+        <div>
+          <p className="font-semibold">Regulatory Impact Note — Paket Starter</p>
+          <p className="text-sm text-muted-foreground mt-1">Catatan dampak regulasi terkini siap forward ke klien.</p>
+        </div>
+        <a href="/onboarding"><Button size="sm" className="gap-2"><Sparkles className="h-3.5 w-3.5" />Upgrade Sekarang</Button></a>
+      </div>
+    );
+  }
+
+  if (!note) {
+    return (
+      <div className="flex flex-col items-center justify-center py-16 text-center gap-4">
+        <div className="w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center">
+          <Scale className="h-8 w-8 text-blue-500" />
+        </div>
+        <div>
+          <p className="font-semibold">Regulatory Impact Note</p>
+          <p className="text-sm text-muted-foreground mt-1 max-w-xs">AI akan analisis regulasi terkini yang berlaku untuk dokumen ini dan dampaknya — siap di-forward ke klien.</p>
+        </div>
+        <Button onClick={generate} disabled={generating} className="gap-2">
+          {generating ? <Loader2 className="h-4 w-4 animate-spin" /> : <Scale className="h-4 w-4" />}
+          {generating ? "Menganalisis regulasi…" : "Generate Regulatory Impact Note"}
+        </Button>
+        {generating && (
+          <p className="text-xs text-muted-foreground animate-pulse">AI sedang memeriksa regulasi terkini yang relevan…</p>
+        )}
+      </div>
+    );
+  }
+
+  const urgensiColor = { tinggi: "text-red-600 bg-red-500/10 border-red-500/20", sedang: "text-amber-600 bg-amber-500/10 border-amber-500/20", rendah: "text-emerald-600 bg-emerald-500/10 border-emerald-500/20" };
+
+  return (
+    <div className="space-y-5">
+      {/* Status + Actions */}
+      <div className="flex items-start justify-between gap-3 flex-wrap">
+        <div className="space-y-1">
+          <p className="text-lg font-bold">{note.status_regulasi}</p>
+          <p className="text-sm text-muted-foreground">{note.ringkasan_satu_kalimat}</p>
+          <p className="text-xs text-muted-foreground">Dianalisis: {note.generated_at}</p>
+        </div>
+        <div className="flex gap-2 shrink-0">
+          <Button size="sm" variant="outline" className="gap-1.5 text-xs h-8" onClick={copyToClipboard}>
+            <Copy className="h-3.5 w-3.5" />Salin ke WA
+          </Button>
+          <Button size="sm" variant="outline" className="gap-1.5 text-xs h-8" onClick={generate} disabled={generating}>
+            {generating ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <RefreshCw className="h-3.5 w-3.5" />}
+            Perbarui
+          </Button>
+        </div>
+      </div>
+
+      {/* Regulasi berlaku */}
+      {note.regulasi_berlaku?.length > 0 && (
+        <div className="space-y-2">
+          <h3 className="text-sm font-semibold flex items-center gap-2"><Scale className="h-4 w-4 text-blue-500" />Regulasi Yang Berlaku</h3>
+          <div className="space-y-2">
+            {note.regulasi_berlaku.map((r, i) => (
+              <div key={i} className="p-3 rounded-lg border border-blue-500/20 bg-blue-500/5">
+                <div className="flex items-start gap-2">
+                  <span className="text-xs font-bold text-blue-600 shrink-0 mt-0.5">{r.nomor}</span>
+                  <div>
+                    <p className="text-sm font-medium">{r.nama}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{r.relevansi}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Perubahan kritis */}
+      {note.perubahan_kritis?.length > 0 && (
+        <div className="space-y-2">
+          <h3 className="text-sm font-semibold flex items-center gap-2"><TrendingUp className="h-4 w-4 text-amber-500" />Perubahan Regulasi Kritis</h3>
+          <div className="space-y-2">
+            {note.perubahan_kritis.map((p, i) => (
+              <div key={i} className="p-3 rounded-lg border border-border/50 bg-background">
+                <div className="flex items-start justify-between gap-2 mb-1">
+                  <p className="text-sm font-semibold">{p.aspek}</p>
+                  <Badge variant="outline" className={`text-xs shrink-0 ${urgensiColor[p.urgensi] ?? urgensiColor.sedang}`}>{p.urgensi}</Badge>
+                </div>
+                <p className="text-sm text-muted-foreground">{p.perubahan}</p>
+                <p className="text-xs mt-1.5 text-amber-600 dark:text-amber-400 flex items-start gap-1">
+                  <AlertTriangle className="h-3 w-3 shrink-0 mt-0.5" />{p.dampak_ke_dokumen}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Risiko */}
+      {note.risiko_ketidakpatuhan?.length > 0 && (
+        <div className="space-y-2">
+          <h3 className="text-sm font-semibold flex items-center gap-2"><ShieldAlert className="h-4 w-4 text-red-500" />Risiko Jika Tidak Dipatuhi</h3>
+          <ul className="space-y-1.5">
+            {note.risiko_ketidakpatuhan.map((r, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm p-2.5 rounded-lg bg-red-500/5 border border-red-500/20">
+                <XCircle className="h-3.5 w-3.5 text-red-500 mt-0.5 shrink-0" />{r}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Rekomendasi */}
+      {note.rekomendasi_tindak_lanjut?.length > 0 && (
+        <div className="space-y-2">
+          <h3 className="text-sm font-semibold flex items-center gap-2"><Lightbulb className="h-4 w-4 text-amber-500" />Rekomendasi Tindak Lanjut</h3>
+          <ol className="space-y-1.5">
+            {note.rekomendasi_tindak_lanjut.map((r, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm p-2.5 rounded-lg bg-amber-500/5 border border-amber-500/20">
+                <span className="font-bold text-amber-600 shrink-0">{i + 1}.</span>{r}
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+
+      {/* Catatan konsultan */}
+      {note.catatan_konsultan && (
+        <div className="p-4 rounded-xl border border-primary/20 bg-primary/5 space-y-2">
+          <h3 className="text-sm font-semibold flex items-center gap-2"><MessageSquare className="h-4 w-4 text-primary" />Catatan untuk Klien (siap forward)</h3>
+          <p className="text-sm leading-relaxed text-foreground/90 italic">"{note.catatan_konsultan}"</p>
+          <Button size="sm" variant="outline" className="gap-1.5 text-xs h-7 mt-1" onClick={copyToClipboard}>
+            <Copy className="h-3 w-3" />Salin semua ke clipboard
+          </Button>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -844,12 +1052,16 @@ function BedahDokumenContent() {
               {/* Tabs */}
               <div className="p-5">
                 <Tabs defaultValue="ringkasan">
-                  <TabsList className="mb-5 w-full sm:w-auto">
+                  <TabsList className="mb-5 w-full sm:w-auto flex-wrap h-auto gap-1">
                     <TabsTrigger value="ringkasan" className="gap-1.5">
                       <BookOpen className="h-3.5 w-3.5" />Ringkasan
                     </TabsTrigger>
                     <TabsTrigger value="checklist" className="gap-1.5">
                       <CheckSquare className="h-3.5 w-3.5" />Checklist
+                      {!isPremium && <Lock className="h-3 w-3 text-amber-500" />}
+                    </TabsTrigger>
+                    <TabsTrigger value="regulasi" className="gap-1.5">
+                      <Scale className="h-3.5 w-3.5" />Regulasi
                       {!isPremium && <Lock className="h-3 w-3 text-amber-500" />}
                     </TabsTrigger>
                     <TabsTrigger value="chat" className="gap-1.5">
@@ -863,6 +1075,9 @@ function BedahDokumenContent() {
                   </TabsContent>
                   <TabsContent value="checklist">
                     <DocChecklist doc={selectedDoc} isPremium={isPremium} />
+                  </TabsContent>
+                  <TabsContent value="regulasi">
+                    <DocRegulasiNote doc={selectedDoc} isPremium={isPremium} />
                   </TabsContent>
                   <TabsContent value="chat">
                     <DocChat doc={selectedDoc} isPremium={isPremium} />
