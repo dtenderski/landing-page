@@ -581,7 +581,7 @@ export default function Landing() {
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="w-full sm:w-auto border-white/40 text-white hover:bg-white/10 gap-2 px-6 h-12" data-testid="button-hero-packs">
-              <Link href="/packs">
+              <Link href="/bedah-dokumen">
                 <BookOpen className="w-4 h-4" />
                 Lihat Paket Bedah Kasus
               </Link>
