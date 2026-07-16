@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import {
   Loader2, Bot, Smartphone, ShoppingCart, CheckCircle2,
   ArrowRight, Star, Users, ChevronRight, Send, Lock, Sparkles,
+  AlertTriangle, Clock, XCircle, TrendingUp, Zap, Shield, MousePointerClick,
 } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { Link } from "wouter";
@@ -446,8 +447,9 @@ export default function StoreFeatured() {
   const mitra = featured?.mitra ?? [];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+    <div className="min-h-screen bg-white">
+
+      {/* ── HEADER ── */}
       <header className="border-b border-gray-200 bg-white/95 backdrop-blur sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -461,9 +463,9 @@ export default function StoreFeatured() {
           </div>
           <div className="flex items-center gap-3">
             <a
-              href="https://wa.me/6281287941900" onClick={() => trackLead({ content_name: "WhatsApp CTA" })}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="https://wa.me/6281287941900"
+              onClick={() => trackLead({ content_name: "WhatsApp CTA" })}
+              target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 transition-colors"
               data-testid="link-wa-header"
             >
@@ -479,122 +481,260 @@ export default function StoreFeatured() {
         </div>
       </header>
 
-      {/* ── Journey Context: MENGGUNAKAN AI ── */}
-      <section className="bg-blue-50 border-b border-blue-200">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <div className="flex flex-wrap items-center gap-1.5 mb-4 text-xs">
-            {["Belajar", "Merakit AI"].map((s) => (
-              <span key={s} className="flex items-center gap-1 text-gray-500">
-                {s}<ChevronRight className="h-3 w-3" />
-              </span>
-            ))}
-            <span className="font-bold px-2.5 py-1 rounded-full bg-blue-600 text-white">TAHAP 3</span>
-            <span className="font-semibold text-blue-800">Menggunakan AI</span>
-            {["Menghasilkan Nilai", "Berkembang"].map((s) => (
-              <span key={s} className="flex items-center gap-1 text-gray-500">
-                <ChevronRight className="h-3 w-3" />{s}
-              </span>
-            ))}
-          </div>
-          <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-1.5">
-            Tidak ingin merakit sendiri? Pilih dan langsung pakai
-          </h2>
-          <p className="text-sm text-blue-700 mb-5 max-w-3xl leading-relaxed">
-            Ratusan AI spesialis siap digunakan — dari domain Konstruksi, Hukum, Pendidikan, HR, Keuangan, hingga Properti. Pilih sesuai kebutuhan, aktif dalam hitungan menit.
+      {/* ── 1. HERO (ATTENTION) ── */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-gray-950 via-violet-950 to-indigo-950 text-white">
+        <div className="absolute inset-0 opacity-10 pointer-events-none"
+          style={{ backgroundImage: "radial-gradient(circle at 20% 50%, #7c3aed 0%, transparent 60%), radial-gradient(circle at 80% 20%, #4f46e5 0%, transparent 50%)" }} />
+        <div className="relative max-w-4xl mx-auto px-4 py-20 text-center">
+          <Badge className="mb-5 bg-violet-500/20 text-violet-300 border-violet-500/30 hover:bg-violet-500/20">
+            🏪 Gustafta Store — AI Spesialis Siap Pakai
+          </Badge>
+          <h1 className="text-3xl sm:text-5xl font-extrabold leading-tight mb-5 tracking-tight">
+            AI Spesialis Domain Anda —<br />
+            <span className="text-violet-400">Aktif Dalam 5 Menit</span>
+          </h1>
+          <p className="text-gray-300 max-w-2xl mx-auto mb-8 text-base sm:text-lg leading-relaxed">
+            Ratusan AI terlatih untuk konstruksi, hukum, keuangan, HR, dan properti —
+            bukan AI generik. Pilih, bayar lisensi, langsung aktif. Tanpa satu baris kode pun.
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 mb-5">
-            {[
-              { icon: "🏗️", label: "AI Konstruksi", sub: "SBU, K3, Tender, RAB" },
-              { icon: "⚖️", label: "AI Hukum", sub: "Kontrak, legalitas" },
-              { icon: "🎓", label: "AI Pendidikan", sub: "Tutor & e-learning" },
-              { icon: "👥", label: "AI HR", sub: "Rekrutmen, kinerja" },
-              { icon: "💹", label: "AI Keuangan", sub: "Pajak, cashflow" },
-              { icon: "🏠", label: "AI Properti", sub: "Developer, agen" },
-              { icon: "📋", label: "Template", sub: "Paket siap pakai" },
-              { icon: "📚", label: "Knowledge Pack", sub: "Pengetahuan domain" },
-            ].map((item) => (
-              <div key={item.label} className="bg-white border border-blue-200 rounded-xl px-2.5 py-2 flex flex-col gap-1 text-center items-center">
-                <span className="text-xl leading-none">{item.icon}</span>
-                <div className="text-[11px] font-semibold text-blue-900 leading-tight">{item.label}</div>
-                <div className="text-[10px] text-blue-500">{item.sub}</div>
-              </div>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 justify-center mb-10">
             <Link href="/store/katalog">
-              <button className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-colors">
-                <ShoppingCart className="h-3.5 w-3.5" /> Lihat Semua AI Solutions
-              </button>
+              <Button
+                size="lg"
+                className="bg-violet-600 hover:bg-violet-500 text-white font-bold px-8 h-12 text-base gap-2"
+                data-testid="button-hero-lihat-ai"
+              >
+                <ShoppingCart className="h-5 w-5" /> Lihat Semua AI Solutions
+              </Button>
             </Link>
-            <a href="https://wa.me/6282299417818?text=Halo%2C%20saya%20ingin%20rekomendasi%20AI%20yang%20tepat%20untuk%20kebutuhan%20saya" onClick={() => trackLead({ content_name: "WhatsApp CTA" })} target="_blank" rel="noopener noreferrer">
-              <button className="inline-flex items-center gap-2 border border-blue-400 text-blue-700 hover:bg-blue-50 text-xs font-semibold px-4 py-2 rounded-lg transition-colors">
-                Minta Rekomendasi <ArrowRight className="h-3.5 w-3.5" />
-              </button>
+            <a
+              href="https://wa.me/6282299417818?text=Halo%2C%20saya%20ingin%20rekomendasi%20AI%20yang%20tepat%20untuk%20kebutuhan%20saya"
+              onClick={() => trackLead({ content_name: "WhatsApp Hero CTA" })}
+              target="_blank" rel="noopener noreferrer"
+            >
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white/30 text-white hover:bg-white/10 font-semibold px-8 h-12 text-base gap-2"
+                data-testid="button-hero-konsultasi"
+              >
+                <Smartphone className="h-5 w-5" /> Konsultasi via WA
+              </Button>
             </a>
           </div>
+          {/* Trust chips */}
+          <div className="flex flex-wrap gap-4 justify-center text-sm text-gray-400">
+            {[
+              { dot: "bg-violet-400", text: "0 konfigurasi teknis" },
+              { dot: "bg-emerald-400", text: "Demo gratis sebelum beli" },
+              { dot: "bg-blue-400",   text: "Dikurasi & diuji tim Gustafta" },
+              { dot: "bg-amber-400",  text: "Aktif 24/7" },
+            ].map(({ dot, text }) => (
+              <span key={text} className="flex items-center gap-1.5">
+                <span className={`w-2 h-2 rounded-full ${dot} inline-block shrink-0`} />
+                {text}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Hero */}
-      <section className="py-10 px-4 text-center border-b border-gray-200 bg-white">
-        <Badge className="mb-3 bg-violet-100 text-violet-700 border-violet-200 hover:bg-violet-100">
-          🏪 Gustafta Store — AI Solutions Siap Pakai
-        </Badge>
-        <h1 className="text-3xl sm:text-4xl font-bold mb-3 text-gray-900">
-          Pilih AI-mu, Langsung Aktif
-        </h1>
-        <p className="text-gray-600 max-w-xl mx-auto mb-6 text-sm leading-relaxed">
-          Dua sumber produk — <strong className="text-gray-900">AI resmi Gustafta</strong> dan{" "}
-          <strong className="text-gray-900">AI dari creator bersertifikat</strong>.
-          Semua siap pakai — lisensi sekali bayar + langganan bulanan (hosting).
-        </p>
-
-        <div className="inline-flex flex-wrap items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-gray-900 border border-gray-700 text-sm mb-6 shadow-sm">
-          <span className="text-orange-300 font-medium">🏷️ Pilih AI</span>
-          <span className="text-gray-400">→</span>
-          <span className="text-green-300 font-medium">💳 Lisensi + Langganan</span>
-          <span className="text-gray-400">→</span>
-          <span className="text-white font-bold">✓ Langsung Aktif</span>
-        </div>
-
-        <div className="flex flex-wrap gap-4 justify-center text-xs text-gray-500">
-          <span className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-violet-400 inline-block" />Aktif tanpa konfigurasi teknis
-          </span>
-          <span className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" />Lisensi sekali + langganan bulanan
-          </span>
-          <span className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-blue-400 inline-block" />Dikurasi & diuji tim
-          </span>
+      {/* ── 2. PROBLEM (PAS) ── */}
+      <section className="py-16 px-4 bg-gray-50 border-b border-gray-200">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-10">
+            <span className="text-xs font-bold uppercase tracking-widest text-orange-500 mb-2 block">Masalah yang Dirasakan</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+              Mengurus pekerjaan teknis sendiri itu melelahkan
+            </h2>
+            <p className="text-gray-500 mt-3 text-sm max-w-xl mx-auto">
+              Bukan karena Anda tidak kompeten — tapi karena volumenya tidak manusiawi.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {[
+              {
+                icon: Clock,
+                color: "text-orange-500 bg-orange-50 border-orange-200",
+                title: "Waktu habis untuk hal administratif",
+                body: "Mengisi dokumen, menelusuri regulasi, menyusun laporan — semua manual, semua menyita jam kerja produktif.",
+              },
+              {
+                icon: XCircle,
+                color: "text-red-500 bg-red-50 border-red-200",
+                title: "AI umum tidak paham konteks Indonesia",
+                body: "ChatGPT tidak tahu Perpres 16/2018, SKK BNSP, atau format CSMS Pertamina. Jawaban generik = risiko di lapangan.",
+              },
+              {
+                icon: AlertTriangle,
+                color: "text-amber-500 bg-amber-50 border-amber-200",
+                title: "Takut salah dokumen & ketinggalan regulasi",
+                body: "Satu syarat yang terlewat bisa membuat tender gugur atau proses sertifikasi tertunda berbulan-bulan.",
+              },
+              {
+                icon: TrendingUp,
+                color: "text-blue-500 bg-blue-50 border-blue-200",
+                title: "Kompetitor sudah pakai AI, Anda belum",
+                body: "Kontraktor, konsultan, dan firma hukum yang lebih cepat mengadopsi AI akan memenangkan lebih banyak proyek.",
+              },
+            ].map(({ icon: Icon, color, title, body }) => (
+              <Card key={title} className={`border ${color.split(" ").slice(1).join(" ")} bg-white`}>
+                <CardContent className="p-5 flex gap-4">
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border ${color.split(" ").slice(1).join(" ")}`}>
+                    <Icon className={`h-5 w-5 ${color.split(" ")[0]}`} />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 text-sm mb-1">{title}</h3>
+                    <p className="text-gray-500 text-xs leading-relaxed">{body}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Main content */}
-      <div className="max-w-6xl mx-auto px-4 py-10 space-y-14">
+      {/* ── 3. AGITATE ── */}
+      <section className="bg-gray-900 text-white py-10 px-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-lg sm:text-2xl font-bold leading-snug text-gray-100">
+            Setiap jam yang Anda habiskan untuk pekerjaan yang bisa diotomasi AI
+            adalah <span className="text-orange-400">jam yang tidak menghasilkan</span> —
+            dan jam yang tidak bisa dikembalikan.
+          </p>
+        </div>
+      </section>
 
-        {/* Section 1 — Produk Gustafta */}
-        <section>
-          <div className="flex items-start justify-between mb-6">
+      {/* ── 4. SOLUTION / HOW IT WORKS (INTEREST) ── */}
+      <section className="py-16 px-4 bg-white border-b border-gray-100">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-xs font-bold uppercase tracking-widest text-violet-500 mb-2 block">Solusi</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+              AI spesialis, bukan AI generik
+            </h2>
+            <p className="text-gray-500 mt-3 text-sm max-w-xl mx-auto">
+              Setiap produk di Gustafta Store dilatih untuk domain spesifik — bukan copy-paste ChatGPT.
+              Tim kami kurasi, uji, dan perbarui secara berkala.
+            </p>
+          </div>
+
+          {/* 3 langkah */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
+            {[
+              {
+                step: "01",
+                icon: MousePointerClick,
+                color: "text-violet-600 bg-violet-50 border-violet-200",
+                title: "Pilih AI yang Tepat",
+                body: "Browse ratusan AI spesialis per domain — konstruksi, hukum, keuangan, HR, properti. Coba demo gratis dulu.",
+              },
+              {
+                step: "02",
+                icon: ShoppingCart,
+                color: "text-emerald-600 bg-emerald-50 border-emerald-200",
+                title: "Beli Lisensi",
+                body: "Bayar lisensi sekali + berlangganan hosting bulanan. Proses aman via Scalev.id. Konfirmasi dalam hitungan menit.",
+              },
+              {
+                step: "03",
+                icon: Zap,
+                color: "text-amber-600 bg-amber-50 border-amber-200",
+                title: "Langsung Aktif",
+                body: "AI aktif tanpa instalasi teknis. Akses via browser atau WhatsApp. Tanya tanpa batas, 24/7.",
+              },
+            ].map(({ step, icon: Icon, color, title, body }) => (
+              <div key={step} className="relative">
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border mb-4 ${color.split(" ").slice(1).join(" ")}`}>
+                  <Icon className={`h-6 w-6 ${color.split(" ")[0]}`} />
+                </div>
+                <span className="absolute top-0 left-0 text-[10px] font-black text-gray-300 leading-none">{step}</span>
+                <h3 className="font-bold text-gray-900 mb-2">{title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{body}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Keunggulan vs AI Generik */}
+          <div className="rounded-2xl border border-violet-200 overflow-hidden bg-violet-50">
+            <div className="grid grid-cols-3 text-center text-xs font-bold uppercase tracking-wide bg-violet-100 border-b border-violet-200">
+              <div className="py-3 px-3 text-gray-500">Aspek</div>
+              <div className="py-3 px-3 text-red-600">AI Generik</div>
+              <div className="py-3 px-3 text-violet-700">Gustafta Store ✓</div>
+            </div>
+            {[
+              ["Konteks regulasi Indonesia", "❌ Tidak tahu", "✅ Terlatih khusus"],
+              ["Akurasi dokumen teknis", "❌ Rawan error", "✅ Dikurasi ahli domain"],
+              ["Setup & mulai pakai", "❌ Perlu prompt rekayasa", "✅ Aktif langsung, 5 menit"],
+              ["Dukungan & update", "❌ Mandiri", "✅ Tim Gustafta + berkala"],
+              ["Integrasi WhatsApp", "❌ Tidak tersedia", "✅ Tersedia di semua produk"],
+            ].map(([aspek, generik, gustafta]) => (
+              <div key={aspek} className="grid grid-cols-3 text-center text-sm border-b border-violet-200 last:border-0">
+                <div className="py-3 px-3 text-gray-700 font-medium text-left">{aspek}</div>
+                <div className="py-3 px-3 text-gray-500">{generik}</div>
+                <div className="py-3 px-3 text-violet-800 font-semibold">{gustafta}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5. DESIRE — Domain Coverage ── */}
+      <section className="py-14 px-4 bg-gray-50 border-b border-gray-200">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-2 block">Cakupan Domain</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+              Satu platform, semua kebutuhan profesional Anda
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {[
+              { icon: "🏗️", label: "AI Konstruksi",   sub: "SBU, K3, Tender, RAB, SMKK" },
+              { icon: "⚖️", label: "AI Hukum",        sub: "Kontrak, legalitas, sengketa" },
+              { icon: "🎓", label: "AI Pendidikan",   sub: "Tutor, e-learning, SKK" },
+              { icon: "👥", label: "AI HR",           sub: "Rekrutmen, kinerja, BNSP" },
+              { icon: "💹", label: "AI Keuangan",     sub: "Pajak, cashflow, RAB" },
+              { icon: "🏠", label: "AI Properti",     sub: "Developer, agen, KPR" },
+              { icon: "📋", label: "Template",        sub: "Dokumen siap pakai" },
+              { icon: "📚", label: "Knowledge Pack",  sub: "Pengetahuan domain mendalam" },
+            ].map((item) => (
+              <div key={item.label} className="bg-white border border-gray-200 rounded-2xl px-4 py-4 flex flex-col gap-2 items-center text-center hover:border-violet-300 hover:shadow-sm transition-all">
+                <span className="text-3xl leading-none">{item.icon}</span>
+                <div className="text-sm font-bold text-gray-900 leading-tight">{item.label}</div>
+                <div className="text-[11px] text-gray-500 leading-tight">{item.sub}</div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link href="/store/katalog">
+              <Button variant="outline" className="gap-2 border-violet-300 text-violet-700 hover:bg-violet-50" data-testid="button-domain-katalog">
+                Jelajahi Semua Kategori <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 6. PRODUCT GRID — Gustafta (ACTION) ── */}
+      <section className="py-14 px-4 bg-white border-b border-gray-100">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-start justify-between mb-8">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <div className="w-7 h-7 rounded-lg bg-violet-600 flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center shrink-0">
                   <Star className="h-4 w-4 text-white" />
                 </div>
-                <h2 className="text-lg font-bold text-gray-900">Produk Chatbot Gustafta</h2>
+                <h2 className="text-xl font-bold text-gray-900">Produk Resmi Gustafta</h2>
                 <Badge className="bg-violet-100 text-violet-700 border-violet-200 text-[10px] font-bold">RESMI</Badge>
               </div>
-              <p className="text-sm text-gray-500 ml-9">
-                Dibuat dan dikurasi langsung oleh tim Gustafta — kualitas terjamin. <span className="text-violet-600 font-medium">Coba demo gratis sebelum beli.</span>
+              <p className="text-sm text-gray-500 ml-10">
+                Dibuat dan dikurasi langsung oleh tim Gustafta — kualitas terjamin.{" "}
+                <span className="text-violet-600 font-medium">Coba demo gratis sebelum beli.</span>
               </p>
             </div>
             <Link href="/store/katalog">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-violet-600 hover:text-violet-700 text-xs gap-1 shrink-0"
-                data-testid="link-lihat-semua-gustafta"
-              >
+              <Button variant="ghost" size="sm" className="text-violet-600 hover:text-violet-700 text-xs gap-1 shrink-0" data-testid="link-lihat-semua-gustafta">
                 Lihat Semua <ArrowRight className="h-3.5 w-3.5" />
               </Button>
             </Link>
@@ -608,30 +748,27 @@ export default function StoreFeatured() {
                 : <GroupEmptyState isGustafta={true} />}
             </div>
           )}
-        </section>
+        </div>
+      </section>
 
-        {/* Section 2 — Produk Mitra */}
-        <section>
-          <div className="flex items-start justify-between mb-6">
+      {/* ── 7. PRODUCT GRID — Mitra ── */}
+      <section className="py-14 px-4 bg-gray-50 border-b border-gray-100">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-start justify-between mb-8">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <div className="w-7 h-7 rounded-lg bg-emerald-600 flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center shrink-0">
                   <Users className="h-4 w-4 text-white" />
                 </div>
-                <h2 className="text-lg font-bold text-gray-900">Produk Chatbot Mitra</h2>
+                <h2 className="text-xl font-bold text-gray-900">Produk Mitra Bersertifikat</h2>
                 <Badge className="bg-emerald-100 text-emerald-700 border-emerald-200 text-[10px] font-bold">BERSERTIFIKAT</Badge>
               </div>
-              <p className="text-sm text-gray-500 ml-9">
+              <p className="text-sm text-gray-500 ml-10">
                 Dibuat oleh creator bersertifikat — lulus workshop Gustafta, direview tim, dikurasi sebelum tayang.
               </p>
             </div>
             <Link href="/store/katalog">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-emerald-600 hover:text-emerald-700 text-xs gap-1 shrink-0"
-                data-testid="link-lihat-semua-mitra"
-              >
+              <Button variant="ghost" size="sm" className="text-emerald-600 hover:text-emerald-700 text-xs gap-1 shrink-0" data-testid="link-lihat-semua-mitra">
                 Lihat Semua <ArrowRight className="h-3.5 w-3.5" />
               </Button>
             </Link>
@@ -645,20 +782,84 @@ export default function StoreFeatured() {
                 : <GroupEmptyState isGustafta={false} />}
             </div>
           )}
-        </section>
-
-        {/* CTA — full catalog */}
-        <div className="text-center py-8 border-t border-gray-200">
-          <p className="text-gray-500 text-sm mb-4">Jelajahi semua chatbot yang tersedia</p>
-          <Link href="/store/katalog">
-            <Button className="bg-violet-600 hover:bg-violet-700 text-white gap-2" data-testid="button-ke-katalog">
-              <Bot className="h-4 w-4" />Buka Katalog Lengkap
-            </Button>
-          </Link>
         </div>
-      </div>
+      </section>
 
-      {/* Footer */}
+      {/* ── 8. FAQ ── */}
+      <section className="py-16 px-4 bg-white border-b border-gray-100">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-10">
+            <span className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 block">FAQ</span>
+            <h2 className="text-2xl font-bold text-gray-900">Pertanyaan yang Sering Ditanyakan</h2>
+          </div>
+          <div className="space-y-4">
+            {[
+              {
+                q: "Apakah perlu kemampuan teknis untuk menggunakannya?",
+                a: "Tidak sama sekali. Tidak perlu coding, tidak perlu instalasi server. Setelah lisensi aktif, Anda langsung bisa menggunakan AI via browser atau WhatsApp.",
+              },
+              {
+                q: "Seberapa akurat jawaban AI-nya?",
+                a: "Setiap AI dilatih dengan basis pengetahuan domain spesifik dan diperbarui secara berkala. Namun untuk keputusan kritis (hukum, teknis struktural, medis), selalu verifikasi ke pihak berwenang atau profesional berlisensi.",
+              },
+              {
+                q: "Apa bedanya lisensi sekali bayar dengan langganan bulanan?",
+                a: "Lisensi adalah hak pakai produk AI. Langganan bulanan adalah biaya hosting agar AI Anda terus aktif dan bisa diakses. Keduanya terpisah dan transparan di halaman checkout.",
+              },
+              {
+                q: "Bisa coba dulu sebelum beli?",
+                a: "Bisa. Setiap produk Gustafta tersedia demo gratis — 3 pertanyaan tanpa daftar, langsung dari halaman ini. Klik tombol 'Coba Demo Gratis' di kartu produk mana saja.",
+              },
+              {
+                q: "Bagaimana jika saya butuh AI yang belum ada di katalog?",
+                a: "Hubungi tim kami via WhatsApp. Kami menerima permintaan custom dan memiliki tim yang bisa merakit AI sesuai kebutuhan spesifik bisnis atau industri Anda.",
+              },
+            ].map(({ q, a }) => (
+              <div key={q} className="border border-gray-200 rounded-xl p-5">
+                <div className="flex items-start gap-3">
+                  <Shield className="h-4 w-4 text-violet-500 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-gray-900 text-sm mb-1.5">{q}</p>
+                    <p className="text-gray-500 text-sm leading-relaxed">{a}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 9. FINAL CTA ── */}
+      <section className="py-16 px-4 bg-gradient-to-br from-violet-600 to-indigo-700 text-white">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">
+            Mulai hari ini — sebelum kompetitor Anda melakukannya
+          </h2>
+          <p className="text-violet-200 mb-8 text-sm leading-relaxed">
+            Pilih AI spesialis, aktif dalam 5 menit, bekerja 24/7 tanpa lelah.
+            Tidak ada alasan untuk menundanya lagi.
+          </p>
+          <div className="flex flex-wrap gap-3 justify-center">
+            <Link href="/store/katalog">
+              <Button size="lg" className="bg-white text-violet-700 hover:bg-violet-50 font-bold px-8 h-12 text-base gap-2" data-testid="button-final-cta-katalog">
+                <Bot className="h-5 w-5" /> Buka Katalog Lengkap
+              </Button>
+            </Link>
+            <a
+              href="https://wa.me/6282299417818?text=Halo%2C%20saya%20ingin%20konsultasi%20memilih%20AI%20yang%20tepat%20untuk%20saya"
+              onClick={() => trackLead({ content_name: "WhatsApp Final CTA" })}
+              target="_blank" rel="noopener noreferrer"
+              data-testid="link-wa-final-cta"
+            >
+              <Button size="lg" variant="outline" className="border-white/40 text-white hover:bg-white/10 font-semibold px-8 h-12 text-base gap-2">
+                <Smartphone className="h-5 w-5" /> Konsultasi via WA
+              </Button>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FOOTER ── */}
       <footer className="border-t border-gray-200 py-8 text-center text-sm text-gray-400 bg-white">
         <div className="flex items-center justify-center gap-4 mb-2">
           <a href="https://wa.me/6281287941900" onClick={() => trackLead({ content_name: "WhatsApp CTA" })} target="_blank" rel="noopener noreferrer"
