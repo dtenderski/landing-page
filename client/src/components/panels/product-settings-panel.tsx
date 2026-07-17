@@ -359,7 +359,7 @@ export function ProductSettingsPanel({ agent }: { agent: any }) {
                 </Select>
                 {settings.licenseClass != null ? (
                   <p className="text-xs text-muted-foreground" data-testid="text-license-class-price">
-                    Lisensi (sekali bayar): <strong>{formatCurrency(priceForClass(settings.licenseClass) ?? 0)}</strong> — otomatis dari kelas. Biaya bulanan tetap terpisah.
+                    Aktivasi (sekali bayar): <strong>{formatCurrency(priceForClass(settings.licenseClass) ?? 0)}</strong> — otomatis dari kelas. Biaya bulanan tetap terpisah.
                   </p>
                 ) : (
                   <div className="space-y-1.5">

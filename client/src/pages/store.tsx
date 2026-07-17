@@ -283,7 +283,7 @@ export default function Store() {
               <span className="text-orange-800 font-semibold text-sm">Produk = Domain Anda</span>
             </div>
             <p className="text-xs text-gray-700 leading-relaxed">Beli sekali — ini yang Anda "miliki". Tanpa produk, tidak ada yang bisa dijalankan. Pilih dari Store di bawah.</p>
-            <p className="text-xs text-orange-700 mt-2 font-semibold">↓ Biaya Lisensi (sekali bayar)</p>
+            <p className="text-xs text-orange-700 mt-2 font-semibold">↓ Biaya Aktivasi (sekali bayar)</p>
           </div>
           <div className="rounded-xl border border-green-300 bg-green-50 p-4 text-left shadow-sm">
             <div className="flex items-center gap-2 mb-2">
@@ -350,7 +350,7 @@ export default function Store() {
             <div className="space-y-2">
               <div className="flex items-center justify-between rounded-xl bg-white border border-violet-200 px-4 py-3 shadow-sm">
                 <div>
-                  <p className="text-xs font-bold text-gray-700">Biaya Lisensi</p>
+                  <p className="text-xs font-bold text-gray-700">Biaya Aktivasi</p>
                   <p className="text-[11px] text-gray-400">Hak pakai chatbot — sekali bayar, install mandiri</p>
                 </div>
                 <div className="text-right">
@@ -616,7 +616,7 @@ export default function Store() {
                 <div className="bg-violet-50 border border-violet-200 rounded-xl p-4 flex items-center justify-between">
                   <div>
                     <div className="flex items-center gap-2 mb-0.5">
-                      <p className="text-xs text-gray-400">Biaya Lisensi</p>
+                      <p className="text-xs text-gray-400">Biaya Aktivasi</p>
                       {detailAgent.licenseClass ? (
                         <Badge className="bg-violet-100 text-violet-700 border-violet-200 text-[10px] px-1.5 py-0 flex items-center gap-0.5"
                           data-testid={`badge-detail-kelas-premium-${detailAgent.id}`}>
@@ -660,7 +660,7 @@ export default function Store() {
               <div className="space-y-2">
                 <div className="bg-violet-50 border border-violet-200 rounded-xl p-3 flex items-center justify-between">
                   <div>
-                    <p className="text-gray-700 text-sm font-medium">Biaya Lisensi</p>
+                    <p className="text-gray-700 text-sm font-medium">Biaya Aktivasi</p>
                     <p className="text-[11px] text-gray-400">Sekali bayar · install mandiri</p>
                   </div>
                   <span className="text-xl font-bold text-violet-600">{formatPrice(selectedAgent.price)}</span>

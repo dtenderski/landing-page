@@ -258,10 +258,10 @@ export default function StarterKitPage() {
               <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Tanpa Starter Kit</div>
               <div className="text-3xl font-extrabold text-gray-700 dark:text-gray-200 mb-0.5">{formatIDR(PRICING.license.amount + PRICING.subscription.starter.amount)}</div>
               <div className="text-xs text-gray-400 mb-1">bulan pertama</div>
-              <div className="text-xs text-gray-400 dark:text-gray-500 mb-5">Lisensi {PRICING.license.short} + Langganan {PRICING.subscription.starter.perMonth}</div>
+              <div className="text-xs text-gray-400 dark:text-gray-500 mb-5">Aktivasi {PRICING.license.short} + Langganan {PRICING.subscription.starter.perMonth}</div>
               <ul className="text-sm space-y-2.5 mb-6 text-gray-500 dark:text-muted-foreground flex-1">
                 {[
-                  { text: "Lisensi platform (sekali bayar)", ok: true },
+                  { text: "Aktivasi platform (sekali bayar)", ok: true },
                   { text: "Akses Builder 1 bulan penuh", ok: true },
                   { text: "Tanpa materi Trilogi GUSTAFTA", ok: false },
                   { text: "Tanpa Prompt Pack & Template", ok: false },

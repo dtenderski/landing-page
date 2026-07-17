@@ -61,18 +61,18 @@ export default function SyaratKetentuan() {
           </section>
 
           <section>
-            <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-2">4. Produk, Lisensi &amp; Biaya</h2>
+            <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-2">4. Produk, Aktivasi &amp; Biaya</h2>
             <p className="mb-2">Gustafta menyediakan beberapa cara memperoleh chatbot beserta skema biayanya:</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li><strong>Lisensi (hak pakai)</strong> — setiap pengguna wajib memiliki lisensi untuk menggunakan chatbot. Lisensi dapat berupa lisensi standar (chatbot biasa yang Anda rakit sendiri) atau lisensi premium (chatbot siap pakai).</li>
+              <li><strong>Aktivasi (hak pakai)</strong> — setiap pengguna wajib mengaktifkan hak pakai untuk menggunakan chatbot. Aktivasi dapat berupa aktivasi standar (chatbot biasa yang Anda rakit sendiri) atau aktivasi premium (chatbot siap pakai).</li>
               <li><strong>Biaya bulanan (hosting &amp; token)</strong> — dikenakan untuk semua produk demi menjalankan chatbot, mengikuti tier langganan yang dipilih.</li>
               <li><strong>Jasa Order (custom)</strong> — biaya setup sekali bayar untuk perakitan khusus, ditambah biaya bulanan.</li>
             </ul>
             <p className="mt-2 mb-2">Ketentuan komersial yang berlaku:</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Setiap pengguna <strong>wajib memiliki lisensi</strong> (hak pakai) untuk menggunakan chatbot. Pada jalur Jasa Order, lisensi sudah termasuk dalam biaya setup dan tidak ditagih terpisah.</li>
+              <li>Setiap pengguna <strong>wajib melakukan aktivasi</strong> (hak pakai) untuk menggunakan chatbot. Pada jalur Jasa Order, aktivasi sudah termasuk dalam biaya setup dan tidak ditagih terpisah.</li>
               <li><strong>Biaya bulanan (hosting &amp; token) dikenakan untuk semua produk</strong> — baik chatbot biasa maupun premium — dan sepenuhnya menjadi hak Gustafta.</li>
-              <li>Perbedaan chatbot biasa dan premium hanya terletak pada <strong>biaya lisensi</strong>; biaya bulanan mengikuti tier langganan yang sama.</li>
+              <li>Perbedaan chatbot biasa dan premium hanya terletak pada <strong>biaya aktivasi</strong>; biaya bulanan mengikuti tier langganan yang sama.</li>
               <li>Layanan <strong>tidak menyediakan akses gratis permanen</strong>. Masa uji coba (bila ada) bersifat sementara sesuai ketentuan yang ditampilkan saat pendaftaran.</li>
             </ul>
             <p className="mt-2">Rincian harga terkini ditampilkan pada halaman produk/harga di dalam Layanan. Harga dapat berubah sewaktu-waktu; perubahan tidak berlaku surut atas periode yang sudah dibayar.</p>

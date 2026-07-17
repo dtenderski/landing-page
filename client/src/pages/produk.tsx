@@ -50,7 +50,7 @@ const ENTERPRISE_PLAN = {
   badgeColor: "bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300",
   price: "Custom",
   priceNote: "hubungi tim",
-  lisensiInfo: "Negosiasi — termasuk lisensi, onboarding penuh, dan SLA dedicated",
+  lisensiInfo: "Negosiasi — termasuk aktivasi, onboarding penuh, dan SLA dedicated",
   color: "text-purple-500",
   borderColor: "border-purple-300 dark:border-purple-700",
   bgColor: "bg-purple-50/50 dark:bg-purple-950/20",
@@ -317,9 +317,9 @@ function BisnisPaket() {
                   </div>
                   <div className="flex items-center gap-1.5 text-[10px]">
                     <span className="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 font-semibold px-1.5 py-0.5 rounded">Tanpa Starter Kit</span>
-                    <span className="text-gray-500 dark:text-gray-400">lisensi {PRICING.license.price} (sekali), tanpa trial</span>
+                    <span className="text-gray-500 dark:text-gray-400">aktivasi {PRICING.license.price} (sekali), tanpa trial</span>
                   </div>
-                  <div className="text-[10px] text-gray-400 dark:text-gray-500">Produk siap pakai — cukup lisensi + langganan bulanan, tanpa biaya setup.</div>
+                  <div className="text-[10px] text-gray-400 dark:text-gray-500">Produk siap pakai — cukup aktivasi + langganan bulanan, tanpa biaya setup.</div>
                 </div>
               )}
             </div>
@@ -620,7 +620,7 @@ function KomparasiTable() {
               <th className="text-left px-4 py-3 text-gray-500 font-medium">Fitur / Perbedaan</th>
               <th className="text-center px-3 py-3 font-semibold">
                 <div className="text-indigo-500">Produk</div>
-                <div className="text-[9px] font-normal text-gray-400">(Lisensi + Langganan)</div>
+                <div className="text-[9px] font-normal text-gray-400">(Aktivasi + Langganan)</div>
               </th>
               <th className="text-center px-3 py-3 font-semibold">
                 <div className="text-violet-500">Layanan Jasa</div>

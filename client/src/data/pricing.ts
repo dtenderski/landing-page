@@ -22,14 +22,15 @@
 
 // ─── Harga inti ────────────────────────────────────────────────────────────────
 export const PRICING = {
+  /** Aktivasi = biaya sekali bayar untuk mengaktifkan hak pakai chatbot (menggantikan "Lisensi") */
   license: {
     /** Harga coret (anchor) sebelum diskon */
-    normal: "Rp 450.000",
-    /** Harga lisensi sekali bayar */
-    price: "Rp 299.000",
+    normal: "Rp 299.000",
+    /** Harga aktivasi sekali bayar */
+    price: "Rp 99.000",
     /** Bentuk singkat untuk badge/CTA */
-    short: "Rp 299rb",
-    amount: 299000,
+    short: "Rp 99rb",
+    amount: 99000,
   },
   starterKit: {
     price: "Rp 245.000",
@@ -114,8 +115,10 @@ export const EBOOK_DIALOG = {
   ],
 } as const;
 
-/** Kalimat info skema lisensi (dipakai berulang di kartu paket bisnis) */
-export const LICENSE_INFO = `Dengan Starter Kit ${PRICING.starterKit.price} (sekali) → lisensi Rp 0 · Tanpa Starter Kit → lisensi ${PRICING.license.price} (sekali)`;
+/** Kalimat info skema aktivasi (dipakai berulang di kartu paket bisnis) */
+export const LICENSE_INFO = `Dengan Starter Kit ${PRICING.starterKit.price} (sekali) → aktivasi Rp 0 · Tanpa Starter Kit → aktivasi ${PRICING.license.price} (sekali)`;
+/** @deprecated alias — gunakan LICENSE_INFO */
+export const AKTIVASI_INFO = LICENSE_INFO;
 
 // ─── Marketplace / Program Creator ───────────────────────────────────────────────
 // Bagi hasil chatbot premium yang dibuat Creator & dijual di toko Gustafta.

@@ -204,7 +204,7 @@ export function DialogGustaftaWidget() {
               <ul className="space-y-1.5 mb-3">
                 {[
                   { icon: BookOpen, text: "3 Panduan Digital Trilogi Gustafta" },
-                  { icon: Star, text: "Lisensi platform seumur hidup" },
+                  { icon: Star, text: "Aktivasi platform (sekali bayar)" },
                   { icon: Zap, text: "7 hari trial Starter gratis" },
                 ].map(({ icon: Icon, text }) => (
                   <li key={text} className="flex items-center gap-2 text-xs text-white/80">
