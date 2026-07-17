@@ -258,7 +258,7 @@ export function SharedHeader({ transparent }: SharedHeaderProps) {
     { href: "/toolkit",                label: "Toolkit",                icon: Hammer },
     { href: "/klinik-uji-kompetensi",  label: "Bimtek Uji Kompetensi", icon: GraduationCap },
     { href: "/executive-summary",      label: "Executive Summary",      icon: FileText },
-    { href: "/mitra",                  label: "Mitra & Jaringan",       icon: Users2, subtle: true },
+    { href: "/store",                  label: "Produk AI",              icon: Zap },
   ];
 
   // Untuk mobile: semua item gabungan
