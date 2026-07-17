@@ -768,20 +768,30 @@ export default function Landing() {
       {/* ── BRIDGE ── */}
       <section className="py-16 px-4 bg-gradient-to-br from-blue-600 to-violet-700 text-white text-center">
         <div className="max-w-3xl mx-auto">
-          <p className="text-blue-200 text-sm font-semibold uppercase tracking-widest mb-4">Apa Pun Titik Awal Anda…</p>
+          <p className="text-blue-200 text-sm font-semibold uppercase tracking-widest mb-4">Satu Ekosistem. Semua yang Anda Butuhkan.</p>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Tujuan Kita Sama.<br />
-            <span className="text-yellow-300">Menjadi Perakit AI.</span>
+            Apa Pun Tantangan Anda —<br />
+            <span className="text-yellow-300">Gustafta Siap Mendampingi.</span>
           </h2>
-          <p className="text-blue-100 text-base leading-relaxed mb-6 max-w-2xl mx-auto">
-            GUSTAFTA hadir untuk menjembatani keduanya. Bukan sekadar mengajari AI. Bukan sekadar membuat chatbot. Tetapi membantu Anda mengubah pengetahuan menjadi AI yang benar-benar bekerja.
+          <p className="text-blue-100 text-base leading-relaxed mb-8 max-w-2xl mx-auto">
+            Dari pertanyaan teknis yang mendesak, dokumen yang perlu dianalisis, hingga keputusan proyek yang kompleks — setiap kebutuhan profesional Anda tersedia dalam satu platform.
           </p>
-          <div className="inline-block bg-white/15 border border-white/30 rounded-2xl px-8 py-4">
-            <div className="flex flex-wrap gap-4 justify-center text-sm font-bold">
-              {["📚 Belajar", "🛠 Merakit", "⚡ Menggunakan", "💡 Menghasilkan", "🚀 Berkembang"].map((s) => (
-                <span key={s}>{s}</span>
-              ))}
-            </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-2xl mx-auto">
+            {[
+              { icon: "🗺️", label: "Peta Jalan", href: "/persona" },
+              { icon: "🏥", label: "Klinik Konsultasi", href: "/klinik" },
+              { icon: "📄", label: "Bedah Dokumen", href: "/bedah-dokumen" },
+              { icon: "🧠", label: "Brain Project", href: "/brain-project" },
+              { icon: "🛠️", label: "Toolkit", href: "/toolkit" },
+              { icon: "🤖", label: "Produk AI", href: "/store" },
+            ].map((item) => (
+              <Link key={item.label} href={item.href}>
+                <div className="bg-white/15 hover:bg-white/25 border border-white/30 rounded-xl px-4 py-3 cursor-pointer transition-colors flex items-center gap-2 text-sm font-semibold">
+                  <span>{item.icon}</span>
+                  <span>{item.label}</span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -989,61 +999,61 @@ export default function Landing() {
       <section className="py-16 px-4 bg-white dark:bg-background">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2">Perjalanan Menjadi Perakit AI</p>
+            <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2">Setiap Menu — Satu Solusi Nyata</p>
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3">
-              Satu Platform. Lima Perjalanan.
+              Satu Platform. Semua Kebutuhan Profesional.
             </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
-              Dari pengetahuan yang Anda miliki hingga menjadi bisnis AI — lima tahap yang saling terhubung. Ketuk tiap tahap untuk melihat detailnya.
+              Gustafta bukan sekadar chatbot — ini ekosistem penyelesaian masalah. Setiap menu adalah layanan nyata yang dirancang untuk tantangan profesional konstruksi Indonesia.
             </p>
           </div>
 
           <Accordion type="single" collapsible defaultValue="stage-0" className="space-y-3">
             {[
               {
-                emoji: "📚", num: "01", label: "BELAJAR",
+                emoji: "🗺️", num: "01", label: "PETA JALAN",
                 color: "border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/20",
                 badge: "bg-blue-600",
-                title: "Mulailah dari Starter Kit GUSTAFTA",
-                desc: "Pelajari cara berpikir sebagai Perakit AI. Bukan sekadar teori — tetapi langkah demi langkah membangun AI yang benar. Starter Kit berisi panduan praktis, blueprint, contoh implementasi, prompt, framework, hingga akses menuju workshop dan academy.",
-                items: ["Trilogi GUSTAFTA (Panduan + Playbook + Prompt)", "GUSTAFTA Framework™", "Panduan Onboarding step-by-step", "Akses Komunitas Perakit AI", "Akses Builder 7 hari"],
-                cta: "Ambil Starter Kit", href: "/persona",
+                title: "Mulai dari Mana? Peta Jalan Memandu Anda.",
+                desc: "Banyak profesional tahu tujuannya, tapi bingung langkah pertamanya. Peta Jalan Gustafta merancang jalur yang tepat sesuai kondisi Anda — apakah Anda baru ingin memanfaatkan AI, sedang mengembangkan kompetensi, atau siap membangun layanan digital sendiri.",
+                items: ["Starter Kit — panduan langkah pertama yang konkret", "GUSTAFTA Framework™ — cara berpikir yang terstruktur", "Panduan Onboarding step-by-step", "Akses Workshop & Academy", "Akses Builder 7 hari gratis"],
+                cta: "Lihat Peta Jalan", href: "/persona",
               },
               {
-                emoji: "🛠", num: "02", label: "MERAKIT",
+                emoji: "🏥", num: "02", label: "KLINIK KONSULTASI",
                 color: "border-violet-200 dark:border-violet-800 bg-violet-50 dark:bg-violet-950/20",
                 badge: "bg-violet-600",
-                title: "Bangun AI Anda Sendiri di GUSTAFTA Builder",
-                desc: "Dengan GUSTAFTA Builder Anda dapat merakit AI Assistant, Chatbot AI, AI Agent, Multi-Agent, Knowledge Base, Mini Apps, Workflow AI, dan OpenClaw Configuration — semuanya secara visual tanpa coding. Teknologi AI terbaru sudah tersedia.",
-                items: ["AI Assistant & Chatbot AI", "AI Agent & Multi-Agent", "Knowledge Base & Mini Apps", "Blueprint Builder — rancang lewat dialog", "Rakit Tim AI — satu misi jadi tim agen", "Kolaborasi & berbagi chatbot dengan tim", "Workflow AI & OpenClaw", "Tanpa coding · Semua via form"],
-                cta: "Masuk ke Builder", href: builderUrl,
+                title: "Ada Pertanyaan Mendesak? Klinik Siap 24/7.",
+                desc: "Regulasi baru, persyaratan SBU/SKK, tender yang membingungkan, masalah perizinan — jawaban cepat dari AI yang sudah dilatih khusus di bidang konstruksi Indonesia. Tidak perlu menunggu jam kerja, tidak perlu antri.",
+                items: ["Konsultasi SBU, SKK, dan SBUJK", "Regulasi tender & pengadaan terbaru", "Klinik Hukum Konstruksi", "Klinik K3 & Lingkungan", "Klinik Keuangan Proyek", "Tanya-jawab 24/7 tanpa batas"],
+                cta: "Buka Klinik Konsultasi", href: "/klinik",
               },
               {
-                emoji: "⚡", num: "03", label: "MENGGUNAKAN",
+                emoji: "📄", num: "03", label: "BEDAH DOKUMEN",
                 color: "border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/20",
                 badge: "bg-emerald-600",
-                title: "AI yang Anda Rakit Mulai Bekerja",
-                desc: "Gunakan AI untuk membantu pelanggan, menyusun laporan, membuat proposal, menghasilkan dokumen, membuat SOP, menghitung RAB, membuat kontrak, menyusun materi pelatihan. Atau gunakan chatbot siap pakai dari GUSTAFTA Store.",
-                items: ["Bantu pelanggan 24/7", "Generate dokumen & kontrak", "Hitung RAB & estimasi biaya", "Susun materi pelatihan", "Pendamping proses sertifikasi", "Chatbot bersertifikat & tepercaya"],
-                cta: "Lihat Chatbot Store", href: "/store",
+                title: "Dokumen Rumit? Bedah dalam Hitungan Menit.",
+                desc: "Spesifikasi teknis, kontrak FIDIC, dokumen lelang, RKS, RAB — dokumen konstruksi bisa sangat panjang dan teknis. Bedah Dokumen Gustafta membaca, merangkum, dan mengidentifikasi poin kritis yang perlu Anda perhatikan.",
+                items: ["Analisis dokumen tender & kontrak", "Ringkasan RKS & spesifikasi teknis", "Identifikasi risiko kontrak", "Ekstraksi poin penting secara otomatis", "Generate dokumen & laporan baru", "Tiket konsultasi dokumen spesifik"],
+                cta: "Coba Bedah Dokumen", href: "/bedah-dokumen",
               },
               {
-                emoji: "💡", num: "04", label: "MENGHASILKAN NILAI",
+                emoji: "🧠", num: "04", label: "BRAIN PROJECT & TOOLKIT",
                 color: "border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/20",
                 badge: "bg-amber-600",
-                title: "AI adalah Aset — Bukan Sekadar Alat",
-                desc: "\"Nilai\" bukan hanya uang. Bisa berupa waktu, produktivitas, reputasi, kompetensi, atau penghasilan nyata. Gunakan AI untuk membuka layanan baru, mempercepat pekerjaan, dan memperkuat keunggulan profesional Anda.",
-                items: ["Layanan konsultasi berbasis AI", "Percepat penyelesaian proyek & dokumen", "Penghasilan dari kompetensi yang Anda miliki", "Program afiliasi 30% recurring"],
-                cta: "Lihat Program Afiliasi", href: "/affiliate",
+                title: "Proyek Kompleks? Brain Project Menjadi Partner Berpikir.",
+                desc: "Perencanaan proyek, estimasi biaya, analisis risiko, penjadwalan, koordinasi tim — Brain Project mengintegrasikan pengetahuan teknis dengan kemampuan analisis AI. Toolkit melengkapi dengan kalkulator, generator laporan, dan mini apps siap pakai.",
+                items: ["Analisis dan perencanaan proyek", "Estimasi RAB & hitung biaya cepat", "Executive Summary otomatis", "Kalkulator teknis & tools lapangan", "Generator dokumen proyek", "Koordinasi tim berbasis AI"],
+                cta: "Eksplorasi Brain Project", href: "/brain-project",
               },
               {
-                emoji: "🚀", num: "05", label: "BERKEMBANG",
+                emoji: "🎓", num: "05", label: "EKOSISTEM KOMPETENSI & BIMTEK",
                 color: "border-orange-200 dark:border-orange-800 bg-orange-50 dark:bg-orange-950/20",
                 badge: "bg-orange-600",
-                title: "Dari Perakit AI — Menjadi Pelaku Bisnis AI.",
-                desc: "Ini bukan lagi tentang memakai AI. Ini tentang membangun bisnis, organisasi, atau ekosistem berbasis AI. Dua jalur tersedia: naik level sebagai Perakit AI Profesional, atau bangun ekosistem AI untuk tim & perusahaan Anda.",
-                items: ["Naik level: Pemula → Profesional → Creator → Enterprise", "Sertifikasi Perakit AI (Certified AI Assembler)", "Buka jasa konsultasi AI sendiri", "AI Studio — tim Gustafta rakitkan untuk Anda", "Kemitraan Bisnis AI", "Corporate Training & AI Organization"],
-                cta: "Mulai Berkembang", href: "/packs",
+                title: "Tingkatkan Kompetensi Tim — Terstruktur dan Terukur.",
+                desc: "Sertifikasi SKK, uji kompetensi, bimtek teknis — semua butuh persiapan matang. Ekosistem Kompetensi Gustafta menyediakan materi belajar, simulasi asesmen, dan pendampingan proses sertifikasi dari lembaga yang diakui.",
+                items: ["Simulasi uji kompetensi SKK/BNSP", "Materi bimtek teknis & K3", "Pendampingan proses sertifikasi", "Bank soal & latihan asesmen", "Akses materi 24/7 tanpa batas", "Sertifikat digital & portofolio digital"],
+                cta: "Lihat Ekosistem Kompetensi", href: "/ekosistem-kompetensi",
               },
             ].map((stage, idx) => (
               <AccordionItem
@@ -1094,7 +1104,7 @@ export default function Landing() {
           <div className="text-center mb-10">
             <p className="text-xs font-bold text-violet-600 dark:text-violet-400 uppercase tracking-widest mb-2">✨ Baru di Gustafta</p>
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3">
-              Kini Anda Merakit Tim AI, Bukan Sekadar Satu Chatbot
+              Kini Gustafta Membantu Anda Memiliki Tim AI, Bukan Sekadar Satu Chatbot
             </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
               Susun satu tim agen AI yang saling bekerja sama, rancang lewat dialog, kerja bareng rekan, dan bangun kepercayaan lewat chatbot bersertifikat — semuanya dalam satu platform.
@@ -1325,14 +1335,14 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ── APA YANG INGIN DIRAKIT ── */}
+      {/* ── SOLUSI AI PER BIDANG ── */}
       <section className="py-16 px-4 bg-white dark:bg-background">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
-            <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2">Apa yang Ingin Anda Rakit?</p>
+            <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2">AI untuk Bidang Anda</p>
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3">
-              Jika Anda Memiliki Pengetahuan…<br />
-              Anda Dapat Merakitnya Menjadi AI.
+              Pengetahuan Anda, Dikuatkan oleh AI.<br />
+              Solusi Nyata untuk Setiap Bidang.
             </h2>
           </div>
 
@@ -1386,29 +1396,29 @@ export default function Landing() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               {
-                emoji: "📚", label: "Belajar Merakit AI",
-                desc: "Mulailah dengan Starter Kit, Workshop, dan Academy. Belajar secara bertahap hingga siap menjadi Perakit AI.",
-                cta: "Ambil Starter Kit", href: "/persona",
+                emoji: "🗺️", label: "Mulai dari Peta Jalan",
+                desc: "Belum tahu harus mulai dari mana? Peta Jalan memandu Anda step-by-step sesuai kondisi dan tujuan Anda.",
+                cta: "Lihat Peta Jalan", href: "/persona",
                 color: "border-blue-200 dark:border-blue-800 hover:border-blue-400",
                 badge: "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300",
               },
               {
-                emoji: "🛠", label: "Merakit AI Sendiri",
-                desc: "Gunakan GUSTAFTA Builder untuk membangun AI sesuai bidang Anda. Semua via form, tanpa coding.",
-                cta: "Buka Builder", href: builderUrl,
+                emoji: "🏥", label: "Konsultasi Langsung",
+                desc: "Ada pertanyaan mendesak seputar SBU, SKK, tender, atau regulasi? Klinik Konsultasi siap 24/7.",
+                cta: "Buka Klinik", href: "/klinik",
                 color: "border-violet-200 dark:border-violet-800 hover:border-violet-400",
                 badge: "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300",
               },
               {
-                emoji: "⚡", label: "Menggunakan AI",
-                desc: "Pilih chatbot siap pakai dari GUSTAFTA Store. Langsung aktif, langsung bekerja.",
-                cta: "Lihat Store", href: "/store",
+                emoji: "🤖", label: "Gunakan Produk AI",
+                desc: "Pilih chatbot AI siap pakai dari Gustafta Store. Langsung aktif untuk keperluan konstruksi Anda.",
+                cta: "Lihat Produk AI", href: "/store",
                 color: "border-emerald-200 dark:border-emerald-800 hover:border-emerald-400",
                 badge: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300",
               },
               {
-                emoji: "🤝", label: "Kami Rakitkan",
-                desc: "Tidak punya waktu? Tim GUSTAFTA siap membantu merancang, membangun, dan mengimplementasikan AI sesuai kebutuhan Anda.",
+                emoji: "🤝", label: "Tim Kami Mendampingi",
+                desc: "Butuh solusi khusus untuk organisasi atau proyek Anda? Tim Gustafta siap merancang dan mendampingi implementasi.",
                 cta: "Konsultasi WA", href: waUrl, external: true,
                 color: "border-amber-200 dark:border-amber-800 hover:border-amber-400",
                 badge: "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
@@ -1570,7 +1580,7 @@ export default function Landing() {
           <div className="text-center mb-10">
             <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2">Untuk Siapa</p>
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3">
-              Siapa Pun yang Punya Pengetahuan — Bisa Menjadi Perakit AI
+              Siapa Pun yang Punya Keahlian — Bisa Didampingi Gustafta
             </h2>
           </div>
 
@@ -1694,7 +1704,7 @@ export default function Landing() {
                 a: "Justru inilah target utama Gustafta. Pengetahuan dan pengalaman Anda adalah modal utamanya. Starter Kit akan memandu Anda langkah demi langkah dari nol hingga memiliki AI pertama Anda.",
               },
               {
-                q: "Apa yang saya miliki setelah merakit?",
+                q: "Apa yang saya miliki setelah bergabung dengan Gustafta?",
                 a: "Ekosistem digital penuh — Anda pemilik data, konten, dan monetisasinya. Gustafta tidak mengunci ekosistem Anda. Bisa digunakan untuk diri sendiri, tim, atau dijual ke orang lain.",
               },
               {
@@ -1746,7 +1756,7 @@ export default function Landing() {
               </ul>
             </div>
             <div>
-              <p className="text-xs font-bold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide">Perakit AI</p>
+              <p className="text-xs font-bold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide">Ekosistem Gustafta</p>
               <ul className="space-y-2">
                 {[
                   { label: "Starter Kit", href: "/persona" },
