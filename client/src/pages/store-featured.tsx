@@ -14,7 +14,7 @@ import {
   AlertTriangle, Clock, XCircle, TrendingUp, Zap, Shield, MousePointerClick,
 } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 const CATEGORY_LABELS: Record<string, string> = {
   engineering: "Teknik & Engineering",
@@ -386,6 +386,7 @@ function SkeletonGrid() {
 
 export default function StoreFeatured() {
   const { toast } = useToast();
+  const [, navigate] = useLocation();
   const [selectedAgent, setSelectedAgent] = useState<AgentProduct | null>(null);
   const [buyForm, setBuyForm] = useState<BuyFormData>({ name: "", email: "", phone: "" });
   const [showBuyDialog, setShowBuyDialog] = useState(false);
@@ -420,9 +421,12 @@ export default function StoreFeatured() {
   });
 
   const handleBuy = (agent: AgentProduct) => {
-    setSelectedAgent(agent);
-    setBuyForm({ name: "", email: "", phone: "" });
-    setShowBuyDialog(true);
+    const qs = new URLSearchParams({
+      agent: String(agent.agentId ?? ""),
+      agentName: encodeURIComponent(agent.name),
+      agentPrice: String(Math.round(agent.price || 99000)),
+    });
+    navigate(`/checkout?${qs.toString()}`);
   };
 
   const handleDemo = (agent: AgentProduct) => {

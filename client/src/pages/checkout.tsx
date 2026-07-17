@@ -149,6 +149,16 @@ export default function CheckoutPage() {
   const plan = SUBSCRIPTION_PLANS[planKey] || null;
   const jasa = JASA_PLANS[jasaKey] || null;
 
+  // ── Agent (Store Chatbot) checkout ─────────────────────────────────────────────
+  const agentId = params.agent || "";
+  const agentName = agentId ? decodeURIComponent(params.agentName || "Chatbot Premium") : "";
+  const agentPriceNum = parseInt(params.agentPrice || "99000") || 99000;
+  const agentPrice = `Rp ${agentPriceNum.toLocaleString("id-ID")}`;
+  const isAgent = !!(agentId && !plan && !jasa);
+  const [agentForm, setAgentForm] = useState({ name: "", email: "", phone: "" });
+  const [agentOrderLoading, setAgentOrderLoading] = useState(false);
+  // ─────────────────────────────────────────────────────────────────────────────
+
   const { user, isAuthenticated } = useAuth();
   const { toast } = useToast();
   const createSubscription = useCreateSubscription();
@@ -156,10 +166,55 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
 
-  const isValid = !!(plan || jasa);
-  const productName = plan?.name || jasa?.name || "Produk tidak ditemukan";
-  const productPrice = plan?.price || jasa?.price || "";
-  const productFeatures = plan?.features || jasa?.features || [];
+  const isValid = !!(plan || jasa || isAgent);
+  const productName = plan?.name || jasa?.name || (isAgent ? agentName : "Produk tidak ditemukan");
+  const productPrice = plan?.price || jasa?.price || (isAgent ? agentPrice : "");
+  const productFeatures = plan?.features || jasa?.features || (isAgent ? [
+    "Chatbot AI siap pakai untuk domain spesifik",
+    "Lisensi hak pakai — sekali bayar, tanpa biaya berulang",
+    "Install mandiri di dashboard Gustafta",
+    "Knowledge base terlatih untuk industri/domain",
+    "Update konten gratis selamanya",
+    "Support via WhatsApp tim Gustafta",
+  ] : []);
+
+  const handleAgentOrder = async () => {
+    if (!agentForm.name.trim()) {
+      toast({ title: "Lengkapi data", description: "Nama lengkap wajib diisi.", variant: "destructive" }); return;
+    }
+    if (!agentForm.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(agentForm.email.trim())) {
+      toast({ title: "Format email salah", description: "Gunakan email yang valid, contoh: nama@gmail.com", variant: "destructive" }); return;
+    }
+    setAgentOrderLoading(true);
+    try {
+      const res = await fetch("/api/store/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          agentId: parseInt(agentId),
+          name: agentForm.name.trim(),
+          email: agentForm.email.trim(),
+          phone: agentForm.phone.trim(),
+        }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || "Gagal membuat pesanan");
+      }
+      const data = await res.json();
+      if (data.scalevUrl) {
+        window.open(data.scalevUrl, "_blank");
+        setDone(true);
+      } else if (data.waUrl) {
+        window.open(data.waUrl, "_blank");
+        setDone(true);
+      }
+    } catch (e: any) {
+      toast({ title: "Gagal memproses", description: e.message || "Coba lagi.", variant: "destructive" });
+    } finally {
+      setAgentOrderLoading(false);
+    }
+  };
 
   const handleOrder = async () => {
     if (!isAuthenticated) {
@@ -282,6 +337,7 @@ export default function CheckoutPage() {
                 }`}>
                   {plan
                     ? <PlanIcon className={`h-6 w-6 ${plan.popular ? "text-primary" : "text-muted-foreground"}`} />
+                    : isAgent ? <Bot className="h-6 w-6 text-violet-600" />
                     : <Wrench className="h-6 w-6 text-violet-600" />
                   }
                 </div>
@@ -312,7 +368,7 @@ export default function CheckoutPage() {
               {/* Features */}
               <div className="space-y-2.5">
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">
-                  {plan ? "Yang Anda dapatkan:" : "Termasuk dalam paket jasa:"}
+                  {plan ? "Yang Anda dapatkan:" : isAgent ? "Yang Anda dapatkan:" : "Termasuk dalam paket jasa:"}
                 </p>
                 {productFeatures.map((f, i) => (
                   <div key={i} className="flex items-start gap-2.5">
@@ -334,13 +390,34 @@ export default function CheckoutPage() {
                   * Biaya setup dibayar sekali, sudah termasuk lisensi + Starter Kit. Hosting berlangganan dibayar terpisah sesuai durasi yang dipilih.
                 </div>
               )}
+              {isAgent && (
+                <div className="mt-5 pt-4 border-t text-xs text-muted-foreground">
+                  * Biaya aktivasi dibayar sekali. Hosting bulanan dibayar terpisah di halaman <a href="/pricing" className="underline underline-offset-2">Harga</a> sesuai durasi yang dipilih.
+                </div>
+              )}
             </div>
 
             {/* Payment process steps */}
             <div className="rounded-2xl border bg-card p-6">
               <h3 className="font-semibold text-sm mb-4">Cara Pembayaran</h3>
               <div className="space-y-4">
-                {(plan ? [
+                {(isAgent ? [
+                  {
+                    step: "1", icon: User, color: "text-violet-600", bg: "bg-violet-100 dark:bg-violet-900/30",
+                    title: "Isi Data Pembeli",
+                    desc: "Masukkan nama, email, dan nomor WhatsApp Anda di formulir di sebelah kanan.",
+                  },
+                  {
+                    step: "2", icon: CreditCard, color: "text-blue-600", bg: "bg-blue-100 dark:bg-blue-900/30",
+                    title: "Bayar via Scalev",
+                    desc: "Klik tombol bayar — halaman Scalev terbuka di tab baru. Pilih metode: transfer bank, QRIS, kartu kredit, dll.",
+                  },
+                  {
+                    step: "3", icon: Zap, color: "text-amber-600", bg: "bg-amber-100 dark:bg-amber-900/30",
+                    title: "Chatbot Aktif Otomatis",
+                    desc: "Setelah bayar dikonfirmasi Scalev, chatbot langsung tersedia di dashboard Anda tanpa konfirmasi manual.",
+                  },
+                ] : plan ? [
                   {
                     step: "1", icon: CreditCard, color: "text-blue-600", bg: "bg-blue-100 dark:bg-blue-900/30",
                     title: "Klik Bayar via Scalev",
@@ -410,6 +487,12 @@ export default function CheckoutPage() {
                       <span className="font-medium">{jasa.scope}</span>
                     </div>
                   )}
+                  {isAgent && (
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Jenis</span>
+                      <span className="font-medium">Lisensi (sekali bayar)</span>
+                    </div>
+                  )}
                   <div className="border-t pt-3 flex justify-between items-baseline">
                     <span className="font-semibold">Total</span>
                     <span className="text-xl font-bold text-primary">{productPrice}</span>
@@ -423,11 +506,46 @@ export default function CheckoutPage() {
                   {jasa && (
                     <div className="text-xs text-muted-foreground text-right">Biaya setup (bayar sekali)</div>
                   )}
+                  {isAgent && (
+                    <div className="text-xs text-muted-foreground text-right">Aktivasi (bayar sekali) + hosting terpisah</div>
+                  )}
                 </div>
               </div>
 
-              {/* Customer info */}
-              {isAuthenticated && user && (
+              {/* Agent form — hanya untuk pembelian chatbot store */}
+              {isAgent && (
+                <div className="rounded-2xl border bg-card p-4 space-y-3">
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Informasi Pembeli</p>
+                  <div>
+                    <label className="text-xs font-medium block mb-1">Nama Lengkap <span className="text-destructive">*</span></label>
+                    <input type="text" value={agentForm.name}
+                      onChange={e => setAgentForm(f => ({ ...f, name: e.target.value }))}
+                      placeholder="Nama Anda"
+                      className="w-full text-sm rounded-lg border border-input bg-background px-3 py-2 outline-none focus:ring-2 focus:ring-ring focus:ring-offset-0"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium block mb-1">Email <span className="text-destructive">*</span> <span className="font-normal text-muted-foreground">(bukan nomor HP)</span></label>
+                    <input type="email" value={agentForm.email}
+                      onChange={e => setAgentForm(f => ({ ...f, email: e.target.value }))}
+                      placeholder="nama@gmail.com"
+                      className="w-full text-sm rounded-lg border border-input bg-background px-3 py-2 outline-none focus:ring-2 focus:ring-ring focus:ring-offset-0"
+                    />
+                    <p className="text-[10px] text-muted-foreground mt-1">Link akses chatbot dikirim ke email ini</p>
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium block mb-1">No. WhatsApp <span className="font-normal text-muted-foreground">(opsional)</span></label>
+                    <input type="tel" value={agentForm.phone}
+                      onChange={e => setAgentForm(f => ({ ...f, phone: e.target.value }))}
+                      placeholder="082299417818"
+                      className="w-full text-sm rounded-lg border border-input bg-background px-3 py-2 outline-none focus:ring-2 focus:ring-ring focus:ring-offset-0"
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Customer info — untuk berlangganan/jasa saja */}
+              {!isAgent && isAuthenticated && user && (
                 <div className="rounded-2xl border bg-card p-4">
                   <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">Info Akun</p>
                   <div className="flex items-center gap-3">
@@ -442,8 +560,8 @@ export default function CheckoutPage() {
                 </div>
               )}
 
-              {/* Login notice */}
-              {!isAuthenticated && (
+              {/* Login notice — untuk berlangganan/jasa saja */}
+              {!isAgent && !isAuthenticated && (
                 <div className="rounded-2xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/20 p-4">
                   <p className="text-xs font-medium text-amber-800 dark:text-amber-300 mb-2 flex items-center gap-1.5">
                     <Lock className="h-3.5 w-3.5" /> Login diperlukan
@@ -458,12 +576,14 @@ export default function CheckoutPage() {
               <Button
                 size="lg"
                 className="w-full gap-2 h-12 text-base font-semibold"
-                onClick={handleOrder}
-                disabled={loading}
+                onClick={isAgent ? handleAgentOrder : handleOrder}
+                disabled={isAgent ? agentOrderLoading : loading}
                 data-testid="button-checkout-confirm"
               >
-                {loading
+                {(isAgent ? agentOrderLoading : loading)
                   ? <><Loader2 className="h-4 w-4 animate-spin" /> Memproses...</>
+                  : isAgent
+                  ? <><CreditCard className="h-4 w-4" /> Bayar {agentPrice} via Scalev<ExternalLink className="h-3.5 w-3.5 ml-1 opacity-60" /></>
                   : !isAuthenticated
                   ? <><Lock className="h-4 w-4" /> Login & Pesan</>
                   : <><CreditCard className="h-4 w-4" /> Bayar via Scalev<ExternalLink className="h-3.5 w-3.5 ml-1 opacity-60" /></>
@@ -471,7 +591,7 @@ export default function CheckoutPage() {
               </Button>
 
               <p className="text-xs text-center text-muted-foreground -mt-1">
-                Terbuka di tab baru — gunakan email Gustafta Anda
+                {isAgent ? "Isi data di atas lalu klik bayar — proses 1–2 menit" : "Terbuka di tab baru — gunakan email Gustafta Anda"}
               </p>
 
               <Button
@@ -485,7 +605,11 @@ export default function CheckoutPage() {
 
               {/* Trust badges */}
               <div className="space-y-2 pt-1">
-                {(plan ? [
+                {(isAgent ? [
+                  { icon: ShieldCheck, text: "Pembayaran aman via Scalev (bank, QRIS, kartu)" },
+                  { icon: Zap, text: "Chatbot aktif otomatis setelah bayar dikonfirmasi" },
+                  { icon: MessageCircle, text: "Support WhatsApp siap membantu" },
+                ] : plan ? [
                   { icon: ShieldCheck, text: "Pembayaran aman via Scalev (bank, QRIS, kartu)" },
                   { icon: Zap, text: "Aktivasi otomatis setelah pembayaran dikonfirmasi" },
                   { icon: MessageCircle, text: "Support WhatsApp siap membantu" },

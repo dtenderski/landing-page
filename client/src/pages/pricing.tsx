@@ -554,14 +554,34 @@ export default function Pricing() {
 
         {/* ── KATALOG CHATBOT ── */}
         <section className="mb-16">
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-              <Lightbulb className="h-4 w-4" />
-              Katalog Chatbot
+          {/* Banner: Chatbot Siap Pakai di Store */}
+          <div className="mb-10 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 p-6 text-white flex flex-col sm:flex-row items-center justify-between gap-5">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <Zap className="h-4 w-4 text-yellow-300" />
+                <span className="text-xs font-bold uppercase tracking-widest text-violet-200">46 Chatbot Siap Pakai</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-1">Langsung Pakai Hari Ini</h3>
+              <p className="text-sm text-violet-100 max-w-lg">
+                Pre-built untuk konstruksi, hukum, kompetensi, pengadaan, dan lebih banyak industri.{" "}
+                <strong className="text-white">Aktivasi mulai Rp 99.000 — lisensi sekali bayar, tanpa biaya berulang.</strong>
+              </p>
             </div>
-            <h2 className="text-3xl font-bold mb-3">Chatbot apa yang Anda butuhkan?</h2>
+            <a href="/store" className="flex-shrink-0">
+              <Button className="bg-white text-violet-700 hover:bg-violet-50 font-semibold gap-2 px-6 h-11 text-sm">
+                Lihat Katalog Store <ArrowRight className="h-4 w-4" />
+              </Button>
+            </a>
+          </div>
+
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 text-sm font-medium mb-4">
+              <Wrench className="h-4 w-4" />
+              Jasa Chatbot Custom
+            </div>
+            <h2 className="text-3xl font-bold mb-3">Tidak ada yang cocok di Store? Pesan Custom</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Setiap chatbot dirancang khusus sesuai kebutuhan industri. Harga bervariasi berdasarkan kompleksitas — pesan sesuai kebutuhan Anda.
+              Tim kami membangun chatbot sesuai spesifikasi bisnis Anda. Konsultasi gratis sebelum memesan. Harga berbeda dari chatbot store.
             </p>
             {/* Legend kompleksitas */}
             <div className="flex flex-wrap justify-center gap-2 mt-4">
@@ -602,7 +622,7 @@ export default function Pricing() {
                         ))}
                       </div>
                       <div className="flex items-center justify-between pt-1 border-t border-border/50 mt-auto">
-                        <span className="font-bold text-sm text-primary">{bot.price}</span>
+                        <span className="text-[10px] text-muted-foreground mr-1">Jasa:</span><span className="font-bold text-sm text-orange-600 dark:text-orange-400">{bot.price}</span>
                         <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${complexityStyle[bot.complexity]}`}>
                           {bot.complexity}
                         </span>

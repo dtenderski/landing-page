@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { useLocation } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -106,6 +107,7 @@ export default function Store() {
     }
   }, [searchInput, selectedCategory]);
   const [page, setPage] = useState(1);
+  const [, navigate] = useLocation();
   const [selectedAgent, setSelectedAgent] = useState<AgentProduct | null>(null);
   const [buyForm, setBuyForm] = useState<BuyFormData>({ name: "", email: "", phone: "" });
   const [showBuyDialog, setShowBuyDialog] = useState(false);
@@ -159,11 +161,13 @@ export default function Store() {
   const handleCategoryChange = (cat: string) => { setSelectedCategory(cat); setPage(1); };
 
   const handleBuy = (agent: AgentProduct) => {
-    setSelectedAgent(agent);
-    setBuyForm({ name: "", email: "", phone: "" });
-    setShowBuyDialog(true);
-    setDetailAgent(null);
     trackViewContent({ content_name: agent.name, content_category: agent.category ?? "chatbot" });
+    const qs = new URLSearchParams({
+      agent: String(agent.agentId ?? ""),
+      agentName: encodeURIComponent(agent.name),
+      agentPrice: String(Math.round(agent.price || 99000)),
+    });
+    navigate(`/checkout?${qs.toString()}`);
   };
 
   const handleDetail = (agent: AgentProduct) => setDetailAgent(agent);
