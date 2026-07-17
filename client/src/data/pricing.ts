@@ -282,6 +282,62 @@ export const CREDIT_PACKS: CreditPack[] = [
   },
 ];
 
+// ─── Klinik Konsultasi AI ────────────────────────────────────────────────────
+// Model harga untuk layanan Klinik: Per Sesi, Per Dokumen, Paket Tuntas.
+// Ini BELUM memiliki payment flow otomatis — transaksi via WhatsApp / Jasa Order.
+// Saat payment flow dibangun, angka di sini menjadi source-of-truth.
+
+export const KLINIK_SESI = [
+  { name: "Sesi Standar",           price: "Rp 150.000", amount: 150000, duration: "60 menit", desc: "Konsultasi 1 domain, 1 spesialis AI, ringkasan hasil", tag: "" },
+  { name: "Sesi Lanjutan",          price: "Rp 300.000", amount: 300000, duration: "90 menit", desc: "Multi-domain, action plan tertulis + ringkasan eksekutif", tag: "Populer" },
+  { name: "Sesi Expert + Dokumen",  price: "Rp 500.000", amount: 500000, duration: "90 menit", desc: "Sesi penuh + 1 dokumen output siap pakai", tag: "" },
+] as const;
+
+export const KLINIK_DOKUMEN = [
+  { name: "Dokumen Dasar",    price: "Rp 99.000",  amount: 99000,  desc: "Surat, checklist, laporan ringkas, RAB sederhana",           examples: ["Surat Permohonan", "Checklist K3", "RAB Pekerjaan Kecil"] },
+  { name: "Dokumen Teknis",   price: "Rp 249.000", amount: 249000, desc: "Metode pelaksanaan, spesifikasi teknis, RKK, RMPK, RMK",      examples: ["Metode Pelaksanaan", "Rencana Mutu Kontrak", "SMKK Singkat"] },
+  { name: "Dokumen Kompleks", price: "Rp 499.000", amount: 499000, desc: "AMDAL ringkas, kontrak, HSE Plan, studi kelayakan mini",      examples: ["UKL-UPL Ringkas", "Draft Kontrak Kerja", "HSE Plan Proyek"] },
+] as const;
+
+export const KLINIK_PAKET = [
+  {
+    key: "tender",       name: "Klinik Tender",       price: "Rp 999.000",   amount: 999000,
+    desc: "Analisis dokumen + strategi menang + 2 dokumen output",
+    includes: ["Analisis RKS / SDP / SSKK / SSUK", "Strategi penawaran & kalkulasi HPS", "2 dokumen output (metode / RAB)", "30 hari akses TenderBot + TENDERA"],
+    tag: "Terlaris",
+  },
+  {
+    key: "sertifikasi",  name: "Klinik SBU & SKK",    price: "Rp 749.000",   amount: 749000,
+    desc: "Peta SBU/SKK + checklist + template portofolio uji kompetensi",
+    includes: ["Peta SBU & SKK yang tepat untuk usaha Anda", "Checklist dokumen pendaftaran lengkap", "Template portofolio SKK siap diisi", "30 hari akses SertifikasiBot + SKK Coach"],
+    tag: "",
+  },
+  {
+    key: "hukum",        name: "Klinik Legal",         price: "Rp 799.000",   amount: 799000,
+    desc: "2 sesi konsultasi hukum + 1 dokumen hukum siap pakai",
+    includes: ["2 sesi konsultasi dengan LexCom AI (17 spesialis)", "1 dokumen hukum (surat / kontrak / klausul review)", "Panduan langkah hukum selanjutnya", "30 hari akses LexCom"],
+    tag: "",
+  },
+  {
+    key: "proyek",       name: "Klinik Proyek",        price: "Rp 1.499.000", amount: 1499000,
+    desc: "Diagnosa proyek + action plan + set dokumen manajemen proyek",
+    includes: ["Diagnosa progres, biaya & risiko proyek", "Action plan & rencana tindak korektif", "3 dokumen manpro (jadwal / RMK / laporan)", "30 hari akses ProyekBot + BRAIN Project"],
+    tag: "Paling Lengkap",
+  },
+  {
+    key: "perijinan",    name: "Klinik Perizinan",     price: "Rp 499.000",   amount: 499000,
+    desc: "Analisis KBLI + roadmap izin OSS-RBA + checklist per izin",
+    includes: ["Peta KBLI & tingkat risiko usaha", "Roadmap perizinan OSS-RBA langkah demi langkah", "Checklist dokumen per jenis izin", "30 hari akses PerijinanBot + OSSClaw"],
+    tag: "",
+  },
+  {
+    key: "iso",          name: "Klinik ISO",           price: "Rp 1.299.000", amount: 1299000,
+    desc: "Gap analysis + template dokumen sistem manajemen + persiapan audit",
+    includes: ["Gap analysis ISO 9001 atau ISO 14001", "Template dokumen QMS / EMS siap adaptasi", "Panduan persiapan audit internal & eksternal", "30 hari akses ISO 9001 AI atau ISO 14001 AI"],
+    tag: "",
+  },
+] as const;
+
 /** Format angka rupiah penuh, mis. 299000 → "Rp 299.000" */
 export function formatIDR(amount: number): string {
   return new Intl.NumberFormat("id-ID", {

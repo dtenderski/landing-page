@@ -113,6 +113,7 @@ import StoreFeatured from "@/pages/store-featured";
 import StoreAccess from "@/pages/store-access";
 import TestTracker from "@/pages/test-tracker";
 import HubAudit from "@/pages/hub-audit";
+import KlinikPage from "@/pages/klinik";
 import AgentLanding from "@/pages/agent-landing";
 import ChaesaPage from "@/pages/chaesa";
 import PlatformSales from "@/pages/platform-sales";
@@ -572,6 +573,7 @@ function Router() {
             icon={<Scale className="h-12 w-12 text-purple-500" />}
           ><LegalChat /></PremiumPageGuard>
         )} />
+      <Route path="/klinik" component={KlinikPage} />
       <Route path="/templates" component={TemplatesPage} />
       <Route path="/store" component={StoreFeatured} />
       <Route path="/ai-marketing" component={AiMarketingLanding} />
