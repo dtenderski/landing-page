@@ -575,12 +575,12 @@ function Router() {
         )} />
       <Route path="/klinik" component={KlinikPage} />
       <Route path="/templates" component={TemplatesPage} />
+      <Route path="/store/katalog" component={StorePage} />
+      <Route path="/store/access/:token" component={StoreAccess} />
       <Route path="/store" component={StoreFeatured} />
       <Route path="/ai-marketing" component={AiMarketingLanding} />
-      <Route path="/store/katalog" component={StorePage} />
       <Route path="/workshop" component={WorkshopPage} />
       <Route path="/gustafta-store" component={StoreFeatured} />
-      <Route path="/store/access/:token" component={StoreAccess} />
       <Route path="/test-tracker" component={TestTracker} />
       <Route path="/hub-audit" component={HubAudit} />
       <Route path="/landing/:agentId" component={AgentLanding} />

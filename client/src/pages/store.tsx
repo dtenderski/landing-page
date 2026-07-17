@@ -98,7 +98,8 @@ export default function Store() {
     const params = new URLSearchParams();
     if (searchInput) params.set("q", searchInput);
     if (selectedCategory) params.set("cat", selectedCategory);
-    const newUrl = params.toString() ? `/store?${params.toString()}` : "/store";
+    const basePath = window.location.pathname.startsWith("/store/katalog") ? "/store/katalog" : "/store";
+    const newUrl = params.toString() ? `${basePath}?${params.toString()}` : basePath;
     window.history.replaceState(null, "", newUrl);
     if (selectedCategory) {
       localStorage.setItem("store_last_category", selectedCategory);
