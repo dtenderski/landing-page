@@ -10,7 +10,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { useFeatureAccess } from "@/hooks/use-feature-access";
 import { usePartnerBranding, toDirectImageUrl, type PartnerBranding } from "@/hooks/use-partner-branding";
 import { trackLead } from "@/lib/meta-pixel";
-import { Bot, LogIn, LogOut, Menu, CreditCard, LayoutDashboard, Smartphone, Shield, Crown, User, MessageCircle, Zap, FileDown, Stethoscope, Route, Hammer, Users2, FileSearch, ArrowRight } from "lucide-react";
+import { Bot, LogIn, LogOut, Menu, CreditCard, LayoutDashboard, Smartphone, Shield, Crown, User, MessageCircle, Zap, FileDown, Stethoscope, Route, Hammer, Users2, FileSearch, ArrowRight, Brain, Award, GraduationCap, FileText } from "lucide-react";
 
 const WA_NUMBERS = [
   { display: "081287941900", link: "6281287941900" },
@@ -235,19 +235,34 @@ export function SharedHeader({ transparent }: SharedHeaderProps) {
   });
 
   // Host mitra whitelabel: menu Gustafta disembunyikan, diganti menu netral mitra.
-  const navItems = partner
+  const partnerItems = partner
     ? [
         { href: "/", label: "Beranda", icon: Bot },
         ...(partner.defaultAgentId
           ? [{ href: `/chat/${partner.defaultAgentId}`, label: "Asisten AI", icon: MessageCircle }]
           : []),
       ]
-    : [
-        { href: "/trilogi",           label: "Peta Jalan",         icon: Route,       badge: "Mulai di Sini" },
-        { href: "/klinik-konsultasi", label: "Klinik Konsultasi",  icon: Stethoscope },
-        { href: "/bedah-dokumen",     label: "Toolkit",            icon: Hammer },
-        { href: "/mitra",             label: "Mitra & Jaringan",   icon: Users2,      subtle: true },
-      ];
+    : null;
+
+  // Baris 1 — pintu masuk utama (kategori besar)
+  const navRow1 = [
+    { href: "/trilogi",           label: "Peta Jalan",          icon: Route,         badge: "Mulai di Sini" },
+    { href: "/klinik-konsultasi", label: "Klinik Konsultasi",   icon: Stethoscope },
+    { href: "/bedah-dokumen",     label: "Bedah Dokumen",       icon: FileSearch },
+    { href: "/brain-project",     label: "Brain Project",       icon: Brain },
+    { href: "/kompetensi-hub",    label: "Ekosistem Kompetensi",icon: Award },
+  ];
+
+  // Baris 2 — tools & layanan spesifik
+  const navRow2 = [
+    { href: "/toolkit",                label: "Toolkit",                icon: Hammer },
+    { href: "/klinik-uji-kompetensi",  label: "Bimtek Uji Kompetensi", icon: GraduationCap },
+    { href: "/executive-summary",      label: "Executive Summary",      icon: FileText },
+    { href: "/mitra",                  label: "Mitra & Jaringan",       icon: Users2, subtle: true },
+  ];
+
+  // Untuk mobile: semua item gabungan
+  const allNavItems = partnerItems ?? [...navRow1, ...navRow2];
 
   const isActive = (href: string) => location === href;
 
@@ -375,7 +390,7 @@ export function SharedHeader({ transparent }: SharedHeaderProps) {
                     </Link>
                   )}
                   <div className="border-t pt-2 mt-1 flex flex-col gap-1">
-                    {navItems.map((item) => (
+                    {allNavItems.map((item) => (
                       <Link key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}>
                         <Button
                           variant={isActive(item.href) ? "secondary" : "ghost"}
@@ -458,59 +473,71 @@ export function SharedHeader({ transparent }: SharedHeaderProps) {
           </div>
         </div>
 
-        {/* ── Baris 2: Nav — desktop only ── */}
-        <nav className="hidden md:flex items-center justify-between px-4 gap-0.5 border-t border-border/50 h-10">
-          {/* Kiri: nav items */}
-          <div className="flex items-center gap-0.5">
-            {navItems.map((item) => (
+        {/* ── Baris 2 & 3: Nav 2-baris — desktop only ── */}
+        {partner ? (
+          // Partner: satu baris sederhana
+          <nav className="hidden md:flex items-center justify-center gap-0.5 border-t border-border/50 h-10">
+            {(partnerItems ?? []).map((item) => (
               <Link key={item.href} href={item.href}>
-                <Button
-                  variant={isActive(item.href) ? "secondary" : "ghost"}
-                  size="sm"
-                  className={`text-xs px-3 h-8 font-medium relative ${
-                    "subtle" in item && item.subtle
-                      ? "text-muted-foreground hover:text-foreground"
-                      : ""
-                  }`}
-                >
+                <Button variant={isActive(item.href) ? "secondary" : "ghost"} size="sm" className="text-sm px-3 h-8 font-medium">
                   {item.label}
-                  {"badge" in item && item.badge && (
-                    <span className="ml-1.5 text-[9px] font-bold px-1.5 py-0.5 rounded-full leading-none bg-emerald-500 text-white">
-                      {item.badge}
-                    </span>
-                  )}
                 </Button>
               </Link>
             ))}
-            {isAuthenticated && !partner && (
-              <Link href="/my-subscription">
-                <Button
-                  variant={isActive("/my-subscription") || isActive("/subscription") ? "secondary" : "ghost"}
-                  size="sm"
-                  className="text-xs px-3 h-8 font-medium text-muted-foreground hover:text-foreground"
-                >
-                  <Crown className="h-3.5 w-3.5 mr-1" />
-                  Paket Saya
-                </Button>
-              </Link>
-            )}
-          </div>
-
-          {/* Kanan: CTA utama */}
-          {!partner && (
-            <Link href="/bedah-dokumen" data-testid="cta-bedah-dokumen-nav">
-              <Button
-                size="sm"
-                className="h-7 px-3 text-xs font-semibold gap-1.5 bg-primary hover:bg-primary/90 shadow-sm"
-                onClick={() => trackLead({ content_name: "CTA Bedah Dokumen Nav" })}
-              >
-                <FileSearch className="h-3.5 w-3.5" />
-                Coba Bedah Dokumen
-                <ArrowRight className="h-3 w-3" />
-              </Button>
-            </Link>
-          )}
-        </nav>
+          </nav>
+        ) : (
+          <nav className="hidden md:flex flex-col border-t border-border/50">
+            {/* Baris 1 — kategori utama */}
+            <div className="flex items-center justify-center gap-0.5 h-10">
+              {navRow1.map((item) => (
+                <Link key={item.href} href={item.href}>
+                  <Button
+                    variant={isActive(item.href) ? "secondary" : "ghost"}
+                    size="sm"
+                    className="text-sm px-3 h-9 font-semibold relative"
+                  >
+                    {item.label}
+                    {"badge" in item && item.badge && (
+                      <span className="ml-1.5 text-[9px] font-bold px-1.5 py-0.5 rounded-full leading-none bg-emerald-500 text-white">
+                        {item.badge}
+                      </span>
+                    )}
+                  </Button>
+                </Link>
+              ))}
+            </div>
+            {/* Baris 2 — tools & layanan spesifik */}
+            <div className="flex items-center justify-center gap-0.5 h-9 border-t border-border/30 bg-muted/20">
+              {navRow2.map((item) => (
+                <Link key={item.href} href={item.href}>
+                  <Button
+                    variant={isActive(item.href) ? "secondary" : "ghost"}
+                    size="sm"
+                    className={`text-sm px-3 h-8 font-medium ${
+                      "subtle" in item && item.subtle
+                        ? "text-muted-foreground hover:text-foreground"
+                        : ""
+                    }`}
+                  >
+                    {item.label}
+                  </Button>
+                </Link>
+              ))}
+              {isAuthenticated && (
+                <Link href="/my-subscription">
+                  <Button
+                    variant={isActive("/my-subscription") || isActive("/subscription") ? "secondary" : "ghost"}
+                    size="sm"
+                    className="text-sm px-3 h-8 font-medium text-muted-foreground hover:text-foreground"
+                  >
+                    <Crown className="h-3 w-3 mr-1" />
+                    Paket Saya
+                  </Button>
+                </Link>
+              )}
+            </div>
+          </nav>
+        )}
 
       </header>
     </div>
