@@ -31,7 +31,7 @@ interface SBUEntry {
 }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
-const SKEMA_ID = 1448;
+const SKEMA_ID = 1789;
 
 const SAMPLE_PROMPTS = [
   "Saya ingin upgrade SBU dari kualifikasi Kecil ke Menengah — apa saja syaratnya?",

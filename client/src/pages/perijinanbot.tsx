@@ -27,7 +27,7 @@ interface SubAgentStatus {
 interface CheckItem { id: string; label: string; done: boolean; note?: string; }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
-const OSS_ID = 1514;
+const OSS_ID = 1790;
 const LS_KEY = "perijinanbot_checklist_v1";
 
 const SAMPLE_PROMPTS = [

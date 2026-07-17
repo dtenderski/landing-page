@@ -35,7 +35,7 @@ interface MaterialItem {
 }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
-const SUPPLY_ID = 1211; // SupplyChainClaw default sub-agent
+const SUPPLY_ID = 1796;
 const LS_KEY = "supplierbot_materials_v1";
 
 const SAMPLE_PROMPTS = [

@@ -38,7 +38,7 @@ interface InvestmentProject {
 }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
-const OWNER_ID = 575; // DevPropertiClaw orchestrator default
+const OWNER_ID = 1793;
 const LS_KEY = "ownerbot_projects_v1";
 
 const SAMPLE_PROMPTS = [

@@ -37,7 +37,7 @@ interface SubkonContract {
 }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
-const KONTRAK_ID = 1920; // KontrakClaw default sub-agent
+const KONTRAK_ID = 1795;
 const LS_KEY = "boheerbot_contracts_v1";
 
 const SAMPLE_PROMPTS = [

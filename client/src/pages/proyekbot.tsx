@@ -35,7 +35,7 @@ interface Project {
 }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
-const KONSTRA_ID = 1281;
+const KONSTRA_ID = 1792;
 const LS_KEY = "proyekbot_projects_v1";
 
 const ROLE_META: Record<string, { label: string; color: string; icon: any }> = {

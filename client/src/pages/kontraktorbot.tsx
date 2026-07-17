@@ -30,7 +30,7 @@ interface TakeoffItem {
 }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
-const QS_ID = 1911;
+const QS_ID = 1791;
 const LS_KEY_TAKEOFF = "kontraktorbot_takeoff_v1";
 
 const SAMPLE_PROMPTS = [

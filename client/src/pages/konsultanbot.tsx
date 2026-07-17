@@ -32,7 +32,7 @@ interface FeeProject {
 }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
-const KK_ID = 1073; // KKClaw orchestrator default ID
+const KK_ID = 1794;
 const LS_KEY = "konsultanbot_projects_v1";
 
 const SAMPLE_PROMPTS = [
