@@ -10,7 +10,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { useFeatureAccess } from "@/hooks/use-feature-access";
 import { usePartnerBranding, toDirectImageUrl, type PartnerBranding } from "@/hooks/use-partner-branding";
 import { trackLead } from "@/lib/meta-pixel";
-import { Bot, BookOpen, BarChart3, LogIn, LogOut, Menu, CreditCard, LayoutDashboard, ShoppingBag, Smartphone, Package, Shield, Crown, User, Store, Rocket, TrendingUp, MessageCircle, GraduationCap, Sparkles, Brain, Zap, FileDown, Stethoscope, CalendarDays, FileSearch } from "lucide-react";
+import { Bot, LogIn, LogOut, Menu, CreditCard, LayoutDashboard, Smartphone, Shield, Crown, User, MessageCircle, Zap, FileDown, Stethoscope, Route, Hammer, Users2, FileSearch, ArrowRight } from "lucide-react";
 
 const WA_NUMBERS = [
   { display: "081287941900", link: "6281287941900" },
@@ -243,25 +243,11 @@ export function SharedHeader({ transparent }: SharedHeaderProps) {
           : []),
       ]
     : [
-        { href: "/#trilogi", label: "Belajar", icon: GraduationCap, badge: "Mulai di Sini" },
-        { href: "/produk", label: "Merakit AI", icon: Rocket },
-        { href: "/store", label: "Menggunakan AI", icon: Zap },
-        { href: "/affiliate", label: "Menghasilkan Nilai", icon: TrendingUp },
-        { href: "/packs", label: "Berkembang", icon: Sparkles },
-        { href: "/klinik-konsultasi", label: "Klinik Konsultasi", icon: Stethoscope },
-        { href: "/bedah-dokumen", label: "Bedah Dokumen", icon: FileSearch },
-        { href: "/indobuildtech", label: "Indobuildtech", icon: CalendarDays, badge: "Event" },
+        { href: "/trilogi",           label: "Peta Jalan",         icon: Route,       badge: "Mulai di Sini" },
+        { href: "/klinik-konsultasi", label: "Klinik Konsultasi",  icon: Stethoscope },
+        { href: "/bedah-dokumen",     label: "Toolkit",            icon: Hammer },
+        { href: "/mitra",             label: "Mitra & Jaringan",   icon: Users2,      subtle: true },
       ];
-
-  const premiumNavItems = [
-    { href: "/edu-counsel", label: "EduCounsel AI", icon: Brain },
-    { href: "/ai-tutor", label: "AI Tutor Adaptif", icon: GraduationCap },
-    { href: "/tutor-builder", label: "Rakit Tim Agen", icon: Sparkles },
-    { href: "/tender-ai", label: "Tendera AI", icon: TrendingUp },
-    { href: "/ib-tu", label: "IB-TU Coordinator", icon: GraduationCap },
-    { href: "/sbu-claw", label: "SBUClaw", icon: TrendingUp },
-    { href: "/data-master", label: "Data Master", icon: TrendingUp },
-  ];
 
   const isActive = (href: string) => location === href;
 
@@ -378,48 +364,39 @@ export function SharedHeader({ transparent }: SharedHeaderProps) {
                   )}
                 </div>
                 <div className="flex flex-col gap-2">
-                  {navItems.map((item) => (
-                    <Link key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}>
-                      <Button
-                        variant={isActive(item.href) ? "secondary" : "ghost"}
-                        className="w-full justify-start"
-                      >
-                        <item.icon className="h-4 w-4 mr-2" />
-                        {item.label}
+                  {/* CTA utama mobile */}
+                  {!partner && (
+                    <Link href="/bedah-dokumen" onClick={() => { setMobileMenuOpen(false); trackLead({ content_name: "CTA Bedah Dokumen Mobile" }); }}>
+                      <Button className="w-full gap-2 font-semibold" data-testid="cta-bedah-dokumen-mobile">
+                        <FileSearch className="h-4 w-4" />
+                        Coba Bedah Dokumen
+                        <ArrowRight className="h-4 w-4 ml-auto" />
                       </Button>
                     </Link>
-                  ))}
+                  )}
+                  <div className="border-t pt-2 mt-1 flex flex-col gap-1">
+                    {navItems.map((item) => (
+                      <Link key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}>
+                        <Button
+                          variant={isActive(item.href) ? "secondary" : "ghost"}
+                          className={`w-full justify-start ${"subtle" in item && item.subtle ? "text-muted-foreground" : ""}`}
+                        >
+                          <item.icon className="h-4 w-4 mr-2" />
+                          {item.label}
+                        </Button>
+                      </Link>
+                    ))}
+                  </div>
                   {isAuthenticated && !partner && (
                     <Link href="/my-subscription" onClick={() => setMobileMenuOpen(false)}>
                       <Button
                         variant={isActive("/my-subscription") || isActive("/subscription") ? "secondary" : "ghost"}
-                        className="w-full justify-start"
+                        className="w-full justify-start text-muted-foreground"
                       >
                         <Crown className="h-4 w-4 mr-2" />
                         Paket Saya
                       </Button>
                     </Link>
-                  )}
-                  {!partner && (
-                    <>
-                      <Link href="/blueprint-saya" onClick={() => setMobileMenuOpen(false)}>
-                        <Button
-                          variant={isActive("/blueprint-saya") ? "secondary" : "ghost"}
-                          className="w-full justify-start"
-                        >
-                          <FileDown className="h-4 w-4 mr-2 text-amber-500" />
-                          Blueprint Saya
-                        </Button>
-                      </Link>
-                      <div className="border-t pt-3 mt-1">
-                        <Link href="/documentation" onClick={() => setMobileMenuOpen(false)}>
-                          <Button variant="ghost" className="w-full justify-start text-muted-foreground" size="sm">
-                            <BookOpen className="h-4 w-4 mr-2" />
-                            Dokumentasi
-                          </Button>
-                        </Link>
-                      </div>
-                    </>
                   )}
                   <div className="border-t pt-4 mt-2">
                     {isAuthenticated ? (
@@ -482,36 +459,54 @@ export function SharedHeader({ transparent }: SharedHeaderProps) {
         </div>
 
         {/* ── Baris 2: Nav — desktop only ── */}
-        <nav className="hidden md:flex items-center justify-center gap-0.5 border-t border-border/50 h-10 overflow-x-auto">
-          {navItems.map((item) => (
-            <Link key={item.href} href={item.href}>
+        <nav className="hidden md:flex items-center justify-between px-4 gap-0.5 border-t border-border/50 h-10">
+          {/* Kiri: nav items */}
+          <div className="flex items-center gap-0.5">
+            {navItems.map((item) => (
+              <Link key={item.href} href={item.href}>
+                <Button
+                  variant={isActive(item.href) ? "secondary" : "ghost"}
+                  size="sm"
+                  className={`text-xs px-3 h-8 font-medium relative ${
+                    "subtle" in item && item.subtle
+                      ? "text-muted-foreground hover:text-foreground"
+                      : ""
+                  }`}
+                >
+                  {item.label}
+                  {"badge" in item && item.badge && (
+                    <span className="ml-1.5 text-[9px] font-bold px-1.5 py-0.5 rounded-full leading-none bg-emerald-500 text-white">
+                      {item.badge}
+                    </span>
+                  )}
+                </Button>
+              </Link>
+            ))}
+            {isAuthenticated && !partner && (
+              <Link href="/my-subscription">
+                <Button
+                  variant={isActive("/my-subscription") || isActive("/subscription") ? "secondary" : "ghost"}
+                  size="sm"
+                  className="text-xs px-3 h-8 font-medium text-muted-foreground hover:text-foreground"
+                >
+                  <Crown className="h-3.5 w-3.5 mr-1" />
+                  Paket Saya
+                </Button>
+              </Link>
+            )}
+          </div>
+
+          {/* Kanan: CTA utama */}
+          {!partner && (
+            <Link href="/bedah-dokumen" data-testid="cta-bedah-dokumen-nav">
               <Button
-                variant={isActive(item.href) ? "secondary" : "ghost"}
                 size="sm"
-                className="text-xs px-3 h-8 font-medium relative"
+                className="h-7 px-3 text-xs font-semibold gap-1.5 bg-primary hover:bg-primary/90 shadow-sm"
+                onClick={() => trackLead({ content_name: "CTA Bedah Dokumen Nav" })}
               >
-                {item.label}
-                {"badge" in item && item.badge && (
-                  <span className={`ml-1.5 text-[9px] font-bold px-1.5 py-0.5 rounded-full leading-none ${
-                    item.badge === "Mulai di Sini"
-                      ? "bg-emerald-500 text-white"
-                      : "bg-amber-400 text-amber-900"
-                  }`}>
-                    {item.badge}
-                  </span>
-                )}
-              </Button>
-            </Link>
-          ))}
-          {isAuthenticated && !partner && (
-            <Link href="/my-subscription">
-              <Button
-                variant={isActive("/my-subscription") || isActive("/subscription") ? "secondary" : "ghost"}
-                size="sm"
-                className="text-xs px-3 h-8 font-medium"
-              >
-                <Crown className="h-3.5 w-3.5 mr-1" />
-                Paket Saya
+                <FileSearch className="h-3.5 w-3.5" />
+                Coba Bedah Dokumen
+                <ArrowRight className="h-3 w-3" />
               </Button>
             </Link>
           )}
