@@ -6751,7 +6751,25 @@ Sampaikan dengan natural, misalnya: "Untuk jawaban yang lebih lengkap dan pembua
       );
       const waUrl = `https://wa.me/6282299417818?text=${waMsg}`;
 
-      res.json({ orderId, accessToken, waUrl, itemName, amount: itemPrice });
+      // ── Scalev checkout otomatis ───────────────────────────────────────────
+      // Bila SCALEV_CHATBOT_SLUG tersedia (env), arahkan ke Scalev checkout.
+      // agent_id & order_ref dikirim sebagai custom_field → dibaca webhook
+      // untuk mengaktifkan clone chatbot secara otomatis setelah bayar.
+      // Fallback ke waUrl bila slug belum dikonfigurasi.
+      const scalevChatbotSlug = process.env.SCALEV_CHATBOT_SLUG;
+      let scalevUrl: string | null = null;
+      if (scalevChatbotSlug && resolvedAgentId) {
+        const qs = new URLSearchParams();
+        qs.set("pre_fill[name]", String(name));
+        qs.set("pre_fill[email]", String(email));
+        if (phone) qs.set("pre_fill[phone]", String(phone));
+        qs.set("agent_id", String(resolvedAgentId));
+        qs.set("order_ref", orderId);
+        scalevUrl = `https://app.scalev.com/checkout/${scalevChatbotSlug}?${qs.toString()}`;
+      }
+      // ──────────────────────────────────────────────────────────────────────
+
+      res.json({ orderId, accessToken, waUrl, scalevUrl, itemName, amount: itemPrice });
     } catch (error) {
       console.error("Store order error:", error);
       res.status(500).json({ error: "Gagal membuat pesanan" });
@@ -18946,6 +18964,73 @@ Return HANYA JSON berikut (tanpa penjelasan lain):
       }
       // ─────────────────────────────────────────────────────────────────────────
 
+      const { randomUUID: genUUID } = await import("crypto");
+      const baseUrl = getServerBaseUrl(req);
+      const accessToken = genUUID();
+
+      // ── Store Chatbot via custom_fields agent_id ──────────────────────────
+      // Ketika checkout URL mengandung agent_id (dikirim /api/store/order),
+      // Scalev meneruskannya di data.agent_id atau data.custom_fields.agent_id.
+      // Branch ini mengaktifkan chatbot tanpa perlu scalev_mappings per produk.
+      const rawAgentIdField =
+        data.agent_id || data.custom_fields?.agent_id || data.metadata?.agent_id;
+      const agentIdFromField = rawAgentIdField ? parseInt(String(rawAgentIdField)) : 0;
+
+      if (agentIdFromField && !isNaN(agentIdFromField) && !matchedPlanConfig) {
+        let masterAgent: any = null;
+        try { masterAgent = await storage.getAgent(String(agentIdFromField)); } catch {}
+
+        if (masterAgent) {
+          if ((masterAgent as any).premiumClass === "private" && customerEmail) {
+            const buyer = await storage.getUserByEmail(customerEmail);
+            if (buyer) {
+              try {
+                const existingClone = await storage.getCloneForOwner(agentIdFromField, buyer.id);
+                const clone = existingClone || await storage.cloneAgentForOwner(agentIdFromField, buyer.id);
+                console.log(`[Scalev Store] ${existingClone ? "existing" : "new"} clone #${clone.id} → ${customerEmail}`);
+              } catch (cloneErr: any) {
+                console.error(`[Scalev Store] Clone gagal untuk ${customerEmail}:`, cloneErr?.message);
+                try { await storage.addPendingPremiumDelivery({ masterAgentId: agentIdFromField, email: customerEmail, source: "scalev" }); } catch {}
+              }
+            } else {
+              try { await storage.addPendingPremiumDelivery({ masterAgentId: agentIdFromField, email: customerEmail, source: "scalev" }); } catch {}
+              console.log(`[Scalev Store] Pending delivery untuk ${customerEmail} → master #${agentIdFromField}`);
+            }
+          }
+
+          // Audit trail store_order
+          try {
+            await storage.createStoreOrder({
+              productId: agentIdFromField,
+              agentId: agentIdFromField,
+              customerName: customerName || "Customer",
+              customerEmail,
+              customerPhone,
+              amount: Math.round(grossRevenue),
+              midtransOrderId: `scalev_${orderId}`,
+              accessToken,
+              status: "paid",
+            });
+          } catch {}
+
+          // Update order pending yang dibuat saat checkout (cocokkan pakai order_ref)
+          const orderRef: string = String(data.custom_fields?.order_ref || data.order_ref || "");
+          if (orderRef) {
+            try {
+              const { db: dbInst } = await import("./db");
+              const { storeOrders: storeOrdersTbl } = await import("@shared/schema");
+              const { eq: eqFn } = await import("drizzle-orm");
+              await dbInst.update(storeOrdersTbl)
+                .set({ status: "paid" })
+                .where(eqFn(storeOrdersTbl.midtransOrderId, orderRef));
+            } catch {}
+          }
+        }
+
+        return res.status(200).json({ received: true, type: "store_chatbot_direct" });
+      }
+      // ─────────────────────────────────────────────────────────────────────
+
       // Find matching product mappings by Scalev product variant names
       const productNames = Object.keys(finalVariants);
       let matchedMapping = null;
@@ -18953,10 +19038,6 @@ Return HANYA JSON berikut (tanpa penjelasan lain):
         const m = await storage.getScalevMappingByProductName(pName);
         if (m) { matchedMapping = m; break; }
       }
-
-      const { randomUUID: genUUID } = await import("crypto");
-      const baseUrl = getServerBaseUrl(req);
-      const accessToken = genUUID();
 
       if (matchedMapping) {
         if (matchedMapping.type === "chatbot" && matchedMapping.agentId) {

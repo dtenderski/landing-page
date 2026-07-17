@@ -406,8 +406,13 @@ export default function StoreFeatured() {
     onSuccess: async (res: Response) => {
       const data = await res.json();
       setShowBuyDialog(false);
-      toast({ title: "Pesanan dibuat!", description: "Tim kami akan menghubungi Anda untuk konfirmasi pembayaran via Scalev." });
-      if (data.waUrl) window.open(data.waUrl, "_blank");
+      if (data.scalevUrl) {
+        toast({ title: "Pesanan dibuat! 🎉", description: "Anda akan diarahkan ke halaman pembayaran Scalev. Setelah bayar, chatbot aktif otomatis." });
+        window.open(data.scalevUrl, "_blank");
+      } else if (data.waUrl) {
+        toast({ title: "Pesanan dibuat!", description: "Tim kami akan menghubungi Anda untuk konfirmasi pembayaran." });
+        window.open(data.waUrl, "_blank");
+      }
     },
     onError: (err: Error) => {
       toast({ title: "Gagal membuat pesanan", description: err.message, variant: "destructive" });

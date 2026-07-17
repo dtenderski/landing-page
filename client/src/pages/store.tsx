@@ -139,11 +139,16 @@ export default function Store() {
     },
     onSuccess: async (res: Response) => {
       const data = await res.json();
-      const { waUrl } = data;
+      const { waUrl, scalevUrl } = data;
       setShowBuyDialog(false);
       trackInitiateCheckout({ content_name: selectedAgent?.name ?? "Store Product", currency: "IDR" });
-      toast({ title: "Pesanan dibuat!", description: "Tim kami akan menghubungi Anda untuk konfirmasi pembayaran via Scalev." });
-      if (waUrl) window.open(waUrl, "_blank");
+      if (scalevUrl) {
+        toast({ title: "Pesanan dibuat! 🎉", description: "Anda akan diarahkan ke halaman pembayaran Scalev. Setelah bayar, chatbot aktif otomatis." });
+        window.open(scalevUrl, "_blank");
+      } else if (waUrl) {
+        toast({ title: "Pesanan dibuat!", description: "Tim kami akan menghubungi Anda untuk konfirmasi pembayaran." });
+        window.open(waUrl, "_blank");
+      }
     },
     onError: (err: Error) => {
       toast({ title: "Gagal membuat pesanan", description: err.message, variant: "destructive" });
