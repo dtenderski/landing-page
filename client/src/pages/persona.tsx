@@ -14,8 +14,8 @@ function handleWaClick() {
   trackLead({ content_name: "WhatsApp CTA" });
 }
 
-const CHECKOUT_URL = "https://bayar.gustafta.my.id/c/checkout?variant_ids=533206&qty=1";
-const CHECKOUT_BASIC = "https://bayar.gustafta.my.id/c/checkout?variant_ids=533205&qty=1";
+const CHECKOUT_URL = "https://wa.me/6282299417818?text=Halo%20Gustafta%21%20Saya%20tertarik%20berlangganan.%20Mohon%20informasi%20cara%20pembayarannya.";
+const CHECKOUT_BASIC = "https://wa.me/6282299417818?text=Halo%20Gustafta%21%20Saya%20tertarik%20berlangganan.%20Mohon%20informasi%20cara%20pembayarannya.";
 
 const PERSONAS = [
   {
@@ -319,7 +319,7 @@ export default function PersonaPage() {
               <p className="text-xs text-gray-400 mb-4 line-through">Normal Rp 315.000</p>
               <a href={CHECKOUT_BASIC} target="_blank" rel="noopener noreferrer">
                 <Button className="w-full" variant="outline" data-testid="btn-paket-basic">
-                  Ambil Starter Kit →
+                  Tanya Info Pembayaran via WA →
                 </Button>
               </a>
             </div>
@@ -334,7 +334,7 @@ export default function PersonaPage() {
               </ul>
               <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer">
                 <Button className="w-full bg-orange-500 hover:bg-orange-400 text-white font-bold" data-testid="btn-paket-bundle">
-                  Ambil Bundle Trilogi →
+                  Tanya Info Pembayaran via WA →
                 </Button>
               </a>
             </div>
@@ -351,7 +351,7 @@ export default function PersonaPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="bg-white text-gray-900 hover:bg-gray-100 font-bold gap-2 px-8 h-12" data-testid="btn-cta-bundle">
-                Ambil Bundle Trilogi <ArrowRight className="h-5 w-5" />
+                Tanya Info Pembayaran via WA <ArrowRight className="h-5 w-5" />
               </Button>
             </a>
             <a href={WA_URL} onClick={handleWaClick} target="_blank" rel="noopener noreferrer">

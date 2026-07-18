@@ -15,7 +15,7 @@ function handleWaClick() {
   trackLead({ content_name: "WhatsApp CTA" });
 }
 
-const CHECKOUT_URL = "https://bayar.gustafta.my.id/c/checkout?variant_ids=533206&qty=1";
+const CHECKOUT_URL = "https://wa.me/6282299417818?text=Halo%20Gustafta%21%20Saya%20tertarik%20berlangganan.%20Mohon%20informasi%20cara%20pembayarannya.";
 
 const MEKANISME = [
   {
@@ -281,7 +281,7 @@ export default function LexKonstruksiSengketaPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="bg-white text-slate-800 hover:bg-slate-100 font-bold gap-2 px-8 h-12" data-testid="btn-cta-checkout">
-                Ambil Bundle Trilogi <ArrowRight className="h-5 w-5" />
+                Tanya Info Pembayaran via WA <ArrowRight className="h-5 w-5" />
               </Button>
             </a>
             <a href={WA_URL} onClick={handleWaClick} target="_blank" rel="noopener noreferrer">

@@ -15,7 +15,7 @@ function handleWaClick() {
   trackLead({ content_name: "WhatsApp CTA" });
 }
 
-const CHECKOUT_URL = "https://bayar.gustafta.my.id/c/checkout?variant_ids=533205&qty=1";
+const CHECKOUT_URL = "https://wa.me/6282299417818?text=Halo%20Gustafta%21%20Saya%20tertarik%20berlangganan.%20Mohon%20informasi%20cara%20pembayarannya.";
 
 // Data riset/lembaga (konteks umum, bukan janji hasil produk). Diverifikasi via sumber publik.
 const STATS_STARTER = [
@@ -78,7 +78,7 @@ export default function StarterKitPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="bg-white text-blue-700 hover:bg-sky-50 font-bold gap-2 px-8 h-12" data-testid="btn-hero-beli-starter">
-                <Zap className="h-5 w-5" /> Ambil Starter Kit — {PRICING.starterKit.price}
+                <Zap className="h-5 w-5" /> Tanya Info Pembayaran via WA — {PRICING.starterKit.price}
               </Button>
             </a>
             <a href={WA_URL} onClick={handleWaClick} target="_blank" rel="noopener noreferrer">
@@ -306,7 +306,7 @@ export default function StarterKitPage() {
               </ul>
               <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer">
                 <Button className="w-full h-11 bg-sky-600 hover:bg-sky-500 text-white font-bold" data-testid="btn-pricing-kit">
-                  Ambil Starter Kit →
+                  Tanya Info Pembayaran via WA →
                 </Button>
               </a>
               <p className="text-xs text-gray-400 mt-2 text-center">Pembayaran aman via Scalev</p>
@@ -335,7 +335,7 @@ export default function StarterKitPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="bg-white text-blue-700 hover:bg-sky-50 font-bold gap-2 px-8 h-12" data-testid="btn-final-cta">
-                Ambil Starter Kit Sekarang <ArrowRight className="h-5 w-5" />
+                Tanya Info Pembayaran via WA Sekarang <ArrowRight className="h-5 w-5" />
               </Button>
             </a>
             <a href={WA_URL} onClick={handleWaClick} target="_blank" rel="noopener noreferrer">

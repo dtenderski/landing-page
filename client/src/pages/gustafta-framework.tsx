@@ -83,7 +83,7 @@ function FrameworkLocked() {
                 </a>
                 <Link href="/starter-kit">
                   <div className="inline-flex items-center justify-center gap-2 w-full border border-blue-300 dark:border-blue-700 text-blue-600 dark:text-blue-400 font-semibold py-2.5 px-5 rounded-xl text-sm hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors cursor-pointer">
-                    <ShoppingCart className="h-4 w-4" /> Ambil Starter Kit — Rp 245.000
+                    <ShoppingCart className="h-4 w-4" /> Tanya Info Pembayaran via WA
                   </div>
                 </Link>
               </div>

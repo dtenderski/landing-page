@@ -236,9 +236,9 @@ export default function BlueprintSayaPage() {
 
                 {/* CTAs */}
                 <div className="px-5 pb-5 space-y-2">
-                  <a href="https://bayar.gustafta.my.id/c/checkout?variant_ids=533205&qty=1" target="_blank" rel="noopener noreferrer" className="block">
+                  <a href="https://wa.me/6282299417818?text=Halo%20Gustafta%21%20Saya%20tertarik%20berlangganan.%20Mohon%20informasi%20cara%20pembayarannya." target="_blank" rel="noopener noreferrer" className="block">
                     <Button className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white h-11 font-bold gap-2 shadow-md">
-                      <ShoppingBag className="h-4 w-4" /> Beli Starter Kit — Rp 245.000
+                      <MessageCircle className="h-4 w-4" /> Tanya Info Pembayaran via WA
                     </Button>
                   </a>
                   <p className="text-center text-[11px] text-gray-400">Sekali bayar · Termasuk lisensi + trial 7 hari</p>

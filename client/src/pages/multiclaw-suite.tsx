@@ -17,8 +17,8 @@ function handleWaClick() {
   trackLead({ content_name: "WhatsApp CTA" });
 }
 
-const CHECKOUT_BUNDLE = "https://bayar.gustafta.my.id/c/checkout?variant_ids=533206&qty=1";
-const CHECKOUT_BASIC  = "https://bayar.gustafta.my.id/c/checkout?variant_ids=533205&qty=1";
+const CHECKOUT_BUNDLE = "https://wa.me/6282299417818?text=Halo%20Gustafta%21%20Saya%20tertarik%20berlangganan.%20Mohon%20informasi%20cara%20pembayarannya.";
+const CHECKOUT_BASIC  = "https://wa.me/6282299417818?text=Halo%20Gustafta%21%20Saya%20tertarik%20berlangganan.%20Mohon%20informasi%20cara%20pembayarannya.";
 
 type PlanTier = "starter" | "profesional" | "bisnis";
 
@@ -283,7 +283,7 @@ export default function MulticlawSuitePage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href={CHECKOUT_BUNDLE} target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="bg-white text-teal-700 hover:bg-cyan-50 font-bold gap-2 px-8 h-12" data-testid="btn-hero-mulai">
-                <Zap className="h-5 w-5" /> Ambil Bundle — Bonus 1 Bulan Gratis
+                <Zap className="h-5 w-5" /> Tanya Info Pembayaran via WA
               </Button>
             </a>
             <a href={WA_URL} onClick={handleWaClick} target="_blank" rel="noopener noreferrer">
@@ -667,7 +667,7 @@ export default function MulticlawSuitePage() {
               </ul>
               <a href={CHECKOUT_BUNDLE} target="_blank" rel="noopener noreferrer">
                 <Button className="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold" data-testid="btn-akses-bundle">
-                  Ambil Bundle Sekarang →
+                  Tanya Info Pembayaran via WA →
                 </Button>
               </a>
             </div>
@@ -717,7 +717,7 @@ export default function MulticlawSuitePage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href={CHECKOUT_BUNDLE} target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="bg-white text-teal-700 hover:bg-cyan-50 font-bold gap-2 px-8 h-12" data-testid="btn-cta-mulai">
-                <Zap className="h-5 w-5" /> Ambil Bundle Sekarang
+                <Zap className="h-5 w-5" /> Tanya Info Pembayaran via WA
               </Button>
             </a>
             <a href={WA_URL} onClick={handleWaClick} target="_blank" rel="noopener noreferrer">
