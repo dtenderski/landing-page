@@ -798,6 +798,96 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* ── RUANG KELOLA & RUANG SIMPAN — NARASI PERKENALAN ── */}
+      <section className="py-20 px-4 bg-white dark:bg-slate-950">
+        <div className="max-w-4xl mx-auto">
+
+          {/* Pembuka — situasi yang dikenali */}
+          <div className="text-center mb-16">
+            <span className="inline-block text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Dua Hal yang Sering Terlewat</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-5 leading-tight">
+              Sebelum AI bisa membantu Anda —<br />
+              <span className="text-blue-600 dark:text-blue-400">Anda perlu tahu apa yang Anda miliki.</span>
+            </h2>
+            <p className="text-slate-500 dark:text-slate-400 text-base max-w-2xl mx-auto leading-relaxed">
+              Banyak perusahaan konstruksi yang sudah paham AI, sudah coba berbagai tools —
+              tapi masih kewalahan dengan hal yang paling mendasar: <em>dokumen perusahaan yang berceceran,
+              tanggal SBU yang terlupakan, dan file lama yang tidak bisa dicari lagi.</em>
+            </p>
+          </div>
+
+          {/* Ruang Kelola */}
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <div className="bg-gradient-to-br from-blue-50 to-slate-50 dark:from-blue-950/30 dark:to-slate-900 border border-blue-100 dark:border-blue-900/50 rounded-3xl p-8">
+              <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center mb-5 shadow-lg shadow-blue-200 dark:shadow-blue-900/40">
+                <Bell className="h-6 w-6 text-white" />
+              </div>
+              <p className="text-xs font-bold text-blue-500 uppercase tracking-widest mb-2">Ruang Kelola</p>
+              <h3 className="text-xl font-black text-slate-900 dark:text-white mb-3 leading-snug">
+                Ingatan perusahaan<br />yang tidak pernah lupa.
+              </h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                Bayangkan ada seseorang di kantor Anda yang tugasnya satu: mengingat semua dokumen legal
+                perusahaan — kapan SBU berakhir, kapan SKK perlu diperpanjang, kapan NIB perlu diperbarui.
+                Dan dua bulan sebelum tanggal itu tiba, ia mengirim pesan ke WhatsApp Anda.
+              </p>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">
+                Itulah Ruang Kelola. Bukan aplikasi untuk mengisi form — tapi sistem yang bekerja
+                diam-diam di belakang layar, menjaga Anda dari gugur tender karena hal yang seharusnya bisa dicegah.
+              </p>
+              <div className="flex items-center gap-1.5 text-xs text-slate-400 dark:text-slate-500 mb-5">
+                <Check className="h-3.5 w-3.5 text-blue-500 shrink-0" />
+                <span>Legalitas · SBU · SKK · Perizinan · Tender — semua dalam satu tempat</span>
+              </div>
+              <Link href="/ruang-kelola">
+                <button className="flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+                  Kenali Ruang Kelola <ArrowRight className="h-4 w-4" />
+                </button>
+              </Link>
+            </div>
+
+            {/* Ruang Simpan */}
+            <div className="bg-gradient-to-br from-indigo-50 to-violet-50 dark:from-indigo-950/30 dark:to-violet-950/30 border border-indigo-100 dark:border-indigo-900/50 rounded-3xl p-8">
+              <div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center mb-5 shadow-lg shadow-indigo-200 dark:shadow-indigo-900/40">
+                <Briefcase className="h-6 w-6 text-white" />
+              </div>
+              <p className="text-xs font-bold text-indigo-500 uppercase tracking-widest mb-2">Ruang Simpan</p>
+              <h3 className="text-xl font-black text-slate-900 dark:text-white mb-3 leading-snug">
+                Lemari arsip yang<br />bisa Anda ajak bicara.
+              </h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                Setiap perusahaan punya Google Drive. Tapi coba tanya ke Drive Anda: <em>"Apakah kita punya
+                pengalaman proyek jembatan yang bisa dicantumkan di penawaran tender ini?"</em> — Drive tidak
+                menjawab. Ia hanya menyimpan.
+              </p>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">
+                Ruang Simpan menyimpan file yang sama — tapi AI Gustafta membaca isinya, memahaminya,
+                dan siap menjadikannya bahan ketika Anda membuka Klinik, Bedah Dokumen, atau fitur lain.
+                Arsip Anda berhenti jadi kuburan file.
+              </p>
+              <div className="flex items-center gap-1.5 text-xs text-slate-400 dark:text-slate-500 mb-5">
+                <Check className="h-3.5 w-3.5 text-indigo-500 shrink-0" />
+                <span>PDF · DOCX · foto scan · dan lainnya — semua bisa dibaca AI</span>
+              </div>
+              <Link href="/ruang-simpan">
+                <button className="flex items-center gap-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors">
+                  Kenali Ruang Simpan <ArrowRight className="h-4 w-4" />
+                </button>
+              </Link>
+            </div>
+          </div>
+
+          {/* Penutup narasi */}
+          <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl px-8 py-6 text-center">
+            <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-2xl mx-auto">
+              Keduanya gratis untuk dicoba. Tidak ada yang perlu diisi dulu, tidak ada yang perlu diunggah dulu.
+              Cukup masuk, dan lihat sendiri bagaimana perusahaan Anda mulai punya <em>memori</em>.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
       {/* ── TRILOGI GUSTAFTA — ALUR PIKIR ── */}
       <section className="py-20 px-4 bg-gray-950 text-white overflow-hidden relative" id="trilogi">
         {/* subtle grid bg */}
