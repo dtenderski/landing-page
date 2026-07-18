@@ -2,8 +2,8 @@
  * Ruang Simpan — Company Document Vault API
  * Penyimpanan dokumen perusahaan + otomatis diproses jadi konteks AI.
  *
- * Phase 1: DB storage (bytea), teks diekstrak, di-chunk untuk search.
- * Phase 2 (next): migrasi ke Cloudflare R2.
+ * Phase 2: Replit Object Storage untuk file binary (menggantikan bytea di DB).
+ *          DB hanya menyimpan metadata + extracted text chunks untuk RAG.
  *
  * SECURITY: Zod validation · UUID guard · userId null guard · ownership check
  *           · Rate limiting · Sanitized errors · Audit log · user_id stripped
@@ -14,6 +14,7 @@ import { isAuthenticated } from "./replit_integrations/auth";
 import multer from "multer";
 import { z } from "zod";
 import rateLimit, { ipKeyGenerator } from "express-rate-limit";
+import { uploadFile, downloadFile, deleteFile } from "./lib/object-storage";
 
 // ── Constants ──────────────────────────────────────────────────────────────
 
@@ -312,10 +313,11 @@ export function registerRuangSimpanRoutes(app: Express): void {
          req.file.size, description?.slice(0, 500) || null]
       );
 
-      // 2. Store binary content
+      // 2. Store binary content di Object Storage
+      const storageKey = await uploadFile(userId, file.id, req.file.originalname, req.file.buffer, req.file.mimetype);
       await pool.query(
-        `INSERT INTO ruang_simpan_file_contents (file_id, content) VALUES ($1, $2)`,
-        [file.id, req.file.buffer]
+        `UPDATE ruang_simpan_files SET storage_key = $1 WHERE id = $2`,
+        [storageKey, file.id]
       );
 
       // 3. Extract text + chunk (async — don't block response)
@@ -371,10 +373,15 @@ export function registerRuangSimpanRoutes(app: Express): void {
     if (!userId) return;
     if (!guardUUID(req.params.id, res)) return;
     try {
-      const { rowCount } = await pool.query(
-        `DELETE FROM ruang_simpan_files WHERE id = $1 AND user_id = $2`, [req.params.id, userId]
+      // Ambil storage_key sebelum delete agar bisa hapus dari Object Storage
+      const { rows } = await pool.query(
+        `DELETE FROM ruang_simpan_files WHERE id = $1 AND user_id = $2 RETURNING storage_key`,
+        [req.params.id, userId]
       );
-      if (!rowCount) return res.status(403).json({ error: "File tidak ditemukan atau akses ditolak" });
+      if (!rows.length) return res.status(403).json({ error: "File tidak ditemukan atau akses ditolak" });
+      // Hapus dari Object Storage (fire-and-forget, tidak block response)
+      const { storage_key } = rows[0];
+      if (storage_key) deleteFile(storage_key).catch(console.error);
       res.json({ ok: true });
     } catch (e) { safeErr(res, e, "DELETE files/:id"); }
   });
@@ -386,18 +393,19 @@ export function registerRuangSimpanRoutes(app: Express): void {
     if (!guardUUID(req.params.id, res)) return;
     try {
       const { rows } = await pool.query(
-        `SELECT f.original_name, f.mime_type, c.content
+        `SELECT f.original_name, f.mime_type, f.storage_key
          FROM ruang_simpan_files f
-         JOIN ruang_simpan_file_contents c ON c.file_id = f.id
          WHERE f.id = $1 AND f.user_id = $2`,
         [req.params.id, userId]
       );
       if (!rows.length) return res.status(404).json({ error: "File tidak ditemukan" });
-      const { original_name, mime_type, content } = rows[0];
+      const { original_name, mime_type, storage_key } = rows[0];
+      if (!storage_key) return res.status(410).json({ error: "File tidak tersedia (storage_key kosong)" });
+      const buffer = await downloadFile(storage_key);
       res.setHeader("Content-Type", mime_type);
       res.setHeader("Content-Disposition", `attachment; filename="${encodeURIComponent(original_name)}"`);
       res.setHeader("Cache-Control", "private, no-store");
-      res.send(content);
+      res.send(buffer);
     } catch (e) { safeErr(res, e, "GET files/:id/download"); }
   });
 
@@ -408,18 +416,19 @@ export function registerRuangSimpanRoutes(app: Express): void {
     if (!guardUUID(req.params.id, res)) return;
     try {
       const { rows } = await pool.query(
-        `SELECT f.original_name, f.mime_type, c.content
+        `SELECT f.original_name, f.mime_type, f.storage_key
          FROM ruang_simpan_files f
-         JOIN ruang_simpan_file_contents c ON c.file_id = f.id
          WHERE f.id = $1 AND f.user_id = $2`,
         [req.params.id, userId]
       );
       if (!rows.length) return res.status(404).json({ error: "File tidak ditemukan" });
-      const { original_name, mime_type, content } = rows[0];
+      const { original_name, mime_type, storage_key } = rows[0];
+      if (!storage_key) return res.status(410).json({ error: "File tidak tersedia (storage_key kosong)" });
+      const buffer = await downloadFile(storage_key);
       res.setHeader("Content-Type", mime_type);
       res.setHeader("Content-Disposition", `inline; filename="${encodeURIComponent(original_name)}"`);
       res.setHeader("Cache-Control", "private, max-age=300");
-      res.send(content);
+      res.send(buffer);
     } catch (e) { safeErr(res, e, "GET files/:id/preview"); }
   });
 
