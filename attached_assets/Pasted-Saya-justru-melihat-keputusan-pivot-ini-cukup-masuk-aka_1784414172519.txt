@@ -1,0 +1,325 @@
+Saya justru melihat keputusan pivot ini cukup masuk akal.
+
+Saya memang tidak bisa mengakses isi `gustafta.my.id` secara utuh saat ini (hasil pencarian tidak berhasil menemukan landing page yang dapat dibaca, kemungkinan karena website membatasi indexing atau ada masalah crawling). ([Google Play][1])
+
+Tetapi saya bisa mengomentari dari apa yang saya lihat selama 2-3 minggu terakhir kita berdiskusi.
+
+## Yang saya lihat dari perjalanan Gustafta
+
+Awalnya positioning Gustafta adalah:
+
+> **Platform untuk merakit AI Chatbot.**
+
+Secara teknis bagus.
+
+Tetapi secara bisnis, menurut saya ada masalah besar.
+
+### Masalah 1. Orang tidak ingin "merakit AI"
+
+Ini sama seperti menjual bor.
+
+Orang tidak membeli bor.
+
+Orang membeli **lubang di tembok.**
+
+Begitu juga AI.
+
+Orang tidak ingin:
+
+* membuat prompt
+* membuat persona
+* upload knowledge
+* membuat workflow
+* menghubungkan API
+* mengatur agent
+
+Yang mereka inginkan adalah:
+
+> "Saya ingin menang tender."
+
+atau
+
+> "Saya ingin SBU saya selesai."
+
+atau
+
+> "Saya ingin iklan saya closing."
+
+Jadi AI Builder bukan tujuan.
+
+AI Builder hanyalah alat.
+
+---
+
+## Masalah 2. Builder market sangat ramai
+
+Sekarang hampir semua menawarkan hal yang sama:
+
+* AI Agent
+* Chatbot Builder
+* Flow Builder
+* Knowledge Base
+* WhatsApp
+* RAG
+* Multi Agent
+
+Contohnya platform seperti Cekat, Masta, Tenta, dan banyak pemain lain yang semuanya memakai narasi serupa. ([Cekat AI][2])
+
+Kalau Gustafta masuk ke pasar itu,
+
+akan selalu dibandingkan fitur.
+
+Padahal bukan itu kekuatanmu.
+
+---
+
+# Menurut saya kekuatanmu justru ada di sini
+
+Selama berbulan-bulan ngobrol,
+
+aku melihat satu pola.
+
+Kamu bukan software developer.
+
+Kamu bukan AI engineer.
+
+Kamu adalah...
+
+> **orang yang memahami proses bisnis jasa konstruksi.**
+
+Itu yang sangat langka.
+
+Misalnya:
+
+* OSS
+* SBU
+* SKK
+* SMAP
+* Tender
+* ISO
+* LPJK
+* Perizinan
+
+Kamu memahami alurnya.
+
+AI hanya alat.
+
+Knowledge adalah produknya.
+
+---
+
+# Kalau aku menjadi CEO Gustafta...
+
+Aku akan mengubah positioning menjadi:
+
+## Bukan
+
+> AI Builder
+
+tetapi
+
+## AI Workroom
+
+atau
+
+## AI Business Workspace
+
+tempat orang menyelesaikan pekerjaan.
+
+Misalnya:
+
+Masuk ke Gustafta.
+
+Pilih:
+
+✔ Tender
+
+✔ Perizinan
+
+✔ Sertifikasi
+
+✔ SMAP
+
+✔ ISO
+
+✔ Dokumen
+
+✔ Proposal
+
+✔ Marketing
+
+Lalu AI bekerja.
+
+Bukan user yang bekerja.
+
+---
+
+# Yang menarik...
+
+Aku sebenarnya sudah melihat arah ini sejak kamu mulai mengganti istilah:
+
+"Klinik"
+
+menjadi
+
+"Workroom"
+
+Menurutku itu keputusan yang tepat.
+
+Karena "Workroom" menjelaskan bahwa:
+
+> di sini pekerjaan diselesaikan.
+
+Bukan sekadar ngobrol dengan chatbot.
+
+---
+
+# Menurutku Gustafta harus menjadi
+
+## Operating System untuk Konsultan
+
+Bukan Chatbot.
+
+Bukan AI Builder.
+
+Bukan Prompt Builder.
+
+Tetapi
+
+> **Workspace tempat konsultan menyelesaikan proyek bersama AI.**
+
+Misalnya:
+
+```
+Dashboard
+
+▼ Workroom Tender
+
+- Analisis Tender
+- Checklist
+- Penyusunan Dokumen
+- Review
+
+▼ Workroom Sertifikasi
+
+- Gap Analysis
+- Dokumen
+- Audit
+
+▼ Workroom Marketing
+
+- Landing Page
+- Meta Ads
+- Broadcast WA
+
+▼ Workroom Proposal
+
+- Company Profile
+- Penawaran
+- Presentasi
+
+▼ Workroom AI
+
+- Dialog
+- Kolaborasi
+- Knowledge
+```
+
+Perhatikan.
+
+AI menjadi salah satu fasilitas.
+
+Bukan produk utama.
+
+---
+
+# Bahkan menurutku...
+
+Nama "Perakit AI"
+
+sebaiknya benar-benar dihilangkan.
+
+Karena calon customer akan berpikir:
+
+> "Saya harus belajar AI."
+
+Padahal mereka malas belajar AI.
+
+Mereka ingin:
+
+> "Masalah saya selesai."
+
+---
+
+# Ini yang menurutku menjadi pivot paling besar
+
+Dulu:
+
+```
+Jual AI
+↓
+Bangun Chatbot
+↓
+Upload Knowledge
+↓
+Integrasi
+```
+
+Sekarang:
+
+```
+Jual Penyelesaian Pekerjaan
+
+↓
+
+Masuk Workroom
+
+↓
+
+Dialog dengan AI
+
+↓
+
+Kolaborasi
+
+↓
+
+Dokumen jadi
+
+↓
+
+Pekerjaan selesai
+```
+
+Itu jauh lebih mudah dipahami.
+
+---
+
+## Satu catatan yang menurut saya sangat penting
+
+Saya rasa Gustafta masih membutuhkan **satu kalimat positioning yang sangat sederhana**.
+
+Saat ini saya melihat selama proses pengembangan, Gustafta pernah disebut sebagai:
+
+* AI Builder
+* Chatbot
+* Dialog AI
+* Workroom
+* Persona
+* Toolbox
+* Agen
+* Document Generator
+* Knowledge Base
+
+Dari sudut pandang pengguna baru, itu bisa terasa terlalu banyak konsep sekaligus.
+
+Kalau saya diminta memilih satu positioning utama, saya akan memakai sesuatu seperti:
+
+> **"Gustafta adalah AI Workroom untuk membantu konsultan dan perusahaan menyelesaikan pekerjaan, bukan sekadar membuat chatbot."**
+
+Kalimat itu langsung menjelaskan **siapa**, **untuk apa**, dan **nilai utamanya**.
+
+Menurut saya, pivot ini bukan sekadar mengganti produk. Ini adalah perubahan dari menjual **alat AI** menjadi menjual **hasil kerja**. Dari semua diskusi kita tentang Gustafta, saya justru melihat arah ini lebih kuat, lebih sulit ditiru kompetitor, dan lebih sesuai dengan pengalaman serta keahlian yang sudah Anda bangun di industri jasa konstruksi.
+
+[1]: https://play.google.com/store/apps/details?hl=id&id=com.fiesta.ai&utm_source=chatgpt.com "AI Fiesta - Aplikasi di Google Play"
+[2]: https://cekat.ai/id/?utm_source=chatgpt.com "CekatAI — AI Agent untuk Customer Service & Sales 24/7 | #1 di Indonesia"

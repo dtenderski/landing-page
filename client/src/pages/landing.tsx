@@ -877,11 +877,24 @@ export default function Landing() {
             </div>
           </div>
 
+          {/* Tagline framework */}
+          <div className="flex justify-center gap-2 sm:gap-6 mb-6 flex-wrap">
+            {["Rapikan", "Hubungkan", "Gunakan Kembali"].map((t, i) => (
+              <div key={t} className="flex items-center gap-2">
+                <span className="text-sm font-bold text-slate-700 dark:text-slate-200">{t}</span>
+                {i < 2 && <span className="text-slate-300 dark:text-slate-600 font-light">→</span>}
+              </div>
+            ))}
+          </div>
+
           {/* Penutup narasi */}
           <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl px-8 py-6 text-center">
+            <p className="text-slate-700 dark:text-slate-300 text-sm font-semibold mb-2 italic">
+              "Karena bisnis yang baik tidak bergantung pada ingatan seseorang."
+            </p>
             <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-2xl mx-auto">
               Keduanya gratis untuk dicoba. Tidak ada yang perlu diisi dulu, tidak ada yang perlu diunggah dulu.
-              Cukup masuk, dan lihat sendiri bagaimana perusahaan Anda mulai punya <em>memori</em>.
+              Cukup masuk, dan lihat sendiri bagaimana perusahaan Anda mulai punya <em>Memori Bisnis</em>.
             </p>
           </div>
 

@@ -456,14 +456,14 @@ function EmptyState({ isDragging, onUploadClick, isSearch }: { isDragging: boole
         <Image className="h-8 w-8 text-emerald-400" />
         <FileSpreadsheet className="h-8 w-8 text-green-500" />
       </div>
-      <p className="font-bold text-foreground text-lg mb-1">Upload Dokumen Perusahaan</p>
+      <p className="font-bold text-foreground text-lg mb-1">Tambahkan Pengetahuan ke Memori Bisnis</p>
       <p className="text-sm text-muted-foreground mb-4">Drag & drop atau klik untuk pilih file<br />PDF · DOCX · XLSX · JPG · PNG · TXT · maks 20MB</p>
       <Button size="sm" className="gap-1.5" onClick={e => { e.stopPropagation(); onUploadClick(); }}>
         <Upload className="h-4 w-4" /> Pilih File
       </Button>
       <div className="mt-6 flex items-center justify-center gap-2 text-xs text-muted-foreground">
         <Brain className="h-3.5 w-3.5 text-violet-500" />
-        <span>Dokumen yang diunggah otomatis diproses untuk konteks AI</span>
+        <span>Setiap file yang ditambahkan memperkaya pengetahuan AI tentang perusahaan Anda</span>
       </div>
     </div>
   );
@@ -696,15 +696,18 @@ function RuangSimpanLandingPage() {
             <HardDrive className="h-3.5 w-3.5" /> Ruang Simpan — Beta
           </div>
           <h1 className="text-3xl sm:text-5xl font-black leading-tight mb-4">
-            Bukan sekadar{" "}
-            <span className="line-through opacity-40">Google Drive</span>.<br />
+            Bangun{" "}
             <span className="bg-gradient-to-r from-indigo-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent">
-              Dokumen yang berpikir.
-            </span>
+              Memori Bisnis
+            </span>{" "}
+            perusahaan Anda.
           </h1>
-          <p className="text-indigo-200 text-base sm:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
-            Simpan dokumen perusahaan BUJK Anda — lalu biarkan seluruh fitur AI Gustafta
-            membaca, memahami, dan menggunakannya sebagai konteks secara otomatis.
+          <p className="text-indigo-200 text-base sm:text-lg max-w-2xl mx-auto mb-3 leading-relaxed">
+            Ruang Simpan bukan tempat menyimpan file. Ini adalah tempat AI Gustafta
+            mengenal perusahaan Anda — agar setiap fitur bekerja dengan konteks yang nyata.
+          </p>
+          <p className="text-indigo-400/80 text-sm max-w-xl mx-auto mb-8 italic">
+            "Karena bisnis yang baik tidak bergantung pada ingatan seseorang."
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/masuk">
@@ -785,12 +788,13 @@ function RuangSimpanLandingPage() {
       {/* ── CARA KERJA ───────────────────────────────────────────────────────── */}
       <section className="py-16 px-4 max-w-4xl mx-auto">
         <p className="text-center text-xs font-bold uppercase tracking-widest text-indigo-500 mb-2">Cara Kerja</p>
-        <h2 className="text-center text-2xl font-bold text-foreground mb-10">3 langkah — dokumen Anda jadi cerdas</h2>
+        <h2 className="text-center text-2xl font-bold text-foreground mb-2">Rapikan. Hubungkan. Gunakan Kembali.</h2>
+        <p className="text-center text-sm text-muted-foreground mb-10 max-w-xl mx-auto">Tiga langkah yang mengubah dokumen yang berserakan menjadi pengetahuan yang bekerja untuk Anda.</p>
         <div className="grid sm:grid-cols-3 gap-6">
           {[
-            { step: "1", icon: Upload, title: "Upload Dokumen", desc: "Drag & drop PDF, DOCX, XLSX, JPG, atau PNG ke folder perusahaan Anda. Maks 20 MB per file.", color: "text-blue-600 bg-blue-100 dark:bg-blue-900/30" },
-            { step: "2", icon: BrainCircuit, title: "AI Proses Otomatis", desc: "Gustafta mengekstrak teks, memotong jadi chunk, dan mengindeks isi dokumen dalam menit.", color: "text-violet-600 bg-violet-100 dark:bg-violet-900/30" },
-            { step: "3", icon: Sparkles, title: "Gunakan di Semua Fitur", desc: "Buka Klinik, Bedah Dokumen, Brain Project — AI langsung punya konteks dari dokumen Anda.", color: "text-emerald-600 bg-emerald-100 dark:bg-emerald-900/30" },
+            { step: "1", icon: Upload, title: "Tambahkan Pengetahuan", desc: "Drag & drop PDF, DOCX, XLSX, foto scan, atau PNG. Anda sedang mengisi Memori Bisnis perusahaan, bukan sekadar upload file.", color: "text-blue-600 bg-blue-100 dark:bg-blue-900/30" },
+            { step: "2", icon: BrainCircuit, title: "AI Memahami & Menghubungkan", desc: "Gustafta membaca isi dokumen, mengindeks maknanya, dan menghubungkannya ke seluruh konteks perusahaan Anda.", color: "text-violet-600 bg-violet-100 dark:bg-violet-900/30" },
+            { step: "3", icon: Sparkles, title: "Gunakan di Semua Workroom", desc: "Buka Klinik, Bedah Dokumen, Brain Project — AI langsung punya konteks. Anda tidak perlu upload ulang.", color: "text-emerald-600 bg-emerald-100 dark:bg-emerald-900/30" },
           ].map(({ step, icon: Icon, title, desc, color }) => (
             <div key={step} className="relative text-center bg-white dark:bg-card border border-border rounded-2xl p-6">
               <div className={`w-12 h-12 rounded-xl ${color} flex items-center justify-center mx-auto mb-4`}>

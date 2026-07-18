@@ -1,0 +1,460 @@
+Terima kasih. Justru saya senang kita kembali "membumi", karena menurut saya **visi besar hanya berguna jika bisa dieksekusi menjadi produk yang dipakai orang minggu depan**.
+
+Kalau saya menjadi Chief Product Officer Gustafta, saya justru akan **melupakan dulu istilah Business Graph, Intelligence, bahkan AI Agent**.
+
+Saya akan bertanya satu hal:
+
+> **"Apa alasan pertama seseorang mau memasukkan dokumen perusahaannya ke Gustafta?"**
+
+Kalau kita tidak bisa menjawab itu, maka Business Memory akan menjadi gudang kosong.
+
+---
+
+# Kesalahan yang sering terjadi
+
+Banyak startup berpikir seperti ini:
+
+```text
+Buat fitur upload
+
+↓
+
+Orang upload
+
+↓
+
+AI bekerja
+```
+
+Padahal kenyataannya:
+
+```text
+"Buat apa saya upload 2.000 dokumen?"
+```
+
+Itu pekerjaan berat.
+
+---
+
+# Maka saya mengubah urutannya
+
+Saya tidak menjual Memory.
+
+Saya menjual
+
+## Immediate Value
+
+Orang harus mendapat manfaat dalam 10 menit.
+
+Misalnya.
+
+Upload Company Profile.
+
+↓
+
+AI langsung membuat Landing Page.
+
+↓
+
+User berkata
+
+"Wah..."
+
+Barulah dia upload dokumen lain.
+
+---
+
+# Jadi Business Memory dibangun sedikit demi sedikit
+
+Bukan sekaligus.
+
+Misalnya.
+
+Hari pertama.
+
+Upload
+
+* Company Profile
+
+AI menghasilkan
+
+* Landing Page
+* Profil Perusahaan
+* Company Overview
+
+User senang.
+
+---
+
+Hari kedua.
+
+Upload
+
+* Sertifikat
+
+AI menghasilkan
+
+Checklist Sertifikasi.
+
+---
+
+Hari ketiga.
+
+Upload
+
+* Proposal lama
+
+AI menghasilkan
+
+Proposal baru.
+
+---
+
+Hari keempat.
+
+Upload
+
+Foto proyek.
+
+AI menghasilkan
+
+Portofolio.
+
+---
+
+Perhatikan.
+
+Memory bertambah karena user mendapatkan hasil.
+
+Bukan karena diminta upload.
+
+---
+
+# Maka saya mengubah slogan
+
+Bukan
+
+> Bangun Business Memory.
+
+Tetapi
+
+> **Selesaikan pekerjaan. Business Memory akan terbentuk otomatis.**
+
+Menurut saya ini jauh lebih kuat.
+
+---
+
+# Saya bahkan menghilangkan menu Upload
+
+Saya lebih suka seperti ini.
+
+Misalnya di Workroom Tender.
+
+AI berkata.
+
+> Agar saya bisa membantu membuat dokumen tender, kirim Company Profile Anda.
+
+Upload.
+
+Selesai.
+
+Memory bertambah.
+
+---
+
+Besok.
+
+> Agar saya bisa membuat Personel Inti, kirim SKK.
+
+Upload.
+
+Memory bertambah.
+
+---
+
+Lusa.
+
+> Agar saya bisa menyusun pengalaman perusahaan, kirim BAST.
+
+Upload.
+
+Memory bertambah.
+
+---
+
+Tanpa sadar.
+
+Business Memory sudah berisi 500 dokumen.
+
+---
+
+# Jadi Memory bukan produk pertama
+
+Tetapi
+
+Efek samping yang positif.
+
+Ini menurut saya sangat penting.
+
+---
+
+# Roadmap yang saya buat
+
+## Fase 1
+
+### Capture
+
+Mengumpulkan.
+
+Belum pintar.
+
+Misalnya.
+
+```text
+Upload
+
+↓
+
+OCR
+
+↓
+
+Index
+
+↓
+
+Tagging
+
+↓
+
+Search
+```
+
+Selesai.
+
+---
+
+## Fase 2
+
+### Understand
+
+AI memahami.
+
+Misalnya.
+
+Kontrak ini milik Proyek A.
+
+---
+
+## Fase 3
+
+### Connect
+
+Menghubungkan.
+
+Misalnya.
+
+Proyek A
+
+↓
+
+Tenaga Ahli
+
+↓
+
+SKK
+
+↓
+
+Invoice
+
+↓
+
+BAST
+
+↓
+
+Foto
+
+---
+
+## Fase 4
+
+### Execute
+
+AI bekerja.
+
+Misalnya.
+
+"Buat Dokumen Tender."
+
+AI mengambil sendiri.
+
+---
+
+# Saya justru melihat pintu masuknya bukan Business Memory
+
+Tetapi
+
+## Workroom
+
+Misalnya.
+
+User masuk
+
+Workroom Tender.
+
+AI berkata.
+
+```text
+Saya bisa membantu.
+
+Agar hasilnya lebih akurat.
+
+Mohon kirim:
+
+✓ Company Profile
+
+✓ Pengalaman
+
+✓ SKK
+
+✓ Sertifikat
+```
+
+Upload.
+
+Memory bertambah.
+
+---
+
+Workroom Marketing.
+
+AI berkata.
+
+```text
+Agar saya bisa membuat iklan.
+
+Mohon kirim:
+
+Logo
+
+Foto
+
+Company Profile
+
+Portofolio
+```
+
+Upload.
+
+Memory bertambah.
+
+---
+
+# Jadi semua Workroom menjadi mesin pengumpul Memory.
+
+Menurut saya ini sangat elegan.
+
+---
+
+# Saya bahkan tidak akan memberi nama "Upload Dokumen"
+
+Saya memberi nama
+
+## Tambahkan Pengetahuan
+
+Karena yang bertambah bukan file.
+
+Tetapi kemampuan AI.
+
+---
+
+# Strategi bisnisnya bagaimana?
+
+Di sinilah menurut saya Gustafta punya peluang yang sangat besar.
+
+Saya akan membagi produk menjadi tiga lapis.
+
+## 1. Produk Gratis → AI Assistant
+
+Masuk.
+
+Chat.
+
+Bertanya.
+
+Tidak perlu upload apa pun.
+
+Tujuannya hanya membuat orang mengenal Gustafta.
+
+---
+
+## 2. Produk Berbayar → Workroom
+
+Misalnya.
+
+Workroom Tender.
+
+Di sinilah user mulai mengunggah dokumen karena ingin menyelesaikan pekerjaan.
+
+Memory mulai terbentuk.
+
+---
+
+## 3. Produk Premium → Business Memory
+
+Pada tahap ini, perusahaan mulai merasakan bahwa semua Workroom bekerja lebih cepat karena AI sudah mengenal perusahaannya.
+
+Yang dijual bukan lagi fitur, tetapi **efisiensi dan kontinuitas**.
+
+---
+
+# Namun menurut saya ada satu perubahan paradigma yang akan membuat adopsi jauh lebih tinggi.
+
+Saya tidak akan memasarkan **Business Memory** sebagai produk pertama.
+
+Saya akan memasarkan **Business Identity**.
+
+Bayangkan proses onboarding seperti ini:
+
+### Langkah 1 — Kenali Perusahaan Anda
+
+Isi profil dasar:
+
+* Nama perusahaan
+* NIB
+* Bidang usaha
+* Layanan
+* Wilayah kerja
+
+### Langkah 2 — Bangun Identitas
+
+Unggah:
+
+* Company Profile
+* Logo
+* Sertifikat
+* Portofolio
+
+### Langkah 3 — AI Siap Bekerja
+
+Seketika Workroom Tender, Marketing, atau Sertifikasi bisa langsung memanfaatkan data tersebut.
+
+Di belakang layar, semua itu disimpan dalam Business Memory.
+
+Dari sudut pandang pengguna, mereka sedang **membangun identitas digital perusahaan**, bukan "mengisi database". Secara psikologis ini jauh lebih menarik, karena identitas adalah sesuatu yang mereka banggakan, sedangkan database terasa seperti pekerjaan administratif.
+
+## Kalau saya menyusun roadmap 90 hari pertama, saya bahkan akan fokus hanya pada satu tujuan:
+
+> **Buat setiap pengguna mengunggah Company Profile dan Portofolio pertama mereka.**
+
+Jangan mengejar 10.000 dokumen.
+
+Kejar **10 dokumen yang paling bernilai**.
+
+Karena jika 10 dokumen itu sudah menghasilkan proposal, landing page, analisis tender, dan materi marketing yang bagus, pengguna akan dengan sendirinya berkata:
+
+> "Kalau saya tambahkan dokumen lain, hasil AI pasti semakin bagus."
+
+Di situlah Business Memory akan tumbuh secara organik, dan setiap Workroom menjadi alasan baru untuk terus memperkayanya. Menurut saya, itu adalah strategi eksekusi yang jauh lebih realistis daripada meminta pengguna membangun Business Memory sejak hari pertama.

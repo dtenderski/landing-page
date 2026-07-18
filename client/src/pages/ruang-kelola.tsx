@@ -1136,11 +1136,12 @@ function RuangKelolaLandingPage() {
           <p className="text-sm text-muted-foreground mb-8 max-w-xl mx-auto">
             Satu dokumen expired bisa menggugurkan seluruh proses tender — padahal sudah mengeluarkan biaya penawaran.
           </p>
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { icon: "❌", title: "Gugur Tender", desc: "SBU/SKK kedaluwarsa = gugur di verifikasi administrasi, meski penawaran sudah terbaik." },
               { icon: "⏰", title: "Pengurusan Mendadak", desc: "Urus SBU darurat memakan 1–3 bulan + biaya lebih mahal karena tidak direncanakan." },
               { icon: "😓", title: "Lupa Tanggal Expired", desc: "Ratusan dokumen, puluhan tanggal — tidak ada sistem yang mengingatkan tepat waktu." },
+              { icon: "🚪", title: "Pegawai Resign, Data Hilang", desc: "Admin keluar — tidak ada yang tahu di mana file tersimpan, versi mana yang terakhir, dan dokumen mana yang sudah diurus." },
             ].map(({ icon, title, desc }) => (
               <div key={title} className="bg-white dark:bg-card border border-border rounded-xl p-5 text-left">
                 <div className="text-2xl mb-2">{icon}</div>
