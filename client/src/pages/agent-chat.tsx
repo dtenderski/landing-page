@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Send, Bot, User, Loader2, ArrowLeft, Share2, Mic, MicOff, Volume2, VolumeX, Paperclip, X, FileText, Image as ImageIcon, Music, Video, File, Copy, Check, ThumbsUp, ThumbsDown, Download, Trash2, Globe, Code, MessageCircle, PlayCircle, Sparkles, Zap, Languages, Shield, Smartphone, ClipboardList, Target, Phone, Calendar, ExternalLink, CheckCircle, Calculator, ListChecks, Wand2, ChevronUp, FileOutput, Hash, Pencil, CornerDownLeft, Link2, FileDown, FileCode2, Bookmark, BookmarkCheck, Search, SearchX, ChevronDown, ChevronUp as ChevronUpIcon, Database } from "lucide-react";
-import { SiWhatsapp, SiTelegram, SiDiscord, SiSlack } from "react-icons/si";
+import { SiWhatsapp, SiTelegram, SiDiscord, SiSlackware } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -242,7 +242,7 @@ const channelMeta: Record<string, { icon: any; label: string; color: string; bgC
   whatsapp: { icon: SiWhatsapp, label: "WhatsApp", color: "text-green-600 dark:text-green-400", bgColor: "bg-green-500/10" },
   telegram: { icon: SiTelegram, label: "Telegram", color: "text-blue-500 dark:text-blue-400", bgColor: "bg-blue-500/10" },
   discord: { icon: SiDiscord, label: "Discord", color: "text-indigo-500 dark:text-indigo-400", bgColor: "bg-indigo-500/10" },
-  slack: { icon: SiSlack, label: "Slack", color: "text-purple-600 dark:text-purple-400", bgColor: "bg-purple-500/10" },
+  slack: { icon: SiSlackware, label: "Slack", color: "text-purple-600 dark:text-purple-400", bgColor: "bg-purple-500/10" },
   web: { icon: Globe, label: "Web Widget", color: "text-cyan-600 dark:text-cyan-400", bgColor: "bg-cyan-500/10" },
   api: { icon: Code, label: "REST API", color: "text-orange-600 dark:text-orange-400", bgColor: "bg-orange-500/10" },
 };

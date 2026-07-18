@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { useIntegrations, useCreateIntegration, useUpdateIntegration } from "@/hooks/use-integrations";
-import { SiWhatsapp, SiTelegram, SiDiscord, SiSlack } from "react-icons/si";
+import { SiWhatsapp, SiTelegram, SiDiscord, SiSlackware } from "react-icons/si";
 import type { Agent, Integration } from "@shared/schema";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useMutation } from "@tanstack/react-query";
@@ -55,7 +55,7 @@ const integrationTypes = [
     type: "slack" as const,
     name: "Slack",
     description: "Integrate with Slack workspaces",
-    icon: SiSlack,
+    icon: SiSlackware,
     color: "text-purple-500",
     bgColor: "bg-purple-500/10",
   },
