@@ -15,9 +15,11 @@ import {
   ClipboardList, Plus, Pencil, Trash2, AlertTriangle,
   CheckCircle2, Clock, Building2, FileText, Shield,
   Award, BarChart3, ChevronRight, Loader2, X, LogIn,
-  Bell, CalendarDays, Search, RefreshCw,
+  Bell, Search, RefreshCw, ScanLine, Upload, Sparkles,
+  PhoneCall, Send,
 } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
+import { useRef } from "react";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 type Category = "semua" | "legalitas" | "sbu" | "skk" | "perizinan" | "tender";
@@ -162,6 +164,8 @@ export default function RuangKelolaPage() {
   const [showProfileForm, setShowProfileForm] = useState(false);
   const [showDocForm, setShowDocForm] = useState(false);
   const [editDoc, setEditDoc] = useState<RKDocument | null>(null);
+  const [showBiroDialog, setShowBiroDialog] = useState(false);
+  const [biroDoc, setBiroDoc] = useState<RKDocument | null>(null);
 
   // ── Queries ────────────────────────────────────────────────────────────
   const { data: profile, isLoading: profileLoading } = useQuery<RKProfile | null>({
@@ -473,18 +477,18 @@ export default function RuangKelolaPage() {
           </div>
         )}
 
-        {/* ── Expiry alerts ── */}
+        {/* ── Expiry alerts + Biro Jasa CTA ── */}
         {filteredDocs.some(d => d.status === "expiring_soon" || d.status === "expired") && (
           <div className="mt-4 space-y-2">
             {filteredDocs
               .filter(d => d.status === "expired" || d.status === "expiring_soon")
-              .slice(0, 5)
+              .slice(0, 8)
               .map(doc => {
                 const days = daysUntilExpiry(doc.expired_date);
                 const isExpired = doc.status === "expired";
                 return (
                   <div key={doc.id + "-alert"}
-                    className={`flex items-center gap-3 px-4 py-2.5 rounded-xl border text-sm
+                    className={`flex flex-wrap items-center gap-3 px-4 py-2.5 rounded-xl border text-sm
                     ${isExpired
                       ? "bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800 text-red-700 dark:text-red-400"
                       : "bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 text-amber-700 dark:text-amber-400"
@@ -495,13 +499,42 @@ export default function RuangKelolaPage() {
                     <span className="text-xs">
                       {isExpired ? `Kedaluwarsa ${formatDate(doc.expired_date)}` : `Berakhir ${days} hari lagi (${formatDate(doc.expired_date)})`}
                     </span>
-                    <button onClick={() => { setEditDoc(doc); setShowDocForm(true); }}
-                      className="ml-auto text-xs underline underline-offset-2 hover:no-underline">
-                      Perbarui
-                    </button>
+                    <div className="ml-auto flex items-center gap-2">
+                      <button onClick={() => { setEditDoc(doc); setShowDocForm(true); }}
+                        className="text-xs underline underline-offset-2 hover:no-underline">
+                        Perbarui
+                      </button>
+                      <button
+                        onClick={() => { setBiroDoc(doc); setShowBiroDialog(true); }}
+                        className="flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded-md bg-white/60 dark:bg-white/10 border border-current hover:bg-white dark:hover:bg-white/20 transition-colors"
+                      >
+                        <PhoneCall className="h-3 w-3" /> Biro Jasa
+                      </button>
+                    </div>
                   </div>
                 );
               })}
+          </div>
+        )}
+
+        {/* ── Biro Jasa Banner (jika ada dokumen bermasalah) ── */}
+        {(totals.total_expired > 0 || totals.total_expiring_soon > 0) && (
+          <div className="mt-5 bg-gradient-to-r from-violet-600 to-blue-600 text-white rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-1">
+                <Sparkles className="h-4 w-4 text-yellow-300" />
+                <span className="text-xs font-bold uppercase tracking-widest text-violet-200">Layanan Biro Jasa</span>
+              </div>
+              <p className="font-bold text-lg leading-tight">Urus dokumen tanpa ribet — serahkan ke tim Gustafta.</p>
+              <p className="text-violet-200 text-sm mt-0.5">SBU, SKK, NIB, BUJK, perizinan lingkungan, dan lainnya. Anda fokus di proyek, kami yang urus administrasinya.</p>
+            </div>
+            <Button
+              size="sm"
+              className="bg-white text-violet-700 hover:bg-violet-50 font-bold gap-1.5 shrink-0"
+              onClick={() => { setBiroDoc(null); setShowBiroDialog(true); }}
+            >
+              <Send className="h-3.5 w-3.5" /> Ajukan Sekarang
+            </Button>
           </div>
         )}
       </div>
@@ -529,6 +562,14 @@ export default function RuangKelolaPage() {
           }
         }}
         isSaving={createDoc.isPending || updateDoc.isPending}
+      />
+
+      {/* ── Biro Jasa Dialog ── */}
+      <BiroJasaDialog
+        open={showBiroDialog}
+        onClose={() => { setShowBiroDialog(false); setBiroDoc(null); }}
+        doc={biroDoc}
+        companyName={profile?.company_name}
       />
     </div>
   );
@@ -646,6 +687,7 @@ function DocFormDialog({ open, onClose, doc, defaultCategory, onSave, isSaving }
   onSave: (data: any) => void;
   isSaving: boolean;
 }) {
+  const { toast } = useToast();
   const emptyForm = {
     category: defaultCategory || "legalitas",
     doc_type: "",
@@ -658,8 +700,12 @@ function DocFormDialog({ open, onClose, doc, defaultCategory, onSave, isSaving }
     notes: "",
   };
   const [form, setForm] = useState(emptyForm);
+  const [ocrLoading, setOcrLoading] = useState(false);
+  const [ocrResult, setOcrResult] = useState<{ confidence: string; filename: string } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    if (open) setOcrResult(null);
     if (doc) {
       setForm({
         category: doc.category,
@@ -688,6 +734,37 @@ function DocFormDialog({ open, onClose, doc, defaultCategory, onSave, isSaving }
     { value: "cancelled",   label: "Dibatalkan" },
   ];
 
+  const handleOcrUpload = async (file: File) => {
+    setOcrLoading(true);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      const res = await fetch("/api/ruang-kelola/ocr", { method: "POST", body: fd });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || "OCR gagal");
+      const d = json.data;
+      // Merge OCR results into form — only overwrite non-empty fields
+      setForm(prev => ({
+        ...prev,
+        doc_name:    d.doc_name    || prev.doc_name,
+        doc_number:  d.doc_number  || prev.doc_number,
+        issued_by:   d.issued_by   || prev.issued_by,
+        issued_date: d.issued_date || prev.issued_date,
+        expired_date:d.expired_date|| prev.expired_date,
+        category:    (d.detected_category && d.detected_category !== "tender") ? d.detected_category : prev.category,
+        notes:       d.notes ? (prev.notes ? prev.notes + "\n" + d.notes : d.notes) : prev.notes,
+        // map doc_type to closest option
+        doc_type:    d.doc_type    || prev.doc_type,
+      }));
+      setOcrResult({ confidence: d.confidence, filename: file.name });
+      toast({ title: `OCR selesai (${d.confidence} confidence)`, description: "Field terisi otomatis dari dokumen. Periksa dan sesuaikan jika perlu." });
+    } catch (err: any) {
+      toast({ title: "Gagal scan dokumen", description: err.message, variant: "destructive" });
+    } finally {
+      setOcrLoading(false);
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={v => !v && onClose()}>
       <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
@@ -698,13 +775,69 @@ function DocFormDialog({ open, onClose, doc, defaultCategory, onSave, isSaving }
           </DialogTitle>
         </DialogHeader>
         <div className="space-y-3 py-2">
+
+          {/* ── OCR Upload Area (only for new doc) ── */}
+          {!doc && (
+            <div
+              className={`relative border-2 border-dashed rounded-xl p-4 text-center cursor-pointer transition-colors
+                ${ocrLoading ? "border-blue-400 bg-blue-50 dark:bg-blue-950/20" : ocrResult ? "border-emerald-400 bg-emerald-50 dark:bg-emerald-950/20" : "border-border hover:border-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-950/10"}`}
+              onClick={() => !ocrLoading && fileInputRef.current?.click()}
+            >
+              <input
+                ref={fileInputRef}
+                type="file"
+                className="hidden"
+                accept="image/jpeg,image/png,image/webp,application/pdf"
+                onChange={e => {
+                  const file = e.target.files?.[0];
+                  if (file) handleOcrUpload(file);
+                  e.target.value = "";
+                }}
+              />
+              {ocrLoading ? (
+                <div className="flex flex-col items-center gap-2 py-1">
+                  <Loader2 className="h-6 w-6 animate-spin text-blue-500" />
+                  <p className="text-sm font-medium text-blue-600">Gemini sedang membaca dokumen…</p>
+                </div>
+              ) : ocrResult ? (
+                <div className="flex items-center gap-3 text-left">
+                  <div className="bg-emerald-100 dark:bg-emerald-900/30 rounded-lg p-2">
+                    <ScanLine className="h-5 w-5 text-emerald-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-400">Field terisi dari dokumen</p>
+                    <p className="text-xs text-muted-foreground truncate">{ocrResult.filename}</p>
+                  </div>
+                  <Badge className={`text-xs shrink-0
+                    ${ocrResult.confidence === "high" ? "bg-emerald-100 text-emerald-700" :
+                      ocrResult.confidence === "medium" ? "bg-amber-100 text-amber-700" : "bg-gray-100 text-gray-600"}`}>
+                    {ocrResult.confidence === "high" ? "✓ Akurat" : ocrResult.confidence === "medium" ? "~ Sedang" : "? Rendah"}
+                  </Badge>
+                  <button onClick={e => { e.stopPropagation(); setOcrResult(null); fileInputRef.current?.click(); }}
+                    className="text-xs text-muted-foreground hover:text-foreground underline shrink-0">
+                    Ganti
+                  </button>
+                </div>
+              ) : (
+                <div className="flex flex-col items-center gap-1.5 py-1">
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <Upload className="h-4 w-4" />
+                    <ScanLine className="h-4 w-4" />
+                    <Sparkles className="h-4 w-4 text-violet-500" />
+                  </div>
+                  <p className="text-sm font-semibold text-foreground">Scan Dokumen (OCR)</p>
+                  <p className="text-xs text-muted-foreground">Upload foto/PDF → Gemini Vision mengisi form otomatis</p>
+                  <p className="text-[10px] text-muted-foreground/60">JPG · PNG · WEBP · PDF · maks 8MB</p>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Category */}
           <div className="grid gap-1.5">
             <Label>Kategori *</Label>
             <Select value={form.category} onValueChange={v => setForm(p => ({ ...p, category: v, doc_type: "", doc_name: "" }))}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
+              <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
                 {CATEGORIES.filter(c => c.key !== "semua").map(c => (
                   <SelectItem key={c.key} value={c.key}>{c.label}</SelectItem>
@@ -717,9 +850,7 @@ function DocFormDialog({ open, onClose, doc, defaultCategory, onSave, isSaving }
           <div className="grid gap-1.5">
             <Label>Jenis Dokumen *</Label>
             <Select value={form.doc_type} onValueChange={v => f("doc_type")(v)}>
-              <SelectTrigger>
-                <SelectValue placeholder="Pilih jenis" />
-              </SelectTrigger>
+              <SelectTrigger><SelectValue placeholder="Pilih jenis" /></SelectTrigger>
               <SelectContent>
                 {availableTypes.map(t => <SelectItem key={t} value={t}>{t}</SelectItem>)}
               </SelectContent>
@@ -767,7 +898,7 @@ function DocFormDialog({ open, onClose, doc, defaultCategory, onSave, isSaving }
             </div>
           </div>
 
-          {/* Status (for tender: manual) */}
+          {/* Status tender */}
           {isTender && (
             <div className="grid gap-1.5">
               <Label>Status Tender</Label>
@@ -797,6 +928,153 @@ function DocFormDialog({ open, onClose, doc, defaultCategory, onSave, isSaving }
             {doc ? "Simpan Perubahan" : "Tambah Dokumen"}
           </Button>
         </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+// ── Biro Jasa Dialog ───────────────────────────────────────────────────────
+const BIRO_SERVICES = [
+  "Pengurusan SBU (Sertifikat Badan Usaha)",
+  "Pengurusan SKK / Sertifikasi Kompetensi",
+  "Pengurusan NIB / BUJK",
+  "Pengurusan Perizinan Lingkungan",
+  "Perpanjangan SBU / SKK yang Kedaluwarsa",
+  "Pengurusan ISO 9001 / 14001 / 45001",
+  "Pengurusan IMB / PBG",
+  "Konsultasi & Bimbingan Tender",
+  "Lainnya",
+];
+
+function BiroJasaDialog({ open, onClose, doc, companyName }: {
+  open: boolean; onClose: () => void;
+  doc?: RKDocument | null;
+  companyName?: string;
+}) {
+  const { toast } = useToast();
+  const [serviceType, setServiceType] = useState("");
+  const [notes, setNotes] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      setSubmitted(false);
+      setNotes("");
+      if (doc) {
+        setServiceType(`Perpanjangan ${doc.doc_type}`);
+      } else {
+        setServiceType("");
+      }
+    }
+  }, [open, doc]);
+
+  const handleSubmit = async () => {
+    if (!serviceType) return;
+    setLoading(true);
+    try {
+      const res = await apiRequest("POST", "/api/ruang-kelola/biro-request", {
+        doc_id: doc?.id || null,
+        service_type: serviceType,
+        notes,
+      });
+      if (!res.ok) throw new Error("Gagal mengirim permintaan");
+      setSubmitted(true);
+    } catch (err: any) {
+      toast({ title: "Gagal mengirim permintaan", description: err.message, variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // WA direct link as alternative
+  const waMessage = encodeURIComponent(
+    `Halo Gustafta! Saya membutuhkan bantuan biro jasa:\n` +
+    `📋 Layanan: ${serviceType || "Biro Jasa"}\n` +
+    (doc ? `📄 Dokumen: ${doc.doc_name} (${doc.doc_type})\n` : "") +
+    (companyName ? `🏢 Perusahaan: ${companyName}\n` : "") +
+    (notes ? `💬 Catatan: ${notes}\n` : "") +
+    `\nMohon info lebih lanjut. Terima kasih!`
+  );
+  const waUrl = `https://wa.me/6282299417818?text=${waMessage}`;
+
+  return (
+    <Dialog open={open} onOpenChange={v => !v && onClose()}>
+      <DialogContent className="max-w-md">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
+            <Sparkles className="h-5 w-5 text-violet-600" />
+            Ajukan ke Biro Jasa Gustafta
+          </DialogTitle>
+        </DialogHeader>
+
+        {submitted ? (
+          <div className="py-6 text-center space-y-3">
+            <div className="w-14 h-14 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mx-auto">
+              <CheckCircle2 className="h-7 w-7 text-emerald-600" />
+            </div>
+            <p className="font-bold text-lg">Permintaan Terkirim!</p>
+            <p className="text-sm text-muted-foreground">
+              Tim Gustafta akan menghubungi Anda dalam waktu 1×24 jam melalui WhatsApp.
+            </p>
+            <div className="pt-2 flex gap-2 justify-center">
+              <Button variant="outline" onClick={onClose}>Tutup</Button>
+              <a href={waUrl} target="_blank" rel="noopener noreferrer">
+                <Button className="gap-1.5 bg-green-600 hover:bg-green-500 text-white">
+                  <PhoneCall className="h-4 w-4" /> Chat Langsung di WA
+                </Button>
+              </a>
+            </div>
+          </div>
+        ) : (
+          <>
+            <div className="space-y-4 py-2">
+              {doc && (
+                <div className="bg-muted/50 rounded-xl p-3 text-sm">
+                  <p className="text-xs text-muted-foreground mb-0.5">Dokumen yang diajukan:</p>
+                  <p className="font-semibold">{doc.doc_name}</p>
+                  <p className="text-xs text-muted-foreground">{doc.doc_type} · {statusBadge(doc.status)}</p>
+                </div>
+              )}
+              <div className="grid gap-1.5">
+                <Label>Jenis Layanan yang Dibutuhkan *</Label>
+                <Select value={serviceType} onValueChange={setServiceType}>
+                  <SelectTrigger><SelectValue placeholder="Pilih layanan..." /></SelectTrigger>
+                  <SelectContent>
+                    {BIRO_SERVICES.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid gap-1.5">
+                <Label>Keterangan Tambahan</Label>
+                <Textarea
+                  value={notes}
+                  onChange={e => setNotes(e.target.value)}
+                  placeholder="Ceritakan kebutuhan Anda secara singkat — dokumen yang perlu diurus, deadline, atau pertanyaan khusus..."
+                  rows={3}
+                />
+              </div>
+              <p className="text-xs text-muted-foreground bg-blue-50 dark:bg-blue-950/20 rounded-lg px-3 py-2">
+                💡 Tim akan menghubungi Anda via WhatsApp untuk konsultasi dan estimasi biaya. Tidak ada biaya di tahap ini.
+              </p>
+            </div>
+            <DialogFooter className="gap-2 flex-col sm:flex-row">
+              <a href={waUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                <Button variant="outline" className="w-full gap-1.5 text-green-700 border-green-300 hover:bg-green-50">
+                  <PhoneCall className="h-3.5 w-3.5" /> Via WA Langsung
+                </Button>
+              </a>
+              <Button
+                onClick={handleSubmit}
+                disabled={!serviceType || loading}
+                className="gap-1.5"
+              >
+                {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+                Kirim Permintaan
+              </Button>
+            </DialogFooter>
+          </>
+        )}
       </DialogContent>
     </Dialog>
   );
