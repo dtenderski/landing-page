@@ -755,8 +755,10 @@ function UploadZone({ onUploaded, isFree, docCount }: {
       return;
     }
     const ext = file.name.toLowerCase();
-    if (!ext.endsWith(".pdf") && !ext.endsWith(".txt")) {
-      toast({ title: "Format tidak didukung", description: "Gunakan file PDF atau TXT.", variant: "destructive" });
+    const isAllowed = [".pdf", ".txt", ".jpg", ".jpeg", ".png", ".webp"]
+      .some(e => ext.endsWith(e));
+    if (!isAllowed) {
+      toast({ title: "Format tidak didukung", description: "Gunakan PDF, gambar teknis (JPG/PNG/WEBP), atau TXT.", variant: "destructive" });
       return;
     }
     setUploading(true);
@@ -802,7 +804,7 @@ function UploadZone({ onUploaded, isFree, docCount }: {
       onDrop={onDrop}
       onClick={() => inputRef.current?.click()}
     >
-      <input ref={inputRef} type="file" accept=".pdf,.txt" className="hidden" onChange={onInputChange} />
+      <input ref={inputRef} type="file" accept=".pdf,.txt,.jpg,.jpeg,.png,.webp" className="hidden" onChange={onInputChange} />
       {uploading ? (
         <div className="flex flex-col items-center gap-3">
           <Loader2 className="h-10 w-10 animate-spin text-primary" />
@@ -815,10 +817,10 @@ function UploadZone({ onUploaded, isFree, docCount }: {
           </div>
           <div>
             <p className="font-semibold">Seret file ke sini atau klik untuk pilih</p>
-            <p className="text-sm text-muted-foreground mt-1">PDF atau TXT • Maks. 50 MB</p>
+            <p className="text-sm text-muted-foreground mt-1">PDF · Gambar Teknis (JPG/PNG) · TXT • Maks. 50 MB</p>
           </div>
           <div className="flex gap-2 text-xs text-muted-foreground flex-wrap justify-center">
-            {["📋 Dokumen Tender", "🏗️ SKK/SBU", "📜 Kontrak"].map(t => (
+            {["📋 Dokumen Tender", "🏗️ SKK/SBU", "📜 Kontrak", "📐 Gambar Teknis"].map(t => (
               <span key={t} className="bg-muted/60 rounded-full px-2.5 py-1 border border-border/50">{t}</span>
             ))}
           </div>

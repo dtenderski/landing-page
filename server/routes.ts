@@ -3523,8 +3523,10 @@ SKK berlaku 5 tahun. Perpanjangan via: Pengembangan Keprofesian Berkelanjutan (P
       if (!req.file) return res.status(400).json({ error: "File tidak ditemukan" });
 
       const ext = path.extname(req.file.originalname).toLowerCase();
-      if (![".pdf", ".txt"].includes(ext)) {
-        return res.status(400).json({ error: "Format tidak didukung. Gunakan PDF atau TXT." });
+      const IMAGE_EXTS = [".jpg", ".jpeg", ".png", ".webp"];
+      const ALLOWED_BD_EXTS = [".pdf", ".txt", ...IMAGE_EXTS];
+      if (!ALLOWED_BD_EXTS.includes(ext)) {
+        return res.status(400).json({ error: "Format tidak didukung. Gunakan PDF, gambar teknis (JPG/PNG/WEBP), atau TXT." });
       }
 
       // Free user: max 1 dokumen
@@ -3544,12 +3546,73 @@ SKK berlaku 5 tahun. Perpanjangan via: Pengembangan Keprofesian Berkelanjutan (P
         }
       }
 
-      // Ekstrak teks
+      // ── Helper: analisis gambar via GPT-4o Vision ────────────────────────────
+      const analyzeDrawingVision = async (dataUrl: string, fname: string): Promise<string> => {
+        const { TECHNICAL_VISION_SYSTEM_PROMPT } = await import("./lib/technical-vision-prompt");
+        const resp = await openai.chat.completions.create({
+          model: "gpt-4o",
+          messages: [{
+            role: "user",
+            content: [
+              {
+                type: "text",
+                text: `${TECHNICAL_VISION_SYSTEM_PROMPT}\n\nFile: ${fname}\n\nAnalisis gambar teknis ini secara komprehensif. Ekstrak SEMUA informasi yang terlihat: jenis gambar, judul/title block, skala, dimensi, label ruang/komponen, notasi struktural, spesifikasi material, catatan teknis (general notes), dan nama proyek/perusahaan. Format hasilnya sebagai teks terstruktur lengkap agar bisa dijadikan referensi dialog lanjutan.`
+              },
+              { type: "image_url", image_url: { url: dataUrl, detail: "high" } }
+            ]
+          }],
+          max_tokens: 4000,
+          temperature: 0.2,
+        });
+        return resp.choices[0]?.message?.content ?? "[Gagal mengekstrak konten gambar teknis]";
+      };
+
+      // ── Helper: render halaman PDF ke base64 PNG via Python/PyMuPDF ──────────
+      const renderPdfPageBase64 = (pdfPath: string, pageIdx: number): Promise<string | null> =>
+        new Promise(resolve => {
+          const { exec } = require("child_process");
+          const script = [
+            "import fitz, base64",
+            `doc = fitz.open(${JSON.stringify(pdfPath)})`,
+            `page = doc[${pageIdx}] if doc.page_count > ${pageIdx} else None`,
+            "if page:",
+            "    pix = page.get_pixmap(matrix=fitz.Matrix(2,2))",
+            "    print(base64.b64encode(pix.tobytes('png')).decode(), end='')",
+            "doc.close()",
+          ].join("\n");
+          exec(`python3 -c ${JSON.stringify(script)}`, { maxBuffer: 25 * 1024 * 1024 }, (err: any, stdout: string) => {
+            resolve((!err && stdout.trim()) ? stdout.trim() : null);
+          });
+        });
+
+      // Ekstrak teks / analisis visual
       let extractedText = "";
+      let isVisionDoc = false;
       try {
-        if (ext === ".pdf") {
+        if (IMAGE_EXTS.includes(ext)) {
+          // Gambar teknis langsung → Vision API
+          const imgBuf = fs.readFileSync(req.file.path);
+          const mime = ext === ".png" ? "image/png" : ext === ".webp" ? "image/webp" : "image/jpeg";
+          extractedText = await analyzeDrawingVision(`data:${mime};base64,${imgBuf.toString("base64")}`, req.file.originalname);
+          isVisionDoc = true;
+        } else if (ext === ".pdf") {
           const fileBuffer = fs.readFileSync(req.file.path);
           extractedText = await parsePdfBuffer(fileBuffer);
+          // PDF gambar/scan: teks sangat sedikit → coba Vision pada halaman 1 & 2
+          const meaningfulChars = extractedText.replace(/\s+/g, " ").trim().length;
+          if (meaningfulChars < 400) {
+            const pageBase64 = await renderPdfPageBase64(req.file.path, 0);
+            if (pageBase64) {
+              extractedText = await analyzeDrawingVision(`data:image/png;base64,${pageBase64}`, req.file.originalname);
+              isVisionDoc = true;
+              // Coba halaman 2 juga (gambar teknis sering multi-halaman)
+              const page2Base64 = await renderPdfPageBase64(req.file.path, 1);
+              if (page2Base64) {
+                const pg2Text = await analyzeDrawingVision(`data:image/png;base64,${page2Base64}`, req.file.originalname + " (hal.2)");
+                extractedText += "\n\n--- HALAMAN 2 ---\n\n" + pg2Text;
+              }
+            }
+          }
         } else {
           extractedText = fs.readFileSync(req.file.path, "utf-8");
         }
@@ -3558,7 +3621,9 @@ SKK berlaku 5 tahun. Perpanjangan via: Pengembangan Keprofesian Berkelanjutan (P
       // Deteksi jenis dokumen
       const textLow = (extractedText + req.file.originalname).toLowerCase();
       let docType = "lainnya";
-      if (/tender|lelang|rks|hps|pengadaan|pokja/.test(textLow)) docType = "tender";
+      if (isVisionDoc) {
+        docType = "gambar_teknis";
+      } else if (/tender|lelang|rks|hps|pengadaan|pokja/.test(textLow)) docType = "tender";
       else if (/\bsbu\b|skk|lpjk|sertifikat kompetensi|kualifikasi badan usaha/.test(textLow)) docType = "skk_sbu";
       else if (/kontrak|perjanjian|\bspk\b|surat perintah kerja/.test(textLow)) docType = "kontrak";
 
@@ -3574,9 +3639,33 @@ SKK berlaku 5 tahun. Perpanjangan via: Pengembangan Keprofesian Berkelanjutan (P
       // Analisis background
       (async () => {
         try {
-          const docLabel: Record<string, string> = { tender: "Dokumen Tender (RKS/HPS)", skk_sbu: "Dokumen SKK/SBU Konstruksi", kontrak: "Kontrak Konstruksi", lainnya: "Dokumen Konstruksi/Proyek" };
+          const docLabel: Record<string, string> = {
+            tender: "Dokumen Tender (RKS/HPS)",
+            skk_sbu: "Dokumen SKK/SBU Konstruksi",
+            kontrak: "Kontrak Konstruksi",
+            gambar_teknis: "Gambar Teknis / Engineering Drawing",
+            lainnya: "Dokumen Konstruksi/Proyek",
+          };
           const snippet = extractedText.substring(0, 12000);
-          const analysisPrompt = `Kamu adalah analis dokumen konstruksi Indonesia senior. Analisis dokumen ini.
+
+          const analysisPrompt = docType === "gambar_teknis"
+            ? `Kamu adalah insinyur konstruksi senior Indonesia yang ahli membaca gambar teknik. Berikut adalah ekstraksi informasi dari gambar teknis yang diunggah pengguna.
+
+NAMA FILE: ${req.file.originalname}
+
+KONTEN YANG DIEKSTRAK DARI GAMBAR:
+${snippet}${extractedText.length > 12000 ? "\n[... dipotong ...]" : ""}
+
+Susun analisis komprehensif dalam format JSON berikut:
+{
+  "summary": "Deskripsi gambar teknis: jenis gambar, nama proyek, skala, pihak/kontraktor, dan isi utama gambar dalam 3-5 paragraf",
+  "doc_type_detail": "Jenis spesifik gambar (mis: Denah Deck House Kapal Tugboat 30 Meter)",
+  "key_points": ["elemen struktural utama yang terlihat","dimensi/ukuran kunci","material/spesifikasi yang disebutkan","catatan teknis penting","dan poin penting lain"],
+  "checklist": [{"kategori":"Kelengkapan Gambar","items":[{"item":"Title block / keterangan gambar","status":"ada|tidak_ada|perlu_dicek","catatan":"..."},{"item":"Skala gambar","status":"ada|tidak_ada|perlu_dicek","catatan":"..."}]}],
+  "risiko": ["hal teknis yang perlu perhatian","potensi masalah di lapangan berdasarkan gambar"],
+  "rekomendasi": ["saran teknis","hal yang perlu dikonfirmasi atau dilengkapi"]
+}`
+            : `Kamu adalah analis dokumen konstruksi Indonesia senior. Analisis dokumen ini.
 
 JENIS: ${docLabel[docType] || "Dokumen"}
 NAMA FILE: ${req.file.originalname}
