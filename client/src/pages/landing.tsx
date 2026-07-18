@@ -776,13 +776,15 @@ export default function Landing() {
           <p className="text-blue-100 text-base leading-relaxed mb-8 max-w-2xl mx-auto">
             Dari pertanyaan teknis yang mendesak, dokumen yang perlu dianalisis, hingga keputusan proyek yang kompleks — setiap kebutuhan profesional Anda tersedia dalam satu platform.
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-2xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
             {[
               { icon: "🗺️", label: "Peta Jalan", href: "/persona" },
               { icon: "🏥", label: "Klinik Konsultasi", href: "/klinik" },
               { icon: "📄", label: "Bedah Dokumen", href: "/bedah-dokumen" },
               { icon: "🧠", label: "Brain Project", href: "/brain-project" },
               { icon: "🛠️", label: "Toolkit", href: "/toolkit" },
+              { icon: "📋", label: "Ruang Kelola", href: "/ruang-kelola" },
+              { icon: "🎓", label: "Ekosistem Kompetensi", href: "/kompetensi-hub" },
               { icon: "🤖", label: "Produk AI", href: "/store" },
             ].map((item) => (
               <Link key={item.label} href={item.href}>

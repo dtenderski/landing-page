@@ -2196,6 +2196,99 @@ function startScheduler() {
   // ── Tender Alert Notifikasi — 08:00 WIB (WA harian per profil BUJK) ────────
   scheduleAtWIB("Tender Alert 08:00", 8, 0, runTenderAlertNotification);
 
+  // ── Ruang Kelola Reminder — 09:00 WIB (notif dokumen akan kedaluwarsa) ───────
+  scheduleAtWIB("Ruang Kelola Reminder", 9, 0, async () => {
+    const waToken = process.env.FONNTE_API_KEY;
+    if (!waToken) {
+      log("[RuangKelola] FONNTE_API_KEY kosong — skip reminder.");
+      return;
+    }
+    try {
+      // Ambil dokumen yang expired dalam 30 hari & belum dikirim reminder_30d
+      const { rows: expiring30 } = await pool.query(`
+        SELECT d.*, p.phone, p.company_name
+        FROM ruang_kelola_documents d
+        JOIN ruang_kelola_profiles p ON p.user_id = d.user_id
+        WHERE d.expired_date IS NOT NULL
+          AND d.expired_date > now()
+          AND d.expired_date <= now() + interval '30 days'
+          AND d.reminder_sent_30d = false
+          AND p.phone IS NOT NULL AND p.phone <> ''
+          AND d.category <> 'tender'
+      `);
+      // Ambil dokumen yang expired dalam 7 hari & belum dikirim reminder_7d
+      const { rows: expiring7 } = await pool.query(`
+        SELECT d.*, p.phone, p.company_name
+        FROM ruang_kelola_documents d
+        JOIN ruang_kelola_profiles p ON p.user_id = d.user_id
+        WHERE d.expired_date IS NOT NULL
+          AND d.expired_date > now()
+          AND d.expired_date <= now() + interval '7 days'
+          AND d.reminder_sent_7d = false
+          AND p.phone IS NOT NULL AND p.phone <> ''
+          AND d.category <> 'tender'
+      `);
+
+      const sendWA = async (phone: string, message: string) => {
+        const res = await fetch("https://api.fonnte.com/send", {
+          method: "POST",
+          headers: { Authorization: waToken },
+          body: new URLSearchParams({ target: phone, message }),
+        });
+        return res.ok;
+      };
+
+      // Group by user (phone)
+      const grouped30: Record<string, typeof expiring30> = {};
+      for (const d of expiring30) {
+        const k = d.phone;
+        if (!grouped30[k]) grouped30[k] = [];
+        grouped30[k].push(d);
+      }
+      const grouped7: Record<string, typeof expiring7> = {};
+      for (const d of expiring7) {
+        const k = d.phone;
+        if (!grouped7[k]) grouped7[k] = [];
+        grouped7[k].push(d);
+      }
+
+      let sent7 = 0, sent30 = 0;
+      for (const [phone, docs] of Object.entries(grouped30)) {
+        const co = docs[0].company_name || "Perusahaan Anda";
+        let msg = `⚠️ *RUANG KELOLA GUSTAFTA*\n`;
+        msg += `Halo *${co}*! Dokumen berikut akan kedaluwarsa dalam 30 hari:\n\n`;
+        docs.forEach((d: any) => {
+          const exp = new Date(d.expired_date).toLocaleDateString("id-ID", { day: "2-digit", month: "short", year: "numeric" });
+          msg += `• *${d.doc_name}* (${d.doc_type})\n  📅 Berakhir: ${exp}\n`;
+        });
+        msg += `\nSegera perbarui di https://gustafta.id/ruang-kelola`;
+        const ok = await sendWA(phone, msg);
+        if (ok) {
+          await pool.query(`UPDATE ruang_kelola_documents SET reminder_sent_30d = true WHERE id = ANY($1::uuid[])`, [docs.map((d: any) => d.id)]);
+          sent30++;
+        }
+      }
+      for (const [phone, docs] of Object.entries(grouped7)) {
+        const co = docs[0].company_name || "Perusahaan Anda";
+        let msg = `🔴 *RUANG KELOLA GUSTAFTA — URGENT*\n`;
+        msg += `Halo *${co}*! Dokumen berikut berakhir dalam *7 hari*:\n\n`;
+        docs.forEach((d: any) => {
+          const exp = new Date(d.expired_date).toLocaleDateString("id-ID", { day: "2-digit", month: "short", year: "numeric" });
+          msg += `• *${d.doc_name}* (${d.doc_type})\n  📅 Berakhir: ${exp}\n`;
+        });
+        msg += `\n⚡ Segera perpanjang sebelum kedaluwarsa!\nhttps://gustafta.id/ruang-kelola`;
+        const ok = await sendWA(phone, msg);
+        if (ok) {
+          await pool.query(`UPDATE ruang_kelola_documents SET reminder_sent_7d = true WHERE id = ANY($1::uuid[])`, [docs.map((d: any) => d.id)]);
+          sent7++;
+        }
+      }
+      log(`[RuangKelola] Reminder selesai — 30hr: ${sent30} WA, 7hr: ${sent7} WA`);
+    } catch (err) {
+      log(`[RuangKelola] Reminder error: ${(err as Error).message}`);
+    }
+  });
+
   // ── Research Feed sweep — 06:30 WIB (isi KB tim riset dari Google News RSS) ──
   scheduleAtWIB("Research Feed Sweep", 6, 30, async () => {
     const { runResearchSweep } = await import("./lib/research-feed");

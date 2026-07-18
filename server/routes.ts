@@ -43,6 +43,7 @@ import { subscriptionPlans, type SubscriptionPlanKey, createPaymentLink, parseWe
 import { isAuthenticated, invalidateUserActiveCache } from "./replit_integrations/auth";
 import { registerBlueprintEngineRoutes } from "./blueprint-engine-routes";
 import { registerOrganizationEngineRoutes } from "./organization-engine-routes";
+import { registerRuangKelolaRoutes } from "./ruang-kelola-routes";
 import { textToSpeech } from "./replit_integrations/audio/client";
 import {
   processAttachmentsAndUrls,
@@ -775,6 +776,9 @@ export async function registerRoutes(
 
   // Organization Engine (Tahap 18–20) → API. Aditif; merancang & mewujudkan tim agen.
   registerOrganizationEngineRoutes(app);
+
+  // Ruang Kelola — pengelolaan legalitas, SBU, SKK, perizinan, tender BUJK.
+  registerRuangKelolaRoutes(app);
 
   // MIME type lookup for proper Content-Type headers
   const mimeTypes: Record<string, string> = {
