@@ -42,6 +42,14 @@ const DOC_TYPES = [
     badge: "bg-amber-500/10 text-amber-600 border-amber-500/20",
     examples: ["Method Statement & PCM", "Laporan Kemajuan Pekerjaan", "BAP & Berita Acara Serah Terima", "Rencana Mutu Kontrak (RMK)"],
   },
+  {
+    icon: "📐",
+    color: "from-cyan-500/10 to-cyan-500/5 border-cyan-500/20",
+    label: "Gambar Teknis",
+    badge: "bg-cyan-500/10 text-cyan-600 border-cyan-500/20",
+    examples: ["Denah & Floor Plan (JPG/PNG)", "Detail Konstruksi Baja & Beton", "Gambar MEP — Mekanikal/Elektrikal", "Shop Drawing & As-Built Drawing", "Gambar Kapal & Keteknikan Lainnya"],
+    note: "Vision AI",
+  },
 ];
 
 const FEATURES = [
@@ -80,8 +88,8 @@ const HOW_IT_WORKS = [
     step: "01",
     icon: <Upload className="h-6 w-6" />,
     color: "bg-primary/10 text-primary",
-    title: "Upload Dokumen",
-    desc: "Seret atau pilih file PDF/TXT dari komputer Anda. Maks 50 MB. Tidak perlu konversi — upload langsung.",
+    title: "Upload Dokumen atau Gambar",
+    desc: "Seret atau pilih file PDF, TXT, atau gambar teknis (JPG/PNG/WEBP). Maks 50 MB. Tidak perlu konversi — upload langsung.",
   },
   {
     step: "02",
@@ -352,17 +360,24 @@ export default function BedahDokumenLandingPage() {
               <FileText className="h-3 w-3 mr-1" />Jenis Dokumen
             </Badge>
             <h2 className="text-2xl md:text-4xl font-bold mb-4">
-              Semua dokumen konstruksi, satu platform
+              Semua dokumen & gambar teknis, satu platform
             </h2>
-            <p className="text-muted-foreground text-lg">AI dilatih khusus pada regulasi dan format dokumen konstruksi Indonesia.</p>
+            <p className="text-muted-foreground text-lg">AI dilatih pada regulasi konstruksi Indonesia — dan kini bisa membaca gambar teknis engineering via Vision AI.</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-5">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {DOC_TYPES.map((dt, i) => (
               <div key={i} className={`rounded-2xl border bg-gradient-to-br p-5 ${dt.color}`}>
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-2xl">{dt.icon}</span>
-                  <Badge variant="outline" className={`text-xs ${dt.badge}`}>{dt.label}</Badge>
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <Badge variant="outline" className={`text-xs ${dt.badge}`}>{dt.label}</Badge>
+                    {(dt as any).note && (
+                      <Badge variant="outline" className="text-xs bg-cyan-500/10 text-cyan-600 border-cyan-500/20">
+                        <Zap className="h-2.5 w-2.5 mr-1" />{(dt as any).note}
+                      </Badge>
+                    )}
+                  </div>
                 </div>
                 <ul className="space-y-1.5">
                   {dt.examples.map((ex, j) => (

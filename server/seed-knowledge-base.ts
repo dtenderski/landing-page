@@ -721,6 +721,74 @@ Orchestrator (DeepSeek Classifier) → ~$0.0001/call
 - **OFF (Nonaktif)**: Pengguna tidak bisa mengakses fitur platform (terblokir di level API)
 - Admin bisa toggle kapan saja — efektif dalam 2 menit (setelah cache expired)
 
+---
+
+### 5.19 RUANG SIMPAN — MEMORI BISNIS
+
+**URL Akses:** /ruang-simpan
+**Tagline:** Arsip cerdas yang jadi memori bisnis perusahaan Anda
+
+**Konsep Inti:**
+Ruang Simpan bukan sekadar cloud storage. Ini adalah lapisan memori yang membuat AI Gustafta "mengenal" perusahaan Anda. Setiap dokumen yang diunggah menjadi pengetahuan yang bisa digunakan agen AI dalam menjawab dan berkolaborasi.
+
+**Cara Kerja ("Rapikan → Hubungkan → Gunakan Kembali"):**
+1. **Tambahkan Pengetahuan** — Upload dokumen, gambar, PDF; organisasikan ke dalam folder tematik (SBU, Kontrak, Proyek, Tim, dll)
+2. **AI Mengindeks Otomatis** — Konten teks diekstrak dan dibuat chunk; gambar teknis dianalisis via Vision AI; PDF dokumen/scan dikenali secara cerdas
+3. **Gunakan di Mana Saja** — Konteks dari Ruang Simpan tersedia untuk Klinik, Bedah Dokumen, Brain Project, dan agen AI Anda
+
+**File yang Didukung:**
+| Tipe | Format | Pemrosesan AI |
+|------|--------|---------------|
+| Dokumen Teks | PDF, TXT, DOCX, XLSX, CSV | Ekstraksi teks + chunking RAG |
+| Gambar Teknis | JPG, PNG, WEBP | Vision AI (GPT-4o) membaca gambar |
+| Arsip | ZIP (coming soon) | — |
+
+**Fitur Utama:**
+- **Folder Pintar**: Organisasikan file ke folder tematik (berwarna, berikon)
+- **Pencarian Full-Text**: Cari di seluruh konten dokumen, bukan hanya nama file
+- **Kuota Storage**: Sesuai paket (Gratis: 500MB; Starter: 5GB; Profesional: 20GB)
+- **Download & Preview**: Akses file kapan saja langsung dari browser
+- **AI Context API**: Endpoint "/api/ruang-simpan/context" untuk mengambil chunk konten paling relevan ke agen AI
+
+**Filosofi — "Karena bisnis yang baik tidak bergantung pada ingatan seseorang."**
+Dokumen SBU yang disimpan di laptop satu orang, kontrak lama yang tidak bisa dicari, gambar teknis yang hilang saat karyawan resign — semua masalah ini diselesaikan Ruang Simpan dengan menjadikan pengetahuan bisnis sebagai aset perusahaan yang terkelola.
+
+---
+
+### 5.20 BEDAH DOKUMEN — ANALISIS AI + GAMBAR TEKNIS
+
+**URL Akses:** /bedah-dokumen
+**Tagline:** Upload dokumen atau gambar teknis → AI menganalisis + bisa Anda ajak berdialog
+
+**Yang Baru — Dukungan Gambar Teknis:**
+Bedah Dokumen kini mendukung **gambar teknis engineering** (JPG/PNG/WEBP) selain PDF dan TXT. AI menggunakan GPT-4o Vision dengan mode "detail: high" untuk membaca:
+- Denah dan floor plan
+- Detail konstruksi (baja, beton, sambungan)
+- Gambar MEP (Mekanikal/Elektrikal/Plumbing)
+- Shop drawing siap fabrikasi
+- As-built drawing
+- Gambar kapal, tugboat, dan keteknikan lainnya
+
+**Cara Kerja:**
+1. Upload file (PDF / JPG / PNG / WEBP / TXT — maks 50 MB)
+2. Untuk **PDF teks** → ekstrak teks → AI analisis → ringkasan + checklist + risiko
+3. Untuk **gambar teknis / PDF scan** → render ke gambar → Vision AI membaca visual → ekstrak dimensi, label, notasi, spesifikasi, catatan teknis
+4. Hasilnya tersimpan → user bisa **berdialog**: "Berapa dimensi pondasi?", "Material struktural apa saja?", "Apa catatan teknis yang perlu diperhatikan?"
+
+**Format Analisis Output:**
+- **Ringkasan Eksekutif** (gratis): Jenis gambar/dokumen, proyek, pihak terlibat, poin utama
+- **Checklist Kelengkapan** (Starter+): Apakah title block lengkap, skala tertera, dimensi konsisten, dll
+- **Deteksi Risiko** (Starter+): Potensi masalah teknis di lapangan berdasarkan gambar/dokumen
+- **Rekomendasi** (Starter+): Hal yang perlu dikonfirmasi atau dilengkapi
+- **Chat Dialog** (Starter+): Tanya bebas tentang isi dokumen/gambar
+
+**Jenis Dokumen yang Didukung:**
+- Dokumen Tender (RKS, HPS, Syarat Kualifikasi)
+- SKK & SBU (Persyaratan, Formulir, Skema)
+- Kontrak Konstruksi (SPK, FIDIC, Sub-kontrak)
+- Gambar Teknis (Denah, Struktur, MEP, Shop Drawing, Gambar Kapal)
+- Dokumen Proyek Umum (Method Statement, BAP, RMK)
+
 ═══════════════════════════════════════════════════════════
 ## BAGIAN 6: PANDUAN STEP-BY-STEP
 ═══════════════════════════════════════════════════════════
@@ -865,6 +933,18 @@ A: Fitur yang mengubah chatbot menjadi mesin lead generation — lead capture fo
 
 **Q: Apakah bisa upload video untuk knowledge base?**
 A: Ya! Upload file .mp4/.webm/.mov → sistem ekstrak audio → transkripsi otomatis → jadi KB. Berlaku juga untuk audio (.mp3/.wav/.m4a/.aac).
+
+**Q: Apa itu Ruang Simpan? Bedanya dengan Knowledge Base?**
+A: Ruang Simpan adalah "Memori Bisnis" perusahaan Anda — tempat menyimpan semua dokumen dan file perusahaan yang terorganisir (SBU, kontrak, gambar proyek, dll) dan otomatis terindeks oleh AI. Knowledge Base (KB) di agen adalah untuk melatih satu chatbot spesifik. Ruang Simpan adalah repositori terpusat yang bisa diakses oleh SEMUA agen Anda — "otak perusahaan" yang jadi referensi bersama.
+
+**Q: File apa saja yang bisa disimpan di Ruang Simpan?**
+A: PDF, TXT, dan gambar (JPG/PNG/WEBP). Untuk PDF dan teks — isi diekstrak otomatis untuk pencarian full-text. Untuk gambar — GPT-4o Vision menganalisis dan mengekstrak informasi visual (dimensi, label, notasi teknis, dll).
+
+**Q: Apakah Bedah Dokumen bisa membaca gambar teknis seperti denah atau gambar kapal?**
+A: Ya! Upload JPG/PNG/WEBP gambar teknis → GPT-4o Vision membaca gambar dengan resolusi tinggi → mengekstrak semua informasi: jenis gambar, dimensi, label ruang, notasi struktural, spesifikasi material, catatan teknis, title block. Untuk PDF gambar/scan — sistem otomatis mendeteksi bahwa PDF ini adalah gambar (bukan teks) dan menggunakan Vision AI. Setelah analisis, Anda bisa **berdialog** tentang isi gambar tersebut.
+
+**Q: Apa perbedaan Bedah Dokumen untuk PDF teks vs PDF gambar teknis?**
+A: PDF teks (kontrak, RKS, SKK) → teks diekstrak langsung → AI analisis konten teks. PDF gambar teknis (shop drawing, denah, gambar kapal) → sistem deteksi: jika teks < 400 karakter, otomatis render halaman ke gambar → Vision AI membaca visual. Hasilnya sama-sama tersimpan dan bisa didialogkan.
 
 ═══════════════════════════════════════════════════════════
 ## BAGIAN 9: SISTEM AI SPESIALIS GUSTAFTA

@@ -126,7 +126,39 @@ async function extractText(buffer: Buffer, mime: string, filename: string): Prom
       }
     } catch { return null; }
   }
-  return null; // images dan office formats: teks tidak diekstrak di Phase 1
+  // Gambar teknis — analisis via GPT-4o Vision
+  if (mime.startsWith("image/")) {
+    try {
+      const { default: OpenAI } = await import("openai");
+      const oai = new OpenAI({
+        apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY || process.env.OPENAI_API_KEY,
+        baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
+      });
+      const { TECHNICAL_VISION_SYSTEM_PROMPT } = await import("./lib/technical-vision-prompt");
+      const base64 = buffer.toString("base64");
+      const resp = await oai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [{
+          role: "user",
+          content: [
+            {
+              type: "text",
+              text: `${TECHNICAL_VISION_SYSTEM_PROMPT}\n\nFile: ${filename}\n\nAnalisis gambar ini secara komprehensif dan ekstrak semua informasi yang terlihat: jenis gambar, judul/title block, skala, dimensi, label ruang/komponen, notasi struktural, spesifikasi material, catatan teknis (general notes), dan nama proyek/perusahaan. Format hasilnya sebagai teks terstruktur lengkap yang bisa digunakan sebagai memori bisnis dan referensi dialog AI.`,
+            },
+            { type: "image_url", image_url: { url: `data:${mime};base64,${base64}`, detail: "high" } },
+          ],
+        }],
+        max_tokens: 2500,
+        temperature: 0.2,
+      });
+      const content = resp.choices[0]?.message?.content ?? null;
+      return content ? content.slice(0, 200_000) : null;
+    } catch (e) {
+      console.error("[Ruang Simpan] Vision analysis failed:", (e as any)?.message);
+      return null;
+    }
+  }
+  return null; // office formats (docx, xlsx, dll) belum didukung di Phase 1
 }
 
 /** Potong teks jadi chunks untuk pencarian. */
