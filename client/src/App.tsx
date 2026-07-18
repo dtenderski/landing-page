@@ -411,6 +411,7 @@ import OwnerBotPage from "@/pages/ownerbot";
 import BoheerBotPage from "@/pages/boheerbot";
 import SupplierBotPage from "@/pages/supplierbot";
 import RuangKelolaPage from "@/pages/ruang-kelola";
+import RuangSimpanPage from "@/pages/ruang-simpan";
 import { ChaesaWidget } from "@/components/chaesa-widget";
 import { MultiClawProvider } from "@/contexts/multiclaw-context";
 import { ProfileCompletionGuard } from "@/components/profile-completion-guard";
@@ -2031,6 +2032,7 @@ function Router() {
         <Route path="/multiclaw" component={MultiClawDirectory} />
         <Route path="/paket-bidang" component={PaketBidangPage} />
         <Route path="/ruang-kelola" component={RuangKelolaPage} />
+        <Route path="/ruang-simpan" component={RuangSimpanPage} />
         <Route path="/konsultasi" component={DialogGustaftaPage} />
         <Route path="/dialog-gustafta" component={DialogGustaftaRedirect} />
         <Route path="/dialog" component={DialogGustaftaRedirect} />

@@ -20,7 +20,7 @@ import { isAuthenticated } from "./replit_integrations/auth";
 import multer from "multer";
 import { GoogleGenAI } from "@google/genai";
 import { z } from "zod";
-import rateLimit from "express-rate-limit";
+import rateLimit, { ipKeyGenerator } from "express-rate-limit";
 
 // ── Constants & allowlists ─────────────────────────────────────────────────
 
@@ -133,7 +133,7 @@ function validateMagicBytes(buffer: Buffer, declaredMime: string): boolean {
 function userKey(req: Request): string {
   const r = req as any;
   const uid = r.user?.id || r.user?.claims?.sub;
-  return uid ? `rk-user:${uid}` : `rk-ip:${req.ip ?? "unknown"}`;
+  return uid ? `rk-user:${uid}` : `rk-ip:${ipKeyGenerator(req.ip ?? "")}`;
 }
 
 const rkWriteLimit = rateLimit({

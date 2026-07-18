@@ -10,7 +10,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { useFeatureAccess } from "@/hooks/use-feature-access";
 import { usePartnerBranding, toDirectImageUrl, type PartnerBranding } from "@/hooks/use-partner-branding";
 import { trackLead } from "@/lib/meta-pixel";
-import { Bot, LogIn, LogOut, Menu, CreditCard, LayoutDashboard, Smartphone, Shield, Crown, User, MessageCircle, Zap, FileDown, Stethoscope, Route, Hammer, Users2, FileSearch, ArrowRight, Brain, Award, GraduationCap, FileText, ClipboardList } from "lucide-react";
+import { Bot, LogIn, LogOut, Menu, CreditCard, LayoutDashboard, Smartphone, Shield, Crown, User, MessageCircle, Zap, FileDown, Stethoscope, Route, Hammer, Users2, FileSearch, ArrowRight, Brain, Award, GraduationCap, FileText, ClipboardList, HardDrive } from "lucide-react";
 
 const WA_NUMBERS = [
   { display: "081287941900", link: "6281287941900" },
@@ -257,6 +257,7 @@ export function SharedHeader({ transparent }: SharedHeaderProps) {
   const navRow2 = [
     { href: "/toolkit",                label: "Toolkit",                icon: Hammer },
     { href: "/ruang-kelola",           label: "Ruang Kelola",           icon: ClipboardList },
+    { href: "/ruang-simpan",           label: "Ruang Simpan",           icon: HardDrive },
     { href: "/klinik-uji-kompetensi",  label: "Bimtek Uji Kompetensi", icon: GraduationCap },
     { href: "/executive-summary",      label: "Executive Summary",      icon: FileText },
     { href: "/store",                  label: "Produk AI",              icon: Zap },

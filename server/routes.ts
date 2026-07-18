@@ -44,6 +44,7 @@ import { isAuthenticated, invalidateUserActiveCache } from "./replit_integration
 import { registerBlueprintEngineRoutes } from "./blueprint-engine-routes";
 import { registerOrganizationEngineRoutes } from "./organization-engine-routes";
 import { registerRuangKelolaRoutes } from "./ruang-kelola-routes";
+import { registerRuangSimpanRoutes } from "./ruang-simpan-routes";
 import { textToSpeech } from "./replit_integrations/audio/client";
 import {
   processAttachmentsAndUrls,
@@ -779,6 +780,9 @@ export async function registerRoutes(
 
   // Ruang Kelola — pengelolaan legalitas, SBU, SKK, perizinan, tender BUJK.
   await registerRuangKelolaRoutes(app);
+
+  // Ruang Simpan — gudang dokumen perusahaan dengan AI context.
+  registerRuangSimpanRoutes(app);
 
   // MIME type lookup for proper Content-Type headers
   const mimeTypes: Record<string, string> = {
