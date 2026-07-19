@@ -19,6 +19,7 @@ import KlinikKonsultasiPage from "@/pages/klinik-konsultasi";
 import KlinikUjiKompetensiPage from "@/pages/klinik-uji-kompetensi";
 import FlierKlinikKonsultasiPage from "@/pages/flier-klinik-konsultasi";
 import KodeAksesPage from "@/pages/kode-akses";
+import BergabungPage from "@/pages/bergabung";
 import AdminAccessCodesPage from "@/pages/admin-access-codes";
 import AdminSystemLoadPage from "@/pages/admin-system-load";
 import { usePartnerBranding } from "@/hooks/use-partner-branding";
@@ -2038,6 +2039,7 @@ function Router() {
         <Route path="/dialog-gustafta" component={DialogGustaftaRedirect} />
         <Route path="/dialog" component={DialogGustaftaRedirect} />
         <Route path="/trilogi-mentor" component={TrilogiMentorRedirect} />
+        <Route path="/bergabung" component={BergabungPage} />
       <Route component={NotFound} />
     </Switch>
   );
